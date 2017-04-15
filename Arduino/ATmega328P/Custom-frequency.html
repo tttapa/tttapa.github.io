@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/main.css">
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
+    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="theme-color" content="#ccc">
+    <title>ATmega328P at custom frequency</title>
+</head>
+
+<body>
+    <article>
+        <h1 style="font-size:40px;margin-bottom:0;">ATmega328P at custom frequency<br></h1>
+        <i style="font-size:0.9em;color:#888;margin-bottom:2em;display:block">Pieter P,&emsp;09-03-2017</i>
+        <p>This is a guide to use the ATmega328P (the microcontroller of an Arduino UNO) with a custom crystal, and run it at a different frequency than the standard 16 MHz.</p>
+        <h2>Downloading Optiboot</h2>
+        <p>The Arduino has a bootloader in order to be able to upload sketches over the UART (serial) connection. When running at a different clock speed, you have to recompile the bootloader. To do this, you need Optiboot.</p>
+        <p>First, install git (if you haven't already):&emsp;<code>sudo apt-get install git</code> <br>Then clone Optiboot:&emsp;<code>git clone https://github.com/Optiboot/optiboot.git</code> <br>Next, go to the 'bootloaders' folder of your Arduino IDE
+            installation, for example:&emsp;<code>cd ~/bin/arduino-1.8.1/hardware/arduino/avr/bootloaders</code> <br>Rename the old 'optiboot' folder:&emsp;<code>mv optiboot optiboot.old</code> <br>And replace it by the new version of Optiboot you just
+            cloned:&emsp;
+            <code>ln -s "$HOME/optiboot/optiboot/bootloaders/optiboot" "$PWD/optiboot"; cd optiboot</code></p>
+        <h2>Compiling the Optiboot bootloader</h2>
+        <p>Open the Makefile to add a new option with a custom frequency:&emsp;<code>gedit Makefile</code><br>Then duplicate the atmega328 and atmega328_isp options, and rename them, for example, atmega328_12 and atmega328_12_isp. Change the CPU speeds,
+            and save the file. The result could be something like this:<pre><code>#Atmega328p @12MHz
+atmega328_12: TARGET = atmega328
+atmega328_12: MCU_TARGET = atmega328p
+atmega328_12: CFLAGS += $(COMMON_OPTIONS)
+atmega328_12: AVR_FREQ = 12000000L
+atmega328_12: LDSECTIONS  = -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe
+atmega328_12: $(PROGRAM)_atmega328_12.hex
+atmega328_12: $(PROGRAM)_atmega328_12.lst
+
+atmega328_12_isp: atmega328
+atmega328_12_isp: TARGET = atmega328
+atmega328_12_isp: MCU_TARGET = atmega328p
+# 512 byte boot, SPIEN
+atmega328_12_isp: HFUSE = DE
+# Low power xtal (12MHz) 16KCK/14CK+65ms
+atmega328_12_isp: LFUSE = FF
+# 2.7V brownout
+atmega328_12_isp: EFUSE = 05
+atmega328_12_isp: isp</code></pre></p>
+        <p>Now tell Optiboot to use the avr-gcc compiler that came with the Arduino IDE:&emsp;<code>export ENV=arduino</code><br>And compile the firmware:&emsp;<code>make atmega328_12</code><br>The output should look something like this: <pre><code>avr-gcc (GCC) 4.9.2
+Copyright (C) 2014 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+BAUD RATE CHECK: Desired: 115200, Real: 115200, UBRRL = 15, Error=0.0%
+../../../../tools/avr/bin/avr-gcc -g -Wall -Os -fno-split-wide-types -mrelax -mmcu=atmega328p -DF_CPU=12000000L  -DBAUD_RATE=115200 -DLED_START_FLASHES=3        -c -o optiboot.o optiboot.c
+../../../../tools/avr/bin/avr-gcc -g -Wall -Os -fno-split-wide-types -mrelax -mmcu=atmega328p -DF_CPU=12000000L  -DBAUD_RATE=115200 -DLED_START_FLASHES=3      -Wl,--section-start=.text=0x7e00 -Wl,--section-start=.version=0x7ffe -Wl,--relax -nostartfiles -nostdlib -o optiboot_atmega328_12.elf optiboot.o -lc
+../../../../tools/avr/bin/avr-size optiboot_atmega328_12.elf
+   text	   data	    bss	    dec	    hex	filename
+    464	      0	      0	    464	    1d0	optiboot_atmega328_12.elf
+../../../../tools/avr/bin/avr-objcopy -j .text -j .data -j .version --set-section-flags .version=alloc,load -O ihex optiboot_atmega328_12.elf optiboot_atmega328_12.hex
+../../../../tools/avr/bin/avr-objdump -h -S optiboot_atmega328_12.elf > optiboot_atmega328_12.lst</code></pre></p>
+        <h2>Adding the option in the Arduino IDE</h2>
+        <p>The next step is to add a new option in the <i>Tools</i> menu in the Arduino IDE.</p>
+        <p>Open the 'boards.txt' file for editing, for example:&emsp;<code>gedit ~/bin/arduino-1.8.1/hardware/arduino/avr/boards.txt</code> <br>You have to add a menu entry to select the speed, change the f_cpu value, and point to the right bootloader. Edit
+            the 'uno' entry, so it looks like this:<pre><code>uno.name=Arduino/Genuino Uno
+
+uno.vid.0=0x2341
+uno.pid.0=0x0043
+uno.vid.1=0x2341
+uno.pid.1=0x0001
+uno.vid.2=0x2A03
+uno.pid.2=0x0043
+uno.vid.3=0x2341
+uno.pid.3=0x0243
+
+uno.upload.tool=avrdude
+uno.upload.protocol=arduino
+uno.upload.maximum_size=32256
+uno.upload.maximum_data_size=2048
+uno.upload.speed=115200
+
+uno.bootloader.tool=avrdude
+uno.bootloader.low_fuses=0xFF
+uno.bootloader.high_fuses=0xDE
+uno.bootloader.extended_fuses=0x05
+uno.bootloader.unlock_bits=0x3F
+uno.bootloader.lock_bits=0x0F
+#uno.bootloader.file=optiboot/optiboot_atmega328.hex
+
+uno.build.mcu=atmega328p
+#uno.build.f_cpu=16000000L
+uno.build.board=AVR_UNO
+uno.build.core=arduino
+uno.build.variant=standard
+
+menu.speed=CPU Speed
+
+uno.menu.speed.16=16 MHz
+uno.menu.speed.12=12 MHz
+uno.menu.speed.16.bootloader.file=optiboot/optiboot_atmega328.hex
+uno.menu.speed.12.bootloader.file=optiboot/optiboot_atmega328_12.hex
+uno.menu.speed.16.build.f_cpu=16000000L
+uno.menu.speed.12.build.f_cpu=12000000L</code></pre> Note that the original f_cpu and bootloader.file lines are commented out. Also make sure that the speeds and bootloader filenames are the same as the ones in the Optiboot Makefile.</p>
+        <p>
+            <p>Restart the Arduino IDE for the changes to take effect. You should see the new options when opening the 'Tools' menu.<img src="/Images/ATmega328P-custom-freq-tools.png"></p>
+    </article>
+</body>
+
+</html>
