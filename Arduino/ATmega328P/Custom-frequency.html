@@ -20,7 +20,7 @@
         <h2>Downloading Optiboot</h2>
         <div>The Arduino has a bootloader in order to be able to upload sketches over the UART (serial) connection. When running at a different clock speed, you have to recompile the bootloader. To do this, you need Optiboot.</div>
         <div>First, install git (if you haven't already):<br><pre class="bash"><code>sudo apt-get install git</code></pre> <br>Then clone Optiboot:<br><pre class="bash"><code>git clone https://github.com/Optiboot/optiboot.git</code></pre> <br>Next, go to the
-            'bootloaders' folder of your Arduino IDE installation, for example:<br><pre class="bash"><code>cd ~/bin/arduino-1.8.1/hardware/arduino/avr/bootloaders</code></pre> <br>Rename the old 'optiboot' folder:<br><pre class="bash"><code>mv optiboot optiboot.old</code></pre>            <br>And replace it by the new version of Optiboot you just cloned:<pre class="bash"><code>ln -s "$HOME/optiboot/optiboot/bootloaders/optiboot" "$PWD/optiboot"; cd optiboot</code></pre></div>
+            'bootloaders' folder of your Arduino IDE installation, for example:<br><pre class="bash"><code>cd ~/opt/arduino-1.8.1/hardware/arduino/avr/bootloaders</code></pre> <br>Rename the old 'optiboot' folder:<br><pre class="bash"><code>mv optiboot optiboot.old</code></pre>            <br>And replace it by the new version of Optiboot you just cloned:<pre class="bash"><code>cp -R ~/optiboot/optiboot/bootloaders/optiboot/ optiboot &amp;&amp; cd optiboot</code></pre></div>
         <h2>Compiling the Optiboot bootloader</h2>
         <div>Open the Makefile to add a new option with a custom frequency:<br><pre class="bash"><code>gedit Makefile</code></pre><br>Then duplicate the atmega328 and atmega328_isp options, and rename them, for example, atmega328_12 and atmega328_12_isp. Change
             the CPU speeds, and save the file. The result could be something like this:<pre><code>#Atmega328p @12MHz
@@ -58,7 +58,7 @@ BAUD RATE CHECK: Desired: 115200, Real: 115200, UBRRL = 15, Error=0.0%
 ../../../../tools/avr/bin/avr-objdump -h -S optiboot_atmega328_12.elf > optiboot_atmega328_12.lst</code></pre></div>
         <h2>Adding the option in the Arduino IDE</h2>
         <div>The next step is to add a new option in the <i>Tools</i> menu in the Arduino IDE.</div>
-        <div>Open the 'boards.txt' file for editing, for example:<br><pre class="bash"><code>gedit ~/bin/arduino-1.8.1/hardware/arduino/avr/boards.txt</code></pre><br>You have to add a menu entry to select the speed, change the f_cpu value, and point to the
+        <div>Open the 'boards.txt' file for editing, for example:<br><pre class="bash"><code>gedit ~/opt/arduino-1.8.1/hardware/arduino/avr/boards.txt</code></pre><br>You have to add a menu entry to select the speed, change the f_cpu value, and point to the
             right bootloader. Edit the 'uno' entry, so it looks like this:<pre><code>uno.name=Arduino/Genuino Uno
 
 uno.vid.0=0x2341
