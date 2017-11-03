@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Pieter P">
+        <link rel="stylesheet" type="text/css" href="../CSS/MIDI.css">
+        <link href='../CSS/roboto.css' rel='stylesheet' type='text/css'>
+        <link href='../CSS/icon.css' rel='stylesheet' type='text/css'>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="theme-color" content="#ccc">
+        <title>Arduino MIDI</title>
+    </head>
+    <body>
+        <nav>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                    <path d="M0 0h48v48h-48z" fill="none"/>
+                    <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+                </svg>
+                <h2>Index</h2>
+                <ol start="0">
+<li><a href="Chap00-Arduino-MIDI.html">Introduction</a></li>
+<li><b>The MIDI protocol</b></li>
+<li><a href="Chap02-MIDI-Hardware.html">MIDI Hardware</a></li>
+<li><a href="Chap03-MIDI-over-Serial.html">Sending MIDI over Serial</a></li>
+
+                </ol>
+                <a href="https://github.com/tttapa/ESP8266/raw/master/A%20Beginner's%20Guide%20to%20the%20ESP8266%20-%20article/PDF/A-Beginner's-Guide-to-the-ESP8266.pdf" title="Download the guide as a PDF document (automatically generated)">Download as PDF</a><br>
+                <a href="https://github.com/tttapa/ESP8266/tree/master/Examples" title="Download all example code that's used in this guide">Download examples</a>
+            </div>
+        </nav>
+        <article>
+<style>
+    table {
+        border-collapse: collapse;
+        empty-cells: show;
+    }
+    tr:hover {
+        background-color: transparent;
+    }
+    td {
+        border: 1px solid #CCC;
+        min-width: 1em;
+        padding: 0.3em;
+    }
+    td:first-child{
+        text-align: left;
+    }
+    td {
+        text-align: center;
+    }
+</style>
+
+<h2><a name="the-midi-protocol" href="#the-midi-protocol">The MIDI protocol</a></h2>
+<p>
+    <small><i>The MIDI specification can be found here: <a href="https://www.midi.org/specifications/item/the-midi-1-0-specification">https://www.midi.org/specifications/item/the-midi-1-0-specification</a></i></small>
+</p>
+<p>
+    The MIDI protocol describes a set of MIDI events. For example, a note is played, or a note is turned off, a controller is moved and set to a new value, a new instrument is selected, etc. These events correspond to MIDI messages that can be sent over the MIDI hardware connection.
+</p>
+
+<div>
+    There are two main types of messages: channel messages and system messages. Most performance information will be sent as channel messages, while system messages are used for things like proprietary handshakes, manufacturer-specific settings, sending long packets of data, real-time messages for syncronization and tuning, and other things that are not really of interest to someone who just wants to make an Arduino MIDI instrument or controller. That's why this guide will mainly focus on channel messages.
+</div>
+
+
+<h3><a name="channel-messages" href="#channel-messages">Channel messages</a></h3>
+<div>A MIDI channel message consist of a header byte, referred to as the status byte, followed by one or two data bytes:
+    <div style="margin: 6px 0px 10px 0px">
+        <div style="padding: 3px"><code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Status</code>&boxh;<code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Data&nbsp;&nbsp;</code></div>
+        <div style="padding: 3px"><code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Status</code>&boxh;<code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Data 1</code>&boxh;<code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Data 2</code></div>
+    </div>
+</div>
+<div>Each byte consists of 8 binary digits. To distinguish between status and data bytes, and to prevent framing errors, status bytes have the most significant bit (msb) set to one (1), and data bytes have the msb set to zero (0).
+<table style="margin: 6px 0px 10px 0px">
+    <tr>
+        <td style="border: none"></td>
+        <td colspan="8">Status byte</td>
+        <td colspan="8">Data byte 1</td>
+        <td colspan="8">Data byte 2 (optional)</td>
+    </tr>
+    <tr>
+        <td>Bit</td>
+        <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+    </tr>
+    <tr>
+        <td>Value</td>
+        <td>1</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td>
+        <td>0</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td>
+        <td>0</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td>
+    </tr>
+</table>
+</div>
+
+<h4><a name="status-bytes" href="#status-bytes">Status bytes</a></h4>
+<div>The status byte of channel messages is divided into two 4-bit nibbles. The high nibble (bits 4-7) specifies the message type, and the low nibble (bits 0-3) specifies the MIDI channel. Because the most significant bit has to be one, there are 8 different message types (<code>0b1000</code> - <code>0b1110</code> or <code>0x8</code> - <code>0xE</code>), and 16 different channels (<code>0x0</code> - <code>0xF</code>). Message type <code>0xF</code> is used for system messages, so it won't be covered in this section on channel messages.
+<table style="margin: 6px 0px 6px 0px">
+    <tr>
+        <td style="border: none"></td>
+        <td colspan="8">Status byte</td>
+    </tr>
+    <tr>
+        <td>Bit</td>
+        <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+    </tr>
+    <tr>
+        <td>Value</td>
+        <td>m</td><td>m</td><td>m</td><td>m</td><td>n</td><td>n</td><td>n</td><td>n</td>
+    </tr>
+</table>
+Where <code>mmmm</code> is the message type (<code>0x8</code> - <code>0xE</code>) and <code>nnnn</code> is the channel nibble.<br>
+Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<code>nnnn = channel - 1</code>)
+</div>
+
+<h4><a name="data-bytes" href="#data-bytes">Data bytes</a></h4>
+<div>Each data byte contains a 7-bit value, a number between 0 and 127 (<code>0b01111111</code> or <code>0x7F</code>). The meaning of this value depends on the message type. For example, it can tell the receiver what note is played, how hard the key was struck, what instrument to select, what value a controller is set to, etc.</div>
+
+<hr>
+
+<div>The following section will go over the different channel messages and their data bytes.</div>
+
+<h4><a name="note-off-code-style-font-weight-normal-0x8" href="#note-off-code-style-font-weight-normal-0x8">Note Off <code style="font-weight: normal">(0x8)</code></a></h4>
+<div>
+    A note off event is used to stop a playing note. For example, when a key is released.
+    <p>
+            <b>Data 1: </b>Note number (key). See <a href="#midi-note-names">MIDI note names</a>.<br>
+            <b>Data 2: </b>Velocity (how fast the key is released).
+    </p>
+        
+    <table style="margin: 6px 0px 10px 0px">
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Note number</td>
+            <td colspan="8">Velocity</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>0</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
+            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+        </tr>
+    </table>
+</div>
+
+<hr>
+
+<h4><a name="midi-note-names" href="#midi-note-names">MIDI note names</a></h4>
+<div>
+    Middle C or C4 is defined as MIDI note <code>0x3C</code>. <br>
+    The lowest note on a standard 88-key piano is A0 (<code>0x15</code>) and the highest note is C8 (<code>0x6C</code>).
+    <table style="margin: 6px 0px 10px 0px">
+        <tr><td  style="border: none"></td></td><td colspan="12"><b>Note</b></td></tr>
+        <tr style="font-weight: bold"><td>Octave</td><td>C</td><td>C#</td><td>D</td><td>D#</td><td>E</td><td>F</td><td>F#</td><td>G</td><td>G#</td><td>A</td><td>A#</td><td>B</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">-1</td><td>00</td><td>01</td><td>02</td><td>03</td><td>04</td><td>05</td><td>06</td><td>07</td><td>08</td><td>09</td><td>0A</td><td>0B</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">0</td><td>0C</td><td>0D</td><td>0E</td><td>0F</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">1</td><td>18</td><td>19</td><td>1A</td><td>1B</td><td>1C</td><td>1D</td><td>1E</td><td>1F</td><td>20</td><td>21</td><td>22</td><td>23</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">2</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>2A</td><td>2B</td><td>2C</td><td>2D</td><td>2E</td><td>2F</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">3</td><td>30</td><td>31</td><td>32</td><td>33</td><td>34</td><td>35</td><td>36</td><td>37</td><td>38</td><td>39</td><td>3A</td><td>3B</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">4</td><td>3C</td><td>3D</td><td>3E</td><td>3F</td><td>40</td><td>41</td><td>42</td><td>43</td><td>44</td><td>45</td><td>46</td><td>47</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">5</td><td>48</td><td>49</td><td>4A</td><td>4B</td><td>4C</td><td>4D</td><td>4E</td><td>4F</td><td>50</td><td>51</td><td>52</td><td>53</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">6</td><td>54</td><td>55</td><td>56</td><td>57</td><td>58</td><td>59</td><td>5A</td><td>5B</td><td>5C</td><td>5D</td><td>5E</td><td>5F</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">7</td><td>60</td><td>61</td><td>62</td><td>63</td><td>64</td><td>65</td><td>66</td><td>67</td><td>68</td><td>69</td><td>6A</td><td>6B</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">8</td><td>6C</td><td>6D</td><td>6E</td><td>6F</td><td>70</td><td>71</td><td>72</td><td>73</td><td>74</td><td>75</td><td>76</td><td>77</td></tr>
+        <tr><td style="text-align: right; font-weight: bold">9</td><td>78</td><td>79</td><td>7A</td><td>7B</td><td>7C</td><td>7D</td><td>7E</td><td>7F</td></tr>
+    </table>
+</div>
+<hr>
+            <div class="back"><a href="Chap00-Arduino-MIDI.html">← Previous chapter</a></div>
+            <div class="next"><a href="Chap02-MIDI-Hardware.html">Next chapter →</a></div>
+            <div class="backArr"><a href="Chap00-Arduino-MIDI.html"><i class="material-icons">arrow_back</i></a></div>
+            <div class="nextArr"><a href="Chap02-MIDI-Hardware.html"><i class="material-icons">arrow_forward</i></a></div>
+        </article>
+    </body>
+</html>
