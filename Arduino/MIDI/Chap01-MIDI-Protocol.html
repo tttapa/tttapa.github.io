@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="author" content="Pieter P">
-        <link rel="stylesheet" type="text/css" href="../CSS/MIDI.css">
-        <link href='../CSS/roboto.css' rel='stylesheet' type='text/css'>
-        <link href='../CSS/icon.css' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="/CSS/MIDI.css">
+        <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
+        <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
         <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
         <meta name="theme-color" content="#ccc">
         <title>Arduino MIDI</title>
@@ -121,13 +121,18 @@ Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<co
 
 <div>The following section will go over the different channel messages and their data bytes.</div>
 
-<h4><a name="note-off-code-style-font-weight-normal-0x8" href="#note-off-code-style-font-weight-normal-0x8">Note Off <code style="font-weight: normal">(0x8)</code></a></h4>
+<h4><a name="note-off-0x8" href="#note-off-0x8">Note Off <code style="font-weight: normal">(0x8)</code></a></h4>
 <div>
     A note off event is used to stop a playing note. For example, when a key is released.
     <p>
-            <b>Data 1: </b>Note number (key). See <a href="#midi-note-names">MIDI note names</a>.<br>
-            <b>Data 2: </b>Velocity (how fast the key is released).
+            <b>Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See <a href="#midi-note-names">MIDI note names</a>.<br>
+            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast the key is released).
     </p>
+    <ul>
+            <li>A velocity of 0 is not defined, and some software or devices may not register the note off event if the velocity is zero.</li>
+            <li>Most software or devices will ignore the note off velocity.</li>
+            <li>Instead of a note off event, a note on event with a velocity of zero may be used. This is especially useful when using a running status.</li>
+    </ul>
         
     <table style="margin: 6px 0px 10px 0px">
         <tr>
@@ -148,12 +153,207 @@ Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<co
             <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
             <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
         </tr>
+    </table>    
+</div>
+
+<h4><a name="note-on-0x9" href="#note-on-0x9">Note On <code style="font-weight: normal">(0x9)</code></a></h4>
+<div>
+    A note on event is used to play a note. For example, when a key is pressed.
+    <p>
+            <b>Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See <a href="#midi-note-names">MIDI note names</a>.<br>
+            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast/hard the key is pressed).
+    </p>
+    <ul>
+            <li>If the velocity is zero, the note on event is interpreted as a note off event. This is especially useful when using a running status.</li>
+    </ul>
+        
+    <table style="margin: 6px 0px 10px 0px">
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Note number</td>
+            <td colspan="8">Velocity</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>0</td><td>0</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
+            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+        </tr>
+    </table>
+</div>
+
+<h4><a name="polyphonic-key-pressure-0xa" href="#polyphonic-key-pressure-0xa">Polyphonic key pressure <code style="font-weight: normal">(0xA)</code></a></h4>
+<div>
+    A polyphonic key pressure event is used when the pressure on a key or a pressure sensitive pad changes after the note on event.
+    <p>
+            <b>Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See <a href="#midi-note-names">MIDI note names</a>.<br>
+            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure on the key.
+    </p>
+    <ul>
+            <li>Most normal MIDI keyboards do not implement this event.</li>
+            <li>Key pressure is sometimes referred to as after-touch or after-pressure.</li>
+    </ul>
+        
+    <table style="margin: 6px 0px 10px 0px">
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Note number</td>
+            <td colspan="8">Pressure</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>0</td><td>1</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
+            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+        </tr>
+    </table>
+</div>
+
+<h4><a name="control-change-0xb" href="#control-change-0xb">Control change <code style="font-weight: normal">(0xB)</code></a></h4>
+<div>
+    A control change event is used when the value of a controller changes.
+    <p>
+            <b>Data 1</b> (<code>0b0ccccccc</code>):&emsp; Controller number. See <a href="#controller-numbers">Controller numbers</a>.<br>
+            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; The value of the controller.
+    </p>
+    <ul>
+            <li>Controller numbers 120-127 are reserved as "Channel Mode Messages".</li>
+    </ul>
+        
+    <table style="margin: 6px 0px 10px 0px">
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Controller number</td>
+            <td colspan="8">Value</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>0</td><td>1</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
+            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+        </tr>
+    </table>
+</div>
+
+<h4><a name="program-change-0xc" href="#program-change-0xc">Program change <code style="font-weight: normal">(0xC)</code></a></h4>
+<div>
+    A program change event is used to change the program (i.e. sound, voice, tone, preset or patch) of a given channel is changed.
+    <p>
+            <b>Data 1</b> (<code>0b0ppppppp</code>):&emsp; Program number. See <a href="#program-numbers">Program numbers</a>.<br>
+    </p>
+    <ul>
+            <li>Controller numbers 120-127 are reserved as "Channel Mode Messages".</li>
+    </ul>
+        
+    <table style="margin: 6px 0px 10px 0px">
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Program number</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>1</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
+        </tr>
+    </table>
+</div>
+
+<h4><a name="channel-pressure-0xd" href="#channel-pressure-0xd">Channel pressure <code style="font-weight: normal">(0xD)</code></a></h4>
+<div>
+    A channel pressure event is used when the pressure on a key or a pressure sensitive pad changes after the note on event. Unlike polyphonic key pressure, channel pressure affects all notes playing on the channel.
+    <p>
+            <b>Data 1</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure value.
+    </p>
+    <ul>
+            <li>Most normal MIDI keyboards do not implement this event.</li>
+            <li>Channel pressure is sometimes referred to as after-touch or after-pressure.</li>
+    </ul>
+        
+    <table style="margin: 6px 0px 10px 0px">
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Pressure</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>1</td><td>0</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+        </tr>
+    </table>
+</div>
+
+<h4><a name="pitch-bend-change-0xe" href="#pitch-bend-change-0xe">Pitch bend change <code style="font-weight: normal">(0xE)</code></a></h4>
+<div>
+    A pitch bend change event is used to alter the pitch of the notes played on a given channel.
+    <p>
+            <b>Data 1</b> (<code>0b0lllllll</code>):&emsp; Least significant byte (bits 0-7) of the pitch bend value.<br>
+            <b>Data 2</b> (<code>0b0mmmmmmm</code>):&emsp; Most significant byte (bits 8-13) of the pitch bend value.
+    </p>
+    <ul>
+            <li>The center position (no pitch change) is represented by LSB = <code>0x0</code>, MSB = <code>0x40</code></li>
+    </ul>
+        
+    <table style="margin: 6px 0px 10px 0px">
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">LSB</td>
+            <td colspan="8">MSB</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>1</td><td>1</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>l</td><td>l</td><td>l</td><td>l</td><td>l</td><td>l</td><td>l</td>
+            <td>0</td><td>m</td><td>m</td><td>m</td><td>m</td><td>m</td><td>m</td><td>m</td>
+        </tr>
     </table>
 </div>
 
 <hr>
 
-<h4><a name="midi-note-names" href="#midi-note-names">MIDI note names</a></h4>
+<h2><a name="appendices" href="#appendices">Appendices</a></h2>
+All numbers are in hexadecimal representation, unless otherwise specified.
+
+<h3><a name="midi-note-names" href="#midi-note-names">MIDI note names</a></h3>
 <div>
     Middle C or C4 is defined as MIDI note <code>0x3C</code>. <br>
     The lowest note on a standard 88-key piano is A0 (<code>0x15</code>) and the highest note is C8 (<code>0x6C</code>).
@@ -172,6 +372,150 @@ Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<co
         <tr><td style="text-align: right; font-weight: bold">8</td><td>6C</td><td>6D</td><td>6E</td><td>6F</td><td>70</td><td>71</td><td>72</td><td>73</td><td>74</td><td>75</td><td>76</td><td>77</td></tr>
         <tr><td style="text-align: right; font-weight: bold">9</td><td>78</td><td>79</td><td>7A</td><td>7B</td><td>7C</td><td>7D</td><td>7E</td><td>7F</td></tr>
     </table>
+</div>
+
+<h3><a name="controller-numbers" href="#controller-numbers">Controller numbers</a></h3>
+<div>
+    This is an overview of the MIDI controller numbers that can be used as the first data byte of a control change event.<br>
+    The second data byte is the value for the controller. This value is 7 bits wide, so has a range of [0, 127]. Controller numbers <code>0x00</code>-<code>0x1F</code> can be combined with numbers <code>0x20</code>-<code>0x3F</code> for 14-bit resolution. In this case, numbers <code>0x00</code>-<code>0x1F</code> set the MSB, and numbers <code>0x20</code>-<code>0x3F</code> the LSB.<br>
+    Controller numbers 120-127 are reserved for Channel Mode Messages, which rather than controlling sound parameters, affect the channel's operating mode.
+    <table style="margin: 6px 0px 10px 0px">
+        <tr><td colspan="2">Controller</td><td rowspan="2">Function</td><td rowspan="2">Value</td><td rowspan="2">Used as</td></tr>
+        <tr><td>Dec</td><td>Hex</td></tr>
+        <tr><td>0</td><td>00</td><td style="text-align: left">Bank Select</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>1</td><td>01</td><td style="text-align: left">Modulation Wheel or Lever</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>2</td><td>02</td><td style="text-align: left">Breath Controller</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>3</td><td>03</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>4</td><td>04</td><td style="text-align: left">Foot Controller</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>5</td><td>05</td><td style="text-align: left">Portamento Time</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>6</td><td>06</td><td style="text-align: left">Data Entry MSB</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>7</td><td>07</td><td style="text-align: left">Channel Volume (formerly Main Volume)</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>8</td><td>08</td><td style="text-align: left">Balance</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>9</td><td>09</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>10</td><td>0A</td><td style="text-align: left">Pan</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>11</td><td>0B</td><td style="text-align: left">Expression Controller</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>12</td><td>0C</td><td style="text-align: left">Effect Control 1</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>13</td><td>0D</td><td style="text-align: left">Effect Control 2</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>14</td><td>0E</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>15</td><td>0F</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>16</td><td>10</td><td style="text-align: left">General Purpose Controller 1</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>17</td><td>11</td><td style="text-align: left">General Purpose Controller 2</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>18</td><td>12</td><td style="text-align: left">General Purpose Controller 3</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>19</td><td>13</td><td style="text-align: left">General Purpose Controller 4</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>20</td><td>14</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>21</td><td>15</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>22</td><td>16</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>23</td><td>17</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>24</td><td>18</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>25</td><td>19</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>26</td><td>1A</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>27</td><td>1B</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>28</td><td>1C</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>29</td><td>1D</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>30</td><td>1E</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>31</td><td>1F</td><td style="text-align: left">Undefined</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>32</td><td>20</td><td style="text-align: left">LSB for Control 0 (Bank Select)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>33</td><td>21</td><td style="text-align: left">LSB for Control 1 (Modulation Wheel or Lever)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>34</td><td>22</td><td style="text-align: left">LSB for Control 2 (Breath Controller)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>35</td><td>23</td><td style="text-align: left">LSB for Control 3 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>36</td><td>24</td><td style="text-align: left">LSB for Control 4 (Foot Controller)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>37</td><td>25</td><td style="text-align: left">LSB for Control 5 (Portamento Time)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>38</td><td>26</td><td style="text-align: left">LSB for Control 6 (Data Entry)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>39</td><td>27</td><td style="text-align: left">LSB for Control 7 (Channel Volume, formerly Main Volume)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>40</td><td>28</td><td style="text-align: left">LSB for Control 8 (Balance)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>41</td><td>29</td><td style="text-align: left">LSB for Control 9 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>42</td><td>2A</td><td style="text-align: left">LSB for Control 10 (Pan)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>43</td><td>2B</td><td style="text-align: left">LSB for Control 11 (Expression Controller)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>44</td><td>2C</td><td style="text-align: left">LSB for Control 12 (Effect control 1)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>45</td><td>2D</td><td style="text-align: left">LSB for Control 13 (Effect control 2)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>46</td><td>2E</td><td style="text-align: left">LSB for Control 14 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>47</td><td>2F</td><td style="text-align: left">LSB for Control 15 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>48</td><td>30</td><td style="text-align: left">LSB for Control 16 (General Purpose Controller 1)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>49</td><td>31</td><td style="text-align: left">LSB for Control 17 (General Purpose Controller 2)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>50</td><td>32</td><td style="text-align: left">LSB for Control 18 (General Purpose Controller 3)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>51</td><td>33</td><td style="text-align: left">LSB for Control 19 (General Purpose Controller 4)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>52</td><td>34</td><td style="text-align: left">LSB for Control 20 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>53</td><td>35</td><td style="text-align: left">LSB for Control 21 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>54</td><td>36</td><td style="text-align: left">LSB for Control 22 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>55</td><td>37</td><td style="text-align: left">LSB for Control 23 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>56</td><td>38</td><td style="text-align: left">LSB for Control 24 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>57</td><td>39</td><td style="text-align: left">LSB for Control 25 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>58</td><td>3A</td><td style="text-align: left">LSB for Control 26 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>59</td><td>3B</td><td style="text-align: left">LSB for Control 27 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>60</td><td>3C</td><td style="text-align: left">LSB for Control 28 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>61</td><td>3D</td><td style="text-align: left">LSB for Control 29 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>62</td><td>3E</td><td style="text-align: left">LSB for Control 30 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>63</td><td>3F</td><td style="text-align: left">LSB for Control 31 (Undefined)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>64</td><td>40</td><td style="text-align: left">Damper Pedal on/off (Sustain)</td><td>≤3F off, ≥40 on</td><td>---</td></tr>
+        <tr><td>65</td><td>41</td><td style="text-align: left">Portamento On/Off</td><td>≤3F off, ≥40 on</td><td>---</td></tr>
+        <tr><td>66</td><td>42</td><td style="text-align: left">Sostenuto On/Off</td><td>≤3F off, ≥40 on</td><td>---</td></tr>
+        <tr><td>67</td><td>43</td><td style="text-align: left">Soft Pedal On/Off</td><td>≤3F off, ≥40 on</td><td>---</td></tr>
+        <tr><td>68</td><td>44</td><td style="text-align: left">Legato Footswitch</td><td>≤3F Normal, ≥40 Legato</td><td>---</td></tr>
+        <tr><td>69</td><td>45</td><td style="text-align: left">Hold 2</td><td>≤3F off, ≥40 on</td><td>---</td></tr>
+        <tr><td>70</td><td>46</td><td style="text-align: left">Sound Controller 1 (default: Sound Variation)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>71</td><td>47</td><td style="text-align: left">Sound Controller 2 (default: Timbre/Harmonic Intens.)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>72</td><td>48</td><td style="text-align: left">Sound Controller 3 (default: Release Time)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>73</td><td>49</td><td style="text-align: left">Sound Controller 4 (default: Attack Time)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>74</td><td>4A</td><td style="text-align: left">Sound Controller 5 (default: Brightness)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>75</td><td>4B</td><td style="text-align: left">Sound Controller 6 (default: Decay Time - see MMA RP-021)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>76</td><td>4C</td><td style="text-align: left">Sound Controller 7 (default: Vibrato Rate - see MMA RP-021)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>77</td><td>4D</td><td style="text-align: left">Sound Controller 8 (default: Vibrato Depth - see MMA RP-021)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>78</td><td>4E</td><td style="text-align: left">Sound Controller 9 (default: Vibrato Delay - see MMA RP-021)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>79</td><td>4F</td><td style="text-align: left">Sound Controller 10 (default undefined - see MMA RP-021)</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>80</td><td>50</td><td style="text-align: left">General Purpose Controller 5</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>81</td><td>51</td><td style="text-align: left">General Purpose Controller 6</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>82</td><td>52</td><td style="text-align: left">General Purpose Controller 7</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>83</td><td>53</td><td style="text-align: left">General Purpose Controller 8</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>84</td><td>54</td><td style="text-align: left">Portamento Control</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>85</td><td>55</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>86</td><td>56</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>87</td><td>57</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>88</td><td>58</td><td style="text-align: left">High Resolution Velocity Prefix</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>89</td><td>59</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>90</td><td>5A</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>91</td><td>5B</td><td style="text-align: left">Effects 1 Depth (default: Reverb Send Level - see MMA RP-023) (formerly ExternalEffects Depth)</td><td>00-7F</td><td>---</td></tr>
+        <tr><td>92</td><td>5C</td><td style="text-align: left">Effects 2 Depth (formerly Tremolo Depth)</td><td>00-7F</td><td>---</td></tr>
+        <tr><td>93</td><td>5D</td><td style="text-align: left">Effects 3 Depth (default: Chorus Send Level - see MMA RP-023) (formerly Chorus Depth)</td><td>00-7F</td><td>---</td></tr>
+        <tr><td>94</td><td>5E</td><td style="text-align: left">Effects 4 Depth (formerly Celeste [Detune] Depth)</td><td>00-7F</td><td>---</td></tr>
+        <tr><td>95</td><td>5F</td><td style="text-align: left">Effects 5 Depth (formerly Phaser Depth)</td><td>00-7F</td><td>---</td></tr>
+        <tr><td>96</td><td>60</td><td style="text-align: left">Data Increment (Data Entry +1) (see MMA RP-018)</td><td>N/A</td><td>---</td></tr>
+        <tr><td>97</td><td>61</td><td style="text-align: left">Data Decrement (Data Entry -1) (see MMA RP-018)</td><td>N/A</td><td>---</td></tr>
+        <tr><td>98</td><td>62</td><td style="text-align: left">Non-Registered Parameter Number (NRPN) - LSB</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>99</td><td>63</td><td style="text-align: left">Non-Registered Parameter Number (NRPN) - MSB</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>100</td><td>64</td><td style="text-align: left">Registered Parameter Number (RPN) - LSB*</td><td>00-7F</td><td>LSB</td></tr>
+        <tr><td>101</td><td>65</td><td style="text-align: left">Registered Parameter Number (RPN) - MSB*</td><td>00-7F</td><td>MSB</td></tr>
+        <tr><td>102</td><td>66</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>103</td><td>67</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>104</td><td>68</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>105</td><td>69</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>106</td><td>6A</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>107</td><td>6B</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>108</td><td>6C</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>109</td><td>6D</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>110</td><td>6E</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>111</td><td>6F</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>112</td><td>70</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>113</td><td>71</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>114</td><td>72</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>115</td><td>73</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>116</td><td>74</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>117</td><td>75</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>118</td><td>76</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+        <tr><td>119</td><td>77</td><td style="text-align: left">Undefined</td><td>---</td><td>---</td></tr>
+    </table>
+    <table style="margin: 6px 0px 10px 0px">
+        <tr><td colspan="2">Channel mode</td><td rowspan="2">Function</td><td rowspan="2">Value</td></tr>
+        <tr><td>Dec</td><td>Hex</td></tr>
+        <tr><td>120</td><td>78</td><td style="text-align: left">All Sound Off</td><td>00</td></tr>
+        <tr><td>121</td><td>79</td><td style="text-align: left">Reset All Controllers</td><td>00</td></tr>
+        <tr><td>122</td><td>7A</td><td style="text-align: left">Local Control On/Off</td><td>00 off, 7F on</td></tr>
+        <tr><td>123</td><td>7B</td><td style="text-align: left">All Notes Off</td><td>00</td></tr>
+        <tr><td>124</td><td>7C</td><td style="text-align: left">Omni Mode Off (+ all notes off)</td><td>00</td></tr>
+        <tr><td>125</td><td>7D</td><td style="text-align: left">Omni Mode On (+ all notes off)</td><td>00</td></tr>
+        <tr><td>126</td><td>7E</td><td style="text-align: left">Mono Mode On (+ poly off, + all notes off)</td><td>Note: This equals the number of channels, or zero if the number of channels equals the number of voices in the receiver.</td></tr>
+        <tr><td>127</td><td>7F</td><td style="text-align: left">Poly Mode On (+ mono off, + all notes off)</td><td>0</td></tr>
+    </table>
+    <i><a href="https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2">Source</a></i>
 </div>
 <hr>
             <div class="back"><a href="Chap00-Arduino-MIDI.html">← Previous chapter</a></div>
