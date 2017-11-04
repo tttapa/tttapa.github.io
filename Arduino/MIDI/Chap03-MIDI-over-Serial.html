@@ -32,27 +32,27 @@
         <article>
 <h2><a name="sending-midi-over-serial" href="#sending-midi-over-serial">Sending MIDI over Serial</a></h2>
 <div>
-    The easiest way to send out MIDI packets is to use the <code>Serial.write(uint8_t data);</code> function. This function
-    writes out one 8-bit byte over the Serial connection (either hardware UART0 or the virtual COM port over USB).</div>
+  The easiest way to send out MIDI packets is to use the <code>Serial.write(uint8_t data);</code> function. This function
+  writes out one 8-bit byte over the Serial connection (either hardware UART0 or the virtual COM port over USB).</div>
 <div>To send out a MIDI packet, we just have to write out the three bytes that make up the packet: first the status byte, then
-    the two data bytes.</div>
+  the two data bytes.</div>
 <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">dataByte1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">dataByte2</font><font color="#000000">)</font> <font color="#000000">{</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">dataByte1</font><font color="#000000">)</font><font color="#000000">;</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">dataByte2</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#000000">}</font></code></pre>
 <div>In order to support MIDI packets with only one data byte as well, we can just overload the sendMIDI function. This means
-    that we create two functions with the same name, but with different parameters.
+  that we create two functions with the same name, but with different parameters.
 </div>
 <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">dataByte</font><font color="#000000">)</font> <font color="#000000">{</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">dataByte</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#000000">}</font></code></pre>
 <div>
-    In its current form, the sendMIDI function is quite silly. Although it sends out MIDI packets, it doesn't automatically create
-    these packets for us, we still have to put together the status and data bytes ourselves, and we have to make sure that
-    it is a valid MIDI packet before calling sendMIDI. Let's create a more useful function that takes a message type, channel
-    number and data as inputs, creates a MIDI packet, and sends it over the Serial port.</div>
+  In its current form, the sendMIDI function is quite silly. Although it sends out MIDI packets, it doesn't automatically create
+  these packets for us, we still have to put together the status and data bytes ourselves, and we have to make sure that
+  it is a valid MIDI packet before calling sendMIDI. Let's create a more useful function that takes a message type, channel
+  number and data as inputs, creates a MIDI packet, and sends it over the Serial port.</div>
 <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>  <font color="#434f54">// Decrement the channel, because MIDI channel 1 corresponds to binary channel 0</font>
   <font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font> <font color="#434f54">=</font> <font color="#000000">messageType</font> <font color="#434f54">|</font> <font color="#000000">channel</font><font color="#000000">;</font>  <font color="#434f54">// Combine the messageType (high nibble) </font>
@@ -63,10 +63,10 @@
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data2</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#000000">}</font></code></pre>
 <div>
-    We now have a working function that sends MIDI packets, and takes a somewhat sensible input, not just the bytes of the packet.
-    But there's still no guarantee that it is a valid MIDI message. Remember that the status byte should have a most significant
-    bit equal to 1, and the data bytes a most significant bit equal to 0. We'll use some bitwise math to make sure that this
-    is always the case, no matter what data the user enters.
+  We now have a working function that sends MIDI packets, and takes a somewhat sensible input, not just the bytes of the packet.
+  But there's still no guarantee that it is a valid MIDI message. Remember that the status byte should have a most significant
+  bit equal to 1, and the data bytes a most significant bit equal to 0. We'll use some bitwise math to make sure that this
+  is always the case, no matter what data the user enters.
 </div>
 <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>                                   <font color="#434f54">// Decrement the channel, because MIDI channel 1 </font>
@@ -95,20 +95,26 @@
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#000000">}</font></code></pre>
 <div>
-    Before sending the packet, we set the most significant bit of the status byte by performing a bitwise <abbr title="(A OR B) is true when either A or B is true">OR</abbr> operation:
-    <pre><code>0bxsss ssss
+  Before sending the packet, we set the most significant bit of the status byte by performing a bitwise
+  <abbr title="(A OR B) is true when either A or B is true">OR</abbr> operation:
+  <pre><code>0bxsss ssss
 0b1000 0000
 ----------- |
-0b1sss ssss</code></pre> Where <code>0bsss ssss</code> is the status, and <code>x</code> is either 1 or 0. As you can see, no matter the
-    value of <code>x</code>, the result will always be <code>0b1sss ssss</code>.<br> We also clear the most significant bits
-    of the data bytes by performing a bitwise <abbr title="(A AND B) is true when both A and B are true">AND</abbr> operation:
-    <pre><code>0bxddd dddd
+0b1sss ssss</code></pre> Where <code>0bsss ssss</code> is the status, and <code>x</code> is either 1 or 0. As you can see,
+  no matter the value of <code>x</code>, the result will always be <code>0b1sss ssss</code>.
+  <br> We also clear the most significant bits of the data bytes by performing a bitwise
+  <abbr title="(A AND B) is true when both A and B are true">AND</abbr> operation:
+  <pre><code>0bxddd dddd
 0b0111 1111
 ----------- &amp;
-0b0ddd dddd</code></pre> Where <code>0bddd dddd</code> is the data, and <code>x</code> is either 1 or 0. No matter what the value of <code>x</code>    is, the result will always be <code>0b0ddd dddd</code>
-<br><br></div>
-<div>You could go even further by making sure that the message type and the channel don't interfere with each other. However, that might be overly defensive.
-<pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
+0b0ddd dddd</code></pre> Where <code>0bddd dddd</code> is the data, and <code>x</code> is either 1 or 0. No matter what
+  the value of <code>x</code> is, the result will always be <code>0b0ddd dddd</code>
+  <br>
+  <br>
+</div>
+<div>You could go even further by making sure that the message type and the channel don't interfere with each other. However,
+  that might be overly defensive.
+  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>                                   <font color="#434f54">// Decrement the channel, because MIDI channel 1 </font>
                                                <font color="#434f54">// corresponds to binary channel 0</font>
   <font color="#000000">messageType</font> <font color="#434f54">&amp;=</font> <font color="#000000">0b11110000</font><font color="#000000">;</font>                   <font color="#434f54">// Make sure that only the high nibble </font>
@@ -130,7 +136,7 @@
 <h3><a name="improving-readibility" href="#improving-readibility">Improving readibility</a></h3>
 
 <div>To send a Control Change (0xB0) message on channel 3 for controller 80 with a value of 64, you would call
-    <code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">0xB0</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#434f54">,</font> <font color="#000000">80</font><font color="#434f54">,</font> <font color="#000000">64</font><font color="#000000">)</font><font color="#000000">;</font></code>
+  <code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">0xB0</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#434f54">,</font> <font color="#000000">80</font><font color="#434f54">,</font> <font color="#000000">64</font><font color="#000000">)</font><font color="#000000">;</font></code>
 </div>
 <div>To make it a little more obvious what's going on, we could declare some constants for the different message types:</div>
 <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">NOTE_OFF</font> <font color="#434f54">=</font> <font color="#000000">0x80</font><font color="#000000">;</font>
@@ -141,43 +147,41 @@
 <font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">CHANNEL_PRESSURE</font> <font color="#434f54">=</font> <font color="#000000">0xD0</font><font color="#000000">;</font>
 <font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">PITCH_BEND</font> <font color="#434f54">=</font> <font color="#000000">0xE0</font><font color="#000000">;</font></code></pre>
 <div>
-    You can now use
-    <code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">CC</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#434f54">,</font> <font color="#000000">80</font><font color="#434f54">,</font> <font color="#000000">64</font><font color="#000000">)</font><font color="#000000">;</font></code> which will make the code much easier to read.
+  You can now use
+  <code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">CC</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#434f54">,</font> <font color="#000000">80</font><font color="#434f54">,</font> <font color="#000000">64</font><font color="#000000">)</font><font color="#000000">;</font></code>  which will make the code much easier to read.
 </div>
 <div>
-When writing code, it's always a good idea to keep so-called <em>magic numbers</em> to a minimum. These are seemingly arbitrary numeric
-literals in your code that don't have a clear meaning. <br>
-For example, this code snippet plays a chromatic glissando (all keys,
-one after the other) on an honky-tonk piano:
-<pre><code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">0xC0</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#434f54">,</font> <font color="#000000">4</font><font color="#000000">)</font><font color="#000000">;</font>
+  When writing code, it's always a good idea to keep so-called
+  <em>magic numbers</em> to a minimum. These are seemingly arbitrary numeric literals in your code that don't have a clear meaning.
+  <br> For example, this code snippet plays a chromatic glissando (all keys, one after the other) on an honky-tonk piano:
+  <pre><code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">0xC0</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#434f54">,</font> <font color="#000000">4</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#5e6d03">for</font> <font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">i</font> <font color="#434f54">=</font> <font color="#000000">21</font><font color="#000000">;</font> <font color="#000000">i</font> <font color="#434f54">&lt;=</font> <font color="#000000">108</font><font color="#000000">;</font> <font color="#000000">i</font><font color="#434f54">++</font><font color="#000000">)</font> <font color="#000000">{</font>
    <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">0x90</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#434f54">,</font> <font color="#000000">i</font><font color="#434f54">,</font> <font color="#000000">64</font><font color="#000000">)</font><font color="#000000">;</font>
    <font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">100</font><font color="#000000">)</font><font color="#000000">;</font>
    <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">0x80</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#434f54">,</font> <font color="#000000">i</font><font color="#434f54">,</font> <font color="#000000">64</font><font color="#000000">)</font><font color="#000000">;</font>
-<font color="#000000">}</font></code></pre> 
-To someone who has never seen the code, or someone who doesn't know all MIDI message type codes by heart, it's not clear
-what all these numbers mean. A much better sketch would be:
-<pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">honkyTonkPiano</font> <font color="#434f54">=</font> <font color="#000000">4</font><font color="#000000">;</font>  <font color="#434f54">// GM defines the Honky-tonk Piano as instrument #4</font>
+<font color="#000000">}</font></code></pre> To someone who has never seen the code, or someone who doesn't know all MIDI
+  message type codes by heart, it's not clear what all these numbers mean. A much better sketch would be:
+  <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">honkyTonkPiano</font> <font color="#434f54">=</font> <font color="#000000">4</font><font color="#000000">;</font>  <font color="#434f54">// GM defines the Honky-tonk Piano as instrument #4</font>
 
 <font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">note_A1</font> <font color="#434f54">=</font> <font color="#000000">21</font><font color="#000000">;</font>  <font color="#434f54">// lowest note on an 88-key piano</font>
 <font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">note_C9</font> <font color="#434f54">=</font> <font color="#000000">108</font><font color="#000000">;</font> <font color="#434f54">// highest note on an 88-key piano</font>
 
 <font color="#00979c">uint8_t</font> <font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>    <font color="#434f54">// MIDI channel 1</font>
 <font color="#00979c">uint8_t</font> <font color="#000000">velocity</font> <font color="#434f54">=</font> <font color="#000000">64</font><font color="#000000">;</font>  <font color="#434f54">// 64 = mezzo forte</font></code></pre>
-<pre><code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">PROGRAM_CHANGE</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">honkyTonkPiano</font><font color="#000000">)</font><font color="#000000">;</font>
+  <pre><code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">PROGRAM_CHANGE</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">honkyTonkPiano</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#5e6d03">for</font> <font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">note</font> <font color="#434f54">=</font> <font color="#000000">note_A1</font><font color="#000000">;</font> <font color="#000000">note</font> <font color="#434f54">&lt;=</font> <font color="#000000">note_C9</font><font color="#000000">;</font> <font color="#000000">note</font><font color="#434f54">++</font><font color="#000000">)</font> <font color="#000000">{</font>  <font color="#434f54">// chromatic glissando over all 88 piano keys</font>
   <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">NOTE_ON</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">note</font><font color="#434f54">,</font> <font color="#000000">velocity</font><font color="#000000">)</font><font color="#000000">;</font>
   <font color="#d35400">delay</font><font color="#000000">(</font><font color="#000000">100</font><font color="#000000">)</font><font color="#000000">;</font>
   <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">NOTE_OFF</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">note</font><font color="#434f54">,</font> <font color="#000000">velocity</font><font color="#000000">)</font><font color="#000000">;</font>
-<font color="#000000">}</font></code></pre>
-This snippet does exactly the same thing as the previous example, but it's much easier to read and understand.
+<font color="#000000">}</font></code></pre> This snippet does exactly the same thing as the previous example, but it's
+  much easier to read and understand.
 </div>
 <hr>
 <h3><a name="using-structs" href="#using-structs">Using structs</a></h3>
 <div>
-    Another approach would be to compose the MIDI message in a buffer, and then just write out that buffer. We can define a struct
-    with the different fields of a MIDI event. Take a look at this struct:
-<pre><code><font color="#00979c">typedef</font> <font color="#00979c">struct</font> <font color="#000000">MIDI_message_3B</font> <font color="#000000">{</font>
+  Another approach would be to compose the MIDI message in a buffer, and then just write out that buffer. We can define a struct
+  with the different fields of a MIDI event. Take a look at this struct:
+  <pre><code><font color="#00979c">typedef</font> <font color="#00979c">struct</font> <font color="#000000">MIDI_message_3B</font> <font color="#000000">{</font>
   <font color="#00979c">unsigned</font> <font color="#00979c">int</font> <font color="#000000">channel</font> <font color="#434f54">:</font> <font color="#000000">4</font><font color="#000000">;</font>   <font color="#434f54">// second nibble : MIDI channel (0-15)</font>
   <font color="#00979c">unsigned</font> <font color="#00979c">int</font> <font color="#000000">status</font> <font color="#434f54">:</font> <font color="#000000">3</font><font color="#000000">;</font>    <font color="#434f54">// first  nibble : status message</font>
   <font color="#00979c">unsigned</font> <font color="#00979c">int</font> <font color="#000000">_msb0</font> <font color="#434f54">:</font> <font color="#000000">1</font><font color="#000000">;</font>     <font color="#434f54">// most significant bit of status byte : should be 1 according to MIDI specification</font>
@@ -186,43 +190,51 @@ This snippet does exactly the same thing as the previous example, but it's much 
   <font color="#00979c">unsigned</font> <font color="#00979c">int</font> <font color="#000000">data2</font> <font color="#434f54">:</font> <font color="#000000">7</font><font color="#000000">;</font>     <font color="#434f54">// third  byte   : second value</font>
   <font color="#00979c">unsigned</font> <font color="#00979c">int</font> <font color="#000000">_msb2</font> <font color="#434f54">:</font> <font color="#000000">1</font><font color="#000000">;</font>     <font color="#434f54">// most significant bit of second data byte : should be 0 according to MIDI specification</font>
   <font color="#000000">MIDI_message_3B</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#434f54">:</font> <font color="#000000">_msb0</font><font color="#000000">(</font><font color="#000000">1</font><font color="#000000">)</font><font color="#434f54">,</font> <font color="#000000">_msb1</font><font color="#000000">(</font><font color="#000000">0</font><font color="#000000">)</font><font color="#434f54">,</font> <font color="#000000">_msb2</font><font color="#000000">(</font><font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font><font color="#000000">}</font>  <font color="#434f54">// set the correct msb's for MIDI</font>
-<font color="#000000">}</font><font color="#000000">;</font></code></pre> 
-You might have noticed that the bit fields are in the wrong order: for example, the normal order of the status byte
-    would be <code>1.mmm.cccc</code> with mmm the message type and cccc the channel. However, the order in our struct is
-    <code>cccc.mmm.1</code>. To understand what's going on, you have to know that Arduinos are Little Endian. This means
-    that the first bit field takes up the least significant bits in each byte. In other words, the bit fields within each
-    byte are in reversed order, compared to the conventional Big Endian notation (that is used in the MIDI specification).</div><br>
+<font color="#000000">}</font><font color="#000000">;</font></code></pre> You might have noticed that the bit fields are
+  in the wrong order: for example, the normal order of the status byte would be <code>1.mmm.cccc</code> with mmm the message
+  type and cccc the channel. However, the order in our struct is
+  <code>cccc.mmm.1</code>. To understand what's going on, you have to know that Arduinos are Little Endian. This means that
+  the first bit field takes up the least significant bits in each byte. In other words, the bit fields within each byte are
+  in reversed order, compared to the conventional Big Endian notation (that is used in the MIDI specification).</div>
+<br>
 <div>You can now fill up all fields of the struct, to create a valid MIDI packet. You don't have to worry about the most significant
-    bits of each byte, bitmasking is done automatically, because of the bit fields. These bits are set to the correct value when a message is created, in the initializer list of the constructor. The only thing you need to keep in mind is that the channels are zero-based. Also note that the message types are no longer 0x80, 0x90 etc., but 0x8, 0x9 ...
-<pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">NOTE_ON</font> <font color="#434f54">=</font> <font color="#000000">0x9</font><font color="#000000">;</font>
+  bits of each byte, bitmasking is done automatically, because of the bit fields. These bits are set to the correct value
+  when a message is created, in the initializer list of the constructor. The only thing you need to keep in mind is that
+  the channels are zero-based. Also note that the message types are no longer 0x80, 0x90 etc., but 0x8, 0x9 ...
+  <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">NOTE_ON</font> <font color="#434f54">=</font> <font color="#000000">0x9</font><font color="#000000">;</font>
         
 <font color="#000000">MIDI_message_3B</font> <font color="#000000">msg</font><font color="#000000">;</font> <font color="#434f54">// Create a variable called 'msg' of the 'MIDI_message_3B' type we just defined</font>
 <font color="#000000">msg</font><font color="#434f54">.</font><font color="#000000">status</font>  <font color="#434f54">=</font> <font color="#00979c">NOTE_ON</font><font color="#000000">;</font>
 <font color="#000000">msg</font><font color="#434f54">.</font><font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">channel</font> <font color="#434f54">-</font> <font color="#000000">1</font><font color="#000000">;</font>  <font color="#434f54">// MIDI channels start from 0, so subtract 1</font>
 <font color="#000000">msg</font><font color="#434f54">.</font><font color="#000000">data1</font>   <font color="#434f54">=</font> <font color="#000000">note_A1</font><font color="#000000">;</font>
 <font color="#000000">msg</font><font color="#434f54">.</font><font color="#000000">data2</font>   <font color="#434f54">=</font> <font color="#000000">velocity</font><font color="#000000">;</font></code></pre>
-    <br></div>
+  <br>
+</div>
 <div>Finally, you can just write out the message over the Serial port. We'll create another overload of the sendMIDI function:
-<pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">MIDI_message_3B</font> <font color="#000000">msg</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">MIDI_message_3B</font> <font color="#000000">msg</font><font color="#000000">)</font> <font color="#000000">{</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#434f54">*</font><font color="#000000">)</font><font color="#434f54">&amp;</font><font color="#000000">msg</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#000000">)</font><font color="#000000">;</font>
-<font color="#000000">}</font></code></pre> We're using the <code>write(uint8_t* buffer, size_t numberOfBytes)</code> function. The first argument is a pointer
-    to a buffer (or array) of data bytes to write out. The pointer points to the first element of this array. The second
-    argument is the number of bytes to send, starting from that first element. There's one minor problem: <code>msg</code>    is not an array, it's an object of type MIDI_message_3B. The <code>write</code> function expects a pointer to an array
-    of bytes (uint8_t). To get around this, we can just take the address of <code>msg</code>, using the <em>address-of</em>    operator (&amp;) and cast it to a pointer to an array of uint8_t's using <code>(uint8_t*)</code>. We need to write out
-    the entire MIDI packet, which is 3 bytes long, so the second argument is just <code>3</code>.<br> To use the function,
-    just use:
-<pre><code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">msg</font><font color="#000000">)</font><font color="#000000">;</font></code></pre>
-</div><br>
+<font color="#000000">}</font></code></pre> We're using the <code>write(uint8_t* buffer, size_t numberOfBytes)</code> function.
+  The first argument is a pointer to a buffer (or array) of data bytes to write out. The pointer points to the first element
+  of this array. The second argument is the number of bytes to send, starting from that first element. There's one minor
+  problem: <code>msg</code> is not an array, it's an object of type MIDI_message_3B. The <code>write</code> function expects
+  a pointer to an array of bytes (uint8_t). To get around this, we can just take the address of <code>msg</code>, using the
+  <em>address-of</em> operator (&amp;) and cast it to a pointer to an array of uint8_t's using <code>(uint8_t*)</code>. We need
+  to write out the entire MIDI packet, which is 3 bytes long, so the second argument is just <code>3</code>.
+  <br> To use the function, just use:
+  <pre><code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">msg</font><font color="#000000">)</font><font color="#000000">;</font></code></pre>
+</div>
+<br>
 <div>In fact, we could do even better. Now every time the sendMIDI function is called, the <code>msg</code> object is copied.
-    This takes time and memory. To prevent it from being copied, we can pass only a reference to <code>msg</code> to the
-    function. Here's what that looks like:
-<pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">MIDI_message_3B</font> <font color="#434f54">&amp;</font><font color="#000000">msg</font><font color="#000000">)</font> <font color="#000000">{</font>
+  This takes time and memory. To prevent it from being copied, we can pass only a reference to <code>msg</code> to the function.
+  Here's what that looks like:
+  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">MIDI_message_3B</font> <font color="#434f54">&amp;</font><font color="#000000">msg</font><font color="#000000">)</font> <font color="#000000">{</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#434f54">*</font><font color="#000000">)</font><font color="#434f54">&amp;</font><font color="#000000">msg</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#000000">}</font></code></pre>
-<pre><code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">msg</font><font color="#000000">)</font><font color="#000000">;</font></code></pre>
-</div><br>
+  <pre><code><font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#000000">msg</font><font color="#000000">)</font><font color="#000000">;</font></code></pre>
+</div>
+<br>
 <div>You can do the same thing for two-byte MIDI packets:
-<pre><code><font color="#00979c">typedef</font> <font color="#00979c">struct</font> <font color="#000000">MIDI_message_2B</font> <font color="#000000">{</font>
+  <pre><code><font color="#00979c">typedef</font> <font color="#00979c">struct</font> <font color="#000000">MIDI_message_2B</font> <font color="#000000">{</font>
   <font color="#00979c">unsigned</font> <font color="#00979c">int</font> <font color="#000000">channel</font> <font color="#434f54">:</font> <font color="#000000">4</font><font color="#000000">;</font>   <font color="#434f54">// second nibble : MIDI channel (0-15)</font>
   <font color="#00979c">unsigned</font> <font color="#00979c">int</font> <font color="#000000">status</font> <font color="#434f54">:</font> <font color="#000000">3</font><font color="#000000">;</font>    <font color="#434f54">// first  nibble : message type</font>
   <font color="#00979c">unsigned</font> <font color="#00979c">int</font> <font color="#000000">_msb0</font> <font color="#434f54">:</font> <font color="#000000">1</font><font color="#000000">;</font>     <font color="#434f54">// most significant bit of status byte : should be 1 according to MIDI specification</font>
@@ -237,8 +249,13 @@ You might have noticed that the bit fields are in the wrong order: for example, 
 </div>
 <hr>
 <h3><a name="running-status" href="#running-status">Running status</a></h3>
-<div>As discussed in <a href="Chap01-MIDI-Protocol.html#running-status">chapter 1</a>, you can use running statusses to save bandwidth. The implementation is relatively easy: remember the last status byte (header) that was sent, and then compare every following status byte to this header. If it's the same status, send the data bytes only, otherwise, send the new status byte, and remember this header. <br>To remember the previous header, a <code>static</code> variable is used. Static variables are not destroyed when they go out of scope, so the value is retained the next time the <code>sendMIDI</code> function is executed.
-    <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
+<div>As discussed in
+  <a href="Chap01-MIDI-Protocol.html#running-status">chapter 1</a>, you can use running statusses to save bandwidth. The implementation is relatively easy: remember the last
+  status byte (header) that was sent, and then compare every following status byte to this header. If it's the same status,
+  send the data bytes only, otherwise, send the new status byte, and remember this header.
+  <br>To remember the previous header, a <code>static</code> variable is used. Static variables are not destroyed when they go
+  out of scope, so the value is retained the next time the <code>sendMIDI</code> function is executed.
+  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>                                   <font color="#434f54">// Decrement the channel, because MIDI channel 1</font>
                                                <font color="#434f54">// corresponds to binary channel 0</font>
   <font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font> <font color="#434f54">=</font> <font color="#000000">messageType</font> <font color="#434f54">|</font> <font color="#000000">channel</font><font color="#000000">;</font>  <font color="#434f54">// Combine the messageType (high nibble)</font>
@@ -257,7 +274,7 @@ You might have noticed that the bit fields are in the wrong order: for example, 
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data1</font><font color="#000000">)</font><font color="#000000">;</font>                         <font color="#434f54">// Send the data bytes over Serial</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data2</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#000000">}</font></code></pre>
-    <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>                                   <font color="#434f54">// Decrement the channel, because MIDI channel 1</font>
                                                <font color="#434f54">// corresponds to binary channel 0</font>
   <font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font> <font color="#434f54">=</font> <font color="#000000">messageType</font> <font color="#434f54">|</font> <font color="#000000">channel</font><font color="#000000">;</font>  <font color="#434f54">// Combine the messageType (high nibble)</font>
@@ -273,9 +290,9 @@ You might have noticed that the bit fields are in the wrong order: for example, 
     <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">statusByte</font><font color="#000000">;</font>                <font color="#434f54">// Remember the new header</font>
   <font color="#000000">}</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data</font><font color="#000000">)</font><font color="#000000">;</font>                          <font color="#434f54">// Send the data byte over Serial</font>
-<font color="#000000">}</font></code></pre>
-Going even further, we can replace note off events by note on events with a velocity of zero:
-<pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
+<font color="#000000">}</font></code></pre> Going even further, we can replace note off events by note on events with a
+  velocity of zero:
+  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">messageType</font> <font color="#434f54">==</font> <font color="#00979c">NOTE_OFF</font><font color="#000000">)</font> <font color="#000000">{</font>               <font color="#434f54">// Replace note off messages</font>
     <font color="#000000">messageType</font> <font color="#434f54">=</font> <font color="#00979c">NOTE_ON</font><font color="#000000">;</font>                     <font color="#434f54">// with a note on message</font>
     <font color="#000000">data2</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>                                 <font color="#434f54">// with a velocity of zero.</font>
@@ -297,9 +314,10 @@ Going even further, we can replace note off events by note on events with a velo
   <font color="#000000">}</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data1</font><font color="#000000">)</font><font color="#000000">;</font>                         <font color="#434f54">// Send the data bytes over Serial</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data2</font><font color="#000000">)</font><font color="#000000">;</font>
-<font color="#000000">}</font></code></pre>
-To ensure that the receiver will know what to do with the data, even if it missed the first header byte, is to send a new header byte regularly. This can be done by remembering the time the last header was sent:
-<pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
+<font color="#000000">}</font></code></pre> To ensure that the receiver will know what to do with the data, even if it
+  missed the first header byte, it is a good idea to send a header byte regularly. This can be done by remembering the time the last
+  header was sent:
+  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">messageType</font> <font color="#434f54">==</font> <font color="#00979c">NOTE_OFF</font><font color="#000000">)</font> <font color="#000000">{</font>               <font color="#434f54">// Replace note off messages</font>
     <font color="#000000">messageType</font> <font color="#434f54">=</font> <font color="#00979c">NOTE_ON</font><font color="#000000">;</font>                     <font color="#434f54">// with a note on message</font>
     <font color="#000000">data2</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>                                 <font color="#434f54">// with a velocity of zero.</font>
@@ -311,8 +329,8 @@ To ensure that the receiver will know what to do with the data, even if it misse
                                                <font color="#434f54">// Both the message type and the channel</font>
                                                <font color="#434f54">// should be 4 bits wide</font>
   <font color="#000000">statusByte</font> <font color="#434f54">|=</font> <font color="#000000">0b10000000</font><font color="#000000">;</font>                    <font color="#434f54">// Set the most significant bit of the status byte</font>
-  <font color="#000000">data1</font>      <font color="#434f54">&=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>                    <font color="#434f54">// Clear the most significant bit of the data bytes</font>
-  <font color="#000000">data2</font>      <font color="#434f54">&=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>
+  <font color="#000000">data1</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>                    <font color="#434f54">// Clear the most significant bit of the data bytes</font>
+  <font color="#000000">data2</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>
 
   <font color="#00979c">static</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">lastHeaderTime</font> <font color="#434f54">=</font> <font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
   <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">runningHeader</font><font color="#000000">;</font>          
