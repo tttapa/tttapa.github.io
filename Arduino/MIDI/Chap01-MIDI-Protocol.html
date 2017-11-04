@@ -25,8 +25,8 @@
 <li><a href="Chap03-MIDI-over-Serial.html">Sending MIDI over Serial</a></li>
 
                 </ol>
-                <a href="https://github.com/tttapa/ESP8266/raw/master/A%20Beginner's%20Guide%20to%20the%20ESP8266%20-%20article/PDF/A-Beginner's-Guide-to-the-ESP8266.pdf" title="Download the guide as a PDF document (automatically generated)">Download as PDF</a><br>
-                <a href="https://github.com/tttapa/ESP8266/tree/master/Examples" title="Download all example code that's used in this guide">Download examples</a>
+                <a href="/PDF/Arduino-MIDI.pdf">Download as PDF</a><br>
+                <a href="https://github.com/tttapa/MIDI/master/Examples" title="Download all example code that's used in this guide">Download examples (TODO)</a>
             </div>
         </nav>
         <article>
@@ -35,111 +35,78 @@
         border-collapse: collapse;
         empty-cells: show;
     }
+
     tr:hover {
         background-color: transparent;
     }
+
     td {
         border: 1px solid #CCC;
         min-width: 1em;
         padding: 0.3em;
     }
-    td:first-child{
+
+    td:first-child {
         text-align: left;
     }
+
     td {
         text-align: center;
+    }
+
+    table.left td {
+        text-align: left;
     }
 </style>
 
 <h2><a name="the-midi-protocol" href="#the-midi-protocol">The MIDI protocol</a></h2>
 <p>
-    <small><i>The MIDI specification can be found here: <a href="https://www.midi.org/specifications/item/the-midi-1-0-specification">https://www.midi.org/specifications/item/the-midi-1-0-specification</a></i></small>
+    <small>
+        <i>The MIDI specification can be found here:
+            <a href="https://www.midi.org/specifications/item/the-midi-1-0-specification">https://www.midi.org/specifications/item/the-midi-1-0-specification</a>
+        </i>
+    </small>
 </p>
 <p>
-    The MIDI protocol describes a set of MIDI events. For example, a note is played, or a note is turned off, a controller is moved and set to a new value, a new instrument is selected, etc. These events correspond to MIDI messages that can be sent over the MIDI hardware connection.
+    The MIDI protocol describes a set of MIDI events. For example, a note is played, or a note is turned off, a controller is
+    moved and set to a new value, a new instrument is selected, etc. These events correspond to MIDI messages that can be
+    sent over the MIDI hardware connection.
 </p>
 
 <div>
-    There are two main types of messages: channel messages and system messages. Most performance information will be sent as channel messages, while system messages are used for things like proprietary handshakes, manufacturer-specific settings, sending long packets of data, real-time messages for syncronization and tuning, and other things that are not really of interest to someone who just wants to make an Arduino MIDI instrument or controller. That's why this guide will mainly focus on channel messages.
+    There are two main types of messages: channel messages and system messages. Most performance information will be sent as
+    channel messages, while system messages are used for things like proprietary handshakes, manufacturer-specific settings,
+    sending long packets of data, real-time messages for syncronization and tuning, and other things that are not really
+    of interest to someone who just wants to make an Arduino MIDI instrument or controller. That's why this guide will mainly
+    focus on channel messages.
 </div>
 
 
 <h3><a name="channel-messages" href="#channel-messages">Channel messages</a></h3>
-<div>A MIDI channel message consist of a header byte, referred to as the status byte, followed by one or two data bytes:
+<p>
+    There are 16 MIDI channels. Each MIDI instrument can play notes on one of these channels, and they can apply different voices
+    or patches to different channels, as well as setting some controllers like volume, pan, balance, sustain pedal, pitch
+    bend, etc.
+    <br> MIDI messages that target a specific channel are called channel messages.
+</p>
+
+<p>A MIDI channel message consist of a header byte, referred to as the status byte, followed by one or two data bytes:
     <div style="margin: 6px 0px 10px 0px">
         <div style="padding: 3px"><code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Status</code>&boxh;<code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Data&nbsp;&nbsp;</code></div>
-        <div style="padding: 3px"><code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Status</code>&boxh;<code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Data 1</code>&boxh;<code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Data 2</code></div>
+        <div style="padding: 3px"><code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Status</code>&boxh;<code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Data 1</code>&boxh;
+            <code style="padding: 2px; display: inline-block; border: 1px solid #AAA">Data 2</code>
+        </div>
     </div>
-</div>
-<div>Each byte consists of 8 binary digits. To distinguish between status and data bytes, and to prevent framing errors, status bytes have the most significant bit (msb) set to one (1), and data bytes have the msb set to zero (0).
-<table style="margin: 6px 0px 10px 0px">
-    <tr>
-        <td style="border: none"></td>
-        <td colspan="8">Status byte</td>
-        <td colspan="8">Data byte 1</td>
-        <td colspan="8">Data byte 2 (optional)</td>
-    </tr>
-    <tr>
-        <td>Bit</td>
-        <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-        <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-        <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-    </tr>
-    <tr>
-        <td>Value</td>
-        <td>1</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td>
-        <td>0</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td>
-        <td>0</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td>
-    </tr>
-</table>
-</div>
-
-<h4><a name="status-bytes" href="#status-bytes">Status bytes</a></h4>
-<div>The status byte of channel messages is divided into two 4-bit nibbles. The high nibble (bits 4-7) specifies the message type, and the low nibble (bits 0-3) specifies the MIDI channel. Because the most significant bit has to be one, there are 8 different message types (<code>0b1000</code> - <code>0b1110</code> or <code>0x8</code> - <code>0xE</code>), and 16 different channels (<code>0x0</code> - <code>0xF</code>). Message type <code>0xF</code> is used for system messages, so it won't be covered in this section on channel messages.
-<table style="margin: 6px 0px 6px 0px">
-    <tr>
-        <td style="border: none"></td>
-        <td colspan="8">Status byte</td>
-    </tr>
-    <tr>
-        <td>Bit</td>
-        <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-    </tr>
-    <tr>
-        <td>Value</td>
-        <td>m</td><td>m</td><td>m</td><td>m</td><td>n</td><td>n</td><td>n</td><td>n</td>
-    </tr>
-</table>
-Where <code>mmmm</code> is the message type (<code>0x8</code> - <code>0xE</code>) and <code>nnnn</code> is the channel nibble.<br>
-Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<code>nnnn = channel - 1</code>)
-</div>
-
-<h4><a name="data-bytes" href="#data-bytes">Data bytes</a></h4>
-<div>Each data byte contains a 7-bit value, a number between 0 and 127 (<code>0b01111111</code> or <code>0x7F</code>). The meaning of this value depends on the message type. For example, it can tell the receiver what note is played, how hard the key was struck, what instrument to select, what value a controller is set to, etc.</div>
-
-<hr>
-
-<div>The following section will go over the different channel messages and their data bytes.</div>
-
-<h4><a name="note-off-0x8" href="#note-off-0x8">Note Off <code style="font-weight: normal">(0x8)</code></a></h4>
+</p>
 <div>
-    A note off event is used to stop a playing note. For example, when a key is released.
-    <p>
-            <b>Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See <a href="#midi-note-names">MIDI note names</a>.<br>
-            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast the key is released).
-    </p>
-    <ul>
-            <li>A velocity of 0 is not defined, and some software or devices may not register the note off event if the velocity is zero.</li>
-            <li>Most software or devices will ignore the note off velocity.</li>
-            <li>Instead of a note off event, a note on event with a velocity of zero may be used. This is especially useful when using a running status.</li>
-    </ul>
-        
+    Each byte consists of 8 binary digits. To distinguish between status and data bytes, and to prevent framing errors, status
+    bytes have the most significant bit (msb) set to one (1), and data bytes have the msb set to zero (0).
     <table style="margin: 6px 0px 10px 0px">
         <tr>
             <td style="border: none"></td>
             <td colspan="8">Status byte</td>
-            <td colspan="8">Note number</td>
-            <td colspan="8">Velocity</td>
+            <td colspan="8">Data byte 1</td>
+            <td colspan="8">Data byte 2 (optional)</td>
         </tr>
         <tr>
             <td>Bit</td>
@@ -149,153 +116,243 @@ Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<co
         </tr>
         <tr>
             <td>Value</td>
-            <td>1</td><td>0</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
-            <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
-            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+            <td>1</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td>
+            <td>0</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td>
+            <td>0</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td><td>x</td>
         </tr>
-    </table>    
+    </table>
+</div>
+
+<h4><a name="status-bytes" href="#status-bytes">Status bytes</a></h4>
+<div>
+    The status byte of channel messages is divided into two 4-bit nibbles. The high nibble (bits 4-7) specifies the message type,
+    and the low nibble (bits 0-3) specifies the MIDI channel. Because the most significant bit has to be one, there are 8
+    different message types (<code>0b1000</code> - <code>0b1111</code> or <code>0x8</code> - <code>0xF</code>), and 16
+    different channels (<code>0x0</code> - <code>0xF</code>). Message type <code>0xF</code> is used for system messages,
+    so it won't be covered in this section on channel messages.
+    <table style="margin: 6px 0px 6px 0px">
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>m</td><td>m</td><td>m</td><td>m</td><td>n</td><td>n</td><td>n</td><td>n</td>
+        </tr>
+    </table> Where <code>mmmm</code> is the message type (<code>0x8</code> - <code>0xE</code>) and <code>nnnn</code>    is the channel nibble.
+    <br> Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<code>nnnn = channel - 1</code>)
+</div>
+
+<h4><a name="data-bytes" href="#data-bytes">Data bytes</a></h4>
+<div>
+    Each data byte contains a 7-bit value, a number between 0 and 127 (<code>0b01111111</code> or <code>0x7F</code>). The
+    meaning of this value depends on the message type. For example, it can tell the receiver what note is played, how hard
+    the key was struck, what instrument to select, what value a controller is set to, etc.
+</div>
+
+
+<h3><a name="channel-messages-message-types" href="#channel-messages-message-types">Channel Messages: message types</a></h3>
+<p>
+    The following section will go over the different channel messages and their status and data bytes.
+    <br> Keep in mind that <code>nnnn = channel - 1</code>.
+</p>
+
+<h4><a name="note-off-0x8" href="#note-off-0x8">Note Off <code style="font-weight: normal">(0x8)</code></a></h4>
+<div>
+    A note off event is used to stop a playing note. For example, when a key is released.
+    <p>
+        <b style="padding-left: 24px">Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See
+        <a href="#midi-note-names">MIDI note names</a>.
+        <br>
+        <b style="padding-left: 24px">Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast the key is released).
+    </p>
+    <ul>
+        <li>A velocity of 0 is not defined, and some software or devices may not register the note off event if the velocity
+            is zero.</li>
+        <li>Most software or devices will ignore the note off velocity.</li>
+        <li>Instead of a note off event, a note on event with a velocity of zero may be used. This is especially useful when
+            using a
+            <a href="#running-status">running status</a>.</li>
+    </ul>
+
+    <table style="margin: 6px 0px 10px 0px">
+            <tr>
+                <td style="border: none"></td>
+                <td colspan="8">Status byte</td>
+                <td colspan="8">Note number</td>
+                <td colspan="8">Velocity</td>
+            </tr>
+            <tr>
+                <td>Bit</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            </tr>
+            <tr>
+                <td>Value</td>
+                <td>1</td><td>0</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+                <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
+                <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+            </tr>
+        </table>
 </div>
 
 <h4><a name="note-on-0x9" href="#note-on-0x9">Note On <code style="font-weight: normal">(0x9)</code></a></h4>
 <div>
     A note on event is used to play a note. For example, when a key is pressed.
     <p>
-            <b>Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See <a href="#midi-note-names">MIDI note names</a>.<br>
-            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast/hard the key is pressed).
+        <b style="padding-left: 24px">Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See
+        <a href="#midi-note-names">MIDI note names</a>.
+        <br>
+        <b style="padding-left: 24px">Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast/hard the key is pressed).
     </p>
     <ul>
-            <li>If the velocity is zero, the note on event is interpreted as a note off event. This is especially useful when using a running status.</li>
+        <li>If the velocity is zero, the note on event is interpreted as a note off event. This is especially useful when using
+            a
+            <a href="#running-status">running status</a>.</li>
     </ul>
-        
+
     <table style="margin: 6px 0px 10px 0px">
-        <tr>
-            <td style="border: none"></td>
-            <td colspan="8">Status byte</td>
-            <td colspan="8">Note number</td>
-            <td colspan="8">Velocity</td>
-        </tr>
-        <tr>
-            <td>Bit</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-        </tr>
-        <tr>
-            <td>Value</td>
-            <td>1</td><td>0</td><td>0</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
-            <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
-            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
-        </tr>
-    </table>
+            <tr>
+                <td style="border: none"></td>
+                <td colspan="8">Status byte</td>
+                <td colspan="8">Note number</td>
+                <td colspan="8">Velocity</td>
+            </tr>
+            <tr>
+                <td>Bit</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            </tr>
+            <tr>
+                <td>Value</td>
+                <td>1</td><td>0</td><td>0</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
+                <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
+                <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+            </tr>
+        </table>
 </div>
 
 <h4><a name="polyphonic-key-pressure-0xa" href="#polyphonic-key-pressure-0xa">Polyphonic key pressure <code style="font-weight: normal">(0xA)</code></a></h4>
 <div>
-    A polyphonic key pressure event is used when the pressure on a key or a pressure sensitive pad changes after the note on event.
+    A polyphonic key pressure event is used when the pressure on a key or a pressure sensitive pad changes after the note on
+    event.
     <p>
-            <b>Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See <a href="#midi-note-names">MIDI note names</a>.<br>
-            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure on the key.
+        <b style="padding-left: 24px">Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See
+        <a href="#midi-note-names">MIDI note names</a>.
+        <br>
+        <b style="padding-left: 24px">Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure on the key.
     </p>
     <ul>
-            <li>Most normal MIDI keyboards do not implement this event.</li>
-            <li>Key pressure is sometimes referred to as after-touch or after-pressure.</li>
+        <li>Most normal MIDI keyboards do not implement this event.</li>
+        <li>Key pressure is sometimes referred to as after-touch or after-pressure.</li>
     </ul>
-        
+
     <table style="margin: 6px 0px 10px 0px">
-        <tr>
-            <td style="border: none"></td>
-            <td colspan="8">Status byte</td>
-            <td colspan="8">Note number</td>
-            <td colspan="8">Pressure</td>
-        </tr>
-        <tr>
-            <td>Bit</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-        </tr>
-        <tr>
-            <td>Value</td>
-            <td>1</td><td>0</td><td>1</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
-            <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
-            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
-        </tr>
-    </table>
+            <tr>
+                <td style="border: none"></td>
+                <td colspan="8">Status byte</td>
+                <td colspan="8">Note number</td>
+                <td colspan="8">Pressure</td>
+            </tr>
+            <tr>
+                <td>Bit</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            </tr>
+            <tr>
+                <td>Value</td>
+                <td>1</td><td>0</td><td>1</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+                <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
+                <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+            </tr>
+        </table>
 </div>
 
 <h4><a name="control-change-0xb" href="#control-change-0xb">Control change <code style="font-weight: normal">(0xB)</code></a></h4>
 <div>
     A control change event is used when the value of a controller changes.
     <p>
-            <b>Data 1</b> (<code>0b0ccccccc</code>):&emsp; Controller number. See <a href="#controller-numbers">Controller numbers</a>.<br>
-            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; The value of the controller.
+        <b style="padding-left: 24px">Data 1</b> (<code>0b0ccccccc</code>):&emsp; Controller number. See
+        <a href="#controller-numbers">Controller numbers</a>.
+        <br>
+        <b style="padding-left: 24px">Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; The value of the controller.
     </p>
     <ul>
-            <li>Controller numbers 120-127 are reserved as "Channel Mode Messages".</li>
+        <li>Controller numbers 120-127 are reserved as "Channel Mode Messages".</li>
     </ul>
-        
+
     <table style="margin: 6px 0px 10px 0px">
-        <tr>
-            <td style="border: none"></td>
-            <td colspan="8">Status byte</td>
-            <td colspan="8">Controller number</td>
-            <td colspan="8">Value</td>
-        </tr>
-        <tr>
-            <td>Bit</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-        </tr>
-        <tr>
-            <td>Value</td>
-            <td>1</td><td>0</td><td>1</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
-            <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
-            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
-        </tr>
-    </table>
+            <tr>
+                <td style="border: none"></td>
+                <td colspan="8">Status byte</td>
+                <td colspan="8">Controller number</td>
+                <td colspan="8">Value</td>
+            </tr>
+            <tr>
+                <td>Bit</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            </tr>
+            <tr>
+                <td>Value</td>
+                <td>1</td><td>0</td><td>1</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
+                <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
+                <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+            </tr>
+        </table>
 </div>
 
 <h4><a name="program-change-0xc" href="#program-change-0xc">Program change <code style="font-weight: normal">(0xC)</code></a></h4>
 <div>
     A program change event is used to change the program (i.e. sound, voice, tone, preset or patch) of a given channel is changed.
     <p>
-            <b>Data 1</b> (<code>0b0ppppppp</code>):&emsp; Program number. See <a href="#program-numbers">Program numbers</a>.<br>
+        <b style="padding-left: 24px">Data 1</b> (<code>0b0ppppppp</code>):&emsp; Program number. See
+        <a href="#program-numbers">Program numbers</a>.
+        <br>
     </p>
     <ul>
-            <li>Controller numbers 120-127 are reserved as "Channel Mode Messages".</li>
+        <li>Controller numbers 120-127 are reserved as "Channel Mode Messages".</li>
     </ul>
-        
+
     <table style="margin: 6px 0px 10px 0px">
-        <tr>
-            <td style="border: none"></td>
-            <td colspan="8">Status byte</td>
-            <td colspan="8">Program number</td>
-        </tr>
-        <tr>
-            <td>Bit</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-        </tr>
-        <tr>
-            <td>Value</td>
-            <td>1</td><td>1</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
-            <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
-        </tr>
-    </table>
+            <tr>
+                <td style="border: none"></td>
+                <td colspan="8">Status byte</td>
+                <td colspan="8">Program number</td>
+            </tr>
+            <tr>
+                <td>Bit</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            </tr>
+            <tr>
+                <td>Value</td>
+                <td>1</td><td>1</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+                <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
+            </tr>
+        </table>
 </div>
 
 <h4><a name="channel-pressure-0xd" href="#channel-pressure-0xd">Channel pressure <code style="font-weight: normal">(0xD)</code></a></h4>
 <div>
-    A channel pressure event is used when the pressure on a key or a pressure sensitive pad changes after the note on event. Unlike polyphonic key pressure, channel pressure affects all notes playing on the channel.
+    A channel pressure event is used when the pressure on a key or a pressure sensitive pad changes after the note on event.
+    Unlike polyphonic key pressure, channel pressure affects all notes playing on the channel.
     <p>
-            <b>Data 1</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure value.
+        <b style="padding-left: 24px">Data 1</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure value.
     </p>
     <ul>
-            <li>Most normal MIDI keyboards do not implement this event.</li>
-            <li>Channel pressure is sometimes referred to as after-touch or after-pressure.</li>
+        <li>Most normal MIDI keyboards do not implement this event.</li>
+        <li>Channel pressure is sometimes referred to as after-touch or after-pressure.</li>
     </ul>
-        
+
     <table style="margin: 6px 0px 10px 0px">
         <tr>
             <td style="border: none"></td>
@@ -319,13 +376,14 @@ Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<co
 <div>
     A pitch bend change event is used to alter the pitch of the notes played on a given channel.
     <p>
-            <b>Data 1</b> (<code>0b0lllllll</code>):&emsp; Least significant byte (bits 0-7) of the pitch bend value.<br>
-            <b>Data 2</b> (<code>0b0mmmmmmm</code>):&emsp; Most significant byte (bits 8-13) of the pitch bend value.
+        <b style="padding-left: 24px">Data 1</b> (<code>0b0lllllll</code>):&emsp; Least significant byte (bits 0-7) of the pitch bend value.
+        <br>
+        <b style="padding-left: 24px">Data 2</b> (<code>0b0mmmmmmm</code>):&emsp; Most significant byte (bits 8-13) of the pitch bend value.
     </p>
     <ul>
-            <li>The center position (no pitch change) is represented by LSB = <code>0x0</code>, MSB = <code>0x40</code></li>
+        <li>The center position (no pitch change) is represented by LSB = <code>0x0</code>, MSB = <code>0x40</code></li>
     </ul>
-        
+
     <table style="margin: 6px 0px 10px 0px">
         <tr>
             <td style="border: none"></td>
@@ -348,6 +406,85 @@ Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<co
     </table>
 </div>
 
+<hr style="border: none; border-top: 1px solid #ccc">
+
+<h4><a name="running-status" href="#running-status">Running status</a></h4>
+<div>
+    There are a lot of circumstances where you have to send many messages of the same type. For example, if you have a digital
+    keyboard, pretty much all messages will be note on and note off events, or when you turn a knob on a MIDI controller,
+    a lot of control change messages will be sent to update the controller value. To save bandwidth in these kinds of situations,
+    you only have to send the status byte once, followed by only data bytes. This technique is called "running status".
+    <br> Because note on events are most likely to be followed by note off events (or more note on events), the MIDI standard
+    allows you to use a note on event with a velocity of zero instead of a note off event. This means that you only need
+    one status byte for all note events, drastically reducing the data throughput, thus minimizing the delay between events.
+</div>
+
+<h3><a name="system-messages" href="#system-messages">System Messages</a></h3>
+System messages are MIDI messages that do not carry data for a specific MIDI channel. There are three types of system messages:
+
+<h4><a name="system-common-messages" href="#system-common-messages">System Common Messages</a></h4>
+<div>
+    System Common messages are intended for all receivers in the system.
+    <br> These messages are beyond the scope of this guide. If you want more information, refer to page 27 of the MIDI 1.0 Detailed
+    Specification 4.2.
+    <ul>
+        <li>MIDI Time Code Quarter Frame <code>(0xF1)</code></li>
+        <li>Song Position Pointer <code>(0xF2)</code></li>
+        <li>Song Select <code>(0xF3)</code></li>
+        <li>Tune Request <code>(0xF6)</code></li>
+        <li>EOX (End of Exclusive) <code>(0xF7)</code></li>
+    </ul>
+</div>
+
+<h4><a name="system-real-time-messages" href="#system-real-time-messages">System Real Time Messages</a></h4>
+<div>
+    System Real Time messages are used for synchronization between clock-based MIDI components.
+    <br> These messages are beyond the scope of this guide. If you want more information, refer to page 30 of the MIDI 1.0 Detailed
+    Specification 4.2.
+    <ul>
+        <li>Timing Clock <code>(0xF8)</code></li>
+        <li>Start <code>(0xFA)</code></li>
+        <li>Continue <code>(0xFB)</code></li>
+        <li>Stop <code>(0xFC)</code></li>
+        <li>Active Sensing <code>(0xFE)</code></li>
+        <li>System Reset <code>(0xFF)</code></li>
+    </ul>
+</div>
+
+<h4><a name="system-exclusive-messages" href="#system-exclusive-messages">System Exclusive Messages</a></h4>
+<div>
+    System Exclusive (SysEx) messages are used for things like setting synthesizer or patch settings, sending sampler data, memory
+    dumps, etc.
+    <br> Most SysEx messages are manufacturer-specific, so it is best to consult the MIDI implementation in the manual. If you
+    want more information on the topic, you can find it on page 34 of the MIDI 1.0 Detailed Specification 4.2.
+    <br>
+    <br> A system exclusive message starts with a status byte <code>0xF0</code>, followed by an arbitrary number of data bytes,
+    and ends with another status byte <code>0xF7</code>.
+    <table style="margin: 6px 0px 10px 0px">
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">SysEx start</td>
+            <td colspan="8">Data</td>
+            <td>&hellip;</td>
+            <td colspan="8">SysEx end</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>&hellip;</td>            
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td>
+            <td>0</td><td>d</td><td>d</td><td>d</td><td>d</td><td>d</td><td>d</td><td>d</td>
+            <td>&hellip;</td>            
+            <td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td>
+        </tr>
+    </table>
+</div>
+
 <hr>
 
 <h2><a name="appendices" href="#appendices">Appendices</a></h2>
@@ -355,8 +492,8 @@ All numbers are in hexadecimal representation, unless otherwise specified.
 
 <h3><a name="midi-note-names" href="#midi-note-names">MIDI note names</a></h3>
 <div>
-    Middle C or C4 is defined as MIDI note <code>0x3C</code>. <br>
-    The lowest note on a standard 88-key piano is A0 (<code>0x15</code>) and the highest note is C8 (<code>0x6C</code>).
+    Middle C or C4 is defined as MIDI note <code>0x3C</code>.
+    <br> The lowest note on a standard 88-key piano is A0 (<code>0x15</code>) and the highest note is C8 (<code>0x6C</code>).
     <table style="margin: 6px 0px 10px 0px">
         <tr><td  style="border: none"></td></td><td colspan="12"><b>Note</b></td></tr>
         <tr style="font-weight: bold"><td>Octave</td><td>C</td><td>C#</td><td>D</td><td>D#</td><td>E</td><td>F</td><td>F#</td><td>G</td><td>G#</td><td>A</td><td>A#</td><td>B</td></tr>
@@ -376,9 +513,12 @@ All numbers are in hexadecimal representation, unless otherwise specified.
 
 <h3><a name="controller-numbers" href="#controller-numbers">Controller numbers</a></h3>
 <div>
-    This is an overview of the MIDI controller numbers that can be used as the first data byte of a control change event.<br>
-    The second data byte is the value for the controller. This value is 7 bits wide, so has a range of [0, 127]. Controller numbers <code>0x00</code>-<code>0x1F</code> can be combined with numbers <code>0x20</code>-<code>0x3F</code> for 14-bit resolution. In this case, numbers <code>0x00</code>-<code>0x1F</code> set the MSB, and numbers <code>0x20</code>-<code>0x3F</code> the LSB.<br>
-    Controller numbers 120-127 are reserved for Channel Mode Messages, which rather than controlling sound parameters, affect the channel's operating mode.
+    This is an overview of the MIDI controller numbers that can be used as the first data byte of a control change event.
+    <br> The second data byte is the value for the controller. This value is 7 bits wide, so has a range of [0, 127]. Controller
+    numbers <code>0x00</code>-<code>0x1F</code> can be combined with numbers <code>0x20</code>-<code>0x3F</code> for 14-bit
+    resolution. In this case, numbers <code>0x00</code>-<code>0x1F</code> set the MSB, and numbers <code>0x20</code>-<code>0x3F</code>    the LSB.
+    <br> Controller numbers 120-127 are reserved for Channel Mode Messages, which rather than controlling sound parameters, affect
+    the channel's operating mode.
     <table style="margin: 6px 0px 10px 0px">
         <tr><td colspan="2">Controller</td><td rowspan="2">Function</td><td rowspan="2">Value</td><td rowspan="2">Used as</td></tr>
         <tr><td>Dec</td><td>Hex</td></tr>
@@ -515,7 +655,603 @@ All numbers are in hexadecimal representation, unless otherwise specified.
         <tr><td>126</td><td>7E</td><td style="text-align: left">Mono Mode On (+ poly off, + all notes off)</td><td>Note: This equals the number of channels, or zero if the number of channels equals the number of voices in the receiver.</td></tr>
         <tr><td>127</td><td>7F</td><td style="text-align: left">Poly Mode On (+ mono off, + all notes off)</td><td>0</td></tr>
     </table>
-    <i><a href="https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2">Source</a></i>
+    <a href="https://www.midi.org/specifications/item/table-3-control-change-messages-data-bytes-2">Source</a>
+</div>
+
+<h4><a name="program-numbers" href="#program-numbers">Program numbers</a></h4>
+<div>
+    The MIDI specification doesn't specify instruments or voices for program numbers. The General MIDI 1 sound set does define
+    a list of sounds and families of sounds.
+    <table style="margin: 6px 0px 10px 0px" class="left">
+        <tr>
+        <td><strong>Program</strong></td>
+        <td><strong>Family Name</strong></td>
+        </tr>
+        <tr>
+        <td>1-8</td>
+        <td>Piano</td>
+        </tr>
+        <tr>
+        <td>9-16</td>
+        <td>Chromatic Percussion</td>
+        </tr>
+        <tr>
+        <td>17-24</td>
+        <td>Organ</td>
+        </tr>
+        <tr>
+        <td>25-32</td>
+        <td>Guitar</td>
+        </tr>
+        <tr>
+        <td>33-40</td>
+        <td>Bass</td>
+        </tr>
+        <tr>
+        <td>41-48</td>
+        <td>Strings</td>
+        </tr>
+        <tr>
+        <td>49-56</td>
+        <td>Ensemble</td>
+        </tr>
+        <tr>
+        <td>57-64</td>
+        <td>Brass</td>
+        </tr>
+        <tr>
+        <td>65-72</td>
+        <td>Reed</td>
+        </tr>
+        <tr>
+        <td>73-80</td>
+        <td>Pipe</td>
+        </tr>
+        <tr>
+        <td>81-88</td>
+        <td>Synth Lead</td>
+        </tr>
+        <tr>
+        <td>89-96</td>
+        <td>Synth Pad</td>
+        </tr>
+        <tr>
+        <td>97-104</td>
+        <td>Synth Effects</td>
+        </tr>
+        <tr>
+        <td>105-112</td>
+        <td>Ethnic</td>
+        </tr>
+        <tr>
+        <td>113-120</td>
+        <td>Percussive</td>
+        </tr>
+        <tr>
+        <td>121-128</td>
+        <td>Sound Effects</td>
+        </tr>
+    </table>
+
+    <table style="margin: 6px 0px 10px 0px" class="left">
+        <tr>
+        <td align="center"><strong>Program</strong></td>
+        <td align="center"><strong>Instrument Name</strong></td>
+        </tr>
+        <tr>
+        <td>1</td>
+        <td>Acoustic Grand Piano</td>
+        </tr>
+        <tr>
+        <td>2</td>
+        <td>Bright Acoustic Piano</td>
+        </tr>
+        <tr>
+        <td>3</td>
+        <td>Electric Grand Piano</td>
+        </tr>
+        <tr>
+        <td>4</td>
+        <td>Honky-tonk Piano</td>
+        </tr>
+        <tr>
+        <td>5</td>
+        <td>Electric Piano 1</td>
+        </tr>
+        <tr>
+        <td>6</td>
+        <td>Electric Piano 2</td>
+        </tr>
+        <tr>
+        <td>7</td>
+        <td>Harpsichord</td>
+        </tr>
+        <tr>
+        <td>8</td>
+        <td>Clavi</td>
+        </tr>
+        <tr>
+        <td>9</td>
+        <td>Celesta</td>
+        </tr>
+        <tr>
+        <td>10</td>
+        <td>Glockenspiel</td>
+        </tr>
+        <tr>
+        <td>11</td>
+        <td>Music Box</td>
+        </tr>
+        <tr>
+        <td>12</td>
+        <td>Vibraphone</td>
+        </tr>
+        <tr>
+        <td>13</td>
+        <td>Marimba</td>
+        </tr>
+        <tr>
+        <td>14</td>
+        <td>Xylophone</td>
+        </tr>
+        <tr>
+        <td>15</td>
+        <td>Tubular Bells</td>
+        </tr>
+        <tr>
+        <td>16</td>
+        <td>Dulcimer</td>
+        </tr>
+        <tr>
+        <td>17</td>
+        <td>Drawbar Organ</td>
+        </tr>
+        <tr>
+        <td>18</td>
+        <td>Percussive Organ</td>
+        </tr>
+        <tr>
+        <td>19</td>
+        <td>Rock Organ</td>
+        </tr>
+        <tr>
+        <td>20</td>
+        <td>Church Organ</td>
+        </tr>
+        <tr>
+        <td>21</td>
+        <td>Reed Organ</td>
+        </tr>
+        <tr>
+        <td>22</td>
+        <td>Accordion</td>
+        </tr>
+        <tr>
+        <td>23</td>
+        <td>Harmonica</td>
+        </tr>
+        <tr>
+        <td>24</td>
+        <td>Tango Accordion</td>
+        </tr>
+        <tr>
+        <td>25</td>
+        <td>Acoustic Guitar (nylon)</td>
+        </tr>
+        <tr>
+        <td>26</td>
+        <td>Acoustic Guitar (steel)</td>
+        </tr>
+        <tr>
+        <td>27</td>
+        <td>Electric Guitar (jazz)</td>
+        </tr>
+        <tr>
+        <td>28</td>
+        <td>Electric Guitar (clean)</td>
+        </tr>
+        <tr>
+        <td>29</td>
+        <td>Electric Guitar (muted)</td>
+        </tr>
+        <tr>
+        <td>30</td>
+        <td>Overdriven Guitar</td>
+        </tr>
+        <tr>
+        <td>31</td>
+        <td>Distortion Guitar</td>
+        </tr>
+        <tr>
+        <td>32</td>
+        <td>Guitar harmonics</td>
+        </tr>
+        <tr>
+        <td>33</td>
+        <td>Acoustic Bass</td>
+        </tr>
+        <tr>
+        <td>34</td>
+        <td>Electric Bass (finger)</td>
+        </tr>
+        <tr>
+        <td>35</td>
+        <td>Electric Bass (pick)</td>
+        </tr>
+        <tr>
+        <td>36</td>
+        <td>Fretless Bass</td>
+        </tr>
+        <tr>
+        <td>37</td>
+        <td>Slap Bass 1</td>
+        </tr>
+        <tr>
+        <td>38</td>
+        <td>Slap Bass 2</td>
+        </tr>
+        <tr>
+        <td>39</td>
+        <td>Synth Bass 1</td>
+        </tr>
+        <tr>
+        <td>40</td>
+        <td>Synth Bass 2</td>
+        </tr>
+        <tr>
+        <td>41</td>
+        <td>Violin</td>
+        </tr>
+        <tr>
+        <td>42</td>
+        <td>Viola</td>
+        </tr>
+        <tr>
+        <td>43</td>
+        <td>Cello</td>
+        </tr>
+        <tr>
+        <td>44</td>
+        <td>Contrabass</td>
+        </tr>
+        <tr>
+        <td>45</td>
+        <td>Tremolo Strings</td>
+        </tr>
+        <tr>
+        <td>46</td>
+        <td>Pizzicato Strings</td>
+        </tr>
+        <tr>
+        <td>47</td>
+        <td>Orchestral Harp</td>
+        </tr>
+        <tr>
+        <td>48</td>
+        <td>Timpani</td>
+        </tr>
+        <tr>
+        <td>49</td>
+        <td>String Ensemble 1</td>
+        </tr>
+        <tr>
+        <td>50</td>
+        <td>String Ensemble 2</td>
+        </tr>
+        <tr>
+        <td>51</td>
+        <td>SynthStrings 1</td>
+        </tr>
+        <tr>
+        <td>52</td>
+        <td>SynthStrings 2</td>
+        </tr>
+        <tr>
+        <td>53</td>
+        <td>Choir Aahs</td>
+        </tr>
+        <tr>
+        <td>54</td>
+        <td>Voice Oohs</td>
+        </tr>
+        <tr>
+        <td>55</td>
+        <td>Synth Voice</td>
+        </tr>
+        <tr>
+        <td>56</td>
+        <td>Orchestra Hit</td>
+        </tr>
+        <tr>
+        <td>57</td>
+        <td>Trumpet</td>
+        </tr>
+        <tr>
+        <td>58</td>
+        <td>Trombone</td>
+        </tr>
+        <tr>
+        <td>59</td>
+        <td>Tuba</td>
+        </tr>
+        <tr>
+        <td>60</td>
+        <td>Muted Trumpet</td>
+        </tr>
+        <tr>
+        <td>61</td>
+        <td>French Horn</td>
+        </tr>
+        <tr>
+        <td>62</td>
+        <td>Brass Section</td>
+        </tr>
+        <tr>
+        <td>63</td>
+        <td>SynthBrass 1</td>
+        </tr>
+        <tr>
+        <td>64</td>
+        <td>SynthBrass 2</td>
+        </tr>
+        <tr>
+        <td>65</td>
+        <td>Soprano Sax</td>
+        </tr>
+        <tr>
+        <td>66</td>
+        <td>Alto Sax</td>
+        </tr>
+        <tr>
+        <td>67</td>
+        <td>Tenor Sax</td>
+        </tr>
+        <tr>
+        <td>68</td>
+        <td>Baritone Sax</td>
+        </tr>
+        <tr>
+        <td>69</td>
+        <td>Oboe</td>
+        </tr>
+        <tr>
+        <td>70</td>
+        <td>English Horn</td>
+        </tr>
+        <tr>
+        <td>71</td>
+        <td>Bassoon</td>
+        </tr>
+        <tr>
+        <td>72</td>
+        <td>Clarinet</td>
+        </tr>
+        <tr>
+        <td>73</td>
+        <td>Piccolo</td>
+        </tr>
+        <tr>
+        <td>74</td>
+        <td>Flute</td>
+        </tr>
+        <tr>
+        <td>75</td>
+        <td>Recorder</td>
+        </tr>
+        <tr>
+        <td>76</td>
+        <td>Pan Flute</td>
+        </tr>
+        <tr>
+        <td>77</td>
+        <td>Blown Bottle</td>
+        </tr>
+        <tr>
+        <td>78</td>
+        <td>Shakuhachi</td>
+        </tr>
+        <tr>
+        <td>79</td>
+        <td>Whistle</td>
+        </tr>
+        <tr>
+        <td>80</td>
+        <td>Ocarina</td>
+        </tr>
+        <tr>
+        <td>81</td>
+        <td>Lead 1 (square)</td>
+        </tr>
+        <tr>
+        <td>82</td>
+        <td>Lead 2 (sawtooth)</td>
+        </tr>
+        <tr>
+        <td>83</td>
+        <td>Lead 3 (calliope)</td>
+        </tr>
+        <tr>
+        <td>84</td>
+        <td>Lead 4 (chiff)</td>
+        </tr>
+        <tr>
+        <td>85</td>
+        <td>Lead 5 (charang)</td>
+        </tr>
+        <tr>
+        <td>86</td>
+        <td>Lead 6 (voice)</td>
+        </tr>
+        <tr>
+        <td>87</td>
+        <td>Lead 7 (fifths)</td>
+        </tr>
+        <tr>
+        <td>88</td>
+        <td>Lead 8 (bass + lead)</td>
+        </tr>
+        <tr>
+        <td>89</td>
+        <td>Pad 1 (new age)</td>
+        </tr>
+        <tr>
+        <td>90</td>
+        <td>Pad 2 (warm)</td>
+        </tr>
+        <tr>
+        <td>91</td>
+        <td>Pad 3 (polysynth)</td>
+        </tr>
+        <tr>
+        <td>92</td>
+        <td>Pad 4 (choir)</td>
+        </tr>
+        <tr>
+        <td>93</td>
+        <td>Pad 5 (bowed)</td>
+        </tr>
+        <tr>
+        <td>94</td>
+        <td>Pad 6 (metallic)</td>
+        </tr>
+        <tr>
+        <td>95</td>
+        <td>Pad 7 (halo)</td>
+        </tr>
+        <tr>
+        <td>96</td>
+        <td>Pad 8 (sweep)</td>
+        </tr>
+        <tr>
+        <td>97</td>
+        <td>FX 1 (rain)</td>
+        </tr>
+        <tr>
+        <td>98</td>
+        <td>FX 2 (soundtrack)</td>
+        </tr>
+        <tr>
+        <td>99</td>
+        <td>FX 3 (crystal)</td>
+        </tr>
+        <tr>
+        <td>100</td>
+        <td>FX 4 (atmosphere)</td>
+        </tr>
+        <tr>
+        <td>101</td>
+        <td>FX 5 (brightness)</td>
+        </tr>
+        <tr>
+        <td>102</td>
+        <td>FX 6 (goblins)</td>
+        </tr>
+        <tr>
+        <td>103</td>
+        <td>FX 7 (echoes)</td>
+        </tr>
+        <tr>
+        <td>104</td>
+        <td>FX 8 (sci-fi)</td>
+        </tr>
+        <tr>
+        <td>105</td>
+        <td>Sitar</td>
+        </tr>
+        <tr>
+        <td>106</td>
+        <td>Banjo</td>
+        </tr>
+        <tr>
+        <td>107</td>
+        <td>Shamisen</td>
+        </tr>
+        <tr>
+        <td>108</td>
+        <td>Koto</td>
+        </tr>
+        <tr>
+        <td>109</td>
+        <td>Kalimba</td>
+        </tr>
+        <tr>
+        <td>110</td>
+        <td>Bag pipe</td>
+        </tr>
+        <tr>
+        <td>111</td>
+        <td>Fiddle</td>
+        </tr>
+        <tr>
+        <td>112</td>
+        <td>Shanai</td>
+        </tr>
+        <tr>
+        <td>113</td>
+        <td>Tinkle Bell</td>
+        </tr>
+        <tr>
+        <td>114</td>
+        <td>Agogo</td>
+        </tr>
+        <tr>
+        <td>115</td>
+        <td>Steel Drums</td>
+        </tr>
+        <tr>
+        <td>116</td>
+        <td>Woodblock</td>
+        </tr>
+        <tr>
+        <td>117</td>
+        <td>Taiko Drum</td>
+        </tr>
+        <tr>
+        <td>118</td>
+        <td>Melodic Tom</td>
+        </tr>
+        <tr>
+        <td>119</td>
+        <td>Synth Drum</td>
+        </tr>
+        <tr>
+        <td>120</td>
+        <td>Reverse Cymbal</td>
+        </tr>
+        <tr>
+        <td>121</td>
+        <td>Guitar Fret Noise</td>
+        </tr>
+        <tr>
+        <td>122</td>
+        <td>Breath Noise</td>
+        </tr>
+        <tr>
+        <td>123</td>
+        <td>Seashore</td>
+        </tr>
+        <tr>
+        <td>124</td>
+        <td>Bird Tweet</td>
+        </tr>
+        <tr>
+        <td>125</td>
+        <td>Telephone Ring</td>
+        </tr>
+        <tr>
+        <td>126</td>
+        <td>Helicopter</td>
+        </tr>
+        <tr>
+        <td>127</td>
+        <td>Applause</td>
+        </tr>
+        <tr>
+        <td>128</td>
+        <td>Gunshot</td>
+        </tr>            
+    </table>
+    <a href="https://www.midi.org/specifications/item/gm-level-1-sound-set">Source</a>
 </div>
 <hr>
             <div class="back"><a href="Chap00-Arduino-MIDI.html">← Previous chapter</a></div>
