@@ -1,0 +1,259 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Pieter P">
+        <link rel="stylesheet" type="text/css" href="/CSS/MIDI.css">
+        <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
+        <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="theme-color" content="#ccc">
+        <title>Arduino MIDI</title>
+    </head>
+    <body>
+        <nav>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                    <path d="M0 0h48v48h-48z" fill="none"/>
+                    <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+                </svg>
+                <h2>Index</h2>
+                <ol start="0">
+<li><a href="Chap00-Arduino-MIDI.html">Introduction</a></li>
+<li><a href="Chap01-MIDI-Protocol.html">The MIDI protocol</a></li>
+<li><a href="Chap02-MIDI-Hardware.html">MIDI Hardware</a></li>
+<li><a href="Chap03-MIDI-over-Serial.html">Sending MIDI over Serial</a></li>
+<li><b>MIDI controllers</b></li>
+
+                </ol>
+                <a href="/PDF/Arduino-MIDI.pdf">Download as PDF</a><br>
+                <a href="https://github.com/tttapa/MIDI/master/Examples" title="Download all example code that's used in this guide">Download examples (TODO)</a>
+            </div>
+        </nav>
+        <article>
+<h2><a name="midi-controllers" href="#midi-controllers">MIDI Controllers</a></h2>
+<div>
+    The MIDI protocol is often used for MIDI controllers, devices with physical knobs and buttons to control settings in a Digital
+    Audio Workstation (DAW), or to enter notes in audio or music notation software. This is often much faster and more intuitive
+    than using the mouse and keyboard for everything. MIDI controllers are also used during live performances, to control
+    effect modules, samplers, synthesizers, DJ software, etc.
+    <br> This chapter will cover how to write the code for a working MIDI controller using Arduino.
+</div>
+<h3><a name="buttons" href="#buttons">Buttons</a></h3>
+<div>
+    For sending the state of a button, note events are used. When the button is pressed, a note on event is sent, when it's released,
+    a note off event is sent.
+    <br>
+    <h4><a name="hardware" href="#hardware">Hardware</a></h4>
+    Connecting a button to the Arduino is pretty straightforward: Connect one lead of the button to a digital input pin, and
+    connect the other lead to ground. ###TODO###Image### The internal pull-up resistor of the input pin will be used, so
+    if the button is released (if it doesn't conduct), the input will be "pulled up" to 5V, and it will read a digital 1.
+    When the button is pressed, it connects the input pin directly to ground, so it will read a digital 0.
+</div>
+<h4><a name="software" href="#software">Software</a></h4>
+<div>The MIDI controller only has to send events when the state of the button changes. To do this, the input will constantly be
+    polled in the <code>loop</code>, and then the previous state is kept in a static variable. When the new input state does
+    not equal the previous state, the state of the button has changed, and a MIDI event will be sent.
+    <br>If the new state is low, the button has been pressed and a note on event is sent. If it's high, it has been released,
+    and a note off event is sent.
+    <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">pushButtonPin</font> <font color="#434f54">=</font> <font color="#000000">2</font><font color="#000000">;</font>
+
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>      <font color="#434f54">// MIDI channel 1</font>
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">note</font> <font color="#434f54">=</font> <font color="#000000">0x3C</font><font color="#000000">;</font>      <font color="#434f54">// Middle C (C4)</font>
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">velocity</font> <font color="#434f54">=</font> <font color="#000000">0x7F</font><font color="#000000">;</font>  <font color="#434f54">// Maximum velocity</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">pushButtonPin</font><font color="#434f54">,</font> <font color="#00979c">INPUT_PULLUP</font><font color="#000000">)</font><font color="#000000">;</font>  <font color="#434f54">// Enable the internal pull-up resistor</font>
+  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">31250</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#00979c">static</font> <font color="#00979c">bool</font> <font color="#000000">previousState</font> <font color="#434f54">=</font> <font color="#00979c">HIGH</font><font color="#000000">;</font>                <font color="#434f54">// Declare a static variable to save the previous state</font>
+                                                   <font color="#434f54">// and initialize it to HIGH (not pressed).</font>
+  <font color="#00979c">bool</font> <font color="#000000">currentState</font> <font color="#434f54">=</font> <font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">pushButtonPin</font><font color="#000000">)</font><font color="#000000">;</font>  <font color="#434f54">// Read the current state of the input pin</font>
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentState</font> <font color="#434f54">!=</font> <font color="#000000">previousState</font><font color="#000000">)</font> <font color="#000000">{</font>             <font color="#434f54">// If the current state is different from the previous state</font>
+    <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentState</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font> <font color="#000000">{</font>                       <font color="#434f54">// If the button is pressed</font>
+      <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">NOTE_ON</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">note</font><font color="#434f54">,</font> <font color="#000000">velocity</font><font color="#000000">)</font><font color="#000000">;</font>      <font color="#434f54">// Send a note on event</font>
+    <font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#000000">{</font>                                         <font color="#434f54">// If the button is released</font>
+      <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">NOTE_OFF</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">note</font><font color="#434f54">,</font> <font color="#000000">velocity</font><font color="#000000">)</font><font color="#000000">;</font>     <font color="#434f54">// Send a note off event</font>
+    <font color="#000000">}</font>
+    <font color="#000000">previousState</font> <font color="#434f54">=</font> <font color="#000000">currentState</font><font color="#000000">;</font>                    <font color="#434f54">// Remember the current state of the button</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font></code></pre> Keep in mind that the declaration and initialization of a static local variable
+    happen only once, the value is retained the next time the function is executed.
+</div>
+<br>
+<div>
+    In principle, this approach should work, however, in practice, there will be contact bounce. When you press or release a
+    button, it actually changes state many times really quickly, before settling to the correct state. This is called bounce,
+    and can be a real problem if you want to reliable button presses. By including a timer in the code, you can make sure
+    that the button is stable for at least a couple of tens of milliseconds before registering the state change. Here's what
+    that looks like:
+    <pre><code><font color="#00979c">const</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">debounceTime</font> <font color="#434f54">=</font> <font color="#000000">25</font><font color="#000000">;</font>  <font color="#434f54">// Ignore all state changes that happen 25 milliseconds</font>
+                                        <font color="#434f54">// after the button is pressed or released.</font>
+ 
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#00979c">static</font> <font color="#00979c">bool</font> <font color="#000000">previousState</font> <font color="#434f54">=</font> <font color="#00979c">HIGH</font><font color="#000000">;</font>                <font color="#434f54">// Declare a static variable to save the previous state of the input</font>
+                                                   <font color="#434f54">// and initialize it to HIGH (not pressed).</font>
+  <font color="#00979c">static</font> <font color="#00979c">bool</font> <font color="#000000">buttonState</font>   <font color="#434f54">=</font> <font color="#00979c">HIGH</font><font color="#000000">;</font>                <font color="#434f54">// Declare a static variable to save the state of the button</font>
+                                                   <font color="#434f54">// and initialize it to HIGH (not pressed).</font>
+  <font color="#00979c">static</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">previousBounceTime</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>     <font color="#434f54">// Declare a static variable to save the time the button last </font>
+                                                   <font color="#434f54">// changed state (bounced).</font>
+  <font color="#00979c">bool</font> <font color="#000000">currentState</font> <font color="#434f54">=</font> <font color="#d35400">digitalRead</font><font color="#000000">(</font><font color="#000000">pushButtonPin</font><font color="#000000">)</font><font color="#000000">;</font>  <font color="#434f54">// Read the current state of the input pin</font>
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentState</font> <font color="#434f54">!=</font> <font color="#000000">buttonState</font><font color="#000000">)</font> <font color="#000000">{</font>                     <font color="#434f54">// If the current state is different from the button state</font>
+    <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#434f54">-</font> <font color="#000000">previousBounceTime</font> <font color="#434f54">&gt;</font> <font color="#000000">debounceTime</font><font color="#000000">)</font> <font color="#000000">{</font>    <font color="#434f54">// If the input has been stable for at least 25 ms</font>
+      <font color="#000000">buttonState</font> <font color="#434f54">=</font> <font color="#000000">currentState</font><font color="#000000">;</font>                            <font color="#434f54">// Remember the state that the (debounced) button is in</font>
+      <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">buttonState</font> <font color="#434f54">==</font> <font color="#00979c">LOW</font><font color="#000000">)</font> <font color="#000000">{</font>                              <font color="#434f54">// If the button is pressed</font>
+        <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">NOTE_ON</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">note</font><font color="#434f54">,</font> <font color="#000000">velocity</font><font color="#000000">)</font><font color="#000000">;</font>            <font color="#434f54">// Send a note on event</font>
+      <font color="#000000">}</font> <font color="#5e6d03">else</font> <font color="#000000">{</font>                                               <font color="#434f54">// If the button is released</font>
+        <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">NOTE_OFF</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">note</font><font color="#434f54">,</font> <font color="#000000">velocity</font><font color="#000000">)</font><font color="#000000">;</font>           <font color="#434f54">// Send a note off event</font>
+      <font color="#000000">}</font>
+    <font color="#000000">}</font>
+  <font color="#000000">}</font>
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">currentState</font> <font color="#434f54">!=</font> <font color="#000000">previousState</font><font color="#000000">)</font> <font color="#000000">{</font>                   <font color="#434f54">// If the state of the input changed (if the button bounces)</font>
+    <font color="#000000">previousBounceTime</font> <font color="#434f54">=</font> <font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>                         <font color="#434f54">// Remember the current time</font>
+    <font color="#000000">previousState</font> <font color="#434f54">=</font> <font color="#000000">currentState</font><font color="#000000">;</font>                          <font color="#434f54">// Remember the current state of the input</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font></code></pre>
+    <code>buttonState</code> keeps the state of the ideal, debounced button, while <code>previousState</code> keeps the previous
+    state of the actual input.</div>
+
+<h3><a name="potentiometers-and-faders" href="#potentiometers-and-faders">Potentiometers and faders</a></h3>
+MIDI controllers often feature potentiometers and faders for continuous controllers like volume, pan, modulation, etc.
+<h4><a name="hardware" href="#hardware">Hardware</a></h4>
+<div>The variable resistors (potentiometers or faders) are just used in a voltage divider configuration, with the two outer pins
+    connected to ground and 5V, and the center pin connected to an analog input pin on the Arduino. Keep in mind that you
+    need a potentiometer with a linear taper (not a logarithmic or audio taper). ###TODO###Image###</div>
+<h4><a name="control-change" href="#control-change">Control Change</a></h4>
+<div>For most continuous controllers, control change events are used. Most software only supports 7-bit controllers. This allows
+    for a total of 1920 controllers (120 on each of the 16 MIDI channels).</div>
+<br>
+<div>A continuous controller can be implemented as follows: sample the analog input in the loop, convert from the 10-bit analog
+    value to a 7-bit Control Change value, if it's a different value than last time, send a control change message with the
+    new value.
+    <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">analogPin</font> <font color="#434f54">=</font> <font color="#000000">A0</font><font color="#000000">;</font>
+
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>        <font color="#434f54">// MIDI channel 1</font>
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">controller</font> <font color="#434f54">=</font> <font color="#000000">0x10</font><font color="#000000">;</font>  <font color="#434f54">// General Purpose Controller 1</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">31250</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">previousValue</font> <font color="#434f54">=</font> <font color="#000000">0b10000000</font><font color="#000000">;</font>       <font color="#434f54">// Declare a static variable to save the previous CC value</font>
+                                                   <font color="#434f54">// and initialize it to 0b10000000 (the most significant bit is set, </font>
+                                                   <font color="#434f54">// so it is different from any possible 7-bit CC value).</font>
+
+  <font color="#00979c">uint16_t</font> <font color="#000000">analogValue</font> <font color="#434f54">=</font> <font color="#d35400">analogRead</font><font color="#000000">(</font><font color="#000000">analogPin</font><font color="#000000">)</font><font color="#000000">;</font>    <font color="#434f54">// Read the value of the analog input</font>
+  <font color="#00979c">uint8_t</font> <font color="#000000">CC_value</font> <font color="#434f54">=</font> <font color="#000000">analogValue</font> <font color="#434f54">&gt;&gt;</font> <font color="#000000">3</font><font color="#000000">;</font>             <font color="#434f54">// Convert from a 10-bit number to a 7-bit number by shifting</font>
+                                                   <font color="#434f54">// it 3 bits to the right.</font>
+  
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">CC_value</font> <font color="#434f54">!=</font> <font color="#000000">previousValue</font><font color="#000000">)</font> <font color="#000000">{</font>                 <font color="#434f54">// If the current value is different from the previous value</font>
+    <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">CC</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">controller</font><font color="#434f54">,</font> <font color="#000000">CC_value</font><font color="#000000">)</font><font color="#000000">;</font>     <font color="#434f54">// Send the new value over MIDI</font>
+    <font color="#000000">previousValue</font> <font color="#434f54">=</font> <font color="#000000">CC_value</font><font color="#000000">;</font>                        <font color="#434f54">// Remember the new value</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font></code></pre> The problem is that there can be quite a lot of noise on the analog inputs.
+    So if the value fluctuates a lot, it will constantly send new CC messages, even if the knob is not being touched. To
+    prevent this, a
+    <a href="https://playground.arduino.cc/Main/RunningAverage">running average filter</a> can be used on the input.
+
+    <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">averageLength</font> <font color="#434f54">=</font> <font color="#000000">8</font><font color="#000000">;</font>  <font color="#434f54">// Average the analog input over 8 samples (maximum = 2^16 / 2^10 = 2^6 = 64)</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">previousValue</font> <font color="#434f54">=</font> <font color="#000000">0b10000000</font><font color="#000000">;</font>     <font color="#434f54">// Declare a static variable to save the previous CC value</font>
+                                                 <font color="#434f54">// and initialize it to 0b10000000 (the most significant bit is set, </font>
+                                                 <font color="#434f54">// so it is different from any possible 7-bit CC value).</font>
+
+  <font color="#00979c">uint16_t</font> <font color="#000000">analogValue</font> <font color="#434f54">=</font> <font color="#d35400">analogRead</font><font color="#000000">(</font><font color="#000000">analogPin</font><font color="#000000">)</font><font color="#000000">;</font>  <font color="#434f54">// Read the value of the analog input</font>
+  <font color="#000000">analogValue</font> <font color="#434f54">=</font> <font color="#000000">runningAverage</font><font color="#000000">(</font><font color="#000000">analogValue</font><font color="#000000">)</font><font color="#000000">;</font>     <font color="#434f54">// Average the value</font>
+  <font color="#00979c">uint8_t</font> <font color="#000000">CC_value</font> <font color="#434f54">=</font> <font color="#000000">analogValue</font> <font color="#434f54">&gt;&gt;</font> <font color="#000000">3</font><font color="#000000">;</font>           <font color="#434f54">// Convert from a 10-bit number to a 7-bit number by shifting</font>
+                                                 <font color="#434f54">// it 3 bits to the right.</font>
+  
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">CC_value</font> <font color="#434f54">!=</font> <font color="#000000">previousValue</font><font color="#000000">)</font> <font color="#000000">{</font>               <font color="#434f54">// If the current value is different from the previous value</font>
+    <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">CC</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">controller</font><font color="#434f54">,</font> <font color="#000000">CC_value</font><font color="#000000">)</font><font color="#000000">;</font>   <font color="#434f54">// Send the new value over MIDI</font>
+    <font color="#000000">previousValue</font> <font color="#434f54">=</font> <font color="#000000">CC_value</font><font color="#000000">;</font>                      <font color="#434f54">// Remember the new value</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">uint16_t</font> <font color="#000000">runningAverage</font><font color="#000000">(</font><font color="#00979c">uint16_t</font> <font color="#000000">value</font><font color="#000000">)</font> <font color="#000000">{</font>  <font color="#434f54">// </font><u><font color="#434f54">https://playground.arduino.cc/Main/RunningAverage</font></u><font color="#434f54"></font>
+  <font color="#00979c">static</font> <font color="#00979c">uint16_t</font> <font color="#000000">previousValues</font><font color="#000000">[</font><font color="#000000">averageLength</font><font color="#000000">]</font><font color="#000000">;</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">index</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint16_t</font> <font color="#000000">sum</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">filled</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+
+  <font color="#000000">sum</font> <font color="#434f54">-=</font> <font color="#000000">previousValues</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">;</font>
+  <font color="#000000">previousValues</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font> <font color="#434f54">=</font> <font color="#000000">value</font><font color="#000000">;</font>
+  <font color="#000000">sum</font> <font color="#434f54">+=</font> <font color="#000000">value</font><font color="#000000">;</font>
+  <font color="#000000">index</font><font color="#434f54">++</font><font color="#000000">;</font>
+  <font color="#000000">index</font> <font color="#434f54">=</font> <font color="#000000">index</font> <font color="#434f54">%</font> <font color="#000000">averageLength</font><font color="#000000">;</font>
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">filled</font> <font color="#434f54">&lt;</font> <font color="#000000">averageLength</font><font color="#000000">)</font>
+    <font color="#000000">filled</font><font color="#434f54">++</font><font color="#000000">;</font>
+    
+  <font color="#5e6d03">return</font> <font color="#000000">sum</font> <font color="#434f54">/</font> <font color="#000000">filled</font><font color="#000000">;</font>
+<font color="#000000">}</font></code></pre>
+</div>
+<h4><a name="pitch-bend" href="#pitch-bend">Pitch Bend</a></h4>
+<div>If a higher resolution is required, for example for volume faders, pitch bend events are used. This means that they have
+    a 14-bit accuracy, however, most devices only use the 10 most significant bits. There can be only one pitch bend controller
+    on each of the 16 MIDI channels.</div>
+<br>
+<div>The code is pretty similar to the previous example. Just shift the value 4 bits to the left instead of 3 bits to the right,
+    and send a pitch bend message instead of a control change message. Also note that some of the variables are now of larger
+    data types, to accomodate the 14-bit pitch bend values.
+    <br> To send the 14-bit pitch bend value, it has to be split up into two 7-bit data bytes. This can be acchieved by shifting
+    it 7 bits to the right, to get the 7 most significant bits. The <code>sendMIDI</code> function takes care of the bit
+    masking of the 7 least significant bits.
+    <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">analogPin</font> <font color="#434f54">=</font> <font color="#000000">A0</font><font color="#000000">;</font>
+
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>        <font color="#434f54">// MIDI channel 1</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">31250</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">averageLength</font> <font color="#434f54">=</font> <font color="#000000">16</font><font color="#000000">;</font>  <font color="#434f54">// Average the analog input over 16 samples (maximum = 2^16 / 2^10 = 2^6 = 64)</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint16_t</font> <font color="#000000">previousValue</font> <font color="#434f54">=</font> <font color="#000000">0x8000</font><font color="#000000">;</font>        <font color="#434f54">// Declare a static variable to save the previous value</font>
+                                                 <font color="#434f54">// and initialize it to 0x8000 (the most significant bit is set, </font>
+                                                 <font color="#434f54">// so it is different from any possible 14-bit pitch bend value).</font>
+
+  <font color="#00979c">uint16_t</font> <font color="#000000">analogValue</font> <font color="#434f54">=</font> <font color="#d35400">analogRead</font><font color="#000000">(</font><font color="#000000">analogPin</font><font color="#000000">)</font><font color="#000000">;</font>  <font color="#434f54">// Read the value of the analog input</font>
+  <font color="#000000">analogValue</font> <font color="#434f54">=</font> <font color="#000000">runningAverage</font><font color="#000000">(</font><font color="#000000">analogValue</font><font color="#000000">)</font><font color="#000000">;</font>     <font color="#434f54">// Average the value</font>
+  <font color="#00979c">uint16_t</font> <font color="#000000">value</font> <font color="#434f54">=</font> <font color="#000000">analogValue</font> <font color="#434f54">&lt;&lt;</font> <font color="#000000">4</font><font color="#000000">;</font>             <font color="#434f54">// Convert from a 10-bit number to a 14-bit number by shifting</font>
+                                                 <font color="#434f54">// it 4 bits to the left (adds 4 padding zeros to the right).</font>
+  
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">value</font> <font color="#434f54">!=</font> <font color="#000000">previousValue</font><font color="#000000">)</font> <font color="#000000">{</font>                        <font color="#434f54">// If the current value is different from the previous value</font>
+    <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">PITCH_BEND</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">value</font><font color="#434f54">,</font> <font color="#000000">value</font> <font color="#434f54">&gt;&gt;</font> <font color="#000000">7</font><font color="#000000">)</font><font color="#000000">;</font>    <font color="#434f54">// Send the new value over MIDI (split up into two 7-bit bytes)</font>
+    <font color="#000000">previousValue</font> <font color="#434f54">=</font> <font color="#000000">value</font><font color="#000000">;</font>                               <font color="#434f54">// Remember the new value</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">uint16_t</font> <font color="#000000">runningAverage</font><font color="#000000">(</font><font color="#00979c">uint16_t</font> <font color="#000000">value</font><font color="#000000">)</font> <font color="#000000">{</font>  <font color="#434f54">// </font><u><font color="#434f54">https://playground.arduino.cc/Main/RunningAverage</font></u><font color="#434f54"></font>
+  <font color="#00979c">static</font> <font color="#00979c">uint16_t</font> <font color="#000000">previousValues</font><font color="#000000">[</font><font color="#000000">averageLength</font><font color="#000000">]</font><font color="#000000">;</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">index</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint16_t</font> <font color="#000000">sum</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">filled</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+
+  <font color="#000000">sum</font> <font color="#434f54">-=</font> <font color="#000000">previousValues</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font><font color="#000000">;</font>
+  <font color="#000000">previousValues</font><font color="#000000">[</font><font color="#000000">index</font><font color="#000000">]</font> <font color="#434f54">=</font> <font color="#000000">value</font><font color="#000000">;</font>
+  <font color="#000000">sum</font> <font color="#434f54">+=</font> <font color="#000000">value</font><font color="#000000">;</font>
+  <font color="#000000">index</font><font color="#434f54">++</font><font color="#000000">;</font>
+  <font color="#000000">index</font> <font color="#434f54">=</font> <font color="#000000">index</font> <font color="#434f54">%</font> <font color="#000000">averageLength</font><font color="#000000">;</font>
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">filled</font> <font color="#434f54">&lt;</font> <font color="#000000">averageLength</font><font color="#000000">)</font>
+    <font color="#000000">filled</font><font color="#434f54">++</font><font color="#000000">;</font>
+    
+  <font color="#5e6d03">return</font> <font color="#000000">sum</font> <font color="#434f54">/</font> <font color="#000000">filled</font><font color="#000000">;</font>
+<font color="#000000">}</font></code></pre>
+</div>
+
+<h3><a name="rotary-encoders" href="#rotary-encoders">Rotary encoders</a></h3>
+
+<div></div>
+<hr>
+            <div class="back"><a href="Chap03-MIDI-over-Serial.html">← Previous chapter</a></div>
+            <div class="backArr"><a href="Chap03-MIDI-over-Serial.html"><i class="material-icons">arrow_back</i></a></div>
+        </article>
+    </body>
+</html>
