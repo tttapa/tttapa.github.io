@@ -144,7 +144,8 @@
             <td>Value</td>
             <td>m</td><td>m</td><td>m</td><td>m</td><td>n</td><td>n</td><td>n</td><td>n</td>
         </tr>
-    </table> Where <code>mmmm</code> is the message type (<code>0x8</code> - <code>0xE</code>) and <code>nnnn</code>    is the channel nibble.
+    </table> Where <code>mmmm</code> is the message type (<code>0x8</code> - <code>0xE</code>) and <code>nnnn</code> is the channel
+    nibble.
     <br> Note that the channels start from <code>nnnn = 0</code> for MIDI channel 1. (<code>nnnn = channel - 1</code>)
 </div>
 
@@ -166,10 +167,11 @@
 <div>
     A note off event is used to stop a playing note. For example, when a key is released.
     <p>
-        <b style="padding-left: 24px">Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See
-        <a href="#midi-note-names">MIDI note names</a>.
-        <br>
-        <b style="padding-left: 24px">Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast the key is released).
+        <div style="padding-left: 24px">
+            <b>Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See
+            <a href="#midi-note-names">MIDI note names</a>.
+            <br>
+            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast the key is released).</div>
     </p>
     <ul>
         <li>A velocity of 0 is not defined, and some software or devices may not register the note off event if the velocity
@@ -181,35 +183,36 @@
     </ul>
 
     <table style="margin: 6px 0px 10px 0px">
-            <tr>
-                <td style="border: none"></td>
-                <td colspan="8">Status byte</td>
-                <td colspan="8">Note number</td>
-                <td colspan="8">Velocity</td>
-            </tr>
-            <tr>
-                <td>Bit</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            </tr>
-            <tr>
-                <td>Value</td>
-                <td>1</td><td>0</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
-                <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
-                <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
-            </tr>
-        </table>
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Note number</td>
+            <td colspan="8">Velocity</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>0</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
+            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+        </tr>
+    </table>
 </div>
 
 <h4><a name="note-on-0x9" href="#note-on-0x9">Note On <code style="font-weight: normal">(0x9)</code></a></h4>
 <div>
     A note on event is used to play a note. For example, when a key is pressed.
     <p>
-        <b style="padding-left: 24px">Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See
-        <a href="#midi-note-names">MIDI note names</a>.
-        <br>
-        <b style="padding-left: 24px">Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast/hard the key is pressed).
+        <div style="padding-left: 24px">
+            <b>Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See
+            <a href="#midi-note-names">MIDI note names</a>.
+            <br>
+            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Velocity (how fast/hard the key is pressed).</div>
     </p>
     <ul>
         <li>If the velocity is zero, the note on event is interpreted as a note off event. This is especially useful when using
@@ -218,25 +221,25 @@
     </ul>
 
     <table style="margin: 6px 0px 10px 0px">
-            <tr>
-                <td style="border: none"></td>
-                <td colspan="8">Status byte</td>
-                <td colspan="8">Note number</td>
-                <td colspan="8">Velocity</td>
-            </tr>
-            <tr>
-                <td>Bit</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            </tr>
-            <tr>
-                <td>Value</td>
-                <td>1</td><td>0</td><td>0</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
-                <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
-                <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
-            </tr>
-        </table>
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Note number</td>
+            <td colspan="8">Velocity</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>0</td><td>0</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
+            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+        </tr>
+    </table>
 </div>
 
 <h4><a name="polyphonic-key-pressure-0xa" href="#polyphonic-key-pressure-0xa">Polyphonic key pressure <code style="font-weight: normal">(0xA)</code></a></h4>
@@ -244,10 +247,11 @@
     A polyphonic key pressure event is used when the pressure on a key or a pressure sensitive pad changes after the note on
     event.
     <p>
-        <b style="padding-left: 24px">Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See
-        <a href="#midi-note-names">MIDI note names</a>.
-        <br>
-        <b style="padding-left: 24px">Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure on the key.
+        <div style="padding-left: 24px">
+            <b>Data 1</b> (<code>0b0kkkkkkk</code>):&emsp; Note number (key). See
+            <a href="#midi-note-names">MIDI note names</a>.
+            <br>
+            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure on the key.</div>
     </p>
     <ul>
         <li>Most normal MIDI keyboards do not implement this event.</li>
@@ -255,91 +259,94 @@
     </ul>
 
     <table style="margin: 6px 0px 10px 0px">
-            <tr>
-                <td style="border: none"></td>
-                <td colspan="8">Status byte</td>
-                <td colspan="8">Note number</td>
-                <td colspan="8">Pressure</td>
-            </tr>
-            <tr>
-                <td>Bit</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            </tr>
-            <tr>
-                <td>Value</td>
-                <td>1</td><td>0</td><td>1</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
-                <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
-                <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
-            </tr>
-        </table>
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Note number</td>
+            <td colspan="8">Pressure</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>0</td><td>1</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td><td>k</td>
+            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+        </tr>
+    </table>
 </div>
 
 <h4><a name="control-change-0xb" href="#control-change-0xb">Control change <code style="font-weight: normal">(0xB)</code></a></h4>
 <div>
     A control change event is used when the value of a controller changes.
     <p>
-        <b style="padding-left: 24px">Data 1</b> (<code>0b0ccccccc</code>):&emsp; Controller number. See
-        <a href="#controller-numbers">Controller numbers</a>.
-        <br>
-        <b style="padding-left: 24px">Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; The value of the controller.
+        <div style="padding-left: 24px">
+            <b>Data 1</b> (<code>0b0ccccccc</code>):&emsp; Controller number. See
+            <a href="#controller-numbers">Controller numbers</a>.
+            <br>
+            <b>Data 2</b> (<code>0b0vvvvvvv</code>):&emsp; The value of the controller.</div>
     </p>
     <ul>
         <li>Controller numbers 120-127 are reserved as "Channel Mode Messages".</li>
     </ul>
 
     <table style="margin: 6px 0px 10px 0px">
-            <tr>
-                <td style="border: none"></td>
-                <td colspan="8">Status byte</td>
-                <td colspan="8">Controller number</td>
-                <td colspan="8">Value</td>
-            </tr>
-            <tr>
-                <td>Bit</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            </tr>
-            <tr>
-                <td>Value</td>
-                <td>1</td><td>0</td><td>1</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
-                <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
-                <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
-            </tr>
-        </table>
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Controller number</td>
+            <td colspan="8">Value</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>0</td><td>1</td><td>1</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
+            <td>0</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td><td>v</td>
+        </tr>
+    </table>
 </div>
 
 <h4><a name="program-change-0xc" href="#program-change-0xc">Program change <code style="font-weight: normal">(0xC)</code></a></h4>
 <div>
     A program change event is used to change the program (i.e. sound, voice, tone, preset or patch) of a given channel is changed.
     <p>
-        <b style="padding-left: 24px">Data 1</b> (<code>0b0ppppppp</code>):&emsp; Program number. See
-        <a href="#program-numbers">Program numbers</a>.
-        <br>
+        <div style="padding-left: 24px">
+            <b>Data 1</b> (<code>0b0ppppppp</code>):&emsp; Program number. See
+            <a href="#program-numbers">Program numbers</a>.
+            <br>
+        </div>
     </p>
     <ul>
         <li>Controller numbers 120-127 are reserved as "Channel Mode Messages".</li>
     </ul>
 
     <table style="margin: 6px 0px 10px 0px">
-            <tr>
-                <td style="border: none"></td>
-                <td colspan="8">Status byte</td>
-                <td colspan="8">Program number</td>
-            </tr>
-            <tr>
-                <td>Bit</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-                <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            </tr>
-            <tr>
-                <td>Value</td>
-                <td>1</td><td>1</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
-                <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
-            </tr>
-        </table>
+        <tr>
+            <td style="border: none"></td>
+            <td colspan="8">Status byte</td>
+            <td colspan="8">Program number</td>
+        </tr>
+        <tr>
+            <td>Bit</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+            <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+        </tr>
+        <tr>
+            <td>Value</td>
+            <td>1</td><td>1</td><td>0</td><td>0</td><td>n</td><td>n</td><td>n</td><td>n</td>
+            <td>0</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td><td>c</td>
+        </tr>
+    </table>
 </div>
 
 <h4><a name="channel-pressure-0xd" href="#channel-pressure-0xd">Channel pressure <code style="font-weight: normal">(0xD)</code></a></h4>
@@ -347,7 +354,8 @@
     A channel pressure event is used when the pressure on a key or a pressure sensitive pad changes after the note on event.
     Unlike polyphonic key pressure, channel pressure affects all notes playing on the channel.
     <p>
-        <b style="padding-left: 24px">Data 1</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure value.
+        <div style="padding-left: 24px">
+            <b>Data 1</b> (<code>0b0vvvvvvv</code>):&emsp; Pressure value.</div>
     </p>
     <ul>
         <li>Most normal MIDI keyboards do not implement this event.</li>
@@ -377,9 +385,10 @@
 <div>
     A pitch bend change event is used to alter the pitch of the notes played on a given channel.
     <p>
-        <b style="padding-left: 24px">Data 1</b> (<code>0b0lllllll</code>):&emsp; Least significant byte (bits 0-7) of the pitch bend value.
-        <br>
-        <b style="padding-left: 24px">Data 2</b> (<code>0b0mmmmmmm</code>):&emsp; Most significant byte (bits 8-13) of the pitch bend value.
+        <div style="padding-left: 24px">
+            <b>Data 1</b> (<code>0b0lllllll</code>):&emsp; Least significant byte (bits 0-7) of the pitch bend value.
+            <br>
+            <b>Data 2</b> (<code>0b0mmmmmmm</code>):&emsp; Most significant byte (bits 8-13) of the pitch bend value.</div>
     </p>
     <ul>
         <li>The center position (no pitch change) is represented by LSB = <code>0x0</code>, MSB = <code>0x40</code></li>
@@ -473,14 +482,14 @@ System messages are MIDI messages that do not carry data for a specific MIDI cha
             <td>Bit</td>
             <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
             <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
-            <td>&hellip;</td>            
+            <td>&hellip;</td>
             <td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
         </tr>
         <tr>
             <td>Value</td>
             <td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td>
             <td>0</td><td>d</td><td>d</td><td>d</td><td>d</td><td>d</td><td>d</td><td>d</td>
-            <td>&hellip;</td>            
+            <td>&hellip;</td>
             <td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td>
         </tr>
     </table>
@@ -496,7 +505,7 @@ All numbers are in hexadecimal representation, unless otherwise specified.
     Middle C or C4 is defined as MIDI note <code>0x3C</code>.
     <br> The lowest note on a standard 88-key piano is A0 (<code>0x15</code>) and the highest note is C8 (<code>0x6C</code>).
     <table style="margin: 6px 0px 10px 0px">
-        <tr><td  style="border: none"></td></td><td colspan="12"><b>Note</b></td></tr>
+        <tr><td style="border: none"></td></td><td colspan="12"><b>Note</b></td></tr>
         <tr style="font-weight: bold"><td>Octave</td><td>C</td><td>C#</td><td>D</td><td>D#</td><td>E</td><td>F</td><td>F#</td><td>G</td><td>G#</td><td>A</td><td>A#</td><td>B</td></tr>
         <tr><td style="text-align: right; font-weight: bold">-1</td><td>00</td><td>01</td><td>02</td><td>03</td><td>04</td><td>05</td><td>06</td><td>07</td><td>08</td><td>09</td><td>0A</td><td>0B</td></tr>
         <tr><td style="text-align: right; font-weight: bold">0</td><td>0C</td><td>0D</td><td>0E</td><td>0F</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td></tr>
@@ -665,592 +674,592 @@ All numbers are in hexadecimal representation, unless otherwise specified.
     a list of sounds and families of sounds.
     <table style="margin: 6px 0px 10px 0px" class="left">
         <tr>
-        <td><strong>Program</strong></td>
-        <td><strong>Family Name</strong></td>
+            <td><strong>Program</strong></td>
+            <td><strong>Family Name</strong></td>
         </tr>
         <tr>
-        <td>1-8</td>
-        <td>Piano</td>
+            <td>1-8</td>
+            <td>Piano</td>
         </tr>
         <tr>
-        <td>9-16</td>
-        <td>Chromatic Percussion</td>
+            <td>9-16</td>
+            <td>Chromatic Percussion</td>
         </tr>
         <tr>
-        <td>17-24</td>
-        <td>Organ</td>
+            <td>17-24</td>
+            <td>Organ</td>
         </tr>
         <tr>
-        <td>25-32</td>
-        <td>Guitar</td>
+            <td>25-32</td>
+            <td>Guitar</td>
         </tr>
         <tr>
-        <td>33-40</td>
-        <td>Bass</td>
+            <td>33-40</td>
+            <td>Bass</td>
         </tr>
         <tr>
-        <td>41-48</td>
-        <td>Strings</td>
+            <td>41-48</td>
+            <td>Strings</td>
         </tr>
         <tr>
-        <td>49-56</td>
-        <td>Ensemble</td>
+            <td>49-56</td>
+            <td>Ensemble</td>
         </tr>
         <tr>
-        <td>57-64</td>
-        <td>Brass</td>
+            <td>57-64</td>
+            <td>Brass</td>
         </tr>
         <tr>
-        <td>65-72</td>
-        <td>Reed</td>
+            <td>65-72</td>
+            <td>Reed</td>
         </tr>
         <tr>
-        <td>73-80</td>
-        <td>Pipe</td>
+            <td>73-80</td>
+            <td>Pipe</td>
         </tr>
         <tr>
-        <td>81-88</td>
-        <td>Synth Lead</td>
+            <td>81-88</td>
+            <td>Synth Lead</td>
         </tr>
         <tr>
-        <td>89-96</td>
-        <td>Synth Pad</td>
+            <td>89-96</td>
+            <td>Synth Pad</td>
         </tr>
         <tr>
-        <td>97-104</td>
-        <td>Synth Effects</td>
+            <td>97-104</td>
+            <td>Synth Effects</td>
         </tr>
         <tr>
-        <td>105-112</td>
-        <td>Ethnic</td>
+            <td>105-112</td>
+            <td>Ethnic</td>
         </tr>
         <tr>
-        <td>113-120</td>
-        <td>Percussive</td>
+            <td>113-120</td>
+            <td>Percussive</td>
         </tr>
         <tr>
-        <td>121-128</td>
-        <td>Sound Effects</td>
+            <td>121-128</td>
+            <td>Sound Effects</td>
         </tr>
     </table>
 
     <table style="margin: 6px 0px 10px 0px" class="left">
         <tr>
-        <td align="center"><strong>Program</strong></td>
-        <td align="center"><strong>Instrument Name</strong></td>
+            <td align="center"><strong>Program</strong></td>
+            <td align="center"><strong>Instrument Name</strong></td>
         </tr>
         <tr>
-        <td>1</td>
-        <td>Acoustic Grand Piano</td>
+            <td>1</td>
+            <td>Acoustic Grand Piano</td>
         </tr>
         <tr>
-        <td>2</td>
-        <td>Bright Acoustic Piano</td>
+            <td>2</td>
+            <td>Bright Acoustic Piano</td>
         </tr>
         <tr>
-        <td>3</td>
-        <td>Electric Grand Piano</td>
+            <td>3</td>
+            <td>Electric Grand Piano</td>
         </tr>
         <tr>
-        <td>4</td>
-        <td>Honky-tonk Piano</td>
+            <td>4</td>
+            <td>Honky-tonk Piano</td>
         </tr>
         <tr>
-        <td>5</td>
-        <td>Electric Piano 1</td>
+            <td>5</td>
+            <td>Electric Piano 1</td>
         </tr>
         <tr>
-        <td>6</td>
-        <td>Electric Piano 2</td>
+            <td>6</td>
+            <td>Electric Piano 2</td>
         </tr>
         <tr>
-        <td>7</td>
-        <td>Harpsichord</td>
+            <td>7</td>
+            <td>Harpsichord</td>
         </tr>
         <tr>
-        <td>8</td>
-        <td>Clavi</td>
+            <td>8</td>
+            <td>Clavi</td>
         </tr>
         <tr>
-        <td>9</td>
-        <td>Celesta</td>
+            <td>9</td>
+            <td>Celesta</td>
         </tr>
         <tr>
-        <td>10</td>
-        <td>Glockenspiel</td>
+            <td>10</td>
+            <td>Glockenspiel</td>
         </tr>
         <tr>
-        <td>11</td>
-        <td>Music Box</td>
+            <td>11</td>
+            <td>Music Box</td>
         </tr>
         <tr>
-        <td>12</td>
-        <td>Vibraphone</td>
+            <td>12</td>
+            <td>Vibraphone</td>
         </tr>
         <tr>
-        <td>13</td>
-        <td>Marimba</td>
+            <td>13</td>
+            <td>Marimba</td>
         </tr>
         <tr>
-        <td>14</td>
-        <td>Xylophone</td>
+            <td>14</td>
+            <td>Xylophone</td>
         </tr>
         <tr>
-        <td>15</td>
-        <td>Tubular Bells</td>
+            <td>15</td>
+            <td>Tubular Bells</td>
         </tr>
         <tr>
-        <td>16</td>
-        <td>Dulcimer</td>
+            <td>16</td>
+            <td>Dulcimer</td>
         </tr>
         <tr>
-        <td>17</td>
-        <td>Drawbar Organ</td>
+            <td>17</td>
+            <td>Drawbar Organ</td>
         </tr>
         <tr>
-        <td>18</td>
-        <td>Percussive Organ</td>
+            <td>18</td>
+            <td>Percussive Organ</td>
         </tr>
         <tr>
-        <td>19</td>
-        <td>Rock Organ</td>
+            <td>19</td>
+            <td>Rock Organ</td>
         </tr>
         <tr>
-        <td>20</td>
-        <td>Church Organ</td>
+            <td>20</td>
+            <td>Church Organ</td>
         </tr>
         <tr>
-        <td>21</td>
-        <td>Reed Organ</td>
+            <td>21</td>
+            <td>Reed Organ</td>
         </tr>
         <tr>
-        <td>22</td>
-        <td>Accordion</td>
+            <td>22</td>
+            <td>Accordion</td>
         </tr>
         <tr>
-        <td>23</td>
-        <td>Harmonica</td>
+            <td>23</td>
+            <td>Harmonica</td>
         </tr>
         <tr>
-        <td>24</td>
-        <td>Tango Accordion</td>
+            <td>24</td>
+            <td>Tango Accordion</td>
         </tr>
         <tr>
-        <td>25</td>
-        <td>Acoustic Guitar (nylon)</td>
+            <td>25</td>
+            <td>Acoustic Guitar (nylon)</td>
         </tr>
         <tr>
-        <td>26</td>
-        <td>Acoustic Guitar (steel)</td>
+            <td>26</td>
+            <td>Acoustic Guitar (steel)</td>
         </tr>
         <tr>
-        <td>27</td>
-        <td>Electric Guitar (jazz)</td>
+            <td>27</td>
+            <td>Electric Guitar (jazz)</td>
         </tr>
         <tr>
-        <td>28</td>
-        <td>Electric Guitar (clean)</td>
+            <td>28</td>
+            <td>Electric Guitar (clean)</td>
         </tr>
         <tr>
-        <td>29</td>
-        <td>Electric Guitar (muted)</td>
+            <td>29</td>
+            <td>Electric Guitar (muted)</td>
         </tr>
         <tr>
-        <td>30</td>
-        <td>Overdriven Guitar</td>
+            <td>30</td>
+            <td>Overdriven Guitar</td>
         </tr>
         <tr>
-        <td>31</td>
-        <td>Distortion Guitar</td>
+            <td>31</td>
+            <td>Distortion Guitar</td>
         </tr>
         <tr>
-        <td>32</td>
-        <td>Guitar harmonics</td>
+            <td>32</td>
+            <td>Guitar harmonics</td>
         </tr>
         <tr>
-        <td>33</td>
-        <td>Acoustic Bass</td>
+            <td>33</td>
+            <td>Acoustic Bass</td>
         </tr>
         <tr>
-        <td>34</td>
-        <td>Electric Bass (finger)</td>
+            <td>34</td>
+            <td>Electric Bass (finger)</td>
         </tr>
         <tr>
-        <td>35</td>
-        <td>Electric Bass (pick)</td>
+            <td>35</td>
+            <td>Electric Bass (pick)</td>
         </tr>
         <tr>
-        <td>36</td>
-        <td>Fretless Bass</td>
+            <td>36</td>
+            <td>Fretless Bass</td>
         </tr>
         <tr>
-        <td>37</td>
-        <td>Slap Bass 1</td>
+            <td>37</td>
+            <td>Slap Bass 1</td>
         </tr>
         <tr>
-        <td>38</td>
-        <td>Slap Bass 2</td>
+            <td>38</td>
+            <td>Slap Bass 2</td>
         </tr>
         <tr>
-        <td>39</td>
-        <td>Synth Bass 1</td>
+            <td>39</td>
+            <td>Synth Bass 1</td>
         </tr>
         <tr>
-        <td>40</td>
-        <td>Synth Bass 2</td>
+            <td>40</td>
+            <td>Synth Bass 2</td>
         </tr>
         <tr>
-        <td>41</td>
-        <td>Violin</td>
+            <td>41</td>
+            <td>Violin</td>
         </tr>
         <tr>
-        <td>42</td>
-        <td>Viola</td>
+            <td>42</td>
+            <td>Viola</td>
         </tr>
         <tr>
-        <td>43</td>
-        <td>Cello</td>
+            <td>43</td>
+            <td>Cello</td>
         </tr>
         <tr>
-        <td>44</td>
-        <td>Contrabass</td>
+            <td>44</td>
+            <td>Contrabass</td>
         </tr>
         <tr>
-        <td>45</td>
-        <td>Tremolo Strings</td>
+            <td>45</td>
+            <td>Tremolo Strings</td>
         </tr>
         <tr>
-        <td>46</td>
-        <td>Pizzicato Strings</td>
+            <td>46</td>
+            <td>Pizzicato Strings</td>
         </tr>
         <tr>
-        <td>47</td>
-        <td>Orchestral Harp</td>
+            <td>47</td>
+            <td>Orchestral Harp</td>
         </tr>
         <tr>
-        <td>48</td>
-        <td>Timpani</td>
+            <td>48</td>
+            <td>Timpani</td>
         </tr>
         <tr>
-        <td>49</td>
-        <td>String Ensemble 1</td>
+            <td>49</td>
+            <td>String Ensemble 1</td>
         </tr>
         <tr>
-        <td>50</td>
-        <td>String Ensemble 2</td>
+            <td>50</td>
+            <td>String Ensemble 2</td>
         </tr>
         <tr>
-        <td>51</td>
-        <td>SynthStrings 1</td>
+            <td>51</td>
+            <td>SynthStrings 1</td>
         </tr>
         <tr>
-        <td>52</td>
-        <td>SynthStrings 2</td>
+            <td>52</td>
+            <td>SynthStrings 2</td>
         </tr>
         <tr>
-        <td>53</td>
-        <td>Choir Aahs</td>
+            <td>53</td>
+            <td>Choir Aahs</td>
         </tr>
         <tr>
-        <td>54</td>
-        <td>Voice Oohs</td>
+            <td>54</td>
+            <td>Voice Oohs</td>
         </tr>
         <tr>
-        <td>55</td>
-        <td>Synth Voice</td>
+            <td>55</td>
+            <td>Synth Voice</td>
         </tr>
         <tr>
-        <td>56</td>
-        <td>Orchestra Hit</td>
+            <td>56</td>
+            <td>Orchestra Hit</td>
         </tr>
         <tr>
-        <td>57</td>
-        <td>Trumpet</td>
+            <td>57</td>
+            <td>Trumpet</td>
         </tr>
         <tr>
-        <td>58</td>
-        <td>Trombone</td>
+            <td>58</td>
+            <td>Trombone</td>
         </tr>
         <tr>
-        <td>59</td>
-        <td>Tuba</td>
+            <td>59</td>
+            <td>Tuba</td>
         </tr>
         <tr>
-        <td>60</td>
-        <td>Muted Trumpet</td>
+            <td>60</td>
+            <td>Muted Trumpet</td>
         </tr>
         <tr>
-        <td>61</td>
-        <td>French Horn</td>
+            <td>61</td>
+            <td>French Horn</td>
         </tr>
         <tr>
-        <td>62</td>
-        <td>Brass Section</td>
+            <td>62</td>
+            <td>Brass Section</td>
         </tr>
         <tr>
-        <td>63</td>
-        <td>SynthBrass 1</td>
+            <td>63</td>
+            <td>SynthBrass 1</td>
         </tr>
         <tr>
-        <td>64</td>
-        <td>SynthBrass 2</td>
+            <td>64</td>
+            <td>SynthBrass 2</td>
         </tr>
         <tr>
-        <td>65</td>
-        <td>Soprano Sax</td>
+            <td>65</td>
+            <td>Soprano Sax</td>
         </tr>
         <tr>
-        <td>66</td>
-        <td>Alto Sax</td>
+            <td>66</td>
+            <td>Alto Sax</td>
         </tr>
         <tr>
-        <td>67</td>
-        <td>Tenor Sax</td>
+            <td>67</td>
+            <td>Tenor Sax</td>
         </tr>
         <tr>
-        <td>68</td>
-        <td>Baritone Sax</td>
+            <td>68</td>
+            <td>Baritone Sax</td>
         </tr>
         <tr>
-        <td>69</td>
-        <td>Oboe</td>
+            <td>69</td>
+            <td>Oboe</td>
         </tr>
         <tr>
-        <td>70</td>
-        <td>English Horn</td>
+            <td>70</td>
+            <td>English Horn</td>
         </tr>
         <tr>
-        <td>71</td>
-        <td>Bassoon</td>
+            <td>71</td>
+            <td>Bassoon</td>
         </tr>
         <tr>
-        <td>72</td>
-        <td>Clarinet</td>
+            <td>72</td>
+            <td>Clarinet</td>
         </tr>
         <tr>
-        <td>73</td>
-        <td>Piccolo</td>
+            <td>73</td>
+            <td>Piccolo</td>
         </tr>
         <tr>
-        <td>74</td>
-        <td>Flute</td>
+            <td>74</td>
+            <td>Flute</td>
         </tr>
         <tr>
-        <td>75</td>
-        <td>Recorder</td>
+            <td>75</td>
+            <td>Recorder</td>
         </tr>
         <tr>
-        <td>76</td>
-        <td>Pan Flute</td>
+            <td>76</td>
+            <td>Pan Flute</td>
         </tr>
         <tr>
-        <td>77</td>
-        <td>Blown Bottle</td>
+            <td>77</td>
+            <td>Blown Bottle</td>
         </tr>
         <tr>
-        <td>78</td>
-        <td>Shakuhachi</td>
+            <td>78</td>
+            <td>Shakuhachi</td>
         </tr>
         <tr>
-        <td>79</td>
-        <td>Whistle</td>
+            <td>79</td>
+            <td>Whistle</td>
         </tr>
         <tr>
-        <td>80</td>
-        <td>Ocarina</td>
+            <td>80</td>
+            <td>Ocarina</td>
         </tr>
         <tr>
-        <td>81</td>
-        <td>Lead 1 (square)</td>
+            <td>81</td>
+            <td>Lead 1 (square)</td>
         </tr>
         <tr>
-        <td>82</td>
-        <td>Lead 2 (sawtooth)</td>
+            <td>82</td>
+            <td>Lead 2 (sawtooth)</td>
         </tr>
         <tr>
-        <td>83</td>
-        <td>Lead 3 (calliope)</td>
+            <td>83</td>
+            <td>Lead 3 (calliope)</td>
         </tr>
         <tr>
-        <td>84</td>
-        <td>Lead 4 (chiff)</td>
+            <td>84</td>
+            <td>Lead 4 (chiff)</td>
         </tr>
         <tr>
-        <td>85</td>
-        <td>Lead 5 (charang)</td>
+            <td>85</td>
+            <td>Lead 5 (charang)</td>
         </tr>
         <tr>
-        <td>86</td>
-        <td>Lead 6 (voice)</td>
+            <td>86</td>
+            <td>Lead 6 (voice)</td>
         </tr>
         <tr>
-        <td>87</td>
-        <td>Lead 7 (fifths)</td>
+            <td>87</td>
+            <td>Lead 7 (fifths)</td>
         </tr>
         <tr>
-        <td>88</td>
-        <td>Lead 8 (bass + lead)</td>
+            <td>88</td>
+            <td>Lead 8 (bass + lead)</td>
         </tr>
         <tr>
-        <td>89</td>
-        <td>Pad 1 (new age)</td>
+            <td>89</td>
+            <td>Pad 1 (new age)</td>
         </tr>
         <tr>
-        <td>90</td>
-        <td>Pad 2 (warm)</td>
+            <td>90</td>
+            <td>Pad 2 (warm)</td>
         </tr>
         <tr>
-        <td>91</td>
-        <td>Pad 3 (polysynth)</td>
+            <td>91</td>
+            <td>Pad 3 (polysynth)</td>
         </tr>
         <tr>
-        <td>92</td>
-        <td>Pad 4 (choir)</td>
+            <td>92</td>
+            <td>Pad 4 (choir)</td>
         </tr>
         <tr>
-        <td>93</td>
-        <td>Pad 5 (bowed)</td>
+            <td>93</td>
+            <td>Pad 5 (bowed)</td>
         </tr>
         <tr>
-        <td>94</td>
-        <td>Pad 6 (metallic)</td>
+            <td>94</td>
+            <td>Pad 6 (metallic)</td>
         </tr>
         <tr>
-        <td>95</td>
-        <td>Pad 7 (halo)</td>
+            <td>95</td>
+            <td>Pad 7 (halo)</td>
         </tr>
         <tr>
-        <td>96</td>
-        <td>Pad 8 (sweep)</td>
+            <td>96</td>
+            <td>Pad 8 (sweep)</td>
         </tr>
         <tr>
-        <td>97</td>
-        <td>FX 1 (rain)</td>
+            <td>97</td>
+            <td>FX 1 (rain)</td>
         </tr>
         <tr>
-        <td>98</td>
-        <td>FX 2 (soundtrack)</td>
+            <td>98</td>
+            <td>FX 2 (soundtrack)</td>
         </tr>
         <tr>
-        <td>99</td>
-        <td>FX 3 (crystal)</td>
+            <td>99</td>
+            <td>FX 3 (crystal)</td>
         </tr>
         <tr>
-        <td>100</td>
-        <td>FX 4 (atmosphere)</td>
+            <td>100</td>
+            <td>FX 4 (atmosphere)</td>
         </tr>
         <tr>
-        <td>101</td>
-        <td>FX 5 (brightness)</td>
+            <td>101</td>
+            <td>FX 5 (brightness)</td>
         </tr>
         <tr>
-        <td>102</td>
-        <td>FX 6 (goblins)</td>
+            <td>102</td>
+            <td>FX 6 (goblins)</td>
         </tr>
         <tr>
-        <td>103</td>
-        <td>FX 7 (echoes)</td>
+            <td>103</td>
+            <td>FX 7 (echoes)</td>
         </tr>
         <tr>
-        <td>104</td>
-        <td>FX 8 (sci-fi)</td>
+            <td>104</td>
+            <td>FX 8 (sci-fi)</td>
         </tr>
         <tr>
-        <td>105</td>
-        <td>Sitar</td>
+            <td>105</td>
+            <td>Sitar</td>
         </tr>
         <tr>
-        <td>106</td>
-        <td>Banjo</td>
+            <td>106</td>
+            <td>Banjo</td>
         </tr>
         <tr>
-        <td>107</td>
-        <td>Shamisen</td>
+            <td>107</td>
+            <td>Shamisen</td>
         </tr>
         <tr>
-        <td>108</td>
-        <td>Koto</td>
+            <td>108</td>
+            <td>Koto</td>
         </tr>
         <tr>
-        <td>109</td>
-        <td>Kalimba</td>
+            <td>109</td>
+            <td>Kalimba</td>
         </tr>
         <tr>
-        <td>110</td>
-        <td>Bag pipe</td>
+            <td>110</td>
+            <td>Bag pipe</td>
         </tr>
         <tr>
-        <td>111</td>
-        <td>Fiddle</td>
+            <td>111</td>
+            <td>Fiddle</td>
         </tr>
         <tr>
-        <td>112</td>
-        <td>Shanai</td>
+            <td>112</td>
+            <td>Shanai</td>
         </tr>
         <tr>
-        <td>113</td>
-        <td>Tinkle Bell</td>
+            <td>113</td>
+            <td>Tinkle Bell</td>
         </tr>
         <tr>
-        <td>114</td>
-        <td>Agogo</td>
+            <td>114</td>
+            <td>Agogo</td>
         </tr>
         <tr>
-        <td>115</td>
-        <td>Steel Drums</td>
+            <td>115</td>
+            <td>Steel Drums</td>
         </tr>
         <tr>
-        <td>116</td>
-        <td>Woodblock</td>
+            <td>116</td>
+            <td>Woodblock</td>
         </tr>
         <tr>
-        <td>117</td>
-        <td>Taiko Drum</td>
+            <td>117</td>
+            <td>Taiko Drum</td>
         </tr>
         <tr>
-        <td>118</td>
-        <td>Melodic Tom</td>
+            <td>118</td>
+            <td>Melodic Tom</td>
         </tr>
         <tr>
-        <td>119</td>
-        <td>Synth Drum</td>
+            <td>119</td>
+            <td>Synth Drum</td>
         </tr>
         <tr>
-        <td>120</td>
-        <td>Reverse Cymbal</td>
+            <td>120</td>
+            <td>Reverse Cymbal</td>
         </tr>
         <tr>
-        <td>121</td>
-        <td>Guitar Fret Noise</td>
+            <td>121</td>
+            <td>Guitar Fret Noise</td>
         </tr>
         <tr>
-        <td>122</td>
-        <td>Breath Noise</td>
+            <td>122</td>
+            <td>Breath Noise</td>
         </tr>
         <tr>
-        <td>123</td>
-        <td>Seashore</td>
+            <td>123</td>
+            <td>Seashore</td>
         </tr>
         <tr>
-        <td>124</td>
-        <td>Bird Tweet</td>
+            <td>124</td>
+            <td>Bird Tweet</td>
         </tr>
         <tr>
-        <td>125</td>
-        <td>Telephone Ring</td>
+            <td>125</td>
+            <td>Telephone Ring</td>
         </tr>
         <tr>
-        <td>126</td>
-        <td>Helicopter</td>
+            <td>126</td>
+            <td>Helicopter</td>
         </tr>
         <tr>
-        <td>127</td>
-        <td>Applause</td>
+            <td>127</td>
+            <td>Applause</td>
         </tr>
         <tr>
-        <td>128</td>
-        <td>Gunshot</td>
-        </tr>            
+            <td>128</td>
+            <td>Gunshot</td>
+        </tr>
     </table>
     <a href="https://www.midi.org/specifications/item/gm-level-1-sound-set">Source</a>
 </div>
