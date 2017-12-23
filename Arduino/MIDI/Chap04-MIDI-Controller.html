@@ -33,30 +33,37 @@
         <article>
 <h2><a name="midi-controllers" href="#midi-controllers">MIDI Controllers</a></h2>
 <div>
-    The MIDI protocol is often used for MIDI controllers, devices with physical knobs and buttons to control settings in a Digital
-    Audio Workstation (DAW), or to enter notes in audio or music notation software. This is often much faster and more intuitive
-    than using the mouse and keyboard for everything. MIDI controllers are also used during live performances, to control
-    effect modules, samplers, synthesizers, DJ software, etc.
-    <br> This chapter will cover how to write the code for a working MIDI controller using Arduino.
+  The MIDI protocol is often used for MIDI controllers, devices with physical knobs and buttons to control settings in a Digital
+  Audio Workstation (DAW), or to enter notes in audio or music notation software. This is often much faster and more intuitive
+  than using the mouse and keyboard for everything. MIDI controllers are also used during live performances, to control effect
+  modules, samplers, synthesizers, DJ software, etc.
+  <br> This chapter will cover how to write the code for a working MIDI controller using Arduino.
 </div>
 <h3><a name="buttons" href="#buttons">Buttons</a></h3>
 <div>
-    For sending the state of a button, note events are used. When the button is pressed, a note on event is sent, when it's released,
-    a note off event is sent.
-    <br>
-    <h4><a name="hardware" href="#hardware">Hardware</a></h4>
-    Connecting a button to the Arduino is pretty straightforward: Connect one lead of the button to a digital input pin, and
-    connect the other lead to ground. ###TODO###Image### The internal pull-up resistor of the input pin will be used, so
-    if the button is released (if it doesn't conduct), the input will be "pulled up" to 5V, and it will read a digital 1.
-    When the button is pressed, it connects the input pin directly to ground, so it will read a digital 0.
+  For sending the state of a button, note events are used. When the button is pressed, a note on event is sent, when it's released,
+  a note off event is sent.
+  <br>
+  <h4><a name="hardware" href="#hardware">Hardware</a></h4>
+  Connecting a button to the Arduino is pretty straightforward: Connect one lead of the button to a digital input pin, and
+  connect the other lead to ground.
+  <img src="/Images/button.svg"> The internal pull-up resistor* of the input pin will be used, so if the button is released (if it doesn't conduct), the
+  input will be "pulled up" to 5V, and it will read a digital 1. When the button is pressed, it connects the input pin directly
+  to ground, so it will read a digital 0.
+  <br>
+  <br>
+  <small>(*) The microcontroller has built-in pull-up resistors, to make working with buttons and open-collector outputs a whole
+    lot easier. This resistor can be enabled in software, using
+    <code><font color="#d35400">pinMode</font><font color="#000000">(</font><font color="#000000">pushButtonPin</font><font color="#434f54">,</font> <font color="#00979c">INPUT_PULLUP</font><font color="#000000">)</font></code>. This means that you don't have to add a resistor externally.</small>
 </div>
 <h4><a name="software" href="#software">Software</a></h4>
 <div>The MIDI controller only has to send events when the state of the button changes. To do this, the input will constantly be
-    polled in the <code>loop</code>, and then the previous state is kept in a static variable. When the new input state does
-    not equal the previous state, the state of the button has changed, and a MIDI event will be sent.
-    <br>If the new state is low, the button has been pressed and a note on event is sent. If it's high, it has been released,
-    and a note off event is sent.
-    <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">pushButtonPin</font> <font color="#434f54">=</font> <font color="#000000">2</font><font color="#000000">;</font>
+  polled in the
+  <code>loop</code>, and then the previous state is kept in a static variable. When the new input state does not equal the previous state,
+  the state of the button has changed, and a MIDI event will be sent.
+  <br>If the new state is low, the button has been pressed and a note on event is sent. If it's high, it has been released, and
+  a note off event is sent.
+  <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">pushButtonPin</font> <font color="#434f54">=</font> <font color="#000000">2</font><font color="#000000">;</font>
 
 <font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>      <font color="#434f54">// MIDI channel 1</font>
 <font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">note</font> <font color="#434f54">=</font> <font color="#000000">0x3C</font><font color="#000000">;</font>      <font color="#434f54">// Middle C (C4)</font>
@@ -79,17 +86,17 @@
     <font color="#000000">}</font>
     <font color="#000000">previousState</font> <font color="#434f54">=</font> <font color="#000000">currentState</font><font color="#000000">;</font>                    <font color="#434f54">// Remember the current state of the button</font>
   <font color="#000000">}</font>
-<font color="#000000">}</font></code></pre> Keep in mind that the declaration and initialization of a static local variable
-    happen only once, the value is retained the next time the function is executed.
+<font color="#000000">}</font></code></pre> Keep in mind that the declaration and initialization of a static local variable happen only once, the value is retained
+  the next time the function is executed.
 </div>
 <br>
 <div>
-    In principle, this approach should work, however, in practice, there will be contact bounce. When you press or release a
-    button, it actually changes state many times really quickly, before settling to the correct state. This is called bounce,
-    and can be a real problem if you want to reliable button presses. By including a timer in the code, you can make sure
-    that the button is stable for at least a couple of tens of milliseconds before registering the state change. Here's what
-    that looks like:
-    <pre><code><font color="#00979c">const</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">debounceTime</font> <font color="#434f54">=</font> <font color="#000000">25</font><font color="#000000">;</font>  <font color="#434f54">// Ignore all state changes that happen 25 milliseconds</font>
+  In principle, this approach should work, however, in practice, there will be contact bounce. When you press or release a
+  button, it actually changes state many times really quickly, before settling to the correct state. This is called bounce,
+  and can be a real problem if you want to reliable button presses. By including a timer in the code, you can make sure that
+  the button is stable for at least a couple of tens of milliseconds before registering the state change. Here's what that
+  looks like:
+  <pre><code><font color="#00979c">const</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">debounceTime</font> <font color="#434f54">=</font> <font color="#000000">25</font><font color="#000000">;</font>  <font color="#434f54">// Ignore all state changes that happen 25 milliseconds</font>
                                         <font color="#434f54">// after the button is pressed or released.</font>
  
 <font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
@@ -115,23 +122,25 @@
     <font color="#000000">previousState</font> <font color="#434f54">=</font> <font color="#000000">currentState</font><font color="#000000">;</font>                          <font color="#434f54">// Remember the current state of the input</font>
   <font color="#000000">}</font>
 <font color="#000000">}</font></code></pre>
-    <code>buttonState</code> keeps the state of the ideal, debounced button, while <code>previousState</code> keeps the previous
-    state of the actual input.</div>
+  <code>buttonState</code> keeps the state of the ideal, debounced button, while
+  <code>previousState</code> keeps the previous state of the actual input.</div>
 
 <h3><a name="potentiometers-and-faders" href="#potentiometers-and-faders">Potentiometers and faders</a></h3>
 MIDI controllers often feature potentiometers and faders for continuous controllers like volume, pan, modulation, etc.
 <h4><a name="hardware" href="#hardware">Hardware</a></h4>
 <div>The variable resistors (potentiometers or faders) are just used in a voltage divider configuration, with the two outer pins
-    connected to ground and 5V, and the center pin connected to an analog input pin on the Arduino. Keep in mind that you
-    need a potentiometer with a linear taper (not a logarithmic or audio taper). ###TODO###Image###</div>
+  connected to ground and 5V, and the center pin connected to an analog input pin on the Arduino. Keep in mind that you need
+  a potentiometer with a linear taper (not a logarithmic or audio taper).
+  <img src="/Images/potentiometer.svg" style="max-height: 12em;">
+</div>
 <h4><a name="control-change" href="#control-change">Control Change</a></h4>
 <div>For most continuous controllers, control change events are used. Most software only supports 7-bit controllers. This allows
-    for a total of 1920 controllers (120 on each of the 16 MIDI channels).</div>
+  for a total of 1920 controllers (120 on each of the 16 MIDI channels).</div>
 <br>
 <div>A continuous controller can be implemented as follows: sample the analog input in the loop, convert from the 10-bit analog
-    value to a 7-bit Control Change value, if it's a different value than last time, send a control change message with the
-    new value.
-    <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">analogPin</font> <font color="#434f54">=</font> <font color="#000000">A0</font><font color="#000000">;</font>
+  value to a 7-bit Control Change value, if it's a different value than last time, send a control change message with the
+  new value.
+  <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">analogPin</font> <font color="#434f54">=</font> <font color="#000000">A0</font><font color="#000000">;</font>
 
 <font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>        <font color="#434f54">// MIDI channel 1</font>
 <font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">controller</font> <font color="#434f54">=</font> <font color="#000000">0x10</font><font color="#000000">;</font>  <font color="#434f54">// General Purpose Controller 1</font>
@@ -153,12 +162,11 @@ MIDI controllers often feature potentiometers and faders for continuous controll
     <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">CC</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">controller</font><font color="#434f54">,</font> <font color="#000000">CC_value</font><font color="#000000">)</font><font color="#000000">;</font>     <font color="#434f54">// Send the new value over MIDI</font>
     <font color="#000000">previousValue</font> <font color="#434f54">=</font> <font color="#000000">CC_value</font><font color="#000000">;</font>                        <font color="#434f54">// Remember the new value</font>
   <font color="#000000">}</font>
-<font color="#000000">}</font></code></pre> The problem is that there can be quite a lot of noise on the analog inputs.
-    So if the value fluctuates a lot, it will constantly send new CC messages, even if the knob is not being touched. To
-    prevent this, a
-    <a href="https://playground.arduino.cc/Main/RunningAverage">running average filter</a> can be used on the input.
+<font color="#000000">}</font></code></pre> The problem is that there can be quite a lot of noise on the analog inputs. So if the value fluctuates a lot, it will
+  constantly send new CC messages, even if the knob is not being touched. To prevent this, a
+  <a href="https://playground.arduino.cc/Main/RunningAverage">running average filter</a> can be used on the input.
 
-    <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">averageLength</font> <font color="#434f54">=</font> <font color="#000000">8</font><font color="#000000">;</font>  <font color="#434f54">// Average the analog input over 8 samples (maximum = 2^16 / 2^10 = 2^6 = 64)</font>
+  <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">averageLength</font> <font color="#434f54">=</font> <font color="#000000">8</font><font color="#000000">;</font>  <font color="#434f54">// Average the analog input over 8 samples (maximum = 2^16 / 2^10 = 2^6 = 64)</font>
 
 <font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">previousValue</font> <font color="#434f54">=</font> <font color="#000000">0b10000000</font><font color="#000000">;</font>     <font color="#434f54">// Declare a static variable to save the previous CC value</font>
@@ -195,16 +203,16 @@ MIDI controllers often feature potentiometers and faders for continuous controll
 </div>
 <h4><a name="pitch-bend" href="#pitch-bend">Pitch Bend</a></h4>
 <div>If a higher resolution is required, for example for volume faders, pitch bend events are used. This means that they have
-    a 14-bit accuracy, however, most devices only use the 10 most significant bits. There can be only one pitch bend controller
-    on each of the 16 MIDI channels.</div>
+  a 14-bit accuracy, however, most devices only use the 10 most significant bits. There can be only one pitch bend controller
+  on each of the 16 MIDI channels.</div>
 <br>
 <div>The code is pretty similar to the previous example. Just shift the value 4 bits to the left instead of 3 bits to the right,
-    and send a pitch bend message instead of a control change message. Also note that some of the variables are now of larger
-    data types, to accomodate the 14-bit pitch bend values.
-    <br> To send the 14-bit pitch bend value, it has to be split up into two 7-bit data bytes. This can be acchieved by shifting
-    it 7 bits to the right, to get the 7 most significant bits. The <code>sendMIDI</code> function takes care of the bit
-    masking of the 7 least significant bits.
-    <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">analogPin</font> <font color="#434f54">=</font> <font color="#000000">A0</font><font color="#000000">;</font>
+  and send a pitch bend message instead of a control change message. Also note that some of the variables are now of larger
+  data types, to accomodate the 14-bit pitch bend values.
+  <br> To send the 14-bit pitch bend value, it has to be split up into two 7-bit data bytes. This can be acchieved by shifting
+  it 7 bits to the right, to get the 7 most significant bits. The
+  <code>sendMIDI</code> function takes care of the bit masking of the 7 least significant bits.
+  <pre><code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">analogPin</font> <font color="#434f54">=</font> <font color="#000000">A0</font><font color="#000000">;</font>
 
 <font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>        <font color="#434f54">// MIDI channel 1</font>
 
@@ -250,7 +258,187 @@ MIDI controllers often feature potentiometers and faders for continuous controll
 
 <h3><a name="rotary-encoders" href="#rotary-encoders">Rotary encoders</a></h3>
 
-<div></div>
+<div>The disadvantage of potentiometers is that the computer can't change their position. For example, if you have a potentiometer
+  mapped to a plugin parameter, and you select a different plugin, the potentiometer doesn't automatically move to the position
+  of the new pluggin paramter's value. Even worse, if you accidentally touch the potentiometer, it will overwrite the parameter
+  with the position of potentiometer, regardless of the value it had before.</div>
+<br>
+<div>One solution is to use rotary encoders. This is a relative or incremental type of rotary knob, which means that it doesn't
+  have an absolute position, it only sends incremental position changes when moved. When the encoder is turned two ticks
+  to the right, it sends a value of +2, when it's turned 5 ticks to the left, it sends a value of -5.</div>
+
+<h4><a name="hardware" href="#hardware">Hardware</a></h4>
+<div>Connect the common pin of the rotary encoder to ground, and connect the A and B pins to digital input pins (preferrably interrupt
+  capable pins) of the Arduino. As a hardware debouncing measure, you could add an RC low-pass filter.</div>
+
+<h4><a name="software" href="#software">Software</a></h4>
+<div>The easiest way to read a rotary encoder is to use a library. This ensures compatibility on pretty much all boards, and many
+  of these libraries are much more efficient than writing the ISR code yourself. My personal favourite is the
+  <a href="https://github.com/PaulStoffregen/Encoder">PJRC Encoder library</a>.
+</div>
+<div>
+  <pre><code><font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">Encoder</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>  <font color="#434f54">// Include the PJRC Encoder library</font>
+
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>        <font color="#434f54">// MIDI channel 1</font>
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">controller</font> <font color="#434f54">=</font> <font color="#000000">0x10</font><font color="#000000">;</font>  <font color="#434f54">// General Purpose Controller 1</font>
+
+<b><font color="#d35400">Encoder</font></b> <font color="#000000">encoder</font> <font color="#000000">(</font><font color="#000000">2</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#000000">)</font><font color="#000000">;</font>  <font color="#434f54">// A rotary encoder connected to pins 2 and 3</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">31250</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#00979c">static</font> <font color="#00979c">int32_t</font> <font color="#000000">previousPosition</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>               <font color="#434f54">// A static variable for saving the previous encoder position</font>
+  <font color="#00979c">int32_t</font> <font color="#000000">position</font> <font color="#434f54">=</font> <font color="#000000">encoder</font><font color="#434f54">.</font><font color="#d35400">read</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>                 <font color="#434f54">// Read the current encoder position</font>
+  <font color="#00979c">int32_t</font> <font color="#000000">difference</font> <font color="#434f54">=</font> <font color="#000000">position</font> <font color="#434f54">-</font> <font color="#000000">previousPosition</font><font color="#000000">;</font>  <font color="#434f54">// Calculate the relative movement</font>
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">difference</font> <font color="#434f54">!=</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>                             <font color="#434f54">// If the encoder was moved</font>
+    <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">CC</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">controller</font><font color="#434f54">,</font> <font color="#000000">difference</font><font color="#000000">)</font><font color="#000000">;</font>   <font color="#434f54">// Send the relative position change over MIDI</font>
+    <font color="#000000">previousPosition</font> <font color="#434f54">=</font> <font color="#000000">position</font><font color="#000000">;</font>                     <font color="#434f54">// Remember the current position as the previous position</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font></code></pre>
+</div>
+
+<div>Most rotary encoders send 4 pulses for every physical 'tick' (indent). It makes sense to divide the number of pulses by 4
+  before sending it over MIDI. Keep in mind that is a floor division, so we can't just update
+  <code>previousPosition</code> with position without losing pulses. For example, if the current position is 6, and the previous position is 0, difference
+  will be 6 pulses. 6 / 4 = 1 complete tick. Then the previous position will be set to 6. However, only 1 tick, so 4 pulses,
+  has been sent, and 6 % 4 = 2 pulses have just been lost.
+  <br> The solution is very simple:
+
+  <pre><code><font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#00979c">static</font> <font color="#00979c">long</font> <font color="#000000">previousPosition</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>                 <font color="#434f54">// A static variable for saving the previous encoder position</font>
+  <font color="#00979c">long</font> <font color="#000000">position</font> <font color="#434f54">=</font> <font color="#000000">encoder</font><font color="#434f54">.</font><font color="#d35400">read</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>                   <font color="#434f54">// Read the current encoder position</font>
+  <font color="#00979c">long</font> <font color="#000000">difference</font> <font color="#434f54">=</font> <font color="#000000">position</font> <font color="#434f54">-</font> <font color="#000000">previousPosition</font><font color="#000000">;</font>    <font color="#434f54">// Calculate the relative movement</font>
+  <font color="#000000">difference</font> <font color="#434f54">/=</font> <font color="#000000">4</font><font color="#000000">;</font>                                  <font color="#434f54">// One tick for every 4 pulses</font>
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">difference</font> <font color="#434f54">!=</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>                            <font color="#434f54">// If the encoder was moved</font>
+    <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">CC</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">controller</font><font color="#434f54">,</font> <font color="#000000">difference</font><font color="#000000">)</font><font color="#000000">;</font>  <font color="#434f54">// Send the relative position change over MIDI</font>
+    <font color="#000000">previousPosition</font> <font color="#434f54">+=</font> <font color="#000000">difference</font> <font color="#434f54">*</font> <font color="#000000">4</font><font color="#000000">;</font>             <font color="#434f54">// Add the pulses sent over MIDI to the previous position</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font></code></pre>
+
+</div>
+
+<div>There are three ways to encode negative position changes into a 7-bit MIDI data byte:
+  <ol>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Two%27s_complement">Two's complement</a>
+    </li>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Signed_number_representations#Signed_magnitude_representation">Signed magnitude</a>
+    </li>
+    <li>
+      <a href="https://en.wikipedia.org/wiki/Offset_binary">Offset binary</a>
+    </li>
+  </ol>
+  On the Arduino, all signed numbers are represented as two's complement. So sending a two's complement number over MIDI is
+  as simple as just sending (the 7 least significant bits of) the signed variable.
+  <br> In signed magnitude representation, bit 6 is used as a sign bit (0 = positive, 1 = negative), and the 6 least significant
+  bits are used to store the absolute value of the signed number.
+  <br> When using binary offset representation, 64 is added to the signed number to make everything positive.
+  <br>
+  <br> Some programs don't support relative changes of more than 15 in one MIDI message, so we constrain the difference to 15.
+  <br>
+  <br> This sketch allows you to choose what representation to use, to guarantee compatibility with most software, and also limits
+  the relative position change per MIDI message to 15.
+  <pre><code><font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">Encoder</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>  <font color="#434f54">// Include the PJRC Encoder library</font>
+
+<font color="#00979c">enum</font> <b><font color="#d35400">relativeCCmode</font></b> <font color="#000000">{</font>
+  <font color="#00979c">TWOS_COMPLEMENT</font><font color="#434f54">,</font>
+  <font color="#00979c">BINARY_OFFSET</font><font color="#434f54">,</font>
+  <font color="#00979c">SIGN_MAGNITUDE</font>
+<font color="#000000">}</font><font color="#000000">;</font>
+
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font> <font color="#434f54">=</font> <font color="#000000">1</font><font color="#000000">;</font>        <font color="#434f54">// MIDI channel 1</font>
+<font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#000000">controller</font> <font color="#434f54">=</font> <font color="#000000">0x10</font><font color="#000000">;</font>  <font color="#434f54">// General Purpose Controller 1</font>
+
+<font color="#00979c">const</font> <b><font color="#d35400">Encoder</font></b> <font color="#000000">encoder</font> <font color="#000000">(</font><font color="#000000">2</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#000000">)</font><font color="#000000">;</font>  <font color="#434f54">// A rotary encoder connected to pins 2 and 3</font>
+
+<font color="#00979c">const</font> <b><font color="#d35400">relativeCCmode</font></b> <font color="#000000">negativeRepresentation</font> <font color="#434f54">=</font> <font color="#00979c">SIGN_MAGNITUDE</font><font color="#000000">;</font>  <font color="#434f54">// Select the way negative numbers are represented</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">31250</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#00979c">static</font> <font color="#00979c">long</font> <font color="#000000">previousPosition</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>                 <font color="#434f54">// A static variable for saving the previous encoder position</font>
+  <font color="#00979c">long</font> <font color="#000000">position</font> <font color="#434f54">=</font> <font color="#000000">encoder</font><font color="#434f54">.</font><font color="#d35400">read</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>                   <font color="#434f54">// Read the current encoder position</font>
+  <font color="#00979c">long</font> <font color="#000000">difference</font> <font color="#434f54">=</font> <font color="#000000">position</font> <font color="#434f54">-</font> <font color="#000000">previousPosition</font><font color="#000000">;</font>    <font color="#434f54">// Calculate the relative movement</font>
+  <font color="#000000">difference</font> <font color="#434f54">/=</font> <font color="#000000">4</font><font color="#000000">;</font>                                  <font color="#434f54">// One tick for every 4 pulses</font>
+  <font color="#000000">difference</font> <font color="#434f54">=</font> <font color="#d35400">constrain</font><font color="#000000">(</font><font color="#000000">difference</font><font color="#434f54">,</font> <font color="#434f54">-</font><font color="#000000">15</font><font color="#434f54">,</font> <font color="#000000">15</font><font color="#000000">)</font><font color="#000000">;</font>      <font color="#434f54">// Make sure that only 15 ticks are sent at once</font>
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">difference</font> <font color="#434f54">!=</font> <font color="#000000">0</font><font color="#000000">)</font> <font color="#000000">{</font>                            <font color="#434f54">// If the encoder was moved</font>
+    <font color="#00979c">uint8_t</font> <font color="#000000">CC_value</font> <font color="#434f54">=</font> <font color="#000000">mapRelativeCC</font><font color="#000000">(</font><font color="#000000">difference</font><font color="#000000">)</font><font color="#000000">;</font>   <font color="#434f54">// Change the representation of negative numbers</font>
+    <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">CC</font><font color="#434f54">,</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#000000">controller</font><font color="#434f54">,</font> <font color="#000000">CC_value</font><font color="#000000">)</font><font color="#000000">;</font>    <font color="#434f54">// Send the relative position change over MIDI</font>
+    <font color="#000000">previousPosition</font> <font color="#434f54">+=</font> <font color="#000000">difference</font> <font color="#434f54">*</font> <font color="#000000">4</font><font color="#000000">;</font>             <font color="#434f54">// Add the pulses sent over MIDI to the previous position</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">uint8_t</font> <font color="#000000">twosComplementTo7bitSignedMagnitude</font><font color="#000000">(</font><font color="#00979c">int8_t</font> <font color="#000000">value</font><font color="#000000">)</font> <font color="#000000">{</font>  <font color="#434f54">// Convert an 8-bit two's complement integer to 7-bit sign-magnitude format</font>
+  <font color="#00979c">uint8_t</font> <font color="#000000">mask</font> <font color="#434f54">=</font> <font color="#000000">value</font> <font color="#434f54">&gt;&gt;</font> <font color="#000000">7</font><font color="#000000">;</font>
+  <font color="#00979c">uint8_t</font> <font color="#d35400">abs</font> <font color="#434f54">=</font> <font color="#000000">(</font><font color="#000000">value</font> <font color="#434f54">+</font> <font color="#000000">mask</font><font color="#000000">)</font> <font color="#434f54">^</font> <font color="#000000">mask</font><font color="#000000">;</font>
+  <font color="#00979c">uint8_t</font> <font color="#000000">sign</font> <font color="#434f54">=</font> <font color="#000000">mask</font> <font color="#434f54">&</font> <font color="#000000">0b01000000</font><font color="#000000">;</font>
+  <font color="#5e6d03">return</font> <font color="#000000">(</font><font color="#d35400">abs</font> <font color="#434f54">&</font> <font color="#000000">0b00111111</font><font color="#000000">)</font> <font color="#434f54">|</font> <font color="#000000">sign</font><font color="#000000">;</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">uint8_t</font> <font color="#000000">mapRelativeCC</font><font color="#000000">(</font><font color="#00979c">int8_t</font> <font color="#000000">value</font><font color="#000000">)</font> <font color="#000000">{</font>  <font color="#434f54">// Convert an 8-bit two's complement integer to a 7-bit value to send over MIDI</font>
+  <font color="#5e6d03">switch</font> <font color="#000000">(</font><font color="#000000">negativeRepresentation</font><font color="#000000">)</font> <font color="#000000">{</font>
+    <font color="#5e6d03">case</font> <font color="#00979c">TWOS_COMPLEMENT</font><font color="#434f54">:</font>
+      <font color="#5e6d03">return</font> <font color="#000000">value</font><font color="#000000">;</font>  <font color="#434f54">// Remember that the sendMIDI function does the bit masking, so you don't have to worry about bit 7 being a 1.</font>
+    <font color="#5e6d03">case</font> <font color="#00979c">BINARY_OFFSET</font><font color="#434f54">:</font>
+      <font color="#5e6d03">return</font> <font color="#000000">value</font> <font color="#434f54">+</font> <font color="#000000">64</font><font color="#000000">;</font>
+    <font color="#5e6d03">case</font> <font color="#00979c">SIGN_MAGNITUDE</font><font color="#434f54">:</font>
+      <font color="#5e6d03">return</font> <font color="#000000">twosComplementTo7bitSignedMagnitude</font><font color="#000000">(</font><font color="#000000">value</font><font color="#000000">)</font><font color="#000000">;</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font></code></pre>
+</div>
+
+<h2><a name="object-oriented-approach" href="#object-oriented-approach">Object-Oriented approach</a></h2>
+
+<div>The examples above only work for a single button, potentiometer or encoder. Just copying and pasting the code for each new
+  component would lead to many repetitions and very messy code. That's why it's a good idea to implement the code in different
+  classes: a class for buttons, another class for potentiometers, etc. You can then just instantiate many objects of these
+  classes for the many buttons and knobs on your MIDI controller.
+  <br>
+  <br> I wrote an Arduino MIDI controller library that makes this really easy. For example, this is all the code you need for
+  a MIDI controller with 4 potentiometers, 4 buttons and 2 rotary encoders:
+
+  <pre><code><font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">MIDI_Controller</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font>  <font color="#434f54">// Include the library</font>
+
+<font color="#95a5a6">/* Create four new instances of the class 'Analog' on pins A0, A1, A2 and A3, </font>
+<font color="#95a5a6">   with controller number 0x07 (channel volume), on MIDI channels 1 through 4. */</font>
+<b><font color="#d35400">Analog</font></b> <font color="#000000">potentiometers</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#434f54">=</font> <font color="#000000">{</font>
+  <font color="#000000">{</font><font color="#000000">A0</font><font color="#434f54">,</font> <font color="#000000">0x7</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#000000">}</font><font color="#434f54">,</font>
+  <font color="#000000">{</font><font color="#000000">A1</font><font color="#434f54">,</font> <font color="#000000">0x7</font><font color="#434f54">,</font> <font color="#000000">2</font><font color="#000000">}</font><font color="#434f54">,</font>
+  <font color="#000000">{</font><font color="#000000">A2</font><font color="#434f54">,</font> <font color="#000000">0x7</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#000000">}</font><font color="#434f54">,</font>
+  <font color="#000000">{</font><font color="#000000">A3</font><font color="#434f54">,</font> <font color="#000000">0x7</font><font color="#434f54">,</font> <font color="#000000">4</font><font color="#000000">}</font><font color="#434f54">,</font>
+<font color="#000000">}</font><font color="#000000">;</font>
+<font color="#95a5a6">/* Create four new instances of the class 'Digital' on pins 4, 5, 6 and 7, </font>
+<font color="#95a5a6">   with note numbers 0x10 through 0x13 (mute), on MIDI channel 1. */</font>
+<b><font color="#d35400">Digital</font></b> <font color="#000000">buttons</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#434f54">=</font> <font color="#000000">{</font>
+  <font color="#000000">{</font><font color="#000000">4</font><font color="#434f54">,</font> <font color="#000000">0x10</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#000000">}</font><font color="#434f54">,</font>
+  <font color="#000000">{</font><font color="#000000">5</font><font color="#434f54">,</font> <font color="#000000">0x11</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#000000">}</font><font color="#434f54">,</font>
+  <font color="#000000">{</font><font color="#000000">6</font><font color="#434f54">,</font> <font color="#000000">0x12</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#000000">}</font><font color="#434f54">,</font>
+  <font color="#000000">{</font><font color="#000000">7</font><font color="#434f54">,</font> <font color="#000000">0x13</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#000000">}</font><font color="#434f54">,</font>
+<font color="#000000">}</font><font color="#000000">;</font>
+<font color="#95a5a6">/* Create two new instances of the class 'RotaryEncoder' called 'encoders', on pins 0 &amp; 1, and 2 &amp; 3, </font>
+<font color="#95a5a6">   controller numbers 0x2F and 0x30, on MIDI channel 1, at normal speed, using normal encoders</font>
+<font color="#95a5a6">   (4 pulses per click/step), using two's complement sign representation. */</font>
+<b><font color="#d35400">RotaryEncoder</font></b> <font color="#000000">encoders</font><font color="#000000">[</font><font color="#000000">]</font> <font color="#434f54">=</font> <font color="#000000">{</font>
+  <font color="#000000">{</font><font color="#000000">0</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#434f54">,</font> <font color="#000000">0x2F</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#434f54">,</font> <font color="#00979c">NORMAL_ENCODER</font><font color="#434f54">,</font> <font color="#00979c">TWOS_COMPLEMENT</font><font color="#000000">}</font><font color="#434f54">,</font>
+  <font color="#000000">{</font><font color="#000000">2</font><font color="#434f54">,</font> <font color="#000000">3</font><font color="#434f54">,</font> <font color="#000000">0x30</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#434f54">,</font> <font color="#000000">1</font><font color="#434f54">,</font> <font color="#00979c">NORMAL_ENCODER</font><font color="#434f54">,</font> <font color="#00979c">TWOS_COMPLEMENT</font><font color="#000000">}</font>
+<font color="#000000">}</font><font color="#000000">;</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font><font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>  <font color="#434f54">// Refresh all inputs</font>
+  <b><font color="#d35400">MIDI_Controller</font></b><font color="#434f54">.</font><font color="#d35400">refresh</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
+<font color="#000000">}</font></code></pre>
+As you can see, there's only the definitions of all controls, then an empty setup, and finally just a loop that refreshes all controls indefinitely. The MIDI Controller library handles everything discussed above, and even more!<br>
+It allows you to arrange controls into different banks, switch between banks, choose between many different MIDI interfaces (USB, Serial, SoftwareSerial), has support for multiplexers, button matrices, etc.
+<br>
+<br>
+You can download the library <b><a href="https://github.com/tttapa/MIDI_controller" target="_blank">here</a></b>.
+</div>
 <hr>
             <div class="back"><a href="Chap03-MIDI-over-Serial.html">← Previous chapter</a></div>
             <div class="backArr"><a href="Chap03-MIDI-over-Serial.html"><i class="material-icons">arrow_back</i></a></div>

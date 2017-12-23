@@ -31,12 +31,32 @@
             </div>
         </nav>
         <article>
-
-   <h2><a name="midi-hardware" href="#midi-hardware">MIDI hardware</a></h2>
-   <div>
-        <br>
-   </div>
-    
+<h2>
+    MIDI hardware</h2>
+<div>
+    The MIDI hardware link is just a 5mA current loop that asynchronously sends and receives 8-bit bytes at a baud rate of 31250
+    symbols per second. This means that the Arduino's hardware UART can be used for transmitting and receiving MIDI. DIN
+    5 pin (180 degree) female receptacles are used for MIDI in, out and through connectors.
+    <br>
+</div>
+<br>
+<div>This is the original schematic that can be found in the 1996 MIDI 1.0 Detailed Specification 4.2:
+    <img src="/Images/MIDI-hardware.png">
+    <br> The current loop consists of a an open collector output on the transmitting end (MIDI out and MIDI through), and an
+    opto-coupler at the receiving end (MIDI in). When a 'zero' is sent, the open collector output sinks current, turning
+    on the LED of the opto-coupler. This will in turn bring low the open collector output of the opto-coupler, resulting
+    in a low signal.
+    <br> The reason for using a current loop instead of a voltage, is that the sender and the receiver can be at different potentials,
+    because everything is galvanically isolated. This also prevents ground loops, which can result in noise.
+    <br> Note that the ground and shielding (pin 2 on the 5-pin DIN connector) is connected to the ground of the MIDI out and
+    through circuits, but not to the ground of the receiver in the MIDI in circuit.
+</div>
+<br>
+<div>The standard was updated in 2014 to include specifications for 3.3V MIDI devices. <br>
+    <a href="https://www.midi.org/downloads?task=callelement&amp;format=raw&amp;item_id=100&amp;element=f85c494b-2b32-4109-b8c1-083cca2b7db6&amp;method=download">(<i>MIDI 1.0 Electrical Specification Update (CA-033)</i> (2014). MMA Technical Standards Board / AMEI MIDI Committee.)</a>
+    <img src="/Images/MIDI-out-2014.svg" style="width: 100%">
+    <img src="/Images/MIDI-in-through-2014.svg" style="width: 100%">
+</div>
 <hr>
             <div class="back"><a href="Chap01-MIDI-Protocol.html">← Previous chapter</a></div>
             <div class="next"><a href="Chap03-MIDI-over-Serial.html">Next chapter →</a></div>
