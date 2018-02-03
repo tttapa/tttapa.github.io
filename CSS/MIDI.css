@@ -1,3 +1,7 @@
+* {
+    max-width: 100%;
+}
+
 body {
     background-color: #ddd;
     margin: 0px;
@@ -24,34 +28,64 @@ pre {
 pre>code {
     display: block;
     background: inherit;
-    padding: 12px;
-    margin-top: 12px;
-    margin-bottom: 12px;
+    padding: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
     max-height: 70vh;
     overflow-y: auto;
     border: 1px solid #eee
 }
 
-pre.lineNumbers {
-    display: block;
+pre.lineNumbers, pre.lineNumbersEmphasis {
+    display: inline-block;
+    counter-reset: line;
+    /* margin-left: 3.2em; */
+    padding: 1em 0 1em 1em;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #eee;
 }
 
-pre.lineNumbers>code {
+pre.lineNumbers>code, pre.lineNumbersEmphasis>code {
     display: inline;
     padding: 0;
+    border: none;
+    margin: 0;
 }
 
-pre.lineNumbers>code:before {
+pre.lineNumbersEmphasis>code {
+    opacity: 0.5;
+    filter: grayscale(40%);
+    /* margin-left: 0.5em; */
+}
+pre.lineNumbersEmphasis>code.emphasis {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+pre.lineNumbersEmphasis>code.emphasis:before {
+    font-weight: bold;
+}
+
+pre.lineNumbers>code:before, pre.lineNumbersEmphasis>code:before {
     counter-increment: line;
     content: counter(line);
     display: inline-block;
-    border-right: 1px solid #ddd;
-    padding: 0 .5em;
-    margin-right: .5em;
-    margin-left: -4em;
+    /* border-right: 1px solid #ddd; */
+    padding: 0 1.5em 0 0;
+    /* margin-right: .5em; */
+    margin-left: -3.7em;
     width: 2.2em;
-    color: #999;
+    color: #555;
     text-align: right;
+}
+
+table {
+    overflow-x: auto;
+}
+
+div.overflowContainer {
+    overflow-x: auto;
 }
 
 td {
@@ -98,7 +132,7 @@ article {
     box-shadow: 1px 1px 5px #555;
     position: relative;
     z-index: 1;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 a, a:visited{
@@ -219,7 +253,7 @@ body {
         width: 100vw;
         max-width: 100%;
         margin: 0px 0px 0px 0px;
-        overflow-x: auto;
+        /* overflow-x: auto; */
         padding: 16px 36px 32px 36px;
     }
     body {

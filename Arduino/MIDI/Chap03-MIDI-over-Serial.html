@@ -256,8 +256,16 @@
   status byte (header) that was sent, and then compare every following status byte to this header. If it's the same status,
   send the data bytes only, otherwise, send the new status byte, and remember this header.
   <br>To remember the previous header, a <code>static</code> variable is used. Static variables are not destroyed when they go
-  out of scope, so the value is retained the next time the <code>sendMIDI</code> function is executed.
-  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
+  out of scope, so the value is retained the next time the <code>sendMIDIHeader</code> function is executed.
+  
+  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDIHeader</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">header</font><font color="#000000">)</font> <font color="#000000">{</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">header</font> <font color="#434f54">!=</font> <font color="#000000">runningHeader</font><font color="#000000">)</font> <font color="#000000">{</font>               <font color="#434f54">// If the new header is different from the previous</font>
+    <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">header</font><font color="#000000">)</font><font color="#000000">;</font>                      <font color="#434f54">// Send the status byte over Serial</font>
+    <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">header</font><font color="#000000">;</font>                    <font color="#434f54">// Remember the new header</font>
+  <font color="#000000">}</font>
+<font color="#000000">}</font></code></pre>
+<pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>                                   <font color="#434f54">// Decrement the channel, because MIDI channel 1</font>
                                                <font color="#434f54">// corresponds to binary channel 0</font>
   <font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font> <font color="#434f54">=</font> <font color="#000000">messageType</font> <font color="#434f54">|</font> <font color="#000000">channel</font><font color="#000000">;</font>  <font color="#434f54">// Combine the messageType (high nibble)</font>
@@ -268,15 +276,10 @@
   <font color="#000000">data1</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>                    <font color="#434f54">// Clear the most significant bit of the data bytes</font>
   <font color="#000000">data2</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>
 
-  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">runningHeader</font><font color="#000000">;</font>
-  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">statusByte</font> <font color="#434f54">!=</font> <font color="#000000">runningHeader</font><font color="#000000">)</font> <font color="#000000">{</font>           <font color="#434f54">// If the new header is different from the previous</font>
-    <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>                  <font color="#434f54">// Send the status byte over Serial</font>
-    <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">statusByte</font><font color="#000000">;</font>                <font color="#434f54">// Remember the new header</font>
-  <font color="#000000">}</font>
+  <font color="#d35400">sendMIDIHeader</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>                  <font color="#434f54">// Send the header over Serial, using running status</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data1</font><font color="#000000">)</font><font color="#000000">;</font>                         <font color="#434f54">// Send the data bytes over Serial</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data2</font><font color="#000000">)</font><font color="#000000">;</font>
-<font color="#000000">}</font></code></pre>
-  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data</font><font color="#000000">)</font> <font color="#000000">{</font>
+<font color="#000000">}</font></code></pre><pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>                                   <font color="#434f54">// Decrement the channel, because MIDI channel 1</font>
                                                <font color="#434f54">// corresponds to binary channel 0</font>
   <font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font> <font color="#434f54">=</font> <font color="#000000">messageType</font> <font color="#434f54">|</font> <font color="#000000">channel</font><font color="#000000">;</font>  <font color="#434f54">// Combine the messageType (high nibble)</font>
@@ -286,13 +289,11 @@
   <font color="#000000">statusByte</font> <font color="#434f54">|=</font> <font color="#000000">0b10000000</font><font color="#000000">;</font>                    <font color="#434f54">// Set the most significant bit of the status byte</font>
   <font color="#000000">data</font>       <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>                    <font color="#434f54">// Clear the most significant bit of the data byte</font>
 
-  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">runningHeader</font><font color="#000000">;</font>
-  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">statusByte</font> <font color="#434f54">!=</font> <font color="#000000">runningHeader</font><font color="#000000">)</font> <font color="#000000">{</font>           <font color="#434f54">// If the new header is different from the previous</font>
-    <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>                  <font color="#434f54">// Send over Serial</font>
-    <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">statusByte</font><font color="#000000">;</font>                <font color="#434f54">// Remember the new header</font>
-  <font color="#000000">}</font>
+  <font color="#d35400">sendMIDIHeader</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>                  <font color="#434f54">// Send the header over Serial, using running status</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data</font><font color="#000000">)</font><font color="#000000">;</font>                          <font color="#434f54">// Send the data byte over Serial</font>
-<font color="#000000">}</font></code></pre> Going even further, we can replace note off events by note on events with a
+<font color="#000000">}</font></code></pre>
+  
+  Going even further, we can replace note off events by note on events with a
   velocity of zero:
   <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">messageType</font> <font color="#434f54">==</font> <font color="#00979c">NOTE_OFF</font><font color="#000000">)</font> <font color="#000000">{</font>               <font color="#434f54">// Replace note off messages</font>
@@ -309,43 +310,91 @@
   <font color="#000000">data1</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>                    <font color="#434f54">// Clear the most significant bit of the data bytes</font>
   <font color="#000000">data2</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>
 
-  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">runningHeader</font><font color="#000000">;</font>
-  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">statusByte</font> <font color="#434f54">!=</font> <font color="#000000">runningHeader</font><font color="#000000">)</font> <font color="#000000">{</font>           <font color="#434f54">// If the new header is different from the previous</font>
-    <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>                  <font color="#434f54">// Send the status byte over Serial</font>
-    <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">statusByte</font><font color="#000000">;</font>                <font color="#434f54">// Remember the new header</font>
-  <font color="#000000">}</font>
+  <font color="#d35400">sendMIDIHeader</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>                  <font color="#434f54">// Send the header over Serial, using running status</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data1</font><font color="#000000">)</font><font color="#000000">;</font>                         <font color="#434f54">// Send the data bytes over Serial</font>
   <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data2</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#000000">}</font></code></pre> To ensure that the receiver will know what to do with the data, even if it
   missed the first header byte, it is a good idea to send a header byte regularly. This can be done by remembering the time the last
   header was sent:
-  <pre><code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font>
-  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">messageType</font> <font color="#434f54">==</font> <font color="#00979c">NOTE_OFF</font><font color="#000000">)</font> <font color="#000000">{</font>               <font color="#434f54">// Replace note off messages</font>
-    <font color="#000000">messageType</font> <font color="#434f54">=</font> <font color="#00979c">NOTE_ON</font><font color="#000000">;</font>                     <font color="#434f54">// with a note on message</font>
-    <font color="#000000">data2</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>                                 <font color="#434f54">// with a velocity of zero.</font>
-  <font color="#000000">}</font>
-  <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>                                   <font color="#434f54">// Decrement the channel, because MIDI channel 1</font>
-                                               <font color="#434f54">// corresponds to binary channel 0</font>
-  <font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font> <font color="#434f54">=</font> <font color="#000000">messageType</font> <font color="#434f54">|</font> <font color="#000000">channel</font><font color="#000000">;</font>  <font color="#434f54">// Combine the messageType (high nibble)</font>
-                                               <font color="#434f54">// with the channel (low nibble)</font>
-                                               <font color="#434f54">// Both the message type and the channel</font>
-                                               <font color="#434f54">// should be 4 bits wide</font>
-  <font color="#000000">statusByte</font> <font color="#434f54">|=</font> <font color="#000000">0b10000000</font><font color="#000000">;</font>                    <font color="#434f54">// Set the most significant bit of the status byte</font>
-  <font color="#000000">data1</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>                    <font color="#434f54">// Clear the most significant bit of the data bytes</font>
-  <font color="#000000">data2</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>
+  <pre><code><font color="#00979c">const</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">headerResendTime</font> <font color="#434f54">=</font> <font color="#000000">1000</font><font color="#000000">;</font>   <font color="#434f54">// send a new header every second</font>
 
+<font color="#00979c">void</font> <font color="#d35400">sendMIDIHeader</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">header</font><font color="#000000">)</font> <font color="#000000">{</font>
   <font color="#00979c">static</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">lastHeaderTime</font> <font color="#434f54">=</font> <font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
-  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">runningHeader</font><font color="#000000">;</font>          
-  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">statusByte</font> <font color="#434f54">!=</font> <font color="#000000">runningHeader</font>              <font color="#434f54">// If the new header is different from the previous</font>
-    <font color="#434f54">||</font> <font color="#000000">(</font><font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#434f54">-</font> <font color="#000000">lastHeaderTime</font><font color="#000000">)</font> <font color="#434f54">&gt;</font> <font color="#000000">1000</font><font color="#000000">)</font> <font color="#000000">{</font>   <font color="#434f54">// Or if the last header was sent more than 1 s ago</font>
-    <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>                  <font color="#434f54">// Send the status byte over Serial</font>
-    <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">statusByte</font><font color="#000000">;</font>                <font color="#434f54">// Remember the new header</font>
+  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>          
+  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">header</font> <font color="#434f54">!=</font> <font color="#000000">runningHeader</font>                  <font color="#434f54">// If the new header is different from the previous</font>
+    <font color="#434f54">||</font> <font color="#000000">(</font><font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#434f54">-</font> <font color="#000000">lastHeaderTime</font><font color="#000000">)</font>
+    <font color="#434f54">&gt;</font> <font color="#000000">headerResendTime</font><font color="#000000">)</font> <font color="#000000">{</font>                      <font color="#434f54">// Or if the last header was sent more than 1 s ago</font>
+    <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">header</font><font color="#000000">)</font><font color="#000000">;</font>                      <font color="#434f54">// Send the status byte over Serial</font>
+    <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">header</font><font color="#000000">;</font>                    <font color="#434f54">// Remember the new header</font>
     <font color="#000000">lastHeaderTime</font> <font color="#434f54">=</font> <font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font>
   <font color="#000000">}</font>
-  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data1</font><font color="#000000">)</font><font color="#000000">;</font>                         <font color="#434f54">// Send the data bytes over Serial</font>
-  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data2</font><font color="#000000">)</font><font color="#000000">;</font>
 <font color="#000000">}</font></code></pre>
 </div>
+
+<hr>
+<h3><a name="finished-code" href="#finished-code">Finished code</a></h3>
+<div>You can now put these functions in a separate file, so that you can use it in all of your sketches. Save it as <code>sendMIDI.h</code>, you'll need it in the following chapters.
+</div>
+<pre class="lineNumbers"><code><font color="#5e6d03">#ifndef</font> <font color="#000000">sendMIDI_h_</font></code>
+<code><font color="#5e6d03">#define</font> <font color="#000000">sendMIDI_h_</font></code>
+<code></code>
+<code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">NOTE_OFF</font> <font color="#434f54">=</font> <font color="#000000">0x80</font><font color="#000000">;</font></code>
+<code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">NOTE_ON</font> <font color="#434f54">=</font> <font color="#000000">0x90</font><font color="#000000">;</font></code>
+<code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">KEY_PRESSURE</font> <font color="#434f54">=</font> <font color="#000000">0xA0</font><font color="#000000">;</font></code>
+<code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">CC</font> <font color="#434f54">=</font> <font color="#000000">0xB0</font><font color="#000000">;</font></code>
+<code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">PROGRAM_CHANGE</font> <font color="#434f54">=</font> <font color="#000000">0xC0</font><font color="#000000">;</font></code>
+<code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">CHANNEL_PRESSURE</font> <font color="#434f54">=</font> <font color="#000000">0xD0</font><font color="#000000">;</font></code>
+<code><font color="#00979c">const</font> <font color="#00979c">uint8_t</font> <font color="#00979c">PITCH_BEND</font> <font color="#434f54">=</font> <font color="#000000">0xE0</font><font color="#000000">;</font></code>
+<code></code>
+<code><font color="#00979c">const</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">headerResendTime</font> <font color="#434f54">=</font> <font color="#000000">1000</font><font color="#000000">;</font>   <font color="#434f54">// send a new header every second</font></code>
+<code></code>
+<code><font color="#00979c">void</font> <font color="#d35400">sendMIDIHeader</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">header</font><font color="#000000">)</font> <font color="#000000">{</font></code>
+<code>  <font color="#00979c">static</font> <font color="#00979c">unsigned</font> <font color="#00979c">long</font> <font color="#000000">lastHeaderTime</font> <font color="#434f54">=</font> <font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font></code>
+<code>  <font color="#00979c">static</font> <font color="#00979c">uint8_t</font> <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font></code>
+<code></code>
+<code>  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">header</font> <font color="#434f54">!=</font> <font color="#000000">runningHeader</font>                  <font color="#434f54">// If the new header is different from the previous</font></code>
+<code>    <font color="#434f54">||</font> <font color="#000000">(</font><font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#434f54">-</font> <font color="#000000">lastHeaderTime</font><font color="#000000">)</font></code>
+<code>    <font color="#434f54">&gt;</font> <font color="#000000">headerResendTime</font><font color="#000000">)</font> <font color="#000000">{</font>                      <font color="#434f54">// Or if the last header was sent more than 1 s ago</font></code>
+<code>    <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">header</font><font color="#000000">)</font><font color="#000000">;</font>                      <font color="#434f54">// Send the status byte over Serial</font></code>
+<code>    <font color="#000000">runningHeader</font> <font color="#434f54">=</font> <font color="#000000">header</font><font color="#000000">;</font>                    <font color="#434f54">// Remember the new header</font></code>
+<code>    <font color="#000000">lastHeaderTime</font> <font color="#434f54">=</font> <font color="#d35400">millis</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font></code>
+<code>  <font color="#000000">}</font></code>
+<code><font color="#000000">}</font></code>
+<code></code>
+<code><font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data1</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data2</font><font color="#000000">)</font> <font color="#000000">{</font></code>
+<code>  <font color="#5e6d03">if</font> <font color="#000000">(</font><font color="#000000">messageType</font> <font color="#434f54">==</font> <font color="#00979c">NOTE_OFF</font><font color="#000000">)</font> <font color="#000000">{</font>               <font color="#434f54">// Replace note off messages</font></code>
+<code>    <font color="#000000">messageType</font> <font color="#434f54">=</font> <font color="#00979c">NOTE_ON</font><font color="#000000">;</font>                     <font color="#434f54">// with a note on message</font></code>
+<code>    <font color="#000000">data2</font> <font color="#434f54">=</font> <font color="#000000">0</font><font color="#000000">;</font>                                 <font color="#434f54">// with a velocity of zero.</font></code>
+<code>  <font color="#000000">}</font></code>
+<code>  <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>                                   <font color="#434f54">// Decrement the channel, because MIDI channel 1</font></code>
+<code>                                               <font color="#434f54">// corresponds to binary channel 0</font></code>
+<code>  <font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font> <font color="#434f54">=</font> <font color="#000000">messageType</font> <font color="#434f54">|</font> <font color="#000000">channel</font><font color="#000000">;</font>  <font color="#434f54">// Combine the messageType (high nibble)</font></code>
+<code>                                               <font color="#434f54">// with the channel (low nibble)</font></code>
+<code>                                               <font color="#434f54">// Both the message type and the channel</font></code>
+<code>                                               <font color="#434f54">// should be 4 bits wide</font></code>
+<code>  <font color="#000000">statusByte</font> <font color="#434f54">|=</font> <font color="#000000">0b10000000</font><font color="#000000">;</font>                    <font color="#434f54">// Set the most significant bit of the status byte</font></code>
+<code>  <font color="#000000">data1</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>                    <font color="#434f54">// Clear the most significant bit of the data bytes</font></code>
+<code>  <font color="#000000">data2</font>      <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font></code>
+<code></code>
+<code>  <font color="#d35400">sendMIDIHeader</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>                  <font color="#434f54">// Send the header over Serial, using running status</font></code>
+<code>  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data1</font><font color="#000000">)</font><font color="#000000">;</font>                         <font color="#434f54">// Send the data bytes over Serial</font></code>
+<code>  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data2</font><font color="#000000">)</font><font color="#000000">;</font></code>
+<code><font color="#000000">}</font></code>
+<code> <font color="#00979c">void</font> <font color="#d35400">sendMIDI</font><font color="#000000">(</font><font color="#00979c">uint8_t</font> <font color="#000000">messageType</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">channel</font><font color="#434f54">,</font> <font color="#00979c">uint8_t</font> <font color="#000000">data</font><font color="#000000">)</font> <font color="#000000">{</font></code>
+<code>  <font color="#000000">channel</font><font color="#434f54">--</font><font color="#000000">;</font>                                   <font color="#434f54">// Decrement the channel, because MIDI channel 1</font></code>
+<code>                                               <font color="#434f54">// corresponds to binary channel 0</font></code>
+<code>  <font color="#00979c">uint8_t</font> <font color="#000000">statusByte</font> <font color="#434f54">=</font> <font color="#000000">messageType</font> <font color="#434f54">|</font> <font color="#000000">channel</font><font color="#000000">;</font>  <font color="#434f54">// Combine the messageType (high nibble)</font></code>
+<code>                                               <font color="#434f54">// with the channel (low nibble)</font></code>
+<code>                                               <font color="#434f54">// Both the message type and the channel</font></code>
+<code>                                               <font color="#434f54">// should be 4 bits wide</font></code>
+<code>  <font color="#000000">statusByte</font> <font color="#434f54">|=</font> <font color="#000000">0b10000000</font><font color="#000000">;</font>                    <font color="#434f54">// Set the most significant bit of the status byte</font></code>
+<code>  <font color="#000000">data</font>       <font color="#434f54">&amp;=</font> <font color="#000000">0b01111111</font><font color="#000000">;</font>                    <font color="#434f54">// Clear the most significant bit of the data byte</font></code>
+<code></code>
+<code>  <font color="#d35400">sendMIDIHeader</font><font color="#000000">(</font><font color="#000000">statusByte</font><font color="#000000">)</font><font color="#000000">;</font>                  <font color="#434f54">// Send the header over Serial, using running status</font></code>
+<code>  <b><font color="#d35400">Serial</font></b><font color="#434f54">.</font><font color="#d35400">write</font><font color="#000000">(</font><font color="#000000">data</font><font color="#000000">)</font><font color="#000000">;</font>                          <font color="#434f54">// Send the data byte over Serial</font></code>
+<code><font color="#000000">}</font></code>
+<code></code>
+<code><font color="#5e6d03">#endif</font></code></pre>
 <hr>
             <div class="back"><a href="Chap02-MIDI-Hardware.html">← Previous chapter</a></div>
             <div class="next"><a href="Chap04-MIDI-Controller.html">Next chapter →</a></div>
