@@ -27,19 +27,28 @@
     <textarea id="input" oninput="format();"></textarea>
     
     <h3>BB formatted code</h3>
-    <button onclick="copy()">Copy formatted code</button>
+    <button onclick="copy()" id="button">Copy formatted code</button>
     <textarea id="output" readonly></textarea>
     </div>
     </article>
     
     <script>
+    let input = document.getElementById("input");
+    let output = document.getElementById("output");
+    let button = document.getElementById("button");
+
     function copy() {
-        let copyText = document.getElementById("output");
+        let copyText = output;
         copyText.select();
-        document.execCommand("Copy");
+        if(document.execCommand("Copy")) {
+            button.textContent = "Copied!"
+            setTimeout(function() {
+                button.textContent = "Copy formatted code";
+            }, 1000);
+        }
     }
     function format() {
-        let content = document.getElementById("input").value;
+        let content = input.value;
 
         content = content.replace(
             /<pre>(\r\n|\n)*/g,
@@ -53,10 +62,9 @@
         content = content.replace(
             /<(\/?[bu])>/g,
             '[$1]');
-        console.log(content);
         content = decodeEntities(content);
-        console.log(content);
-        document.getElementById("output").value = content;
+        output.value = content;
+        button.textContent = "Copy formatted code"
     }
     
     var decodeEntities = (function() { // https://stackoverflow.com/questions/5796718/html-entity-decode
