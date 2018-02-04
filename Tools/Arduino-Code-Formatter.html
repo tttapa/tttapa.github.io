@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="author" content="Pieter P">
+        <link rel="stylesheet" type="text/css" href="/CSS/code-formatter.css">
+        <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+        <meta name="theme-color" content="#ccc">
+        <title>Arduino Forum Code Formatter</title>
+    </head>
+    <body>
+    <style>
+    body {
+        background-color: #ddd;
+        margin: 0px;
+        padding: 16px 0px 48px 0px;
+        font-family: 'Roboto', sans-serif;
+        color: #111;
+        box-sizing: border-box;
+    }
+    article {
+        box-sizing: border-box;
+        background-color: #fff;
+        padding: 3em;
+        width: 70%;
+        max-width: 1080px;
+        box-shadow: 1px 1px 5px #555;
+        position: relative;
+        z-index: 1;
+        margin: 0px auto;
+    }
+    html, body, article {
+        height: 100%;
+    }
+    h1 {
+        font-size: 2.5em;
+        margin-bottom:0;
+    }
+    article {
+        display: flex;
+        flex-direction: column;
+        padding: 2em;
+        box-sizing: border-box;
+    }
+    div.container {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+    }
+    textarea {
+        width: 100%;
+        flex-grow: 1;
+        box-sizing: border-box;
+    }
+    
+    </style>
+    <article>
+    <h1>Arduino Forum Code Formatter</h1>
+    <i style="font-size:0.9em;color:#888;margin-bottom:1em;display:block">Pieter P</i>
+
+    <div>
+        <ol>
+            <li>Select the code in the Arduino IDE</li>
+            <li>Right click the selection, and choose "Copy as HTML"</li>
+            <li>Paste the code here</li>
+            <li>Click "Copy formatted code" to copy the BB-formatted code</li>
+            <li>Paste it on the Arduino forum</li>
+        </ol>
+    </div>
+    <div class="container">
+    <h3>HTML code</h3>
+    <textarea id="input" oninput="format();"></textarea>
+    
+    <h3>BB formatted code</h3>
+    <button onclick="copy()">Copy formatted code</button>
+    <textarea id="output" readonly></textarea>
+    </div>
+    </article>
+    
+    <script>
+    function copy() {
+        let copyText = document.getElementById("output");
+        copyText.select();
+        document.execCommand("Copy");
+    }
+    function format() {
+        let content = document.getElementById("input").value;
+
+        content = content.replace(
+            /<pre>(\r\n|\n)*/g,
+            '[table][tr][td][tt]Code:[hr][/td][/tr][tr][td][tt]');
+        content = content.replace(
+            /(\r\n|\n)*<\/pre>/g, 
+            '[/tt][/td][/tr][/table]');
+        content = content.replace(
+            /<font +color="(#[0-9A-Fa-f]{6})">((?:(?!<\/font>).)*)<\/font>/g,
+            '[color=$1]$2[/color]');
+        content = content.replace(
+            /<(\/?[bu])>/g,
+            '[$1]');
+        console.log(content);
+        content = decodeEntities(content);
+        console.log(content);
+        document.getElementById("output").value = content;
+    }
+    
+    var decodeEntities = (function() { // https://stackoverflow.com/questions/5796718/html-entity-decode
+        // this prevents any overhead from creating the object each time
+        var element = document.createElement('div');
+
+        function decodeHTMLEntities (str) {
+            if(str && typeof str === 'string') {
+            // strip script/html tags
+                str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+                str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+                element.innerHTML = str;
+                str = element.textContent;
+                element.textContent = '';
+            }
+            return str;
+        }
+        return decodeHTMLEntities;
+    })();
+
+    </script>
+
+    </body>
+</html>
