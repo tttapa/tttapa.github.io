@@ -39,7 +39,7 @@
                 <tr><td>Title: </td>
                 <td><input id="title" placeholder="Title" oninput="format();"></td></tr>
                 <tr><td>Author: </td>
-                <td><input id="author" placeholder="Author" oninput="format();"></td></tr>
+                <td><input id="author" placeholder="Author" oninput="format();saveAuthor();"></td></tr>
             </table>
         </div>
         <div class="container">
@@ -248,6 +248,17 @@
                 heading += `<i class="subtitle">${author}</i>\r\n`;
             return heading;
         }
+
+        function saveAuthor() {
+            let author = document.getElementById("author").value;
+            localStorage.setItem('Arduino-Code-Printer:author', author);
+        }
+        function getAuthor() {
+            let author = localStorage.getItem('Arduino-Code-Printer:author');
+            if (author)
+                document.getElementById("author").value = author;
+        }
+        getAuthor();
 
         let printWindow;
         function print() {
