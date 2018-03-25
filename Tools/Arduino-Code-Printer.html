@@ -30,12 +30,17 @@
                 <li>Add three asterisks before the lines you want to emphasize</li>
                 <li>Check the box below</li>
             </ol>
-            <input type="checkbox" id="emphasize" onchange="format();">
-            <label for="emphasize">Emphasize</label>
-            <br> Title:&emsp;
-            <input id="title" placeholder="Title" oninput="format();">
-            <br> Author:&emsp;
-            <input id="author" placeholder="Author" oninput="format();">
+            <h4>Add page breaks</h4>
+            You can add a page break after a line by adding three dashes (---) at the end of the line.
+            <h4>Settings</h4>
+            <table>
+                <tr><td><label for="emphasize">Emphasize: </label></td>
+                <td><input type="checkbox" id="emphasize" onchange="format();"></td></tr>
+                <tr><td>Title: </td>
+                <td><input id="title" placeholder="Title" oninput="format();"></td></tr>
+                <tr><td>Author: </td>
+                <td><input id="author" placeholder="Author" oninput="format();"></td></tr>
+            </table>
         </div>
         <div class="container">
             <h3>Raw HTML code</h3>
@@ -58,6 +63,11 @@
             max-height: 30vh;
             overflow: auto;
         }
+        code.pagebreak {
+            display: block !important;
+            border-bottom: #888 1px solid;
+            margin-bottom: 1em;
+        }
     </style>
 
 <style id="lineNumbers">
@@ -75,9 +85,6 @@
 
     pre.lineNumbers>code {
         display: inline;
-        padding: 0;
-        border: none;
-        margin: 0;
     }
 
     pre.lineNumbers>code:before {
@@ -107,9 +114,6 @@
 
     pre.lineNumbersEmphasis>code {
         display: inline;
-        padding: 0;
-        border: none;
-        margin: 0;
     }
 
     pre.lineNumbersEmphasis>code {
@@ -210,12 +214,12 @@
                     : '<code>');
             
             content = content.replace(
-                /<code>---+/g,
-                '<code class="pagebreak">');
+                /<code>(.*)---\s*<\/code>/g,
+                '<code class="pagebreak">$1</code>');
 
             content = content.replace(
-                /<code (class="[^"]*)">---+/g,
-                '<code $1 pagebreak">');
+                /<code (class="[^"]*)">(.*)---\s*<\/code>/g,
+                '<code $1 pagebreak">$2</code>');
 
             content = content.replace(
                 /&nbsp;/g,
