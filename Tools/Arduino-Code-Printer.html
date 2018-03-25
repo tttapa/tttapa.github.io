@@ -139,6 +139,23 @@
         }
 </style>
 
+<style id="general">
+    body {
+        font-family: sans-serif;
+    }
+    i.subtitle {
+        color: #888;
+        margin-bottom: 1.5em;
+        display: block;
+    }
+    @media print {
+        code.pagebreak {
+            page-break-after: always;
+            display: block !important;
+        }
+    }
+</style>
+
     <script>
         let input = document.getElementById("input");
         let output = document.getElementById("output");
@@ -147,14 +164,18 @@
 
         let lnstyle = document.getElementById("lineNumbers").outerHTML;
         let lnestyle = document.getElementById("lineNumbersEmphasis").outerHTML;
+        let generalstyle =  document.getElementById("general").outerHTML;
 
         function copy() {
             output.select();
-            if (document.execCommand("Copy")) {
-                button.textContent = "Copied!"
-                setTimeout(function () {
+            try {
+                document.execCommand("Copy");
+                button.textContent = "Copied!";
+                window.setTimeout(function () {
                     button.textContent = "Copy HTML code";
                 }, 2000);
+            } catch(e) {
+                console.error("Unable to copy", e);
             }
         }
 
@@ -187,15 +208,29 @@
                 emphasize ?
                     '<code class="emphasis">'
                     : '<code>');
+            
+            content = content.replace(
+                /<code>---+/g,
+                '<code class="pagebreak">');
+
+            content = content.replace(
+                /<code (class="[^"]*)">---+/g,
+                '<code $1 pagebreak">');
 
             content = content.replace(
                 /&nbsp;/g,
                 ' '
             )
-
-            output.value = (emphasize ? lnestyle : lnstyle) + "\r\n\r\n" + getHeading() + "\r\n" + content;
+            let heading = getHeading();
+            output.value = (emphasize ? lnestyle : lnstyle) + "\r\n" 
+                + generalstyle + "\r\n\r\n" 
+                + heading + "\r\n" 
+                + content;
             button.textContent = "Copy HTML code";
-            result.innerHTML = getHeading() + "\r\n" + content;
+            result.innerHTML = heading + "\r\n" 
+                + content;
+            if (printWindow)
+                printWindow.close();
         }
 
         function getHeading() {
@@ -205,7 +240,7 @@
             if (title !== "")
                 heading += `<h1>${title}</h1>\r\n`;
             if (author !== "")
-                heading += `<i style="color:#888;margin-bottom:1.5em;display:block">${author}</i>\r\n`;
+                heading += `<i class="subtitle">${author}</i>\r\n`;
             return heading;
         }
 
@@ -223,7 +258,7 @@
     <meta name="theme-color" content="#ccc">
     <title>${title}</title>
 </head>
-<body style="font-family: sans-serif;">\r\n`
+<body>\r\n`
 
             printWindow = window.open("", "print", "");
             printWindow.document.open();
