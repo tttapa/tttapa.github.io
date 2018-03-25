@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Arduino-Forum-Code-Formatter.css">
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="theme-color" content="#ccc">
+    <title>Code Printer</title>
+</head>
+
+<body>
+    <article>
+        <h1>Arduino Code Printer</h1>
+        <i style="font-size:0.9em;color:#888;margin-bottom:1em;display:block">Pieter P</i>
+        <div>
+            This is a simple tool for printing Arduino code with line numbers and syntax highlighting.</a>.
+            <ol>
+                <li>Select the code in the Arduino IDE</li>
+                <li>Right click the selection, and choose "Copy as HTML"</li>
+                <li>Paste the code here</li>
+                <li>Emphasise some lines if you want to (see below)</li>
+                <li>Either copy the raw html, or copy the result and paste it in a text editor</li>
+            </ol>
+            <h4>Emphasise code</h4>
+            You can use this tool to emphasise certain lines. Other lines will be grayed out.
+            <ol>
+                <li>Add three asterisks before the lines you want to emphasise</li>
+                <li>Check the box below</li>
+            </ol>
+            <input type="checkbox" id="emphasize" onchange="format();">
+            <label for="emphasize">Emphasize</label>
+            <br> Title:&emsp;
+            <input id="title" placeholder="Title" oninput="format();">
+            <br> Author:&emsp;
+            <input id="author" placeholder="Author" oninput="format();">
+        </div>
+        <div class="container">
+            <h3>HTML code</h3>
+            <textarea id="input" oninput="format();"></textarea>
+
+            <h3>BB-formatted code</h3>
+            <button onclick="copy()" id="button">Copy HTML code</button>
+            <textarea id="output" readonly></textarea>
+
+            <h3>Result</h3>
+            <button onclick="print()" id="print">Print</button>
+            <div id="result">
+            </div>
+        </div>
+    </article>
+
+    <style>
+        div#result {
+            border: solid #A9A9A9 1px;
+        }
+    </style>
+
+    <style id="lineNumbers">
+        pre.lineNumbers {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            display: block;
+            padding-left: 4em;
+            counter-reset: line;
+            width: 100%;
+            box-sizing: border-box;
+            /* border: 1px solid #eee; */
+        }
+
+        pre.lineNumbers>code {
+            display: inline;
+            padding: 0;
+            border: none;
+            margin: 0;
+        }
+
+        pre.lineNumbers>code:before {
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            /* border-right: 1px solid #ddd; */
+            padding: 0 1.5em 0 0;
+            margin-left: -3.7em;
+            width: 2.2em;
+            color: #555;
+            text-align: right;
+        }
+    </style>
+    <style id="lineNumbersEmphasis">
+        pre.lineNumbersEmphasis {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            display: block;
+            padding-left: 4em;
+            counter-reset: line;
+            width: 100%;
+            box-sizing: border-box;
+            /* border: 1px solid #eee; */
+        }
+
+        pre.lineNumbersEmphasis>code {
+            display: inline;
+            padding: 0;
+            border: none;
+            margin: 0;
+        }
+
+        pre.lineNumbersEmphasis>code {
+            opacity: 0.5;
+            filter: grayscale(40%);
+        }
+
+        pre.lineNumbersEmphasis>code.emphasis {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+
+        pre.lineNumbersEmphasis>code.emphasis:before {
+            font-weight: bold;
+        }
+
+        pre.lineNumbersEmphasis>code:before {
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            /* border-right: 1px solid #ddd; */
+            padding: 0 1.5em 0 0;
+            margin-left: -3.7em;
+            width: 2.2em;
+            color: #555;
+            text-align: right;
+        }
+    </style>
+
+    <script>
+        let input = document.getElementById("input");
+        let output = document.getElementById("output");
+        let button = document.getElementById("button");
+        let result = document.getElementById("result");
+
+        let lnstyle = document.getElementById("lineNumbers").outerHTML;
+        let lnestyle = document.getElementById("lineNumbersEmphasis").outerHTML;
+
+        function copy() {
+            output.select();
+            if (document.execCommand("Copy")) {
+                button.textContent = "Copied!"
+                setTimeout(function () {
+                    button.textContent = "Copy HTML code";
+                }, 2000);
+            }
+        }
+
+        function format() {
+            let emphasize = document.getElementById("emphasize").checked;
+            console.log(emphasize);
+            let content = input.value;
+
+            if (!content.includes("<pre>"))
+                content = "<pre>" + content;
+
+            if (!content.includes("</pre>"))
+                content += "</pre>";
+
+            content = content.replace(
+                /<pre>[\r\n]*/g,
+                emphasize ?
+                    '<pre class="lineNumbersEmphasis"><code>'
+                    : '<pre class="lineNumbers"><code>');
+
+            content = content.replace(
+                /[\r\n]*<\/pre>/g,
+                '</code></pre>');
+
+            content = content.replace(
+                /([\r\n])+/g,
+                '</code>$1<code>');
+
+            content = content.replace(
+                /<code>\*\*\*+/g,
+                emphasize ?
+                    '<code class="emphasis">'
+                    : '<code>');
+
+            content = content.replace(
+                /&nbsp;/g,
+                ' '
+            )
+
+            output.value = (emphasize ? lnestyle : lnstyle) + "\r\n\r\n" + getHeading() + "\r\n" + content;
+            button.textContent = "Copy HTML code";
+            result.innerHTML = getHeading() + "\r\n" + content;
+        }
+
+        function getHeading() {
+            let title = document.getElementById("title").value;
+            let author = document.getElementById("author").value;
+            let heading = "";
+            if (title !== "")
+                heading += `<h1>${title}</h1>\r\n`;
+            if (author !== "")
+                heading += `<i style="font-size:0.9em;color:#888;margin-bottom:1em;display:block">${author}</i>\r\n`;
+            return heading;
+        }
+
+        let printWindow;
+        function print() {
+            let title = document.getElementById("title").value;
+            title = title === "" ? "Print Code" : title;
+            let htmlHead =
+                `<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Arduino-Forum-Code-Formatter.css">
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="theme-color" content="#ccc">
+    <title>${title}</title>
+</head>
+<body style="font-family: sans-serif;">\r\n`
+
+            printWindow = window.open("", "print", "");
+            printWindow.document.open();
+            printWindow.document.write(htmlHead + output.value);
+            printWindow.document.close();
+        }
+
+        window.onbeforeunload = function () {
+            if (printWindow)
+                printWindow.close();
+        }
+        format();
+    </script>
+
+</body>
+
+</html>
