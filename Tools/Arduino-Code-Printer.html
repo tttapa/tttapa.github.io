@@ -226,6 +226,10 @@
                 '<code $1 pagebreak">$2</code>');
 
             content = content.replace(
+                /<code>(?:<font[^>]*>)\s*((\/\/)|(\/\*))[^a-zA-Z]*((---)|(===)|(___))[^a-zA-Z]*(?:<\/font>)<\/code>/g,
+                '<code class="pagebreak"></code>');
+
+            content = content.replace(
                 /&nbsp;/g,
                 ' ');
             let heading = getHeading();
@@ -271,12 +275,10 @@
         }
         function saveEmphasize() {
             let emphasize = document.getElementById("emphasize").checked.toString();
-            console.log("Save emphasize", emphasize);
             localStorage.setItem('Arduino-Code-Printer:emphasize', emphasize);
         }
         function getEmphasize() {
             let emphasize = localStorage.getItem('Arduino-Code-Printer:emphasize') == 'true';
-            console.log("Get emphasize", emphasize);
             if (emphasize)
                 document.getElementById("emphasize").checked = emphasize;
         }
