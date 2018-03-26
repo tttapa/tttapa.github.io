@@ -35,16 +35,16 @@
             <h4>Settings</h4>
             <table>
                 <tr><td><label for="emphasize">Emphasize: </label></td>
-                <td><input type="checkbox" id="emphasize" onchange="format();"></td></tr>
+                <td><input type="checkbox" id="emphasize" onchange="format();saveEmphasize();"></td></tr>
                 <tr><td>Title: </td>
-                <td><input id="title" placeholder="Title" oninput="format();"></td></tr>
+                <td><input id="title" placeholder="Title" oninput="format();saveTitle();"></td></tr>
                 <tr><td>Author: </td>
                 <td><input id="author" placeholder="Author" oninput="format();saveAuthor();"></td></tr>
             </table>
         </div>
         <div class="container">
             <h3>Raw HTML code</h3>
-            <textarea id="input" oninput="format();"></textarea>
+            <textarea id="input" oninput="format();saveInput();"></textarea>
 
             <h3>Formatted HTML code</h3>
             <button onclick="copy()" id="button">Copy HTML code</button>
@@ -260,7 +260,39 @@
             if (author)
                 document.getElementById("author").value = author;
         }
+        function saveTitle() {
+            let title = document.getElementById("title").value;
+            localStorage.setItem('Arduino-Code-Printer:title', title);
+        }
+        function getTitle() {
+            let title = localStorage.getItem('Arduino-Code-Printer:title');
+            if (title)
+                document.getElementById("title").value = title;
+        }
+        function saveEmphasize() {
+            let emphasize = document.getElementById("emphasize").checked.toString();
+            console.log("Save emphasize", emphasize);
+            localStorage.setItem('Arduino-Code-Printer:emphasize', emphasize);
+        }
+        function getEmphasize() {
+            let emphasize = localStorage.getItem('Arduino-Code-Printer:emphasize') == 'true';
+            console.log("Get emphasize", emphasize);
+            if (emphasize)
+                document.getElementById("emphasize").checked = emphasize;
+        }
+        function saveInput() {
+            let input = document.getElementById("input").value;
+            localStorage.setItem('Arduino-Code-Printer:input', input);
+        }
+        function getInput() {
+            let input = localStorage.getItem('Arduino-Code-Printer:input');
+            if (input)
+                document.getElementById("input").value = input;
+        }
+        getEmphasize();
+        getTitle();
         getAuthor();
+        getInput();
 
         let printWindow;
         function print() {
