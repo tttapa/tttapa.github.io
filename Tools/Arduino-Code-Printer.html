@@ -31,7 +31,8 @@
                 <li>Check the box below</li>
             </ol>
             <h4>Add page breaks</h4>
-            You can add a page break after a line by adding three dashes (---) at the end of the line.
+            You can add a page break after a line by adding three dashes (---) at the end of the line.<br>
+            By default, lines of code that only contain comments with lines (<code>//---</code> or <code>//===</code> or <code>//___</code>) will be replaced by page breaks as well.
             <h4>Settings</h4>
             <table>
                 <tr><td><label for="emphasize">Emphasize: </label></td>
@@ -245,7 +246,7 @@
                 '<code $1 pagebreak">$2</code>');
 
             content = content.replace(
-                /<code>(?:<font[^>]*>)\s*((\/\/)|(\/\*))[^a-zA-Z]*((---)|(===)|(___))[^a-zA-Z]*(?:<\/font>)<\/code>/g,
+                /<code>(?:<font[^>]*>)\s*((\/\/)|(\/\*))[^a-zA-Z]*[-=_]{3,}[^a-zA-Z]*(?:<\/font>)<\/code>/g,
                 '<code class="pagebreak"></code>');
 
             content = content.replace(
