@@ -1,0 +1,27 @@
+var classMIDI__Input__Element =
+[
+    [ "MIDI_Input_Element", "classMIDI__Input__Element.html#a29d1e2dcc7af3ed0ec6332a2fa4a56aa", null ],
+    [ "display", "classMIDI__Input__Element.html#a0b01baba66fd4bc4a063cfc202c0f67e", null ],
+    [ "map", "classMIDI__Input__Element.html#a64f8601e7fce45f71750ff4cccd2e772", null ],
+    [ "match", "classMIDI__Input__Element.html#a562777c4f68767541bc927259d3a75b8", null ],
+    [ "matchAddress", "classMIDI__Input__Element.html#a32a5c20257b2c0aa3a0dcb5c893e38d3", null ],
+    [ "matchChannel", "classMIDI__Input__Element.html#a4c0d078ca3b8fa4c4f1fcadbce98d9f9", null ],
+    [ "moveDown", "classMIDI__Input__Element.html#a7ee336d7d5623e0b883f85492d1eda60", null ],
+    [ "refresh", "classMIDI__Input__Element.html#a56a10a660c4467c72e7003845e37a4d8", null ],
+    [ "reset", "classMIDI__Input__Element.html#a898498c1d146b492930c7c04237bfa9f", null ],
+    [ "setAddressOffset", "classMIDI__Input__Element.html#a85af7e3ae11e30e3a71ea61acef7aaa9", null ],
+    [ "setChannelOffset", "classMIDI__Input__Element.html#a932a468397187f9a0d96162c09688a8a", null ],
+    [ "settracksPerBank", "classMIDI__Input__Element.html#a39d1d90ae6e0fc5a4ef247b71129954e", null ],
+    [ "update", "classMIDI__Input__Element.html#a1cb025a503fac955747d86393888e881", null ],
+    [ "updateImpl", "classMIDI__Input__Element.html#a5758e3bbaef34ed97292215f40899ac4", null ],
+    [ "LinkedList::append", "classMIDI__Input__Element.html#a8b43a60cb516dcfce4e907a80b99bb3b", null ],
+    [ "LinkedList::moveDown", "classMIDI__Input__Element.html#a54ee271be70b5d69eff4dc38bdbbb6a8", null ],
+    [ "LinkedList::remove", "classMIDI__Input__Element.html#acfb71872cb2e4cc5479ec319ddf2d288", null ],
+    [ "address", "classMIDI__Input__Element.html#a9695c45ad07502e06378cd5b7a9fcd1d", null ],
+    [ "addressOffset", "classMIDI__Input__Element.html#ad707a5bc7271234a21c82beebea3a7d5", null ],
+    [ "channel", "classMIDI__Input__Element.html#a6837331641a01cd58175e356fa45b737", null ],
+    [ "channelOffset", "classMIDI__Input__Element.html#adc8a6595f4cf5342bcdc1669950ae080", null ],
+    [ "nb_addresses", "classMIDI__Input__Element.html#aba23bd36f50a8b0c53b12c850794b1a8", null ],
+    [ "nb_channels", "classMIDI__Input__Element.html#ab5838399ece5c389820c26b390eb5d27", null ],
+    [ "tracksPerBank", "classMIDI__Input__Element.html#a33920585a8a5f296becda59e42b41660", null ]
+];
