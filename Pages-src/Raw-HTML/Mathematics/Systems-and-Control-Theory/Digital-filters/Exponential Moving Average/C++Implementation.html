@@ -1,0 +1,52 @@
+<!--
+@title: C++ Implementation
+@author: Pieter P
+@keywords: EMA, Exponential Moving Average, IIR filter, filters, DSP, C++, implementation, algorithm
+@description: Digital exponential moving average filters explained, as well as an implementation in C++, and simulation in MATLAB.
+-->
+<html>
+
+<h2>Dividing by 2</h2>
+<p>
+    To get an efficient implementation, we can minimize the number of multiplications needed by rewriting the difference equation:
+ $$ \begin{split}
+    y[n] &amp;= \alpha x[n] + (1-\alpha) y[n-1] \\
+    y[n] &amp;= y[n-1] + \alpha (x[n] - y[n-1]) 
+    \end{split} $$
+    We now have to calculate two sums and one multiplication by a number between 0 and 1.
+    Floating point numbers are relatively inefficient on integrated systems, so we'll replace
+    the multiplication by a division by \(1/\alpha\), which is a positive integer.<br>
+    Going even further, we can pick value for \(\alpha\) in such a way that \(1/\alpha = 2^n, n \in \mathbb{N}\).
+    Division is pretty expensive, but by using powers of 2, it can be replaced by a very fast right bitshift:
+ $$ \alpha x = \frac{x}{2^n} = x \gg n $$
+</p>
+<h2>Fixed-point arithmetic</h2>
+<p>
+    As mentioned before, it's not a great idea to use floating point numbers. 
+    An alternative is to use integers, and interpret them as fixed-point numbers.<br>
+    For example, you could decide to place the radix point between bits 3 and 4.
+    In that case, you would interpret the number 0b00001001 (9 in decimal) as 0b0000.1001 = 1/2 + 1/16 = 0.5625.
+</p>
+<p>
+    To convert a normal integer to the fixed-point format, you can just bitshift it to the left.<br>
+    To convert a fixed-point value back to an integer, one half is added to the number, in order to round it,
+    and finally, it is bitshifted to the right again.
+</p>
+<p>
+    For example, let's use 3 fractional places to calculate 25 / 40.
+ $$ \begin{split}
+    &amp; 25 = 0b00011001 → 25 \ll 3 = 0b11001.000 = 200 \\
+    &amp; 200 / 40 = 5 = 0b00000101 = 0.625 \\
+    &amp;→ 0b00000.101 = 0.5 + 0.125 = 0.625 = 25 / 40
+    \end{split} $$
+    Rounding the result:
+ $$ \begin{split}
+    &amp;0.625 + 0.5 = 0b00000.101 + 0b00000.100 = 0b00001.001 \\
+    &amp;→ 0b00001001 \gg 3 = 0b00000001 = 1
+    \end{split} $$
+</p>
+<p>
+    TODO
+</p>
+
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="author" content="Pieter P"/>
+        <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+        <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
+        <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
+        <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+        <meta name="theme-color" content="#ccc"/>
+        <meta name="keywords" content="Eclipse,Java,Ubuntu,Installation"/>
+        <meta name="description" content="Installation instructions for the Eclipse IDE on Ubuntu."/>
+        <title>Eclipse</title>
+    </head>
+    <body>
+        <nav>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                    <path d="M0 0h48v48h-48z" fill="none"/>
+                    <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+                </svg>
+                <h2><a href="/">Home</a></h2>
+<ul>
+  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino">Arduino</a>
+  <ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/Bootloaders">Bootloaders</a>
+    <ul>
+      <li><span class="ftriangle"></span><a href="/Pages/Arduino/Bootloaders/ATmega328P-custom-frequency.html">Optiboot - ATmega328P at custom frequency</a></li>
+    </ul>
+    </li>
+  </ul>
+  </li>
+  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics">Mathematics</a>
+  <ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory">Systems and Control Theory</a>
+    <ul>
+      <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters">Digital filters</a>
+      <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average">Exponential Moving Average</a>
+        <ul>
+          <li><span class="ftriangle"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+          <li><span class="ftriangle"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+        </ul>
+        </li>
+      </ul>
+      </li>
+    </ul>
+    </li>
+  </ul>
+  </li>
+  <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu">Ubuntu</a>
+  <ul>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu/Software-Installation">Software Installation</a>
+    <ul>
+      <li><span class="ftriangle"></span><a class="openEntry" href="/Pages/Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+      <li><span class="ftriangle"></span><a href="/Pages/Ubuntu/Software-Installation/Java.html">Java</a></li>
+    </ul>
+    </li>
+  </ul>
+  </li>
+</ul>
+
+                <a href="https://github.com/tttapa/tttapa.github.io/issues" title="Comment or open an issue">Comment or open an issue</a>
+            </div>
+        </nav>
+        <article>
+            <h1 class="title">Eclipse</h1>
+            <i class="author">Pieter P</i>
+            <div>
+<p>This is an installation guide for the Eclipse IDE on Ubuntu.</p>
+<h3><a name="install-java" href="#install-java">Install Java</a></h3>
+<div>The first step is to install the Oracle Java platform. The latest version at the time of writing this is Java SE 9.0.4.</div>
+<div>
+    <a href="Java.html">How to install Java</a>
+</div>
+<h3><a name="downloading-eclipse" href="#downloading-eclipse">Downloading Eclipse</a></h3>
+<p>Go to the Eclipse website and download the IDE. I prefer to use the portable version (without the installer).</p>
+<p>The version of Eclipse that will be used in this guide is Eclipse Oxygen. It can be downloaded
+    <a href="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/oxygen/2/eclipse-java-oxygen-2-linux-gtk-x86_64.tar.gz">here</a>.</p>
+<h3><a name="extracting-and-moving-the-downloaded-files" href="#extracting-and-moving-the-downloaded-files">Extracting and moving the downloaded files</a></h3>
+<p>When Eclipse has finished downloading, open a terminal (using <code>CTRL+ALT+T</code>).</p>
+<p>First, navigate to the directory where you downloaded the file to (by default, this is <code>~/Downloads</code>):
+    <pre class="console"><code>cd ~/Downloads</code></pre>
+Move the file to <code>/tmp</code> and extract it:
+    <pre class="console"><code>mv eclipse-java-oxygen-2-linux-gtk-x86_64.tar.gz /tmp/</code>
+<code>cd /tmp</code>
+<code>tar -xzf eclipse-java-oxygen-2-linux-gtk-x86_64.tar.gz</code></pre> 
+Then move the extracted files to your software installation folder. I use <code>~/opt</code>. If it doesn't exist, you
+    have to create the folder first.
+    <pre class="console"><code>mkdir -p ~/opt/</code>
+<code>mv eclipse ~/opt/</code></pre>
+</p>
+<h3><a name="create-desktop-launcher" href="#create-desktop-launcher">Create desktop launcher</a></h3>
+<p>Right now, you can go to <code>~/opt/eclipse</code> and run Eclipse from there. However, that's pretty cumbersome, so we'll
+    link Eclipse to the <code>~/.local/bin</code> folder that's in the system's path. This allows you to execute Eclipse
+    from the terminal.
+    <pre class="console"><code>mkdir -p ~/.local/bin/</code>
+<code>ln -s "$HOME/opt/eclipse/eclipse" "$HOME/.local/bin/"</code></pre> To check if everything works correctly, you can try to run Eclipse from the terminal:
+    <pre class="console"><code>eclipse</code></pre>
+</p>
+<p>
+    The next step is to add the Eclipse icon to the system's icon cache:
+    <pre class="console"><code>mkdir -p ~/.local/share/icons/hicolor/256x256/apps/</code>
+<code>ln -s "$HOME/opt/eclipse/icon.xpm" "$HOME/.local/share/icons/hicolor/256x256/apps/eclipse.xpm"</code>
+<code>gtk-update-icon-cache ~/.local/share/icons/hicolor</code></pre>
+</p>
+<p>Finally, create a desktop launcher, to be able to open Eclipse from the Dash, or pin it to the launcher.
+    <pre class="console"><code>echo "[Desktop Entry]
+Name=Eclipse Oxygen
+Comment=Eclipse Oxygen
+Exec=eclipse
+Icon=eclipse
+Terminal=false
+Type=Application
+Categories=Development;" > ~/.local/share/applications/eclipse.desktop</code>
+<code>chmod +x ~/.local/share/applications/eclipse.desktop</code></pre>
+</p>
+<p>
+    After logging out and back in, you should be able to find Eclipse in the Dash.
+</p>
+
+</div>
+        </article>
+        <footer>Last edited: Thursday, 15 February 2018 16:39 UTC</footer>
+    </body>
+</html>

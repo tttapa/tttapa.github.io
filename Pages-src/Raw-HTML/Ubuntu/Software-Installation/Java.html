@@ -1,0 +1,89 @@
+<!--
+@title: Java
+@author: Pieter P
+@keywords: Java,Oracle,Ubuntu,Installation
+@description: Installation instructions for the Oracle Java SE on Ubuntu.
+-->
+<html>
+<p>This is an installation guide for the Oracle Java SE Development Kit on Ubuntu.</p>
+<h3>Adding the PPA</h3>
+<p>First add the Oracle Java SE repository:
+    <pre class="console"><code>sudo add-apt-repository ppa:webupd8team/java</code></pre> It will ask you to confirm adding the repository. Press enter to do so.</p>
+<p>The output should look something like this:
+    <pre><code>Oracle Java (JDK) Installer (automatically downloads and installs Oracle JDK7 / JDK8 / JDK9). There are no actual Java files in this PPA.
+
+Important -> Why Oracle Java 7 And 6 Installers No Longer Work: http://www.webupd8.org/2017/06/why-oracle-java-7-and-6-installers-no.html
+
+Ubuntu 16.10 Yakkety Yak is no longer supported by Canonical (and thus, Launchpad and this PPA). The PPA supports Ubuntu 17.10, 17.04, 16.04, 14.04 and 12.04.
+
+More info (and Ubuntu installation instructions):
+- for Oracle Java 7: http://www.webupd8.org/2012/01/install-oracle-java-jdk-7-in-ubuntu-via.html
+- for Oracle Java 8: http://www.webupd8.org/2012/09/install-oracle-java-8-in-ubuntu-via-ppa.html
+
+Debian installation instructions:
+- Oracle Java 7: http://www.webupd8.org/2012/06/how-to-install-oracle-java-7-in-debian.html
+- Oracle Java 8: http://www.webupd8.org/2014/03/how-to-install-oracle-java-8-in-debian.html
+
+Oracle Java 9 (for both Ubuntu and Debian): http://www.webupd8.org/2015/02/install-oracle-java-9-in-ubuntu-linux.html
+
+Oracle JDK 9 is now considered stable. There are currently only 64bit builds (no other builds are available for download: http://www.oracle.com/technetwork/java/javase/downloads/index.html )
+ More info: https://launchpad.net/~webupd8team/+archive/ubuntu/java
+Press [ENTER] to continue or ctrl-c to cancel adding it</pre>
+    </code>
+    <pre><code>gpg: keyring `/tmp/tmpe1pjq_vf/secring.gpg' created
+gpg: keyring `/tmp/tmpe1pjq_vf/pubring.gpg' created
+gpg: requesting key EEA14886 from hkp server keyserver.ubuntu.com
+gpg: /tmp/tmpe1pjq_vf/trustdb.gpg: trustdb created
+gpg: key EEA14886: public key "Launchpad VLC" imported
+gpg: no ultimately trusted keys found
+gpg: Total number processed: 1
+gpg:               imported: 1  (RSA: 1)
+OK</code></pre>
+</p>
+<p>
+    Then update the package list:
+    <pre class="console"><code>sudo apt-get update</code></pre>
+</p>
+
+<h3>Install Java SE Development Kit 9</h3>
+<p>Install the Oracle Java SE Development Kit 9 (JDK 9) using the package manager:
+    <pre class="console"><code>sudo apt install oracle-java9-installer</code></pre> Type <code>y</code> and enter to confirm.
+</p>
+<p>You have to agree to the license agreement.
+<pre class="center nowrap"><code>
+┌─────────────────────────┤ Configuring oracle-java9-installer ├──────────────────────────┐
+│                                                                                         │
+│ Oracle Binary Code License Agreement for the Java SE Platform Products and JavaFX       │
+│                                                                                         │
+│                                                                                         │
+│                                                                                         │
+│ You MUST agree to the license available in http://java.com/license if you want to use   │
+│ Oracle JDK.                                                                             │
+│                                                                                         │
+│                                         &lt;Ok&gt;                                            │
+│                                                                                         │
+└─────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>Press enter to agree.
+</p>
+<p>
+    Then accept the license terms as well. Use the left arrow key to select <code>&lt;Yes&gt;</code> and hit enter.
+    <pre class="center nowrap"><code>
+┌───────────────────────────┤ Configuring oracle-java9-installer ├───────────────────────────┐
+│                                                                                            │
+│ In order to install this package, you must accept the license terms, the "Oracle Binary    │
+│ Code License Agreement for the Java SE Platform Products and JavaFX ". Not accepting will  │
+│ cancel the installation.                                                                   │
+│                                                                                            │
+│ Do you accept the Oracle Binary Code license terms?                                        │
+│                                                                                            │
+│                          &lt;Yes&gt;                             &lt;No&gt;                            │
+│                                                                                            │
+└────────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre>
+</p>
+<h3>Set Oracle Java as default</h3>
+<p>If you have multiple versions of Java installed, you can use the following command to set the Oracle JDK 9 as the default.
+    <pre class="console"><code>sudo apt install oracle-java9-set-default</code></pre>
+</p>
+
+</html>

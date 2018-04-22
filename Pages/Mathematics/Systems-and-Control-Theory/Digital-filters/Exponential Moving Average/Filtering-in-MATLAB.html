@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="author" content="Pieter P"/>
+        <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+        <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
+        <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
+        <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+        <meta name="theme-color" content="#ccc"/>
+        <meta name="keywords" content="EMA, Exponential Moving Average, IIR filter, filters, DSP, MATLAB"/>
+        <meta name="description" content="EMA simulation in MATLAB, the effects of an EMA on music and other signals."/>
+        <title>Filtering in MATLAB</title>
+    </head>
+    <body>
+        <nav>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                    <path d="M0 0h48v48h-48z" fill="none"/>
+                    <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+                </svg>
+                <h2><a href="/">Home</a></h2>
+<ul>
+  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino">Arduino</a>
+  <ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/Bootloaders">Bootloaders</a>
+    <ul>
+      <li><span class="ftriangle"></span><a href="/Pages/Arduino/Bootloaders/ATmega328P-custom-frequency.html">Optiboot - ATmega328P at custom frequency</a></li>
+    </ul>
+    </li>
+  </ul>
+  </li>
+  <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics">Mathematics</a>
+  <ul>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory">Systems and Control Theory</a>
+    <ul>
+      <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters">Digital filters</a>
+      <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average">Exponential Moving Average</a>
+        <ul>
+          <li><span class="ftriangle"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+          <li><span class="ftriangle"></span><a class="openEntry" href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+        </ul>
+        </li>
+      </ul>
+      </li>
+    </ul>
+    </li>
+  </ul>
+  </li>
+  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu">Ubuntu</a>
+  <ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu/Software-Installation">Software Installation</a>
+    <ul>
+      <li><span class="ftriangle"></span><a href="/Pages/Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+      <li><span class="ftriangle"></span><a href="/Pages/Ubuntu/Software-Installation/Java.html">Java</a></li>
+    </ul>
+    </li>
+  </ul>
+  </li>
+</ul>
+
+                <a href="https://github.com/tttapa/tttapa.github.io/issues" title="Comment or open an issue">Comment or open an issue</a>
+            </div>
+        </nav>
+        <article>
+            <h1 class="title">Filtering in MATLAB</h1>
+            <i class="author">Pieter P</i>
+            <div>
+
+<p>
+    We can use MATLAB to visualize the effects of the filter.
+    <pre class="lineNumbers"><code>%% Visualization</code>
+<code></code>
+<code>close all;      % Close all open figures</code>
+<code></code>
+<code>alpha = 0.25;   % Filter factor of 1/4</code>
+<code></code>
+<code>f_s = 10000;     % 10 kHz sample frequency</code>
+<code>f_1 = 300;       % First sine wave with a frequency of 300 Hz</code>
+<code>f_2 = 2500;      % Second sine wave with a frequency of 2.5 kHz</code>
+<code></code>
+<code>samples = 100;  % Calculate/plot 100 samples</code>
+<code>n = linspace(0,samples-1,samples);  % Generate a vector with sample numbers</code>
+<code>t = n / f_s;    % Generate a vector with time</code>
+<code></code>
+<code>sine_1 = sin(2*pi*f_1*t);   % Calculate the (sampled) sine waves</code>
+<code>sine_2 = sin(2*pi*f_2*t);</code>
+<code>signal = (sine_1 + sine_2);     % Mix the two sine waves together</code>
+<code></code>
+<code>b = alpha;              % Coefficients of the numerator of the transfer function</code>
+<code>a = [1,-(1-alpha)];     % Coefficients of the denominator of the transfer function</code>
+<code>filtered = filter(b,a,signal);   % Filter the signal</code>
+<code></code>
+<code>oversample_continuous = 20;     % Create a version with ten times more samples</code>
+<code>                                % to display the smooth, continuous signal</code>
+<code>samples_continuous = oversample_continuous * samples;</code>
+<code>n_continuous = linspace(0, samples_continuous-1,samples_continuous) / oversample_continuous;</code>
+<code>t_continuous = n_continuous / f_s;</code>
+<code>sine_1_continuous = sin(2*pi*f_1*t_continuous);</code>
+<code>sine_2_continuous = sin(2*pi*f_2*t_continuous);</code>
+<code>signal_continuous = (sine_1_continuous + sine_2_continuous);</code>
+<code></code>
+<code>% Plot the two original sine waves</code>
+<code>figure('pos',[0,0,1200,400]);</code>
+<code>hold on;</code>
+<code>plot(t_continuous, sine_1_continuous, 'k');</code>
+<code>plot(t_continuous, sine_2_continuous, 'k');</code>
+<code>title('Original sine waves');</code>
+<code>xlabel('Time (s)');</code>
+<code>ylabel('Amplitude');</code>
+<code></code>
+<code>% Plot the continuous signal, the sampled version and the filtered output</code>
+<code>figure('pos',[0,0,1200,400]);</code>
+<code>hold on;</code>
+<code>plot(n_continuous, signal_continuous, 'k');</code>
+<code>plot(n, signal,'o');</code>
+<code>plot(n, filtered,'-o');</code>
+<code>title('Filtering the signal');</code>
+<code>xlabel('Sample');</code>
+<code>ylabel('Amplitude');</code>
+<code>legend('Original signal','Sampled signal','Filtered signal');</code>
+<code></code>
+<code>% Apply a fast fourier transform and plot the spectra of the </code>
+<code>% original signal and of the filtered output</code>
+<code>figure('pos',[0,0,1000,400]);</code>
+<code>hold on;</code>
+<code>f = linspace(0,samples-1,samples)*f_s/samples;</code>
+<code>original_spectrum = (abs(fft(signal))*2/samples).^2;</code>
+<code>filtered_spectrum = (abs(fft(filtered))*2/samples).^2;</code>
+<code>plot(f(1:1+samples/2),original_spectrum(1:1+samples/2),'-o');</code>
+<code>plot(f(1:1+samples/2),filtered_spectrum(1:1+samples/2),'-o');</code>
+<code>title('Power spectral density');</code>
+<code>xlabel('Frequency (Hz)');</code>
+<code>legend('Original signal','Filtered signal');</code>
+<code></code>
+<code>% Calculate the attenuation of the two sine waves</code>
+<code>f_1_index = f_1*samples/f_s+1;</code>
+<code>A_1 = filtered_spectrum(f_1_index) / original_spectrum(f_1_index);</code>
+<code>A_1_dB = 10*log10(A_1);</code>
+<code>fprintf('Attenuation of first sine wave (%.0f Hz) = %.02f dB\n', f_1, A_1_dB);</code>
+<code></code>
+<code>f_2_index = f_2*samples/f_s+1;</code>
+<code>A_2 = filtered_spectrum(f_2_index) / original_spectrum(f_2_index);</code>
+<code>A_2_dB = 10*log10(A_2);</code>
+<code>fprintf('Attenuation of second sine wave (%.0f Hz) = %.02f dB\n', f_2, A_2_dB);</code>
+<code></code>
+<code>% Open the filter visualization tool</code>
+<code>fvtool(b,a,'Fs',f_s);</code>
+<code></code>
+<code>%% WAV export</code>
+<code></code>
+<code>samples = f_s*2;    % 2 seconds of audio</code>
+<code>n = linspace(0,samples-1,samples);  % Generate a vector with sample numbers</code>
+<code>t = n / f_s;        % Generate a vector with time</code>
+<code></code>
+<code>sine_1 = sin(2*pi*f_1*t);   % Calculate the (sampled) sine waves</code>
+<code>sine_2 = sin(2*pi*f_2*t);</code>
+<code>signal = (sine_1 + sine_2)/2; % Mix the two sine waves together</code>
+<code></code>
+<code>filtered = filter(alpha,[1,-(1-alpha)],signal);   % Filter the signal</code>
+<code></code>
+<code>audiowrite('original.wav',signal,f_s);    % Export as audio</code>
+<code>audiowrite('filtered.wav',filtered,f_s);</code></pre>
+First, we generate a test signal that consists of two sine waves.
+<img src="images/original-sine-waves.svg" style="width: 90%"/>
+Then we apply the filter to it and plot the result. You can clearly see how the high-frequency sine wave is attenuated. Also note the phase shift between the original and the filtered signal.
+<img src="images/filtering-the-signal.svg" style="width: 90%"/>
+Finally, we can apply a fast fourier transform to inspect the frequency content.
+<img src="images/power-spectral-density.svg" style="width: 80%"/>
+<pre><code>Attenuation of first sine wave (30 Hz) = -1.53 dB
+Attenuation of second sine wave (250 Hz) = -13.97 dB</code></pre>
+You can hear the difference for yourself:
+<div>
+<audio id="original_wav">
+    <source src="images/original.mp3" type="audio/mpeg"/>
+</audio>
+<button onclick="document.getElementById('original_wav').play();document.getElementById('original_wav').currentTime = 0;document.getElementById('filtered_wav').pause()">Original</button>
+<audio id="filtered_wav">
+    <source src="images/filtered.mp3" type="audio/mpeg"/>
+</audio>
+<button onclick="document.getElementById('filtered_wav').currentTime = 0;document.getElementById('filtered_wav').play();document.getElementById('original_wav').pause()">Filtered</button>
+</div>
+</p>
+<p>
+    It can be used on music as well:
+    <pre class="lineNumbers"><code>[signal,f_s] = audioread('telegraph_road_original.wav');</code>
+<code></code>
+<code>alpha = 0.25;   % Filter factor of 1/4</code>
+<code></code>
+<code>b = alpha;              % Coefficients of the numerator of the transfer function</code>
+<code>a = [1,-(1-alpha)];     % Coefficients of the denominator of the transfer function</code>
+<code>filtered = filter(b,a,signal);   % Filter the signal</code>
+<code></code>
+<code>audiowrite('telegraph_road_filtered.wav',filtered,f_s);</code></pre>
+<div>
+<audio id="telegraph_road_original_wav">
+    <source src="images/telegraph_road_original.mp3" type="audio/mpeg"/>
+</audio>
+<button onmousedown="document.getElementById('telegraph_road_filtered_wav').pause();document.getElementById('telegraph_road_original_wav').currentTime = document.getElementById('telegraph_road_filtered_wav').currentTime;document.getElementById('telegraph_road_original_wav').play()">Original</button>
+<audio id="telegraph_road_filtered_wav">
+    <source src="images/telegraph_road_filtered.mp3" type="audio/mpeg"/>
+</audio>
+<button onmousedown="document.getElementById('telegraph_road_original_wav').pause();document.getElementById('telegraph_road_filtered_wav').currentTime = document.getElementById('telegraph_road_original_wav').currentTime;document.getElementById('telegraph_road_filtered_wav').play()">Filtered</button>
+</div>
+</p>
+
+</div>
+        </article>
+        <footer>Last edited: Sunday, 22 April 2018 21:39 UTC</footer>
+    </body>
+</html>
