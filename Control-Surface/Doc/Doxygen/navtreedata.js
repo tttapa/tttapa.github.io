@@ -57,10 +57,10 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "AnalogMultiplex_8h_source.html",
-"classHairlessMIDI__Interface.html#a2433d8ab8343cbd45473ff578b8ed4e7",
-"classMCU__VU__LED.html#a6837331641a01cd58175e356fa45b737",
-"classNoteDisplay.html#a19f23fe17e9bb1269dd2c935a39aabee",
-"examples.html"
+"classExtendedIOElement.html#aff7b15138b06cd5a3ad438d2b8746111",
+"classMCU__VU__LED.html#a4c0d078ca3b8fa4c4f1fcadbce98d9f9",
+"classMIDI__Parser.html#a80c3e8ba1f058974c4c59d35092b3bed",
+"classVUDisplay.html#a32d0ac21a69571d35ca75bee5552851b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

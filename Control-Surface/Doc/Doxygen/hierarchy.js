@@ -16,6 +16,7 @@ var hierarchy =
       [ "AnalogMultiplex", "classAnalogMultiplex.html", null ],
       [ "ShiftRegisterOut", "classShiftRegisterOut.html", null ]
     ] ],
+    [ "Hysteresis", "classHysteresis.html", null ],
     [ "Location", "structLocation.html", null ],
     [ "MIDI_Element", "classMIDI__Element.html", [
       [ "MIDI_Control_Element", "classMIDI__Control__Element.html", [
@@ -79,7 +80,8 @@ var hierarchy =
     ] ],
     [ "Selector", "classSelector.html", [
       [ "BankSelector", "classBankSelector.html", null ],
-      [ "SelectorPC", "classSelectorPC.html", null ]
+      [ "SelectorPC", "classSelectorPC.html", null ],
+      [ "Transposer", "classTransposer.html", null ]
     ] ],
     [ "XBitmap", "structXBitmap.html", null ]
 ];

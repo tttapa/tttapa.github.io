@@ -9,7 +9,7 @@ var classAnalogPB =
     [ "setChannelOffset", "classAnalogPB.html#a4ad7e1f1b594cc647570b829af76c600", null ],
     [ "settracksPerBank", "classAnalogPB.html#a39d1d90ae6e0fc5a4ef247b71129954e", null ],
     [ "addressOffset", "classAnalogPB.html#ad707a5bc7271234a21c82beebea3a7d5", null ],
-    [ "channel", "classAnalogPB.html#ad3491ffca3ab63f422565ba49a50813b", null ],
+    [ "channel", "classAnalogPB.html#adf3fe53620054725e363ca9a8a766433", null ],
     [ "channelOffset", "classAnalogPB.html#adc8a6595f4cf5342bcdc1669950ae080", null ],
     [ "oldVal", "classAnalogPB.html#ab19b21fdd4da8f3c838cea5d34a77f7c", null ],
     [ "tracksPerBank", "classAnalogPB.html#a33920585a8a5f296becda59e42b41660", null ]

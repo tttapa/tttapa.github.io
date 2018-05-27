@@ -9,9 +9,10 @@ var classAnalogCC =
     [ "setChannelOffset", "classAnalogCC.html#a4ad7e1f1b594cc647570b829af76c600", null ],
     [ "settracksPerBank", "classAnalogCC.html#a39d1d90ae6e0fc5a4ef247b71129954e", null ],
     [ "addressOffset", "classAnalogCC.html#ad707a5bc7271234a21c82beebea3a7d5", null ],
-    [ "channel", "classAnalogCC.html#aeb86fe8daee4c9210ffa79c579cd782c", null ],
+    [ "channel", "classAnalogCC.html#a3c144de07039b263013424063631e627", null ],
     [ "channelOffset", "classAnalogCC.html#adc8a6595f4cf5342bcdc1669950ae080", null ],
-    [ "controller", "classAnalogCC.html#ad21a43ae0901e975d85a8160459b00ca", null ],
+    [ "controller", "classAnalogCC.html#a960d8652b257684687598d77415a3e3e", null ],
+    [ "hysteresis", "classAnalogCC.html#a2f449887472c7c097d9b0d67211a48a1", null ],
     [ "oldVal", "classAnalogCC.html#a5b9523c0788a0f9a183181e86ab1e88e", null ],
     [ "tracksPerBank", "classAnalogCC.html#a33920585a8a5f296becda59e42b41660", null ]
 ];

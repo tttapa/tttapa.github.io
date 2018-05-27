@@ -16,5 +16,6 @@ var examples =
     [ "Ex.14.LED.ino", "Ex_814_8LED_8ino-example.html", null ],
     [ "Ex.15.LED-Shift-Register.ino", "Ex_815_8LED-Shift-Register_8ino-example.html", null ],
     [ "Ex.16.SelectorPC.ino", "Ex_816_8SelectorPC_8ino-example.html", null ],
+    [ "Ex.17.Transposer.ino", "Ex_817_8Transposer_8ino-example.html", null ],
     [ "OLED-Demo.ino", "OLED-Demo_8ino-example.html", null ]
 ];
