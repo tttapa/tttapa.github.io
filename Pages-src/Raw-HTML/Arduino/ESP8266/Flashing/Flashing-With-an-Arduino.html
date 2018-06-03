@@ -1,0 +1,132 @@
+<!--
+@title: Flashing the ESP8266 with an Arduino UNO
+@author: Pieter P
+@keywords: ESP8266, Flashing, UNO, Arduino
+@description: Flashing an ESP8266 with an Arduino UNO
+-->
+<html>
+<p>
+    The best way to flash an ESP8266 is by using an ESP8266 development board (e.g. Wemos D1 mini or NodeMCU).
+    <br> Alternatively, you could use a bare-bones AI-Thinker module, and program it using a USB-to-Serial converter.
+    <br> If you don't have such a converter, it is possible to use the internal USB-to-Serial converter of an Arduino to flash
+    the ESP8266. That's what this guide will teach you.
+</p>
+
+<h2>Preparing the Arduino</h2>
+
+<p>
+    To flash the ESP8266, we'll use the USB-to-Serial converter of the Arduino. It cannot be disconnected from the Arduino's
+    main microcontroller, so we'll have to make sure that the Arduino is not using the Serial connection while we're flashing
+    the ESP8266. The easiest way is to just upload an empty sketch to the Arduino beforehand (see File &gt; Examples &gt;
+    01.Basics &gt; BareMinimum).
+
+    <pre class="lineNumbers"><font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font> <font color="#000000">}</font>
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font> <font color="#000000">}</font></pre>
+</p>
+
+<h2>Hardware connections</h2>
+
+<h3>Enabling the chip</h3>
+
+<p>
+    If you're using a bare-bone ESP-## board by AI Thinker, you have to add some resistors to turn on the ESP8266, and to select
+    the right boot mode.
+    <ol>
+        <li>Enable the chip by connecting the CH_PD (Chip Power Down, sometimes labeled CH_EN or chip enable) pin to V<sub>CC </sub>through
+            a 10KΩ resistor.</li>
+        <li>Disable SD-card boot by connecting GPIO15 to ground through a 10KΩ resistor.</li>
+        <li>Select normal boot mode by connecting GPIO0 to V<sub>CC </sub>through a 10KΩ resistor.</li>
+        <li>Prevent random resets by connecting the RST (reset) pin to V<sub>CC </sub>through a 10KΩ resistor.</li>
+        <li>Make sure you don't have anything connected to GPIO2 (more information in the next chapter).
+            <br>
+        </li>
+    </ol>
+</p>
+<p>
+    <img src="/Images/ESP8266-2.png" style="width: 600px;margin: 1em auto;">
+</p>
+
+<h3>Adding reset and program buttons</h3>
+
+<p>
+    If your ESP8266 board doesn't have a reset button, you could add one by connecting a push button to between the RST pin and
+    ground.
+</p>
+<p>
+    To put the chip into programming mode, you have to pull GPIO0 low during startup. That's why we also need a program button.
+    Because it's possible to use GPIO0 as an output, we can't directly short it to ground, as that could damage the chip. To
+    prevent this, connect 470Ω resistor in series with the switch. It's important that this resistance is low enough, otherwise,
+    it will be pulled high by the 10KΩ resistor we added in the previous paragraph.
+</p>
+
+<h3>Powering the ESP8266</h3>
+
+<p>
+    You need a decent 3.3V power supply, it's not recommended to use the internal 3.3V regulator of the Arduino. You can use
+    a normal LDO like the LM1117-3.3, for example.
+    <img src="/Images/VReg.png" style="width: 600px;margin: 1em auto;">
+</p>
+
+<h3>Connecting the serial interface</h3>
+
+<p>
+    The next step is to connect the serial interface of the ESP8266 to the USB-to-Serial converter on the Arduino. This is an
+    ATmega16U2, the small square chip next to the USB connector.
+</p>
+<p>
+    Keep in mind that TX and RX lines are swapped in a normal situation. The TX and RX labels on the Arduino board are the TX
+    and RX pins of the main microcontroller (ATmega328P), and not those of the ATmega16U2.
+    <br>We need the ATmega16U2, so we'll have to swap RX and TX again when connecting it.
+</p>
+<p>
+    The ESP8266 is a 3.3V device, and the ATmega16U2 on the UNO runs and transmits at 5V. To prevent damage to the ESP8266, we
+    have to add a level shifter on the transmit pin of the ATmega16U2, to get the voltage level down from 5V to 3.3V. The
+    easiest way is to connect a 2 kΩ resistor between the Aruino's pin 0 (ATmega16U2 TX) and ground. Together with the on-board
+    1 kΩ resistors of the Arduino, this will form a voltage divider.
+    <br> Don't forget to connect the grounds of the ESP8266 and the Arduino together.
+</p>
+<p>
+    Finally, connect pin 0 of the Arduino (ATmega16U2 TX) to the RX or RXD pin of the ESP8266, and pin 1 of the Arduino (ATmega16U2
+    RX) to the TX or TXD pin of the ESP8266.
+</p>
+<p>
+    <img src="images/ESP8266-UNO-flash.svg" style="width: 800px;margin: 1em auto;">
+</p>
+
+<h3>Preventing the Arduino from resetting</h3>
+
+<p>
+    When opening the USB-to-Serial converter from the computer, the ATmega328P is automatically reset to start the bootloader.
+    We want to prevent this, because we don't want it to interfere with the ESP8266. To disable the automatic reset, it is
+    sufficient to add a 10 µF (or larger) capacitor between the reset pin of the Arduino and ground. If you don't have such
+    a capacitor, you can short the reset pin to ground entirely.
+</p>
+
+<h2>Putting the ESP8266 into programming mode</h2>
+
+<p>
+    For the ESP8266 to receive new firmware over the serial port, and for it to program itself, you have to select the correct
+    boot mode. This is done by keeping GPIO0 low during reset.
+    <ol>
+        <li>Press and hold the reset button</li>
+        <li>Press and hold the program button</li>
+        <li>Release the reset button, the ESP will boot in program mode</li>
+        <li>Release the program button</li>
+    </ol>
+</p>
+
+<h2>Uploading the program</h2>
+
+<p>
+    Finally, just select the correct board options in the Arduino IDE (select
+    <em>Generic ESP8266 Module</em> as board type, for example), select the Arduino as the serial port to use, and hit upload.
+</p>
+<p>
+    If you get errors like:
+    <pre><code>warning: espcomm_sync failed
+error: espcomm_open failed
+error: espcomm_upload_mem failed</code></pre> Then the ESP8266 may not have been in programming mode, or you didn't select the correct serial port in the IDE.
+    <br> Sporadically, the upload seems to just randomly fail. If that's the case, try a lower baud rate.
+</p>
+
+</html>
