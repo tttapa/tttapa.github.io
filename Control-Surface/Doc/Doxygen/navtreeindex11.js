@@ -1,5 +1,6 @@
 var NAVTREEINDEX11 =
 {
+"db/d2b/classBankable_1_1CCButtonMatrix.html#a4c1c6bd44da328dd5b4dc29503219d09":[1,0,3,8],
 "db/d2b/classBankable_1_1CCButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f":[1,0,3,24],
 "db/d2b/classBankable_1_1CCButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b":[1,0,3,2],
 "db/d2b/classBankable_1_1CCButtonMatrix.html#a698d89514186aa0c29ea6fbc5bef1e06":[1,0,3,6],
@@ -248,6 +249,5 @@ var NAVTREEINDEX11 =
 "dc/d45/classControl__Surface__.html#a69fd0ae13604c39d6dc0da12fc94a18f":[3,0,27,5],
 "dc/d45/classControl__Surface__.html#a77ee86088235acc137eb0958051a80ac":[3,0,27,6],
 "dc/d45/classControl__Surface__.html#a8c54f9f2af46ad381d1236097f940feb":[3,0,27,12],
-"dc/d45/classControl__Surface__.html#ab3f014ac4122db40d411efb69e12fa5a":[3,0,27,9],
-"dc/d45/classControl__Surface__.html#abc974fd16c735a8a7942b0b138751490":[3,0,27,8]
+"dc/d45/classControl__Surface__.html#ab3f014ac4122db40d411efb69e12fa5a":[3,0,27,9]
 };

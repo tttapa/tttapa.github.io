@@ -1,5 +1,6 @@
 var NAVTREEINDEX8 =
 {
+"d8/d0b/classStreamDebugMIDI__Interface.html#a6c6df29de49ed235f77245d8d2647d73":[1,3,1,15],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a70967d594ff3bae938a3f1b30a319018":[1,3,1,20],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc":[1,3,1,9],
 "d8/d0b/classStreamDebugMIDI__Interface.html#aa737854accb7d5a1726e1ed899a30fb8":[1,3,1,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX8 =
 "d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71d":[4,0,119,6],
 "d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71da267b41f122f6532430459e11fad0da40":[4,0,119,6,1],
 "d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71da9aa2a35d92976c7de970506c4d19a96c":[4,0,119,6,0],
-"d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71dab7ad87adda84e60b671dc61f369c8c5b":[4,0,119,6,2],
-"d9/d24/RelativeCCSender_8hpp.html#aefe2ccfff49d9c60239539662c1cdf9f":[4,0,119,3]
+"d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71dab7ad87adda84e60b671dc61f369c8c5b":[4,0,119,6,2]
 };

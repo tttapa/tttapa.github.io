@@ -22,7 +22,7 @@ var NAVTREEINDEX0 =
 "d0/d0d/classSerialMIDI__Parser.html#ac6808b5b4f403e48368f32385171929c":[3,0,106,7],
 "d0/d0d/classSerialMIDI__Parser.html#acdae5ccd2c883d35379eece73219357c":[3,0,106,5],
 "d0/d0d/classSerialMIDI__Parser.html#add28e4338eca6dc5b9f5f97320fa38a2":[3,0,106,9],
-"d0/d1b/PushButtonsLEDsShiftRegMultiplex_8ino-example.html":[5,5],
+"d0/d1b/PushButtonsLEDsShiftRegMultiplex_8ino-example.html":[5,6],
 "d0/d31/MIDIInputElementNote_8cpp.html":[4,0,95],
 "d0/d31/MIDIInputElementNote_8cpp_source.html":[4,0,95],
 "d0/d40/ButtonMatrix_8h.html":[4,0,16],

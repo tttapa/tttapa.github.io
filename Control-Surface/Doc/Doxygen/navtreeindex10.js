@@ -1,5 +1,6 @@
 var NAVTREEINDEX10 =
 {
+"da/d0a/classMCU_1_1VULEDs__Base.html#a03a7e70a7d34196153b508101a7bf63f":[3,0,1,14,18],
 "da/d0a/classMCU_1_1VULEDs__Base.html#a0bc33aa8712fd07c9c218ed35cc7dce3":[3,0,1,14,2],
 "da/d0a/classMCU_1_1VULEDs__Base.html#a0d8332b03ddd5b492937cc3ac047d124":[3,0,1,14,10],
 "da/d0a/classMCU_1_1VULEDs__Base.html#a104e3c7f67feee481b29e0104e75242d":[3,0,1,14,9],
@@ -145,7 +146,7 @@ var NAVTREEINDEX10 =
 "da/d6a/classPBPotentiometer.html#af26f74892403177a7234182d792744f5":[1,0,23,13],
 "da/d80/struct__Setbase.html":[3,0,2],
 "da/d80/struct__Setbase.html#a71ff2a1cb6bd223fbe45707260f6182f":[3,0,2,0],
-"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[5,6],
+"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[5,7],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html":[3,0,1,0,0],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a07155d1404800da8eb51cbc6c6da0c6e":[3,0,1,0,0,32],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a0a087f8b370de8a92fe4aa3f68771fa7":[3,0,1,0,0,1],
@@ -154,11 +155,11 @@ var NAVTREEINDEX10 =
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a316d0c8239f1503aad64fed5b6058446":[3,0,1,0,0,6],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a31ad1a9d8cac90e8ac05ac2e656f6a85":[3,0,1,0,0,19],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a3cdc427ed1a74ba765311e87dbdbe60b":[3,0,1,0,0,25],
-"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[3,0,1,0,0,29],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[3,0,1,0,0,28],
+"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[3,0,1,0,0,29],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5723f4a7c22aea22a940f481c48bd798":[3,0,1,0,0,10],
-"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[3,0,1,0,0,30],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[3,0,1,0,0,31],
+"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[3,0,1,0,0,30],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5d0876c7cf28c049801ffd9276cb5bdc":[3,0,1,0,0,3],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5d638e14de4b2e6508131c110d028ab4":[3,0,1,0,0,7],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a662d4ec9cf4ab9dd7a7f8a0726ac96a7":[3,0,1,0,0,18],
@@ -204,7 +205,7 @@ var NAVTREEINDEX10 =
 "da/ddf/DisplayInterface_8cpp_source.html":[4,0,44],
 "da/df4/Hysteresis_8h.html":[4,0,60],
 "da/df4/Hysteresis_8h_source.html":[4,0,60],
-"da/df7/OLED-Demo-Audio_8ino-example.html":[5,2],
+"da/df7/OLED-Demo-Audio_8ino-example.html":[5,3],
 "db/d15/Bankable_2CCButton_8hpp.html":[4,0,17],
 "db/d15/Bankable_2CCButton_8hpp_source.html":[4,0,17],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html":[3,0,1,0,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX10 =
 "db/d2b/classBankable_1_1CCButtonMatrix.html#a2c8ccb65e5634d190b38873670a5b107":[1,0,3,11],
 "db/d2b/classBankable_1_1CCButtonMatrix.html#a3af6f1bdd9c0471a79fbda986ca0a69f":[1,0,3,13],
 "db/d2b/classBankable_1_1CCButtonMatrix.html#a4a13b63f90ec988cd14d871df9dbc53b":[1,0,3,23],
-"db/d2b/classBankable_1_1CCButtonMatrix.html#a4c0438aedab2bf66ec4abdc90b79d793":[1,0,3,20],
-"db/d2b/classBankable_1_1CCButtonMatrix.html#a4c1c6bd44da328dd5b4dc29503219d09":[1,0,3,8]
+"db/d2b/classBankable_1_1CCButtonMatrix.html#a4c0438aedab2bf66ec4abdc90b79d793":[1,0,3,20]
 };

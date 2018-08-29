@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"d6/da6/MCU_8h.html#a0b0a2480c2a0bbfbca785b72c66d5010":[4,0,72,14],
 "d6/da6/MCU_8h.html#a0d5b301b547713fe18b71e1a482e08b7":[4,0,72,52],
 "d6/da6/MCU_8h.html#a0dbae857e721bdf6f58d9f5c8a807fb3":[4,0,72,108],
 "d6/da6/MCU_8h.html#a0fe32f6eb1cbcd5cd90641bc5b8de0ac":[4,0,72,73],
@@ -142,7 +143,7 @@ var NAVTREEINDEX7 =
 "d7/d40/classEMA.html#a612ffac5a18df3450d6f25aff4a7a15f":[3,0,36,2],
 "d7/d40/classEMA.html#ab0d7694cffaee5280d7e68f5a71f725e":[3,0,36,0],
 "d7/d40/classEMA.html#ae4550b22dcf19b3e6c15e7ffa09aeefb":[3,0,36,1],
-"d7/d5f/ShiftRegisterBlink_8ino-example.html":[5,7],
+"d7/d5f/ShiftRegisterBlink_8ino-example.html":[5,8],
 "d7/d6a/structArray.html":[3,0,6],
 "d7/d6a/structArray.html#a022734bbdbf9665f0acf09573939b9e1":[3,0,6,7],
 "d7/d6a/structArray.html#a32e08de67edecaaa43a03c7fcb1dee8d":[3,0,6,0],
@@ -219,8 +220,8 @@ var NAVTREEINDEX7 =
 "d7/dc0/classBankable_1_1CCPotentiometer.html#ad4273e4aa2f15de8dbe478af16af259e":[1,0,5,10],
 "d7/dc0/classBankable_1_1CCPotentiometer.html#ae85019a4e24c8ecb21651246f56c20ff":[1,0,5,1],
 "d7/dc0/classBankable_1_1CCPotentiometer.html#afca632d097e1f0dd4590ba3f3c69c47e":[1,0,5,18],
-"d7/dc7/namespaceMCU.html":[2,0,3],
 "d7/dc7/namespaceMCU.html":[3,0,1],
+"d7/dc7/namespaceMCU.html":[2,0,3],
 "d7/dc9/structis__unsigned.html":[3,0,56],
 "d7/dc9/structis__unsigned.html#af5b418ca6b02f609493c983ca1aa526e":[3,0,56,0],
 "d7/dcd/RelativeCCSender_8cpp.html":[4,0,118],
@@ -248,6 +249,5 @@ var NAVTREEINDEX7 =
 "d8/d0b/classStreamDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c":[1,3,1,17],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a5229f0375a0a9e9c303b0ba1fa99a342":[1,3,1,7],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a64d5c27c6796f20369da7d68f4e21250":[1,3,1,11],
-"d8/d0b/classStreamDebugMIDI__Interface.html#a68e98b029031d6260972bed02e0aa59c":[1,3,1,6],
-"d8/d0b/classStreamDebugMIDI__Interface.html#a6c6df29de49ed235f77245d8d2647d73":[1,3,1,15]
+"d8/d0b/classStreamDebugMIDI__Interface.html#a68e98b029031d6260972bed02e0aa59c":[1,3,1,6]
 };
