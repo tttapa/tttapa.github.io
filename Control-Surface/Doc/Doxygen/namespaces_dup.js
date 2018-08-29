@@ -1,9 +1,9 @@
 var namespaces_dup =
 [
-    [ "Bankable", "namespaceBankable.html", null ],
-    [ "ExtIO", "namespaceExtIO.html", null ],
-    [ "LinkedList", "namespaceLinkedList.html", null ],
-    [ "MCU", "namespaceMCU.html", "namespaceMCU" ],
-    [ "MIDI_CC", "namespaceMIDI__CC.html", null ],
-    [ "XBM", "namespaceXBM.html", null ]
+    [ "Bankable", "d1/dd0/namespaceBankable.html", null ],
+    [ "ExtIO", "d8/d3d/namespaceExtIO.html", null ],
+    [ "LinkedList", "db/d76/namespaceLinkedList.html", null ],
+    [ "MCU", "d7/dc7/namespaceMCU.html", "d7/dc7/namespaceMCU" ],
+    [ "MIDI_CC", "d4/dbe/namespaceMIDI__CC.html", null ],
+    [ "XBM", "dd/d93/namespaceXBM.html", null ]
 ];

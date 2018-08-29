@@ -24,7 +24,7 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "Control Surface", "index.html", [
-    [ "Todo List", "todo.html", null ],
+    [ "Todo List", "dd/da0/todo.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
@@ -66,22 +66,22 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"Abstract_2MIDIButtonLatching_8hpp.html",
-"Error_8hpp_source.html",
-"MIDI__Parser_8h.html#a4d5f7c786c1a7480bd707642de92e109",
-"classAnalogMultiplex.html",
-"classBankable_1_1CCPotentiometer.html#ad4273e4aa2f15de8dbe478af16af259e",
-"classBankable_1_1MIDINoteLED.html#aa9f43b2f899a1022597f4cf885fb3eb3",
-"classCCButton.html#a2c8ccb65e5634d190b38873670a5b107",
-"classDoublyLinkedList_1_1reverse__node__iterator.html#a2029b54f3ab20d72a3be04f59daff71a",
-"classIncrementDecrementSelectorLEDs.html",
-"classMCU_1_1Bankable_1_1VU.html#a57b6615469e554c514a9ff56dc24908f",
-"classMCU_1_1VU.html#ac166479a8b8ade7b7abf109362f72b86",
-"classMIDIInputElement.html#a2110089781785e421888fdcf3badef23",
-"classManyButtonsSelector.html#acfabd4911411ebbfd96d4080103f4725",
-"classSelector.html#aedf651d52b4657c226a0407bc4558183",
-"classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32",
-"group__MIDIOutputElementConstructors.html#gad5314303f3a6f73e403d25602a663587"
+"annotated.html",
+"d0/dd2/classMIDIFilteredAnalogAddressable.html#a8af924e5b3b708eb042919703d175ed3",
+"d1/d9f/classNoteButton.html#a4a13b63f90ec988cd14d871df9dbc53b",
+"d2/daf/classNoteButtonMatrix.html#a8af924e5b3b708eb042919703d175ed3",
+"d3/d69/classManyButtonsSelector.html#a883138a1262a82e8b9e05c75d576e36d",
+"d4/d36/MIDI__Parser_8h.html#a93517f4d4a6e9fbcdff6aa77a73a4e26",
+"d5/da2/BankableMIDIOutputAddressable_8hpp.html",
+"d6/da6/MCU_8h.html#a0fe32f6eb1cbcd5cd90641bc5b8de0ac",
+"d8/d0b/classStreamDebugMIDI__Interface.html#ac179dad8f24eedfa6a9f4e8dbaef7b46",
+"d9/d28/Hardware_2LEDs_2VULEDs_8hpp_source.html",
+"da/d0a/classMCU_1_1VULEDs__Base.html#a1889dd074ee4ee9a0c6331e5183126ad",
+"db/d2b/classBankable_1_1CCButtonMatrix.html#a6bae640621972b14ad9c28b6b399f08f",
+"dc/d48/PrintStream_8h.html#a2b44e6ada22b1b5a703617123ebd0598",
+"dd/d16/classDoublyLinkedList.html#a3c067d3d91d183268148650708108be6",
+"de/d52/classMCU_1_1VPotRingLEDs__Base.html#aac5c0e4f25ae8a1996d1ef7bb894c802",
+"functions_p.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

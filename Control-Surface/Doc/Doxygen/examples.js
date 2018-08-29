@@ -1,11 +1,11 @@
 var examples =
 [
-    [ "CCPotentiometer.ino", "CCPotentiometer_8ino-example.html", null ],
-    [ "Ex.1.Shift-Register-LED-Effects.ino", "Ex_81_8Shift-Register-LED-Effects_8ino-example.html", null ],
-    [ "OLED-Demo-Audio.ino", "OLED-Demo-Audio_8ino-example.html", null ],
-    [ "OLED-Demo.ino", "OLED-Demo_8ino-example.html", null ],
-    [ "PushButtonsLEDs.ino", "PushButtonsLEDs_8ino-example.html", null ],
-    [ "PushButtonsLEDsShiftRegMultiplex.ino", "PushButtonsLEDsShiftRegMultiplex_8ino-example.html", null ],
-    [ "VUMeterLEDs-USB-DAC.ino", "VUMeterLEDs-USB-DAC_8ino-example.html", null ],
-    [ "VUMeterOLED-USB-DAC.ino", "VUMeterOLED-USB-DAC_8ino-example.html", null ]
+    [ "CCPotentiometer.ino", "d2/d35/CCPotentiometer_8ino-example.html", null ],
+    [ "Ex.1.Shift-Register-LED-Effects.ino", "d3/d82/Ex_81_8Shift-Register-LED-Effects_8ino-example.html", null ],
+    [ "OLED-Demo-Audio.ino", "da/df7/OLED-Demo-Audio_8ino-example.html", null ],
+    [ "OLED-Demo.ino", "de/ddb/OLED-Demo_8ino-example.html", null ],
+    [ "PushButtonsLEDs.ino", "d0/de3/PushButtonsLEDs_8ino-example.html", null ],
+    [ "PushButtonsLEDsShiftRegMultiplex.ino", "d0/d1b/PushButtonsLEDsShiftRegMultiplex_8ino-example.html", null ],
+    [ "VUMeterLEDs-USB-DAC.ino", "df/dad/VUMeterLEDs-USB-DAC_8ino-example.html", null ],
+    [ "VUMeterOLED-USB-DAC.ino", "d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html", null ]
 ];

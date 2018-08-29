@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['linkedlist',['LinkedList',['../namespaceLinkedList.html',1,'']]]
+  ['linkedlist',['LinkedList',['../db/d76/namespaceLinkedList.html',1,'']]]
 ];
