@@ -6,6 +6,7 @@ var classButton =
       [ "Falling", "d1/d19/classButton.html#ae15938c6b06f6bbf909314f987938fd6ae322e4070b093611d60f42872eb008cf", null ],
       [ "Rising", "d1/d19/classButton.html#ae15938c6b06f6bbf909314f987938fd6a9ab5bfa1050fa2d2219af088e13b220c", null ]
     ] ],
+    [ "Button", "d1/d19/classButton.html#a3b36df1ae23c58aedb9e15a713159459", null ],
     [ "Button", "d1/d19/classButton.html#a1ccc15ff0a38286a609ee5cda2b9e2f4", null ],
     [ "begin", "d1/d19/classButton.html#a666adf00bc92a8b264758abfa655a6a4", null ],
     [ "getName", "d1/d19/classButton.html#a5e92368e2a142fb2d246e6de0a5e89c5", null ],
@@ -15,7 +16,7 @@ var classButton =
     [ "debouncedState", "d1/d19/classButton.html#a8e17132bff9eb9b87d5936a6e1ecaff7", null ],
     [ "debounceTime", "d1/d19/classButton.html#a210b03addb819e086e26b2bb3b683603", null ],
     [ "invertState", "d1/d19/classButton.html#a6cb2c9aec2b114232a342846ed944205", null ],
-    [ "pin", "d1/d19/classButton.html#a963ebd117a2a3bf12f2516d1b0fae20c", null ],
+    [ "pin", "d1/d19/classButton.html#ae3d6505a06de31a4f285da136cee1f21", null ],
     [ "prevBounceTime", "d1/d19/classButton.html#af94117c6192397d34540b64eb19dd75f", null ],
     [ "prevState", "d1/d19/classButton.html#ac432cee3f2f9ad9a3368c0d6fefc7f3f", null ]
 ];

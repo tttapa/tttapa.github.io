@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"d5/d9b/CCButtonMatrix_8hpp.html":[4,0,22],
 "d5/d9b/CCButtonMatrix_8hpp_source.html":[4,0,22],
 "d5/da2/BankableMIDIOutputAddressable_8hpp.html":[4,0,9],
 "d5/da2/BankableMIDIOutputAddressable_8hpp_source.html":[4,0,9],
@@ -11,8 +12,8 @@ var NAVTREEINDEX6 =
 "d5/db5/classDigitalCCSender.html#a919deb0eb055522fd09590bd1880528a":[3,0,28,3],
 "d5/db5/classDigitalCCSender.html#a9bf0e3b10473f825a9134e58d6832573":[3,0,28,0],
 "d5/db6/ArrayHelpers_8hpp.html":[4,0,2],
+"d5/db6/ArrayHelpers_8hpp.html#a01db435432a4e3142f97736734a8066c":[4,0,2,3],
 "d5/db6/ArrayHelpers_8hpp.html#a662b743ce08991d63ce296f33137ca22":[4,0,2,2],
-"d5/db6/ArrayHelpers_8hpp.html#ac7c6a3d27fc1ce3a3c5f39597a52af12":[4,0,2,3],
 "d5/db6/ArrayHelpers_8hpp.html#addd42f8d7a7cb2605e50325b9c54fefa":[4,0,2,1],
 "d5/db6/ArrayHelpers_8hpp_source.html":[4,0,2],
 "d5/db9/structNormalUpdatable.html":[3,0,87],
@@ -105,8 +106,8 @@ var NAVTREEINDEX6 =
 "d5/df9/group__MIDIOutputElementConstructors.html#gab5cecfea621e06620010420697fd1436":[1,0,20,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#gabb982c76ed6ed8992d4ca8d556941371":[1,0,0,3],
 "d5/df9/group__MIDIOutputElementConstructors.html#gabb982c76ed6ed8992d4ca8d556941371":[1,0,13,0],
-"d5/df9/group__MIDIOutputElementConstructors.html#gaccd0c6bcb8e5a5af3a42e552393743ba":[1,0,0,6],
 "d5/df9/group__MIDIOutputElementConstructors.html#gaccd0c6bcb8e5a5af3a42e552393743ba":[1,0,4,0],
+"d5/df9/group__MIDIOutputElementConstructors.html#gaccd0c6bcb8e5a5af3a42e552393743ba":[1,0,0,6],
 "d5/df9/group__MIDIOutputElementConstructors.html#gad5314303f3a6f73e403d25602a663587":[1,0,0,4],
 "d5/df9/group__MIDIOutputElementConstructors.html#gad5314303f3a6f73e403d25602a663587":[1,0,14,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#gadd391a8997b1e1f6d116a85904633286":[1,0,17,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "d6/da6/MCU_8h.html#a0926b23e79c7619b77bb90e84f38a75c":[4,0,72,34],
 "d6/da6/MCU_8h.html#a09ff3d36e06dc759e5fc8a4f5752f761":[4,0,72,36],
 "d6/da6/MCU_8h.html#a0aa2154c420b61e79ee13f5617f998fb":[4,0,72,114],
-"d6/da6/MCU_8h.html#a0b0a2480c2a0bbfbca785b72c66d5010":[4,0,72,14],
-"d6/da6/MCU_8h.html#a0d5b301b547713fe18b71e1a482e08b7":[4,0,72,52]
+"d6/da6/MCU_8h.html#a0b0a2480c2a0bbfbca785b72c66d5010":[4,0,72,14]
 };

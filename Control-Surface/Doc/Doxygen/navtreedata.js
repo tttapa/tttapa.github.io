@@ -68,20 +68,20 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d0/dd2/classMIDIFilteredAnalogAddressable.html#a883138a1262a82e8b9e05c75d576e36d",
-"d1/d9f/classNoteButton.html#a3af6f1bdd9c0471a79fbda986ca0a69f",
-"d2/daf/classNoteButtonMatrix.html#a883138a1262a82e8b9e05c75d576e36d",
-"d3/d69/classManyButtonsSelector.html#a6bae640621972b14ad9c28b6b399f08f",
-"d4/d36/MIDI__Parser_8h.html#a7b96baa7581ecc5a27af22f664b85d82",
-"d5/d9b/CCButtonMatrix_8hpp_source.html",
-"d6/da6/MCU_8h.html#a0dbae857e721bdf6f58d9f5c8a807fb3",
-"d8/d0b/classStreamDebugMIDI__Interface.html#aa737854accb7d5a1726e1ed899a30fb8",
-"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html",
-"da/d0a/classMCU_1_1VULEDs__Base.html#a104e3c7f67feee481b29e0104e75242d",
-"db/d2b/classBankable_1_1CCButtonMatrix.html#a6a779804092487b4a4a135559b45daf5",
-"dc/d48/PrintStream_8h.html#a1ffa6bad6017c44f306903ffec337575",
-"dd/d16/classDoublyLinkedList.html#a31fc3c7d7b7ca745474ff9f4dfe5fcb3",
-"de/d52/classMCU_1_1VPotRingLEDs__Base.html#a9d3f3fb69c11536a5d795df42cb722a5",
-"functions_o.html"
+"d1/d9f/classNoteButton.html#a2c8ccb65e5634d190b38873670a5b107",
+"d2/daf/classNoteButtonMatrix.html#a6bae640621972b14ad9c28b6b399f08f",
+"d3/d69/classManyButtonsSelector.html#a698d89514186aa0c29ea6fbc5bef1e06",
+"d4/d36/MIDI__Parser_8h.html#a70e06d59d135cc8807843fd8b79f6b43",
+"d5/d9b/CCButtonMatrix_8hpp.html",
+"d6/da6/MCU_8h.html#a0d5b301b547713fe18b71e1a482e08b7",
+"d8/d0b/classStreamDebugMIDI__Interface.html#a70967d594ff3bae938a3f1b30a319018",
+"d9/d24/RelativeCCSender_8hpp.html#af7774143941c236448d7c53f4347276b",
+"da/d0a/classMCU_1_1VULEDs__Base.html#a0bc33aa8712fd07c9c218ed35cc7dce3",
+"db/d2b/classBankable_1_1CCButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f",
+"dc/d45/classControl__Surface__.html#acabe7a649d24807ffacba4c87aba6a79",
+"dd/d16/classDoublyLinkedList.html#a00ad35f05ce61d50a4cb1e914aba50dd",
+"de/d52/classMCU_1_1VPotRingLEDs__Base.html#a867b2b78492f2cc693bfb17952acbe34",
+"functions_l.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

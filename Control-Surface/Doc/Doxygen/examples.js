@@ -6,6 +6,8 @@ var examples =
     [ "OLED-Demo.ino", "de/ddb/OLED-Demo_8ino-example.html", null ],
     [ "PushButtonsLEDs.ino", "d0/de3/PushButtonsLEDs_8ino-example.html", null ],
     [ "PushButtonsLEDsShiftRegMultiplex.ino", "d0/d1b/PushButtonsLEDsShiftRegMultiplex_8ino-example.html", null ],
+    [ "PushButtonsToggleLEDsShiftRegMultiplex.ino", "da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html", null ],
+    [ "ShiftRegisterBlink.ino", "d7/d5f/ShiftRegisterBlink_8ino-example.html", null ],
     [ "VUMeterLEDs-USB-DAC.ino", "df/dad/VUMeterLEDs-USB-DAC_8ino-example.html", null ],
     [ "VUMeterOLED-USB-DAC.ino", "d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html", null ]
 ];

@@ -1,5 +1,7 @@
 var NAVTREEINDEX9 =
 {
+"d9/d24/RelativeCCSender_8hpp.html#af7774143941c236448d7c53f4347276b":[4,0,119,1],
+"d9/d24/RelativeCCSender_8hpp_source.html":[4,0,119],
 "d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html":[4,0,147],
 "d9/d28/Hardware_2LEDs_2VULEDs_8hpp_source.html":[4,0,147],
 "d9/d35/ShiftRegisterOut_8cpp.html":[4,0,130],
@@ -88,7 +90,7 @@ var NAVTREEINDEX9 =
 "d9/d78/classHardwareSerialMIDI__Interface.html#ac5c80f3fbc75938d6387c503761fa555":[1,3,8,1],
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad61032be4eecf18e9a248f153b5e61a8":[1,3,8,3],
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad82ba06102163ff804b381364919d78b":[1,3,8,11],
-"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[5,7],
+"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[5,9],
 "d9/d98/ExtendedIOElement_8h.html":[4,0,56],
 "d9/d98/ExtendedIOElement_8h_source.html":[4,0,56],
 "d9/d99/Bankable_2PBPotentiometer_8hpp.html":[4,0,112],
@@ -247,7 +249,5 @@ var NAVTREEINDEX9 =
 "da/d0a/Groups_8h.html":[4,0,58],
 "da/d0a/Groups_8h_source.html":[4,0,58],
 "da/d0a/classMCU_1_1VULEDs__Base.html":[3,0,1,14],
-"da/d0a/classMCU_1_1VULEDs__Base.html#a03a7e70a7d34196153b508101a7bf63f":[3,0,1,14,18],
-"da/d0a/classMCU_1_1VULEDs__Base.html#a0bc33aa8712fd07c9c218ed35cc7dce3":[3,0,1,14,2],
-"da/d0a/classMCU_1_1VULEDs__Base.html#a0d8332b03ddd5b492937cc3ac047d124":[3,0,1,14,10]
+"da/d0a/classMCU_1_1VULEDs__Base.html#a03a7e70a7d34196153b508101a7bf63f":[3,0,1,14,18]
 };

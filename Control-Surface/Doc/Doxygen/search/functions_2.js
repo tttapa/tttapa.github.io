@@ -17,6 +17,6 @@ var searchData=
   ['blue',['blue',['../d1/d5c/classShiftRegisterOut.html#ab7de50fbe395ae38fd0be760e7b87208',1,'ShiftRegisterOut']]],
   ['bluetoothmidi_5finterface',['BluetoothMIDI_Interface',['../d0/d89/classBluetoothMIDI__Interface.html#ae406d082db68de691732ccfa35dbc751',1,'BluetoothMIDI_Interface']]],
   ['boolalpha',['boolalpha',['../da/d69/PrintStream_8cpp.html#aa88c44c66680f55fd42b3a19095aff3f',1,'boolalpha(Print &amp;printer):&#160;PrintStream.cpp'],['../dc/d48/PrintStream_8h.html#aa88c44c66680f55fd42b3a19095aff3f',1,'boolalpha(Print &amp;printer):&#160;PrintStream.cpp']]],
-  ['button',['Button',['../d1/d19/classButton.html#a1ccc15ff0a38286a609ee5cda2b9e2f4',1,'Button']]],
+  ['button',['Button',['../d1/d19/classButton.html#a3b36df1ae23c58aedb9e15a713159459',1,'Button::Button()'],['../d1/d19/classButton.html#a1ccc15ff0a38286a609ee5cda2b9e2f4',1,'Button::Button(pin_t pin)']]],
   ['buttonmatrix',['ButtonMatrix',['../d8/d6c/classButtonMatrix.html#ad77595d9dcb8623f01a73e6adc955a7b',1,'ButtonMatrix']]]
 ];
