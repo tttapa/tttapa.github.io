@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Hardware/Button.cpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/140.html'>Hardware</a>/Button.cpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L11'>[^]</a><a href='#L15'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L11' title='Defined at 11.'>invert</a>
+<li><a href='#L15' title='Defined at 15.'>getState</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#include</font> "<a href='103.html'>Button.h</a>"
+<a name='L2'>   2 
+<a name='L3'>   3 <b>using</b> <b>namespace</b> <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>;
+<a name='L4'>   4 
+<a name='L5'>   5 <a href='../R/14.html' title='Multiple refered from 29 places.'>Button</a>::Button(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/550.html' title='Multiple used in 30 places.'>pin</a>) : <a href='../Y/550.html' title='Multiple used in 30 places.'>pin</a>(<a href='../Y/550.html' title='Multiple used in 30 places.'>pin</a>) <font color='red'>{</font>
+<a name='L6'>   6     <i><font color='green'>// Enable the internal pull-up resistor on</font></i>
+<a name='L7'>   7     <i><font color='green'>// the pin with the button/switch</font></i>
+<a name='L8'>   8     <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>::<a href='../D/246.html' title='Multiple defined in 3 places.'>pinMode</a>(<a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>, <a href='../S/96.html#L22' title='Defined at 22 in Hardware/ExtendedInputOutput/ExtendedInputOutput.h.'>INPUT_PULLUP</a>);
+<a name='L9'>   9 <font color='red'>}</font>
+<a name='L10'>  10 
+<a name='L11'>  11 <b>void</b> <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a>::<a href='../S/103.html#L26' title='Refered from 26 in Hardware/Button.h.'>invert</a>() <font color='red'>{</font> <a href='../Y/476.html' title='Multiple used in 4 places.'>invertState</a> = <b>true</b>; <font color='red'>}</font>
+<a name='L12'>  12 
+<a name='L13'>  13 <b>bool</b> <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a>::<a href='../Y/476.html' title='Multiple used in 4 places.'>invertState</a> = <b>false</b>;
+<a name='L14'>  14 
+<a name='L15'>  15 <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a>::<a href='../S/103.html#L28' title='Defined at 28 in Hardware/Button.h.'>State</a> <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a>::<a href='../R/186.html' title='Multiple refered from 8 places.'>getState</a>() <font color='red'>{</font>
+<a name='L16'>  16     <a href='../S/103.html#L28' title='Defined at 28 in Hardware/Button.h.'>State</a> <a href='../Y/590.html' title='Multiple used in 4 places.'>rstate</a>;
+<a name='L17'>  17     <b>bool</b> <a href='../Y/621.html' title='Multiple used in 32 places.'>state</a> = <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>::<a href='../D/149.html' title='Multiple defined in 4 places.'>digitalRead</a>(<a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>) ^
+<a name='L18'>  18                  <a href='../Y/476.html' title='Multiple used in 4 places.'>invertState</a>; <i><font color='green'>// read the button state and invert</font></i>
+<a name='L19'>  19                               <i><font color='green'>// it if "invertState" is true</font></i>
+<a name='L20'>  20     <b>unsigned</b> <b>long</b> <a href='../Y/536.html' title='Multiple used in 3 places.'>now</a> = <a href='../Y/506.html' title='Multiple used in 11 places.'>millis</a>();
+<a name='L21'>  21     <b>if</b> (<a href='../Y/536.html' title='Multiple used in 3 places.'>now</a> - <a href='../Y/557.html' title='Multiple used in 7 places.'>prevBounceTime</a> &gt; <a href='../Y/424.html' title='Multiple used in 4 places.'>debounceTime</a>) <font color='red'>{</font> <i><font color='green'>// wait for state to stabilize</font></i>
+<a name='L22'>  22         <a href='../Y/590.html' title='Multiple used in 4 places.'>rstate</a> = <b>static_cast</b>&lt;<a href='../S/103.html#L28' title='Defined at 28 in Hardware/Button.h.'>State</a>&gt;((<a href='../Y/426.html' title='Multiple used in 4 places.'>debouncedState</a> &lt;&lt; 1) | <a href='../Y/621.html' title='Multiple used in 32 places.'>state</a>);
+<a name='L23'>  23         <a href='../Y/426.html' title='Multiple used in 4 places.'>debouncedState</a> = <a href='../Y/621.html' title='Multiple used in 32 places.'>state</a>;
+<a name='L24'>  24     <font color='red'>}</font> <b>else</b> <font color='red'>{</font>
+<a name='L25'>  25         <a href='../Y/590.html' title='Multiple used in 4 places.'>rstate</a> = <b>static_cast</b>&lt;<a href='../S/103.html#L28' title='Defined at 28 in Hardware/Button.h.'>State</a>&gt;(<a href='../Y/426.html' title='Multiple used in 4 places.'>debouncedState</a> &lt;&lt; 1 | <a href='../Y/426.html' title='Multiple used in 4 places.'>debouncedState</a>);
+<a name='L26'>  26     <font color='red'>}</font>
+<a name='L27'>  27     <b>if</b> (<a href='../Y/621.html' title='Multiple used in 32 places.'>state</a> != <a href='../Y/560.html' title='Multiple used in 6 places.'>prevState</a>) <font color='red'>{</font> <i><font color='green'>// Button is pressed, released or bounces</font></i>
+<a name='L28'>  28         <a href='../Y/557.html' title='Multiple used in 7 places.'>prevBounceTime</a> = <a href='../Y/536.html' title='Multiple used in 3 places.'>now</a>;
+<a name='L29'>  29         <a href='../Y/560.html' title='Multiple used in 6 places.'>prevState</a> = <a href='../Y/621.html' title='Multiple used in 32 places.'>state</a>;
+<a name='L30'>  30     <font color='red'>}</font>
+<a name='L31'>  31     <b>return</b> <a href='../Y/590.html' title='Multiple used in 4 places.'>rstate</a>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L11'>[^]</a><a href='#L15'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

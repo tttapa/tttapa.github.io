@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['banktype',['bankType',['../classBank.html#a73646decda6f1100f09599b8c37c75f0',1,'Bank']]]
+  ['banktype',['BankType',['../BankConfigAddressable_8hpp.html#a6fe085db0aa80588322c415f46d74bf1',1,'BankConfigAddressable.hpp']]]
 ];

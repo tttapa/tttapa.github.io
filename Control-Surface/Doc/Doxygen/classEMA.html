@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.15"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Control Surface: EMA&lt; shiftFac, int_t &gt; Class Template Reference</title>
+<title>Control Surface: EMA&lt; K, int_t &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,7 +25,7 @@
     extensions: ["tex2jax.js"],
     jax: ["input/TeX","output/SVG"],
 });
-</script><script type="text/javascript" async src="../MathJax/MathJax.js"></script>
+</script><script type="text/javascript" async="async" src="../MathJax/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 <link href="custom_stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
@@ -96,20 +96,146 @@ $(document).ready(function(){initNavTree('classEMA.html','');});
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
+<a href="#pri-static-attribs">Static Private Attributes</a> &#124;
 <a href="classEMA-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">EMA&lt; shiftFac, int_t &gt; Class Template Reference</div>  </div>
+<div class="title">EMA&lt; K, int_t &gt; Class Template Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class for single-pole infinite impulse response filters or exponential moving average filters.  
+ <a href="classEMA.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="EMA_8h_source.html">EMA.h</a>&gt;</code></p>
+<div class="dynheader">
+Collaboration diagram for EMA&lt; K, int_t &gt;:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="classEMA__coll__graph.svg" width="170" height="243"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aead94271436406398a1f7579f792d003"><td class="memItemLeft" align="right" valign="top"><a id="aead94271436406398a1f7579f792d003"></a>
-int_t&#160;</td><td class="memItemRight" valign="bottom"><b>filter</b> (int_t value)</td></tr>
-<tr class="separator:aead94271436406398a1f7579f792d003"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab0d7694cffaee5280d7e68f5a71f725e"><td class="memItemLeft" align="right" valign="top">int_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEMA.html#ab0d7694cffaee5280d7e68f5a71f725e">filter</a> (int_t input)</td></tr>
+<tr class="memdesc:ab0d7694cffaee5280d7e68f5a71f725e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Filter the input: Given \( x[n] \), calculate \( y[n] \).  <a href="#ab0d7694cffaee5280d7e68f5a71f725e">More...</a><br /></td></tr>
+<tr class="separator:ab0d7694cffaee5280d7e68f5a71f725e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ae4550b22dcf19b3e6c15e7ffa09aeefb"><td class="memItemLeft" align="right" valign="top">int_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEMA.html#ae4550b22dcf19b3e6c15e7ffa09aeefb">filtered</a> = 0</td></tr>
+<tr class="separator:ae4550b22dcf19b3e6c15e7ffa09aeefb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-attribs"></a>
+Static Private Attributes</h2></td></tr>
+<tr class="memitem:a612ffac5a18df3450d6f25aff4a7a15f"><td class="memItemLeft" align="right" valign="top">static constexpr int_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEMA.html#a612ffac5a18df3450d6f25aff4a7a15f">fixedPointAHalf</a> = 1 &lt;&lt; ((K * 2) - 1)</td></tr>
+<tr class="separator:a612ffac5a18df3450d6f25aff4a7a15f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><h3>template&lt;uint8_t K, class int_t&gt;<br />
+class EMA&lt; K, int_t &gt;</h3>
+
+<p class="">A class for single-pole infinite impulse response filters or exponential moving average filters. </p>
+<p class="">Straightforward implementation of the difference equation with a slight optimization by using a factor of two as the pole location (this means that no division or floating point operations are required).</p>
+<p class="">Difference equation: \( y[n] = \alpha·x[n]+(1-\alpha)·y[n-1] \) where \( \alpha = \left(\frac{1}{2}\right)^{K} \), \( x \) is the input sequence, and \( y \) is the output sequence.</p>
+<p class=""><a href="https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential%20Moving%20Average/">An in-depth explanation of the EMA filter</a></p>
+<p class="">Fixed-point integer arithmetic with a precision of \( 2K \) is used.</p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">K</td><td>The amount of bits to shift by. This determines the location of the pole in the <a class="el" href="classEMA.html" title="A class for single-pole infinite impulse response filters or exponential moving average filters.">EMA</a> transfer function, and therefore the cut-off frequency. </td></tr>
+    <tr><td class="paramname">int_t</td><td>The (signed) integer type to use for the input, intermediate values and the output. Should be at least \( M+1+2K \) bits wide, where \( M \) is the maximum number of bits of the input. In case of the Arduino's built-in ADC, \( M = 10 = \log_2(1024) \). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="EMA_8h_source.html#l00036">36</a> of file <a class="el" href="EMA_8h_source.html">EMA.h</a>.</p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ab0d7694cffaee5280d7e68f5a71f725e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0d7694cffaee5280d7e68f5a71f725e">&#9670;&nbsp;</a></span>filter()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint8_t K, class int_t&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">int_t <a class="el" href="classEMA.html">EMA</a>&lt; K, int_t &gt;::filter </td>
+          <td>(</td>
+          <td class="paramtype">int_t&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Filter the input: Given \( x[n] \), calculate \( y[n] \). </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">input</td><td>The new raw input value. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The new filtered output value. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="EMA_8h_source.html#l00055">55</a> of file <a class="el" href="EMA_8h_source.html">EMA.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae4550b22dcf19b3e6c15e7ffa09aeefb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4550b22dcf19b3e6c15e7ffa09aeefb">&#9670;&nbsp;</a></span>filtered</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint8_t K, class int_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int_t <a class="el" href="classEMA.html">EMA</a>&lt; K, int_t &gt;::filtered = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EMA_8h_source.html#l00048">48</a> of file <a class="el" href="EMA_8h_source.html">EMA.h</a>.</p>
+
+</div>
+</div>
+<a id="a612ffac5a18df3450d6f25aff4a7a15f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a612ffac5a18df3450d6f25aff4a7a15f">&#9670;&nbsp;</a></span>fixedPointAHalf</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;uint8_t K, class int_t&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr int_t <a class="el" href="classEMA.html">EMA</a>&lt; K, int_t &gt;::fixedPointAHalf = 1 &lt;&lt; ((K * 2) - 1)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EMA_8h_source.html#l00049">49</a> of file <a class="el" href="EMA_8h_source.html">EMA.h</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Helpers/<a class="el" href="EMA_8h_source.html">EMA.h</a></li>
+<li><a class="el" href="EMA_8h_source.html">EMA.h</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

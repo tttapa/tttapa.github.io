@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Display/DisplayHelpers.hpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/138.html'>Display</a>/DisplayHelpers.hpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L9'>[^]</a><a href='#L39'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='84.html#L4' title='Included from 4 in Display/DisplayElement.hpp.'>INCLUDED FROM</a></h2>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L9' title='Defined at 9.'>drawCircle</a>
+<li><a href='#L39' title='Defined at 39.'>fillCircle</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> &lt;Adafruit_GFX.h&gt;
+<a name='L4'>   4 
+<a name='L5'>   5 <i><font color='green'>/**</font></i>
+<a name='L6'>   6 <i><font color='green'> * @brief Draws the outline of a circle</font></i>
+<a name='L7'>   7 <i><font color='green'> * https://en.wikipedia.org/wiki/Midpoint_circle_algorithm</font></i>
+<a name='L8'>   8 <i><font color='green'> */</font></i>
+<a name='L9'>   9 <b>void</b> <a href='../R/135.html' title='Multiple refered from 2 places.'>drawCircle</a>(<a href='../Y/16.html' title='Multiple used in 9 places.'>Adafruit_GFX</a> &amp;<a href='../Y/435.html' title='Multiple used in 13 places.'>display</a>, <a href='../Y/473.html' title='Multiple used in 13 places.'>int16_t</a> <a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a>, <a href='../Y/473.html' title='Multiple used in 13 places.'>int16_t</a> <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a>, <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../Y/573.html' title='Multiple used in 9 places.'>radius</a>,
+<a name='L10'>  10                 <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../Y/406.html' title='Multiple used in 12 places.'>color</a>) <font color='red'>{</font>
+<a name='L11'>  11   <b>int</b> <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> = <a href='../Y/573.html' title='Multiple used in 9 places.'>radius</a>;
+<a name='L12'>  12   <b>int</b> <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a> = 0;
+<a name='L13'>  13   <b>int</b> <a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> = 0;
+<a name='L14'>  14 
+<a name='L15'>  15   <b>while</b> (<a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> &gt;= <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>) <font color='red'>{</font>
+<a name='L16'>  16     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/438.html' title='Multiple used in 8 places.'>drawPixel</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> + <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> + <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L17'>  17     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/438.html' title='Multiple used in 8 places.'>drawPixel</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> + <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> + <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L18'>  18     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/438.html' title='Multiple used in 8 places.'>drawPixel</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> - <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> + <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L19'>  19     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/438.html' title='Multiple used in 8 places.'>drawPixel</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> - <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> + <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L20'>  20     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/438.html' title='Multiple used in 8 places.'>drawPixel</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> - <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> - <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L21'>  21     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/438.html' title='Multiple used in 8 places.'>drawPixel</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> - <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> - <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L22'>  22     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/438.html' title='Multiple used in 8 places.'>drawPixel</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> + <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> - <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L23'>  23     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/438.html' title='Multiple used in 8 places.'>drawPixel</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> + <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> - <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L24'>  24 
+<a name='L25'>  25     <b>if</b> (<a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> &lt;= 0) <font color='red'>{</font>
+<a name='L26'>  26       <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>++;
+<a name='L27'>  27       <a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> += 2 * <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a> + 1;
+<a name='L28'>  28     <font color='red'>}</font>
+<a name='L29'>  29     <b>if</b> (<a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> &gt; 0) <font color='red'>{</font>
+<a name='L30'>  30       <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>--;
+<a name='L31'>  31       <a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> -= 2 * <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> + 1;
+<a name='L32'>  32     <font color='red'>}</font>
+<a name='L33'>  33   <font color='red'>}</font>
+<a name='L34'>  34 <font color='red'>}</font>
+<a name='L35'>  35 
+<a name='L36'>  36 <i><font color='green'>/**</font></i>
+<a name='L37'>  37 <i><font color='green'> * @brief Fills a circle</font></i>
+<a name='L38'>  38 <i><font color='green'> */</font></i>
+<a name='L39'>  39 <b>void</b> <a href='../S/85.html#L24' title='Refered from 24 in Display/VPotDisplay.hpp.'>fillCircle</a>(<a href='../Y/16.html' title='Multiple used in 9 places.'>Adafruit_GFX</a> &amp;<a href='../Y/435.html' title='Multiple used in 13 places.'>display</a>, <a href='../Y/473.html' title='Multiple used in 13 places.'>int16_t</a> <a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a>, <a href='../Y/473.html' title='Multiple used in 13 places.'>int16_t</a> <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a>, <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../Y/573.html' title='Multiple used in 9 places.'>radius</a>,
+<a name='L40'>  40                 <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../Y/406.html' title='Multiple used in 12 places.'>color</a>) <font color='red'>{</font>
+<a name='L41'>  41   <b>int</b> <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> = <a href='../Y/573.html' title='Multiple used in 9 places.'>radius</a>;
+<a name='L42'>  42   <b>int</b> <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a> = 0;
+<a name='L43'>  43   <b>int</b> <a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> = 0;
+<a name='L44'>  44 
+<a name='L45'>  45   <b>while</b> (<a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> &gt;= <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>) <font color='red'>{</font>
+<a name='L46'>  46     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/436.html' title='Multiple used in 5 places.'>drawFastHLine</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> - <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> + <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, 2 * <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L47'>  47     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/436.html' title='Multiple used in 5 places.'>drawFastHLine</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> - <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> + <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, 2 * <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L48'>  48     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/436.html' title='Multiple used in 5 places.'>drawFastHLine</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> - <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> - <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, 2 * <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L49'>  49     <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/436.html' title='Multiple used in 5 places.'>drawFastHLine</a>(<a href='../Y/668.html' title='Multiple used in 14 places.'>x0</a> - <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../Y/673.html' title='Multiple used in 14 places.'>y0</a> - <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>, 2 * <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L50'>  50 
+<a name='L51'>  51     <b>if</b> (<a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> &lt;= 0) <font color='red'>{</font>
+<a name='L52'>  52       <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>++;
+<a name='L53'>  53       <a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> += 2 * <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a> + 1;
+<a name='L54'>  54     <font color='red'>}</font>
+<a name='L55'>  55     <b>if</b> (<a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> &gt; 0) <font color='red'>{</font>
+<a name='L56'>  56       <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>--;
+<a name='L57'>  57       <a href='../Y/443.html' title='Multiple used in 10 places.'>err</a> -= 2 * <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> + 1;
+<a name='L58'>  58     <font color='red'>}</font>
+<a name='L59'>  59   <font color='red'>}</font>
+<a name='L60'>  60 <font color='red'>}</font>
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L9'>[^]</a><a href='#L39'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

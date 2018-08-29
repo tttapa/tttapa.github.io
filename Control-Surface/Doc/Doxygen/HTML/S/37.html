@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>MIDI_Parsers/USBMIDI_Parser.cpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/153.html'>MIDI_Parsers</a>/USBMIDI_Parser.cpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L5'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L5' title='Defined at 5.'>parse</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#include</font> "<a href='40.html'>USBMIDI_Parser.h</a>"
+<a name='L2'>   2 <font color='darkred'>#include</font> "<a href='49.html'>../Settings/SettingsWrapper.h</a>"
+<a name='L3'>   3 
+<a name='L4'>   4 <i><font color='green'>// http://www.usb.org/developers/docs/devclass_docs/midi10.pdf</font></i>
+<a name='L5'>   5 <a href='../S/38.html#L26' title='Defined at 26 in MIDI_Parsers/MIDI_Parser.h.'>MIDI_read_t</a> <a href='../Y/285.html' title='Multiple used in 3 places.'>USBMIDI_Parser</a>::<a href='../R/224.html' title='Multiple refered from 6 places.'>parse</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> *<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>)
+<a name='L6'>   6 <font color='red'>{</font>
+<a name='L7'>   7   <a href='../D/25.html' title='Multiple defined in 2 places.'>DEBUGREF</a>("MIDIUSB packet:\t" &lt;&lt; <a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a>
+<a name='L8'>   8         &lt;&lt; +<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[0] &lt;&lt; ' ' &lt;&lt; +<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[1] &lt;&lt; ' ' &lt;&lt; +<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[2] &lt;&lt; ' ' &lt;&lt; +<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[3] &lt;&lt; <a href='../S/30.html#L69' title='Defined at 69 in Helpers/PrintStream.cpp.'>dec</a>);
+<a name='L9'>   9   <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/47.html' title='Multiple used in 6 places.'>CIN</a> = (<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a>)<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[0] &lt;&lt; 4; <i><font color='green'>// MIDI USB cable index number</font></i>
+<a name='L10'>  10 
+<a name='L11'>  11   <b>if</b> (<a href='../Y/47.html' title='Multiple used in 6 places.'>CIN</a> &gt;= <a href='../Y/169.html' title='Multiple used in 4 places.'>NOTE_OFF</a> &amp;&amp; <a href='../Y/47.html' title='Multiple used in 6 places.'>CIN</a> &lt;= <a href='../Y/184.html' title='Multiple used in 2 places.'>PITCH_BEND</a>) <font color='red'>{</font> 
+<a name='L12'>  12     <i><font color='green'>// 2- or 3-byte MIDI event</font></i>
+<a name='L13'>  13    
+<a name='L14'>  14     <i><font color='green'>// uint8_t type = packet[1] &amp; 0xF0;</font></i>
+<a name='L15'>  15     <i><font color='green'>// if (CIN != type) // invalid MIDI USB packet</font></i>
+<a name='L16'>  16     <i><font color='green'>//    return NO_MESSAGE;</font></i>
+<a name='L17'>  17     <a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>.<a href='../Y/461.html' title='Multiple used in 14 places.'>header</a> = <a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[1];
+<a name='L18'>  18     <a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>.<a href='../Y/418.html' title='Multiple used in 20 places.'>data1</a> = <a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[2];
+<a name='L19'>  19     <a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>.<a href='../Y/419.html' title='Multiple used in 14 places.'>data2</a> = <a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[3];
+<a name='L20'>  20     <b>return</b> <a href='../S/38.html#L28' title='Defined at 28 in MIDI_Parsers/MIDI_Parser.h.'>CHANNEL_MESSAGE</a>;
+<a name='L21'>  21   <font color='red'>}</font>
+<a name='L22'>  22 
+<a name='L23'>  23 <font color='darkred'>#ifndef</font> <a href='../D/44.html' title='Multiple defined in 2 places.'>IGNORE_SYSEX</a>
+<a name='L24'>  24   <b>else</b> <b>if</b> (<a href='../Y/47.html' title='Multiple used in 6 places.'>CIN</a> == 0x40) <font color='red'>{</font> 
+<a name='L25'>  25     <i><font color='green'>// SysEx starts or continues (3 bytes)</font></i>
+<a name='L26'>  26     <b>if</b> (<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[1] == <a href='../Y/272.html' title='Multiple used in 8 places.'>SysExStart</a>)
+<a name='L27'>  27       <a href='../S/36.html#L4' title='Defined at 4 in MIDI_Parsers/MIDI_Parser.cpp.'>startSysEx</a>(); <i><font color='green'>// start a new message (overwrite previous unfinished message)</font></i>
+<a name='L28'>  28     <b>else</b> <b>if</b> (!<a href='../Y/579.html' title='Multiple used in 7 places.'>receivingSysEx</a>) <font color='red'>{</font> <i><font color='green'>// If we haven't received a SysExStart</font></i>
+<a name='L29'>  29       <a href='../D/25.html' title='Multiple defined in 2 places.'>DEBUGREF</a>(<a href='../S/27.html#L50' title='Defined at 50 in Helpers/Debug.hpp.'>F</a>("Error: No SysExStart received"));
+<a name='L30'>  30       <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>; <i><font color='green'>// ignore the data</font></i>
+<a name='L31'>  31     <font color='red'>}</font>
+<a name='L32'>  32     <a href='../S/36.html#L15' title='Defined at 15 in MIDI_Parsers/MIDI_Parser.cpp.'>addSysExByte</a>(<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[1]) &amp;&amp; <i><font color='green'>// add three data bytes to buffer</font></i>
+<a name='L33'>  33     <a href='../S/36.html#L15' title='Defined at 15 in MIDI_Parsers/MIDI_Parser.cpp.'>addSysExByte</a>(<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[2]) &amp;&amp; 
+<a name='L34'>  34     <a href='../S/36.html#L15' title='Defined at 15 in MIDI_Parsers/MIDI_Parser.cpp.'>addSysExByte</a>(<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[3]);
+<a name='L35'>  35     <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>; <i><font color='green'>// SysEx is not finished yet</font></i>
+<a name='L36'>  36   <font color='red'>}</font>
+<a name='L37'>  37 
+<a name='L38'>  38   <b>else</b> <b>if</b> (<a href='../Y/47.html' title='Multiple used in 6 places.'>CIN</a> == 0x50) <font color='red'>{</font> 
+<a name='L39'>  39     <i><font color='green'>// SysEx ends with following single byte (or Single-byte System Common Message, not implemented)</font></i>
+<a name='L40'>  40     <b>if</b> (<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[1] != <a href='../Y/270.html' title='Multiple used in 7 places.'>SysExEnd</a>) <font color='red'>{</font> <i><font color='green'>// System Common (not implemented)</font></i>
+<a name='L41'>  41       <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>;
+<a name='L42'>  42     <font color='red'>}</font> <b>else</b> <b>if</b> (!<a href='../Y/579.html' title='Multiple used in 7 places.'>receivingSysEx</a>) <font color='red'>{</font> <i><font color='green'>// If we haven't received a SysExStart</font></i>
+<a name='L43'>  43       <a href='../D/24.html' title='Multiple defined in 2 places.'>DEBUGFN</a>(<a href='../S/27.html#L50' title='Defined at 50 in Helpers/Debug.hpp.'>F</a>("Error: No SysExStart received"));
+<a name='L44'>  44       <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>; <i><font color='green'>// ignore the data</font></i>
+<a name='L45'>  45     <font color='red'>}</font>
+<a name='L46'>  46     <b>if</b> (
+<a name='L47'>  47       <a href='../S/36.html#L15' title='Defined at 15 in MIDI_Parsers/MIDI_Parser.cpp.'>addSysExByte</a>(<a href='../Y/270.html' title='Multiple used in 7 places.'>SysExEnd</a>)
+<a name='L48'>  48     ) <font color='red'>{</font>
+<a name='L49'>  49       <a href='../S/36.html#L10' title='Defined at 10 in MIDI_Parsers/MIDI_Parser.cpp.'>endSysEx</a>();
+<a name='L50'>  50       <b>return</b> <a href='../S/38.html#L29' title='Defined at 29 in MIDI_Parsers/MIDI_Parser.h.'>SYSEX_MESSAGE</a>;
+<a name='L51'>  51     <font color='red'>}</font> <b>else</b> 
+<a name='L52'>  52       <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>; <i><font color='green'>// Buffer full, ignore message</font></i>
+<a name='L53'>  53   <font color='red'>}</font>
+<a name='L54'>  54 
+<a name='L55'>  55   <b>else</b> <b>if</b> (<a href='../Y/47.html' title='Multiple used in 6 places.'>CIN</a> == 0x60) <font color='red'>{</font> 
+<a name='L56'>  56     <i><font color='green'>// SysEx ends with following two bytes</font></i>
+<a name='L57'>  57     <b>if</b> (<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[1] == <a href='../Y/272.html' title='Multiple used in 8 places.'>SysExStart</a>)
+<a name='L58'>  58       <a href='../S/36.html#L4' title='Defined at 4 in MIDI_Parsers/MIDI_Parser.cpp.'>startSysEx</a>(); <i><font color='green'>// start a new message (overwrite previous unfinished message)</font></i>
+<a name='L59'>  59     <b>else</b> <b>if</b> (!<a href='../Y/579.html' title='Multiple used in 7 places.'>receivingSysEx</a>) <font color='red'>{</font> <i><font color='green'>// If we haven't received a SysExStart</font></i>
+<a name='L60'>  60       <a href='../D/24.html' title='Multiple defined in 2 places.'>DEBUGFN</a>(<a href='../S/27.html#L50' title='Defined at 50 in Helpers/Debug.hpp.'>F</a>("Error: No SysExStart received"));
+<a name='L61'>  61       <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>; <i><font color='green'>// ignore the data</font></i>
+<a name='L62'>  62     <font color='red'>}</font>
+<a name='L63'>  63     <b>if</b> (  <i><font color='green'>// add two data bytes to buffer</font></i>
+<a name='L64'>  64       <a href='../S/36.html#L15' title='Defined at 15 in MIDI_Parsers/MIDI_Parser.cpp.'>addSysExByte</a>(<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[1]) &amp;&amp;
+<a name='L65'>  65       <a href='../S/36.html#L15' title='Defined at 15 in MIDI_Parsers/MIDI_Parser.cpp.'>addSysExByte</a>(<a href='../Y/270.html' title='Multiple used in 7 places.'>SysExEnd</a>)
+<a name='L66'>  66     ) <font color='red'>{</font>
+<a name='L67'>  67       <a href='../S/36.html#L10' title='Defined at 10 in MIDI_Parsers/MIDI_Parser.cpp.'>endSysEx</a>();
+<a name='L68'>  68       <b>return</b> <a href='../S/38.html#L29' title='Defined at 29 in MIDI_Parsers/MIDI_Parser.h.'>SYSEX_MESSAGE</a>;
+<a name='L69'>  69     <font color='red'>}</font> <b>else</b> 
+<a name='L70'>  70       <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>; <i><font color='green'>// Buffer full, ignore message</font></i>
+<a name='L71'>  71   <font color='red'>}</font>
+<a name='L72'>  72 
+<a name='L73'>  73   <b>else</b> <b>if</b> (<a href='../Y/47.html' title='Multiple used in 6 places.'>CIN</a> == 0x70) <font color='red'>{</font> 
+<a name='L74'>  74     <i><font color='green'>// SysEx ends with following three bytes</font></i>
+<a name='L75'>  75     <b>if</b> (<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[1] == <a href='../Y/272.html' title='Multiple used in 8 places.'>SysExStart</a>)
+<a name='L76'>  76       <a href='../S/36.html#L4' title='Defined at 4 in MIDI_Parsers/MIDI_Parser.cpp.'>startSysEx</a>(); <i><font color='green'>// start a new message (overwrite previous unfinished message)</font></i>
+<a name='L77'>  77     <b>else</b> <b>if</b> (!<a href='../Y/579.html' title='Multiple used in 7 places.'>receivingSysEx</a>) <i><font color='green'>// If we haven't received a SysExStart</font></i>
+<a name='L78'>  78     <font color='red'>{</font>
+<a name='L79'>  79       <a href='../D/24.html' title='Multiple defined in 2 places.'>DEBUGFN</a>(<a href='../S/27.html#L50' title='Defined at 50 in Helpers/Debug.hpp.'>F</a>("Error: No SysExStart received"));
+<a name='L80'>  80       <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>; <i><font color='green'>// ignore the data</font></i>
+<a name='L81'>  81     <font color='red'>}</font>
+<a name='L82'>  82     <b>if</b> ( <i><font color='green'>// add three data bytes to buffer</font></i>
+<a name='L83'>  83       <a href='../S/36.html#L15' title='Defined at 15 in MIDI_Parsers/MIDI_Parser.cpp.'>addSysExByte</a>(<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[1]) &amp;&amp; 
+<a name='L84'>  84       <a href='../S/36.html#L15' title='Defined at 15 in MIDI_Parsers/MIDI_Parser.cpp.'>addSysExByte</a>(<a href='../Y/545.html' title='Multiple used in 17 places.'>packet</a>[2]) &amp;&amp;
+<a name='L85'>  85       <a href='../S/36.html#L15' title='Defined at 15 in MIDI_Parsers/MIDI_Parser.cpp.'>addSysExByte</a>(<a href='../Y/270.html' title='Multiple used in 7 places.'>SysExEnd</a>)
+<a name='L86'>  86     ) <font color='red'>{</font>
+<a name='L87'>  87       <a href='../S/36.html#L10' title='Defined at 10 in MIDI_Parsers/MIDI_Parser.cpp.'>endSysEx</a>();
+<a name='L88'>  88       <b>return</b> <a href='../S/38.html#L29' title='Defined at 29 in MIDI_Parsers/MIDI_Parser.h.'>SYSEX_MESSAGE</a>;
+<a name='L89'>  89     <font color='red'>}</font>
+<a name='L90'>  90     <b>else</b>
+<a name='L91'>  91       <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>; <i><font color='green'>// Buffer full, ignore message</font></i>
+<a name='L92'>  92   <font color='red'>}</font>
+<a name='L93'>  93 <font color='darkred'>#endif</font> <i><font color='green'>// IGNORE_SYSEX</font></i>
+<a name='L94'>  94 
+<a name='L95'>  95   <i><font color='green'>/*</font></i>
+<a name='L96'>  96 <i><font color='green'>    else if (CIN == 0x00) // Miscellaneous function codes. Reserved for future extensions. (not implemented)</font></i>
+<a name='L97'>  97 <i><font color='green'>      ;</font></i>
+<a name='L98'>  98 <i><font color='green'>    else if (CIN == 0x10) // Cable events. Reserved for future expansion. (not implemented)</font></i>
+<a name='L99'>  99 <i><font color='green'>      ;</font></i>
+<a name='L100'> 100 <i><font color='green'>    else if (CIN == 0x20) // Two-byte System Common message (not implemented)</font></i>
+<a name='L101'> 101 <i><font color='green'>      ;</font></i>
+<a name='L102'> 102 <i><font color='green'>    else if (CIN == 0x30) // Three-byte System Common message (not implemented)</font></i>
+<a name='L103'> 103 <i><font color='green'>      ;</font></i>
+<a name='L104'> 104 <i><font color='green'>    else if (CIN == 0xF0) // Single Byte (not implemented)</font></i>
+<a name='L105'> 105 <i><font color='green'>      ;</font></i>
+<a name='L106'> 106 <i><font color='green'>  */</font></i>
+<a name='L107'> 107 
+<a name='L108'> 108   <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^]<a href='#L5'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

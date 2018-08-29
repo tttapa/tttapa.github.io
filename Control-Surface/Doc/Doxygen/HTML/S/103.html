@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>Hardware/Button.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/140.html'>Hardware</a>/Button.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/20.html' title='Multiple included from 7 places.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> &lt;<a href='96.html'>Hardware/ExtendedInputOutput/ExtendedInputOutput.h</a>&gt;
+<a name='L4'>   4 <font color='darkred'>#include</font> &lt;<a href='49.html'>Settings/SettingsWrapper.h</a>&gt;
+<a name='L5'>   5 
+<a name='L6'>   6 <i><font color='green'>/**</font></i>
+<a name='L7'>   7 <i><font color='green'> * @brief   A class for reading and debouncing buttons and switches.</font></i>
+<a name='L8'>   8 <i><font color='green'> */</font></i>
+<a name='L9'>   9 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a> <font color='red'>{</font>
+<a name='L10'>  10   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L11'>  11     <i><font color='green'>/**</font></i>
+<a name='L12'>  12 <i><font color='green'>     * @brief   Construct a new Button object.</font></i>
+<a name='L13'>  13 <i><font color='green'>     *</font></i>
+<a name='L14'>  14 <i><font color='green'>     * @param   pin</font></i>
+<a name='L15'>  15 <i><font color='green'>     *          The digital pin to read from. The internal pull-up resistor</font></i>
+<a name='L16'>  16 <i><font color='green'>     *          will be enabled.</font></i>
+<a name='L17'>  17 <i><font color='green'>     */</font></i>
+<a name='L18'>  18     <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>);
+<a name='L19'>  19 
+<a name='L20'>  20     <i><font color='green'>/**</font></i>
+<a name='L21'>  21 <i><font color='green'>     * @brief Invert the state of all buttons (button pressed is HIGH instead of</font></i>
+<a name='L22'>  22 <i><font color='green'>     * LOW).</font></i>
+<a name='L23'>  23 <i><font color='green'>     *</font></i>
+<a name='L24'>  24 <i><font color='green'>     * @note This affects **all** Button objects.</font></i>
+<a name='L25'>  25 <i><font color='green'>     */</font></i>
+<a name='L26'>  26     <b>static</b> <b>void</b> <a href='../S/101.html#L11' title='Defined at 11 in Hardware/Button.cpp.'>invert</a>();
+<a name='L27'>  27 
+<a name='L28'>  28     <b>enum</b> <a href='../R/92.html' title='Multiple refered from 11 places.'>State</a> <font color='red'>{</font>
+<a name='L29'>  29         Pressed = 0b00,
+<a name='L30'>  30         Released = 0b11,
+<a name='L31'>  31         <a href='../R/35.html' title='Multiple refered from 6 places.'>Falling</a> = 0b10,
+<a name='L32'>  32         <a href='../R/79.html' title='Multiple refered from 6 places.'>Rising</a> = 0b01
+<a name='L33'>  33     <font color='red'>}</font>;
+<a name='L34'>  34     <i><font color='green'>/**</font></i>
+<a name='L35'>  35 <i><font color='green'>     * @brief Get the state of the button.</font></i>
+<a name='L36'>  36 <i><font color='green'>     *</font></i>
+<a name='L37'>  37 <i><font color='green'>     * The button is debounced, the debounce time can be set in</font></i>
+<a name='L38'>  38 <i><font color='green'>     * Settings.h: #BUTTON_DEBOUNCE_TIME.</font></i>
+<a name='L39'>  39 <i><font color='green'>     *</font></i>
+<a name='L40'>  40 <i><font color='green'>     * ```</font></i>
+<a name='L41'>  41 <i><font color='green'>     * Debounce time: ├────┤</font></i>
+<a name='L42'>  42 <i><font color='green'>     *</font></i>
+<a name='L43'>  43 <i><font color='green'>     * Raw input:</font></i>
+<a name='L44'>  44 <i><font color='green'>     *    HIGH  ──────┐      ┌──────┐ ┌─┐      ┌─┐ ┌──────┐ ┌────────</font></i>
+<a name='L45'>  45 <i><font color='green'>     *    LOW         └──────┘      └─┘ └──────┘ └─┘      └─┘</font></i>
+<a name='L46'>  46 <i><font color='green'>     *                ├────┤ ├────┤ ├─┼─┼────┤ ├─┼─┼────┤ ├─┼────┤</font></i>
+<a name='L47'>  47 <i><font color='green'>     *</font></i>
+<a name='L48'>  48 <i><font color='green'>     * Debounced output:</font></i>
+<a name='L49'>  49 <i><font color='green'>     *    HIGH  ──────┐      ┌──────┐          ┌──────────┐      ┌───</font></i>
+<a name='L50'>  50 <i><font color='green'>     *    LOW         └──────┘      └──────────┘          └──────┘</font></i>
+<a name='L51'>  51 <i><font color='green'>     *</font></i>
+<a name='L52'>  52 <i><font color='green'>     * States:</font></i>
+<a name='L53'>  53 <i><font color='green'>     *    HIGH  ────────────────┐                  ┌─────────────────</font></i>
+<a name='L54'>  54 <i><font color='green'>     *    LOW                   └──────────────────┘</font></i>
+<a name='L55'>  55 <i><font color='green'>     *            RELEASED   FALLING   PRESSED   RISING</font></i>
+<a name='L56'>  56 <i><font color='green'>     * ```</font></i>
+<a name='L57'>  57 <i><font color='green'>     *</font></i>
+<a name='L58'>  58 <i><font color='green'>     * @return  The state of the button, either Button::PRESSED,</font></i>
+<a name='L59'>  59 <i><font color='green'>     *          Button::RELEASED, Button::FALLING or Button::RISING.</font></i>
+<a name='L60'>  60 <i><font color='green'>     */</font></i>
+<a name='L61'>  61     <a href='../S/103.html#L28' title='Defined at 28 in Hardware/Button.h.'>State</a> <a href='../S/101.html#L15' title='Defined at 15 in Hardware/Button.cpp.'>getState</a>();
+<a name='L62'>  62 
+<a name='L63'>  63   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L64'>  64     <b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>;
+<a name='L65'>  65 
+<a name='L66'>  66     <a href='../Y/380.html' title='Multiple used in 20 places.'>bool</a> <a href='../Y/560.html' title='Multiple used in 6 places.'>prevState</a> = <a href='../S/96.html#L9' title='Defined at 9 in Hardware/ExtendedInputOutput/ExtendedInputOutput.h.'>HIGH</a>;
+<a name='L67'>  67     <a href='../Y/380.html' title='Multiple used in 20 places.'>bool</a> <a href='../Y/426.html' title='Multiple used in 4 places.'>debouncedState</a> = <a href='../S/96.html#L9' title='Defined at 9 in Hardware/ExtendedInputOutput/ExtendedInputOutput.h.'>HIGH</a>;
+<a name='L68'>  68     <b>unsigned</b> <b>long</b> <a href='../Y/557.html' title='Multiple used in 7 places.'>prevBounceTime</a> = 0;
+<a name='L69'>  69 
+<a name='L70'>  70     <b>static</b> <a href='../Y/380.html' title='Multiple used in 20 places.'>bool</a> <a href='../Y/476.html' title='Multiple used in 4 places.'>invertState</a>;
+<a name='L71'>  71 
+<a name='L72'>  72     <i><font color='green'>// Edit this in Settings/Settings.h</font></i>
+<a name='L73'>  73     <a href='../Y/407.html' title='Multiple used in 206 places.'>constexpr</a> <b>static</b> <b>unsigned</b> <b>long</b> <a href='../Y/424.html' title='Multiple used in 4 places.'>debounceTime</a> = <a href='../S/48.html#L41' title='Defined at 41 in Settings/Settings.h.'>BUTTON_DEBOUNCE_TIME</a>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

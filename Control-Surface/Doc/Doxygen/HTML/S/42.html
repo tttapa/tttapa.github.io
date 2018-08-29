@@ -1,0 +1,105 @@
+<html>
+<head>
+<title>Control_Surface/Control_Surface_Class.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/137.html'>Control_Surface</a>/Control_Surface_Class.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/9.html' title='Multiple included from 7 places.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> &lt;<a href='18.html'>MIDI_Interfaces/USBMIDI_Interface.h</a>&gt;
+<a name='L4'>   4 
+<a name='L5'>   5 <font color='darkred'>#ifdef</font> <a href='../Y/58.html' title='Multiple used in 3 places.'>DISPLAY_GFX</a>
+<a name='L6'>   6 <font color='darkred'>#include</font> &lt;<a href='90.html'>Display/Display.hpp</a>&gt;
+<a name='L7'>   7 <font color='darkred'>#include</font> &lt;<a href='84.html'>Display/DisplayElement.hpp</a>&gt;
+<a name='L8'>   8 <font color='darkred'>#endif</font>
+<a name='L9'>   9 
+<a name='L10'>  10 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../S/43.html#L13' title='Defined at 13 in Control_Surface/Control_Surface_Class.cpp.'>Control_Surface_</a> <font color='red'>{</font>
+<a name='L11'>  11   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L12'>  12     <i><font color='green'>/**</font></i>
+<a name='L13'>  13 <i><font color='green'>     * @brief   Return the static Control_Surface_ instance.</font></i>
+<a name='L14'>  14 <i><font color='green'>     *          (Control_Surface_ is a singleton.)</font></i>
+<a name='L15'>  15 <i><font color='green'>     */</font></i>
+<a name='L16'>  16     <b>static</b> <a href='../S/43.html#L13' title='Defined at 13 in Control_Surface/Control_Surface_Class.cpp.'>Control_Surface_</a> &amp;<a href='../S/43.html#L8' title='Defined at 8 in Control_Surface/Control_Surface_Class.cpp.'>getInstance</a>();
+<a name='L17'>  17     <a href='../S/43.html#L13' title='Defined at 13 in Control_Surface/Control_Surface_Class.cpp.'>Control_Surface_</a>(<a href='../S/43.html#L13' title='Defined at 13 in Control_Surface/Control_Surface_Class.cpp.'>Control_Surface_</a> <b>const</b> &amp;) = <a href='../Y/430.html' title='Multiple used in 6 places.'>delete</a>;
+<a name='L18'>  18     <b>void</b> <a href='../Y/542.html' title='Multiple used in 18 places.'>operator</a>=(<a href='../S/43.html#L13' title='Defined at 13 in Control_Surface/Control_Surface_Class.cpp.'>Control_Surface_</a> <b>const</b> &amp;) = <a href='../Y/430.html' title='Multiple used in 6 places.'>delete</a>;
+<a name='L19'>  19     ~<a href='../S/43.html#L13' title='Defined at 13 in Control_Surface/Control_Surface_Class.cpp.'>Control_Surface_</a>();
+<a name='L20'>  20 
+<a name='L21'>  21     <i><font color='green'>/**</font></i>
+<a name='L22'>  22 <i><font color='green'>     * @brief Initialize the Control_Surface object.</font></i>
+<a name='L23'>  23 <i><font color='green'>     */</font></i>
+<a name='L24'>  24     <b>void</b> <a href='../D/135.html' title='Multiple defined in 3 places.'>begin</a>();
+<a name='L25'>  25     <i><font color='green'>/**</font></i>
+<a name='L26'>  26 <i><font color='green'>     * @brief Update all MIDI elements, send MIDI events and read MIDI input.</font></i>
+<a name='L27'>  27 <i><font color='green'>     */</font></i>
+<a name='L28'>  28     <b>void</b> <a href='../S/43.html#L30' title='Defined at 30 in Control_Surface/Control_Surface_Class.cpp.'>loop</a>();
+<a name='L29'>  29     <i><font color='green'>/**</font></i>
+<a name='L30'>  30 <i><font color='green'>     * @brief   Get the MIDI interface of the Control Surface.</font></i>
+<a name='L31'>  31 <i><font color='green'>     *</font></i>
+<a name='L32'>  32 <i><font color='green'>     * @return  A reference to the Control Surface's MIDI interface.</font></i>
+<a name='L33'>  33 <i><font color='green'>     */</font></i>
+<a name='L34'>  34     <a href='../S/22.html#L3' title='Defined at 3 in MIDI_Interfaces/MIDI_Interface.cpp.'>MIDI_Interface</a> &amp;<a href='../S/43.html#L39' title='Defined at 39 in Control_Surface/Control_Surface_Class.cpp.'>MIDI</a>();
+<a name='L35'>  35     <i><font color='green'>/**</font></i>
+<a name='L36'>  36 <i><font color='green'>     * @brief   Set the given MIDI interface as the Control Surface's interface.</font></i>
+<a name='L37'>  37 <i><font color='green'>     *</font></i>
+<a name='L38'>  38 <i><font color='green'>     * @param   midi</font></i>
+<a name='L39'>  39 <i><font color='green'>     *          The MIDI interface to use for input and output of the Control</font></i>
+<a name='L40'>  40 <i><font color='green'>     *          surface.</font></i>
+<a name='L41'>  41 <i><font color='green'>     */</font></i>
+<a name='L42'>  42     <b>void</b> <a href='../S/43.html#L45' title='Defined at 45 in Control_Surface/Control_Surface_Class.cpp.'>setMIDI_Interface</a>(<a href='../S/22.html#L3' title='Defined at 3 in MIDI_Interfaces/MIDI_Interface.cpp.'>MIDI_Interface</a> &amp;<a href='../Y/498.html' title='Multiple used in 15 places.'>midi</a>);
+<a name='L43'>  43 
+<a name='L44'>  44   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L45'>  45     <i><font color='green'>/**</font></i>
+<a name='L46'>  46 <i><font color='green'>     * @brief   Control_Surface_ is a singleton, so the constructor is private.</font></i>
+<a name='L47'>  47 <i><font color='green'>     */</font></i>
+<a name='L48'>  48     <a href='../S/43.html#L13' title='Defined at 13 in Control_Surface/Control_Surface_Class.cpp.'>Control_Surface_</a>() <font color='red'>{</font><font color='red'>}</font>
+<a name='L49'>  49     <a href='../S/22.html#L3' title='Defined at 3 in MIDI_Interfaces/MIDI_Interface.cpp.'>MIDI_Interface</a> *<a href='../Y/524.html' title='Multiple used in 6 places.'>new_midi</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L50'>  50     <a href='../S/22.html#L3' title='Defined at 3 in MIDI_Interfaces/MIDI_Interface.cpp.'>MIDI_Interface</a> *<a href='../Y/498.html' title='Multiple used in 15 places.'>midi</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L51'>  51     <i><font color='green'>/**</font></i>
+<a name='L52'>  52 <i><font color='green'>     * @brief   Update all MIDI_Control_Element%s.</font></i>
+<a name='L53'>  53 <i><font color='green'>     */</font></i>
+<a name='L54'>  54     <b>void</b> <a href='../S/43.html#L51' title='Defined at 51 in Control_Surface/Control_Surface_Class.cpp.'>updateControls</a>();
+<a name='L55'>  55     <i><font color='green'>/**</font></i>
+<a name='L56'>  56 <i><font color='green'>     * @brief   Update all Selector%s (BankSelector%s, Transposer%s,</font></i>
+<a name='L57'>  57 <i><font color='green'>     *          ProgramSelector%s).</font></i>
+<a name='L58'>  58 <i><font color='green'>     */</font></i>
+<a name='L59'>  59     <b>void</b> <a href='../S/43.html#L55' title='Defined at 55 in Control_Surface/Control_Surface_Class.cpp.'>updateSelectors</a>();
+<a name='L60'>  60     <b>void</b> <a href='../S/43.html#L61' title='Defined at 61 in Control_Surface/Control_Surface_Class.cpp.'>updateMidiInput</a>();
+<a name='L61'>  61     <b>void</b> <a href='../S/43.html#L123' title='Defined at 123 in Control_Surface/Control_Surface_Class.cpp.'>updateInputs</a>();
+<a name='L62'>  62 
+<a name='L63'>  63   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L64'>  64     <b>void</b> <a href='../Y/648.html' title='Multiple used in 2 places.'>updateDisplays</a>() <font color='red'>{</font>
+<a name='L65'>  65 <font color='darkred'>#ifdef</font> <a href='../Y/58.html' title='Multiple used in 3 places.'>DISPLAY_GFX</a>
+<a name='L66'>  66         <b>static</b> <b>unsigned</b> <b>long</b> <a href='../Y/566.html' title='Multiple used in 3 places.'>previousRefresh</a> = <a href='../Y/506.html' title='Multiple used in 11 places.'>millis</a>();
+<a name='L67'>  67 
+<a name='L68'>  68         <b>if</b> (<a href='../Y/506.html' title='Multiple used in 11 places.'>millis</a>() - <a href='../Y/566.html' title='Multiple used in 3 places.'>previousRefresh</a> &lt; 1000 / <a href='../S/48.html#L61' title='Defined at 61 in Settings/Settings.h.'>MAX_FPS</a>)
+<a name='L69'>  69             <b>return</b>;
+<a name='L70'>  70         <a href='../Y/566.html' title='Multiple used in 3 places.'>previousRefresh</a> += 1000 / <a href='../S/48.html#L61' title='Defined at 61 in Settings/Settings.h.'>MAX_FPS</a>;
+<a name='L71'>  71 
+<a name='L72'>  72         <b>for</b> (<a href='../S/90.html#L5' title='Defined at 5 in Display/Display.hpp.'>DisplayInterface</a> *<a href='../D/151.html' title='Multiple defined in 4 places.'>display</a> = <a href='../S/90.html#L5' title='Defined at 5 in Display/Display.hpp.'>DisplayInterface</a>::<a href='../D/189.html' title='Multiple defined in 3 places.'>getFirst</a>();
+<a name='L73'>  73              <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a> != <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>; <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a> = <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>-&gt;<a href='../D/195.html' title='Multiple defined in 3 places.'>getNext</a>())
+<a name='L74'>  74             <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>-&gt;clearDisplay();
+<a name='L75'>  75 
+<a name='L76'>  76         <b>for</b> (<a href='../S/84.html#L11' title='Defined at 11 in Display/DisplayElement.hpp.'>DisplayElement</a> *<a href='../Y/423.html' title='Multiple used in 3 places.'>de</a> = <a href='../S/84.html#L11' title='Defined at 11 in Display/DisplayElement.hpp.'>DisplayElement</a>::<a href='../D/189.html' title='Multiple defined in 3 places.'>getFirst</a>(); <a href='../Y/423.html' title='Multiple used in 3 places.'>de</a> != <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L77'>  77              <a href='../Y/423.html' title='Multiple used in 3 places.'>de</a> = <a href='../Y/423.html' title='Multiple used in 3 places.'>de</a>-&gt;<a href='../D/195.html' title='Multiple defined in 3 places.'>getNext</a>())
+<a name='L78'>  78             <a href='../Y/423.html' title='Multiple used in 3 places.'>de</a>-&gt;<a href='../D/152.html' title='Multiple defined in 5 places.'>draw</a>();
+<a name='L79'>  79 
+<a name='L80'>  80         <b>for</b> (<a href='../S/90.html#L5' title='Defined at 5 in Display/Display.hpp.'>DisplayInterface</a> *<a href='../D/151.html' title='Multiple defined in 4 places.'>display</a> = <a href='../S/90.html#L5' title='Defined at 5 in Display/Display.hpp.'>DisplayInterface</a>::<a href='../D/189.html' title='Multiple defined in 3 places.'>getFirst</a>();
+<a name='L81'>  81              <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a> != <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>; <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a> = <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>-&gt;<a href='../D/195.html' title='Multiple defined in 3 places.'>getNext</a>())
+<a name='L82'>  82             <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>-&gt;<a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>();
+<a name='L83'>  83 <font color='darkred'>#endif</font>
+<a name='L84'>  84     <font color='red'>}</font>
+<a name='L85'>  85 <font color='red'>}</font>;
+<a name='L86'>  86 
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<html>
+<head>
+<title>MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/149.html'>MIDI_Outputs</a>/<a href='../files/150.html'>Abstract</a>/AbstractMIDIOutput.hpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L22'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/68.html' title='Multiple included from 10 places.'>INCLUDED FROM</a></h2>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L22' title='Defined at 22.'>updateAll</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> &lt;<a href='24.html'>Helpers/LinkedList.h</a>&gt;
+<a name='L4'>   4 <font color='darkred'>#include</font> &lt;stdint.h&gt;
+<a name='L5'>   5 
+<a name='L6'>   6 <i><font color='green'>/**</font></i>
+<a name='L7'>   7 <i><font color='green'> * @brief   A base class for all MIDI output elements.</font></i>
+<a name='L8'>   8 <i><font color='green'> *</font></i>
+<a name='L9'>   9 <i><font color='green'> * All MIDI output elements are added to a linked list,</font></i>
+<a name='L10'>  10 <i><font color='green'> * so they can be updated all at once by simply looping over</font></i>
+<a name='L11'>  11 <i><font color='green'> * the entire list.</font></i>
+<a name='L12'>  12 <i><font color='green'> */</font></i>
+<a name='L13'>  13 <b>class</b> <a href='../R/3.html' title='Multiple refered from 16 places.'>AbstractMIDIOutput</a> <font color='red'>{</font>
+<a name='L14'>  14   <b>protected</b>:
+<a name='L15'>  15     AbstractMIDIOutput() <font color='red'>{</font> <a href='../Y/129.html' title='Multiple used in 52 places.'>LinkedList</a>::<a href='../Y/356.html' title='Multiple used in 18 places.'>append</a>(<b>this</b>, <a href='../Y/449.html' title='Multiple used in 66 places.'>first</a>, <a href='../Y/480.html' title='Multiple used in 51 places.'>last</a>); <font color='red'>}</font>
+<a name='L16'>  16 
+<a name='L17'>  17   <b>public</b>:
+<a name='L18'>  18     <b>virtual</b> ~AbstractMIDIOutput() <font color='red'>{</font> <a href='../Y/129.html' title='Multiple used in 52 places.'>LinkedList</a>::<a href='../S/111.html#L34' title='Defined at 34 in Banks/Bank.cpp.'>remove</a>(<b>this</b>, <a href='../Y/449.html' title='Multiple used in 66 places.'>first</a>, <a href='../Y/480.html' title='Multiple used in 51 places.'>last</a>); <font color='red'>}</font>
+<a name='L19'>  19 
+<a name='L20'>  20     <b>virtual</b> <b>void</b> <a href='../D/286.html' title='Multiple defined in 14 places.'>update</a>() = 0;
+<a name='L21'>  21 
+<a name='L22'>  22     <b>static</b> <b>void</b> <a href='../R/265.html' title='Multiple refered from 3 places.'>updateAll</a>() <font color='red'>{</font>
+<a name='L23'>  23         <b>for</b> (<a href='../S/123.html#L13' title='Defined at 13 in MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp.'>AbstractMIDIOutput</a> *<a href='../Y/441.html' title='Multiple used in 18 places.'>el</a> = <a href='../Y/449.html' title='Multiple used in 66 places.'>first</a>; <a href='../Y/441.html' title='Multiple used in 18 places.'>el</a>; <a href='../Y/441.html' title='Multiple used in 18 places.'>el</a> = <a href='../Y/441.html' title='Multiple used in 18 places.'>el</a>-&gt;<a href='../Y/525.html' title='Multiple used in 34 places.'>next</a>)
+<a name='L24'>  24             <a href='../Y/441.html' title='Multiple used in 18 places.'>el</a>-&gt;<a href='../D/286.html' title='Multiple defined in 14 places.'>update</a>();
+<a name='L25'>  25     <font color='red'>}</font>
+<a name='L26'>  26 
+<a name='L27'>  27   <b>private</b>:
+<a name='L28'>  28     <a href='../S/123.html#L13' title='Defined at 13 in MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp.'>AbstractMIDIOutput</a> *<a href='../Y/525.html' title='Multiple used in 34 places.'>next</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L29'>  29     <a href='../S/123.html#L13' title='Defined at 13 in MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp.'>AbstractMIDIOutput</a> *<a href='../Y/562.html' title='Multiple used in 21 places.'>previous</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L30'>  30     <b>static</b> <a href='../S/123.html#L13' title='Defined at 13 in MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp.'>AbstractMIDIOutput</a> *<a href='../Y/480.html' title='Multiple used in 51 places.'>last</a>;
+<a name='L31'>  31     <b>static</b> <a href='../S/123.html#L13' title='Defined at 13 in MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp.'>AbstractMIDIOutput</a> *<a href='../Y/449.html' title='Multiple used in 66 places.'>first</a>;
+<a name='L32'>  32 
+<a name='L33'>  33     <b>template</b> &lt;<b>class</b> <a href='../Y/178.html' title='Multiple used in 59 places.'>Node</a>&gt;
+<a name='L34'>  34     <b>friend</b> <b>void</b> <a href='../Y/129.html' title='Multiple used in 52 places.'>LinkedList</a>::append(<a href='../Y/178.html' title='Multiple used in 59 places.'>Node</a> *, <a href='../Y/178.html' title='Multiple used in 59 places.'>Node</a> *&amp;, <a href='../Y/178.html' title='Multiple used in 59 places.'>Node</a> *&amp;);
+<a name='L35'>  35     <b>template</b> &lt;<b>class</b> <a href='../Y/178.html' title='Multiple used in 59 places.'>Node</a>&gt;
+<a name='L36'>  36     <b>friend</b> <b>void</b> <a href='../Y/129.html' title='Multiple used in 52 places.'>LinkedList</a>::<a href='../S/111.html#L34' title='Defined at 34 in Banks/Bank.cpp.'>remove</a>(<a href='../Y/178.html' title='Multiple used in 59 places.'>Node</a> *, <a href='../Y/178.html' title='Multiple used in 59 places.'>Node</a> *&amp;, <a href='../Y/178.html' title='Multiple used in 59 places.'>Node</a> *&amp;);
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^]<a href='#L22'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

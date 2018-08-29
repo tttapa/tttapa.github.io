@@ -1,0 +1,307 @@
+<html>
+<head>
+<title>MIDI_Interfaces/DebugMIDI_Interface.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/148.html'>MIDI_Interfaces</a>/DebugMIDI_Interface.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='135.html#L58' title='Included from 58 in Control_Surface.h.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> "<a href='19.html'>SerialMIDI_Interface.h</a>"
+<a name='L4'>   4 
+<a name='L5'>   5 <b>const</b> <b>static</b> <b>char</b> *<a href='../Y/152.html' title='Multiple used in 3 places.'>MIDI_STATUS_TYPE_NAMES</a>[] = <font color='red'>{</font> <i><font color='green'>// @todo PROGMEM</font></i>
+<a name='L6'>   6     "Note Off\t",       "Note On\t\t",      "Key Pressure\t",
+<a name='L7'>   7     "Control Change\t", "Program Change\t", "Channel Pressure",
+<a name='L8'>   8     "Pitch Bend\t"<font color='red'>}</font>;
+<a name='L9'>   9 
+<a name='L10'>  10 <i><font color='green'>/**</font></i>
+<a name='L11'>  11 <i><font color='green'> * @brief   A class for MIDI interfaces sending and receiving </font></i>
+<a name='L12'>  12 <i><font color='green'> *          human-readable MIDI messages over a Stream.</font></i>
+<a name='L13'>  13 <i><font color='green'> */</font></i>
+<a name='L14'>  14 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/266.html' title='Multiple used in 4 places.'>StreamDebugMIDI_Interface</a> : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/267.html' title='Multiple used in 6 places.'>StreamMIDI_Interface</a> <font color='red'>{</font>
+<a name='L15'>  15   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L16'>  16     <i><font color='green'>/**</font></i>
+<a name='L17'>  17 <i><font color='green'>     * @brief   Construct a debug MIDI interface on the given Stream.</font></i>
+<a name='L18'>  18 <i><font color='green'>     * </font></i>
+<a name='L19'>  19 <i><font color='green'>     * @param   stream</font></i>
+<a name='L20'>  20 <i><font color='green'>     *          The Stream interface.</font></i>
+<a name='L21'>  21 <i><font color='green'>     */</font></i>
+<a name='L22'>  22     <a href='../Y/266.html' title='Multiple used in 4 places.'>StreamDebugMIDI_Interface</a>(<a href='../Y/265.html' title='Multiple used in 3 places.'>Stream</a> &amp;<a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>) : <a href='../Y/267.html' title='Multiple used in 6 places.'>StreamMIDI_Interface</a>(<a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L23'>  23 
+<a name='L24'>  24   <a href='../Y/571.html' title='Multiple used in 8 places.'>protected</a>:
+<a name='L25'>  25     <b>void</b> <a href='../Y/596.html' title='Multiple used in 12 places.'>sendImpl</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/490.html' title='Multiple used in 26 places.'>m</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/391.html' title='Multiple used in 30 places.'>c</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/416.html' title='Multiple used in 13 places.'>d2</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L26'>  26         <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/497.html' title='Multiple used in 6 places.'>messageType</a> = (<a href='../Y/490.html' title='Multiple used in 26 places.'>m</a> &gt;&gt; 4) - 8;
+<a name='L27'>  27         <b>if</b> (<a href='../Y/497.html' title='Multiple used in 6 places.'>messageType</a> &gt;= 7)
+<a name='L28'>  28             <b>return</b>;
+<a name='L29'>  29         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>(<a href='../Y/152.html' title='Multiple used in 3 places.'>MIDI_STATUS_TYPE_NAMES</a>[<a href='../Y/497.html' title='Multiple used in 6 places.'>messageType</a>]);
+<a name='L30'>  30         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>("\tChannel: ");
+<a name='L31'>  31         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>(<a href='../Y/391.html' title='Multiple used in 30 places.'>c</a> + 1);
+<a name='L32'>  32         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>("\tData 1: 0x");
+<a name='L33'>  33         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>(<a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a>, <a href='../Y/113.html' title='Multiple used in 5 places.'>HEX</a>);
+<a name='L34'>  34         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>("\tData 2: 0x");
+<a name='L35'>  35         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>(<a href='../Y/416.html' title='Multiple used in 13 places.'>d2</a>, <a href='../Y/113.html' title='Multiple used in 5 places.'>HEX</a>);
+<a name='L36'>  36         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>("\r\n");
+<a name='L37'>  37         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/30.html#L49' title='Defined at 49 in Helpers/PrintStream.cpp.'>flush</a>();
+<a name='L38'>  38     <font color='red'>}</font>
+<a name='L39'>  39 
+<a name='L40'>  40     <b>void</b> <a href='../Y/596.html' title='Multiple used in 12 places.'>sendImpl</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/490.html' title='Multiple used in 26 places.'>m</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/391.html' title='Multiple used in 30 places.'>c</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L41'>  41         <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/497.html' title='Multiple used in 6 places.'>messageType</a> = (<a href='../Y/490.html' title='Multiple used in 26 places.'>m</a> &gt;&gt; 4) - 8;
+<a name='L42'>  42         <b>if</b> (<a href='../Y/497.html' title='Multiple used in 6 places.'>messageType</a> &gt;= 7)
+<a name='L43'>  43             <b>return</b>;
+<a name='L44'>  44         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>(<a href='../Y/152.html' title='Multiple used in 3 places.'>MIDI_STATUS_TYPE_NAMES</a>[<a href='../Y/497.html' title='Multiple used in 6 places.'>messageType</a>]);
+<a name='L45'>  45         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>("\tChannel: ");
+<a name='L46'>  46         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>(<a href='../Y/391.html' title='Multiple used in 30 places.'>c</a> + 1);
+<a name='L47'>  47         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>("\tData 1: 0x");
+<a name='L48'>  48         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>(<a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a>, <a href='../Y/113.html' title='Multiple used in 5 places.'>HEX</a>);
+<a name='L49'>  49         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/13.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/TimeDisplay.hpp.'>print</a>("\r\n");
+<a name='L50'>  50         <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../S/30.html#L49' title='Defined at 49 in Helpers/PrintStream.cpp.'>flush</a>();
+<a name='L51'>  51     <font color='red'>}</font>
+<a name='L52'>  52 
+<a name='L53'>  53     <a href='../Y/661.html' title='Multiple used in 26 places.'>virtual</a> <a href='../S/38.html#L26' title='Defined at 26 in MIDI_Parsers/MIDI_Parser.h.'>MIDI_read_t</a> <a href='../Y/575.html' title='Multiple used in 10 places.'>read</a>() <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L54'>  54         <b>while</b> (<a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../Y/359.html' title='Multiple used in 2 places.'>available</a>() &gt; 0) <font color='red'>{</font>
+<a name='L55'>  55             <b>char</b> <a href='../Y/417.html' title='Multiple used in 30 places.'>data</a> = <a href='../Y/625.html' title='Multiple used in 31 places.'>stream</a>.<a href='../Y/575.html' title='Multiple used in 10 places.'>read</a>();
+<a name='L56'>  56 
+<a name='L57'>  57             <b>if</b> (<a href='../Y/477.html' title='Multiple used in 2 places.'>isHexChar</a>(<a href='../Y/638.html' title='Multiple used in 3 places.'>toLowerCase</a>(<a href='../Y/417.html' title='Multiple used in 30 places.'>data</a>))) <font color='red'>{</font>
+<a name='L58'>  58                 <a href='../Y/417.html' title='Multiple used in 30 places.'>data</a> = <a href='../Y/638.html' title='Multiple used in 3 places.'>toLowerCase</a>(<a href='../Y/417.html' title='Multiple used in 30 places.'>data</a>);
+<a name='L59'>  59                 <b>if</b> (<a href='../Y/450.html' title='Multiple used in 7 places.'>firstChar</a> == '\0') <font color='red'>{</font>
+<a name='L60'>  60                     <a href='../Y/450.html' title='Multiple used in 7 places.'>firstChar</a> = <a href='../Y/417.html' title='Multiple used in 30 places.'>data</a>;
+<a name='L61'>  61                 <font color='red'>}</font> <b>else</b> <b>if</b> (<a href='../Y/593.html' title='Multiple used in 8 places.'>secondChar</a> == '\0') <font color='red'>{</font>
+<a name='L62'>  62                     <a href='../Y/593.html' title='Multiple used in 8 places.'>secondChar</a> = <a href='../Y/417.html' title='Multiple used in 30 places.'>data</a>;
+<a name='L63'>  63                 <font color='red'>}</font> <b>else</b> <font color='red'>{</font>
+<a name='L64'>  64                     <a href='../Y/450.html' title='Multiple used in 7 places.'>firstChar</a> = <a href='../Y/593.html' title='Multiple used in 8 places.'>secondChar</a>;
+<a name='L65'>  65                     <a href='../Y/593.html' title='Multiple used in 8 places.'>secondChar</a> = <a href='../Y/417.html' title='Multiple used in 30 places.'>data</a>;
+<a name='L66'>  66                 <font color='red'>}</font>
+<a name='L67'>  67             <font color='red'>}</font> <b>else</b> <b>if</b> (<a href='../Y/478.html' title='Multiple used in 2 places.'>isWhiteSpace</a>(<a href='../Y/417.html' title='Multiple used in 30 places.'>data</a>) &amp;&amp; <a href='../Y/450.html' title='Multiple used in 7 places.'>firstChar</a> &amp;&amp; <a href='../Y/593.html' title='Multiple used in 8 places.'>secondChar</a>) <font color='red'>{</font>
+<a name='L68'>  68                 <i><font color='green'>// if we received two hex characters followed by</font></i>
+<a name='L69'>  69                 <i><font color='green'>// whitespace</font></i>
+<a name='L70'>  70                 <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/499.html' title='Multiple used in 12 places.'>midiByte</a> = <a href='../Y/463.html' title='Multiple used in 3 places.'>hexCharToNibble</a>(<a href='../Y/450.html' title='Multiple used in 7 places.'>firstChar</a>) &lt;&lt; 4 |
+<a name='L71'>  71                                    <a href='../Y/463.html' title='Multiple used in 3 places.'>hexCharToNibble</a>(<a href='../Y/593.html' title='Multiple used in 8 places.'>secondChar</a>);
+<a name='L72'>  72                 <a href='../Y/450.html' title='Multiple used in 7 places.'>firstChar</a> = '\0';
+<a name='L73'>  73                 <a href='../Y/593.html' title='Multiple used in 8 places.'>secondChar</a> = '\0';
+<a name='L74'>  74                 <a href='../S/38.html#L26' title='Defined at 26 in MIDI_Parsers/MIDI_Parser.h.'>MIDI_read_t</a> <a href='../Y/546.html' title='Multiple used in 12 places.'>parseResult</a> = <a href='../Y/547.html' title='Multiple used in 14 places.'>parser</a>.<a href='../D/244.html' title='Multiple defined in 2 places.'>parse</a>(<a href='../Y/499.html' title='Multiple used in 12 places.'>midiByte</a>);
+<a name='L75'>  75                 <b>if</b> (<a href='../Y/546.html' title='Multiple used in 12 places.'>parseResult</a> != <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>)
+<a name='L76'>  76                     <b>return</b> <a href='../Y/546.html' title='Multiple used in 12 places.'>parseResult</a>;
+<a name='L77'>  77             <font color='red'>}</font> <b>else</b> <font color='red'>{</font>
+<a name='L78'>  78                 ; <i><font color='green'>// Ignore any characters other than whitespace and hexadecimal digits</font></i>
+<a name='L79'>  79             <font color='red'>}</font>
+<a name='L80'>  80         <font color='red'>}</font>
+<a name='L81'>  81         <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>;
+<a name='L82'>  82     <font color='red'>}</font>
+<a name='L83'>  83 
+<a name='L84'>  84   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L85'>  85     <b>char</b> <a href='../Y/450.html' title='Multiple used in 7 places.'>firstChar</a>;
+<a name='L86'>  86     <b>char</b> <a href='../Y/593.html' title='Multiple used in 8 places.'>secondChar</a>;
+<a name='L87'>  87 
+<a name='L88'>  88     <i><font color='green'>/**</font></i>
+<a name='L89'>  89 <i><font color='green'>     * @brief   Check if a given character is a lowercase hexadecimal digit</font></i>
+<a name='L90'>  90 <i><font color='green'>     *          (0-9 or a-f).</font></i>
+<a name='L91'>  91 <i><font color='green'>     * </font></i>
+<a name='L92'>  92 <i><font color='green'>     * @param   hex</font></i>
+<a name='L93'>  93 <i><font color='green'>     *          The hexadecimal character to check.</font></i>
+<a name='L94'>  94 <i><font color='green'>     * @return  true</font></i>
+<a name='L95'>  95 <i><font color='green'>     *          The character is a lowercase hexadecimal digit.</font></i>
+<a name='L96'>  96 <i><font color='green'>     * @return  false</font></i>
+<a name='L97'>  97 <i><font color='green'>     *          The character is not a lowercase hexadecimal digit.</font></i>
+<a name='L98'>  98 <i><font color='green'>     */</font></i>
+<a name='L99'>  99     <a href='../Y/380.html' title='Multiple used in 20 places.'>bool</a> <a href='../Y/477.html' title='Multiple used in 2 places.'>isHexChar</a>(<b>char</b> <a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a>) <font color='red'>{</font>
+<a name='L100'> 100         <b>return</b> (<a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a> &gt;= '0' &amp;&amp; <a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a> &lt;= '9') || (<a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a> &gt;= 'a' &amp;&amp; <a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a> &lt;= 'f');
+<a name='L101'> 101     <font color='red'>}</font>
+<a name='L102'> 102     <i><font color='green'>/**</font></i>
+<a name='L103'> 103 <i><font color='green'>     * @brief   Convert a given letter to lower case, no effect if</font></i>
+<a name='L104'> 104 <i><font color='green'>     *          it's a digit (0 - 9) or if it's already lower case.</font></i>
+<a name='L105'> 105 <i><font color='green'>     */</font></i>
+<a name='L106'> 106     <b>char</b> <a href='../Y/638.html' title='Multiple used in 3 places.'>toLowerCase</a>(<b>char</b> <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>) <font color='red'>{</font> <b>return</b> <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> | 0b0100000; <font color='red'>}</font>
+<a name='L107'> 107     <i><font color='green'>/**</font></i>
+<a name='L108'> 108 <i><font color='green'>     * @brief   Convert a hexadecimal character to a 4-bit nibble.</font></i>
+<a name='L109'> 109 <i><font color='green'>     */</font></i>
+<a name='L110'> 110     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/463.html' title='Multiple used in 3 places.'>hexCharToNibble</a>(<b>char</b> <a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a>) <font color='red'>{</font>
+<a name='L111'> 111         <b>return</b> <a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a> &lt; 'a' ? <a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a> - '0' : <a href='../S/30.html#L54' title='Defined at 54 in Helpers/PrintStream.cpp.'>hex</a> - 'a' + 10;
+<a name='L112'> 112     <font color='red'>}</font>
+<a name='L113'> 113     <i><font color='green'>/**</font></i>
+<a name='L114'> 114 <i><font color='green'>     * @brief   Check if the given character is whitespace (SP, CR or LF).</font></i>
+<a name='L115'> 115 <i><font color='green'>     * </font></i>
+<a name='L116'> 116 <i><font color='green'>     * @return  true</font></i>
+<a name='L117'> 117 <i><font color='green'>     *          The given character is either a space,</font></i>
+<a name='L118'> 118 <i><font color='green'>     *          a carriage return or a line feed (SP, CR or LF).</font></i>
+<a name='L119'> 119 <i><font color='green'>     */</font></i>
+<a name='L120'> 120     <b>inline</b> <a href='../Y/380.html' title='Multiple used in 20 places.'>bool</a> <a href='../Y/478.html' title='Multiple used in 2 places.'>isWhiteSpace</a>(<b>char</b> <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>) <font color='red'>{</font>
+<a name='L121'> 121         <b>return</b> <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> == ' ' || <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> == '\r' || <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a> == '\n';
+<a name='L122'> 122     <font color='red'>}</font>
+<a name='L123'> 123 <font color='red'>}</font>;
+<a name='L124'> 124 
+<a name='L125'> 125 <i><font color='green'>/**</font></i>
+<a name='L126'> 126 <i><font color='green'> * @brief   A wrapper class for debug MIDI interfaces sending and receiving </font></i>
+<a name='L127'> 127 <i><font color='green'> *          human-readable MIDI messages over a Serial port of class T.</font></i>
+<a name='L128'> 128 <i><font color='green'> * </font></i>
+<a name='L129'> 129 <i><font color='green'> * @note    This is a template class because the class of the Serial object</font></i>
+<a name='L130'> 130 <i><font color='green'> *          is completely different on different architectures, and they</font></i>
+<a name='L131'> 131 <i><font color='green'> *          do not share a common super-class that has a `begin` method.</font></i>
+<a name='L132'> 132 <i><font color='green'> */</font></i>
+<a name='L133'> 133 <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/644.html' title='Multiple used in 2 places.'>typename</a> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a>&gt;
+<a name='L134'> 134 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a> : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/266.html' title='Multiple used in 4 places.'>StreamDebugMIDI_Interface</a> <font color='red'>{</font>
+<a name='L135'> 135   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L136'> 136     <i><font color='green'>/**</font></i>
+<a name='L137'> 137 <i><font color='green'>     * @brief   Construct a new Debug MIDI Interface on the given Serial interface</font></i>
+<a name='L138'> 138 <i><font color='green'>     *          with the given baud rate.</font></i>
+<a name='L139'> 139 <i><font color='green'>     * </font></i>
+<a name='L140'> 140 <i><font color='green'>     * @param   serial</font></i>
+<a name='L141'> 141 <i><font color='green'>     *          The Serial interface.</font></i>
+<a name='L142'> 142 <i><font color='green'>     * @param   baud</font></i>
+<a name='L143'> 143 <i><font color='green'>     *          The baud rate for the Serial interface.</font></i>
+<a name='L144'> 144 <i><font color='green'>     */</font></i>
+<a name='L145'> 145     <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>(<a href='../Y/273.html' title='Multiple used in 51 places.'>T</a> &amp;<a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>, <b>unsigned</b> <b>long</b> <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>)
+<a name='L146'> 146         : <a href='../Y/266.html' title='Multiple used in 4 places.'>StreamDebugMIDI_Interface</a>(<a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>), <a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>(<a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>), <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>(<a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L147'> 147     <i><font color='green'>/**</font></i>
+<a name='L148'> 148 <i><font color='green'>     * @brief   Start the Serial interface at the predefined baud rate.</font></i>
+<a name='L149'> 149 <i><font color='green'>     */</font></i>
+<a name='L150'> 150     <a href='../Y/661.html' title='Multiple used in 26 places.'>virtual</a> <b>void</b> <a href='../D/135.html' title='Multiple defined in 3 places.'>begin</a>() <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font> <a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>.<a href='../D/135.html' title='Multiple defined in 3 places.'>begin</a>(<a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>); <font color='red'>}</font>
+<a name='L151'> 151 
+<a name='L152'> 152   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L153'> 153     <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a> &amp;<a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>;
+<a name='L154'> 154     <b>const</b> <b>unsigned</b> <b>long</b> <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>;
+<a name='L155'> 155 <font color='red'>}</font>;
+<a name='L156'> 156 
+<a name='L157'> 157 <i><font color='green'>/**</font></i>
+<a name='L158'> 158 <i><font color='green'> * @brief   A class for debug MIDI interfaces sending and receiving </font></i>
+<a name='L159'> 159 <i><font color='green'> *          human-readable MIDI messages over a HardwareSerial port.</font></i>
+<a name='L160'> 160 <i><font color='green'> */</font></i>
+<a name='L161'> 161 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/116.html' title='Multiple used in 4 places.'>HardwareSerialDebugMIDI_Interface</a>
+<a name='L162'> 162     : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>&lt;<a href='../Y/115.html' title='Multiple used in 4 places.'>HardwareSerial</a>&gt; <font color='red'>{</font>
+<a name='L163'> 163   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L164'> 164     <i><font color='green'>/**</font></i>
+<a name='L165'> 165 <i><font color='green'>     * @brief   Construct a new Debug MIDI Interface on the given HardwareSerial </font></i>
+<a name='L166'> 166 <i><font color='green'>     *          interface with the given baud rate.</font></i>
+<a name='L167'> 167 <i><font color='green'>     * </font></i>
+<a name='L168'> 168 <i><font color='green'>     * @param   serial</font></i>
+<a name='L169'> 169 <i><font color='green'>     *          The HardwareSerial interface.</font></i>
+<a name='L170'> 170 <i><font color='green'>     * @param   baud</font></i>
+<a name='L171'> 171 <i><font color='green'>     *          The baud rate for the serial interface.</font></i>
+<a name='L172'> 172 <i><font color='green'>     */</font></i>
+<a name='L173'> 173     <a href='../Y/116.html' title='Multiple used in 4 places.'>HardwareSerialDebugMIDI_Interface</a>(<a href='../Y/115.html' title='Multiple used in 4 places.'>HardwareSerial</a> &amp;<a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>,
+<a name='L174'> 174                                       <b>unsigned</b> <b>long</b> <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>)
+<a name='L175'> 175         : <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>(<a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>, <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L176'> 176 <font color='red'>}</font>;
+<a name='L177'> 177 
+<a name='L178'> 178 <i><font color='green'>// The Serial USB connection</font></i>
+<a name='L179'> 179 <i><font color='green'>// (Why do I have to do this, why don't they all inherit from one single class?)</font></i>
+<a name='L180'> 180 
+<a name='L181'> 181 <i><font color='green'>// Boards without a USB connection (UNO, MEGA, Nano ...)</font></i>
+<a name='L182'> 182 <font color='darkred'>#if</font> !(<b>defined</b>(<a href='../Y/282.html' title='Multiple used in 7 places.'>USBCON</a>) || <b>defined</b>(<a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>))
+<a name='L183'> 183 <i><font color='green'>/**</font></i>
+<a name='L184'> 184 <i><font color='green'> * @brief   A class for debug MIDI interfaces sending and receiving </font></i>
+<a name='L185'> 185 <i><font color='green'> *          human-readable MIDI messages over the USB CDC connection.</font></i>
+<a name='L186'> 186 <i><font color='green'> * </font></i>
+<a name='L187'> 187 <i><font color='green'> *          Boards without a native USB connection (UNO, MEGA, Nano ...)</font></i>
+<a name='L188'> 188 <i><font color='green'> *          use HardwareSerial0 for USB communcication.</font></i>
+<a name='L189'> 189 <i><font color='green'> */</font></i>
+<a name='L190'> 190 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/283.html' title='Multiple used in 8 places.'>USBDebugMIDI_Interface</a> : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/116.html' title='Multiple used in 4 places.'>HardwareSerialDebugMIDI_Interface</a> <font color='red'>{</font>
+<a name='L191'> 191   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L192'> 192     <i><font color='green'>/**</font></i>
+<a name='L193'> 193 <i><font color='green'>     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.</font></i>
+<a name='L194'> 194 <i><font color='green'>     * </font></i>
+<a name='L195'> 195 <i><font color='green'>     * @param   baud</font></i>
+<a name='L196'> 196 <i><font color='green'>     *          The baud rate to start the USB Serial connection with.</font></i>
+<a name='L197'> 197 <i><font color='green'>     */</font></i>
+<a name='L198'> 198     <a href='../Y/283.html' title='Multiple used in 8 places.'>USBDebugMIDI_Interface</a>(<b>unsigned</b> <b>long</b> <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>)
+<a name='L199'> 199         : <a href='../Y/116.html' title='Multiple used in 4 places.'>HardwareSerialDebugMIDI_Interface</a>(<a href='../Y/242.html' title='Multiple used in 9 places.'>Serial</a>, <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L200'> 200 <font color='red'>}</font>;
+<a name='L201'> 201 
+<a name='L202'> 202 <i><font color='green'>// Teensies</font></i>
+<a name='L203'> 203 <font color='darkred'>#elif</font> <b>defined</b>(<a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>)
+<a name='L204'> 204 <i><font color='green'>/**</font></i>
+<a name='L205'> 205 <i><font color='green'> * @brief   A class for debug MIDI interfaces sending and receiving </font></i>
+<a name='L206'> 206 <i><font color='green'> *          human-readable MIDI messages over the USB Serial CDC connection.</font></i>
+<a name='L207'> 207 <i><font color='green'> * </font></i>
+<a name='L208'> 208 <i><font color='green'> *          The USB Serial connection `Serial` on Teensies is an instance of</font></i>
+<a name='L209'> 209 <i><font color='green'> *          the `usb_serial_class`.</font></i>
+<a name='L210'> 210 <i><font color='green'> */</font></i>
+<a name='L211'> 211 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/283.html' title='Multiple used in 8 places.'>USBDebugMIDI_Interface</a>
+<a name='L212'> 212     : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>&lt;<a href='../Y/655.html' title='Multiple used in 2 places.'>usb_serial_class</a>&gt; <font color='red'>{</font>
+<a name='L213'> 213   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L214'> 214     <i><font color='green'>/**</font></i>
+<a name='L215'> 215 <i><font color='green'>     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.</font></i>
+<a name='L216'> 216 <i><font color='green'>     * </font></i>
+<a name='L217'> 217 <i><font color='green'>     * @param   baud</font></i>
+<a name='L218'> 218 <i><font color='green'>     *          The baud rate to start the USB Serial connection with.</font></i>
+<a name='L219'> 219 <i><font color='green'>     */</font></i>
+<a name='L220'> 220     <a href='../Y/283.html' title='Multiple used in 8 places.'>USBDebugMIDI_Interface</a>(<b>unsigned</b> <b>long</b> <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>)
+<a name='L221'> 221         : <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>(<a href='../Y/242.html' title='Multiple used in 9 places.'>Serial</a>, <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L222'> 222 <font color='red'>}</font>;
+<a name='L223'> 223 
+<a name='L224'> 224 <i><font color='green'>// Arduino DUE</font></i>
+<a name='L225'> 225 <font color='darkred'>#elif</font> <b>defined</b>(<a href='../Y/4.html' title='Multiple used in 2 places.'>ARDUINO_ARCH_SAM</a>)
+<a name='L226'> 226 <i><font color='green'>/**</font></i>
+<a name='L227'> 227 <i><font color='green'> * @brief   A class for debug MIDI interfaces sending and receiving </font></i>
+<a name='L228'> 228 <i><font color='green'> *          human-readable MIDI messages over the USB Serial CDC connection.</font></i>
+<a name='L229'> 229 <i><font color='green'> * </font></i>
+<a name='L230'> 230 <i><font color='green'> *          The USB Serial connection `Serial` on the Arduino DUE is an </font></i>
+<a name='L231'> 231 <i><font color='green'> *          instance of the `UARTClass`.</font></i>
+<a name='L232'> 232 <i><font color='green'> */</font></i>
+<a name='L233'> 233 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/283.html' title='Multiple used in 8 places.'>USBDebugMIDI_Interface</a> : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>&lt;<a href='../Y/277.html' title='Multiple used in 2 places.'>UARTClass</a>&gt; <font color='red'>{</font>
+<a name='L234'> 234   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L235'> 235     <i><font color='green'>/**</font></i>
+<a name='L236'> 236 <i><font color='green'>     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.</font></i>
+<a name='L237'> 237 <i><font color='green'>     * </font></i>
+<a name='L238'> 238 <i><font color='green'>     * @param   baud</font></i>
+<a name='L239'> 239 <i><font color='green'>     *          The baud rate to start the USB Serial connection with.</font></i>
+<a name='L240'> 240 <i><font color='green'>     */</font></i>
+<a name='L241'> 241     <a href='../Y/283.html' title='Multiple used in 8 places.'>USBDebugMIDI_Interface</a>(<b>unsigned</b> <b>long</b> <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>)
+<a name='L242'> 242         : <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>(<a href='../Y/242.html' title='Multiple used in 9 places.'>Serial</a>, <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L243'> 243 <font color='red'>}</font>;
+<a name='L244'> 244 
+<a name='L245'> 245 <i><font color='green'>// Others (Leonardo, Micro ... )</font></i>
+<a name='L246'> 246 <font color='darkred'>#else</font>
+<a name='L247'> 247 <i><font color='green'>/**</font></i>
+<a name='L248'> 248 <i><font color='green'> * @brief   A class for debug MIDI interfaces sending and receiving </font></i>
+<a name='L249'> 249 <i><font color='green'> *          human-readable MIDI messages over the USB Serial CDC connection.</font></i>
+<a name='L250'> 250 <i><font color='green'> * </font></i>
+<a name='L251'> 251 <i><font color='green'> *          The USB Serial connection `Serial` on the Arduino Leonardo, Micro,</font></i>
+<a name='L252'> 252 <i><font color='green'> *          etc. is an instance of the `Serial_` class.</font></i>
+<a name='L253'> 253 <i><font color='green'> */</font></i>
+<a name='L254'> 254 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/283.html' title='Multiple used in 8 places.'>USBDebugMIDI_Interface</a> : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>&lt;<a href='../Y/246.html' title='Multiple used in 2 places.'>Serial_</a>&gt; <font color='red'>{</font>
+<a name='L255'> 255   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L256'> 256     <i><font color='green'>/**</font></i>
+<a name='L257'> 257 <i><font color='green'>     * @brief   Construct a USBDebugMIDI_Interface with the given baud rate.</font></i>
+<a name='L258'> 258 <i><font color='green'>     * </font></i>
+<a name='L259'> 259 <i><font color='green'>     * @param   baud</font></i>
+<a name='L260'> 260 <i><font color='green'>     *          The baud rate to start the USB Serial connection with.</font></i>
+<a name='L261'> 261 <i><font color='green'>     */</font></i>
+<a name='L262'> 262     <a href='../Y/283.html' title='Multiple used in 8 places.'>USBDebugMIDI_Interface</a>(<b>unsigned</b> <b>long</b> <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>)
+<a name='L263'> 263         : <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>(<a href='../Y/242.html' title='Multiple used in 9 places.'>Serial</a>, <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L264'> 264 <font color='red'>}</font>;
+<a name='L265'> 265 <font color='darkred'>#endif</font>
+<a name='L266'> 266 
+<a name='L267'> 267 <font color='darkred'>#if</font> <b>defined</b>(<a href='../Y/328.html' title='Multiple used in 2 places.'>__AVR__</a>) || <b>defined</b>(<a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>)
+<a name='L268'> 268 <font color='darkred'>#include</font> &lt;SoftwareSerial.h&gt;
+<a name='L269'> 269 <i><font color='green'>/**</font></i>
+<a name='L270'> 270 <i><font color='green'> * @brief   A class for debug MIDI interfaces sending and receiving </font></i>
+<a name='L271'> 271 <i><font color='green'> *          human-readable MIDI messages over a SoftwareSerial interface.</font></i>
+<a name='L272'> 272 <i><font color='green'> */</font></i>
+<a name='L273'> 273 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/252.html' title='Multiple used in 2 places.'>SoftwareSerialDebugMIDI_Interface</a>
+<a name='L274'> 274     : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>&lt;<a href='../Y/251.html' title='Multiple used in 4 places.'>SoftwareSerial</a>&gt; <font color='red'>{</font>
+<a name='L275'> 275   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L276'> 276     <i><font color='green'>/**</font></i>
+<a name='L277'> 277 <i><font color='green'>     * @brief   Construct a SoftwareSerialDebugMIDI_Interface on the given </font></i>
+<a name='L278'> 278 <i><font color='green'>     *          SoftwareSerial interface with the given baud rate.</font></i>
+<a name='L279'> 279 <i><font color='green'>     * </font></i>
+<a name='L280'> 280 <i><font color='green'>     * @param   serial</font></i>
+<a name='L281'> 281 <i><font color='green'>     *          The SoftwareSerial interface.</font></i>
+<a name='L282'> 282 <i><font color='green'>     * @param   baud</font></i>
+<a name='L283'> 283 <i><font color='green'>     *          The baud rate for the serial interface.</font></i>
+<a name='L284'> 284 <i><font color='green'>     */</font></i>
+<a name='L285'> 285     <a href='../Y/252.html' title='Multiple used in 2 places.'>SoftwareSerialDebugMIDI_Interface</a>(<a href='../Y/251.html' title='Multiple used in 4 places.'>SoftwareSerial</a> &amp;<a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>,
+<a name='L286'> 286                                       <b>unsigned</b> <b>long</b> <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>)
+<a name='L287'> 287         : <a href='../Y/243.html' title='Multiple used in 12 places.'>SerialDebugMIDI_Interface</a>(<a href='../Y/598.html' title='Multiple used in 16 places.'>serial</a>, <a href='../Y/371.html' title='Multiple used in 32 places.'>baud</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L288'> 288 <font color='red'>}</font>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

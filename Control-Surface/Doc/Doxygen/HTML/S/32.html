@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Helpers/BitArray.hpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/142.html'>Helpers</a>/BitArray.hpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L23'>[^]</a><a href='#L66'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='97.html#L3' title='Included from 3 in Hardware/ExtendedInputOutput/ShiftRegisterOut.h.'>INCLUDED FROM</a></h2>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L23' title='Defined at 23.'>get</a>
+<li><a href='#L27' title='Defined at 27.'>set</a>
+<li><a href='#L31' title='Defined at 31.'>clear</a>
+<li><a href='#L35' title='Defined at 35.'>set</a>
+<li><a href='#L42' title='Defined at 42.'>safeIndex</a>
+<li><a href='#L52' title='Defined at 52.'>getByte</a>
+<li><a href='#L57' title='Defined at 57.'>getBufferLength</a>
+<li><a href='#L60' title='Defined at 60.'>getBufferIndex</a>
+<li><a href='#L63' title='Defined at 63.'>getBufferBit</a>
+<li><a href='#L66' title='Defined at 66.'>getBufferMask</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#if</font> <b>defined</b>(<a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>) <i><font color='green'>// || ... // TODO</font></i>
+<a name='L4'>   4 <font color='darkred'>#define</font> <a href='../R/97.html' title='Multiple refered from 3 places.'>USE_UNIQUE_PTR</a> <i><font color='green'>// No extra memory usage on Teensy 3.2 using TD 1.41</font></i>
+<a name='L5'>   5 <font color='darkred'>#endif</font>
+<a name='L6'>   6 
+<a name='L7'>   7 <font color='darkred'>#include</font> "<a href='27.html'>Debug.hpp</a>"
+<a name='L8'>   8 <font color='darkred'>#include</font> &lt;stdint.h&gt;
+<a name='L9'>   9 <font color='darkred'>#ifdef</font> <a href='../S/32.html#L4' title='Defined at 4 in Helpers/BitArray.hpp.'>USE_UNIQUE_PTR</a>
+<a name='L10'>  10 <font color='darkred'>#include</font> &lt;memory&gt;
+<a name='L11'>  11 <font color='darkred'>#endif</font>
+<a name='L12'>  12 
+<a name='L13'>  13 <b>class</b> <a href='../S/97.html#L145' title='Refered from 145 in Hardware/ExtendedInputOutput/ShiftRegisterOut.h.'>BitArray</a> <font color='red'>{</font>
+<a name='L14'>  14   <b>public</b>:
+<a name='L15'>  15     BitArray(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/611.html' title='Multiple used in 10 places.'>size</a>)
+<a name='L16'>  16         : <a href='../Y/385.html' title='Multiple used in 7 places.'>bufferLength</a><font color='red'>{</font>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a>)((<a href='../Y/611.html' title='Multiple used in 10 places.'>size</a> + 7) / 8)<font color='red'>}</font>,
+<a name='L17'>  17           <a href='../Y/384.html' title='Multiple used in 20 places.'>buffer</a><font color='red'>{</font><b>new</b> uint8_t[<a href='../Y/385.html' title='Multiple used in 7 places.'>bufferLength</a>]()<font color='red'>}</font> <font color='red'>{</font><font color='red'>}</font>
+<a name='L18'>  18 
+<a name='L19'>  19 <font color='darkred'>#ifndef</font> <a href='../S/32.html#L4' title='Defined at 4 in Helpers/BitArray.hpp.'>USE_UNIQUE_PTR</a>
+<a name='L20'>  20     ~BitArray() <font color='red'>{</font> <b>delete</b>[] <a href='../Y/384.html' title='Multiple used in 20 places.'>buffer</a>; <font color='red'>}</font>
+<a name='L21'>  21 <font color='darkred'>#endif</font>
+<a name='L22'>  22 
+<a name='L23'>  23     <b>bool</b> <a href='../S/93.html#L19' title='Refered from 19 in Hardware/ExtendedInputOutput/ShiftRegisterOut.cpp.'>get</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>) <font color='red'>{</font>
+<a name='L24'>  24         <b>return</b> <a href='../Y/384.html' title='Multiple used in 20 places.'>buffer</a>[<a href='../S/32.html#L60' title='Defined at 60 in Helpers/BitArray.hpp.'>getBufferIndex</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>)] &amp; <a href='../S/32.html#L66' title='Defined at 66 in Helpers/BitArray.hpp.'>getBufferMask</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>);
+<a name='L25'>  25     <font color='red'>}</font>
+<a name='L26'>  26 
+<a name='L27'>  27     <b>void</b> <a href='../R/242.html' title='Multiple refered from 2 places.'>set</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>) <font color='red'>{</font>
+<a name='L28'>  28         <a href='../Y/384.html' title='Multiple used in 20 places.'>buffer</a>[<a href='../S/32.html#L60' title='Defined at 60 in Helpers/BitArray.hpp.'>getBufferIndex</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>)] |= <a href='../S/32.html#L66' title='Defined at 66 in Helpers/BitArray.hpp.'>getBufferMask</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>);
+<a name='L29'>  29     <font color='red'>}</font>
+<a name='L30'>  30 
+<a name='L31'>  31     <b>void</b> <a href='../S/32.html#L39' title='Refered from 39 in Helpers/BitArray.hpp.'>clear</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>) <font color='red'>{</font>
+<a name='L32'>  32         <a href='../Y/384.html' title='Multiple used in 20 places.'>buffer</a>[<a href='../S/32.html#L60' title='Defined at 60 in Helpers/BitArray.hpp.'>getBufferIndex</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>)] &amp;= ~<a href='../S/32.html#L66' title='Defined at 66 in Helpers/BitArray.hpp.'>getBufferMask</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>);
+<a name='L33'>  33     <font color='red'>}</font>
+<a name='L34'>  34 
+<a name='L35'>  35     <b>void</b> <a href='../R/242.html' title='Multiple refered from 2 places.'>set</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>, <b>bool</b> <a href='../Y/621.html' title='Multiple used in 32 places.'>state</a>) <font color='red'>{</font>
+<a name='L36'>  36         <b>if</b> (<a href='../Y/621.html' title='Multiple used in 32 places.'>state</a>)
+<a name='L37'>  37             <a href='../D/264.html' title='Multiple defined in 2 places.'>set</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>);
+<a name='L38'>  38         <b>else</b>
+<a name='L39'>  39             <a href='../S/32.html#L31' title='Defined at 31 in Helpers/BitArray.hpp.'>clear</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>);
+<a name='L40'>  40     <font color='red'>}</font>
+<a name='L41'>  41 
+<a name='L42'>  42     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../S/32.html#L61' title='Refered from 61 in Helpers/BitArray.hpp.'>safeIndex</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/389.html' title='Multiple used in 6 places.'>byteIndex</a>) <b>const</b> <font color='red'>{</font>
+<a name='L43'>  43         <b>if</b> (<a href='../Y/389.html' title='Multiple used in 6 places.'>byteIndex</a> &gt;= <a href='../S/32.html#L57' title='Defined at 57 in Helpers/BitArray.hpp.'>getBufferLength</a>()) <font color='red'>{</font>
+<a name='L44'>  44             <a href='../D/24.html' title='Multiple defined in 2 places.'>DEBUGFN</a>(<a href='../S/27.html#L50' title='Defined at 50 in Helpers/Debug.hpp.'>F</a>("Error: index out of bounds (")
+<a name='L45'>  45                     &lt;&lt; (<b>unsigned</b> <b>int</b>)<a href='../Y/389.html' title='Multiple used in 6 places.'>byteIndex</a> &lt;&lt; <a href='../S/27.html#L50' title='Defined at 50 in Helpers/Debug.hpp.'>F</a>(", length is ")
+<a name='L46'>  46                     &lt;&lt; (<b>unsigned</b> <b>int</b>)<a href='../S/32.html#L57' title='Defined at 57 in Helpers/BitArray.hpp.'>getBufferLength</a>() &lt;&lt; ')');
+<a name='L47'>  47             <a href='../D/32.html' title='Multiple defined in 2 places.'>ERROR</a>(<b>return</b> <a href='../S/32.html#L57' title='Defined at 57 in Helpers/BitArray.hpp.'>getBufferLength</a>() - 1);
+<a name='L48'>  48         <font color='red'>}</font>
+<a name='L49'>  49         <b>return</b> <a href='../Y/389.html' title='Multiple used in 6 places.'>byteIndex</a>;
+<a name='L50'>  50     <font color='red'>}</font>
+<a name='L51'>  51 
+<a name='L52'>  52     <b>inline</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/159.html' title='Multiple refered from 2 places.'>getByte</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/389.html' title='Multiple used in 6 places.'>byteIndex</a>) <b>const</b> <font color='red'>{</font>
+<a name='L53'>  53         <b>return</b> <a href='../Y/384.html' title='Multiple used in 20 places.'>buffer</a>[<a href='../Y/389.html' title='Multiple used in 6 places.'>byteIndex</a>];
+<a name='L54'>  54         <i><font color='green'>// return buffer[safeIndex(byteIndex)];</font></i>
+<a name='L55'>  55     <font color='red'>}</font>
+<a name='L56'>  56 
+<a name='L57'>  57     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/157.html' title='Multiple refered from 4 places.'>getBufferLength</a>() <b>const</b> <font color='red'>{</font> <b>return</b> <a href='../Y/385.html' title='Multiple used in 7 places.'>bufferLength</a>; <font color='red'>}</font>
+<a name='L58'>  58 
+<a name='L59'>  59   <b>private</b>:
+<a name='L60'>  60     <b>inline</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/156.html' title='Multiple refered from 3 places.'>getBufferIndex</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>) <b>const</b> <font color='red'>{</font>
+<a name='L61'>  61         <b>return</b> <a href='../S/32.html#L42' title='Defined at 42 in Helpers/BitArray.hpp.'>safeIndex</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a> &gt;&gt; 3); <i><font color='green'>// bitIndex / 8</font></i>
+<a name='L62'>  62     <font color='red'>}</font>
+<a name='L63'>  63     <b>inline</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../S/32.html#L67' title='Refered from 67 in Helpers/BitArray.hpp.'>getBufferBit</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>) <b>const</b> <font color='red'>{</font>
+<a name='L64'>  64         <b>return</b> <a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a> &amp; 0b111; <i><font color='green'>// bitIndex % 8</font></i>
+<a name='L65'>  65     <font color='red'>}</font>
+<a name='L66'>  66     <b>inline</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/158.html' title='Multiple refered from 3 places.'>getBufferMask</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>) <b>const</b> <font color='red'>{</font>
+<a name='L67'>  67         <b>return</b> 1 &lt;&lt; <a href='../S/32.html#L63' title='Defined at 63 in Helpers/BitArray.hpp.'>getBufferBit</a>(<a href='../Y/373.html' title='Multiple used in 15 places.'>bitIndex</a>);
+<a name='L68'>  68     <font color='red'>}</font>
+<a name='L69'>  69 
+<a name='L70'>  70     <b>const</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/385.html' title='Multiple used in 7 places.'>bufferLength</a>;
+<a name='L71'>  71 <font color='darkred'>#ifdef</font> <a href='../S/32.html#L4' title='Defined at 4 in Helpers/BitArray.hpp.'>USE_UNIQUE_PTR</a>
+<a name='L72'>  72     <a href='../D/281.html' title='Multiple defined in 13 places.'>std</a>::unique_ptr&lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a>[]&gt; <a href='../Y/384.html' title='Multiple used in 20 places.'>buffer</a>;
+<a name='L73'>  73 <font color='darkred'>#else</font>
+<a name='L74'>  74     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> *<a href='../Y/384.html' title='Multiple used in 20 places.'>buffer</a>;
+<a name='L75'>  75 <font color='darkred'>#endif</font>
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L23'>[^]</a><a href='#L66'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

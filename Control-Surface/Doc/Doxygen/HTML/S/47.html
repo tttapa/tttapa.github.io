@@ -1,0 +1,76 @@
+<html>
+<head>
+<title>Selectors/ProgramSelector.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/155.html'>Selectors</a>/ProgramSelector.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='135.html#L52' title='Included from 52 in Control_Surface.h.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <i><font color='green'>// #include &lt;Arduino.h&gt;</font></i>
+<a name='L4'>   4 <font color='darkred'>#include</font> "<a href='42.html'>../Control_Surface/Control_Surface_Class.h</a>"
+<a name='L5'>   5 <font color='darkred'>#include</font> "<a href='25.html'>../Helpers/Copy.hpp</a>"
+<a name='L6'>   6 <font color='darkred'>#include</font> "<a href='49.html'>../Settings/SettingsWrapper.h</a>"
+<a name='L7'>   7 <font color='darkred'>#include</font> "<a href='45.html'>./Selector.h</a>"
+<a name='L8'>   8 
+<a name='L9'>   9 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/198.html' title='Multiple used in 6 places.'>ProgramSelector</a> : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/240.html' title='Multiple used in 40 places.'>Selector</a> <font color='red'>{</font>
+<a name='L10'>  10   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L11'>  11     <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/1.html' title='Multiple used in 8 places.'>A</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>, <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a>... <a href='../Y/22.html' title='Multiple used in 6 places.'>Args</a>&gt;
+<a name='L12'>  12     <a href='../Y/198.html' title='Multiple used in 6 places.'>ProgramSelector</a>(<b>const</b> <a href='../Y/1.html' title='Multiple used in 8 places.'>A</a> (&amp;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>], <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>, <a href='../Y/22.html' title='Multiple used in 6 places.'>Args</a>... <a href='../Y/357.html' title='Multiple used in 4 places.'>args</a>)
+<a name='L13'>  13         : <a href='../Y/240.html' title='Multiple used in 40 places.'>Selector</a>(<a href='../Y/357.html' title='Multiple used in 4 places.'>args</a>...), <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>(<a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>) <font color='red'>{</font>
+<a name='L14'>  14         <a href='../Y/636.html' title='Multiple used in 24 places.'>this</a>-&gt;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a> = <a href='../Y/521.html' title='Multiple used in 8 places.'>new</a> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a>[<a href='../Y/520.html' title='Multiple used in 22 places.'>nb_settings</a>];
+<a name='L15'>  15         <a href='../S/25.html#L17' title='Defined at 17 in Helpers/Copy.hpp.'>copy</a>(<a href='../Y/636.html' title='Multiple used in 24 places.'>this</a>-&gt;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>, <a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>);
+<a name='L16'>  16     <font color='red'>}</font>
+<a name='L17'>  17 
+<a name='L18'>  18     <i><font color='green'>// initializer_lists are not supported with variadic templates, so overload</font></i>
+<a name='L19'>  19     <i><font color='green'>// them manually</font></i>
+<a name='L20'>  20 
+<a name='L21'>  21     <i><font color='green'>// Multiple buttons, no LEDs</font></i>
+<a name='L22'>  22     <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/1.html' title='Multiple used in 8 places.'>A</a>, <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>&gt;
+<a name='L23'>  23     <a href='../Y/198.html' title='Multiple used in 6 places.'>ProgramSelector</a>(<b>const</b> <a href='../Y/1.html' title='Multiple used in 8 places.'>A</a> (&amp;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>], <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>,
+<a name='L24'>  24                <b>const</b> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a> (&amp;<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>])
+<a name='L25'>  25         : <a href='../Y/240.html' title='Multiple used in 40 places.'>Selector</a>((<b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> (&amp;)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>])<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>), <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>(<a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>) <font color='red'>{</font>
+<a name='L26'>  26         <a href='../Y/636.html' title='Multiple used in 24 places.'>this</a>-&gt;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a> = <a href='../Y/521.html' title='Multiple used in 8 places.'>new</a> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a>[<a href='../Y/520.html' title='Multiple used in 22 places.'>nb_settings</a>];
+<a name='L27'>  27         <a href='../S/25.html#L17' title='Defined at 17 in Helpers/Copy.hpp.'>copy</a>(<a href='../Y/636.html' title='Multiple used in 24 places.'>this</a>-&gt;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>, <a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>);
+<a name='L28'>  28     <font color='red'>}</font>
+<a name='L29'>  29 
+<a name='L30'>  30     <i><font color='green'>// One (+1), two (+1, -1) or multiple buttons, multiple LEDs</font></i>
+<a name='L31'>  31     <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/1.html' title='Multiple used in 8 places.'>A</a>, <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a>, <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/216.html' title='Multiple used in 12 places.'>S</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>&gt;
+<a name='L32'>  32     <a href='../Y/198.html' title='Multiple used in 6 places.'>ProgramSelector</a>(<b>const</b> <a href='../Y/1.html' title='Multiple used in 8 places.'>A</a> (&amp;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>)[<a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>], <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>,
+<a name='L33'>  33                <b>const</b> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a> (&amp;<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>], <b>const</b> <a href='../Y/216.html' title='Multiple used in 12 places.'>S</a> (&amp;<a href='../Y/484.html' title='Multiple used in 26 places.'>ledPins</a>)[<a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>])
+<a name='L34'>  34         : <a href='../Y/240.html' title='Multiple used in 40 places.'>Selector</a>((<b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> (&amp;)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>])<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>, (<b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> (&amp;)[<a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>])<a href='../Y/484.html' title='Multiple used in 26 places.'>ledPins</a>),
+<a name='L35'>  35           <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>(<a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>) <font color='red'>{</font>
+<a name='L36'>  36         <a href='../Y/636.html' title='Multiple used in 24 places.'>this</a>-&gt;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a> = <a href='../Y/521.html' title='Multiple used in 8 places.'>new</a> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a>[<a href='../Y/520.html' title='Multiple used in 22 places.'>nb_settings</a>];
+<a name='L37'>  37         <a href='../S/25.html#L17' title='Defined at 17 in Helpers/Copy.hpp.'>copy</a>(<a href='../Y/636.html' title='Multiple used in 24 places.'>this</a>-&gt;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>, <a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>);
+<a name='L38'>  38     <font color='red'>}</font>
+<a name='L39'>  39 
+<a name='L40'>  40     <i><font color='green'>// One (+1) or two (+1, -1) buttons, no LEDs</font></i>
+<a name='L41'>  41     <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/1.html' title='Multiple used in 8 places.'>A</a>, <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>&gt;
+<a name='L42'>  42     <a href='../Y/198.html' title='Multiple used in 6 places.'>ProgramSelector</a>(<b>const</b> <a href='../Y/1.html' title='Multiple used in 8 places.'>A</a> (&amp;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>)[<a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>], <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>,
+<a name='L43'>  43                <b>const</b> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a> (&amp;<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>])
+<a name='L44'>  44         : <a href='../Y/240.html' title='Multiple used in 40 places.'>Selector</a>((<b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> (&amp;)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>])<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>, <a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>), <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>(<a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>) <font color='red'>{</font>
+<a name='L45'>  45         <a href='../Y/636.html' title='Multiple used in 24 places.'>this</a>-&gt;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a> = <a href='../Y/521.html' title='Multiple used in 8 places.'>new</a> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a>[<a href='../Y/520.html' title='Multiple used in 22 places.'>nb_settings</a>];
+<a name='L46'>  46         <a href='../S/25.html#L17' title='Defined at 17 in Helpers/Copy.hpp.'>copy</a>(<a href='../Y/636.html' title='Multiple used in 24 places.'>this</a>-&gt;<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>, <a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>);
+<a name='L47'>  47     <font color='red'>}</font>
+<a name='L48'>  48     ~<a href='../Y/198.html' title='Multiple used in 6 places.'>ProgramSelector</a>() <font color='red'>{</font> <a href='../Y/430.html' title='Multiple used in 6 places.'>delete</a>[] <a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>; <font color='red'>}</font>
+<a name='L49'>  49 
+<a name='L50'>  50   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L51'>  51     <b>void</b> <a href='../D/290.html' title='Multiple defined in 8 places.'>updateImpl</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/522.html' title='Multiple used in 24 places.'>newSetting</a>) <font color='red'>{</font>
+<a name='L52'>  52         <a href='../Y/56.html' title='Multiple used in 8 places.'>Control_Surface</a>.<a href='../S/43.html#L39' title='Defined at 39 in Control_Surface/Control_Surface_Class.cpp.'>MIDI</a>().<a href='../D/261.html' title='Multiple defined in 3 places.'>send</a>(<a href='../Y/188.html' title='Multiple used in 3 places.'>PROGRAM_CHANGE</a>, <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>,
+<a name='L53'>  53                                      <a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a>[<a href='../Y/522.html' title='Multiple used in 24 places.'>newSetting</a>]);
+<a name='L54'>  54     <font color='red'>}</font>
+<a name='L55'>  55 
+<a name='L56'>  56     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> *<a href='../Y/350.html' title='Multiple used in 27 places.'>addresses</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L57'>  57     <b>const</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

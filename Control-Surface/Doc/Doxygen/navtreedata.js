@@ -25,11 +25,13 @@ var NAVTREE =
 [
   [ "Control Surface", "index.html", [
     [ "Todo List", "todo.html", null ],
+    [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],
       [ "Namespace Members", "namespacemembers.html", [
-        [ "All", "namespacemembers.html", null ],
-        [ "Functions", "namespacemembers_func.html", null ]
+        [ "All", "namespacemembers.html", "namespacemembers_dup" ],
+        [ "Functions", "namespacemembers_func.html", null ],
+        [ "Variables", "namespacemembers_vars.html", "namespacemembers_vars" ]
       ] ]
     ] ],
     [ "Classes", "annotated.html", [
@@ -37,16 +39,24 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Functions", "functions_func.html", "functions_func" ],
+        [ "Variables", "functions_vars.html", "functions_vars" ],
+        [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
-        [ "Enumerator", "functions_eval.html", null ]
+        [ "Enumerator", "functions_eval.html", null ],
+        [ "Related Functions", "functions_rela.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
-        [ "All", "globals.html", null ],
+        [ "All", "globals.html", "globals_dup" ],
+        [ "Functions", "globals_func.html", null ],
+        [ "Variables", "globals_vars.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ],
         [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ],
@@ -56,11 +66,22 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"AnalogMultiplex_8h_source.html",
-"classExtendedIOElement.html#aff7b15138b06cd5a3ad438d2b8746111",
-"classMCU__VU__LED.html#a4c0d078ca3b8fa4c4f1fcadbce98d9f9",
-"classMIDI__Parser.html#a80c3e8ba1f058974c4c59d35092b3bed",
-"classVUDisplay.html#a32d0ac21a69571d35ca75bee5552851b"
+"Abstract_2MIDIButtonLatching_8hpp.html",
+"Error_8hpp_source.html",
+"MIDI__Parser_8h.html#a4d5f7c786c1a7480bd707642de92e109",
+"classAnalogMultiplex.html",
+"classBankable_1_1CCPotentiometer.html#ad4273e4aa2f15de8dbe478af16af259e",
+"classBankable_1_1MIDINoteLED.html#aa9f43b2f899a1022597f4cf885fb3eb3",
+"classCCButton.html#a2c8ccb65e5634d190b38873670a5b107",
+"classDoublyLinkedList_1_1reverse__node__iterator.html#a2029b54f3ab20d72a3be04f59daff71a",
+"classIncrementDecrementSelectorLEDs.html",
+"classMCU_1_1Bankable_1_1VU.html#a57b6615469e554c514a9ff56dc24908f",
+"classMCU_1_1VU.html#ac166479a8b8ade7b7abf109362f72b86",
+"classMIDIInputElement.html#a2110089781785e421888fdcf3badef23",
+"classManyButtonsSelector.html#acfabd4911411ebbfd96d4080103f4725",
+"classSelector.html#aedf651d52b4657c226a0407bc4558183",
+"classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32",
+"group__MIDIOutputElementConstructors.html#gad5314303f3a6f73e403d25602a663587"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

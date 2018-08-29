@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>Banks/BankSelector.hpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/136.html'>Banks</a>/BankSelector.hpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L35'>[^]</a><a href='#L60'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/4.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L35' title='Defined at 35.'>bank</a>
+<li><a href='#L44' title='Defined at 44.'>bank</a>
+<li><a href='#L53' title='Defined at 53.'>bank</a>
+<li><a href='#L60' title='Defined at 60.'>updateImpl</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> &lt;<a href='45.html'>Selectors/Selector.h</a>&gt;
+<a name='L4'>   4 <font color='darkred'>#include</font> &lt;<a href='107.html'>Banks/Bank.h</a>&gt;
+<a name='L5'>   5 
+<a name='L6'>   6 <i><font color='green'>/**</font></i>
+<a name='L7'>   7 <i><font color='green'> * @brief   A class for changing the setting of a Bank</font></i>
+<a name='L8'>   8 <i><font color='green'> *          depending on the selection of a Selector.</font></i>
+<a name='L9'>   9 <i><font color='green'> *</font></i>
+<a name='L10'>  10 <i><font color='green'> * Can be used for selecting fader banks,</font></i>
+<a name='L11'>  11 <i><font color='green'> * changing the channel of MIDI_Control_Element%s,</font></i>
+<a name='L12'>  12 <i><font color='green'> * transposing notes, displaying different tracks</font></i>
+<a name='L13'>  13 <i><font color='green'> * for MIDI_Input_Element%s, etc.</font></i>
+<a name='L14'>  14 <i><font color='green'> *</font></i>
+<a name='L15'>  15 <i><font color='green'> * Refer to the documentation of Selector for information</font></i>
+<a name='L16'>  16 <i><font color='green'> * on the different modes of operation.</font></i>
+<a name='L17'>  17 <i><font color='green'> */</font></i>
+<a name='L18'>  18 <b>class</b> <a href='../R/10.html' title='Multiple refered from 9 places.'>BankSelector</a> : <b>public</b> Selector <font color='red'>{</font>
+<a name='L19'>  19   <b>public</b>:
+<a name='L20'>  20     <i><font color='green'>/**</font></i>
+<a name='L21'>  21 <i><font color='green'>     * @see Selector::Selector</font></i>
+<a name='L22'>  22 <i><font color='green'>     */</font></i>
+<a name='L23'>  23     <b>template</b> &lt;<b>class</b>... <a href='../Y/22.html' title='Multiple used in 6 places.'>Args</a>&gt;
+<a name='L24'>  24     <a href='../S/109.html#L18' title='Defined at 18 in Banks/BankSelector.hpp.'>BankSelector</a>(<a href='../Y/33.html' title='Multiple used in 6 places.'>Bank</a> &amp;<a href='../R/113.html' title='Multiple refered from 32 places.'>bank</a>, <a href='../Y/22.html' title='Multiple used in 6 places.'>Args</a>... <a href='../Y/357.html' title='Multiple used in 4 places.'>args</a>) : <a href='../Y/240.html' title='Multiple used in 40 places.'>Selector</a>(<a href='../Y/357.html' title='Multiple used in 4 places.'>args</a>...), <a href='../Y/361.html' title='Multiple used in 9 places.'>bank</a>(<a href='../Y/361.html' title='Multiple used in 9 places.'>bank</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L25'>  25 
+<a name='L26'>  26     <i><font color='green'>// Initializer_lists are not supported with variadic templates, so overload</font></i>
+<a name='L27'>  27     <i><font color='green'>// them manually</font></i>
+<a name='L28'>  28 
+<a name='L29'>  29     <i><font color='green'>/**</font></i>
+<a name='L30'>  30 <i><font color='green'>     * @see Selector::Selector</font></i>
+<a name='L31'>  31 <i><font color='green'>     */</font></i>
+<a name='L32'>  32     <i><font color='green'>// Multiple buttons, no LEDs</font></i>
+<a name='L33'>  33     <b>template</b> &lt;<b>class</b> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>&gt;
+<a name='L34'>  34     <a href='../S/109.html#L18' title='Defined at 18 in Banks/BankSelector.hpp.'>BankSelector</a>(<a href='../Y/33.html' title='Multiple used in 6 places.'>Bank</a> &amp;<a href='../Y/361.html' title='Multiple used in 9 places.'>bank</a>, <b>const</b> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a> (&amp;<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>])
+<a name='L35'>  35         : <a href='../Y/240.html' title='Multiple used in 40 places.'>Selector</a>((<b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> (&amp;)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>])<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>), <a href='../R/113.html' title='Multiple refered from 32 places.'>bank</a>(<a href='../Y/361.html' title='Multiple used in 9 places.'>bank</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L36'>  36 
+<a name='L37'>  37     <i><font color='green'>/**</font></i>
+<a name='L38'>  38 <i><font color='green'>     * @see Selector::Selector</font></i>
+<a name='L39'>  39 <i><font color='green'>     */</font></i>
+<a name='L40'>  40     <i><font color='green'>// One (+1), two (+1, -1) or multiple buttons, multiple LEDs</font></i>
+<a name='L41'>  41     <b>template</b> &lt;<b>class</b> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a>, <b>class</b> <a href='../Y/216.html' title='Multiple used in 12 places.'>S</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>&gt;
+<a name='L42'>  42     <a href='../S/109.html#L18' title='Defined at 18 in Banks/BankSelector.hpp.'>BankSelector</a>(<a href='../Y/33.html' title='Multiple used in 6 places.'>Bank</a> &amp;<a href='../Y/361.html' title='Multiple used in 9 places.'>bank</a>, <b>const</b> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a> (&amp;<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>], <b>const</b> <a href='../Y/216.html' title='Multiple used in 12 places.'>S</a> (&amp;<a href='../Y/484.html' title='Multiple used in 26 places.'>ledPins</a>)[<a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>])
+<a name='L43'>  43         : <a href='../Y/240.html' title='Multiple used in 40 places.'>Selector</a>((<b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> (&amp;)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>])<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>, (<b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> (&amp;)[<a href='../Y/132.html' title='Multiple used in 19 places.'>M</a>])<a href='../Y/484.html' title='Multiple used in 26 places.'>ledPins</a>),
+<a name='L44'>  44           <a href='../R/113.html' title='Multiple refered from 32 places.'>bank</a>(<a href='../Y/361.html' title='Multiple used in 9 places.'>bank</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L45'>  45 
+<a name='L46'>  46     <i><font color='green'>/**</font></i>
+<a name='L47'>  47 <i><font color='green'>     * @see Selector::Selector</font></i>
+<a name='L48'>  48 <i><font color='green'>     */</font></i>
+<a name='L49'>  49     <i><font color='green'>// One (+1) or two (+1, -1) buttons, no LEDs</font></i>
+<a name='L50'>  50     <b>template</b> &lt;<b>class</b> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a>, <b>class</b> <a href='../Y/216.html' title='Multiple used in 12 places.'>S</a>, <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>&gt;
+<a name='L51'>  51     <a href='../S/109.html#L18' title='Defined at 18 in Banks/BankSelector.hpp.'>BankSelector</a>(<a href='../Y/33.html' title='Multiple used in 6 places.'>Bank</a> &amp;<a href='../Y/361.html' title='Multiple used in 9 places.'>bank</a>, <b>const</b> <a href='../Y/273.html' title='Multiple used in 51 places.'>T</a> (&amp;<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>], <a href='../Y/216.html' title='Multiple used in 12 places.'>S</a> <a href='../Y/520.html' title='Multiple used in 22 places.'>nb_settings</a>)
+<a name='L52'>  52         : <a href='../Y/240.html' title='Multiple used in 40 places.'>Selector</a>((<b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> (&amp;)[<a href='../Y/167.html' title='Multiple used in 64 places.'>N</a>])<a href='../Y/627.html' title='Multiple used in 38 places.'>switchPins</a>, (<a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a>)<a href='../Y/520.html' title='Multiple used in 22 places.'>nb_settings</a>),
+<a name='L53'>  53           <a href='../R/113.html' title='Multiple refered from 32 places.'>bank</a>(<a href='../Y/361.html' title='Multiple used in 9 places.'>bank</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L54'>  54 
+<a name='L55'>  55   <b>private</b>:
+<a name='L56'>  56     <a href='../S/111.html#L5' title='Defined at 5 in Banks/Bank.cpp.'>Bank</a> &amp;<a href='../D/131.html' title='Multiple defined in 4 places.'>bank</a>;
+<a name='L57'>  57     <i><font color='green'>/**</font></i>
+<a name='L58'>  58 <i><font color='green'>     * @brief   Update the bank setting with the new selector setting.</font></i>
+<a name='L59'>  59 <i><font color='green'>     */</font></i>
+<a name='L60'>  60     <b>void</b> <a href='../R/268.html' title='Multiple refered from 12 places.'>updateImpl</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/522.html' title='Multiple used in 24 places.'>newSetting</a>) <font color='red'>{</font> <a href='../D/131.html' title='Multiple defined in 4 places.'>bank</a>.<a href='../S/111.html#L25' title='Defined at 25 in Banks/Bank.cpp.'>setBankSetting</a>(<a href='../Y/522.html' title='Multiple used in 24 places.'>newSetting</a>); <font color='red'>}</font>
+<a name='L61'>  61 <font color='red'>}</font>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L35'>[^]</a><a href='#L60'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

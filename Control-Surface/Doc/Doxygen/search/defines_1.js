@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['button_5fdebounce_5ftime',['BUTTON_DEBOUNCE_TIME',['../Settings_8h.html#a83cdd160ac40ba3e1f36cf4c4d7e9a15',1,'Settings.h']]]
+  ['error',['ERROR',['../Error_8hpp.html#a72337c44fb2364f15aa51d3c4223f1c5',1,'Error.hpp']]],
+  ['ext_5fpin',['EXT_PIN',['../ExtendedInputOutput_8h.html#a187bb7f7f473287a8e4a847289d33c41',1,'ExtendedInputOutput.h']]]
 ];

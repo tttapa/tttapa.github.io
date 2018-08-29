@@ -1,0 +1,84 @@
+<html>
+<head>
+<title>Helpers/EMA.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/142.html'>Helpers</a>/EMA.h</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L55'>[^]</a>[v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='100.html#L4' title='Included from 4 in Hardware/FilteredAnalog.h.'>INCLUDED FROM</a></h2>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L55' title='Defined at 55.'>filter</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> &lt;stdint.h&gt;
+<a name='L4'>   4 
+<a name='L5'>   5 <i><font color='green'>/**</font></i>
+<a name='L6'>   6 <i><font color='green'> * @brief   A class for single-pole infinite impulse response filters</font></i>
+<a name='L7'>   7 <i><font color='green'> *          or exponential moving average filters.</font></i>
+<a name='L8'>   8 <i><font color='green'> *</font></i>
+<a name='L9'>   9 <i><font color='green'> * Straightforward implementation of the difference equation with a slight</font></i>
+<a name='L10'>  10 <i><font color='green'> * optimization by using a factor of two as the pole location (this means</font></i>
+<a name='L11'>  11 <i><font color='green'> * that no division or floating point operations are required).</font></i>
+<a name='L12'>  12 <i><font color='green'> *</font></i>
+<a name='L13'>  13 <i><font color='green'> * Difference equation: @f$ y[n] = \alpha·x[n]+(1-\alpha)·y[n-1] @f$</font></i>
+<a name='L14'>  14 <i><font color='green'> * where @f$ \alpha = \left(\frac{1}{2}\right)^{K} @f$, @f$ x @f$ is the</font></i>
+<a name='L15'>  15 <i><font color='green'> * input sequence, and @f$ y @f$ is the output sequence.</font></i>
+<a name='L16'>  16 <i><font color='green'> *</font></i>
+<a name='L17'>  17 <i><font color='green'> * [An in-depth explanation of the EMA filter]</font></i>
+<a name='L18'>  18 <i><font color='green'> * (https://tttapa.github.io/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential%20Moving%20Average/)</font></i>
+<a name='L19'>  19 <i><font color='green'> * </font></i>
+<a name='L20'>  20 <i><font color='green'> * Fixed-point integer arithmetic with a precision of @f$ 2K @f$ is used.</font></i>
+<a name='L21'>  21 <i><font color='green'> *</font></i>
+<a name='L22'>  22 <i><font color='green'> * @tparam  K</font></i>
+<a name='L23'>  23 <i><font color='green'> *          The amount of bits to shift by. This determines the location</font></i>
+<a name='L24'>  24 <i><font color='green'> *          of the pole in the EMA transfer function, and therefore the</font></i>
+<a name='L25'>  25 <i><font color='green'> *          cut-off frequency.</font></i>
+<a name='L26'>  26 <i><font color='green'> * @tparam  int_t</font></i>
+<a name='L27'>  27 <i><font color='green'> *          The (signed) integer type to use for the input, intermediate values</font></i>
+<a name='L28'>  28 <i><font color='green'> *          and the output.</font></i>
+<a name='L29'>  29 <i><font color='green'> *          Should be at least @f$ M+1+2K @f$ bits wide, where @f$ M @f$</font></i>
+<a name='L30'>  30 <i><font color='green'> *          is the maximum number of bits of the input.</font></i>
+<a name='L31'>  31 <i><font color='green'> *          In case of the Arduino's built-in ADC,</font></i>
+<a name='L32'>  32 <i><font color='green'> *          @f$ M = 10 = \log_2(1024) @f$.</font></i>
+<a name='L33'>  33 <i><font color='green'> *</font></i>
+<a name='L34'>  34 <i><font color='green'> */</font></i>
+<a name='L35'>  35 <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/121.html' title='Multiple used in 7 places.'>K</a>, <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a>&gt;
+<a name='L36'>  36 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/70.html' title='Multiple used in 3 places.'>EMA</a> <font color='red'>{</font>
+<a name='L37'>  37   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L38'>  38     <i><font color='green'>/**</font></i>
+<a name='L39'>  39 <i><font color='green'>     * @brief   Filter the input: Given @f$ x[n] @f$, calculate @f$ y[n] @f$.</font></i>
+<a name='L40'>  40 <i><font color='green'>     *</font></i>
+<a name='L41'>  41 <i><font color='green'>     * @param   input</font></i>
+<a name='L42'>  42 <i><font color='green'>     *          The new raw input value.</font></i>
+<a name='L43'>  43 <i><font color='green'>     * @return  The new filtered output value.</font></i>
+<a name='L44'>  44 <i><font color='green'>     */</font></i>
+<a name='L45'>  45     <a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a> <a href='../S/26.html#L55' title='Defined at 55 in Helpers/EMA.h.'>filter</a>(<a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a> <a href='../Y/470.html' title='Multiple used in 8 places.'>input</a>);
+<a name='L46'>  46 
+<a name='L47'>  47   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L48'>  48     <a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a> <a href='../Y/447.html' title='Multiple used in 4 places.'>filtered</a> = 0;
+<a name='L49'>  49     <a href='../Y/407.html' title='Multiple used in 206 places.'>constexpr</a> <b>static</b> <a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a> <a href='../Y/452.html' title='Multiple used in 2 places.'>fixedPointAHalf</a> = 1 &lt;&lt; ((<a href='../Y/121.html' title='Multiple used in 7 places.'>K</a> * 2) - 1);
+<a name='L50'>  50 <font color='red'>}</font>;
+<a name='L51'>  51 
+<a name='L52'>  52 <i><font color='green'>// ------------ Implementation ------------ //</font></i>
+<a name='L53'>  53 
+<a name='L54'>  54 <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/121.html' title='Multiple used in 7 places.'>K</a>, <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a>&gt;
+<a name='L55'>  55 <a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a> <a href='../Y/70.html' title='Multiple used in 3 places.'>EMA</a>&lt;<a href='../Y/121.html' title='Multiple used in 7 places.'>K</a>, <a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a>&gt;::<a href='../R/142.html' title='Multiple refered from 3 places.'>filter</a>(<a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a> <a href='../Y/470.html' title='Multiple used in 8 places.'>input</a>) <font color='red'>{</font>
+<a name='L56'>  56     <a href='../Y/470.html' title='Multiple used in 8 places.'>input</a> = <a href='../Y/470.html' title='Multiple used in 8 places.'>input</a> &lt;&lt; (<a href='../Y/121.html' title='Multiple used in 7 places.'>K</a> * 2);
+<a name='L57'>  57     <a href='../Y/475.html' title='Multiple used in 7 places.'>int_t</a> <a href='../Y/434.html' title='Multiple used in 2 places.'>difference</a> = <a href='../Y/470.html' title='Multiple used in 8 places.'>input</a> - <a href='../Y/447.html' title='Multiple used in 4 places.'>filtered</a>;
+<a name='L58'>  58     <a href='../Y/447.html' title='Multiple used in 4 places.'>filtered</a> = <a href='../Y/447.html' title='Multiple used in 4 places.'>filtered</a> + (<a href='../Y/434.html' title='Multiple used in 2 places.'>difference</a> &gt;&gt; <a href='../Y/121.html' title='Multiple used in 7 places.'>K</a>);
+<a name='L59'>  59     <b>return</b> (<a href='../Y/447.html' title='Multiple used in 4 places.'>filtered</a> + <a href='../Y/452.html' title='Multiple used in 2 places.'>fixedPointAHalf</a>) &gt;&gt; (<a href='../Y/121.html' title='Multiple used in 7 places.'>K</a> * 2);
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^]<a href='#L55'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

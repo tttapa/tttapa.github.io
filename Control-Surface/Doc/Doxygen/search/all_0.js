@@ -1,9 +1,10 @@
 var searchData=
 [
-  ['add',['add',['../classBank.html#a30b3469d9825fa2cce0bbcdae2b13983',1,'Bank::add(MIDI_Element *element, bankType type=CHANGE_ADDRESS)'],['../classBank.html#afb70801c4022d8e94f24ad9e25905bfb',1,'Bank::add(MIDI_Element &amp;element, bankType type=CHANGE_ADDRESS)'],['../classBank.html#a588b171a2011be347157157b238a15e2',1,'Bank::add(T(&amp;arr)[N], bankType type=CHANGE_ADDRESS)']]],
-  ['analog_5ffilter_5fshift_5ffactor',['ANALOG_FILTER_SHIFT_FACTOR',['../Settings_8h.html#a3af2086f183139c20f45b11f1e853140',1,'Settings.h']]],
-  ['analogbase',['AnalogBase',['../classAnalogBase.html',1,'AnalogBase'],['../classAnalogBase.html#a50b0873dd5a8276f81c64a43bad239fe',1,'AnalogBase::AnalogBase()']]],
-  ['analogcc',['AnalogCC',['../classAnalogCC.html',1,'AnalogCC'],['../classAnalogCC.html#a5de15e1193e7394996022800364dfdea',1,'AnalogCC::AnalogCC()']]],
-  ['analogmultiplex',['AnalogMultiplex',['../classAnalogMultiplex.html',1,'']]],
-  ['analogpb',['AnalogPB',['../classAnalogPB.html',1,'AnalogPB'],['../classAnalogPB.html#a38a05c49ce0d56eb12994e1691a0f6ad',1,'AnalogPB::AnalogPB()']]]
+  ['_5f_5fattribute_5f_5f',['__attribute__',['../VPotDisplay_8cpp.html#aaaf7fb73cb580a6986dcd52bcd295383',1,'__attribute__((weak))=0.4887:&#160;VPotDisplay.cpp'],['../ShiftRegisterOut_8cpp.html#acff335108b71a3141616b2d47d014abb',1,'__attribute__((weak))=0:&#160;ShiftRegisterOut.cpp']]],
+  ['_5fm_5fbase',['_M_base',['../struct__Setbase.html#a71ff2a1cb6bd223fbe45707260f6182f',1,'_Setbase']]],
+  ['_5fm_5fbytesep',['_M_bytesep',['../struct__Setbytesep.html#a989f53d5fa5b234defab96c330c31950',1,'_Setbytesep']]],
+  ['_5fm_5fn',['_M_n',['../struct__Setprecision.html#aa82dfb10f40dfa22ccef2975f6719181',1,'_Setprecision']]],
+  ['_5fsetbase',['_Setbase',['../struct__Setbase.html',1,'']]],
+  ['_5fsetbytesep',['_Setbytesep',['../struct__Setbytesep.html',1,'']]],
+  ['_5fsetprecision',['_Setprecision',['../struct__Setprecision.html',1,'']]]
 ];

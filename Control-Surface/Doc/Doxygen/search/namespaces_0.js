@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xbm',['XBM',['../namespaceXBM.html',1,'']]]
+  ['bankable',['Bankable',['../namespaceBankable.html',1,'']]]
 ];

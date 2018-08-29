@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['switchtype',['SwitchType',['../classSelector.html#a7079a2e1b053c0ddc5436cb163cb03e1',1,'Selector']]]
+  ['relativeccmode',['relativeCCmode',['../RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71d',1,'RelativeCCSender.hpp']]]
 ];

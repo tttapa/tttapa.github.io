@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>MIDI_Outputs/Abstract/MIDIButtonLatching.hpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/149.html'>MIDI_Outputs</a>/<a href='../files/150.html'>Abstract</a>/MIDIButtonLatching.hpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L24'>[^]</a><a href='#L27'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/70.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L24' title='Defined at 24.'>baseChannel</a>
+<li><a href='#L27' title='Defined at 27.'>update</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> &lt;<a href='123.html'>MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp</a>&gt;
+<a name='L4'>   4 <font color='darkred'>#include</font> &lt;<a href='103.html'>Hardware/Button.h</a>&gt;
+<a name='L5'>   5 
+<a name='L6'>   6 <i><font color='green'>/**</font></i>
+<a name='L7'>   7 <i><font color='green'> * @brief   A class for latching buttons and switches that send MIDI events.</font></i>
+<a name='L8'>   8 <i><font color='green'> *</font></i>
+<a name='L9'>   9 <i><font color='green'> * The button is debounced.</font></i>
+<a name='L10'>  10 <i><font color='green'> *</font></i>
+<a name='L11'>  11 <i><font color='green'> * @see     Button</font></i>
+<a name='L12'>  12 <i><font color='green'> */</font></i>
+<a name='L13'>  13 <b>template</b> &lt;<b>class</b> <a href='../Y/241.html' title='Multiple used in 24 places.'>Sender</a>&gt;
+<a name='L14'>  14 <b>class</b> <a href='../R/52.html' title='Multiple refered from 2 places.'>MIDIButtonLatching</a> : <b>public</b> <a href='../S/123.html#L13' title='Defined at 13 in MIDI_Outputs/Abstract/AbstractMIDIOutput.hpp.'>AbstractMIDIOutput</a> <font color='red'>{</font>
+<a name='L15'>  15   <b>protected</b>:
+<a name='L16'>  16     <i><font color='green'>/**</font></i>
+<a name='L17'>  17 <i><font color='green'>     * @brief   Construct a new MIDIButtonLatching.</font></i>
+<a name='L18'>  18 <i><font color='green'>     *</font></i>
+<a name='L19'>  19 <i><font color='green'>     * @param   pin</font></i>
+<a name='L20'>  20 <i><font color='green'>     *          The digital input pin with the button connected.</font></i>
+<a name='L21'>  21 <i><font color='green'>     *          The internal pull-up resistor will be enabled.</font></i>
+<a name='L22'>  22 <i><font color='green'>     */</font></i>
+<a name='L23'>  23     MIDIButtonLatching(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/550.html' title='Multiple used in 30 places.'>pin</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/367.html' title='Multiple used in 27 places.'>baseAddress</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/368.html' title='Multiple used in 32 places.'>baseChannel</a>)
+<a name='L24'>  24         : <a href='../Y/387.html' title='Multiple used in 21 places.'>button</a><font color='red'>{</font><a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a><font color='red'>}</font>, <a href='../S/1.html#L12' title='Defined at 12 in MIDI_Inputs/MIDI_Input_Element_Addressable.hpp.'>baseAddress</a>(<a href='../Y/367.html' title='Multiple used in 27 places.'>baseAddress</a>), <a href='../R/116.html' title='Multiple refered from 39 places.'>baseChannel</a>(<a href='../Y/368.html' title='Multiple used in 32 places.'>baseChannel</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L25'>  25 
+<a name='L26'>  26   <b>public</b>:
+<a name='L27'>  27     <b>void</b> <a href='../R/264.html' title='Multiple refered from 14 places.'>update</a>() <a href='../Y/448.html' title='Multiple used in 10 places.'>final</a> <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L28'>  28         <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a>::<a href='../S/103.html#L28' title='Defined at 28 in Hardware/Button.h.'>State</a> <a href='../Y/621.html' title='Multiple used in 32 places.'>state</a> = <a href='../Y/387.html' title='Multiple used in 21 places.'>button</a>.<a href='../S/101.html#L15' title='Defined at 15 in Hardware/Button.cpp.'>getState</a>();
+<a name='L29'>  29         <b>if</b> (<a href='../Y/621.html' title='Multiple used in 32 places.'>state</a> == <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a>::<a href='../S/103.html#L31' title='Defined at 31 in Hardware/Button.h.'>Falling</a> || <a href='../Y/621.html' title='Multiple used in 32 places.'>state</a> == <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a>::<a href='../S/103.html#L32' title='Defined at 32 in Hardware/Button.h.'>Rising</a>) <font color='red'>{</font>
+<a name='L30'>  30             <a href='../Y/241.html' title='Multiple used in 24 places.'>Sender</a>::<a href='../D/263.html' title='Multiple defined in 2 places.'>sendOn</a>(<a href='../D/134.html' title='Multiple defined in 6 places.'>baseChannel</a>, <a href='../S/1.html#L12' title='Defined at 12 in MIDI_Inputs/MIDI_Input_Element_Addressable.hpp.'>baseAddress</a>);
+<a name='L31'>  31             <a href='../Y/241.html' title='Multiple used in 24 places.'>Sender</a>::<a href='../D/262.html' title='Multiple defined in 2 places.'>sendOff</a>(<a href='../D/134.html' title='Multiple defined in 6 places.'>baseChannel</a>, <a href='../S/1.html#L12' title='Defined at 12 in MIDI_Inputs/MIDI_Input_Element_Addressable.hpp.'>baseAddress</a>);
+<a name='L32'>  32         <font color='red'>}</font>
+<a name='L33'>  33     <font color='red'>}</font>
+<a name='L34'>  34 
+<a name='L35'>  35   <b>private</b>:
+<a name='L36'>  36     <a href='../S/101.html#L5' title='Defined at 5 in Hardware/Button.cpp.'>Button</a> <a href='../Y/387.html' title='Multiple used in 21 places.'>button</a>;
+<a name='L37'>  37     <b>const</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../S/1.html#L12' title='Defined at 12 in MIDI_Inputs/MIDI_Input_Element_Addressable.hpp.'>baseAddress</a>;
+<a name='L38'>  38     <b>const</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../D/134.html' title='Multiple defined in 6 places.'>baseChannel</a>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L24'>[^]</a><a href='#L27'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

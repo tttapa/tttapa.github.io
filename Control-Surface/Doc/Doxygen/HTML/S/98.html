@@ -1,0 +1,52 @@
+<html>
+<head>
+<title>Hardware/ExtendedInputOutput/ExtendedIOElement.cpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/140.html'>Hardware</a>/<a href='../files/141.html'>ExtendedInputOutput</a>/ExtendedIOElement.cpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L5'>[^]</a><a href='#L21'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L5' title='Defined at 5.'>end</a>
+<li><a href='#L16' title='Defined at 16.'>getEnd</a>
+<li><a href='#L18' title='Defined at 18.'>getStart</a>
+<li><a href='#L20' title='Defined at 20.'>getNext</a>
+<li><a href='#L21' title='Defined at 21.'>getFirst</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#include</font> "<a href='92.html'>ExtendedIOElement.h</a>"
+<a name='L2'>   2 <font color='darkred'>#include</font> &lt;Arduino.h&gt;
+<a name='L3'>   3 
+<a name='L4'>   4 <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>::<a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/486.html' title='Multiple used in 10 places.'>length</a>)
+<a name='L5'>   5     : <a href='../Y/486.html' title='Multiple used in 10 places.'>length</a>(<a href='../Y/486.html' title='Multiple used in 10 places.'>length</a>), start(<a href='../Y/540.html' title='Multiple used in 15 places.'>offset</a>), <a href='../R/137.html' title='Multiple refered from 10 places.'>end</a>(<a href='../Y/540.html' title='Multiple used in 15 places.'>offset</a> + <a href='../Y/486.html' title='Multiple used in 10 places.'>length</a>) <font color='red'>{</font>
+<a name='L6'>   6     <a href='../Y/129.html' title='Multiple used in 52 places.'>LinkedList</a>::<a href='../Y/356.html' title='Multiple used in 18 places.'>append</a>(<b>this</b>, <a href='../Y/449.html' title='Multiple used in 66 places.'>first</a>, <a href='../Y/480.html' title='Multiple used in 51 places.'>last</a>);
+<a name='L7'>   7     <a href='../Y/540.html' title='Multiple used in 15 places.'>offset</a> = <a href='../S/98.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>end</a>;
+<a name='L8'>   8 <font color='red'>}</font>
+<a name='L9'>   9 
+<a name='L10'>  10 <a href='../R/30.html' title='Multiple refered from 28 places.'>ExtendedIOElement</a>::~<a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>() <font color='red'>{</font>
+<a name='L11'>  11     <a href='../Y/129.html' title='Multiple used in 52 places.'>LinkedList</a>::<a href='../S/111.html#L34' title='Defined at 34 in Banks/Bank.cpp.'>remove</a>(<b>this</b>, <a href='../Y/449.html' title='Multiple used in 66 places.'>first</a>, <a href='../Y/480.html' title='Multiple used in 51 places.'>last</a>);
+<a name='L12'>  12 <font color='red'>}</font>
+<a name='L13'>  13 
+<a name='L14'>  14 <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>::<a href='../R/225.html' title='Multiple refered from 93 places.'>pin</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/544.html' title='Multiple used in 4 places.'>p</a>) <font color='red'>{</font> <b>return</b> <a href='../Y/544.html' title='Multiple used in 4 places.'>p</a> + <a href='../Y/618.html' title='Multiple used in 3 places.'>start</a>; <font color='red'>}</font>
+<a name='L15'>  15 
+<a name='L16'>  16 <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>::<a href='../R/169.html' title='Multiple refered from 2 places.'>getEnd</a>() <font color='red'>{</font> <b>return</b> <a href='../S/98.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>end</a>; <font color='red'>}</font>
+<a name='L17'>  17 
+<a name='L18'>  18 <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>::<a href='../R/183.html' title='Multiple refered from 6 places.'>getStart</a>() <font color='red'>{</font> <b>return</b> <a href='../Y/618.html' title='Multiple used in 3 places.'>start</a>; <font color='red'>}</font>
+<a name='L19'>  19 
+<a name='L20'>  20 <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a> *<a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>::<a href='../R/176.html' title='Multiple refered from 7 places.'>getNext</a>() <font color='red'>{</font> <b>return</b> <a href='../Y/525.html' title='Multiple used in 34 places.'>next</a>; <font color='red'>}</font>
+<a name='L21'>  21 <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a> *<a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>::<a href='../R/170.html' title='Multiple refered from 7 places.'>getFirst</a>() <font color='red'>{</font> <b>return</b> <a href='../Y/449.html' title='Multiple used in 66 places.'>first</a>; <font color='red'>}</font>
+<a name='L22'>  22 
+<a name='L23'>  23 <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a> *<a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>::<a href='../Y/449.html' title='Multiple used in 66 places.'>first</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L24'>  24 <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a> *<a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>::<a href='../Y/480.html' title='Multiple used in 51 places.'>last</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L25'>  25 <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a>::<a href='../Y/540.html' title='Multiple used in 15 places.'>offset</a> = <a href='../Y/177.html' title='Multiple used in 6 places.'>NUM_DIGITAL_PINS</a> + <a href='../Y/176.html' title='Multiple used in 6 places.'>NUM_ANALOG_INPUTS</a>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L5'>[^]</a><a href='#L21'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

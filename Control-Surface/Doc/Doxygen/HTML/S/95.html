@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Hardware/ExtendedInputOutput/AnalogMultiplex.cpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/140.html'>Hardware</a>/<a href='../files/141.html'>ExtendedInputOutput</a>/AnalogMultiplex.cpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L6'>[^]</a><a href='#L27'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L6' title='Defined at 6.'>pinMode</a>
+<li><a href='#L10' title='Defined at 10.'>digitalRead</a>
+<li><a href='#L15' title='Defined at 15.'>analogRead</a>
+<li><a href='#L21' title='Defined at 21.'>begin</a>
+<li><a href='#L27' title='Defined at 27.'>setMuxAddress</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#include</font> "<a href='91.html'>AnalogMultiplex.h</a>"
+<a name='L2'>   2 <font color='darkred'>#include</font> "<a href='96.html'>ExtendedInputOutput.h</a>"
+<a name='L3'>   3 
+<a name='L4'>   4 <b>using</b> <b>namespace</b> <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>;
+<a name='L5'>   5 
+<a name='L6'>   6 <b>void</b> <a href='../Y/20.html' title='Multiple used in 8 places.'>AnalogMultiplex</a>::<a href='../R/226.html' title='Multiple refered from 29 places.'>pinMode</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/508.html' title='Multiple used in 30 places.'>mode</a>) <font color='red'>{</font>
+<a name='L7'>   7     <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>::<a href='../D/246.html' title='Multiple defined in 3 places.'>pinMode</a>(<a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>, <a href='../Y/508.html' title='Multiple used in 30 places.'>mode</a>);
+<a name='L8'>   8 <font color='red'>}</font>
+<a name='L9'>   9 
+<a name='L10'>  10 <b>int</b> <a href='../Y/20.html' title='Multiple used in 8 places.'>AnalogMultiplex</a>::<a href='../R/131.html' title='Multiple refered from 14 places.'>digitalRead</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/550.html' title='Multiple used in 30 places.'>pin</a>) <font color='red'>{</font>
+<a name='L11'>  11     <a href='../S/95.html#L27' title='Defined at 27 in Hardware/ExtendedInputOutput/AnalogMultiplex.cpp.'>setMuxAddress</a>(<a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>);
+<a name='L12'>  12     <b>return</b> <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>::<a href='../D/149.html' title='Multiple defined in 4 places.'>digitalRead</a>(<a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>);
+<a name='L13'>  13 <font color='red'>}</font>
+<a name='L14'>  14 
+<a name='L15'>  15 <a href='../S/92.html#L7' title='Defined at 7 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>analog_t</a> <a href='../Y/20.html' title='Multiple used in 8 places.'>AnalogMultiplex</a>::<a href='../R/111.html' title='Multiple refered from 11 places.'>analogRead</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/550.html' title='Multiple used in 30 places.'>pin</a>) <font color='red'>{</font>
+<a name='L16'>  16     <a href='../S/95.html#L27' title='Defined at 27 in Hardware/ExtendedInputOutput/AnalogMultiplex.cpp.'>setMuxAddress</a>(<a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>);
+<a name='L17'>  17     <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>::<a href='../D/129.html' title='Multiple defined in 3 places.'>analogRead</a>(<a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>);
+<a name='L18'>  18     <b>return</b> <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>::<a href='../D/129.html' title='Multiple defined in 3 places.'>analogRead</a>(<a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>);
+<a name='L19'>  19 <font color='red'>}</font>
+<a name='L20'>  20 
+<a name='L21'>  21 <b>void</b> <a href='../Y/20.html' title='Multiple used in 8 places.'>AnalogMultiplex</a>::<a href='../R/117.html' title='Multiple refered from 14 places.'>begin</a>() <font color='red'>{</font>
+<a name='L22'>  22     <i><font color='green'>// ExtIO::pinMode(analogPin, INPUT);</font></i>
+<a name='L23'>  23     <b>for</b> (<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a> = 0; <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a> &lt; <a href='../Y/517.html' title='Multiple used in 4 places.'>nb_addressPins</a>; <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a>++)
+<a name='L24'>  24         <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>::<a href='../D/246.html' title='Multiple defined in 3 places.'>pinMode</a>(<a href='../Y/349.html' title='Multiple used in 7 places.'>addressPins</a>[<a href='../Y/465.html' title='Multiple used in 64 places.'>i</a>], <a href='../S/96.html#L19' title='Defined at 19 in Hardware/ExtendedInputOutput/ExtendedInputOutput.h.'>OUTPUT</a>);
+<a name='L25'>  25 <font color='red'>}</font>
+<a name='L26'>  26 
+<a name='L27'>  27 <b>void</b> <a href='../Y/20.html' title='Multiple used in 8 places.'>AnalogMultiplex</a>::<a href='../R/247.html' title='Multiple refered from 3 places.'>setMuxAddress</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/345.html' title='Multiple used in 27 places.'>address</a>) <font color='red'>{</font>
+<a name='L28'>  28     <b>for</b> (<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a> = 0; <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a> &lt; <a href='../Y/517.html' title='Multiple used in 4 places.'>nb_addressPins</a>; <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a>++)
+<a name='L29'>  29         <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>::<a href='../D/150.html' title='Multiple defined in 3 places.'>digitalWrite</a>(<a href='../Y/349.html' title='Multiple used in 7 places.'>addressPins</a>[<a href='../Y/465.html' title='Multiple used in 64 places.'>i</a>], <a href='../Y/345.html' title='Multiple used in 27 places.'>address</a> &amp; (1 &lt;&lt; <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a>));
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L6'>[^]</a><a href='#L27'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

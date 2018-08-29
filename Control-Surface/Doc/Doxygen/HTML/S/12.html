@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>MIDI_Inputs/MCU/VPotRing.hpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/144.html'>MIDI_Inputs</a>/<a href='../files/147.html'>MCU</a>/VPotRing.hpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L10'>[^]</a><a href='#L109'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/50.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L10' title='Defined at 10.'>minimum</a>
+<li><a href='#L11' title='Defined at 11.'>maximum</a>
+<li><a href='#L20' title='Defined at 20.'>getPosition</a>
+<li><a href='#L21' title='Defined at 21.'>getCenterLed</a>
+<li><a href='#L22' title='Defined at 22.'>getMode</a>
+<li><a href='#L24' title='Defined at 24.'>getStartOn</a>
+<li><a href='#L35' title='Defined at 35.'>getStartOff</a>
+<li><a href='#L47' title='Defined at 47.'>sanitizeValue</a>
+<li><a href='#L54' title='Defined at 54.'>getPosition</a>
+<li><a href='#L55' title='Defined at 55.'>getCenterLed</a>
+<li><a href='#L56' title='Defined at 56.'>getMode</a>
+<li><a href='#L69' title='Defined at 69.'>updateImpl</a>
+<li><a href='#L74' title='Defined at 74.'>getValue</a>
+<li><a href='#L93' title='Defined at 93.'>updateImpl</a>
+<li><a href='#L100' title='Defined at 100.'>matchAddress</a>
+<li><a href='#L105' title='Defined at 105.'>getValue</a>
+<li><a href='#L109' title='Defined at 109.'>onBankSettingChange</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> &lt;<a href='6.html'>MIDI_Inputs/MIDI_Input_CC.hpp</a>&gt;
+<a name='L4'>   4 
+<a name='L5'>   5 <b>namespace</b> <a href='../S/35.html#L9' title='Refered from 9 in MIDI_Constants/MCU.h.'>MCU</a> <font color='red'>{</font>
+<a name='L6'>   6 
+<a name='L7'>   7 <a href='../Y/407.html' title='Multiple used in 206 places.'>constexpr</a> <b>static</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/300.html' title='Multiple used in 2 places.'>VPotRingAddress</a> = 0x30;
+<a name='L8'>   8 
+<a name='L9'>   9 <i><font color='green'>// TODO: why can't I use the min/max macros on Teensy?</font></i>
+<a name='L10'>  10 <b>inline</b> <a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../R/214.html' title='Multiple refered from 2 places.'>minimum</a>(<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/342.html' title='Multiple used in 4 places.'>a</a>, <a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/360.html' title='Multiple used in 8 places.'>b</a>) <font color='red'>{</font> <b>return</b> <a href='../Y/342.html' title='Multiple used in 4 places.'>a</a> &gt; <a href='../Y/360.html' title='Multiple used in 8 places.'>b</a> ? <a href='../Y/360.html' title='Multiple used in 8 places.'>b</a> : <a href='../Y/342.html' title='Multiple used in 4 places.'>a</a>; <font color='red'>}</font>
+<a name='L11'>  11 <b>inline</b> <a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../R/212.html' title='Multiple refered from 2 places.'>maximum</a>(<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/342.html' title='Multiple used in 4 places.'>a</a>, <a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/360.html' title='Multiple used in 8 places.'>b</a>) <font color='red'>{</font> <b>return</b> <a href='../Y/342.html' title='Multiple used in 4 places.'>a</a> &lt; <a href='../Y/360.html' title='Multiple used in 8 places.'>b</a> ? <a href='../Y/360.html' title='Multiple used in 8 places.'>b</a> : <a href='../Y/342.html' title='Multiple used in 4 places.'>a</a>; <font color='red'>}</font>
+<a name='L12'>  12 
+<a name='L13'>  13 <b>class</b> <a href='../R/100.html' title='Multiple refered from 4 places.'>VPotRing_Base</a> : <b>public</b> <a href='../S/6.html#L6' title='Defined at 6 in MIDI_Inputs/MIDI_Input_CC.hpp.'>MIDI_Input_CC</a> <font color='red'>{</font>
+<a name='L14'>  14   <b>protected</b>:
+<a name='L15'>  15     <a href='../S/12.html#L13' title='Defined at 13 in MIDI_Inputs/MCU/VPotRing.hpp.'>VPotRing_Base</a>(); <i><font color='green'>// unused, only for virtual inheritance</font></i>
+<a name='L16'>  16   <b>public</b>:
+<a name='L17'>  17     VPotRing_Base(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/639.html' title='Multiple used in 22 places.'>track</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a> = 1)
+<a name='L18'>  18         : <a href='../Y/143.html' title='Multiple used in 2 places.'>MIDI_Input_CC</a>(<a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>, <a href='../Y/639.html' title='Multiple used in 22 places.'>track</a> + <a href='../Y/300.html' title='Multiple used in 2 places.'>VPotRingAddress</a> - 1) <font color='red'>{</font><font color='red'>}</font>
+<a name='L19'>  19 
+<a name='L20'>  20     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/179.html' title='Multiple refered from 4 places.'>getPosition</a>() <b>const</b> <font color='red'>{</font> <b>return</b> <a href='../D/199.html' title='Multiple defined in 2 places.'>getPosition</a>(<a href='../D/211.html' title='Multiple defined in 6 places.'>getValue</a>()); <font color='red'>}</font>
+<a name='L21'>  21     <b>bool</b> <a href='../S/12.html#L21' title='Refered from 21 in MIDI_Inputs/MCU/VPotRing.hpp.'>getCenterLed</a>() <b>const</b> <font color='red'>{</font> <b>return</b> <a href='../D/178.html' title='Multiple defined in 2 places.'>getCenterLed</a>(<a href='../D/211.html' title='Multiple defined in 6 places.'>getValue</a>()); <font color='red'>}</font>
+<a name='L22'>  22     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/175.html' title='Multiple refered from 5 places.'>getMode</a>() <b>const</b> <font color='red'>{</font> <b>return</b> <a href='../D/194.html' title='Multiple defined in 3 places.'>getMode</a>(<a href='../D/211.html' title='Multiple defined in 6 places.'>getValue</a>()); <font color='red'>}</font>
+<a name='L23'>  23 
+<a name='L24'>  24     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../S/2.html#L19' title='Refered from 19 in MIDI_Inputs/LEDs/MCU/VPotRing_LEDs.hpp.'>getStartOn</a>() <b>const</b> <font color='red'>{</font>
+<a name='L25'>  25         <a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> = (<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a>)<a href='../D/199.html' title='Multiple defined in 2 places.'>getPosition</a>() - (<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a>)1;
+<a name='L26'>  26         <b>switch</b> (<a href='../D/194.html' title='Multiple defined in 3 places.'>getMode</a>()) <font color='red'>{</font>
+<a name='L27'>  27             <b>case</b> 0: <b>return</b> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>;
+<a name='L28'>  28             <b>case</b> 1: <b>return</b> <a href='../S/12.html#L10' title='Defined at 10 in MIDI_Inputs/MCU/VPotRing.hpp.'>minimum</a>(<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>, 5);
+<a name='L29'>  29             <b>case</b> 2: <b>return</b> 0;
+<a name='L30'>  30             <b>case</b> 3: <b>return</b> <a href='../S/12.html#L11' title='Defined at 11 in MIDI_Inputs/MCU/VPotRing.hpp.'>maximum</a>(5 - <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>, 0);
+<a name='L31'>  31         <font color='red'>}</font>
+<a name='L32'>  32         <b>return</b> 0; <i><font color='green'>// Shouldn't happen, just keeps the compiler happy.</font></i>
+<a name='L33'>  33     <font color='red'>}</font>
+<a name='L34'>  34 
+<a name='L35'>  35     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../S/2.html#L20' title='Refered from 20 in MIDI_Inputs/LEDs/MCU/VPotRing_LEDs.hpp.'>getStartOff</a>() <b>const</b> <font color='red'>{</font>
+<a name='L36'>  36         <a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> = (<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a>)<a href='../D/199.html' title='Multiple defined in 2 places.'>getPosition</a>() - (<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a>)1;
+<a name='L37'>  37         <b>switch</b> (<a href='../D/194.html' title='Multiple defined in 3 places.'>getMode</a>()) <font color='red'>{</font>
+<a name='L38'>  38             <b>case</b> 0: <b>return</b> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> + 1;
+<a name='L39'>  39             <b>case</b> 1: <b>return</b> <a href='../S/12.html#L11' title='Defined at 11 in MIDI_Inputs/MCU/VPotRing.hpp.'>maximum</a>(<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>, 5) + 1;
+<a name='L40'>  40             <b>case</b> 2: <b>return</b> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> + 1;
+<a name='L41'>  41             <b>case</b> 3: <b>return</b> <a href='../S/12.html#L10' title='Defined at 10 in MIDI_Inputs/MCU/VPotRing.hpp.'>minimum</a>(6 + <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>, 11);
+<a name='L42'>  42         <font color='red'>}</font>
+<a name='L43'>  43         <b>return</b> 0; <i><font color='green'>// Shouldn't happen, just keeps the compiler happy.</font></i>
+<a name='L44'>  44     <font color='red'>}</font>
+<a name='L45'>  45 
+<a name='L46'>  46   <b>protected</b>:
+<a name='L47'>  47     <b>static</b> <b>inline</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/238.html' title='Multiple refered from 2 places.'>sanitizeValue</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>) <font color='red'>{</font>
+<a name='L48'>  48         <b>return</b> (<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> &amp; 0x0F) &lt; 0x0C ? <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> : ((<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> &amp; 0xF0) | 0xB);
+<a name='L49'>  49     <font color='red'>}</font>
+<a name='L50'>  50 
+<a name='L51'>  51   <b>private</b>:
+<a name='L52'>  52     <b>virtual</b> <b>bool</b> <a href='../D/290.html' title='Multiple defined in 8 places.'>updateImpl</a>(<b>const</b> <a href='../Y/153.html' title='Multiple used in 18 places.'>MIDI_message_matcher</a> &amp;<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>) = 0;
+<a name='L53'>  53 
+<a name='L54'>  54     <b>static</b> <b>inline</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/179.html' title='Multiple refered from 4 places.'>getPosition</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>) <font color='red'>{</font> <b>return</b> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> &amp; 0x0F; <font color='red'>}</font>
+<a name='L55'>  55     <b>static</b> <b>inline</b> <b>bool</b> <a href='../S/12.html#L21' title='Refered from 21 in MIDI_Inputs/MCU/VPotRing.hpp.'>getCenterLed</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>) <font color='red'>{</font> <b>return</b> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> &amp; 0x40; <font color='red'>}</font>
+<a name='L56'>  56     <b>static</b> <b>inline</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/175.html' title='Multiple refered from 5 places.'>getMode</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>) <font color='red'>{</font> <b>return</b> (<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> &amp; 0x30) &gt;&gt; 4; <font color='red'>}</font>
+<a name='L57'>  57 
+<a name='L58'>  58     <b>virtual</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../D/211.html' title='Multiple defined in 6 places.'>getValue</a>() <b>const</b> = 0;
+<a name='L59'>  59 <font color='red'>}</font>;
+<a name='L60'>  60 
+<a name='L61'>  61 <i><font color='green'>// -------------------------------------------------------------------------- //</font></i>
+<a name='L62'>  62 
+<a name='L63'>  63 <b>class</b> <a href='../R/99.html' title='Multiple refered from 2 places.'>VPotRing</a> : <b>public</b> <b>virtual</b> <a href='../S/12.html#L13' title='Defined at 13 in MIDI_Inputs/MCU/VPotRing.hpp.'>VPotRing_Base</a> <font color='red'>{</font>
+<a name='L64'>  64   <b>public</b>:
+<a name='L65'>  65     VPotRing(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/639.html' title='Multiple used in 22 places.'>track</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a> = 1)
+<a name='L66'>  66         : <a href='../Y/301.html' title='Multiple used in 2 places.'>VPotRing_Base</a>(<a href='../Y/639.html' title='Multiple used in 22 places.'>track</a>, <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L67'>  67 
+<a name='L68'>  68   <b>private</b>:
+<a name='L69'>  69     <b>bool</b> <a href='../R/268.html' title='Multiple refered from 12 places.'>updateImpl</a>(<b>const</b> <a href='../Y/153.html' title='Multiple used in 18 places.'>MIDI_message_matcher</a> &amp;<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L70'>  70         <b>this</b>-&gt;<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> = <a href='../S/12.html#L47' title='Defined at 47 in MIDI_Inputs/MCU/VPotRing.hpp.'>sanitizeValue</a>(<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>.<a href='../Y/419.html' title='Multiple used in 14 places.'>data2</a>);
+<a name='L71'>  71         <b>return</b> <b>true</b>;
+<a name='L72'>  72     <font color='red'>}</font>
+<a name='L73'>  73 
+<a name='L74'>  74     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/191.html' title='Multiple refered from 9 places.'>getValue</a>() <b>const</b> <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font> <b>return</b> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>; <font color='red'>}</font>
+<a name='L75'>  75 
+<a name='L76'>  76     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> = 0;
+<a name='L77'>  77 <font color='red'>}</font>;
+<a name='L78'>  78 
+<a name='L79'>  79 <i><font color='green'>// -------------------------------------------------------------------------- //</font></i>
+<a name='L80'>  80 
+<a name='L81'>  81 <font color='darkred'>#include</font> &lt;<a href='112.html'>Banks/BankableMIDIInputAddressable.hpp</a>&gt;
+<a name='L82'>  82 
+<a name='L83'>  83 <b>namespace</b> Bankable <font color='red'>{</font>
+<a name='L84'>  84 
+<a name='L85'>  85 <b>template</b> &lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/174.html' title='Multiple used in 19 places.'>NUMBER_OF_BANKS</a>&gt;
+<a name='L86'>  86 <b>class</b> <a href='../R/99.html' title='Multiple refered from 2 places.'>VPotRing</a> : <b>public</b> <b>virtual</b> <a href='../S/12.html#L13' title='Defined at 13 in MIDI_Inputs/MCU/VPotRing.hpp.'>VPotRing_Base</a>,
+<a name='L87'>  87                  <b>public</b> <a href='../S/112.html#L6' title='Defined at 6 in Banks/BankableMIDIInputAddressable.hpp.'>BankableMIDIInputAddressable</a> <font color='red'>{</font>
+<a name='L88'>  88   <b>public</b>:
+<a name='L89'>  89     VPotRing(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/639.html' title='Multiple used in 22 places.'>track</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a> = 1)
+<a name='L90'>  90         : <a href='../Y/301.html' title='Multiple used in 2 places.'>VPotRing_Base</a>(<a href='../Y/639.html' title='Multiple used in 22 places.'>track</a>, <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L91'>  91 
+<a name='L92'>  92   <b>private</b>:
+<a name='L93'>  93     <b>bool</b> <a href='../R/268.html' title='Multiple refered from 12 places.'>updateImpl</a>(<b>const</b> <a href='../Y/153.html' title='Multiple used in 18 places.'>MIDI_message_matcher</a> &amp;<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L94'>  94         <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/467.html' title='Multiple used in 28 places.'>index</a> = <a href='../S/112.html#L24' title='Defined at 24 in Banks/BankableMIDIInputAddressable.hpp.'>getAddressIndex</a>(<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>.<a href='../Y/418.html' title='Multiple used in 20 places.'>data1</a>, <a href='../S/1.html#L48' title='Defined at 48 in MIDI_Inputs/MIDI_Input_Element_Addressable.hpp.'>getBaseAddress</a>());
+<a name='L95'>  95         <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> = <a href='../S/12.html#L47' title='Defined at 47 in MIDI_Inputs/MCU/VPotRing.hpp.'>sanitizeValue</a>(<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>.<a href='../Y/419.html' title='Multiple used in 14 places.'>data2</a>);
+<a name='L96'>  96         <a href='../Y/659.html' title='Multiple used in 14 places.'>values</a>[<a href='../Y/467.html' title='Multiple used in 28 places.'>index</a>] = <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>;
+<a name='L97'>  97         <b>return</b> <b>true</b>;
+<a name='L98'>  98     <font color='red'>}</font>
+<a name='L99'>  99 
+<a name='L100'> 100     <b>bool</b> <a href='../R/208.html' title='Multiple refered from 4 places.'>matchAddress</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/629.html' title='Multiple used in 20 places.'>targetAddress</a>) <b>const</b> <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L101'> 101         <b>return</b> <a href='../S/112.html#L6' title='Defined at 6 in Banks/BankableMIDIInputAddressable.hpp.'>BankableMIDIInputAddressable</a>::<a href='../D/228.html' title='Multiple defined in 5 places.'>matchAddress</a>(
+<a name='L102'> 102             <a href='../Y/629.html' title='Multiple used in 20 places.'>targetAddress</a>, <a href='../S/1.html#L48' title='Defined at 48 in MIDI_Inputs/MIDI_Input_Element_Addressable.hpp.'>getBaseAddress</a>(), <a href='../Y/174.html' title='Multiple used in 19 places.'>NUMBER_OF_BANKS</a>);
+<a name='L103'> 103     <font color='red'>}</font>
+<a name='L104'> 104 
+<a name='L105'> 105     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/191.html' title='Multiple refered from 9 places.'>getValue</a>() <b>const</b> <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L106'> 106         <b>return</b> <a href='../Y/659.html' title='Multiple used in 14 places.'>values</a>[<a href='../D/167.html' title='Multiple defined in 3 places.'>getBankSetting</a>() % <a href='../Y/174.html' title='Multiple used in 19 places.'>NUMBER_OF_BANKS</a>];
+<a name='L107'> 107     <font color='red'>}</font>
+<a name='L108'> 108 
+<a name='L109'> 109     <b>void</b> <a href='../S/112.html#L95' title='Refered from 95 in Banks/BankableMIDIInputAddressable.hpp.'>onBankSettingChange</a>() <b>const</b> <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font> <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>(); <font color='red'>}</font>
+<a name='L110'> 110     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/659.html' title='Multiple used in 14 places.'>values</a>[<a href='../Y/174.html' title='Multiple used in 19 places.'>NUMBER_OF_BANKS</a>] = <font color='red'>{</font><font color='red'>}</font>;
+<a name='L111'> 111 <font color='red'>}</font>;
+<a name='L112'> 112 
+<a name='L113'> 113 <font color='red'>}</font> <i><font color='green'>// namespace Bankable</font></i>
+<a name='L114'> 114 
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L10'>[^]</a><a href='#L109'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

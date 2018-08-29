@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>MIDI_Senders/RelativeCCSender.hpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/154.html'>MIDI_Senders</a>/RelativeCCSender.hpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L19'>[^]</a><a href='#L42'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L19' title='Defined at 19.'>toTwosComplement7bit</a>
+<li><a href='#L23' title='Defined at 23.'>toBinaryOffset7bit</a>
+<li><a href='#L26' title='Defined at 26.'>toSignedMagnitude7bit</a>
+<li><a href='#L34' title='Defined at 34.'>mapRelativeCC</a>
+<li><a href='#L42' title='Defined at 42.'>send</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> &lt;<a href='42.html'>Control_Surface/Control_Surface_Class.h</a>&gt;
+<a name='L4'>   4 
+<a name='L5'>   5 <b>enum</b> relativeCCmode <font color='red'>{</font> <a href='../R/95.html' title='Multiple refered from 3 places.'>TWOS_COMPLEMENT</a>, <a href='../R/7.html' title='Multiple refered from 2 places.'>BINARY_OFFSET</a>, <a href='../R/81.html' title='Multiple refered from 3 places.'>SIGN_MAGNITUDE</a> <font color='red'>}</font>;
+<a name='L6'>   6 
+<a name='L7'>   7 <font color='darkred'>#define</font> REAPER_RELATIVE_1 <a href='../S/104.html#L5' title='Defined at 5 in MIDI_Senders/RelativeCCSender.hpp.'>TWOS_COMPLEMENT</a>
+<a name='L8'>   8 <font color='darkred'>#define</font> REAPER_RELATIVE_2 <a href='../S/104.html#L5' title='Defined at 5 in MIDI_Senders/RelativeCCSender.hpp.'>BINARY_OFFSET</a>
+<a name='L9'>   9 <font color='darkred'>#define</font> REAPER_RELATIVE_3 <a href='../S/104.html#L5' title='Defined at 5 in MIDI_Senders/RelativeCCSender.hpp.'>SIGN_MAGNITUDE</a>
+<a name='L10'>  10 
+<a name='L11'>  11 <font color='darkred'>#define</font> TRACKTION_RELATIVE <a href='../S/104.html#L5' title='Defined at 5 in MIDI_Senders/RelativeCCSender.hpp.'>TWOS_COMPLEMENT</a>
+<a name='L12'>  12 
+<a name='L13'>  13 <font color='darkred'>#define</font> MACKIE_CONTROL_RELATIVE <a href='../S/104.html#L5' title='Defined at 5 in MIDI_Senders/RelativeCCSender.hpp.'>SIGN_MAGNITUDE</a>
+<a name='L14'>  14 
+<a name='L15'>  15 <b>class</b> <a href='../R/24.html' title='Multiple refered from 6 places.'>DigitalCCSender</a> <font color='red'>{</font>
+<a name='L16'>  16   <b>public</b>:
+<a name='L17'>  17     <i><font color='green'>/** Convert an 8-bit two's complement integer to a 7-bit two's complement</font></i>
+<a name='L18'>  18 <i><font color='green'>     *  integer. */</font></i>
+<a name='L19'>  19     <b>static</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../S/104.html#L36' title='Refered from 36 in MIDI_Senders/RelativeCCSender.hpp.'>toTwosComplement7bit</a>(<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>) <font color='red'>{</font> <b>return</b> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> &amp; 0x7F; <font color='red'>}</font>
+<a name='L20'>  20     <i><font color='green'>/** Convert an 8-bit two's complement integer to a 7-bit integer with a</font></i>
+<a name='L21'>  21 <i><font color='green'>     *  binary offset of 64. In other words, a value of 0 corresponds to -64,</font></i>
+<a name='L22'>  22 <i><font color='green'>     *  a value of 64 corresponds to 0, and a value of 127 corresponds to 63. */</font></i>
+<a name='L23'>  23     <b>static</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../S/104.html#L37' title='Refered from 37 in MIDI_Senders/RelativeCCSender.hpp.'>toBinaryOffset7bit</a>(<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>) <font color='red'>{</font> <b>return</b> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> + 64; <font color='red'>}</font>
+<a name='L24'>  24     <i><font color='green'>/** Convert an 8-bit two's complement integer to 7-bit sign-magnitude</font></i>
+<a name='L25'>  25 <i><font color='green'>     *  format. */</font></i>
+<a name='L26'>  26     <b>static</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../S/104.html#L38' title='Refered from 38 in MIDI_Senders/RelativeCCSender.hpp.'>toSignedMagnitude7bit</a>(<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>) <font color='red'>{</font>
+<a name='L27'>  27         <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/494.html' title='Multiple used in 3 places.'>mask</a> = <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> &gt;&gt; 7;
+<a name='L28'>  28         <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/343.html' title='Multiple used in 2 places.'>abs</a> = (<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> + <a href='../Y/494.html' title='Multiple used in 3 places.'>mask</a>) ^ <a href='../Y/494.html' title='Multiple used in 3 places.'>mask</a>;
+<a name='L29'>  29         <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/609.html' title='Multiple used in 2 places.'>sign</a> = <a href='../Y/494.html' title='Multiple used in 3 places.'>mask</a> &amp; 0b01000000;
+<a name='L30'>  30         <b>return</b> (<a href='../Y/343.html' title='Multiple used in 2 places.'>abs</a> &amp; 0b00111111) | <a href='../Y/609.html' title='Multiple used in 2 places.'>sign</a>;
+<a name='L31'>  31     <font color='red'>}</font>
+<a name='L32'>  32     <i><font color='green'>/** Convert an 8-bit two's complement integer to a 7-bit value to send over</font></i>
+<a name='L33'>  33 <i><font color='green'>     *  MIDI. */</font></i>
+<a name='L34'>  34     <b>static</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../S/104.html#L48' title='Refered from 48 in MIDI_Senders/RelativeCCSender.hpp.'>mapRelativeCC</a>(<a href='../Y/474.html' title='Multiple used in 20 places.'>int8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>, <a href='../Y/585.html' title='Multiple used in 2 places.'>relativeCCmode</a> <a href='../Y/508.html' title='Multiple used in 30 places.'>mode</a>) <font color='red'>{</font>
+<a name='L35'>  35         <b>switch</b> (<a href='../Y/508.html' title='Multiple used in 30 places.'>mode</a>) <font color='red'>{</font>
+<a name='L36'>  36             <b>case</b> <a href='../S/104.html#L5' title='Defined at 5 in MIDI_Senders/RelativeCCSender.hpp.'>TWOS_COMPLEMENT</a>: <b>return</b> <a href='../S/104.html#L19' title='Defined at 19 in MIDI_Senders/RelativeCCSender.hpp.'>toTwosComplement7bit</a>(<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>);
+<a name='L37'>  37             <b>case</b> <a href='../S/104.html#L5' title='Defined at 5 in MIDI_Senders/RelativeCCSender.hpp.'>BINARY_OFFSET</a>: <b>return</b> <a href='../S/104.html#L23' title='Defined at 23 in MIDI_Senders/RelativeCCSender.hpp.'>toBinaryOffset7bit</a>(<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>);
+<a name='L38'>  38             <b>case</b> <a href='../S/104.html#L5' title='Defined at 5 in MIDI_Senders/RelativeCCSender.hpp.'>SIGN_MAGNITUDE</a>: <b>return</b> <a href='../S/104.html#L26' title='Defined at 26 in MIDI_Senders/RelativeCCSender.hpp.'>toSignedMagnitude7bit</a>(<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>);
+<a name='L39'>  39         <font color='red'>}</font>
+<a name='L40'>  40     <font color='red'>}</font>
+<a name='L41'>  41 
+<a name='L42'>  42     <b>static</b> <b>void</b> <a href='../R/239.html' title='Multiple refered from 8 places.'>send</a>(<b>long</b> <a href='../Y/431.html' title='Multiple used in 4 places.'>delta</a>, <a href='../Y/585.html' title='Multiple used in 2 places.'>relativeCCmode</a> <a href='../Y/508.html' title='Multiple used in 30 places.'>mode</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>,
+<a name='L43'>  43                      <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/345.html' title='Multiple used in 27 places.'>address</a>) <font color='red'>{</font>
+<a name='L44'>  44         <b>while</b> (<a href='../Y/431.html' title='Multiple used in 4 places.'>delta</a> != 0) <font color='red'>{</font>
+<a name='L45'>  45             <i><font color='green'>// Constrain relative movement to +/-15 for</font></i>
+<a name='L46'>  46             <i><font color='green'>// Mackie Control Universal compatibility</font></i>
+<a name='L47'>  47             <b>long</b> <a href='../Y/637.html' title='Multiple used in 3 places.'>thisDelta</a> = constrain(<a href='../Y/431.html' title='Multiple used in 4 places.'>delta</a>, -15, 15);
+<a name='L48'>  48             <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/510.html' title='Multiple used in 2 places.'>msgVal</a> = <a href='../S/104.html#L34' title='Defined at 34 in MIDI_Senders/RelativeCCSender.hpp.'>mapRelativeCC</a>(<a href='../Y/637.html' title='Multiple used in 3 places.'>thisDelta</a>, <a href='../Y/508.html' title='Multiple used in 30 places.'>mode</a>);
+<a name='L49'>  49             <i><font color='green'>// send a Control Change MIDI event</font></i>
+<a name='L50'>  50             <a href='../Y/56.html' title='Multiple used in 8 places.'>Control_Surface</a>.<a href='../S/43.html#L39' title='Defined at 39 in Control_Surface/Control_Surface_Class.cpp.'>MIDI</a>().<a href='../D/261.html' title='Multiple defined in 3 places.'>send</a>(<a href='../Y/43.html' title='Multiple used in 7 places.'>CC</a>, <a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>, <a href='../Y/345.html' title='Multiple used in 27 places.'>address</a>, <a href='../Y/510.html' title='Multiple used in 2 places.'>msgVal</a>);
+<a name='L51'>  51             <a href='../Y/431.html' title='Multiple used in 4 places.'>delta</a> -= <a href='../Y/637.html' title='Multiple used in 3 places.'>thisDelta</a>;
+<a name='L52'>  52         <font color='red'>}</font>
+<a name='L53'>  53     <font color='red'>}</font>
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L19'>[^]</a><a href='#L42'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

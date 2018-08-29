@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['analogbase',['AnalogBase',['../classAnalogBase.html',1,'']]],
-  ['analogcc',['AnalogCC',['../classAnalogCC.html',1,'']]],
-  ['analogmultiplex',['AnalogMultiplex',['../classAnalogMultiplex.html',1,'']]],
-  ['analogpb',['AnalogPB',['../classAnalogPB.html',1,'']]]
+  ['_5fsetbase',['_Setbase',['../struct__Setbase.html',1,'']]],
+  ['_5fsetbytesep',['_Setbytesep',['../struct__Setbytesep.html',1,'']]],
+  ['_5fsetprecision',['_Setprecision',['../struct__Setprecision.html',1,'']]]
 ];

@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>Hardware/FilteredAnalog.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/140.html'>Hardware</a>/FilteredAnalog.h</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L82'>[^]</a><a href='#L103'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L82' title='Defined at 82.'>update</a>
+<li><a href='#L98' title='Defined at 98.'>getValue</a>
+<li><a href='#L103' title='Defined at 103.'>map</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> "<a href='96.html'>../Hardware/ExtendedInputOutput/ExtendedInputOutput.h</a>"
+<a name='L4'>   4 <font color='darkred'>#include</font> "<a href='26.html'>../Helpers/EMA.h</a>"
+<a name='L5'>   5 <font color='darkred'>#include</font> "<a href='23.html'>../Helpers/Hysteresis.h</a>"
+<a name='L6'>   6 <font color='darkred'>#include</font> "<a href='49.html'>../Settings/SettingsWrapper.h</a>"
+<a name='L7'>   7 
+<a name='L8'>   8 <a href='../Y/407.html' title='Multiple used in 206 places.'>constexpr</a> <b>static</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/2.html' title='Multiple used in 2 places.'>ADC_BITS</a> = 10;
+<a name='L9'>   9 
+<a name='L10'>  10 <i><font color='green'>/**</font></i>
+<a name='L11'>  11 <i><font color='green'> * A class that reads and filters an analog input.</font></i>
+<a name='L12'>  12 <i><font color='green'> *</font></i>
+<a name='L13'>  13 <i><font color='green'> * A map function can be applied to the analog value (e.g. to compensate for</font></i>
+<a name='L14'>  14 <i><font color='green'> * logarithmic taper potentiometers or to calibrate the range). The analog input</font></i>
+<a name='L15'>  15 <i><font color='green'> * value is filtered using an exponential moving average filter. The settings</font></i>
+<a name='L16'>  16 <i><font color='green'> * for this filter can be changed in Settings.h.</font></i>
+<a name='L17'>  17 <i><font color='green'> */</font></i>
+<a name='L18'>  18 <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt;
+<a name='L19'>  19 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../S/100.html#L78' title='Defined at 78 in Hardware/FilteredAnalog.h.'>FilteredAnalog</a> <font color='red'>{</font>
+<a name='L20'>  20   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L21'>  21     <i><font color='green'>/**</font></i>
+<a name='L22'>  22 <i><font color='green'>     * @brief Construct a new FilteredAnalog object.</font></i>
+<a name='L23'>  23 <i><font color='green'>     *</font></i>
+<a name='L24'>  24 <i><font color='green'>     * @param analogPin</font></i>
+<a name='L25'>  25 <i><font color='green'>     *        The analog pin to read from.</font></i>
+<a name='L26'>  26 <i><font color='green'>     */</font></i>
+<a name='L27'>  27     <a href='../S/100.html#L78' title='Defined at 78 in Hardware/FilteredAnalog.h.'>FilteredAnalog</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>); <i><font color='green'>// Constructor</font></i>
+<a name='L28'>  28     
+<a name='L29'>  29     <i><font color='green'>/**</font></i>
+<a name='L30'>  30 <i><font color='green'>     * @brief   Specify a mapping function that is applied to the raw </font></i>
+<a name='L31'>  31 <i><font color='green'>     *          analog value before sending.</font></i>
+<a name='L32'>  32 <i><font color='green'>     *</font></i>
+<a name='L33'>  33 <i><font color='green'>     * @param   fn</font></i>
+<a name='L34'>  34 <i><font color='green'>     *          A function pointer to the mapping function. This function </font></i>
+<a name='L35'>  35 <i><font color='green'>     *          should take the 10-bit analog value as a parameter, and </font></i>
+<a name='L36'>  36 <i><font color='green'>     *          should return a 10-bit value.</font></i>
+<a name='L37'>  37 <i><font color='green'>     */</font></i>
+<a name='L38'>  38     <b>void</b> <a href='../S/100.html#L103' title='Defined at 103 in Hardware/FilteredAnalog.h.'>map</a>(<b>int</b> (*<a href='../Y/453.html' title='Multiple used in 4 places.'>fn</a>)(<b>int</b>));
+<a name='L39'>  39 
+<a name='L40'>  40     <i><font color='green'>/**</font></i>
+<a name='L41'>  41 <i><font color='green'>     * @brief Read the analog input value, apply the mapping function, and</font></i>
+<a name='L42'>  42 <i><font color='green'>     * update the average.</font></i>
+<a name='L43'>  43 <i><font color='green'>     *</font></i>
+<a name='L44'>  44 <i><font color='green'>     * @return  true</font></i>
+<a name='L45'>  45 <i><font color='green'>     *          The value changed since last time it was updated.</font></i>
+<a name='L46'>  46 <i><font color='green'>     * @return  false</font></i>
+<a name='L47'>  47 <i><font color='green'>     *          Otherwise.</font></i>
+<a name='L48'>  48 <i><font color='green'>     */</font></i>
+<a name='L49'>  49     <a href='../Y/380.html' title='Multiple used in 20 places.'>bool</a> <a href='../D/286.html' title='Multiple defined in 14 places.'>update</a>();
+<a name='L50'>  50 
+<a name='L51'>  51     <i><font color='green'>/**</font></i>
+<a name='L52'>  52 <i><font color='green'>     * @brief   Get the filtered value of the analog input.</font></i>
+<a name='L53'>  53 <i><font color='green'>     *</font></i>
+<a name='L54'>  54 <i><font color='green'>     * @return  The filtered value of the analog input, as a number</font></i>
+<a name='L55'>  55 <i><font color='green'>     *          of `PRECISION` bits wide. </font></i>
+<a name='L56'>  56 <i><font color='green'>     * @return  0xFFFF if the update() has not been called yet.</font></i>
+<a name='L57'>  57 <i><font color='green'>     */</font></i>
+<a name='L58'>  58     <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../D/211.html' title='Multiple defined in 6 places.'>getValue</a>();
+<a name='L59'>  59 
+<a name='L60'>  60   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L61'>  61     <b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>;
+<a name='L62'>  62 
+<a name='L63'>  63     <b>int</b> (*<a href='../Y/492.html' title='Multiple used in 4 places.'>mapFn</a>)(<b>int</b>) = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L64'>  64 
+<a name='L65'>  65     <a href='../Y/70.html' title='Multiple used in 3 places.'>EMA</a>&lt;<a href='../S/48.html#L31' title='Defined at 31 in Settings/Settings.h.'>ANALOG_FILTER_SHIFT_FACTOR</a>, <a href='../S/48.html#L38' title='Defined at 38 in Settings/Settings.h.'>ANALOG_FILTER_TYPE</a>&gt; <a href='../S/26.html#L55' title='Defined at 55 in Helpers/EMA.h.'>filter</a>;
+<a name='L66'>  66     <a href='../Y/120.html' title='Multiple used in 3 places.'>Hysteresis</a>&lt;<a href='../Y/2.html' title='Multiple used in 2 places.'>ADC_BITS</a> - <a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt; <a href='../Y/464.html' title='Multiple used in 2 places.'>hysteresis</a>;
+<a name='L67'>  67 
+<a name='L68'>  68     <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> = 0xFFFF;
+<a name='L69'>  69 <font color='red'>}</font>;
+<a name='L70'>  70 
+<a name='L71'>  71 <i><font color='green'>// ------------------------ Implementations ------------------------ //</font></i>
+<a name='L72'>  72 
+<a name='L73'>  73 <font color='darkred'>#include</font> "<a href='42.html'>../Control_Surface/Control_Surface_Class.h</a>"
+<a name='L74'>  74 
+<a name='L75'>  75 <a href='../Y/656.html' title='Multiple used in 14 places.'>using</a> <a href='../Y/516.html' title='Multiple used in 7 places.'>namespace</a> <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>;
+<a name='L76'>  76 
+<a name='L77'>  77 <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt;
+<a name='L78'>  78 <a href='../R/36.html' title='Multiple refered from 6 places.'>FilteredAnalog</a>&lt;<a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt;::<a href='../S/100.html#L78' title='Defined at 78 in Hardware/FilteredAnalog.h.'>FilteredAnalog</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>)
+<a name='L79'>  79     : <a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>(<a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>) <font color='red'>{</font><font color='red'>}</font> <i><font color='green'>// Constructor</font></i>
+<a name='L80'>  80 
+<a name='L81'>  81 <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt;
+<a name='L82'>  82 <a href='../Y/380.html' title='Multiple used in 20 places.'>bool</a> <a href='../S/100.html#L78' title='Defined at 78 in Hardware/FilteredAnalog.h.'>FilteredAnalog</a>&lt;<a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt;::<a href='../R/264.html' title='Multiple refered from 14 places.'>update</a>() <font color='red'>{</font>
+<a name='L83'>  83     <b>unsigned</b> <b>int</b> <a href='../Y/470.html' title='Multiple used in 8 places.'>input</a> =
+<a name='L84'>  84         <a href='../S/94.html#L5' title='Defined at 5 in Hardware/ExtendedInputOutput/ExtendedInputOutput.cpp.'>ExtIO</a>::<a href='../D/129.html' title='Multiple defined in 3 places.'>analogRead</a>(<a href='../Y/352.html' title='Multiple used in 12 places.'>analogPin</a>); <i><font color='green'>// read the raw analog input value</font></i>
+<a name='L85'>  85     <b>if</b> (<a href='../Y/492.html' title='Multiple used in 4 places.'>mapFn</a> != <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>)             <i><font color='green'>// if a map function is specified</font></i>
+<a name='L86'>  86         <a href='../Y/470.html' title='Multiple used in 8 places.'>input</a> = <a href='../Y/492.html' title='Multiple used in 4 places.'>mapFn</a>(<a href='../Y/470.html' title='Multiple used in 8 places.'>input</a>);         <i><font color='green'>// apply the map function to the value</font></i>
+<a name='L87'>  87     <a href='../Y/470.html' title='Multiple used in 8 places.'>input</a> = <a href='../S/26.html#L55' title='Defined at 55 in Helpers/EMA.h.'>filter</a>.<a href='../S/26.html#L55' title='Defined at 55 in Helpers/EMA.h.'>filter</a>(<a href='../Y/470.html' title='Multiple used in 8 places.'>input</a>);     <i><font color='green'>// apply a low-pass EMA filter</font></i>
+<a name='L88'>  88     <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../Y/523.html' title='Multiple used in 9 places.'>newValue</a> =
+<a name='L89'>  89         <a href='../Y/464.html' title='Multiple used in 2 places.'>hysteresis</a>.<a href='../S/23.html#L50' title='Defined at 50 in Helpers/Hysteresis.h.'>getOutputLevel</a>(<a href='../Y/470.html' title='Multiple used in 8 places.'>input</a>); <i><font color='green'>// map from the 10-bit analog input</font></i>
+<a name='L90'>  90                                           <i><font color='green'>// value to a value of `PRECISION` </font></i>
+<a name='L91'>  91                                           <i><font color='green'>// bits wide, applying hysteresis</font></i>
+<a name='L92'>  92     <a href='../Y/380.html' title='Multiple used in 20 places.'>bool</a> <a href='../Y/393.html' title='Multiple used in 2 places.'>changed</a> = <a href='../Y/523.html' title='Multiple used in 9 places.'>newValue</a> != <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>;
+<a name='L93'>  93     <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> = <a href='../Y/523.html' title='Multiple used in 9 places.'>newValue</a>;
+<a name='L94'>  94     <b>return</b> <a href='../Y/393.html' title='Multiple used in 2 places.'>changed</a>;
+<a name='L95'>  95 <font color='red'>}</font>
+<a name='L96'>  96 
+<a name='L97'>  97 <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt;
+<a name='L98'>  98 <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../S/100.html#L78' title='Defined at 78 in Hardware/FilteredAnalog.h.'>FilteredAnalog</a>&lt;<a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt;::<a href='../R/191.html' title='Multiple refered from 9 places.'>getValue</a>() <font color='red'>{</font>
+<a name='L99'>  99     <b>return</b> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>;
+<a name='L100'> 100 <font color='red'>}</font>
+<a name='L101'> 101 
+<a name='L102'> 102 <a href='../Y/633.html' title='Multiple used in 35 places.'>template</a> &lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt;
+<a name='L103'> 103 <b>void</b> <a href='../S/100.html#L78' title='Defined at 78 in Hardware/FilteredAnalog.h.'>FilteredAnalog</a>&lt;<a href='../Y/186.html' title='Multiple used in 10 places.'>PRECISION</a>&gt;::<a href='../R/205.html' title='Multiple refered from 2 places.'>map</a>(<b>int</b> (*<a href='../Y/453.html' title='Multiple used in 4 places.'>fn</a>)(<b>int</b>)) <font color='red'>{</font>
+<a name='L104'> 104     <a href='../Y/492.html' title='Multiple used in 4 places.'>mapFn</a> = <a href='../Y/453.html' title='Multiple used in 4 places.'>fn</a>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L82'>[^]</a><a href='#L103'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

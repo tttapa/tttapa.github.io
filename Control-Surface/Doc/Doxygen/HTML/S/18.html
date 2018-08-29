@@ -1,0 +1,163 @@
+<html>
+<head>
+<title>MIDI_Interfaces/USBMIDI_Interface.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/148.html'>MIDI_Interfaces</a>/USBMIDI_Interface.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/66.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> "<a href='40.html'>../MIDI_Parsers/USBMIDI_Parser.h</a>"
+<a name='L4'>   4 <font color='darkred'>#include</font> "<a href='20.html'>MIDI_Interface.h</a>"
+<a name='L5'>   5 
+<a name='L6'>   6 <font color='darkred'>#ifdef</font> <a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>
+<a name='L7'>   7 <font color='darkred'>#include</font> &lt;usb_dev.h&gt;
+<a name='L8'>   8 <font color='darkred'>#endif</font>
+<a name='L9'>   9 
+<a name='L10'>  10 <i><font color='green'>// If the main MCU has a USB connection but is not a Teensy</font></i>
+<a name='L11'>  11 <font color='darkred'>#if</font> <b>defined</b>(<a href='../Y/282.html' title='Multiple used in 7 places.'>USBCON</a>) &amp;&amp; !<b>defined</b>(<a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>)
+<a name='L12'>  12 <font color='darkred'>#include</font> "MIDIUSB.h"
+<a name='L13'>  13 <font color='darkred'>#endif</font>
+<a name='L14'>  14 
+<a name='L15'>  15 <i><font color='green'>// If the main MCU has a USB connection or is a Teensy</font></i>
+<a name='L16'>  16 <font color='darkred'>#if</font> <b>defined</b>(<a href='../Y/282.html' title='Multiple used in 7 places.'>USBCON</a>) || <b>defined</b>(<a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>)
+<a name='L17'>  17 <i><font color='green'>/**</font></i>
+<a name='L18'>  18 <i><font color='green'> * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI</font></i>
+<a name='L19'>  19 <i><font color='green'> *          connection.</font></i>
+<a name='L20'>  20 <i><font color='green'> * </font></i>
+<a name='L21'>  21 <i><font color='green'> * @note    See the [MIDI over USB Wiki]</font></i>
+<a name='L22'>  22 <i><font color='green'> *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)</font></i>
+<a name='L23'>  23 <i><font color='green'> *          for more information. </font></i>
+<a name='L24'>  24 <i><font color='green'> */</font></i>
+<a name='L25'>  25 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/284.html' title='Multiple used in 4 places.'>USBMIDI_Interface</a> : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../S/22.html#L3' title='Defined at 3 in MIDI_Interfaces/MIDI_Interface.cpp.'>MIDI_Interface</a> <font color='red'>{</font>
+<a name='L26'>  26   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L27'>  27     <i><font color='green'>/**</font></i>
+<a name='L28'>  28 <i><font color='green'>     * @brief   Construct a new USBMIDI_Interface.</font></i>
+<a name='L29'>  29 <i><font color='green'>     */</font></i>
+<a name='L30'>  30     <a href='../Y/284.html' title='Multiple used in 4 places.'>USBMIDI_Interface</a>() : <a href='../S/22.html#L3' title='Defined at 3 in MIDI_Interfaces/MIDI_Interface.cpp.'>MIDI_Interface</a>(<a href='../Y/547.html' title='Multiple used in 14 places.'>parser</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L31'>  31 
+<a name='L32'>  32   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L33'>  33     <a href='../Y/285.html' title='Multiple used in 3 places.'>USBMIDI_Parser</a> <a href='../Y/547.html' title='Multiple used in 14 places.'>parser</a>;
+<a name='L34'>  34 
+<a name='L35'>  35 <i><font color='green'>// If it's a Teensy board</font></i>
+<a name='L36'>  36 <font color='darkred'>#if</font> <b>defined</b>(<a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>)
+<a name='L37'>  37     <b>void</b> <a href='../Y/596.html' title='Multiple used in 12 places.'>sendImpl</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/490.html' title='Multiple used in 26 places.'>m</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/391.html' title='Multiple used in 30 places.'>c</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/416.html' title='Multiple used in 13 places.'>d2</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L38'>  38         usb_midi_write_packed((<a href='../Y/490.html' title='Multiple used in 26 places.'>m</a> &gt;&gt; 4) | ((<a href='../Y/490.html' title='Multiple used in 26 places.'>m</a> | <a href='../Y/391.html' title='Multiple used in 30 places.'>c</a>) &lt;&lt; 8) | (<a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a> &lt;&lt; 16) |
+<a name='L39'>  39                               (<a href='../Y/416.html' title='Multiple used in 13 places.'>d2</a> &lt;&lt; 24));
+<a name='L40'>  40     <font color='red'>}</font>
+<a name='L41'>  41 
+<a name='L42'>  42 <i><font color='green'>// If the main MCU has a USB connection but is not a Teensy</font></i>
+<a name='L43'>  43 <font color='darkred'>#elif</font> <b>defined</b>(<a href='../Y/282.html' title='Multiple used in 7 places.'>USBCON</a>)
+<a name='L44'>  44     <b>void</b> <a href='../Y/596.html' title='Multiple used in 12 places.'>sendImpl</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/490.html' title='Multiple used in 26 places.'>m</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/391.html' title='Multiple used in 30 places.'>c</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/416.html' title='Multiple used in 13 places.'>d2</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L45'>  45         <a href='../Y/500.html' title='Multiple used in 2 places.'>midiEventPacket_t</a> <a href='../Y/509.html' title='Multiple used in 2 places.'>msg</a> = <font color='red'>{</font>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a>)(<a href='../Y/490.html' title='Multiple used in 26 places.'>m</a> &gt;&gt; 4), (<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a>)(<a href='../Y/490.html' title='Multiple used in 26 places.'>m</a> | <a href='../Y/391.html' title='Multiple used in 30 places.'>c</a>), <a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a>, <a href='../Y/416.html' title='Multiple used in 13 places.'>d2</a><font color='red'>}</font>;
+<a name='L46'>  46         <a href='../Y/163.html' title='Multiple used in 3 places.'>MidiUSB</a>.sendMIDI(<a href='../Y/509.html' title='Multiple used in 2 places.'>msg</a>);
+<a name='L47'>  47         <a href='../Y/163.html' title='Multiple used in 3 places.'>MidiUSB</a>.<a href='../S/30.html#L49' title='Defined at 49 in Helpers/PrintStream.cpp.'>flush</a>();
+<a name='L48'>  48     <font color='red'>}</font>
+<a name='L49'>  49 <font color='darkred'>#endif</font>
+<a name='L50'>  50     <b>void</b> <a href='../Y/596.html' title='Multiple used in 12 places.'>sendImpl</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/490.html' title='Multiple used in 26 places.'>m</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/391.html' title='Multiple used in 30 places.'>c</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L51'>  51         <a href='../Y/596.html' title='Multiple used in 12 places.'>sendImpl</a>(<a href='../Y/490.html' title='Multiple used in 26 places.'>m</a>, <a href='../Y/391.html' title='Multiple used in 30 places.'>c</a>, <a href='../Y/415.html' title='Multiple used in 24 places.'>d1</a>, 0);
+<a name='L52'>  52     <font color='red'>}</font>
+<a name='L53'>  53 
+<a name='L54'>  54   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L55'>  55 <i><font color='green'>// If it's a Teensy board</font></i>
+<a name='L56'>  56 <font color='darkred'>#if</font> <b>defined</b>(<a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>)
+<a name='L57'>  57     <a href='../S/38.html#L26' title='Defined at 26 in MIDI_Parsers/MIDI_Parser.h.'>MIDI_read_t</a> <a href='../Y/575.html' title='Multiple used in 10 places.'>read</a>() <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L58'>  58         <b>while</b> (1) <font color='red'>{</font>
+<a name='L59'>  59             <b>if</b> (<a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a> == <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>) <font color='red'>{</font> <i><font color='green'>// If there's no previous packet</font></i>
+<a name='L60'>  60                 <b>if</b> (!usb_configuration) <i><font color='green'>// Check USB configuration</font></i>
+<a name='L61'>  61                     <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>;
+<a name='L62'>  62                 <a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a> = <a href='../Y/654.html' title='Multiple used in 2 places.'>usb_rx</a>(
+<a name='L63'>  63                     <a href='../Y/151.html' title='Multiple used in 2 places.'>MIDI_RX_ENDPOINT</a>); <i><font color='green'>// Read a new packet from the USB buffer</font></i>
+<a name='L64'>  64                 <b>if</b> (<a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a> == <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>) <font color='red'>{</font> <i><font color='green'>// If there's no new packet, return</font></i>
+<a name='L65'>  65                     <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>;
+<a name='L66'>  66                 <font color='red'>}</font>
+<a name='L67'>  67                 <b>if</b> (<a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a>-&gt;<a href='../Y/485.html' title='Multiple used in 4 places.'>len</a> &lt; 4) <font color='red'>{</font>
+<a name='L68'>  68                     <i><font color='green'>// If the lenght is less than 4, it's not a valid MIDI USB</font></i>
+<a name='L69'>  69                     <i><font color='green'>// packet</font></i>
+<a name='L70'>  70                     <a href='../Y/651.html' title='Multiple used in 2 places.'>usb_free</a>(<a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a>); <i><font color='green'>// Free the packet</font></i>
+<a name='L71'>  71                     <a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>; <i><font color='green'>// Read new packet next time around</font></i>
+<a name='L72'>  72                     <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>;
+<a name='L73'>  73                 <font color='red'>}</font>
+<a name='L74'>  74             <font color='red'>}</font>
+<a name='L75'>  75 
+<a name='L76'>  76             <a href='../Y/612.html' title='Multiple used in 38 places.'>size_t</a> <a href='../Y/467.html' title='Multiple used in 28 places.'>index</a> = <a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a>-&gt;<a href='../Y/467.html' title='Multiple used in 28 places.'>index</a>;
+<a name='L77'>  77             <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> *<a href='../Y/417.html' title='Multiple used in 30 places.'>data</a> = <a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a>-&gt;buf + <a href='../Y/467.html' title='Multiple used in 28 places.'>index</a>; <i><font color='green'>// A pointer to this packet</font></i>
+<a name='L78'>  78 
+<a name='L79'>  79             <a href='../S/38.html#L26' title='Defined at 26 in MIDI_Parsers/MIDI_Parser.h.'>MIDI_read_t</a> <a href='../Y/546.html' title='Multiple used in 12 places.'>parseResult</a> = <a href='../Y/547.html' title='Multiple used in 14 places.'>parser</a>.<a href='../D/244.html' title='Multiple defined in 2 places.'>parse</a>(<a href='../Y/417.html' title='Multiple used in 30 places.'>data</a>);
+<a name='L80'>  80 
+<a name='L81'>  81             <a href='../Y/467.html' title='Multiple used in 28 places.'>index</a> += 4;
+<a name='L82'>  82             <b>if</b> (<a href='../Y/467.html' title='Multiple used in 28 places.'>index</a> &lt; <a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a>-&gt;<a href='../Y/485.html' title='Multiple used in 4 places.'>len</a>) <font color='red'>{</font>
+<a name='L83'>  83                 <i><font color='green'>// If the packet is longer than 4 bytes</font></i>
+<a name='L84'>  84                 <a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a>-&gt;<a href='../Y/467.html' title='Multiple used in 28 places.'>index</a> = <a href='../Y/467.html' title='Multiple used in 28 places.'>index</a>; <i><font color='green'>// Change the index and read the next</font></i>
+<a name='L85'>  85                                           <i><font color='green'>// four bytes on next read</font></i>
+<a name='L86'>  86             <font color='red'>}</font> <b>else</b> <font color='red'>{</font>
+<a name='L87'>  87                 <i><font color='green'>// If the packet was only 4 bytes long</font></i>
+<a name='L88'>  88                 <a href='../Y/651.html' title='Multiple used in 2 places.'>usb_free</a>(<a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a>);                  <i><font color='green'>// Free the packet</font></i>
+<a name='L89'>  89                 <a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a> = <a href='../Y/654.html' title='Multiple used in 2 places.'>usb_rx</a>(<a href='../Y/151.html' title='Multiple used in 2 places.'>MIDI_RX_ENDPOINT</a>); <i><font color='green'>// Read the next packet</font></i>
+<a name='L90'>  90             <font color='red'>}</font>
+<a name='L91'>  91             <b>if</b> (<a href='../Y/546.html' title='Multiple used in 12 places.'>parseResult</a> != <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>)
+<a name='L92'>  92                 <b>return</b> <a href='../Y/546.html' title='Multiple used in 12 places.'>parseResult</a>;
+<a name='L93'>  93         <font color='red'>}</font>
+<a name='L94'>  94     <font color='red'>}</font>
+<a name='L95'>  95 
+<a name='L96'>  96 <i><font color='green'>// If the main MCU has a USB connection but is not a Teensy →  MIDIUSB library</font></i>
+<a name='L97'>  97 <font color='darkred'>#elif</font> <b>defined</b>(<a href='../Y/282.html' title='Multiple used in 7 places.'>USBCON</a>)
+<a name='L98'>  98     <a href='../S/38.html#L26' title='Defined at 26 in MIDI_Parsers/MIDI_Parser.h.'>MIDI_read_t</a> <a href='../Y/575.html' title='Multiple used in 10 places.'>read</a>() <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <font color='red'>{</font>
+<a name='L99'>  99         <b>while</b> (1) <font color='red'>{</font>
+<a name='L100'> 100             <a href='../Y/500.html' title='Multiple used in 2 places.'>midiEventPacket_t</a> <a href='../Y/505.html' title='Multiple used in 3 places.'>midipacket</a> = <a href='../Y/163.html' title='Multiple used in 3 places.'>MidiUSB</a>.<a href='../Y/575.html' title='Multiple used in 10 places.'>read</a>();
+<a name='L101'> 101             <a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a> = reinterpret_cast&lt;<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> *&gt;(&amp;<a href='../Y/505.html' title='Multiple used in 3 places.'>midipacket</a>);
+<a name='L102'> 102             <b>if</b> (!<a href='../Y/505.html' title='Multiple used in 3 places.'>midipacket</a>.<a href='../Y/461.html' title='Multiple used in 14 places.'>header</a>)
+<a name='L103'> 103                 <b>return</b> <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>;
+<a name='L104'> 104             <a href='../S/38.html#L26' title='Defined at 26 in MIDI_Parsers/MIDI_Parser.h.'>MIDI_read_t</a> <a href='../Y/546.html' title='Multiple used in 12 places.'>parseResult</a> = <a href='../Y/547.html' title='Multiple used in 14 places.'>parser</a>.<a href='../D/244.html' title='Multiple defined in 2 places.'>parse</a>(<a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a>);
+<a name='L105'> 105             <b>if</b> (<a href='../Y/546.html' title='Multiple used in 12 places.'>parseResult</a> != <a href='../S/38.html#L27' title='Defined at 27 in MIDI_Parsers/MIDI_Parser.h.'>NO_MESSAGE</a>)
+<a name='L106'> 106                 <b>return</b> <a href='../Y/546.html' title='Multiple used in 12 places.'>parseResult</a>;
+<a name='L107'> 107         <font color='red'>}</font>
+<a name='L108'> 108     <font color='red'>}</font>
+<a name='L109'> 109 <font color='darkred'>#endif</font>
+<a name='L110'> 110 
+<a name='L111'> 111   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L112'> 112 <i><font color='green'>// If it's a Teensy board</font></i>
+<a name='L113'> 113 <font color='darkred'>#if</font> <b>defined</b>(<a href='../Y/52.html' title='Multiple used in 14 places.'>CORE_TEENSY</a>)
+<a name='L114'> 114     usb_packet_t *<a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L115'> 115 
+<a name='L116'> 116 <i><font color='green'>// If the main MCU has a USB connection but is not a Teensy</font></i>
+<a name='L117'> 117 <font color='darkred'>#elif</font> <b>defined</b>(<a href='../Y/282.html' title='Multiple used in 7 places.'>USBCON</a>)
+<a name='L118'> 118     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> *<a href='../Y/591.html' title='Multiple used in 16 places.'>rx_packet</a> = <a href='../Y/537.html' title='Multiple used in 72 places.'>nullptr</a>;
+<a name='L119'> 119 <font color='darkred'>#endif</font>
+<a name='L120'> 120 <font color='red'>}</font>;
+<a name='L121'> 121 
+<a name='L122'> 122 <i><font color='green'>// If the main MCU doesn't have a USB connection:</font></i>
+<a name='L123'> 123 <i><font color='green'>// Fall back on Serial connection at the hardware MIDI baud rate.</font></i>
+<a name='L124'> 124 <i><font color='green'>// (Can be used with HIDUINO or USBMidiKliK.)</font></i>
+<a name='L125'> 125 <font color='darkred'>#else</font>
+<a name='L126'> 126 
+<a name='L127'> 127 <font color='darkred'>#include</font> "<a href='19.html'>SerialMIDI_Interface.h</a>"
+<a name='L128'> 128 
+<a name='L129'> 129 <i><font color='green'>/**</font></i>
+<a name='L130'> 130 <i><font color='green'> * @brief   A class for MIDI interfaces sending MIDI messages over a USB MIDI</font></i>
+<a name='L131'> 131 <i><font color='green'> *          connection.</font></i>
+<a name='L132'> 132 <i><font color='green'> * </font></i>
+<a name='L133'> 133 <i><font color='green'> * @note    See the [MIDI over USB Wiki]</font></i>
+<a name='L134'> 134 <i><font color='green'> *          (https://github.com/tttapa/MIDI_controller/wiki/MIDI-over-USB)</font></i>
+<a name='L135'> 135 <i><font color='green'> *          for more information. </font></i>
+<a name='L136'> 136 <i><font color='green'> */</font></i>
+<a name='L137'> 137 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/284.html' title='Multiple used in 4 places.'>USBMIDI_Interface</a> : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../Y/286.html' title='Multiple used in 12 places.'>USBSerialMIDI_Interface</a> <font color='red'>{</font>
+<a name='L138'> 138   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L139'> 139     <i><font color='green'>/**</font></i>
+<a name='L140'> 140 <i><font color='green'>     * @brief   Construct a new USBMIDI_Interface.</font></i>
+<a name='L141'> 141 <i><font color='green'>     */</font></i>
+<a name='L142'> 142     <a href='../Y/284.html' title='Multiple used in 4 places.'>USBMIDI_Interface</a>() : <a href='../Y/286.html' title='Multiple used in 12 places.'>USBSerialMIDI_Interface</a>(<a href='../S/20.html#L5' title='Defined at 5 in MIDI_Interfaces/MIDI_Interface.h.'>MIDI_BAUD</a>)<font color='red'>{</font><font color='red'>}</font>;
+<a name='L143'> 143 <font color='red'>}</font>;
+<a name='L144'> 144 
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

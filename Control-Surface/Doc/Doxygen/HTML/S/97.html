@@ -1,0 +1,164 @@
+<html>
+<head>
+<title>Hardware/ExtendedInputOutput/ShiftRegisterOut.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/140.html'>Hardware</a>/<a href='../files/141.html'>ExtendedInputOutput</a>/ShiftRegisterOut.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='../J/29.html' title='Multiple included from 2 places.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> "<a href='32.html'>../../Helpers/BitArray.hpp</a>"
+<a name='L4'>   4 <font color='darkred'>#include</font> "<a href='92.html'>ExtendedIOElement.h</a>"
+<a name='L5'>   5 
+<a name='L6'>   6 <i><font color='green'>/**</font></i>
+<a name='L7'>   7 <i><font color='green'> * @brief   A class for serial-in/parallel-out shift registers, </font></i>
+<a name='L8'>   8 <i><font color='green'> *          like the 74HC595. </font></i>
+<a name='L9'>   9 <i><font color='green'> */</font></i>
+<a name='L10'>  10 <a href='../Y/400.html' title='Multiple used in 63 places.'>class</a> <a href='../Y/249.html' title='Multiple used in 12 places.'>ShiftRegisterOut</a> : <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a> <a href='../S/98.html#L10' title='Defined at 10 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>ExtendedIOElement</a> <font color='red'>{</font>
+<a name='L11'>  11   <a href='../Y/572.html' title='Multiple used in 66 places.'>public</a>:
+<a name='L12'>  12     <i><font color='green'>/**</font></i>
+<a name='L13'>  13 <i><font color='green'>     * @brief   Create a new ShiftRegisterOut object with a shift register</font></i>
+<a name='L14'>  14 <i><font color='green'>     *          connected to the given pins, with a given bit order,</font></i>
+<a name='L15'>  15 <i><font color='green'>     *          and a given number of outputs.</font></i>
+<a name='L16'>  16 <i><font color='green'>     * </font></i>
+<a name='L17'>  17 <i><font color='green'>     * Multiple shift registers can be cascaded:</font></i>
+<a name='L18'>  18 <i><font color='green'>     * ```</font></i>
+<a name='L19'>  19 <i><font color='green'>     * clockPin &gt;──────────────┬─────────────────────────────┬─────────────────────────────┐            </font></i>
+<a name='L20'>  20 <i><font color='green'>     *              ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓      ┎━━━━━━━━━━┷━━━━━━━━━━━┓</font></i>
+<a name='L21'>  21 <i><font color='green'>     *              ┃        SH_CP         ┃      ┃        SH_CP         ┃      ┃        SH_CP         ┃</font></i>
+<a name='L22'>  22 <i><font color='green'>     * dataPin  &gt;───┨ Data in     Data out ┠──────┨ Data in     Data out ┠──────┨ Data in     Data out ┃</font></i>
+<a name='L23'>  23 <i><font color='green'>     *              ┃        ST_CP         ┃      ┃        ST_CP         ┃      ┃        ST_CP         ┃</font></i>
+<a name='L24'>  24 <i><font color='green'>     *              ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛      ┗━━━━━━━━━━┯━━━━━━━━━━━┛</font></i>
+<a name='L25'>  25 <i><font color='green'>     * latchPin &gt;──────────────┴─────────────────────────────┴─────────────────────────────┘            </font></i>
+<a name='L26'>  26 <i><font color='green'>     * ```</font></i>
+<a name='L27'>  27 <i><font color='green'>     * </font></i>
+<a name='L28'>  28 <i><font color='green'>     * @param   dataPin</font></i>
+<a name='L29'>  29 <i><font color='green'>     *          The digital output pin connected to the serial data input (DS)</font></i>
+<a name='L30'>  30 <i><font color='green'>     *          of the shift register.</font></i>
+<a name='L31'>  31 <i><font color='green'>     * @param   clockPin</font></i>
+<a name='L32'>  32 <i><font color='green'>     *          The digital output pin connected to the clock input (SH_CP)</font></i>
+<a name='L33'>  33 <i><font color='green'>     *          of the shift register.</font></i>
+<a name='L34'>  34 <i><font color='green'>     * @param   latchPin</font></i>
+<a name='L35'>  35 <i><font color='green'>     *          The digital output pin connected to the latch pin (ST_CP)</font></i>
+<a name='L36'>  36 <i><font color='green'>     *          of the shift register.</font></i>
+<a name='L37'>  37 <i><font color='green'>     */</font></i>
+<a name='L38'>  38     <a href='../Y/249.html' title='Multiple used in 12 places.'>ShiftRegisterOut</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/420.html' title='Multiple used in 14 places.'>dataPin</a>, <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/403.html' title='Multiple used in 14 places.'>clockPin</a>, <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/481.html' title='Multiple used in 7 places.'>latchPin</a>,
+<a name='L39'>  39                      <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/374.html' title='Multiple used in 11 places.'>bitOrder</a>, <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/486.html' title='Multiple used in 10 places.'>length</a> = 8);
+<a name='L40'>  40 
+<a name='L41'>  41     <i><font color='green'>/**</font></i>
+<a name='L42'>  42 <i><font color='green'>     * @brief   The pinMode function is not implemented because the mode is</font></i>
+<a name='L43'>  43 <i><font color='green'>     *          `OUTPUT` by definition.</font></i>
+<a name='L44'>  44 <i><font color='green'>     */</font></i>
+<a name='L45'>  45     <b>void</b> <a href='../D/246.html' title='Multiple defined in 3 places.'>pinMode</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/508.html' title='Multiple used in 30 places.'>mode</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <b>__attribute__</b>((<a href='../Y/432.html' title='Multiple used in 5 places.'>deprecated</a>)) <font color='red'>{</font>
+<a name='L46'>  46     <font color='red'>}</font>
+<a name='L47'>  47 
+<a name='L48'>  48     <i><font color='green'>/**</font></i>
+<a name='L49'>  49 <i><font color='green'>     * @brief   Set the state of a given output pin.</font></i>
+<a name='L50'>  50 <i><font color='green'>     * </font></i>
+<a name='L51'>  51 <i><font color='green'>     * @param   pin</font></i>
+<a name='L52'>  52 <i><font color='green'>     *          The shift register pin to set.</font></i>
+<a name='L53'>  53 <i><font color='green'>     * @param   val</font></i>
+<a name='L54'>  54 <i><font color='green'>     *          The value to set the pin to.</font></i>
+<a name='L55'>  55 <i><font color='green'>     *          (Either `HIGH` (1) or `LOW` (0))</font></i>
+<a name='L56'>  56 <i><font color='green'>     */</font></i>
+<a name='L57'>  57     <b>void</b> <a href='../D/150.html' title='Multiple defined in 3 places.'>digitalWrite</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/657.html' title='Multiple used in 27 places.'>val</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a>;
+<a name='L58'>  58 
+<a name='L59'>  59     <i><font color='green'>/**</font></i>
+<a name='L60'>  60 <i><font color='green'>     * @brief   Get the current state of a given output pin.</font></i>
+<a name='L61'>  61 <i><font color='green'>     * </font></i>
+<a name='L62'>  62 <i><font color='green'>     * @param   pin</font></i>
+<a name='L63'>  63 <i><font color='green'>     *          The pin to read.</font></i>
+<a name='L64'>  64 <i><font color='green'>     */</font></i>
+<a name='L65'>  65     <b>int</b> <a href='../D/149.html' title='Multiple defined in 4 places.'>digitalRead</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a>;
+<a name='L66'>  66 
+<a name='L67'>  67     <i><font color='green'>/**</font></i>
+<a name='L68'>  68 <i><font color='green'>     * @brief   The analogRead function is deprecated because a shift</font></i>
+<a name='L69'>  69 <i><font color='green'>     *          is always digital.</font></i>
+<a name='L70'>  70 <i><font color='green'>     */</font></i>
+<a name='L71'>  71     <a href='../S/92.html#L7' title='Defined at 7 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>analog_t</a> <a href='../D/129.html' title='Multiple defined in 3 places.'>analogRead</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a> <b>__attribute__</b>((<a href='../Y/432.html' title='Multiple used in 5 places.'>deprecated</a>)) <font color='red'>{</font>
+<a name='L72'>  72         <b>return</b> <a href='../D/149.html' title='Multiple defined in 4 places.'>digitalRead</a>(<a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>);
+<a name='L73'>  73     <font color='red'>}</font>
+<a name='L74'>  74 
+<a name='L75'>  75     <i><font color='green'>/**</font></i>
+<a name='L76'>  76 <i><font color='green'>     * @brief   The analogWrite function is not deprecated because a shift</font></i>
+<a name='L77'>  77 <i><font color='green'>     *          is always digital.</font></i>
+<a name='L78'>  78 <i><font color='green'>     */</font></i>
+<a name='L79'>  79     <b>void</b> <a href='../Y/353.html' title='Multiple used in 3 places.'>analogWrite</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>, <a href='../S/92.html#L7' title='Defined at 7 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>analog_t</a> <a href='../Y/657.html' title='Multiple used in 27 places.'>val</a>) <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a>
+<a name='L80'>  80         <b>__attribute__</b>((<a href='../Y/432.html' title='Multiple used in 5 places.'>deprecated</a>)) <font color='red'>{</font>
+<a name='L81'>  81         <a href='../D/150.html' title='Multiple defined in 3 places.'>digitalWrite</a>(<a href='../S/98.html#L14' title='Defined at 14 in Hardware/ExtendedInputOutput/ExtendedIOElement.cpp.'>pin</a>, <a href='../Y/657.html' title='Multiple used in 27 places.'>val</a> &gt; 127);
+<a name='L82'>  82     <font color='red'>}</font>
+<a name='L83'>  83 
+<a name='L84'>  84     <i><font color='green'>/**</font></i>
+<a name='L85'>  85 <i><font color='green'>     * @brief   Initialize the shift register.  </font></i>
+<a name='L86'>  86 <i><font color='green'>     *          Set the data and clock pins to output mode, </font></i>
+<a name='L87'>  87 <i><font color='green'>     *          and set all shift register outputs to `LOW`.</font></i>
+<a name='L88'>  88 <i><font color='green'>     */</font></i>
+<a name='L89'>  89     <b>void</b> <a href='../D/135.html' title='Multiple defined in 3 places.'>begin</a>() <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a>;
+<a name='L90'>  90 
+<a name='L91'>  91     <i><font color='green'>/**</font></i>
+<a name='L92'>  92 <i><font color='green'>     * @brief   Write the state buffer to the physical outputs.</font></i>
+<a name='L93'>  93 <i><font color='green'>     */</font></i>
+<a name='L94'>  94     <b>void</b> <a href='../D/286.html' title='Multiple defined in 14 places.'>update</a>() <a href='../Y/543.html' title='Multiple used in 65 places.'>override</a>;
+<a name='L95'>  95 
+<a name='L96'>  96     <i><font color='green'>/**</font></i>
+<a name='L97'>  97 <i><font color='green'>     * @brief   Set all shift register outputs to `LOW`.</font></i>
+<a name='L98'>  98 <i><font color='green'>     */</font></i>
+<a name='L99'>  99     <b>void</b> <a href='../D/257.html' title='Multiple defined in 4 places.'>reset</a>();
+<a name='L100'> 100 
+<a name='L101'> 101     <i><font color='green'>/**</font></i>
+<a name='L102'> 102 <i><font color='green'>     * @brief   Get the red output pin of the given LED.</font></i>
+<a name='L103'> 103 <i><font color='green'>     * </font></i>
+<a name='L104'> 104 <i><font color='green'>     * @param   id</font></i>
+<a name='L105'> 105 <i><font color='green'>     *          The zero-based LED number.</font></i>
+<a name='L106'> 106 <i><font color='green'>     */</font></i>
+<a name='L107'> 107     <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/93.html#L42' title='Defined at 42 in Hardware/ExtendedInputOutput/ShiftRegisterOut.cpp.'>red</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/466.html' title='Multiple used in 6 places.'>id</a>);
+<a name='L108'> 108     <i><font color='green'>/**</font></i>
+<a name='L109'> 109 <i><font color='green'>     * @brief   Get the green output pin of the given LED.</font></i>
+<a name='L110'> 110 <i><font color='green'>     * </font></i>
+<a name='L111'> 111 <i><font color='green'>     * @param   id</font></i>
+<a name='L112'> 112 <i><font color='green'>     *          The zero-based LED number.</font></i>
+<a name='L113'> 113 <i><font color='green'>     */</font></i>
+<a name='L114'> 114     <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/93.html#L41' title='Defined at 41 in Hardware/ExtendedInputOutput/ShiftRegisterOut.cpp.'>green</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/466.html' title='Multiple used in 6 places.'>id</a>);
+<a name='L115'> 115     <i><font color='green'>/**</font></i>
+<a name='L116'> 116 <i><font color='green'>     * @brief   Get the blue output pin of the given LED.</font></i>
+<a name='L117'> 117 <i><font color='green'>     * </font></i>
+<a name='L118'> 118 <i><font color='green'>     * @param   id</font></i>
+<a name='L119'> 119 <i><font color='green'>     *          The zero-based LED number.</font></i>
+<a name='L120'> 120 <i><font color='green'>     */</font></i>
+<a name='L121'> 121     <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../S/93.html#L43' title='Defined at 43 in Hardware/ExtendedInputOutput/ShiftRegisterOut.cpp.'>blue</a>(<a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/466.html' title='Multiple used in 6 places.'>id</a>);
+<a name='L122'> 122 
+<a name='L123'> 123     <i><font color='green'>/**</font></i>
+<a name='L124'> 124 <i><font color='green'>     * @brief   The position of the red output pin for 3-color LEDs.  </font></i>
+<a name='L125'> 125 <i><font color='green'>     *          For the usual RGB configuration, this is 0.</font></i>
+<a name='L126'> 126 <i><font color='green'>     */</font></i>
+<a name='L127'> 127     <b>const</b> <b>static</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/582.html' title='Multiple used in 3 places.'>redBit</a>; <i><font color='green'>// = 0;</font></i>
+<a name='L128'> 128     <i><font color='green'>/**</font></i>
+<a name='L129'> 129 <i><font color='green'>     * @brief   The position of the green output pin for 3-color LEDs.  </font></i>
+<a name='L130'> 130 <i><font color='green'>     *          For the usual RGB configuration, this is 1.</font></i>
+<a name='L131'> 131 <i><font color='green'>     */</font></i>
+<a name='L132'> 132     <b>const</b> <b>static</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/460.html' title='Multiple used in 3 places.'>greenBit</a>; <i><font color='green'>// = 1;</font></i>
+<a name='L133'> 133     <i><font color='green'>/**</font></i>
+<a name='L134'> 134 <i><font color='green'>     * @brief   The position of the blue output pin for 3-color LEDs.  </font></i>
+<a name='L135'> 135 <i><font color='green'>     *          For the usual RGB configuration, this is 2.</font></i>
+<a name='L136'> 136 <i><font color='green'>     */</font></i>
+<a name='L137'> 137     <b>const</b> <b>static</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/379.html' title='Multiple used in 3 places.'>blueBit</a>; <i><font color='green'>// = 2;</font></i>
+<a name='L138'> 138 
+<a name='L139'> 139   <a href='../Y/570.html' title='Multiple used in 21 places.'>private</a>:
+<a name='L140'> 140     <b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/420.html' title='Multiple used in 14 places.'>dataPin</a>;
+<a name='L141'> 141     <b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/403.html' title='Multiple used in 14 places.'>clockPin</a>;
+<a name='L142'> 142     <b>const</b> <a href='../S/92.html#L6' title='Defined at 6 in Hardware/ExtendedInputOutput/ExtendedIOElement.h.'>pin_t</a> <a href='../Y/481.html' title='Multiple used in 7 places.'>latchPin</a>;
+<a name='L143'> 143     <b>const</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/374.html' title='Multiple used in 11 places.'>bitOrder</a>;
+<a name='L144'> 144 
+<a name='L145'> 145     <a href='../S/32.html#L13' title='Defined at 13 in Helpers/BitArray.hpp.'>BitArray</a> <a href='../Y/384.html' title='Multiple used in 20 places.'>buffer</a>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

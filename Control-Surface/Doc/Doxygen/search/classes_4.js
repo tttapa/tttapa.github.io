@@ -1,6 +1,27 @@
 var searchData=
 [
-  ['ema',['EMA',['../classEMA.html',1,'']]],
-  ['ema_3c_20analog_5ffilter_5fshift_5ffactor_2c_20int32_5ft_20_3e',['EMA&lt; ANALOG_FILTER_SHIFT_FACTOR, int32_t &gt;',['../classEMA.html',1,'']]],
-  ['extendedioelement',['ExtendedIOElement',['../classExtendedIOElement.html',1,'']]]
+  ['digitalccsender',['DigitalCCSender',['../classDigitalCCSender.html',1,'']]],
+  ['digitalnotesender',['DigitalNoteSender',['../classDigitalNoteSender.html',1,'']]],
+  ['display',['Display',['../structDisplay.html',1,'']]],
+  ['displayelement',['DisplayElement',['../classDisplayElement.html',1,'']]],
+  ['displayinterface',['DisplayInterface',['../classDisplayInterface.html',1,'']]],
+  ['dotbardisplayleds',['DotBarDisplayLEDs',['../classDotBarDisplayLEDs.html',1,'']]],
+  ['doublylinkable',['DoublyLinkable',['../classDoublyLinkable.html',1,'']]],
+  ['doublylinkable_3c_20bankablemidiinputaddressable_3c_20n_20_3e_20_3e',['DoublyLinkable&lt; BankableMIDIInputAddressable&lt; N &gt; &gt;',['../classDoublyLinkable.html',1,'']]],
+  ['doublylinkable_3c_20extendedioelement_20_3e',['DoublyLinkable&lt; ExtendedIOElement &gt;',['../classDoublyLinkable.html',1,'']]],
+  ['doublylinkable_3c_20midiinputelementcc_20_3e',['DoublyLinkable&lt; MIDIInputElementCC &gt;',['../classDoublyLinkable.html',1,'']]],
+  ['doublylinkable_3c_20midiinputelementnote_20_3e',['DoublyLinkable&lt; MIDIInputElementNote &gt;',['../classDoublyLinkable.html',1,'']]],
+  ['doublylinkable_3c_20updatable_3c_20audiovu_20_3e_20_3e',['DoublyLinkable&lt; Updatable&lt; AudioVU &gt; &gt;',['../classDoublyLinkable.html',1,'']]],
+  ['doublylinkable_3c_20updatable_3c_20normalupdatable_20_3e_20_3e',['DoublyLinkable&lt; Updatable&lt; NormalUpdatable &gt; &gt;',['../classDoublyLinkable.html',1,'']]],
+  ['doublylinkable_3c_20updatable_3c_20potentiometer_20_3e_20_3e',['DoublyLinkable&lt; Updatable&lt; Potentiometer &gt; &gt;',['../classDoublyLinkable.html',1,'']]],
+  ['doublylinkable_3c_20updatable_3c_20t_20_3e_20_3e',['DoublyLinkable&lt; Updatable&lt; T &gt; &gt;',['../classDoublyLinkable.html',1,'']]],
+  ['doublylinkedlist',['DoublyLinkedList',['../classDoublyLinkedList.html',1,'']]],
+  ['doublylinkedlist_3c_20bankablemidiinputaddressable_3c_20n_20_3e_20_3e',['DoublyLinkedList&lt; BankableMIDIInputAddressable&lt; N &gt; &gt;',['../classDoublyLinkedList.html',1,'']]],
+  ['doublylinkedlist_3c_20extendedioelement_20_3e',['DoublyLinkedList&lt; ExtendedIOElement &gt;',['../classDoublyLinkedList.html',1,'']]],
+  ['doublylinkedlist_3c_20midiinputelementcc_20_3e',['DoublyLinkedList&lt; MIDIInputElementCC &gt;',['../classDoublyLinkedList.html',1,'']]],
+  ['doublylinkedlist_3c_20midiinputelementnote_20_3e',['DoublyLinkedList&lt; MIDIInputElementNote &gt;',['../classDoublyLinkedList.html',1,'']]],
+  ['doublylinkedlist_3c_20updatable_3c_20audiovu_20_3e_20_3e',['DoublyLinkedList&lt; Updatable&lt; AudioVU &gt; &gt;',['../classDoublyLinkedList.html',1,'']]],
+  ['doublylinkedlist_3c_20updatable_3c_20normalupdatable_20_3e_20_3e',['DoublyLinkedList&lt; Updatable&lt; NormalUpdatable &gt; &gt;',['../classDoublyLinkedList.html',1,'']]],
+  ['doublylinkedlist_3c_20updatable_3c_20potentiometer_20_3e_20_3e',['DoublyLinkedList&lt; Updatable&lt; Potentiometer &gt; &gt;',['../classDoublyLinkedList.html',1,'']]],
+  ['doublylinkedlist_3c_20updatable_3c_20t_20_3e_20_3e',['DoublyLinkedList&lt; Updatable&lt; T &gt; &gt;',['../classDoublyLinkedList.html',1,'']]]
 ];

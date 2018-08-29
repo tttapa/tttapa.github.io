@@ -1,0 +1,96 @@
+<html>
+<head>
+<title>MIDI_Inputs/MIDI_Input_Element.hpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/144.html'>MIDI_Inputs</a>/MIDI_Input_Element.hpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L16'>[^]</a><a href='#L55'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='16.html#L3' title='Included from 3 in MIDI_Inputs/MIDI_Input_ChannelPressure.hpp.'>INCLUDED FROM</a></h2>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L16' title='Defined at 16.'>display</a>
+<li><a href='#L22' title='Defined at 22.'>update</a>
+<li><a href='#L32' title='Defined at 32.'>updateWith</a>
+<li><a href='#L43' title='Defined at 43.'>getBaseChannel</a>
+<li><a href='#L55' title='Defined at 55.'>matchChannel</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> "<a href='8.html'>MIDI_message_matcher.h</a>"
+<a name='L4'>   4 
+<a name='L5'>   5 <b>class</b> <a href='../S/16.html#L6' title='Refered from 6 in MIDI_Inputs/MIDI_Input_ChannelPressure.hpp.'>MIDI_Input_Element</a> <font color='red'>{</font>
+<a name='L6'>   6   <b>public</b>:
+<a name='L7'>   7     <i><font color='green'>/**</font></i>
+<a name='L8'>   8 <i><font color='green'>     * @brief   Constructor.</font></i>
+<a name='L9'>   9 <i><font color='green'>     * @todo    Documentation.</font></i>
+<a name='L10'>  10 <i><font color='green'>     */</font></i>
+<a name='L11'>  11     MIDI_Input_Element(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/368.html' title='Multiple used in 32 places.'>baseChannel</a>) : <a href='../Y/368.html' title='Multiple used in 32 places.'>baseChannel</a>(<a href='../Y/368.html' title='Multiple used in 32 places.'>baseChannel</a> - 1) <font color='red'>{</font><font color='red'>}</font>
+<a name='L12'>  12 
+<a name='L13'>  13     <i><font color='green'>/**</font></i>
+<a name='L14'>  14 <i><font color='green'>     * @brief   Update the display of the input element.</font></i>
+<a name='L15'>  15 <i><font color='green'>     */</font></i>
+<a name='L16'>  16     <b>virtual</b> <b>void</b> <a href='../R/133.html' title='Multiple refered from 46 places.'>display</a>() <font color='red'>{</font><font color='red'>}</font>
+<a name='L17'>  17 
+<a name='L18'>  18     <i><font color='green'>/**</font></i>
+<a name='L19'>  19 <i><font color='green'>     * @brief   Update the value of the input element.</font></i>
+<a name='L20'>  20 <i><font color='green'>     *          Used for decaying VU meters etc.</font></i>
+<a name='L21'>  21 <i><font color='green'>     */</font></i>
+<a name='L22'>  22     <b>virtual</b> <b>void</b> <a href='../R/264.html' title='Multiple refered from 14 places.'>update</a>() <font color='red'>{</font><font color='red'>}</font>
+<a name='L23'>  23 
+<a name='L24'>  24     <i><font color='green'>/**</font></i>
+<a name='L25'>  25 <i><font color='green'>     * @brief   Reset the input element to its initial state.</font></i>
+<a name='L26'>  26 <i><font color='green'>     */</font></i>
+<a name='L27'>  27     <b>virtual</b> <b>void</b> <a href='../D/257.html' title='Multiple defined in 4 places.'>reset</a>() = 0;
+<a name='L28'>  28 
+<a name='L29'>  29     <i><font color='green'>/**</font></i>
+<a name='L30'>  30 <i><font color='green'>     * @brief   Receive a new MIDI message and update the internal state.</font></i>
+<a name='L31'>  31 <i><font color='green'>     */</font></i>
+<a name='L32'>  32     <b>bool</b> <a href='../R/273.html' title='Multiple refered from 3 places.'>updateWith</a>(<b>const</b> <a href='../Y/153.html' title='Multiple used in 18 places.'>MIDI_message_matcher</a> &amp;<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>) <font color='red'>{</font>
+<a name='L33'>  33         <a href='../D/24.html' title='Multiple defined in 2 places.'>DEBUGFN</a>("");
+<a name='L34'>  34         <b>if</b> (!<a href='../D/229.html' title='Multiple defined in 5 places.'>matchChannel</a>(<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>.<a href='../Y/394.html' title='Multiple used in 87 places.'>channel</a>))
+<a name='L35'>  35             <b>return</b> <b>false</b>;
+<a name='L36'>  36         <a href='../D/24.html' title='Multiple defined in 2 places.'>DEBUGFN</a>("Channel matched");
+<a name='L37'>  37         <b>if</b> (!<a href='../D/290.html' title='Multiple defined in 8 places.'>updateImpl</a>(<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>))
+<a name='L38'>  38             <b>return</b> <b>false</b>;
+<a name='L39'>  39         <a href='../D/235.html' title='Multiple defined in 3 places.'>moveDown</a>();
+<a name='L40'>  40         <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>();
+<a name='L41'>  41     <font color='red'>}</font>
+<a name='L42'>  42 
+<a name='L43'>  43     <b>inline</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../R/152.html' title='Multiple refered from 7 places.'>getBaseChannel</a>() <b>const</b> <font color='red'>{</font> <b>return</b> <a href='../D/134.html' title='Multiple defined in 6 places.'>baseChannel</a>; <font color='red'>}</font>
+<a name='L44'>  44 
+<a name='L45'>  45   <b>private</b>:
+<a name='L46'>  46     <i><font color='green'>/**</font></i>
+<a name='L47'>  47 <i><font color='green'>     * @brief   Update the internal state with the new MIDI message.</font></i>
+<a name='L48'>  48 <i><font color='green'>     */</font></i>
+<a name='L49'>  49     <b>virtual</b> <b>bool</b> <a href='../D/290.html' title='Multiple defined in 8 places.'>updateImpl</a>(<b>const</b> <a href='../Y/153.html' title='Multiple used in 18 places.'>MIDI_message_matcher</a> &amp;<a href='../Y/504.html' title='Multiple used in 74 places.'>midimsg</a>) = 0;
+<a name='L50'>  50 
+<a name='L51'>  51     <i><font color='green'>/**</font></i>
+<a name='L52'>  52 <i><font color='green'>     * @brief   Check if the channel of the incoming MIDI message</font></i>
+<a name='L53'>  53 <i><font color='green'>     *          matches an channel of this element.</font></i>
+<a name='L54'>  54 <i><font color='green'>     */</font></i>
+<a name='L55'>  55     <b>virtual</b> <b>inline</b> <b>bool</b> <a href='../R/209.html' title='Multiple refered from 4 places.'>matchChannel</a>(<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/630.html' title='Multiple used in 17 places.'>targetChannel</a>) <b>const</b> <font color='red'>{</font>
+<a name='L56'>  56         <b>return</b> <a href='../D/170.html' title='Multiple defined in 2 places.'>getBaseChannel</a>() == <a href='../Y/630.html' title='Multiple used in 17 places.'>targetChannel</a>;
+<a name='L57'>  57     <font color='red'>}</font>
+<a name='L58'>  58 
+<a name='L59'>  59     <i><font color='green'>/**</font></i>
+<a name='L60'>  60 <i><font color='green'>     * @brief   Move down this element in the linked list of elements.</font></i>
+<a name='L61'>  61 <i><font color='green'>     *          This means that the element will be checked earlier on the next</font></i>
+<a name='L62'>  62 <i><font color='green'>     *          iteration.</font></i>
+<a name='L63'>  63 <i><font color='green'>     */</font></i>
+<a name='L64'>  64     <b>virtual</b> <b>void</b> <a href='../D/235.html' title='Multiple defined in 3 places.'>moveDown</a>() = 0;
+<a name='L65'>  65 
+<a name='L66'>  66     <b>const</b> <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../D/134.html' title='Multiple defined in 6 places.'>baseChannel</a>;
+<a name='L67'>  67 <font color='red'>}</font>;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L16'>[^]</a><a href='#L55'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

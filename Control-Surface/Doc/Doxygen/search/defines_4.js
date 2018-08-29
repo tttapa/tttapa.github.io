@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['max_5ffps',['MAX_FPS',['../Settings_8h.html#a83bf3347e926abd1e2d06dbf885fb6f1',1,'Settings.h']]]
+  ['location',['LOCATION',['../Debug_8hpp.html#ac27b81440ce6781d5bfcab7a9bbdef99',1,'Debug.hpp']]]
 ];

@@ -1,0 +1,73 @@
+<html>
+<head>
+<title>Display/VUDisplay.hpp</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/138.html'>Display</a>/VUDisplay.hpp</h2>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L11'>[^]</a><a href='#L12'>[v]</a>[top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='135.html#L75' title='Included from 75 in Control_Surface.h.'>INCLUDED FROM</a></h2>
+<hr>
+<h2>DEFINITIONS</h2>
+This source file includes following definitions.
+<ol>
+<li><a href='#L11' title='Defined at 11.'>color</a>
+<li><a href='#L12' title='Defined at 12.'>draw</a>
+</ol>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#pragma</font> once
+<a name='L2'>   2 
+<a name='L3'>   3 <font color='darkred'>#include</font> "../MIDI_Inputs/MIDI_Input_VU.h"
+<a name='L4'>   4 <font color='darkred'>#include</font> "<a href='84.html'>./DisplayElement.hpp</a>"
+<a name='L5'>   5 
+<a name='L6'>   6 <b>class</b> <a href='../S/88.html#L8' title='Refered from 8 in Display/VUDisplay.hpp.'>VUDisplay</a> : <b>public</b> <a href='../S/84.html#L11' title='Defined at 11 in Display/DisplayElement.hpp.'>DisplayElement</a> <font color='red'>{</font>
+<a name='L7'>   7 <b>public</b>:
+<a name='L8'>   8   <a href='../S/88.html#L6' title='Defined at 6 in Display/VUDisplay.hpp.'>VUDisplay</a>(<a href='../Y/16.html' title='Multiple used in 9 places.'>Adafruit_GFX</a> &amp;<a href='../Y/435.html' title='Multiple used in 13 places.'>display</a>, <a href='../Y/136.html' title='Multiple used in 2 places.'>MCU_VU</a> &amp;<a href='../Y/663.html' title='Multiple used in 4 places.'>vu</a>, <a href='../Y/131.html' title='Multiple used in 5 places.'>Location</a> <a href='../Y/487.html' title='Multiple used in 12 places.'>loc</a>, <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../Y/665.html' title='Multiple used in 9 places.'>width</a>,
+<a name='L9'>   9             <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/378.html' title='Multiple used in 5 places.'>blockheight</a>, <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/616.html' title='Multiple used in 5 places.'>spacing</a>, <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../Y/406.html' title='Multiple used in 12 places.'>color</a>)
+<a name='L10'>  10       : <a href='../Y/69.html' title='Multiple used in 5 places.'>DisplayElement</a>(<a href='../Y/435.html' title='Multiple used in 13 places.'>display</a>), <a href='../Y/663.html' title='Multiple used in 4 places.'>vu</a>(vu), <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>(<a href='../Y/487.html' title='Multiple used in 12 places.'>loc</a>.x), <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>(<a href='../Y/487.html' title='Multiple used in 12 places.'>loc</a>.y), <a href='../Y/665.html' title='Multiple used in 9 places.'>width</a>(width),
+<a name='L11'>  11         <a href='../Y/378.html' title='Multiple used in 5 places.'>blockheight</a>(blockheight), <a href='../Y/616.html' title='Multiple used in 5 places.'>spacing</a>(spacing), <a href='../R/124.html' title='Multiple refered from 26 places.'>color</a>(<a href='../Y/406.html' title='Multiple used in 12 places.'>color</a>) <font color='red'>{</font><font color='red'>}</font>
+<a name='L12'>  12   <b>void</b> <a href='../R/134.html' title='Multiple refered from 2 places.'>draw</a>() <font color='red'>{</font>
+<a name='L13'>  13     <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> = <a href='../Y/663.html' title='Multiple used in 4 places.'>vu</a>.<a href='../D/211.html' title='Multiple defined in 6 places.'>getValue</a>();
+<a name='L14'>  14 
+<a name='L15'>  15     <b>if</b> (<a href='../Y/658.html' title='Multiple used in 65 places.'>value</a> &gt;= <a href='../Y/548.html' title='Multiple used in 7 places.'>peak</a>) <font color='red'>{</font>
+<a name='L16'>  16       <a href='../Y/548.html' title='Multiple used in 7 places.'>peak</a> = <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>;
+<a name='L17'>  17       <a href='../Y/563.html' title='Multiple used in 4 places.'>previousDecay</a> = <a href='../Y/506.html' title='Multiple used in 11 places.'>millis</a>();
+<a name='L18'>  18     <font color='red'>}</font> <b>else</b> <b>if</b> (<a href='../Y/506.html' title='Multiple used in 11 places.'>millis</a>() - <a href='../Y/563.html' title='Multiple used in 4 places.'>previousDecay</a> &gt; <a href='../S/14.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/VU.hpp.'>decayTime</a>) <font color='red'>{</font>
+<a name='L19'>  19       <b>if</b> (<a href='../Y/548.html' title='Multiple used in 7 places.'>peak</a> &gt; 0) <font color='red'>{</font>
+<a name='L20'>  20         <a href='../Y/548.html' title='Multiple used in 7 places.'>peak</a>--;
+<a name='L21'>  21         <a href='../Y/563.html' title='Multiple used in 4 places.'>previousDecay</a> = <a href='../Y/506.html' title='Multiple used in 11 places.'>millis</a>();
+<a name='L22'>  22       <font color='red'>}</font>
+<a name='L23'>  23     <font color='red'>}</font>
+<a name='L24'>  24     <b>if</b> (<a href='../Y/548.html' title='Multiple used in 7 places.'>peak</a> &gt; 0) <font color='red'>{</font>
+<a name='L25'>  25       <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.<a href='../Y/436.html' title='Multiple used in 5 places.'>drawFastHLine</a>(
+<a name='L26'>  26           <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a> - <a href='../Y/616.html' title='Multiple used in 5 places.'>spacing</a> + <a href='../Y/378.html' title='Multiple used in 5 places.'>blockheight</a> - <a href='../Y/548.html' title='Multiple used in 7 places.'>peak</a> * (<a href='../Y/378.html' title='Multiple used in 5 places.'>blockheight</a> + <a href='../Y/616.html' title='Multiple used in 5 places.'>spacing</a>), <a href='../Y/665.html' title='Multiple used in 9 places.'>width</a>,
+<a name='L27'>  27           <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L28'>  28       <b>for</b> (<a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a> = 0; <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a> &lt; <a href='../Y/658.html' title='Multiple used in 65 places.'>value</a>; <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a>++)
+<a name='L29'>  29         <a href='../D/151.html' title='Multiple defined in 4 places.'>display</a>.fillRect(<a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>, <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a> - <a href='../Y/465.html' title='Multiple used in 64 places.'>i</a> * (<a href='../Y/378.html' title='Multiple used in 5 places.'>blockheight</a> + <a href='../Y/616.html' title='Multiple used in 5 places.'>spacing</a>), <a href='../Y/665.html' title='Multiple used in 9 places.'>width</a>, <a href='../Y/378.html' title='Multiple used in 5 places.'>blockheight</a>,
+<a name='L30'>  30                          <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>);
+<a name='L31'>  31     <font color='red'>}</font>
+<a name='L32'>  32   <font color='red'>}</font>
+<a name='L33'>  33 
+<a name='L34'>  34 <b>private</b>:
+<a name='L35'>  35   <a href='../Y/136.html' title='Multiple used in 2 places.'>MCU_VU</a> &amp;<a href='../Y/663.html' title='Multiple used in 4 places.'>vu</a>;
+<a name='L36'>  36 
+<a name='L37'>  37   <a href='../Y/473.html' title='Multiple used in 13 places.'>int16_t</a> <a href='../Y/667.html' title='Multiple used in 60 places.'>x</a>;
+<a name='L38'>  38   <a href='../Y/473.html' title='Multiple used in 13 places.'>int16_t</a> <a href='../Y/672.html' title='Multiple used in 41 places.'>y</a>;
+<a name='L39'>  39   <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../Y/665.html' title='Multiple used in 9 places.'>width</a>;
+<a name='L40'>  40   <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/378.html' title='Multiple used in 5 places.'>blockheight</a>;
+<a name='L41'>  41   <a href='../Y/646.html' title='Multiple used in 629 places.'>uint8_t</a> <a href='../Y/616.html' title='Multiple used in 5 places.'>spacing</a>;
+<a name='L42'>  42   <a href='../Y/645.html' title='Multiple used in 32 places.'>uint16_t</a> <a href='../D/142.html' title='Multiple defined in 5 places.'>color</a>;
+<a name='L43'>  43 
+<a name='L44'>  44   <b>unsigned</b> <b>long</b> <a href='../Y/548.html' title='Multiple used in 7 places.'>peak</a> = 0;
+<a name='L45'>  45   <b>unsigned</b> <b>long</b> <a href='../Y/563.html' title='Multiple used in 4 places.'>previousDecay</a> = 0;
+<a name='L46'>  46 
+<a name='L47'>  47   <a href='../Y/407.html' title='Multiple used in 206 places.'>constexpr</a> <b>static</b> <b>unsigned</b> <b>long</b> <a href='../S/14.html#L15' title='Defined at 15 in MIDI_Inputs/MCU/VU.hpp.'>decayTime</a> = 350;
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;]<a href='#L11'>[^]</a><a href='#L12'>[v]</a><a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>

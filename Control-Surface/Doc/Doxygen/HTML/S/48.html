@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Settings/Settings.h</title>
+<meta name='robots' content='noindex,nofollow'>
+<meta name='generator' content='GLOBAL-5.7.1'>
+</head>
+<body text='#191970' bgcolor='#f5f5dc' vlink='gray'>
+<a name='TOP'><h2><a href='../mains.html'>root</a>/<a href='../files/156.html'>Settings</a>/Settings.h</h2>
+<i><font color='green'>/* [&lt;][&gt;][^][v][top]<a href='#BOTTOM'>[bottom]</a><a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+<hr>
+<h2><a href='49.html#L6' title='Included from 6 in Settings/SettingsWrapper.h.'>INCLUDED FROM</a></h2>
+<hr>
+<pre>
+<a name='L1'>   1 <font color='darkred'>#ifndef</font> <a href='../S/49.html#L2' title='Defined at 2 in Settings/SettingsWrapper.h.'>SETTINGSWRAPPER_H</a>
+<a name='L2'>   2 <font color='darkred'>#error</font> "Do not include this file directly, use the wrapper!"
+<a name='L3'>   3 <font color='darkred'>#endif</font>
+<a name='L4'>   4 
+<a name='L5'>   5 <i><font color='green'>/**</font></i>
+<a name='L6'>   6 <i><font color='green'> * @file Settings.h</font></i>
+<a name='L7'>   7 <i><font color='green'> *</font></i>
+<a name='L8'>   8 <i><font color='green'> * @brief All user settings and debugging options can be changed here.</font></i>
+<a name='L9'>   9 <i><font color='green'> */</font></i>
+<a name='L10'>  10 
+<a name='L11'>  11 <i><font color='green'>// ---------------------------- Debug Settings --------------------------- //</font></i>
+<a name='L12'>  12 <i><font color='green'>// ======================================================================= //</font></i>
+<a name='L13'>  13 
+<a name='L14'>  14 <i><font color='green'>/** The debug output. */</font></i>
+<a name='L15'>  15 <font color='darkred'>#define</font> <a href='../R/23.html' title='Multiple refered from 11 places.'>DEBUG_OUT</a> <a href='../Y/242.html' title='Multiple used in 9 places.'>Serial</a>
+<a name='L16'>  16 
+<a name='L17'>  17 <font color='darkred'>#define</font> <a href='../R/22.html' title='Multiple refered from 2 places.'>DEBUG_MIDI_PACKETS</a>
+<a name='L18'>  18 
+<a name='L19'>  19 <i><font color='green'>/** Exit when encountering an error, instead of recovering. */</font></i>
+<a name='L20'>  20 <font color='darkred'>#define</font> <a href='../S/27.html#L113' title='Refered from 113 in Helpers/Debug.hpp.'>FATAL_ERRORS</a>
+<a name='L21'>  21 
+<a name='L22'>  22 <i><font color='green'>// ---------------------------- User Settings ---------------------------- //</font></i>
+<a name='L23'>  23 <i><font color='green'>// ======================================================================= //</font></i>
+<a name='L24'>  24 
+<a name='L25'>  25 <i><font color='green'>/** The factor for the analog filter: &lt;br&gt;</font></i>
+<a name='L26'>  26 <i><font color='green'> *  Difference equation:</font></i>
+<a name='L27'>  27 <i><font color='green'> *  @f$ y[n] = \alpha\cdot x[n] + (1-\alpha)\cdot y[n-1] @f$</font></i>
+<a name='L28'>  28 <i><font color='green'> *  where</font></i>
+<a name='L29'>  29 <i><font color='green'> *  @f$ \alpha = \left(\frac{1}{2}\right)^{ANALOG\_FILTER\_SHIFT\_FACTOR} @f$</font></i>
+<a name='L30'>  30 <i><font color='green'> */</font></i>
+<a name='L31'>  31 <font color='darkred'>#define</font> <a href='../S/100.html#L65' title='Refered from 65 in Hardware/FilteredAnalog.h.'>ANALOG_FILTER_SHIFT_FACTOR</a> 2
+<a name='L32'>  32 
+<a name='L33'>  33 <i><font color='green'>/** The signed integer type to use for analog inputs during filtering.</font></i>
+<a name='L34'>  34 <i><font color='green'> * Should be at least @f$ 10+1+2·ANALOG\_FILTER\_SHIFT\_FACTOR @f$ bits wide.</font></i>
+<a name='L35'>  35 <i><font color='green'> * (10 bits of ADC resolution, 1 sign bit, and 2·ANALOG_FILTER_SHIFT_FACTOR</font></i>
+<a name='L36'>  36 <i><font color='green'> * bits of fixed point precision for intermediate filter calculations.</font></i>
+<a name='L37'>  37 <i><font color='green'> */</font></i>
+<a name='L38'>  38 <font color='darkred'>#define</font> <a href='../S/100.html#L65' title='Refered from 65 in Hardware/FilteredAnalog.h.'>ANALOG_FILTER_TYPE</a> <a href='../Y/473.html' title='Multiple used in 13 places.'>int16_t</a>
+<a name='L39'>  39 
+<a name='L40'>  40 <i><font color='green'>/** The debounce time for momentary push buttons in milliseconds. */</font></i>
+<a name='L41'>  41 <font color='darkred'>#define</font> <a href='../R/8.html' title='Multiple refered from 2 places.'>BUTTON_DEBOUNCE_TIME</a> 25
+<a name='L42'>  42 
+<a name='L43'>  43 <i><font color='green'>/** The interval between updating all inputs, in microseconds (µs).</font></i>
+<a name='L44'>  44 <i><font color='green'> * @todo Implement</font></i>
+<a name='L45'>  45 <i><font color='green'> */</font></i>
+<a name='L46'>  46 <font color='darkred'>#define</font> INPUT_UPDATE_INTERVAL 1000 <i><font color='green'>// 1 ms</font></i>
+<a name='L47'>  47 
+<a name='L48'>  48 <i><font color='green'>/** Don't parse incomming System Exclusive messages. */</font></i>
+<a name='L49'>  49 <font color='darkred'>#define</font> <a href='../R/39.html' title='Multiple refered from 4 places.'>IGNORE_SYSEX</a>
+<a name='L50'>  50 
+<a name='L51'>  51 <i><font color='green'>/** The length of the maximum System Exclusive message</font></i>
+<a name='L52'>  52 <i><font color='green'> *  that can be received. The maximum length sent by</font></i>
+<a name='L53'>  53 <i><font color='green'> *  the MCU protocol is 120 bytes.</font></i>
+<a name='L54'>  54 <i><font color='green'> */</font></i>
+<a name='L55'>  55 <font color='darkred'>#define</font> <a href='../S/38.html#L45' title='Refered from 45 in MIDI_Parsers/MIDI_Parser.h.'>SYSEX_BUFFER_SIZE</a> 128
+<a name='L56'>  56 
+<a name='L57'>  57 <i><font color='green'>/** The baud rate to use for Hairless MIDI. */</font></i>
+<a name='L58'>  58 <font color='darkred'>#define</font> <a href='../S/19.html#L208' title='Refered from 208 in MIDI_Interfaces/SerialMIDI_Interface.h.'>HAIRLESS_BAUD</a> 115200
+<a name='L59'>  59 
+<a name='L60'>  60 <i><font color='green'>/** The maximum frame rate of the displays. */</font></i>
+<a name='L61'>  61 <font color='darkred'>#define</font> <a href='../R/48.html' title='Multiple refered from 2 places.'>MAX_FPS</a> 30
+<a name='L62'>  62 
+</pre>
+<hr>
+<a name='BOTTOM'>
+<i><font color='green'>/* [&lt;][&gt;][^][v]<a href='#TOP'>[top]</a>[bottom]<a href='../mains.html'>[index]</a><a href='../help.html'>[help]</a> */</font></i>
+</body>
+</html>
