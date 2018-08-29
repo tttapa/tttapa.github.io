@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"d1/d9f/classNoteButton.html#a3af6f1bdd9c0471a79fbda986ca0a69f":[1,0,19,13],
 "d1/d9f/classNoteButton.html#a4a13b63f90ec988cd14d871df9dbc53b":[1,0,19,22],
 "d1/d9f/classNoteButton.html#a4c0438aedab2bf66ec4abdc90b79d793":[1,0,19,19],
 "d1/d9f/classNoteButton.html#a4c1c6bd44da328dd5b4dc29503219d09":[1,0,19,8],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "d2/daf/classNoteButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f":[1,0,21,16],
 "d2/daf/classNoteButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b":[1,0,21,2],
 "d2/daf/classNoteButtonMatrix.html#a698d89514186aa0c29ea6fbc5bef1e06":[1,0,21,6],
-"d2/daf/classNoteButtonMatrix.html#a6bae640621972b14ad9c28b6b399f08f":[1,0,21,5],
-"d2/daf/classNoteButtonMatrix.html#a883138a1262a82e8b9e05c75d576e36d":[1,0,21,11]
+"d2/daf/classNoteButtonMatrix.html#a6bae640621972b14ad9c28b6b399f08f":[1,0,21,5]
 };

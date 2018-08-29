@@ -4,6 +4,7 @@ var Def_8hpp =
     [ "Potentiometer", "d5/d0f/structPotentiometer.html", null ],
     [ "MotorFader", "d1/d0f/structMotorFader.html", null ],
     [ "Display", "d9/d11/structDisplay.html", null ],
+    [ "UNUSED_PARAM", "d0/d4e/Def_8hpp.html#a32dce3380228f1a23cdc1f784263762b", null ],
     [ "analog_t", "d0/d4e/Def_8hpp.html#a49ace7363d145f4002998991ff504bfb", null ],
     [ "Array2D", "d0/d4e/Def_8hpp.html#a65347c7f97dc7e8e602fb77ac735f585", null ],
     [ "ContinuousSendFunction14Bit", "d0/d4e/Def_8hpp.html#ae3b021f6f37d77167ab200f4e68c0999", null ],

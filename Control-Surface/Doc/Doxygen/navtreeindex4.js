@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"d3/d69/classManyButtonsSelector.html#a6bae640621972b14ad9c28b6b399f08f":[3,0,61,8],
 "d3/d69/classManyButtonsSelector.html#a883138a1262a82e8b9e05c75d576e36d":[3,0,61,16],
 "d3/d69/classManyButtonsSelector.html#a8af924e5b3b708eb042919703d175ed3":[3,0,61,20],
 "d3/d69/classManyButtonsSelector.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[3,0,61,12],
@@ -10,7 +11,7 @@ var NAVTREEINDEX4 =
 "d3/d69/classManyButtonsSelector.html#acfabd4911411ebbfd96d4080103f4725":[3,0,61,10],
 "d3/d69/classManyButtonsSelector.html#ad25440693fa50fe54e3424e86e04ac04":[3,0,61,5],
 "d3/d69/classManyButtonsSelector.html#ad4273e4aa2f15de8dbe478af16af259e":[3,0,61,13],
-"d3/d69/classManyButtonsSelector.html#af95be5cf479daa0174d284b33718f3da":[3,0,61,21],
+"d3/d69/classManyButtonsSelector.html#afb5d36e1e641cc8e700553b2f0b5be28":[3,0,61,21],
 "d3/d6c/classNoteButtonLatching.html":[1,0,20],
 "d3/d6c/classNoteButtonLatching.html#a2008b6b51e779d44e87129e43f5ccc3c":[1,0,20,1],
 "d3/d6c/classNoteButtonLatching.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[1,0,20,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "d4/d36/MIDI__Parser_8h.html#a5a09dc5095f21d54023c0a02c984ba4ba8fd591a2f7145f74be11b4bfd048e5c7":[4,0,77,3,1],
 "d4/d36/MIDI__Parser_8h.html#a5a09dc5095f21d54023c0a02c984ba4bafcfbf42d4adcad6219734d45c640804e":[4,0,77,3,0],
 "d4/d36/MIDI__Parser_8h.html#a5a4104fa1a57bf95247549f946599922":[4,0,77,12],
-"d4/d36/MIDI__Parser_8h.html#a70e06d59d135cc8807843fd8b79f6b43":[4,0,77,7],
-"d4/d36/MIDI__Parser_8h.html#a7b96baa7581ecc5a27af22f664b85d82":[4,0,77,14]
+"d4/d36/MIDI__Parser_8h.html#a70e06d59d135cc8807843fd8b79f6b43":[4,0,77,7]
 };

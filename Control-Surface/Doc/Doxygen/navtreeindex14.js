@@ -1,5 +1,6 @@
 var NAVTREEINDEX14 =
 {
+"de/d52/classMCU_1_1VPotRingLEDs__Base.html#a9d3f3fb69c11536a5d795df42cb722a5":[3,0,1,9,15],
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#aac5c0e4f25ae8a1996d1ef7bb894c802":[3,0,1,9,2],
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#ab33b338d3900b8430f31ae437d1211c8":[3,0,1,9,10],
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#ac8c40d605d479ff826820438cd054ab6":[3,0,1,9,9],
@@ -7,9 +8,9 @@ var NAVTREEINDEX14 =
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#adcad91116cfbc2c03b2e775ccd64be16":[3,0,1,9,11],
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#afef7aed594d218edd4b328e87bcd4e59":[3,0,1,9,13],
 "de/d55/classMIDI__Callbacks.html":[3,0,64],
-"de/d55/classMIDI__Callbacks.html#a28b9ecb36f9334d31723e52f784b8607":[3,0,64,1],
 "de/d55/classMIDI__Callbacks.html#a4058f4cab2bc7e0f40ff0227542f141e":[3,0,64,0],
-"de/d55/classMIDI__Callbacks.html#ac79deb455d07dbc81f6f65f9447a1cf9":[3,0,64,2],
+"de/d55/classMIDI__Callbacks.html#a9e34bd5a9b4999c18a3d55ef7a53502d":[3,0,64,1],
+"de/d55/classMIDI__Callbacks.html#aac33c1093979493c5a3ca81c49ce0942":[3,0,64,2],
 "de/d55/classMIDI__Callbacks.html#adaa3c4c28183f0297fc33b0b74cd143b":[3,0,64,3],
 "de/d5e/Transposer_8hpp.html":[4,0,134],
 "de/d5e/Transposer_8hpp_source.html":[4,0,134],
@@ -184,8 +185,8 @@ var NAVTREEINDEX14 =
 "df/d69/classMCU_1_1TimeDisplay.html#aac5c0e4f25ae8a1996d1ef7bb894c802":[3,0,1,3,2],
 "df/d69/classMCU_1_1TimeDisplay.html#ae1c3088fa1e75227a97f735c30c48552":[3,0,1,3,0],
 "df/d69/classMCU_1_1TimeDisplay.html#afebbe4f2a583d21e226a7db90718d451":[3,0,1,3,13],
-"df/d6e/namespaceMCU_1_1Bankable.html":[3,0,1,0],
 "df/d6e/namespaceMCU_1_1Bankable.html":[2,0,3,0],
+"df/d6e/namespaceMCU_1_1Bankable.html":[3,0,1,0],
 "df/d8b/group__MIDIInputElements.html":[1,1],
 "df/da8/struct__Setprecision.html":[3,0,4],
 "df/da8/struct__Setprecision.html#aa82dfb10f40dfa22ccef2975f6719181":[3,0,4,0],
@@ -210,8 +211,8 @@ var NAVTREEINDEX14 =
 "df/df5/IncrementDecrementButtons_8hpp_source.html":[4,0,62],
 "examples.html":[5],
 "files.html":[4,0],
-"functions.html":[3,3,0],
 "functions.html":[3,3,0,0],
+"functions.html":[3,3,0],
 "functions_a.html":[3,3,0,1],
 "functions_b.html":[3,3,0,2],
 "functions_c.html":[3,3,0,3],
@@ -220,8 +221,8 @@ var NAVTREEINDEX14 =
 "functions_enum.html":[3,3,4],
 "functions_eval.html":[3,3,5],
 "functions_f.html":[3,3,0,6],
-"functions_func.html":[3,3,1],
 "functions_func.html":[3,3,1,0],
+"functions_func.html":[3,3,1],
 "functions_func_b.html":[3,3,1,1],
 "functions_func_c.html":[3,3,1,2],
 "functions_func_d.html":[3,3,1,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX14 =
 "functions_i.html":[3,3,0,9],
 "functions_l.html":[3,3,0,10],
 "functions_m.html":[3,3,0,11],
-"functions_n.html":[3,3,0,12],
-"functions_o.html":[3,3,0,13]
+"functions_n.html":[3,3,0,12]
 };

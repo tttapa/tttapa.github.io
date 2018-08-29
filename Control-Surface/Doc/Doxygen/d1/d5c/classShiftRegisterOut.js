@@ -14,7 +14,7 @@ var classShiftRegisterOut =
     [ "green", "d1/d5c/classShiftRegisterOut.html#a95ca9199e5cf3679d988f1add360920a", null ],
     [ "pin", "d1/d5c/classShiftRegisterOut.html#a163cffb9da0f3b7fdcb3c49b58393c03", null ],
     [ "pinMode", "d1/d5c/classShiftRegisterOut.html#ab0e7b41124b477456bf5a1de8071d1e3", null ],
-    [ "pinMode", "d1/d5c/classShiftRegisterOut.html#a5411f7ceda6fe0b721ec5720d1b69c07", null ],
+    [ "pinMode", "d1/d5c/classShiftRegisterOut.html#a5173e7ee092439e5fd5bbfbb5e82cd28", null ],
     [ "red", "d1/d5c/classShiftRegisterOut.html#a43995674149a77e80f49aaed0e11d248", null ],
     [ "update", "d1/d5c/classShiftRegisterOut.html#af71a95209b1d0190ecc1daf3d056061e", null ],
     [ "bitOrder", "d1/d5c/classShiftRegisterOut.html#aa57cfe0bb68b09746c9aa086d04ceae6", null ],

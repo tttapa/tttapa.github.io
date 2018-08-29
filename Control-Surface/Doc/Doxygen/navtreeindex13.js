@@ -1,5 +1,6 @@
 var NAVTREEINDEX13 =
 {
+"dd/d16/classDoublyLinkedList.html#a31fc3c7d7b7ca745474ff9f4dfe5fcb3":[3,0,35,21],
 "dd/d16/classDoublyLinkedList.html#a3c067d3d91d183268148650708108be6":[3,0,35,8],
 "dd/d16/classDoublyLinkedList.html#a4b039d4aba2dd86e91a5482c58e24dba":[3,0,35,7],
 "dd/d16/classDoublyLinkedList.html#a57fafae0be8c04f523bbfc06aa2c9bf9":[3,0,35,9],
@@ -248,6 +249,5 @@ var NAVTREEINDEX13 =
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#a807d80a7ebabe1286a83bb15f7899ba5":[3,0,1,9,18],
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#a867b2b78492f2cc693bfb17952acbe34":[3,0,1,9,17],
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#a8e932f9dbf314ab379bd2edb9ceb44f8":[3,0,1,9,4],
-"de/d52/classMCU_1_1VPotRingLEDs__Base.html#a9a0be1898f5b85afb1c3b493007e19b2":[3,0,1,9,14],
-"de/d52/classMCU_1_1VPotRingLEDs__Base.html#a9d3f3fb69c11536a5d795df42cb722a5":[3,0,1,9,15]
+"de/d52/classMCU_1_1VPotRingLEDs__Base.html#a9a0be1898f5b85afb1c3b493007e19b2":[3,0,1,9,14]
 };

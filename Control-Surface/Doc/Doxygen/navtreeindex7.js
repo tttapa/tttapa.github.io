@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"d6/da6/MCU_8h.html#a0dbae857e721bdf6f58d9f5c8a807fb3":[4,0,72,108],
 "d6/da6/MCU_8h.html#a0fe32f6eb1cbcd5cd90641bc5b8de0ac":[4,0,72,73],
 "d6/da6/MCU_8h.html#a11e886ce2826514e8242f595dbded8f5":[4,0,72,41],
 "d6/da6/MCU_8h.html#a128e3c76bbdf6ac405421bd9549a55e3":[4,0,72,24],
@@ -164,10 +165,10 @@ var NAVTREEINDEX7 =
 "d7/d8d/classAnalogMultiplex.html#a17e37b634c36f15c11fea3eeed0ba4f7":[1,4,0,5],
 "d7/d8d/classAnalogMultiplex.html#a250db013ee2adaea882e655bf5531da4":[1,4,0,1],
 "d7/d8d/classAnalogMultiplex.html#a2cf92229bc134f5e5e8088a920289140":[1,4,0,3],
+"d7/d8d/classAnalogMultiplex.html#a2d30d879d04e1d35ad3eb2d999833c9a":[1,4,0,4],
 "d7/d8d/classAnalogMultiplex.html#a2d7896bcedc95c3aa74f57e7268078cd":[1,4,0,22],
 "d7/d8d/classAnalogMultiplex.html#a3151d5bf08e6b32231cdd58ed2f39aee":[1,4,0,10],
 "d7/d8d/classAnalogMultiplex.html#a346e11b18926219396c566bc3e210fa1":[1,4,0,20],
-"d7/d8d/classAnalogMultiplex.html#a3d45adba948a985fc33e5fe117e7e977":[1,4,0,4],
 "d7/d8d/classAnalogMultiplex.html#a40489dda038fc493ea3b1948bb9e47bd":[1,4,0,15],
 "d7/d8d/classAnalogMultiplex.html#a4a13b63f90ec988cd14d871df9dbc53b":[1,4,0,23],
 "d7/d8d/classAnalogMultiplex.html#a57b6615469e554c514a9ff56dc24908f":[1,4,0,24],
@@ -180,10 +181,10 @@ var NAVTREEINDEX7 =
 "d7/d8d/classAnalogMultiplex.html#ac59d85d61812add9eb6d3e28c1c24beb":[1,4,0,7],
 "d7/d8d/classAnalogMultiplex.html#ac6099de145b3d4335c61be7e55b8eca6":[1,4,0,6],
 "d7/d8d/classAnalogMultiplex.html#acdece870fadd4c99a2e0b7cf00f637ef":[1,4,0,2],
+"d7/d8d/classAnalogMultiplex.html#ad7a07a424662ba5fd6d1a49b5c19e3c8":[1,4,0,9],
 "d7/d8d/classAnalogMultiplex.html#ae1a5bd8228336499b285255dd8be1f8e":[1,4,0,21],
 "d7/d8d/classAnalogMultiplex.html#aef8e5ac156adeb1864ff1f8621218e40":[1,4,0,8],
 "d7/d8d/classAnalogMultiplex.html#af163589d6ce6e3596804e3e92984c236":[1,4,0,16],
-"d7/d8d/classAnalogMultiplex.html#af25b4d6a0874ef4049e92116381d240b":[1,4,0,9],
 "d7/d92/ManyButtonsSelectorLEDs_8hpp.html":[4,0,71],
 "d7/d92/ManyButtonsSelectorLEDs_8hpp_source.html":[4,0,71],
 "d7/da6/MIDIInputElementCC_8cpp.html":[4,0,91],
@@ -248,6 +249,5 @@ var NAVTREEINDEX7 =
 "d8/d0b/classStreamDebugMIDI__Interface.html#a68e98b029031d6260972bed02e0aa59c":[1,3,1,6],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a6c6df29de49ed235f77245d8d2647d73":[1,3,1,15],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a70967d594ff3bae938a3f1b30a319018":[1,3,1,20],
-"d8/d0b/classStreamDebugMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc":[1,3,1,9],
-"d8/d0b/classStreamDebugMIDI__Interface.html#aa737854accb7d5a1726e1ed899a30fb8":[1,3,1,4]
+"d8/d0b/classStreamDebugMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc":[1,3,1,9]
 };

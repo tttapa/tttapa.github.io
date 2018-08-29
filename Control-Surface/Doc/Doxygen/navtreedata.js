@@ -67,21 +67,21 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d0/dd2/classMIDIFilteredAnalogAddressable.html#a8af924e5b3b708eb042919703d175ed3",
-"d1/d9f/classNoteButton.html#a4a13b63f90ec988cd14d871df9dbc53b",
-"d2/daf/classNoteButtonMatrix.html#a8af924e5b3b708eb042919703d175ed3",
-"d3/d69/classManyButtonsSelector.html#a883138a1262a82e8b9e05c75d576e36d",
-"d4/d36/MIDI__Parser_8h.html#a93517f4d4a6e9fbcdff6aa77a73a4e26",
-"d5/da2/BankableMIDIOutputAddressable_8hpp.html",
-"d6/da6/MCU_8h.html#a0fe32f6eb1cbcd5cd90641bc5b8de0ac",
-"d8/d0b/classStreamDebugMIDI__Interface.html#ac179dad8f24eedfa6a9f4e8dbaef7b46",
-"d9/d28/Hardware_2LEDs_2VULEDs_8hpp_source.html",
-"da/d0a/classMCU_1_1VULEDs__Base.html#a1889dd074ee4ee9a0c6331e5183126ad",
-"db/d2b/classBankable_1_1CCButtonMatrix.html#a6bae640621972b14ad9c28b6b399f08f",
-"dc/d48/PrintStream_8h.html#a2b44e6ada22b1b5a703617123ebd0598",
-"dd/d16/classDoublyLinkedList.html#a3c067d3d91d183268148650708108be6",
-"de/d52/classMCU_1_1VPotRingLEDs__Base.html#aac5c0e4f25ae8a1996d1ef7bb894c802",
-"functions_p.html"
+"d0/dd2/classMIDIFilteredAnalogAddressable.html#a883138a1262a82e8b9e05c75d576e36d",
+"d1/d9f/classNoteButton.html#a3af6f1bdd9c0471a79fbda986ca0a69f",
+"d2/daf/classNoteButtonMatrix.html#a883138a1262a82e8b9e05c75d576e36d",
+"d3/d69/classManyButtonsSelector.html#a6bae640621972b14ad9c28b6b399f08f",
+"d4/d36/MIDI__Parser_8h.html#a7b96baa7581ecc5a27af22f664b85d82",
+"d5/d9b/CCButtonMatrix_8hpp_source.html",
+"d6/da6/MCU_8h.html#a0dbae857e721bdf6f58d9f5c8a807fb3",
+"d8/d0b/classStreamDebugMIDI__Interface.html#aa737854accb7d5a1726e1ed899a30fb8",
+"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html",
+"da/d0a/classMCU_1_1VULEDs__Base.html#a104e3c7f67feee481b29e0104e75242d",
+"db/d2b/classBankable_1_1CCButtonMatrix.html#a6a779804092487b4a4a135559b45daf5",
+"dc/d48/PrintStream_8h.html#a1ffa6bad6017c44f306903ffec337575",
+"dd/d16/classDoublyLinkedList.html#a31fc3c7d7b7ca745474ff9f4dfe5fcb3",
+"de/d52/classMCU_1_1VPotRingLEDs__Base.html#a9d3f3fb69c11536a5d795df42cb722a5",
+"functions_o.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

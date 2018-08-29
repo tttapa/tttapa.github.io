@@ -1,5 +1,6 @@
 var NAVTREEINDEX9 =
 {
+"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html":[4,0,147],
 "d9/d28/Hardware_2LEDs_2VULEDs_8hpp_source.html":[4,0,147],
 "d9/d35/ShiftRegisterOut_8cpp.html":[4,0,130],
 "d9/d35/ShiftRegisterOut_8cpp.html#acff335108b71a3141616b2d47d014abb":[4,0,130,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX9 =
 "da/d0a/classMCU_1_1VULEDs__Base.html":[3,0,1,14],
 "da/d0a/classMCU_1_1VULEDs__Base.html#a03a7e70a7d34196153b508101a7bf63f":[3,0,1,14,18],
 "da/d0a/classMCU_1_1VULEDs__Base.html#a0bc33aa8712fd07c9c218ed35cc7dce3":[3,0,1,14,2],
-"da/d0a/classMCU_1_1VULEDs__Base.html#a0d8332b03ddd5b492937cc3ac047d124":[3,0,1,14,10],
-"da/d0a/classMCU_1_1VULEDs__Base.html#a104e3c7f67feee481b29e0104e75242d":[3,0,1,14,9]
+"da/d0a/classMCU_1_1VULEDs__Base.html#a0d8332b03ddd5b492937cc3ac047d124":[3,0,1,14,10]
 };

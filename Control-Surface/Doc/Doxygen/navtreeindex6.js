@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"d5/d9b/CCButtonMatrix_8hpp_source.html":[4,0,22],
 "d5/da2/BankableMIDIOutputAddressable_8hpp.html":[4,0,9],
 "d5/da2/BankableMIDIOutputAddressable_8hpp_source.html":[4,0,9],
 "d5/da2/IncrementSelector_8hpp.html":[4,0,65],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "d6/da6/MCU_8h.html#a09ff3d36e06dc759e5fc8a4f5752f761":[4,0,72,36],
 "d6/da6/MCU_8h.html#a0aa2154c420b61e79ee13f5617f998fb":[4,0,72,114],
 "d6/da6/MCU_8h.html#a0b0a2480c2a0bbfbca785b72c66d5010":[4,0,72,14],
-"d6/da6/MCU_8h.html#a0d5b301b547713fe18b71e1a482e08b7":[4,0,72,52],
-"d6/da6/MCU_8h.html#a0dbae857e721bdf6f58d9f5c8a807fb3":[4,0,72,108]
+"d6/da6/MCU_8h.html#a0d5b301b547713fe18b71e1a482e08b7":[4,0,72,52]
 };

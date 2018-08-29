@@ -11,7 +11,7 @@ var searchData=
   ['clearall',['clearAll',['../df/d42/classDisplayInterface.html#ad53c16260c7b1f9b9b1f8edb80fca476',1,'DisplayInterface']]],
   ['clearoverload',['clearOverload',['../d8/d4c/classMCU_1_1VU.html#ac166479a8b8ade7b7abf109362f72b86',1,'MCU::VU::clearOverload()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a0077ee33342180d5d9376a65fe0d7b73',1,'MCU::Bankable::VU::clearOverload()']]],
   ['clearoverloadhelper',['clearOverloadHelper',['../d4/d71/classMCU_1_1VU__Base.html#af777c4f515387d0c08b78496a6934804',1,'MCU::VU_Base']]],
-  ['contains',['contains',['../dd/dc1/classLinkable.html#a626d759f7836059987ae62f8f11473c7',1,'Linkable::contains()'],['../db/d76/namespaceLinkedList.html#a6128fba433f03bacbe85b3e434b7b8a9',1,'LinkedList::contains()']]],
+  ['contains',['contains',['../dd/dc1/classLinkable.html#a626d759f7836059987ae62f8f11473c7',1,'Linkable::contains()'],['../db/d76/namespaceLinkedList.html#a97c05483fdc448a755fe61d61208d3d4',1,'LinkedList::contains()']]],
   ['control_5fsurface_5f',['Control_Surface_',['../dc/d45/classControl__Surface__.html#acabe7a649d24807ffacba4c87aba6a79',1,'Control_Surface_::Control_Surface_(Control_Surface_ const &amp;)=delete'],['../dc/d45/classControl__Surface__.html#a2f0fa1ce738f9dcf481e6eb8ece14237',1,'Control_Surface_::Control_Surface_()=default']]],
   ['copy',['copy',['../d9/d52/Copy_8hpp.html#af0292f665b86e00cc6398bdfacb12153',1,'Copy.hpp']]],
   ['couldcontain',['couldContain',['../dd/d16/classDoublyLinkedList.html#ad5f6720a2d9ac9590fae337b2c5a744a',1,'DoublyLinkedList']]]

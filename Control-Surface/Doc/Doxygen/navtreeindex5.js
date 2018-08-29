@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"d4/d36/MIDI__Parser_8h.html#a7b96baa7581ecc5a27af22f664b85d82":[4,0,77,14],
 "d4/d36/MIDI__Parser_8h.html#a93517f4d4a6e9fbcdff6aa77a73a4e26":[4,0,77,8],
 "d4/d36/MIDI__Parser_8h.html#aad8bb3729b92f3444c97ba371fb7403e":[4,0,77,9],
 "d4/d36/MIDI__Parser_8h.html#ad96073d2c4c439d53d73520e2f94c87d":[4,0,77,13],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "d5/d8e/classMIDIFilteredAnalog.html#af2934e41e40aba0d83670b1e4460579a":[3,0,73,13],
 "d5/d9a/USBMIDI__Parser_8h.html":[4,0,139],
 "d5/d9a/USBMIDI__Parser_8h_source.html":[4,0,139],
-"d5/d9b/CCButtonMatrix_8hpp.html":[4,0,22],
-"d5/d9b/CCButtonMatrix_8hpp_source.html":[4,0,22]
+"d5/d9b/CCButtonMatrix_8hpp.html":[4,0,22]
 };
