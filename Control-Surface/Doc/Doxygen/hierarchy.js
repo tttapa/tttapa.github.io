@@ -111,7 +111,10 @@ var hierarchy =
     [ "DoublyLinkable< ExtendedIOElement >", "d4/d23/classDoublyLinkable.html", [
       [ "ExtendedIOElement", "de/d4e/classExtendedIOElement.html", [
         [ "AnalogMultiplex< N >", "d7/d8d/classAnalogMultiplex.html", null ],
-        [ "ShiftRegisterOut", "d1/d5c/classShiftRegisterOut.html", null ]
+        [ "ShiftRegisterOutBase", "d8/db4/classShiftRegisterOutBase.html", [
+          [ "ShiftRegisterOut", "d1/d5c/classShiftRegisterOut.html", null ],
+          [ "SPIShiftRegisterOut", "dd/d81/classSPIShiftRegisterOut.html", null ]
+        ] ]
       ] ]
     ] ],
     [ "DoublyLinkable< MIDIInputElementCC >", "d4/d23/classDoublyLinkable.html", [
@@ -251,6 +254,7 @@ var hierarchy =
     [ "EMA_f", "db/d6f/classEMA__f.html", null ],
     [ "FilteredAnalog< PRECISION >", "da/da7/classFilteredAnalog.html", null ],
     [ "FilteredAnalog< 7 >", "da/da7/classFilteredAnalog.html", null ],
+    [ "Frequency", "d7/d90/classFrequency.html", null ],
     [ "Hysteresis< BITS >", "d2/dcb/classHysteresis.html", null ],
     [ "Hysteresis< ADC_BITS - PRECISION >", "d2/dcb/classHysteresis.html", null ],
     [ "IncrementButton", "df/d38/classIncrementButton.html", null ],

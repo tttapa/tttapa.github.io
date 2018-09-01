@@ -14,6 +14,6 @@ var searchData=
   ['general_5fpurpose_5fcontroller_5f7',['General_Purpose_Controller_7',['../d4/dbe/namespaceMIDI__CC.html#a20394adb29bba22c3a8006650ea30c32',1,'MIDI_CC']]],
   ['general_5fpurpose_5fcontroller_5f8',['General_Purpose_Controller_8',['../d4/dbe/namespaceMIDI__CC.html#ae1f17f3e59958dfae6c99260b7b5d34d',1,'MIDI_CC']]],
   ['global_5fview',['GLOBAL_VIEW',['../d7/dc7/namespaceMCU.html#a4b2605222a62ed280cd95061ff7d6522',1,'MCU']]],
-  ['greenbit',['greenBit',['../d1/d5c/classShiftRegisterOut.html#ab4bc7119364ab199d8544ce7cece9d32',1,'ShiftRegisterOut']]],
+  ['greenbit',['greenBit',['../d8/db4/classShiftRegisterOutBase.html#a5a8bba49ef6695a367d12f6291edc867',1,'ShiftRegisterOutBase']]],
   ['group',['GROUP',['../d7/dc7/namespaceMCU.html#aaae72d5574f869865d76bcb55bd819f8',1,'MCU']]]
 ];

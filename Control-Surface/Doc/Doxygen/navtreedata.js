@@ -67,21 +67,21 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d0/dd2/classMIDIFilteredAnalogAddressable.html#a883138a1262a82e8b9e05c75d576e36d",
-"d1/d9f/classNoteButton.html#a2c8ccb65e5634d190b38873670a5b107",
-"d2/daf/classNoteButtonMatrix.html#a6bae640621972b14ad9c28b6b399f08f",
-"d3/d69/classManyButtonsSelector.html#a698d89514186aa0c29ea6fbc5bef1e06",
-"d4/d36/MIDI__Parser_8h.html#a70e06d59d135cc8807843fd8b79f6b43",
-"d5/d9b/CCButtonMatrix_8hpp.html",
-"d6/da6/MCU_8h.html#a0b0a2480c2a0bbfbca785b72c66d5010",
-"d8/d0b/classStreamDebugMIDI__Interface.html#a6c6df29de49ed235f77245d8d2647d73",
-"d9/d24/RelativeCCSender_8hpp.html#aefe2ccfff49d9c60239539662c1cdf9f",
-"da/d0a/classMCU_1_1VULEDs__Base.html#a03a7e70a7d34196153b508101a7bf63f",
-"db/d2b/classBankable_1_1CCButtonMatrix.html#a4c1c6bd44da328dd5b4dc29503219d09",
-"dc/d45/classControl__Surface__.html#abc974fd16c735a8a7942b0b138751490",
-"dd/d16/classDoublyLinkedList.html",
-"de/d52/classMCU_1_1VPotRingLEDs__Base.html#a807d80a7ebabe1286a83bb15f7899ba5",
-"functions_i.html"
+"d0/dd2/classMIDIFilteredAnalogAddressable.html#a57b6615469e554c514a9ff56dc24908f",
+"d1/d9f/classNoteButton.html",
+"d2/daf/classNoteButtonMatrix.html#a4a13b63f90ec988cd14d871df9dbc53b",
+"d3/d69/classManyButtonsSelector.html#a4a13b63f90ec988cd14d871df9dbc53b",
+"d4/d36/MIDI__Parser_8h.html#a4419d0225c6e08e5029a42302783ee5f",
+"d5/d8e/classMIDIFilteredAnalog.html#a9cf409bc7effa13042ebd1d1e02d1046",
+"d6/da6/MCU_8h.html#a0151b66708e64dcd26a4ec2e60703083",
+"d8/d0b/classStreamDebugMIDI__Interface.html#a0db0ea9a49ced7874f0a5b533e625a20",
+"d9/d0d/classMIDINoteLED.html#a1e75b1a1050158783d672dae72c7f1ac",
+"d9/df9/classBankable_1_1MIDIButton.html#ad4273e4aa2f15de8dbe478af16af259e",
+"db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a0bc33aa8712fd07c9c218ed35cc7dce3",
+"dc/d22/classBankable_1_1MIDIButtons.html#a2884cfeb090f1c85fc704341f7c3f70a",
+"dc/df8/classIncrementSelectorLEDs.html#a57b6615469e554c514a9ff56dc24908f",
+"de/d2d/classUSBDebugMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc",
+"df/d69/classMCU_1_1TimeDisplay.html#a57b6615469e554c514a9ff56dc24908f"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

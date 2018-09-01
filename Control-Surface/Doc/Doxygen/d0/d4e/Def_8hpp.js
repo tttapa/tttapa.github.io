@@ -4,6 +4,7 @@ var Def_8hpp =
     [ "Potentiometer", "d5/d0f/structPotentiometer.html", null ],
     [ "MotorFader", "d1/d0f/structMotorFader.html", null ],
     [ "Display", "d9/d11/structDisplay.html", null ],
+    [ "Frequency", "d7/d90/classFrequency.html", "d7/d90/classFrequency" ],
     [ "UNUSED_PARAM", "d0/d4e/Def_8hpp.html#a32dce3380228f1a23cdc1f784263762b", null ],
     [ "analog_t", "d0/d4e/Def_8hpp.html#a49ace7363d145f4002998991ff504bfb", null ],
     [ "Array2D", "d0/d4e/Def_8hpp.html#a65347c7f97dc7e8e602fb77ac735f585", null ],
@@ -17,6 +18,11 @@ var Def_8hpp =
     [ "PinList", "d0/d4e/Def_8hpp.html#a2cad4766e2eb5bb24649f97d53635b73", null ],
     [ "RelativeSendFunction", "d0/d4e/Def_8hpp.html#ae96ec394d657e2dee38a3a6504250b93", null ],
     [ "setting_t", "d0/d4e/Def_8hpp.html#a51d33bc7af1fb6a6705f272add970db0", null ],
+    [ "operator\"\" _Hz", "d0/d4e/Def_8hpp.html#a1ec9bb917cc13302c71a35173b133314", null ],
+    [ "operator\"\" _kHz", "d0/d4e/Def_8hpp.html#a881481fcf6415d0eb1eadcfb60804762", null ],
+    [ "operator\"\" _kHz", "d0/d4e/Def_8hpp.html#a675d2c7abce176da59e467a319b3ffac", null ],
+    [ "operator\"\" _MHz", "d0/d4e/Def_8hpp.html#a025f251bd7e9df64763af86d8b5874dc", null ],
+    [ "operator\"\" _MHz", "d0/d4e/Def_8hpp.html#a7c6f3607115ab20a25fc33f1a2f167db", null ],
     [ "NO_ADDRESS", "d0/d4e/Def_8hpp.html#a40b8f348da991a3b8052117ec81ccef3", null ],
     [ "NO_PIN", "d0/d4e/Def_8hpp.html#a4a1c4604f2bf0c0c2fcfb0b1e0f91c25", null ]
 ];

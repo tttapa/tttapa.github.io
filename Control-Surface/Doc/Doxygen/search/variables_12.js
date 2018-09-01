@@ -49,6 +49,7 @@ var searchData=
   ['sound_5fcontroller_5f9',['Sound_Controller_9',['../d4/dbe/namespaceMIDI__CC.html#a1e063639d40e0b0b64315a47fe517f0b',1,'MIDI_CC']]],
   ['spacing',['spacing',['../d4/d42/classMCU_1_1VUDisplay.html#a5f2d91f0d65d935bb495f69a508c5a84',1,'MCU::VUDisplay']]],
   ['speedmultiply',['speedMultiply',['../dc/dc2/classMIDIIncrementDecrementButtons.html#adf69613c6c45e8c8701ada3e2c75e1f4',1,'MIDIIncrementDecrementButtons::speedMultiply()'],['../d8/d20/classMIDIRotaryEncoder.html#a2330758ba9146eeea1ae6cbcb120c1ae',1,'MIDIRotaryEncoder::speedMultiply()'],['../dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#ab7c206aca4177c77ddd8f8c801379e13',1,'Bankable::MIDIRotaryEncoder::speedMultiply()']]],
+  ['spi_5fmax_5fspeed',['SPI_MAX_SPEED',['../dd/d81/classSPIShiftRegisterOut.html#a833f3b957b52e0f7882b8dc5bf52d3f9',1,'SPIShiftRegisterOut']]],
   ['start',['start',['../de/d4e/classExtendedIOElement.html#acbd5a0c4f813052317227564ecfc295d',1,'ExtendedIOElement']]],
   ['starttime',['startTime',['../d0/d89/classBluetoothMIDI__Interface.html#ab64ee2e8cb5a7832881f6346a007f9f4',1,'BluetoothMIDI_Interface']]],
   ['stop',['STOP',['../d7/dc7/namespaceMCU.html#ab923ca50cd779c04d489ee42b8d63526',1,'MCU']]],

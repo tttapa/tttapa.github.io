@@ -9,6 +9,7 @@ var examples =
     [ "PushButtonsLEDsShiftRegMultiplex.ino", "d0/d1b/PushButtonsLEDsShiftRegMultiplex_8ino-example.html", null ],
     [ "PushButtonsToggleLEDsShiftRegMultiplex.ino", "da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html", null ],
     [ "ShiftRegisterBlink.ino", "d7/d5f/ShiftRegisterBlink_8ino-example.html", null ],
+    [ "SPIShiftRegisterBlink.ino", "db/dd1/SPIShiftRegisterBlink_8ino-example.html", null ],
     [ "VUMeterLEDs-USB-DAC.ino", "df/dad/VUMeterLEDs-USB-DAC_8ino-example.html", null ],
     [ "VUMeterOLED-USB-DAC.ino", "d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html", null ]
 ];

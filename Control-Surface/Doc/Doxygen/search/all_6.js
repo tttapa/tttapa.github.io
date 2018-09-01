@@ -32,5 +32,6 @@ var searchData=
   ['foot_5fcontroller',['Foot_Controller',['../d4/dbe/namespaceMIDI__CC.html#ad1b47e6a838ac359dfd884a7e08e2ba3',1,'MIDI_CC']]],
   ['foot_5fcontroller_5flsb',['Foot_Controller_LSB',['../d4/dbe/namespaceMIDI__CC.html#a45b427c1f69ff3bd7fcb7ad211cd7634',1,'MIDI_CC']]],
   ['formatprintstream',['formatPrintStream',['../da/d69/PrintStream_8cpp.html#aa9cd8589bac070bb2ab968b4f9c15231',1,'PrintStream.cpp']]],
+  ['frequency',['Frequency',['../d7/d90/classFrequency.html',1,'Frequency'],['../d7/d90/classFrequency.html#a74f669a1568087cc2c134363faa18186',1,'Frequency::Frequency()']]],
   ['func_5flocation',['FUNC_LOCATION',['../df/dee/Debug_8hpp.html#af70a086ec2671f38a23cd71019e6e9fc',1,'Debug.hpp']]]
 ];

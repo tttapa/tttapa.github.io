@@ -9,6 +9,7 @@ var searchData=
   ['header',['header',['../de/df8/structMIDI__message.html#af73ddde8746b7f86712a180320aacbbd',1,'MIDI_message']]],
   ['height',['height',['../d2/df6/structXBitmap.html#aadc2e950f43a466fb09b0b0239dcf3ee',1,'XBitmap']]],
   ['helpers_2ehpp',['Helpers.hpp',['../d7/dd7/Helpers_8hpp.html',1,'']]],
+  ['hertz',['hertz',['../d7/d90/classFrequency.html#a42d4284ade4160360eb7a54afccf5a4c',1,'Frequency']]],
   ['hex',['hex',['../da/d69/PrintStream_8cpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f',1,'hex(Print &amp;printer):&#160;PrintStream.cpp'],['../dc/d48/PrintStream_8h.html#aa47b34b5f85fef7f8b050c0d0a715d2f',1,'hex(Print &amp;printer):&#160;PrintStream.cpp']]],
   ['hexchartonibble',['hexCharToNibble',['../d8/d0b/classStreamDebugMIDI__Interface.html#a68e98b029031d6260972bed02e0aa59c',1,'StreamDebugMIDI_Interface']]],
   ['high',['HIGH',['../d4/d8e/ExtendedInputOutput_8h.html#acecd29798f132930ae1bfbe527f41e8d',1,'ExtendedInputOutput.h']]],

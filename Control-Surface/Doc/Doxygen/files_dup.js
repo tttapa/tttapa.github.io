@@ -262,8 +262,12 @@ var files_dup =
     [ "SevenSegmentDisplay.hpp", "d4/d18/SevenSegmentDisplay_8hpp.html", [
       [ "SevenSegmentDisplay", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", "d5/d54/classMCU_1_1SevenSegmentDisplay" ]
     ] ],
-    [ "ShiftRegisterOut.cpp", "d9/d35/ShiftRegisterOut_8cpp.html", "d9/d35/ShiftRegisterOut_8cpp" ],
+    [ "ShiftRegisterOut.cpp", "d9/d35/ShiftRegisterOut_8cpp.html", null ],
     [ "ShiftRegisterOut.h", "d3/d78/ShiftRegisterOut_8h.html", null ],
+    [ "ShiftRegisterOutBase.cpp", "dd/d08/ShiftRegisterOutBase_8cpp.html", "dd/d08/ShiftRegisterOutBase_8cpp" ],
+    [ "ShiftRegisterOutBase.hpp", "d8/d93/ShiftRegisterOutBase_8hpp.html", null ],
+    [ "SPIShiftRegisterOut.cpp", "d2/dde/SPIShiftRegisterOut_8cpp.html", null ],
+    [ "SPIShiftRegisterOut.hpp", "d7/d88/SPIShiftRegisterOut_8hpp.html", null ],
     [ "TimeDisplay.hpp", "d9/dc9/TimeDisplay_8hpp.html", "d9/dc9/TimeDisplay_8hpp" ],
     [ "TimeDisplayDisplay.hpp", "d2/d35/TimeDisplayDisplay_8hpp.html", [
       [ "TimeDisplayDisplay", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html", "d1/dc8/classMCU_1_1TimeDisplayDisplay" ]

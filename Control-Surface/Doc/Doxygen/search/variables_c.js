@@ -1,7 +1,7 @@
 var searchData=
 [
   ['last',['last',['../d8/d43/classDisplayElement.html#afde4bd458ea3d7d1682fdf2daaa97e59',1,'DisplayElement::last()'],['../df/d42/classDisplayInterface.html#ad2fe0400425d637fc987ae3e31e7a942',1,'DisplayInterface::last()'],['../dd/d16/classDoublyLinkedList.html#a0d07cc4e88a72bc4def592d6c868ab19',1,'DoublyLinkedList::last()'],['../d1/df7/classMIDIInputElementChannelPressure.html#ae52ca59c7f04e02111b4658fc275c9af',1,'MIDIInputElementChannelPressure::last()']]],
-  ['latchpin',['latchPin',['../d1/d5c/classShiftRegisterOut.html#a1cd93b9b0f0c21ddb6ac4ef77adfde52',1,'ShiftRegisterOut']]],
+  ['latchpin',['latchPin',['../d8/db4/classShiftRegisterOutBase.html#af1a740c5aaf221e9305f97467c83b4b2',1,'ShiftRegisterOutBase']]],
   ['leadingzerosprintstream',['leadingZerosPrintStream',['../da/d69/PrintStream_8cpp.html#ac1bd36282d0562d941f2512da9243042',1,'PrintStream.cpp']]],
   ['ledpin',['ledPin',['../d3/db4/classMIDINoteLED__Base.html#ad4351b2db248adcb9b5831ff9c1b1d71',1,'MIDINoteLED_Base']]],
   ['ledpins',['ledPins',['../d2/d1b/classLEDs.html#ad52b5ac6bc0f69fc3d44b0c36d2a4fee',1,'LEDs::ledPins()'],['../dd/d8b/classSelectorLEDs.html#acba21a9284933d498f922e28d8bb8f68',1,'SelectorLEDs::ledPins()']]],
