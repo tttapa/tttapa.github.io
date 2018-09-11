@@ -1,34 +1,32 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Pieter P">
-    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
-    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-          TeX: { equationNumbers: { autoNumber: "AMS" } }
-        });
-    </script>
-    <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="theme-color" content="#ccc">
-    <meta name="keywords" content="Digital, filter, discrete, system, time-invariant, linear, causal">
-    <meta name="description" content="A description of digital filters: discrete-time linear time-invariant causal systems.">
-    <title>Digital filters</title>
-</head>
-
-<body>
-    <nav>
-        <div>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                <path d="M0 0h48v48h-48z" fill="none" />
-                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z" />
-            </svg>
-            <h2><a href="/">Home</a></h2>
-            <ul>
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="author" content="Pieter P"/>
+        <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+        <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
+        <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+              TeX: { equationNumbers: { autoNumber: "AMS" } }
+            });
+        </script>
+        <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+        <meta name="theme-color" content="#ccc"/>
+        <meta name="keywords" content="Discretization, bilinear transform, tustin method, digital filters, continuous-time, discrete-time, Butterworth filter"/>
+        <meta name="description" content="Converting a continuous-time second-order Butterworth low-pass filter to a discrete-time filter."/>
+        <title>Discretization of a Second-Order Butterworth Filter</title>
+    </head>
+    <body>
+        <nav>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                    <path d="M0 0h48v48h-48z" fill="none"/>
+                    <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+                </svg>
+                <h2><a href="/">Home</a></h2>
+<ul>
   <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino">Arduino</a>
   <ul>
     <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/Bootloaders">Bootloaders</a>
@@ -51,12 +49,12 @@
   <ul>
     <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory">Systems and Control Theory</a>
     <ul>
-      <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry" href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters">Digital filters</a>
+      <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters">Digital filters</a>
       <ul>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization">Discretization</a>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization">Discretization</a>
         <ul>
           <li><span class="ftriangle"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
-          <li><span class="ftriangle"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-second-order-Butterworth-filter.html">Discretization of a Second-Order Butterworth Filter</a></li>
+          <li><span class="ftriangle"></span><a class="openEntry" href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-second-order-Butterworth-filter.html">Discretization of a Second-Order Butterworth Filter</a></li>
         </ul>
         </li>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average">Exponential Moving Average</a>
@@ -83,25 +81,16 @@
   </li>
 </ul>
 
-            <a href="https://github.com/tttapa/tttapa.github.io/issues" title="Comment or open an issue">Comment or open an issue</a>
-        </div>
-    </nav>
-    <article>
-        <h1 class="indexTitle">Digital filters</h1>
-        <i class="author">Pieter P</i>
-        <div>
-    
-</div>
-        <hr>
-        <div class="indexContainer"><a href="Discretization">
-    <h2>Discretization</h2>
-    <p>Converting continuous-time filters to discrete-time filters.</p>
-</a><a href="Exponential Moving Average">
-    <h2>Exponential Moving Average</h2>
-    <p>Digital exponential moving average filters explained, as well as an implementation in C++, and simulation in MATLAB.</p>
-</a></div>
-    </article>
-    <footer>Last edited: Sunday, 22 April 2018 22:29 UTC</footer>
-</body>
+                <a href="https://github.com/tttapa/tttapa.github.io/issues" title="Comment or open an issue">Comment or open an issue</a>
+            </div>
+        </nav>
+        <article>
+            <h1 class="title">Discretization of a Second-Order Butterworth Filter</h1>
+            <i class="author">Pieter P</i>
+            <div>
 
+</div>
+        </article>
+        <footer>Last edited: Tuesday, 11 September 2018 15:49 UTC</footer>
+    </body>
 </html>
