@@ -112,7 +112,7 @@
     \end{equation} $$
 </p>
 <p>
-    If we evaluate \(y(t)\) at specific time \(t = kT_s\), it can be written as follows:
+    If we evaluate \(y(t)\) at a specific time \(t = kT_s\), \(y(t)\) can be written as follows:
     $$ y[k] \triangleq y(kT_s) = \int_0^{kT_s}u(\tau) d\tau $$
     By splitting up the integral:
     $$ y[k] = \int_0^{(k-1)T_s}u(\tau)d\tau + \int_{(k-1)T_s}^{kT_s}u(\tau)d\tau $$
@@ -125,8 +125,8 @@
     transform, the trapezoidal rule is used, with a step size (sample time) of \(T_s\).<br>
     This is demonstrated in the following figure.
     <img src="images/Trapezoidal-rule.svg">
-    The light red area is the first term in Equation \((2)\), and the darker red trapezoid approximates the second term
-    of the equation.<br>
+    The light red area on the left is the first term in Equation \((2)\), and the darker red trapezoid on the right 
+    approximates the second term of the equation.<br>
     The area of this trapezoid is given by:
     $$ A = T_s \frac{u((k-1)T_s) + u(kT_s)}{2} = \frac{T_s}{2} \left(u[k-1]+u[k]\right) $$
     $$ u[k] \triangleq u(kT_s) $$
@@ -185,11 +185,11 @@
     We wish to determine what happens to the stability of poles when applying the bilinear transform.<br>
     Let's look at the image of the imaginary axis \(\left(s = j\omega\right)\):
     $$ \begin{split}
-    z \;= &amp;\; \frac{1 + \frac{T_s}{2}j\omega}{1 - \frac{T_s}{2}j\omega} \\
-    = &amp;\; \frac{1 + \frac{T_s}{2}j\omega}{1 - \frac{T_s}{2}j\omega} \cdot \frac{1 + \frac{T_s}{2}j\omega}{1 +
+    z \;=\;&amp;  \frac{1 + \frac{T_s}{2}j\omega}{1 - \frac{T_s}{2}j\omega} \\
+    =\;&amp;  \frac{1 + \frac{T_s}{2}j\omega}{1 - \frac{T_s}{2}j\omega} \cdot \frac{1 + \frac{T_s}{2}j\omega}{1 +
     \frac{T_s}{2}j\omega} \\
-    = &amp;\; \frac{\left(1 + \frac{T_s}{2}j\omega\right)^2}{1 + \left(\frac{T_s}{2}\omega\right)^2} \\
-    = &amp;\; \frac{1 + 2 \frac{T_s}{2}j\omega - \left(\frac{T_s}{2}\omega\right)^2}{1 +
+    =\;&amp;  \frac{\left(1 + \frac{T_s}{2}j\omega\right)^2}{1 + \left(\frac{T_s}{2}\omega\right)^2} \\
+    =\;&amp;  \frac{1 + 2 \frac{T_s}{2}j\omega - \left(\frac{T_s}{2}\omega\right)^2}{1 +
     \left(\frac{T_s}{2}\omega\right)^2} \\
     \end{split} $$
     $$
@@ -197,18 +197,19 @@
     z \;=\; \frac{1 - \left(\frac{T_s}{2}\omega\right)^2}{1 + \left(\frac{T_s}{2}\omega\right)^2} + j\frac{2
     \frac{T_s}{2}\omega}{1 + \left(\frac{T_s}{2}\omega\right)^2}
     \end{equation} $$
-    We'll now calculate \(\Re(z)^2 + \Im(z)^2\), you'll see why in a moment.
+    We'll now calculate \(\left|z\right|^2\), you'll see why in a moment.
     $$ \begin{split}
-    \Re(z)^2 + \Im(z)^2 \;= &amp;\; \frac{\left(1 - \left(\frac{T_s}{2}\omega\right)^2\right)^2}{\left(1 +
+    \left|z\right|^2 \;=\;&amp; \Re(z)^2 + \Im(z)^2 \\
+    =\;&amp;  \frac{\left(1 - \left(\frac{T_s}{2}\omega\right)^2\right)^2}{\left(1 +
     \left(\frac{T_s}{2}\omega\right)^2\right)^2} +
     \frac{\left(2 \frac{T_s}{2}\omega\right)^2}{\left(1 + \left(\frac{T_s}{2}\omega\right)^2\right)^2} \\
-    = &amp;\; \frac{1 - 2 \left(\frac{T_s}{2}\omega\right)^2 + \left(\frac{T_s}{2}\omega\right)^4 + 4
+    =\;&amp;  \frac{1 - 2 \left(\frac{T_s}{2}\omega\right)^2 + \left(\frac{T_s}{2}\omega\right)^4 + 4
     \left(\frac{T_s}{2}\omega\right)^2}{\left(1 + \left(\frac{T_s}{2}\omega\right)^2\right)^2} \\
-    = &amp;\; \frac{1 + 2 \left(\frac{T_s}{2}\omega\right)^2 + \left(\frac{T_s}{2}\omega\right)^4}{\left(1 +
+    =\;&amp;  \frac{1 + 2 \left(\frac{T_s}{2}\omega\right)^2 + \left(\frac{T_s}{2}\omega\right)^4}{\left(1 +
     \left(\frac{T_s}{2}\omega\right)^2\right)^2} \\
-    = &amp;\; \frac{\left(1 + \left(\frac{T_s}{2}\omega\right)^2\right)^2}{\left(1 +
+    =\;&amp;  \frac{\left(1 + \left(\frac{T_s}{2}\omega\right)^2\right)^2}{\left(1 +
     \left(\frac{T_s}{2}\omega\right)^2\right)^2} \\
-    \Re(z)^2 + \Im(z)^2 \;= &amp;\; 1
+    \left|z\right|^2 \;=\;&amp;  1
     \end{split} $$
     In other words, the imaginary axis in the s-plane (Laplace domain) maps to the unit circle in the z-plane
     (Z-domain).
@@ -331,6 +332,6 @@
 
 </div>
         </article>
-        <footer>Last edited: Tuesday, 11 September 2018 17:48 UTC</footer>
+        <footer>Last edited: Tuesday, 11 September 2018 18:02 UTC</footer>
     </body>
 </html>
