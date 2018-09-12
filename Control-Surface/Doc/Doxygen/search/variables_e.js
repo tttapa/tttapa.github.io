@@ -2,7 +2,7 @@ var searchData=
 [
   ['n',['N',['../da/db8/classTransposer.html#ac643bffed4cdcf2a5f7afc030b50eddd',1,'Transposer']]],
   ['name_5fvalue',['NAME_VALUE',['../d7/dc7/namespaceMCU.html#aa7dd1780dbb355bf59050db18088a45a',1,'MCU']]],
-  ['next',['next',['../d8/d43/classDisplayElement.html#a7f2535e70e281198141996a91798d33c',1,'DisplayElement::next()'],['../df/d42/classDisplayInterface.html#abdc036e02127667632b7a407cc0a7cd8',1,'DisplayInterface::next()'],['../dd/dc1/classLinkable.html#a3edb373fdc0472dc50294c084dfac7c1',1,'Linkable::next()'],['../d4/d23/classDoublyLinkable.html#a4a13b63f90ec988cd14d871df9dbc53b',1,'DoublyLinkable::next()'],['../d1/df7/classMIDIInputElementChannelPressure.html#aa6f63559ed9bfe3d501b535d401d4aed',1,'MIDIInputElementChannelPressure::next()']]],
+  ['next',['next',['../d4/d23/classDoublyLinkable.html#a4a13b63f90ec988cd14d871df9dbc53b',1,'DoublyLinkable']]],
   ['no_5faddress',['NO_ADDRESS',['../d0/d4e/Def_8hpp.html#a40b8f348da991a3b8052117ec81ccef3',1,'Def.hpp']]],
   ['no_5fpin',['NO_PIN',['../d0/d4e/Def_8hpp.html#a4a1c4604f2bf0c0c2fcfb0b1e0f91c25',1,'Def.hpp']]],
   ['node',['node',['../db/d52/classDoublyLinkedList_1_1node__iterator__base.html#a95930aabdd54c10d7aa5d4b58d59cec2',1,'DoublyLinkedList::node_iterator_base']]],

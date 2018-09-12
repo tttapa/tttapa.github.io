@@ -1,12 +1,13 @@
 var searchData=
 [
   ['teensy_20audio',['Teensy Audio',['../d3/d5c/group__Audio.html',1,'']]],
+  ['teensyusbtypes_2ehpp',['TeensyUSBTypes.hpp',['../d9/d98/TeensyUSBTypes_8hpp.html',1,'']]],
   ['text',['text',['../d5/d54/classMCU_1_1SevenSegmentDisplay.html#adc7a66657391fdd760e190bfc9ee5292',1,'MCU::SevenSegmentDisplay']]],
   ['thirdbyte',['thirdByte',['../d0/d0d/classSerialMIDI__Parser.html#a6ec69d1a24b2a0517a281cc352ad88d1',1,'SerialMIDI_Parser']]],
   ['timedisplay',['TimeDisplay',['../df/d69/classMCU_1_1TimeDisplay.html',1,'MCU::TimeDisplay'],['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ae38d59728ad82430746231d6491d602e',1,'MCU::TimeDisplayDisplay::timedisplay()'],['../df/d69/classMCU_1_1TimeDisplay.html#ae1c3088fa1e75227a97f735c30c48552',1,'MCU::TimeDisplay::TimeDisplay()']]],
   ['timedisplay_2ehpp',['TimeDisplay.hpp',['../d9/dc9/TimeDisplay_8hpp.html',1,'']]],
   ['timedisplayaddress',['TimeDisplayAddress',['../d7/dc7/namespaceMCU.html#a49cf2e313b0da8300dda59bc578f6b37',1,'MCU']]],
-  ['timedisplaydisplay',['TimeDisplayDisplay',['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html',1,'MCU::TimeDisplayDisplay'],['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ad5d19aa7052e5bef91d29a0e4f0b231e',1,'MCU::TimeDisplayDisplay::TimeDisplayDisplay()']]],
+  ['timedisplaydisplay',['TimeDisplayDisplay',['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html',1,'MCU::TimeDisplayDisplay'],['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#afc9a0176759cd9eb2836d3c255330260',1,'MCU::TimeDisplayDisplay::TimeDisplayDisplay()']]],
   ['timedisplaydisplay_2ehpp',['TimeDisplayDisplay.hpp',['../d2/d35/TimeDisplayDisplay_8hpp.html',1,'']]],
   ['timedisplaylength',['TimeDisplayLength',['../d7/dc7/namespaceMCU.html#a202f6469406ac9b1b7fd8ea34a4ba1f5',1,'MCU']]],
   ['timefunction',['timefunction',['../d7/d74/MillisTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3',1,'MillisTimer.hpp']]],

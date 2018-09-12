@@ -10,10 +10,9 @@ var searchData=
   ['settings_2eh',['Settings.h',['../dd/dbc/Settings_8h.html',1,'']]],
   ['settingswrapper_2eh',['SettingsWrapper.h',['../d4/d6b/SettingsWrapper_8h.html',1,'']]],
   ['sevensegmentdisplay_2ehpp',['SevenSegmentDisplay.hpp',['../d4/d18/SevenSegmentDisplay_8hpp.html',1,'']]],
-  ['shiftregisterout_2ecpp',['ShiftRegisterOut.cpp',['../d9/d35/ShiftRegisterOut_8cpp.html',1,'']]],
   ['shiftregisterout_2eh',['ShiftRegisterOut.h',['../d3/d78/ShiftRegisterOut_8h.html',1,'']]],
-  ['shiftregisteroutbase_2ecpp',['ShiftRegisterOutBase.cpp',['../dd/d08/ShiftRegisterOutBase_8cpp.html',1,'']]],
   ['shiftregisteroutbase_2ehpp',['ShiftRegisterOutBase.hpp',['../d8/d93/ShiftRegisterOutBase_8hpp.html',1,'']]],
-  ['spishiftregisterout_2ecpp',['SPIShiftRegisterOut.cpp',['../d2/dde/SPIShiftRegisterOut_8cpp.html',1,'']]],
+  ['shiftregisteroutrgb_2ecpp',['ShiftRegisterOutRGB.cpp',['../db/d0b/ShiftRegisterOutRGB_8cpp.html',1,'']]],
+  ['shiftregisteroutrgb_2ehpp',['ShiftRegisterOutRGB.hpp',['../d1/d1f/ShiftRegisterOutRGB_8hpp.html',1,'']]],
   ['spishiftregisterout_2ehpp',['SPIShiftRegisterOut.hpp',['../d7/d88/SPIShiftRegisterOut_8hpp.html',1,'']]]
 ];

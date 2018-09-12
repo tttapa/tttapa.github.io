@@ -23,7 +23,9 @@ var files_dup =
       [ "BankableMIDIOutputAddressable", "d9/d14/classBankableMIDIOutputAddressable.html", "d9/d14/classBankableMIDIOutputAddressable" ]
     ] ],
     [ "BankConfigAddressable.hpp", "db/dd1/BankConfigAddressable_8hpp.html", "db/dd1/BankConfigAddressable_8hpp" ],
-    [ "BitArray.hpp", "d1/d40/BitArray_8hpp.html", "d1/d40/BitArray_8hpp" ],
+    [ "BitArray.hpp", "d1/d40/BitArray_8hpp.html", [
+      [ "BitArray", "db/de9/classBitArray.html", "db/de9/classBitArray" ]
+    ] ],
     [ "BLEMIDI.hpp", "d0/dc9/BLEMIDI_8hpp.html", "d0/dc9/BLEMIDI_8hpp" ],
     [ "BluetoothMIDI_Interface.hpp", "df/ded/BluetoothMIDI__Interface_8hpp.html", null ],
     [ "Button.cpp", "de/dd1/Button_8cpp.html", null ],
@@ -66,7 +68,6 @@ var files_dup =
     ] ],
     [ "DisplayElement.cpp", "d1/dde/DisplayElement_8cpp.html", null ],
     [ "DisplayElement.hpp", "d6/dd2/DisplayElement_8hpp.html", [
-      [ "Location", "d3/d98/structLocation.html", "d3/d98/structLocation" ],
       [ "DisplayElement", "d8/d43/classDisplayElement.html", "d8/d43/classDisplayElement" ]
     ] ],
     [ "DisplayInterface.cpp", "da/ddf/DisplayInterface_8cpp.html", null ],
@@ -127,7 +128,6 @@ var files_dup =
     [ "LEDs.hpp", "d9/d4f/LEDs_8hpp.html", [
       [ "LEDs", "d2/d1b/classLEDs.html", "d2/d1b/classLEDs" ]
     ] ],
-    [ "LinkedList.h", "db/d44/LinkedList_8h.html", "db/d44/LinkedList_8h" ],
     [ "LinkedList.hpp", "de/dd1/LinkedList_8hpp.html", [
       [ "DoublyLinkedList", "dd/d16/classDoublyLinkedList.html", "dd/d16/classDoublyLinkedList" ],
       [ "node_iterator_base", "db/d52/classDoublyLinkedList_1_1node__iterator__base.html", "db/d52/classDoublyLinkedList_1_1node__iterator__base" ],
@@ -172,6 +172,7 @@ var files_dup =
     [ "Bankable/Abstract/MIDIButtons.hpp", "d9/df7/Bankable_2Abstract_2MIDIButtons_8hpp.html", [
       [ "MIDIButtons", "dc/d22/classBankable_1_1MIDIButtons.html", "dc/d22/classBankable_1_1MIDIButtons" ]
     ] ],
+    [ "MIDICNChannelAddress.hpp", "d8/d38/MIDICNChannelAddress_8hpp.html", "d8/d38/MIDICNChannelAddress_8hpp" ],
     [ "Abstract/MIDIFilteredAnalog.hpp", "d3/de4/Abstract_2MIDIFilteredAnalog_8hpp.html", [
       [ "MIDIFilteredAnalogAddressable", "d0/dd2/classMIDIFilteredAnalogAddressable.html", "d0/dd2/classMIDIFilteredAnalogAddressable" ],
       [ "MIDIFilteredAnalog", "d5/d8e/classMIDIFilteredAnalog.html", "d5/d8e/classMIDIFilteredAnalog" ]
@@ -262,12 +263,14 @@ var files_dup =
     [ "SevenSegmentDisplay.hpp", "d4/d18/SevenSegmentDisplay_8hpp.html", [
       [ "SevenSegmentDisplay", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", "d5/d54/classMCU_1_1SevenSegmentDisplay" ]
     ] ],
-    [ "ShiftRegisterOut.cpp", "d9/d35/ShiftRegisterOut_8cpp.html", null ],
     [ "ShiftRegisterOut.h", "d3/d78/ShiftRegisterOut_8h.html", null ],
-    [ "ShiftRegisterOutBase.cpp", "dd/d08/ShiftRegisterOutBase_8cpp.html", "dd/d08/ShiftRegisterOutBase_8cpp" ],
     [ "ShiftRegisterOutBase.hpp", "d8/d93/ShiftRegisterOutBase_8hpp.html", null ],
-    [ "SPIShiftRegisterOut.cpp", "d2/dde/SPIShiftRegisterOut_8cpp.html", null ],
+    [ "ShiftRegisterOutRGB.cpp", "db/d0b/ShiftRegisterOutRGB_8cpp.html", "db/d0b/ShiftRegisterOutRGB_8cpp" ],
+    [ "ShiftRegisterOutRGB.hpp", "d1/d1f/ShiftRegisterOutRGB_8hpp.html", [
+      [ "ShiftRegisterOutRGB", "d5/d45/structShiftRegisterOutRGB.html", "d5/d45/structShiftRegisterOutRGB" ]
+    ] ],
     [ "SPIShiftRegisterOut.hpp", "d7/d88/SPIShiftRegisterOut_8hpp.html", null ],
+    [ "TeensyUSBTypes.hpp", "d9/d98/TeensyUSBTypes_8hpp.html", null ],
     [ "TimeDisplay.hpp", "d9/dc9/TimeDisplay_8hpp.html", "d9/dc9/TimeDisplay_8hpp" ],
     [ "TimeDisplayDisplay.hpp", "d2/d35/TimeDisplayDisplay_8hpp.html", [
       [ "TimeDisplayDisplay", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html", "d1/dc8/classMCU_1_1TimeDisplayDisplay" ]

@@ -18,7 +18,6 @@ var searchData=
   ['incrementselectorleds',['IncrementSelectorLEDs',['../dc/df8/classIncrementSelectorLEDs.html',1,'IncrementSelectorLEDs&lt; N &gt;'],['../dc/df8/classIncrementSelectorLEDs.html#aa22c5eb2b1a39422393edd37974999fc',1,'IncrementSelectorLEDs::IncrementSelectorLEDs()']]],
   ['incrementselectorleds_2ehpp',['IncrementSelectorLEDs.hpp',['../db/d24/IncrementSelectorLEDs_8hpp.html',1,'']]],
   ['index',['index',['../d0/d89/classBluetoothMIDI__Interface.html#a014aa95f1daee067e4acc0bacc9739c0',1,'BluetoothMIDI_Interface']]],
-  ['init',['init',['../d8/d6c/classButtonMatrix.html#a07b640645f4fa7b1e6e405fe7df71725',1,'ButtonMatrix']]],
   ['initial',['Initial',['../df/d38/classIncrementButton.html#a2d2b2085d52f929af3d02d0d87acdcb0a9ad38bb5716e1838cb302b5e10a9ee49',1,'IncrementButton::Initial()'],['../d5/d20/classIncrementDecrementButtons.html#a75e0d7f96fba9727a20b434a1dc63b32a6c9f2f79b4e7b8ccee93a79a4d7bc650',1,'IncrementDecrementButtons::Initial()']]],
   ['initialselection',['initialSelection',['../de/de7/classSelectable.html#a873f8a7df644bcde72cbc4f43a0b51fb',1,'Selectable']]],
   ['innerradius',['innerRadius',['../d3/d98/classMCU_1_1VPotDisplay.html#a4ae7b4d66b549898f628baa3b09cfe9e',1,'MCU::VPotDisplay']]],
@@ -34,6 +33,7 @@ var searchData=
   ['isenabled',['isEnabled',['../d5/de0/classUpdatable.html#a883138a1262a82e8b9e05c75d576e36d',1,'Updatable']]],
   ['ishexchar',['isHexChar',['../d8/d0b/classStreamDebugMIDI__Interface.html#a5229f0375a0a9e9c303b0ba1fa99a342',1,'StreamDebugMIDI_Interface']]],
   ['isstatus',['isStatus',['../df/d0c/classMIDI__Parser.html#a0030089e4fe636ae1ca7997dba7b86ae',1,'MIDI_Parser']]],
+  ['isvalid',['isValid',['../d3/d10/classMIDICNChannelAddress.html#a5cc0927606de3d24f37c4e5461083a03',1,'MIDICNChannelAddress']]],
   ['iswhitespace',['isWhiteSpace',['../d8/d0b/classStreamDebugMIDI__Interface.html#a06d80f3b4a5fa49d443a1379e124e785',1,'StreamDebugMIDI_Interface']]],
   ['iterator',['iterator',['../dd/d16/classDoublyLinkedList.html#a00ad35f05ce61d50a4cb1e914aba50dd',1,'DoublyLinkedList']]],
   ['ivu',['IVU',['../d2/de9/classIVU.html',1,'']]]

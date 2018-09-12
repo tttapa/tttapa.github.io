@@ -61,7 +61,7 @@ var hierarchy =
       ] ]
     ] ],
     [ "BankConfigAddressable< N >", "dd/d33/classBankConfigAddressable.html", null ],
-    [ "BitArray", "db/de9/classBitArray.html", null ],
+    [ "BitArray< N >", "db/de9/classBitArray.html", null ],
     [ "BLECharacteristicCallbacks", null, [
       [ "BluetoothMIDI_Interface", "d0/d89/classBluetoothMIDI__Interface.html", null ]
     ] ],
@@ -86,13 +86,6 @@ var hierarchy =
     [ "DigitalCCSender", "d5/db5/classDigitalCCSender.html", null ],
     [ "DigitalNoteSender", "dc/dd4/classDigitalNoteSender.html", null ],
     [ "Display", "d9/d11/structDisplay.html", null ],
-    [ "DisplayElement", "d8/d43/classDisplayElement.html", [
-      [ "MCU::TimeDisplayDisplay", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html", null ],
-      [ "MCU::VPotDisplay", "d3/d98/classMCU_1_1VPotDisplay.html", null ],
-      [ "MCU::VUDisplay", "d4/d42/classMCU_1_1VUDisplay.html", null ],
-      [ "NoteBitmapDisplay", "de/dc5/classNoteBitmapDisplay.html", null ],
-      [ "SelectorDisplay< N >", "d3/d51/classSelectorDisplay.html", null ]
-    ] ],
     [ "DoublyLinkable< Node >", "d4/d23/classDoublyLinkable.html", null ],
     [ "DoublyLinkable< BankableMIDIInputAddressable< N > >", "d4/d23/classDoublyLinkable.html", [
       [ "BankableMIDIInputAddressable< N >", "d1/d91/classBankableMIDIInputAddressable.html", [
@@ -108,12 +101,26 @@ var hierarchy =
         ] ]
       ] ]
     ] ],
+    [ "DoublyLinkable< DisplayElement >", "d4/d23/classDoublyLinkable.html", [
+      [ "DisplayElement", "d8/d43/classDisplayElement.html", [
+        [ "MCU::TimeDisplayDisplay", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html", null ],
+        [ "MCU::VPotDisplay", "d3/d98/classMCU_1_1VPotDisplay.html", null ],
+        [ "MCU::VUDisplay", "d4/d42/classMCU_1_1VUDisplay.html", null ],
+        [ "NoteBitmapDisplay", "de/dc5/classNoteBitmapDisplay.html", null ],
+        [ "SelectorDisplay< N >", "d3/d51/classSelectorDisplay.html", null ]
+      ] ]
+    ] ],
+    [ "DoublyLinkable< DisplayInterface >", "d4/d23/classDoublyLinkable.html", [
+      [ "DisplayInterface", "df/d42/classDisplayInterface.html", [
+        [ "SSD1306_DisplayInterface", "dc/ddd/classSSD1306__DisplayInterface.html", null ]
+      ] ]
+    ] ],
     [ "DoublyLinkable< ExtendedIOElement >", "d4/d23/classDoublyLinkable.html", [
       [ "ExtendedIOElement", "de/d4e/classExtendedIOElement.html", [
         [ "AnalogMultiplex< N >", "d7/d8d/classAnalogMultiplex.html", null ],
-        [ "ShiftRegisterOutBase", "d8/db4/classShiftRegisterOutBase.html", [
-          [ "ShiftRegisterOut", "d1/d5c/classShiftRegisterOut.html", null ],
-          [ "SPIShiftRegisterOut", "dd/d81/classSPIShiftRegisterOut.html", null ]
+        [ "ShiftRegisterOutBase< N >", "d8/db4/classShiftRegisterOutBase.html", [
+          [ "ShiftRegisterOut< N >", "d1/d5c/classShiftRegisterOut.html", null ],
+          [ "SPIShiftRegisterOut< N >", "dd/d81/classSPIShiftRegisterOut.html", null ]
         ] ]
       ] ]
     ] ],
@@ -135,6 +142,21 @@ var hierarchy =
         ] ],
         [ "MCU::SevenSegmentDisplay< TimeDisplayLength >", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", [
           [ "MCU::TimeDisplay", "df/d69/classMCU_1_1TimeDisplay.html", null ]
+        ] ]
+      ] ]
+    ] ],
+    [ "DoublyLinkable< MIDIInputElementChannelPressure >", "d4/d23/classDoublyLinkable.html", [
+      [ "MIDIInputElementChannelPressure", "d1/df7/classMIDIInputElementChannelPressure.html", [
+        [ "MCU::VU_Base", "d4/d71/classMCU_1_1VU__Base.html", [
+          [ "MCU::Bankable::VU< N >", "d0/d43/classMCU_1_1Bankable_1_1VU.html", null ],
+          [ "MCU::VU", "d8/d4c/classMCU_1_1VU.html", [
+            [ "MCU::VULEDs< N >", "df/d36/classMCU_1_1VULEDs.html", null ]
+          ] ],
+          [ "MCU::VULEDs_Base< N >", "da/d0a/classMCU_1_1VULEDs__Base.html", [
+            [ "MCU::Bankable::VULEDs< M, N >", "db/d17/classMCU_1_1Bankable_1_1VULEDs.html", null ],
+            [ "MCU::VULEDs< N >", "df/d36/classMCU_1_1VULEDs.html", null ]
+          ] ],
+          [ "MCU::Bankable::VU< M >", "d0/d43/classMCU_1_1Bankable_1_1VU.html", null ]
         ] ]
       ] ]
     ] ],
@@ -242,8 +264,11 @@ var hierarchy =
     ] ],
     [ "DoublyLinkedList< Node >", "dd/d16/classDoublyLinkedList.html", null ],
     [ "DoublyLinkedList< BankableMIDIInputAddressable< N > >", "dd/d16/classDoublyLinkedList.html", null ],
+    [ "DoublyLinkedList< DisplayElement >", "dd/d16/classDoublyLinkedList.html", null ],
+    [ "DoublyLinkedList< DisplayInterface >", "dd/d16/classDoublyLinkedList.html", null ],
     [ "DoublyLinkedList< ExtendedIOElement >", "dd/d16/classDoublyLinkedList.html", null ],
     [ "DoublyLinkedList< MIDIInputElementCC >", "dd/d16/classDoublyLinkedList.html", null ],
+    [ "DoublyLinkedList< MIDIInputElementChannelPressure >", "dd/d16/classDoublyLinkedList.html", null ],
     [ "DoublyLinkedList< MIDIInputElementNote >", "dd/d16/classDoublyLinkedList.html", null ],
     [ "DoublyLinkedList< Updatable< AudioVU > >", "dd/d16/classDoublyLinkedList.html", null ],
     [ "DoublyLinkedList< Updatable< NormalUpdatable > >", "dd/d16/classDoublyLinkedList.html", null ],
@@ -265,24 +290,12 @@ var hierarchy =
       [ "AudioVU", "d4/dce/classAudioVU.html", [
         [ "AudioVULEDs< N >", "d9/dbf/classAudioVULEDs.html", null ]
       ] ],
-      [ "MCU::VU_Base", "d4/d71/classMCU_1_1VU__Base.html", [
-        [ "MCU::Bankable::VU< N >", "d0/d43/classMCU_1_1Bankable_1_1VU.html", null ],
-        [ "MCU::VU", "d8/d4c/classMCU_1_1VU.html", [
-          [ "MCU::VULEDs< N >", "df/d36/classMCU_1_1VULEDs.html", null ]
-        ] ],
-        [ "MCU::VULEDs_Base< N >", "da/d0a/classMCU_1_1VULEDs__Base.html", [
-          [ "MCU::Bankable::VULEDs< M, N >", "db/d17/classMCU_1_1Bankable_1_1VULEDs.html", null ],
-          [ "MCU::VULEDs< N >", "df/d36/classMCU_1_1VULEDs.html", null ]
-        ] ],
-        [ "MCU::Bankable::VU< M >", "d0/d43/classMCU_1_1Bankable_1_1VU.html", null ]
-      ] ]
+      [ "MCU::VU_Base", "d4/d71/classMCU_1_1VU__Base.html", null ]
     ] ],
     [ "LEDs< N >", "d2/d1b/classLEDs.html", [
       [ "DotBarDisplayLEDs< N >", "d1/d3e/classDotBarDisplayLEDs.html", null ]
     ] ],
     [ "LEDs< 11 >", "d2/d1b/classLEDs.html", null ],
-    [ "Linkable< Node >", "dd/dc1/classLinkable.html", null ],
-    [ "Location", "d3/d98/structLocation.html", null ],
     [ "MIDI_Callbacks", "de/d55/classMIDI__Callbacks.html", [
       [ "Control_Surface_", "dc/d45/classControl__Surface__.html", null ]
     ] ],
@@ -293,12 +306,9 @@ var hierarchy =
         [ "SerialMIDI_Interface< HardwareSerial >", "d9/db8/classSerialMIDI__Interface.html", [
           [ "HardwareSerialMIDI_Interface", "d9/d78/classHardwareSerialMIDI__Interface.html", null ]
         ] ],
-        [ "SerialMIDI_Interface< SoftwareSerial >", "d9/db8/classSerialMIDI__Interface.html", [
-          [ "SoftwareSerialMIDI_Interface", "d6/d6d/classSoftwareSerialMIDI__Interface.html", null ]
-        ] ],
-        [ "SerialMIDI_Interface< usb_serial_class >", "d9/db8/classSerialMIDI__Interface.html", [
+        [ "SerialMIDI_Interface< Serial_ >", "d9/db8/classSerialMIDI__Interface.html", [
           [ "USBSerialMIDI_Interface", "d8/d57/classUSBSerialMIDI__Interface.html", [
-            [ "HairlessMIDI_Interface", "dc/dff/classHairlessMIDI__Interface.html", null ]
+            [ "USBMIDI_Interface", "de/d05/classUSBMIDI__Interface.html", null ]
           ] ]
         ] ],
         [ "StreamDebugMIDI_Interface", "d8/d0b/classStreamDebugMIDI__Interface.html", [
@@ -308,13 +318,9 @@ var hierarchy =
           ] ],
           [ "SerialDebugMIDI_Interface< SoftwareSerial >", "db/dc4/classSerialDebugMIDI__Interface.html", [
             [ "SoftwareSerialDebugMIDI_Interface", "d3/d54/classSoftwareSerialDebugMIDI__Interface.html", null ]
-          ] ],
-          [ "SerialDebugMIDI_Interface< usb_serial_class >", "db/dc4/classSerialDebugMIDI__Interface.html", [
-            [ "USBDebugMIDI_Interface", "de/d2d/classUSBDebugMIDI__Interface.html", null ]
           ] ]
         ] ]
-      ] ],
-      [ "USBMIDI_Interface", "de/d05/classUSBMIDI__Interface.html", null ]
+      ] ]
     ] ],
     [ "MIDI_message", "de/df8/structMIDI__message.html", null ],
     [ "MIDI_message_matcher", "dd/d36/structMIDI__message__matcher.html", null ],
@@ -322,10 +328,9 @@ var hierarchy =
       [ "SerialMIDI_Parser", "d0/d0d/classSerialMIDI__Parser.html", null ],
       [ "USBMIDI_Parser", "db/db0/classUSBMIDI__Parser.html", null ]
     ] ],
+    [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html", null ],
     [ "MIDIInputElement", "d9/db1/classMIDIInputElement.html", [
-      [ "MIDIInputElementChannelPressure", "d1/df7/classMIDIInputElementChannelPressure.html", [
-        [ "MCU::VU_Base", "d4/d71/classMCU_1_1VU__Base.html", null ]
-      ] ]
+      [ "MIDIInputElementChannelPressure", "d1/df7/classMIDIInputElementChannelPressure.html", null ]
     ] ],
     [ "MIDIInputElementAddressable", "d6/d3d/classMIDIInputElementAddressable.html", [
       [ "MIDIInputElementCC", "d3/d96/classMIDIInputElementCC.html", null ],
@@ -345,11 +350,10 @@ var hierarchy =
     ] ],
     [ "OutputBankConfigAddressable", "d5/dc5/classOutputBankConfigAddressable.html", null ],
     [ "PitchBendSender< INPUT_PRECISION_BITS >", "de/d46/classPitchBendSender.html", null ],
+    [ "PixelLocation", "dc/dd2/structPixelLocation.html", null ],
     [ "Potentiometer", "d5/d0f/structPotentiometer.html", null ],
     [ "Print", null, [
-      [ "DisplayInterface", "df/d42/classDisplayInterface.html", [
-        [ "SSD1306_DisplayInterface", "dc/ddd/classSSD1306__DisplayInterface.html", null ]
-      ] ]
+      [ "DisplayInterface", "df/d42/classDisplayInterface.html", null ]
     ] ],
     [ "Printable", null, [
       [ "MCU::SevenSegmentDisplay< LENGTH >", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", null ],
@@ -362,6 +366,7 @@ var hierarchy =
       [ "Bank< MAXIMUM_SEMITONES - MINIMUM_SEMITONES+1 >", "db/dbd/classBank.html", null ],
       [ "ProgramChanger< N >", "de/d43/classProgramChanger.html", null ]
     ] ],
+    [ "ShiftRegisterOutRGB", "d5/d45/structShiftRegisterOutRGB.html", null ],
     [ "MIDI_Parser::SysExMessage", "d2/d56/structMIDI__Parser_1_1SysExMessage.html", null ],
     [ "Timer< time >", "dc/dea/classTimer.html", null ],
     [ "Timer< micros >", "dc/dea/classTimer.html", null ],

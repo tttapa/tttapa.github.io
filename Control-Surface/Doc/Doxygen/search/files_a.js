@@ -8,6 +8,7 @@ var searchData=
   ['midi_5fmessage_5fmatcher_2eh',['MIDI_message_matcher.h',['../db/df0/MIDI__message__matcher_8h.html',1,'']]],
   ['midi_5fparser_2ecpp',['MIDI_Parser.cpp',['../d4/d84/MIDI__Parser_8cpp.html',1,'']]],
   ['midi_5fparser_2eh',['MIDI_Parser.h',['../d4/d36/MIDI__Parser_8h.html',1,'']]],
+  ['midicnchanneladdress_2ehpp',['MIDICNChannelAddress.hpp',['../d8/d38/MIDICNChannelAddress_8hpp.html',1,'']]],
   ['midiincrementdecrementbuttons_2ehpp',['MIDIIncrementDecrementButtons.hpp',['../dc/dc5/MIDIIncrementDecrementButtons_8hpp.html',1,'']]],
   ['midiinputelement_2ehpp',['MIDIInputElement.hpp',['../dc/d90/MIDIInputElement_8hpp.html',1,'']]],
   ['midiinputelementaddressable_2ehpp',['MIDIInputElementAddressable.hpp',['../d3/d9c/MIDIInputElementAddressable_8hpp.html',1,'']]],

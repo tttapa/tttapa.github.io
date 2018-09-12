@@ -25,5 +25,7 @@ var classMCU_1_1VU =
     [ "updateAllWith", "d8/d4c/classMCU_1_1VU.html#a4b08a75485926ddd3fa6396b6a4da2a1", null ],
     [ "updateImpl", "d8/d4c/classMCU_1_1VU.html#ae547bbb399f4650ecf13884019b5b460", null ],
     [ "updateWith", "d8/d4c/classMCU_1_1VU.html#adcb98982679f02c01c46ac8d22722e1d", null ],
+    [ "next", "d8/d4c/classMCU_1_1VU.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
+    [ "previous", "d8/d4c/classMCU_1_1VU.html#a57b6615469e554c514a9ff56dc24908f", null ],
     [ "value", "d8/d4c/classMCU_1_1VU.html#ad40f40b1f9913e074d92c463b40b6f57", null ]
 ];

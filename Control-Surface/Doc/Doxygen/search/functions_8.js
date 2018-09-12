@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['hairlessmidi_5finterface',['HairlessMIDI_Interface',['../dc/dff/classHairlessMIDI__Interface.html#abc4d677aa73a965edb00a1220a81cda2',1,'HairlessMIDI_Interface']]],
   ['hardwareserialdebugmidi_5finterface',['HardwareSerialDebugMIDI_Interface',['../d8/d29/classHardwareSerialDebugMIDI__Interface.html#a26b52cf1391838deb67f38260fd675ee',1,'HardwareSerialDebugMIDI_Interface']]],
   ['hardwareserialmidi_5finterface',['HardwareSerialMIDI_Interface',['../d9/d78/classHardwareSerialMIDI__Interface.html#a689765de0ae6ff2e288782ff640054a6',1,'HardwareSerialMIDI_Interface']]],
   ['hasspacefor',['hasSpaceFor',['../d0/d89/classBluetoothMIDI__Interface.html#a6417f6d48fc3043fd97363b67649a363',1,'BluetoothMIDI_Interface']]],

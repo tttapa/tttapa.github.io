@@ -1,7 +1,6 @@
 var classControl__Surface__ =
 [
     [ "Control_Surface_", "dc/d45/classControl__Surface__.html#acabe7a649d24807ffacba4c87aba6a79", null ],
-    [ "~Control_Surface_", "dc/d45/classControl__Surface__.html#a3c5fd8c53007f8fb6309a1ca1b3946e2", null ],
     [ "Control_Surface_", "dc/d45/classControl__Surface__.html#a2f0fa1ce738f9dcf481e6eb8ece14237", null ],
     [ "begin", "dc/d45/classControl__Surface__.html#a1fda63983d83a8be20302e9fef48f63e", null ],
     [ "getInstance", "dc/d45/classControl__Surface__.html#a2bebbe9d9bc94ef004ed63f55445ce0d", null ],

@@ -33,6 +33,8 @@ var classMCU_1_1Bankable_1_1VU =
     [ "updateImpl", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a3758f5dd9dcbc60577744ecae3017c25", null ],
     [ "updateWith", "d0/d43/classMCU_1_1Bankable_1_1VU.html#adcb98982679f02c01c46ac8d22722e1d", null ],
     [ "next", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
+    [ "next", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
+    [ "previous", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a57b6615469e554c514a9ff56dc24908f", null ],
     [ "previous", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a57b6615469e554c514a9ff56dc24908f", null ],
     [ "values", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a4cfb57a29c7c03b92b8a40be2186078f", null ]
 ];

@@ -16,7 +16,7 @@ var searchData=
   ['record',['RECORD',['../d7/dc7/namespaceMCU.html#a6ac764356b286ab7c1316a3c912a910e',1,'MCU']]],
   ['record_5f7_5fbits',['record_7_bits',['../dd/d93/namespaceXBM.html#a0d6b7e357dfb9b15cac691bc2b178fa5',1,'XBM']]],
   ['record_5f9_5fbits',['record_9_bits',['../dd/d93/namespaceXBM.html#a47acda83a65bdaf3ada72ea48f9eb15e',1,'XBM']]],
-  ['redbit',['redBit',['../d8/db4/classShiftRegisterOutBase.html#ad2fd7dcb6933f03c918b95ad489a5290',1,'ShiftRegisterOutBase']]],
+  ['redbit',['redBit',['../d5/d45/structShiftRegisterOutRGB.html#ac992738309ccea4d7ba56a82c9a60e69',1,'ShiftRegisterOutRGB']]],
   ['relay',['RELAY',['../d7/dc7/namespaceMCU.html#a2d8d192fddf3c5f33317833a439a135e',1,'MCU']]],
   ['replace',['REPLACE',['../d7/dc7/namespaceMCU.html#adf2c59fb689e5b0a894f73499e76c7ea',1,'MCU']]],
   ['reset_5fall_5fcontrollers',['Reset_All_Controllers',['../d4/dbe/namespaceMIDI__CC.html#ab15c4b10ed81b3ece22ba9c004d3fa91',1,'MIDI_CC']]],
@@ -26,6 +26,5 @@ var searchData=
   ['rowpins',['rowPins',['../d8/d6c/classButtonMatrix.html#a598757145009131a1c275af993df9355',1,'ButtonMatrix']]],
   ['rpn_5flsb',['RPN_LSB',['../d4/dbe/namespaceMIDI__CC.html#a59e4c1cf0028b4ac79673f95afb865c0',1,'MIDI_CC']]],
   ['rpn_5fmsb',['RPN_MSB',['../d4/dbe/namespaceMIDI__CC.html#a34ae7b8c654c8c9fb5b77f6964c2a40b',1,'MIDI_CC']]],
-  ['rude_5fsolo',['RUDE_SOLO',['../d7/dc7/namespaceMCU.html#a6026f47b0188170b7a4799cc774a62eb',1,'MCU']]],
-  ['rx_5fpacket',['rx_packet',['../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32',1,'USBMIDI_Interface']]]
+  ['rude_5fsolo',['RUDE_SOLO',['../d7/dc7/namespaceMCU.html#a6026f47b0188170b7a4799cc774a62eb',1,'MCU']]]
 ];

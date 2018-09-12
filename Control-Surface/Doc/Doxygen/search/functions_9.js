@@ -10,12 +10,12 @@ var searchData=
   ['incrementselector',['IncrementSelector',['../dc/d4c/classIncrementSelector.html#a5826b3bf25bc404a3228b3c20b67c90c',1,'IncrementSelector::IncrementSelector(Selectable&lt; N &gt; &amp;selectable, const IncrementButton &amp;button, bool wrap=true)'],['../dc/d4c/classIncrementSelector.html#ad37edd7702072b522342b54a09cdaa0f',1,'IncrementSelector::IncrementSelector(Selectable&lt; N &gt; &amp;selectable, const Button &amp;button, bool wrap=true)']]],
   ['incrementselector_5fbase',['IncrementSelector_Base',['../d4/de9/classIncrementSelector__Base.html#ae54220d9cfabd939161f5c78f8bed7bd',1,'IncrementSelector_Base::IncrementSelector_Base(const IncrementButton &amp;button, bool wrap=true)'],['../d4/de9/classIncrementSelector__Base.html#a7591a40497ad84b4eaa95e7ade7a778c',1,'IncrementSelector_Base::IncrementSelector_Base(const Button &amp;button, bool wrap=true)']]],
   ['incrementselectorleds',['IncrementSelectorLEDs',['../dc/df8/classIncrementSelectorLEDs.html#aa22c5eb2b1a39422393edd37974999fc',1,'IncrementSelectorLEDs']]],
-  ['init',['init',['../d8/d6c/classButtonMatrix.html#a07b640645f4fa7b1e6e405fe7df71725',1,'ButtonMatrix']]],
   ['inrange',['inRange',['../d8/d3d/namespaceExtIO.html#aedf6005ecc64cea16059965b80ce5f85',1,'ExtIO']]],
   ['invert',['invert',['../d1/d19/classButton.html#a1027f25dee91c915849d531515365aab',1,'Button']]],
   ['isdata',['isData',['../df/d0c/classMIDI__Parser.html#ac6808b5b4f403e48368f32385171929c',1,'MIDI_Parser']]],
   ['isenabled',['isEnabled',['../d5/de0/classUpdatable.html#a883138a1262a82e8b9e05c75d576e36d',1,'Updatable']]],
   ['ishexchar',['isHexChar',['../d8/d0b/classStreamDebugMIDI__Interface.html#a5229f0375a0a9e9c303b0ba1fa99a342',1,'StreamDebugMIDI_Interface']]],
   ['isstatus',['isStatus',['../df/d0c/classMIDI__Parser.html#a0030089e4fe636ae1ca7997dba7b86ae',1,'MIDI_Parser']]],
+  ['isvalid',['isValid',['../d3/d10/classMIDICNChannelAddress.html#a5cc0927606de3d24f37c4e5461083a03',1,'MIDICNChannelAddress']]],
   ['iswhitespace',['isWhiteSpace',['../d8/d0b/classStreamDebugMIDI__Interface.html#a06d80f3b4a5fa49d443a1379e124e785',1,'StreamDebugMIDI_Interface']]]
 ];

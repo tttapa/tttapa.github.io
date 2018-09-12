@@ -15,6 +15,8 @@ var classDoublyLinkedList =
     [ "couldContain", "dd/d16/classDoublyLinkedList.html#ad5f6720a2d9ac9590fae337b2c5a744a", null ],
     [ "end", "dd/d16/classDoublyLinkedList.html#acbcb82c1029fcec3f6e8bcb3326df8c9", null ],
     [ "end", "dd/d16/classDoublyLinkedList.html#aa21ac3c9f28d3d2a6a26b4f56557c5a2", null ],
+    [ "getFirst", "dd/d16/classDoublyLinkedList.html#ab4f64cd2515175a4e159001cd29905b8", null ],
+    [ "getLast", "dd/d16/classDoublyLinkedList.html#a29e0234851509035aabc8e044a600531", null ],
     [ "moveDown", "dd/d16/classDoublyLinkedList.html#ae2a986168448de551aaaa2274ac7f5fe", null ],
     [ "rbegin", "dd/d16/classDoublyLinkedList.html#ada3db713c76e004c72ed96c98d67b7f2", null ],
     [ "rbegin", "dd/d16/classDoublyLinkedList.html#a58231886c814f8bdb60d029d79673999", null ],

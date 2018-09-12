@@ -20,5 +20,7 @@ var classMCU_1_1VULEDs =
     [ "updateAll", "df/d36/classMCU_1_1VULEDs.html#aa32cdb3125e337090f73f8f3358a8a73", null ],
     [ "updateAllWith", "df/d36/classMCU_1_1VULEDs.html#a4b08a75485926ddd3fa6396b6a4da2a1", null ],
     [ "updateImpl", "df/d36/classMCU_1_1VULEDs.html#ae547bbb399f4650ecf13884019b5b460", null ],
-    [ "updateWith", "df/d36/classMCU_1_1VULEDs.html#adcb98982679f02c01c46ac8d22722e1d", null ]
+    [ "updateWith", "df/d36/classMCU_1_1VULEDs.html#adcb98982679f02c01c46ac8d22722e1d", null ],
+    [ "next", "df/d36/classMCU_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
+    [ "previous", "df/d36/classMCU_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

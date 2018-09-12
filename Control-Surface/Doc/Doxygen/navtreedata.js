@@ -44,8 +44,7 @@ var NAVTREE =
         [ "Variables", "functions_vars.html", "functions_vars" ],
         [ "Typedefs", "functions_type.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
-        [ "Enumerator", "functions_eval.html", null ],
-        [ "Related Functions", "functions_rela.html", null ]
+        [ "Enumerator", "functions_eval.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -67,21 +66,21 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d0/dd2/classMIDIFilteredAnalogAddressable.html#a57b6615469e554c514a9ff56dc24908f",
+"d0/dd2/classMIDIFilteredAnalogAddressable.html#a4c1c6bd44da328dd5b4dc29503219d09",
 "d1/d9f/classNoteButton.html",
-"d2/daf/classNoteButtonMatrix.html#a4a13b63f90ec988cd14d871df9dbc53b",
-"d3/d69/classManyButtonsSelector.html#a4a13b63f90ec988cd14d871df9dbc53b",
-"d4/d36/MIDI__Parser_8h.html#a4419d0225c6e08e5029a42302783ee5f",
-"d5/d8e/classMIDIFilteredAnalog.html#a9cf409bc7effa13042ebd1d1e02d1046",
-"d6/da6/MCU_8h.html#a0151b66708e64dcd26a4ec2e60703083",
-"d8/d0b/classStreamDebugMIDI__Interface.html#a0db0ea9a49ced7874f0a5b533e625a20",
-"d9/d0d/classMIDINoteLED.html#a1e75b1a1050158783d672dae72c7f1ac",
-"d9/df9/classBankable_1_1MIDIButton.html#ad4273e4aa2f15de8dbe478af16af259e",
-"db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a0bc33aa8712fd07c9c218ed35cc7dce3",
-"dc/d22/classBankable_1_1MIDIButtons.html#a2884cfeb090f1c85fc704341f7c3f70a",
+"d2/daf/classNoteButtonMatrix.html#a6bae640621972b14ad9c28b6b399f08f",
+"d3/d69/classManyButtonsSelector.html#a28dfbd31c4cb424f9b32480b1aeb0bbf",
+"d4/d36/MIDI__Parser_8h.html#a4d5f7c786c1a7480bd707642de92e109",
+"d5/d8e/classMIDIFilteredAnalog.html#a7cc0c94311558c18a763721274b9c815",
+"d6/da6/MCU_8h.html#a14a7cfd850ae0f5213ed83ad326d19d6",
+"d8/d0b/classStreamDebugMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc",
+"d9/d0d/classMIDINoteLED.html#a2aadbdc142f8771f472f9d09c59cdd0c",
+"d9/df9/classBankable_1_1MIDIButton.html#adf9065e2f57a2a9baa0e14005585b7b2",
+"db/d15/Bankable_2CCButton_8hpp.html",
+"dc/d22/classBankable_1_1MIDIButtons.html#a3af6f1bdd9c0471a79fbda986ca0a69f",
 "dc/df8/classIncrementSelectorLEDs.html#a57b6615469e554c514a9ff56dc24908f",
-"de/d2d/classUSBDebugMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc",
-"df/d69/classMCU_1_1TimeDisplay.html#a57b6615469e554c514a9ff56dc24908f"
+"de/d4e/classExtendedIOElement.html#a4bc35f3be5cfc6a63b714bab7fb8222b",
+"functions_func_c.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

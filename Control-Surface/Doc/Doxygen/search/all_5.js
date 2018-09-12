@@ -9,7 +9,7 @@ var searchData=
   ['effects_5f3',['Effects_3',['../d4/dbe/namespaceMIDI__CC.html#ad88eb1e442062ff26976943fb6bb3389',1,'MIDI_CC']]],
   ['effects_5f4',['Effects_4',['../d4/dbe/namespaceMIDI__CC.html#a564086cbe2e297efad355dbc304de21f',1,'MIDI_CC']]],
   ['effects_5f5',['Effects_5',['../d4/dbe/namespaceMIDI__CC.html#acddd6306d4134367ff1574e73dad39fd',1,'MIDI_CC']]],
-  ['elements',['elements',['../de/d4e/classExtendedIOElement.html#a972adc28e5ee916d7f1eaba13daf76a2',1,'ExtendedIOElement::elements()'],['../d3/d96/classMIDIInputElementCC.html#abb45298f2fb5603360f5e30a807f6c1a',1,'MIDIInputElementCC::elements()'],['../db/d4b/classMIDIInputElementNote.html#a803846e21a2488fccf5f612087bbfa76',1,'MIDIInputElementNote::elements()']]],
+  ['elements',['elements',['../d8/d43/classDisplayElement.html#ab2cc9ad72b720035a3e39c6a9b0c10f3',1,'DisplayElement::elements()'],['../df/d42/classDisplayInterface.html#a40ef6f7f99789390d88e4d67fa436ba8',1,'DisplayInterface::elements()'],['../de/d4e/classExtendedIOElement.html#a972adc28e5ee916d7f1eaba13daf76a2',1,'ExtendedIOElement::elements()'],['../d3/d96/classMIDIInputElementCC.html#abb45298f2fb5603360f5e30a807f6c1a',1,'MIDIInputElementCC::elements()'],['../d1/df7/classMIDIInputElementChannelPressure.html#afd32e17bd94b1a83c8e29559a28b7b9f',1,'MIDIInputElementChannelPressure::elements()'],['../db/d4b/classMIDIInputElementNote.html#a803846e21a2488fccf5f612087bbfa76',1,'MIDIInputElementNote::elements()']]],
   ['ema',['EMA',['../d7/d40/classEMA.html',1,'']]],
   ['ema_2eh',['EMA.h',['../d3/d5a/EMA_8h.html',1,'']]],
   ['ema_3c_20analog_5ffilter_5fshift_5ffactor_2c_20analog_5ffilter_5ftype_20_3e',['EMA&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE &gt;',['../d7/d40/classEMA.html',1,'']]],

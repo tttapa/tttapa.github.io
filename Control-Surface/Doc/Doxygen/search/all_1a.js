@@ -2,8 +2,7 @@ var searchData=
 [
   ['_7ebankablemidiinputaddressable',['~BankableMIDIInputAddressable',['../d1/d91/classBankableMIDIInputAddressable.html#adbc458411673242c0dc882933c4a07af',1,'BankableMIDIInputAddressable']]],
   ['_7eblemidi',['~BLEMIDI',['../d8/d39/classBLEMIDI.html#afdb4cce97116f63be21b155903ac7c08',1,'BLEMIDI']]],
-  ['_7ebuttonmatrix',['~ButtonMatrix',['../d8/d6c/classButtonMatrix.html#acc26d1cf9878e3ce7da10b73112d7776',1,'ButtonMatrix']]],
-  ['_7econtrol_5fsurface_5f',['~Control_Surface_',['../dc/d45/classControl__Surface__.html#a3c5fd8c53007f8fb6309a1ca1b3946e2',1,'Control_Surface_']]],
+  ['_7ebuttonmatrix',['~ButtonMatrix',['../d8/d6c/classButtonMatrix.html#ab6ec60a0b7c885ea5569cd8b1e8140ab',1,'ButtonMatrix']]],
   ['_7edisplayelement',['~DisplayElement',['../d8/d43/classDisplayElement.html#a1169603ef985e177ac928012474474d6',1,'DisplayElement']]],
   ['_7edisplayinterface',['~DisplayInterface',['../df/d42/classDisplayInterface.html#a61b547ae65dbfd592a351da52a10f278',1,'DisplayInterface']]],
   ['_7edoublylinkable',['~DoublyLinkable',['../d4/d23/classDoublyLinkable.html#a7f9a1c99452f84097ae7fdb94ed23326',1,'DoublyLinkable']]],

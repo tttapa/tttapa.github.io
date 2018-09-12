@@ -1,16 +1,15 @@
 var classBitArray =
 [
-    [ "BitArray", "db/de9/classBitArray.html#ae4bbf15b38ecbcfa0d4e35c9ff0b37d5", null ],
-    [ "clear", "db/de9/classBitArray.html#ab2278aa896ae3ac46d7fcc12186873ba", null ],
-    [ "get", "db/de9/classBitArray.html#a66ea19e962b49a96a8f10f208c050b00", null ],
-    [ "getBufferBit", "db/de9/classBitArray.html#a7e058b8579faec7721f6683c7dcbad24", null ],
-    [ "getBufferIndex", "db/de9/classBitArray.html#abd9fb6d2f1b9ff72e11b2a7896138e44", null ],
-    [ "getBufferLength", "db/de9/classBitArray.html#aacefcc4192572972267e4a488078c55f", null ],
-    [ "getBufferMask", "db/de9/classBitArray.html#a22f43403e0dbd04b67c248f6e5f56525", null ],
-    [ "getByte", "db/de9/classBitArray.html#aeec8f5b93dfe769260a944c8fa6debca", null ],
-    [ "safeIndex", "db/de9/classBitArray.html#a04c467b2f19a2329a4318d5da74bb35e", null ],
-    [ "set", "db/de9/classBitArray.html#a606470361559934d0c26a39e1b46cf5d", null ],
-    [ "set", "db/de9/classBitArray.html#a60e210bc2ee99152cd1df96c4dbd89b0", null ],
-    [ "buffer", "db/de9/classBitArray.html#af5b1763e3f356f6b791cbdaf05f7f1ff", null ],
-    [ "bufferLength", "db/de9/classBitArray.html#af8f8f3687152c5319f22c0235fb39039", null ]
+    [ "clear", "db/de9/classBitArray.html#a004695424087494cee2d1c6dce843118", null ],
+    [ "get", "db/de9/classBitArray.html#ae70a67b38aba607d4301cca64a2f9640", null ],
+    [ "getBufferBit", "db/de9/classBitArray.html#a873e212ea025f807da031667ec38508d", null ],
+    [ "getBufferIndex", "db/de9/classBitArray.html#a6f88d7f06380b68327b6affee50c5f5b", null ],
+    [ "getBufferLength", "db/de9/classBitArray.html#a15ee7c68209b609e730a0811133b69fa", null ],
+    [ "getBufferMask", "db/de9/classBitArray.html#ada8a19208bad820d128510b5e439fcf7", null ],
+    [ "getByte", "db/de9/classBitArray.html#a517038489cd46836c80803f6e3a0f258", null ],
+    [ "safeIndex", "db/de9/classBitArray.html#a5aa71f15bed263c25c32b7a31152e23c", null ],
+    [ "set", "db/de9/classBitArray.html#aeab58639d34ba3af28dabe49f2fa6992", null ],
+    [ "set", "db/de9/classBitArray.html#a61a953baab78ff4ed53c65a6a45d3686", null ],
+    [ "buffer", "db/de9/classBitArray.html#a1cc5ae34690a8f065243531bcb64d20a", null ],
+    [ "bufferLength", "db/de9/classBitArray.html#aec5f3894a0f8eeb476db695cdd74f0b5", null ]
 ];

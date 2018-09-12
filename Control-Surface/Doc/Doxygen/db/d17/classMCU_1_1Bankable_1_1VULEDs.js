@@ -29,5 +29,7 @@ var classMCU_1_1Bankable_1_1VULEDs =
     [ "updateImpl", "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a3758f5dd9dcbc60577744ecae3017c25", null ],
     [ "updateWith", "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#adcb98982679f02c01c46ac8d22722e1d", null ],
     [ "next", "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
+    [ "next", "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
+    [ "previous", "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f", null ],
     [ "previous", "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];
