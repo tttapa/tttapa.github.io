@@ -1,0 +1,232 @@
+<!--
+@title: Exponential Moving Average
+@author: Pieter P
+@keywords: EMA, Exponential Moving Average, IIR filter, filters, DSP
+@description: Digital exponential moving average filters explained.
+-->
+
+<html>
+
+<h3>Difference equation</h3>
+
+<p>
+    The Difference equation of an exponential moving average filter is very simple:
+    $$ y[n] = \alpha x[n] + (1-\alpha) y[n-1] $$
+    In this equation, \(y[n]\) is the current output, \(y[n-1]\) is the previous output, and \(x[n]\) is the current
+    input;
+    \(\alpha\) is a number between 0 and 1. If \(\alpha = 1\), the output is just equal to the input, and no filtering
+    takes place
+</p>
+<p>
+    The filter is called 'exponential', because the weighting factor of previous inputs decreases exponentially.
+    This can be easily demonstrated by substituting the previous outputs:
+    $$ \begin{split}
+    y[n] &amp;= \alpha x[n] + (1-\alpha) y[n-1] \\
+    &amp;= \alpha x[n] + (1-\alpha) \left(\alpha x[n-1] + (1-\alpha) y[n-2]\right) \\
+    &amp;= \alpha x[n] + (1-\alpha) \left(\alpha x[n-1] + (1-\alpha) \left(\alpha x[n-2] + (1-\alpha)
+    y[n-3]\right)\right) \\
+    &amp; \dots \\
+    &amp;= \alpha \sum_{k=0}^{n} \left(1-\alpha\right)^{k} x[n-k]
+    \end{split} $$
+</p>
+<h3>Impulse and step response</h3>
+<p>
+    From the previous equation, we can now easily calculate the impulse and step response.
+</p>
+<p>
+    The impulse response is the output of the filter when a Kronecker delta function is applied to the input.
+    $$ \delta[n] = \begin{cases}
+    1 &amp; n = 0 \\
+    0 &amp; n\ne0
+    \end{cases} $$
+    $$ y_{impulse}[n] = h[n] = \alpha \sum_{k=0}^{n} \left(1-\alpha\right)^{k} \delta[n-k] = \alpha (1-\alpha)^n $$
+    For example, if \(\alpha = 0.25\), the impulse response is as follows:
+    <img src="images/impulse-response.png" />
+</p>
+<p>
+    The step response is the output of the filter when a Heaviside step function is applied to the input.
+    $$ H[n] = \begin{cases}
+    0 &amp; n \lt 0 \\
+    1 &amp; n \ge 0
+    \end{cases} $$
+    $$ y_{step}[n] = \alpha \sum_{k=0}^{n} \left(1-\alpha\right)^{k} H[n-k] = \alpha \sum_{k=0}^{n}
+    \left(1-\alpha\right)^{k} $$
+    For example, if \(\alpha = 0.25\), the step response is as follows:
+    <img src="images/step-response.png" />
+</p>
+<h3>Transfer function</h3>
+<p>
+    You can express the output of discrete-time linear time-invariant systems, of which the EMA is an example,
+    as the convolution of the input with the impulse response.<br>
+    This is because any input \(x[n]\) can be written as an infinite sum of shifted Kronecker delta functions
+    $$ x[n] = \sum_{k=0}^{\infty} x[k] \delta[k-n] $$
+    If \(T\) is the transformation performed by the DTLTI system,
+    and by using the fact that \(T\) is a linear transformation and that it is time-invariant:
+    $$ \begin{split}
+    y[n] &amp;= T\left(x[n]\right) \\
+    &amp;= T\left(\sum_{k=0}^{\infty} x[k] \delta[k-n]\right) \\
+    &amp;= \sum_{k=0}^{\infty} T\left(x[k] \delta[k-n]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k] T\left(\delta[k-n]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k] h[k-n] \\
+    &amp;= x[n] * h[n]
+    \end{split} $$
+    Analysis of such systems is usually easier in the Z-domain, in which the convolution is reduced to a simple
+    product. <br>
+    The (unilateral) Z-transform is defined as:
+    $$ {\cal Z}\{x[n]\} = \sum_{n=0}^{\infty} x[n] z^{-n} $$
+    If \(X(z) = {\cal Z}\{x[n]\}\), \(Y(z) = {\cal Z}\{y[n]\}\) and \(H(z) = {\cal Z}\{h[n]\}\)
+    are the Z-transforms of the input, output and impulse response respectively, then:
+    $$ \begin{split}
+    {\cal Z}\{y[n]\} &amp;= {\cal Z}\{x[n] * h[n]\} \\
+    Y(z) &amp;= X(z) H(z) \\
+    H(z) &amp;= \frac{Y(x)}{X(z)}
+    \end{split} $$
+    \(H(z)\) is called the transfer function of the system.
+</p>
+<p>
+    Let's calculate the transfer function of the EMA.<br>
+    We can take two main approaches: use the difference equation and use some of
+    the properties of the Z-transform to calculate \(\frac{Y(x)}{X(z)}\), or apply
+    the definition of the Z-transform to the impulse response \(h[n]\) directly.
+    <h4>Using the difference equation</h4>
+    All you have to do is apply the time shifting property of the Z transform:
+    $$ {\cal Z}\{y[n-n_0]\} = z^{-n_0}{\cal Z}\{y[n]\} $$
+    Then just rearrange the terms.
+    $$ \begin{split}
+    y[n] &amp;= \alpha x[n] + (1-\alpha) y[n-1] \\
+    {\cal Z}\{y[n]\} &amp;= {\cal Z}\{\alpha x[n] + (1-\alpha) y[n-1]\} \\
+    &amp;= \alpha {\cal Z}\{x[n]\} + (1-\alpha) {\cal Z}\{y[n-1]\} \\
+    &amp;= \alpha {\cal Z}\{x[n]\} + (1-\alpha) z^{-1} {\cal Z}\{y[n]\} \\
+    Y(z) &amp;= \alpha X(z) + (1-\alpha) z^{-1} Y(z) \\
+    Y(z) - (1-\alpha) z^{-1} Y(z) &amp;= \alpha X(z) \\
+    \frac{Y(z)}{X(z)} &amp;= \frac{\alpha}{1 - (1-\alpha) z^{-1}} \\
+    H(z) &amp;= \frac{\alpha}{1 - (1-\alpha) z^{-1}}
+    \end{split} $$
+    <h4>Using the impulse response</h4>
+    $$ \begin{split}
+    H(z) &amp;= {\cal Z}\{h[n]\} \\
+    &amp;= \sum_{n=0}^{\infty} h[n] z^{-n} \\
+    &amp;= \alpha \sum_{n=0}^{\infty} (1-\alpha)^n z^{-n} \\
+    &amp;= \alpha \sum_{n=0}^{\infty} \left(\frac{1-\alpha}{z}\right)^n \\
+    &amp;= \frac{\alpha}{1 - \frac{1-\alpha}{z}}
+    \end{split} $$
+    The last step is only valid if the sum converges,
+    this is the case for \(\lvert\frac{1-\alpha}{z}\rvert\ \lt 1\).
+    (See <a href="https://en.wikipedia.org/wiki/Geometric_series#Formula">Infinite Geometric Series</a>)
+</p>
+<p>
+    In these expressions, \(z\) is a complex variable, and \(H(z)\) is a complex function. <br>
+    There are a couple of interesting values for \(z\): values that result in the numerator becoming zero, called <em>zeros</em>,
+    and values that result in the denominator becoming zero, called <em>poles</em>.
+    $$ \begin{split}
+    H(z) &amp;= \frac{\alpha}{1 - \frac{1-\alpha}{z}} \\
+    &amp;= \frac{\alpha z}{z - (1-\alpha)}
+    \end{split} $$
+    By rewriting the transfer function, we can easily see that \(z = 0\) is a zero, and \(z = 1-\alpha\) is a pole.
+</p>
+<p>
+    The poles and zeros determine the overall effect of the transfer function,
+    so pole-zero plots are a very useful tool when describing filters.<br>
+    This is the pole-zero plot of the same example EMA as before, with \(\alpha = 0.25\).
+    <img src="images/pole-zero.png" />
+    The zero in the origin is indicated by an <b>O</b>, and the pole at \(1-\alpha = 0.75\) by an <b>X</b>.
+</p>
+<h3>Frequency response</h3>
+<p>
+    An important property of discrete-time linear time-invariant systems is that it preserves the pulsation (frequency)
+    of sinusoidal signals, only the phase shift and the amplitude are altered.<br>
+    This makes it relatively easy to express the frequency response (sometimes called magnitude response) of a filter.
+</p>
+<p>
+    We're interested in the spectrum of frequencies that a signal contains, so it makes sense to decompose it as a sum
+    of
+    sines and cosines. That's exactly what the discrete-time Fourier transform does:
+    $$ X_{2\pi} = \sum_{n=-\infty}^{\infty} x[n] e^{-i\omega n} $$
+    Note that this is just a special case of the Z-transform, where \(z = e^{i\omega}\).
+</p>
+<p>
+    Consider the DTFT of the Kronecker delta. Remember that \(\delta[n]\) is always zero, except for \(n = 1\).
+    This means that all but one terms of the infinite sum are zero, and what's left is just one.
+    $$ X_{2\pi} = \sum_{n=-\infty}^{\infty} \delta[n] e^{-i\omega n} = \delta[0] e^{-i\omega 0} = 1 $$
+    This is constant in function of pulsation \(\omega\), meaning that the Kronecker delta function
+    contains all frequencies with the same amplitude. In other words, it is a very good reference.
+    To determine the frequency response, we apply all frequencies to the input (the Kronecker delta),
+    we measure those frequencies at the output, and compare their amplitudes to the original amplitude of 1.
+</p>
+<p>
+    We already know what the output signal of the system is when applying the Kronecker delta function
+    to the input, it's the impuls response \(h[k]\).<br>
+    We already know the DTFT of the impulse as well, it is the Z-transform of \(h[k]\), \(H(z)\), where
+    \(z = e^{i\omega}\).
+    $$ \begin{split}
+    {\cal F}_{DTFT}\{h[k]\} &amp;= \sum_{n=-\infty}^{\infty} h[n] e^{-i\omega n} \\
+    &amp;= H(e^{i\omega}) \\
+    &amp;= \frac{\alpha}{1 - (1-\alpha) e^{-i\omega}}
+    \end{split} $$
+    We can now calculate the amplitude of each frequency component in the output by taking the modulus
+    of \(H(e^{i\omega})\). For reasons that will become apparent in a minute, we'll calculate the modulus squared.
+    We use Euler's formula for writing the exponential as a sines and cosines.
+    $$ \begin{split}
+    \lvert H(e^{i\omega}) \rvert^2 &amp;= \frac{\alpha^2}{\lvert 1 - (1-\alpha) e^{-i\omega} \rvert^2} \\
+    &amp;= \frac{\alpha^2}{\lvert 1 - (1-\alpha) \left(\cos(-\omega) + i \sin(-\omega)\right) \rvert^2} \\
+    &amp;= \frac{\alpha^2}{ (1 - (1-\alpha) \cos(\omega))^2 - ((1-\alpha) \sin(\omega))^2} \\
+    &amp;= \frac{\alpha^2}{1 - 2 (1-\alpha) \cos(\omega) + (1-\alpha)^2 \cos^2(\omega) + (1-\alpha)^2 \sin^2(\omega)}
+    \\
+    &amp;= \frac{\alpha^2}{1 - 2 (1-\alpha) \cos(\omega) + (1-\alpha)^2}
+    \end{split} $$
+
+    \(\omega\) is the normalized pulsation in radians per sample. You can substitute it with
+    \(\omega = \frac{2\pi f}{f_s}\) where \(f\) is the frequency in Hertz, and \(f_s\) is the
+    sample frequency of the system in Hertz.
+</p>
+<p>
+    We can now plot the filter's gain in function of the pulsation. These plots often use a logarithmic scale, to
+    show the gain in decibels. In order to calculate the power gain, the amplitude is squared.
+    $$ A_{dB}(\omega) = 10\ \log_{10} \lvert H\left(e^{i\omega}\right)\rvert^2 $$
+    Note that when a frequency is not present in the output signal, the gain will be \(-\infty\ dB\).
+    If a frequency has an amplitude of one in the output signal, the gain will be \(0\ dB\).
+    <img src="images/frequency-response.png" />
+    You can clearly see the low-pass behavior of the EMA: low frequencies have a near-unit gain, and high frequencies
+    are attenuated.
+</p>
+<p>
+    To get a better understanding of where this curve comes from, we can plot the entire \(\lvert H(z)\rvert\) surface
+    in the Z-domain.
+    As mentioned above, the DTFT is just a special case of the Z-transform, where \(z = e^{i\omega}\), i.e. the unit
+    circle in the complex plane.
+    Remember that the point \(z = e^{i\omega}\) is a point with a distance of \(1\) to the origin, and with an angle of
+    \(\omega\ rad\)
+    between its position vector and the positive x axis.
+    <img src="images/pole-zero-omega.png" />
+    <img src="images/magnitude-H-surf.png" />
+    The image of the unit circle is shown in blue. Notice that this is the same curve as the blue curve in the
+    magnitude response graph above:
+    close to 0 when \(\omega → 0\) (the right half of the circle) and negative when \(\omega → \pi\) (the left half of
+    the circle).<br>
+    You can clearly see the effect of the pole at \(0.75 + 0i\). The zero in the origin has no effect on the frequency
+    response,
+    because it doesn't alter the image of the unit circle, since
+    \(\lvert e^{i\omega} \rvert = 1\) or \(\log(\lvert e^{i\omega}\lvert) = 0\).
+</p>
+<h4>Cutoff frequency</h4>
+<p>
+    The cutoff frequency is defined as the frequency of the half-power point, where the power gain is a half. It's
+    often called the \(-3\ dB\)-point,
+    because \(10 \log_{10}\left(\frac{1}{2}\right) \approx -3.01\ dB\).<br>
+    To find it, just solve the following equation:
+    $$ \lvert H\left(e^{i\omega_c}\right) \rvert^2 = \frac{1}{2} $$
+    $$ \begin{split}
+    \frac{\alpha^2}{1 - 2 (1-\alpha) \cos(\omega_c) + (1-\alpha)^2} &amp;= \frac{1}{2} \\
+    \omega_c = \arccos\left(\frac{\alpha^2+2\alpha+2}{2\alpha+2}\right)
+    \end{split} $$
+</p>
+<p>
+    For example, if \(\alpha\ = 0.25\), then \(\omega_c = \arccos\left(\frac{23}{24}\right) \approx 0.2897
+    \frac{rad}{sample} \).<br>
+    To convert it to a frequency in Hertz, you can multiply \(\omega\) by \(\frac{f_s}{2\pi}\), with \(f_s\) the sample
+    frequency.<br>
+    For example, if the sample frequency is \(f_s = 1000\ \frac{samples}{s}\), then \(f =
+    \arccos\left(\frac{23}{24}\right)\frac{f_s}{2\pi} \approx 46.12\ Hz\).
+</p>
+
+</html>
