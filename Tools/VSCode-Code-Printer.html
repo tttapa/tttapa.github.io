@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Arduino-Forum-Code-Formatter.css">
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="theme-color" content="#ccc">
+    <title>Code Printer</title>
+</head>
+
+<body>
+    <article>
+        <h1>Arduino Code Printer</h1>
+        <i style="font-size:0.9em;color:#888;margin-bottom:1em;display:block">Pieter P</i>
+        <div>
+            This is a simple tool for printing Arduino code with line numbers and syntax highlighting.
+            <ol>
+                <li>Select the code in the Arduino IDE</li>
+                <li>Right click the selection, and choose "Copy as HTML"</li>
+                <li>Paste the code here</li>
+                <li>Emphasize some lines if you want to (see below)</li>
+                <li>Click "Print", or copy the generated HTML</li>
+            </ol>
+            <h4>Emphasize code</h4>
+            You can use this tool to emphasize certain lines. Other lines will be grayed out.
+            <ol>
+                <li>Add three asterisks (***) before the lines you want to emphasize</li>
+                <li>Check the box below</li>
+            </ol>
+            <h4>Add page breaks</h4>
+            You can add a page break after a line by adding three dashes (---) at the end of the line.<br>
+            By default, lines of code that only contain comments with lines (<code>//---</code> or <code>//===</code> or <code>//___</code>) will be replaced by page breaks as well.
+            <h4>Settings</h4>
+            <table>
+                <tr><td><label for="emphasize">Emphasize: </label></td>
+                <td><input type="checkbox" id="emphasize" onchange="format();saveEmphasize();"></td></tr>
+                <tr><td>Title: </td>
+                <td><input id="title" placeholder="Title" oninput="format();saveTitle();"></td></tr>
+                <tr><td>Author: </td>
+                <td><input id="author" placeholder="Author" oninput="format();saveAuthor();"></td></tr>
+            </table>
+        </div>
+        <div class="container">
+            <h3>Raw HTML code</h3>
+            <textarea id="input" oninput="format();saveInput();"></textarea>
+
+            <h3>Formatted HTML code</h3>
+            <button onclick="copy()" id="button">Copy HTML code</button>
+            <textarea id="output" readonly></textarea>
+
+            <h3>Result</h3>
+            <button onclick="print()" id="print">Print</button>
+            <div id="result">
+            </div>
+        </div>
+    </article>
+
+    <style>
+        div#result {
+            border: solid #A9A9A9 1px;
+            max-height: 30vh;
+            overflow: auto;
+        }
+        code.pagebreak {
+            display: block !important;
+            border-bottom: #888 1px solid;
+            margin-bottom: 1em;
+        }
+        article {
+            min-height: 100em;
+        }
+        table {
+            table-layout: fixed;
+            width: 100%;
+        }
+        td>input {
+            max-width: 100%;
+        }
+        @media screen and (max-width: 769px) {
+            article {
+                width: 100vw;
+                max-width: 100%;
+                margin: 0px 0px 0px 0px;
+                padding: 16px 36px 32px 36px;
+            }
+            body {
+                padding: 0px;
+                margin: 0;
+            }
+        }
+    </style>
+
+<style id="lineNumbers">
+    .lineNumbers {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        display: block;
+        padding-left: 4em;
+        counter-reset: line;
+        width: 100%;
+        box-sizing: border-box;
+        /* border: 1px solid #eee; */
+    }
+
+    .lineNumbers>code,
+    .lineNumbers>.codeLine {
+        display: block;
+    }
+
+    .lineNumbers>code:before,
+    .lineNumbers>.codeLine:before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        /* border-right: 1px solid #ddd; */
+        padding: 0 1.5em 0 0;
+        margin-left: -3.7em;
+        width: 2.2em;
+        color: #555;
+        text-align: right;
+    }
+</style>
+<style id="lineNumbersEmphasis">
+    .lineNumbersEmphasis {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        display: block;
+        padding-left: 4em;
+        counter-reset: line;
+        width: 100%;
+        box-sizing: border-box;
+        /* border: 1px solid #eee; */
+    }
+
+    .lineNumbersEmphasis>code {
+        display: inline;
+    }
+
+    .lineNumbersEmphasis>code {
+        opacity: 0.5;
+        /* filter: grayscale(40%); */
+    }
+
+    .lineNumbersEmphasis>code.emphasis {
+        opacity: 1;
+        /* filter: grayscale(0%); */
+    }
+
+    .lineNumbersEmphasis>code.emphasis:before {
+        font-weight: bold;
+    }
+
+    .lineNumbersEmphasis>code:before {
+        counter-increment: line;
+        content: counter(line);
+        display: inline-block;
+        /* border-right: 1px solid #ddd; */
+        padding: 0 1.5em 0 0;
+        margin-left: -3.7em;
+        width: 2.2em;
+        color: #555;
+        text-align: right;
+    }
+    .vscode {
+        color: inherit;
+    }
+</style>
+
+<style id="general">
+    body {
+        font-family: 'Roboto', sans-serif;
+    }
+    i.subtitle {
+        color: #888;
+        margin-bottom: 1.5em;
+        display: block;
+    }
+    @media print {
+        code.pagebreak {
+            page-break-after: always;
+            display: block !important;
+        }
+        pre {
+            margin-bottom: 0 !important;
+        }
+    }
+</style>
+
+    <script>
+        let input = document.getElementById("input");
+        let output = document.getElementById("output");
+        let button = document.getElementById("button");
+        let result = document.getElementById("result");
+
+        let lnstyle = document.getElementById("lineNumbers").outerHTML;
+        let lnestyle = document.getElementById("lineNumbersEmphasis").outerHTML;
+        let generalstyle =  document.getElementById("general").outerHTML;
+
+        let VSCode = false;
+
+        function paste(e) {
+            var clipboardData, pastedData;
+            // Stop data actually being pasted into div
+            e.stopPropagation();
+            e.preventDefault();
+            // Get pasted data via clipboard API
+            clipboardData = e.clipboardData || window.clipboardData;
+            pastedHTML = clipboardData.getData('text/html');
+            if (pastedHTML) {
+                pastedData = pastedHTML;
+                VSCode = true;
+            } else {
+                pastedData = clipboardData.getData('text/plain');
+                VSCode = false;                
+            }
+            // Do whatever with pasteddata
+            this.value = pastedData;
+            format();
+        }
+
+        input.addEventListener('paste', paste);
+
+        function copy() {
+            output.select();
+            try {
+                document.execCommand("Copy");
+                button.textContent = "Copied!";
+                window.setTimeout(function () {
+                    button.textContent = "Copy HTML code";
+                }, 2000);
+            } catch(e) {
+                console.error("Unable to copy", e);
+            }
+        }
+
+        function formatContent(content) {
+            if (VSCode) {
+                return formatVSCode(content);
+            } else {
+                return formatNormalContent(content);
+            }
+        }
+
+        function formatNormalContent(content) {
+            if (!content.includes("<pre>"))
+                content = "<pre>" + content;
+
+            if (!content.includes("</pre>"))
+                content += "</pre>";
+
+            content = content.replace(
+                /<pre>[\r\n]*/g,
+                emphasize ?
+                    '<pre class="lineNumbersEmphasis"><code>'
+                    : '<pre class="lineNumbers"><code>');
+
+            content = content.replace(
+                /[\r\n]*<\/pre>/g,
+                '</code></pre>');
+
+            content = content.replace(
+                /([\r\n])/g,
+                '</code>$1<code>');
+
+            content = content.replace(
+                /<code>\*\*\*+/g,
+                emphasize ?
+                    '<code class="emphasis">'
+                    : '<code>');
+            
+            content = content.replace(
+                /<code>(.*)---\s*<\/code>/g,
+                '<code class="pagebreak">$1</code>');
+
+            content = content.replace(
+                /<code (class="[^"]*)">(.*)---\s*<\/code>/g,
+                '<code $1 pagebreak">$2</code>');
+
+            content = content.replace(
+                /<code>(?:<font[^>]*>)\s*((\/\/)|(\/\*))[^a-zA-Z]*[-=_]{3,}[^a-zA-Z]*(?:<\/font>)<\/code>/g,
+                '<code class="pagebreak"></code>');
+
+            content = content.replace(
+                /&nbsp;/g,
+                ' ');
+            return content;
+        }
+
+        function formatVSCode(content) {
+            let tmp = document.createElement("div");
+            tmp.innerHTML = content;
+            let container = tmp.getElementsByTagName("div")[0];
+            container.style.whiteSpace = null;
+            container.classList.add("lineNumbers", "vscode");
+            Array.prototype.forEach.call(container.getElementsByTagName("div"), el => {
+                el.classList.add("codeLine");
+            });
+            let brs = container.getElementsByTagName('br');
+            let i = brs.length;
+            while (i--) {
+                let el = brs[i];
+                let div = document.createElement("div");
+                div.classList.add("codeLine");
+                container.insertBefore(div, el);
+                container.removeChild(el);
+            }
+            return tmp.innerHTML;
+        }
+
+        function format() {
+            let emphasize = document.getElementById("emphasize").checked;
+            let content = input.value;
+
+            content = formatContent(content);
+            
+            let heading = getHeading();
+            output.value = (emphasize ? lnestyle : lnstyle) + "\r\n" 
+                + generalstyle + "\r\n\r\n" 
+                + heading + "\r\n" 
+                + content;
+            button.textContent = "Copy HTML code";
+            result.innerHTML = heading + "\r\n" 
+                + content;
+            if (printWindow)
+                printWindow.close();
+        }
+
+        function getHeading() {
+            let title = document.getElementById("title").value;
+            let author = document.getElementById("author").value;
+            let heading = "";
+            if (title !== "")
+                heading += `<h1>${title}</h1>\r\n`;
+            if (author !== "")
+                heading += `<i class="subtitle">${author}</i>\r\n`;
+            return heading;
+        }
+
+        function saveAuthor() {
+            let author = document.getElementById("author").value;
+            localStorage.setItem('Arduino-Code-Printer:author', author);
+        }
+        function getAuthor() {
+            let author = localStorage.getItem('Arduino-Code-Printer:author');
+            if (author)
+                document.getElementById("author").value = author;
+        }
+        function saveTitle() {
+            let title = document.getElementById("title").value;
+            localStorage.setItem('Arduino-Code-Printer:title', title);
+        }
+        function getTitle() {
+            let title = localStorage.getItem('Arduino-Code-Printer:title');
+            if (title)
+                document.getElementById("title").value = title;
+        }
+        function saveEmphasize() {
+            let emphasize = document.getElementById("emphasize").checked.toString();
+            localStorage.setItem('Arduino-Code-Printer:emphasize', emphasize);
+        }
+        function getEmphasize() {
+            let emphasize = localStorage.getItem('Arduino-Code-Printer:emphasize') == 'true';
+            if (emphasize)
+                document.getElementById("emphasize").checked = emphasize;
+        }
+        function saveInput() {
+            let input = document.getElementById("input").value;
+            localStorage.setItem('Arduino-Code-Printer:input', input);
+        }
+        function getInput() {
+            let input = localStorage.getItem('Arduino-Code-Printer:input');
+            if (input)
+                document.getElementById("input").value = input;
+        }
+        getEmphasize();
+        getTitle();
+        getAuthor();
+        getInput();
+
+        let printWindow;
+        function print() {
+            let title = document.getElementById("title").value;
+            title = title === "" ? "Print Code" : title;
+            let htmlHead =
+                `<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <meta name="theme-color" content="#ccc">
+    <title>${title}</title>
+</head>
+<body>\r\n`
+
+            printWindow = window.open("", "print", "");
+            printWindow.document.open();
+            printWindow.document.write(htmlHead + output.value);
+            printWindow.document.close();
+            printWindow.print();
+        }
+
+        window.onbeforeunload = function () {
+            if (printWindow)
+                printWindow.close();
+        }
+        format();
+    </script>
+
+</body>
+
+</html>
