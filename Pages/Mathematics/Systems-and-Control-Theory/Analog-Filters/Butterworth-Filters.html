@@ -1,0 +1,256 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="author" content="Pieter P"/>
+        <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+        <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
+        <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+              TeX: { equationNumbers: { autoNumber: "AMS" } },
+              "fast-preview": {
+                disabled: true
+              }
+            });
+        </script>
+        <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+        <meta name="theme-color" content="#ccc"/>
+        <meta name="keywords" content="Butterworth filter"/>
+        <meta name="description" content="Derivation and properties of Butterworth filters."/>
+        <title>Butterworth Filters</title>
+    </head>
+    <body>
+        <nav>
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                    <path d="M0 0h48v48h-48z" fill="none"/>
+                    <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+                </svg>
+                <h2><a href="/">Home</a></h2>
+<ul>
+  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino">Arduino</a>
+  <ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/Bootloaders">Bootloaders</a>
+    <ul>
+      <li><span class="ftriangle"></span><a href="/Pages/Arduino/Bootloaders/ATmega328P-custom-frequency.html">Optiboot - ATmega328P at custom frequency</a></li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/ESP8266">ESP8266</a>
+    <ul>
+      <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/ESP8266/Flashing">Flashing</a>
+      <ul>
+        <li><span class="ftriangle"></span><a href="/Pages/Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+      </ul>
+      </li>
+    </ul>
+    </li>
+  </ul>
+  </li>
+  <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics">Mathematics</a>
+  <ul>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory">Systems and Control Theory</a>
+    <ul>
+      <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Analog-Filters">Analog-Filters</a>
+      <ul>
+        <li><span class="ftriangle"></span><a class="openEntry" href="/Pages/Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+      </ul>
+      </li>
+      <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters">Digital filters</a>
+      <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization">Discretization</a>
+        <ul>
+          <li><span class="ftriangle"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+          <li><span class="ftriangle"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-second-order-Butterworth-filter.html">Discretization of a Second-Order Butterworth Filter</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average">Exponential Moving Average</a>
+        <ul>
+          <li><span class="ftriangle"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+          <li><span class="ftriangle"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+        </ul>
+        </li>
+      </ul>
+      </li>
+    </ul>
+    </li>
+  </ul>
+  </li>
+  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu">Ubuntu</a>
+  <ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu/Software-Installation">Software Installation</a>
+    <ul>
+      <li><span class="ftriangle"></span><a href="/Pages/Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+      <li><span class="ftriangle"></span><a href="/Pages/Ubuntu/Software-Installation/Java.html">Java</a></li>
+    </ul>
+    </li>
+  </ul>
+  </li>
+</ul>
+
+                <a href="https://github.com/tttapa/tttapa.github.io/issues" title="Comment or open an issue">Comment or open an issue</a>
+            </div>
+        </nav>
+        <article>
+            <h1 class="title">Butterworth Filters</h1>
+            <i class="author">Pieter P</i>
+            <div>
+
+<h3><a name="butterworth-filters" href="#butterworth-filters">Butterworth Filters</a></h3>
+
+<p>
+    Normalized Butterworth filters are defined in the frequency domain as follows:
+    $$ \begin{equation} \left|H_n(j\omega)\right| \triangleq \frac{1}{\sqrt{1+\omega^{2n}}} \end{equation} $$
+
+    <img src="images/Normalized-Butterworth-Filters-Frequency-Response.svg">
+
+    In order to determine the transfer function, we'll start from the frequency response squared.
+    We'll assume that the transfer function \(H_n(s)\) is a rational function with real coefficients.
+    Therefore, \(\overline{H_n(s)} = H_n\left(\overline{s}\right)\).
+    $$ \begin{split}
+    \left|H_n(j\omega)\right|^2 \;=\; &amp; H_n(j\omega) \overline{H_n(j\omega)} \\
+    \;=\; &amp; H_n(j\omega) H_n(\overline{j\omega}) \\
+    \;=\; &amp; H_n(j\omega) H_n(-j\omega) \\
+    \;=\; &amp; \frac{1}{1+\omega^{2n}}
+    \end{split} $$
+    We're looking for the transfer function \(H_n(s)\), so we'll use the identity \(s = j\omega \Leftrightarrow \omega
+    = \frac{s}{j}\).
+    $$ H_n(s) H_n(-s) = \frac{1}{1 + \left(\frac{s}{j}\right)^{2n}} $$
+    The poles of this transfer function are given by:
+    $$ \begin{split}
+    &amp; \left(\frac{s}{j}\right)^{2n} = -1 \\
+    \Leftrightarrow \quad &amp; s^{2n} = -1 \left(j\right)^{2n} \\
+    \Leftrightarrow \quad &amp; s^{2n} = -1 \left(-1\right)^n \\
+    \Leftrightarrow \quad &amp; s^{2n} = \left(-1\right)^{n+1} \\
+    \Leftrightarrow \quad &amp; s^{2n} = e^{j\pi(n+1)}
+    \end{split} $$
+    Keep in mind that this is a polynomial of order \(2n\), so it has \(2n\) complex roots.
+    $$ s_k = e^{j2\pi\frac{2k + n + 1}{4n}} \quad k \in \{0, 1, \dots 2n - 1\} $$
+    For example, for \(n = 3\), the poles are:
+    $$ \begin{split}
+    s_0 \;=\; &amp; e^{j2\pi\frac{0 + 3 + 1}{12}} \;=\; e^{j2\pi\frac{2}{6}} \\
+    s_1 \;=\; &amp; e^{j2\pi\frac{2 + 3 + 1}{12}} \;=\; e^{j2\pi\frac{3}{6}} \\
+    s_2 \;=\; &amp; e^{j2\pi\frac{4 + 3 + 1}{12}} \;=\; e^{j2\pi\frac{4}{6}} \\
+    s_3 \;=\; &amp; e^{j2\pi\frac{6 + 3 + 1}{12}} \;=\; e^{j2\pi\frac{5}{6}} \\
+    s_4 \;=\; &amp; e^{j2\pi\frac{8 + 3 + 1}{12}} \;=\; e^{j2\pi\frac{6}{6}} \\
+    s_5 \;=\; &amp; e^{j2\pi\frac{10 + 3 + 1}{12}} \;=\; e^{j2\pi\frac{1}{6}}
+    \end{split} $$
+    These are all points on the unit circle, \(\pi/3 = 60°\) apart.
+    <img src="images/Butterworth-Poles.svg">
+    The poles are stable if they are in the left half plane, if their complex argument is between 90° and 270°:
+
+    $$ \begin{split}
+    &amp; 2\pi\frac{2k + n + 1}{4n} \in \left(\frac{\pi}{2}, \frac{3\pi}{2}\right) \\
+    \Leftrightarrow \quad &amp; 2k + n + 1 \in \left(n, 3n\right) \\
+    \Leftrightarrow \quad &amp; k \in \left(-\frac{1}{2}, n-\frac{1}{2}\right) \\
+    \Rightarrow \quad &amp; k \in \left(-\frac{1}{2}, n-\frac{1}{2}\right) \cup \{0, 1, \dots 2n - 1\} \\
+    \Leftrightarrow \quad &amp; k \in \{0, 1, \dots n - 1\}
+    \end{split} $$
+    $$ \begin{equation} s_{k, stable} = e^{j2\pi\frac{2k + n + 1}{4n}} \quad k \in \{0, 1, \dots n - 1\} \end{equation}
+    $$
+    We want our filter \(H_n(s)\) to be stable, so we pick the poles in the left half plane to be the poles of
+    \(H_n(s)\).
+    The unstable poles, for \(k \in \{n, n+1, \dots 2n - 1\}\) are the poles of \(H_n(-s)\). They are the opposites of
+    the poles of \(H_n(s)\):
+    $$ \begin{split}
+    s_{k, unstable} \;=\; &amp; e^{j2\pi\frac{2k + n + 1}{4n}} \quad k \in \{n, n+1, \dots 2n - 1\} \\
+    &amp; l \triangleq k-n \\
+    \;=\; &amp; e^{j2\pi\frac{2(l+n) + n + 1}{4n}} \quad l \in \{0, 1, \dots n - 1\} \\
+    \;=\; &amp; e^{j\left(2\pi\frac{2l + n + 1}{4n}+\pi\right)} \quad l \in \{0, 1, \dots n - 1\} \\
+    \;=\; &amp; e^{j\pi}\cdot e^{j2\pi\frac{2l + n + 1}{4n}} \quad l \in \{0, 1, \dots n - 1\} \\
+    \;=\; &amp; -1\cdot e^{j2\pi\frac{2l + n + 1}{4n}} \quad l \in \{0, 1, \dots n - 1\} \\
+    \;=\; &amp; -s_{l, stable} \quad l \in \{0, 1, \dots n - 1\}
+    \end{split} $$
+</p>
+<p>
+    We'll define the normalized Butterworth polynomial as follows:
+    $$ \begin{equation} B_n(s) \triangleq \prod_{k=0}^{n-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right) \end{equation}
+    $$
+    Using the identity, \(e^{j\theta} + e^{-j\theta} = 2\cos\theta\), we can further simplify the result:
+    Even order \(n\):
+    $$ \begin{split}
+    B_n(s) \;=\; &amp; \prod_{k=0}^{n-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right) \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right)
+    \prod_{l=\frac{n}{2}}^{n-1}\left(s-e^{j2\pi\frac{2l + n + 1}{4n}}\right) \\
+    &amp; l = n - k - 1 \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right)
+    \left(s-e^{j2\pi\frac{2\left(n - k - 1\right) + n + 1}{4n}}\right) \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right)
+    \left(s-\frac{e^{j2\pi\frac{-2k + 3n - 1}{4n}}}{1}\right) \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right)
+    \left(s-\frac{e^{j2\pi\frac{-2k + 3n - 1}{4n}}}{e^{j2\pi}}\right) \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right)
+    \left(s-e^{j2\pi\left(\frac{-2k + 3n - 1}{4n} - 1 \right)}\right) \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right)
+    \left(s-e^{j2\pi\frac{-2k + 3n - 4n - 1}{4n}}\right) \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right)
+    \left(s-e^{j2\pi\frac{-2k - n - 1}{4n}}\right) \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s-e^{j2\pi\frac{2k + n + 1}{4n}}\right)
+    \left(s-e^{-j2\pi\frac{2k + n + 1}{4n}}\right) \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s^2 - s e^{j2\pi\frac{2k + n + 1}{4n}} - s e^{-j2\pi\frac{2k + n +
+    1}{4n}}
+    + 1\right) \\
+    \;=\; &amp; \prod_{k=0}^{\frac{n}{2}-1}\left(s^2 - 2 \cos\left(2\pi\frac{2k + n + 1}{4n}\right) s + 1\right) \\
+    \end{split} $$
+</p>
+<p>
+    Odd order \(n\):<br>
+    In this case, \(n-1\) is even, and you get a special pole for \(k = \frac{n-1}{2}\):
+    $$ \begin{split}
+    s_{\frac{n-1}{2}} \;=\; &amp; e^{j2\pi\frac{2\frac{n-1}{2} + n + 1}{4n}} \\
+    \;=\; &amp; e^{j2\pi\frac{2n}{4n}} \\
+    \;=\; &amp; e^{j\pi} \\
+    \;=\; &amp; -1
+    \end{split} $$
+    After isolating this pole, we're left with an even number of complex conjugate poles, just like in the case where
+    \(n\) was even.
+</p>
+<p>
+    In conclusion, the normalized Butterworth polynomial of degree \(n\) is given by:
+    $$ \begin{equation}
+    B_n(s) \;=\;
+    \begin{cases}
+    \prod_{k=0}^{\frac{n}{2}-1}\left(s^2 - 2 \cos\left(2\pi\frac{2k + n + 1}{4n}\right) s + 1\right) &amp;
+    \textrm{even}\ n \\
+    (s + 1) \prod_{k=0}^{\frac{n-1}{2}-1}\left(s^2 - 2 \cos\left(2\pi\frac{2k + n + 1}{4n}\right) s + 1\right) &amp;
+    \textrm{odd}\ n
+    \end{cases}
+    \end{equation} $$
+</p>
+<p>
+    The transfer function \(H_n(s)\) has no zeros, so the numerator is a constant. The poles of \(H_n(s)\) are given by
+    Equation \((2)\), so
+    the denominator is given by Equation \((3)\).
+    $$ H_n(s) = \frac{c}{B_n(s)} $$
+</p>
+<p>
+    We wanted a DC gain of \(1\) \(\left(= 0 dB\right)\) for \(\omega = 0\):
+    $$ \begin{split}
+    &amp; \left|H_n(0j)\right| \;=\; 1 \\
+    \Leftrightarrow \quad &amp; \left|\frac{c}{B_n(0)}\right| \;=\; 1 \\
+    \Leftrightarrow \quad &amp; \left|\frac{c}{\prod_{k=0}^{n-1}\left(0-e^{j2\pi\frac{2k + n + 1}{4n}}\right)}\right|
+    \;=\; 1 \\
+    \Leftrightarrow \quad &amp; \frac{\left|c\right|}{\prod_{k=0}^{n-1}\left|-e^{j2\pi\frac{2k + n + 1}{4n}}\right|}
+    \;=\; 1 \\
+    \Leftrightarrow \quad &amp; \frac{\left|c\right|}{1} \;=\; 1
+    \end{split} $$
+    If we want no phase offset for low frequencies, we can postulate that \(\angle H_n(0j) = 0\):
+    $$ \begin{split}
+    &amp; \angle H_n(0j) \;=\; 0 \\
+    \Leftrightarrow \quad &amp; \angle\left(\frac{c}{B_n(0)}\right) \;=\; 0 \\
+    \Leftrightarrow \quad &amp; \angle c - \angle\left(\prod_{k=0}^{\frac{n}{2}-1}\left(0^2 - 2 \cos\left(2\pi\frac{2k
+    + n + 1}{4n}\right) \cdot 0 + 1\right)\right) \;=\; 0 \\
+    \Leftrightarrow \quad &amp; \angle c - \angle 1 \;=\; 0
+    \end{split} $$
+    The derivation is analogous for odd \(n\).<br>
+    Therefore, \(c = 1\), and we've eliminated all unknown parameters from the transfer function:
+
+    $$ \begin{equation} H_n(s) = \frac{1}{B_n(s)} \end{equation} $$
+</p>
+
+</div>
+        </article>
+        <footer>Last edited: Wednesday, 12 September 2018 13:45 UTC</footer>
+    </body>
+</html>
