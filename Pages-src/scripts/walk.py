@@ -3,7 +3,7 @@
 import os, re, time, shutil
 from os.path import join, getsize, normpath, basename, splitext, relpath
 from HTMLGenerator import *
-from subprocess import run, Popen
+from subprocess import run, Popen, check_output
 import sys
 
 port = 4654
@@ -69,12 +69,17 @@ def main(print_to_pdf):
                 with open(full_html_path, "w") as full_html_file:
                     if f == "index.html":
                         full_html = createIndexPage(raw_html_path, root)
-                        full_html_file.write(full_html)
                     else:
                         full_html = rawToFull(raw_html_path)
-                        full_html_file.write(full_html)
-                        if print_to_pdf:
-                            exportPDF(full_html_path)
+                    if print_to_pdf:
+                        full_html = check_output(
+                            ["mjpage", '--output=CommonHTML', "--eqno=AMS",
+                            '--fontURL=/MathJax/fonts/HTML-CSS'],
+                            timeout=10, input=bytes(full_html, 'utf-8')
+                        ).decode('utf-8')
+                    full_html_file.write(full_html)
+                    if print_to_pdf:
+                        exportPDF(full_html_path)
 
 if __name__=="__main__":
     if len(sys.argv) > 1 and "pdf" in sys.argv:
