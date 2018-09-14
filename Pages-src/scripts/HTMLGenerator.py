@@ -165,6 +165,7 @@ def createIndexPage(path, root):
     values = getTemplateValues(path)
         
     values["index"] = createIndexPageList(root)
+    values['filenamepdf'] = 'index.pdf'
 
     content = template_index
 
