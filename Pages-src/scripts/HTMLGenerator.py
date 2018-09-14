@@ -1,5 +1,5 @@
 import os, re, time, HTMLFormatter
-from os.path import join, getsize, basename, normpath
+from os.path import join, getsize, basename, normpath, splitext
 from warnings import warn
 
 from walk import html_dir, raw_html_dir, script_dir
@@ -152,6 +152,7 @@ def createIndexPageList(path):
 
 def rawToFull(path):
     values = getTemplateValues(path)
+    values['filenamepdf'] = splitext(basename(path))[0] + '.pdf'
 
     content = template
 
