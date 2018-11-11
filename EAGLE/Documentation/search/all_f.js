@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['q',['Q',['../da/d0b/structQR.html#a32582d3e86096bc0ae8294798455116b',1,'QR::Q()'],['../d2/dff/namespaceConfig.html#a14e80d17e6c494a7694b273e6c83cec9',1,'Config::Q()']]],
+  ['qn',['Qn',['../d2/dff/namespaceConfig.html#a525d76a5ac3d90e767480217b80cf70d',1,'Config']]],
+  ['qomega',['Qomega',['../d2/dff/namespaceConfig.html#ade034982d6843a824f63f23be7db534a',1,'Config']]],
+  ['qq',['Qq',['../d2/dff/namespaceConfig.html#ab994e6d7b715d7b86d3d71782050f9f0',1,'Config']]],
+  ['qr',['QR',['../da/d0b/structQR.html',1,'']]],
+  ['qu',['qu',['../d3/d9a/structTestReferenceFunction.html#a892d5afe83dab2c8b7d9238e942cde14',1,'TestReferenceFunction']]],
+  ['quat2eul',['quat2eul',['../d3/d1f/Quaternion_8hpp.html#aed0b75e891c2a69457302d6defa85412',1,'Quaternion.hpp']]],
+  ['quat2red',['quat2red',['../d6/d26/ReducedQuaternion_8hpp.html#a7717771b635917627ca8747a0ccf7888',1,'ReducedQuaternion.hpp']]],
+  ['quatconjugate',['quatconjugate',['../d3/d1f/Quaternion_8hpp.html#a617ead491cf63926d27bdce9082b132e',1,'Quaternion.hpp']]],
+  ['quatdifference',['quatDifference',['../d3/d1f/Quaternion_8hpp.html#ad50fe0b878f1171ecea67d8bb2c39bc5',1,'Quaternion.hpp']]],
+  ['quaternion',['Quaternion',['../d3/d1f/Quaternion_8hpp.html#a838c63f5e61db5facc530a0eea4cb39f',1,'Quaternion.hpp']]],
+  ['quaternion_2ehpp',['Quaternion.hpp',['../d3/d1f/Quaternion_8hpp.html',1,'']]],
+  ['quaternionstateaddsub_2ehpp',['QuaternionStateAddSub.hpp',['../d6/d97/QuaternionStateAddSub_8hpp.html',1,'']]],
+  ['quaternionstatesadd',['quaternionStatesAdd',['../d6/d97/QuaternionStateAddSub_8hpp.html#a656a3ae10d4bf54c445f6dc6e375c4e3',1,'QuaternionStateAddSub.hpp']]],
+  ['quaternionstatessub',['quaternionStatesSub',['../d6/d97/QuaternionStateAddSub_8hpp.html#ab18748d10ac3aae1a44c51d72a8f662c',1,'QuaternionStateAddSub.hpp']]],
+  ['quatmultiply',['quatmultiply',['../d3/d1f/Quaternion_8hpp.html#a4f01525e3dad23ddc5b640162526271e',1,'Quaternion.hpp']]],
+  ['qx',['qx',['../d3/d9a/structTestReferenceFunction.html#a4716589a312196ec0ae7b91262aa30ea',1,'TestReferenceFunction']]],
+  ['qy',['qy',['../d3/d9a/structTestReferenceFunction.html#a32cfba24f63b944612f3c776cca3f7b0',1,'TestReferenceFunction']]],
+  ['qz',['qz',['../d3/d9a/structTestReferenceFunction.html#abdc5528e95bdfaa739f618bb767736d6',1,'TestReferenceFunction']]],
+  ['qz_5fz',['qz_Z',['../d1/d8b/DLQR_8hpp.html#a1aef813db920b8197c070b00d9e6ec90',1,'DLQR.hpp']]]
+];

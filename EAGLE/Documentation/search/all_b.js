@@ -1,0 +1,24 @@
+var searchData=
+[
+  ['m',['m',['../dc/ded/structMatrixAssignmentHelper.html#ac0605b614e7a1b70c74c68dcb52b8f73',1,'MatrixAssignmentHelper::m()'],['../de/db8/structParams.html#a88d76e8597d1759ae139401bd6297d17',1,'Params::m()'],['../d3/d88/namespaceMotorControlTransformation.html#a8976e4e6e5fac627e896c9bd4acfb9e0',1,'MotorControlTransformation::M()']]],
+  ['m_5finv',['M_inv',['../d3/d88/namespaceMotorControlTransformation.html#ae614d7cf9291e815f0097da01d38030e',1,'MotorControlTransformation']]],
+  ['main',['main',['../df/d0a/main_8cpp.html#abf9e6b7e6f15df4b525a2e7705ba3089',1,'main.cpp']]],
+  ['main_2ecpp',['main.cpp',['../df/d0a/main_8cpp.html',1,'']]],
+  ['maketimevector',['makeTimeVector',['../dc/df3/Plot_8hpp.html#acbc230108fc7e3240b07b320baf93a4d',1,'Plot.hpp']]],
+  ['matrices',['Matrices',['../d5/d42/namespaceMatrices.html',1,'']]],
+  ['matrix',['Matrix',['../d9/d1c/Matrix_8hpp.html#a09188de1b4315b8af6d7ce32b3008662',1,'Matrix.hpp']]],
+  ['matrix_2ehpp',['Matrix.hpp',['../d9/d1c/Matrix_8hpp.html',1,'']]],
+  ['matrixassignmenthelper',['MatrixAssignmentHelper',['../dc/ded/structMatrixAssignmentHelper.html',1,'']]],
+  ['matrixprinting',['MatrixPrinting',['../db/d71/namespaceMatrixPrinting.html',1,'']]],
+  ['maximum_5fiterations_5fexceeded',['MAXIMUM_ITERATIONS_EXCEEDED',['../d6/d9c/ODEResult_8hpp.html#acf4851ce1a6480115e6493a38ecf11a1aa9164fe0617b3e87677eef0c8eeabd34',1,'ODEResult.hpp']]],
+  ['maxiter',['maxiter',['../dd/d8b/structAdaptiveODEOptions.html#af4883fb5cfdaa7485730a7e799e05221',1,'AdaptiveODEOptions']]],
+  ['minimum_5fstep_5fsize_5freached',['MINIMUM_STEP_SIZE_REACHED',['../d6/d9c/ODEResult_8hpp.html#acf4851ce1a6480115e6493a38ecf11a1a5371995a3d0e767cf2d8565bb6b5571e',1,'ODEResult.hpp']]],
+  ['mm',['mm',['../de/db8/structParams.html#a26fdd1d91b8d1695560f09101db91014',1,'Params']]],
+  ['model',['Model',['../d6/d18/classModel.html',1,'']]],
+  ['model_2ehpp',['Model.hpp',['../df/d6e/Model_8hpp.html',1,'']]],
+  ['motorcontrol_2ehpp',['MotorControl.hpp',['../d8/dd0/MotorControl_8hpp.html',1,'']]],
+  ['motorcontroltransformation',['MotorControlTransformation',['../d3/d88/namespaceMotorControlTransformation.html',1,'']]],
+  ['mp',['mp',['../de/db8/structParams.html#a6a07ccd19c607f1e5626c1a8106bc654',1,'Params']]],
+  ['mr',['mr',['../de/db8/structParams.html#ae56faedb1cadb3683c299ab280c3269e',1,'Params']]],
+  ['mydebug',['mydebug',['../da/d7b/debug_8hpp.html#ac2b4080a248a2ccf14feb6184c329766',1,'mydebug():&#160;main.cpp'],['../df/d0a/main_8cpp.html#ac2b4080a248a2ccf14feb6184c329766',1,'mydebug():&#160;main.cpp']]]
+];
