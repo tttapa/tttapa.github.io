@@ -1,0 +1,83 @@
+<!--
+@title: Model
+@author: Pieter P
+@keywords: 
+@description: 
+-->
+<html>
+
+<h3>Torque caused by motor thrust</h3>
+
+$$ \begin{split}
+    \vec{F_i}(n) \;=\;& C_T \rho n^2 D^4 \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \\
+                 \;=\;& \vec{F_i}(n_h) + \frac{d\vec{F_i}}{dn}(n_h)(n-n_h) + \dots \\
+           \;\approx\;& \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_i-n_h\right)\right) \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \\
+    \\
+    \vec{M_i} \;=\;& \vec{r_i}\times\vec{F_i} \\
+              \;=\;& \vec{r_i} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_i-n_h\right)\right) \\
+
+    \vec{M_1} \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}-1 \\ 1 \\ 0\end{pmatrix} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_1-n_h\right)\right) \\
+              \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}1 \\ 1 \\ 0\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_1-n_h\right)\right) \\
+
+    \vec{M_2} \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}1 \\ 1 \\ 0\end{pmatrix} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_2-n_h\right)\right) \\
+              \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_2-n_h\right)\right) \\
+
+    \vec{M_3} \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}-1 \\ -1 \\ 0\end{pmatrix} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_3-n_h\right)\right) \\
+              \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}-1 \\ 1 \\ 0\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_3-n_h\right)\right) \\
+
+    \vec{M_4} \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_4-n_h\right)\right) \\
+              \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}-1 \\ -1 \\ 0\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_4-n_h\right)\right) \\
+    \\
+    \vec{M}   \;=\;& \vec{M_1} + \vec{M_2} + \vec{M_3} + \vec{M_4} \\
+              \;=\;& \frac{L}{\sqrt{2}} \left(\frac{-mg}{4} - 2 C_T \rho n_h^2 \right) \left(\begin{pmatrix}1 \\ 1 \\ 0\end{pmatrix} + \begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix} + \begin{pmatrix}-1 \\ 1 \\ 0\end{pmatrix} + \begin{pmatrix}-1 \\ -1 \\ 0\end{pmatrix} \right) \\
+                & + \frac{L}{\sqrt{2}} 2 C_T \rho n_h D^4 n_1 \begin{pmatrix}1 \\ 1 \\ 0\end{pmatrix} \\
+                & + \frac{L}{\sqrt{2}} 2 C_T \rho n_h D^4 n_2 \begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix} \\
+                & + \frac{L}{\sqrt{2}} 2 C_T \rho n_h D^4 n_3 \begin{pmatrix}-1 \\ 1 \\ 0\end{pmatrix} \\
+                & + \frac{L}{\sqrt{2}} 2 C_T \rho n_h D^4 n_4 \begin{pmatrix}-1 \\ -1 \\ 0\end{pmatrix} \\
+              \;=\;& \sqrt{2} L C_T \rho n_h D^4 \begin{pmatrix} n_1 + n_2 - n_3 - n_4 \\
+              n_1 - n_2 + n_3 - n_4 \\ 
+              0 \end{pmatrix} \\
+    n_x \triangleq \frac{n_1 + n_2 - n_3 - n_4} {4} \\
+    n_y \triangleq \frac{n_1 - n_2 + n_3 - n_4} {4} \\
+    \;=\;& 4\sqrt{2} L C_T \rho n_h D^4 \begin{pmatrix} n_x \\ n_y \\ 0 \end{pmatrix} \\
+    \\
+    \vec{M} \;=\;& I\vec{\alpha} \\
+    \Leftrightarrow\;&I^{-1}\vec{M} \;=\; \vec{\alpha} \\
+    \Leftrightarrow\;&\vec{\alpha}\;=\;
+    \begin{pmatrix} 
+        I_{xx}^{-1} & 0 & 0 \\
+        0 & I_{yy}^{-1} & 0 \\
+        0 & 0 & I_{xx}^{-1}
+    \end{pmatrix} 4\sqrt{2} L C_T \rho n_h D^4 \begin{pmatrix} n_x \\ n_y \\ 0 \end{pmatrix} \\ 
+
+    \Leftrightarrow\;&\vec{\alpha}\;=\; 4\sqrt{2} L C_T \rho n_h D^4 
+    \begin{pmatrix} \frac{n_x}{I_{xx}} \\ \frac{n_y}{I_{yy}} \\ 0 \end{pmatrix}
+
+\end{split} $$
+
+$$ \begin{align} 
+k_3^x \;\triangleq\;& \frac{4\sqrt{2} L C_T \rho n_h D^4} {I_{xx}} \\
+k_3^y \;\triangleq\;& \frac{4\sqrt{2} L C_T \rho n_h D^4} {I_{yy}} 
+\end{align} $$ 
+
+<h3>Torque caused by ???</h3>
+$$ \begin{align} 
+k_3^z \;\triangleq\;& \frac{4 C_P \rho n_h D^5} {\pi I_{zz}} 
+\end{align} $$
+
+<h3>Torque caused by inertia of the motors and propellers</h3>
+$$ \begin{align}
+M_{prop, m} \;=\;& \left(I_{prop} + I_m\right) \left(-\dot{n}_1 + \dot{n}_2 + \dot{n}_3 - \dot{n}_4 \right) \\
+n_z \triangleq \frac{-n_1 + n_2 + n_3 - n_4} {4} \\
+\;=\;& 4 \left(I_{prop} + I_m\right) \dot{n}_z \\
+M_{prop, m} + M_z \;=\;& 0 \\
+M_z \;=\;& -4 \left(I_{prop} + I_m\right) \dot{n}_z \\
+\alpha_z \;=\;& -4 \frac{I_{prop} + I_m} {I_{zz}} \dot{n}_z \\
+??? \\
+k_4^z \;\triangleq\; 8\pi \frac{I_{prop} + I_m} {I_{zz}} \\
+\alpha_z \;=\;& -k_4^z \dot{n}_z
+\end{align} $$
+
+<h3>Complete
+
+</html>

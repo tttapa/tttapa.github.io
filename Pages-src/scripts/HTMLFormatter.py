@@ -43,6 +43,7 @@ def formatCode(html):
     html = re.sub(findPre, addCodeLines, html)
     html = re.sub(findPreEmph, addLineNumbersEmphasis, html)
 
+    # Arduino IDE export HTML doesn't encode HTML entities
     html = re.sub(r">&<", r">&amp;<", html)
     html = re.sub(r">&=<", r">&amp;=<", html)
 

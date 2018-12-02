@@ -18,9 +18,9 @@
     <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="theme-color" content="#ccc">
-    <meta name="keywords" content="Ubuntu, Software Installation, Linux, Install">
-    <meta name="description" content="Step-by-step installation guides for software on Ubuntu.">
-    <title>Software Installation</title>
+    <meta name="keywords" content="@description: ">
+    <meta name="description" content="">
+    <title>Model</title>
 </head>
 
 <body>
@@ -56,11 +56,11 @@
     </li>
   </ul>
   </li>
-  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/EAGLE">EAGLE</a>
+  <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/EAGLE">EAGLE</a>
   <ul>
-    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/EAGLE/ANC">ANC</a>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/EAGLE/ANC">ANC</a>
     <ul>
-      <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/EAGLE/ANC/Model">Model</a>
+      <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry" href="/Pages/EAGLE/ANC/Model">Model</a>
       <ul>
       </ul>
       </li>
@@ -98,9 +98,9 @@
     </li>
   </ul>
   </li>
-  <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu">Ubuntu</a>
+  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu">Ubuntu</a>
   <ul>
-    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry" href="/Pages/Ubuntu/Software-Installation">Software Installation</a>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu/Software-Installation">Software Installation</a>
     <ul>
       <li><span class="ftriangle"></span><a href="/Pages/Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
       <li><span class="ftriangle"></span><a href="/Pages/Ubuntu/Software-Installation/Java.html">Java</a></li>
@@ -125,21 +125,89 @@
         </div>
     </nav>
     <article>
-        <h1 class="indexTitle">Software Installation</h1>
+        <h1 class="indexTitle">Model</h1>
         <i class="author">Pieter P</i>
         <div>
-    
+
+<h3><a name="torque-caused-by-motor-thrust" href="#torque-caused-by-motor-thrust">Torque caused by motor thrust</a></h3>
+
+$$ \begin{split}
+    \vec{F_i}(n) \;=\;& C_T \rho n^2 D^4 \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \\
+                 \;=\;& \vec{F_i}(n_h) + \frac{d\vec{F_i}}{dn}(n_h)(n-n_h) + \dots \\
+           \;\approx\;& \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_i-n_h\right)\right) \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \\
+    \\
+    \vec{M_i} \;=\;& \vec{r_i}\times\vec{F_i} \\
+              \;=\;& \vec{r_i} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_i-n_h\right)\right) \\
+
+    \vec{M_1} \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}-1 \\ 1 \\ 0\end{pmatrix} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_1-n_h\right)\right) \\
+              \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}1 \\ 1 \\ 0\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_1-n_h\right)\right) \\
+
+    \vec{M_2} \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}1 \\ 1 \\ 0\end{pmatrix} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_2-n_h\right)\right) \\
+              \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_2-n_h\right)\right) \\
+
+    \vec{M_3} \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}-1 \\ -1 \\ 0\end{pmatrix} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_3-n_h\right)\right) \\
+              \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}-1 \\ 1 \\ 0\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_3-n_h\right)\right) \\
+
+    \vec{M_4} \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix} \times \begin{pmatrix}0 \\ 0 \\ 1\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_4-n_h\right)\right) \\
+              \;=\;& \frac{L}{\sqrt{2}} \begin{pmatrix}-1 \\ -1 \\ 0\end{pmatrix} \left(\frac{-mg}{4} + 2 C_T \rho n_h D^4 \left(n_4-n_h\right)\right) \\
+    \\
+    \vec{M}   \;=\;& \vec{M_1} + \vec{M_2} + \vec{M_3} + \vec{M_4} \\
+              \;=\;& \frac{L}{\sqrt{2}} \left(\frac{-mg}{4} - 2 C_T \rho n_h^2 \right) \left(\begin{pmatrix}1 \\ 1 \\ 0\end{pmatrix} + \begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix} + \begin{pmatrix}-1 \\ 1 \\ 0\end{pmatrix} + \begin{pmatrix}-1 \\ -1 \\ 0\end{pmatrix} \right) \\
+                & + \frac{L}{\sqrt{2}} 2 C_T \rho n_h D^4 n_1 \begin{pmatrix}1 \\ 1 \\ 0\end{pmatrix} \\
+                & + \frac{L}{\sqrt{2}} 2 C_T \rho n_h D^4 n_2 \begin{pmatrix}1 \\ -1 \\ 0\end{pmatrix} \\
+                & + \frac{L}{\sqrt{2}} 2 C_T \rho n_h D^4 n_3 \begin{pmatrix}-1 \\ 1 \\ 0\end{pmatrix} \\
+                & + \frac{L}{\sqrt{2}} 2 C_T \rho n_h D^4 n_4 \begin{pmatrix}-1 \\ -1 \\ 0\end{pmatrix} \\
+              \;=\;& \sqrt{2} L C_T \rho n_h D^4 \begin{pmatrix} n_1 + n_2 - n_3 - n_4 \\
+              n_1 - n_2 + n_3 - n_4 \\ 
+              0 \end{pmatrix} \\
+    n_x \triangleq \frac{n_1 + n_2 - n_3 - n_4} {4} \\
+    n_y \triangleq \frac{n_1 - n_2 + n_3 - n_4} {4} \\
+    \;=\;& 4\sqrt{2} L C_T \rho n_h D^4 \begin{pmatrix} n_x \\ n_y \\ 0 \end{pmatrix} \\
+    \\
+    \vec{M} \;=\;& I\vec{\alpha} \\
+    \Leftrightarrow\;&I^{-1}\vec{M} \;=\; \vec{\alpha} \\
+    \Leftrightarrow\;&\vec{\alpha}\;=\;
+    \begin{pmatrix} 
+        I_{xx}^{-1} & 0 & 0 \\
+        0 & I_{yy}^{-1} & 0 \\
+        0 & 0 & I_{xx}^{-1}
+    \end{pmatrix} 4\sqrt{2} L C_T \rho n_h D^4 \begin{pmatrix} n_x \\ n_y \\ 0 \end{pmatrix} \\ 
+
+    \Leftrightarrow\;&\vec{\alpha}\;=\; 4\sqrt{2} L C_T \rho n_h D^4 
+    \begin{pmatrix} \frac{n_x}{I_{xx}} \\ \frac{n_y}{I_{yy}} \\ 0 \end{pmatrix}
+
+\end{split} $$
+
+$$ \begin{align} 
+k_3^x \;\triangleq\;& \frac{4\sqrt{2} L C_T \rho n_h D^4} {I_{xx}} \\
+k_3^y \;\triangleq\;& \frac{4\sqrt{2} L C_T \rho n_h D^4} {I_{yy}} 
+\end{align} $$ 
+
+<h3><a name="torque-caused-by" href="#torque-caused-by">Torque caused by ???</a></h3>
+$$ \begin{align} 
+k_3^z \;\triangleq\;& \frac{4 C_P \rho n_h D^5} {\pi I_{zz}} 
+\end{align} $$
+
+<h3><a name="torque-caused-by-inertia-of-the-motors-and-propellers" href="#torque-caused-by-inertia-of-the-motors-and-propellers">Torque caused by inertia of the motors and propellers</a></h3>
+$$ \begin{align}
+M_{prop, m} \;=\;& \left(I_{prop} + I_m\right) \left(-\dot{n}_1 + \dot{n}_2 + \dot{n}_3 - \dot{n}_4 \right) \\
+n_z \triangleq \frac{-n_1 + n_2 + n_3 - n_4} {4} \\
+\;=\;& 4 \left(I_{prop} + I_m\right) \dot{n}_z \\
+M_{prop, m} + M_z \;=\;& 0 \\
+M_z \;=\;& -4 \left(I_{prop} + I_m\right) \dot{n}_z \\
+\alpha_z \;=\;& -4 \frac{I_{prop} + I_m} {I_{zz}} \dot{n}_z \\
+??? \\
+k_4^z \;\triangleq\; 8\pi \frac{I_{prop} + I_m} {I_{zz}} \\
+\alpha_z \;=\;& -k_4^z \dot{n}_z
+\end{align} $$
+
+<h3>Complete
+
 </div>
         <hr>
-        <div class="indexContainer"><a href="Eclipse.html">
-    <h2>Eclipse</h2>
-    <p>Installation instructions for the Eclipse IDE on Ubuntu.</p>
-</a><a href="Java.html">
-    <h2>Java</h2>
-    <p>Installation instructions for the Oracle Java SE on Ubuntu.</p>
-</a></div>
+        <div class="indexContainer"></div>
     </article>
-    <footer>Last edited: Sunday, 22 April 2018 16:37 UTC</footer>
+    <footer>Last edited: Sunday, 02 December 2018 21:06 UTC</footer>
 </body>
 
 </html>

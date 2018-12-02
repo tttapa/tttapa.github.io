@@ -42,14 +42,15 @@ with open(join(template_dir, "template_index_item.html"), "r") as template_index
 #########################################################################################
 
 def sortDirEntries(it):
-    entries = sorted(list(it),key=lambda entry: entry.name)
-    swapped = True
-    while swapped:
-        swapped = False
-        for i in range(len(entries)-1):
-            if entries[i].is_file() and not entries[i+1].is_file():
-                swapped = True
-                entries[i], entries[i+1] = entries[i+1], entries[i]
+    entries = sorted(list(it),key=lambda entry: (entry.is_file(), entry.name))
+    # entries = sorted(list(it),key=lambda entry: entry.name)
+    # swapped = True
+    # while swapped:
+    #     swapped = False
+    #     for i in range(len(entries)-1):
+    #         if entries[i].is_file() and not entries[i+1].is_file():
+    #             swapped = True
+    #             entries[i], entries[i+1] = entries[i+1], entries[i]
     return entries
 
 def escapeBackSlashes(string):

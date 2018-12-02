@@ -1,0 +1,86 @@
+<!--
+@title: ANC
+@author: Pieter P
+@keywords: 
+@description: 
+-->
+<html>
+
+<H1></H1>
+
+<h2>Attitude</h2>
+
+<h3>Model</h3>
+
+<div>
+    $$ \begin{align}
+    \boldsymbol{\dot{q}} &= \frac{1}{2} \boldsymbol{q} \otimes \begin{pmatrix} 0 \\ \vec{\omega} \end{pmatrix} \\
+    \dot{\vec{\omega}} &= \Gamma_n \vec{n} + \Gamma_u \vec{u}
+    - I^{-1} \left(\vec{\omega} \times I \vec{\omega} \right) \\
+    \dot{\vec{n}} &= k_2 \left(k_1 \vec{u} - \vec{n}\right)
+    \end{align} $$
+
+    There are 10 system states:
+    $$ x = \begin{pmatrix} q_0 & q_1 & q_2 & q_3 & \omega_x & \omega_y & \omega_z & n_x & n_y & n_x \end{pmatrix}^T \in
+    \mathbb{R}^{10×1} $$
+
+    <ul>
+        <li>\(\boldsymbol{q}\) is the orientation of the drone, expressed as a unit quaternion.</li>
+        <li>\(\omega\) is the angular velocity of the drone.</li>
+        <li>\(n\) is the speed of the torque motors.</li>
+    </ul>
+
+    The input to the system is the control signal to the three torque motors:
+    $$ u = \begin{pmatrix} u_x & u_y & u_z \end{pmatrix}^T \in \mathbb{R}^{3×1} $$
+
+    The output (measurements) of the system are the orientation and the angular velocity:
+    $$ y = \begin{pmatrix} q_0 & q_1 & q_2 & q_3 & \omega_x & \omega_y & \omega_z \end{pmatrix}^T \in
+    \mathbb{R}^{7×1} $$
+
+    \(\Gamma_n\) and \(\Gamma_u\) are first order approximations of the motor torque in function of the motor speed and
+    control signal.
+
+</div>
+<h4>Linearisation</h4>
+<div>
+
+</div>
+
+<h3>Controller</h3>
+Linear Quadratic Regulator
+$$ Q = \begin{pmatrix}
+   1.4e+02 &        0 &        0 &        0 &        0 &        0 &        0 &        0 &        0\\
+         0 &  1.4e+02 &        0 &        0 &        0 &        0 &        0 &        0 &        0\\
+         0 &        0 &  2.4e+02 &        0 &        0 &        0 &        0 &        0 &        0\\
+         0 &        0 &        0 &     0.15 &        0 &        0 &        0 &        0 &        0\\
+         0 &        0 &        0 &        0 &     0.15 &        0 &        0 &        0 &        0\\
+         0 &        0 &        0 &        0 &        0 &    0.041 &        0 &        0 &        0\\
+         0 &        0 &        0 &        0 &        0 &        0 &    1e-10 &        0 &        0\\
+         0 &        0 &        0 &        0 &        0 &        0 &        0 &    1e-10 &        0\\
+         0 &        0 &        0 &        0 &        0 &        0 &        0 &        0 &    1e-10
+\end{pmatrix} $$
+$$ R = \begin{pmatrix}
+         1 &        0 &        0\\
+         0 &        1 &        0\\
+         0 &        0 &        1
+\end{pmatrix} $$
+
+<h2>Vragen</h2>
+<div><ol>
+    <li>Bias rejection attitude controller</li>
+    <li>Integral controller attitude controller</li>
+    <li>Flippen observer als yaw > 90°</li>
+</ol></div>
+
+<h2>To do</h2>
+<div><ol>
+    <li>Bias rejection attitude controller</li>
+    <li>Clamp thrust to 80%</li>
+</ol></div>
+
+
+<a href="images/ref-tracking.svg"><img src="images/ref-tracking.svg"></a>
+<a href="images/step-0-0-10.svg"><img src="images/step-0-0-10.svg"></a>
+<a href="images/step-0-10-10.svg"><img src="images/step-0-10-10.svg"></a>
+
+</html>
