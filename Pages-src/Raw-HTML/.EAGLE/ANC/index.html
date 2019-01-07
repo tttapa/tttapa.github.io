@@ -65,22 +65,45 @@ $$ R = \begin{pmatrix}
          0 &        0 &        1
 \end{pmatrix} $$
 
+<h3>Bias rejection</h3>
+<div>
+    $$ \begin{pmatrix}x_{k+1} \\ d_{k+1} \end{pmatrix} = \begin{pmatrix} A & 0 \\ 0 & I_6 \end{pmatrix} \begin{pmatrix} x_k \\ d_k \end{pmatrix} + \begin{pmatrix} B \\ 0 \end{pmatrix} u_k + \begin{pmatrix} I_9 & B & 0 \\ 0 & 0 & I_6 \end{pmatrix} \begin{pmatrix} \delta_x \\ \delta_u \\ \delta_d \end{pmatrix} \\
+    y_k = \begin{pmatrix} C & I_6 \end{pmatrix} \begin{pmatrix}x_k \\ d_k \end{pmatrix} + D u_k + v $$
+</div>
+
 <h2>Vragen</h2>
 <div><ol>
     <li>Bias rejection attitude controller</li>
     <li>Integral controller attitude controller</li>
     <li>Flippen observer als yaw > 90°</li>
+    <li>SSH is traag</li>
+    <li>SSH fingerprint verandert heel de tijd</li>
+    <li>PWM limits: multiple defines</li>
+    <li>Router board bevestigen op de drone</li>
+    <li>Calibratie wanneer thrust geclamped wordt</li>
+    <li>Als de controller wegvalt, moet de drone stoppen!</li>
 </ol></div>
 
 <h2>To do</h2>
 <div><ol>
-    <li>Bias rejection attitude controller</li>
-    <li>Clamp thrust to 80%</li>
+    <li>✔ Bias rejection attitude controller</li>
+    <li>✔ Clamp thrust to 80%</li>
+    <li>✔ Vliegen RC attitude + filmpje</li>
+    <li>✔ Vliegen met altitude + filmpje</li>
+    <li>✔ Schema controllers/observers afwerken</li>
+    <li>✔ Montage GA</li>
+    <li>✔ Blender animation</li>
+    <li>Keep \(q_0\) positive (slide 135)</li>
+    <li>✔ Observer reset als thrust 0</li>
+    <li>Mousse IMU</li>
+    <li>When switching from altitude to attitude, gradually change thrust</li>
 </ol></div>
 
 
 <a href="images/ref-tracking.svg"><img src="images/ref-tracking.svg"></a>
 <a href="images/step-0-0-10.svg"><img src="images/step-0-0-10.svg"></a>
 <a href="images/step-0-10-10.svg"><img src="images/step-0-10-10.svg"></a>
+
+<!-- <video src="images/Drone.mp4"></video> -->
 
 </html>
