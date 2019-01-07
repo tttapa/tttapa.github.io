@@ -149,7 +149,7 @@ If we don't the cut-off frequency will shift to an incorrect frequency when we d
     \end{split} $$
 </p>
 
-<h3>Frequency response</h3>
+<h3>Frequency response &amp; Pole-Zero Map</h3>
 
 <p>
     We can check the filter's frequency response to make sure that we didn't make any mistakes. 
@@ -159,6 +159,7 @@ If we don't the cut-off frequency will shift to an incorrect frequency when we d
     We can also plot the phase angle of the response:
     $$ \phi(\omega) = \angle H\left(e^{j\omega}\right) $$
     <img src="images/Bode-Digital-Butterworth.svg">
+    <img src="images/pz-butter.svg">
     You can see that the corner frequency lies around \(45 \;\mathrm{Hz}\). We can check this mathematically:
     $$ A(\omega_{c,d}) = -3.01 \mathrm{dB} $$
 </p>
@@ -199,7 +200,7 @@ f_c = 45     # Cut-off frequency in Hz
 order = 4    # Order of the butterworth filter
 
 omega_c = 2 * pi * f_c       # Cut-off angular frequency
-omega_c_d = omega_c / f_s    # Normalized cut-off pulsation (digital)
+omega_c_d = omega_c / f_s    # Normalized cut-off frequency (digital)
 
 b, a = butter(order, omega_c_d / pi)    # Design the Butterworth filter
 print("a =", a)                         # Print the coefficients
