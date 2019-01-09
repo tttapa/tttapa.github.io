@@ -494,21 +494,32 @@ A similar function is available in the SciPy signal package:
 <code></code>
 <code>w, h = freqz(b, a)                   # Calculate the frequency response</code>
 <code>w *= f_s / (2 * pi)                  # Convert from rad/sample to Hz</code>
+<code></code>
+<code>plt.subplot(2, 1, 1)                 # Plot the amplitude response</code>
+<code>plt.suptitle('Bode Plot')            </code>
 <code>plt.plot(w, 20 * np.log10(abs(h)))   # Convert to dB</code>
-<code>plt.title('Frequency Response')      # Plot the result</code>
-<code>plt.xlabel('Frequency [Hz]')</code>
 <code>plt.ylabel('Magnitude [dB]')</code>
 <code>plt.xlim(0, f_s / 2)</code>
 <code>plt.ylim(-80, 6)</code>
 <code>plt.axvline(f_c, color='red')</code>
+<code>plt.axhline(-3, linewidth=0.8, color='black', linestyle=':')</code>
+<code></code>
+<code>plt.subplot(2, 1, 2)                 # Plot the phase response</code>
+<code>plt.plot(w, 180 * np.angle(h) / pi)  # Convert argument to degrees</code>
+<code>plt.xlabel('Frequency [Hz]')</code>
+<code>plt.ylabel('Phase [°]')</code>
+<code>plt.xlim(0, f_s / 2)</code>
+<code>plt.ylim(-180, 180)</code>
+<code>plt.yticks([-180, -135, -90, -45, 0, 45, 90, 135, 180])</code>
+<code>plt.axvline(f_c, color='red')</code>
 <code>plt.show()</code></pre>
 
-<img src="images/Bode-Digital-Butterworth-Python.svg">
+<img src="images/Bode-Digital-Butterworth-Python-2.svg">
 <p></p>
 
 </div>
         </article>
-        <footer>Last edited: Monday, 07 January 2019 18:07 UTC</footer>
+        <footer>Last edited: Monday, 07 January 2019 20:44 UTC</footer>
     
 
 </body></html>
