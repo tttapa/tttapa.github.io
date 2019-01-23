@@ -22,6 +22,5 @@ var classSPIShiftRegisterOut =
     [ "dirty", "dd/d81/classSPIShiftRegisterOut.html#a0e458fef1cf00d2a4ee3f229450e070c", null ],
     [ "latchPin", "dd/d81/classSPIShiftRegisterOut.html#a772ff7436aff0cc793762ab95b872013", null ],
     [ "next", "dd/d81/classSPIShiftRegisterOut.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
-    [ "previous", "dd/d81/classSPIShiftRegisterOut.html#a57b6615469e554c514a9ff56dc24908f", null ],
-    [ "SPI_MAX_SPEED", "dd/d81/classSPIShiftRegisterOut.html#a0c31b40374cea15602fd5719c3275f1a", null ]
+    [ "previous", "dd/d81/classSPIShiftRegisterOut.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

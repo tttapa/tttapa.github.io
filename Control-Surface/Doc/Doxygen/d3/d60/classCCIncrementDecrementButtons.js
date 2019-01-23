@@ -1,6 +1,6 @@
 var classCCIncrementDecrementButtons =
 [
-    [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga6a5fdf593668a68fb2d077046eef8664", null ],
+    [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#gaac377d1594c4bfa72f38e166a77c6607", null ],
     [ "begin", "d3/d60/classCCIncrementDecrementButtons.html#ab4a676fd35e419713549f8be2b4cbc3a", null ],
     [ "beginAll", "d3/d60/classCCIncrementDecrementButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d3/d60/classCCIncrementDecrementButtons.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

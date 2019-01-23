@@ -1,14 +1,14 @@
 var classBankableMIDIOutput =
 [
-    [ "BankableMIDIOutput", "d3/d43/classBankableMIDIOutput.html#ac10ca2b07bb6dbd5a5b5329cdd014482", null ],
-    [ "getChannel", "d3/d43/classBankableMIDIOutput.html#a2732386557c854745227c4a5ea50de57", null ],
-    [ "getChannelsPerBank", "d3/d43/classBankableMIDIOutput.html#a1b42cb1fe142d37b1442079ddbbfcfcb", null ],
-    [ "getRawBankSetting", "d3/d43/classBankableMIDIOutput.html#af26f74892403177a7234182d792744f5", null ],
-    [ "getSelection", "d3/d43/classBankableMIDIOutput.html#ad255d8e36e74c6c4477d0b848e6c05f3", null ],
+    [ "BankableMIDIOutput", "d3/d43/classBankableMIDIOutput.html#a60f6558ecc93b7b15b33ef5272038f89", null ],
+    [ "BankableMIDIOutput", "d3/d43/classBankableMIDIOutput.html#af03ef79cbf76849baf65f05055fcd7eb", null ],
+    [ "getAddressOffset", "d3/d43/classBankableMIDIOutput.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
+    [ "getRawBankSetting", "d3/d43/classBankableMIDIOutput.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
+    [ "getSelection", "d3/d43/classBankableMIDIOutput.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
     [ "lock", "d3/d43/classBankableMIDIOutput.html#a9f34809178ed809a8ff203220bd1b206", null ],
     [ "unlock", "d3/d43/classBankableMIDIOutput.html#a4154c3302c845a9dc6a455600c4d0e2b", null ],
     [ "bank", "d3/d43/classBankableMIDIOutput.html#a2f9470a247cd26661a3bdc539e8341e3", null ],
-    [ "channelsPerBank", "d3/d43/classBankableMIDIOutput.html#af45f5189fd3c260281eb1480a0121de1", null ],
-    [ "lockedSetting", "d3/d43/classBankableMIDIOutput.html#a596536a6622bf58f595feff02900c288", null ],
-    [ "UNLOCKED", "d3/d43/classBankableMIDIOutput.html#a07ac7a1bdef85217c888724e55fd915c", null ]
+    [ "lockedSetting", "d3/d43/classBankableMIDIOutput.html#af7718c6fc90fbeb7799e3c3fb076e7ed", null ],
+    [ "type", "d3/d43/classBankableMIDIOutput.html#af30bdbbffae9b018094cd8b69ed59a9d", null ],
+    [ "UNLOCKED", "d3/d43/classBankableMIDIOutput.html#ac1848ee26eaafc006e6d6e24d01cff12", null ]
 ];

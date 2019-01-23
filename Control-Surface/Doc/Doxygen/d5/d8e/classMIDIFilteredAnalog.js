@@ -1,6 +1,6 @@
 var classMIDIFilteredAnalog =
 [
-    [ "MIDIFilteredAnalog", "d5/d8e/classMIDIFilteredAnalog.html#a3fb7c65f5492a38d7bf6e55097cd13d4", null ],
+    [ "MIDIFilteredAnalog", "d5/d8e/classMIDIFilteredAnalog.html#a1ac076079b6876cf506bac99b337753a", null ],
     [ "begin", "d5/d8e/classMIDIFilteredAnalog.html#a7cc0c94311558c18a763721274b9c815", null ],
     [ "beginAll", "d5/d8e/classMIDIFilteredAnalog.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d5/d8e/classMIDIFilteredAnalog.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -15,7 +15,7 @@ var classMIDIFilteredAnalog =
     [ "map", "d5/d8e/classMIDIFilteredAnalog.html#ac086a501589947b698bea9af2dbd982f", null ],
     [ "update", "d5/d8e/classMIDIFilteredAnalog.html#af2934e41e40aba0d83670b1e4460579a", null ],
     [ "updateAll", "d5/d8e/classMIDIFilteredAnalog.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "channel", "d5/d8e/classMIDIFilteredAnalog.html#a4bdee04bcb46ee366fc9a1407beecae0", null ],
+    [ "address", "d5/d8e/classMIDIFilteredAnalog.html#af7c547efa4151f9a0a76cc9374a40cc5", null ],
     [ "filteredAnalog", "d5/d8e/classMIDIFilteredAnalog.html#a45dd2083e7121832821f355ad5214ea2", null ],
     [ "next", "d5/d8e/classMIDIFilteredAnalog.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d5/d8e/classMIDIFilteredAnalog.html#a57b6615469e554c514a9ff56dc24908f", null ]

@@ -1,6 +1,6 @@
 var classCCPotentiometer =
 [
-    [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gadd391a8997b1e1f6d116a85904633286", null ],
+    [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga7dec56405ad50a0834b4e3f4ed5ed1fa", null ],
     [ "begin", "db/d32/classCCPotentiometer.html#a377e5bfccb2304c4e0d6061b1b922a91", null ],
     [ "beginAll", "db/d32/classCCPotentiometer.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "db/d32/classCCPotentiometer.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

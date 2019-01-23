@@ -1,6 +1,6 @@
 var classNoteButtonLatching =
 [
-    [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#gab5cecfea621e06620010420697fd1436", null ],
+    [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga516da4239fef7e463ff8bfcda208feb7", null ],
     [ "begin", "d3/d6c/classNoteButtonLatching.html#a2008b6b51e779d44e87129e43f5ccc3c", null ],
     [ "beginAll", "d3/d6c/classNoteButtonLatching.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d3/d6c/classNoteButtonLatching.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

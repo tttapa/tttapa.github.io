@@ -1,14 +1,12 @@
 var classMCU_1_1VULEDs =
 [
-    [ "VULEDs", "df/d36/classMCU_1_1VULEDs.html#aad25ff2676bfdfd9a11c615b524722a2", null ],
+    [ "VULEDs", "df/d36/classMCU_1_1VULEDs.html#a76f2324e0fdd8e51a9da73928dd00b49", null ],
     [ "begin", "df/d36/classMCU_1_1VULEDs.html#a587e086a42dc49a7b0ec4217b042e6f3", null ],
     [ "begin", "df/d36/classMCU_1_1VULEDs.html#a7ae18e103d62568ba35c1c2de2e37885", null ],
     [ "beginAll", "df/d36/classMCU_1_1VULEDs.html#a0bc33aa8712fd07c9c218ed35cc7dce3", null ],
     [ "clearOverloadHelper", "df/d36/classMCU_1_1VULEDs.html#af777c4f515387d0c08b78496a6934804", null ],
     [ "display", "df/d36/classMCU_1_1VULEDs.html#a3a12728d4a3d630e38748756c93a0587", null ],
     [ "display", "df/d36/classMCU_1_1VULEDs.html#abc54b9402e8555c615aaee35235f3aa4", null ],
-    [ "getBaseChannel", "df/d36/classMCU_1_1VULEDs.html#a2110089781785e421888fdcf3badef23", null ],
-    [ "getBaseTrack", "df/d36/classMCU_1_1VULEDs.html#ac89d4614bd6ba94f57998dc77bd64610", null ],
     [ "getOverload", "df/d36/classMCU_1_1VULEDs.html#a9a4d6084fd01383f5b288ca403f65387", null ],
     [ "getOverloadHelper", "df/d36/classMCU_1_1VULEDs.html#ae7b6c222b00073816f565bcc32103ed3", null ],
     [ "getValue", "df/d36/classMCU_1_1VULEDs.html#a104e3c7f67feee481b29e0104e75242d", null ],
@@ -19,8 +17,10 @@ var classMCU_1_1VULEDs =
     [ "setValueHelper", "df/d36/classMCU_1_1VULEDs.html#a1889dd074ee4ee9a0c6331e5183126ad", null ],
     [ "updateAll", "df/d36/classMCU_1_1VULEDs.html#aa32cdb3125e337090f73f8f3358a8a73", null ],
     [ "updateAllWith", "df/d36/classMCU_1_1VULEDs.html#a4b08a75485926ddd3fa6396b6a4da2a1", null ],
-    [ "updateImpl", "df/d36/classMCU_1_1VULEDs.html#ae547bbb399f4650ecf13884019b5b460", null ],
+    [ "updateImpl", "df/d36/classMCU_1_1VULEDs.html#af448f099f51e14a31e7017f855a12ec9", null ],
     [ "updateWith", "df/d36/classMCU_1_1VULEDs.html#adcb98982679f02c01c46ac8d22722e1d", null ],
+    [ "address", "df/d36/classMCU_1_1VULEDs.html#a38d9872489fd94dee25077c16073e8cf", null ],
     [ "next", "df/d36/classMCU_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
+    [ "NO_DECAY", "df/d36/classMCU_1_1VULEDs.html#a9fc167b9796b01178bc82bf7d8e0799e", null ],
     [ "previous", "df/d36/classMCU_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

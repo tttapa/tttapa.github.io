@@ -1,6 +1,6 @@
 var classCCRotaryEncoder =
 [
-    [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#ga9e635281a88ccc35fbf28479f71cac8f", null ],
+    [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#gae72cec73d19c10369bc81410bae4a265", null ],
     [ "begin", "d3/d62/classCCRotaryEncoder.html#ace9489f2ffd66a7352a4f67b57394ea2", null ],
     [ "beginAll", "d3/d62/classCCRotaryEncoder.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d3/d62/classCCRotaryEncoder.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

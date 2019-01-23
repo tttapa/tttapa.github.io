@@ -1,6 +1,6 @@
 var classMIDIIncrementDecrementButtons =
 [
-    [ "MIDIIncrementDecrementButtons", "dc/dc2/classMIDIIncrementDecrementButtons.html#a32196b9394649c26abaf1190d367d637", null ],
+    [ "MIDIIncrementDecrementButtons", "dc/dc2/classMIDIIncrementDecrementButtons.html#a6a3337527c3d7611627045013b35e790", null ],
     [ "begin", "dc/dc2/classMIDIIncrementDecrementButtons.html#ab4a676fd35e419713549f8be2b4cbc3a", null ],
     [ "beginAll", "dc/dc2/classMIDIIncrementDecrementButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "dc/dc2/classMIDIIncrementDecrementButtons.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -15,12 +15,11 @@ var classMIDIIncrementDecrementButtons =
     [ "reset", "dc/dc2/classMIDIIncrementDecrementButtons.html#a69209779d0451467db9f6a8a9e15b77f", null ],
     [ "update", "dc/dc2/classMIDIIncrementDecrementButtons.html#ae1d01910ae5ff00432d80f76859e1670", null ],
     [ "updateAll", "dc/dc2/classMIDIIncrementDecrementButtons.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "address", "dc/dc2/classMIDIIncrementDecrementButtons.html#ab9deab08171a7b11037c2fe359644bfe", null ],
+    [ "address", "dc/dc2/classMIDIIncrementDecrementButtons.html#a8f97e59af4415595a6518f0dc8b050b0", null ],
     [ "buttons", "dc/dc2/classMIDIIncrementDecrementButtons.html#a1d51007fc38e90ee8dda1fed8844e223", null ],
-    [ "channel", "dc/dc2/classMIDIIncrementDecrementButtons.html#afdec13709fb10721c045214d764c6128", null ],
     [ "next", "dc/dc2/classMIDIIncrementDecrementButtons.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "dc/dc2/classMIDIIncrementDecrementButtons.html#a57b6615469e554c514a9ff56dc24908f", null ],
-    [ "resetAddress", "dc/dc2/classMIDIIncrementDecrementButtons.html#aa0944a02d16ec0fd78b47c0ba19cac62", null ],
+    [ "resetAddress", "dc/dc2/classMIDIIncrementDecrementButtons.html#ac871bde6eebec5ad99ea0ae95f759e8d", null ],
     [ "sendOff", "dc/dc2/classMIDIIncrementDecrementButtons.html#a59c670c99153f76a0d66e2f284d4c074", null ],
     [ "sendOn", "dc/dc2/classMIDIIncrementDecrementButtons.html#adc6627bf870bc76e0cb53a8eae64968e", null ],
     [ "speedMultiply", "dc/dc2/classMIDIIncrementDecrementButtons.html#adf69613c6c45e8c8701ada3e2c75e1f4", null ]

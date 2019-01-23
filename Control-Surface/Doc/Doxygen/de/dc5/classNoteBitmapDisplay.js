@@ -1,7 +1,7 @@
 var classNoteBitmapDisplay =
 [
     [ "NoteBitmapDisplay", "de/dc5/classNoteBitmapDisplay.html#ae74d23a77f203c107abc197985592400", null ],
-    [ "draw", "de/dc5/classNoteBitmapDisplay.html#ae2eb0ee71469861f8ae7b7fb318759c1", null ],
+    [ "draw", "de/dc5/classNoteBitmapDisplay.html#a19802618b180382b1f1b29a66c3c8af2", null ],
     [ "drawAll", "de/dc5/classNoteBitmapDisplay.html#a0c82ae0196c0a214a3ff30ce12d06bb8", null ],
     [ "color", "de/dc5/classNoteBitmapDisplay.html#a45caf14e87c3d212f20bb23e325d5a26", null ],
     [ "display", "de/dc5/classNoteBitmapDisplay.html#aa037234d0ea1fea98682e6c04175e813", null ],

@@ -1,6 +1,6 @@
 var classBankable_1_1PBPotentiometer =
 [
-    [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga39a49a42d2e979f70cb90c75a8aab4ce", null ],
+    [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gacbbac40867807872e222789e2b29b0b3", null ],
     [ "begin", "de/d8c/classBankable_1_1PBPotentiometer.html#a1f687fc423ca089c93f7e43fdfcf0fee", null ],
     [ "beginAll", "de/d8c/classBankable_1_1PBPotentiometer.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "de/d8c/classBankable_1_1PBPotentiometer.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -11,10 +11,9 @@ var classBankable_1_1PBPotentiometer =
     [ "enable", "de/d8c/classBankable_1_1PBPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "de/d8c/classBankable_1_1PBPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
     [ "enable", "de/d8c/classBankable_1_1PBPotentiometer.html#ad4273e4aa2f15de8dbe478af16af259e", null ],
-    [ "getChannel", "de/d8c/classBankable_1_1PBPotentiometer.html#a2732386557c854745227c4a5ea50de57", null ],
-    [ "getChannelsPerBank", "de/d8c/classBankable_1_1PBPotentiometer.html#a1b42cb1fe142d37b1442079ddbbfcfcb", null ],
-    [ "getRawBankSetting", "de/d8c/classBankable_1_1PBPotentiometer.html#af26f74892403177a7234182d792744f5", null ],
-    [ "getSelection", "de/d8c/classBankable_1_1PBPotentiometer.html#ad255d8e36e74c6c4477d0b848e6c05f3", null ],
+    [ "getAddressOffset", "de/d8c/classBankable_1_1PBPotentiometer.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
+    [ "getRawBankSetting", "de/d8c/classBankable_1_1PBPotentiometer.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
+    [ "getSelection", "de/d8c/classBankable_1_1PBPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
     [ "isEnabled", "de/d8c/classBankable_1_1PBPotentiometer.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "lock", "de/d8c/classBankable_1_1PBPotentiometer.html#a9f34809178ed809a8ff203220bd1b206", null ],
     [ "map", "de/d8c/classBankable_1_1PBPotentiometer.html#a79bb7e2fa5066744e984bbdc36892ca8", null ],

@@ -13,6 +13,7 @@ var searchData=
   ['debouncetime',['debounceTime',['../d1/d19/classButton.html#a210b03addb819e086e26b2bb3b683603',1,'Button']]],
   ['decaying',['decaying',['../d4/d42/classMCU_1_1VUDisplay.html#aa7219d841ca5db8894cfed444b71acd2',1,'MCU::VUDisplay']]],
   ['decaytime',['decayTime',['../d4/d42/classMCU_1_1VUDisplay.html#a5e2388ab8ba02b03d50f6a2729052555',1,'MCU::VUDisplay::decayTime()'],['../d4/d71/classMCU_1_1VU__Base.html#a9bb376d12c42668527884fd32956e516',1,'MCU::VU_Base::decayTime()']]],
+  ['decodemode',['DECODEMODE',['../da/dd0/classMAX7219__Base.html#a21662a399a1fb50e744927fe2ba4fb17',1,'MAX7219_Base']]],
   ['decrementbutton',['decrementButton',['../d5/d20/classIncrementDecrementButtons.html#a6eda84fe30527525c6f50eb757b9b12a',1,'IncrementDecrementButtons']]],
   ['defaultmidi_5finterface',['DefaultMIDI_Interface',['../d9/d73/classMIDI__Interface.html#abfbaa1922cc1c82123b8eb92e287d46f',1,'MIDI_Interface']]],
   ['descriptor',['descriptor',['../d8/d39/classBLEMIDI.html#acdba5ac6a8a01b1523935a7ec4b44bf7',1,'BLEMIDI']]],
@@ -20,6 +21,7 @@ var searchData=
   ['disabled',['DISABLED',['../d7/d8d/classAnalogMultiplex.html#a346e11b18926219396c566bc3e210fa1',1,'AnalogMultiplex']]],
   ['disp',['disp',['../dc/ddd/classSSD1306__DisplayInterface.html#aa09392f4de8c19dc22e2534353f550d5',1,'SSD1306_DisplayInterface']]],
   ['display',['display',['../d8/d43/classDisplayElement.html#aa037234d0ea1fea98682e6c04175e813',1,'DisplayElement']]],
+  ['displaytest',['DISPLAYTEST',['../da/dd0/classMAX7219__Base.html#a2f515fbad03f9579e4f5ebe960bba526',1,'MAX7219_Base']]],
   ['displaytimer',['displayTimer',['../dc/d45/classControl__Surface__.html#a2cff2f4599bd105a94c6a4d79fd79733',1,'Control_Surface_']]],
   ['down',['DOWN',['../d7/dc7/namespaceMCU.html#ab6f4576f35e221608d71a38bb79787e2',1,'MCU']]],
   ['drop',['DROP',['../d7/dc7/namespaceMCU.html#a68c13e6d8dbb6ccc6612ba4457efb7c3',1,'MCU']]]

@@ -13,19 +13,13 @@ var hierarchy =
     [ "Array< pin_t, N >", "d7/d6a/structArray.html", null ],
     [ "Array< uint8_t, N >", "d7/d6a/structArray.html", null ],
     [ "BankableMIDIOutput", "d3/d43/classBankableMIDIOutput.html", [
-      [ "Bankable::MIDIFilteredAnalog< send, PRECISION >", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", null ],
-      [ "Bankable::MIDIFilteredAnalog< PitchBendSender< 8 >::send, 8 >", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", [
-        [ "Bankable::PBPotentiometer", "de/d8c/classBankable_1_1PBPotentiometer.html", null ],
-        [ "PBPotentiometer", "da/d6a/classPBPotentiometer.html", null ]
-      ] ]
-    ] ],
-    [ "BankableMIDIOutputAddressable", "d9/d14/classBankableMIDIOutputAddressable.html", [
       [ "Bankable::MIDIButton< sendOn, sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
       [ "Bankable::MIDIButtonLatching< sendOn, sendOff >", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", null ],
       [ "Bankable::MIDIButtonMatrix< sendOn, sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
       [ "Bankable::MIDIButtons< sendOn, sendOff, NUMBER_OF_BUTTONS >", "dc/d22/classBankable_1_1MIDIButtons.html", [
         [ "Bankable::NoteButtons< NUMBER_OF_BUTTONS >", "d6/d5b/classBankable_1_1NoteButtons.html", null ]
       ] ],
+      [ "Bankable::MIDIFilteredAnalog< send, PRECISION >", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", null ],
       [ "Bankable::MIDIFilteredAnalogAddressable< send, PRECISION >", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", [
         [ "Bankable::CCPotentiometer", "d7/dc0/classBankable_1_1CCPotentiometer.html", null ]
       ] ],
@@ -44,8 +38,9 @@ var hierarchy =
       [ "Bankable::MIDIButtonLatching< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", [
         [ "Bankable::NoteButtonLatching", "d9/d3f/classBankable_1_1NoteButtonLatching.html", null ]
       ] ],
-      [ "Bankable::MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", [
-        [ "Bankable::CCButtonMatrix< nb_rows, nb_cols >", "db/d2b/classBankable_1_1CCButtonMatrix.html", null ]
+      [ "Bankable::MIDIButtonMatrix< DigitalCCSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", [
+        [ "Bankable::CCButtonMatrix< nb_rows, nb_cols >", "db/d2b/classBankable_1_1CCButtonMatrix.html", null ],
+        [ "CCButtonMatrix< nb_rows, nb_cols >", "d3/d2a/classCCButtonMatrix.html", null ]
       ] ],
       [ "Bankable::MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", [
         [ "Bankable::NoteButtonMatrix< nb_rows, nb_cols >", "d2/d2b/classBankable_1_1NoteButtonMatrix.html", null ]
@@ -55,13 +50,18 @@ var hierarchy =
         [ "CCButtons< NUMBER_OF_BUTTONS >", "d0/dd3/classCCButtons.html", null ]
       ] ],
       [ "Bankable::MIDIButtons< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, NUMBER_OF_BUTTONS >", "dc/d22/classBankable_1_1MIDIButtons.html", null ],
+      [ "Bankable::MIDIFilteredAnalog< PitchBendSender< 8 >::send, 8 >", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", [
+        [ "Bankable::PBPotentiometer", "de/d8c/classBankable_1_1PBPotentiometer.html", null ],
+        [ "PBPotentiometer", "da/d6a/classPBPotentiometer.html", null ]
+      ] ],
       [ "Bankable::MIDIFilteredAnalogAddressable< ContinuousCCSender::send, 7 >", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", null ],
       [ "Bankable::MIDIRotaryEncoder< RelativeCCSender::send >", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html", [
         [ "Bankable::CCRotaryEncoder", "da/d40/classBankable_1_1CCRotaryEncoder.html", null ]
       ] ]
     ] ],
-    [ "BankConfigAddressable< N >", "dd/d33/classBankConfigAddressable.html", null ],
+    [ "BankConfig< N >", "d5/db5/classBankConfig.html", null ],
     [ "BitArray< N >", "db/de9/classBitArray.html", null ],
+    [ "BitArray< 64 >", "db/de9/classBitArray.html", null ],
     [ "BLECharacteristicCallbacks", null, [
       [ "BluetoothMIDI_Interface", "d0/d89/classBluetoothMIDI__Interface.html", null ]
     ] ],
@@ -73,22 +73,20 @@ var hierarchy =
     [ "ButtonMatrix< nb_rows, nb_cols >", "d8/d6c/classButtonMatrix.html", [
       [ "Bankable::MIDIButtonMatrix< sendOn, sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
       [ "MIDIButtonMatrix< sendOn, sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", null ],
-      [ "MIDIButtonMatrix< DigitalCCSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", [
-        [ "CCButtonMatrix< nb_rows, nb_cols >", "d3/d2a/classCCButtonMatrix.html", null ]
-      ] ],
-      [ "Bankable::MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
+      [ "Bankable::MIDIButtonMatrix< DigitalCCSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
       [ "Bankable::MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
       [ "MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", [
         [ "NoteButtonMatrix< nb_rows, nb_cols >", "d2/daf/classNoteButtonMatrix.html", null ]
       ] ]
     ] ],
+    [ "Channel", "d2/d48/classChannel.html", null ],
     [ "ContinuousCCSender", "da/d07/classContinuousCCSender.html", null ],
     [ "DigitalCCSender", "d5/db5/classDigitalCCSender.html", null ],
     [ "DigitalNoteSender", "dc/dd4/classDigitalNoteSender.html", null ],
     [ "Display", "d9/d11/structDisplay.html", null ],
     [ "DoublyLinkable< Node >", "d4/d23/classDoublyLinkable.html", null ],
-    [ "DoublyLinkable< BankableMIDIInputAddressable< N > >", "d4/d23/classDoublyLinkable.html", [
-      [ "BankableMIDIInputAddressable< N >", "d1/d91/classBankableMIDIInputAddressable.html", [
+    [ "DoublyLinkable< BankableMIDIInput< N > >", "d4/d23/classDoublyLinkable.html", [
+      [ "BankableMIDIInput< N >", "db/d6e/classBankableMIDIInput.html", [
         [ "Bankable::MIDINote< N >", "d0/d42/classBankable_1_1MIDINote.html", [
           [ "Bankable::MIDINoteLED< N >", "dc/df8/classBankable_1_1MIDINoteLED.html", null ]
         ] ],
@@ -118,6 +116,7 @@ var hierarchy =
     [ "DoublyLinkable< ExtendedIOElement >", "d4/d23/classDoublyLinkable.html", [
       [ "ExtendedIOElement", "de/d4e/classExtendedIOElement.html", [
         [ "AnalogMultiplex< N >", "d7/d8d/classAnalogMultiplex.html", null ],
+        [ "MAX7219", "dc/d19/classMAX7219.html", null ],
         [ "ShiftRegisterOutBase< N >", "d8/db4/classShiftRegisterOutBase.html", [
           [ "ShiftRegisterOut< N >", "d1/d5c/classShiftRegisterOut.html", null ],
           [ "SPIShiftRegisterOut< N >", "dd/d81/classSPIShiftRegisterOut.html", null ]
@@ -202,8 +201,7 @@ var hierarchy =
         ] ],
         [ "Bankable::MIDIButtonLatching< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", null ],
         [ "MIDIButtonMatrix< sendOn, sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", null ],
-        [ "MIDIButtonMatrix< DigitalCCSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", null ],
-        [ "Bankable::MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
+        [ "Bankable::MIDIButtonMatrix< DigitalCCSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
         [ "Bankable::MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
         [ "MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", null ],
         [ "MIDIButtons< sendOn, sendOff, NUMBER_OF_BUTTONS >", "d2/d87/classMIDIButtons.html", null ],
@@ -263,7 +261,7 @@ var hierarchy =
       [ "Updatable< T >", "d5/de0/classUpdatable.html", null ]
     ] ],
     [ "DoublyLinkedList< Node >", "dd/d16/classDoublyLinkedList.html", null ],
-    [ "DoublyLinkedList< BankableMIDIInputAddressable< N > >", "dd/d16/classDoublyLinkedList.html", null ],
+    [ "DoublyLinkedList< BankableMIDIInput< N > >", "dd/d16/classDoublyLinkedList.html", null ],
     [ "DoublyLinkedList< DisplayElement >", "dd/d16/classDoublyLinkedList.html", null ],
     [ "DoublyLinkedList< DisplayInterface >", "dd/d16/classDoublyLinkedList.html", null ],
     [ "DoublyLinkedList< ExtendedIOElement >", "dd/d16/classDoublyLinkedList.html", null ],
@@ -296,6 +294,10 @@ var hierarchy =
       [ "DotBarDisplayLEDs< N >", "d1/d3e/classDotBarDisplayLEDs.html", null ]
     ] ],
     [ "LEDs< 11 >", "d2/d1b/classLEDs.html", null ],
+    [ "MAX7219_Base", "da/dd0/classMAX7219__Base.html", [
+      [ "MAX7219", "dc/d19/classMAX7219.html", null ],
+      [ "MAX7219SevenSegmentDisplay", "d4/d26/classMAX7219SevenSegmentDisplay.html", null ]
+    ] ],
     [ "MIDI_Callbacks", "de/d55/classMIDI__Callbacks.html", [
       [ "Control_Surface_", "dc/d45/classControl__Surface__.html", null ]
     ] ],
@@ -328,12 +330,11 @@ var hierarchy =
       [ "SerialMIDI_Parser", "d0/d0d/classSerialMIDI__Parser.html", null ],
       [ "USBMIDI_Parser", "db/db0/classUSBMIDI__Parser.html", null ]
     ] ],
+    [ "MIDICNChannel", "df/d9b/classMIDICNChannel.html", null ],
     [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html", null ],
     [ "MIDIInputElement", "d9/db1/classMIDIInputElement.html", [
-      [ "MIDIInputElementChannelPressure", "d1/df7/classMIDIInputElementChannelPressure.html", null ]
-    ] ],
-    [ "MIDIInputElementAddressable", "d6/d3d/classMIDIInputElementAddressable.html", [
       [ "MIDIInputElementCC", "d3/d96/classMIDIInputElementCC.html", null ],
+      [ "MIDIInputElementChannelPressure", "d1/df7/classMIDIInputElementChannelPressure.html", null ],
       [ "MIDIInputElementNote", "db/d4b/classMIDIInputElementNote.html", null ]
     ] ],
     [ "MotorFader", "d1/d0f/structMotorFader.html", null ],
@@ -348,7 +349,7 @@ var hierarchy =
         [ "Transposer< MINIMUM_SEMITONES, MAXIMUM_SEMITONES >", "da/db8/classTransposer.html", null ]
       ] ]
     ] ],
-    [ "OutputBankConfigAddressable", "d5/dc5/classOutputBankConfigAddressable.html", null ],
+    [ "OutputBankConfig", "d0/d95/classOutputBankConfig.html", null ],
     [ "PitchBendSender< INPUT_PRECISION_BITS >", "de/d46/classPitchBendSender.html", null ],
     [ "PixelLocation", "dc/dd2/structPixelLocation.html", null ],
     [ "Potentiometer", "d5/d0f/structPotentiometer.html", null ],
@@ -361,6 +362,7 @@ var hierarchy =
       [ "MCU::SevenSegmentDisplay< TimeDisplayLength >", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", null ]
     ] ],
     [ "RelativeCCSender", "d3/dd0/classRelativeCCSender.html", null ],
+    [ "RelativeMIDICNChannelAddress", "da/dc7/classRelativeMIDICNChannelAddress.html", null ],
     [ "Selectable< N >", "de/de7/classSelectable.html", [
       [ "Bank< N >", "db/dbd/classBank.html", null ],
       [ "Bank< MAXIMUM_SEMITONES - MINIMUM_SEMITONES+1 >", "db/dbd/classBank.html", null ],

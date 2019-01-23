@@ -1,11 +1,9 @@
 var classMCU_1_1AssignmentDisplay =
 [
-    [ "AssignmentDisplay", "d1/d08/classMCU_1_1AssignmentDisplay.html#ac43f9cedf8c6d0f92819570cf8225772", null ],
-    [ "begin", "d1/d08/classMCU_1_1AssignmentDisplay.html#a0a087f8b370de8a92fe4aa3f68771fa7", null ],
+    [ "AssignmentDisplay", "d1/d08/classMCU_1_1AssignmentDisplay.html#a2e894184f69e1acaec6ccc1bf50a0184", null ],
+    [ "begin", "d1/d08/classMCU_1_1AssignmentDisplay.html#a7ae18e103d62568ba35c1c2de2e37885", null ],
     [ "beginAll", "d1/d08/classMCU_1_1AssignmentDisplay.html#aac5c0e4f25ae8a1996d1ef7bb894c802", null ],
-    [ "display", "d1/d08/classMCU_1_1AssignmentDisplay.html#a5d0876c7cf28c049801ffd9276cb5bdc", null ],
-    [ "getBaseAddress", "d1/d08/classMCU_1_1AssignmentDisplay.html#a8e932f9dbf314ab379bd2edb9ceb44f8", null ],
-    [ "getBaseChannel", "d1/d08/classMCU_1_1AssignmentDisplay.html#a316d0c8239f1503aad64fed5b6058446", null ],
+    [ "display", "d1/d08/classMCU_1_1AssignmentDisplay.html#abc54b9402e8555c615aaee35235f3aa4", null ],
     [ "getCharacterAt", "d1/d08/classMCU_1_1AssignmentDisplay.html#a35a0a8da913c86224cf515d18159fcd7", null ],
     [ "getDecimalPointAt", "d1/d08/classMCU_1_1AssignmentDisplay.html#a1b6f037443b1622fc476cfc4ad02e212", null ],
     [ "getDecimalPoints", "d1/d08/classMCU_1_1AssignmentDisplay.html#a422ab92ae0548f938ca5f24004e96a15", null ],
@@ -13,10 +11,11 @@ var classMCU_1_1AssignmentDisplay =
     [ "printTo", "d1/d08/classMCU_1_1AssignmentDisplay.html#a3a6b88b2ced14db4c783b80e22a2c8b1", null ],
     [ "reset", "d1/d08/classMCU_1_1AssignmentDisplay.html#a3ac85907a8efeac137173bb5c741b83a", null ],
     [ "resetAll", "d1/d08/classMCU_1_1AssignmentDisplay.html#a1aa71fafd60f18ef365091e09c0b3357", null ],
-    [ "update", "d1/d08/classMCU_1_1AssignmentDisplay.html#a9a0be1898f5b85afb1c3b493007e19b2", null ],
+    [ "update", "d1/d08/classMCU_1_1AssignmentDisplay.html#ab487eb31758e7be2b98731bd0f255588", null ],
     [ "updateAll", "d1/d08/classMCU_1_1AssignmentDisplay.html#a9d3f3fb69c11536a5d795df42cb722a5", null ],
     [ "updateAllWith", "d1/d08/classMCU_1_1AssignmentDisplay.html#a3cdc427ed1a74ba765311e87dbdbe60b", null ],
-    [ "updateWith", "d1/d08/classMCU_1_1AssignmentDisplay.html#a867b2b78492f2cc693bfb17952acbe34", null ],
+    [ "updateWith", "d1/d08/classMCU_1_1AssignmentDisplay.html#adcb98982679f02c01c46ac8d22722e1d", null ],
+    [ "address", "d1/d08/classMCU_1_1AssignmentDisplay.html#a38d9872489fd94dee25077c16073e8cf", null ],
     [ "next", "d1/d08/classMCU_1_1AssignmentDisplay.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d1/d08/classMCU_1_1AssignmentDisplay.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

@@ -1,6 +1,7 @@
 var searchData=
 [
   ['save',['SAVE',['../d7/dc7/namespaceMCU.html#af1e008d9ce12b2871e74b49335372f94',1,'MCU']]],
+  ['scanlimit',['SCANLIMIT',['../da/dd0/classMAX7219__Base.html#a5627a59964dcdc347113f1d87aab87e7',1,'MAX7219_Base']]],
   ['scrub',['SCRUB',['../d7/dc7/namespaceMCU.html#a603abf0bc7188ef047827bd5212c04b9',1,'MCU']]],
   ['secondchar',['secondChar',['../d8/d0b/classStreamDebugMIDI__Interface.html#aeac9a066ae4727e24d265d35e106512a',1,'StreamDebugMIDI_Interface']]],
   ['select_5f1',['SELECT_1',['../d7/dc7/namespaceMCU.html#a3f3b64e9caef80aa717201108fefd094',1,'MCU']]],
@@ -18,8 +19,11 @@ var searchData=
   ['serial',['serial',['../db/dc4/classSerialDebugMIDI__Interface.html#acd8a7b82c4ca0c085384ceb30cb54ead',1,'SerialDebugMIDI_Interface::serial()'],['../d9/db8/classSerialMIDI__Interface.html#ab8329a43ddd0f772aa6ad0b78b4ce8cf',1,'SerialMIDI_Interface::serial()']]],
   ['service_5fuuid',['SERVICE_UUID',['../d0/dc9/BLEMIDI_8hpp.html#a9f1afb680e585b01547e7c9aa663ed04',1,'BLEMIDI.hpp']]],
   ['setting',['setting',['../d1/d54/classSelector.html#a199c1563e0cff988546e52718c9eb103',1,'Selector']]],
+  ['settings',['settings',['../da/dd0/classMAX7219__Base.html#a3b1e1002b1305958ea2bc1784d6cd63a',1,'MAX7219_Base']]],
+  ['sevensegmentcharacters',['SevenSegmentCharacters',['../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a5a6ac1773492df06f2083501ada5e692',1,'MAX7219SevenSegmentDisplay.hpp']]],
   ['shift',['SHIFT',['../d7/dc7/namespaceMCU.html#aa14f14f92c3dc7ff343a5920947c0988',1,'MCU']]],
   ['showbaseprintstream',['showbasePrintStream',['../da/d69/PrintStream_8cpp.html#af3f3e169c625ed3418298a1795a6823b',1,'PrintStream.cpp']]],
+  ['shutdown',['SHUTDOWN',['../da/dd0/classMAX7219__Base.html#ac3181c37a955d14f8c741dcb28013702',1,'MAX7219_Base']]],
   ['size',['size',['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#a48d325beebc2d94fd7168888915cb3e8',1,'MCU::TimeDisplayDisplay::size()'],['../d3/d51/classSelectorDisplay.html#a30895e91a524d1fa3b43282f31cc203b',1,'SelectorDisplay::size()']]],
   ['smpte',['SMPTE',['../d7/dc7/namespaceMCU.html#aa4df315543be2b64b6e264b03c433694',1,'MCU']]],
   ['smpte_5fbeats',['SMPTE_BEATS',['../d7/dc7/namespaceMCU.html#a7e5d42795de95a34bd461be3db45eb3f',1,'MCU']]],
@@ -49,15 +53,15 @@ var searchData=
   ['sound_5fcontroller_5f9',['Sound_Controller_9',['../d4/dbe/namespaceMIDI__CC.html#a1e063639d40e0b0b64315a47fe517f0b',1,'MIDI_CC']]],
   ['spacing',['spacing',['../d4/d42/classMCU_1_1VUDisplay.html#a5f2d91f0d65d935bb495f69a508c5a84',1,'MCU::VUDisplay']]],
   ['speedmultiply',['speedMultiply',['../dc/dc2/classMIDIIncrementDecrementButtons.html#adf69613c6c45e8c8701ada3e2c75e1f4',1,'MIDIIncrementDecrementButtons::speedMultiply()'],['../d8/d20/classMIDIRotaryEncoder.html#a2330758ba9146eeea1ae6cbcb120c1ae',1,'MIDIRotaryEncoder::speedMultiply()'],['../dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#ab7c206aca4177c77ddd8f8c801379e13',1,'Bankable::MIDIRotaryEncoder::speedMultiply()']]],
-  ['spi_5fmax_5fspeed',['SPI_MAX_SPEED',['../dd/d81/classSPIShiftRegisterOut.html#a0c31b40374cea15602fd5719c3275f1a',1,'SPIShiftRegisterOut']]],
+  ['spi_5fmax_5fspeed',['SPI_MAX_SPEED',['../db/d02/Settings_8hpp.html#a19dcde97c67ed7db5a54bb2175575339',1,'Settings.hpp']]],
   ['start',['start',['../de/d4e/classExtendedIOElement.html#acbd5a0c4f813052317227564ecfc295d',1,'ExtendedIOElement']]],
   ['starttime',['startTime',['../d0/d89/classBluetoothMIDI__Interface.html#ab64ee2e8cb5a7832881f6346a007f9f4',1,'BluetoothMIDI_Interface']]],
   ['stop',['STOP',['../d7/dc7/namespaceMCU.html#ab923ca50cd779c04d489ee42b8d63526',1,'MCU']]],
   ['stream',['stream',['../d3/dc3/classStreamMIDI__Interface.html#ac3c535639ffaf05f66dde82dbbf25237',1,'StreamMIDI_Interface']]],
   ['switchpin',['switchPin',['../d0/daf/classEncoderSelector__Base.html#a1961dd72ccc811fe119f93c96c10607c',1,'EncoderSelector_Base']]],
-  ['sysex_5fbuffer_5fsize',['SYSEX_BUFFER_SIZE',['../dd/dbc/Settings_8h.html#a3081f3937d694684489a38a344815b29',1,'Settings.h']]],
+  ['sysex_5fbuffer_5fsize',['SYSEX_BUFFER_SIZE',['../db/d02/Settings_8hpp.html#a3081f3937d694684489a38a344815b29',1,'Settings.hpp']]],
   ['sysexbuffer',['SysExBuffer',['../df/d0c/classMIDI__Parser.html#ac5f93d140c63f306f7cc78815ed51f44',1,'MIDI_Parser']]],
-  ['sysexend',['SysExEnd',['../d4/d36/MIDI__Parser_8h.html#a5a4104fa1a57bf95247549f946599922',1,'MIDI_Parser.h']]],
+  ['sysexend',['SysExEnd',['../d7/d2d/MIDI__Parser_8hpp.html#a5a4104fa1a57bf95247549f946599922',1,'MIDI_Parser.hpp']]],
   ['sysexlength',['SysExLength',['../df/d0c/classMIDI__Parser.html#a89cd28ab3abffdffe9c1cb18fbee034c',1,'MIDI_Parser']]],
-  ['sysexstart',['SysExStart',['../d4/d36/MIDI__Parser_8h.html#ad96073d2c4c439d53d73520e2f94c87d',1,'MIDI_Parser.h']]]
+  ['sysexstart',['SysExStart',['../d7/d2d/MIDI__Parser_8hpp.html#ad96073d2c4c439d53d73520e2f94c87d',1,'MIDI_Parser.hpp']]]
 ];

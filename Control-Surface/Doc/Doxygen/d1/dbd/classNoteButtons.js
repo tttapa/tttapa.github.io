@@ -1,6 +1,6 @@
 var classNoteButtons =
 [
-    [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga4fcbab414b273ee3ebbe44cd2ae0ec5b", null ],
+    [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac", null ],
     [ "begin", "d1/dbd/classNoteButtons.html#a97464005c2dc0f838e1b512b8468b322", null ],
     [ "beginAll", "d1/dbd/classNoteButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d1/dbd/classNoteButtons.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -11,8 +11,6 @@ var classNoteButtons =
     [ "enable", "d1/dbd/classNoteButtons.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d1/dbd/classNoteButtons.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
     [ "enable", "d1/dbd/classNoteButtons.html#ad4273e4aa2f15de8dbe478af16af259e", null ],
-    [ "getAddressIncrement", "d1/dbd/classNoteButtons.html#a37aa3292910e09b8539f9c96d493dd0d", null ],
-    [ "getChannelIncrement", "d1/dbd/classNoteButtons.html#af752d14a30822151c60e32e909500e81", null ],
     [ "isEnabled", "d1/dbd/classNoteButtons.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "update", "d1/dbd/classNoteButtons.html#ae57920009161d5983962dced5aa27b97", null ],
     [ "updateAll", "d1/dbd/classNoteButtons.html#a8af924e5b3b708eb042919703d175ed3", null ],

@@ -1,7 +1,7 @@
 var classMCU_1_1VPotDisplay =
 [
     [ "VPotDisplay", "d3/d98/classMCU_1_1VPotDisplay.html#a952c48695ef51da9059bdfc11d0d5bef", null ],
-    [ "draw", "d3/d98/classMCU_1_1VPotDisplay.html#ab05937039d3774d28056f4762caa1b4f", null ],
+    [ "draw", "d3/d98/classMCU_1_1VPotDisplay.html#a6120c40796b7de94f04f951b1db37ced", null ],
     [ "drawAll", "d3/d98/classMCU_1_1VPotDisplay.html#a0c82ae0196c0a214a3ff30ce12d06bb8", null ],
     [ "drawVPotSegment", "d3/d98/classMCU_1_1VPotDisplay.html#a8b115b3b011c7b394791a7bf70e2f3c6", null ],
     [ "angleSpacing", "d3/d98/classMCU_1_1VPotDisplay.html#a809b8e848cdc11d12d18ba3ccf0ee4bf", null ],

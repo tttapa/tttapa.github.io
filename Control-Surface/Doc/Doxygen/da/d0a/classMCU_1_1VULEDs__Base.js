@@ -5,8 +5,6 @@ var classMCU_1_1VULEDs__Base =
     [ "beginAll", "da/d0a/classMCU_1_1VULEDs__Base.html#a0bc33aa8712fd07c9c218ed35cc7dce3", null ],
     [ "clearOverloadHelper", "da/d0a/classMCU_1_1VULEDs__Base.html#af777c4f515387d0c08b78496a6934804", null ],
     [ "display", "da/d0a/classMCU_1_1VULEDs__Base.html#a3a12728d4a3d630e38748756c93a0587", null ],
-    [ "getBaseChannel", "da/d0a/classMCU_1_1VULEDs__Base.html#a2110089781785e421888fdcf3badef23", null ],
-    [ "getBaseTrack", "da/d0a/classMCU_1_1VULEDs__Base.html#ac89d4614bd6ba94f57998dc77bd64610", null ],
     [ "getOverload", "da/d0a/classMCU_1_1VULEDs__Base.html#a9a4d6084fd01383f5b288ca403f65387", null ],
     [ "getOverloadHelper", "da/d0a/classMCU_1_1VULEDs__Base.html#ae7b6c222b00073816f565bcc32103ed3", null ],
     [ "getValue", "da/d0a/classMCU_1_1VULEDs__Base.html#a104e3c7f67feee481b29e0104e75242d", null ],
@@ -18,8 +16,10 @@ var classMCU_1_1VULEDs__Base =
     [ "updateAll", "da/d0a/classMCU_1_1VULEDs__Base.html#aa32cdb3125e337090f73f8f3358a8a73", null ],
     [ "updateAllWith", "da/d0a/classMCU_1_1VULEDs__Base.html#a4b08a75485926ddd3fa6396b6a4da2a1", null ],
     [ "updateWith", "da/d0a/classMCU_1_1VULEDs__Base.html#adcb98982679f02c01c46ac8d22722e1d", null ],
+    [ "address", "da/d0a/classMCU_1_1VULEDs__Base.html#a38d9872489fd94dee25077c16073e8cf", null ],
     [ "FLOOR_CORRECTION", "da/d0a/classMCU_1_1VULEDs__Base.html#a03a7e70a7d34196153b508101a7bf63f", null ],
     [ "leds", "da/d0a/classMCU_1_1VULEDs__Base.html#a763144b70b99dca14cde58a73de21513", null ],
     [ "next", "da/d0a/classMCU_1_1VULEDs__Base.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
+    [ "NO_DECAY", "da/d0a/classMCU_1_1VULEDs__Base.html#a9fc167b9796b01178bc82bf7d8e0799e", null ],
     [ "previous", "da/d0a/classMCU_1_1VULEDs__Base.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

@@ -1,6 +1,6 @@
 var classCCButtonLatching =
 [
-    [ "CCButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#gabb982c76ed6ed8992d4ca8d556941371", null ],
+    [ "CCButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga6504e3fa38d762a7321ef52be08a962f", null ],
     [ "begin", "d8/db0/classCCButtonLatching.html#a2008b6b51e779d44e87129e43f5ccc3c", null ],
     [ "beginAll", "d8/db0/classCCButtonLatching.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d8/db0/classCCButtonLatching.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

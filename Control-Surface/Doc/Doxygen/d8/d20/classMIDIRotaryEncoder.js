@@ -1,6 +1,6 @@
 var classMIDIRotaryEncoder =
 [
-    [ "MIDIRotaryEncoder", "d8/d20/classMIDIRotaryEncoder.html#a06e90d340af5102aa230e3fb5c4c7a03", null ],
+    [ "MIDIRotaryEncoder", "d8/d20/classMIDIRotaryEncoder.html#a9a860311b04f6a040199afa41802b5b8", null ],
     [ "begin", "d8/d20/classMIDIRotaryEncoder.html#ace9489f2ffd66a7352a4f67b57394ea2", null ],
     [ "beginAll", "d8/d20/classMIDIRotaryEncoder.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d8/d20/classMIDIRotaryEncoder.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -14,8 +14,7 @@ var classMIDIRotaryEncoder =
     [ "isEnabled", "d8/d20/classMIDIRotaryEncoder.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "update", "d8/d20/classMIDIRotaryEncoder.html#aa0937f911bacc46090b1b39c1f1150f4", null ],
     [ "updateAll", "d8/d20/classMIDIRotaryEncoder.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "address", "d8/d20/classMIDIRotaryEncoder.html#a3aa8e4673a658d8eca9878d8e939b977", null ],
-    [ "channel", "d8/d20/classMIDIRotaryEncoder.html#a34070cd24209e51bf37e72df9a3a5955", null ],
+    [ "address", "d8/d20/classMIDIRotaryEncoder.html#a304d05c16cb01f4678eecffeac8df325", null ],
     [ "encoder", "d8/d20/classMIDIRotaryEncoder.html#ab9c6c6d4ec4b5889d751afb5065c9548", null ],
     [ "next", "d8/d20/classMIDIRotaryEncoder.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d8/d20/classMIDIRotaryEncoder.html#a57b6615469e554c514a9ff56dc24908f", null ],

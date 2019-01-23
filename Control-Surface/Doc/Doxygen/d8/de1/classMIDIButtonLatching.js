@@ -1,6 +1,6 @@
 var classMIDIButtonLatching =
 [
-    [ "MIDIButtonLatching", "d8/de1/classMIDIButtonLatching.html#acafb71308b881460eb692d03637e18b7", null ],
+    [ "MIDIButtonLatching", "d8/de1/classMIDIButtonLatching.html#af85a7d9712cc394ddc5e721a41d3d84f", null ],
     [ "begin", "d8/de1/classMIDIButtonLatching.html#a2008b6b51e779d44e87129e43f5ccc3c", null ],
     [ "beginAll", "d8/de1/classMIDIButtonLatching.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d8/de1/classMIDIButtonLatching.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -14,8 +14,7 @@ var classMIDIButtonLatching =
     [ "isEnabled", "d8/de1/classMIDIButtonLatching.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "update", "d8/de1/classMIDIButtonLatching.html#aefb3b2f7cfb598d2cd68a622c94ea772", null ],
     [ "updateAll", "d8/de1/classMIDIButtonLatching.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "baseAddress", "d8/de1/classMIDIButtonLatching.html#a57354e8ac4e7d3d4c5d68d682b28b516", null ],
-    [ "baseChannel", "d8/de1/classMIDIButtonLatching.html#aea56bf85d23fd06adbfa97649011c07b", null ],
+    [ "address", "d8/de1/classMIDIButtonLatching.html#afb0db394a9d011d776606dbb4c854dbb", null ],
     [ "button", "d8/de1/classMIDIButtonLatching.html#ac1c120fd0dc42822cf4f12aa7f3ba571", null ],
     [ "next", "d8/de1/classMIDIButtonLatching.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d8/de1/classMIDIButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]

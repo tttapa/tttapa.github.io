@@ -66,21 +66,22 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d0/dd2/classMIDIFilteredAnalogAddressable.html#a4c1c6bd44da328dd5b4dc29503219d09",
-"d1/d9f/classNoteButton.html",
-"d2/daf/classNoteButtonMatrix.html#a6bae640621972b14ad9c28b6b399f08f",
-"d3/d69/classManyButtonsSelector.html#a28dfbd31c4cb424f9b32480b1aeb0bbf",
-"d4/d36/MIDI__Parser_8h.html#a4d5f7c786c1a7480bd707642de92e109",
-"d5/d8e/classMIDIFilteredAnalog.html#a7cc0c94311558c18a763721274b9c815",
-"d6/da6/MCU_8h.html#a14a7cfd850ae0f5213ed83ad326d19d6",
-"d8/d0b/classStreamDebugMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc",
-"d9/d0d/classMIDINoteLED.html#a2aadbdc142f8771f472f9d09c59cdd0c",
-"d9/df9/classBankable_1_1MIDIButton.html#adf9065e2f57a2a9baa0e14005585b7b2",
-"db/d15/Bankable_2CCButton_8hpp.html",
-"dc/d22/classBankable_1_1MIDIButtons.html#a3af6f1bdd9c0471a79fbda986ca0a69f",
-"dc/df8/classIncrementSelectorLEDs.html#a57b6615469e554c514a9ff56dc24908f",
-"de/d4e/classExtendedIOElement.html#a4bc35f3be5cfc6a63b714bab7fb8222b",
-"functions_func_c.html"
+"d0/dbf/VPotDisplay_8hpp_source.html",
+"d1/d8e/group__ExtIO.html#ga76abe1cbb481b44875fb5e08da186ad0",
+"d2/daa/classCCButton.html#a57b6615469e554c514a9ff56dc24908f",
+"d3/d60/classCCIncrementDecrementButtons.html#a9cf409bc7effa13042ebd1d1e02d1046",
+"d4/d42/classMCU_1_1VUDisplay.html#a41ba02433ea87dbce1cb17ca1bf8397d",
+"d5/db5/classBankConfig.html#ae780354d12556e3b5b47d800896d3b76",
+"d7/d40/Control__Surface_8cpp_source.html",
+"d8/d4c/classMCU_1_1VU.html#adcb98982679f02c01c46ac8d22722e1d",
+"d9/d43/Control__Change_8hpp.html#a3e17b64a384aae0ae4e21f30bc673930",
+"d9/df9/classBankable_1_1MIDIButton.html#acfabd4911411ebbfd96d4080103f4725",
+"db/d02/Settings_8hpp.html#ad73f28073ff4298bbf7bdde13c083393",
+"db/d60/MCU_8hpp.html#aff4b1ae44544ef0f8a3bb796be4eb9de",
+"dc/d4c/classIncrementSelector.html#a57b6615469e554c514a9ff56dc24908f",
+"dd/d33/XBitmaps_8hpp.html#a84d2060525f627939a4f56602e2244a3",
+"de/d36/classBankable_1_1NoteButton.html#ad4273e4aa2f15de8dbe478af16af259e",
+"df/d9b/classMIDICNChannel.html#a81b4bc10a992aab57c598850a687c7b6"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

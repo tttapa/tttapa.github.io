@@ -1,6 +1,6 @@
 var classMIDIButtons =
 [
-    [ "MIDIButtons", "d2/d87/classMIDIButtons.html#a4e18646b783088cc6cf5b1f6d9d61be2", null ],
+    [ "MIDIButtons", "d2/d87/classMIDIButtons.html#a6eb1259bc4840d39a5940e7b98e31ef0", null ],
     [ "begin", "d2/d87/classMIDIButtons.html#a97464005c2dc0f838e1b512b8468b322", null ],
     [ "beginAll", "d2/d87/classMIDIButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d2/d87/classMIDIButtons.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -11,15 +11,12 @@ var classMIDIButtons =
     [ "enable", "d2/d87/classMIDIButtons.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d2/d87/classMIDIButtons.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
     [ "enable", "d2/d87/classMIDIButtons.html#ad4273e4aa2f15de8dbe478af16af259e", null ],
-    [ "getAddressIncrement", "d2/d87/classMIDIButtons.html#a37aa3292910e09b8539f9c96d493dd0d", null ],
-    [ "getChannelIncrement", "d2/d87/classMIDIButtons.html#af752d14a30822151c60e32e909500e81", null ],
     [ "isEnabled", "d2/d87/classMIDIButtons.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "update", "d2/d87/classMIDIButtons.html#ae57920009161d5983962dced5aa27b97", null ],
     [ "updateAll", "d2/d87/classMIDIButtons.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "baseAddress", "d2/d87/classMIDIButtons.html#a206f2cf2d3d20069c79fcc206714d376", null ],
-    [ "baseChannel", "d2/d87/classMIDIButtons.html#a383a70a1c6d21df1819aaa494a33027d", null ],
+    [ "baseAddress", "d2/d87/classMIDIButtons.html#a33688ac1aae36fabb6ff45183a9c8be5", null ],
     [ "buttons", "d2/d87/classMIDIButtons.html#a932c9335dc5ea215521e554eb5dadc87", null ],
-    [ "increment", "d2/d87/classMIDIButtons.html#aeba1cec8b8b85451066c7f01fc7dabc0", null ],
+    [ "incrementAddress", "d2/d87/classMIDIButtons.html#abd040788a921f9a07974505612107e0d", null ],
     [ "next", "d2/d87/classMIDIButtons.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d2/d87/classMIDIButtons.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];
