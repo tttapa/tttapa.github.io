@@ -1,6 +1,6 @@
 var classHardwareSerialDebugMIDI__Interface =
 [
-    [ "HardwareSerialDebugMIDI_Interface", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a26b52cf1391838deb67f38260fd675ee", null ],
+    [ "HardwareSerialDebugMIDI_Interface", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a66875b68af9d7a787e62a95f9cf94a1e", null ],
     [ "begin", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#ac15d88684640007b0bb1c2991bd2d396", null ],
     [ "dispatchMIDIEvent", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a58470aacb3262891701b456daadced6d", null ],
     [ "getChannelMessage", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a4923aed435b881567b3276614dad6d11", null ],
@@ -20,6 +20,7 @@ var classHardwareSerialDebugMIDI__Interface =
     [ "sendNoteOn", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a80c4843f88185a213ebe20a26c0fd579", null ],
     [ "sendPB", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f", null ],
     [ "sendPB", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1", null ],
+    [ "sendPC", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a7002bfae1bf346eadead1397a238f9b6", null ],
     [ "setAsDefault", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#ac179dad8f24eedfa6a9f4e8dbaef7b46", null ],
     [ "setCallbacks", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c", null ],
     [ "update", "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4", null ],

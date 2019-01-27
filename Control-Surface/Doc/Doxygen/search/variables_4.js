@@ -15,6 +15,7 @@ var searchData=
   ['decaytime',['decayTime',['../d4/d42/classMCU_1_1VUDisplay.html#a5e2388ab8ba02b03d50f6a2729052555',1,'MCU::VUDisplay::decayTime()'],['../d4/d71/classMCU_1_1VU__Base.html#a9bb376d12c42668527884fd32956e516',1,'MCU::VU_Base::decayTime()']]],
   ['decodemode',['DECODEMODE',['../da/dd0/classMAX7219__Base.html#a21662a399a1fb50e744927fe2ba4fb17',1,'MAX7219_Base']]],
   ['decrementbutton',['decrementButton',['../d5/d20/classIncrementDecrementButtons.html#a6eda84fe30527525c6f50eb757b9b12a',1,'IncrementDecrementButtons']]],
+  ['defaultbaudrate',['defaultBaudRate',['../db/d02/Settings_8hpp.html#ac1052a84bab455c13aac40a30d8cb4ba',1,'Settings.hpp']]],
   ['defaultmidi_5finterface',['DefaultMIDI_Interface',['../d9/d73/classMIDI__Interface.html#abfbaa1922cc1c82123b8eb92e287d46f',1,'MIDI_Interface']]],
   ['descriptor',['descriptor',['../d8/d39/classBLEMIDI.html#acdba5ac6a8a01b1523935a7ec4b44bf7',1,'BLEMIDI']]],
   ['dirty',['dirty',['../d8/db4/classShiftRegisterOutBase.html#a0e458fef1cf00d2a4ee3f229450e070c',1,'ShiftRegisterOutBase']]],

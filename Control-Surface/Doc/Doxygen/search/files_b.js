@@ -4,6 +4,7 @@ var searchData=
   ['notebitmapdisplay_2ehpp',['NoteBitmapDisplay.hpp',['../d2/d24/NoteBitmapDisplay_8hpp.html',1,'']]],
   ['notebutton_2ecpp',['NoteButton.cpp',['../df/d83/NoteButton_8cpp.html',1,'']]],
   ['notebutton_2ehpp',['NoteButton.hpp',['../d3/d80/NoteButton_8hpp.html',1,'']]],
+  ['notebuttonlatched_2ehpp',['NoteButtonLatched.hpp',['../d0/d4e/NoteButtonLatched_8hpp.html',1,'']]],
   ['notebuttonlatching_2ecpp',['NoteButtonLatching.cpp',['../db/d28/NoteButtonLatching_8cpp.html',1,'']]],
   ['notebuttonlatching_2ehpp',['NoteButtonLatching.hpp',['../d6/d09/NoteButtonLatching_8hpp.html',1,'']]],
   ['notebuttonmatrix_2ecpp',['NoteButtonMatrix.cpp',['../d0/d4c/NoteButtonMatrix_8cpp.html',1,'']]],

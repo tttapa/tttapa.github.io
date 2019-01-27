@@ -12,6 +12,7 @@ var classShiftRegisterOut =
     [ "getEnd", "d1/d5c/classShiftRegisterOut.html#a916fb2b6f637e2d35c162677f5d95a64", null ],
     [ "getStart", "d1/d5c/classShiftRegisterOut.html#a955322d29e4e63ec40a587b5ed9db31b", null ],
     [ "green", "d1/d5c/classShiftRegisterOut.html#a81fabf06f40056b1e2c22e0d8420cc1c", null ],
+    [ "operator[]", "d1/d5c/classShiftRegisterOut.html#a2c6058c4a84b5be7c9b05e2cc1a9d94f", null ],
     [ "pin", "d1/d5c/classShiftRegisterOut.html#a163cffb9da0f3b7fdcb3c49b58393c03", null ],
     [ "pinMode", "d1/d5c/classShiftRegisterOut.html#a651cd79fb7296052beb837b0c1ff31a8", null ],
     [ "pinMode", "d1/d5c/classShiftRegisterOut.html#ab0e7b41124b477456bf5a1de8071d1e3", null ],

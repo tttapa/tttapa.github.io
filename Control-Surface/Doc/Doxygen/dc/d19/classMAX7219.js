@@ -11,6 +11,7 @@ var classMAX7219 =
     [ "getEnd", "dc/d19/classMAX7219.html#a916fb2b6f637e2d35c162677f5d95a64", null ],
     [ "getStart", "dc/d19/classMAX7219.html#a955322d29e4e63ec40a587b5ed9db31b", null ],
     [ "init", "dc/d19/classMAX7219.html#abc1d2ae777d19ca9aaf8eb7d1f500716", null ],
+    [ "operator[]", "dc/d19/classMAX7219.html#a2c6058c4a84b5be7c9b05e2cc1a9d94f", null ],
     [ "pin", "dc/d19/classMAX7219.html#a163cffb9da0f3b7fdcb3c49b58393c03", null ],
     [ "pinMode", "dc/d19/classMAX7219.html#a11e81d2ec7ebbfd6d29b092fc8a394a9", null ],
     [ "pinMode", "dc/d19/classMAX7219.html#ab0e7b41124b477456bf5a1de8071d1e3", null ],

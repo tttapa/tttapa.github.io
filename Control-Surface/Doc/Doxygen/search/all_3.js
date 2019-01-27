@@ -30,7 +30,7 @@ var searchData=
   ['change_5faddress',['CHANGE_ADDRESS',['../dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1a8e818986f5a41a491dde170eeeb4fd29',1,'BankConfig.hpp']]],
   ['change_5fcablenb',['CHANGE_CABLENB',['../dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1a1699078e885a4bfa2d7d55a3b94dfe0d',1,'BankConfig.hpp']]],
   ['change_5fchannel',['CHANGE_CHANNEL',['../dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1a1020529b55d78c3ec8a38703c1a79b23',1,'BankConfig.hpp']]],
-  ['channel',['Channel',['../d2/d48/classChannel.html',1,'Channel'],['../dd/d36/structMIDI__message__matcher.html#a7e67ba2468e2c479ccb4d2367b16a393',1,'MIDI_message_matcher::channel()'],['../de/d43/classProgramChanger.html#ae2954935d3c1a6e46c43d9b3c7b0532f',1,'ProgramChanger::channel()'],['../d2/d48/classChannel.html#a5f31ead2abdefce67d573ebfb8305000',1,'Channel::Channel()']]],
+  ['channel',['Channel',['../d2/d48/classChannel.html',1,'Channel'],['../dd/d36/structMIDI__message__matcher.html#a7e67ba2468e2c479ccb4d2367b16a393',1,'MIDI_message_matcher::channel()'],['../de/d43/classProgramChanger.html#a94efcffef5e9d38c9e67bae00b12dde4',1,'ProgramChanger::channel()'],['../d2/d48/classChannel.html#a5f31ead2abdefce67d573ebfb8305000',1,'Channel::Channel()']]],
   ['channel_2ecpp',['Channel.cpp',['../d1/dc4/Channel_8cpp.html',1,'']]],
   ['channel_2ehpp',['Channel.hpp',['../d7/d42/Channel_8hpp.html',1,'']]],
   ['channel_5f1',['CHANNEL_1',['../d7/d42/Channel_8hpp.html#a166aafd26c8b912f9e8bc7acb8b1cd17',1,'Channel.hpp']]],

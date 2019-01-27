@@ -1,6 +1,5 @@
 var PrintStream_8cpp =
 [
-    [ "FLUSH", "da/d69/PrintStream_8cpp.html#a263ccab0461d1643cb62c6625b788a7f", null ],
     [ "LOWERCASE", "da/d69/PrintStream_8cpp.html#a6674af4819a4f85e8c40be5971746668af8ee0dcc4d45543df8763035c19ef2fc", null ],
     [ "UPPERCASE", "da/d69/PrintStream_8cpp.html#a6674af4819a4f85e8c40be5971746668a19d6b87b851ddfd4fdc4f182e2ae0617", null ],
     [ "bin", "da/d69/PrintStream_8cpp.html#a99e9817ede325b42677fc53cfb468b7f", null ],

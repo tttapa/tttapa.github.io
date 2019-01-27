@@ -4,7 +4,7 @@ var searchData=
   ['cancel',['CANCEL',['../d7/dc7/namespaceMCU.html#a0b0a2480c2a0bbfbca785b72c66d5010',1,'MCU']]],
   ['caseprintstream',['casePrintStream',['../da/d69/PrintStream_8cpp.html#a0ea54e5be4d1c162631f25acd0d1d6c9',1,'PrintStream.cpp']]],
   ['cc',['CC',['../d7/d2d/MIDI__Parser_8hpp.html#a4d5f7c786c1a7480bd707642de92e109',1,'MIDI_Parser.hpp']]],
-  ['channel',['channel',['../dd/d36/structMIDI__message__matcher.html#a7e67ba2468e2c479ccb4d2367b16a393',1,'MIDI_message_matcher::channel()'],['../de/d43/classProgramChanger.html#ae2954935d3c1a6e46c43d9b3c7b0532f',1,'ProgramChanger::channel()']]],
+  ['channel',['channel',['../dd/d36/structMIDI__message__matcher.html#a7e67ba2468e2c479ccb4d2367b16a393',1,'MIDI_message_matcher::channel()'],['../de/d43/classProgramChanger.html#a94efcffef5e9d38c9e67bae00b12dde4',1,'ProgramChanger::channel()']]],
   ['channel_5f1',['CHANNEL_1',['../d7/d42/Channel_8hpp.html#a166aafd26c8b912f9e8bc7acb8b1cd17',1,'Channel.hpp']]],
   ['channel_5f10',['CHANNEL_10',['../d7/d42/Channel_8hpp.html#a38181bb9d72cf3357dc175ea10c5c05f',1,'Channel.hpp']]],
   ['channel_5f11',['CHANNEL_11',['../d7/d42/Channel_8hpp.html#a21370e60d5cdb82b4b9e7041bae6337d',1,'Channel.hpp']]],

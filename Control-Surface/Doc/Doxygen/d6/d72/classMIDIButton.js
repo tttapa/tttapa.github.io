@@ -11,6 +11,7 @@ var classMIDIButton =
     [ "enable", "d6/d72/classMIDIButton.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d6/d72/classMIDIButton.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
     [ "enable", "d6/d72/classMIDIButton.html#ad4273e4aa2f15de8dbe478af16af259e", null ],
+    [ "getButtonCopy", "d6/d72/classMIDIButton.html#a8842303990b364fc8e3deacd4768f9bd", null ],
     [ "isEnabled", "d6/d72/classMIDIButton.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "update", "d6/d72/classMIDIButton.html#a500ab1a23dcdbb686b31f1a475328e77", null ],
     [ "updateAll", "d6/d72/classMIDIButton.html#a8af924e5b3b708eb042919703d175ed3", null ],

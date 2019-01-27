@@ -24,6 +24,7 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "Control Surface", "index.html", [
+    [ "Getting Started", "db/df0/md__home_pieter_GitHub_Control-Surface_doc_Getting-Started.html", null ],
     [ "Todo List", "dd/da0/todo.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
@@ -66,22 +67,23 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d0/dbf/VPotDisplay_8hpp_source.html",
-"d1/d8e/group__ExtIO.html#ga76abe1cbb481b44875fb5e08da186ad0",
-"d2/daa/classCCButton.html#a57b6615469e554c514a9ff56dc24908f",
-"d3/d60/classCCIncrementDecrementButtons.html#a9cf409bc7effa13042ebd1d1e02d1046",
-"d4/d42/classMCU_1_1VUDisplay.html#a41ba02433ea87dbce1cb17ca1bf8397d",
-"d5/db5/classBankConfig.html#ae780354d12556e3b5b47d800896d3b76",
-"d7/d40/Control__Surface_8cpp_source.html",
-"d8/d4c/classMCU_1_1VU.html#adcb98982679f02c01c46ac8d22722e1d",
-"d9/d43/Control__Change_8hpp.html#a3e17b64a384aae0ae4e21f30bc673930",
-"d9/df9/classBankable_1_1MIDIButton.html#acfabd4911411ebbfd96d4080103f4725",
-"db/d02/Settings_8hpp.html#ad73f28073ff4298bbf7bdde13c083393",
-"db/d60/MCU_8hpp.html#aff4b1ae44544ef0f8a3bb796be4eb9de",
-"dc/d4c/classIncrementSelector.html#a57b6615469e554c514a9ff56dc24908f",
-"dd/d33/XBitmaps_8hpp.html#a84d2060525f627939a4f56602e2244a3",
-"de/d36/classBankable_1_1NoteButton.html#ad4273e4aa2f15de8dbe478af16af259e",
-"df/d9b/classMIDICNChannel.html#a81b4bc10a992aab57c598850a687c7b6"
+"d0/db9/VUDisplay_8hpp.html",
+"d1/d64/USBMIDI__Interface_8hpp_source.html",
+"d2/da8/NoteButtonMatrix_8hpp.html",
+"d3/d60/classCCIncrementDecrementButtons.html#a4a13b63f90ec988cd14d871df9dbc53b",
+"d3/de1/Bankable_2NoteButtonMatrix_8cpp_source.html",
+"d5/d5f/MIDIInputElementNote_8hpp.html",
+"d6/d72/classMIDIButton.html",
+"d8/d29/classHardwareSerialDebugMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f",
+"d9/d0d/classMIDINoteLED.html#abc54b9402e8555c615aaee35235f3aa4",
+"d9/db8/classSerialMIDI__Interface.html#abcc0f3cf0208b5d0a72e70ba9c72e78b",
+"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4b4095c85e5a4be88baef10c778811ca",
+"db/d60/MCU_8hpp.html#a43fe0d6d55f1f2b003c3568b6444321b",
+"db/de9/classBitArray.html#aeab58639d34ba3af28dabe49f2fa6992",
+"dc/df8/classIncrementSelectorLEDs.html#a1250b18b06f75d2eaef3a1906b7d94cf",
+"dd/dd6/classIncrementor.html#a7ceaef1e90db446980ae9b823d937b9e",
+"de/daf/PitchBendSender_8hpp_source.html",
+"functions_vars_b.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

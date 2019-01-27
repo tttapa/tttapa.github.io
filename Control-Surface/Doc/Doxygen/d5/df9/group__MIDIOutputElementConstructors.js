@@ -15,6 +15,7 @@ var group__MIDIOutputElementConstructors =
     [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#ga75c3c0dd2734eb91b8d4dd1038df9b43", null ],
     [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga4e817c4bf6f1e0481e253832440539a2", null ],
     [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga18afb0520a2a6e0fa012b9474c1a48b8", null ],
+    [ "NoteButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#ga0919df0f6f2cdff84c8e84cacee9d77b", null ],
     [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga516da4239fef7e463ff8bfcda208feb7", null ],
     [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga8dc98ebbfbfef00af8bf09a7140dc7d0", null ],
     [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga87e7f8dd26c1b5395a767d7033ba1cce", null ],

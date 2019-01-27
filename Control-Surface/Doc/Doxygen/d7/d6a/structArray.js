@@ -8,5 +8,6 @@ var structArray =
     [ "operator==", "d7/d6a/structArray.html#ab1bbbf7efcd036a89abe917e1b2ffb97", null ],
     [ "operator[]", "d7/d6a/structArray.html#aa3851ab37aefde60e79e78d17a449682", null ],
     [ "operator[]", "d7/d6a/structArray.html#a022734bbdbf9665f0acf09573939b9e1", null ],
-    [ "data", "d7/d6a/structArray.html#a797eabcf5e012d39e65fd88599b4d596", null ]
+    [ "data", "d7/d6a/structArray.html#a797eabcf5e012d39e65fd88599b4d596", null ],
+    [ "length", "d7/d6a/structArray.html#aa30345f4441dc7d7d794301c0469b37a", null ]
 ];

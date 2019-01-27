@@ -26,5 +26,6 @@ var searchData=
   ['rowpins',['rowPins',['../d8/d6c/classButtonMatrix.html#a598757145009131a1c275af993df9355',1,'ButtonMatrix']]],
   ['rpn_5flsb',['RPN_LSB',['../d4/dbe/namespaceMIDI__CC.html#a59e4c1cf0028b4ac79673f95afb865c0',1,'MIDI_CC']]],
   ['rpn_5fmsb',['RPN_MSB',['../d4/dbe/namespaceMIDI__CC.html#a34ae7b8c654c8c9fb5b77f6964c2a40b',1,'MIDI_CC']]],
-  ['rude_5fsolo',['RUDE_SOLO',['../d7/dc7/namespaceMCU.html#a6026f47b0188170b7a4799cc774a62eb',1,'MCU']]]
+  ['rude_5fsolo',['RUDE_SOLO',['../d7/dc7/namespaceMCU.html#a6026f47b0188170b7a4799cc774a62eb',1,'MCU']]],
+  ['rx_5fpacket',['rx_packet',['../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32',1,'USBMIDI_Interface']]]
 ];

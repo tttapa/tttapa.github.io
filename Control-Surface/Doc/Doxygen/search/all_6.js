@@ -29,7 +29,7 @@ var searchData=
   ['fixedpointahalf',['fixedPointAHalf',['../d7/d40/classEMA.html#a612ffac5a18df3450d6f25aff4a7a15f',1,'EMA']]],
   ['flip',['FLIP',['../d7/dc7/namespaceMCU.html#a09ff3d36e06dc759e5fc8a4f5752f761',1,'MCU']]],
   ['floor_5fcorrection',['FLOOR_CORRECTION',['../da/d0a/classMCU_1_1VULEDs__Base.html#a03a7e70a7d34196153b508101a7bf63f',1,'MCU::VULEDs_Base']]],
-  ['flush',['FLUSH',['../da/d69/PrintStream_8cpp.html#a263ccab0461d1643cb62c6625b788a7f',1,'FLUSH():&#160;PrintStream.cpp'],['../da/d69/PrintStream_8cpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp']]],
+  ['flush',['flush',['../da/d69/PrintStream_8cpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp']]],
   ['foot_5fcontroller',['Foot_Controller',['../d4/dbe/namespaceMIDI__CC.html#ad1b47e6a838ac359dfd884a7e08e2ba3',1,'MIDI_CC']]],
   ['foot_5fcontroller_5flsb',['Foot_Controller_LSB',['../d4/dbe/namespaceMIDI__CC.html#a45b427c1f69ff3bd7fcb7ad211cd7634',1,'MIDI_CC']]],
   ['formatprintstream',['formatPrintStream',['../da/d69/PrintStream_8cpp.html#aa9cd8589bac070bb2ab968b4f9c15231',1,'PrintStream.cpp']]],

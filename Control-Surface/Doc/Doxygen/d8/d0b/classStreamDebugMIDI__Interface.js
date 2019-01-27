@@ -23,6 +23,7 @@ var classStreamDebugMIDI__Interface =
     [ "sendNoteOn", "d8/d0b/classStreamDebugMIDI__Interface.html#a80c4843f88185a213ebe20a26c0fd579", null ],
     [ "sendPB", "d8/d0b/classStreamDebugMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f", null ],
     [ "sendPB", "d8/d0b/classStreamDebugMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1", null ],
+    [ "sendPC", "d8/d0b/classStreamDebugMIDI__Interface.html#a7002bfae1bf346eadead1397a238f9b6", null ],
     [ "setAsDefault", "d8/d0b/classStreamDebugMIDI__Interface.html#ac179dad8f24eedfa6a9f4e8dbaef7b46", null ],
     [ "setCallbacks", "d8/d0b/classStreamDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c", null ],
     [ "toLowerCase", "d8/d0b/classStreamDebugMIDI__Interface.html#a2c51af08d2d5cbe316723b6f5a142efc", null ],

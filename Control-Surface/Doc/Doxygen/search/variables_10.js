@@ -2,7 +2,7 @@ var searchData=
 [
   ['pan',['Pan',['../d4/dbe/namespaceMIDI__CC.html#aa6725029581654bb945c667627bfde93',1,'MIDI_CC']]],
   ['pan_5flsb',['Pan_LSB',['../d4/dbe/namespaceMIDI__CC.html#a57785a7761967c4c143cdec3f6101b5e',1,'MIDI_CC']]],
-  ['parser',['parser',['../d0/d89/classBluetoothMIDI__Interface.html#a1b07e54d4f50abddc9f5283e862d4286',1,'BluetoothMIDI_Interface::parser()'],['../d9/d73/classMIDI__Interface.html#abb9cd2d4b36083284f2c51ddff06de3b',1,'MIDI_Interface::parser()'],['../d3/dc3/classStreamMIDI__Interface.html#a2c9b5e576f7e2ad2df057a30d13412d5',1,'StreamMIDI_Interface::parser()']]],
+  ['parser',['parser',['../d0/d89/classBluetoothMIDI__Interface.html#a1b07e54d4f50abddc9f5283e862d4286',1,'BluetoothMIDI_Interface::parser()'],['../d9/d73/classMIDI__Interface.html#abb9cd2d4b36083284f2c51ddff06de3b',1,'MIDI_Interface::parser()'],['../d3/dc3/classStreamMIDI__Interface.html#a2c9b5e576f7e2ad2df057a30d13412d5',1,'StreamMIDI_Interface::parser()'],['../de/d05/classUSBMIDI__Interface.html#af6945ad96d523946517ecd07aeab4693',1,'USBMIDI_Interface::parser()']]],
   ['pcharacteristic',['pCharacteristic',['../d8/d39/classBLEMIDI.html#af388b78447b485342da87dbc401bcfeb',1,'BLEMIDI']]],
   ['peak',['peak',['../d4/d42/classMCU_1_1VUDisplay.html#a3b83c0ee0dcee75aacc60d8ac8ba3c03',1,'MCU::VUDisplay']]],
   ['pin',['pin',['../d1/d19/classButton.html#ae3d6505a06de31a4f285da136cee1f21',1,'Button']]],

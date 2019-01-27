@@ -11,6 +11,6 @@ var searchData=
   ['printhex',['printHex',['../da/d69/PrintStream_8cpp.html#adb5b74280fd1d090bd20805a6d0ec6f2',1,'PrintStream.cpp']]],
   ['printintegral',['printIntegral',['../da/d69/PrintStream_8cpp.html#a505bb61b2f822982a09821e3d52cd424',1,'PrintStream.cpp']]],
   ['printto',['printTo',['../d5/d54/classMCU_1_1SevenSegmentDisplay.html#a3a6b88b2ced14db4c783b80e22a2c8b1',1,'MCU::SevenSegmentDisplay']]],
-  ['programchanger',['ProgramChanger',['../de/d43/classProgramChanger.html#afe164307dd7ac6391ac2745d2544aa27',1,'ProgramChanger']]],
+  ['programchanger',['ProgramChanger',['../de/d43/classProgramChanger.html#a996f64faa6c0ce97c293b290c16f56b3',1,'ProgramChanger']]],
   ['publish',['publish',['../d0/d89/classBluetoothMIDI__Interface.html#ae838971ae0eac14ced4f874a39b9dd36',1,'BluetoothMIDI_Interface']]]
 ];

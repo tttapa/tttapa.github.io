@@ -224,6 +224,9 @@ var files_dup =
     [ "Bankable/Abstract/MIDIButton.hpp", "dd/d2a/Bankable_2Abstract_2MIDIButton_8hpp.html", [
       [ "MIDIButton", "d9/df9/classBankable_1_1MIDIButton.html", "d9/df9/classBankable_1_1MIDIButton" ]
     ] ],
+    [ "MIDIButtonLatched.hpp", "d1/dd3/MIDIButtonLatched_8hpp.html", [
+      [ "MIDIButtonLatched", "d3/d88/classMIDIButtonLatched.html", "d3/d88/classMIDIButtonLatched" ]
+    ] ],
     [ "Abstract/MIDIButtonLatching.cpp", "dd/d91/Abstract_2MIDIButtonLatching_8cpp.html", null ],
     [ "Bankable/Abstract/MIDIButtonLatching.cpp", "d5/d0d/Bankable_2Abstract_2MIDIButtonLatching_8cpp.html", null ],
     [ "Abstract/MIDIButtonLatching.hpp", "d0/d55/Abstract_2MIDIButtonLatching_8hpp.html", [
@@ -310,6 +313,7 @@ var files_dup =
     [ "NoteButton.cpp", "df/d83/NoteButton_8cpp.html", null ],
     [ "Bankable/NoteButton.hpp", "d5/d8e/Bankable_2NoteButton_8hpp.html", null ],
     [ "NoteButton.hpp", "d3/d80/NoteButton_8hpp.html", null ],
+    [ "NoteButtonLatched.hpp", "d0/d4e/NoteButtonLatched_8hpp.html", null ],
     [ "Bankable/NoteButtonLatching.cpp", "d8/de7/Bankable_2NoteButtonLatching_8cpp.html", null ],
     [ "NoteButtonLatching.cpp", "db/d28/NoteButtonLatching_8cpp.html", null ],
     [ "Bankable/NoteButtonLatching.hpp", "d6/d6e/Bankable_2NoteButtonLatching_8hpp.html", null ],
@@ -343,9 +347,7 @@ var files_dup =
       [ "Selectable", "de/de7/classSelectable.html", "de/de7/classSelectable" ]
     ] ],
     [ "Selector.cpp", "de/d6d/Selector_8cpp.html", null ],
-    [ "Selector.hpp", "d6/d16/Selector_8hpp.html", [
-      [ "Selector", "d1/d54/classSelector.html", "d1/d54/classSelector" ]
-    ] ],
+    [ "Selector.hpp", "d6/d16/Selector_8hpp.html", "d6/d16/Selector_8hpp" ],
     [ "SelectorDisplay.cpp", "d5/d23/SelectorDisplay_8cpp.html", null ],
     [ "SelectorDisplay.hpp", "df/d3d/SelectorDisplay_8hpp.html", [
       [ "SelectorDisplay", "d3/d51/classSelectorDisplay.html", "d3/d51/classSelectorDisplay" ]
@@ -362,7 +364,7 @@ var files_dup =
     ] ],
     [ "Settings.hpp", "db/d02/Settings_8hpp.html", "db/d02/Settings_8hpp" ],
     [ "SettingsWrapper.cpp", "d9/dcf/SettingsWrapper_8cpp.html", null ],
-    [ "SettingsWrapper.hpp", "d2/dd5/SettingsWrapper_8hpp.html", null ],
+    [ "SettingsWrapper.hpp", "d2/dd5/SettingsWrapper_8hpp.html", "d2/dd5/SettingsWrapper_8hpp" ],
     [ "SevenSegmentDisplay.cpp", "dd/d58/SevenSegmentDisplay_8cpp.html", null ],
     [ "SevenSegmentDisplay.hpp", "d4/d18/SevenSegmentDisplay_8hpp.html", [
       [ "SevenSegmentDisplay", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", "d5/d54/classMCU_1_1SevenSegmentDisplay" ]
@@ -426,9 +428,7 @@ var files_dup =
     ] ],
     [ "Hardware/LEDs/VULEDs.cpp", "d1/dff/Hardware_2LEDs_2VULEDs_8cpp.html", null ],
     [ "MIDI_Inputs/LEDs/MCU/VULEDs.cpp", "d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp.html", null ],
-    [ "Hardware/LEDs/VULEDs.hpp", "d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html", [
-      [ "DotBarDisplayLEDs", "d1/d3e/classDotBarDisplayLEDs.html", "d1/d3e/classDotBarDisplayLEDs" ]
-    ] ],
+    [ "Hardware/LEDs/VULEDs.hpp", "d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html", "d9/d28/Hardware_2LEDs_2VULEDs_8hpp" ],
     [ "MIDI_Inputs/LEDs/MCU/VULEDs.hpp", "d3/d52/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8hpp.html", [
       [ "VULEDs_Base", "da/d0a/classMCU_1_1VULEDs__Base.html", "da/d0a/classMCU_1_1VULEDs__Base" ],
       [ "VULEDs", "df/d36/classMCU_1_1VULEDs.html", "df/d36/classMCU_1_1VULEDs" ],

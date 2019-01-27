@@ -16,7 +16,7 @@ var searchData=
   ['v_5fpot_5fselect_5f6',['V_POT_SELECT_6',['../d7/dc7/namespaceMCU.html#a0151b66708e64dcd26a4ec2e60703083',1,'MCU']]],
   ['v_5fpot_5fselect_5f7',['V_POT_SELECT_7',['../d7/dc7/namespaceMCU.html#a64f1c21b767e1ac24ac649871e018170',1,'MCU']]],
   ['v_5fpot_5fselect_5f8',['V_POT_SELECT_8',['../d7/dc7/namespaceMCU.html#a7199347ed39a2aeb702548b3c81342a4',1,'MCU']]],
-  ['value',['value',['../dd/dd6/classIncrementor.html#a39bad7c1112fb5ab989942b2e1b56e16',1,'Incrementor::value()'],['../d7/dc9/structis__unsigned.html#af5b418ca6b02f609493c983ca1aa526e',1,'is_unsigned::value()'],['../d5/ddb/classMCU_1_1VPotRing.html#ae6da95de5aa4b8abc892ee8d942ea678',1,'MCU::VPotRing::value()'],['../d8/d4c/classMCU_1_1VU.html#ad40f40b1f9913e074d92c463b40b6f57',1,'MCU::VU::value()'],['../de/d18/classMIDINote.html#ac73ae709f8043b526448cdcdf988af3e',1,'MIDINote::value()']]],
+  ['value',['value',['../dd/dd6/classIncrementor.html#affd2ff24a11c4d73badca7a25b9b9609',1,'Incrementor::value()'],['../d7/dc9/structis__unsigned.html#af5b418ca6b02f609493c983ca1aa526e',1,'is_unsigned::value()'],['../d5/ddb/classMCU_1_1VPotRing.html#ae6da95de5aa4b8abc892ee8d942ea678',1,'MCU::VPotRing::value()'],['../d8/d4c/classMCU_1_1VU.html#ad40f40b1f9913e074d92c463b40b6f57',1,'MCU::VU::value()'],['../de/d18/classMIDINote.html#ac73ae709f8043b526448cdcdf988af3e',1,'MIDINote::value()']]],
   ['values',['values',['../da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a07155d1404800da8eb51cbc6c6da0c6e',1,'MCU::Bankable::VPotRing::values()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a4cfb57a29c7c03b92b8a40be2186078f',1,'MCU::Bankable::VU::values()'],['../d0/d42/classBankable_1_1MIDINote.html#a805e8788ac7a9c07784ea04c37885b39',1,'Bankable::MIDINote::values()']]],
   ['velocity',['velocity',['../dc/dd4/classDigitalNoteSender.html#abcbbb6fab8c321f6cd2887b78cd0f769',1,'DigitalNoteSender']]],
   ['view_5faudio',['VIEW_AUDIO',['../d7/dc7/namespaceMCU.html#a14d3846c3aff80a8b057b9036843fb70',1,'MCU']]],
@@ -41,5 +41,5 @@ var searchData=
   ['vu_5fpeak_5fdecay_5ftime',['VU_PEAK_DECAY_TIME',['../db/d02/Settings_8hpp.html#a8be794417540934c31a498143e8efafb',1,'Settings.hpp']]],
   ['vu_5fpeak_5fhold_5ftime',['VU_PEAK_HOLD_TIME',['../db/d02/Settings_8hpp.html#a774333c030e245d506acef0577246d7c',1,'Settings.hpp']]],
   ['vu_5fpeak_5fsmooth_5fdecay',['VU_PEAK_SMOOTH_DECAY',['../db/d02/Settings_8hpp.html#a5f630db6e6dc66cae6184da0276070b7',1,'Settings.hpp']]],
-  ['vuleds',['vuleds',['../d9/dbf/classAudioVULEDs.html#a957ee7e2b192655bcf8dee9f9bee521d',1,'AudioVULEDs']]]
+  ['vuleds',['vuleds',['../d9/dbf/classAudioVULEDs.html#a64675795cc0cddd9924285ac20dd0948',1,'AudioVULEDs']]]
 ];

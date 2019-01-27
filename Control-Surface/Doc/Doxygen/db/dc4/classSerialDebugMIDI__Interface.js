@@ -1,6 +1,6 @@
 var classSerialDebugMIDI__Interface =
 [
-    [ "SerialDebugMIDI_Interface", "db/dc4/classSerialDebugMIDI__Interface.html#ae22bad5016a8ea33ce6a761287acd882", null ],
+    [ "SerialDebugMIDI_Interface", "db/dc4/classSerialDebugMIDI__Interface.html#a8406a270e0d753b6dc00a1d0ff1d3a6e", null ],
     [ "begin", "db/dc4/classSerialDebugMIDI__Interface.html#ac15d88684640007b0bb1c2991bd2d396", null ],
     [ "dispatchMIDIEvent", "db/dc4/classSerialDebugMIDI__Interface.html#a58470aacb3262891701b456daadced6d", null ],
     [ "getChannelMessage", "db/dc4/classSerialDebugMIDI__Interface.html#a4923aed435b881567b3276614dad6d11", null ],
@@ -20,6 +20,7 @@ var classSerialDebugMIDI__Interface =
     [ "sendNoteOn", "db/dc4/classSerialDebugMIDI__Interface.html#a80c4843f88185a213ebe20a26c0fd579", null ],
     [ "sendPB", "db/dc4/classSerialDebugMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f", null ],
     [ "sendPB", "db/dc4/classSerialDebugMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1", null ],
+    [ "sendPC", "db/dc4/classSerialDebugMIDI__Interface.html#a7002bfae1bf346eadead1397a238f9b6", null ],
     [ "setAsDefault", "db/dc4/classSerialDebugMIDI__Interface.html#ac179dad8f24eedfa6a9f4e8dbaef7b46", null ],
     [ "setCallbacks", "db/dc4/classSerialDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c", null ],
     [ "update", "db/dc4/classSerialDebugMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4", null ],

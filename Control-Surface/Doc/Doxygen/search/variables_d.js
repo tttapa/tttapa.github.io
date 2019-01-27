@@ -11,7 +11,7 @@ var searchData=
   ['midi_5fstatus_5ftype_5fnames',['MIDI_STATUS_TYPE_NAMES',['../db/d55/DebugMIDI__Interface_8hpp.html#a616c796c1a81f07d22ac41b80d84f5e7',1,'DebugMIDI_Interface.hpp']]],
   ['midimsg',['midimsg',['../df/d0c/classMIDI__Parser.html#a1eb2260f33070b05d25d771cc0078672',1,'MIDI_Parser']]],
   ['mixers',['mixers',['../d4/de3/classVolumeControl.html#af0a817abed5a4f448b2072be0fbf3f56',1,'VolumeControl']]],
-  ['mode',['mode',['../d1/d3e/classDotBarDisplayLEDs.html#ac4c77ccf413109dd249922ab897e1c93',1,'DotBarDisplayLEDs::mode()'],['../d3/dd0/classRelativeCCSender.html#a4318791fc32ceb36b9100a6fc20341e1',1,'RelativeCCSender::mode()']]],
+  ['mode',['mode',['../d1/d3e/classDotBarDisplayLEDs.html#ab84c68ad7f06313d1e8e20aa26595bc6',1,'DotBarDisplayLEDs::mode()'],['../d3/dd0/classRelativeCCSender.html#a4318791fc32ceb36b9100a6fc20341e1',1,'RelativeCCSender::mode()']]],
   ['modulation_5fwheel',['Modulation_Wheel',['../d4/dbe/namespaceMIDI__CC.html#a20dc249ff93148b640953595b6ca7c31',1,'MIDI_CC']]],
   ['modulation_5fwheel_5flsb',['Modulation_Wheel_LSB',['../d4/dbe/namespaceMIDI__CC.html#a97969b88d3b56cea29f6ae0d3a6a25fb',1,'MIDI_CC']]],
   ['mono_5fmode_5fon',['Mono_Mode_On',['../d4/dbe/namespaceMIDI__CC.html#a3fd3aa3eeda78ac93b6c253b4f6bfc89',1,'MIDI_CC']]],

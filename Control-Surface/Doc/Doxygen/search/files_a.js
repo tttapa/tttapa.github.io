@@ -18,6 +18,7 @@ var searchData=
   ['midi_5fmessage_5fmatcher_2ehpp',['MIDI_message_matcher.hpp',['../d1/d30/MIDI__message__matcher_8hpp.html',1,'']]],
   ['midi_5fparser_2ecpp',['MIDI_Parser.cpp',['../d4/d84/MIDI__Parser_8cpp.html',1,'']]],
   ['midi_5fparser_2ehpp',['MIDI_Parser.hpp',['../d7/d2d/MIDI__Parser_8hpp.html',1,'']]],
+  ['midibuttonlatched_2ehpp',['MIDIButtonLatched.hpp',['../d1/dd3/MIDIButtonLatched_8hpp.html',1,'']]],
   ['midicnchanneladdress_2ecpp',['MIDICNChannelAddress.cpp',['../d6/d65/MIDICNChannelAddress_8cpp.html',1,'']]],
   ['midicnchanneladdress_2ehpp',['MIDICNChannelAddress.hpp',['../d8/d38/MIDICNChannelAddress_8hpp.html',1,'']]],
   ['midiincrementdecrementbuttons_2ecpp',['MIDIIncrementDecrementButtons.cpp',['../d3/d47/MIDIIncrementDecrementButtons_8cpp.html',1,'']]],

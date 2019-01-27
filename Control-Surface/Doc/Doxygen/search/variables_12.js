@@ -56,6 +56,7 @@ var searchData=
   ['spi_5fmax_5fspeed',['SPI_MAX_SPEED',['../db/d02/Settings_8hpp.html#a19dcde97c67ed7db5a54bb2175575339',1,'Settings.hpp']]],
   ['start',['start',['../de/d4e/classExtendedIOElement.html#acbd5a0c4f813052317227564ecfc295d',1,'ExtendedIOElement']]],
   ['starttime',['startTime',['../d0/d89/classBluetoothMIDI__Interface.html#ab64ee2e8cb5a7832881f6346a007f9f4',1,'BluetoothMIDI_Interface']]],
+  ['state',['state',['../d3/d88/classMIDIButtonLatched.html#a4a3b97f664ec55bc35766b754ddac25b',1,'MIDIButtonLatched']]],
   ['stop',['STOP',['../d7/dc7/namespaceMCU.html#ab923ca50cd779c04d489ee42b8d63526',1,'MCU']]],
   ['stream',['stream',['../d3/dc3/classStreamMIDI__Interface.html#ac3c535639ffaf05f66dde82dbbf25237',1,'StreamMIDI_Interface']]],
   ['switchpin',['switchPin',['../d0/daf/classEncoderSelector__Base.html#a1961dd72ccc811fe119f93c96c10607c',1,'EncoderSelector_Base']]],

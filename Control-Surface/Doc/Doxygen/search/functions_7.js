@@ -1,7 +1,8 @@
 var searchData=
 [
   ['generate',['generate',['../d5/db6/ArrayHelpers_8hpp.html#a662b743ce08991d63ce296f33137ca22',1,'ArrayHelpers.hpp']]],
-  ['generatearray',['generateArray',['../d5/db6/ArrayHelpers_8hpp.html#a39f85933ddb3692ec1657ba2cf2e82b8',1,'ArrayHelpers.hpp']]],
+  ['generatearray',['generateArray',['../d5/db6/ArrayHelpers_8hpp.html#ad057365533c1a68ad4db2f3d2cf80074',1,'ArrayHelpers.hpp']]],
+  ['generateincrementalarray',['generateIncrementalArray',['../d5/db6/ArrayHelpers_8hpp.html#a257e4a5e72cbdef5a31a770b83992741',1,'ArrayHelpers.hpp']]],
   ['get',['get',['../db/de9/classBitArray.html#ae70a67b38aba607d4301cca64a2f9640',1,'BitArray::get()'],['../d1/d54/classSelector.html#a3752b5ddd24addec01b3898f55c0a8ab',1,'Selector::get()']]],
   ['getaddress',['getAddress',['../d3/d10/classMIDICNChannelAddress.html#a65bea05cbf038e58d55b36955a2d2b1b',1,'MIDICNChannelAddress']]],
   ['getaddressoffset',['getAddressOffset',['../d3/d43/classBankableMIDIOutput.html#a6ed605c9fd59aa3c5b42116b341ea9bb',1,'BankableMIDIOutput']]],
@@ -13,6 +14,7 @@ var searchData=
   ['getbufferindex',['getBufferIndex',['../db/de9/classBitArray.html#a6f88d7f06380b68327b6affee50c5f5b',1,'BitArray']]],
   ['getbufferlength',['getBufferLength',['../db/de9/classBitArray.html#a15ee7c68209b609e730a0811133b69fa',1,'BitArray']]],
   ['getbuffermask',['getBufferMask',['../db/de9/classBitArray.html#ada8a19208bad820d128510b5e439fcf7',1,'BitArray']]],
+  ['getbuttoncopy',['getButtonCopy',['../d6/d72/classMIDIButton.html#a8842303990b364fc8e3deacd4768f9bd',1,'MIDIButton']]],
   ['getbyte',['getByte',['../db/de9/classBitArray.html#a517038489cd46836c80803f6e3a0f258',1,'BitArray']]],
   ['getcablenumber',['getCableNumber',['../d3/d10/classMIDICNChannelAddress.html#af095bbce791e4b3540dd82d31d0227c1',1,'MIDICNChannelAddress']]],
   ['getcenterled',['getCenterLed',['../db/dac/classMCU_1_1VPotRing__Base.html#a5d638e14de4b2e6508131c110d028ab4',1,'MCU::VPotRing_Base::getCenterLed() const'],['../db/dac/classMCU_1_1VPotRing__Base.html#aa8841edc64aac3b550d6cee2bcfa907e',1,'MCU::VPotRing_Base::getCenterLed(uint8_t value)']]],
@@ -45,7 +47,7 @@ var searchData=
   ['getstart',['getStart',['../de/d4e/classExtendedIOElement.html#a955322d29e4e63ec40a587b5ed9db31b',1,'ExtendedIOElement']]],
   ['getstartoff',['getStartOff',['../db/dac/classMCU_1_1VPotRing__Base.html#ac8c40d605d479ff826820438cd054ab6',1,'MCU::VPotRing_Base']]],
   ['getstarton',['getStartOn',['../db/dac/classMCU_1_1VPotRing__Base.html#ab33b338d3900b8430f31ae437d1211c8',1,'MCU::VPotRing_Base']]],
-  ['getstate',['getState',['../d1/d19/classButton.html#a444805aabacda3e290d668d2fdf4c735',1,'Button::getState()'],['../df/d38/classIncrementButton.html#a5c8d067118823e19c19ea3a4a0c0d965',1,'IncrementButton::getState()'],['../d5/d20/classIncrementDecrementButtons.html#ad6efab932f5a392210ad3bf71890466e',1,'IncrementDecrementButtons::getState()'],['../da/d1b/classMIDINote__Base.html#aa9f43b2f899a1022597f4cf885fb3eb3',1,'MIDINote_Base::getState()']]],
+  ['getstate',['getState',['../d1/d19/classButton.html#a444805aabacda3e290d668d2fdf4c735',1,'Button::getState()'],['../df/d38/classIncrementButton.html#a5c8d067118823e19c19ea3a4a0c0d965',1,'IncrementButton::getState()'],['../d5/d20/classIncrementDecrementButtons.html#ad6efab932f5a392210ad3bf71890466e',1,'IncrementDecrementButtons::getState()'],['../da/d1b/classMIDINote__Base.html#aa9f43b2f899a1022597f4cf885fb3eb3',1,'MIDINote_Base::getState()'],['../d3/d88/classMIDIButtonLatched.html#a8acd3f0f62aa9ef48e65350920510849',1,'MIDIButtonLatched::getState()']]],
   ['getsysexbuffer',['getSysExBuffer',['../d9/d73/classMIDI__Interface.html#aa737854accb7d5a1726e1ed899a30fb8',1,'MIDI_Interface::getSysExBuffer()'],['../df/d0c/classMIDI__Parser.html#a0fb94001b616d6a29fe31b50f9165e05',1,'MIDI_Parser::getSysExBuffer()']]],
   ['getsysexlength',['getSysExLength',['../d9/d73/classMIDI__Interface.html#a3fc87ebf2ec5429f3254d92714a935ea',1,'MIDI_Interface::getSysExLength()'],['../df/d0c/classMIDI__Parser.html#a3d045a60a816ac5797543fdc34683498',1,'MIDI_Parser::getSysExLength()']]],
   ['getsysexmessage',['getSysExMessage',['../df/d0c/classMIDI__Parser.html#acdae5ccd2c883d35379eece73219357c',1,'MIDI_Parser']]],

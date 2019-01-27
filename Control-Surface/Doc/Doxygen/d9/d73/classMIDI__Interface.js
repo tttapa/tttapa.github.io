@@ -21,6 +21,7 @@ var classMIDI__Interface =
     [ "sendNoteOn", "d9/d73/classMIDI__Interface.html#a80c4843f88185a213ebe20a26c0fd579", null ],
     [ "sendPB", "d9/d73/classMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f", null ],
     [ "sendPB", "d9/d73/classMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1", null ],
+    [ "sendPC", "d9/d73/classMIDI__Interface.html#a7002bfae1bf346eadead1397a238f9b6", null ],
     [ "setAsDefault", "d9/d73/classMIDI__Interface.html#ac179dad8f24eedfa6a9f4e8dbaef7b46", null ],
     [ "setCallbacks", "d9/d73/classMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c", null ],
     [ "update", "d9/d73/classMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4", null ],

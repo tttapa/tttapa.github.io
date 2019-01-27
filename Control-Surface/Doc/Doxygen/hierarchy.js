@@ -191,6 +191,10 @@ var hierarchy =
         [ "MIDIButton< sendOn, sendOff >", "d6/d72/classMIDIButton.html", null ],
         [ "Bankable::MIDIButton< DigitalCCSender::sendOn, DigitalCCSender::sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
         [ "Bankable::MIDIButton< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
+        [ "MIDIButtonLatched< sendOn, sendOff >", "d3/d88/classMIDIButtonLatched.html", null ],
+        [ "MIDIButtonLatched< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d3/d88/classMIDIButtonLatched.html", [
+          [ "NoteButtonLatched", "de/def/classNoteButtonLatched.html", null ]
+        ] ],
         [ "MIDIButtonLatching< sendOn, sendOff >", "d8/de1/classMIDIButtonLatching.html", null ],
         [ "MIDIButtonLatching< DigitalCCSender::sendOn, DigitalCCSender::sendOff >", "d8/de1/classMIDIButtonLatching.html", [
           [ "CCButtonLatching", "d8/db0/classCCButtonLatching.html", null ]
@@ -282,7 +286,7 @@ var hierarchy =
     [ "Hysteresis< ADC_BITS - PRECISION >", "d2/dcb/classHysteresis.html", null ],
     [ "IncrementButton", "df/d38/classIncrementButton.html", null ],
     [ "IncrementDecrementButtons", "d5/d20/classIncrementDecrementButtons.html", null ],
-    [ "Incrementor< T >", "dd/dd6/classIncrementor.html", null ],
+    [ "Incrementor< T, V >", "dd/dd6/classIncrementor.html", null ],
     [ "is_unsigned< T >", "d7/dc9/structis__unsigned.html", null ],
     [ "IVU", "d2/de9/classIVU.html", [
       [ "AudioVU", "d4/dce/classAudioVU.html", [
@@ -308,9 +312,12 @@ var hierarchy =
         [ "SerialMIDI_Interface< HardwareSerial >", "d9/db8/classSerialMIDI__Interface.html", [
           [ "HardwareSerialMIDI_Interface", "d9/d78/classHardwareSerialMIDI__Interface.html", null ]
         ] ],
-        [ "SerialMIDI_Interface< Serial_ >", "d9/db8/classSerialMIDI__Interface.html", [
+        [ "SerialMIDI_Interface< SoftwareSerial >", "d9/db8/classSerialMIDI__Interface.html", [
+          [ "SoftwareSerialMIDI_Interface", "d6/d6d/classSoftwareSerialMIDI__Interface.html", null ]
+        ] ],
+        [ "SerialMIDI_Interface< usb_serial_class >", "d9/db8/classSerialMIDI__Interface.html", [
           [ "USBSerialMIDI_Interface", "d8/d57/classUSBSerialMIDI__Interface.html", [
-            [ "USBMIDI_Interface", "de/d05/classUSBMIDI__Interface.html", null ]
+            [ "HairlessMIDI_Interface", "dc/dff/classHairlessMIDI__Interface.html", null ]
           ] ]
         ] ],
         [ "StreamDebugMIDI_Interface", "d8/d0b/classStreamDebugMIDI__Interface.html", [
@@ -320,9 +327,13 @@ var hierarchy =
           ] ],
           [ "SerialDebugMIDI_Interface< SoftwareSerial >", "db/dc4/classSerialDebugMIDI__Interface.html", [
             [ "SoftwareSerialDebugMIDI_Interface", "d3/d54/classSoftwareSerialDebugMIDI__Interface.html", null ]
+          ] ],
+          [ "SerialDebugMIDI_Interface< usb_serial_class >", "db/dc4/classSerialDebugMIDI__Interface.html", [
+            [ "USBDebugMIDI_Interface", "de/d2d/classUSBDebugMIDI__Interface.html", null ]
           ] ]
         ] ]
-      ] ]
+      ] ],
+      [ "USBMIDI_Interface", "de/d05/classUSBMIDI__Interface.html", null ]
     ] ],
     [ "MIDI_message", "de/df8/structMIDI__message.html", null ],
     [ "MIDI_message_matcher", "dd/d36/structMIDI__message__matcher.html", null ],
