@@ -25,6 +25,8 @@ var NAVTREE =
 [
   [ "Control Surface", "index.html", [
     [ "Getting Started", "db/df0/md__home_pieter_GitHub_Control-Surface_doc_Getting-Started.html", null ],
+    [ "Installation", "dc/da0/md__home_pieter_GitHub_Control-Surface_doc_Installation.html", null ],
+    [ "MIDI over USB", "da/dd9/md__home_pieter_GitHub_Control-Surface_doc_MIDI-over-USB.html", null ],
     [ "Todo List", "dd/da0/todo.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
@@ -78,12 +80,12 @@ var NAVTREEINDEX =
 "d9/d0d/classMIDINoteLED.html#abc54b9402e8555c615aaee35235f3aa4",
 "d9/db8/classSerialMIDI__Interface.html#abcc0f3cf0208b5d0a72e70ba9c72e78b",
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4b4095c85e5a4be88baef10c778811ca",
-"db/d60/MCU_8hpp.html#a43fe0d6d55f1f2b003c3568b6444321b",
-"db/de9/classBitArray.html#aeab58639d34ba3af28dabe49f2fa6992",
-"dc/df8/classIncrementSelectorLEDs.html#a1250b18b06f75d2eaef3a1906b7d94cf",
-"dd/dd6/classIncrementor.html#a7ceaef1e90db446980ae9b823d937b9e",
-"de/daf/PitchBendSender_8hpp_source.html",
-"functions_vars_b.html"
+"db/d60/MCU_8hpp.html#a4247bcebef466af542ed747d17c14fce",
+"db/de9/classBitArray.html#ae70a67b38aba607d4301cca64a2f9640",
+"dc/df8/classBankable_1_1MIDINoteLED.html#aee737e5e10cdda105bc65c0424f71cc0",
+"dd/dd6/classIncrementor.html#a20a51ad799227646885c0070c5d553f3",
+"de/d8c/classBankable_1_1PBPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf",
+"functions_vars.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

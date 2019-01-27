@@ -37,6 +37,7 @@ var searchData=
   ['inrange',['inRange',['../db/d6e/classBankableMIDIInput.html#a4b4095c85e5a4be88baef10c778811ca',1,'BankableMIDIInput::inRange()'],['../d8/d3d/namespaceExtIO.html#aedf6005ecc64cea16059965b80ce5f85',1,'ExtIO::inRange()']]],
   ['insertbefore',['insertBefore',['../dd/d16/classDoublyLinkedList.html#a534cc4a8db91810e6266243ef9a0b8f0',1,'DoublyLinkedList::insertBefore(Node *toBeInserted, Node *before)'],['../dd/d16/classDoublyLinkedList.html#a13888d516363e617de1a76b539804796',1,'DoublyLinkedList::insertBefore(Node &amp;toBeInserted, Node &amp;before)']]],
   ['insertsorted',['insertSorted',['../dd/d16/classDoublyLinkedList.html#a9827be9e57d28ee0d4fd1998d21e602e',1,'DoublyLinkedList::insertSorted(Node *node, Sorter sorter)'],['../dd/d16/classDoublyLinkedList.html#ae75df28899191ac4cb60d3390a11210a',1,'DoublyLinkedList::insertSorted(Node *node)']]],
+  ['installation_2emd',['Installation.md',['../d2/d2c/Installation_8md.html',1,'']]],
   ['intensity',['INTENSITY',['../da/dd0/classMAX7219__Base.html#a3aff37e2ea6bea2a289fc3d8dc132954',1,'MAX7219_Base']]],
   ['interval',['interval',['../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d',1,'Timer']]],
   ['invert',['invert',['../d1/d19/classButton.html#a1027f25dee91c915849d531515365aab',1,'Button']]],
@@ -50,5 +51,6 @@ var searchData=
   ['iswhitespace',['isWhiteSpace',['../d8/d0b/classStreamDebugMIDI__Interface.html#a06d80f3b4a5fa49d443a1379e124e785',1,'StreamDebugMIDI_Interface']]],
   ['iterator',['iterator',['../dd/d16/classDoublyLinkedList.html#a00ad35f05ce61d50a4cb1e914aba50dd',1,'DoublyLinkedList']]],
   ['iterator_5fcategory',['iterator_category',['../dd/d02/classDoublyLinkedList_1_1node__iterator.html#aa787edffd90be4e79d4a0fc26686ea6f',1,'DoublyLinkedList::node_iterator::iterator_category()'],['../d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html#a75b6ebfbc28d2daea552509cd2d5ae31',1,'DoublyLinkedList::reverse_node_iterator::iterator_category()']]],
-  ['ivu',['IVU',['../d2/de9/classIVU.html',1,'']]]
+  ['ivu',['IVU',['../d2/de9/classIVU.html',1,'']]],
+  ['installation',['Installation',['../dc/da0/md__home_pieter_GitHub_Control-Surface_doc_Installation.html',1,'']]]
 ];

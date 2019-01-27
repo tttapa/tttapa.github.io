@@ -12,6 +12,7 @@ var searchData=
   ['max7219sevensegmentdisplay_2ehpp',['MAX7219SevenSegmentDisplay.hpp',['../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html',1,'']]],
   ['mcu_2ecpp',['MCU.cpp',['../d1/deb/MCU_8cpp.html',1,'']]],
   ['mcu_2ehpp',['MCU.hpp',['../db/d60/MCU_8hpp.html',1,'']]],
+  ['midi_2dover_2dusb_2emd',['MIDI-over-USB.md',['../dc/df4/MIDI-over-USB_8md.html',1,'']]],
   ['midi_5finterface_2ecpp',['MIDI_Interface.cpp',['../de/d0f/MIDI__Interface_8cpp.html',1,'']]],
   ['midi_5finterface_2ehpp',['MIDI_Interface.hpp',['../d6/d04/MIDI__Interface_8hpp.html',1,'']]],
   ['midi_5fmessage_5fmatcher_2ecpp',['MIDI_message_matcher.cpp',['../dd/d0a/MIDI__message__matcher_8cpp.html',1,'']]],

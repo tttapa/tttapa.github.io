@@ -11,5 +11,6 @@ var searchData=
   ['incrementselector_2ecpp',['IncrementSelector.cpp',['../d1/d7f/IncrementSelector_8cpp.html',1,'']]],
   ['incrementselector_2ehpp',['IncrementSelector.hpp',['../d5/da2/IncrementSelector_8hpp.html',1,'']]],
   ['incrementselectorleds_2ecpp',['IncrementSelectorLEDs.cpp',['../db/ddc/IncrementSelectorLEDs_8cpp.html',1,'']]],
-  ['incrementselectorleds_2ehpp',['IncrementSelectorLEDs.hpp',['../db/d24/IncrementSelectorLEDs_8hpp.html',1,'']]]
+  ['incrementselectorleds_2ehpp',['IncrementSelectorLEDs.hpp',['../db/d24/IncrementSelectorLEDs_8hpp.html',1,'']]],
+  ['installation_2emd',['Installation.md',['../d2/d2c/Installation_8md.html',1,'']]]
 ];
