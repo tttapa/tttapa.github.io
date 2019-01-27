@@ -4,5 +4,6 @@ var namespaces_dup =
     [ "ExtIO", "d8/d3d/namespaceExtIO.html", null ],
     [ "MCU", "d7/dc7/namespaceMCU.html", "d7/dc7/namespaceMCU" ],
     [ "MIDI_CC", "d4/dbe/namespaceMIDI__CC.html", null ],
+    [ "MIDI_Notes", "d7/d78/namespaceMIDI__Notes.html", null ],
     [ "XBM", "dd/d93/namespaceXBM.html", null ]
 ];

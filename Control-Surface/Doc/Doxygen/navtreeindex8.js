@@ -1,5 +1,7 @@
 var NAVTREEINDEX8 =
 {
+"d8/d20/classMIDIRotaryEncoder.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,91,2],
+"d8/d20/classMIDIRotaryEncoder.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,91,6],
 "d8/d20/classMIDIRotaryEncoder.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,91,5],
 "d8/d20/classMIDIRotaryEncoder.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,91,11],
 "d8/d20/classMIDIRotaryEncoder.html#a8af924e5b3b708eb042919703d175ed3":[6,0,91,13],
@@ -12,8 +14,8 @@ var NAVTREEINDEX8 =
 "d8/d20/classMIDIRotaryEncoder.html#ace9489f2ffd66a7352a4f67b57394ea2":[6,0,91,1],
 "d8/d20/classMIDIRotaryEncoder.html#acfabd4911411ebbfd96d4080103f4725":[6,0,91,7],
 "d8/d20/classMIDIRotaryEncoder.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,91,10],
-"d8/d21/USBMIDI__Parser_8hpp.html":[7,0,255],
-"d8/d21/USBMIDI__Parser_8hpp_source.html":[7,0,255],
+"d8/d21/USBMIDI__Parser_8hpp.html":[7,0,256],
+"d8/d21/USBMIDI__Parser_8hpp_source.html":[7,0,256],
 "d8/d29/classHardwareSerialDebugMIDI__Interface.html":[4,3,3],
 "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f":[4,3,3,18],
 "d8/d29/classHardwareSerialDebugMIDI__Interface.html#a0db0ea9a49ced7874f0a5b533e625a20":[4,3,3,12],
@@ -142,8 +144,8 @@ var NAVTREEINDEX8 =
 "d8/d78/Control__Change_8cpp_source.html":[7,0,60],
 "d8/d8b/MAX7219__Base_8cpp.html":[7,0,129],
 "d8/d8b/MAX7219__Base_8cpp_source.html":[7,0,129],
-"d8/d93/ShiftRegisterOutBase_8hpp.html":[7,0,237],
-"d8/d93/ShiftRegisterOutBase_8hpp_source.html":[7,0,237],
+"d8/d93/ShiftRegisterOutBase_8hpp.html":[7,0,238],
+"d8/d93/ShiftRegisterOutBase_8hpp_source.html":[7,0,238],
 "d8/daf/ManyButtonsSelector_8cpp.html":[7,0,123],
 "d8/daf/ManyButtonsSelector_8cpp_source.html":[7,0,123],
 "d8/db0/classCCButtonLatching.html":[4,0,13],
@@ -191,8 +193,8 @@ var NAVTREEINDEX8 =
 "d8/db7/Bankable_2CCButtons_8cpp_source.html":[7,0,42],
 "d8/dd5/CCButtons_8cpp.html":[7,0,43],
 "d8/dd5/CCButtons_8cpp_source.html":[7,0,43],
-"d8/dd8/USBMIDI__Parser_8cpp.html":[7,0,254],
-"d8/dd8/USBMIDI__Parser_8cpp_source.html":[7,0,254],
+"d8/dd8/USBMIDI__Parser_8cpp.html":[7,0,255],
+"d8/dd8/USBMIDI__Parser_8cpp_source.html":[7,0,255],
 "d8/de1/classMIDIButtonLatching.html":[6,0,73],
 "d8/de1/classMIDIButtonLatching.html#a2008b6b51e779d44e87129e43f5ccc3c":[6,0,73,1],
 "d8/de1/classMIDIButtonLatching.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,73,4],
@@ -247,7 +249,5 @@ var NAVTREEINDEX8 =
 "d8/df7/classEncoderSelectorLEDs.html#ae2862f751184a7163e83947716a5b515":[6,0,40,21],
 "d8/df7/classEncoderSelectorLEDs.html#aedf651d52b4657c226a0407bc4558183":[6,0,40,6],
 "d9/d03/Bankable_2Abstract_2MIDIButtons_8cpp.html":[7,0,155],
-"d9/d03/Bankable_2Abstract_2MIDIButtons_8cpp_source.html":[7,0,155],
-"d9/d0a/EMA_8cpp.html":[7,0,84],
-"d9/d0a/EMA_8cpp_source.html":[7,0,84]
+"d9/d03/Bankable_2Abstract_2MIDIButtons_8cpp_source.html":[7,0,155]
 };

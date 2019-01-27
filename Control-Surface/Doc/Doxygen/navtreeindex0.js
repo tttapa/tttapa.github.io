@@ -22,9 +22,9 @@ var NAVTREEINDEX0 =
 "d0/d0d/classSerialMIDI__Parser.html#ac6808b5b4f403e48368f32385171929c":[6,0,115,7],
 "d0/d0d/classSerialMIDI__Parser.html#acdae5ccd2c883d35379eece73219357c":[6,0,115,5],
 "d0/d0d/classSerialMIDI__Parser.html#add28e4338eca6dc5b9f5f97320fa38a2":[6,0,115,9],
-"d0/d1b/PushButtonsLEDsShiftRegMultiplex_8ino-example.html":[8,8],
-"d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp.html":[7,0,269],
-"d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp_source.html":[7,0,269],
+"d0/d1b/PushButtonsLEDsShiftRegMultiplex_8ino-example.html":[8,9],
+"d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp.html":[7,0,270],
+"d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp_source.html":[7,0,270],
 "d0/d31/MIDIInputElementNote_8cpp.html":[7,0,172],
 "d0/d31/MIDIInputElementNote_8cpp_source.html":[7,0,172],
 "d0/d42/classBankable_1_1MIDINote.html":[6,0,0,12],
@@ -77,8 +77,8 @@ var NAVTREEINDEX0 =
 "d0/d43/classMCU_1_1Bankable_1_1VU.html#a4b08a75485926ddd3fa6396b6a4da2a1":[6,0,1,0,2,27],
 "d0/d43/classMCU_1_1Bankable_1_1VU.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,1,0,2,14],
 "d0/d43/classMCU_1_1Bankable_1_1VU.html#a4cfb57a29c7c03b92b8a40be2186078f":[6,0,1,0,2,36],
-"d0/d43/classMCU_1_1Bankable_1_1VU.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,2,35],
 "d0/d43/classMCU_1_1Bankable_1_1VU.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,2,34],
+"d0/d43/classMCU_1_1Bankable_1_1VU.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,2,35],
 "d0/d43/classMCU_1_1Bankable_1_1VU.html#a58d7b5a92fc5f7fa8d5f1d3bb43cdfa1":[6,0,1,0,2,23],
 "d0/d43/classMCU_1_1Bankable_1_1VU.html#a6d425d7489541b6ff8b89e5f9c2cb5e1":[6,0,1,0,2,19],
 "d0/d43/classMCU_1_1Bankable_1_1VU.html#a6f96ce9db29d8d001956e9c094750479":[6,0,1,0,2,24],
@@ -248,6 +248,6 @@ var NAVTREEINDEX0 =
 "d0/daf/classEncoderSelector__Base.html#aedf651d52b4657c226a0407bc4558183":[6,0,39,5],
 "d0/daf/classEncoderSelector__Base.html#af596b0ad8a8abe00fd4760c201e77cf3":[6,0,39,22],
 "d0/daf/classEncoderSelector__Base.html#afebd857c6134f35f2d14308862cc3ae5":[6,0,39,25],
-"d0/db4/ShiftRegisterOut_8hpp.html":[7,0,235],
-"d0/db4/ShiftRegisterOut_8hpp_source.html":[7,0,235]
+"d0/db4/ShiftRegisterOut_8hpp.html":[7,0,236],
+"d0/db4/ShiftRegisterOut_8hpp_source.html":[7,0,236]
 };

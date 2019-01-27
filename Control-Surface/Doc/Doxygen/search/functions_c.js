@@ -6,6 +6,7 @@ var searchData=
   ['node_5fiterator_5fbase',['node_iterator_base',['../db/d52/classDoublyLinkedList_1_1node__iterator__base.html#a4c04d1304cb2cf5dc55c7df7dd22473a',1,'DoublyLinkedList::node_iterator_base']]],
   ['noleadingzeros',['noleadingzeros',['../da/d69/PrintStream_8cpp.html#a8c9f111e05c74acb9bdffce673ef5709',1,'noleadingzeros(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#a8c9f111e05c74acb9bdffce673ef5709',1,'noleadingzeros(Print &amp;printer):&#160;PrintStream.cpp']]],
   ['noshowbase',['noshowbase',['../da/d69/PrintStream_8cpp.html#a8ae8a20941a7cf9957efc590d5a56ef4',1,'noshowbase(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#a8ae8a20941a7cf9957efc590d5a56ef4',1,'noshowbase(Print &amp;printer):&#160;PrintStream.cpp']]],
+  ['note',['note',['../d7/d78/namespaceMIDI__Notes.html#a559f01ec7251fdc9c5a5bc0e26b97372',1,'MIDI_Notes']]],
   ['notebitmapdisplay',['NoteBitmapDisplay',['../de/dc5/classNoteBitmapDisplay.html#ae74d23a77f203c107abc197985592400',1,'NoteBitmapDisplay']]],
   ['notebutton',['NoteButton',['../d5/df9/group__MIDIOutputElementConstructors.html#ga18afb0520a2a6e0fa012b9474c1a48b8',1,'Bankable::NoteButton::NoteButton()'],['../d5/df9/group__MIDIOutputElementConstructors.html#ga4e817c4bf6f1e0481e253832440539a2',1,'NoteButton::NoteButton()']]],
   ['notebuttonlatched',['NoteButtonLatched',['../d5/df9/group__MIDIOutputElementConstructors.html#ga0919df0f6f2cdff84c8e84cacee9d77b',1,'NoteButtonLatched']]],

@@ -329,6 +329,7 @@ var files_dup =
     [ "NoteButtons.cpp", "d2/d3d/NoteButtons_8cpp.html", null ],
     [ "Bankable/NoteButtons.hpp", "dd/dbb/Bankable_2NoteButtons_8hpp.html", null ],
     [ "NoteButtons.hpp", "d4/db7/NoteButtons_8hpp.html", null ],
+    [ "Notes.hpp", "d9/dc5/Notes_8hpp.html", "d9/dc5/Notes_8hpp" ],
     [ "Bankable/PBPotentiometer.cpp", "de/d09/Bankable_2PBPotentiometer_8cpp.html", null ],
     [ "PBPotentiometer.cpp", "d6/d59/PBPotentiometer_8cpp.html", null ],
     [ "Bankable/PBPotentiometer.hpp", "d9/d99/Bankable_2PBPotentiometer_8hpp.html", null ],

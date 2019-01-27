@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['b',['B',['../d7/d78/namespaceMIDI__Notes.html#a5d3863f3260c9ccc894ed8c2827b9423',1,'MIDI_Notes']]],
   ['balance',['Balance',['../d4/dbe/namespaceMIDI__CC.html#a41e0695dbfd7e67a7a516c1f68e24b58',1,'MIDI_CC']]],
   ['balance_5flsb',['Balance_LSB',['../d4/dbe/namespaceMIDI__CC.html#ad7490da9ab84be381f5d4671eeb79074',1,'MIDI_CC']]],
   ['bank',['bank',['../db/d6e/classBankableMIDIInput.html#abf0c1d8da75edecd39505d52ea0dab1d',1,'BankableMIDIInput::bank()'],['../d3/d43/classBankableMIDIOutput.html#a2f9470a247cd26661a3bdc539e8341e3',1,'BankableMIDIOutput::bank()'],['../d5/db5/classBankConfig.html#ae780354d12556e3b5b47d800896d3b76',1,'BankConfig::bank()'],['../d0/d95/classOutputBankConfig.html#ac16b53d8c35e9df535327003c7fa78a9',1,'OutputBankConfig::bank()']]],
@@ -11,6 +12,7 @@ var searchData=
   ['baseaddress',['baseAddress',['../d2/d87/classMIDIButtons.html#a33688ac1aae36fabb6ff45183a9c8be5',1,'MIDIButtons::baseAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a328e24602541106644e51fb9b4679f15',1,'Bankable::MIDIButtons::baseAddress()'],['../d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a656050d5d5657013853098bfb3c816fb',1,'Bankable::MIDIFilteredAnalogAddressable::baseAddress()']]],
   ['basechannel',['baseChannel',['../d0/d54/classMIDIButtonMatrix.html#ad6697b95b9ed7ab7163e9e5916fcd5ad',1,'MIDIButtonMatrix::baseChannel()'],['../d3/d65/classBankable_1_1MIDIButtonMatrix.html#a3a59b2c010fc696a75b5d61b33390883',1,'Bankable::MIDIButtonMatrix::baseChannel()']]],
   ['baud',['baud',['../db/dc4/classSerialDebugMIDI__Interface.html#a29017961303b5040ee17afc9589e87f3',1,'SerialDebugMIDI_Interface::baud()'],['../d9/db8/classSerialMIDI__Interface.html#acbae10bfe3f32c2fc60b7a01fb35d1ad',1,'SerialMIDI_Interface::baud()']]],
+  ['bb',['Bb',['../d7/d78/namespaceMIDI__Notes.html#a3fb964ab484d091e83ead44b3649d667',1,'MIDI_Notes']]],
   ['beats',['BEATS',['../d7/dc7/namespaceMCU.html#a4d49d2667fe2c176b37fe25d273391bc',1,'MCU']]],
   ['bitorder',['bitOrder',['../d8/db4/classShiftRegisterOutBase.html#aab68e6c0b29526ebe79873b1adc3effe',1,'ShiftRegisterOutBase']]],
   ['bits',['bits',['../d2/df6/structXBitmap.html#ae81f5ca02f09dc774c8150359e02f019',1,'XBitmap']]],

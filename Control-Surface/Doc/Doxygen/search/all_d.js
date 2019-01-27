@@ -54,6 +54,7 @@ var searchData=
   ['midi_5fmessage_5fmatcher',['MIDI_message_matcher',['../dd/d36/structMIDI__message__matcher.html',1,'MIDI_message_matcher'],['../dd/d36/structMIDI__message__matcher.html#a3d869b8c5ae8305bcf72d53afa9278d4',1,'MIDI_message_matcher::MIDI_message_matcher(uint8_t type, Channel channel, uint8_t data1, uint8_t data2)'],['../dd/d36/structMIDI__message__matcher.html#a3deff10c8d8156afb32adeeebe58510e',1,'MIDI_message_matcher::MIDI_message_matcher(const MIDI_message &amp;midimsg)']]],
   ['midi_5fmessage_5fmatcher_2ecpp',['MIDI_message_matcher.cpp',['../dd/d0a/MIDI__message__matcher_8cpp.html',1,'']]],
   ['midi_5fmessage_5fmatcher_2ehpp',['MIDI_message_matcher.hpp',['../d1/d30/MIDI__message__matcher_8hpp.html',1,'']]],
+  ['midi_5fnotes',['MIDI_Notes',['../d7/d78/namespaceMIDI__Notes.html',1,'']]],
   ['midi_5fparser',['MIDI_Parser',['../df/d0c/classMIDI__Parser.html',1,'']]],
   ['midi_5fparser_2ecpp',['MIDI_Parser.cpp',['../d4/d84/MIDI__Parser_8cpp.html',1,'']]],
   ['midi_5fparser_2ehpp',['MIDI_Parser.hpp',['../d7/d2d/MIDI__Parser_8hpp.html',1,'']]],

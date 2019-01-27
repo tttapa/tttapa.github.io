@@ -10,5 +10,6 @@ var searchData=
   ['notebuttonmatrix_2ecpp',['NoteButtonMatrix.cpp',['../d0/d4c/NoteButtonMatrix_8cpp.html',1,'']]],
   ['notebuttonmatrix_2ehpp',['NoteButtonMatrix.hpp',['../d2/da8/NoteButtonMatrix_8hpp.html',1,'']]],
   ['notebuttons_2ecpp',['NoteButtons.cpp',['../d2/d3d/NoteButtons_8cpp.html',1,'']]],
-  ['notebuttons_2ehpp',['NoteButtons.hpp',['../d4/db7/NoteButtons_8hpp.html',1,'']]]
+  ['notebuttons_2ehpp',['NoteButtons.hpp',['../d4/db7/NoteButtons_8hpp.html',1,'']]],
+  ['notes_2ehpp',['Notes.hpp',['../d9/dc5/Notes_8hpp.html',1,'']]]
 ];

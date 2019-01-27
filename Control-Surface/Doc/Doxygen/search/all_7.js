@@ -1,6 +1,8 @@
 var searchData=
 [
+  ['g',['G',['../d7/d78/namespaceMIDI__Notes.html#a7e6f3ec66b39be4c71e7d9a85dc6370a',1,'MIDI_Notes']]],
   ['gain',['gain',['../d4/dce/classAudioVU.html#aaa14a6cb4fc96a9e889087fd284ca3d8',1,'AudioVU']]],
+  ['gb',['Gb',['../d7/d78/namespaceMIDI__Notes.html#ab83787ce70f99280924d2ed7dd09fbd8',1,'MIDI_Notes']]],
   ['general_5fpurpose_5fcontroller_5f1',['General_Purpose_Controller_1',['../d4/dbe/namespaceMIDI__CC.html#a1c8acee58b40318f585c6bcae9927aa6',1,'MIDI_CC']]],
   ['general_5fpurpose_5fcontroller_5f1_5flsb',['General_Purpose_Controller_1_LSB',['../d4/dbe/namespaceMIDI__CC.html#acc7f0e4e0089bd816976347a011cce56',1,'MIDI_CC']]],
   ['general_5fpurpose_5fcontroller_5f2',['General_Purpose_Controller_2',['../d4/dbe/namespaceMIDI__CC.html#ac81539f928e838e7f57e5d0979bc4cf2',1,'MIDI_CC']]],

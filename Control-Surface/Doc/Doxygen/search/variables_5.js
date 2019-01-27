@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['e',['E',['../d7/d78/namespaceMIDI__Notes.html#abbbb37697caf646f1842b14ec8f868fd',1,'MIDI_Notes']]],
+  ['eb',['Eb',['../d7/d78/namespaceMIDI__Notes.html#a4d4ea8cc8db7b12fdbfb26e5472a95fa',1,'MIDI_Notes']]],
   ['effect_5fcontrol_5f1',['Effect_Control_1',['../d4/dbe/namespaceMIDI__CC.html#a387d0b2e50ca62985339ada9e37c9212',1,'MIDI_CC']]],
   ['effect_5fcontrol_5f1_5flsb',['Effect_Control_1_LSB',['../d4/dbe/namespaceMIDI__CC.html#a3174429add10be66c65c11ef5d47f4e3',1,'MIDI_CC']]],
   ['effect_5fcontrol_5f2',['Effect_Control_2',['../d4/dbe/namespaceMIDI__CC.html#a74d40ba44bcb8038da09d9e94ebe8697',1,'MIDI_CC']]],

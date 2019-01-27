@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['octave',['octave',['../d7/d78/namespaceMIDI__Notes.html#ac8e09ef6ac945b393a10ffd638746888',1,'MIDI_Notes']]],
   ['offset',['offset',['../d3/d51/classSelectorDisplay.html#ad3074f69e1f3767e017d76eade1bff49',1,'SelectorDisplay::offset()'],['../de/d4e/classExtendedIOElement.html#a4bc35f3be5cfc6a63b714bab7fb8222b',1,'ExtendedIOElement::offset()'],['../d2/dcb/classHysteresis.html#a531097a0bf6882bbfca412f1bc3fa95e',1,'Hysteresis::offset()']]],
   ['offvalue',['offValue',['../d5/db5/classDigitalCCSender.html#a78116488a36a4894c9f838c6a1c77ab4',1,'DigitalCCSender']]],
   ['omni_5fmode_5foff',['Omni_Mode_Off',['../d4/dbe/namespaceMIDI__CC.html#a28541aadfc7e36623b264046905b9cb6',1,'MIDI_CC']]],
