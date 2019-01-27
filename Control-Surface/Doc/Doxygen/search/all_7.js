@@ -78,5 +78,5 @@ var searchData=
   ['greenbit',['greenBit',['../d5/d45/structShiftRegisterOutRGB.html#ab969310ccdd300931776fdbcb598211f',1,'ShiftRegisterOutRGB']]],
   ['group',['GROUP',['../d7/dc7/namespaceMCU.html#aaae72d5574f869865d76bcb55bd819f8',1,'MCU']]],
   ['groups_2eh',['Groups.h',['../da/d0a/Groups_8h.html',1,'']]],
-  ['getting_20started',['Getting Started',['../db/df0/md__home_pieter_GitHub_Control-Surface_doc_Getting-Started.html',1,'']]]
+  ['getting_20started',['Getting Started',['../dd/dcc/md_Getting-Started.html',1,'']]]
 ];

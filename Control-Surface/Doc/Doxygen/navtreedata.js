@@ -24,9 +24,9 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "Control Surface", "index.html", [
-    [ "Getting Started", "db/df0/md__home_pieter_GitHub_Control-Surface_doc_Getting-Started.html", null ],
-    [ "Installation", "dc/da0/md__home_pieter_GitHub_Control-Surface_doc_Installation.html", null ],
-    [ "MIDI over USB", "da/dd9/md__home_pieter_GitHub_Control-Surface_doc_MIDI-over-USB.html", null ],
+    [ "Getting Started", "dd/dcc/md_Getting-Started.html", null ],
+    [ "Installation", "d4/d6d/md_Installation.html", null ],
+    [ "MIDI over USB", "db/de6/md_MIDI-over-USB.html", null ],
     [ "Todo List", "dd/da0/todo.html", null ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
@@ -70,22 +70,22 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d0/db9/VUDisplay_8hpp.html",
-"d1/d64/USBMIDI__Interface_8hpp_source.html",
-"d2/da8/NoteButtonMatrix_8hpp.html",
-"d3/d60/classCCIncrementDecrementButtons.html#a4a13b63f90ec988cd14d871df9dbc53b",
-"d3/de1/Bankable_2NoteButtonMatrix_8cpp_source.html",
-"d5/d5f/MIDIInputElementNote_8hpp.html",
-"d6/d72/classMIDIButton.html",
-"d8/d29/classHardwareSerialDebugMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f",
-"d9/d0d/classMIDINoteLED.html#abc54b9402e8555c615aaee35235f3aa4",
-"d9/db8/classSerialMIDI__Interface.html#abcc0f3cf0208b5d0a72e70ba9c72e78b",
-"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4b4095c85e5a4be88baef10c778811ca",
-"db/d60/MCU_8hpp.html#a4247bcebef466af542ed747d17c14fce",
-"db/de9/classBitArray.html#ae70a67b38aba607d4301cca64a2f9640",
-"dc/df8/classBankable_1_1MIDINoteLED.html#aee737e5e10cdda105bc65c0424f71cc0",
-"dd/dd6/classIncrementor.html#a20a51ad799227646885c0070c5d553f3",
-"de/d8c/classBankable_1_1PBPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf",
-"functions_vars.html"
+"d1/d7f/IncrementSelector_8cpp_source.html",
+"d2/daa/classCCButton.html",
+"d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a64d5c27c6796f20369da7d68f4e21250",
+"d3/dc5/classEncoderSelector.html#ae2862f751184a7163e83947716a5b515",
+"d5/d54/classMCU_1_1SevenSegmentDisplay.html#a3cdc427ed1a74ba765311e87dbdbe60b",
+"d6/d6d/classSoftwareSerialMIDI__Interface.html#a57bf8a86d2d4067d4de1dd6da26701ed",
+"d8/d20/classMIDIRotaryEncoder.html#a6bae640621972b14ad9c28b6b399f08f",
+"d9/d0d/classMIDINoteLED.html",
+"d9/db8/classSerialMIDI__Interface.html#a3058e51eff2e68b7480b1c18c1aa8dbd",
+"da/d6a/classPBPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf",
+"db/d60/MCU_8hpp.html#a252f0e7e263b059329af94d38e0de29f",
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#af8c3b3200bfae07e61d25fa99efd9dcf",
+"dc/dea/classTimer.html#ad4fa8e5c9f307790593ab1f7d9862205",
+"dd/d8b/classSelectorLEDs.html#a414872fbd3ea45e7ac44a42fcf2fc88d",
+"de/d6d/Selector_8cpp_source.html",
+"functions_func_h.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

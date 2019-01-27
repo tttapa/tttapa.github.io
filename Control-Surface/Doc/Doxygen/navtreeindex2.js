@@ -1,7 +1,5 @@
 var NAVTREEINDEX2 =
 {
-"d1/d64/USBMIDI__Interface_8hpp_source.html":[7,0,253],
-"d1/d7f/IncrementSelector_8cpp.html":[7,0,115],
 "d1/d7f/IncrementSelector_8cpp_source.html":[7,0,115],
 "d1/d8e/group__ExtIO.html":[4,4],
 "d1/d8e/group__ExtIO.html#ga3ab4921db62494df27df05daf4b11e70":[4,4,4],
@@ -249,5 +247,7 @@ var NAVTREEINDEX2 =
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#aee737e5e10cdda105bc65c0424f71cc0":[6,0,1,0,1,15],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#afef7aed594d218edd4b328e87bcd4e59":[6,0,1,0,1,20],
 "d2/d97/MIDINote_8hpp.html":[7,0,175],
-"d2/d97/MIDINote_8hpp_source.html":[7,0,175]
+"d2/d97/MIDINote_8hpp_source.html":[7,0,175],
+"d2/da8/NoteButtonMatrix_8hpp.html":[7,0,200],
+"d2/da8/NoteButtonMatrix_8hpp_source.html":[7,0,200]
 };

@@ -294,7 +294,10 @@ var files_dup =
       [ "MIDINoteLED", "dc/df8/classBankable_1_1MIDINoteLED.html", "dc/df8/classBankable_1_1MIDINoteLED" ]
     ] ],
     [ "MIDIOutputElement.cpp", "db/d18/MIDIOutputElement_8cpp.html", null ],
-    [ "MIDIOutputElement.hpp", "d1/d41/MIDIOutputElement_8hpp.html", "d1/d41/MIDIOutputElement_8hpp" ],
+    [ "MIDIOutputElement.hpp", "d1/d41/MIDIOutputElement_8hpp.html", [
+      [ "MIDIOutputElement", "dc/dc9/structMIDIOutputElement.html", "dc/dc9/structMIDIOutputElement" ],
+      [ "MIDIOutputElementPotentiometer", "d2/de7/structMIDIOutputElementPotentiometer.html", "d2/de7/structMIDIOutputElementPotentiometer" ]
+    ] ],
     [ "Abstract/MIDIRotaryEncoder.cpp", "d0/d56/Abstract_2MIDIRotaryEncoder_8cpp.html", null ],
     [ "Bankable/Abstract/MIDIRotaryEncoder.cpp", "d7/d84/Bankable_2Abstract_2MIDIRotaryEncoder_8cpp.html", null ],
     [ "Abstract/MIDIRotaryEncoder.hpp", "db/d50/Abstract_2MIDIRotaryEncoder_8hpp.html", [

@@ -181,55 +181,57 @@ var hierarchy =
     [ "DoublyLinkable< Updatable< NormalUpdatable > >", "d4/d23/classDoublyLinkable.html", [
       [ "Updatable< NormalUpdatable >", "d5/de0/classUpdatable.html", null ],
       [ "Updatable<>", "d5/de0/classUpdatable.html", [
-        [ "Bankable::MIDIButton< sendOn, sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
-        [ "Bankable::MIDIButtonLatching< sendOn, sendOff >", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", null ],
-        [ "Bankable::MIDIButtonMatrix< sendOn, sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
-        [ "Bankable::MIDIButtons< sendOn, sendOff, NUMBER_OF_BUTTONS >", "dc/d22/classBankable_1_1MIDIButtons.html", null ],
-        [ "Bankable::MIDIFilteredAnalog< send, PRECISION >", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", null ],
-        [ "Bankable::MIDIFilteredAnalogAddressable< send, PRECISION >", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", null ],
-        [ "Bankable::MIDIRotaryEncoder< send >", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html", null ],
-        [ "MIDIButton< sendOn, sendOff >", "d6/d72/classMIDIButton.html", null ],
-        [ "Bankable::MIDIButton< DigitalCCSender::sendOn, DigitalCCSender::sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
-        [ "Bankable::MIDIButton< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
-        [ "MIDIButtonLatched< sendOn, sendOff >", "d3/d88/classMIDIButtonLatched.html", null ],
-        [ "MIDIButtonLatched< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d3/d88/classMIDIButtonLatched.html", [
-          [ "NoteButtonLatched", "de/def/classNoteButtonLatched.html", null ]
+        [ "MIDIOutputElement", "dc/dc9/structMIDIOutputElement.html", [
+          [ "Bankable::MIDIButton< sendOn, sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
+          [ "Bankable::MIDIButtonLatching< sendOn, sendOff >", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", null ],
+          [ "Bankable::MIDIButtonMatrix< sendOn, sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
+          [ "Bankable::MIDIButtons< sendOn, sendOff, NUMBER_OF_BUTTONS >", "dc/d22/classBankable_1_1MIDIButtons.html", null ],
+          [ "Bankable::MIDIFilteredAnalog< send, PRECISION >", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", null ],
+          [ "Bankable::MIDIFilteredAnalogAddressable< send, PRECISION >", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", null ],
+          [ "Bankable::MIDIRotaryEncoder< send >", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html", null ],
+          [ "MIDIButton< sendOn, sendOff >", "d6/d72/classMIDIButton.html", null ],
+          [ "Bankable::MIDIButton< DigitalCCSender::sendOn, DigitalCCSender::sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
+          [ "Bankable::MIDIButton< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
+          [ "MIDIButtonLatched< sendOn, sendOff >", "d3/d88/classMIDIButtonLatched.html", null ],
+          [ "MIDIButtonLatched< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d3/d88/classMIDIButtonLatched.html", [
+            [ "NoteButtonLatched", "de/def/classNoteButtonLatched.html", null ]
+          ] ],
+          [ "MIDIButtonLatching< sendOn, sendOff >", "d8/de1/classMIDIButtonLatching.html", null ],
+          [ "MIDIButtonLatching< DigitalCCSender::sendOn, DigitalCCSender::sendOff >", "d8/de1/classMIDIButtonLatching.html", [
+            [ "CCButtonLatching", "d8/db0/classCCButtonLatching.html", null ]
+          ] ],
+          [ "Bankable::MIDIButtonLatching< DigitalCCSender::sendOn, DigitalCCSender::sendOff >", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", null ],
+          [ "MIDIButtonLatching< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d8/de1/classMIDIButtonLatching.html", [
+            [ "NoteButtonLatching", "d3/d6c/classNoteButtonLatching.html", null ]
+          ] ],
+          [ "Bankable::MIDIButtonLatching< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", null ],
+          [ "MIDIButtonMatrix< sendOn, sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", null ],
+          [ "Bankable::MIDIButtonMatrix< DigitalCCSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
+          [ "Bankable::MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
+          [ "MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", null ],
+          [ "MIDIButtons< sendOn, sendOff, NUMBER_OF_BUTTONS >", "d2/d87/classMIDIButtons.html", null ],
+          [ "Bankable::MIDIButtons< DigitalCCSender::sendOn, DigitalCCSender::sendOff, NUMBER_OF_BUTTONS >", "dc/d22/classBankable_1_1MIDIButtons.html", null ],
+          [ "Bankable::MIDIButtons< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, NUMBER_OF_BUTTONS >", "dc/d22/classBankable_1_1MIDIButtons.html", null ],
+          [ "MIDIButtons< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, NUMBER_OF_BUTTONS >", "d2/d87/classMIDIButtons.html", [
+            [ "NoteButtons< NUMBER_OF_BUTTONS >", "d1/dbd/classNoteButtons.html", null ]
+          ] ],
+          [ "MIDIFilteredAnalog< send, PRECISION >", "d5/d8e/classMIDIFilteredAnalog.html", null ],
+          [ "Bankable::MIDIFilteredAnalog< PitchBendSender< 8 >::send, 8 >", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", null ],
+          [ "MIDIFilteredAnalogAddressable< send, PRECISION >", "d0/dd2/classMIDIFilteredAnalogAddressable.html", null ],
+          [ "MIDIFilteredAnalogAddressable< ContinuousCCSender::send, 7 >", "d0/dd2/classMIDIFilteredAnalogAddressable.html", [
+            [ "CCPotentiometer", "db/d32/classCCPotentiometer.html", null ]
+          ] ],
+          [ "Bankable::MIDIFilteredAnalogAddressable< ContinuousCCSender::send, 7 >", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", null ],
+          [ "MIDIIncrementDecrementButtons< send >", "dc/dc2/classMIDIIncrementDecrementButtons.html", null ],
+          [ "MIDIIncrementDecrementButtons< RelativeCCSender::send >", "dc/dc2/classMIDIIncrementDecrementButtons.html", [
+            [ "CCIncrementDecrementButtons", "d3/d60/classCCIncrementDecrementButtons.html", null ]
+          ] ],
+          [ "MIDIRotaryEncoder< send >", "d8/d20/classMIDIRotaryEncoder.html", null ],
+          [ "MIDIRotaryEncoder< RelativeCCSender::send >", "d8/d20/classMIDIRotaryEncoder.html", [
+            [ "CCRotaryEncoder", "d3/d62/classCCRotaryEncoder.html", null ]
+          ] ],
+          [ "Bankable::MIDIRotaryEncoder< RelativeCCSender::send >", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html", null ]
         ] ],
-        [ "MIDIButtonLatching< sendOn, sendOff >", "d8/de1/classMIDIButtonLatching.html", null ],
-        [ "MIDIButtonLatching< DigitalCCSender::sendOn, DigitalCCSender::sendOff >", "d8/de1/classMIDIButtonLatching.html", [
-          [ "CCButtonLatching", "d8/db0/classCCButtonLatching.html", null ]
-        ] ],
-        [ "Bankable::MIDIButtonLatching< DigitalCCSender::sendOn, DigitalCCSender::sendOff >", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", null ],
-        [ "MIDIButtonLatching< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d8/de1/classMIDIButtonLatching.html", [
-          [ "NoteButtonLatching", "d3/d6c/classNoteButtonLatching.html", null ]
-        ] ],
-        [ "Bankable::MIDIButtonLatching< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", null ],
-        [ "MIDIButtonMatrix< sendOn, sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", null ],
-        [ "Bankable::MIDIButtonMatrix< DigitalCCSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
-        [ "Bankable::MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
-        [ "MIDIButtonMatrix< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols >", "d0/d54/classMIDIButtonMatrix.html", null ],
-        [ "MIDIButtons< sendOn, sendOff, NUMBER_OF_BUTTONS >", "d2/d87/classMIDIButtons.html", null ],
-        [ "Bankable::MIDIButtons< DigitalCCSender::sendOn, DigitalCCSender::sendOff, NUMBER_OF_BUTTONS >", "dc/d22/classBankable_1_1MIDIButtons.html", null ],
-        [ "Bankable::MIDIButtons< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, NUMBER_OF_BUTTONS >", "dc/d22/classBankable_1_1MIDIButtons.html", null ],
-        [ "MIDIButtons< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, NUMBER_OF_BUTTONS >", "d2/d87/classMIDIButtons.html", [
-          [ "NoteButtons< NUMBER_OF_BUTTONS >", "d1/dbd/classNoteButtons.html", null ]
-        ] ],
-        [ "MIDIFilteredAnalog< send, PRECISION >", "d5/d8e/classMIDIFilteredAnalog.html", null ],
-        [ "Bankable::MIDIFilteredAnalog< PitchBendSender< 8 >::send, 8 >", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", null ],
-        [ "MIDIFilteredAnalogAddressable< send, PRECISION >", "d0/dd2/classMIDIFilteredAnalogAddressable.html", null ],
-        [ "MIDIFilteredAnalogAddressable< ContinuousCCSender::send, 7 >", "d0/dd2/classMIDIFilteredAnalogAddressable.html", [
-          [ "CCPotentiometer", "db/d32/classCCPotentiometer.html", null ]
-        ] ],
-        [ "Bankable::MIDIFilteredAnalogAddressable< ContinuousCCSender::send, 7 >", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", null ],
-        [ "MIDIIncrementDecrementButtons< send >", "dc/dc2/classMIDIIncrementDecrementButtons.html", null ],
-        [ "MIDIIncrementDecrementButtons< RelativeCCSender::send >", "dc/dc2/classMIDIIncrementDecrementButtons.html", [
-          [ "CCIncrementDecrementButtons", "d3/d60/classCCIncrementDecrementButtons.html", null ]
-        ] ],
-        [ "MIDIRotaryEncoder< send >", "d8/d20/classMIDIRotaryEncoder.html", null ],
-        [ "MIDIRotaryEncoder< RelativeCCSender::send >", "d8/d20/classMIDIRotaryEncoder.html", [
-          [ "CCRotaryEncoder", "d3/d62/classCCRotaryEncoder.html", null ]
-        ] ],
-        [ "Bankable::MIDIRotaryEncoder< RelativeCCSender::send >", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html", null ],
         [ "Selector< N >", "d1/d54/classSelector.html", [
           [ "EncoderSelector_Base< N >", "d0/daf/classEncoderSelector__Base.html", [
             [ "EncoderSelector< N >", "d3/dc5/classEncoderSelector.html", null ],
@@ -258,6 +260,7 @@ var hierarchy =
     ] ],
     [ "DoublyLinkable< Updatable< Potentiometer > >", "d4/d23/classDoublyLinkable.html", [
       [ "Updatable< Potentiometer >", "d5/de0/classUpdatable.html", [
+        [ "MIDIOutputElementPotentiometer", "d2/de7/structMIDIOutputElementPotentiometer.html", null ],
         [ "VolumeControl< N >", "d4/de3/classVolumeControl.html", null ]
       ] ]
     ] ],

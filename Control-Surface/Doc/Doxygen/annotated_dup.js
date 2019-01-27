@@ -89,6 +89,8 @@ var annotated_dup =
     [ "MIDINote_Base", "da/d1b/classMIDINote__Base.html", "da/d1b/classMIDINote__Base" ],
     [ "MIDINoteLED", "d9/d0d/classMIDINoteLED.html", "d9/d0d/classMIDINoteLED" ],
     [ "MIDINoteLED_Base", "d3/db4/classMIDINoteLED__Base.html", "d3/db4/classMIDINoteLED__Base" ],
+    [ "MIDIOutputElement", "dc/dc9/structMIDIOutputElement.html", "dc/dc9/structMIDIOutputElement" ],
+    [ "MIDIOutputElementPotentiometer", "d2/de7/structMIDIOutputElementPotentiometer.html", "d2/de7/structMIDIOutputElementPotentiometer" ],
     [ "MIDIRotaryEncoder", "d8/d20/classMIDIRotaryEncoder.html", "d8/d20/classMIDIRotaryEncoder" ],
     [ "MotorFader", "d1/d0f/structMotorFader.html", null ],
     [ "NormalUpdatable", "d5/db9/structNormalUpdatable.html", null ],
