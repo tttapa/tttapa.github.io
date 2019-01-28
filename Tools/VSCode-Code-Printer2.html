@@ -105,13 +105,11 @@
         /* border: 1px solid #eee; */
     }
 
-    .lineNumbers>code,
-    .lineNumbers>.codeLine {
-        display: block;
+    .lineNumbers>code {
+        display: inline-block;
     }
 
-    .lineNumbers>code:before,
-    .lineNumbers>.codeLine:before {
+    .lineNumbers>code:before {
         counter-increment: line;
         content: counter(line);
         display: inline-block;
@@ -136,7 +134,7 @@
     }
 
     .lineNumbersEmphasis>code {
-        display: inline;
+        display: inline-block;
     }
 
     .lineNumbersEmphasis>code {
@@ -163,9 +161,6 @@
         width: 2.2em;
         color: #555;
         text-align: right;
-    }
-    .vscode {
-        color: inherit;
     }
 </style>
 
@@ -199,11 +194,9 @@
         let lnestyle = document.getElementById("lineNumbersEmphasis").outerHTML;
         let generalstyle =  document.getElementById("general").outerHTML;
 
-        let VSCode = false;
-
         function paste(e) {
             var clipboardData, pastedData;
-            // Stop data actually being pasted into div
+            // Stop data actually being pasted
             e.stopPropagation();
             e.preventDefault();
             // Get pasted data via clipboard API
@@ -211,14 +204,12 @@
             pastedHTML = clipboardData.getData('text/html');
             if (pastedHTML) {
                 pastedData = pastedHTML;
-                VSCode = true;
             } else {
                 pastedData = clipboardData.getData('text/plain');
-                VSCode = false;                
             }
-            // Do whatever with pasteddata
             this.value = pastedData;
             format();
+            saveInput();
         }
 
         input.addEventListener('paste', paste);
@@ -237,34 +228,14 @@
         }
 
         function formatContent(content) {
-            if (VSCode) {
-                return formatVSCode(content);
-            } else {
-                return formatNormalContent(content);
-            }
+            let VSCode = content.match(/^<meta/);
+            console.log(VSCode);
+            content = VSCode ? formatVSCode(content) : formatNormalContent(content);
+            content = formatSpecialContent(content);
+            return content;
         }
 
-        function formatNormalContent(content) {
-            if (!content.includes("<pre>"))
-                content = "<pre>" + content;
-
-            if (!content.includes("</pre>"))
-                content += "</pre>";
-
-            content = content.replace(
-                /<pre>[\r\n]*/g,
-                emphasize ?
-                    '<pre class="lineNumbersEmphasis"><code>'
-                    : '<pre class="lineNumbers"><code>');
-
-            content = content.replace(
-                /[\r\n]*<\/pre>/g,
-                '</code></pre>');
-
-            content = content.replace(
-                /([\r\n])/g,
-                '</code>$1<code>');
-
+        function formatSpecialContent(content) {
             content = content.replace(
                 /<code>\*\*\*+/g,
                 emphasize ?
@@ -286,28 +257,56 @@
             content = content.replace(
                 /&nbsp;/g,
                 ' ');
+
+            return content;
+        }
+
+        function formatNormalContent(content) {
+            let emphasize = document.getElementById("emphasize").checked;
+
+            if (!content.includes("<pre>"))
+                content = "<pre>" + content;
+
+            if (!content.includes("</pre>"))
+                content += "</pre>";
+
+            content = content.replace(
+                /<pre>[\r\n]*/g,
+                emphasize ?
+                    '<pre class="lineNumbersEmphasis"><code>'
+                    : '<pre class="lineNumbers"><code>');
+
+            content = content.replace(
+                /[\r\n]*<\/pre>/g,
+                '</code></pre>');
+
+            content = content.replace(
+                /[\r\n]/g,
+                '</code><code>');
+
             return content;
         }
 
         function formatVSCode(content) {
+            let emphasize = document.getElementById("emphasize").checked;
             let tmp = document.createElement("div");
             tmp.innerHTML = content;
             let container = tmp.getElementsByTagName("div")[0];
-            container.style.whiteSpace = null;
-            container.classList.add("lineNumbers", "vscode");
-            Array.prototype.forEach.call(container.getElementsByTagName("div"), el => {
-                el.classList.add("codeLine");
+
+            let result = document.createElement("pre");
+            result.style.color = container.style.color;
+            result.style.backgroundColor = container.style.backgroundColor;
+            result.classList.add(emphasize ? "lineNumbersEmphasis" : "lineNumbers");
+
+            Array.prototype.forEach.call(container.querySelectorAll("div,br"), el => {
+                let code = document.createElement("code");
+                code.innerHTML = el.innerHTML;
+                result.appendChild(code);
+                let enter = document.createTextNode("\n");
+                result.appendChild(enter);
             });
-            let brs = container.getElementsByTagName('br');
-            let i = brs.length;
-            while (i--) {
-                let el = brs[i];
-                let div = document.createElement("div");
-                div.classList.add("codeLine");
-                container.insertBefore(div, el);
-                container.removeChild(el);
-            }
-            return tmp.innerHTML;
+
+            return result.outerHTML;
         }
 
         function format() {
@@ -369,16 +368,20 @@
         function saveInput() {
             let input = document.getElementById("input").value;
             localStorage.setItem('VS-Code-Printer:input', input);
+            console.log("saved");
         }
         function getInput() {
             let input = localStorage.getItem('VS-Code-Printer:input');
             if (input)
                 document.getElementById("input").value = input;
         }
+
+
         getEmphasize();
         getTitle();
         getAuthor();
         getInput();
+
 
         let printWindow;
         function print() {
@@ -407,6 +410,7 @@
             if (printWindow)
                 printWindow.close();
         }
+        
         format();
     </script>
 

@@ -190,42 +190,42 @@ before passing it to the <code>butter</code> function.
 A similar function is available in the SciPy signal package:
 <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html"><code>butter</code></a>.
 
-<pre class="lineNumbers">from scipy.signal import butter, freqz 
-import matplotlib.pyplot as plt
-from math import pi
-import numpy as np
+<pre class="lineNumbers"><span style="color: #af00db;">from</span> scipy.signal <span style="color: #af00db;">import</span> butter, freqz 
+<span style="color: #af00db;">import</span> matplotlib.pyplot <span style="color: #af00db;">as</span> plt
+<span style="color: #af00db;">from</span> math <span style="color: #af00db;">import</span> pi
+<span style="color: #af00db;">import</span> numpy <span style="color: #af00db;">as</span> np
 
-f_s = 360    # Sample frequency in Hz
-f_c = 45     # Cut-off frequency in Hz
-order = 4    # Order of the butterworth filter
+f_s = <span style="color: #09885a;">360</span>    <span style="color: #008000;"># Sample frequency in Hz</span>
+f_c = <span style="color: #09885a;">45</span>     <span style="color: #008000;"># Cut-off frequency in Hz</span>
+order = <span style="color: #09885a;">4</span>    <span style="color: #008000;"># Order of the butterworth filter</span>
 
-omega_c = 2 * pi * f_c       # Cut-off angular frequency
-omega_c_d = omega_c / f_s    # Normalized cut-off frequency (digital)
+omega_c = <span style="color: #09885a;">2</span> * pi * f_c       <span style="color: #008000;"># Cut-off angular frequency</span>
+omega_c_d = omega_c / f_s    <span style="color: #008000;"># Normalized cut-off frequency (digital)</span>
 
-b, a = butter(order, omega_c_d / pi)    # Design the Butterworth filter
-print("a =", a)                         # Print the coefficients
-print("b =", b)
+b, a = butter(order, omega_c_d / pi)    <span style="color: #008000;"># Design the Butterworth filter</span>
+<span style="color: #795e26;">print</span>(<span style="color: #a31515;">"a ="</span>, a)                         <span style="color: #008000;"># Print the coefficients</span>
+<span style="color: #795e26;">print</span>(<span style="color: #a31515;">"b ="</span>, b)
 
-w, h = freqz(b, a)                   # Calculate the frequency response
-w *= f_s / (2 * pi)                  # Convert from rad/sample to Hz
+w, h = freqz(b, a, <span style="color: #09885a;">4096</span>)             <span style="color: #008000;"># Calculate the frequency response</span>
+w *= f_s / (<span style="color: #09885a;">2</span> * pi)                  <span style="color: #008000;"># Convert from rad/sample to Hz</span>
 
-plt.subplot(2, 1, 1)                 # Plot the amplitude response
-plt.suptitle('Bode Plot')            
-plt.plot(w, 20 * np.log10(abs(h)))   # Convert to dB
-plt.ylabel('Magnitude [dB]')
-plt.xlim(0, f_s / 2)
-plt.ylim(-80, 6)
-plt.axvline(f_c, color='red')
-plt.axhline(-3, linewidth=0.8, color='black', linestyle=':')
+plt.subplot(<span style="color: #09885a;">2</span>, <span style="color: #09885a;">1</span>, <span style="color: #09885a;">1</span>)                 <span style="color: #008000;"># Plot the amplitude response</span>
+plt.suptitle(<span style="color: #a31515;">'Bode Plot'</span>)            
+plt.plot(w, <span style="color: #09885a;">20</span> * np.log10(<span style="color: #795e26;">abs</span>(h)))   <span style="color: #008000;"># Convert to dB</span>
+plt.ylabel(<span style="color: #a31515;">'Magnitude [dB]'</span>)
+plt.xlim(<span style="color: #09885a;">0</span>, f_s / <span style="color: #09885a;">2</span>)
+plt.ylim(-<span style="color: #09885a;">80</span>, <span style="color: #09885a;">6</span>)
+plt.axvline(f_c, <span style="color: #001080;">color</span>=<span style="color: #a31515;">'red'</span>)
+plt.axhline(-<span style="color: #09885a;">3</span>, <span style="color: #001080;">linewidth</span>=<span style="color: #09885a;">0.8</span>, <span style="color: #001080;">color</span>=<span style="color: #a31515;">'black'</span>, <span style="color: #001080;">linestyle</span>=<span style="color: #a31515;">':'</span>)
 
-plt.subplot(2, 1, 2)                 # Plot the phase response
-plt.plot(w, 180 * np.angle(h) / pi)  # Convert argument to degrees
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Phase [°]')
-plt.xlim(0, f_s / 2)
-plt.ylim(-180, 180)
-plt.yticks([-180, -135, -90, -45, 0, 45, 90, 135, 180])
-plt.axvline(f_c, color='red')
+plt.subplot(<span style="color: #09885a;">2</span>, <span style="color: #09885a;">1</span>, <span style="color: #09885a;">2</span>)                 <span style="color: #008000;"># Plot the phase response</span>
+plt.plot(w, <span style="color: #09885a;">180</span> * np.angle(h) / pi)  <span style="color: #008000;"># Convert argument to degrees</span>
+plt.xlabel(<span style="color: #a31515;">'Frequency [Hz]'</span>)
+plt.ylabel(<span style="color: #a31515;">'Phase [°]'</span>)
+plt.xlim(<span style="color: #09885a;">0</span>, f_s / <span style="color: #09885a;">2</span>)
+plt.ylim(-<span style="color: #09885a;">180</span>, <span style="color: #09885a;">180</span>)
+plt.yticks([-<span style="color: #09885a;">180</span>, -<span style="color: #09885a;">135</span>, -<span style="color: #09885a;">90</span>, -<span style="color: #09885a;">45</span>, <span style="color: #09885a;">0</span>, <span style="color: #09885a;">45</span>, <span style="color: #09885a;">90</span>, <span style="color: #09885a;">135</span>, <span style="color: #09885a;">180</span>])
+plt.axvline(f_c, <span style="color: #001080;">color</span>=<span style="color: #a31515;">'red'</span>)
 plt.show()</pre>
 
 <img src="images/Bode-Digital-Butterworth-Python-2.svg">
