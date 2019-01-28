@@ -1,5 +1,6 @@
 var NAVTREEINDEX13 =
 {
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4154c3302c845a9dc6a455600c4d0e2b":[6,0,0,10,17],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,10,22],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,0,10,8],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,10,23],
@@ -29,13 +30,13 @@ var NAVTREEINDEX13 =
 "db/de9/classBitArray.html#a1cc5ae34690a8f065243531bcb64d20a":[6,0,13,10],
 "db/de9/classBitArray.html#a517038489cd46836c80803f6e3a0f258":[6,0,13,6],
 "db/de9/classBitArray.html#a5aa71f15bed263c25c32b7a31152e23c":[6,0,13,7],
+"db/de9/classBitArray.html#a5b8bef74feec0b2b77c4f3025eb13a10":[6,0,13,11],
 "db/de9/classBitArray.html#a61a953baab78ff4ed53c65a6a45d3686":[6,0,13,9],
 "db/de9/classBitArray.html#a6f88d7f06380b68327b6affee50c5f5b":[6,0,13,3],
 "db/de9/classBitArray.html#a873e212ea025f807da031667ec38508d":[6,0,13,2],
 "db/de9/classBitArray.html#ada8a19208bad820d128510b5e439fcf7":[6,0,13,5],
 "db/de9/classBitArray.html#ae70a67b38aba607d4301cca64a2f9640":[6,0,13,1],
 "db/de9/classBitArray.html#aeab58639d34ba3af28dabe49f2fa6992":[6,0,13,8],
-"db/de9/classBitArray.html#aec5f3894a0f8eeb476db695cdd74f0b5":[6,0,13,11],
 "db/df2/BankableMIDIOutput_8hpp.html":[7,0,17],
 "db/df2/BankableMIDIOutput_8hpp_source.html":[7,0,17],
 "db/df8/Bankable_2NoteButton_8cpp.html":[7,0,188],
@@ -166,8 +167,9 @@ var NAVTREEINDEX13 =
 "dc/dc2/classMIDIIncrementDecrementButtons.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,80,17],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,80,8],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#a57b6615469e554c514a9ff56dc24908f":[6,0,80,18],
-"dc/dc2/classMIDIIncrementDecrementButtons.html#a59c670c99153f76a0d66e2f284d4c074":[6,0,80,20],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,80,2],
+"dc/dc2/classMIDIIncrementDecrementButtons.html#a5f5abdc429cb41dcea804d881003804d":[6,0,80,20],
+"dc/dc2/classMIDIIncrementDecrementButtons.html#a5feefe1923e70343c43c4a0620a53922":[6,0,80,21],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#a69209779d0451467db9f6a8a9e15b77f":[6,0,80,12],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,80,6],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#a6a3337527c3d7611627045013b35e790":[6,0,80,0],
@@ -181,7 +183,6 @@ var NAVTREEINDEX13 =
 "dc/dc2/classMIDIIncrementDecrementButtons.html#ac871bde6eebec5ad99ea0ae95f759e8d":[6,0,80,19],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#acfabd4911411ebbfd96d4080103f4725":[6,0,80,7],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,80,10],
-"dc/dc2/classMIDIIncrementDecrementButtons.html#adc6627bf870bc76e0cb53a8eae64968e":[6,0,80,21],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#adf69613c6c45e8c8701ada3e2c75e1f4":[6,0,80,22],
 "dc/dc2/classMIDIIncrementDecrementButtons.html#ae1d01910ae5ff00432d80f76859e1670":[6,0,80,13],
 "dc/dc5/MIDIIncrementDecrementButtons_8hpp.html":[7,0,165],
@@ -207,7 +208,7 @@ var NAVTREEINDEX13 =
 "dc/dd2/structPixelLocation.html#ac0cd2ddbf7c10a028c80fc58974f1523":[6,0,104,0],
 "dc/dd4/classDigitalNoteSender.html":[6,0,29],
 "dc/dd4/classDigitalNoteSender.html#a07fc2de01c28c7f9a771c7f0f327ce3f":[6,0,29,0],
-"dc/dd4/classDigitalNoteSender.html#abcbbb6fab8c321f6cd2887b78cd0f769":[6,0,29,2],
+"dc/dd4/classDigitalNoteSender.html#a63d346c623fcb986d1ff3c1aa92b1869":[6,0,29,2],
 "dc/dd4/classDigitalNoteSender.html#ac092f3907d1b21e7b9e056a08caf6ff2":[6,0,29,1],
 "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html":[6,0,0,14],
 "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,0,14,4],
@@ -248,6 +249,5 @@ var NAVTREEINDEX13 =
 "dc/ddd/classSSD1306__DisplayInterface.html#a4df7f9684c281df8b5167f2b7a7db1ed":[6,0,122,0],
 "dc/ddd/classSSD1306__DisplayInterface.html#a506cd4fecbf7dd3abd311ae391bc313f":[6,0,122,14],
 "dc/ddd/classSSD1306__DisplayInterface.html#a57b6615469e554c514a9ff56dc24908f":[6,0,122,22],
-"dc/ddd/classSSD1306__DisplayInterface.html#a7bdf3b452f9a794ddc73aab51b3ea145":[6,0,122,16],
-"dc/ddd/classSSD1306__DisplayInterface.html#a80725798003d8d4eb581d7832f1ebd2c":[6,0,122,5]
+"dc/ddd/classSSD1306__DisplayInterface.html#a7bdf3b452f9a794ddc73aab51b3ea145":[6,0,122,16]
 };

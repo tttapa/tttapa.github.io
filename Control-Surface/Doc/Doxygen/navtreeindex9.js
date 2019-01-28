@@ -218,7 +218,7 @@ var NAVTREEINDEX9 =
 "d9/d78/classHardwareSerialMIDI__Interface.html#ac5c80f3fbc75938d6387c503761fa555":[4,3,8,1],
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad61032be4eecf18e9a248f153b5e61a8":[4,3,8,4],
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad82ba06102163ff804b381364919d78b":[4,3,8,14],
-"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[8,14],
+"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[8,15],
 "d9/d94/ContinuousCCSender_8cpp.html":[7,0,58],
 "d9/d94/ContinuousCCSender_8cpp_source.html":[7,0,58],
 "d9/d97/Abstract_2MIDIButton_8cpp.html":[7,0,141],

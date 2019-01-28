@@ -12,7 +12,7 @@ var searchData=
   ['leds_3c_2011_20_3e',['LEDs&lt; 11 &gt;',['../d2/d1b/classLEDs.html',1,'']]],
   ['left',['LEFT',['../d7/dc7/namespaceMCU.html#a90955e55b5b6ed836457992ab70f1c12',1,'MCU']]],
   ['legato_5ffootswitch',['Legato_Footswitch',['../d4/dbe/namespaceMIDI__CC.html#a9e44e15596fcea1fe9e001e1d2d1df37',1,'MIDI_CC']]],
-  ['length',['length',['../de/d4e/classExtendedIOElement.html#a018a3ac2d6a11014e27c8186a2feb684',1,'ExtendedIOElement::length()'],['../d7/d6a/structArray.html#aa30345f4441dc7d7d794301c0469b37a',1,'Array::length()'],['../d2/d56/structMIDI__Parser_1_1SysExMessage.html#a57b974cf1b73c995401a75a8516da163',1,'MIDI_Parser::SysExMessage::length()']]],
+  ['length',['length',['../de/d4e/classExtendedIOElement.html#a018a3ac2d6a11014e27c8186a2feb684',1,'ExtendedIOElement::length()'],['../d7/d6a/structArray.html#a7615d7f35d563b104928b7029202690a',1,'Array::length()'],['../d2/d56/structMIDI__Parser_1_1SysExMessage.html#a57b974cf1b73c995401a75a8516da163',1,'MIDI_Parser::SysExMessage::length()']]],
   ['level',['level',['../d4/dce/classAudioVU.html#ae1966e81a5c908350e7e85e378cf4b6f',1,'AudioVU']]],
   ['linkedlist_2ecpp',['LinkedList.cpp',['../df/db8/LinkedList_8cpp.html',1,'']]],
   ['linkedlist_2ehpp',['LinkedList.hpp',['../de/dd1/LinkedList_8hpp.html',1,'']]],

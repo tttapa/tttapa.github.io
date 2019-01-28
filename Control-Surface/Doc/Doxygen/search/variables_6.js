@@ -18,9 +18,9 @@ var searchData=
   ['filteredanalog',['filteredAnalog',['../d4/de3/classVolumeControl.html#a6d6dac5db13da47c9147c81f2c8f9e29',1,'VolumeControl::filteredAnalog()'],['../d0/dd2/classMIDIFilteredAnalogAddressable.html#a943adc039dcc704d2d3aa8087ceb4fa2',1,'MIDIFilteredAnalogAddressable::filteredAnalog()'],['../d5/d8e/classMIDIFilteredAnalog.html#a45dd2083e7121832821f355ad5214ea2',1,'MIDIFilteredAnalog::filteredAnalog()'],['../d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#abfca8e8cf5b6b1c4164375d3503e5d5e',1,'Bankable::MIDIFilteredAnalogAddressable::filteredAnalog()'],['../db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a72608be0106f4f08dc13d8c30bdad7f4',1,'Bankable::MIDIFilteredAnalog::filteredAnalog()']]],
   ['first',['first',['../dd/d16/classDoublyLinkedList.html#aa99a1b25b649c77114d63ea32c7f2681',1,'DoublyLinkedList']]],
   ['firstchar',['firstChar',['../d8/d0b/classStreamDebugMIDI__Interface.html#a70967d594ff3bae938a3f1b30a319018',1,'StreamDebugMIDI_Interface']]],
-  ['fixedpointahalf',['fixedPointAHalf',['../d7/d40/classEMA.html#a612ffac5a18df3450d6f25aff4a7a15f',1,'EMA']]],
+  ['fixedpointahalf',['fixedPointAHalf',['../d7/d40/classEMA.html#a0738ba021e9d79bbb005b5ea7d59d90a',1,'EMA']]],
   ['flip',['FLIP',['../d7/dc7/namespaceMCU.html#a09ff3d36e06dc759e5fc8a4f5752f761',1,'MCU']]],
-  ['floor_5fcorrection',['FLOOR_CORRECTION',['../da/d0a/classMCU_1_1VULEDs__Base.html#a03a7e70a7d34196153b508101a7bf63f',1,'MCU::VULEDs_Base']]],
+  ['floor_5fcorrection',['FLOOR_CORRECTION',['../da/d0a/classMCU_1_1VULEDs__Base.html#ae61be50843c5c44fc974e8a1d1ab1882',1,'MCU::VULEDs_Base']]],
   ['foot_5fcontroller',['Foot_Controller',['../d4/dbe/namespaceMIDI__CC.html#ad1b47e6a838ac359dfd884a7e08e2ba3',1,'MIDI_CC']]],
   ['foot_5fcontroller_5flsb',['Foot_Controller_LSB',['../d4/dbe/namespaceMIDI__CC.html#a45b427c1f69ff3bd7fcb7ad211cd7634',1,'MIDI_CC']]],
   ['formatprintstream',['formatPrintStream',['../da/d69/PrintStream_8cpp.html#aa9cd8589bac070bb2ab968b4f9c15231',1,'PrintStream.cpp']]]

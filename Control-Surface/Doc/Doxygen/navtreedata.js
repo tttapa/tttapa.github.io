@@ -81,11 +81,11 @@ var NAVTREEINDEX =
 "d9/db8/classSerialMIDI__Interface.html#a2c79441f44b904566d237b05b8b3c2fb",
 "da/d6a/classPBPotentiometer.html#a4154c3302c845a9dc6a455600c4d0e2b",
 "db/d60/MCU_8hpp.html#a0b0a2480c2a0bbfbca785b72c66d5010",
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4a13b63f90ec988cd14d871df9dbc53b",
-"dc/ddd/classSSD1306__DisplayInterface.html#a91ddc3f3b4294f2be76d1e6645635b4a",
-"dd/d81/classSPIShiftRegisterOut.html#a8cbe6c07061e5352c7ebf7513f264dbb",
-"de/d52/classMCU_1_1VPotRingLEDs__Base.html#ab33b338d3900b8430f31ae437d1211c8",
-"functions.html"
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4154c3302c845a9dc6a455600c4d0e2b",
+"dc/ddd/classSSD1306__DisplayInterface.html#a80725798003d8d4eb581d7832f1ebd2c",
+"dd/d81/classSPIShiftRegisterOut.html#a81fabf06f40056b1e2c22e0d8420cc1c",
+"de/d52/classMCU_1_1VPotRingLEDs__Base.html#aac5c0e4f25ae8a1996d1ef7bb894c802",
+"files.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

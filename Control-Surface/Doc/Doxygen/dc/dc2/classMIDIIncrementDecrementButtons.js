@@ -20,7 +20,7 @@ var classMIDIIncrementDecrementButtons =
     [ "next", "dc/dc2/classMIDIIncrementDecrementButtons.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "dc/dc2/classMIDIIncrementDecrementButtons.html#a57b6615469e554c514a9ff56dc24908f", null ],
     [ "resetAddress", "dc/dc2/classMIDIIncrementDecrementButtons.html#ac871bde6eebec5ad99ea0ae95f759e8d", null ],
-    [ "sendOff", "dc/dc2/classMIDIIncrementDecrementButtons.html#a59c670c99153f76a0d66e2f284d4c074", null ],
-    [ "sendOn", "dc/dc2/classMIDIIncrementDecrementButtons.html#adc6627bf870bc76e0cb53a8eae64968e", null ],
+    [ "sendOff", "dc/dc2/classMIDIIncrementDecrementButtons.html#a5f5abdc429cb41dcea804d881003804d", null ],
+    [ "sendOn", "dc/dc2/classMIDIIncrementDecrementButtons.html#a5feefe1923e70343c43c4a0620a53922", null ],
     [ "speedMultiply", "dc/dc2/classMIDIIncrementDecrementButtons.html#adf69613c6c45e8c8701ada3e2c75e1f4", null ]
 ];

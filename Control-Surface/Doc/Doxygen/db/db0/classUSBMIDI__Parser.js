@@ -11,7 +11,7 @@ var classUSBMIDI__Parser =
     [ "isStatus", "db/db0/classUSBMIDI__Parser.html#a0030089e4fe636ae1ca7997dba7b86ae", null ],
     [ "parse", "db/db0/classUSBMIDI__Parser.html#a4954fa510842a41e2f4aef0c31660b92", null ],
     [ "startSysEx", "db/db0/classUSBMIDI__Parser.html#a3f49c0d44693c4ce2438b056eab696d3", null ],
-    [ "bufferSize", "db/db0/classUSBMIDI__Parser.html#a7e27c82f87cef5d7a521ac99930c8e4e", null ],
+    [ "bufferSize", "db/db0/classUSBMIDI__Parser.html#a7e8858d7a75858c925254a9fdeb95c98", null ],
     [ "midimsg", "db/db0/classUSBMIDI__Parser.html#a1eb2260f33070b05d25d771cc0078672", null ],
     [ "receivingSysEx", "db/db0/classUSBMIDI__Parser.html#ab6aff8a419b886faae8861d0afa56a63", null ],
     [ "SysExBuffer", "db/db0/classUSBMIDI__Parser.html#ac5f93d140c63f306f7cc78815ed51f44", null ],

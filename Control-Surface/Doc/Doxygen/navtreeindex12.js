@@ -150,6 +150,7 @@ var NAVTREEINDEX12 =
 "db/d93/ArrayHelpers_8cpp_source.html":[7,0,4],
 "db/d9d/IncrementButton_8cpp.html":[7,0,107],
 "db/d9d/IncrementButton_8cpp_source.html":[7,0,107],
+"db/dac/PushButtons_8ino-example.html":[8,7],
 "db/dac/classMCU_1_1VPotRing__Base.html":[6,0,1,7],
 "db/dac/classMCU_1_1VPotRing__Base.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,1,7,15],
 "db/dac/classMCU_1_1VPotRing__Base.html#a38d9872489fd94dee25077c16073e8cf":[6,0,1,7,21],
@@ -184,7 +185,7 @@ var NAVTREEINDEX12 =
 "db/db0/classUSBMIDI__Parser.html#a3d045a60a816ac5797543fdc34683498":[6,0,130,4],
 "db/db0/classUSBMIDI__Parser.html#a3f49c0d44693c4ce2438b056eab696d3":[6,0,130,10],
 "db/db0/classUSBMIDI__Parser.html#a4954fa510842a41e2f4aef0c31660b92":[6,0,130,9],
-"db/db0/classUSBMIDI__Parser.html#a7e27c82f87cef5d7a521ac99930c8e4e":[6,0,130,11],
+"db/db0/classUSBMIDI__Parser.html#a7e8858d7a75858c925254a9fdeb95c98":[6,0,130,11],
 "db/db0/classUSBMIDI__Parser.html#a80c3e8ba1f058974c4c59d35092b3bed":[6,0,130,1],
 "db/db0/classUSBMIDI__Parser.html#a89cd28ab3abffdffe9c1cb18fbee034c":[6,0,130,15],
 "db/db0/classUSBMIDI__Parser.html#a8f6d4b8fd4cddf5068275f7636b8e87e":[6,0,130,6],
@@ -240,7 +241,7 @@ var NAVTREEINDEX12 =
 "db/dcf/VUDisplay_8cpp_source.html":[7,0,267],
 "db/dd1/ContinuousCCSender_8hpp.html":[7,0,59],
 "db/dd1/ContinuousCCSender_8hpp_source.html":[7,0,59],
-"db/dd1/SPIShiftRegisterBlink_8ino-example.html":[8,12],
+"db/dd1/SPIShiftRegisterBlink_8ino-example.html":[8,13],
 "db/dda/VU_8hpp.html":[7,0,266],
 "db/dda/VU_8hpp_source.html":[7,0,266],
 "db/ddc/IncrementSelectorLEDs_8cpp.html":[7,0,117],
@@ -248,6 +249,5 @@ var NAVTREEINDEX12 =
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html":[6,0,0,10],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a152a9da69ce9e29a540de7deed705dbf":[6,0,0,10,20],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a1f687fc423ca089c93f7e43fdfcf0fee":[6,0,0,10,1],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,0,10,4],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4154c3302c845a9dc6a455600c4d0e2b":[6,0,0,10,17]
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,0,10,4]
 };

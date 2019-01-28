@@ -14,7 +14,7 @@ var classButton =
     [ "invert", "d1/d19/classButton.html#a1027f25dee91c915849d531515365aab", null ],
     [ "stableTime", "d1/d19/classButton.html#a051753574468288ae7fce0d29c60feea", null ],
     [ "debouncedState", "d1/d19/classButton.html#a8e17132bff9eb9b87d5936a6e1ecaff7", null ],
-    [ "debounceTime", "d1/d19/classButton.html#a210b03addb819e086e26b2bb3b683603", null ],
+    [ "debounceTime", "d1/d19/classButton.html#a252cea17c7aec9457da8c961eee04074", null ],
     [ "invertState", "d1/d19/classButton.html#a6cb2c9aec2b114232a342846ed944205", null ],
     [ "pin", "d1/d19/classButton.html#ae3d6505a06de31a4f285da136cee1f21", null ],
     [ "prevBounceTime", "d1/d19/classButton.html#af94117c6192397d34540b64eb19dd75f", null ],

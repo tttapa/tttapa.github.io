@@ -13,7 +13,7 @@ var Settings_8hpp =
     [ "LONG_PRESS_REPEAT_DELAY", "db/d02/Settings_8hpp.html#a4c6482347c7ca829da34491dfb905773", null ],
     [ "MAX_FPS", "db/d02/Settings_8hpp.html#ab44cfa307e19c5688403a9506ea0555e", null ],
     [ "NOTE_VELOCITY_THRESHOLD", "db/d02/Settings_8hpp.html#ad73f28073ff4298bbf7bdde13c083393", null ],
-    [ "SPI_MAX_SPEED", "db/d02/Settings_8hpp.html#a19dcde97c67ed7db5a54bb2175575339", null ],
+    [ "SPI_MAX_SPEED", "db/d02/Settings_8hpp.html#a5b86686a1a39f3bd4c50998dc17706e6", null ],
     [ "SYSEX_BUFFER_SIZE", "db/d02/Settings_8hpp.html#a3081f3937d694684489a38a344815b29", null ],
     [ "VU_PEAK_DECAY_TIME", "db/d02/Settings_8hpp.html#a8be794417540934c31a498143e8efafb", null ],
     [ "VU_PEAK_HOLD_TIME", "db/d02/Settings_8hpp.html#a774333c030e245d506acef0577246d7c", null ],

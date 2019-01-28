@@ -7,6 +7,7 @@ var examples =
     [ "NoteButtonMatrixKeyboard.ino", "d7/d6c/NoteButtonMatrixKeyboard_8ino-example.html", null ],
     [ "OLED-Demo-Audio.ino", "da/df7/OLED-Demo-Audio_8ino-example.html", null ],
     [ "OLED-Demo.ino", "de/ddb/OLED-Demo_8ino-example.html", null ],
+    [ "PushButtons.ino", "db/dac/PushButtons_8ino-example.html", null ],
     [ "PushButtonsLEDs.ino", "d0/de3/PushButtonsLEDs_8ino-example.html", null ],
     [ "PushButtonsLEDsNoMIDIFeedback.ino", "d9/deb/PushButtonsLEDsNoMIDIFeedback_8ino-example.html", null ],
     [ "PushButtonsLEDsShiftRegMultiplex.ino", "d0/d1b/PushButtonsLEDsShiftRegMultiplex_8ino-example.html", null ],

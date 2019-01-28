@@ -11,5 +11,5 @@ var classBitArray =
     [ "set", "db/de9/classBitArray.html#aeab58639d34ba3af28dabe49f2fa6992", null ],
     [ "set", "db/de9/classBitArray.html#a61a953baab78ff4ed53c65a6a45d3686", null ],
     [ "buffer", "db/de9/classBitArray.html#a1cc5ae34690a8f065243531bcb64d20a", null ],
-    [ "bufferLength", "db/de9/classBitArray.html#aec5f3894a0f8eeb476db695cdd74f0b5", null ]
+    [ "bufferLength", "db/de9/classBitArray.html#a5b8bef74feec0b2b77c4f3025eb13a10", null ]
 ];

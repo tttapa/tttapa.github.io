@@ -11,7 +11,7 @@ var classMIDI__Parser =
     [ "isData", "df/d0c/classMIDI__Parser.html#ac6808b5b4f403e48368f32385171929c", null ],
     [ "isStatus", "df/d0c/classMIDI__Parser.html#a0030089e4fe636ae1ca7997dba7b86ae", null ],
     [ "startSysEx", "df/d0c/classMIDI__Parser.html#a3f49c0d44693c4ce2438b056eab696d3", null ],
-    [ "bufferSize", "df/d0c/classMIDI__Parser.html#a7e27c82f87cef5d7a521ac99930c8e4e", null ],
+    [ "bufferSize", "df/d0c/classMIDI__Parser.html#a7e8858d7a75858c925254a9fdeb95c98", null ],
     [ "midimsg", "df/d0c/classMIDI__Parser.html#a1eb2260f33070b05d25d771cc0078672", null ],
     [ "receivingSysEx", "df/d0c/classMIDI__Parser.html#ab6aff8a419b886faae8861d0afa56a63", null ],
     [ "SysExBuffer", "df/d0c/classMIDI__Parser.html#ac5f93d140c63f306f7cc78815ed51f44", null ],

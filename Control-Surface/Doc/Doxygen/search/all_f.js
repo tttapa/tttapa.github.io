@@ -1,8 +1,8 @@
 var searchData=
 [
   ['octave',['octave',['../d7/d78/namespaceMIDI__Notes.html#ac8e09ef6ac945b393a10ffd638746888',1,'MIDI_Notes']]],
-  ['offset',['offset',['../d3/d51/classSelectorDisplay.html#ad3074f69e1f3767e017d76eade1bff49',1,'SelectorDisplay::offset()'],['../de/d4e/classExtendedIOElement.html#a4bc35f3be5cfc6a63b714bab7fb8222b',1,'ExtendedIOElement::offset()'],['../d2/dcb/classHysteresis.html#a531097a0bf6882bbfca412f1bc3fa95e',1,'Hysteresis::offset()']]],
-  ['offvalue',['offValue',['../d5/db5/classDigitalCCSender.html#a78116488a36a4894c9f838c6a1c77ab4',1,'DigitalCCSender']]],
+  ['offset',['offset',['../d3/d51/classSelectorDisplay.html#ad3074f69e1f3767e017d76eade1bff49',1,'SelectorDisplay::offset()'],['../de/d4e/classExtendedIOElement.html#a4bc35f3be5cfc6a63b714bab7fb8222b',1,'ExtendedIOElement::offset()'],['../d2/dcb/classHysteresis.html#afa78cb16ea87ca6c2cde550a966ca4b4',1,'Hysteresis::offset()']]],
+  ['offvalue',['offValue',['../d5/db5/classDigitalCCSender.html#ab61c9ebc9734e996072563187eaa7113',1,'DigitalCCSender']]],
   ['omni_5fmode_5foff',['Omni_Mode_Off',['../d4/dbe/namespaceMIDI__CC.html#a28541aadfc7e36623b264046905b9cb6',1,'MIDI_CC']]],
   ['omni_5fmode_5fon',['Omni_Mode_On',['../d4/dbe/namespaceMIDI__CC.html#aa282092a8c50ad3573405f34e26092f1',1,'MIDI_CC']]],
   ['onbanksettingchange',['onBankSettingChange',['../db/d6e/classBankableMIDIInput.html#a18335970d15e47869e154a0aa8b9f5ef',1,'BankableMIDIInput::onBankSettingChange()'],['../db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a705697ffc3713587e8d89aeb19323b69',1,'MCU::Bankable::VULEDs::onBankSettingChange()'],['../da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a31ad1a9d8cac90e8ac05ac2e656f6a85',1,'MCU::Bankable::VPotRing::onBankSettingChange()'],['../d0/d42/classBankable_1_1MIDINote.html#a1177be8cac05017a73a2f3c73c053feb',1,'Bankable::MIDINote::onBankSettingChange()']]],
@@ -13,7 +13,7 @@ var searchData=
   ['onread',['onRead',['../d0/d89/classBluetoothMIDI__Interface.html#a380e959894f1ee9a62b5001036eed6f5',1,'BluetoothMIDI_Interface']]],
   ['onrealtimemessage',['onRealtimeMessage',['../de/d55/classMIDI__Callbacks.html#acd19dca90db2414d72b353f9e4254e9e',1,'MIDI_Callbacks::onRealtimeMessage()'],['../d9/d73/classMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1',1,'MIDI_Interface::onRealtimeMessage()']]],
   ['onsysexmessage',['onSysExMessage',['../dc/d45/classControl__Surface__.html#abc974fd16c735a8a7942b0b138751490',1,'Control_Surface_::onSysExMessage()'],['../de/d55/classMIDI__Callbacks.html#aac33c1093979493c5a3ca81c49ce0942',1,'MIDI_Callbacks::onSysExMessage()'],['../d9/d73/classMIDI__Interface.html#a3058e51eff2e68b7480b1c18c1aa8dbd',1,'MIDI_Interface::onSysExMessage()']]],
-  ['onvalue',['onValue',['../d5/db5/classDigitalCCSender.html#a919deb0eb055522fd09590bd1880528a',1,'DigitalCCSender']]],
+  ['onvalue',['onValue',['../d5/db5/classDigitalCCSender.html#a055f934b02303daf27b54f55df626ec1',1,'DigitalCCSender']]],
   ['onwrite',['onWrite',['../d0/d89/classBluetoothMIDI__Interface.html#a192545f2dcc19effef8e6a91b3a8773b',1,'BluetoothMIDI_Interface']]],
   ['operator_20_2a',['operator *',['../db/d52/classDoublyLinkedList_1_1node__iterator__base.html#af83bee1adffccb780fe3fee030aceb30',1,'DoublyLinkedList::node_iterator_base']]],
   ['operator_20bool',['operator bool',['../d3/d10/classMIDICNChannelAddress.html#a55c62c60f090eafde9ae92172c452926',1,'MIDICNChannelAddress::operator bool()'],['../dc/dea/classTimer.html#ab4883393ce41724763407b2a73826a24',1,'Timer::operator bool()']]],

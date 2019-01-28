@@ -38,10 +38,10 @@ var group__MIDIInterfaces =
       [ "update", "d0/d89/classBluetoothMIDI__Interface.html#a104e1881ff5c8b64ff6e859301521ed0", null ],
       [ "bleMidi", "d0/d89/classBluetoothMIDI__Interface.html#a8eba6b90239d929604431f348ddb1ca6", null ],
       [ "buffer", "d0/d89/classBluetoothMIDI__Interface.html#a03c0def524d83df0ac7233bed942a386", null ],
-      [ "BUFFER_LENGTH", "d0/d89/classBluetoothMIDI__Interface.html#a3300d532566d36821cb6d85d1b9e14cc", null ],
+      [ "BUFFER_LENGTH", "d0/d89/classBluetoothMIDI__Interface.html#a489349230705ccf9b11de956e620af20", null ],
       [ "connected", "d0/d89/classBluetoothMIDI__Interface.html#aa0208195f15cbe22ea6cca28114ee7c3", null ],
       [ "index", "d0/d89/classBluetoothMIDI__Interface.html#a014aa95f1daee067e4acc0bacc9739c0", null ],
-      [ "MAX_MESSAGE_TIME", "d0/d89/classBluetoothMIDI__Interface.html#a72e1bc63f92ec526493526a3eb28f6d9", null ],
+      [ "MAX_MESSAGE_TIME", "d0/d89/classBluetoothMIDI__Interface.html#ae6f39d010658aead9506362244925d97", null ],
       [ "parser", "d0/d89/classBluetoothMIDI__Interface.html#a1b07e54d4f50abddc9f5283e862d4286", null ],
       [ "startTime", "d0/d89/classBluetoothMIDI__Interface.html#ab64ee2e8cb5a7832881f6346a007f9f4", null ]
     ] ],

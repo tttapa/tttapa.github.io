@@ -1,5 +1,6 @@
 var NAVTREEINDEX16 =
 {
+"de/d52/classMCU_1_1VPotRingLEDs__Base.html#aac5c0e4f25ae8a1996d1ef7bb894c802":[6,0,1,9,2],
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#ab33b338d3900b8430f31ae437d1211c8":[6,0,1,9,8],
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#ab487eb31758e7be2b98731bd0f255588":[6,0,1,9,12],
 "de/d52/classMCU_1_1VPotRingLEDs__Base.html#ac8c40d605d479ff826820438cd054ab6":[6,0,1,9,7],
@@ -24,8 +25,8 @@ var NAVTREEINDEX16 =
 "de/d76/Array_8hpp.html":[7,0,3],
 "de/d76/Array_8hpp_source.html":[7,0,3],
 "de/d83/AssignmentDisplay_8hpp.html":[7,0,7],
-"de/d83/AssignmentDisplay_8hpp.html#ac7427c704f128ff879c86c6cb6ea590a":[7,0,7,1],
-"de/d83/AssignmentDisplay_8hpp.html#ac7986aa82e2c6e6e0de83bf3fb219031":[7,0,7,2],
+"de/d83/AssignmentDisplay_8hpp.html#a14b615065ed90c08185f281223aa4dfd":[7,0,7,1],
+"de/d83/AssignmentDisplay_8hpp.html#a8c20ffed4d233063d04fea83f51636df":[7,0,7,2],
 "de/d83/AssignmentDisplay_8hpp_source.html":[7,0,7],
 "de/d8c/classBankable_1_1PBPotentiometer.html":[4,0,11],
 "de/d8c/classBankable_1_1PBPotentiometer.html#a1f687fc423ca089c93f7e43fdfcf0fee":[4,0,11,1],
@@ -112,7 +113,7 @@ var NAVTREEINDEX16 =
 "df/d0c/classMIDI__Parser.html#a25a1088e0b58f8b901f0a951ba2bfbdc":[6,0,70,1],
 "df/d0c/classMIDI__Parser.html#a3d045a60a816ac5797543fdc34683498":[6,0,70,5],
 "df/d0c/classMIDI__Parser.html#a3f49c0d44693c4ce2438b056eab696d3":[6,0,70,10],
-"df/d0c/classMIDI__Parser.html#a7e27c82f87cef5d7a521ac99930c8e4e":[6,0,70,11],
+"df/d0c/classMIDI__Parser.html#a7e8858d7a75858c925254a9fdeb95c98":[6,0,70,11],
 "df/d0c/classMIDI__Parser.html#a80c3e8ba1f058974c4c59d35092b3bed":[6,0,70,2],
 "df/d0c/classMIDI__Parser.html#a89cd28ab3abffdffe9c1cb18fbee034c":[6,0,70,15],
 "df/d0c/classMIDI__Parser.html#a8f6d4b8fd4cddf5068275f7636b8e87e":[6,0,70,7],
@@ -128,6 +129,7 @@ var NAVTREEINDEX16 =
 "df/d36/classMCU_1_1VULEDs.html#a104e3c7f67feee481b29e0104e75242d":[6,0,1,13,9],
 "df/d36/classMCU_1_1VULEDs.html#a1889dd074ee4ee9a0c6331e5183126ad":[6,0,1,13,14],
 "df/d36/classMCU_1_1VULEDs.html#a38d9872489fd94dee25077c16073e8cf":[6,0,1,13,19],
+"df/d36/classMCU_1_1VULEDs.html#a39bed9bf8c604e890b8f82d10170e2fa":[6,0,1,13,21],
 "df/d36/classMCU_1_1VULEDs.html#a3a12728d4a3d630e38748756c93a0587":[6,0,1,13,5],
 "df/d36/classMCU_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,13,20],
 "df/d36/classMCU_1_1VULEDs.html#a4b08a75485926ddd3fa6396b6a4da2a1":[6,0,1,13,16],
@@ -138,7 +140,6 @@ var NAVTREEINDEX16 =
 "df/d36/classMCU_1_1VULEDs.html#a76f2324e0fdd8e51a9da73928dd00b49":[6,0,1,13,0],
 "df/d36/classMCU_1_1VULEDs.html#a7ae18e103d62568ba35c1c2de2e37885":[6,0,1,13,2],
 "df/d36/classMCU_1_1VULEDs.html#a9a4d6084fd01383f5b288ca403f65387":[6,0,1,13,7],
-"df/d36/classMCU_1_1VULEDs.html#a9fc167b9796b01178bc82bf7d8e0799e":[6,0,1,13,21],
 "df/d36/classMCU_1_1VULEDs.html#aa32cdb3125e337090f73f8f3358a8a73":[6,0,1,13,15],
 "df/d36/classMCU_1_1VULEDs.html#abc54b9402e8555c615aaee35235f3aa4":[6,0,1,13,6],
 "df/d36/classMCU_1_1VULEDs.html#adcb7da06e470ced36073d5cbeb5ad6c0":[6,0,1,13,12],
@@ -226,7 +227,7 @@ var NAVTREEINDEX16 =
 "df/d9b/classMIDICNChannel.html#adc1ff6e8f2fa717352eb5f858df81c78":[6,0,76,1],
 "df/da8/struct__Setprecision.html":[6,0,4],
 "df/da8/struct__Setprecision.html#aa82dfb10f40dfa22ccef2975f6719181":[6,0,4,0],
-"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,13],
+"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,14],
 "df/db8/LinkedList_8cpp.html":[7,0,121],
 "df/db8/LinkedList_8cpp_source.html":[7,0,121],
 "df/dbc/AudioVU_8cpp.html":[7,0,8],
@@ -248,6 +249,5 @@ var NAVTREEINDEX16 =
 "df/dee/Debug_8hpp_source.html":[7,0,69],
 "df/df5/IncrementDecrementButtons_8hpp.html":[7,0,110],
 "df/df5/IncrementDecrementButtons_8hpp_source.html":[7,0,110],
-"examples.html":[8],
-"files.html":[7,0]
+"examples.html":[8]
 };

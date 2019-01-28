@@ -24,7 +24,7 @@ var classMCU_1_1VU__Base =
     [ "address", "d4/d71/classMCU_1_1VU__Base.html#a38d9872489fd94dee25077c16073e8cf", null ],
     [ "decayTime", "d4/d71/classMCU_1_1VU__Base.html#a9bb376d12c42668527884fd32956e516", null ],
     [ "next", "d4/d71/classMCU_1_1VU__Base.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
-    [ "NO_DECAY", "d4/d71/classMCU_1_1VU__Base.html#a9fc167b9796b01178bc82bf7d8e0799e", null ],
+    [ "NO_DECAY", "d4/d71/classMCU_1_1VU__Base.html#a39bed9bf8c604e890b8f82d10170e2fa", null ],
     [ "prevDecayTime", "d4/d71/classMCU_1_1VU__Base.html#a18e432eccdf3682f75f9c286d8a47e19", null ],
     [ "previous", "d4/d71/classMCU_1_1VU__Base.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];
