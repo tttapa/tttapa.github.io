@@ -10,6 +10,6 @@ var searchData=
   ['vu',['VU',['../d8/d4c/classMCU_1_1VU.html#ae95cc9bc3749b144ede2c50d5f92b322',1,'MCU::VU::VU()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a25224e1cd150901c02c38731801223f0',1,'MCU::Bankable::VU::VU()']]],
   ['vu_5fbase',['VU_Base',['../d4/d71/classMCU_1_1VU__Base.html#a8e1cf284c76d2b5f096d4353f6eb9705',1,'MCU::VU_Base::VU_Base()'],['../d4/d71/classMCU_1_1VU__Base.html#a561ab0663828526d35663e2336d28a3f',1,'MCU::VU_Base::VU_Base(const MIDICNChannelAddress &amp;address, unsigned int decayTime)']]],
   ['vudisplay',['VUDisplay',['../d4/d42/classMCU_1_1VUDisplay.html#a41ba02433ea87dbce1cb17ca1bf8397d',1,'MCU::VUDisplay']]],
-  ['vuleds',['VULEDs',['../df/d36/classMCU_1_1VULEDs.html#a76f2324e0fdd8e51a9da73928dd00b49',1,'MCU::VULEDs::VULEDs()'],['../db/d17/classMCU_1_1Bankable_1_1VULEDs.html#abea11dd6ae2135645de76f3c5f3ded50',1,'MCU::Bankable::VULEDs::VULEDs()']]],
+  ['vuleds',['VULEDs',['../df/d36/classMCU_1_1VULEDs.html#afd408385cac96aa0744cfa0d84013bce',1,'MCU::VULEDs::VULEDs()'],['../db/d17/classMCU_1_1Bankable_1_1VULEDs.html#abea11dd6ae2135645de76f3c5f3ded50',1,'MCU::Bankable::VULEDs::VULEDs()']]],
   ['vuleds_5fbase',['VULEDs_Base',['../da/d0a/classMCU_1_1VULEDs__Base.html#a6eabaca3cac2c5c3e7ea0f6b965d4350',1,'MCU::VULEDs_Base']]]
 ];
