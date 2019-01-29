@@ -450,76 +450,153 @@ If we don't the cut-off frequency will shift to an incorrect frequency when we d
     <span class="mjpage mjpage__block"><span class="mjx-chtml MJXc-display" style="text-align: center;"><span class="mjx-math" aria-label=" A(\omega_{c,d}) = -3.01 \mathrm{dB} "><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.519em; padding-bottom: 0.298em;">A</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">(</span></span><span class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">ω</span></span></span><span class="mjx-sub" style="font-size: 70.7%; vertical-align: -0.219em; padding-right: 0.071em;"><span class="mjx-texatom" style=""><span class="mjx-mrow"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">c</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.144em; padding-bottom: 0.519em;">,</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.446em; padding-bottom: 0.298em; padding-right: 0.003em;">d</span></span></span></span></span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">)</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">3.01</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">d</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">B</span></span></span></span></span></span></span></span>
 </p>
 
-<h3><a name="matlab" href="#matlab">MATLAB</a></h3>
+<h3><a name="matlab-gnu-octave" href="#matlab-gnu-octave">MATLAB &amp; GNU Octave</a></h3>
 
 <p>
     If you have to design many different filters, you don't want to calculate them all by hand. 
     Luckily, MATLAB and GNU Octave come with a command to calculate the coefficients of Butterworth filters.
 
-    </p><pre class="lineNumbers"><code>f_s = 360;    % Sample frequency in Hz</code>
-<code>f_c = 45;     % Cut-off frequency in Hz</code>
-<code>order = 4;    % Order of the butterworth filter</code>
-<code></code>
-<code>omega_c = 2 * pi * f_c;       % Cut-off angular frequency</code>
-<code>omega_c_d = omega_c / f_s;    % Normalized cut-off frequency (digital)</code>
-<code></code>
-<code>[b, a] = butter(order, omega_c_d / pi);    % Design the Butterworth filter</code>
-<code>disp("a = "); disp(a);                     % Print the coefficients</code>
-<code>disp("b = "); disp(b);</code>
-<code>H = tf(b, a, 1 / f_s);                     % Create a transfer function</code>
-<code>bode(H);                                   % Show the Bode plot</code></pre>
+    </p><pre class="lineNumbers" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"><code><code><span style="color: #000000;">f_s = </span><span style="color: #09885a;">360</span><span style="color: #000000;">;    </span><span style="color: #008000;">% Sample frequency in Hz</span></code></code>
+<code><code><span style="color: #000000;">f_c = </span><span style="color: #09885a;">45</span><span style="color: #000000;">;     </span><span style="color: #008000;">% Cut-off frequency in Hz</span></code></code>
+<code><code><span style="color: #795e26;">order</span><span style="color: #000000;"> = </span><span style="color: #09885a;">4</span><span style="color: #000000;">;    </span><span style="color: #008000;">% Order of the butterworth filter</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">omega_c = </span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> </span><span style="color: #0000ff;">pi</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> f_c;       </span><span style="color: #008000;">% Cut-off angular frequency</span></code></code>
+<code><code><span style="color: #000000;">omega_c_d = omega_c </span><span style="color: #000000;">/</span><span style="color: #000000;"> f_s;    </span><span style="color: #008000;">% Normalized cut-off frequency (digital)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">[b, a] = </span><span style="color: #795e26;">butter</span><span style="color: #000000;">(</span><span style="color: #795e26;">order</span><span style="color: #000000;">, omega_c_d </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #0000ff;">pi</span><span style="color: #000000;">);    </span><span style="color: #008000;">% Design the Butterworth filter</span></code></code>
+<code><code><span style="color: #0000ff;">disp</span><span style="color: #000000;">(</span><span style="color: #a31515;">'a = '</span><span style="color: #000000;">); </span><span style="color: #0000ff;">disp</span><span style="color: #000000;">(a);                     </span><span style="color: #008000;">% Print the coefficients</span></code></code>
+<code><code><span style="color: #0000ff;">disp</span><span style="color: #000000;">(</span><span style="color: #a31515;">'b = '</span><span style="color: #000000;">); </span><span style="color: #0000ff;">disp</span><span style="color: #000000;">(b);</span></code></code>
+<code><code><span style="color: #000000;">H = </span><span style="color: #795e26;">tf</span><span style="color: #000000;">(b, a, </span><span style="color: #09885a;">1</span><span style="color: #000000;"> </span><span style="color: #000000;">/</span><span style="color: #000000;"> f_s);                     </span><span style="color: #008000;">% Create a transfer function</span></code></code>
+<code><code><span style="color: #795e26;">bode</span><span style="color: #000000;">(H);                                   </span><span style="color: #008000;">% Show the Bode plot</span></code></code></pre>
 Note that MATLAB expects the normalized frequency as a number from 0 to 1, so we have to divide by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\pi"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em; padding-right: 0.003em;">π</span></span></span></span></span></span> 
 before passing it to the <code>butter</code> function.
 <p></p>
+
+<h3><a name="python" href="#python">Python</a></h3>
 
 <p>
 A similar function is available in the SciPy signal package:
 <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.butter.html"><code>butter</code></a>.
 
-</p><pre class="lineNumbers"><code><span style="color: #af00db;">from</span> scipy.signal <span style="color: #af00db;">import</span> butter, freqz </code>
-<code><span style="color: #af00db;">import</span> matplotlib.pyplot <span style="color: #af00db;">as</span> plt</code>
-<code><span style="color: #af00db;">from</span> math <span style="color: #af00db;">import</span> pi</code>
-<code><span style="color: #af00db;">import</span> numpy <span style="color: #af00db;">as</span> np</code>
-<code></code>
-<code>f_s = <span style="color: #09885a;">360</span>    <span style="color: #008000;"># Sample frequency in Hz</span></code>
-<code>f_c = <span style="color: #09885a;">45</span>     <span style="color: #008000;"># Cut-off frequency in Hz</span></code>
-<code>order = <span style="color: #09885a;">4</span>    <span style="color: #008000;"># Order of the butterworth filter</span></code>
-<code></code>
-<code>omega_c = <span style="color: #09885a;">2</span> * pi * f_c       <span style="color: #008000;"># Cut-off angular frequency</span></code>
-<code>omega_c_d = omega_c / f_s    <span style="color: #008000;"># Normalized cut-off frequency (digital)</span></code>
-<code></code>
-<code>b, a = butter(order, omega_c_d / pi)    <span style="color: #008000;"># Design the Butterworth filter</span></code>
-<code><span style="color: #795e26;">print</span>(<span style="color: #a31515;">"a ="</span>, a)                         <span style="color: #008000;"># Print the coefficients</span></code>
-<code><span style="color: #795e26;">print</span>(<span style="color: #a31515;">"b ="</span>, b)</code>
-<code></code>
-<code>w, h = freqz(b, a, <span style="color: #09885a;">4096</span>)             <span style="color: #008000;"># Calculate the frequency response</span></code>
-<code>w *= f_s / (<span style="color: #09885a;">2</span> * pi)                  <span style="color: #008000;"># Convert from rad/sample to Hz</span></code>
-<code></code>
-<code>plt.subplot(<span style="color: #09885a;">2</span>, <span style="color: #09885a;">1</span>, <span style="color: #09885a;">1</span>)                 <span style="color: #008000;"># Plot the amplitude response</span></code>
-<code>plt.suptitle(<span style="color: #a31515;">'Bode Plot'</span>)            </code>
-<code>plt.plot(w, <span style="color: #09885a;">20</span> * np.log10(<span style="color: #795e26;">abs</span>(h)))   <span style="color: #008000;"># Convert to dB</span></code>
-<code>plt.ylabel(<span style="color: #a31515;">'Magnitude [dB]'</span>)</code>
-<code>plt.xlim(<span style="color: #09885a;">0</span>, f_s / <span style="color: #09885a;">2</span>)</code>
-<code>plt.ylim(-<span style="color: #09885a;">80</span>, <span style="color: #09885a;">6</span>)</code>
-<code>plt.axvline(f_c, <span style="color: #001080;">color</span>=<span style="color: #a31515;">'red'</span>)</code>
-<code>plt.axhline(-<span style="color: #09885a;">3</span>, <span style="color: #001080;">linewidth</span>=<span style="color: #09885a;">0.8</span>, <span style="color: #001080;">color</span>=<span style="color: #a31515;">'black'</span>, <span style="color: #001080;">linestyle</span>=<span style="color: #a31515;">':'</span>)</code>
-<code></code>
-<code>plt.subplot(<span style="color: #09885a;">2</span>, <span style="color: #09885a;">1</span>, <span style="color: #09885a;">2</span>)                 <span style="color: #008000;"># Plot the phase response</span></code>
-<code>plt.plot(w, <span style="color: #09885a;">180</span> * np.angle(h) / pi)  <span style="color: #008000;"># Convert argument to degrees</span></code>
-<code>plt.xlabel(<span style="color: #a31515;">'Frequency [Hz]'</span>)</code>
-<code>plt.ylabel(<span style="color: #a31515;">'Phase [°]'</span>)</code>
-<code>plt.xlim(<span style="color: #09885a;">0</span>, f_s / <span style="color: #09885a;">2</span>)</code>
-<code>plt.ylim(-<span style="color: #09885a;">180</span>, <span style="color: #09885a;">180</span>)</code>
-<code>plt.yticks([-<span style="color: #09885a;">180</span>, -<span style="color: #09885a;">135</span>, -<span style="color: #09885a;">90</span>, -<span style="color: #09885a;">45</span>, <span style="color: #09885a;">0</span>, <span style="color: #09885a;">45</span>, <span style="color: #09885a;">90</span>, <span style="color: #09885a;">135</span>, <span style="color: #09885a;">180</span>])</code>
-<code>plt.axvline(f_c, <span style="color: #001080;">color</span>=<span style="color: #a31515;">'red'</span>)</code>
-<code>plt.show()</code></pre>
+</p><pre class="lineNumbers" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"><code><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> butter, freqz, freqs</span></code></code>
+<code><code><span style="color: #af00db;">import</span><span style="color: #000000;"> matplotlib.pyplot </span><span style="color: #af00db;">as</span><span style="color: #000000;"> plt</span></code></code>
+<code><code><span style="color: #af00db;">from</span><span style="color: #000000;"> math </span><span style="color: #af00db;">import</span><span style="color: #000000;"> pi</span></code></code>
+<code><code><span style="color: #af00db;">import</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">as</span><span style="color: #000000;"> np</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">f_s </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">360</span><span style="color: #000000;">    </span><span style="color: #008000;"># Sample frequency in Hz</span></code></code>
+<code><code><span style="color: #000000;">f_c </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">45</span><span style="color: #000000;">     </span><span style="color: #008000;"># Cut-off frequency in Hz</span></code></code>
+<code><code><span style="color: #000000;">order </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">4</span><span style="color: #000000;">    </span><span style="color: #008000;"># Order of the butterworth filter</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">omega_c </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> pi </span><span style="color: #000000;">*</span><span style="color: #000000;"> f_c       </span><span style="color: #008000;"># Cut-off angular frequency</span></code></code>
+<code><code><span style="color: #000000;">omega_c_d </span><span style="color: #000000;">=</span><span style="color: #000000;"> omega_c </span><span style="color: #000000;">/</span><span style="color: #000000;"> f_s    </span><span style="color: #008000;"># Normalized cut-off frequency (digital)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;"># Design the digital Butterworth filter</span></code></code>
+<code><code><span style="color: #000000;">b, a </span><span style="color: #000000;">=</span><span style="color: #000000;"> butter(order, omega_c_d </span><span style="color: #000000;">/</span><span style="color: #000000;"> pi)    </span></code></code>
+<code><code><span style="color: #795e26;">print</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Coefficients'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #795e26;">print</span><span style="color: #000000;">(</span><span style="color: #a31515;">"b ="</span><span style="color: #000000;">, b)                           </span><span style="color: #008000;"># Print the coefficients</span></code></code>
+<code><code><span style="color: #795e26;">print</span><span style="color: #000000;">(</span><span style="color: #a31515;">"a ="</span><span style="color: #000000;">, a)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">w, H </span><span style="color: #000000;">=</span><span style="color: #000000;"> freqz(b, a, </span><span style="color: #09885a;">4096</span><span style="color: #000000;">)                  </span><span style="color: #008000;"># Calculate the frequency response</span></code></code>
+<code><code><span style="color: #000000;">w </span><span style="color: #000000;">*=</span><span style="color: #000000;"> f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> (</span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> pi)                       </span><span style="color: #008000;"># Convert from rad/sample to Hz</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;"># Plot the amplitude response</span></code></code>
+<code><code><span style="color: #000000;">plt.subplot(</span><span style="color: #09885a;">2</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">)            </span></code></code>
+<code><code><span style="color: #000000;">plt.suptitle(</span><span style="color: #a31515;">'Bode Plot'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">H_dB </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">20</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> np.log10(</span><span style="color: #795e26;">abs</span><span style="color: #000000;">(H))              </span><span style="color: #008000;"># Convert modulus of H to dB</span></code></code>
+<code><code><span style="color: #000000;">plt.plot(w, H_dB)</span></code></code>
+<code><code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Magnitude [dB]'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.xlim(</span><span style="color: #09885a;">0</span><span style="color: #000000;">, f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.ylim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">80</span><span style="color: #000000;">, </span><span style="color: #09885a;">6</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.axvline(f_c, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'red'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.axhline(</span><span style="color: #000000;">-</span><span style="color: #09885a;">3</span><span style="color: #000000;">, </span><span style="color: #001080;">linewidth</span><span style="color: #000000;">=</span><span style="color: #09885a;">0.8</span><span style="color: #000000;">, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'black'</span><span style="color: #000000;">, </span><span style="color: #001080;">linestyle</span><span style="color: #000000;">=</span><span style="color: #a31515;">':'</span><span style="color: #000000;">)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;"># Plot the phase response</span></code></code>
+<code><code><span style="color: #000000;">plt.subplot(</span><span style="color: #09885a;">2</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">, </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">phi </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.angle(H)                         </span><span style="color: #008000;"># Argument of H</span></code></code>
+<code><code><span style="color: #000000;">phi </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.unwrap(phi)                      </span><span style="color: #008000;"># Remove discontinuities </span></code></code>
+<code><code><span style="color: #000000;">phi </span><span style="color: #000000;">*=</span><span style="color: #000000;"> </span><span style="color: #09885a;">180</span><span style="color: #000000;"> </span><span style="color: #000000;">/</span><span style="color: #000000;"> pi                           </span><span style="color: #008000;"># and convert to degrees</span></code></code>
+<code><code><span style="color: #000000;">plt.plot(w, phi)</span></code></code>
+<code><code><span style="color: #000000;">plt.xlabel(</span><span style="color: #a31515;">'Frequency [Hz]'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Phase [°]'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.xlim(</span><span style="color: #09885a;">0</span><span style="color: #000000;">, f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.ylim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">360</span><span style="color: #000000;">, </span><span style="color: #09885a;">0</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.yticks([</span><span style="color: #000000;">-</span><span style="color: #09885a;">360</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">270</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">180</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">90</span><span style="color: #000000;">, </span><span style="color: #09885a;">0</span><span style="color: #000000;">])</span></code></code>
+<code><code><span style="color: #000000;">plt.axvline(f_c, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'red'</span><span style="color: #000000;">)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">plt.show()</span></code></code></pre>
 
-<img src="images/Bode-Digital-Butterworth-Python-2.svg">
+<img src="images/Bode-Digital-Butterworth-Python-3.svg">
+<p></p>
+
+<h3><a name="comparison-between-the-analog-and-digital-filter" href="#comparison-between-the-analog-and-digital-filter">Comparison Between the Analog and Digital Filter</a></h3>
+
+<p>
+    We can easily plot the Bode plots of the two filters on top of each other, in order to compare their properties.
+    </p><pre class="lineNumbers" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"><code><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> butter, freqz, freqs</span></code></code>
+<code><code><span style="color: #af00db;">import</span><span style="color: #000000;"> matplotlib.pyplot </span><span style="color: #af00db;">as</span><span style="color: #000000;"> plt</span></code></code>
+<code><code><span style="color: #af00db;">from</span><span style="color: #000000;"> math </span><span style="color: #af00db;">import</span><span style="color: #000000;"> pi</span></code></code>
+<code><code><span style="color: #af00db;">import</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">as</span><span style="color: #000000;"> np</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">f_s </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">360</span><span style="color: #000000;">    </span><span style="color: #008000;"># Sample frequency in Hz</span></code></code>
+<code><code><span style="color: #000000;">f_c </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">45</span><span style="color: #000000;">     </span><span style="color: #008000;"># Cut-off frequency in Hz</span></code></code>
+<code><code><span style="color: #000000;">order </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">4</span><span style="color: #000000;">    </span><span style="color: #008000;"># Order of the butterworth filter</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">omega_c </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> pi </span><span style="color: #000000;">*</span><span style="color: #000000;"> f_c       </span><span style="color: #008000;"># Cut-off angular frequency</span></code></code>
+<code><code><span style="color: #000000;">omega_c_d </span><span style="color: #000000;">=</span><span style="color: #000000;"> omega_c </span><span style="color: #000000;">/</span><span style="color: #000000;"> f_s    </span><span style="color: #008000;"># Normalized cut-off frequency (digital)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;"># Design the digital Butterworth filter</span></code></code>
+<code><code><span style="color: #000000;">b_d, a_d </span><span style="color: #000000;">=</span><span style="color: #000000;"> butter(order, omega_c_d </span><span style="color: #000000;">/</span><span style="color: #000000;"> pi)    </span></code></code>
+<code><code><span style="color: #795e26;">print</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Digital Coefficients'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #795e26;">print</span><span style="color: #000000;">(</span><span style="color: #a31515;">"b ="</span><span style="color: #000000;">, b_d)                         </span><span style="color: #008000;"># Print the coefficients</span></code></code>
+<code><code><span style="color: #795e26;">print</span><span style="color: #000000;">(</span><span style="color: #a31515;">"a ="</span><span style="color: #000000;">, a_d)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">w, H_d </span><span style="color: #000000;">=</span><span style="color: #000000;"> freqz(b_d, a_d, </span><span style="color: #09885a;">4096</span><span style="color: #000000;">)            </span><span style="color: #008000;"># Calculate the frequency response</span></code></code>
+<code><code><span style="color: #000000;">w </span><span style="color: #000000;">*=</span><span style="color: #000000;"> f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> (</span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> pi)                       </span><span style="color: #008000;"># Convert from rad/sample to Hz</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;"># Design the analog Butterworth filter</span></code></code>
+<code><code><span style="color: #000000;">b_a, a_a </span><span style="color: #000000;">=</span><span style="color: #000000;"> butter(order, f_c, </span><span style="color: #001080;">analog</span><span style="color: #000000;">=</span><span style="color: #0000ff;">True</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #795e26;">print</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Analog Coefficients'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #795e26;">print</span><span style="color: #000000;">(</span><span style="color: #a31515;">"b ="</span><span style="color: #000000;">, b_a)                         </span><span style="color: #008000;"># Print the coefficients</span></code></code>
+<code><code><span style="color: #795e26;">print</span><span style="color: #000000;">(</span><span style="color: #a31515;">"a ="</span><span style="color: #000000;">, a_a)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">w, H_a </span><span style="color: #000000;">=</span><span style="color: #000000;"> freqs(b_a, a_a, w)               </span><span style="color: #008000;"># Calculate the frequency response</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;"># Plot the amplitude response</span></code></code>
+<code><code><span style="color: #000000;">plt.subplot(</span><span style="color: #09885a;">2</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">)            </span></code></code>
+<code><code><span style="color: #000000;">plt.suptitle(</span><span style="color: #a31515;">'Bode Plot'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">H_d_dB </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">20</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> np.log10(</span><span style="color: #795e26;">abs</span><span style="color: #000000;">(H_d))          </span><span style="color: #008000;"># Convert modulus of H to dB</span></code></code>
+<code><code><span style="color: #000000;">H_a_dB </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">20</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> np.log10(</span><span style="color: #795e26;">abs</span><span style="color: #000000;">(H_a))</span></code></code>
+<code><code><span style="color: #000000;">plt.plot(w, H_d_dB, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'blue'</span><span style="color: #000000;">, </span><span style="color: #001080;">label</span><span style="color: #000000;">=</span><span style="color: #a31515;">'Digital'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.plot(w, H_a_dB, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'green'</span><span style="color: #000000;">, </span><span style="color: #001080;">label</span><span style="color: #000000;">=</span><span style="color: #a31515;">'Analog'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.legend()</span></code></code>
+<code><code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Magnitude [dB]'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.xlim(</span><span style="color: #09885a;">0</span><span style="color: #000000;">, f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.ylim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">80</span><span style="color: #000000;">, </span><span style="color: #09885a;">6</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.axvline(f_c, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'red'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.axhline(</span><span style="color: #000000;">-</span><span style="color: #09885a;">3</span><span style="color: #000000;">, </span><span style="color: #001080;">linewidth</span><span style="color: #000000;">=</span><span style="color: #09885a;">0.8</span><span style="color: #000000;">, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'black'</span><span style="color: #000000;">, </span><span style="color: #001080;">linestyle</span><span style="color: #000000;">=</span><span style="color: #a31515;">':'</span><span style="color: #000000;">)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;"># Plot the phase response</span></code></code>
+<code><code><span style="color: #000000;">plt.subplot(</span><span style="color: #09885a;">2</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">, </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">phi_d </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.angle(H_d)                     </span><span style="color: #008000;"># Argument of H</span></code></code>
+<code><code><span style="color: #000000;">phi_a </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.angle(H_a)</span></code></code>
+<code><code><span style="color: #000000;">phi_d </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.unwrap(phi_d) </span><span style="color: #000000;">*</span><span style="color: #000000;"> </span><span style="color: #09885a;">180</span><span style="color: #000000;"> </span><span style="color: #000000;">/</span><span style="color: #000000;"> pi       </span><span style="color: #008000;"># Remove discontinuities</span></code></code>
+<code><code><span style="color: #000000;">phi_a </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.unwrap(phi_a) </span><span style="color: #000000;">*</span><span style="color: #000000;"> </span><span style="color: #09885a;">180</span><span style="color: #000000;"> </span><span style="color: #000000;">/</span><span style="color: #000000;"> pi       </span><span style="color: #008000;"># and convert to degrees</span></code></code>
+<code><code><span style="color: #000000;">plt.plot(w, phi_d, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'blue'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.plot(w, phi_a, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'green'</span><span style="color: #000000;">)  </span></code></code>
+<code><code><span style="color: #000000;">plt.xlabel(</span><span style="color: #a31515;">'Frequency [Hz]'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Phase [°]'</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.xlim(</span><span style="color: #09885a;">0</span><span style="color: #000000;">, f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.ylim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">360</span><span style="color: #000000;">, </span><span style="color: #09885a;">0</span><span style="color: #000000;">)</span></code></code>
+<code><code><span style="color: #000000;">plt.yticks([</span><span style="color: #000000;">-</span><span style="color: #09885a;">360</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">270</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">180</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">90</span><span style="color: #000000;">, </span><span style="color: #09885a;">0</span><span style="color: #000000;">])</span></code></code>
+<code><code><span style="color: #000000;">plt.axvline(f_c, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'red'</span><span style="color: #000000;">)</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">plt.show()</span></code></code></pre>
+<img src="images/Bode-Butter-4-Compare-Digital-Analog.svg">
 <p></p>
 
 </div>
         </article>
-        <footer>Last edited: Sunday, 13 January 2019 12:04 UTC</footer>
+        <footer>Last edited: Tuesday, 29 January 2019 12:00 UTC</footer>
     
 
 </body></html>
