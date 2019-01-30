@@ -1,6 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"d5/d54/classMCU_1_1SevenSegmentDisplay.html#a3cdc427ed1a74ba765311e87dbdbe60b":[6,0,1,2,14],
 "d5/d54/classMCU_1_1SevenSegmentDisplay.html#a422ab92ae0548f938ca5f24004e96a15":[6,0,1,2,6],
 "d5/d54/classMCU_1_1SevenSegmentDisplay.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,2,18],
 "d5/d54/classMCU_1_1SevenSegmentDisplay.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,2,19],
@@ -111,8 +110,8 @@ var NAVTREEINDEX6 =
 "d5/de7/USBMIDI__Interface_8cpp_source.html":[7,0,253],
 "d5/dee/Getting-Started_8ino-example.html":[8,3],
 "d5/df9/group__MIDIOutputElementConstructors.html":[4,0,0],
-"d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac":[4,0,0,20],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac":[4,0,23,0],
+"d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac":[4,0,0,20],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga0919df0f6f2cdff84c8e84cacee9d77b":[4,0,20,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga0919df0f6f2cdff84c8e84cacee9d77b":[4,0,0,15],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga105a377c32b45e7f117a636597a0e1ca":[4,0,24,0],
@@ -249,5 +248,6 @@ var NAVTREEINDEX6 =
 "d6/d6d/classSoftwareSerialMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4":[4,3,11,23],
 "d6/d6d/classSoftwareSerialMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c":[4,3,11,22],
 "d6/d6d/classSoftwareSerialMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1":[4,3,11,8],
-"d6/d6d/classSoftwareSerialMIDI__Interface.html#a56032e02fcf2540151ceca9d687cd6ef":[4,3,11,10]
+"d6/d6d/classSoftwareSerialMIDI__Interface.html#a56032e02fcf2540151ceca9d687cd6ef":[4,3,11,10],
+"d6/d6d/classSoftwareSerialMIDI__Interface.html#a57bf8a86d2d4067d4de1dd6da26701ed":[4,3,11,0]
 };

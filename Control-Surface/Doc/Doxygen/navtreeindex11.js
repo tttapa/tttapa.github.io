@@ -1,6 +1,5 @@
 var NAVTREEINDEX11 =
 {
-"da/d6a/classPBPotentiometer.html#a4154c3302c845a9dc6a455600c4d0e2b":[4,0,24,17],
 "da/d6a/classPBPotentiometer.html#a4a13b63f90ec988cd14d871df9dbc53b":[4,0,24,20],
 "da/d6a/classPBPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09":[4,0,24,8],
 "da/d6a/classPBPotentiometer.html#a57b6615469e554c514a9ff56dc24908f":[4,0,24,21],
@@ -21,7 +20,7 @@ var NAVTREEINDEX11 =
 "da/d6a/classPBPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,24,13],
 "da/d80/struct__Setbase.html":[6,0,2],
 "da/d80/struct__Setbase.html#a71ff2a1cb6bd223fbe45707260f6182f":[6,0,2,0],
-"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,11],
+"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,12],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html":[6,0,1,0,0],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a07155d1404800da8eb51cbc6c6da0c6e":[6,0,1,0,0,32],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,1,0,0,20],
@@ -31,12 +30,12 @@ var NAVTREEINDEX11 =
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a38d9872489fd94dee25077c16073e8cf":[6,0,1,0,0,27],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a39912b6c8d039c840aa9a1e73e645318":[6,0,1,0,0,16],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a3cdc427ed1a74ba765311e87dbdbe60b":[6,0,1,0,0,24],
-"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,0,0,29],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,0,0,28],
+"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,0,0,29],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,1,0,0,12],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5723f4a7c22aea22a940f481c48bd798":[6,0,1,0,0,6],
-"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,0,30],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,0,31],
+"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,0,30],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5b0faa934f92505e1a85857996ee9a0a":[6,0,1,0,0,25],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5d638e14de4b2e6508131c110d028ab4":[6,0,1,0,0,4],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a6d425d7489541b6ff8b89e5f9c2cb5e1":[6,0,1,0,0,17],
@@ -249,5 +248,6 @@ var NAVTREEINDEX11 =
 "db/d60/MCU_8hpp.html#a08f1d2050f1b633b2504909d9bab3236":[7,0,134,78],
 "db/d60/MCU_8hpp.html#a0926b23e79c7619b77bb90e84f38a75c":[7,0,134,34],
 "db/d60/MCU_8hpp.html#a09ff3d36e06dc759e5fc8a4f5752f761":[7,0,134,36],
-"db/d60/MCU_8hpp.html#a0aa2154c420b61e79ee13f5617f998fb":[7,0,134,114]
+"db/d60/MCU_8hpp.html#a0aa2154c420b61e79ee13f5617f998fb":[7,0,134,114],
+"db/d60/MCU_8hpp.html#a0b0a2480c2a0bbfbca785b72c66d5010":[7,0,134,14]
 };

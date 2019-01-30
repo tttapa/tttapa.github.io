@@ -1,6 +1,5 @@
 var NAVTREEINDEX10 =
 {
-"d9/db8/classSerialMIDI__Interface.html#a2c79441f44b904566d237b05b8b3c2fb":[4,3,7,16],
 "d9/db8/classSerialMIDI__Interface.html#a2c9b5e576f7e2ad2df057a30d13412d5":[4,3,7,25],
 "d9/db8/classSerialMIDI__Interface.html#a3058e51eff2e68b7480b1c18c1aa8dbd":[4,3,7,9],
 "d9/db8/classSerialMIDI__Interface.html#a3549169b2cfd90f2d11a19f551407b12":[4,3,7,13],
@@ -74,7 +73,7 @@ var NAVTREEINDEX10 =
 "d9/dc9/TimeDisplay_8hpp_source.html":[7,0,246],
 "d9/dcf/SettingsWrapper_8cpp.html":[7,0,231],
 "d9/dcf/SettingsWrapper_8cpp_source.html":[7,0,231],
-"d9/deb/PushButtonsLEDsNoMIDIFeedback_8ino-example.html":[8,9],
+"d9/deb/PushButtonsLEDsNoMIDIFeedback_8ino-example.html":[8,10],
 "d9/df7/Bankable_2Abstract_2MIDIButtons_8hpp.html":[7,0,157],
 "d9/df7/Bankable_2Abstract_2MIDIButtons_8hpp_source.html":[7,0,157],
 "d9/df9/classBankable_1_1CCButtonLatching.html":[4,0,2],
@@ -249,5 +248,6 @@ var NAVTREEINDEX10 =
 "da/d69/PrintStream_8cpp_source.html":[7,0,212],
 "da/d6a/classPBPotentiometer.html":[4,0,24],
 "da/d6a/classPBPotentiometer.html#a1f687fc423ca089c93f7e43fdfcf0fee":[4,0,24,1],
-"da/d6a/classPBPotentiometer.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,24,4]
+"da/d6a/classPBPotentiometer.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,24,4],
+"da/d6a/classPBPotentiometer.html#a4154c3302c845a9dc6a455600c4d0e2b":[4,0,24,17]
 };

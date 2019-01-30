@@ -1,6 +1,5 @@
 var NAVTREEINDEX12 =
 {
-"db/d60/MCU_8hpp.html#a0b0a2480c2a0bbfbca785b72c66d5010":[7,0,134,14],
 "db/d60/MCU_8hpp.html#a0d5b301b547713fe18b71e1a482e08b7":[7,0,134,52],
 "db/d60/MCU_8hpp.html#a0dbae857e721bdf6f58d9f5c8a807fb3":[7,0,134,108],
 "db/d60/MCU_8hpp.html#a0fe32f6eb1cbcd5cd90641bc5b8de0ac":[7,0,134,73],
@@ -150,7 +149,7 @@ var NAVTREEINDEX12 =
 "db/d93/ArrayHelpers_8cpp_source.html":[7,0,4],
 "db/d9d/IncrementButton_8cpp.html":[7,0,107],
 "db/d9d/IncrementButton_8cpp_source.html":[7,0,107],
-"db/dac/PushButtons_8ino-example.html":[8,7],
+"db/dac/PushButtons_8ino-example.html":[8,8],
 "db/dac/classMCU_1_1VPotRing__Base.html":[6,0,1,7],
 "db/dac/classMCU_1_1VPotRing__Base.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,1,7,15],
 "db/dac/classMCU_1_1VPotRing__Base.html#a38d9872489fd94dee25077c16073e8cf":[6,0,1,7,21],
@@ -241,7 +240,7 @@ var NAVTREEINDEX12 =
 "db/dcf/VUDisplay_8cpp_source.html":[7,0,267],
 "db/dd1/ContinuousCCSender_8hpp.html":[7,0,59],
 "db/dd1/ContinuousCCSender_8hpp_source.html":[7,0,59],
-"db/dd1/SPIShiftRegisterBlink_8ino-example.html":[8,13],
+"db/dd1/SPIShiftRegisterBlink_8ino-example.html":[8,14],
 "db/dda/VU_8hpp.html":[7,0,266],
 "db/dda/VU_8hpp_source.html":[7,0,266],
 "db/ddc/IncrementSelectorLEDs_8cpp.html":[7,0,117],
@@ -249,5 +248,6 @@ var NAVTREEINDEX12 =
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html":[6,0,0,10],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a152a9da69ce9e29a540de7deed705dbf":[6,0,0,10,20],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a1f687fc423ca089c93f7e43fdfcf0fee":[6,0,0,10,1],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,0,10,4]
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,0,10,4],
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4154c3302c845a9dc6a455600c4d0e2b":[6,0,0,10,17]
 };

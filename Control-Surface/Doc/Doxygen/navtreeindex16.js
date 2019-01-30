@@ -227,7 +227,7 @@ var NAVTREEINDEX16 =
 "df/d9b/classMIDICNChannel.html#adc1ff6e8f2fa717352eb5f858df81c78":[6,0,76,1],
 "df/da8/struct__Setprecision.html":[6,0,4],
 "df/da8/struct__Setprecision.html#aa82dfb10f40dfa22ccef2975f6719181":[6,0,4,0],
-"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,14],
+"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,15],
 "df/db8/LinkedList_8cpp.html":[7,0,121],
 "df/db8/LinkedList_8cpp_source.html":[7,0,121],
 "df/dbc/AudioVU_8cpp.html":[7,0,8],

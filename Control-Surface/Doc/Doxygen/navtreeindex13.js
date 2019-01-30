@@ -1,6 +1,5 @@
 var NAVTREEINDEX13 =
 {
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4154c3302c845a9dc6a455600c4d0e2b":[6,0,0,10,17],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,10,22],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,0,10,8],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,10,23],
@@ -157,6 +156,7 @@ var NAVTREEINDEX13 =
 "dc/d70/BLEMIDI_8cpp_source.html":[7,0,22],
 "dc/d77/DisplayInterface_8hpp.html":[7,0,81],
 "dc/d77/DisplayInterface_8hpp_source.html":[7,0,81],
+"dc/d82/ProgramChanger_8ino-example.html":[8,7],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp.html":[7,0,54],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp_source.html":[7,0,54],
 "dc/d90/MIDIInputElement_8hpp.html":[7,0,167],

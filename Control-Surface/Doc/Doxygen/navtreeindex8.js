@@ -1,6 +1,5 @@
 var NAVTREEINDEX8 =
 {
-"d8/d20/classMIDIRotaryEncoder.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,91,2],
 "d8/d20/classMIDIRotaryEncoder.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,91,6],
 "d8/d20/classMIDIRotaryEncoder.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,91,5],
 "d8/d20/classMIDIRotaryEncoder.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,91,11],
@@ -249,5 +248,6 @@ var NAVTREEINDEX8 =
 "d8/df7/classEncoderSelectorLEDs.html#ae2862f751184a7163e83947716a5b515":[6,0,40,21],
 "d8/df7/classEncoderSelectorLEDs.html#aedf651d52b4657c226a0407bc4558183":[6,0,40,6],
 "d9/d03/Bankable_2Abstract_2MIDIButtons_8cpp.html":[7,0,155],
-"d9/d03/Bankable_2Abstract_2MIDIButtons_8cpp_source.html":[7,0,155]
+"d9/d03/Bankable_2Abstract_2MIDIButtons_8cpp_source.html":[7,0,155],
+"d9/d0a/EMA_8cpp.html":[7,0,84]
 };

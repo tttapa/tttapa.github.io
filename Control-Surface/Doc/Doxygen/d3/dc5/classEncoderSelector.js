@@ -1,7 +1,6 @@
 var classEncoderSelector =
 [
     [ "EncoderSelector", "d3/dc5/classEncoderSelector.html#a1addaab826cbdc18e2696ca0b6f95405", null ],
-    [ "EncoderSelector", "d3/dc5/classEncoderSelector.html#a3175e240e0dcad5f7132a7256d3649cb", null ],
     [ "begin", "d3/dc5/classEncoderSelector.html#a6244b6e5a34336abb2293257c47d7e15", null ],
     [ "beginAll", "d3/dc5/classEncoderSelector.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "beginInput", "d3/dc5/classEncoderSelector.html#a0f55e2edbd610515285e8cb54a5cd401", null ],

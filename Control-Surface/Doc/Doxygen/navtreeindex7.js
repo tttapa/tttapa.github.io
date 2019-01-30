@@ -1,6 +1,5 @@
 var NAVTREEINDEX7 =
 {
-"d6/d6d/classSoftwareSerialMIDI__Interface.html#a57bf8a86d2d4067d4de1dd6da26701ed":[4,3,11,0],
 "d6/d6d/classSoftwareSerialMIDI__Interface.html#a58470aacb3262891701b456daadced6d":[4,3,11,2],
 "d6/d6d/classSoftwareSerialMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1":[4,3,11,19],
 "d6/d6d/classSoftwareSerialMIDI__Interface.html#a7002bfae1bf346eadead1397a238f9b6":[4,3,11,20],
@@ -108,7 +107,7 @@ var NAVTREEINDEX7 =
 "d7/d42/Channel_8hpp.html#ae585d21b73ab00128a688bc2ea5cb9be":[7,0,57,9],
 "d7/d42/Channel_8hpp.html#aed637b88f30e58e2276eea6ebb02b208":[7,0,57,16],
 "d7/d42/Channel_8hpp_source.html":[7,0,57],
-"d7/d5f/ShiftRegisterBlink_8ino-example.html":[8,12],
+"d7/d5f/ShiftRegisterBlink_8ino-example.html":[8,13],
 "d7/d6a/structArray.html":[6,0,6],
 "d7/d6a/structArray.html#a022734bbdbf9665f0acf09573939b9e1":[6,0,6,7],
 "d7/d6a/structArray.html#a32e08de67edecaaa43a03c7fcb1dee8d":[6,0,6,0],
@@ -194,8 +193,8 @@ var NAVTREEINDEX7 =
 "d7/dc0/classBankable_1_1CCPotentiometer.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,5,10],
 "d7/dc0/classBankable_1_1CCPotentiometer.html#ae85019a4e24c8ecb21651246f56c20ff":[4,0,5,1],
 "d7/dc0/classBankable_1_1CCPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,5,13],
-"d7/dc7/namespaceMCU.html":[6,0,1],
 "d7/dc7/namespaceMCU.html":[5,0,2],
+"d7/dc7/namespaceMCU.html":[6,0,1],
 "d7/dc9/structis__unsigned.html":[6,0,57],
 "d7/dc9/structis__unsigned.html#a4eb00c4455bb6f1f79e7a3318afff73b":[6,0,57,0],
 "d7/dcd/RelativeCCSender_8cpp.html":[7,0,216],
@@ -249,5 +248,6 @@ var NAVTREEINDEX7 =
 "d8/d20/classMIDIRotaryEncoder.html#a304d05c16cb01f4678eecffeac8df325":[6,0,91,14],
 "d8/d20/classMIDIRotaryEncoder.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,91,16],
 "d8/d20/classMIDIRotaryEncoder.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,91,8],
-"d8/d20/classMIDIRotaryEncoder.html#a57b6615469e554c514a9ff56dc24908f":[6,0,91,17]
+"d8/d20/classMIDIRotaryEncoder.html#a57b6615469e554c514a9ff56dc24908f":[6,0,91,17],
+"d8/d20/classMIDIRotaryEncoder.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,91,2]
 };
