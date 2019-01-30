@@ -120,7 +120,8 @@ var files_dup =
     [ "EncoderSelector.cpp", "d9/d20/EncoderSelector_8cpp.html", null ],
     [ "EncoderSelector.hpp", "d7/de4/EncoderSelector_8hpp.html", [
       [ "EncoderSelector_Base", "d0/daf/classEncoderSelector__Base.html", "d0/daf/classEncoderSelector__Base" ],
-      [ "EncoderSelector", "d3/dc5/classEncoderSelector.html", "d3/dc5/classEncoderSelector" ]
+      [ "EncoderSelector", "d3/dc5/classEncoderSelector.html", "d3/dc5/classEncoderSelector" ],
+      [ "EncoderButtonSelector", "d5/df1/classEncoderButtonSelector.html", "d5/df1/classEncoderButtonSelector" ]
     ] ],
     [ "EncoderSelectorLEDs.cpp", "d1/d90/EncoderSelectorLEDs_8cpp.html", null ],
     [ "EncoderSelectorLEDs.hpp", "d9/dc4/EncoderSelectorLEDs_8hpp.html", [

@@ -38,6 +38,7 @@ var annotated_dup =
     [ "DoublyLinkedList", "dd/d16/classDoublyLinkedList.html", "dd/d16/classDoublyLinkedList" ],
     [ "EMA", "d7/d40/classEMA.html", "d7/d40/classEMA" ],
     [ "EMA_f", "db/d6f/classEMA__f.html", "db/d6f/classEMA__f" ],
+    [ "EncoderButtonSelector", "d5/df1/classEncoderButtonSelector.html", "d5/df1/classEncoderButtonSelector" ],
     [ "EncoderSelector", "d3/dc5/classEncoderSelector.html", "d3/dc5/classEncoderSelector" ],
     [ "EncoderSelector_Base", "d0/daf/classEncoderSelector__Base.html", "d0/daf/classEncoderSelector__Base" ],
     [ "EncoderSelectorLEDs", "d8/df7/classEncoderSelectorLEDs.html", "d8/df7/classEncoderSelectorLEDs" ],

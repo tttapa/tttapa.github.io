@@ -21,6 +21,7 @@ var searchData=
   ['enabled',['ENABLED',['../d7/d8d/classAnalogMultiplex.html#ade5742279d9030113637f86cf35498cf',1,'AnalogMultiplex']]],
   ['enablepin',['enablePin',['../d7/d8d/classAnalogMultiplex.html#a2d7896bcedc95c3aa74f57e7268078cd',1,'AnalogMultiplex']]],
   ['encoder',['encoder',['../d8/d20/classMIDIRotaryEncoder.html#ab9c6c6d4ec4b5889d751afb5065c9548',1,'MIDIRotaryEncoder::encoder()'],['../dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a293b51b313e7504e02a2b9aaa92cffd3',1,'Bankable::MIDIRotaryEncoder::encoder()'],['../d0/daf/classEncoderSelector__Base.html#af596b0ad8a8abe00fd4760c201e77cf3',1,'EncoderSelector_Base::encoder()']]],
+  ['encoderbuttonselector',['EncoderButtonSelector',['../d5/df1/classEncoderButtonSelector.html',1,'EncoderButtonSelector&lt; N &gt;'],['../d5/df1/classEncoderButtonSelector.html#aec0bc0c8b7893dd37ad6cc2a4db7b7d2',1,'EncoderButtonSelector::EncoderButtonSelector()']]],
   ['encoderpinlist',['EncoderPinList',['../d0/d4e/Def_8hpp.html#a825dd802ea5edea3af01ada65ad5859d',1,'Def.hpp']]],
   ['encoderselector',['EncoderSelector',['../d3/dc5/classEncoderSelector.html',1,'EncoderSelector&lt; N &gt;'],['../d3/dc5/classEncoderSelector.html#a1addaab826cbdc18e2696ca0b6f95405',1,'EncoderSelector::EncoderSelector()']]],
   ['encoderselector_2ecpp',['EncoderSelector.cpp',['../d9/d20/EncoderSelector_8cpp.html',1,'']]],

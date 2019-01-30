@@ -234,6 +234,7 @@ var hierarchy =
         ] ],
         [ "Selector< N >", "d1/d54/classSelector.html", [
           [ "EncoderSelector_Base< N >", "d0/daf/classEncoderSelector__Base.html", [
+            [ "EncoderButtonSelector< N >", "d5/df1/classEncoderButtonSelector.html", null ],
             [ "EncoderSelector< N >", "d3/dc5/classEncoderSelector.html", null ],
             [ "EncoderSelectorLEDs< N >", "d8/df7/classEncoderSelectorLEDs.html", null ]
           ] ],
