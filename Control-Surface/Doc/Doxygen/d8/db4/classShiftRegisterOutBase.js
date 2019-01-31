@@ -10,6 +10,7 @@ var classShiftRegisterOutBase =
     [ "digitalWrite", "d8/db4/classShiftRegisterOutBase.html#a9f87915364296d5ee654f4ae3bed8e3d", null ],
     [ "getAll", "d8/db4/classShiftRegisterOutBase.html#a3151d5bf08e6b32231cdd58ed2f39aee", null ],
     [ "getEnd", "d8/db4/classShiftRegisterOutBase.html#a916fb2b6f637e2d35c162677f5d95a64", null ],
+    [ "getLength", "d8/db4/classShiftRegisterOutBase.html#a3d9607995d349d197fc24a23d6c4016f", null ],
     [ "getStart", "d8/db4/classShiftRegisterOutBase.html#a955322d29e4e63ec40a587b5ed9db31b", null ],
     [ "green", "d8/db4/classShiftRegisterOutBase.html#a81fabf06f40056b1e2c22e0d8420cc1c", null ],
     [ "operator[]", "d8/db4/classShiftRegisterOutBase.html#a2c6058c4a84b5be7c9b05e2cc1a9d94f", null ],

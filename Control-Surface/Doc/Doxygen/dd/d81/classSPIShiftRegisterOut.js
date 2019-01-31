@@ -10,6 +10,7 @@ var classSPIShiftRegisterOut =
     [ "digitalWrite", "dd/d81/classSPIShiftRegisterOut.html#a9f87915364296d5ee654f4ae3bed8e3d", null ],
     [ "getAll", "dd/d81/classSPIShiftRegisterOut.html#a3151d5bf08e6b32231cdd58ed2f39aee", null ],
     [ "getEnd", "dd/d81/classSPIShiftRegisterOut.html#a916fb2b6f637e2d35c162677f5d95a64", null ],
+    [ "getLength", "dd/d81/classSPIShiftRegisterOut.html#a3d9607995d349d197fc24a23d6c4016f", null ],
     [ "getStart", "dd/d81/classSPIShiftRegisterOut.html#a955322d29e4e63ec40a587b5ed9db31b", null ],
     [ "green", "dd/d81/classSPIShiftRegisterOut.html#a81fabf06f40056b1e2c22e0d8420cc1c", null ],
     [ "operator[]", "dd/d81/classSPIShiftRegisterOut.html#a2c6058c4a84b5be7c9b05e2cc1a9d94f", null ],

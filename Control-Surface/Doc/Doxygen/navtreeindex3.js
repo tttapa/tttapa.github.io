@@ -1,5 +1,7 @@
 var NAVTREEINDEX3 =
 {
+"d2/da8/NoteButtonMatrix_8hpp.html":[7,0,200],
+"d2/da8/NoteButtonMatrix_8hpp_source.html":[7,0,200],
 "d2/daa/classCCButton.html":[4,0,12],
 "d2/daa/classCCButton.html#a125820966ab551393b8b4df765cd6447":[4,0,12,1],
 "d2/daa/classCCButton.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,12,4],
@@ -247,7 +249,5 @@ var NAVTREEINDEX3 =
 "d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a4923aed435b881567b3276614dad6d11":[4,3,5,3],
 "d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4":[4,3,5,23],
 "d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c":[4,3,5,22],
-"d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1":[4,3,5,8],
-"d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a58470aacb3262891701b456daadced6d":[4,3,5,2],
-"d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1":[4,3,5,19]
+"d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1":[4,3,5,8]
 };

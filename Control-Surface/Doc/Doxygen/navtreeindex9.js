@@ -1,5 +1,9 @@
 var NAVTREEINDEX9 =
 {
+"d8/df7/classEncoderSelectorLEDs.html#a0f55e2edbd610515285e8cb54a5cd401":[6,0,41,4],
+"d8/df7/classEncoderSelectorLEDs.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,41,19],
+"d8/df7/classEncoderSelectorLEDs.html#a1c4bbfb29eb4aadd75f0aba78376dcd9":[6,0,41,1],
+"d8/df7/classEncoderSelectorLEDs.html#a22396f8624ff23df11098a5c59d44bc8":[6,0,41,23],
 "d8/df7/classEncoderSelectorLEDs.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,41,9],
 "d8/df7/classEncoderSelectorLEDs.html#a3752b5ddd24addec01b3898f55c0a8ab":[6,0,41,16],
 "d8/df7/classEncoderSelectorLEDs.html#a414872fbd3ea45e7ac44a42fcf2fc88d":[6,0,41,7],
@@ -242,12 +246,8 @@ var NAVTREEINDEX9 =
 "d9/d78/classHardwareSerialMIDI__Interface.html#ac5c80f3fbc75938d6387c503761fa555":[4,3,8,1],
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad61032be4eecf18e9a248f153b5e61a8":[4,3,8,4],
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad82ba06102163ff804b381364919d78b":[4,3,8,14],
-"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[8,16],
+"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[8,17],
 "d9/d94/ContinuousCCSender_8cpp.html":[7,0,58],
 "d9/d94/ContinuousCCSender_8cpp_source.html":[7,0,58],
-"d9/d97/Abstract_2MIDIButton_8cpp.html":[7,0,141],
-"d9/d97/Abstract_2MIDIButton_8cpp_source.html":[7,0,141],
-"d9/d98/TeensyUSBTypes_8hpp.html":[7,0,244],
-"d9/d98/TeensyUSBTypes_8hpp_source.html":[7,0,244],
-"d9/d99/Bankable_2PBPotentiometer_8hpp.html":[7,0,208]
+"d9/d97/Abstract_2MIDIButton_8cpp.html":[7,0,141]
 };

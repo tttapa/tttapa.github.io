@@ -1,5 +1,9 @@
 var NAVTREEINDEX12 =
 {
+"db/d4b/classMIDIInputElementNote.html#a803846e21a2488fccf5f612087bbfa76":[4,1,0,13],
+"db/d4b/classMIDIInputElementNote.html#ab487eb31758e7be2b98731bd0f255588":[4,1,0,8],
+"db/d4b/classMIDIInputElementNote.html#abc54b9402e8555c615aaee35235f3aa4":[4,1,0,4],
+"db/d4b/classMIDIInputElementNote.html#ac77730bbf5c3b01cf2537e2e599df1ae":[4,1,0,0],
 "db/d4b/classMIDIInputElementNote.html#ad3d45f882302e552a8754a5e96ae6b6e":[4,1,0,6],
 "db/d4b/classMIDIInputElementNote.html#adcb98982679f02c01c46ac8d22722e1d":[4,1,0,11],
 "db/d50/Abstract_2MIDIRotaryEncoder_8hpp.html":[7,0,182],
@@ -174,7 +178,7 @@ var NAVTREEINDEX12 =
 "db/d93/ArrayHelpers_8cpp_source.html":[7,0,4],
 "db/d9d/IncrementButton_8cpp.html":[7,0,107],
 "db/d9d/IncrementButton_8cpp_source.html":[7,0,107],
-"db/dac/PushButtons_8ino-example.html":[8,8],
+"db/dac/PushButtons_8ino-example.html":[8,9],
 "db/dac/classMCU_1_1VPotRing__Base.html":[6,0,1,7],
 "db/dac/classMCU_1_1VPotRing__Base.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,1,7,15],
 "db/dac/classMCU_1_1VPotRing__Base.html#a38d9872489fd94dee25077c16073e8cf":[6,0,1,7,21],
@@ -245,9 +249,5 @@ var NAVTREEINDEX12 =
 "db/dc4/classSerialDebugMIDI__Interface.html#a442f855cc109caa01e4bc2ebcf6d7783":[4,3,2,14],
 "db/dc4/classSerialDebugMIDI__Interface.html#a4923aed435b881567b3276614dad6d11":[4,3,2,3],
 "db/dc4/classSerialDebugMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4":[4,3,2,23],
-"db/dc4/classSerialDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c":[4,3,2,22],
-"db/dc4/classSerialDebugMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1":[4,3,2,8],
-"db/dc4/classSerialDebugMIDI__Interface.html#a58470aacb3262891701b456daadced6d":[4,3,2,2],
-"db/dc4/classSerialDebugMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1":[4,3,2,19],
-"db/dc4/classSerialDebugMIDI__Interface.html#a64d5c27c6796f20369da7d68f4e21250":[4,3,2,10]
+"db/dc4/classSerialDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c":[4,3,2,22]
 };

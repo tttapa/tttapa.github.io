@@ -1,5 +1,7 @@
 var NAVTREEINDEX5 =
 {
+"d3/dc5/classEncoderSelector.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,39,13],
+"d3/dc5/classEncoderSelector.html#ae2862f751184a7163e83947716a5b515":[6,0,39,19],
 "d3/dce/SelectorLEDs_8hpp.html":[7,0,225],
 "d3/dce/SelectorLEDs_8hpp_source.html":[7,0,225],
 "d3/dd0/classRelativeCCSender.html":[6,0,108],
@@ -247,7 +249,5 @@ var NAVTREEINDEX5 =
 "d5/d54/classMCU_1_1SevenSegmentDisplay.html#a2ac34f11e7a8c4e62f4d1128e6f576a3":[6,0,1,2,0],
 "d5/d54/classMCU_1_1SevenSegmentDisplay.html#a35a0a8da913c86224cf515d18159fcd7":[6,0,1,2,4],
 "d5/d54/classMCU_1_1SevenSegmentDisplay.html#a38d9872489fd94dee25077c16073e8cf":[6,0,1,2,17],
-"d5/d54/classMCU_1_1SevenSegmentDisplay.html#a3a6b88b2ced14db4c783b80e22a2c8b1":[6,0,1,2,9],
-"d5/d54/classMCU_1_1SevenSegmentDisplay.html#a3ac85907a8efeac137173bb5c741b83a":[6,0,1,2,10],
-"d5/d54/classMCU_1_1SevenSegmentDisplay.html#a3cdc427ed1a74ba765311e87dbdbe60b":[6,0,1,2,14]
+"d5/d54/classMCU_1_1SevenSegmentDisplay.html#a3a6b88b2ced14db4c783b80e22a2c8b1":[6,0,1,2,9]
 };

@@ -1,5 +1,9 @@
 var NAVTREEINDEX11 =
 {
+"da/d69/PrintStream_8cpp.html#a8c9f111e05c74acb9bdffce673ef5709":[7,0,212,11],
+"da/d69/PrintStream_8cpp.html#a99e9817ede325b42677fc53cfb468b7f":[7,0,212,2],
+"da/d69/PrintStream_8cpp.html#aa46b20141a495c428e33bcdcbf63c04e":[7,0,212,4],
+"da/d69/PrintStream_8cpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f":[7,0,212,7],
 "da/d69/PrintStream_8cpp.html#aa6cc568dec1935b6f2514f2287335800":[7,0,212,23],
 "da/d69/PrintStream_8cpp.html#aa88c44c66680f55fd42b3a19095aff3f":[7,0,212,3],
 "da/d69/PrintStream_8cpp.html#aa9cd8589bac070bb2ab968b4f9c15231":[7,0,212,42],
@@ -45,7 +49,7 @@ var NAVTREEINDEX11 =
 "da/d6a/classPBPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,24,13],
 "da/d80/struct__Setbase.html":[6,0,2],
 "da/d80/struct__Setbase.html#a71ff2a1cb6bd223fbe45707260f6182f":[6,0,2,0],
-"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,12],
+"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,13],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html":[6,0,1,0,0],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a07155d1404800da8eb51cbc6c6da0c6e":[6,0,1,0,0,32],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,1,0,0,20],
@@ -59,8 +63,8 @@ var NAVTREEINDEX11 =
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,0,0,29],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,1,0,0,12],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5723f4a7c22aea22a940f481c48bd798":[6,0,1,0,0,6],
-"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,0,31],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,0,30],
+"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,0,31],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5b0faa934f92505e1a85857996ee9a0a":[6,0,1,0,0,25],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5d638e14de4b2e6508131c110d028ab4":[6,0,1,0,0,4],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a6d425d7489541b6ff8b89e5f9c2cb5e1":[6,0,1,0,0,17],
@@ -127,7 +131,7 @@ var NAVTREEINDEX11 =
 "da/de8/MIDIInputElement_8cpp_source.html":[7,0,166],
 "da/def/Abstract_2MIDIButtonMatrix_8cpp.html":[7,0,150],
 "da/def/Abstract_2MIDIButtonMatrix_8cpp_source.html":[7,0,150],
-"da/df7/OLED-Demo-Audio_8ino-example.html":[8,5],
+"da/df7/OLED-Demo-Audio_8ino-example.html":[8,6],
 "db/d02/Settings_8hpp.html":[7,0,230],
 "db/d02/Settings_8hpp.html#a0f4fabd413ae4e94b4f8d45cc1a249ad":[7,0,230,2],
 "db/d02/Settings_8hpp.html#a2a82e3cbc4ddcf68ac47d0d464189e35":[7,0,230,1],
@@ -170,8 +174,8 @@ var NAVTREEINDEX11 =
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,0,3,30],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a4b08a75485926ddd3fa6396b6a4da2a1":[6,0,1,0,3,25],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,1,0,3,13],
-"db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,3,33],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,3,32],
+"db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,3,33],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a587e086a42dc49a7b0ec4217b042e6f3":[6,0,1,0,3,1],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a58d7b5a92fc5f7fa8d5f1d3bb43cdfa1":[6,0,1,0,3,22],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a6d425d7489541b6ff8b89e5f9c2cb5e1":[6,0,1,0,3,18],
@@ -245,9 +249,5 @@ var NAVTREEINDEX11 =
 "db/d4b/classMIDIInputElementNote.html#a57b6615469e554c514a9ff56dc24908f":[4,1,0,15],
 "db/d4b/classMIDIInputElementNote.html#a611c554918cc06f26cc6d688a4911a8b":[4,1,0,7],
 "db/d4b/classMIDIInputElementNote.html#a6c07c068654f8d5c2a28e440d1bbd78a":[4,1,0,5],
-"db/d4b/classMIDIInputElementNote.html#a7ae18e103d62568ba35c1c2de2e37885":[4,1,0,2],
-"db/d4b/classMIDIInputElementNote.html#a803846e21a2488fccf5f612087bbfa76":[4,1,0,13],
-"db/d4b/classMIDIInputElementNote.html#ab487eb31758e7be2b98731bd0f255588":[4,1,0,8],
-"db/d4b/classMIDIInputElementNote.html#abc54b9402e8555c615aaee35235f3aa4":[4,1,0,4],
-"db/d4b/classMIDIInputElementNote.html#ac77730bbf5c3b01cf2537e2e599df1ae":[4,1,0,0]
+"db/d4b/classMIDIInputElementNote.html#a7ae18e103d62568ba35c1c2de2e37885":[4,1,0,2]
 };

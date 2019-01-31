@@ -1,5 +1,7 @@
 var NAVTREEINDEX4 =
 {
+"d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a58470aacb3262891701b456daadced6d":[4,3,5,2],
+"d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1":[4,3,5,19],
 "d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a64d5c27c6796f20369da7d68f4e21250":[4,3,5,10],
 "d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a6c6df29de49ed235f77245d8d2647d73":[4,3,5,15],
 "d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a7002bfae1bf346eadead1397a238f9b6":[4,3,5,20],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "d3/dc5/classEncoderSelector.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[6,0,39,12],
 "d3/dc5/classEncoderSelector.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,39,6],
 "d3/dc5/classEncoderSelector.html#ab567692bb6cb8509a2856a6cd6f46361":[6,0,39,18],
-"d3/dc5/classEncoderSelector.html#acfabd4911411ebbfd96d4080103f4725":[6,0,39,10],
-"d3/dc5/classEncoderSelector.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,39,13],
-"d3/dc5/classEncoderSelector.html#ae2862f751184a7163e83947716a5b515":[6,0,39,19]
+"d3/dc5/classEncoderSelector.html#acfabd4911411ebbfd96d4080103f4725":[6,0,39,10]
 };

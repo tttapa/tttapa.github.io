@@ -12,6 +12,7 @@ var classAnalogMultiplex =
     [ "digitalWrite", "d7/d8d/classAnalogMultiplex.html#a0afd6681ab951942ca3cac83370562bb", null ],
     [ "getAll", "d7/d8d/classAnalogMultiplex.html#a3151d5bf08e6b32231cdd58ed2f39aee", null ],
     [ "getEnd", "d7/d8d/classAnalogMultiplex.html#a916fb2b6f637e2d35c162677f5d95a64", null ],
+    [ "getLength", "d7/d8d/classAnalogMultiplex.html#a3d9607995d349d197fc24a23d6c4016f", null ],
     [ "getStart", "d7/d8d/classAnalogMultiplex.html#a955322d29e4e63ec40a587b5ed9db31b", null ],
     [ "operator[]", "d7/d8d/classAnalogMultiplex.html#a2c6058c4a84b5be7c9b05e2cc1a9d94f", null ],
     [ "pin", "d7/d8d/classAnalogMultiplex.html#a163cffb9da0f3b7fdcb3c49b58393c03", null ],

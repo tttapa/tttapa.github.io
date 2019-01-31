@@ -23,7 +23,7 @@ var searchData=
   ['boolalphaprintstream',['boolalphaPrintStream',['../da/d69/PrintStream_8cpp.html#ac031ea43b717d6e00396a00c3caef6f2',1,'PrintStream.cpp']]],
   ['breath_5fcontroller',['Breath_Controller',['../d4/dbe/namespaceMIDI__CC.html#a7db8e01c945c88d228836e4d0277149c',1,'MIDI_CC']]],
   ['breath_5fcontroller_5flsb',['Breath_Controller_LSB',['../d4/dbe/namespaceMIDI__CC.html#a7e3bfdad3c155a1b96903a69cfe52c98',1,'MIDI_CC']]],
-  ['buffer',['buffer',['../dc/d19/classMAX7219.html#a565789cbdd1558a06b24876e43432fb4',1,'MAX7219::buffer()'],['../d8/db4/classShiftRegisterOutBase.html#a619b9994c880b0c0f6cd50858610bbba',1,'ShiftRegisterOutBase::buffer()'],['../db/de9/classBitArray.html#a1cc5ae34690a8f065243531bcb64d20a',1,'BitArray::buffer()'],['../d0/d89/classBluetoothMIDI__Interface.html#a03c0def524d83df0ac7233bed942a386',1,'BluetoothMIDI_Interface::buffer()']]],
+  ['buffer',['buffer',['../dc/d19/classMAX7219.html#a0f819c98c8091bba60e3b72f8a5cd6e9',1,'MAX7219::buffer()'],['../d8/db4/classShiftRegisterOutBase.html#a619b9994c880b0c0f6cd50858610bbba',1,'ShiftRegisterOutBase::buffer()'],['../db/de9/classBitArray.html#a1cc5ae34690a8f065243531bcb64d20a',1,'BitArray::buffer()'],['../d0/d89/classBluetoothMIDI__Interface.html#a03c0def524d83df0ac7233bed942a386',1,'BluetoothMIDI_Interface::buffer()']]],
   ['buffer_5flength',['BUFFER_LENGTH',['../d0/d89/classBluetoothMIDI__Interface.html#a489349230705ccf9b11de956e620af20',1,'BluetoothMIDI_Interface']]],
   ['bufferlength',['bufferLength',['../db/de9/classBitArray.html#a5b8bef74feec0b2b77c4f3025eb13a10',1,'BitArray']]],
   ['buffersize',['bufferSize',['../df/d0c/classMIDI__Parser.html#a7e8858d7a75858c925254a9fdeb95c98',1,'MIDI_Parser']]],

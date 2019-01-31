@@ -48,6 +48,7 @@ var searchData=
   ['getinstance',['getInstance',['../dc/d45/classControl__Surface__.html#a2bebbe9d9bc94ef004ed63f55445ce0d',1,'Control_Surface_']]],
   ['getioelementofpin',['getIOElementOfPin',['../d8/d3d/namespaceExtIO.html#ae314377b34b9e49b153f6e36fb354d37',1,'ExtIO']]],
   ['getlast',['getLast',['../dd/d16/classDoublyLinkedList.html#a29e0234851509035aabc8e044a600531',1,'DoublyLinkedList']]],
+  ['getlength',['getLength',['../de/d4e/classExtendedIOElement.html#a3d9607995d349d197fc24a23d6c4016f',1,'ExtendedIOElement']]],
   ['getmode',['getMode',['../db/dac/classMCU_1_1VPotRing__Base.html#a5723f4a7c22aea22a940f481c48bd798',1,'MCU::VPotRing_Base::getMode() const'],['../db/dac/classMCU_1_1VPotRing__Base.html#a60e214a3d4fc51843aa251dea0749b5c',1,'MCU::VPotRing_Base::getMode(uint8_t value)']]],
   ['getname',['getName',['../d1/d19/classButton.html#a5e92368e2a142fb2d246e6de0a5e89c5',1,'Button']]],
   ['getoverload',['getOverload',['../d4/dce/classAudioVU.html#a8f0917212f149f0b068d52e5048c9bad',1,'AudioVU::getOverload()'],['../d2/de9/classIVU.html#a42e2bfb3b83f2b4936e3fa117a89d919',1,'IVU::getOverload()'],['../d4/d71/classMCU_1_1VU__Base.html#a9a4d6084fd01383f5b288ca403f65387',1,'MCU::VU_Base::getOverload()']]],

@@ -61,7 +61,7 @@ var hierarchy =
     ] ],
     [ "BankConfig< N >", "d5/db5/classBankConfig.html", null ],
     [ "BitArray< N >", "db/de9/classBitArray.html", null ],
-    [ "BitArray< 64 >", "db/de9/classBitArray.html", null ],
+    [ "BitArray< 8 *8 >", "db/de9/classBitArray.html", null ],
     [ "BLECharacteristicCallbacks", null, [
       [ "BluetoothMIDI_Interface", "d0/d89/classBluetoothMIDI__Interface.html", null ]
     ] ],

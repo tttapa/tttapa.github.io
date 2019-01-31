@@ -1,5 +1,9 @@
 var NAVTREEINDEX10 =
 {
+"d9/d97/Abstract_2MIDIButton_8cpp_source.html":[7,0,141],
+"d9/d98/TeensyUSBTypes_8hpp.html":[7,0,244],
+"d9/d98/TeensyUSBTypes_8hpp_source.html":[7,0,244],
+"d9/d99/Bankable_2PBPotentiometer_8hpp.html":[7,0,208],
 "d9/d99/Bankable_2PBPotentiometer_8hpp_source.html":[7,0,208],
 "d9/d9b/Bankable_2CCButtonLatching_8cpp.html":[7,0,34],
 "d9/d9b/Bankable_2CCButtonLatching_8cpp_source.html":[7,0,34],
@@ -98,7 +102,7 @@ var NAVTREEINDEX10 =
 "d9/dc9/TimeDisplay_8hpp_source.html":[7,0,246],
 "d9/dcf/SettingsWrapper_8cpp.html":[7,0,231],
 "d9/dcf/SettingsWrapper_8cpp_source.html":[7,0,231],
-"d9/deb/PushButtonsLEDsNoMIDIFeedback_8ino-example.html":[8,10],
+"d9/deb/PushButtonsLEDsNoMIDIFeedback_8ino-example.html":[8,11],
 "d9/df7/Bankable_2Abstract_2MIDIButtons_8hpp.html":[7,0,157],
 "d9/df7/Bankable_2Abstract_2MIDIButtons_8hpp_source.html":[7,0,157],
 "d9/df9/classBankable_1_1CCButtonLatching.html":[4,0,2],
@@ -245,9 +249,5 @@ var NAVTREEINDEX10 =
 "da/d69/PrintStream_8cpp.html#a842b80be9bc486e915c4b8c62fa818cb":[7,0,212,16],
 "da/d69/PrintStream_8cpp.html#a84d169b856e83ea462a841bde851dd94":[7,0,212,36],
 "da/d69/PrintStream_8cpp.html#a850e974302fabbc260fea3568752bc48":[7,0,212,18],
-"da/d69/PrintStream_8cpp.html#a8ae8a20941a7cf9957efc590d5a56ef4":[7,0,212,12],
-"da/d69/PrintStream_8cpp.html#a8c9f111e05c74acb9bdffce673ef5709":[7,0,212,11],
-"da/d69/PrintStream_8cpp.html#a99e9817ede325b42677fc53cfb468b7f":[7,0,212,2],
-"da/d69/PrintStream_8cpp.html#aa46b20141a495c428e33bcdcbf63c04e":[7,0,212,4],
-"da/d69/PrintStream_8cpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f":[7,0,212,7]
+"da/d69/PrintStream_8cpp.html#a8ae8a20941a7cf9957efc590d5a56ef4":[7,0,212,12]
 };
