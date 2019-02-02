@@ -1,7 +1,5 @@
 var NAVTREEINDEX6 =
 {
-"d4/de9/classIncrementSelector__Base.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,58,14],
-"d4/de9/classIncrementSelector__Base.html#aea432295daa82ecc9659e59cc2e2a339":[6,0,58,0],
 "d4/de9/classIncrementSelector__Base.html#aedf651d52b4657c226a0407bc4558183":[6,0,58,5],
 "d4/df0/CCPotentiometer_8hpp.html":[7,0,54],
 "d4/df0/CCPotentiometer_8hpp_source.html":[7,0,54],
@@ -205,8 +203,8 @@ var NAVTREEINDEX6 =
 "d5/de0/classUpdatable.html#acfabd4911411ebbfd96d4080103f4725":[6,0,135,8],
 "d5/de0/classUpdatable.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,135,11],
 "d5/de0/classUpdatable.html#ad8bf09da68e0657bfdecb6e380aeb0bf":[6,0,135,0],
-"d5/de7/USBMIDI__Interface_8cpp.html":[7,0,261],
-"d5/de7/USBMIDI__Interface_8cpp_source.html":[7,0,261],
+"d5/de7/USBMIDI__Interface_8cpp.html":[7,0,259],
+"d5/de7/USBMIDI__Interface_8cpp_source.html":[7,0,259],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html":[4,0,6],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,6,4],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a372b8a0173315cad364f906ff7587dc1":[4,0,6,18],
@@ -249,5 +247,7 @@ var NAVTREEINDEX6 =
 "d5/df9/group__MIDIOutputElementConstructors.html#ga4d88a43d071b56eaceb9c9a73b646d8d":[4,0,12,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga4e817c4bf6f1e0481e253832440539a2":[4,0,23,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga4e817c4bf6f1e0481e253832440539a2":[4,0,0,16],
-"d5/df9/group__MIDIOutputElementConstructors.html#ga516da4239fef7e463ff8bfcda208feb7":[4,0,25,0]
+"d5/df9/group__MIDIOutputElementConstructors.html#ga516da4239fef7e463ff8bfcda208feb7":[4,0,25,0],
+"d5/df9/group__MIDIOutputElementConstructors.html#ga516da4239fef7e463ff8bfcda208feb7":[4,0,0,20],
+"d5/df9/group__MIDIOutputElementConstructors.html#ga59bd54a6d2d0f31b1d326c30187c258a":[4,0,5,0]
 };

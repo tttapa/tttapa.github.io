@@ -23,8 +23,8 @@ var NAVTREEINDEX0 =
 "d0/d0d/classSerialMIDI__Parser.html#acdae5ccd2c883d35379eece73219357c":[6,0,122,5],
 "d0/d0d/classSerialMIDI__Parser.html#add28e4338eca6dc5b9f5f97320fa38a2":[6,0,122,9],
 "d0/d1b/PushButtonsLEDsShiftRegMultiplex_8ino-example.html":[8,12],
-"d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp.html":[7,0,278],
-"d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp_source.html":[7,0,278],
+"d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp.html":[7,0,276],
+"d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp_source.html":[7,0,276],
 "d0/d24/structOutputBankConfig.html":[6,0,105],
 "d0/d24/structOutputBankConfig.html#a14f88e319bbd8b62202b4cdcab4cedfe":[6,0,105,2],
 "d0/d24/structOutputBankConfig.html#a7631c95371440ad4d7635630ad53c13b":[6,0,105,0],
@@ -248,6 +248,6 @@ var NAVTREEINDEX0 =
 "d0/daf/classEncoderSelector__Base.html#afebd857c6134f35f2d14308862cc3ae5":[6,0,41,24],
 "d0/db4/ShiftRegisterOut_8hpp.html":[7,0,243],
 "d0/db4/ShiftRegisterOut_8hpp_source.html":[7,0,243],
-"d0/db9/VUDisplay_8hpp.html":[7,0,276],
-"d0/db9/VUDisplay_8hpp_source.html":[7,0,276]
+"d0/db9/VUDisplay_8hpp.html":[7,0,274],
+"d0/db9/VUDisplay_8hpp_source.html":[7,0,274]
 };

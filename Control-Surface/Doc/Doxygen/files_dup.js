@@ -403,7 +403,6 @@ var files_dup =
     [ "StaticSizeExtendedIOElement.hpp", "d2/d05/StaticSizeExtendedIOElement_8hpp.html", [
       [ "StaticSizeExtendedIOElement", "d1/d13/classStaticSizeExtendedIOElement.html", "d1/d13/classStaticSizeExtendedIOElement" ]
     ] ],
-    [ "TeensyUSBTypes.cpp", "d1/d58/TeensyUSBTypes_8cpp.html", null ],
     [ "TeensyUSBTypes.hpp", "d9/d98/TeensyUSBTypes_8hpp.html", null ],
     [ "TimeDisplay.cpp", "d1/d55/TimeDisplay_8cpp.html", null ],
     [ "TimeDisplay.hpp", "d9/dc9/TimeDisplay_8hpp.html", "d9/dc9/TimeDisplay_8hpp" ],
@@ -415,7 +414,6 @@ var files_dup =
     [ "Transposer.hpp", "de/d5e/Transposer_8hpp.html", [
       [ "Transposer", "da/db8/classTransposer.html", "da/db8/classTransposer" ]
     ] ],
-    [ "Updatable.cpp", "d6/dea/Updatable_8cpp.html", null ],
     [ "Updatable.hpp", "d4/d93/Updatable_8hpp.html", [
       [ "Updatable", "d5/de0/classUpdatable.html", "d5/de0/classUpdatable" ]
     ] ],

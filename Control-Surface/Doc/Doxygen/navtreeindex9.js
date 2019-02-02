@@ -1,9 +1,5 @@
 var NAVTREEINDEX9 =
 {
-"d8/d57/classUSBSerialMIDI__Interface.html#a58470aacb3262891701b456daadced6d":[4,3,9,2],
-"d8/d57/classUSBSerialMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1":[4,3,9,19],
-"d8/d57/classUSBSerialMIDI__Interface.html#a7002bfae1bf346eadead1397a238f9b6":[4,3,9,20],
-"d8/d57/classUSBSerialMIDI__Interface.html#a7b78a89483b0f1ea3fe4845e733c70e0":[4,3,9,0],
 "d8/d57/classUSBSerialMIDI__Interface.html#a80c4843f88185a213ebe20a26c0fd579":[4,3,9,17],
 "d8/d57/classUSBSerialMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc":[4,3,9,7],
 "d8/d57/classUSBSerialMIDI__Interface.html#aa737854accb7d5a1726e1ed899a30fb8":[4,3,9,5],
@@ -90,8 +86,8 @@ var NAVTREEINDEX9 =
 "d8/dcc/ProgramChangeSelector_8cpp_source.html":[7,0,222],
 "d8/dd5/CCButtons_8cpp.html":[7,0,45],
 "d8/dd5/CCButtons_8cpp_source.html":[7,0,45],
-"d8/dd8/USBMIDI__Parser_8cpp.html":[7,0,263],
-"d8/dd8/USBMIDI__Parser_8cpp_source.html":[7,0,263],
+"d8/dd8/USBMIDI__Parser_8cpp.html":[7,0,261],
+"d8/dd8/USBMIDI__Parser_8cpp_source.html":[7,0,261],
 "d8/de1/classMIDIButtonLatching.html":[6,0,76],
 "d8/de1/classMIDIButtonLatching.html#a2008b6b51e779d44e87129e43f5ccc3c":[6,0,76,1],
 "d8/de1/classMIDIButtonLatching.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,76,4],
@@ -206,11 +202,11 @@ var NAVTREEINDEX9 =
 "d9/d24/RelativeCCSender_8hpp.html#aefe2ccfff49d9c60239539662c1cdf9f":[7,0,225,3],
 "d9/d24/RelativeCCSender_8hpp.html#af7774143941c236448d7c53f4347276b":[7,0,225,1],
 "d9/d24/RelativeCCSender_8hpp_source.html":[7,0,225],
-"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html":[7,0,279],
-"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html#af626aa654815b2c30bbc674379e8807a":[7,0,279,1],
-"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html#af626aa654815b2c30bbc674379e8807aaaf6c6cf7a454b4ef4a850ac4d960a2cc":[7,0,279,1,1],
-"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html#af626aa654815b2c30bbc674379e8807aaddc35f88fa71b6ef142ae61f35364653":[7,0,279,1,0],
-"d9/d28/Hardware_2LEDs_2VULEDs_8hpp_source.html":[7,0,279],
+"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html":[7,0,277],
+"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html#af626aa654815b2c30bbc674379e8807a":[7,0,277,1],
+"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html#af626aa654815b2c30bbc674379e8807aaaf6c6cf7a454b4ef4a850ac4d960a2cc":[7,0,277,1,1],
+"d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html#af626aa654815b2c30bbc674379e8807aaddc35f88fa71b6ef142ae61f35364653":[7,0,277,1,0],
+"d9/d28/Hardware_2LEDs_2VULEDs_8hpp_source.html":[7,0,277],
 "d9/d35/ShiftRegisterOut_8cpp.html":[7,0,242],
 "d9/d35/ShiftRegisterOut_8cpp_source.html":[7,0,242],
 "d9/d36/classOutputBank.html":[6,0,104],
@@ -249,5 +245,9 @@ var NAVTREEINDEX9 =
 "d9/d43/Control__Change_8hpp.html":[7,0,64],
 "d9/d43/Control__Change_8hpp.html#a042d71ab0e3135bbb7262f8b13d74ee8":[7,0,64,34],
 "d9/d43/Control__Change_8hpp.html#a1452ebb069eec6b6d2bd78edde200c77":[7,0,64,19],
-"d9/d43/Control__Change_8hpp.html#a1b9d6a2c4b834622d6d27657f6be0ca0":[7,0,64,70]
+"d9/d43/Control__Change_8hpp.html#a1b9d6a2c4b834622d6d27657f6be0ca0":[7,0,64,70],
+"d9/d43/Control__Change_8hpp.html#a1c8acee58b40318f585c6bcae9927aa6":[7,0,64,28],
+"d9/d43/Control__Change_8hpp.html#a1e063639d40e0b0b64315a47fe517f0b":[7,0,64,72],
+"d9/d43/Control__Change_8hpp.html#a1f190469bb17b078fce59bcf1aa029f8":[7,0,64,1],
+"d9/d43/Control__Change_8hpp.html#a20394adb29bba22c3a8006650ea30c32":[7,0,64,38]
 };

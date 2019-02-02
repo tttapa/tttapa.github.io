@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['teensyusbtypes_2ecpp',['TeensyUSBTypes.cpp',['../d1/d58/TeensyUSBTypes_8cpp.html',1,'']]],
   ['teensyusbtypes_2ehpp',['TeensyUSBTypes.hpp',['../d9/d98/TeensyUSBTypes_8hpp.html',1,'']]],
   ['timedisplay_2ecpp',['TimeDisplay.cpp',['../d1/d55/TimeDisplay_8cpp.html',1,'']]],
   ['timedisplay_2ehpp',['TimeDisplay.hpp',['../d9/dc9/TimeDisplay_8hpp.html',1,'']]],

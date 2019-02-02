@@ -1,7 +1,5 @@
 var NAVTREEINDEX4 =
 {
-"d3/d10/classMIDICNChannelAddress.html#ae82ce192ab9177b8320e0e3d56591c9a":[6,0,80,16],
-"d3/d10/classMIDICNChannelAddress.html#af095bbce791e4b3540dd82d31d0227c1":[6,0,80,5],
 "d3/d2a/classCCButtonMatrix.html":[4,0,18],
 "d3/d2a/classCCButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef":[4,0,18,16],
 "d3/d2a/classCCButtonMatrix.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,18,4],
@@ -58,8 +56,8 @@ var NAVTREEINDEX4 =
 "d3/d51/classSelectorDisplay.html#ab71d71ccea06274bb4eb772d072e16e3":[6,0,118,3],
 "d3/d51/classSelectorDisplay.html#ad3074f69e1f3767e017d76eade1bff49":[6,0,118,8],
 "d3/d51/classSelectorDisplay.html#adc2e20fd87b2e53c357f36b634cc6006":[6,0,118,1],
-"d3/d52/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8hpp.html":[7,0,280],
-"d3/d52/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8hpp_source.html":[7,0,280],
+"d3/d52/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8hpp.html":[7,0,278],
+"d3/d52/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8hpp_source.html":[7,0,278],
 "d3/d54/classSoftwareSerialDebugMIDI__Interface.html":[4,3,5],
 "d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f":[4,3,5,18],
 "d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a0db0ea9a49ced7874f0a5b533e625a20":[4,3,5,12],
@@ -249,5 +247,7 @@ var NAVTREEINDEX4 =
 "d3/d98/classMCU_1_1VPotDisplay.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,5,10],
 "d3/d98/classMCU_1_1VPotDisplay.html#a6120c40796b7de94f04f951b1db37ced":[6,0,1,5,1],
 "d3/d98/classMCU_1_1VPotDisplay.html#a6a1ea44e40f9fa5fba669dc6e930c9bc":[6,0,1,5,14],
-"d3/d98/classMCU_1_1VPotDisplay.html#a809b8e848cdc11d12d18ba3ccf0ee4bf":[6,0,1,5,4]
+"d3/d98/classMCU_1_1VPotDisplay.html#a809b8e848cdc11d12d18ba3ccf0ee4bf":[6,0,1,5,4],
+"d3/d98/classMCU_1_1VPotDisplay.html#a8b115b3b011c7b394791a7bf70e2f3c6":[6,0,1,5,3],
+"d3/d98/classMCU_1_1VPotDisplay.html#a952c48695ef51da9059bdfc11d0d5bef":[6,0,1,5,0]
 };

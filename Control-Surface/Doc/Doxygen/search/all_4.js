@@ -80,7 +80,7 @@ var searchData=
   ['doublylinkable_3c_20updatable_3c_20normalupdatable_20_3e_20_3e',['DoublyLinkable&lt; Updatable&lt; NormalUpdatable &gt; &gt;',['../d4/d23/classDoublyLinkable.html',1,'']]],
   ['doublylinkable_3c_20updatable_3c_20potentiometer_20_3e_20_3e',['DoublyLinkable&lt; Updatable&lt; Potentiometer &gt; &gt;',['../d4/d23/classDoublyLinkable.html',1,'']]],
   ['doublylinkable_3c_20updatable_3c_20t_20_3e_20_3e',['DoublyLinkable&lt; Updatable&lt; T &gt; &gt;',['../d4/d23/classDoublyLinkable.html',1,'']]],
-  ['doublylinkedlist',['DoublyLinkedList',['../dd/d16/classDoublyLinkedList.html',1,'DoublyLinkedList&lt; Node &gt;'],['../dd/d16/classDoublyLinkedList.html#a4b039d4aba2dd86e91a5482c58e24dba',1,'DoublyLinkedList::DoublyLinkedList()']]],
+  ['doublylinkedlist',['DoublyLinkedList',['../dd/d16/classDoublyLinkedList.html',1,'']]],
   ['doublylinkedlist_3c_20bankablemidiinput_3c_20n_20_3e_20_3e',['DoublyLinkedList&lt; BankableMIDIInput&lt; N &gt; &gt;',['../dd/d16/classDoublyLinkedList.html',1,'']]],
   ['doublylinkedlist_3c_20displayelement_20_3e',['DoublyLinkedList&lt; DisplayElement &gt;',['../dd/d16/classDoublyLinkedList.html',1,'']]],
   ['doublylinkedlist_3c_20displayinterface_20_3e',['DoublyLinkedList&lt; DisplayInterface &gt;',['../dd/d16/classDoublyLinkedList.html',1,'']]],

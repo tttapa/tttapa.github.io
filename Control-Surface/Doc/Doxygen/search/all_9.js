@@ -36,7 +36,7 @@ var searchData=
   ['inputbankables',['inputBankables',['../db/dbd/classBank.html#a912875f2dcd454240890d99c8aec0348',1,'Bank']]],
   ['inrange',['inRange',['../db/d6e/classBankableMIDIInput.html#a4b4095c85e5a4be88baef10c778811ca',1,'BankableMIDIInput::inRange()'],['../d8/d3d/namespaceExtIO.html#aedf6005ecc64cea16059965b80ce5f85',1,'ExtIO::inRange()']]],
   ['insertbefore',['insertBefore',['../dd/d16/classDoublyLinkedList.html#a534cc4a8db91810e6266243ef9a0b8f0',1,'DoublyLinkedList::insertBefore(Node *toBeInserted, Node *before)'],['../dd/d16/classDoublyLinkedList.html#a13888d516363e617de1a76b539804796',1,'DoublyLinkedList::insertBefore(Node &amp;toBeInserted, Node &amp;before)']]],
-  ['insertsorted',['insertSorted',['../dd/d16/classDoublyLinkedList.html#a9827be9e57d28ee0d4fd1998d21e602e',1,'DoublyLinkedList::insertSorted(Node *node, Sorter sorter)'],['../dd/d16/classDoublyLinkedList.html#ae75df28899191ac4cb60d3390a11210a',1,'DoublyLinkedList::insertSorted(Node *node)']]],
+  ['insertsorted',['insertSorted',['../dd/d16/classDoublyLinkedList.html#aaac21d927c86879dd877dc4c9cbdf81d',1,'DoublyLinkedList::insertSorted(Node *node, Compare cmp)'],['../dd/d16/classDoublyLinkedList.html#ae75df28899191ac4cb60d3390a11210a',1,'DoublyLinkedList::insertSorted(Node *node)']]],
   ['installation_2emd',['Installation.md',['../d2/d2c/Installation_8md.html',1,'']]],
   ['intensity',['INTENSITY',['../da/dd0/classMAX7219__Base.html#a3aff37e2ea6bea2a289fc3d8dc132954',1,'MAX7219_Base']]],
   ['interval',['interval',['../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d',1,'Timer']]],

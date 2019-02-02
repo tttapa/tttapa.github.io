@@ -1,7 +1,7 @@
 var NAVTREEINDEX1 =
 {
-"d0/dbf/VPotDisplay_8hpp.html":[7,0,268],
-"d0/dbf/VPotDisplay_8hpp_source.html":[7,0,268],
+"d0/dbf/VPotDisplay_8hpp.html":[7,0,266],
+"d0/dbf/VPotDisplay_8hpp_source.html":[7,0,266],
 "d0/dc9/BLEMIDI_8hpp.html":[7,0,23],
 "d0/dc9/BLEMIDI_8hpp.html#a823310164de4a8813b2f815c36553864":[7,0,23,2],
 "d0/dc9/BLEMIDI_8hpp.html#a9f1afb680e585b01547e7c9aa663ed04":[7,0,23,3],
@@ -235,10 +235,8 @@ var NAVTREEINDEX1 =
 "d1/d54/classSelector.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,117,14],
 "d1/d54/classSelector.html#aedf651d52b4657c226a0407bc4558183":[6,0,117,5],
 "d1/d54/classSelector.html#afcadc5135468cb60de05688ab3b99318":[6,0,117,0],
-"d1/d55/TimeDisplay_8cpp.html":[7,0,253],
-"d1/d55/TimeDisplay_8cpp_source.html":[7,0,253],
-"d1/d58/TeensyUSBTypes_8cpp.html":[7,0,251],
-"d1/d58/TeensyUSBTypes_8cpp_source.html":[7,0,251],
+"d1/d55/TimeDisplay_8cpp.html":[7,0,252],
+"d1/d55/TimeDisplay_8cpp_source.html":[7,0,252],
 "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html":[6,0,0,14],
 "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,0,14,4],
 "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a2fbabc5ac3d1299b6a482de44bd02570":[6,0,0,14,16],
@@ -249,5 +247,7 @@ var NAVTREEINDEX1 =
 "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,14,23],
 "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,0,14,2],
 "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a63b760e4554d4ea496ee012b2ba3d508":[6,0,0,14,12],
-"d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a656050d5d5657013853098bfb3c816fb":[6,0,0,14,20]
+"d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a656050d5d5657013853098bfb3c816fb":[6,0,0,14,20],
+"d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,0,14,6],
+"d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,0,14,5]
 };

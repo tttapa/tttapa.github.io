@@ -1,9 +1,5 @@
 var NAVTREEINDEX12 =
 {
-"da/d6a/classPBPotentiometer.html#ab1a0f9e5acac4550476df16a31036a10":[4,0,28,18],
-"da/d6a/classPBPotentiometer.html#acfabd4911411ebbfd96d4080103f4725":[4,0,28,7],
-"da/d6a/classPBPotentiometer.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,28,10],
-"da/d6a/classPBPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,28,13],
 "da/d80/struct__Setbase.html":[6,0,2],
 "da/d80/struct__Setbase.html#a71ff2a1cb6bd223fbe45707260f6182f":[6,0,2,0],
 "da/d85/CCButtonLatched_8hpp.html":[7,0,35],
@@ -18,8 +14,8 @@ var NAVTREEINDEX12 =
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a38d9872489fd94dee25077c16073e8cf":[6,0,1,0,0,27],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a39912b6c8d039c840aa9a1e73e645318":[6,0,1,0,0,16],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a3cdc427ed1a74ba765311e87dbdbe60b":[6,0,1,0,0,24],
-"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,0,0,28],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,0,0,29],
+"da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,1,0,0,28],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,1,0,0,12],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a5723f4a7c22aea22a940f481c48bd798":[6,0,1,0,0,6],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a57b6615469e554c514a9ff56dc24908f":[6,0,1,0,0,30],
@@ -249,5 +245,9 @@ var NAVTREEINDEX12 =
 "db/d53/Bankable_2CCButtonLatched_8hpp.html":[7,0,34],
 "db/d53/Bankable_2CCButtonLatched_8hpp_source.html":[7,0,34],
 "db/d55/DebugMIDI__Interface_8hpp.html":[7,0,72],
-"db/d55/DebugMIDI__Interface_8hpp.html#a616c796c1a81f07d22ac41b80d84f5e7":[7,0,72,0]
+"db/d55/DebugMIDI__Interface_8hpp.html#a616c796c1a81f07d22ac41b80d84f5e7":[7,0,72,0],
+"db/d55/DebugMIDI__Interface_8hpp_source.html":[7,0,72],
+"db/d5f/Def_8cpp.html":[7,0,73],
+"db/d5f/Def_8cpp_source.html":[7,0,73],
+"db/d60/MCU_8hpp.html":[7,0,135]
 };

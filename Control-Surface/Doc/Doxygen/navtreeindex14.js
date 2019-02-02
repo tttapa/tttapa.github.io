@@ -1,10 +1,6 @@
 var NAVTREEINDEX14 =
 {
-"db/dd1/ContinuousCCSender_8hpp.html":[7,0,62],
-"db/dd1/ContinuousCCSender_8hpp_source.html":[7,0,62],
-"db/dd1/SPIShiftRegisterBlink_8ino-example.html":[8,15],
-"db/dda/VU_8hpp.html":[7,0,274],
-"db/dda/VU_8hpp_source.html":[7,0,274],
+"db/dda/VU_8hpp_source.html":[7,0,272],
 "db/ddc/IncrementSelectorLEDs_8cpp.html":[7,0,118],
 "db/ddc/IncrementSelectorLEDs_8cpp_source.html":[7,0,118],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html":[6,0,0,13],
@@ -132,8 +128,8 @@ var NAVTREEINDEX14 =
 "dc/d45/classControl__Surface__.html#abc974fd16c735a8a7942b0b138751490":[6,0,28,7],
 "dc/d45/classControl__Surface__.html#acabe7a649d24807ffacba4c87aba6a79":[6,0,28,0],
 "dc/d45/classControl__Surface__.html#aff515a0b3c0cd86ab716bb2ff01a07ef":[6,0,28,9],
-"dc/d48/VPotRingLEDs_8hpp.html":[7,0,272],
-"dc/d48/VPotRingLEDs_8hpp_source.html":[7,0,272],
+"dc/d48/VPotRingLEDs_8hpp.html":[7,0,270],
+"dc/d48/VPotRingLEDs_8hpp_source.html":[7,0,270],
 "dc/d4c/classIncrementSelector.html":[6,0,57],
 "dc/d4c/classIncrementSelector.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,57,18],
 "dc/d4c/classIncrementSelector.html#a1826ffc345c70d8d4ffe104fcc1e5f59":[6,0,57,20],
@@ -167,8 +163,8 @@ var NAVTREEINDEX14 =
 "dc/d50/Frequency_8hpp.html#ab1091e6dffc3a554c0cc6df174742b5d":[7,0,102,4],
 "dc/d50/Frequency_8hpp.html#ae135e37c8cef46f38e967bbbf7ac6336":[7,0,102,1],
 "dc/d50/Frequency_8hpp_source.html":[7,0,102],
-"dc/d55/VolumeControl_8cpp.html":[7,0,265],
-"dc/d55/VolumeControl_8cpp_source.html":[7,0,265],
+"dc/d55/VolumeControl_8cpp.html":[7,0,263],
+"dc/d55/VolumeControl_8cpp_source.html":[7,0,263],
 "dc/d56/MAX7219SevenSegmentDisplay_8cpp.html":[7,0,132],
 "dc/d56/MAX7219SevenSegmentDisplay_8cpp_source.html":[7,0,132],
 "dc/d70/BLEMIDI_8cpp.html":[7,0,22],
@@ -249,5 +245,9 @@ var NAVTREEINDEX14 =
 "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a8af924e5b3b708eb042919703d175ed3":[6,0,0,18,18],
 "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[6,0,0,18,9],
 "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,0,18,3],
-"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a9f34809178ed809a8ff203220bd1b206":[6,0,0,18,15]
+"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a9f34809178ed809a8ff203220bd1b206":[6,0,0,18,15],
+"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#aa13d45bfd55adbcc06acdd3e6946666f":[6,0,0,18,1],
+"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#aa36bcdf99c565df918d78222e8843eb2":[6,0,0,18,19],
+"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#ab7c206aca4177c77ddd8f8c801379e13":[6,0,0,18,25],
+"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#abcb877f25341f8097a6f2a5d353a3dc2":[6,0,0,18,17]
 };

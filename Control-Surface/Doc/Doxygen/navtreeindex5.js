@@ -1,7 +1,5 @@
 var NAVTREEINDEX5 =
 {
-"d3/d98/classMCU_1_1VPotDisplay.html#a8b115b3b011c7b394791a7bf70e2f3c6":[6,0,1,5,3],
-"d3/d98/classMCU_1_1VPotDisplay.html#a952c48695ef51da9059bdfc11d0d5bef":[6,0,1,5,0],
 "d3/d98/classMCU_1_1VPotDisplay.html#a958ba917a8e2f5aad046c5faea5e9918":[6,0,1,5,5],
 "d3/d98/classMCU_1_1VPotDisplay.html#aa037234d0ea1fea98682e6c04175e813":[6,0,1,5,6],
 "d3/d98/classMCU_1_1VPotDisplay.html#ab2cc9ad72b720035a3e39c6a9b0c10f3":[6,0,1,5,7],
@@ -182,8 +180,8 @@ var NAVTREEINDEX5 =
 "d4/d8c/Bankable_2Abstract_2MIDIButtonLatching_8hpp_source.html":[7,0,151],
 "d4/d8e/Bankable_2Abstract_2MIDIFilteredAnalog_8cpp.html":[7,0,163],
 "d4/d8e/Bankable_2Abstract_2MIDIFilteredAnalog_8cpp_source.html":[7,0,163],
-"d4/d93/Updatable_8hpp.html":[7,0,260],
-"d4/d93/Updatable_8hpp_source.html":[7,0,260],
+"d4/d93/Updatable_8hpp.html":[7,0,258],
+"d4/d93/Updatable_8hpp_source.html":[7,0,258],
 "d4/db3/Button_8hpp.html":[7,0,27],
 "d4/db3/Button_8hpp_source.html":[7,0,27],
 "d4/db7/NoteButtons_8hpp.html":[7,0,210],
@@ -224,8 +222,8 @@ var NAVTREEINDEX5 =
 "d4/de3/classVolumeControl.html#ab2b63d2685b52f7ad584094c44f62754":[4,2,2,15],
 "d4/de3/classVolumeControl.html#acfabd4911411ebbfd96d4080103f4725":[4,2,2,7],
 "d4/de3/classVolumeControl.html#ad4273e4aa2f15de8dbe478af16af259e":[4,2,2,10],
-"d4/de6/VPotRingLEDs_8cpp.html":[7,0,271],
-"d4/de6/VPotRingLEDs_8cpp_source.html":[7,0,271],
+"d4/de6/VPotRingLEDs_8cpp.html":[7,0,269],
+"d4/de6/VPotRingLEDs_8cpp_source.html":[7,0,269],
 "d4/de9/classIncrementSelector__Base.html":[6,0,58],
 "d4/de9/classIncrementSelector__Base.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,58,18],
 "d4/de9/classIncrementSelector__Base.html#a1826ffc345c70d8d4ffe104fcc1e5f59":[6,0,58,20],
@@ -249,5 +247,7 @@ var NAVTREEINDEX5 =
 "d4/de9/classIncrementSelector__Base.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,58,7],
 "d4/de9/classIncrementSelector__Base.html#ab567692bb6cb8509a2856a6cd6f46361":[6,0,58,19],
 "d4/de9/classIncrementSelector__Base.html#aced769f940a40df9d9af8e686026d278":[6,0,58,25],
-"d4/de9/classIncrementSelector__Base.html#acfabd4911411ebbfd96d4080103f4725":[6,0,58,11]
+"d4/de9/classIncrementSelector__Base.html#acfabd4911411ebbfd96d4080103f4725":[6,0,58,11],
+"d4/de9/classIncrementSelector__Base.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,58,14],
+"d4/de9/classIncrementSelector__Base.html#aea432295daa82ecc9659e59cc2e2a339":[6,0,58,0]
 };

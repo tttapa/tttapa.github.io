@@ -1,9 +1,5 @@
 var NAVTREEINDEX10 =
 {
-"d9/d43/Control__Change_8hpp.html#a1c8acee58b40318f585c6bcae9927aa6":[7,0,64,28],
-"d9/d43/Control__Change_8hpp.html#a1e063639d40e0b0b64315a47fe517f0b":[7,0,64,72],
-"d9/d43/Control__Change_8hpp.html#a1f190469bb17b078fce59bcf1aa029f8":[7,0,64,1],
-"d9/d43/Control__Change_8hpp.html#a20394adb29bba22c3a8006650ea30c32":[7,0,64,38],
 "d9/d43/Control__Change_8hpp.html#a20dc249ff93148b640953595b6ca7c31":[7,0,64,44],
 "d9/d43/Control__Change_8hpp.html#a25bb5a787a1d7e457ccd77bfb72f9988":[7,0,64,62],
 "d9/d43/Control__Change_8hpp.html#a26c32b8bce98263875dda97928fcef34":[7,0,64,31],
@@ -140,8 +136,8 @@ var NAVTREEINDEX10 =
 "d9/d94/ContinuousCCSender_8cpp_source.html":[7,0,61],
 "d9/d97/Abstract_2MIDIButton_8cpp.html":[7,0,142],
 "d9/d97/Abstract_2MIDIButton_8cpp_source.html":[7,0,142],
-"d9/d98/TeensyUSBTypes_8hpp.html":[7,0,252],
-"d9/d98/TeensyUSBTypes_8hpp_source.html":[7,0,252],
+"d9/d98/TeensyUSBTypes_8hpp.html":[7,0,251],
+"d9/d98/TeensyUSBTypes_8hpp_source.html":[7,0,251],
 "d9/d99/Bankable_2PBPotentiometer_8hpp.html":[7,0,214],
 "d9/d99/Bankable_2PBPotentiometer_8hpp_source.html":[7,0,214],
 "d9/d9b/Bankable_2CCButtonLatching_8cpp.html":[7,0,36],
@@ -224,8 +220,8 @@ var NAVTREEINDEX10 =
 "d9/dc1/classProgramChangeSelector__Base.html#a38d9872489fd94dee25077c16073e8cf":[6,0,112,28],
 "d9/dc1/classProgramChangeSelector__Base.html#a3ce65d79721847cdb45833c7a3cc2e52":[6,0,112,19],
 "d9/dc1/classProgramChangeSelector__Base.html#a414872fbd3ea45e7ac44a42fcf2fc88d":[6,0,112,6],
-"d9/dc1/classProgramChangeSelector__Base.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,112,29],
 "d9/dc1/classProgramChangeSelector__Base.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,112,30],
+"d9/dc1/classProgramChangeSelector__Base.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,112,29],
 "d9/dc1/classProgramChangeSelector__Base.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,112,13],
 "d9/dc1/classProgramChangeSelector__Base.html#a4e0baeb085087d285a10bd82115b760d":[6,0,112,25],
 "d9/dc1/classProgramChangeSelector__Base.html#a57b6615469e554c514a9ff56dc24908f":[6,0,112,31],
@@ -249,5 +245,9 @@ var NAVTREEINDEX10 =
 "d9/dc1/classProgramChangeSelector__Base.html#acfabd4911411ebbfd96d4080103f4725":[6,0,112,12],
 "d9/dc1/classProgramChangeSelector__Base.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,112,15],
 "d9/dc1/classProgramChangeSelector__Base.html#adcb98982679f02c01c46ac8d22722e1d":[6,0,112,27],
-"d9/dc1/classProgramChangeSelector__Base.html#aedf651d52b4657c226a0407bc4558183":[6,0,112,5]
+"d9/dc1/classProgramChangeSelector__Base.html#aedf651d52b4657c226a0407bc4558183":[6,0,112,5],
+"d9/dc1/classProgramChangeSelector__Base.html#aefd76b1de2f83ee90b1c789c4e8e8803":[6,0,112,0],
+"d9/dc4/EncoderSelectorLEDs_8hpp.html":[7,0,90],
+"d9/dc4/EncoderSelectorLEDs_8hpp_source.html":[7,0,90],
+"d9/dc5/Notes_8hpp.html":[7,0,211]
 };

@@ -13,7 +13,7 @@ var searchData=
   ['init',['init',['../da/dd0/classMAX7219__Base.html#abc1d2ae777d19ca9aaf8eb7d1f500716',1,'MAX7219_Base']]],
   ['inrange',['inRange',['../db/d6e/classBankableMIDIInput.html#a4b4095c85e5a4be88baef10c778811ca',1,'BankableMIDIInput::inRange()'],['../d8/d3d/namespaceExtIO.html#aedf6005ecc64cea16059965b80ce5f85',1,'ExtIO::inRange()']]],
   ['insertbefore',['insertBefore',['../dd/d16/classDoublyLinkedList.html#a534cc4a8db91810e6266243ef9a0b8f0',1,'DoublyLinkedList::insertBefore(Node *toBeInserted, Node *before)'],['../dd/d16/classDoublyLinkedList.html#a13888d516363e617de1a76b539804796',1,'DoublyLinkedList::insertBefore(Node &amp;toBeInserted, Node &amp;before)']]],
-  ['insertsorted',['insertSorted',['../dd/d16/classDoublyLinkedList.html#a9827be9e57d28ee0d4fd1998d21e602e',1,'DoublyLinkedList::insertSorted(Node *node, Sorter sorter)'],['../dd/d16/classDoublyLinkedList.html#ae75df28899191ac4cb60d3390a11210a',1,'DoublyLinkedList::insertSorted(Node *node)']]],
+  ['insertsorted',['insertSorted',['../dd/d16/classDoublyLinkedList.html#aaac21d927c86879dd877dc4c9cbdf81d',1,'DoublyLinkedList::insertSorted(Node *node, Compare cmp)'],['../dd/d16/classDoublyLinkedList.html#ae75df28899191ac4cb60d3390a11210a',1,'DoublyLinkedList::insertSorted(Node *node)']]],
   ['invert',['invert',['../d1/d19/classButton.html#a1027f25dee91c915849d531515365aab',1,'Button']]],
   ['isdata',['isData',['../df/d0c/classMIDI__Parser.html#ac6808b5b4f403e48368f32385171929c',1,'MIDI_Parser']]],
   ['isenabled',['isEnabled',['../d5/de0/classUpdatable.html#a883138a1262a82e8b9e05c75d576e36d',1,'Updatable']]],

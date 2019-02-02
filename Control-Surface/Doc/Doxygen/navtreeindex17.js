@@ -1,10 +1,5 @@
 var NAVTREEINDEX17 =
 {
-"de/d36/classBankable_1_1NoteButton.html#a57b6615469e554c514a9ff56dc24908f":[4,0,9,20],
-"de/d36/classBankable_1_1NoteButton.html#a5c008d0d20b072e46c14b9c48ec6c45b":[4,0,9,2],
-"de/d36/classBankable_1_1NoteButton.html#a63b760e4554d4ea496ee012b2ba3d508":[4,0,9,12],
-"de/d36/classBankable_1_1NoteButton.html#a698d89514186aa0c29ea6fbc5bef1e06":[4,0,9,6],
-"de/d36/classBankable_1_1NoteButton.html#a6bae640621972b14ad9c28b6b399f08f":[4,0,9,5],
 "de/d36/classBankable_1_1NoteButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[4,0,9,11],
 "de/d36/classBankable_1_1NoteButton.html#a883138a1262a82e8b9e05c75d576e36d":[4,0,9,14],
 "de/d36/classBankable_1_1NoteButton.html#a8af924e5b3b708eb042919703d175ed3":[4,0,9,18],
@@ -77,8 +72,8 @@ var NAVTREEINDEX17 =
 "de/d55/classMIDI__Callbacks.html#adaa3c4c28183f0297fc33b0b74cd143b":[6,0,69,4],
 "de/d5b/BankableMIDIOutput_8cpp.html":[7,0,16],
 "de/d5b/BankableMIDIOutput_8cpp_source.html":[7,0,16],
-"de/d5e/Transposer_8hpp.html":[7,0,258],
-"de/d5e/Transposer_8hpp_source.html":[7,0,258],
+"de/d5e/Transposer_8hpp.html":[7,0,257],
+"de/d5e/Transposer_8hpp_source.html":[7,0,257],
 "de/d6d/Selector_8cpp.html":[7,0,228],
 "de/d6d/Selector_8cpp_source.html":[7,0,228],
 "de/d6e/BankableMIDIInput_8hpp.html":[7,0,15],
@@ -249,5 +244,10 @@ var NAVTREEINDEX17 =
 "df/d42/classDisplayInterface.html#aacd6d0835f7d7b61ae4c1f40af8b0470":[6,0,33,9],
 "df/d42/classDisplayInterface.html#ab816bb3ca679d605ab09530e4bcf90e4":[6,0,33,7],
 "df/d42/classDisplayInterface.html#ac0610342dde73f0856c746b6c6b1789c":[6,0,33,18],
-"df/d42/classDisplayInterface.html#aca6d08fe3ebca868b10dc8884b9cf81d":[6,0,33,14]
+"df/d42/classDisplayInterface.html#aca6d08fe3ebca868b10dc8884b9cf81d":[6,0,33,14],
+"df/d42/classDisplayInterface.html#afd8830ad2c109bfd1afc09abe4403179":[6,0,33,6],
+"df/d53/XBitmaps_8cpp.html":[7,0,279],
+"df/d53/XBitmaps_8cpp_source.html":[7,0,279],
+"df/d66/Debug_8cpp.html":[7,0,69],
+"df/d66/Debug_8cpp_source.html":[7,0,69]
 };
