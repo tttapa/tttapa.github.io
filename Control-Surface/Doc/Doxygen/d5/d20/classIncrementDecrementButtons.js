@@ -11,7 +11,7 @@ var classIncrementDecrementButtons =
     ] ],
     [ "IncrementDecrementButtons", "d5/d20/classIncrementDecrementButtons.html#ac59f4c72e86f8d1cd8665d959f526ca9", null ],
     [ "begin", "d5/d20/classIncrementDecrementButtons.html#af661941dbb4a67e2b3919306bae23c8f", null ],
-    [ "getState", "d5/d20/classIncrementDecrementButtons.html#ad6efab932f5a392210ad3bf71890466e", null ],
+    [ "getState", "d5/d20/classIncrementDecrementButtons.html#a2e207d948f38c1cca993dc4d967ebef6", null ],
     [ "decrementButton", "d5/d20/classIncrementDecrementButtons.html#a6eda84fe30527525c6f50eb757b9b12a", null ],
     [ "incrementButton", "d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3", null ],
     [ "longPressRepeat", "d5/d20/classIncrementDecrementButtons.html#ab9b9e6fe8c72d37648ecbca236eb4f15", null ],

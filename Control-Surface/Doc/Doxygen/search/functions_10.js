@@ -37,7 +37,7 @@ var searchData=
   ['setprevstate',['setPrevState',['../d8/d6c/classButtonMatrix.html#a62e38d98ee02ed2692c96775a458baa7',1,'ButtonMatrix']]],
   ['setservercallbacks',['setServerCallbacks',['../d8/d39/classBLEMIDI.html#ad0ec35ba2ab499e3c42dda91c31df8be',1,'BLEMIDI']]],
   ['setsize',['setSize',['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#a65f6d83760cbddb5aff72fa5747d8c08',1,'MCU::TimeDisplayDisplay']]],
-  ['setstate',['setState',['../d3/d88/classMIDIButtonLatched.html#a9dbbd5afbce8ae323c3a628fbf730549',1,'MIDIButtonLatched']]],
+  ['setstate',['setState',['../d3/d88/classMIDIButtonLatched.html#a9dbbd5afbce8ae323c3a628fbf730549',1,'MIDIButtonLatched::setState()'],['../df/dca/classBankable_1_1MIDIButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835',1,'Bankable::MIDIButtonLatched::setState()']]],
   ['settextcolor',['setTextColor',['../df/d42/classDisplayInterface.html#ac0610342dde73f0856c746b6c6b1789c',1,'DisplayInterface::setTextColor()'],['../dc/ddd/classSSD1306__DisplayInterface.html#ad91944c642753d9e9b8967353e750ced',1,'SSD1306_DisplayInterface::setTextColor()']]],
   ['settextsize',['setTextSize',['../df/d42/classDisplayInterface.html#a7ab036652126c8304c74412464805bf7',1,'DisplayInterface::setTextSize()'],['../dc/ddd/classSSD1306__DisplayInterface.html#aa67363f3bb4792a735ef17267a8bf75b',1,'SSD1306_DisplayInterface::setTextSize()']]],
   ['setvalue',['setValue',['../d8/d4c/classMCU_1_1VU.html#a89007f5055bc7257ce5ff0fc750234af',1,'MCU::VU::setValue()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a6f96ce9db29d8d001956e9c094750479',1,'MCU::Bankable::VU::setValue()']]],
@@ -55,6 +55,7 @@ var searchData=
   ['ssd1306_5fdisplayinterface',['SSD1306_DisplayInterface',['../dc/ddd/classSSD1306__DisplayInterface.html#a4df7f9684c281df8b5167f2b7a7db1ed',1,'SSD1306_DisplayInterface']]],
   ['stabletime',['stableTime',['../d1/d19/classButton.html#a051753574468288ae7fce0d29c60feea',1,'Button']]],
   ['startsysex',['startSysEx',['../df/d0c/classMIDI__Parser.html#a3f49c0d44693c4ce2438b056eab696d3',1,'MIDI_Parser']]],
+  ['staticsizeextendedioelement',['StaticSizeExtendedIOElement',['../d1/d13/classStaticSizeExtendedIOElement.html#a1b6604268bf255fbd2c2041e76f2f935',1,'StaticSizeExtendedIOElement']]],
   ['streamdebugmidi_5finterface',['StreamDebugMIDI_Interface',['../d8/d0b/classStreamDebugMIDI__Interface.html#af8d66b27c1d62bb2632c838182cdc92f',1,'StreamDebugMIDI_Interface']]],
   ['streammidi_5finterface',['StreamMIDI_Interface',['../d3/dc3/classStreamMIDI__Interface.html#a2311b38f0f82784f8ad46f9e9381608f',1,'StreamMIDI_Interface']]]
 ];

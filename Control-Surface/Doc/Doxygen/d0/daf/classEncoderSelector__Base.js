@@ -1,8 +1,7 @@
 var classEncoderSelector__Base =
 [
-    [ "EncoderSelector_Base", "d0/daf/classEncoderSelector__Base.html#a0a1773a09d20f23a179b6732ab7bce32", null ],
-    [ "EncoderSelector_Base", "d0/daf/classEncoderSelector__Base.html#a31e55964bcee4f471f493f257dc45fea", null ],
-    [ "begin", "d0/daf/classEncoderSelector__Base.html#a6244b6e5a34336abb2293257c47d7e15", null ],
+    [ "EncoderSelector_Base", "d0/daf/classEncoderSelector__Base.html#af494ec6d454b643186a97fe42501ee22", null ],
+    [ "begin", "d0/daf/classEncoderSelector__Base.html#a7bd638cee6ef0ac16f850278b60bb049", null ],
     [ "beginAll", "d0/daf/classEncoderSelector__Base.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "beginInput", "d0/daf/classEncoderSelector__Base.html#a0f55e2edbd610515285e8cb54a5cd401", null ],
     [ "beginOutput", "d0/daf/classEncoderSelector__Base.html#aedf651d52b4657c226a0407bc4558183", null ],
@@ -27,7 +26,7 @@ var classEncoderSelector__Base =
     [ "previous", "d0/daf/classEncoderSelector__Base.html#a57b6615469e554c514a9ff56dc24908f", null ],
     [ "previousPosition", "d0/daf/classEncoderSelector__Base.html#afebd857c6134f35f2d14308862cc3ae5", null ],
     [ "previousSwitchState", "d0/daf/classEncoderSelector__Base.html#aa6492b88c40f0865486f02ffed5abb77", null ],
-    [ "pulsesPerStep", "d0/daf/classEncoderSelector__Base.html#a8f278a4c9badf724c3f3876c297338f7", null ],
+    [ "pulsesPerStep", "d0/daf/classEncoderSelector__Base.html#a7228b4fc8b02dcdc5af70989a48973e5", null ],
     [ "switchPin", "d0/daf/classEncoderSelector__Base.html#a1961dd72ccc811fe119f93c96c10607c", null ],
     [ "wrap", "d0/daf/classEncoderSelector__Base.html#aeb9e30ad79c718f600d8655576593cb4", null ]
 ];

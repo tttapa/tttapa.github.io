@@ -69,23 +69,24 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"d0/db9/VUDisplay_8hpp.html",
-"d1/d7f/IncrementSelector_8cpp.html",
-"d2/da8/NoteButtonMatrix_8hpp.html",
-"d3/d54/classSoftwareSerialDebugMIDI__Interface.html#a58470aacb3262891701b456daadced6d",
-"d3/dc5/classEncoderSelector.html#ad4273e4aa2f15de8dbe478af16af259e",
-"d5/d54/classMCU_1_1SevenSegmentDisplay.html#a3ac85907a8efeac137173bb5c741b83a",
-"d6/d5b/classBankable_1_1NoteButtons.html#a9cf409bc7effa13042ebd1d1e02d1046",
-"d8/d0b/classStreamDebugMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4",
-"d8/df7/classEncoderSelectorLEDs.html#a0f55e2edbd610515285e8cb54a5cd401",
-"d9/d97/Abstract_2MIDIButton_8cpp_source.html",
-"da/d69/PrintStream_8cpp.html#a8c9f111e05c74acb9bdffce673ef5709",
-"db/d4b/classMIDIInputElementNote.html#a803846e21a2488fccf5f612087bbfa76",
-"db/dc4/classSerialDebugMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1",
-"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a5c008d0d20b072e46c14b9c48ec6c45b",
-"dd/d80/PrintStream_8hpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f",
-"de/d4e/classExtendedIOElement.html#a29b7bc6b58838c2dbe16d57dd47eeeac",
-"df/d83/NoteButton_8cpp_source.html"
+"d0/dbf/VPotDisplay_8hpp.html",
+"d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a698d89514186aa0c29ea6fbc5bef1e06",
+"d2/d87/classMIDIButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b",
+"d3/d2a/classCCButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef",
+"d3/d98/classMCU_1_1VPotDisplay.html#aa037234d0ea1fea98682e6c04175e813",
+"d4/df0/CCPotentiometer_8hpp_source.html",
+"d5/df9/group__MIDIOutputElementConstructors.html#ga5c6a4f18f1b2d13f3d82cf365013b3d1",
+"d7/d78/namespaceMIDI__Notes.html",
+"d8/d57/classUSBSerialMIDI__Interface.html#a80c4843f88185a213ebe20a26c0fd579",
+"d9/d43/Control__Change_8hpp.html#a275be85a4b26d3765c5e74ae314781be",
+"d9/dc5/Notes_8hpp.html#a4d4ea8cc8db7b12fdbfb26e5472a95fa",
+"da/d85/CCButtonLatched_8hpp_source.html",
+"db/d60/MCU_8hpp.html#a0926b23e79c7619b77bb90e84f38a75c",
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a152a9da69ce9e29a540de7deed705dbf",
+"dc/ddd/classSSD1306__DisplayInterface.html#a1b4e3dcf27017e0da390c80cb6b331b5",
+"dd/d81/classSPIShiftRegisterOut.html#a0e458fef1cf00d2a4ee3f229450e070c",
+"de/d36/classBankable_1_1NoteButton.html#ad4273e4aa2f15de8dbe478af16af259e",
+"df/d69/classMCU_1_1TimeDisplay.html#a3c9c49395893147a4a7d40d40e76ac5c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

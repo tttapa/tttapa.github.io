@@ -20,7 +20,7 @@ var searchData=
   ['relay',['RELAY',['../d7/dc7/namespaceMCU.html#a2d8d192fddf3c5f33317833a439a135e',1,'MCU']]],
   ['replace',['REPLACE',['../d7/dc7/namespaceMCU.html#adf2c59fb689e5b0a894f73499e76c7ea',1,'MCU']]],
   ['reset_5fall_5fcontrollers',['Reset_All_Controllers',['../d4/dbe/namespaceMIDI__CC.html#ab15c4b10ed81b3ece22ba9c004d3fa91',1,'MIDI_CC']]],
-  ['resetaddress',['resetAddress',['../dc/dc2/classMIDIIncrementDecrementButtons.html#ac871bde6eebec5ad99ea0ae95f759e8d',1,'MIDIIncrementDecrementButtons']]],
+  ['resetaddress',['resetAddress',['../dc/dc2/classMIDIIncrementDecrementButtons.html#ac871bde6eebec5ad99ea0ae95f759e8d',1,'MIDIIncrementDecrementButtons::resetAddress()'],['../d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a075f144b0a11550fa929a4bfc69b1e9a',1,'Bankable::MIDIIncrementDecrementButtons::resetAddress()']]],
   ['rewind',['REWIND',['../d7/dc7/namespaceMCU.html#a20258b3ceee859c9555491f8d3867d57',1,'MCU']]],
   ['right',['RIGHT',['../d7/dc7/namespaceMCU.html#a74a70556c26270816e28e87802700730',1,'MCU']]],
   ['rowpins',['rowPins',['../d8/d6c/classButtonMatrix.html#a598757145009131a1c275af993df9355',1,'ButtonMatrix']]],

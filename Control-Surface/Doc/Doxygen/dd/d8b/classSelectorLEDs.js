@@ -1,7 +1,7 @@
 var classSelectorLEDs =
 [
     [ "SelectorLEDs", "dd/d8b/classSelectorLEDs.html#a1027f3d5c34c9a28c16d55bcdb6d78e8", null ],
-    [ "begin", "dd/d8b/classSelectorLEDs.html#a6244b6e5a34336abb2293257c47d7e15", null ],
+    [ "begin", "dd/d8b/classSelectorLEDs.html#a7bd638cee6ef0ac16f850278b60bb049", null ],
     [ "beginAll", "dd/d8b/classSelectorLEDs.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "beginInput", "dd/d8b/classSelectorLEDs.html#aa07233bff4bb5c742f53e284980281b0", null ],
     [ "beginOutput", "dd/d8b/classSelectorLEDs.html#ab233434c25c75a83b32972a332c52fd0", null ],

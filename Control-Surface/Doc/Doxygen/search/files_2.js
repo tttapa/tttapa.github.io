@@ -2,6 +2,7 @@ var searchData=
 [
   ['ccbutton_2ecpp',['CCButton.cpp',['../d5/d1b/CCButton_8cpp.html',1,'']]],
   ['ccbutton_2ehpp',['CCButton.hpp',['../d3/dd8/CCButton_8hpp.html',1,'']]],
+  ['ccbuttonlatched_2ehpp',['CCButtonLatched.hpp',['../da/d85/CCButtonLatched_8hpp.html',1,'']]],
   ['ccbuttonlatching_2ecpp',['CCButtonLatching.cpp',['../d3/d09/CCButtonLatching_8cpp.html',1,'']]],
   ['ccbuttonlatching_2ehpp',['CCButtonLatching.hpp',['../d0/d04/CCButtonLatching_8hpp.html',1,'']]],
   ['ccbuttonmatrix_2ecpp',['CCButtonMatrix.cpp',['../d4/dd2/CCButtonMatrix_8cpp.html',1,'']]],
@@ -23,7 +24,5 @@ var searchData=
   ['control_5fsurface_2ecpp',['Control_Surface.cpp',['../d7/d40/Control__Surface_8cpp.html',1,'']]],
   ['control_5fsurface_2eh',['Control_Surface.h',['../db/dbf/Control__Surface_8h.html',1,'']]],
   ['control_5fsurface_5fclass_2ecpp',['Control_Surface_Class.cpp',['../d9/d38/Control__Surface__Class_8cpp.html',1,'']]],
-  ['control_5fsurface_5fclass_2ehpp',['Control_Surface_Class.hpp',['../d3/d37/Control__Surface__Class_8hpp.html',1,'']]],
-  ['copy_2ecpp',['Copy.cpp',['../d7/d37/Copy_8cpp.html',1,'']]],
-  ['copy_2ehpp',['Copy.hpp',['../d9/d52/Copy_8hpp.html',1,'']]]
+  ['control_5fsurface_5fclass_2ehpp',['Control_Surface_Class.hpp',['../d3/d37/Control__Surface__Class_8hpp.html',1,'']]]
 ];

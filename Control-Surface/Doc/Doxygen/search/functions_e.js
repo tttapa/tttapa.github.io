@@ -4,6 +4,7 @@ var searchData=
   ['pbpotentiometer',['PBPotentiometer',['../d5/df9/group__MIDIOutputElementConstructors.html#gacbbac40867807872e222789e2b29b0b3',1,'Bankable::PBPotentiometer::PBPotentiometer()'],['../d5/df9/group__MIDIOutputElementConstructors.html#ga105a377c32b45e7f117a636597a0e1ca',1,'PBPotentiometer::PBPotentiometer()']]],
   ['pin',['pin',['../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03',1,'ExtendedIOElement']]],
   ['pinmode',['pinMode',['../d7/d8d/classAnalogMultiplex.html#a6b93eff331c4f7ab31a1ea2a037aecc3',1,'AnalogMultiplex::pinMode()'],['../de/d4e/classExtendedIOElement.html#ab0e7b41124b477456bf5a1de8071d1e3',1,'ExtendedIOElement::pinMode()'],['../dc/d19/classMAX7219.html#a11e81d2ec7ebbfd6d29b092fc8a394a9',1,'MAX7219::pinMode()'],['../d8/db4/classShiftRegisterOutBase.html#a651cd79fb7296052beb837b0c1ff31a8',1,'ShiftRegisterOutBase::pinMode()'],['../d8/d3d/namespaceExtIO.html#aab1cbf2a78b56e576a536d371e1984ef',1,'ExtIO::pinMode(pin_t pin, uint8_t mode)'],['../d8/d3d/namespaceExtIO.html#aa2255838f49566f984eb61c8609a6a7a',1,'ExtIO::pinMode(int pin, uint8_t mode)']]],
+  ['pins',['pins',['../d1/d13/classStaticSizeExtendedIOElement.html#aee2c3864f44f4d969265e36643f61776',1,'StaticSizeExtendedIOElement']]],
   ['positiontobits',['positionToBits',['../d8/d6c/classButtonMatrix.html#a8d6b7965c08300559c22de5325f2164f',1,'ButtonMatrix']]],
   ['preparereading',['prepareReading',['../d7/d8d/classAnalogMultiplex.html#a40489dda038fc493ea3b1948bb9e47bd',1,'AnalogMultiplex']]],
   ['print',['print',['../df/d69/classMCU_1_1TimeDisplay.html#afebbe4f2a583d21e226a7db90718d451',1,'MCU::TimeDisplay']]],
@@ -12,5 +13,8 @@ var searchData=
   ['printintegral',['printIntegral',['../da/d69/PrintStream_8cpp.html#a505bb61b2f822982a09821e3d52cd424',1,'PrintStream.cpp']]],
   ['printto',['printTo',['../d5/d54/classMCU_1_1SevenSegmentDisplay.html#a3a6b88b2ced14db4c783b80e22a2c8b1',1,'MCU::SevenSegmentDisplay']]],
   ['programchanger',['ProgramChanger',['../de/d43/classProgramChanger.html#a996f64faa6c0ce97c293b290c16f56b3',1,'ProgramChanger']]],
+  ['programchangeselector',['ProgramChangeSelector',['../dd/dd4/classProgramChangeSelector.html#a48d81bcb12f23fa6e77c2d727280d085',1,'ProgramChangeSelector']]],
+  ['programchangeselector_5fbase',['ProgramChangeSelector_Base',['../d9/dc1/classProgramChangeSelector__Base.html#aefd76b1de2f83ee90b1c789c4e8e8803',1,'ProgramChangeSelector_Base']]],
+  ['programchangeselectorleds',['ProgramChangeSelectorLEDs',['../d9/dee/classProgramChangeSelectorLEDs.html#ac58dd9cb566648c38be242f000fa2874',1,'ProgramChangeSelectorLEDs']]],
   ['publish',['publish',['../d0/d89/classBluetoothMIDI__Interface.html#ae838971ae0eac14ced4f874a39b9dd36',1,'BluetoothMIDI_Interface']]]
 ];

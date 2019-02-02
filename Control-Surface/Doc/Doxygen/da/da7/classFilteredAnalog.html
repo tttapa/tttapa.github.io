@@ -150,7 +150,7 @@ class FilteredAnalog&lt; PRECISION &gt;</h3>
 <p>A class that reads and filters an analog input. </p>
 <p>A map function can be applied to the analog value (e.g. to compensate for logarithmic taper potentiometers or to calibrate the range). The analog input value is filtered using an exponential moving average filter. The settings for this filter can be changed in <a class="el" href="../../db/d02/Settings_8hpp.html" title="All user settings and debugging options can be changed here.">Settings.hpp</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00020">20</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00022">22</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a388578a292755baa536508b491e3da7c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a388578a292755baa536508b491e3da7c">&#9670;&nbsp;</a></span>FilteredAnalog()</h2>
@@ -178,7 +178,7 @@ template&lt;uint8_t PRECISION&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00086">86</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00094">94</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -203,7 +203,7 @@ template&lt;uint8_t PRECISION&gt; </div>
 <p>Get the filtered value of the analog input without the mapping function applied. </p>
 <dl class="section return"><dt>Returns</dt><dd>The filtered value of the analog input, as a number of <code>PRECISION</code> bits wide. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00106">106</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00114">114</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -227,7 +227,7 @@ template&lt;uint8_t PRECISION&gt; </div>
 <p>Get the filtered value of the analog input with the mapping function applied. </p>
 <dl class="section return"><dt>Returns</dt><dd>The filtered value of the analog input, as a number of <code>PRECISION</code> bits wide. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00098">98</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00106">106</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -258,12 +258,14 @@ template&lt;uint8_t PRECISION&gt; </div>
 <p>Specify a mapping function that is applied to the raw analog value before filtering. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">fn</td><td>A function pointer to the mapping function. This function should take the 10-bit analog value as a parameter, and should return a 10-bit value. </td></tr>
+    <tr><td class="paramname">fn</td><td>A function pointer to the mapping function. This function should take the filtered value (of <code>PRECISION</code> bits wide) as a parameter, and should return a value of <code>PRECISION</code> bits.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section note"><dt>Note</dt><dd>Applying the mapping function before filtering could result in the noise being amplified to such an extent that filtering it afterwards would be ineffective. <br />
+ That's why the mapping function is applied after filtering and hysteresis. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00111">111</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00119">119</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -289,7 +291,7 @@ template&lt;uint8_t PRECISION&gt; </div>
 <dd>
 false The value is still the same. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00090">90</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00098">98</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -322,7 +324,7 @@ template&lt;uint8_t PRECISION&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00071">71</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00079">79</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -348,7 +350,7 @@ template&lt;uint8_t PRECISION&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00075">75</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00083">83</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -374,7 +376,7 @@ template&lt;uint8_t PRECISION&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00076">76</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00084">84</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>
@@ -400,7 +402,7 @@ template&lt;uint8_t PRECISION&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00073">73</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00081">81</a> of file <a class="el" href="../../d8/df3/FilteredAnalog_8hpp_source.html">FilteredAnalog.hpp</a>.</p>
 
 </div>
 </div>

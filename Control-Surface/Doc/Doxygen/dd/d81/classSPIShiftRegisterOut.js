@@ -17,6 +17,7 @@ var classSPIShiftRegisterOut =
     [ "pin", "dd/d81/classSPIShiftRegisterOut.html#a163cffb9da0f3b7fdcb3c49b58393c03", null ],
     [ "pinMode", "dd/d81/classSPIShiftRegisterOut.html#a651cd79fb7296052beb837b0c1ff31a8", null ],
     [ "pinMode", "dd/d81/classSPIShiftRegisterOut.html#ab0e7b41124b477456bf5a1de8071d1e3", null ],
+    [ "pins", "dd/d81/classSPIShiftRegisterOut.html#aee2c3864f44f4d969265e36643f61776", null ],
     [ "red", "dd/d81/classSPIShiftRegisterOut.html#a6cbf86a1b6bf843c75bfc0b4ecf5a391", null ],
     [ "update", "dd/d81/classSPIShiftRegisterOut.html#a8cbe6c07061e5352c7ebf7513f264dbb", null ],
     [ "bitOrder", "dd/d81/classSPIShiftRegisterOut.html#aab68e6c0b29526ebe79873b1adc3effe", null ],

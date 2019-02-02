@@ -14,6 +14,7 @@ var searchData=
   ['audiovuleds_2ehpp',['AudioVULEDs.hpp',['../d4/dde/AudioVULEDs_8hpp.html',1,'']]],
   ['midibutton_2ecpp',['MIDIButton.cpp',['../d9/d97/Abstract_2MIDIButton_8cpp.html',1,'']]],
   ['midibutton_2ehpp',['MIDIButton.hpp',['../dd/d47/Abstract_2MIDIButton_8hpp.html',1,'']]],
+  ['midibuttonlatched_2ehpp',['MIDIButtonLatched.hpp',['../d8/dba/Abstract_2MIDIButtonLatched_8hpp.html',1,'']]],
   ['midibuttonlatching_2ecpp',['MIDIButtonLatching.cpp',['../dd/d91/Abstract_2MIDIButtonLatching_8cpp.html',1,'']]],
   ['midibuttonlatching_2ehpp',['MIDIButtonLatching.hpp',['../d0/d55/Abstract_2MIDIButtonLatching_8hpp.html',1,'']]],
   ['midibuttonmatrix_2ecpp',['MIDIButtonMatrix.cpp',['../da/def/Abstract_2MIDIButtonMatrix_8cpp.html',1,'']]],
@@ -22,6 +23,7 @@ var searchData=
   ['midibuttons_2ehpp',['MIDIButtons.hpp',['../d2/d07/Abstract_2MIDIButtons_8hpp.html',1,'']]],
   ['midifilteredanalog_2ecpp',['MIDIFilteredAnalog.cpp',['../df/d2f/Abstract_2MIDIFilteredAnalog_8cpp.html',1,'']]],
   ['midifilteredanalog_2ehpp',['MIDIFilteredAnalog.hpp',['../d3/de4/Abstract_2MIDIFilteredAnalog_8hpp.html',1,'']]],
+  ['midiincrementdecrementbuttons_2ehpp',['MIDIIncrementDecrementButtons.hpp',['../db/d20/Abstract_2MIDIIncrementDecrementButtons_8hpp.html',1,'']]],
   ['midirotaryencoder_2ecpp',['MIDIRotaryEncoder.cpp',['../d0/d56/Abstract_2MIDIRotaryEncoder_8cpp.html',1,'']]],
   ['midirotaryencoder_2ehpp',['MIDIRotaryEncoder.hpp',['../db/d50/Abstract_2MIDIRotaryEncoder_8hpp.html',1,'']]]
 ];

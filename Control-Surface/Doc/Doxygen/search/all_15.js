@@ -53,7 +53,7 @@ var searchData=
   ['vpotringleds_2ecpp',['VPotRingLEDs.cpp',['../d4/de6/VPotRingLEDs_8cpp.html',1,'']]],
   ['vpotringleds_2ehpp',['VPotRingLEDs.hpp',['../dc/d48/VPotRingLEDs_8hpp.html',1,'']]],
   ['vpotringleds_5fbase',['VPotRingLEDs_Base',['../de/d52/classMCU_1_1VPotRingLEDs__Base.html',1,'MCU::VPotRingLEDs_Base'],['../de/d52/classMCU_1_1VPotRingLEDs__Base.html#a03c9f9b774ba669f0a02f7b326382c1c',1,'MCU::VPotRingLEDs_Base::VPotRingLEDs_Base()']]],
-  ['vu',['VU',['../d8/d4c/classMCU_1_1VU.html',1,'MCU::VU'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable::VU&lt; N &gt;'],['../d4/d42/classMCU_1_1VUDisplay.html#ac4bf0fcba04b3fd9caf2717b6caf0058',1,'MCU::VUDisplay::vu()'],['../d8/d4c/classMCU_1_1VU.html#ae95cc9bc3749b144ede2c50d5f92b322',1,'MCU::VU::VU()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a25224e1cd150901c02c38731801223f0',1,'MCU::Bankable::VU::VU()']]],
+  ['vu',['VU',['../d8/d4c/classMCU_1_1VU.html',1,'MCU::VU'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable::VU&lt; N &gt;'],['../d8/d4c/classMCU_1_1VU.html#ae95cc9bc3749b144ede2c50d5f92b322',1,'MCU::VU::VU()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a25224e1cd150901c02c38731801223f0',1,'MCU::Bankable::VU::VU()'],['../d4/d42/classMCU_1_1VUDisplay.html#ac4bf0fcba04b3fd9caf2717b6caf0058',1,'MCU::VUDisplay::vu()']]],
   ['vu_2ecpp',['VU.cpp',['../d6/d26/VU_8cpp.html',1,'']]],
   ['vu_2ehpp',['VU.hpp',['../db/dda/VU_8hpp.html',1,'']]],
   ['vu_3c_20m_20_3e',['VU&lt; M &gt;',['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable']]],
@@ -64,6 +64,6 @@ var searchData=
   ['vudisplay',['VUDisplay',['../d4/d42/classMCU_1_1VUDisplay.html',1,'MCU::VUDisplay'],['../d4/d42/classMCU_1_1VUDisplay.html#a41ba02433ea87dbce1cb17ca1bf8397d',1,'MCU::VUDisplay::VUDisplay()']]],
   ['vudisplay_2ecpp',['VUDisplay.cpp',['../db/dcf/VUDisplay_8cpp.html',1,'']]],
   ['vudisplay_2ehpp',['VUDisplay.hpp',['../d0/db9/VUDisplay_8hpp.html',1,'']]],
-  ['vuleds',['VULEDs',['../df/d36/classMCU_1_1VULEDs.html',1,'MCU::VULEDs&lt; N &gt;'],['../db/d17/classMCU_1_1Bankable_1_1VULEDs.html',1,'MCU::Bankable::VULEDs&lt; M, N &gt;'],['../df/d36/classMCU_1_1VULEDs.html#afd408385cac96aa0744cfa0d84013bce',1,'MCU::VULEDs::VULEDs()'],['../db/d17/classMCU_1_1Bankable_1_1VULEDs.html#abea11dd6ae2135645de76f3c5f3ded50',1,'MCU::Bankable::VULEDs::VULEDs()'],['../d9/dbf/classAudioVULEDs.html#a64675795cc0cddd9924285ac20dd0948',1,'AudioVULEDs::vuleds()']]],
+  ['vuleds',['VULEDs',['../df/d36/classMCU_1_1VULEDs.html',1,'MCU::VULEDs&lt; N &gt;'],['../db/d17/classMCU_1_1Bankable_1_1VULEDs.html',1,'MCU::Bankable::VULEDs&lt; M, N &gt;'],['../d9/dbf/classAudioVULEDs.html#a64675795cc0cddd9924285ac20dd0948',1,'AudioVULEDs::vuleds()'],['../df/d36/classMCU_1_1VULEDs.html#afd408385cac96aa0744cfa0d84013bce',1,'MCU::VULEDs::VULEDs()'],['../db/d17/classMCU_1_1Bankable_1_1VULEDs.html#abea11dd6ae2135645de76f3c5f3ded50',1,'MCU::Bankable::VULEDs::VULEDs()']]],
   ['vuleds_5fbase',['VULEDs_Base',['../da/d0a/classMCU_1_1VULEDs__Base.html',1,'MCU::VULEDs_Base&lt; N &gt;'],['../da/d0a/classMCU_1_1VULEDs__Base.html#a6eabaca3cac2c5c3e7ea0f6b965d4350',1,'MCU::VULEDs_Base::VULEDs_Base()']]]
 ];

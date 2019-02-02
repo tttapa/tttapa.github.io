@@ -8,7 +8,7 @@ var classIncrementButton =
     ] ],
     [ "IncrementButton", "df/d38/classIncrementButton.html#ad0133d3b080fa4093b24ade7acd2f2c1", null ],
     [ "begin", "df/d38/classIncrementButton.html#a03eb36a87c5651067e384134843bdb65", null ],
-    [ "getState", "df/d38/classIncrementButton.html#a5c8d067118823e19c19ea3a4a0c0d965", null ],
+    [ "getState", "df/d38/classIncrementButton.html#a420ed67682567f9df6a00d437af8b029", null ],
     [ "button", "df/d38/classIncrementButton.html#a07b9b3c44da829321715e2caec5ee427", null ],
     [ "longPressRepeat", "df/d38/classIncrementButton.html#a007fe99c59cd8bc8bad9727ca1185e65", null ],
     [ "longPressState", "df/d38/classIncrementButton.html#af1a0a9d8af01cd41a0f5b3cd87513d42", null ]

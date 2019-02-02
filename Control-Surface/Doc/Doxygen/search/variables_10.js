@@ -32,5 +32,5 @@ var searchData=
   ['program_5fchange',['PROGRAM_CHANGE',['../d7/d2d/MIDI__Parser_8hpp.html#ad9da84bbd662de5e6f227125e3c54cf9',1,'MIDI_Parser.hpp']]],
   ['programs',['programs',['../de/d43/classProgramChanger.html#a906de79bf189d5b373411aeebb7a16ca',1,'ProgramChanger']]],
   ['pserver',['pServer',['../d8/d39/classBLEMIDI.html#a0f3aacf3e230569a6875ee178eb925d0',1,'BLEMIDI']]],
-  ['pulsesperstep',['pulsesPerStep',['../d8/d20/classMIDIRotaryEncoder.html#a080ccb8ce0680885275054cf6ee9e917',1,'MIDIRotaryEncoder::pulsesPerStep()'],['../dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a295639bed8aea8de367dc32021739fd8',1,'Bankable::MIDIRotaryEncoder::pulsesPerStep()'],['../d0/daf/classEncoderSelector__Base.html#a8f278a4c9badf724c3f3876c297338f7',1,'EncoderSelector_Base::pulsesPerStep()']]]
+  ['pulsesperstep',['pulsesPerStep',['../d8/d20/classMIDIRotaryEncoder.html#a080ccb8ce0680885275054cf6ee9e917',1,'MIDIRotaryEncoder::pulsesPerStep()'],['../dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a295639bed8aea8de367dc32021739fd8',1,'Bankable::MIDIRotaryEncoder::pulsesPerStep()'],['../d0/daf/classEncoderSelector__Base.html#a7228b4fc8b02dcdc5af70989a48973e5',1,'EncoderSelector_Base::pulsesPerStep()']]]
 ];

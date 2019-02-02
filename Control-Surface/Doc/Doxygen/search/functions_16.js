@@ -13,5 +13,6 @@ var searchData=
   ['_7emidiinputelementcc',['~MIDIInputElementCC',['../d3/d96/classMIDIInputElementCC.html#af1e2107514dc377ad0d78cae025159dd',1,'MIDIInputElementCC']]],
   ['_7emidiinputelementchannelpressure',['~MIDIInputElementChannelPressure',['../d1/df7/classMIDIInputElementChannelPressure.html#a22dc6f7831c2a1a0ce0fe4cd3a189bfc',1,'MIDIInputElementChannelPressure']]],
   ['_7emidiinputelementnote',['~MIDIInputElementNote',['../db/d4b/classMIDIInputElementNote.html#a0830ac1b41cacb52da6023f5b890a6b9',1,'MIDIInputElementNote']]],
+  ['_7emidiinputelementpc',['~MIDIInputElementPC',['../db/d1d/classMIDIInputElementPC.html#a8292565a67104ddb3f3f378aef785931',1,'MIDIInputElementPC']]],
   ['_7eupdatable',['~Updatable',['../d5/de0/classUpdatable.html#a5b85de915a351c0d8c9cdebe8bc12f50',1,'Updatable']]]
 ];

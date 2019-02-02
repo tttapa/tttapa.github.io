@@ -1,6 +1,6 @@
 var classCCButtonMatrix =
 [
-    [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#gad5314303f3a6f73e403d25602a663587", null ],
+    [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#gaca1ffefdf0adbd7df0285f18f5a67928", null ],
     [ "begin", "d3/d2a/classCCButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
     [ "beginAll", "d3/d2a/classCCButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d3/d2a/classCCButtonMatrix.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

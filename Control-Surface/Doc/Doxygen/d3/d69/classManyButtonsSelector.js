@@ -1,7 +1,7 @@
 var classManyButtonsSelector =
 [
     [ "ManyButtonsSelector", "d3/d69/classManyButtonsSelector.html#ab12ec44f3c92f581b4444a8cc1f2035a", null ],
-    [ "begin", "d3/d69/classManyButtonsSelector.html#a6244b6e5a34336abb2293257c47d7e15", null ],
+    [ "begin", "d3/d69/classManyButtonsSelector.html#a7bd638cee6ef0ac16f850278b60bb049", null ],
     [ "beginAll", "d3/d69/classManyButtonsSelector.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "beginInput", "d3/d69/classManyButtonsSelector.html#ac692bcd41c1cae3cf89d51b36b3193d8", null ],
     [ "beginOutput", "d3/d69/classManyButtonsSelector.html#a3540a3b126cbff45cb44bc21f7c7ffde", null ],

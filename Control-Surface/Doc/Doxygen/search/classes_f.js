@@ -23,6 +23,9 @@ var searchData=
   ['softwareserialmidi_5finterface',['SoftwareSerialMIDI_Interface',['../d6/d6d/classSoftwareSerialMIDI__Interface.html',1,'']]],
   ['spishiftregisterout',['SPIShiftRegisterOut',['../dd/d81/classSPIShiftRegisterOut.html',1,'']]],
   ['ssd1306_5fdisplayinterface',['SSD1306_DisplayInterface',['../dc/ddd/classSSD1306__DisplayInterface.html',1,'']]],
+  ['staticsizeextendedioelement',['StaticSizeExtendedIOElement',['../d1/d13/classStaticSizeExtendedIOElement.html',1,'']]],
+  ['staticsizeextendedioelement_3c_201_3c_3c_20n_20_3e',['StaticSizeExtendedIOElement&lt; 1&lt;&lt; N &gt;',['../d1/d13/classStaticSizeExtendedIOElement.html',1,'']]],
+  ['staticsizeextendedioelement_3c_208_20_2a8_20_3e',['StaticSizeExtendedIOElement&lt; 8 *8 &gt;',['../d1/d13/classStaticSizeExtendedIOElement.html',1,'']]],
   ['streamdebugmidi_5finterface',['StreamDebugMIDI_Interface',['../d8/d0b/classStreamDebugMIDI__Interface.html',1,'']]],
   ['streammidi_5finterface',['StreamMIDI_Interface',['../d3/dc3/classStreamMIDI__Interface.html',1,'']]],
   ['sysexmessage',['SysExMessage',['../d2/d56/structMIDI__Parser_1_1SysExMessage.html',1,'MIDI_Parser']]]

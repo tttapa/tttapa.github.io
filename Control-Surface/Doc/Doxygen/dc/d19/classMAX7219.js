@@ -16,6 +16,7 @@ var classMAX7219 =
     [ "pin", "dc/d19/classMAX7219.html#a163cffb9da0f3b7fdcb3c49b58393c03", null ],
     [ "pinMode", "dc/d19/classMAX7219.html#a11e81d2ec7ebbfd6d29b092fc8a394a9", null ],
     [ "pinMode", "dc/d19/classMAX7219.html#ab0e7b41124b477456bf5a1de8071d1e3", null ],
+    [ "pins", "dc/d19/classMAX7219.html#aee2c3864f44f4d969265e36643f61776", null ],
     [ "send", "dc/d19/classMAX7219.html#a85225775c37c594374687279ceb56673", null ],
     [ "sendRaw", "dc/d19/classMAX7219.html#ad5fae5a26168c869305c426dc8b48d49", null ],
     [ "setIntensity", "dc/d19/classMAX7219.html#a307897ca4835a676d55e153d49371293", null ],

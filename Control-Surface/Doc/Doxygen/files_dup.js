@@ -50,6 +50,8 @@ var files_dup =
     [ "CCButton.cpp", "d5/d1b/CCButton_8cpp.html", null ],
     [ "Bankable/CCButton.hpp", "db/d15/Bankable_2CCButton_8hpp.html", null ],
     [ "CCButton.hpp", "d3/dd8/CCButton_8hpp.html", null ],
+    [ "Bankable/CCButtonLatched.hpp", "db/d53/Bankable_2CCButtonLatched_8hpp.html", null ],
+    [ "CCButtonLatched.hpp", "da/d85/CCButtonLatched_8hpp.html", null ],
     [ "Bankable/CCButtonLatching.cpp", "d9/d9b/Bankable_2CCButtonLatching_8cpp.html", null ],
     [ "CCButtonLatching.cpp", "d3/d09/CCButtonLatching_8cpp.html", null ],
     [ "Bankable/CCButtonLatching.hpp", "d2/dac/Bankable_2CCButtonLatching_8hpp.html", null ],
@@ -63,6 +65,7 @@ var files_dup =
     [ "Bankable/CCButtons.hpp", "d7/d16/Bankable_2CCButtons_8hpp.html", null ],
     [ "CCButtons.hpp", "d2/d03/CCButtons_8hpp.html", null ],
     [ "CCIncrementDecrementButtons.cpp", "d2/dcb/CCIncrementDecrementButtons_8cpp.html", null ],
+    [ "Bankable/CCIncrementDecrementButtons.hpp", "d7/dcc/Bankable_2CCIncrementDecrementButtons_8hpp.html", null ],
     [ "CCIncrementDecrementButtons.hpp", "d1/de5/CCIncrementDecrementButtons_8hpp.html", null ],
     [ "Bankable/CCPotentiometer.cpp", "d1/d40/Bankable_2CCPotentiometer_8cpp.html", null ],
     [ "CCPotentiometer.cpp", "d2/d7b/CCPotentiometer_8cpp.html", null ],
@@ -84,8 +87,6 @@ var files_dup =
     [ "Control_Surface.h", "db/dbf/Control__Surface_8h.html", null ],
     [ "Control_Surface_Class.cpp", "d9/d38/Control__Surface__Class_8cpp.html", "d9/d38/Control__Surface__Class_8cpp" ],
     [ "Control_Surface_Class.hpp", "d3/d37/Control__Surface__Class_8hpp.html", "d3/d37/Control__Surface__Class_8hpp" ],
-    [ "Copy.cpp", "d7/d37/Copy_8cpp.html", null ],
-    [ "Copy.hpp", "d9/d52/Copy_8hpp.html", "d9/d52/Copy_8hpp" ],
     [ "Debug.cpp", "df/d66/Debug_8cpp.html", null ],
     [ "Debug.hpp", "df/dee/Debug_8hpp.html", "df/dee/Debug_8hpp" ],
     [ "DebugMIDI_Interface.cpp", "d1/d40/DebugMIDI__Interface_8cpp.html", null ],
@@ -120,8 +121,7 @@ var files_dup =
     [ "EncoderSelector.cpp", "d9/d20/EncoderSelector_8cpp.html", null ],
     [ "EncoderSelector.hpp", "d7/de4/EncoderSelector_8hpp.html", [
       [ "EncoderSelector_Base", "d0/daf/classEncoderSelector__Base.html", "d0/daf/classEncoderSelector__Base" ],
-      [ "EncoderSelector", "d3/dc5/classEncoderSelector.html", "d3/dc5/classEncoderSelector" ],
-      [ "EncoderButtonSelector", "d5/df1/classEncoderButtonSelector.html", "d5/df1/classEncoderButtonSelector" ]
+      [ "EncoderSelector", "d3/dc5/classEncoderSelector.html", "d3/dc5/classEncoderSelector" ]
     ] ],
     [ "EncoderSelectorLEDs.cpp", "d1/d90/EncoderSelectorLEDs_8cpp.html", null ],
     [ "EncoderSelectorLEDs.hpp", "d9/dc4/EncoderSelectorLEDs_8hpp.html", [
@@ -225,8 +225,11 @@ var files_dup =
     [ "Bankable/Abstract/MIDIButton.hpp", "dd/d2a/Bankable_2Abstract_2MIDIButton_8hpp.html", [
       [ "MIDIButton", "d9/df9/classBankable_1_1MIDIButton.html", "d9/df9/classBankable_1_1MIDIButton" ]
     ] ],
-    [ "MIDIButtonLatched.hpp", "d1/dd3/MIDIButtonLatched_8hpp.html", [
+    [ "Abstract/MIDIButtonLatched.hpp", "d8/dba/Abstract_2MIDIButtonLatched_8hpp.html", [
       [ "MIDIButtonLatched", "d3/d88/classMIDIButtonLatched.html", "d3/d88/classMIDIButtonLatched" ]
+    ] ],
+    [ "Bankable/Abstract/MIDIButtonLatched.hpp", "d7/d4e/Bankable_2Abstract_2MIDIButtonLatched_8hpp.html", [
+      [ "MIDIButtonLatched", "df/dca/classBankable_1_1MIDIButtonLatched.html", "df/dca/classBankable_1_1MIDIButtonLatched" ]
     ] ],
     [ "Abstract/MIDIButtonLatching.cpp", "dd/d91/Abstract_2MIDIButtonLatching_8cpp.html", null ],
     [ "Bankable/Abstract/MIDIButtonLatching.cpp", "d5/d0d/Bankable_2Abstract_2MIDIButtonLatching_8cpp.html", null ],
@@ -265,8 +268,11 @@ var files_dup =
       [ "MIDIFilteredAnalog", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", "db/ddc/classBankable_1_1MIDIFilteredAnalog" ]
     ] ],
     [ "MIDIIncrementDecrementButtons.cpp", "d3/d47/MIDIIncrementDecrementButtons_8cpp.html", null ],
-    [ "MIDIIncrementDecrementButtons.hpp", "dc/dc5/MIDIIncrementDecrementButtons_8hpp.html", [
+    [ "Abstract/MIDIIncrementDecrementButtons.hpp", "db/d20/Abstract_2MIDIIncrementDecrementButtons_8hpp.html", [
       [ "MIDIIncrementDecrementButtons", "dc/dc2/classMIDIIncrementDecrementButtons.html", "dc/dc2/classMIDIIncrementDecrementButtons" ]
+    ] ],
+    [ "Bankable/Abstract/MIDIIncrementDecrementButtons.hpp", "de/dc8/Bankable_2Abstract_2MIDIIncrementDecrementButtons_8hpp.html", [
+      [ "MIDIIncrementDecrementButtons", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons" ]
     ] ],
     [ "MIDIInputElement.cpp", "da/de8/MIDIInputElement_8cpp.html", null ],
     [ "MIDIInputElement.hpp", "dc/d90/MIDIInputElement_8hpp.html", [
@@ -282,6 +288,10 @@ var files_dup =
     ] ],
     [ "MIDIInputElementNote.cpp", "d0/d31/MIDIInputElementNote_8cpp.html", null ],
     [ "MIDIInputElementNote.hpp", "d5/d5f/MIDIInputElementNote_8hpp.html", null ],
+    [ "MIDIInputElementPC.cpp", "d5/ddf/MIDIInputElementPC_8cpp.html", null ],
+    [ "MIDIInputElementPC.hpp", "d7/d33/MIDIInputElementPC_8hpp.html", [
+      [ "MIDIInputElementPC", "db/d1d/classMIDIInputElementPC.html", "db/d1d/classMIDIInputElementPC" ]
+    ] ],
     [ "MIDINote.cpp", "d5/da5/MIDINote_8cpp.html", null ],
     [ "MIDINote.hpp", "d2/d97/MIDINote_8hpp.html", [
       [ "MIDINote_Base", "da/d1b/classMIDINote__Base.html", "da/d1b/classMIDINote__Base" ],
@@ -317,6 +327,7 @@ var files_dup =
     [ "NoteButton.cpp", "df/d83/NoteButton_8cpp.html", null ],
     [ "Bankable/NoteButton.hpp", "d5/d8e/Bankable_2NoteButton_8hpp.html", null ],
     [ "NoteButton.hpp", "d3/d80/NoteButton_8hpp.html", null ],
+    [ "Bankable/NoteButtonLatched.hpp", "df/de8/Bankable_2NoteButtonLatched_8hpp.html", null ],
     [ "NoteButtonLatched.hpp", "d0/d4e/NoteButtonLatched_8hpp.html", null ],
     [ "Bankable/NoteButtonLatching.cpp", "d8/de7/Bankable_2NoteButtonLatching_8cpp.html", null ],
     [ "NoteButtonLatching.cpp", "db/d28/NoteButtonLatching_8cpp.html", null ],
@@ -345,6 +356,12 @@ var files_dup =
     [ "ProgramChanger.hpp", "da/d0c/ProgramChanger_8hpp.html", [
       [ "ProgramChanger", "de/d43/classProgramChanger.html", "de/d43/classProgramChanger" ]
     ] ],
+    [ "ProgramChangeSelector.cpp", "d8/dcc/ProgramChangeSelector_8cpp.html", null ],
+    [ "ProgramChangeSelector.hpp", "d0/da3/ProgramChangeSelector_8hpp.html", [
+      [ "ProgramChangeSelector_Base", "d9/dc1/classProgramChangeSelector__Base.html", "d9/dc1/classProgramChangeSelector__Base" ],
+      [ "ProgramChangeSelector", "dd/dd4/classProgramChangeSelector.html", "dd/dd4/classProgramChangeSelector" ],
+      [ "ProgramChangeSelectorLEDs", "d9/dee/classProgramChangeSelectorLEDs.html", "d9/dee/classProgramChangeSelectorLEDs" ]
+    ] ],
     [ "RelativeCCSender.cpp", "d7/dcd/RelativeCCSender_8cpp.html", null ],
     [ "RelativeCCSender.hpp", "d9/d24/RelativeCCSender_8hpp.html", "d9/d24/RelativeCCSender_8hpp" ],
     [ "Selectable.cpp", "d9/d37/Selectable_8cpp.html", null ],
@@ -368,7 +385,6 @@ var files_dup =
       [ "SerialMIDI_Parser", "d0/d0d/classSerialMIDI__Parser.html", "d0/d0d/classSerialMIDI__Parser" ]
     ] ],
     [ "Settings.hpp", "db/d02/Settings_8hpp.html", "db/d02/Settings_8hpp" ],
-    [ "SettingsWrapper.cpp", "d9/dcf/SettingsWrapper_8cpp.html", null ],
     [ "SettingsWrapper.hpp", "d2/dd5/SettingsWrapper_8hpp.html", "d2/dd5/SettingsWrapper_8hpp" ],
     [ "SevenSegmentDisplay.cpp", "dd/d58/SevenSegmentDisplay_8cpp.html", null ],
     [ "SevenSegmentDisplay.hpp", "d4/d18/SevenSegmentDisplay_8hpp.html", [
@@ -384,6 +400,9 @@ var files_dup =
     ] ],
     [ "SPIShiftRegisterOut.cpp", "d2/dde/SPIShiftRegisterOut_8cpp.html", null ],
     [ "SPIShiftRegisterOut.hpp", "d7/d88/SPIShiftRegisterOut_8hpp.html", null ],
+    [ "StaticSizeExtendedIOElement.hpp", "d2/d05/StaticSizeExtendedIOElement_8hpp.html", [
+      [ "StaticSizeExtendedIOElement", "d1/d13/classStaticSizeExtendedIOElement.html", "d1/d13/classStaticSizeExtendedIOElement" ]
+    ] ],
     [ "TeensyUSBTypes.cpp", "d1/d58/TeensyUSBTypes_8cpp.html", null ],
     [ "TeensyUSBTypes.hpp", "d9/d98/TeensyUSBTypes_8hpp.html", null ],
     [ "TimeDisplay.cpp", "d1/d55/TimeDisplay_8cpp.html", null ],

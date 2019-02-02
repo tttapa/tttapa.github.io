@@ -53,7 +53,7 @@ var group__Audio =
       [ "updateAll", "d4/de3/classVolumeControl.html#a8af924e5b3b708eb042919703d175ed3", null ],
       [ "filteredAnalog", "d4/de3/classVolumeControl.html#a6d6dac5db13da47c9147c81f2c8f9e29", null ],
       [ "maxGain", "d4/de3/classVolumeControl.html#ab2b63d2685b52f7ad584094c44f62754", null ],
-      [ "mixers", "d4/de3/classVolumeControl.html#af0a817abed5a4f448b2072be0fbf3f56", null ],
+      [ "mixers", "d4/de3/classVolumeControl.html#a5f9f8656781d0bd16ba2e9a9f5038f75", null ],
       [ "next", "d4/de3/classVolumeControl.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
       [ "previous", "d4/de3/classVolumeControl.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ]

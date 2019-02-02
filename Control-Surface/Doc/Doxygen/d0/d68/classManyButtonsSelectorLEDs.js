@@ -1,7 +1,7 @@
 var classManyButtonsSelectorLEDs =
 [
     [ "ManyButtonsSelectorLEDs", "d0/d68/classManyButtonsSelectorLEDs.html#ac86dd59b4299ea79aa4c849fe16f28f9", null ],
-    [ "begin", "d0/d68/classManyButtonsSelectorLEDs.html#a6244b6e5a34336abb2293257c47d7e15", null ],
+    [ "begin", "d0/d68/classManyButtonsSelectorLEDs.html#a7bd638cee6ef0ac16f850278b60bb049", null ],
     [ "beginAll", "d0/d68/classManyButtonsSelectorLEDs.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "beginInput", "d0/d68/classManyButtonsSelectorLEDs.html#ac692bcd41c1cae3cf89d51b36b3193d8", null ],
     [ "beginOutput", "d0/d68/classManyButtonsSelectorLEDs.html#ab233434c25c75a83b32972a332c52fd0", null ],

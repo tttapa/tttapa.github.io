@@ -1,6 +1,6 @@
 var classBankable_1_1NoteButtons =
 [
-    [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga89d8bb1ae29ee12d35796ff8fa32e0b9", null ],
+    [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#gab8e2c7323d83241e1ac25e9e0b4fce23", null ],
     [ "begin", "d6/d5b/classBankable_1_1NoteButtons.html#a0898f089b0bf29c6296550ba05fc53b3", null ],
     [ "beginAll", "d6/d5b/classBankable_1_1NoteButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d6/d5b/classBankable_1_1NoteButtons.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

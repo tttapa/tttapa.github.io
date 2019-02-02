@@ -131,13 +131,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab6ec60a0b7c885ea5569cd8b1e8140ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#ab6ec60a0b7c885ea5569cd8b1e8140ab">More...</a><br /></td></tr>
 <tr class="separator:ab6ec60a0b7c885ea5569cd8b1e8140ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50ca23907b34544b059f7bbaf8dbc921"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d6c/classButtonMatrix.html#a50ca23907b34544b059f7bbaf8dbc921">begin</a> ()</td></tr>
+<tr class="memdesc:a50ca23907b34544b059f7bbaf8dbc921"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize (enable internal pull-up resistors on column pins).  <a href="#a50ca23907b34544b059f7bbaf8dbc921">More...</a><br /></td></tr>
 <tr class="separator:a50ca23907b34544b059f7bbaf8dbc921"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1ba9c4b8860d3d9115a70f8d97f21cef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d6c/classButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef">refresh</a> ()</td></tr>
+<tr class="memdesc:a1ba9c4b8860d3d9115a70f8d97f21cef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Scan the matrix, read all button states, and call the onButtonChanged callback.  <a href="#a1ba9c4b8860d3d9115a70f8d97f21cef">More...</a><br /></td></tr>
 <tr class="separator:a1ba9c4b8860d3d9115a70f8d97f21cef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
 <tr class="memitem:a75a8c44788ae7029d544cf1398539eec"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d6c/classButtonMatrix.html#a75a8c44788ae7029d544cf1398539eec">onButtonChanged</a> (uint8_t row, uint8_t col, bool state)=0</td></tr>
+<tr class="memdesc:a75a8c44788ae7029d544cf1398539eec"><td class="mdescLeft">&#160;</td><td class="mdescRight">The callback function that is called whenever a button changes state.  <a href="#a75a8c44788ae7029d544cf1398539eec">More...</a><br /></td></tr>
 <tr class="separator:a75a8c44788ae7029d544cf1398539eec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af3adb9370f0220eb3235885e1406e9e3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d8/d6c/classButtonMatrix.html#af3adb9370f0220eb3235885e1406e9e3">getPrevState</a> (uint8_t col, uint8_t row)</td></tr>
 <tr class="separator:af3adb9370f0220eb3235885e1406e9e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,7 +180,7 @@ class ButtonMatrix&lt; nb_rows, nb_cols &gt;</h3>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00016">16</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00018">18</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad77595d9dcb8623f01a73e6adc955a7b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad77595d9dcb8623f01a73e6adc955a7b">&#9670;&nbsp;</a></span>ButtonMatrix()</h2>
@@ -210,8 +213,10 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 <p>Construct a new <a class="el" href="../../d8/d6c/classButtonMatrix.html" title="A MIDI_Control_Element that reads the states of a button matrix and sends it over MIDI.">ButtonMatrix</a> object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">rowPins</td><td>A list of pin numbers connected to the rows of the button matrix. These pins will be driven LOW (Lo-Z). </td></tr>
-    <tr><td class="paramname">colPins</td><td>A list of pin numbers connected to the columns of the button matrix. These pins will be used as inputs, and the internal pull-up resistor will be enabled. </td></tr>
+    <tr><td class="paramname">rowPins</td><td>A list of pin numbers connected to the rows of the button matrix. <br />
+ <b>⚠</b> These pins will be driven LOW (Lo-Z). </td></tr>
+    <tr><td class="paramname">colPins</td><td>A list of pin numbers connected to the columns of the button matrix. <br />
+ These pins will be used as inputs (Hi-Z), and the internal pull-up resistor will be enabled. </td></tr>
   </table>
   </dd>
 </dl>
@@ -264,6 +269,8 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Initialize (enable internal pull-up resistors on column pins). </p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -409,6 +416,16 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </table>
 </div><div class="memdoc">
 
+<p>The callback function that is called whenever a button changes state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">row</td><td>The row of the button that changed state. </td></tr>
+    <tr><td class="paramname">col</td><td>The column of the button that changed state. </td></tr>
+    <tr><td class="paramname">state</td><td>The new state of the button. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 <p>Implemented in <a class="el" href="../../d3/d65/classBankable_1_1MIDIButtonMatrix.html#a290e5d1cd97fcf9d73c8706507a8f4b2">Bankable::MIDIButtonMatrix&lt; sendOn, sendOff, nb_rows, nb_cols &gt;</a>, <a class="el" href="../../d3/d65/classBankable_1_1MIDIButtonMatrix.html#a290e5d1cd97fcf9d73c8706507a8f4b2">Bankable::MIDIButtonMatrix&lt; DigitalCCSender::sendOn, DigitalCCSender::sendOff, nb_rows, nb_cols &gt;</a>, <a class="el" href="../../d3/d65/classBankable_1_1MIDIButtonMatrix.html#a290e5d1cd97fcf9d73c8706507a8f4b2">Bankable::MIDIButtonMatrix&lt; DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols &gt;</a>, <a class="el" href="../../d0/d54/classMIDIButtonMatrix.html#a826cc6b304e4451c63e05677fadc49c4">MIDIButtonMatrix&lt; sendOn, sendOff, nb_rows, nb_cols &gt;</a>, and <a class="el" href="../../d0/d54/classMIDIButtonMatrix.html#a826cc6b304e4451c63e05677fadc49c4">MIDIButtonMatrix&lt; DigitalNoteSender::sendOn, DigitalNoteSender::sendOff, nb_rows, nb_cols &gt;</a>.</p>
 
 </div>
@@ -467,6 +484,8 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Scan the matrix, read all button states, and call the onButtonChanged callback. </p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -543,7 +562,7 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00052">52</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00075">75</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
 
 </div>
 </div>
@@ -569,7 +588,7 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00048">48</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00071">71</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
 
 </div>
 </div>
@@ -595,7 +614,7 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00049">49</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00072">72</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
 
 </div>
 </div>
@@ -621,7 +640,7 @@ template&lt;uint8_t nb_rows, uint8_t nb_cols&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00051">51</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html#l00074">74</a> of file <a class="el" href="../../d9/d4b/ButtonMatrix_8hpp_source.html">ButtonMatrix.hpp</a>.</p>
 
 </div>
 </div>

@@ -13,7 +13,6 @@ var searchData=
   ['serialmidi_5fparser_2ecpp',['SerialMIDI_Parser.cpp',['../d1/d49/SerialMIDI__Parser_8cpp.html',1,'']]],
   ['serialmidi_5fparser_2ehpp',['SerialMIDI_Parser.hpp',['../d1/d22/SerialMIDI__Parser_8hpp.html',1,'']]],
   ['settings_2ehpp',['Settings.hpp',['../db/d02/Settings_8hpp.html',1,'']]],
-  ['settingswrapper_2ecpp',['SettingsWrapper.cpp',['../d9/dcf/SettingsWrapper_8cpp.html',1,'']]],
   ['settingswrapper_2ehpp',['SettingsWrapper.hpp',['../d2/dd5/SettingsWrapper_8hpp.html',1,'']]],
   ['sevensegmentdisplay_2ecpp',['SevenSegmentDisplay.cpp',['../dd/d58/SevenSegmentDisplay_8cpp.html',1,'']]],
   ['sevensegmentdisplay_2ehpp',['SevenSegmentDisplay.hpp',['../d4/d18/SevenSegmentDisplay_8hpp.html',1,'']]],
@@ -24,5 +23,6 @@ var searchData=
   ['shiftregisteroutrgb_2ecpp',['ShiftRegisterOutRGB.cpp',['../db/d0b/ShiftRegisterOutRGB_8cpp.html',1,'']]],
   ['shiftregisteroutrgb_2ehpp',['ShiftRegisterOutRGB.hpp',['../d1/d1f/ShiftRegisterOutRGB_8hpp.html',1,'']]],
   ['spishiftregisterout_2ecpp',['SPIShiftRegisterOut.cpp',['../d2/dde/SPIShiftRegisterOut_8cpp.html',1,'']]],
-  ['spishiftregisterout_2ehpp',['SPIShiftRegisterOut.hpp',['../d7/d88/SPIShiftRegisterOut_8hpp.html',1,'']]]
+  ['spishiftregisterout_2ehpp',['SPIShiftRegisterOut.hpp',['../d7/d88/SPIShiftRegisterOut_8hpp.html',1,'']]],
+  ['staticsizeextendedioelement_2ehpp',['StaticSizeExtendedIOElement.hpp',['../d2/d05/StaticSizeExtendedIOElement_8hpp.html',1,'']]]
 ];

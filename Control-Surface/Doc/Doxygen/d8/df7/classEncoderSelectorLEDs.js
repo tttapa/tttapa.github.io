@@ -1,8 +1,7 @@
 var classEncoderSelectorLEDs =
 [
-    [ "EncoderSelectorLEDs", "d8/df7/classEncoderSelectorLEDs.html#a9790fa5e345f88ee7f313a885457cf25", null ],
     [ "EncoderSelectorLEDs", "d8/df7/classEncoderSelectorLEDs.html#a1c4bbfb29eb4aadd75f0aba78376dcd9", null ],
-    [ "begin", "d8/df7/classEncoderSelectorLEDs.html#a6244b6e5a34336abb2293257c47d7e15", null ],
+    [ "begin", "d8/df7/classEncoderSelectorLEDs.html#a7bd638cee6ef0ac16f850278b60bb049", null ],
     [ "beginAll", "d8/df7/classEncoderSelectorLEDs.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "beginInput", "d8/df7/classEncoderSelectorLEDs.html#a0f55e2edbd610515285e8cb54a5cd401", null ],
     [ "beginOutput", "d8/df7/classEncoderSelectorLEDs.html#ab233434c25c75a83b32972a332c52fd0", null ],

@@ -17,6 +17,7 @@ var classAnalogMultiplex =
     [ "operator[]", "d7/d8d/classAnalogMultiplex.html#a2c6058c4a84b5be7c9b05e2cc1a9d94f", null ],
     [ "pin", "d7/d8d/classAnalogMultiplex.html#a163cffb9da0f3b7fdcb3c49b58393c03", null ],
     [ "pinMode", "d7/d8d/classAnalogMultiplex.html#a6b93eff331c4f7ab31a1ea2a037aecc3", null ],
+    [ "pins", "d7/d8d/classAnalogMultiplex.html#aee2c3864f44f4d969265e36643f61776", null ],
     [ "prepareReading", "d7/d8d/classAnalogMultiplex.html#a40489dda038fc493ea3b1948bb9e47bd", null ],
     [ "setMuxAddress", "d7/d8d/classAnalogMultiplex.html#af163589d6ce6e3596804e3e92984c236", null ],
     [ "update", "d7/d8d/classAnalogMultiplex.html#a5a90a6c5cafd95ddfdc0c43054c12250", null ],
