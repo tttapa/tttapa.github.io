@@ -13,6 +13,7 @@ var searchData=
   ['bitstobitmask',['bitsToBitmask',['../d8/d6c/classButtonMatrix.html#a9d01928f942d82328d92ed561fac5dc0',1,'ButtonMatrix']]],
   ['bitstoindex',['bitsToIndex',['../d8/d6c/classButtonMatrix.html#a12fba66cf26e01862697f728b359486d',1,'ButtonMatrix']]],
   ['blue',['blue',['../d8/db4/classShiftRegisterOutBase.html#ad87dfdfa94c11f4cb6fdfbebe95731f1',1,'ShiftRegisterOutBase']]],
+  ['bluepins',['bluePins',['../d8/db4/classShiftRegisterOutBase.html#a4fc069f268ac935d5b478c04c8d74a0b',1,'ShiftRegisterOutBase']]],
   ['bluetoothmidi_5finterface',['BluetoothMIDI_Interface',['../d0/d89/classBluetoothMIDI__Interface.html#ae406d082db68de691732ccfa35dbc751',1,'BluetoothMIDI_Interface']]],
   ['boolalpha',['boolalpha',['../da/d69/PrintStream_8cpp.html#aa88c44c66680f55fd42b3a19095aff3f',1,'boolalpha(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#aa88c44c66680f55fd42b3a19095aff3f',1,'boolalpha(Print &amp;printer):&#160;PrintStream.cpp']]],
   ['button',['Button',['../d1/d19/classButton.html#a3b36df1ae23c58aedb9e15a713159459',1,'Button::Button()'],['../d1/d19/classButton.html#a1ccc15ff0a38286a609ee5cda2b9e2f4',1,'Button::Button(pin_t pin)']]],

@@ -60,5 +60,6 @@ var searchData=
   ['getvaluehelper',['getValueHelper',['../d4/d71/classMCU_1_1VU__Base.html#a0d8332b03ddd5b492937cc3ac047d124',1,'MCU::VU_Base']]],
   ['getx',['getX',['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#a7125f33609563b564b56e6b1b77208b7',1,'MCU::TimeDisplayDisplay']]],
   ['gety',['getY',['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ac487fa8a2be5878cc840ae2b2ceecd7f',1,'MCU::TimeDisplayDisplay']]],
-  ['green',['green',['../d8/db4/classShiftRegisterOutBase.html#a81fabf06f40056b1e2c22e0d8420cc1c',1,'ShiftRegisterOutBase']]]
+  ['green',['green',['../d8/db4/classShiftRegisterOutBase.html#a81fabf06f40056b1e2c22e0d8420cc1c',1,'ShiftRegisterOutBase']]],
+  ['greenpins',['greenPins',['../d8/db4/classShiftRegisterOutBase.html#a73bc7d1e992a41be1e80ce352729479d',1,'ShiftRegisterOutBase']]]
 ];

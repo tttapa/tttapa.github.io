@@ -5,6 +5,7 @@ var classMAX7219 =
     [ "analogWrite", "dc/d19/classMAX7219.html#a0142ff818b660dfdef3dc024ca0c3a85", null ],
     [ "begin", "dc/d19/classMAX7219.html#ade26fbae73442246ab3e1887c0b79b68", null ],
     [ "beginAll", "dc/d19/classMAX7219.html#ac6099de145b3d4335c61be7e55b8eca6", null ],
+    [ "clear", "dc/d19/classMAX7219.html#a9c83bc43a2d4b275806b1718c6815f0b", null ],
     [ "digitalRead", "dc/d19/classMAX7219.html#ac3ebb45e4e1678ec0715be1c8470244b", null ],
     [ "digitalWrite", "dc/d19/classMAX7219.html#acf789d594c9da7acb8a613b0fef4152d", null ],
     [ "getAll", "dc/d19/classMAX7219.html#a3151d5bf08e6b32231cdd58ed2f39aee", null ],

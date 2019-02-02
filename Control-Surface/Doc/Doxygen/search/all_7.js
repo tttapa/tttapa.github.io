@@ -79,6 +79,7 @@ var searchData=
   ['global_5fview',['GLOBAL_VIEW',['../d7/dc7/namespaceMCU.html#a4b2605222a62ed280cd95061ff7d6522',1,'MCU']]],
   ['green',['green',['../d8/db4/classShiftRegisterOutBase.html#a81fabf06f40056b1e2c22e0d8420cc1c',1,'ShiftRegisterOutBase']]],
   ['greenbit',['greenBit',['../d5/d45/structShiftRegisterOutRGB.html#ab969310ccdd300931776fdbcb598211f',1,'ShiftRegisterOutRGB']]],
+  ['greenpins',['greenPins',['../d8/db4/classShiftRegisterOutBase.html#a73bc7d1e992a41be1e80ce352729479d',1,'ShiftRegisterOutBase']]],
   ['group',['GROUP',['../d7/dc7/namespaceMCU.html#aaae72d5574f869865d76bcb55bd819f8',1,'MCU']]],
   ['groups_2eh',['Groups.h',['../da/d0a/Groups_8h.html',1,'']]],
   ['getting_20started',['Getting Started',['../dd/dcc/md_Getting-Started.html',1,'']]]

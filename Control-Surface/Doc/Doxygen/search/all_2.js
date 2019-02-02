@@ -51,6 +51,7 @@ var searchData=
   ['blockheight',['blockheight',['../d4/d42/classMCU_1_1VUDisplay.html#a38de8c79cfabe9685216cf862fbb0e14',1,'MCU::VUDisplay']]],
   ['blue',['blue',['../d8/db4/classShiftRegisterOutBase.html#ad87dfdfa94c11f4cb6fdfbebe95731f1',1,'ShiftRegisterOutBase']]],
   ['bluebit',['blueBit',['../d5/d45/structShiftRegisterOutRGB.html#a298a2c8984ed6cbe53fe0ffae6d35d98',1,'ShiftRegisterOutRGB']]],
+  ['bluepins',['bluePins',['../d8/db4/classShiftRegisterOutBase.html#a4fc069f268ac935d5b478c04c8d74a0b',1,'ShiftRegisterOutBase']]],
   ['bluetoothmidi_5finterface',['BluetoothMIDI_Interface',['../d0/d89/classBluetoothMIDI__Interface.html',1,'BluetoothMIDI_Interface'],['../d0/d89/classBluetoothMIDI__Interface.html#ae406d082db68de691732ccfa35dbc751',1,'BluetoothMIDI_Interface::BluetoothMIDI_Interface()']]],
   ['bluetoothmidi_5finterface_2ecpp',['BluetoothMIDI_Interface.cpp',['../d8/d2c/BluetoothMIDI__Interface_8cpp.html',1,'']]],
   ['bluetoothmidi_5finterface_2ehpp',['BluetoothMIDI_Interface.hpp',['../df/ded/BluetoothMIDI__Interface_8hpp.html',1,'']]],

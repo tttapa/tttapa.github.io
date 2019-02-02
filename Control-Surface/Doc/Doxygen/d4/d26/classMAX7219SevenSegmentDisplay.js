@@ -2,6 +2,7 @@ var classMAX7219SevenSegmentDisplay =
 [
     [ "MAX7219SevenSegmentDisplay", "d4/d26/classMAX7219SevenSegmentDisplay.html#a1eacb3d21160d20feac4213a6a4698c6", null ],
     [ "begin", "d4/d26/classMAX7219SevenSegmentDisplay.html#aced7b9dd40938f24383caf0896d8ba7e", null ],
+    [ "clear", "d4/d26/classMAX7219SevenSegmentDisplay.html#a9c83bc43a2d4b275806b1718c6815f0b", null ],
     [ "display", "d4/d26/classMAX7219SevenSegmentDisplay.html#a03c3e91c6342104c691f89ba17b99083", null ],
     [ "display", "d4/d26/classMAX7219SevenSegmentDisplay.html#a44bb965607b74eda8426a6544d0770dd", null ],
     [ "display", "d4/d26/classMAX7219SevenSegmentDisplay.html#ae9ce121f6a90d8ba7d58afb881041a58", null ],

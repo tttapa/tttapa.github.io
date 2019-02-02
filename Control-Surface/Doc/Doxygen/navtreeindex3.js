@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"d2/d87/classMIDIButtons.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,78,17],
+"d2/d87/classMIDIButtons.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,78,8],
+"d2/d87/classMIDIButtons.html#a57b6615469e554c514a9ff56dc24908f":[6,0,78,18],
 "d2/d87/classMIDIButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,78,2],
 "d2/d87/classMIDIButtons.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,78,6],
 "d2/d87/classMIDIButtons.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,78,5],
@@ -246,8 +249,5 @@ var NAVTREEINDEX3 =
 "d3/d10/classMIDICNChannelAddress.html#ad1b03279da3019e88b2d8b9ecd7ddb05":[6,0,80,8],
 "d3/d10/classMIDICNChannelAddress.html#ade8fe7853184918d184b4b004f4590ae":[6,0,80,15],
 "d3/d10/classMIDICNChannelAddress.html#ae2794067ce35df7c40295537c0b43efe":[6,0,80,9],
-"d3/d10/classMIDICNChannelAddress.html#ae2c660a02f3b66fa943a79acb55b4c0f":[6,0,80,12],
-"d3/d10/classMIDICNChannelAddress.html#ae82ce192ab9177b8320e0e3d56591c9a":[6,0,80,16],
-"d3/d10/classMIDICNChannelAddress.html#af095bbce791e4b3540dd82d31d0227c1":[6,0,80,5],
-"d3/d2a/classCCButtonMatrix.html":[4,0,18]
+"d3/d10/classMIDICNChannelAddress.html#ae2c660a02f3b66fa943a79acb55b4c0f":[6,0,80,12]
 };

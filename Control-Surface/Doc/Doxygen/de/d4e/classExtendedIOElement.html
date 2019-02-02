@@ -177,6 +177,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:ac8029dcd223af8b53e4fdd588b309554"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../de/d4e/classExtendedIOElement.html#ac8029dcd223af8b53e4fdd588b309554">ExtendedIOElement</a> (<a class="el" href="../../d0/d4e/Def_8hpp.html#a5dac1481c2337a983c60f5f2b9c704ef">pin_t</a> <a class="el" href="../../de/d4e/classExtendedIOElement.html#a018a3ac2d6a11014e27c8186a2feb684">length</a>)</td></tr>
+<tr class="memdesc:ac8029dcd223af8b53e4fdd588b309554"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an <a class="el" href="../../de/d4e/classExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements.">ExtendedIOElement</a> with the given number of pins.  <a href="#ac8029dcd223af8b53e4fdd588b309554">More...</a><br /></td></tr>
 <tr class="separator:ac8029dcd223af8b53e4fdd588b309554"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -212,12 +213,12 @@ If the pin number corresponds to an actual Arduino pin, the default Arduino IO f
 If the pin is not an Arduino pin, it is an extended IO pin number, so the extended IO element that this pin belongs to is looked up, and the IO function for this element is executed with the correct pin number.</p>
 <p>For example: Imagine an Arduino with 20 pins (e.g. the Arduino UNO). Pins 0 - 19 will correspond to the Arduino pins, and <code>ExtIO::digitalRead(pin)</code> will have the exact same effect as the standard <code>digitalRead(pin)</code> function (albeit a little slower). <br />
 Now, we'll add two 8-channel analog multiplexers, let's call them <code>mux1</code> and <code>mux2</code>. <br />
-The first pin (pin 0) of <code>mux1</code> will be extended IO pin number 20, the last pin (pin 7) of <code>mux1</code> will be extended IO pin number 27, etc. The first pin of <code>mux2</code> will be extended IO pin number 28, you get the idea. If you now call <code><a class="el" href="../../d8/d3d/namespaceExtIO.html#a9bda9dc007f42a200626d1d4ea94250b">ExtIO::digitalRead</a>(mux1.<a class="el" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03" title="Get the extended IO pin number of a given physical pin of this extended IO element.">pin</a> (7))</code> or <code>ExtIO::digitalRead(27)</code>, both will be translated to <code>mux1.digitalRead(7)</code>.</p>
+The first pin (pin 0) of <code>mux1</code> will be extended IO pin number 20, the last pin (pin 7) of <code>mux1</code> will be extended IO pin number 27, etc. The first pin of <code>mux2</code> will be extended IO pin number 28, you get the idea. If you now call <code><a class="el" href="../../d8/d3d/namespaceExtIO.html#a9bda9dc007f42a200626d1d4ea94250b" title="An ExtIO version of the Arduino function.">ExtIO::digitalRead</a>(mux1.<a class="el" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03" title="Get the extended IO pin number of a given physical pin of this extended IO element.">pin</a> (7))</code> or <code>ExtIO::digitalRead(27)</code>, both will be translated to <code>mux1.digitalRead(7)</code>.</p>
 <p>The number of extended IO elements is limited only by the size of <code>pin_t</code>. However, looking up the extended IO element for a given extended IO pin number uses linear search, so that might add some noticable overhead for large pin numbers. <br />
  The design here is a compromise: saving a pointer to each extended IO element to find it directly would be much faster than having to search all elements each time. On the other hand, it would require each <code>pin_t</code> variable to be at least one byte larger. Since almost all other classes in this library store pin variables, the memory penalty would be too large, especially on AVR microcontrollers. <br />
 Another reason to do it this way, is that this approach is still fast enough to make sure it is not noticable to human users. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00055">55</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac8029dcd223af8b53e4fdd588b309554"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac8029dcd223af8b53e4fdd588b309554">&#9670;&nbsp;</a></span>ExtendedIOElement()</h2>
@@ -242,6 +243,14 @@ Another reason to do it this way, is that this approach is still fast enough to 
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Create an <a class="el" href="../../de/d4e/classExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements.">ExtendedIOElement</a> with the given number of pins. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">length</td><td>The number of pins this element has. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html#l00006">6</a> of file <a class="el" href="../../da/d1f/ExtendedIOElement_8cpp_source.html">ExtendedIOElement.cpp</a>.</p>
 <div class="dynheader">
@@ -373,7 +382,7 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a99806b37b9f62f566f9abfa82b6432ca">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../dc/d19/classMAX7219.html#a0142ff818b660dfdef3dc024ca0c3a85">MAX7219</a>.</p>
+<p>Implemented in <a class="el" href="../../dc/d19/classMAX7219.html#a0142ff818b660dfdef3dc024ca0c3a85">MAX7219</a>, and <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#a99806b37b9f62f566f9abfa82b6432ca">ShiftRegisterOutBase&lt; N &gt;</a>.</p>
 
 </div>
 </div>
@@ -531,7 +540,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a0afd6681ab951942ca3cac83370562bb_icgraph.svg" width="1294" height="560"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a0afd6681ab951942ca3cac83370562bb_icgraph.svg" width="1294" height="586"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -566,7 +575,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a3151d5bf08e6b32231cdd58ed2f39aee_icgraph.svg" width="1606" height="1879"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a3151d5bf08e6b32231cdd58ed2f39aee_icgraph.svg" width="1606" height="1892"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -638,7 +647,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a955322d29e4e63ec40a587b5ed9db31b_icgraph.svg" width="1446" height="1879"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a955322d29e4e63ec40a587b5ed9db31b_icgraph.svg" width="1446" height="1892"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -823,7 +832,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00185">185</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00193">193</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -847,7 +856,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00182">182</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00190">190</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -871,7 +880,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00180">180</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00188">188</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -919,7 +928,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00183">183</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00191">191</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -967,7 +976,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00181">181</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00189">189</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
 
 </div>
 </div>

@@ -33,6 +33,7 @@ var searchData=
   ['record_5f9_5fwidth',['record_9_width',['../dd/d33/XBitmaps_8hpp.html',1,'XBitmaps.hpp']]],
   ['red',['red',['../d8/db4/classShiftRegisterOutBase.html#a6cbf86a1b6bf843c75bfc0b4ecf5a391',1,'ShiftRegisterOutBase']]],
   ['redbit',['redBit',['../d5/d45/structShiftRegisterOutRGB.html#ac992738309ccea4d7ba56a82c9a60e69',1,'ShiftRegisterOutRGB']]],
+  ['redpins',['redPins',['../d8/db4/classShiftRegisterOutBase.html#a44cb8ff30affdf1890b32b37795c534d',1,'ShiftRegisterOutBase']]],
   ['reference',['reference',['../dd/d02/classDoublyLinkedList_1_1node__iterator.html#a5c4fc1e5fbfc0eaf8a768aa049d14125',1,'DoublyLinkedList::node_iterator::reference()'],['../d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html#ad6fe95261fab30826c15c0e6e907d919',1,'DoublyLinkedList::reverse_node_iterator::reference()']]],
   ['refresh',['refresh',['../d8/d6c/classButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef',1,'ButtonMatrix']]],
   ['relativeccmode',['relativeCCmode',['../d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71d',1,'RelativeCCSender.hpp']]],

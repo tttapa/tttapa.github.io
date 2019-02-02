@@ -1,5 +1,9 @@
 var NAVTREEINDEX8 =
 {
+"d7/d6c/NoteButtonMatrixKeyboard_8ino-example.html":[8,5],
+"d7/d74/MillisTimer_8hpp.html":[7,0,190],
+"d7/d74/MillisTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3":[7,0,190,1],
+"d7/d74/MillisTimer_8hpp_source.html":[7,0,190],
 "d7/d78/namespaceMIDI__Notes.html":[5,0,4],
 "d7/d81/VPotRing_8hpp.html":[7,0,270],
 "d7/d81/VPotRing_8hpp.html#a0681e0754a87bedc7364572d20743d3b":[7,0,270,5],
@@ -245,9 +249,5 @@ var NAVTREEINDEX8 =
 "d8/d57/classUSBSerialMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4":[4,3,9,23],
 "d8/d57/classUSBSerialMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c":[4,3,9,22],
 "d8/d57/classUSBSerialMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1":[4,3,9,8],
-"d8/d57/classUSBSerialMIDI__Interface.html#a56032e02fcf2540151ceca9d687cd6ef":[4,3,9,10],
-"d8/d57/classUSBSerialMIDI__Interface.html#a58470aacb3262891701b456daadced6d":[4,3,9,2],
-"d8/d57/classUSBSerialMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1":[4,3,9,19],
-"d8/d57/classUSBSerialMIDI__Interface.html#a7002bfae1bf346eadead1397a238f9b6":[4,3,9,20],
-"d8/d57/classUSBSerialMIDI__Interface.html#a7b78a89483b0f1ea3fe4845e733c70e0":[4,3,9,0]
+"d8/d57/classUSBSerialMIDI__Interface.html#a56032e02fcf2540151ceca9d687cd6ef":[4,3,9,10]
 };
