@@ -1,7 +1,5 @@
 var NAVTREEINDEX13 =
 {
-"db/d60/MCU_8hpp.html#a0151b66708e64dcd26a4ec2e60703083":[7,0,135,109],
-"db/d60/MCU_8hpp.html#a06c22872e4ce57a6ce1bbeb7dbc7e014":[7,0,135,103],
 "db/d60/MCU_8hpp.html#a083510e23b8379b9bb7380ad940a0296":[7,0,135,98],
 "db/d60/MCU_8hpp.html#a08f1d2050f1b633b2504909d9bab3236":[7,0,135,78],
 "db/d60/MCU_8hpp.html#a0926b23e79c7619b77bb90e84f38a75c":[7,0,135,34],
@@ -157,7 +155,7 @@ var NAVTREEINDEX13 =
 "db/d93/ArrayHelpers_8cpp_source.html":[7,0,4],
 "db/d9d/IncrementButton_8cpp.html":[7,0,108],
 "db/d9d/IncrementButton_8cpp_source.html":[7,0,108],
-"db/dac/PushButtons_8ino-example.html":[8,9],
+"db/dac/PushButtons_8ino-example.html":[8,10],
 "db/dac/classMCU_1_1VPotRing__Base.html":[6,0,1,7],
 "db/dac/classMCU_1_1VPotRing__Base.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,1,7,15],
 "db/dac/classMCU_1_1VPotRing__Base.html#a38d9872489fd94dee25077c16073e8cf":[6,0,1,7,21],
@@ -248,6 +246,8 @@ var NAVTREEINDEX13 =
 "db/dcf/VUDisplay_8cpp_source.html":[7,0,273],
 "db/dd1/ContinuousCCSender_8hpp.html":[7,0,62],
 "db/dd1/ContinuousCCSender_8hpp_source.html":[7,0,62],
-"db/dd1/SPIShiftRegisterBlink_8ino-example.html":[8,15],
-"db/dda/VU_8hpp.html":[7,0,272]
+"db/dd1/SPIShiftRegisterBlink_8ino-example.html":[8,16],
+"db/dda/VU_8hpp.html":[7,0,272],
+"db/dda/VU_8hpp_source.html":[7,0,272],
+"db/ddc/IncrementSelectorLEDs_8cpp.html":[7,0,118]
 };

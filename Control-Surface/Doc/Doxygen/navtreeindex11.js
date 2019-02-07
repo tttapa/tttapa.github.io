@@ -1,7 +1,5 @@
 var NAVTREEINDEX11 =
 {
-"d9/dc5/Notes_8hpp.html#a17f67c20013bf43a299a253d4a1926cb":[7,0,211,7],
-"d9/dc5/Notes_8hpp.html#a3fb964ab484d091e83ead44b3649d667":[7,0,211,5],
 "d9/dc5/Notes_8hpp.html#a43bb6e39eb685f48594d3241b1bc55e1":[7,0,211,11],
 "d9/dc5/Notes_8hpp.html#a4d4ea8cc8db7b12fdbfb26e5472a95fa":[7,0,211,10],
 "d9/dc5/Notes_8hpp.html#a559f01ec7251fdc9c5a5bc0e26b97372":[7,0,211,0],
@@ -19,7 +17,7 @@ var NAVTREEINDEX11 =
 "d9/dc9/TimeDisplay_8hpp.html#a341d8e07dfa1868cccaf8f83f79d8c45":[7,0,253,2],
 "d9/dc9/TimeDisplay_8hpp.html#ad256c4dd4482b2fb96d8acc1230787da":[7,0,253,1],
 "d9/dc9/TimeDisplay_8hpp_source.html":[7,0,253],
-"d9/deb/PushButtonsLEDsNoMIDIFeedback_8ino-example.html":[8,11],
+"d9/deb/PushButtonsLEDsNoMIDIFeedback_8ino-example.html":[8,12],
 "d9/dee/classProgramChangeSelectorLEDs.html":[6,0,113],
 "d9/dee/classProgramChangeSelectorLEDs.html#a0c7dc759dc219ca0ab1df398df8f14b6":[6,0,113,27],
 "d9/dee/classProgramChangeSelectorLEDs.html#a22396f8624ff23df11098a5c59d44bc8":[6,0,113,28],
@@ -28,8 +26,8 @@ var NAVTREEINDEX11 =
 "d9/dee/classProgramChangeSelectorLEDs.html#a38d9872489fd94dee25077c16073e8cf":[6,0,113,30],
 "d9/dee/classProgramChangeSelectorLEDs.html#a3ce65d79721847cdb45833c7a3cc2e52":[6,0,113,20],
 "d9/dee/classProgramChangeSelectorLEDs.html#a414872fbd3ea45e7ac44a42fcf2fc88d":[6,0,113,7],
-"d9/dee/classProgramChangeSelectorLEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,113,31],
 "d9/dee/classProgramChangeSelectorLEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,113,32],
+"d9/dee/classProgramChangeSelectorLEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,113,31],
 "d9/dee/classProgramChangeSelectorLEDs.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,113,14],
 "d9/dee/classProgramChangeSelectorLEDs.html#a4e0baeb085087d285a10bd82115b760d":[6,0,113,26],
 "d9/dee/classProgramChangeSelectorLEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,113,33],
@@ -249,5 +247,7 @@ var NAVTREEINDEX11 =
 "da/d6a/classPBPotentiometer.html#ab1a0f9e5acac4550476df16a31036a10":[4,0,28,18],
 "da/d6a/classPBPotentiometer.html#acfabd4911411ebbfd96d4080103f4725":[4,0,28,7],
 "da/d6a/classPBPotentiometer.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,28,10],
-"da/d6a/classPBPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,28,13]
+"da/d6a/classPBPotentiometer.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,28,13],
+"da/d80/struct__Setbase.html":[6,0,2],
+"da/d80/struct__Setbase.html#a71ff2a1cb6bd223fbe45707260f6182f":[6,0,2,0]
 };

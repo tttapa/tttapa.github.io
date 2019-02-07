@@ -105,6 +105,9 @@ $(document).ready(function(){initNavTree('d9/db1/classMIDIInputElement.html','..
 </div><!--header-->
 <div class="contents">
 
+<p>A class for objects that listen for incoming MIDI events.  
+ <a href="../../d9/db1/classMIDIInputElement.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for MIDIInputElement:</div>
@@ -133,7 +136,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ad3d45f882302e552a8754a5e96ae6b6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset the input element to its initial state.  <a href="#ad3d45f882302e552a8754a5e96ae6b6e">More...</a><br /></td></tr>
 <tr class="separator:ad3d45f882302e552a8754a5e96ae6b6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab487eb31758e7be2b98731bd0f255588"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/db1/classMIDIInputElement.html#ab487eb31758e7be2b98731bd0f255588">update</a> ()</td></tr>
-<tr class="memdesc:ab487eb31758e7be2b98731bd0f255588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the value of the input element.  <a href="#ab487eb31758e7be2b98731bd0f255588">More...</a><br /></td></tr>
+<tr class="memdesc:ab487eb31758e7be2b98731bd0f255588"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update the value of the input element. Used for decaying VU meters etc.  <a href="#ab487eb31758e7be2b98731bd0f255588">More...</a><br /></td></tr>
 <tr class="separator:ab487eb31758e7be2b98731bd0f255588"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcb98982679f02c01c46ac8d22722e1d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/db1/classMIDIInputElement.html#adcb98982679f02c01c46ac8d22722e1d">updateWith</a> (const <a class="el" href="../../dd/d36/structMIDI__message__matcher.html">MIDI_message_matcher</a> &amp;midimsg)</td></tr>
 <tr class="memdesc:adcb98982679f02c01c46ac8d22722e1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Receive a new MIDI message and update the internal state.  <a href="#adcb98982679f02c01c46ac8d22722e1d">More...</a><br /></td></tr>
@@ -142,7 +145,7 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
 <tr class="memitem:aa37227962f74df17dcfa8f2782c1ec40"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/db1/classMIDIInputElement.html#aa37227962f74df17dcfa8f2782c1ec40">MIDIInputElement</a> (const <a class="el" href="../../d3/d10/classMIDICNChannelAddress.html">MIDICNChannelAddress</a> &amp;<a class="el" href="../../d9/db1/classMIDIInputElement.html#a38d9872489fd94dee25077c16073e8cf">address</a>)</td></tr>
-<tr class="memdesc:aa37227962f74df17dcfa8f2782c1ec40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#aa37227962f74df17dcfa8f2782c1ec40">More...</a><br /></td></tr>
+<tr class="memdesc:aa37227962f74df17dcfa8f2782c1ec40"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new <a class="el" href="../../d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events.">MIDIInputElement</a> that listens on the given address.  <a href="#aa37227962f74df17dcfa8f2782c1ec40">More...</a><br /></td></tr>
 <tr class="separator:aa37227962f74df17dcfa8f2782c1ec40"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -159,15 +162,17 @@ Private Member Functions</h2></td></tr>
 <tr class="memdesc:ada42f78b1c2da5414267391714d5da18"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract the target address from a MIDI message.  <a href="#ada42f78b1c2da5414267391714d5da18">More...</a><br /></td></tr>
 <tr class="separator:ada42f78b1c2da5414267391714d5da18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e49b0cf1baf26d55a155da750c02137"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/db1/classMIDIInputElement.html#a7e49b0cf1baf26d55a155da750c02137">match</a> (const <a class="el" href="../../d3/d10/classMIDICNChannelAddress.html">MIDICNChannelAddress</a> &amp;target) const</td></tr>
-<tr class="memdesc:a7e49b0cf1baf26d55a155da750c02137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the address and channel of the incoming MIDI message match an address and channel of this element.  <a href="#a7e49b0cf1baf26d55a155da750c02137">More...</a><br /></td></tr>
+<tr class="memdesc:a7e49b0cf1baf26d55a155da750c02137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the address of the incoming MIDI message matches an address of this element.  <a href="#a7e49b0cf1baf26d55a155da750c02137">More...</a><br /></td></tr>
 <tr class="separator:a7e49b0cf1baf26d55a155da750c02137"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2670c55f5a13cacd7b76f24cd671287d"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/db1/classMIDIInputElement.html#a2670c55f5a13cacd7b76f24cd671287d">moveDown</a> ()=0</td></tr>
 <tr class="memdesc:a2670c55f5a13cacd7b76f24cd671287d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move down this element in the linked list of elements.  <a href="#a2670c55f5a13cacd7b76f24cd671287d">More...</a><br /></td></tr>
 <tr class="separator:a2670c55f5a13cacd7b76f24cd671287d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00006">6</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
+<div class="textblock"><p>A class for objects that listen for incoming MIDI events. </p>
+<p>They can either update some kind of display, or they can just save the state. </p>
+
+<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00013">13</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="aa37227962f74df17dcfa8f2782c1ec40"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa37227962f74df17dcfa8f2782c1ec40">&#9670;&nbsp;</a></span>MIDIInputElement()</h2>
@@ -193,10 +198,15 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor. </p>
-<dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000017">Todo:</a></b></dt><dd>Documentation. </dd></dl>
+<p>Create a new <a class="el" href="../../d9/db1/classMIDIInputElement.html" title="A class for objects that listen for incoming MIDI events.">MIDIInputElement</a> that listens on the given address. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">address</td><td>The MIDI address to listen to. </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00012">12</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00021">21</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
 
 </div>
 </div>
@@ -253,7 +263,7 @@ Private Member Functions</h2></td></tr>
 
 <p>Reimplemented in <a class="el" href="../../da/d0a/classMCU_1_1VULEDs__Base.html#a587e086a42dc49a7b0ec4217b042e6f3">MCU::VULEDs_Base&lt; N &gt;</a>, <a class="el" href="../../de/d52/classMCU_1_1VPotRingLEDs__Base.html#a5ee198cc0d3fdcb32e4aa8c83a367944">MCU::VPotRingLEDs_Base</a>, <a class="el" href="../../d3/db4/classMIDINoteLED__Base.html#a75da3183d48daa3aebc466d0895d7405">MIDINoteLED_Base</a>, and <a class="el" href="../../d9/dc1/classProgramChangeSelector__Base.html#a9a26a1933a640e37260b2eca73436b7d">ProgramChangeSelector_Base&lt; N &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00020">20</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00027">27</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -290,7 +300,7 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="../../da/d0a/classMCU_1_1VULEDs__Base.html#a3a12728d4a3d630e38748756c93a0587">MCU::VULEDs_Base&lt; N &gt;</a>, <a class="el" href="../../d3/db4/classMIDINoteLED__Base.html#a0457ff2615e77836175341517ea6c2dc">MIDINoteLED_Base</a>, and <a class="el" href="../../de/d52/classMCU_1_1VPotRingLEDs__Base.html#a1b196410444c7f2944bfa00cd7d45c7d">MCU::VPotRingLEDs_Base</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00025">25</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00030">30</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -329,7 +339,7 @@ Here is the caller graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="../../d1/df7/classMIDIInputElementChannelPressure.html#a81b9ae82c5d06d0435f7617cd23c5217">MIDIInputElementChannelPressure</a>, <a class="el" href="../../db/d1d/classMIDIInputElementPC.html#a496797587001116f52e2465d368ce421">MIDIInputElementPC</a>, and <a class="el" href="../../d4/d71/classMCU_1_1VU__Base.html#af5a7c8369f2ec58920efda3fdc886915">MCU::VU_Base</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00069">69</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00065">65</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -363,12 +373,12 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Check if the address and channel of the incoming MIDI message match an address and channel of this element. </p>
+<p>Check if the address of the incoming MIDI message matches an address of this element. </p>
 <dl class="section note"><dt>Note</dt><dd>This base version of the function is only valid for non-Bankable MIDI input elements. </dd></dl>
 
 <p>Reimplemented in <a class="el" href="../../d0/d43/classMCU_1_1Bankable_1_1VU.html#a1ce171c65fdad2a6796ab53e60facd49">MCU::Bankable::VU&lt; N &gt;</a>, <a class="el" href="../../d0/d43/classMCU_1_1Bankable_1_1VU.html#a1ce171c65fdad2a6796ab53e60facd49">MCU::Bankable::VU&lt; M &gt;</a>, <a class="el" href="../../da/d93/classMCU_1_1Bankable_1_1VPotRing.html#ae20a608caddcf53d4a131532dfc73abc">MCU::Bankable::VPotRing&lt; N &gt;</a>, <a class="el" href="../../d0/d42/classBankable_1_1MIDINote.html#a8b16cda23d79b67e985342d43ef804ba">Bankable::MIDINote&lt; N &gt;</a>, <a class="el" href="../../d5/d54/classMCU_1_1SevenSegmentDisplay.html#ab42f687f3df2387828f58b4f706dcef9">MCU::SevenSegmentDisplay&lt; LENGTH &gt;</a>, <a class="el" href="../../d5/d54/classMCU_1_1SevenSegmentDisplay.html#ab42f687f3df2387828f58b4f706dcef9">MCU::SevenSegmentDisplay&lt; AssignmentDisplayLength &gt;</a>, and <a class="el" href="../../d5/d54/classMCU_1_1SevenSegmentDisplay.html#ab42f687f3df2387828f58b4f706dcef9">MCU::SevenSegmentDisplay&lt; TimeDisplayLength &gt;</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00079">79</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00075">75</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -466,9 +476,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p>Update the value of the input element. </p>
-<p><br />
- Used for decaying VU meters etc. </p>
+<p>Update the value of the input element. Used for decaying VU meters etc. </p>
 
 <p>Reimplemented in <a class="el" href="../../d4/d71/classMCU_1_1VU__Base.html#a3175f5c2a8a87d35f3722e2831e7b44f">MCU::VU_Base</a>, and <a class="el" href="../../d9/dc1/classProgramChangeSelector__Base.html#aa77232767c9aa99ce5578ceb0170f777">ProgramChangeSelector_Base&lt; N &gt;</a>.</p>
 
@@ -548,7 +556,7 @@ Here is the caller graph for this function:</div>
 
 <p>Receive a new MIDI message and update the internal state. </p>
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00041">41</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00039">39</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -579,7 +587,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00091">91</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html#l00088">88</a> of file <a class="el" href="../../dc/d90/MIDIInputElement_8hpp_source.html">MIDIInputElement.hpp</a>.</p>
 
 </div>
 </div>

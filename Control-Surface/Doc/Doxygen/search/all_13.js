@@ -24,7 +24,6 @@ var searchData=
   ['tobinaryoffset7bit',['toBinaryOffset7bit',['../d3/dd0/classRelativeCCSender.html#ac406ede5761aeb3a427816f3d477e87c',1,'RelativeCCSender']]],
   ['todo_20list',['Todo List',['../dd/da0/todo.html',1,'']]],
   ['togglestate',['toggleState',['../d3/d88/classMIDIButtonLatched.html#a0d00b33017b5363b3e4e1899226c4b84',1,'MIDIButtonLatched::toggleState()'],['../df/dca/classBankable_1_1MIDIButtonLatched.html#a1b311122504657e75c797c93e0cbd0e3',1,'Bankable::MIDIButtonLatched::toggleState()']]],
-  ['tolowercase',['toLowerCase',['../d8/d0b/classStreamDebugMIDI__Interface.html#a2c51af08d2d5cbe316723b6f5a142efc',1,'StreamDebugMIDI_Interface']]],
   ['tosignedmagnitude7bit',['toSignedMagnitude7bit',['../d3/dd0/classRelativeCCSender.html#a38d4cea14065c527fc3b505a0a93d8fe',1,'RelativeCCSender']]],
   ['totwoscomplement7bit',['toTwosComplement7bit',['../d3/dd0/classRelativeCCSender.html#afa2d94bd34b48761f1103fe0b6dbecdf',1,'RelativeCCSender']]],
   ['tracksperbank',['tracksPerBank',['../d9/d36/classOutputBank.html#a2391244d107dc76c48a63c59181b82d9',1,'OutputBank']]],

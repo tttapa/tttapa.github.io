@@ -1,7 +1,5 @@
 var NAVTREEINDEX9 =
 {
-"d8/d57/classUSBSerialMIDI__Interface.html#a80c4843f88185a213ebe20a26c0fd579":[4,3,9,17],
-"d8/d57/classUSBSerialMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc":[4,3,9,7],
 "d8/d57/classUSBSerialMIDI__Interface.html#aa737854accb7d5a1726e1ed899a30fb8":[4,3,9,5],
 "d8/d57/classUSBSerialMIDI__Interface.html#abcc0f3cf0208b5d0a72e70ba9c72e78b":[4,3,9,15],
 "d8/d57/classUSBSerialMIDI__Interface.html#ac179dad8f24eedfa6a9f4e8dbaef7b46":[4,3,9,21],
@@ -249,5 +247,7 @@ var NAVTREEINDEX9 =
 "d9/d43/Control__Change_8hpp.html#a1c8acee58b40318f585c6bcae9927aa6":[7,0,64,28],
 "d9/d43/Control__Change_8hpp.html#a1e063639d40e0b0b64315a47fe517f0b":[7,0,64,72],
 "d9/d43/Control__Change_8hpp.html#a1f190469bb17b078fce59bcf1aa029f8":[7,0,64,1],
-"d9/d43/Control__Change_8hpp.html#a20394adb29bba22c3a8006650ea30c32":[7,0,64,38]
+"d9/d43/Control__Change_8hpp.html#a20394adb29bba22c3a8006650ea30c32":[7,0,64,38],
+"d9/d43/Control__Change_8hpp.html#a20dc249ff93148b640953595b6ca7c31":[7,0,64,44],
+"d9/d43/Control__Change_8hpp.html#a25bb5a787a1d7e457ccd77bfb72f9988":[7,0,64,62]
 };

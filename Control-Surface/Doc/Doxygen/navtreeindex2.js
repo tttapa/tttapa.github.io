@@ -50,7 +50,7 @@ var NAVTREEINDEX2 =
 "d1/d64/USBMIDI__Interface_8hpp_source.html":[7,0,260],
 "d1/d7f/IncrementSelector_8cpp.html":[7,0,116],
 "d1/d7f/IncrementSelector_8cpp_source.html":[7,0,116],
-"d1/d8d/Multiplexer-AnalogReadSerial_8ino-example.html":[8,4],
+"d1/d8d/Multiplexer-AnalogReadSerial_8ino-example.html":[8,5],
 "d1/d8e/group__ExtIO.html":[4,4],
 "d1/d8e/group__ExtIO.html#ga3ab4921db62494df27df05daf4b11e70":[4,4,4],
 "d1/d8e/group__ExtIO.html#ga3ab4921db62494df27df05daf4b11e70":[7,0,1,0],

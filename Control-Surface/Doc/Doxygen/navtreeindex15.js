@@ -1,7 +1,5 @@
 var NAVTREEINDEX15 =
 {
-"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#acfabd4911411ebbfd96d4080103f4725":[6,0,0,18,7],
-"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,0,18,10],
 "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#af8c3b3200bfae07e61d25fa99efd9dcf":[6,0,0,18,13],
 "dc/ddd/classSSD1306__DisplayInterface.html":[6,0,129],
 "dc/ddd/classSSD1306__DisplayInterface.html#a0545ac6471fcf272c3061c33c349b743":[6,0,129,2],
@@ -47,8 +45,8 @@ var NAVTREEINDEX15 =
 "dc/df8/classBankable_1_1MIDINoteLED.html#a38d9872489fd94dee25077c16073e8cf":[6,0,0,17,21],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a39912b6c8d039c840aa9a1e73e645318":[6,0,0,17,13],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a3bff2e290b2ff305ab6f42fe549b0b62":[6,0,0,17,3],
-"dc/df8/classBankable_1_1MIDINoteLED.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,17,22],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,17,23],
+"dc/df8/classBankable_1_1MIDINoteLED.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,17,22],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,0,17,10],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,17,25],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,17,24],
@@ -249,5 +247,7 @@ var NAVTREEINDEX15 =
 "dd/d80/PrintStream_8hpp.html#acfb70bb3046cc98c296cef97e0b38026":[7,0,219,27],
 "dd/d80/PrintStream_8hpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e":[7,0,219,8],
 "dd/d80/PrintStream_8hpp.html#adebbaba10eeb805a0b4b9c454968d1f9":[7,0,219,19],
-"dd/d80/PrintStream_8hpp.html#af5c2099a0aa00cf6d5a554b6fcc71431":[7,0,219,33]
+"dd/d80/PrintStream_8hpp.html#af5c2099a0aa00cf6d5a554b6fcc71431":[7,0,219,33],
+"dd/d80/PrintStream_8hpp.html#afe87cba57f9519b52f58d00a7ecaba02":[7,0,219,31],
+"dd/d80/PrintStream_8hpp.html#aff5eada882f71bd90e0de66c48faaeb3":[7,0,219,14]
 };

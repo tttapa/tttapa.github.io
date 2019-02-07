@@ -1,7 +1,5 @@
 var NAVTREEINDEX14 =
 {
-"db/dda/VU_8hpp_source.html":[7,0,272],
-"db/ddc/IncrementSelectorLEDs_8cpp.html":[7,0,118],
 "db/ddc/IncrementSelectorLEDs_8cpp_source.html":[7,0,118],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html":[6,0,0,13],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a152a9da69ce9e29a540de7deed705dbf":[6,0,0,13,20],
@@ -174,7 +172,7 @@ var NAVTREEINDEX14 =
 "dc/d81/structEncoderPinList.html":[6,0,39],
 "dc/d81/structEncoderPinList.html#a69bad79ba249be03c5b488a8f1afbed4":[6,0,39,0],
 "dc/d81/structEncoderPinList.html#abf9944693d2221e276d586e97f4db54e":[6,0,39,1],
-"dc/d82/ProgramChanger_8ino-example.html":[8,8],
+"dc/d82/ProgramChanger_8ino-example.html":[8,9],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp.html":[7,0,57],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp_source.html":[7,0,57],
 "dc/d90/MIDIInputElement_8hpp.html":[7,0,170],
@@ -249,5 +247,7 @@ var NAVTREEINDEX14 =
 "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#aa13d45bfd55adbcc06acdd3e6946666f":[6,0,0,18,1],
 "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#aa36bcdf99c565df918d78222e8843eb2":[6,0,0,18,19],
 "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#ab7c206aca4177c77ddd8f8c801379e13":[6,0,0,18,25],
-"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#abcb877f25341f8097a6f2a5d353a3dc2":[6,0,0,18,17]
+"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#abcb877f25341f8097a6f2a5d353a3dc2":[6,0,0,18,17],
+"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#acfabd4911411ebbfd96d4080103f4725":[6,0,0,18,7],
+"dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,0,18,10]
 };

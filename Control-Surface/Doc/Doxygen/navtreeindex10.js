@@ -1,7 +1,5 @@
 var NAVTREEINDEX10 =
 {
-"d9/d43/Control__Change_8hpp.html#a20dc249ff93148b640953595b6ca7c31":[7,0,64,44],
-"d9/d43/Control__Change_8hpp.html#a25bb5a787a1d7e457ccd77bfb72f9988":[7,0,64,62],
 "d9/d43/Control__Change_8hpp.html#a26c32b8bce98263875dda97928fcef34":[7,0,64,31],
 "d9/d43/Control__Change_8hpp.html#a275be85a4b26d3765c5e74ae314781be":[7,0,64,64],
 "d9/d43/Control__Change_8hpp.html#a28541aadfc7e36623b264046905b9cb6":[7,0,64,49],
@@ -131,7 +129,7 @@ var NAVTREEINDEX10 =
 "d9/d78/classHardwareSerialMIDI__Interface.html#ac5c80f3fbc75938d6387c503761fa555":[4,3,8,1],
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad61032be4eecf18e9a248f153b5e61a8":[4,3,8,4],
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad82ba06102163ff804b381364919d78b":[4,3,8,14],
-"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[8,17],
+"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[8,18],
 "d9/d94/ContinuousCCSender_8cpp.html":[7,0,61],
 "d9/d94/ContinuousCCSender_8cpp_source.html":[7,0,61],
 "d9/d97/Abstract_2MIDIButton_8cpp.html":[7,0,142],
@@ -220,8 +218,8 @@ var NAVTREEINDEX10 =
 "d9/dc1/classProgramChangeSelector__Base.html#a38d9872489fd94dee25077c16073e8cf":[6,0,112,28],
 "d9/dc1/classProgramChangeSelector__Base.html#a3ce65d79721847cdb45833c7a3cc2e52":[6,0,112,19],
 "d9/dc1/classProgramChangeSelector__Base.html#a414872fbd3ea45e7ac44a42fcf2fc88d":[6,0,112,6],
-"d9/dc1/classProgramChangeSelector__Base.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,112,30],
 "d9/dc1/classProgramChangeSelector__Base.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,112,29],
+"d9/dc1/classProgramChangeSelector__Base.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,112,30],
 "d9/dc1/classProgramChangeSelector__Base.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,112,13],
 "d9/dc1/classProgramChangeSelector__Base.html#a4e0baeb085087d285a10bd82115b760d":[6,0,112,25],
 "d9/dc1/classProgramChangeSelector__Base.html#a57b6615469e554c514a9ff56dc24908f":[6,0,112,31],
@@ -249,5 +247,7 @@ var NAVTREEINDEX10 =
 "d9/dc1/classProgramChangeSelector__Base.html#aefd76b1de2f83ee90b1c789c4e8e8803":[6,0,112,0],
 "d9/dc4/EncoderSelectorLEDs_8hpp.html":[7,0,90],
 "d9/dc4/EncoderSelectorLEDs_8hpp_source.html":[7,0,90],
-"d9/dc5/Notes_8hpp.html":[7,0,211]
+"d9/dc5/Notes_8hpp.html":[7,0,211],
+"d9/dc5/Notes_8hpp.html#a17f67c20013bf43a299a253d4a1926cb":[7,0,211,7],
+"d9/dc5/Notes_8hpp.html#a3fb964ab484d091e83ead44b3649d667":[7,0,211,5]
 };

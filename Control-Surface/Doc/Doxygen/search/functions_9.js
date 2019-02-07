@@ -17,8 +17,6 @@ var searchData=
   ['invert',['invert',['../d1/d19/classButton.html#a1027f25dee91c915849d531515365aab',1,'Button']]],
   ['isdata',['isData',['../df/d0c/classMIDI__Parser.html#ac6808b5b4f403e48368f32385171929c',1,'MIDI_Parser']]],
   ['isenabled',['isEnabled',['../d5/de0/classUpdatable.html#a883138a1262a82e8b9e05c75d576e36d',1,'Updatable']]],
-  ['ishexchar',['isHexChar',['../d8/d0b/classStreamDebugMIDI__Interface.html#a5229f0375a0a9e9c303b0ba1fa99a342',1,'StreamDebugMIDI_Interface']]],
   ['isstatus',['isStatus',['../df/d0c/classMIDI__Parser.html#a0030089e4fe636ae1ca7997dba7b86ae',1,'MIDI_Parser']]],
-  ['isvalid',['isValid',['../da/dc7/classRelativeMIDICNChannelAddress.html#aa4acbfbf4f8fa9507a7d0b347fc606da',1,'RelativeMIDICNChannelAddress::isValid()'],['../d3/d10/classMIDICNChannelAddress.html#a5cc0927606de3d24f37c4e5461083a03',1,'MIDICNChannelAddress::isValid()']]],
-  ['iswhitespace',['isWhiteSpace',['../d8/d0b/classStreamDebugMIDI__Interface.html#a06d80f3b4a5fa49d443a1379e124e785',1,'StreamDebugMIDI_Interface']]]
+  ['isvalid',['isValid',['../da/dc7/classRelativeMIDICNChannelAddress.html#aa4acbfbf4f8fa9507a7d0b347fc606da',1,'RelativeMIDICNChannelAddress::isValid()'],['../d3/d10/classMIDICNChannelAddress.html#a5cc0927606de3d24f37c4e5461083a03',1,'MIDICNChannelAddress::isValid()']]]
 ];
