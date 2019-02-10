@@ -6,6 +6,7 @@ var hierarchy =
     [ "Array< T, N >", "d7/d6a/structArray.html", null ],
     [ "Array< AudioMixer4 *, N >", "d7/d6a/structArray.html", null ],
     [ "Array< Button, NUMBER_OF_BUTTONS >", "d7/d6a/structArray.html", null ],
+    [ "Array< MIDICNChannelAddress, N >", "d7/d6a/structArray.html", null ],
     [ "Array< N >", "d7/d6a/structArray.html", null ],
     [ "Array< nb_cols >", "d7/d6a/structArray.html", null ],
     [ "Array< nb_rows >", "d7/d6a/structArray.html", null ],
@@ -217,6 +218,7 @@ var hierarchy =
           [ "Bankable::MIDIFilteredAnalogAddressable< send, PRECISION >", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", null ],
           [ "Bankable::MIDIIncrementDecrementButtons< send >", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html", null ],
           [ "Bankable::MIDIRotaryEncoder< send >", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html", null ],
+          [ "ManyAddresses::MIDIFilteredAnalogAddressable< N, send, PRECISION >", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html", null ],
           [ "MIDIButton< sendOn, sendOff >", "d6/d72/classMIDIButton.html", null ],
           [ "Bankable::MIDIButton< DigitalCCSender::sendOn, DigitalCCSender::sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
           [ "Bankable::MIDIButton< DigitalNoteSender::sendOn, DigitalNoteSender::sendOff >", "d9/df9/classBankable_1_1MIDIButton.html", null ],
@@ -255,6 +257,9 @@ var hierarchy =
             [ "CCPotentiometer", "db/d32/classCCPotentiometer.html", null ]
           ] ],
           [ "Bankable::MIDIFilteredAnalogAddressable< ContinuousCCSender::send, 7 >", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", null ],
+          [ "ManyAddresses::MIDIFilteredAnalogAddressable< N, ContinuousCCSender::send, 7 >", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html", [
+            [ "ManyAddresses::CCPotentiometer< N >", "d7/df2/classManyAddresses_1_1CCPotentiometer.html", null ]
+          ] ],
           [ "MIDIIncrementDecrementButtons< send >", "dc/dc2/classMIDIIncrementDecrementButtons.html", null ],
           [ "Bankable::MIDIIncrementDecrementButtons< RelativeCCSender::send >", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html", null ],
           [ "MIDIRotaryEncoder< send >", "d8/d20/classMIDIRotaryEncoder.html", null ],
@@ -288,6 +293,9 @@ var hierarchy =
             [ "ManyButtonsSelectorLEDs< N >", "d0/d68/classManyButtonsSelectorLEDs.html", null ],
             [ "ProgramChangeSelectorLEDs< N >", "d9/dee/classProgramChangeSelectorLEDs.html", null ]
           ] ]
+        ] ],
+        [ "Selector< 2 >", "d1/d54/classSelector.html", [
+          [ "SwitchSelector", "df/def/classSwitchSelector.html", null ]
         ] ]
       ] ]
     ] ],
@@ -337,6 +345,10 @@ var hierarchy =
       [ "DotBarDisplayLEDs< N >", "d1/d3e/classDotBarDisplayLEDs.html", null ]
     ] ],
     [ "LEDs< 11 >", "d2/d1b/classLEDs.html", null ],
+    [ "ManyAddressesMIDIOutput< N >", "d1/d2f/classManyAddressesMIDIOutput.html", [
+      [ "ManyAddresses::MIDIFilteredAnalogAddressable< N, send, PRECISION >", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html", null ],
+      [ "ManyAddresses::MIDIFilteredAnalogAddressable< N, ContinuousCCSender::send, 7 >", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html", null ]
+    ] ],
     [ "MAX7219_Base", "da/dd0/classMAX7219__Base.html", [
       [ "MAX7219", "dc/d19/classMAX7219.html", null ],
       [ "MAX7219SevenSegmentDisplay", "d4/d26/classMAX7219SevenSegmentDisplay.html", null ]
@@ -420,7 +432,8 @@ var hierarchy =
       [ "ProgramChanger< N >", "de/d43/classProgramChanger.html", null ]
     ] ],
     [ "ShiftRegisterOutRGB", "d5/d45/structShiftRegisterOutRGB.html", null ],
-    [ "MIDI_Parser::SysExMessage", "d2/d56/structMIDI__Parser_1_1SysExMessage.html", null ],
+    [ "SysExBuffer", "d1/db1/classSysExBuffer.html", null ],
+    [ "SysExMessage", "db/d45/structSysExMessage.html", null ],
     [ "Timer< time >", "dc/dea/classTimer.html", null ],
     [ "Timer< micros >", "dc/dea/classTimer.html", null ],
     [ "XBitmap", "d2/df6/structXBitmap.html", null ]

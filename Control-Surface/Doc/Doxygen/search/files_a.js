@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['ccpotentiometer_2ehpp',['CCPotentiometer.hpp',['../d1/d82/ManyAddresses_2CCPotentiometer_8hpp.html',1,'']]],
+  ['manyaddressesmidiouptut_2ehpp',['ManyAddressesMIDIOuptut.hpp',['../d0/dcb/ManyAddressesMIDIOuptut_8hpp.html',1,'']]],
   ['manybuttonsselector_2ecpp',['ManyButtonsSelector.cpp',['../d8/daf/ManyButtonsSelector_8cpp.html',1,'']]],
   ['manybuttonsselector_2ehpp',['ManyButtonsSelector.hpp',['../d1/d02/ManyButtonsSelector_8hpp.html',1,'']]],
   ['manybuttonsselectorleds_2ecpp',['ManyButtonsSelectorLEDs.cpp',['../df/dea/ManyButtonsSelectorLEDs_8cpp.html',1,'']]],
@@ -21,6 +23,7 @@ var searchData=
   ['midi_5fparser_2ehpp',['MIDI_Parser.hpp',['../d7/d2d/MIDI__Parser_8hpp.html',1,'']]],
   ['midicnchanneladdress_2ecpp',['MIDICNChannelAddress.cpp',['../d6/d65/MIDICNChannelAddress_8cpp.html',1,'']]],
   ['midicnchanneladdress_2ehpp',['MIDICNChannelAddress.hpp',['../d8/d38/MIDICNChannelAddress_8hpp.html',1,'']]],
+  ['midifilteredanalog_2ehpp',['MIDIFilteredAnalog.hpp',['../d4/dba/ManyAddresses_2Abstract_2MIDIFilteredAnalog_8hpp.html',1,'']]],
   ['midiincrementdecrementbuttons_2ecpp',['MIDIIncrementDecrementButtons.cpp',['../d3/d47/MIDIIncrementDecrementButtons_8cpp.html',1,'']]],
   ['midiinputelement_2ecpp',['MIDIInputElement.cpp',['../da/de8/MIDIInputElement_8cpp.html',1,'']]],
   ['midiinputelement_2ehpp',['MIDIInputElement.hpp',['../dc/d90/MIDIInputElement_8hpp.html',1,'']]],

@@ -12,7 +12,7 @@ var searchData=
   ['onwrite',['onWrite',['../d0/d89/classBluetoothMIDI__Interface.html#a192545f2dcc19effef8e6a91b3a8773b',1,'BluetoothMIDI_Interface']]],
   ['operator_20_2a',['operator *',['../db/d52/classDoublyLinkedList_1_1node__iterator__base.html#af83bee1adffccb780fe3fee030aceb30',1,'DoublyLinkedList::node_iterator_base']]],
   ['operator_20bool',['operator bool',['../d3/d10/classMIDICNChannelAddress.html#a55c62c60f090eafde9ae92172c452926',1,'MIDICNChannelAddress::operator bool()'],['../dc/dea/classTimer.html#ab4883393ce41724763407b2a73826a24',1,'Timer::operator bool()']]],
-  ['operator_20unsigned_20long',['operator unsigned long',['../d7/d90/classFrequency.html#a0e1122f13a39e1c05bf6c9b8ee3c4b77',1,'Frequency']]],
+  ['operator_20unsigned_20long',['operator unsigned long',['../d7/d90/classFrequency.html#a8ba81b459a85bf51ca38fb6989af33cf',1,'Frequency']]],
   ['operator_21_3d',['operator!=',['../d3/d10/classMIDICNChannelAddress.html#a7d8e6ba136343edd50587d9150072dc2',1,'MIDICNChannelAddress::operator!=()'],['../d7/d6a/structArray.html#a5a33628f3e756558e67eb13a1a729ddc',1,'Array::operator!=()'],['../db/d52/classDoublyLinkedList_1_1node__iterator__base.html#a23b21ce43b95e9b1fb7ced28aa57f0ef',1,'DoublyLinkedList::node_iterator_base::operator!=()'],['../de/df8/structMIDI__message.html#a919a1842f5c582ecbc0df91c0ea0961b',1,'MIDI_message::operator!=()']]],
   ['operator_22_22_5fch',['operator&quot;&quot;_ch',['../d7/d42/Channel_8hpp.html#a47e5d27fda2cb7b93b15da9fa4ccfe5b',1,'Channel.hpp']]],
   ['operator_22_22_5fhz',['operator&quot;&quot;_Hz',['../dc/d50/Frequency_8hpp.html#ae135e37c8cef46f38e967bbbf7ac6336',1,'Frequency.hpp']]],

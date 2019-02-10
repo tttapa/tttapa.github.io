@@ -12,7 +12,7 @@ var searchData=
   ['rec_5frdy_5f7',['REC_RDY_7',['../d7/dc7/namespaceMCU.html#abe3471236ed5c4a082fa21efb607bc09',1,'MCU']]],
   ['rec_5frdy_5f7_5fbits',['rec_rdy_7_bits',['../dd/d93/namespaceXBM.html#ab42d7845cb19ae971799691dc2cf50eb',1,'XBM']]],
   ['rec_5frdy_5f8',['REC_RDY_8',['../d7/dc7/namespaceMCU.html#ab947100c55081abe65367dd5c6fc74c3',1,'MCU']]],
-  ['receivingsysex',['receivingSysEx',['../df/d0c/classMIDI__Parser.html#ab6aff8a419b886faae8861d0afa56a63',1,'MIDI_Parser']]],
+  ['receiving',['receiving',['../d1/db1/classSysExBuffer.html#a9fbcc48c3f4b2342fbe3ece1ea6ab0ba',1,'SysExBuffer']]],
   ['record',['RECORD',['../d7/dc7/namespaceMCU.html#a6ac764356b286ab7c1316a3c912a910e',1,'MCU']]],
   ['record_5f7_5fbits',['record_7_bits',['../dd/d93/namespaceXBM.html#a0d6b7e357dfb9b15cac691bc2b178fa5',1,'XBM']]],
   ['record_5f9_5fbits',['record_9_bits',['../dd/d93/namespaceXBM.html#a47acda83a65bdaf3ada72ea48f9eb15e',1,'XBM']]],

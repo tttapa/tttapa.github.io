@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['add',['add',['../db/dbd/classBank.html#ae1638c8fa8f201e8672309272657c924',1,'Bank']]],
-  ['addsysexbyte',['addSysExByte',['../df/d0c/classMIDI__Parser.html#a25a1088e0b58f8b901f0a951ba2bfbdc',1,'MIDI_Parser']]],
+  ['add',['add',['../db/dbd/classBank.html#ae1638c8fa8f201e8672309272657c924',1,'Bank::add()'],['../d1/db1/classSysExBuffer.html#adbf58e6ad564b86d3b0a4934456d3f2f',1,'SysExBuffer::add()']]],
+  ['addsysexbyte',['addSysExByte',['../d0/d0d/classSerialMIDI__Parser.html#a4c6fe6ec4fde6697d98aec4ca7e906ec',1,'SerialMIDI_Parser::addSysExByte()'],['../db/db0/classUSBMIDI__Parser.html#a79ae4d59229b417a6e8938008050c047',1,'USBMIDI_Parser::addSysExByte()']]],
   ['addtobuffer',['addToBuffer',['../d0/d89/classBluetoothMIDI__Interface.html#a3c6c5ad85186a96450035793b6a6525e',1,'BluetoothMIDI_Interface::addToBuffer(uint8_t(&amp;data)[N])'],['../d0/d89/classBluetoothMIDI__Interface.html#a667456e6010ac897406ac55b5824ce7f',1,'BluetoothMIDI_Interface::addToBuffer(uint8_t *data, size_t len)']]],
   ['afterreading',['afterReading',['../d7/d8d/classAnalogMultiplex.html#a250db013ee2adaea882e655bf5531da4',1,'AnalogMultiplex']]],
   ['analogmultiplex',['AnalogMultiplex',['../d7/d8d/classAnalogMultiplex.html#a01039610ecef8035850ad9e5235728b6',1,'AnalogMultiplex']]],

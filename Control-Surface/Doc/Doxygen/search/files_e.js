@@ -24,5 +24,8 @@ var searchData=
   ['shiftregisteroutrgb_2ehpp',['ShiftRegisterOutRGB.hpp',['../d1/d1f/ShiftRegisterOutRGB_8hpp.html',1,'']]],
   ['spishiftregisterout_2ecpp',['SPIShiftRegisterOut.cpp',['../d2/dde/SPIShiftRegisterOut_8cpp.html',1,'']]],
   ['spishiftregisterout_2ehpp',['SPIShiftRegisterOut.hpp',['../d7/d88/SPIShiftRegisterOut_8hpp.html',1,'']]],
-  ['staticsizeextendedioelement_2ehpp',['StaticSizeExtendedIOElement.hpp',['../d2/d05/StaticSizeExtendedIOElement_8hpp.html',1,'']]]
+  ['staticsizeextendedioelement_2ehpp',['StaticSizeExtendedIOElement.hpp',['../d2/d05/StaticSizeExtendedIOElement_8hpp.html',1,'']]],
+  ['switchselector_2ehpp',['SwitchSelector.hpp',['../d3/ddf/SwitchSelector_8hpp.html',1,'']]],
+  ['sysexbuffer_2ecpp',['SysExBuffer.cpp',['../d5/d0b/SysExBuffer_8cpp.html',1,'']]],
+  ['sysexbuffer_2ehpp',['SysExBuffer.hpp',['../d0/dbb/SysExBuffer_8hpp.html',1,'']]]
 ];

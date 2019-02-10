@@ -1,8 +1,8 @@
 var classMIDICNChannelAddress =
 [
     [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a52a20f2627c4d9ff0cb391c7d55a7770", null ],
-    [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a37f5043a1b1f3823b9560c928532606f", null ],
-    [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a0084e61eb3084c0000bd36389fbc7d36", null ],
+    [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a20a349458b4401d584e9ee713be0a8dc", null ],
+    [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a65c831b77c8d5f0d89706e1d41303a77", null ],
     [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a3f570e6ccee7abc542cfdec6ff674f79", null ],
     [ "getAddress", "d3/d10/classMIDICNChannelAddress.html#a65bea05cbf038e58d55b36955a2d2b1b", null ],
     [ "getCableNumber", "d3/d10/classMIDICNChannelAddress.html#af095bbce791e4b3540dd82d31d0227c1", null ],

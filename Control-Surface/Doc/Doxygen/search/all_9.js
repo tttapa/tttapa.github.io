@@ -1,7 +1,7 @@
 var searchData=
 [
   ['ignore_5fsysex',['IGNORE_SYSEX',['../db/d02/Settings_8hpp.html#a2a82e3cbc4ddcf68ac47d0d464189e35',1,'Settings.hpp']]],
-  ['increment',['Increment',['../df/d38/classIncrementButton.html#a37fb5e087715edfdb4ab30209c83753ca1c40de72a61916bbe238020067501963',1,'IncrementButton::Increment()'],['../d5/d20/classIncrementDecrementButtons.html#aad41077d49378ea34dca4f6cf77ae06ba20e11204d63d579b5cf85a8698740f10',1,'IncrementDecrementButtons::Increment()'],['../dd/dd6/classIncrementor.html#a5f9ac3154cda1e503cbbe5194a706a39',1,'Incrementor::increment()'],['../d1/d54/classSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1',1,'Selector::increment()']]],
+  ['increment',['increment',['../dd/dd6/classIncrementor.html#a5f9ac3154cda1e503cbbe5194a706a39',1,'Incrementor::increment()'],['../d1/d54/classSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1',1,'Selector::increment()'],['../df/d38/classIncrementButton.html#a37fb5e087715edfdb4ab30209c83753ca1c40de72a61916bbe238020067501963',1,'IncrementButton::Increment()'],['../d5/d20/classIncrementDecrementButtons.html#aad41077d49378ea34dca4f6cf77ae06ba20e11204d63d579b5cf85a8698740f10',1,'IncrementDecrementButtons::Increment()']]],
   ['incrementaddress',['incrementAddress',['../d2/d87/classMIDIButtons.html#abd040788a921f9a07974505612107e0d',1,'MIDIButtons::incrementAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a84fad1969a8634ab747f86fca0e62c96',1,'Bankable::MIDIButtons::incrementAddress()']]],
   ['incrementbutton',['IncrementButton',['../df/d38/classIncrementButton.html',1,'IncrementButton'],['../df/d38/classIncrementButton.html#ad0133d3b080fa4093b24ade7acd2f2c1',1,'IncrementButton::IncrementButton()'],['../d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3',1,'IncrementDecrementButtons::incrementButton()']]],
   ['incrementbutton_2ecpp',['IncrementButton.cpp',['../db/d9d/IncrementButton_8cpp.html',1,'']]],
@@ -45,6 +45,7 @@ var searchData=
   ['is_5funsigned',['is_unsigned',['../d7/dc9/structis__unsigned.html',1,'']]],
   ['isdata',['isData',['../df/d0c/classMIDI__Parser.html#ac6808b5b4f403e48368f32385171929c',1,'MIDI_Parser']]],
   ['isenabled',['isEnabled',['../d5/de0/classUpdatable.html#a883138a1262a82e8b9e05c75d576e36d',1,'Updatable']]],
+  ['isreceiving',['isReceiving',['../d1/db1/classSysExBuffer.html#aee21293188fbdbf52eb28d84ddd4b476',1,'SysExBuffer']]],
   ['isstatus',['isStatus',['../df/d0c/classMIDI__Parser.html#a0030089e4fe636ae1ca7997dba7b86ae',1,'MIDI_Parser']]],
   ['isvalid',['isValid',['../da/dc7/classRelativeMIDICNChannelAddress.html#aa4acbfbf4f8fa9507a7d0b347fc606da',1,'RelativeMIDICNChannelAddress::isValid()'],['../d3/d10/classMIDICNChannelAddress.html#a5cc0927606de3d24f37c4e5461083a03',1,'MIDICNChannelAddress::isValid()']]],
   ['iterator',['iterator',['../dd/d16/classDoublyLinkedList.html#a00ad35f05ce61d50a4cb1e914aba50dd',1,'DoublyLinkedList']]],

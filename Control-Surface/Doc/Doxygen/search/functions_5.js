@@ -5,8 +5,8 @@ var searchData=
   ['encoderselector',['EncoderSelector',['../d3/dc5/classEncoderSelector.html#a79907f1c533e2728598a4176f65598c5',1,'EncoderSelector']]],
   ['encoderselector_5fbase',['EncoderSelector_Base',['../d0/daf/classEncoderSelector__Base.html#af494ec6d454b643186a97fe42501ee22',1,'EncoderSelector_Base']]],
   ['encoderselectorleds',['EncoderSelectorLEDs',['../d8/df7/classEncoderSelectorLEDs.html#a1c4bbfb29eb4aadd75f0aba78376dcd9',1,'EncoderSelectorLEDs']]],
-  ['end',['end',['../d7/d6a/structArray.html#a99c8affba2ed7cd3d9d39ed70c182caf',1,'Array::end()'],['../d7/d6a/structArray.html#a5a3140bf69cf282245c22a1890d25158',1,'Array::end() const'],['../dd/d16/classDoublyLinkedList.html#acbcb82c1029fcec3f6e8bcb3326df8c9',1,'DoublyLinkedList::end()'],['../dd/d16/classDoublyLinkedList.html#aa21ac3c9f28d3d2a6a26b4f56557c5a2',1,'DoublyLinkedList::end() const']]],
+  ['end',['end',['../d7/d6a/structArray.html#a99c8affba2ed7cd3d9d39ed70c182caf',1,'Array::end()'],['../d7/d6a/structArray.html#a5a3140bf69cf282245c22a1890d25158',1,'Array::end() const'],['../dd/d16/classDoublyLinkedList.html#acbcb82c1029fcec3f6e8bcb3326df8c9',1,'DoublyLinkedList::end()'],['../dd/d16/classDoublyLinkedList.html#aa21ac3c9f28d3d2a6a26b4f56557c5a2',1,'DoublyLinkedList::end() const'],['../d1/db1/classSysExBuffer.html#a1f7af4669c4fca392bec6767a0c31f1a',1,'SysExBuffer::end()']]],
   ['endl',['endl',['../da/d69/PrintStream_8cpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d',1,'endl(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d',1,'endl(Print &amp;printer):&#160;PrintStream.cpp']]],
-  ['endsysex',['endSysEx',['../df/d0c/classMIDI__Parser.html#a80c3e8ba1f058974c4c59d35092b3bed',1,'MIDI_Parser']]],
+  ['endsysex',['endSysEx',['../d0/d0d/classSerialMIDI__Parser.html#a88204d0c18b9efb220513dfa10c9c259',1,'SerialMIDI_Parser::endSysEx()'],['../db/db0/classUSBMIDI__Parser.html#ae61832c9768b95ccda2c77c2b1162763',1,'USBMIDI_Parser::endSysEx()']]],
   ['extendedioelement',['ExtendedIOElement',['../de/d4e/classExtendedIOElement.html#ac8029dcd223af8b53e4fdd588b309554',1,'ExtendedIOElement']]]
 ];

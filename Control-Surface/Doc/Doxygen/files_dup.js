@@ -71,6 +71,7 @@ var files_dup =
     [ "CCPotentiometer.cpp", "d2/d7b/CCPotentiometer_8cpp.html", null ],
     [ "Bankable/CCPotentiometer.hpp", "d6/ddd/Bankable_2CCPotentiometer_8hpp.html", null ],
     [ "CCPotentiometer.hpp", "d4/df0/CCPotentiometer_8hpp.html", null ],
+    [ "ManyAddresses/CCPotentiometer.hpp", "d1/d82/ManyAddresses_2CCPotentiometer_8hpp.html", null ],
     [ "Bankable/CCRotaryEncoder.cpp", "dd/d46/Bankable_2CCRotaryEncoder_8cpp.html", null ],
     [ "CCRotaryEncoder.cpp", "d1/db0/CCRotaryEncoder_8cpp.html", null ],
     [ "Bankable/CCRotaryEncoder.hpp", "dc/d8b/Bankable_2CCRotaryEncoder_8hpp.html", null ],
@@ -188,6 +189,9 @@ var files_dup =
       [ "reverse_node_iterator", "d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html", "d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator" ],
       [ "DoublyLinkable", "d4/d23/classDoublyLinkable.html", "d4/d23/classDoublyLinkable" ]
     ] ],
+    [ "ManyAddressesMIDIOuptut.hpp", "d0/dcb/ManyAddressesMIDIOuptut_8hpp.html", [
+      [ "ManyAddressesMIDIOutput", "d1/d2f/classManyAddressesMIDIOutput.html", "d1/d2f/classManyAddressesMIDIOutput" ]
+    ] ],
     [ "ManyButtonsSelector.cpp", "d8/daf/ManyButtonsSelector_8cpp.html", null ],
     [ "ManyButtonsSelector.hpp", "d1/d02/ManyButtonsSelector_8hpp.html", [
       [ "ManyButtonsSelector_Base", "d1/d3d/classManyButtonsSelector__Base.html", "d1/d3d/classManyButtonsSelector__Base" ],
@@ -266,6 +270,9 @@ var files_dup =
     [ "Bankable/Abstract/MIDIFilteredAnalog.hpp", "d5/d4d/Bankable_2Abstract_2MIDIFilteredAnalog_8hpp.html", [
       [ "MIDIFilteredAnalogAddressable", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable" ],
       [ "MIDIFilteredAnalog", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", "db/ddc/classBankable_1_1MIDIFilteredAnalog" ]
+    ] ],
+    [ "ManyAddresses/Abstract/MIDIFilteredAnalog.hpp", "d4/dba/ManyAddresses_2Abstract_2MIDIFilteredAnalog_8hpp.html", [
+      [ "MIDIFilteredAnalogAddressable", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable" ]
     ] ],
     [ "MIDIIncrementDecrementButtons.cpp", "d3/d47/MIDIIncrementDecrementButtons_8cpp.html", null ],
     [ "Abstract/MIDIIncrementDecrementButtons.hpp", "db/d20/Abstract_2MIDIIncrementDecrementButtons_8hpp.html", [
@@ -403,6 +410,13 @@ var files_dup =
     [ "StaticSizeExtendedIOElement.hpp", "d2/d05/StaticSizeExtendedIOElement_8hpp.html", [
       [ "StaticSizeExtendedIOElement", "d1/d13/classStaticSizeExtendedIOElement.html", "d1/d13/classStaticSizeExtendedIOElement" ]
     ] ],
+    [ "SwitchSelector.hpp", "d3/ddf/SwitchSelector_8hpp.html", [
+      [ "SwitchSelector", "df/def/classSwitchSelector.html", "df/def/classSwitchSelector" ]
+    ] ],
+    [ "SysExBuffer.cpp", "d5/d0b/SysExBuffer_8cpp.html", null ],
+    [ "SysExBuffer.hpp", "d0/dbb/SysExBuffer_8hpp.html", [
+      [ "SysExBuffer", "d1/db1/classSysExBuffer.html", "d1/db1/classSysExBuffer" ]
+    ] ],
     [ "TeensyUSBTypes.hpp", "d9/d98/TeensyUSBTypes_8hpp.html", null ],
     [ "TimeDisplay.cpp", "d1/d55/TimeDisplay_8cpp.html", null ],
     [ "TimeDisplay.hpp", "d9/dc9/TimeDisplay_8hpp.html", "d9/dc9/TimeDisplay_8hpp" ],
@@ -420,9 +434,7 @@ var files_dup =
     [ "USBMIDI_Interface.cpp", "d5/de7/USBMIDI__Interface_8cpp.html", null ],
     [ "USBMIDI_Interface.hpp", "d1/d64/USBMIDI__Interface_8hpp.html", null ],
     [ "USBMIDI_Parser.cpp", "d8/dd8/USBMIDI__Parser_8cpp.html", null ],
-    [ "USBMIDI_Parser.hpp", "d8/d21/USBMIDI__Parser_8hpp.html", [
-      [ "USBMIDI_Parser", "db/db0/classUSBMIDI__Parser.html", "db/db0/classUSBMIDI__Parser" ]
-    ] ],
+    [ "USBMIDI_Parser.hpp", "d8/d21/USBMIDI__Parser_8hpp.html", "d8/d21/USBMIDI__Parser_8hpp" ],
     [ "VolumeControl.cpp", "dc/d55/VolumeControl_8cpp.html", null ],
     [ "VolumeControl.hpp", "da/d51/VolumeControl_8hpp.html", null ],
     [ "VPotDisplay.cpp", "d7/db9/VPotDisplay_8cpp.html", "d7/db9/VPotDisplay_8cpp" ],

@@ -2,6 +2,7 @@ var searchData=
 [
   ['selectable',['Selectable',['../de/de7/classSelectable.html',1,'']]],
   ['selector',['Selector',['../d1/d54/classSelector.html',1,'']]],
+  ['selector_3c_202_20_3e',['Selector&lt; 2 &gt;',['../d1/d54/classSelector.html',1,'']]],
   ['selectordisplay',['SelectorDisplay',['../d3/d51/classSelectorDisplay.html',1,'']]],
   ['selectorleds',['SelectorLEDs',['../dd/d8b/classSelectorLEDs.html',1,'']]],
   ['serialdebugmidi_5finterface',['SerialDebugMIDI_Interface',['../db/dc4/classSerialDebugMIDI__Interface.html',1,'']]],
@@ -28,5 +29,7 @@ var searchData=
   ['staticsizeextendedioelement_3c_208_20_2a8_20_3e',['StaticSizeExtendedIOElement&lt; 8 *8 &gt;',['../d1/d13/classStaticSizeExtendedIOElement.html',1,'']]],
   ['streamdebugmidi_5finterface',['StreamDebugMIDI_Interface',['../d8/d0b/classStreamDebugMIDI__Interface.html',1,'']]],
   ['streammidi_5finterface',['StreamMIDI_Interface',['../d3/dc3/classStreamMIDI__Interface.html',1,'']]],
-  ['sysexmessage',['SysExMessage',['../d2/d56/structMIDI__Parser_1_1SysExMessage.html',1,'MIDI_Parser']]]
+  ['switchselector',['SwitchSelector',['../df/def/classSwitchSelector.html',1,'']]],
+  ['sysexbuffer',['SysExBuffer',['../d1/db1/classSysExBuffer.html',1,'']]],
+  ['sysexmessage',['SysExMessage',['../db/d45/structSysExMessage.html',1,'']]]
 ];

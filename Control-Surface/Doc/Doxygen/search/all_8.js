@@ -5,7 +5,7 @@ var searchData=
   ['hardwareserialdebugmidi_5finterface',['HardwareSerialDebugMIDI_Interface',['../d8/d29/classHardwareSerialDebugMIDI__Interface.html',1,'HardwareSerialDebugMIDI_Interface'],['../d8/d29/classHardwareSerialDebugMIDI__Interface.html#a66875b68af9d7a787e62a95f9cf94a1e',1,'HardwareSerialDebugMIDI_Interface::HardwareSerialDebugMIDI_Interface()']]],
   ['hardwareserialmidi_5finterface',['HardwareSerialMIDI_Interface',['../d9/d78/classHardwareSerialMIDI__Interface.html',1,'HardwareSerialMIDI_Interface'],['../d9/d78/classHardwareSerialMIDI__Interface.html#a689765de0ae6ff2e288782ff640054a6',1,'HardwareSerialMIDI_Interface::HardwareSerialMIDI_Interface()']]],
   ['hasspacefor',['hasSpaceFor',['../d0/d89/classBluetoothMIDI__Interface.html#a6417f6d48fc3043fd97363b67649a363',1,'BluetoothMIDI_Interface']]],
-  ['hasspaceleft',['hasSpaceLeft',['../df/d0c/classMIDI__Parser.html#a8f6d4b8fd4cddf5068275f7636b8e87e',1,'MIDI_Parser']]],
+  ['hasspaceleft',['hasSpaceLeft',['../d1/db1/classSysExBuffer.html#a0bb1a353d17c2bcc3a09a6d981adf819',1,'SysExBuffer']]],
   ['header',['header',['../de/df8/structMIDI__message.html#af73ddde8746b7f86712a180320aacbbd',1,'MIDI_message']]],
   ['height',['height',['../d2/df6/structXBitmap.html#aadc2e950f43a466fb09b0b0239dcf3ee',1,'XBitmap']]],
   ['helpers_2ecpp',['Helpers.cpp',['../de/dce/Helpers_8cpp.html',1,'']]],

@@ -54,8 +54,10 @@ var searchData=
   ['spishiftregisterout',['SPIShiftRegisterOut',['../dd/d81/classSPIShiftRegisterOut.html#ab459e0686d7799d4f36e4fcecfeb6028',1,'SPIShiftRegisterOut']]],
   ['ssd1306_5fdisplayinterface',['SSD1306_DisplayInterface',['../dc/ddd/classSSD1306__DisplayInterface.html#a4df7f9684c281df8b5167f2b7a7db1ed',1,'SSD1306_DisplayInterface']]],
   ['stabletime',['stableTime',['../d1/d19/classButton.html#a051753574468288ae7fce0d29c60feea',1,'Button']]],
-  ['startsysex',['startSysEx',['../df/d0c/classMIDI__Parser.html#a3f49c0d44693c4ce2438b056eab696d3',1,'MIDI_Parser']]],
+  ['start',['start',['../d1/db1/classSysExBuffer.html#a3fa91b8bb0a048d8cb99fff92b3af034',1,'SysExBuffer']]],
+  ['startsysex',['startSysEx',['../d0/d0d/classSerialMIDI__Parser.html#a3fa6beb82ec8f07bba72c544e6d6656b',1,'SerialMIDI_Parser::startSysEx()'],['../db/db0/classUSBMIDI__Parser.html#a71a524e459ad3ee371c408321f1399b4',1,'USBMIDI_Parser::startSysEx()']]],
   ['staticsizeextendedioelement',['StaticSizeExtendedIOElement',['../d1/d13/classStaticSizeExtendedIOElement.html#a1b6604268bf255fbd2c2041e76f2f935',1,'StaticSizeExtendedIOElement']]],
   ['streamdebugmidi_5finterface',['StreamDebugMIDI_Interface',['../d8/d0b/classStreamDebugMIDI__Interface.html#af8d66b27c1d62bb2632c838182cdc92f',1,'StreamDebugMIDI_Interface']]],
-  ['streammidi_5finterface',['StreamMIDI_Interface',['../d3/dc3/classStreamMIDI__Interface.html#a2311b38f0f82784f8ad46f9e9381608f',1,'StreamMIDI_Interface']]]
+  ['streammidi_5finterface',['StreamMIDI_Interface',['../d3/dc3/classStreamMIDI__Interface.html#a2311b38f0f82784f8ad46f9e9381608f',1,'StreamMIDI_Interface']]],
+  ['switchselector',['SwitchSelector',['../df/def/classSwitchSelector.html#a6905720489e5525f08347653de23456c',1,'SwitchSelector']]]
 ];

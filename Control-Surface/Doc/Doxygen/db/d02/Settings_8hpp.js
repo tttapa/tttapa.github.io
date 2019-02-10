@@ -1,6 +1,5 @@
 var Settings_8hpp =
 [
-    [ "DEBUG_OUT", "db/d02/Settings_8hpp.html#a7cc5a6d57623c456857b1ba01ce919ee", null ],
     [ "FATAL_ERRORS", "db/d02/Settings_8hpp.html#a5894a0b22947afb71dca51783e61ac2c", null ],
     [ "IGNORE_SYSEX", "db/d02/Settings_8hpp.html#a2a82e3cbc4ddcf68ac47d0d464189e35", null ],
     [ "INDIVIDUAL_BUTTON_INVERT", "db/d02/Settings_8hpp.html#a0f4fabd413ae4e94b4f8d45cc1a249ad", null ],
@@ -18,5 +17,5 @@ var Settings_8hpp =
     [ "SYSEX_BUFFER_SIZE", "db/d02/Settings_8hpp.html#a3081f3937d694684489a38a344815b29", null ],
     [ "VU_PEAK_DECAY_TIME", "db/d02/Settings_8hpp.html#a8be794417540934c31a498143e8efafb", null ],
     [ "VU_PEAK_HOLD_TIME", "db/d02/Settings_8hpp.html#a774333c030e245d506acef0577246d7c", null ],
-    [ "VU_PEAK_SMOOTH_DECAY", "db/d02/Settings_8hpp.html#a5f630db6e6dc66cae6184da0276070b7", null ]
+    [ "VU_PEAK_SMOOTH_DECAY", "db/d02/Settings_8hpp.html#aba09a773d21d5e9fd3cf0d537b645405", null ]
 ];

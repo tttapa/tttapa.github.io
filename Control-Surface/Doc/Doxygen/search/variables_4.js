@@ -2,7 +2,7 @@ var searchData=
 [
   ['d',['D',['../d7/d78/namespaceMIDI__Notes.html#a17f67c20013bf43a299a253d4a1926cb',1,'MIDI_Notes']]],
   ['damper_5fpedal',['Damper_Pedal',['../d4/dbe/namespaceMIDI__CC.html#a305f0ec8c6fe138e124df49d044c2e11',1,'MIDI_CC']]],
-  ['data',['data',['../d7/d6a/structArray.html#a797eabcf5e012d39e65fd88599b4d596',1,'Array::data()'],['../d2/d56/structMIDI__Parser_1_1SysExMessage.html#afbd67dc4fd06b9d73949e0eedf27111e',1,'MIDI_Parser::SysExMessage::data()']]],
+  ['data',['data',['../d7/d6a/structArray.html#a797eabcf5e012d39e65fd88599b4d596',1,'Array::data()'],['../db/d45/structSysExMessage.html#ab6e499ffd178a585eb2340edf1fd857b',1,'SysExMessage::data()']]],
   ['data1',['data1',['../dd/d36/structMIDI__message__matcher.html#ac443b9410f85ee27af5b87f3d16608a3',1,'MIDI_message_matcher::data1()'],['../de/df8/structMIDI__message.html#af80e4955731e58bfdb6e2faad1beea07',1,'MIDI_message::data1()']]],
   ['data2',['data2',['../dd/d36/structMIDI__message__matcher.html#a3f3a21550af649f09490019ba8195265',1,'MIDI_message_matcher::data2()'],['../de/df8/structMIDI__message.html#adfda2d0dae130aa3363bee27942f816d',1,'MIDI_message::data2()']]],
   ['data_5fdecrement',['Data_Decrement',['../d4/dbe/namespaceMIDI__CC.html#af18be7266e39a4b3097cdc5650a80ae6',1,'MIDI_CC']]],

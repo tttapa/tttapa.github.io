@@ -2,8 +2,10 @@ var classMCU_1_1TimeDisplayDisplay =
 [
     [ "TimeDisplayDisplay", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#afc9a0176759cd9eb2836d3c255330260", null ],
     [ "draw", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#a995f9d05fe9aa554561c802f36cf2c7c", null ],
-    [ "drawAll", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#a0c82ae0196c0a214a3ff30ce12d06bb8", null ],
+    [ "getAll", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#a432ece125651c9ed20a7373fb196e375", null ],
     [ "getColor", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#a7ec229c44d173558b4426d5a72715663", null ],
+    [ "getDisplay", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#abcb247a48cd14b7815f1fb930b6fedd1", null ],
+    [ "getDisplay", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ac7e658b8a699ce49ddaf3f5d5e17c679", null ],
     [ "getSize", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#aecef759e97a31057a77bbe1015428351", null ],
     [ "getX", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#a7125f33609563b564b56e6b1b77208b7", null ],
     [ "getY", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ac487fa8a2be5878cc840ae2b2ceecd7f", null ],

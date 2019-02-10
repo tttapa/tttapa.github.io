@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['write',['write',['../df/d42/classDisplayInterface.html#a05b15931b6009cadd1238eb8c77ddd72',1,'DisplayInterface::write()'],['../dc/ddd/classSSD1306__DisplayInterface.html#a91ddc3f3b4294f2be76d1e6645635b4a',1,'SSD1306_DisplayInterface::write()']]]
+  ['write',['write',['../df/d42/classDisplayInterface.html#a37169676461537d0d4e618c33e2dec83',1,'DisplayInterface::write()'],['../dc/ddd/classSSD1306__DisplayInterface.html#a91ddc3f3b4294f2be76d1e6645635b4a',1,'SSD1306_DisplayInterface::write()']]]
 ];

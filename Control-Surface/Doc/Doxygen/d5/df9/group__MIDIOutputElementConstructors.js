@@ -14,6 +14,7 @@ var group__MIDIOutputElementConstructors =
     [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga1e06a6afc8420c3bd2a23b498265a21c", null ],
     [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga7dec56405ad50a0834b4e3f4ed5ed1fa", null ],
     [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga5c6a4f18f1b2d13f3d82cf365013b3d1", null ],
+    [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gafb2a0204708a879948c9dbf5e5cb7097", null ],
     [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#gae72cec73d19c10369bc81410bae4a265", null ],
     [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#ga75c3c0dd2734eb91b8d4dd1038df9b43", null ],
     [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga4e817c4bf6f1e0481e253832440539a2", null ],

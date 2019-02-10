@@ -2,7 +2,9 @@ var classMCU_1_1VUDisplay =
 [
     [ "VUDisplay", "d4/d42/classMCU_1_1VUDisplay.html#a41ba02433ea87dbce1cb17ca1bf8397d", null ],
     [ "draw", "d4/d42/classMCU_1_1VUDisplay.html#a75c0f9a1e28810703d031d7f78d35cfe", null ],
-    [ "drawAll", "d4/d42/classMCU_1_1VUDisplay.html#a0c82ae0196c0a214a3ff30ce12d06bb8", null ],
+    [ "getAll", "d4/d42/classMCU_1_1VUDisplay.html#a432ece125651c9ed20a7373fb196e375", null ],
+    [ "getDisplay", "d4/d42/classMCU_1_1VUDisplay.html#abcb247a48cd14b7815f1fb930b6fedd1", null ],
+    [ "getDisplay", "d4/d42/classMCU_1_1VUDisplay.html#ac7e658b8a699ce49ddaf3f5d5e17c679", null ],
     [ "blockheight", "d4/d42/classMCU_1_1VUDisplay.html#a38de8c79cfabe9685216cf862fbb0e14", null ],
     [ "color", "d4/d42/classMCU_1_1VUDisplay.html#afab0c9a4ede33a791b40f608825518ed", null ],
     [ "decaying", "d4/d42/classMCU_1_1VUDisplay.html#aa7219d841ca5db8894cfed444b71acd2", null ],

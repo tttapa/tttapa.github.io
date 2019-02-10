@@ -1,6 +1,7 @@
 var annotated_dup =
 [
     [ "Bankable", "d1/dd0/namespaceBankable.html", "d1/dd0/namespaceBankable" ],
+    [ "ManyAddresses", "d6/d79/namespaceManyAddresses.html", "d6/d79/namespaceManyAddresses" ],
     [ "MCU", "d7/dc7/namespaceMCU.html", "d7/dc7/namespaceMCU" ],
     [ "_Setbase", "da/d80/struct__Setbase.html", "da/d80/struct__Setbase" ],
     [ "_Setbytesep", "d6/d9e/struct__Setbytesep.html", "d6/d9e/struct__Setbytesep" ],
@@ -63,6 +64,7 @@ var annotated_dup =
     [ "is_unsigned", "d7/dc9/structis__unsigned.html", "d7/dc9/structis__unsigned" ],
     [ "IVU", "d2/de9/classIVU.html", "d2/de9/classIVU" ],
     [ "LEDs", "d2/d1b/classLEDs.html", "d2/d1b/classLEDs" ],
+    [ "ManyAddressesMIDIOutput", "d1/d2f/classManyAddressesMIDIOutput.html", "d1/d2f/classManyAddressesMIDIOutput" ],
     [ "ManyButtonsSelector", "d3/d69/classManyButtonsSelector.html", "d3/d69/classManyButtonsSelector" ],
     [ "ManyButtonsSelector_Base", "d1/d3d/classManyButtonsSelector__Base.html", "d1/d3d/classManyButtonsSelector__Base" ],
     [ "ManyButtonsSelectorLEDs", "d0/d68/classManyButtonsSelectorLEDs.html", "d0/d68/classManyButtonsSelectorLEDs" ],
@@ -133,6 +135,9 @@ var annotated_dup =
     [ "StaticSizeExtendedIOElement", "d1/d13/classStaticSizeExtendedIOElement.html", "d1/d13/classStaticSizeExtendedIOElement" ],
     [ "StreamDebugMIDI_Interface", "d8/d0b/classStreamDebugMIDI__Interface.html", "d8/d0b/classStreamDebugMIDI__Interface" ],
     [ "StreamMIDI_Interface", "d3/dc3/classStreamMIDI__Interface.html", "d3/dc3/classStreamMIDI__Interface" ],
+    [ "SwitchSelector", "df/def/classSwitchSelector.html", "df/def/classSwitchSelector" ],
+    [ "SysExBuffer", "d1/db1/classSysExBuffer.html", "d1/db1/classSysExBuffer" ],
+    [ "SysExMessage", "db/d45/structSysExMessage.html", "db/d45/structSysExMessage" ],
     [ "Timer", "dc/dea/classTimer.html", "dc/dea/classTimer" ],
     [ "Transposer", "da/db8/classTransposer.html", "da/db8/classTransposer" ],
     [ "Updatable", "d5/de0/classUpdatable.html", "d5/de0/classUpdatable" ],
