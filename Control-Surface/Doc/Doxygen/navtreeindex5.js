@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"d3/d96/classMIDIInputElementCC.html#a3cdc427ed1a74ba765311e87dbdbe60b":[6,0,87,10],
 "d3/d96/classMIDIInputElementCC.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,87,14],
 "d3/d96/classMIDIInputElementCC.html#a57b6615469e554c514a9ff56dc24908f":[6,0,87,15],
 "d3/d96/classMIDIInputElementCC.html#a69f3fe011a96eeb959ef993ead98b5d1":[6,0,87,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX5 =
 "d4/de3/classVolumeControl.html#a847a39f34dc70b6ad743b67b8bbf7a24":[4,2,2,0],
 "d4/de3/classVolumeControl.html#a883138a1262a82e8b9e05c75d576e36d":[4,2,2,11],
 "d4/de3/classVolumeControl.html#a8af924e5b3b708eb042919703d175ed3":[4,2,2,13],
-"d4/de3/classVolumeControl.html#a9c5cf9652729a493b541248f440ecbb8":[4,2,2,12],
-"d4/de3/classVolumeControl.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[4,2,2,9]
+"d4/de3/classVolumeControl.html#a9c5cf9652729a493b541248f440ecbb8":[4,2,2,12]
 };

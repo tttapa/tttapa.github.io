@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"d3/d0b/classBankable_1_1MIDIButtonLatching.html#acfabd4911411ebbfd96d4080103f4725":[6,0,0,10,7],
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,0,10,10],
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html#aedf38b6c7c6e45fd6ed57e8d1caf1506":[6,0,0,10,20],
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html#af8c3b3200bfae07e61d25fa99efd9dcf":[6,0,0,10,13],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "d3/d88/classMIDIButtonLatched.html#aedfde329baf58ab601202016432d8d55":[6,0,77,18],
 "d3/d96/classMIDIInputElementCC.html":[6,0,87],
 "d3/d96/classMIDIInputElementCC.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,87,7],
-"d3/d96/classMIDIInputElementCC.html#a38d9872489fd94dee25077c16073e8cf":[6,0,87,12],
-"d3/d96/classMIDIInputElementCC.html#a3cdc427ed1a74ba765311e87dbdbe60b":[6,0,87,10]
+"d3/d96/classMIDIInputElementCC.html#a38d9872489fd94dee25077c16073e8cf":[6,0,87,12]
 };

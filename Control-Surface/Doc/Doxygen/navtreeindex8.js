@@ -1,5 +1,6 @@
 var NAVTREEINDEX8 =
 {
+"d7/d40/classEMA.html#a0738ba021e9d79bbb005b5ea7d59d90a":[6,0,38,2],
 "d7/d40/classEMA.html#ab0d7694cffaee5280d7e68f5a71f725e":[6,0,38,0],
 "d7/d40/classEMA.html#ae4550b22dcf19b3e6c15e7ffa09aeefb":[6,0,38,1],
 "d7/d42/Channel_8hpp.html":[7,0,61],
@@ -248,6 +249,5 @@ var NAVTREEINDEX8 =
 "d8/d39/classBLEMIDI.html#aca1f4f6626f2a405ac75bd288ca7e1c8":[6,0,15,2],
 "d8/d39/classBLEMIDI.html#acdba5ac6a8a01b1523935a7ec4b44bf7":[6,0,15,6],
 "d8/d39/classBLEMIDI.html#ad0ec35ba2ab499e3c42dda91c31df8be":[6,0,15,5],
-"d8/d39/classBLEMIDI.html#aeaf0a8d859bfc29cda7002a9b38cda2c":[6,0,15,3],
-"d8/d39/classBLEMIDI.html#af388b78447b485342da87dbc401bcfeb":[6,0,15,7]
+"d8/d39/classBLEMIDI.html#aeaf0a8d859bfc29cda7002a9b38cda2c":[6,0,15,3]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"d4/de3/classVolumeControl.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[4,2,2,9],
 "d4/de3/classVolumeControl.html#a9cf409bc7effa13042ebd1d1e02d1046":[4,2,2,3],
 "d4/de3/classVolumeControl.html#ab2b63d2685b52f7ad584094c44f62754":[4,2,2,15],
 "d4/de3/classVolumeControl.html#acfabd4911411ebbfd96d4080103f4725":[4,2,2,7],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a4c1c6bd44da328dd5b4dc29503219d09":[4,0,6,8],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a57b6615469e554c514a9ff56dc24908f":[4,0,6,21],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b":[4,0,6,2],
-"d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a63b760e4554d4ea496ee012b2ba3d508":[4,0,6,12],
-"d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a698d89514186aa0c29ea6fbc5bef1e06":[4,0,6,6]
+"d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a63b760e4554d4ea496ee012b2ba3d508":[4,0,6,12]
 };

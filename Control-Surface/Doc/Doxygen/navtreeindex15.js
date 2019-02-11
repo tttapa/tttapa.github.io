@@ -1,5 +1,6 @@
 var NAVTREEINDEX15 =
 {
+"dc/d50/Frequency_8hpp_source.html":[7,0,103],
 "dc/d55/VolumeControl_8cpp.html":[7,0,269],
 "dc/d55/VolumeControl_8cpp_source.html":[7,0,269],
 "dc/d56/MAX7219SevenSegmentDisplay_8cpp.html":[7,0,134],
@@ -248,6 +249,5 @@ var NAVTREEINDEX15 =
 "dd/d16/classDoublyLinkedList.html#ae88f182608278ecca1ce770834ff5a74":[6,0,37,10],
 "dd/d16/classDoublyLinkedList.html#aeb9263ec362ab59f96f668f3f12f7b4e":[6,0,37,6],
 "dd/d1f/BankConfig_8hpp.html":[7,0,19],
-"dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1":[7,0,19,3],
-"dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1a1020529b55d78c3ec8a38703c1a79b23":[7,0,19,3,1]
+"dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1":[7,0,19,3]
 };

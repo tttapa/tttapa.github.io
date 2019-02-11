@@ -1,5 +1,6 @@
 var NAVTREEINDEX17 =
 {
+"de/d06/classIncrementDecrementSelector__Base.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,55,17],
 "de/d06/classIncrementDecrementSelector__Base.html#a1b9217b63785445fbf994e06f87d59b1":[6,0,55,3],
 "de/d06/classIncrementDecrementSelector__Base.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,55,7],
 "de/d06/classIncrementDecrementSelector__Base.html#a3752b5ddd24addec01b3898f55c0a8ab":[6,0,55,14],
@@ -248,6 +249,5 @@ var NAVTREEINDEX17 =
 "de/def/classNoteButtonLatched.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,25,10],
 "de/df8/structMIDI__message.html":[6,0,73],
 "de/df8/structMIDI__message.html#a000e113ffd36497921602a05105d020c":[6,0,73,1],
-"de/df8/structMIDI__message.html#a6415e45e09f11b6e184ae686a3d5c725":[6,0,73,2],
-"de/df8/structMIDI__message.html#a919a1842f5c582ecbc0df91c0ea0961b":[6,0,73,0]
+"de/df8/structMIDI__message.html#a6415e45e09f11b6e184ae686a3d5c725":[6,0,73,2]
 };

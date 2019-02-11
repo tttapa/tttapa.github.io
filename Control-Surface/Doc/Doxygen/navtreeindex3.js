@@ -15,6 +15,7 @@ var NAVTREEINDEX3 =
 "d2/d48/classChannel.html#ada142fabcfc0e77e178af46139b2392f":[6,0,27,4],
 "d2/d56/BitArray_8cpp.html":[7,0,20],
 "d2/d56/BitArray_8cpp_source.html":[7,0,20],
+"d2/d77/VU-Bridge_8ino-example.html":[8,18],
 "d2/d7b/CCPotentiometer_8cpp.html":[7,0,52],
 "d2/d7b/CCPotentiometer_8cpp_source.html":[7,0,52],
 "d2/d87/classMIDIButtons.html":[6,0,80],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[6,0,0,10,9],
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,0,10,3],
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a9f34809178ed809a8ff203220bd1b206":[6,0,0,10,15],
-"d3/d0b/classBankable_1_1MIDIButtonLatching.html#ac4a4255356e6a03481b2b4f0893d449e":[6,0,0,10,0],
-"d3/d0b/classBankable_1_1MIDIButtonLatching.html#acfabd4911411ebbfd96d4080103f4725":[6,0,0,10,7]
+"d3/d0b/classBankable_1_1MIDIButtonLatching.html#ac4a4255356e6a03481b2b4f0893d449e":[6,0,0,10,0]
 };

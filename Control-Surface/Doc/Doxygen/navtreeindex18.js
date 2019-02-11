@@ -1,5 +1,6 @@
 var NAVTREEINDEX18 =
 {
+"de/df8/structMIDI__message.html#a919a1842f5c582ecbc0df91c0ea0961b":[6,0,73,0],
 "de/df8/structMIDI__message.html#adfda2d0dae130aa3363bee27942f816d":[6,0,73,4],
 "de/df8/structMIDI__message.html#af73ddde8746b7f86712a180320aacbbd":[6,0,73,5],
 "de/df8/structMIDI__message.html#af80e4955731e58bfdb6e2faad1beea07":[6,0,73,3],
@@ -105,8 +106,8 @@ var NAVTREEINDEX18 =
 "df/d69/classMCU_1_1TimeDisplay.html#adcb98982679f02c01c46ac8d22722e1d":[6,0,2,3,18],
 "df/d69/classMCU_1_1TimeDisplay.html#ae24e4fc0a95f0a80ed8bc03059bc3b4d":[6,0,2,3,0],
 "df/d69/classMCU_1_1TimeDisplay.html#afebbe4f2a583d21e226a7db90718d451":[6,0,2,3,11],
-"df/d6e/namespaceMCU_1_1Bankable.html":[5,0,3,0],
 "df/d6e/namespaceMCU_1_1Bankable.html":[6,0,2,0],
+"df/d6e/namespaceMCU_1_1Bankable.html":[5,0,3,0],
 "df/d83/NoteButton_8cpp.html":[7,0,197],
 "df/d83/NoteButton_8cpp_source.html":[7,0,197],
 "df/d8b/group__MIDIInputElements.html":[4,1],
@@ -117,7 +118,7 @@ var NAVTREEINDEX18 =
 "df/d9b/classMIDICNChannel.html#adc1ff6e8f2fa717352eb5f858df81c78":[6,0,81,1],
 "df/da8/struct__Setprecision.html":[6,0,5],
 "df/da8/struct__Setprecision.html#aa82dfb10f40dfa22ccef2975f6719181":[6,0,5,0],
-"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,18],
+"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,19],
 "df/db8/LinkedList_8cpp.html":[7,0,123],
 "df/db8/LinkedList_8cpp_source.html":[7,0,123],
 "df/dbc/AudioVU_8cpp.html":[7,0,8],
@@ -207,8 +208,8 @@ var NAVTREEINDEX18 =
 "functions_enum.html":[6,3,4],
 "functions_eval.html":[6,3,5],
 "functions_f.html":[6,3,0,6],
-"functions_func.html":[6,3,1,0],
 "functions_func.html":[6,3,1],
+"functions_func.html":[6,3,1,0],
 "functions_func_b.html":[6,3,1,1],
 "functions_func_c.html":[6,3,1,2],
 "functions_func_d.html":[6,3,1,3],
@@ -244,10 +245,9 @@ var NAVTREEINDEX18 =
 "functions_type.html":[6,3,3],
 "functions_u.html":[6,3,0,18],
 "functions_v.html":[6,3,0,19],
-"functions_vars.html":[6,3,2],
 "functions_vars.html":[6,3,2,0],
+"functions_vars.html":[6,3,2],
 "functions_vars_a.html":[6,3,2,1],
 "functions_vars_b.html":[6,3,2,2],
-"functions_vars_c.html":[6,3,2,3],
-"functions_vars_d.html":[6,3,2,4]
+"functions_vars_c.html":[6,3,2,3]
 };

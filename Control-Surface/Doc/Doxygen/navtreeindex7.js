@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a698d89514186aa0c29ea6fbc5bef1e06":[4,0,6,6],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a6bae640621972b14ad9c28b6b399f08f":[4,0,6,5],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[4,0,6,11],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a883138a1262a82e8b9e05c75d576e36d":[4,0,6,14],
@@ -248,6 +249,5 @@ var NAVTREEINDEX7 =
 "d7/d33/MIDIInputElementPC_8hpp_source.html":[7,0,181],
 "d7/d40/Control__Surface_8cpp.html":[7,0,66],
 "d7/d40/Control__Surface_8cpp_source.html":[7,0,66],
-"d7/d40/classEMA.html":[6,0,38],
-"d7/d40/classEMA.html#a0738ba021e9d79bbb005b5ea7d59d90a":[6,0,38,2]
+"d7/d40/classEMA.html":[6,0,38]
 };

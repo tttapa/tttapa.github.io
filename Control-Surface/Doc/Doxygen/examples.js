@@ -18,6 +18,7 @@ var examples =
     [ "ShiftRegisterBlink.ino", "d7/d5f/ShiftRegisterBlink_8ino-example.html", null ],
     [ "SPIShiftRegisterBlink.ino", "db/dd1/SPIShiftRegisterBlink_8ino-example.html", null ],
     [ "VU-Bridge-Dual-Display.ino", "d5/d2a/VU-Bridge-Dual-Display_8ino-example.html", null ],
+    [ "VU-Bridge.ino", "d2/d77/VU-Bridge_8ino-example.html", null ],
     [ "VUMeterLEDs-USB-DAC.ino", "df/dad/VUMeterLEDs-USB-DAC_8ino-example.html", null ],
     [ "VUMeterOLED-USB-DAC.ino", "d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html", null ]
 ];

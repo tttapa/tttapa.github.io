@@ -1,5 +1,6 @@
 var NAVTREEINDEX9 =
 {
+"d8/d39/classBLEMIDI.html#af388b78447b485342da87dbc401bcfeb":[6,0,15,7],
 "d8/d39/classBLEMIDI.html#afdb4cce97116f63be21b155903ac7c08":[6,0,15,0],
 "d8/d3d/namespaceExtIO.html":[5,0,1],
 "d8/d43/classDisplayElement.html":[6,0,33],
@@ -248,6 +249,5 @@ var NAVTREEINDEX9 =
 "d9/d1d/classBankable_1_1CCButtonLatched.html#ac100ef66e13d05bbeddb1691a6fd2ce0":[4,0,2,1],
 "d9/d1d/classBankable_1_1CCButtonLatched.html#acfabd4911411ebbfd96d4080103f4725":[4,0,2,7],
 "d9/d1d/classBankable_1_1CCButtonLatched.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,2,10],
-"d9/d1d/classBankable_1_1CCButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835":[4,0,2,17],
-"d9/d1d/classBankable_1_1CCButtonLatched.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,2,13]
+"d9/d1d/classBankable_1_1CCButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835":[4,0,2,17]
 };

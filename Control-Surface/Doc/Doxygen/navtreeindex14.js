@@ -1,5 +1,6 @@
 var NAVTREEINDEX14 =
 {
+"db/dac/classMCU_1_1VPotRing__Base.html#a3cdc427ed1a74ba765311e87dbdbe60b":[6,0,2,7,19],
 "db/dac/classMCU_1_1VPotRing__Base.html#a483d8fc0af011586ebd549849a7cf712":[6,0,2,7,11],
 "db/dac/classMCU_1_1VPotRing__Base.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,2,7,22],
 "db/dac/classMCU_1_1VPotRing__Base.html#a5723f4a7c22aea22a940f481c48bd798":[6,0,2,7,7],
@@ -248,6 +249,5 @@ var NAVTREEINDEX14 =
 "dc/d50/Frequency_8hpp.html#a4f759d47db3f192e03d3565d99af1468":[7,0,103,5],
 "dc/d50/Frequency_8hpp.html#a9d64fb3adecada7a0e91ca17805ad385":[7,0,103,2],
 "dc/d50/Frequency_8hpp.html#ab1091e6dffc3a554c0cc6df174742b5d":[7,0,103,4],
-"dc/d50/Frequency_8hpp.html#ae135e37c8cef46f38e967bbbf7ac6336":[7,0,103,1],
-"dc/d50/Frequency_8hpp_source.html":[7,0,103]
+"dc/d50/Frequency_8hpp.html#ae135e37c8cef46f38e967bbbf7ac6336":[7,0,103,1]
 };

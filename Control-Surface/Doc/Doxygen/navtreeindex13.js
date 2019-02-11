@@ -1,5 +1,6 @@
 var NAVTREEINDEX13 =
 {
+"db/d1d/classMIDIInputElementPC.html#abc54b9402e8555c615aaee35235f3aa4":[6,0,90,4],
 "db/d1d/classMIDIInputElementPC.html#abe2602b3aabe0b1d717d166025992e88":[6,0,90,8],
 "db/d1d/classMIDIInputElementPC.html#ad3d45f882302e552a8754a5e96ae6b6e":[6,0,90,7],
 "db/d1d/classMIDIInputElementPC.html#adcb98982679f02c01c46ac8d22722e1d":[6,0,90,12],
@@ -248,6 +249,5 @@ var NAVTREEINDEX13 =
 "db/dac/PushButtons_8ino-example.html":[8,10],
 "db/dac/classMCU_1_1VPotRing__Base.html":[6,0,2,7],
 "db/dac/classMCU_1_1VPotRing__Base.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,2,7,15],
-"db/dac/classMCU_1_1VPotRing__Base.html#a38d9872489fd94dee25077c16073e8cf":[6,0,2,7,21],
-"db/dac/classMCU_1_1VPotRing__Base.html#a3cdc427ed1a74ba765311e87dbdbe60b":[6,0,2,7,19]
+"db/dac/classMCU_1_1VPotRing__Base.html#a38d9872489fd94dee25077c16073e8cf":[6,0,2,7,21]
 };
