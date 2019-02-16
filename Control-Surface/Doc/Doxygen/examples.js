@@ -2,6 +2,7 @@ var examples =
 [
     [ "CCIncrementDecrementButtons.ino", "da/d54/CCIncrementDecrementButtons_8ino-example.html", null ],
     [ "CCPotentiometer.ino", "d2/d35/CCPotentiometer_8ino-example.html", null ],
+    [ "CCRotaryEncoder.ino", "d3/d15/CCRotaryEncoder_8ino-example.html", null ],
     [ "Ex.1.Shift-Register-LED-Effects.ino", "d3/d82/Ex_81_8Shift-Register-LED-Effects_8ino-example.html", null ],
     [ "Getting-Started.ino", "d5/dee/Getting-Started_8ino-example.html", null ],
     [ "LED.ino", "d7/da7/LED_8ino-example.html", null ],

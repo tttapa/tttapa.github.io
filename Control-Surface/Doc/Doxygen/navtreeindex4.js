@@ -23,6 +23,7 @@ var NAVTREEINDEX4 =
 "d3/d10/classMIDICNChannelAddress.html#ae2c660a02f3b66fa943a79acb55b4c0f":[6,0,82,12],
 "d3/d10/classMIDICNChannelAddress.html#ae82ce192ab9177b8320e0e3d56591c9a":[6,0,82,16],
 "d3/d10/classMIDICNChannelAddress.html#af095bbce791e4b3540dd82d31d0227c1":[6,0,82,5],
+"d3/d15/CCRotaryEncoder_8ino-example.html":[8,2],
 "d3/d2a/classCCButtonMatrix.html":[4,0,18],
 "d3/d2a/classCCButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef":[4,0,18,16],
 "d3/d2a/classCCButtonMatrix.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,18,4],
@@ -223,7 +224,7 @@ var NAVTREEINDEX4 =
 "d3/d74/PBPotentiometer_8hpp_source.html":[7,0,218],
 "d3/d80/NoteButton_8hpp.html":[7,0,199],
 "d3/d80/NoteButton_8hpp_source.html":[7,0,199],
-"d3/d82/Ex_81_8Shift-Register-LED-Effects_8ino-example.html":[8,2],
+"d3/d82/Ex_81_8Shift-Register-LED-Effects_8ino-example.html":[8,3],
 "d3/d88/classMIDIButtonLatched.html":[6,0,77],
 "d3/d88/classMIDIButtonLatched.html#a0d00b33017b5363b3e4e1899226c4b84":[6,0,77,14],
 "d3/d88/classMIDIButtonLatched.html#a139cdf7fa68a19e2eca342aad1e10d70":[6,0,77,17],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "d3/d88/classMIDIButtonLatched.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,77,10],
 "d3/d88/classMIDIButtonLatched.html#aedfde329baf58ab601202016432d8d55":[6,0,77,18],
 "d3/d96/classMIDIInputElementCC.html":[6,0,87],
-"d3/d96/classMIDIInputElementCC.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,87,7],
-"d3/d96/classMIDIInputElementCC.html#a38d9872489fd94dee25077c16073e8cf":[6,0,87,12]
+"d3/d96/classMIDIInputElementCC.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,87,7]
 };

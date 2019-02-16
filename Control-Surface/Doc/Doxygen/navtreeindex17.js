@@ -1,5 +1,6 @@
 var NAVTREEINDEX17 =
 {
+"de/d06/classIncrementDecrementSelector__Base.html":[6,0,55],
 "de/d06/classIncrementDecrementSelector__Base.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,55,17],
 "de/d06/classIncrementDecrementSelector__Base.html#a1b9217b63785445fbf994e06f87d59b1":[6,0,55,3],
 "de/d06/classIncrementDecrementSelector__Base.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,55,7],
@@ -221,7 +222,7 @@ var NAVTREEINDEX17 =
 "de/dd1/Button_8cpp_source.html":[7,0,26],
 "de/dd1/LinkedList_8hpp.html":[7,0,124],
 "de/dd1/LinkedList_8hpp_source.html":[7,0,124],
-"de/ddb/OLED-Demo_8ino-example.html":[8,8],
+"de/ddb/OLED-Demo_8ino-example.html":[8,9],
 "de/de7/classSelectable.html":[6,0,118],
 "de/de7/classSelectable.html#a2654b231e11c02a41f20f5a0d7cce2dc":[6,0,118,2],
 "de/de7/classSelectable.html#a2d6a37f1527d18f22bb440899b395002":[6,0,118,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX17 =
 "de/def/classNoteButtonLatched.html#acfabd4911411ebbfd96d4080103f4725":[4,0,25,7],
 "de/def/classNoteButtonLatched.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,25,10],
 "de/df8/structMIDI__message.html":[6,0,73],
-"de/df8/structMIDI__message.html#a000e113ffd36497921602a05105d020c":[6,0,73,1],
-"de/df8/structMIDI__message.html#a6415e45e09f11b6e184ae686a3d5c725":[6,0,73,2]
+"de/df8/structMIDI__message.html#a000e113ffd36497921602a05105d020c":[6,0,73,1]
 };

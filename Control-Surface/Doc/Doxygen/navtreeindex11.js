@@ -1,5 +1,6 @@
 var NAVTREEINDEX11 =
 {
+"d9/db8/classSerialMIDI__Interface.html#af4f7be5b6b486b4d116b9fd6a38f22a4":[4,3,7,6],
 "d9/dbf/classAudioVULEDs.html":[4,2,1],
 "d9/dbf/classAudioVULEDs.html#a19de641f54a4ab6559e6d5e8ca0865b3":[4,2,1,18],
 "d9/dbf/classAudioVULEDs.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,2,1,5],
@@ -81,7 +82,7 @@ var NAVTREEINDEX11 =
 "d9/dc9/TimeDisplay_8hpp.html#a341d8e07dfa1868cccaf8f83f79d8c45":[7,0,259,2],
 "d9/dc9/TimeDisplay_8hpp.html#ad256c4dd4482b2fb96d8acc1230787da":[7,0,259,1],
 "d9/dc9/TimeDisplay_8hpp_source.html":[7,0,259],
-"d9/deb/PushButtonsLEDsNoMIDIFeedback_8ino-example.html":[8,12],
+"d9/deb/PushButtonsLEDsNoMIDIFeedback_8ino-example.html":[8,13],
 "d9/dee/classProgramChangeSelectorLEDs.html":[6,0,115],
 "d9/dee/classProgramChangeSelectorLEDs.html#a0c7dc759dc219ca0ab1df398df8f14b6":[6,0,115,27],
 "d9/dee/classProgramChangeSelectorLEDs.html#a22396f8624ff23df11098a5c59d44bc8":[6,0,115,28],
@@ -248,6 +249,5 @@ var NAVTREEINDEX11 =
 "da/d69/PrintStream_8cpp.html#a2b44e6ada22b1b5a703617123ebd0598":[7,0,221,38],
 "da/d69/PrintStream_8cpp.html#a36c3d007838c2df83b23486ab5e2d37c":[7,0,221,27],
 "da/d69/PrintStream_8cpp.html#a43ae2a66eb945be61773cbb24d9b6608":[7,0,221,37],
-"da/d69/PrintStream_8cpp.html#a495db53e37d033f4748f88d7d6579a4e":[7,0,221,28],
-"da/d69/PrintStream_8cpp.html#a505bb61b2f822982a09821e3d52cd424":[7,0,221,33]
+"da/d69/PrintStream_8cpp.html#a495db53e37d033f4748f88d7d6579a4e":[7,0,221,28]
 };

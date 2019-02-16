@@ -1,5 +1,6 @@
 var NAVTREEINDEX6 =
 {
+"d4/de3/classVolumeControl.html#a9c5cf9652729a493b541248f440ecbb8":[4,2,2,12],
 "d4/de3/classVolumeControl.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[4,2,2,9],
 "d4/de3/classVolumeControl.html#a9cf409bc7effa13042ebd1d1e02d1046":[4,2,2,3],
 "d4/de3/classVolumeControl.html#ab2b63d2685b52f7ad584094c44f62754":[4,2,2,15],
@@ -73,7 +74,7 @@ var NAVTREEINDEX6 =
 "d5/d20/classIncrementDecrementButtons.html#af661941dbb4a67e2b3919306bae23c8f":[6,0,53,5],
 "d5/d23/SelectorDisplay_8cpp.html":[7,0,233],
 "d5/d23/SelectorDisplay_8cpp_source.html":[7,0,233],
-"d5/d2a/VU-Bridge-Dual-Display_8ino-example.html":[8,17],
+"d5/d2a/VU-Bridge-Dual-Display_8ino-example.html":[8,18],
 "d5/d2d/classIncrementDecrementSelectorLEDs.html":[6,0,56],
 "d5/d2d/classIncrementDecrementSelectorLEDs.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,56,18],
 "d5/d2d/classIncrementDecrementSelectorLEDs.html#a1b9217b63785445fbf994e06f87d59b1":[6,0,56,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX6 =
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a4a13b63f90ec988cd14d871df9dbc53b":[4,0,6,20],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a4c1c6bd44da328dd5b4dc29503219d09":[4,0,6,8],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a57b6615469e554c514a9ff56dc24908f":[4,0,6,21],
-"d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b":[4,0,6,2],
-"d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a63b760e4554d4ea496ee012b2ba3d508":[4,0,6,12]
+"d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b":[4,0,6,2]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX8 =
 {
+"d7/d40/classEMA.html":[6,0,38],
 "d7/d40/classEMA.html#a0738ba021e9d79bbb005b5ea7d59d90a":[6,0,38,2],
 "d7/d40/classEMA.html#ab0d7694cffaee5280d7e68f5a71f725e":[6,0,38,0],
 "d7/d40/classEMA.html#ae4550b22dcf19b3e6c15e7ffa09aeefb":[6,0,38,1],
@@ -24,7 +25,7 @@ var NAVTREEINDEX8 =
 "d7/d42/Channel_8hpp_source.html":[7,0,61],
 "d7/d4e/Bankable_2Abstract_2MIDIButtonLatched_8hpp.html":[7,0,149],
 "d7/d4e/Bankable_2Abstract_2MIDIButtonLatched_8hpp_source.html":[7,0,149],
-"d7/d5f/ShiftRegisterBlink_8ino-example.html":[8,15],
+"d7/d5f/ShiftRegisterBlink_8ino-example.html":[8,16],
 "d7/d6a/structArray.html":[6,0,7],
 "d7/d6a/structArray.html#a022734bbdbf9665f0acf09573939b9e1":[6,0,7,7],
 "d7/d6a/structArray.html#a32e08de67edecaaa43a03c7fcb1dee8d":[6,0,7,0],
@@ -36,7 +37,7 @@ var NAVTREEINDEX8 =
 "d7/d6a/structArray.html#aa3851ab37aefde60e79e78d17a449682":[6,0,7,6],
 "d7/d6a/structArray.html#ab1bbbf7efcd036a89abe917e1b2ffb97":[6,0,7,5],
 "d7/d6a/structArray.html#ada05051d9c3f46082ce19faee57c1dd1":[6,0,7,1],
-"d7/d6c/NoteButtonMatrixKeyboard_8ino-example.html":[8,6],
+"d7/d6c/NoteButtonMatrixKeyboard_8ino-example.html":[8,7],
 "d7/d74/MillisTimer_8hpp.html":[7,0,193],
 "d7/d74/MillisTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3":[7,0,193,1],
 "d7/d74/MillisTimer_8hpp_source.html":[7,0,193],
@@ -87,7 +88,7 @@ var NAVTREEINDEX8 =
 "d7/d92/ManyButtonsSelectorLEDs_8hpp_source.html":[7,0,129],
 "d7/da6/MIDIInputElementCC_8cpp.html":[7,0,174],
 "d7/da6/MIDIInputElementCC_8cpp_source.html":[7,0,174],
-"d7/da7/LED_8ino-example.html":[8,4],
+"d7/da7/LED_8ino-example.html":[8,5],
 "d7/db9/VPotDisplay_8cpp.html":[7,0,271],
 "d7/db9/VPotDisplay_8cpp.html#a569d6e87ddad2bac3726800425c1909a":[7,0,271,0],
 "d7/db9/VPotDisplay_8cpp_source.html":[7,0,271],
@@ -248,6 +249,5 @@ var NAVTREEINDEX8 =
 "d8/d39/classBLEMIDI.html#a31b995dbd057d884e0517af15fa988a1":[6,0,15,1],
 "d8/d39/classBLEMIDI.html#aca1f4f6626f2a405ac75bd288ca7e1c8":[6,0,15,2],
 "d8/d39/classBLEMIDI.html#acdba5ac6a8a01b1523935a7ec4b44bf7":[6,0,15,6],
-"d8/d39/classBLEMIDI.html#ad0ec35ba2ab499e3c42dda91c31df8be":[6,0,15,5],
-"d8/d39/classBLEMIDI.html#aeaf0a8d859bfc29cda7002a9b38cda2c":[6,0,15,3]
+"d8/d39/classBLEMIDI.html#ad0ec35ba2ab499e3c42dda91c31df8be":[6,0,15,5]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX15 =
 {
+"dc/d50/Frequency_8hpp.html#ae135e37c8cef46f38e967bbbf7ac6336":[7,0,103,1],
 "dc/d50/Frequency_8hpp_source.html":[7,0,103],
 "dc/d55/VolumeControl_8cpp.html":[7,0,269],
 "dc/d55/VolumeControl_8cpp_source.html":[7,0,269],
@@ -12,7 +13,7 @@ var NAVTREEINDEX15 =
 "dc/d81/structEncoderPinList.html":[6,0,40],
 "dc/d81/structEncoderPinList.html#a69bad79ba249be03c5b488a8f1afbed4":[6,0,40,0],
 "dc/d81/structEncoderPinList.html#abf9944693d2221e276d586e97f4db54e":[6,0,40,1],
-"dc/d82/ProgramChanger_8ino-example.html":[8,9],
+"dc/d82/ProgramChanger_8ino-example.html":[8,10],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp.html":[7,0,58],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp_source.html":[7,0,58],
 "dc/d90/MIDIInputElement_8hpp.html":[7,0,173],
@@ -134,11 +135,11 @@ var NAVTREEINDEX15 =
 "dc/df8/classBankable_1_1MIDINoteLED.html#a38d9872489fd94dee25077c16073e8cf":[6,0,0,17,21],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a39912b6c8d039c840aa9a1e73e645318":[6,0,0,17,13],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a3bff2e290b2ff305ab6f42fe549b0b62":[6,0,0,17,3],
-"dc/df8/classBankable_1_1MIDINoteLED.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,17,23],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,17,22],
+"dc/df8/classBankable_1_1MIDINoteLED.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,17,23],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,0,17,10],
-"dc/df8/classBankable_1_1MIDINoteLED.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,17,25],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,17,24],
+"dc/df8/classBankable_1_1MIDINoteLED.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,17,25],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a611c554918cc06f26cc6d688a4911a8b":[6,0,0,17,16],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a646f8a5a88f68d1f8a5b91086de4f2b4":[6,0,0,17,8],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a6d425d7489541b6ff8b89e5f9c2cb5e1":[6,0,0,17,14],
@@ -248,6 +249,5 @@ var NAVTREEINDEX15 =
 "dd/d16/classDoublyLinkedList.html#ae75df28899191ac4cb60d3390a11210a":[6,0,37,19],
 "dd/d16/classDoublyLinkedList.html#ae88f182608278ecca1ce770834ff5a74":[6,0,37,10],
 "dd/d16/classDoublyLinkedList.html#aeb9263ec362ab59f96f668f3f12f7b4e":[6,0,37,6],
-"dd/d1f/BankConfig_8hpp.html":[7,0,19],
-"dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1":[7,0,19,3]
+"dd/d1f/BankConfig_8hpp.html":[7,0,19]
 };

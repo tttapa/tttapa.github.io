@@ -1,5 +1,6 @@
 var NAVTREEINDEX7 =
 {
+"d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a63b760e4554d4ea496ee012b2ba3d508":[4,0,6,12],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a698d89514186aa0c29ea6fbc5bef1e06":[4,0,6,6],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a6bae640621972b14ad9c28b6b399f08f":[4,0,6,5],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[4,0,6,11],
@@ -13,7 +14,7 @@ var NAVTREEINDEX7 =
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,6,10],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#ad96a50ea1490e5d061d57a6d208deaf7":[4,0,6,1],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,6,13],
-"d5/dee/Getting-Started_8ino-example.html":[8,3],
+"d5/dee/Getting-Started_8ino-example.html":[8,4],
 "d5/df9/group__MIDIOutputElementConstructors.html":[4,0,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac":[4,0,28,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac":[4,0,0,25],
@@ -248,6 +249,5 @@ var NAVTREEINDEX7 =
 "d7/d33/MIDIInputElementPC_8hpp.html":[7,0,181],
 "d7/d33/MIDIInputElementPC_8hpp_source.html":[7,0,181],
 "d7/d40/Control__Surface_8cpp.html":[7,0,66],
-"d7/d40/Control__Surface_8cpp_source.html":[7,0,66],
-"d7/d40/classEMA.html":[6,0,38]
+"d7/d40/Control__Surface_8cpp_source.html":[7,0,66]
 };

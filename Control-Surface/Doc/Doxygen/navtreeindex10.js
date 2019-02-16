@@ -1,5 +1,6 @@
 var NAVTREEINDEX10 =
 {
+"d9/d1d/classBankable_1_1CCButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835":[4,0,2,17],
 "d9/d1d/classBankable_1_1CCButtonLatched.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,2,13],
 "d9/d20/EncoderSelector_8cpp.html":[7,0,88],
 "d9/d20/EncoderSelector_8cpp_source.html":[7,0,88],
@@ -193,7 +194,7 @@ var NAVTREEINDEX10 =
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad61032be4eecf18e9a248f153b5e61a8":[4,3,8,5],
 "d9/d78/classHardwareSerialMIDI__Interface.html#ad82ba06102163ff804b381364919d78b":[4,3,8,14],
 "d9/d78/classHardwareSerialMIDI__Interface.html#af4f7be5b6b486b4d116b9fd6a38f22a4":[4,3,8,6],
-"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[8,20],
+"d9/d8b/VUMeterOLED-USB-DAC_8ino-example.html":[8,21],
 "d9/d94/ContinuousCCSender_8cpp.html":[7,0,62],
 "d9/d94/ContinuousCCSender_8cpp_source.html":[7,0,62],
 "d9/d97/Abstract_2MIDIButton_8cpp.html":[7,0,144],
@@ -248,6 +249,5 @@ var NAVTREEINDEX10 =
 "d9/db8/classSerialMIDI__Interface.html#acbae10bfe3f32c2fc60b7a01fb35d1ad":[4,3,7,24],
 "d9/db8/classSerialMIDI__Interface.html#ad5ae5d35fa5f34ea11b7a21b7a57bb18":[4,3,7,4],
 "d9/db8/classSerialMIDI__Interface.html#ad61032be4eecf18e9a248f153b5e61a8":[4,3,7,5],
-"d9/db8/classSerialMIDI__Interface.html#ad82ba06102163ff804b381364919d78b":[4,3,7,14],
-"d9/db8/classSerialMIDI__Interface.html#af4f7be5b6b486b4d116b9fd6a38f22a4":[4,3,7,6]
+"d9/db8/classSerialMIDI__Interface.html#ad82ba06102163ff804b381364919d78b":[4,3,7,14]
 };

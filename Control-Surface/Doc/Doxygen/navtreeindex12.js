@@ -1,5 +1,6 @@
 var NAVTREEINDEX12 =
 {
+"da/d69/PrintStream_8cpp.html#a505bb61b2f822982a09821e3d52cd424":[7,0,221,33],
 "da/d69/PrintStream_8cpp.html#a5116ec6b4908a3a571278c6ed32e7693":[7,0,221,19],
 "da/d69/PrintStream_8cpp.html#a5527414c024fddf1fce6190623601f80":[7,0,221,15],
 "da/d69/PrintStream_8cpp.html#a57bfabe8286b9f6938243b52a7779e86":[7,0,221,22],
@@ -66,7 +67,7 @@ var NAVTREEINDEX12 =
 "da/d80/struct__Setbase.html#a71ff2a1cb6bd223fbe45707260f6182f":[6,0,3,0],
 "da/d85/CCButtonLatched_8hpp.html":[7,0,35],
 "da/d85/CCButtonLatched_8hpp_source.html":[7,0,35],
-"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,14],
+"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,15],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html":[6,0,2,0,0],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a07155d1404800da8eb51cbc6c6da0c6e":[6,0,2,0,0,32],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,2,0,0,20],
@@ -173,7 +174,7 @@ var NAVTREEINDEX12 =
 "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#acfabd4911411ebbfd96d4080103f4725":[6,0,1,1,7],
 "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,1,1,10],
 "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#afd41ec707b50753edd2c39567efe8517":[6,0,1,1,12],
-"da/df7/OLED-Demo-Audio_8ino-example.html":[8,7],
+"da/df7/OLED-Demo-Audio_8ino-example.html":[8,8],
 "db/d02/Settings_8hpp.html":[7,0,241],
 "db/d02/Settings_8hpp.html#a0f4fabd413ae4e94b4f8d45cc1a249ad":[7,0,241,2],
 "db/d02/Settings_8hpp.html#a2a82e3cbc4ddcf68ac47d0d464189e35":[7,0,241,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX12 =
 "db/d1d/classMIDIInputElementPC.html#a77e0f0816c9394f48a685888309504db":[6,0,90,3],
 "db/d1d/classMIDIInputElementPC.html#a7ae18e103d62568ba35c1c2de2e37885":[6,0,90,2],
 "db/d1d/classMIDIInputElementPC.html#a8292565a67104ddb3f3f378aef785931":[6,0,90,1],
-"db/d1d/classMIDIInputElementPC.html#a97a344a693c0926e2f70f9a078181d4f":[6,0,90,10],
-"db/d1d/classMIDIInputElementPC.html#ab487eb31758e7be2b98731bd0f255588":[6,0,90,9]
+"db/d1d/classMIDIInputElementPC.html#a97a344a693c0926e2f70f9a078181d4f":[6,0,90,10]
 };
