@@ -19,7 +19,6 @@ var searchData=
   ['channel_2ehpp',['Channel.hpp',['../d7/d42/Channel_8hpp.html',1,'']]],
   ['continuousccsender_2ecpp',['ContinuousCCSender.cpp',['../d9/d94/ContinuousCCSender_8cpp.html',1,'']]],
   ['continuousccsender_2ehpp',['ContinuousCCSender.hpp',['../db/dd1/ContinuousCCSender_8hpp.html',1,'']]],
-  ['control_5fchange_2ecpp',['Control_Change.cpp',['../d8/d78/Control__Change_8cpp.html',1,'']]],
   ['control_5fchange_2ehpp',['Control_Change.hpp',['../d9/d43/Control__Change_8hpp.html',1,'']]],
   ['control_5fsurface_2ecpp',['Control_Surface.cpp',['../d7/d40/Control__Surface_8cpp.html',1,'']]],
   ['control_5fsurface_2eh',['Control_Surface.h',['../db/dbf/Control__Surface_8h.html',1,'']]],

@@ -82,7 +82,6 @@ var files_dup =
     [ "ContinuousCCSender.hpp", "db/dd1/ContinuousCCSender_8hpp.html", [
       [ "ContinuousCCSender", "da/d07/classContinuousCCSender.html", "da/d07/classContinuousCCSender" ]
     ] ],
-    [ "Control_Change.cpp", "d8/d78/Control__Change_8cpp.html", null ],
     [ "Control_Change.hpp", "d9/d43/Control__Change_8hpp.html", "d9/d43/Control__Change_8hpp" ],
     [ "Control_Surface.cpp", "d7/d40/Control__Surface_8cpp.html", null ],
     [ "Control_Surface.h", "db/dbf/Control__Surface_8h.html", null ],
@@ -211,7 +210,6 @@ var files_dup =
     ] ],
     [ "MAX7219SevenSegmentDisplay.cpp", "dc/d56/MAX7219SevenSegmentDisplay_8cpp.html", null ],
     [ "MAX7219SevenSegmentDisplay.hpp", "d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html", "d5/d0c/MAX7219SevenSegmentDisplay_8hpp" ],
-    [ "MCU.cpp", "d1/deb/MCU_8cpp.html", null ],
     [ "MCU.hpp", "db/d60/MCU_8hpp.html", "db/d60/MCU_8hpp" ],
     [ "MIDI_Interface.cpp", "de/d0f/MIDI__Interface_8cpp.html", null ],
     [ "MIDI_Interface.hpp", "d6/d04/MIDI__Interface_8hpp.html", "d6/d04/MIDI__Interface_8hpp" ],

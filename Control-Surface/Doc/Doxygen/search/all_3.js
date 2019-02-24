@@ -80,7 +80,6 @@ var searchData=
   ['continuoussendfunction7bit',['ContinuousSendFunction7Bit',['../d0/d4e/Def_8hpp.html#a07aaa0ba182f95bf623abc210207f928',1,'Def.hpp']]],
   ['control',['CONTROL',['../d7/dc7/namespaceMCU.html#a96b6768f27bc6657ff892af5fd93ccce',1,'MCU']]],
   ['control_5fchange',['CONTROL_CHANGE',['../d7/d2d/MIDI__Parser_8hpp.html#a222dd918246e7470a36e3537724d5a17',1,'MIDI_Parser.hpp']]],
-  ['control_5fchange_2ecpp',['Control_Change.cpp',['../d8/d78/Control__Change_8cpp.html',1,'']]],
   ['control_5fchange_2ehpp',['Control_Change.hpp',['../d9/d43/Control__Change_8hpp.html',1,'']]],
   ['control_5fsurface',['Control_Surface',['../d9/d38/Control__Surface__Class_8cpp.html#af7a5d250297d82b2b29605dd7ac250df',1,'Control_Surface():&#160;Control_Surface_Class.cpp'],['../d3/d37/Control__Surface__Class_8hpp.html#af7a5d250297d82b2b29605dd7ac250df',1,'Control_Surface():&#160;Control_Surface_Class.cpp']]],
   ['control_5fsurface_2ecpp',['Control_Surface.cpp',['../d7/d40/Control__Surface_8cpp.html',1,'']]],
