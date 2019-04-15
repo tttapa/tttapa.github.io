@@ -41,7 +41,7 @@ var NAVTREEINDEX13 =
 "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#acfabd4911411ebbfd96d4080103f4725":[6,0,1,1,7],
 "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,1,1,8],
 "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#afd41ec707b50753edd2c39567efe8517":[6,0,1,1,12],
-"da/df7/OLED-Demo-Audio_8ino-example.html":[8,8],
+"da/df7/OLED-Demo-Audio_8ino-example.html":[8,9],
 "db/d02/Settings_8hpp.html":[7,0,248],
 "db/d02/Settings_8hpp.html#a0f4fabd413ae4e94b4f8d45cc1a249ad":[7,0,248,2],
 "db/d02/Settings_8hpp.html#a2a82e3cbc4ddcf68ac47d0d464189e35":[7,0,248,1],
@@ -65,6 +65,7 @@ var NAVTREEINDEX13 =
 "db/d0b/ShiftRegisterOutRGB_8cpp.html":[7,0,256],
 "db/d0b/ShiftRegisterOutRGB_8cpp.html#a484a37f40fefe5c8a1f0f73b2d21dfba":[7,0,256,0],
 "db/d0b/ShiftRegisterOutRGB_8cpp_source.html":[7,0,256],
+"db/d12/NoteChordButton_8ino-example.html":[8,8],
 "db/d15/Bankable_2CCButton_8hpp.html":[7,0,32],
 "db/d15/Bankable_2CCButton_8hpp_source.html":[7,0,32],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html":[6,0,2,0,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX13 =
 "db/d60/MCU_8hpp.html#a422bcc84cdcbb157228d08ae7a8431a0":[7,0,137,17],
 "db/d60/MCU_8hpp.html#a4247bcebef466af542ed747d17c14fce":[7,0,137,99],
 "db/d60/MCU_8hpp.html#a43fe0d6d55f1f2b003c3568b6444321b":[7,0,137,102],
-"db/d60/MCU_8hpp.html#a4b2605222a62ed280cd95061ff7d6522":[7,0,137,37],
-"db/d60/MCU_8hpp.html#a4d49d2667fe2c176b37fe25d273391bc":[7,0,137,13]
+"db/d60/MCU_8hpp.html#a4b2605222a62ed280cd95061ff7d6522":[7,0,137,37]
 };

@@ -8,6 +8,7 @@ var examples =
     [ "LED.ino", "d7/da7/LED_8ino-example.html", null ],
     [ "Multiplexer-AnalogReadSerial.ino", "d1/d8d/Multiplexer-AnalogReadSerial_8ino-example.html", null ],
     [ "NoteButtonMatrixKeyboard.ino", "d7/d6c/NoteButtonMatrixKeyboard_8ino-example.html", null ],
+    [ "NoteChordButton.ino", "db/d12/NoteChordButton_8ino-example.html", null ],
     [ "OLED-Demo-Audio.ino", "da/df7/OLED-Demo-Audio_8ino-example.html", null ],
     [ "OLED-Demo.ino", "de/ddb/OLED-Demo_8ino-example.html", null ],
     [ "ProgramChanger.ino", "dc/d82/ProgramChanger_8ino-example.html", null ],

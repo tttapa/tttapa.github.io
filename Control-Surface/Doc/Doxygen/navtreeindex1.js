@@ -49,7 +49,7 @@ var NAVTREEINDEX1 =
 "d0/dd3/classCCButtons.html#ad2d72afc7556c0d852669e7fbf9fe7e3":[4,0,20,17],
 "d0/dd3/classCCButtons.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,20,8],
 "d0/dd3/classCCButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,20,13],
-"d0/de3/PushButtonsLEDs_8ino-example.html":[8,12],
+"d0/de3/PushButtonsLEDs_8ino-example.html":[8,13],
 "d1/d02/ManyButtonsSelector_8hpp.html":[7,0,128],
 "d1/d02/ManyButtonsSelector_8hpp_source.html":[7,0,128],
 "d1/d08/classMCU_1_1AssignmentDisplay.html":[6,0,2,1],

@@ -156,7 +156,7 @@ var NAVTREEINDEX12 =
 "da/d80/struct__Setbase.html#a71ff2a1cb6bd223fbe45707260f6182f":[6,0,3,0],
 "da/d85/CCButtonLatched_8hpp.html":[7,0,35],
 "da/d85/CCButtonLatched_8hpp_source.html":[7,0,35],
-"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,15],
+"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,16],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html":[6,0,2,0,0],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a07155d1404800da8eb51cbc6c6da0c6e":[6,0,2,0,0,32],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,2,0,0,20],

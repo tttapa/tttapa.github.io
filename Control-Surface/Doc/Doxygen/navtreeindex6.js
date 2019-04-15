@@ -111,7 +111,7 @@ var NAVTREEINDEX6 =
 "d5/d20/classIncrementDecrementButtons.html#af661941dbb4a67e2b3919306bae23c8f":[6,0,55,5],
 "d5/d23/SelectorDisplay_8cpp.html":[7,0,240],
 "d5/d23/SelectorDisplay_8cpp_source.html":[7,0,240],
-"d5/d2a/VU-Bridge-Dual-Display_8ino-example.html":[8,18],
+"d5/d2a/VU-Bridge-Dual-Display_8ino-example.html":[8,19],
 "d5/d2d/classIncrementDecrementSelectorLEDs.html":[6,0,58],
 "d5/d2d/classIncrementDecrementSelectorLEDs.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,58,18],
 "d5/d2d/classIncrementDecrementSelectorLEDs.html#a1b9217b63785445fbf994e06f87d59b1":[6,0,58,3],

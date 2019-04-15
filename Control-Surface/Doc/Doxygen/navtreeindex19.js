@@ -1,5 +1,6 @@
 var NAVTREEINDEX19 =
 {
+"df/d42/classDisplayInterface.html#afd8830ad2c109bfd1afc09abe4403179":[6,0,35,6],
 "df/d53/XBitmaps_8cpp.html":[7,0,293],
 "df/d53/XBitmaps_8cpp_source.html":[7,0,293],
 "df/d66/Debug_8cpp.html":[7,0,70],
@@ -39,7 +40,7 @@ var NAVTREEINDEX19 =
 "df/d9b/classMIDICNChannel.html#adc1ff6e8f2fa717352eb5f858df81c78":[6,0,84,1],
 "df/da8/struct__Setprecision.html":[6,0,5],
 "df/da8/struct__Setprecision.html#aa82dfb10f40dfa22ccef2975f6719181":[6,0,5,0],
-"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,20],
+"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,21],
 "df/db8/LinkedList_8cpp.html":[7,0,124],
 "df/db8/LinkedList_8cpp_source.html":[7,0,124],
 "df/dbc/AudioVU_8cpp.html":[7,0,8],
@@ -170,8 +171,8 @@ var NAVTREEINDEX19 =
 "functions_type.html":[6,3,3],
 "functions_u.html":[6,3,0,18],
 "functions_v.html":[6,3,0,19],
-"functions_vars.html":[6,3,2],
 "functions_vars.html":[6,3,2,0],
+"functions_vars.html":[6,3,2],
 "functions_vars_a.html":[6,3,2,1],
 "functions_vars_b.html":[6,3,2,2],
 "functions_vars_c.html":[6,3,2,3],
@@ -248,6 +249,5 @@ var NAVTREEINDEX19 =
 "namespacemembers_m.html":[5,1,0,11],
 "namespacemembers_n.html":[5,1,0,12],
 "namespacemembers_o.html":[5,1,0,13],
-"namespacemembers_p.html":[5,1,0,14],
-"namespacemembers_r.html":[5,1,0,15]
+"namespacemembers_p.html":[5,1,0,14]
 };

@@ -1,5 +1,6 @@
 var NAVTREEINDEX16 =
 {
+"dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d":[6,0,145,3],
 "dc/df0/group__MIDIInterfaces.html":[4,3],
 "dc/df8/classBankable_1_1MIDINoteLED.html":[6,0,0,18],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a0a1ba413a53668ea7f7dbc05e8414e4b":[6,0,0,18,19],
@@ -9,8 +10,8 @@ var NAVTREEINDEX16 =
 "dc/df8/classBankable_1_1MIDINoteLED.html#a38d9872489fd94dee25077c16073e8cf":[6,0,0,18,21],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a39912b6c8d039c840aa9a1e73e645318":[6,0,0,18,13],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a3bff2e290b2ff305ab6f42fe549b0b62":[6,0,0,18,3],
-"dc/df8/classBankable_1_1MIDINoteLED.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,18,23],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,18,22],
+"dc/df8/classBankable_1_1MIDINoteLED.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,18,23],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,0,18,10],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,18,25],
 "dc/df8/classBankable_1_1MIDINoteLED.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,18,24],
@@ -248,6 +249,5 @@ var NAVTREEINDEX16 =
 "dd/d80/PrintStream_8hpp.html#ac1965a822d8334f9c97e598d36056dff":[7,0,229,10],
 "dd/d80/PrintStream_8hpp.html#ac70cf0f4169749ed3db3801836289d40":[7,0,229,17],
 "dd/d80/PrintStream_8hpp.html#ac9013d198ba536b4b1cd22c374f8603a":[7,0,229,19],
-"dd/d80/PrintStream_8hpp.html#ac93c94db784331d028ba9f0bec58f3e7":[7,0,229,30],
-"dd/d80/PrintStream_8hpp.html#acfb70bb3046cc98c296cef97e0b38026":[7,0,229,18]
+"dd/d80/PrintStream_8hpp.html#ac93c94db784331d028ba9f0bec58f3e7":[7,0,229,30]
 };

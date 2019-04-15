@@ -33,7 +33,7 @@ var NAVTREEINDEX3 =
 "d2/d48/classChannel.html#ada142fabcfc0e77e178af46139b2392f":[6,0,27,4],
 "d2/d56/BitArray_8cpp.html":[7,0,20],
 "d2/d56/BitArray_8cpp_source.html":[7,0,20],
-"d2/d77/VU-Bridge_8ino-example.html":[8,19],
+"d2/d77/VU-Bridge_8ino-example.html":[8,20],
 "d2/d7b/CCPotentiometer_8cpp.html":[7,0,52],
 "d2/d7b/CCPotentiometer_8cpp_source.html":[7,0,52],
 "d2/d87/classMIDIButtons.html":[6,0,82],

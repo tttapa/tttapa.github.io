@@ -81,13 +81,13 @@ var NAVTREEINDEX =
 "d9/d78/classHardwareSerialMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4",
 "d9/df9/classBankable_1_1MIDIButton.html#a9f34809178ed809a8ff203220bd1b206",
 "da/dd0/classMAX7219__Base.html#a5627a59964dcdc347113f1d87aab87e7",
-"db/d60/MCU_8hpp.html#a4e5f30af84a3ae7efa9ffa7696db76c2",
-"db/de9/classBitArray.html#a61a953baab78ff4ed53c65a6a45d3686",
-"dc/df0/group__MIDIInterfaces.html",
-"dd/d80/PrintStream_8hpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e",
-"de/d36/classBankable_1_1NoteButton.html#a63b760e4554d4ea496ee012b2ba3d508",
-"df/d53/XBitmaps_8cpp.html",
-"namespacemembers_s.html"
+"db/d60/MCU_8hpp.html#a4d49d2667fe2c176b37fe25d273391bc",
+"db/de9/classBitArray.html#a5b8bef74feec0b2b77c4f3025eb13a10",
+"dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d",
+"dd/d80/PrintStream_8hpp.html#acfb70bb3046cc98c296cef97e0b38026",
+"de/d36/classBankable_1_1NoteButton.html#a5c008d0d20b072e46c14b9c48ec6c45b",
+"df/d42/classDisplayInterface.html#afd8830ad2c109bfd1afc09abe4403179",
+"namespacemembers_r.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

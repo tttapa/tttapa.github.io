@@ -75,7 +75,7 @@ var NAVTREEINDEX8 =
 "d7/d42/Channel_8hpp_source.html":[7,0,61],
 "d7/d4e/Bankable_2Abstract_2MIDIButtonLatched_8hpp.html":[7,0,149],
 "d7/d4e/Bankable_2Abstract_2MIDIButtonLatched_8hpp_source.html":[7,0,149],
-"d7/d5f/ShiftRegisterBlink_8ino-example.html":[8,16],
+"d7/d5f/ShiftRegisterBlink_8ino-example.html":[8,17],
 "d7/d6a/structArray.html":[6,0,7],
 "d7/d6a/structArray.html#a022734bbdbf9665f0acf09573939b9e1":[6,0,7,7],
 "d7/d6a/structArray.html#a32e08de67edecaaa43a03c7fcb1dee8d":[6,0,7,0],

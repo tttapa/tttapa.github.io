@@ -1,5 +1,6 @@
 var NAVTREEINDEX15 =
 {
+"db/de9/classBitArray.html#a5b8bef74feec0b2b77c4f3025eb13a10":[6,0,14,11],
 "db/de9/classBitArray.html#a61a953baab78ff4ed53c65a6a45d3686":[6,0,14,9],
 "db/de9/classBitArray.html#a6f88d7f06380b68327b6affee50c5f5b":[6,0,14,3],
 "db/de9/classBitArray.html#a873e212ea025f807da031667ec38508d":[6,0,14,2],
@@ -138,7 +139,7 @@ var NAVTREEINDEX15 =
 "dc/d81/structEncoderPinList.html":[6,0,41],
 "dc/d81/structEncoderPinList.html#a69bad79ba249be03c5b488a8f1afbed4":[6,0,41,0],
 "dc/d81/structEncoderPinList.html#abf9944693d2221e276d586e97f4db54e":[6,0,41,1],
-"dc/d82/ProgramChanger_8ino-example.html":[8,10],
+"dc/d82/ProgramChanger_8ino-example.html":[8,11],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp.html":[7,0,58],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp_source.html":[7,0,58],
 "dc/d90/MIDIInputElement_8hpp.html":[7,0,177],
@@ -248,6 +249,5 @@ var NAVTREEINDEX15 =
 "dc/dea/classTimer.html#a80b14a1a0a76371692329924b9064a19":[6,0,145,0],
 "dc/dea/classTimer.html#a8a385bff3bedc0250ead0b1a8e82d76f":[6,0,145,1],
 "dc/dea/classTimer.html#ab4883393ce41724763407b2a73826a24":[6,0,145,2],
-"dc/dea/classTimer.html#ad4fa8e5c9f307790593ab1f7d9862205":[6,0,145,4],
-"dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d":[6,0,145,3]
+"dc/dea/classTimer.html#ad4fa8e5c9f307790593ab1f7d9862205":[6,0,145,4]
 };
