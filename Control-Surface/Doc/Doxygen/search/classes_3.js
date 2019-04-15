@@ -9,6 +9,7 @@ var searchData=
   ['ccpotentiometer',['CCPotentiometer',['../d7/dc0/classBankable_1_1CCPotentiometer.html',1,'Bankable::CCPotentiometer'],['../db/d32/classCCPotentiometer.html',1,'CCPotentiometer'],['../d7/df2/classManyAddresses_1_1CCPotentiometer.html',1,'ManyAddresses::CCPotentiometer&lt; N &gt;']]],
   ['ccrotaryencoder',['CCRotaryEncoder',['../da/d40/classBankable_1_1CCRotaryEncoder.html',1,'Bankable::CCRotaryEncoder'],['../d3/d62/classCCRotaryEncoder.html',1,'CCRotaryEncoder']]],
   ['channel',['Channel',['../d2/d48/classChannel.html',1,'']]],
+  ['chord',['Chord',['../d5/dc0/classChord.html',1,'']]],
   ['continuousccsender',['ContinuousCCSender',['../da/d07/classContinuousCCSender.html',1,'']]],
   ['control_5fsurface_5f',['Control_Surface_',['../dc/d45/classControl__Surface__.html',1,'']]]
 ];

@@ -415,7 +415,7 @@ template&lt;uint8_t N&gt; </div>
 </div><div class="memdoc">
 
 <p>Initialize the shift register. </p>
-<p><br />
+<p><br  />
  Set the data and clock pins to output mode, and set all shift register outputs to <code>LOW</code>. </p>
 
 <p>Implements <a class="el" href="../../de/d4e/classExtendedIOElement.html#a29b7bc6b58838c2dbe16d57dd47eeeac">ExtendedIOElement</a>.</p>
@@ -653,7 +653,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a3151d5bf08e6b32231cdd58ed2f39aee_icgraph.svg" width="1606" height="2086"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a3151d5bf08e6b32231cdd58ed2f39aee_icgraph.svg" width="1611" height="2235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -749,7 +749,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a955322d29e4e63ec40a587b5ed9db31b_icgraph.svg" width="1446" height="2086"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a955322d29e4e63ec40a587b5ed9db31b_icgraph.svg" width="1451" height="2235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -845,7 +845,7 @@ template&lt;uint8_t N&gt; </div>
 </div><div class="memdoc">
 
 <p>Get the extended IO pin number of a given physical pin of this extended IO element. </p>
-<p><br />
+<p><br  />
  It is alias for <code><a class="el" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03" title="Get the extended IO pin number of a given physical pin of this extended IO element.">ExtendedIOElement::pin</a></code>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>The zero-based physical pin number of this IO element. </td></tr>
@@ -909,8 +909,64 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a id="ab0e7b41124b477456bf5a1de8071d1e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab0e7b41124b477456bf5a1de8071d1e3">&#9670;&nbsp;</a></span>pinMode() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ExtendedIOElement::pinMode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d0/d4e/Def_8hpp.html#a5dac1481c2337a983c60f5f2b9c704ef">pin_t</a>&#160;</td>
+          <td class="paramname"><em>pin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>mode</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set the mode of a given pin. </p>
+<dl class="section note"><dt>Note</dt><dd>This function might not be implemented by all subclasses. <br  />
+ Some extended IO types, such as shift registers, can only be used as outputs. <br  />
+ On others, it might be implemented, but it could impact all pins of the IO element. For example, enabling the internal pull-up resistor on an analog multiplexer affects all pins of the mux.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">pin</td><td>The (zero-based) pin of this IO element. </td></tr>
+    <tr><td class="paramname">mode</td><td>The mode to set the pin to (e.g. <code>INPUT</code>, <code>OUTPUT</code> or <code>INPUT_PULLUP</code>). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a6b93eff331c4f7ab31a1ea2a037aecc3">AnalogMultiplex&lt; N &gt;</a>.</p>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_ab0e7b41124b477456bf5a1de8071d1e3_icgraph.svg" width="1096" height="1071"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+</div>
+</div>
+
+</div>
+</div>
 <a id="a651cd79fb7296052beb837b0c1ff31a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a651cd79fb7296052beb837b0c1ff31a8">&#9670;&nbsp;</a></span>pinMode() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a651cd79fb7296052beb837b0c1ff31a8">&#9670;&nbsp;</a></span>pinMode() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -948,62 +1004,6 @@ template&lt;uint8_t N&gt; </div>
 <p>The pinMode function is not implemented because the mode is <code>OUTPUT</code> by definition. </p>
 
 <p class="definition">Definition at line <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00040">40</a> of file <a class="el" href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html">ShiftRegisterOutBase.hpp</a>.</p>
-
-</div>
-</div>
-<a id="ab0e7b41124b477456bf5a1de8071d1e3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab0e7b41124b477456bf5a1de8071d1e3">&#9670;&nbsp;</a></span>pinMode() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void ExtendedIOElement::pinMode </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="../../d0/d4e/Def_8hpp.html#a5dac1481c2337a983c60f5f2b9c704ef">pin_t</a>&#160;</td>
-          <td class="paramname"><em>pin</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>mode</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span><span class="mlabel">inherited</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Set the mode of a given pin. </p>
-<dl class="section note"><dt>Note</dt><dd>This function might not be implemented by all subclasses. <br />
- Some extended IO types, such as shift registers, can only be used as outputs. <br />
- On others, it might be implemented, but it could impact all pins of the IO element. For example, enabling the internal pull-up resistor on an analog multiplexer affects all pins of the mux.</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pin</td><td>The (zero-based) pin of this IO element. </td></tr>
-    <tr><td class="paramname">mode</td><td>The mode to set the pin to (e.g. <code>INPUT</code>, <code>OUTPUT</code> or <code>INPUT_PULLUP</code>). </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#a6b93eff331c4f7ab31a1ea2a037aecc3">AnalogMultiplex&lt; N &gt;</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_ab0e7b41124b477456bf5a1de8071d1e3_icgraph.svg" width="1091" height="895"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
-</div>
-</div>
 
 </div>
 </div>
@@ -1344,6 +1344,9 @@ template&lt;uint8_t N&gt; </div>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aclassShiftRegisterOut_html_af722e396ff3daf26a8abc096f2ddaf66"><div class="ttname"><a href="../../d1/d5c/classShiftRegisterOut.html#af722e396ff3daf26a8abc096f2ddaf66">ShiftRegisterOut::dataPin</a></div><div class="ttdeci">const pin_t dataPin</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/db4/ShiftRegisterOut_8hpp_source.html#l00064">ShiftRegisterOut.hpp:64</a></div></div>
+<div class="ttc" id="aclassShiftRegisterOutBase_html_a772ff7436aff0cc793762ab95b872013"><div class="ttname"><a href="../../d8/db4/classShiftRegisterOutBase.html#a772ff7436aff0cc793762ab95b872013">ShiftRegisterOutBase::latchPin</a></div><div class="ttdeci">const pin_t latchPin</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/d93/ShiftRegisterOutBase_8hpp_source.html#l00135">ShiftRegisterOutBase.hpp:135</a></div></div>
+<div class="ttc" id="aclassShiftRegisterOut_html_a59c9de6869394eb0103fc61aa836d708"><div class="ttname"><a href="../../d1/d5c/classShiftRegisterOut.html#a59c9de6869394eb0103fc61aa836d708">ShiftRegisterOut::clockPin</a></div><div class="ttdeci">const pin_t clockPin</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/db4/ShiftRegisterOut_8hpp_source.html#l00065">ShiftRegisterOut.hpp:65</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

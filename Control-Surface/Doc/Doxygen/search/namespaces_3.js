@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xbm',['XBM',['../dd/d93/namespaceXBM.html',1,'']]]
+  ['intervals',['Intervals',['../da/dd4/namespaceIntervals.html',1,'']]]
 ];

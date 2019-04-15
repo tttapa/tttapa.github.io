@@ -1,6 +1,7 @@
 var searchData=
 [
   ['d',['D',['../d7/d78/namespaceMIDI__Notes.html#a17f67c20013bf43a299a253d4a1926cb',1,'MIDI_Notes']]],
+  ['d5',['d5',['../da/dd4/namespaceIntervals.html#a4203a9ce5f6d65d3c800b653b6408823',1,'Intervals']]],
   ['damper_5fpedal',['Damper_Pedal',['../d4/dbe/namespaceMIDI__CC.html#a305f0ec8c6fe138e124df49d044c2e11',1,'MIDI_CC']]],
   ['data',['data',['../d7/d6a/structArray.html#a797eabcf5e012d39e65fd88599b4d596',1,'Array::data()'],['../db/d45/structSysExMessage.html#ab6e499ffd178a585eb2340edf1fd857b',1,'SysExMessage::data()']]],
   ['data1',['data1',['../dd/d36/structMIDI__message__matcher.html#ac443b9410f85ee27af5b87f3d16608a3',1,'MIDI_message_matcher::data1()'],['../de/df8/structMIDI__message.html#af80e4955731e58bfdb6e2faad1beea07',1,'MIDI_message::data1()']]],
@@ -42,6 +43,7 @@ var searchData=
   ['digitalread',['digitalRead',['../d7/d8d/classAnalogMultiplex.html#ac59d85d61812add9eb6d3e28c1c24beb',1,'AnalogMultiplex::digitalRead()'],['../de/d4e/classExtendedIOElement.html#af799512582ef9f7b56616d29fd78324a',1,'ExtendedIOElement::digitalRead()'],['../dc/d19/classMAX7219.html#ac3ebb45e4e1678ec0715be1c8470244b',1,'MAX7219::digitalRead()'],['../d8/db4/classShiftRegisterOutBase.html#a8fc372c4de18bf3f15ff4e5eb357a38c',1,'ShiftRegisterOutBase::digitalRead()'],['../d8/d3d/namespaceExtIO.html#a9bda9dc007f42a200626d1d4ea94250b',1,'ExtIO::digitalRead(pin_t pin)'],['../d8/d3d/namespaceExtIO.html#a9e1b1e3ddc71a977fbf6df93c10cce82',1,'ExtIO::digitalRead(int pin)']]],
   ['digitalsendfunction',['DigitalSendFunction',['../d0/d4e/Def_8hpp.html#a2889dcca0ddf95509a3a05a06d074b13',1,'Def.hpp']]],
   ['digitalwrite',['digitalWrite',['../d7/d8d/classAnalogMultiplex.html#ad7a07a424662ba5fd6d1a49b5c19e3c8',1,'AnalogMultiplex::digitalWrite()'],['../de/d4e/classExtendedIOElement.html#a0afd6681ab951942ca3cac83370562bb',1,'ExtendedIOElement::digitalWrite()'],['../dc/d19/classMAX7219.html#acf789d594c9da7acb8a613b0fef4152d',1,'MAX7219::digitalWrite()'],['../d8/db4/classShiftRegisterOutBase.html#a9f87915364296d5ee654f4ae3bed8e3d',1,'ShiftRegisterOutBase::digitalWrite()'],['../d8/d3d/namespaceExtIO.html#af83b2f2728401bf8efea42049ceb7dcd',1,'ExtIO::digitalWrite(pin_t pin, uint8_t val)'],['../d8/d3d/namespaceExtIO.html#a69924b6a6c77c160b097286862ba5f38',1,'ExtIO::digitalWrite(int pin, uint8_t val)']]],
+  ['diminished',['Diminished',['../df/d20/namespaceChords.html#a1a0523f331a461ec9943e4fcb7bdd932',1,'Chords']]],
   ['dirty',['dirty',['../d8/db4/classShiftRegisterOutBase.html#a0e458fef1cf00d2a4ee3f229450e070c',1,'ShiftRegisterOutBase']]],
   ['disable',['disable',['../d5/de0/classUpdatable.html#a9cf409bc7effa13042ebd1d1e02d1046',1,'Updatable::disable()'],['../d5/de0/classUpdatable.html#a28dfbd31c4cb424f9b32480b1aeb0bbf',1,'Updatable::disable(Updatable&lt; T &gt; *element)'],['../d5/de0/classUpdatable.html#a6bae640621972b14ad9c28b6b399f08f',1,'Updatable::disable(Updatable&lt; T &gt; &amp;element)'],['../d5/de0/classUpdatable.html#a698d89514186aa0c29ea6fbc5bef1e06',1,'Updatable::disable(U(&amp;array)[N])']]],
   ['disabled',['DISABLED',['../d7/d8d/classAnalogMultiplex.html#a57f26279e831b5fdad039524836b1cd6',1,'AnalogMultiplex']]],
@@ -61,10 +63,12 @@ var searchData=
   ['displayrange',['displayRange',['../d2/d1b/classLEDs.html#ae9224faaf1b3cf09fa6f1e3e5e6a60d7',1,'LEDs']]],
   ['displaytest',['DISPLAYTEST',['../da/dd0/classMAX7219__Base.html#a2f515fbad03f9579e4f5ebe960bba526',1,'MAX7219_Base']]],
   ['displaytimer',['displayTimer',['../dc/d45/classControl__Surface__.html#a2cff2f4599bd105a94c6a4d79fd79733',1,'Control_Surface_']]],
+  ['dominantseventh',['DominantSeventh',['../df/d20/namespaceChords.html#a17aff5e1f5f5536c33cf81a7c509dc9b',1,'Chords']]],
   ['dot',['Dot',['../d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html#af626aa654815b2c30bbc674379e8807aaaf6c6cf7a454b4ef4a850ac4d960a2cc',1,'VULEDs.hpp']]],
   ['dotbardisplayleds',['DotBarDisplayLEDs',['../d1/d3e/classDotBarDisplayLEDs.html',1,'DotBarDisplayLEDs&lt; N &gt;'],['../d1/d3e/classDotBarDisplayLEDs.html#aa75b21adbfde3aaa57d04a19e4835ef5',1,'DotBarDisplayLEDs::DotBarDisplayLEDs()']]],
   ['dotbarmode',['DotBarMode',['../d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html#af626aa654815b2c30bbc674379e8807a',1,'VULEDs.hpp']]],
   ['dotmode',['dotMode',['../d9/dbf/classAudioVULEDs.html#a5d0109b03741963b04d5f248678a8b34',1,'AudioVULEDs::dotMode()'],['../d1/d3e/classDotBarDisplayLEDs.html#af4dd134f3b5774908c6ccd6d04aeb3e8',1,'DotBarDisplayLEDs::dotMode()']]],
+  ['double',['Double',['../de/d77/namespaceBass.html#a10c3f88a0158cd7bd2a0f590056e179d',1,'Bass']]],
   ['doublylinkable',['DoublyLinkable',['../d4/d23/classDoublyLinkable.html',1,'']]],
   ['doublylinkable_3c_20bankablemidiinput_3c_20n_20_3e_20_3e',['DoublyLinkable&lt; BankableMIDIInput&lt; N &gt; &gt;',['../d4/d23/classDoublyLinkable.html',1,'']]],
   ['doublylinkable_3c_20displayelement_20_3e',['DoublyLinkable&lt; DisplayElement &gt;',['../d4/d23/classDoublyLinkable.html',1,'']]],

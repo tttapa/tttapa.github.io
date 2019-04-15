@@ -17,5 +17,5 @@ var Settings_8hpp =
     [ "SYSEX_BUFFER_SIZE", "db/d02/Settings_8hpp.html#a3081f3937d694684489a38a344815b29", null ],
     [ "VU_PEAK_DECAY_TIME", "db/d02/Settings_8hpp.html#a8be794417540934c31a498143e8efafb", null ],
     [ "VU_PEAK_HOLD_TIME", "db/d02/Settings_8hpp.html#a774333c030e245d506acef0577246d7c", null ],
-    [ "VU_PEAK_SMOOTH_DECAY", "db/d02/Settings_8hpp.html#aba09a773d21d5e9fd3cf0d537b645405", null ]
+    [ "VU_PEAK_SMOOTH_DECAY", "db/d02/Settings_8hpp.html#a5f630db6e6dc66cae6184da0276070b7", null ]
 ];

@@ -40,6 +40,6 @@ var searchData=
   ['vu',['vu',['../d4/d42/classMCU_1_1VUDisplay.html#ac4bf0fcba04b3fd9caf2717b6caf0058',1,'MCU::VUDisplay']]],
   ['vu_5fpeak_5fdecay_5ftime',['VU_PEAK_DECAY_TIME',['../db/d02/Settings_8hpp.html#a8be794417540934c31a498143e8efafb',1,'Settings.hpp']]],
   ['vu_5fpeak_5fhold_5ftime',['VU_PEAK_HOLD_TIME',['../db/d02/Settings_8hpp.html#a774333c030e245d506acef0577246d7c',1,'Settings.hpp']]],
-  ['vu_5fpeak_5fsmooth_5fdecay',['VU_PEAK_SMOOTH_DECAY',['../db/d02/Settings_8hpp.html#aba09a773d21d5e9fd3cf0d537b645405',1,'Settings.hpp']]],
+  ['vu_5fpeak_5fsmooth_5fdecay',['VU_PEAK_SMOOTH_DECAY',['../db/d02/Settings_8hpp.html#a5f630db6e6dc66cae6184da0276070b7',1,'Settings.hpp']]],
   ['vuleds',['vuleds',['../d9/dbf/classAudioVULEDs.html#a64675795cc0cddd9924285ac20dd0948',1,'AudioVULEDs']]]
 ];

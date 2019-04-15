@@ -4,6 +4,7 @@ var searchData=
   ['array',['Array',['../d7/d6a/structArray.html',1,'']]],
   ['array_3c_20audiomixer4_20_2a_2c_20n_20_3e',['Array&lt; AudioMixer4 *, N &gt;',['../d7/d6a/structArray.html',1,'']]],
   ['array_3c_20button_2c_20number_5fof_5fbuttons_20_3e',['Array&lt; Button, NUMBER_OF_BUTTONS &gt;',['../d7/d6a/structArray.html',1,'']]],
+  ['array_3c_20int8_5ft_2c_20n_20_3e',['Array&lt; int8_t, N &gt;',['../d7/d6a/structArray.html',1,'']]],
   ['array_3c_20midicnchanneladdress_2c_20n_20_3e',['Array&lt; MIDICNChannelAddress, N &gt;',['../d7/d6a/structArray.html',1,'']]],
   ['array_3c_20n_20_3e',['Array&lt; N &gt;',['../d7/d6a/structArray.html',1,'']]],
   ['array_3c_20nb_5fcols_20_3e',['Array&lt; nb_cols &gt;',['../d7/d6a/structArray.html',1,'']]],

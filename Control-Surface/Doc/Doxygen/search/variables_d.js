@@ -1,5 +1,13 @@
 var searchData=
 [
+  ['m2',['m2',['../da/dd4/namespaceIntervals.html#a3ae063eac2cb3034c4c9bf41641f8cad',1,'Intervals::m2()'],['../da/dd4/namespaceIntervals.html#a24badc22181dd0156e1cbbece4795332',1,'Intervals::M2()']]],
+  ['m3',['m3',['../da/dd4/namespaceIntervals.html#a87b3fbf4d404906dbc30ce0357099734',1,'Intervals::m3()'],['../da/dd4/namespaceIntervals.html#a0bba7f36cf4e22efafe7b4b029d37d96',1,'Intervals::M3()']]],
+  ['m6',['m6',['../da/dd4/namespaceIntervals.html#a113a63113079585e980675007ea59791',1,'Intervals::m6()'],['../da/dd4/namespaceIntervals.html#ae990da8805f898263d30e3377e4aba78',1,'Intervals::M6()']]],
+  ['m7',['m7',['../da/dd4/namespaceIntervals.html#a46249007f68970d4493844be8df14f41',1,'Intervals::m7()'],['../da/dd4/namespaceIntervals.html#ac4b40453c5311d0dfc527214c0d401e9',1,'Intervals::M7()']]],
+  ['major',['Major',['../df/d20/namespaceChords.html#a35787176ae6383c1f7f5108b755709fc',1,'Chords']]],
+  ['majorfirstinv',['MajorFirstInv',['../df/d20/namespaceChords.html#a7b55b68e11d8bf381afcd2eebcbbe31e',1,'Chords']]],
+  ['majorsecondinv',['MajorSecondInv',['../df/d20/namespaceChords.html#a4551a1787cc2b9c652de02751e939f3b',1,'Chords']]],
+  ['majorseventh',['MajorSeventh',['../df/d20/namespaceChords.html#a82f4a80f53bb8d25cbe14a423e644768',1,'Chords']]],
   ['mapfn',['mapFn',['../da/da7/classFilteredAnalog.html#accf21866f19eda0d5e5cfeb95f7b8893',1,'FilteredAnalog']]],
   ['margin',['margin',['../d2/dcb/classHysteresis.html#a48ccf79107552e1996e5c0cb8cb86ab4',1,'Hysteresis']]],
   ['marker',['MARKER',['../d7/dc7/namespaceMCU.html#a11e886ce2826514e8242f595dbded8f5',1,'MCU']]],
@@ -10,6 +18,9 @@ var searchData=
   ['maxgain',['maxGain',['../d4/de3/classVolumeControl.html#ab2b63d2685b52f7ad584094c44f62754',1,'VolumeControl']]],
   ['midi_5fstatus_5ftype_5fnames',['MIDI_STATUS_TYPE_NAMES',['../db/d55/DebugMIDI__Interface_8hpp.html#a616c796c1a81f07d22ac41b80d84f5e7',1,'DebugMIDI_Interface.hpp']]],
   ['midimsg',['midimsg',['../df/d0c/classMIDI__Parser.html#a1eb2260f33070b05d25d771cc0078672',1,'MIDI_Parser']]],
+  ['minor',['Minor',['../df/d20/namespaceChords.html#a8fe1f903e6374981e0e7a5bf3f276548',1,'Chords']]],
+  ['minorfirstinv',['MinorFirstInv',['../df/d20/namespaceChords.html#a7f2490e745ffc733115935cf2b18168d',1,'Chords']]],
+  ['minorsecondinv',['MinorSecondInv',['../df/d20/namespaceChords.html#a245de744b1e2437df0764af5dc94d6be',1,'Chords']]],
   ['mixers',['mixers',['../d4/de3/classVolumeControl.html#a5f9f8656781d0bd16ba2e9a9f5038f75',1,'VolumeControl']]],
   ['mode',['mode',['../d1/d3e/classDotBarDisplayLEDs.html#ab84c68ad7f06313d1e8e20aa26595bc6',1,'DotBarDisplayLEDs::mode()'],['../d3/dd0/classRelativeCCSender.html#a4318791fc32ceb36b9100a6fc20341e1',1,'RelativeCCSender::mode()']]],
   ['modulation_5fwheel',['Modulation_Wheel',['../d4/dbe/namespaceMIDI__CC.html#a20dc249ff93148b640953595b6ca7c31',1,'MIDI_CC']]],

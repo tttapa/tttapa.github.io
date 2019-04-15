@@ -1,7 +1,8 @@
 var searchData=
 [
+  ['ichord',['IChord',['../db/dbe/classIChord.html',1,'']]],
   ['ignore_5fsysex',['IGNORE_SYSEX',['../db/d02/Settings_8hpp.html#a2a82e3cbc4ddcf68ac47d0d464189e35',1,'Settings.hpp']]],
-  ['increment',['increment',['../dd/dd6/classIncrementor.html#a5f9ac3154cda1e503cbbe5194a706a39',1,'Incrementor::increment()'],['../d1/d54/classSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1',1,'Selector::increment()'],['../df/d38/classIncrementButton.html#a37fb5e087715edfdb4ab30209c83753ca1c40de72a61916bbe238020067501963',1,'IncrementButton::Increment()'],['../d5/d20/classIncrementDecrementButtons.html#aad41077d49378ea34dca4f6cf77ae06ba20e11204d63d579b5cf85a8698740f10',1,'IncrementDecrementButtons::Increment()']]],
+  ['increment',['Increment',['../df/d38/classIncrementButton.html#a37fb5e087715edfdb4ab30209c83753ca1c40de72a61916bbe238020067501963',1,'IncrementButton::Increment()'],['../d5/d20/classIncrementDecrementButtons.html#aad41077d49378ea34dca4f6cf77ae06ba20e11204d63d579b5cf85a8698740f10',1,'IncrementDecrementButtons::Increment()'],['../dd/dd6/classIncrementor.html#a5f9ac3154cda1e503cbbe5194a706a39',1,'Incrementor::increment()'],['../d1/d54/classSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1',1,'Selector::increment()']]],
   ['incrementaddress',['incrementAddress',['../d2/d87/classMIDIButtons.html#abd040788a921f9a07974505612107e0d',1,'MIDIButtons::incrementAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a84fad1969a8634ab747f86fca0e62c96',1,'Bankable::MIDIButtons::incrementAddress()']]],
   ['incrementbutton',['IncrementButton',['../df/d38/classIncrementButton.html',1,'IncrementButton'],['../df/d38/classIncrementButton.html#ad0133d3b080fa4093b24ade7acd2f2c1',1,'IncrementButton::IncrementButton()'],['../d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3',1,'IncrementDecrementButtons::incrementButton()']]],
   ['incrementbutton_2ecpp',['IncrementButton.cpp',['../db/d9d/IncrementButton_8cpp.html',1,'']]],
@@ -40,6 +41,8 @@ var searchData=
   ['installation_2emd',['Installation.md',['../d2/d2c/Installation_8md.html',1,'']]],
   ['intensity',['INTENSITY',['../da/dd0/classMAX7219__Base.html#a3aff37e2ea6bea2a289fc3d8dc132954',1,'MAX7219_Base']]],
   ['interval',['interval',['../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d',1,'Timer']]],
+  ['intervals',['Intervals',['../da/dd4/namespaceIntervals.html',1,'']]],
+  ['intervals_2ehpp',['Intervals.hpp',['../d1/d12/Intervals_8hpp.html',1,'']]],
   ['invert',['invert',['../d1/d19/classButton.html#a1027f25dee91c915849d531515365aab',1,'Button']]],
   ['invertstate',['invertState',['../d1/d19/classButton.html#a6cb2c9aec2b114232a342846ed944205',1,'Button']]],
   ['is_5funsigned',['is_unsigned',['../d7/dc9/structis__unsigned.html',1,'']]],

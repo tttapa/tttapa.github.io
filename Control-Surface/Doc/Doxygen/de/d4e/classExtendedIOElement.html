@@ -205,17 +205,17 @@ Static Private Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>An abstract base class for Extended Input/Output elements. </p>
-<p>The limited number of IO pins of the Arduino can be extended by adding multiplexers, shift registers, IO expanders, etc. <br />
+<p>The limited number of IO pins of the Arduino can be extended by adding multiplexers, shift registers, IO expanders, etc. <br  />
 <a class="el" href="../../de/d4e/classExtendedIOElement.html" title="An abstract base class for Extended Input/Output elements.">ExtendedIOElement</a> serves as a base class for all these expanders.</p>
-<p>The pins of each extended IO element are mapped to a pin number greater than the greatest Arduino pin number. <br />
-You can supply this pin number to the IO functions in the <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> namespace. <br />
-If the pin number corresponds to an actual Arduino pin, the default Arduino IO function (digitalRead, digitalWrite, ...) will be called. <br />
+<p>The pins of each extended IO element are mapped to a pin number greater than the greatest Arduino pin number. <br  />
+You can supply this pin number to the IO functions in the <a class="el" href="../../d8/d3d/namespaceExtIO.html" title="A namespace with alternatives to the standard Arduino IO functions that can be used with extended IO ...">ExtIO</a> namespace. <br  />
+If the pin number corresponds to an actual Arduino pin, the default Arduino IO function (digitalRead, digitalWrite, ...) will be called. <br  />
 If the pin is not an Arduino pin, it is an extended IO pin number, so the extended IO element that this pin belongs to is looked up, and the IO function for this element is executed with the correct pin number.</p>
-<p>For example: Imagine an Arduino with 20 pins (e.g. the Arduino UNO). Pins 0 - 19 will correspond to the Arduino pins, and <code>ExtIO::digitalRead(pin)</code> will have the exact same effect as the standard <code>digitalRead(pin)</code> function (albeit a little slower). <br />
-Now, we'll add two 8-channel analog multiplexers, let's call them <code>mux1</code> and <code>mux2</code>. <br />
-The first pin (pin 0) of <code>mux1</code> will be extended IO pin number 20, the last pin (pin 7) of <code>mux1</code> will be extended IO pin number 27, etc. The first pin of <code>mux2</code> will be extended IO pin number 28, you get the idea. If you now call <code><a class="el" href="../../d8/d3d/namespaceExtIO.html#a9bda9dc007f42a200626d1d4ea94250b" title="An ExtIO version of the Arduino function.">ExtIO::digitalRead</a>(mux1.<a class="el" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03" title="Get the extended IO pin number of a given physical pin of this extended IO element.">pin</a> (7))</code> or <code>ExtIO::digitalRead(27)</code>, both will be translated to <code>mux1.digitalRead(7)</code>.</p>
-<p>The number of extended IO elements is limited only by the size of <code>pin_t</code>. However, looking up the extended IO element for a given extended IO pin number uses linear search, so that might add some noticable overhead for large pin numbers. <br />
- The design here is a compromise: saving a pointer to each extended IO element to find it directly would be much faster than having to search all elements each time. On the other hand, it would require each <code>pin_t</code> variable to be at least one byte larger. Since almost all other classes in this library store pin variables, the memory penalty would be too large, especially on AVR microcontrollers. <br />
+<p>For example: Imagine an Arduino with 20 pins (e.g. the Arduino UNO). Pins 0 - 19 will correspond to the Arduino pins, and <code>ExtIO::digitalRead(pin)</code> will have the exact same effect as the standard <code>digitalRead(pin)</code> function (albeit a little slower). <br  />
+Now, we'll add two 8-channel analog multiplexers, let's call them <code>mux1</code> and <code>mux2</code>. <br  />
+The first pin (pin 0) of <code>mux1</code> will be extended IO pin number 20, the last pin (pin 7) of <code>mux1</code> will be extended IO pin number 27, etc. The first pin of <code>mux2</code> will be extended IO pin number 28, you get the idea. If you now call <code><a class="el" href="../../d8/d3d/namespaceExtIO.html#a9bda9dc007f42a200626d1d4ea94250b" title="An ExtIO version of the Arduino function.">ExtIO::digitalRead</a>(mux1.#pin (7))</code> or <code>ExtIO::digitalRead(27)</code>, both will be translated to <code>mux1.digitalRead(7)</code>.</p>
+<p>The number of extended IO elements is limited only by the size of <code>pin_t</code>. However, looking up the extended IO element for a given extended IO pin number uses linear search, so that might add some noticable overhead for large pin numbers. <br  />
+ The design here is a compromise: saving a pointer to each extended IO element to find it directly would be much faster than having to search all elements each time. On the other hand, it would require each <code>pin_t</code> variable to be at least one byte larger. Since almost all other classes in this library store pin variables, the memory penalty would be too large, especially on AVR microcontrollers. <br  />
 Another reason to do it this way, is that this approach is still fast enough to make sure it is not noticable to human users. </p>
 
 <p class="definition">Definition at line <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html#l00057">57</a> of file <a class="el" href="../../d4/d57/ExtendedIOElement_8hpp_source.html">ExtendedIOElement.hpp</a>.</p>
@@ -329,7 +329,7 @@ Here is the call graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The new analog value of pin. </dd></dl>
 
-<p>Implemented in <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#acdece870fadd4c99a2e0b7cf00f637ef">AnalogMultiplex&lt; N &gt;</a>, <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#ab057033782e3221b061be135f766b7a8">ShiftRegisterOutBase&lt; N &gt;</a>, and <a class="el" href="../../dc/d19/classMAX7219.html#a2c909f5bd0c3af8fa883acd1d5e3817a">MAX7219</a>.</p>
+<p>Implemented in <a class="el" href="../../d8/db4/classShiftRegisterOutBase.html#ab057033782e3221b061be135f766b7a8">ShiftRegisterOutBase&lt; N &gt;</a>, <a class="el" href="../../dc/d19/classMAX7219.html#a2c909f5bd0c3af8fa883acd1d5e3817a">MAX7219</a>, and <a class="el" href="../../d7/d8d/classAnalogMultiplex.html#acdece870fadd4c99a2e0b7cf00f637ef">AnalogMultiplex&lt; N &gt;</a>.</p>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -487,7 +487,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_af799512582ef9f7b56616d29fd78324a_icgraph.svg" width="1068" height="727"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_af799512582ef9f7b56616d29fd78324a_icgraph.svg" width="1086" height="903"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -575,7 +575,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a3151d5bf08e6b32231cdd58ed2f39aee_icgraph.svg" width="1606" height="2086"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a3151d5bf08e6b32231cdd58ed2f39aee_icgraph.svg" width="1611" height="2235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -647,7 +647,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a955322d29e4e63ec40a587b5ed9db31b_icgraph.svg" width="1446" height="2086"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_a955322d29e4e63ec40a587b5ed9db31b_icgraph.svg" width="1451" height="2235"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 
@@ -670,7 +670,7 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Get the extended IO pin number of a given physical pin of this extended IO element. </p>
-<p><br />
+<p><br  />
  It is alias for <code><a class="el" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03" title="Get the extended IO pin number of a given physical pin of this extended IO element.">ExtendedIOElement::pin</a></code>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pin</td><td>The zero-based physical pin number of this IO element. </td></tr>
@@ -761,8 +761,8 @@ Here is the caller graph for this function:</div>
 </div><div class="memdoc">
 
 <p>Set the mode of a given pin. </p>
-<dl class="section note"><dt>Note</dt><dd>This function might not be implemented by all subclasses. <br />
- Some extended IO types, such as shift registers, can only be used as outputs. <br />
+<dl class="section note"><dt>Note</dt><dd>This function might not be implemented by all subclasses. <br  />
+ Some extended IO types, such as shift registers, can only be used as outputs. <br  />
  On others, it might be implemented, but it could impact all pins of the IO element. For example, enabling the internal pull-up resistor on an analog multiplexer affects all pins of the mux.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -776,7 +776,7 @@ Here is the caller graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_ab0e7b41124b477456bf5a1de8071d1e3_icgraph.svg" width="1091" height="895"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../de/d4e/classExtendedIOElement_ab0e7b41124b477456bf5a1de8071d1e3_icgraph.svg" width="1096" height="1071"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 

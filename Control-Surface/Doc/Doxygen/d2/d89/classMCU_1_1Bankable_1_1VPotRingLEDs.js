@@ -1,11 +1,11 @@
 var classMCU_1_1Bankable_1_1VPotRingLEDs =
 [
     [ "VPotRingLEDs", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a7a19dd09816ec745b991a4eee96ec8aa", null ],
-    [ "begin", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a5ee198cc0d3fdcb32e4aa8c83a367944", null ],
     [ "begin", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a7ae18e103d62568ba35c1c2de2e37885", null ],
+    [ "begin", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a5ee198cc0d3fdcb32e4aa8c83a367944", null ],
     [ "beginAll", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#aac5c0e4f25ae8a1996d1ef7bb894c802", null ],
-    [ "display", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a1b196410444c7f2944bfa00cd7d45c7d", null ],
     [ "display", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#abc54b9402e8555c615aaee35235f3aa4", null ],
+    [ "display", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a1b196410444c7f2944bfa00cd7d45c7d", null ],
     [ "getCenterLed", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a5d638e14de4b2e6508131c110d028ab4", null ],
     [ "getIndex", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a239ccb004b25fa96f720406e271ac881", null ],
     [ "getMode", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a5723f4a7c22aea22a940f481c48bd798", null ],
@@ -14,8 +14,8 @@ var classMCU_1_1Bankable_1_1VPotRingLEDs =
     [ "getStartOff", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#ac8c40d605d479ff826820438cd054ab6", null ],
     [ "getStartOn", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#ab33b338d3900b8430f31ae437d1211c8", null ],
     [ "inRange", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a4b4095c85e5a4be88baef10c778811ca", null ],
-    [ "matchBankable", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#ae6721d466730c84513bd02185f457e06", null ],
     [ "matchBankable", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#aee737e5e10cdda105bc65c0424f71cc0", null ],
+    [ "matchBankable", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#ae6721d466730c84513bd02185f457e06", null ],
     [ "matchBankableAddressInRange", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a39912b6c8d039c840aa9a1e73e645318", null ],
     [ "matchBankableInRange", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a6d425d7489541b6ff8b89e5f9c2cb5e1", null ],
     [ "reset", "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#ae2d200b1677bf2e20b59cc745309fc57", null ],

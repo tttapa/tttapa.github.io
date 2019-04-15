@@ -13,6 +13,7 @@ var namespaceBankable =
     [ "MIDIButtonLatching", "d3/d0b/classBankable_1_1MIDIButtonLatching.html", "d3/d0b/classBankable_1_1MIDIButtonLatching" ],
     [ "MIDIButtonMatrix", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", "d3/d65/classBankable_1_1MIDIButtonMatrix" ],
     [ "MIDIButtons", "dc/d22/classBankable_1_1MIDIButtons.html", "dc/d22/classBankable_1_1MIDIButtons" ],
+    [ "MIDIChordButton", "da/d96/classBankable_1_1MIDIChordButton.html", "da/d96/classBankable_1_1MIDIChordButton" ],
     [ "MIDIFilteredAnalog", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html", "db/ddc/classBankable_1_1MIDIFilteredAnalog" ],
     [ "MIDIFilteredAnalogAddressable", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable" ],
     [ "MIDIIncrementDecrementButtons", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons" ],
@@ -24,5 +25,6 @@ var namespaceBankable =
     [ "NoteButtonLatching", "d9/d3f/classBankable_1_1NoteButtonLatching.html", "d9/d3f/classBankable_1_1NoteButtonLatching" ],
     [ "NoteButtonMatrix", "d2/d2b/classBankable_1_1NoteButtonMatrix.html", "d2/d2b/classBankable_1_1NoteButtonMatrix" ],
     [ "NoteButtons", "d6/d5b/classBankable_1_1NoteButtons.html", "d6/d5b/classBankable_1_1NoteButtons" ],
+    [ "NoteChordButton", "d8/d9d/classBankable_1_1NoteChordButton.html", "d8/d9d/classBankable_1_1NoteChordButton" ],
     [ "PBPotentiometer", "de/d8c/classBankable_1_1PBPotentiometer.html", "de/d8c/classBankable_1_1PBPotentiometer" ]
 ];

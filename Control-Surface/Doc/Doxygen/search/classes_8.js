@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['ichord',['IChord',['../db/dbe/classIChord.html',1,'']]],
   ['incrementbutton',['IncrementButton',['../df/d38/classIncrementButton.html',1,'']]],
   ['incrementdecrementbuttons',['IncrementDecrementButtons',['../d5/d20/classIncrementDecrementButtons.html',1,'']]],
   ['incrementdecrementselector',['IncrementDecrementSelector',['../d2/deb/classIncrementDecrementSelector.html',1,'']]],

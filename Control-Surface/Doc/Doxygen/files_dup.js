@@ -78,6 +78,7 @@ var files_dup =
     [ "CCRotaryEncoder.hpp", "dd/dd9/CCRotaryEncoder_8hpp.html", null ],
     [ "Channel.cpp", "d1/dc4/Channel_8cpp.html", null ],
     [ "Channel.hpp", "d7/d42/Channel_8hpp.html", "d7/d42/Channel_8hpp" ],
+    [ "Chords.hpp", "d9/dac/Chords_8hpp.html", "d9/dac/Chords_8hpp" ],
     [ "ContinuousCCSender.cpp", "d9/d94/ContinuousCCSender_8cpp.html", null ],
     [ "ContinuousCCSender.hpp", "db/dd1/ContinuousCCSender_8hpp.html", [
       [ "ContinuousCCSender", "da/d07/classContinuousCCSender.html", "da/d07/classContinuousCCSender" ]
@@ -176,6 +177,7 @@ var files_dup =
     [ "IncrementSelectorLEDs.hpp", "db/d24/IncrementSelectorLEDs_8hpp.html", [
       [ "IncrementSelectorLEDs", "dc/df8/classIncrementSelectorLEDs.html", "dc/df8/classIncrementSelectorLEDs" ]
     ] ],
+    [ "Intervals.hpp", "d1/d12/Intervals_8hpp.html", "d1/d12/Intervals_8hpp" ],
     [ "LEDs.cpp", "d7/dd4/LEDs_8cpp.html", null ],
     [ "LEDs.hpp", "d9/d4f/LEDs_8hpp.html", [
       [ "LEDs", "d2/d1b/classLEDs.html", "d2/d1b/classLEDs" ]
@@ -256,6 +258,14 @@ var files_dup =
     ] ],
     [ "Bankable/Abstract/MIDIButtons.hpp", "d9/df7/Bankable_2Abstract_2MIDIButtons_8hpp.html", [
       [ "MIDIButtons", "dc/d22/classBankable_1_1MIDIButtons.html", "dc/d22/classBankable_1_1MIDIButtons" ]
+    ] ],
+    [ "Abstract/MIDIChordButton.cpp", "d1/d58/Abstract_2MIDIChordButton_8cpp.html", null ],
+    [ "Bankable/Abstract/MIDIChordButton.cpp", "d9/dac/Bankable_2Abstract_2MIDIChordButton_8cpp.html", null ],
+    [ "Abstract/MIDIChordButton.hpp", "dd/d31/Abstract_2MIDIChordButton_8hpp.html", [
+      [ "MIDIChordButton", "dd/d29/classMIDIChordButton.html", "dd/d29/classMIDIChordButton" ]
+    ] ],
+    [ "Bankable/Abstract/MIDIChordButton.hpp", "dc/d34/Bankable_2Abstract_2MIDIChordButton_8hpp.html", [
+      [ "MIDIChordButton", "da/d96/classBankable_1_1MIDIChordButton.html", "da/d96/classBankable_1_1MIDIChordButton" ]
     ] ],
     [ "MIDICNChannelAddress.cpp", "d6/d65/MIDICNChannelAddress_8cpp.html", null ],
     [ "MIDICNChannelAddress.hpp", "d8/d38/MIDICNChannelAddress_8hpp.html", "d8/d38/MIDICNChannelAddress_8hpp" ],
@@ -346,6 +356,9 @@ var files_dup =
     [ "NoteButtons.cpp", "d2/d3d/NoteButtons_8cpp.html", null ],
     [ "Bankable/NoteButtons.hpp", "dd/dbb/Bankable_2NoteButtons_8hpp.html", null ],
     [ "NoteButtons.hpp", "d4/db7/NoteButtons_8hpp.html", null ],
+    [ "NoteChordButton.cpp", "d4/d7c/NoteChordButton_8cpp.html", null ],
+    [ "Bankable/NoteChordButton.hpp", "de/de3/Bankable_2NoteChordButton_8hpp.html", null ],
+    [ "NoteChordButton.hpp", "df/de2/NoteChordButton_8hpp.html", null ],
     [ "Notes.hpp", "d9/dc5/Notes_8hpp.html", "d9/dc5/Notes_8hpp" ],
     [ "Bankable/PBPotentiometer.cpp", "de/d09/Bankable_2PBPotentiometer_8cpp.html", null ],
     [ "PBPotentiometer.cpp", "d6/d59/PBPotentiometer_8cpp.html", null ],
@@ -426,6 +439,7 @@ var files_dup =
     [ "Transposer.hpp", "de/d5e/Transposer_8hpp.html", [
       [ "Transposer", "da/db8/classTransposer.html", "da/db8/classTransposer" ]
     ] ],
+    [ "unique_ptr.hpp", "d1/d17/unique__ptr_8hpp.html", "d1/d17/unique__ptr_8hpp" ],
     [ "Updatable.hpp", "d4/d93/Updatable_8hpp.html", [
       [ "Updatable", "d5/de0/classUpdatable.html", "d5/de0/classUpdatable" ]
     ] ],

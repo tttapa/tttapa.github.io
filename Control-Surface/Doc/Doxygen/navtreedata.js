@@ -2,17 +2,16 @@
 @ @licstart  The following is the entire license notice for the
 JavaScript code in this file.
 
-Copyright (C) 1997-2017 by Dimitri van Heesch
+Copyright (C) 1997-2019 by Dimitri van Heesch
 
 This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
+it under the terms of version 2 of the GNU General Public License as published by
+the Free Software Foundation
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
@@ -70,24 +69,25 @@ var NAVTREEINDEX =
 [
 "annotated.html",
 "d0/dbf/VPotDisplay_8hpp_source.html",
-"d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a4154c3302c845a9dc6a455600c4d0e2b",
-"d2/d3d/NoteButtons_8cpp_source.html",
-"d3/d0b/classBankable_1_1MIDIButtonLatching.html#aedf38b6c7c6e45fd6ed57e8d1caf1506",
-"d3/d96/classMIDIInputElementCC.html#a4a13b63f90ec988cd14d871df9dbc53b",
-"d4/de3/classVolumeControl.html#a9cf409bc7effa13042ebd1d1e02d1046",
-"d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a6bae640621972b14ad9c28b6b399f08f",
-"d7/d40/classEMA.html#ab0d7694cffaee5280d7e68f5a71f725e",
-"d8/d39/classBLEMIDI.html#afdb4cce97116f63be21b155903ac7c08",
-"d9/d24/RelativeCCSender_8hpp.html",
-"d9/dbf/classAudioVULEDs.html#a2f69122c293537143a2aab6cc440baab",
-"da/d69/PrintStream_8cpp.html#a643fcf8db7c14c0dc68d6ae017366506",
-"db/d1d/classMIDIInputElementPC.html#adcb98982679f02c01c46ac8d22722e1d",
-"db/dac/classMCU_1_1VPotRing__Base.html#a5723f4a7c22aea22a940f481c48bd798",
-"dc/d56/MAX7219SevenSegmentDisplay_8cpp.html",
-"dd/d1f/BankConfig_8hpp_source.html",
-"de/d06/classIncrementDecrementSelector__Base.html#a3752b5ddd24addec01b3898f55c0a8ab",
-"de/df8/structMIDI__message.html#af80e4955731e58bfdb6e2faad1beea07",
-"functions_vars_g.html"
+"d1/d54/classSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1",
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a63b760e4554d4ea496ee012b2ba3d508",
+"d3/d0b/classBankable_1_1MIDIButtonLatching.html#a28dfbd31c4cb424f9b32480b1aeb0bbf",
+"d3/d6c/classNoteButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9",
+"d4/d93/Updatable_8hpp_source.html",
+"d5/ddb/classMCU_1_1VPotRing.html#a5723f4a7c22aea22a940f481c48bd798",
+"d6/d79/namespaceManyAddresses.html",
+"d8/d20/classMIDIRotaryEncoder.html#a8af924e5b3b708eb042919703d175ed3",
+"d8/df7/classEncoderSelectorLEDs.html#a0f55e2edbd610515285e8cb54a5cd401",
+"d9/d78/classHardwareSerialMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4",
+"d9/df9/classBankable_1_1MIDIButton.html#a9f34809178ed809a8ff203220bd1b206",
+"da/dd0/classMAX7219__Base.html#a5627a59964dcdc347113f1d87aab87e7",
+"db/d60/MCU_8hpp.html#a4e5f30af84a3ae7efa9ffa7696db76c2",
+"db/de9/classBitArray.html#a61a953baab78ff4ed53c65a6a45d3686",
+"dc/df0/group__MIDIInterfaces.html",
+"dd/d80/PrintStream_8hpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e",
+"de/d36/classBankable_1_1NoteButton.html#a63b760e4554d4ea496ee012b2ba3d508",
+"df/d53/XBitmaps_8cpp.html",
+"namespacemembers_s.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

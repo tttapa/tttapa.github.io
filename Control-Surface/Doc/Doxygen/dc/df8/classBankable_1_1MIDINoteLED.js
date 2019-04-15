@@ -1,8 +1,8 @@
 var classBankable_1_1MIDINoteLED =
 [
     [ "MIDINoteLED", "dc/df8/classBankable_1_1MIDINoteLED.html#ad8e89ee42200564078307014966f62c5", null ],
-    [ "begin", "dc/df8/classBankable_1_1MIDINoteLED.html#a75da3183d48daa3aebc466d0895d7405", null ],
     [ "begin", "dc/df8/classBankable_1_1MIDINoteLED.html#a7ae18e103d62568ba35c1c2de2e37885", null ],
+    [ "begin", "dc/df8/classBankable_1_1MIDINoteLED.html#a75da3183d48daa3aebc466d0895d7405", null ],
     [ "beginAll", "dc/df8/classBankable_1_1MIDINoteLED.html#a3bff2e290b2ff305ab6f42fe549b0b62", null ],
     [ "display", "dc/df8/classBankable_1_1MIDINoteLED.html#abc54b9402e8555c615aaee35235f3aa4", null ],
     [ "getIndex", "dc/df8/classBankable_1_1MIDINoteLED.html#a239ccb004b25fa96f720406e271ac881", null ],
@@ -11,8 +11,8 @@ var classBankable_1_1MIDINoteLED =
     [ "getValue", "dc/df8/classBankable_1_1MIDINoteLED.html#a646f8a5a88f68d1f8a5b91086de4f2b4", null ],
     [ "getValueFromMIDIMessage", "dc/df8/classBankable_1_1MIDINoteLED.html#ac71a2b8124e8d14da2a563402130e26e", null ],
     [ "inRange", "dc/df8/classBankable_1_1MIDINoteLED.html#a4b4095c85e5a4be88baef10c778811ca", null ],
-    [ "matchBankable", "dc/df8/classBankable_1_1MIDINoteLED.html#ae6721d466730c84513bd02185f457e06", null ],
     [ "matchBankable", "dc/df8/classBankable_1_1MIDINoteLED.html#aee737e5e10cdda105bc65c0424f71cc0", null ],
+    [ "matchBankable", "dc/df8/classBankable_1_1MIDINoteLED.html#ae6721d466730c84513bd02185f457e06", null ],
     [ "matchBankableAddressInRange", "dc/df8/classBankable_1_1MIDINoteLED.html#a39912b6c8d039c840aa9a1e73e645318", null ],
     [ "matchBankableInRange", "dc/df8/classBankable_1_1MIDINoteLED.html#a6d425d7489541b6ff8b89e5f9c2cb5e1", null ],
     [ "reset", "dc/df8/classBankable_1_1MIDINoteLED.html#ad19fbc70385396ef87fccfa7b6a16774", null ],

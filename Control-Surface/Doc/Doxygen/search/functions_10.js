@@ -25,6 +25,7 @@ var searchData=
   ['setbytesep',['setbytesep',['../da/d69/PrintStream_8cpp.html#af5c2099a0aa00cf6d5a554b6fcc71431',1,'setbytesep(char __bytesep):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#af5c2099a0aa00cf6d5a554b6fcc71431',1,'setbytesep(char __bytesep):&#160;PrintStream.cpp']]],
   ['setcallbacks',['setCallbacks',['../d9/d73/classMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c',1,'MIDI_Interface']]],
   ['setcharacteristicscallbacks',['setCharacteristicsCallbacks',['../d8/d39/classBLEMIDI.html#a2ca7c6da1363e29a421d37319ab49a8f',1,'BLEMIDI']]],
+  ['setchord',['setChord',['../dd/d29/classMIDIChordButton.html#adbcf265b805f01be8203112a261decc2',1,'MIDIChordButton::setChord()'],['../da/d96/classBankable_1_1MIDIChordButton.html#ae3d27e83c8c6e521dc44c4a7abeb9d28',1,'Bankable::MIDIChordButton::setChord()']]],
   ['setcolor',['setColor',['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#abc8b539c1740411d3cadd4ceabfe7d87',1,'MCU::TimeDisplayDisplay']]],
   ['setcursor',['setCursor',['../df/d42/classDisplayInterface.html#a3c42da4fd07568f41ad45a46b12decd4',1,'DisplayInterface::setCursor()'],['../dc/ddd/classSSD1306__DisplayInterface.html#a7bdf3b452f9a794ddc73aab51b3ea145',1,'SSD1306_DisplayInterface::setCursor()']]],
   ['setgain',['setGain',['../d4/dce/classAudioVU.html#a3e2d23e9a4d13d95c9c423aad13010b5',1,'AudioVU']]],

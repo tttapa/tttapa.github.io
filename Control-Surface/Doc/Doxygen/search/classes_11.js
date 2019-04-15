@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['unique_5fptr',['unique_ptr',['../dd/d67/classunique__ptr.html',1,'']]],
+  ['unique_5fptr_3c_20const_20ichord_20_3e',['unique_ptr&lt; const IChord &gt;',['../dd/d67/classunique__ptr.html',1,'']]],
   ['updatable',['Updatable',['../d5/de0/classUpdatable.html',1,'']]],
   ['updatable_3c_20audiovu_20_3e',['Updatable&lt; AudioVU &gt;',['../d5/de0/classUpdatable.html',1,'']]],
   ['updatable_3c_20normalupdatable_20_3e',['Updatable&lt; NormalUpdatable &gt;',['../d5/de0/classUpdatable.html',1,'']]],
