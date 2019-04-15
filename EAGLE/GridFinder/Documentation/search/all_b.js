@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['m',['m',['../structMatrixAssignmentHelper.html#ac0605b614e7a1b70c74c68dcb52b8f73',1,'MatrixAssignmentHelper']]],
+  ['magenta',['magenta',['../namespaceANSIColors.html#a843f93289e3e92050e1b9a863df9ce19',1,'ANSIColors']]],
+  ['magentab',['magentab',['../namespaceANSIColors.html#ae10ecab37f0f5bf5f83c4eb0f743a9df',1,'ANSIColors']]],
+  ['map',['map',['../Array_8hpp.html#a301d6114927faa3bda607b86c47b7439',1,'map(const T &amp;t, F &amp;&amp;f):&#160;Array.hpp'],['../Array_8hpp.html#a6bf495656c2aebd8cab9847a3182422f',1,'map(const Array&lt; T, N &gt; &amp;a, F &amp;&amp;f):&#160;Array.hpp']]],
+  ['matrices',['Matrices',['../namespaceMatrices.html',1,'']]],
+  ['matrix',['Matrix',['../Matrix_8hpp.html#a09188de1b4315b8af6d7ce32b3008662',1,'Matrix.hpp']]],
+  ['matrix_2ehpp',['Matrix.hpp',['../Matrix_8hpp.html',1,'']]],
+  ['matrixassignmenthelper',['MatrixAssignmentHelper',['../structMatrixAssignmentHelper.html',1,'']]],
+  ['matrixhelpers_2ehpp',['MatrixHelpers.hpp',['../MatrixHelpers_8hpp.html',1,'']]],
+  ['matrixprinting',['MatrixPrinting',['../namespaceMatrixPrinting.html',1,'']]],
+  ['max_5fgap',['MAX_GAP',['../classGridFinder.html#aefccfda1ff7d039edab855b6f7eafd54',1,'GridFinder']]],
+  ['max_5fline_5fwidth',['MAX_LINE_WIDTH',['../classGridFinder.html#a28d7a596362603d50b5affe909acdd2b',1,'GridFinder']]],
+  ['maximum_5fvertical_5fstart_5fline_5fwidth',['MAXIMUM_VERTICAL_START_LINE_WIDTH',['../classGridFinder.html#af667c56bec981faf7ff1aec38010d54b',1,'GridFinder']]],
+  ['maxsquareerror',['maxSquareError',['../MeanSquareError_8hpp.html#aaea5e00a8cb283ab17b1d5d89be6fc48',1,'MeanSquareError.hpp']]],
+  ['meansquareerror',['meanSquareError',['../MeanSquareError_8hpp.html#a8e251cbd6c24d1b635c2380bc53f39f6',1,'MeanSquareError.hpp']]],
+  ['meansquareerror_2ehpp',['MeanSquareError.hpp',['../MeanSquareError_8hpp.html',1,'']]],
+  ['middle',['middle',['../structFirstLineEstimate.html#a584a8e75fc5ffe36bc5a085bf288f283',1,'FirstLineEstimate']]],
+  ['minimim_5fline_5fweighted_5fvote_5fcount',['MINIMIM_LINE_WEIGHTED_VOTE_COUNT',['../classGridFinder.html#a4be7329c5a370ef93092c320e5a60c41',1,'GridFinder']]],
+  ['minimim_5fstart_5fline_5fweighted_5fvote_5fcount',['MINIMIM_START_LINE_WEIGHTED_VOTE_COUNT',['../classGridFinder.html#a4cd2205d36a2fb2d60a62878c1f6c028',1,'GridFinder']]],
+  ['minimum_5fstart_5fline_5fwidth',['MINIMUM_START_LINE_WIDTH',['../classGridFinder.html#a2fe2f1f6d59b9c0e58465b18c7898e82',1,'GridFinder']]],
+  ['move',['move',['../classGridFinder.html#a9b31ec7807efc6e1fde49f5a56c0d0fa',1,'GridFinder']]],
+  ['mt',['MT',['../structpybind11_1_1detail_1_1type__caster_3_01TMatrix_3_01T_00_01R_00_01C_01_4_01_4.html#a42b4128c450a83a84ccb125044130948',1,'pybind11::detail::type_caster&lt; TMatrix&lt; T, R, C &gt; &gt;']]]
+];
