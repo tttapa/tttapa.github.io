@@ -128,7 +128,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a20f10e8136febf04c3a1987a35860ef1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa1dc2d7760adcd45c649f0c8a303563e"><td class="memTemplParams" colspan="2">template&lt;uint N&gt; </td></tr>
 <tr class="memitem:aa1dc2d7760adcd45c649f0c8a303563e"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="structHoughResult.html">HoughResult</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classGridFinder.html#aa1dc2d7760adcd45c649f0c8a303563e">findLineAngleAccurateRange</a> (<a class="el" href="structPixel.html">Pixel</a> px, <a class="el" href="Angle_8hpp.html#a4cce452d97e7ee5145be7e6479b5713e">angle_t</a> centerAngle) const</td></tr>
-<tr class="memdesc:aa1dc2d7760adcd45c649f0c8a303563e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Similar to <code>findLineAngle</code>, but is more accurate, because it uses the average of the range of angles with the hightest vote counts.  <a href="#aa1dc2d7760adcd45c649f0c8a303563e">More...</a><br /></td></tr>
+<tr class="memdesc:aa1dc2d7760adcd45c649f0c8a303563e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Similar to <a class="el" href="classGridFinder.html#a20f10e8136febf04c3a1987a35860ef1" title="Scan 360° around a given pixel, and find the angle with the most white pixels.">findLineAngle</a>, but is more accurate, because it uses the average of the range of angles with the hightest vote counts.  <a href="#aa1dc2d7760adcd45c649f0c8a303563e">More...</a><br /></td></tr>
 <tr class="separator:aa1dc2d7760adcd45c649f0c8a303563e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a83b31c2192a137e56e91d13661f1c658"><td class="memItemLeft" align="right" valign="top"><a class="el" href="uint_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGridFinder.html#a83b31c2192a137e56e91d13661f1c658">getWidthAtPointOnLine</a> (<a class="el" href="structPixel.html">Pixel</a> pixel, <a class="el" href="structCosSin.html">CosSin</a> angle, <a class="el" href="uint_8hpp.html#a69aa29b598b851b0640aa225a9e5d61d">uint</a> maxLineGap=<a class="el" href="classGridFinder.html#aefccfda1ff7d039edab855b6f7eafd54">MAX_GAP</a>, bool plus90deg=true) const</td></tr>
 <tr class="memdesc:a83b31c2192a137e56e91d13661f1c658"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the width of the line at a given point.  <a href="#a83b31c2192a137e56e91d13661f1c658">More...</a><br /></td></tr>
@@ -632,8 +632,8 @@ template&lt;uint N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Similar to <code>findLineAngle</code>, but is more accurate, because it uses the average of the range of angles with the hightest vote counts. </p>
-<p>It also doesn't scan 360°, but takes 2N samples around a given center angle. </p>
+<p>Similar to <a class="el" href="classGridFinder.html#a20f10e8136febf04c3a1987a35860ef1" title="Scan 360° around a given pixel, and find the angle with the most white pixels.">findLineAngle</a>, but is more accurate, because it uses the average of the range of angles with the hightest vote counts. </p>
+<p>It also doesn't scan 360°, but takes 2<code>N</code> samples around a given center angle. </p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -937,7 +937,7 @@ template&lt;size_t W, size_t H&gt; </div>
 </div><div class="memdoc">
 
 <p>Get an estimate of the first line. </p>
-<p>Searches in multiple columns, starting from the center, taking jumps of <code>FIRST_LINE_INVALID_HORIZONTAL_JUMP</code> pixels if no valid line is found in the currenc column.</p>
+<p>Searches in multiple columns, starting from the center, taking jumps of <a class="el" href="classGridFinder.html#ae4270fc0b855381f98ac7ef00c81a85e" title="If no valid first line is found in a column, don&#39;t try the column right next to it,...">FIRST_LINE_INVALID_HORIZONTAL_JUMP</a> pixels if no valid line is found in the currenc column.</p>
 <dl class="section return"><dt>Returns</dt><dd>Returns no result if no valid lines are found across the entire frame. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
@@ -986,8 +986,8 @@ template&lt;size_t W, size_t H&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Returns no result if no line can be found that has a vote count higher than <code>MINIMIM_START_LINE_WEIGHTED_VOTE_COUNT</code>, or if the line candidate has a width that's less than <code>MINIMUM_START_LINE_WIDTH</code>. <br  />
- Also doesn't return an estimate if <code>getMiddleWithRetries</code> fails. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Returns no result if no line can be found that has a vote count higher than <a class="el" href="classGridFinder.html#a4cd2205d36a2fb2d60a62878c1f6c028" title="The minimum number of Hough votes the first line must have.">MINIMIM_START_LINE_WEIGHTED_VOTE_COUNT</a>, or if the line candidate has a width that's less than <a class="el" href="classGridFinder.html#a2fe2f1f6d59b9c0e58465b18c7898e82" title="The minimum width the first line must have.">MINIMUM_START_LINE_WIDTH</a>. <br  />
+ Also doesn't return an estimate if <a class="el" href="classGridFinder.html#a504ddc8af3a0cc68b68de387ac1a90ea" title="In exceptional cases, we might want to find the middle of a line in a point that happens to lie at th...">getMiddleWithRetries</a> fails. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1034,7 +1034,7 @@ However, notice how we ended up in a square that's farther away from the center 
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><br  />
  Returns no result if the vertical range of white pixels is too long, which would indicate a vertical line. <br  />
- Also returns no result if <code>getFirstLineEstimate</code> fails, or if no white pixels are found in the given column. </dd></dl>
+ Also returns no result if <a class="el" href="classGridFinder.html#ac78760540b520bc08f716ef77127f1fc" title="Get an estimate of the line through a given pixel.">getFirstLineEstimate</a> fails, or if no white pixels are found in the given column. </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1137,7 +1137,7 @@ template&lt;size_t W, size_t H&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>TODO </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>// TODO </dd></dl>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -1259,9 +1259,9 @@ template&lt;size_t W, size_t H&gt; </div>
 </div><div class="memdoc">
 
 <p>Get the width of the line at a given point. </p>
-<p>Start at the given pixel, and move in the given direction for maxLineGap pixels, in each pixel, move in the perpendicular direction until a black pixel is encountered. At this point, the half width of the line from the base line is known. <br  />
+<p>Start at the given pixel, and move in the given direction for <code>maxLineGap</code> pixels, in each pixel, move in the perpendicular direction until a black pixel is encountered. At this point, the half width of the line from the base line is known. <br  />
 Finally, the maximum of all distances is returned.</p>
-<p>If the width at any point exceeds the MAX_LINE_WIDTH, MAX_LINE_WIDTH is returned.</p>
+<p>If the width at any point exceeds the <a class="el" href="classGridFinder.html#a28d7a596362603d50b5affe909acdd2b" title="&quot;Lines&quot; that are wider than this value are ignored, to prevent white blobs (of sunlight,...">MAX_LINE_WIDTH</a>, <a class="el" href="classGridFinder.html#a28d7a596362603d50b5affe909acdd2b" title="&quot;Lines&quot; that are wider than this value are ignored, to prevent white blobs (of sunlight,...">MAX_LINE_WIDTH</a> is returned.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">pixel</td><td>A point on the line. </td></tr>
@@ -1323,7 +1323,7 @@ template&lt;size_t W, size_t H&gt; </div>
 </div><div class="memdoc">
 
 <p>Starting from the given pixel, move in the direction of the given angle, and count the number of white pixels, weighing them more as the distance increases. </p>
-<p>When more than HOUGH_MAX_GAP consecutive black pixels are encountered, stop looking any farther. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>When more than <a class="el" href="classGridFinder.html#aec832be8ddb869f875e3e440e84625e5" title="When this many consecutive black pixels are encountered, stop following the line.">HOUGH_MAX_GAP</a> consecutive black pixels are encountered, stop looking any farther. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">px</td><td>The starting point. </td></tr>
     <tr><td class="paramname">angle</td><td>The direction to look in. </td></tr>
