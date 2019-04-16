@@ -295,7 +295,7 @@
 
             let result = document.createElement("pre");
             result.style.color = container.style.color;
-            result.style.backgroundColor = container.style.backgroundColor;
+            // result.style.backgroundColor = container.style.backgroundColor;
             result.classList.add(emphasize ? "lineNumbersEmphasis" : "lineNumbers");
 
             Array.prototype.forEach.call(container.querySelectorAll("div,br"), el => {
@@ -305,7 +305,7 @@
                 let enter = document.createTextNode("\n");
                 result.appendChild(enter);
             });
-
+            result.removeChild(result.lastChild);
             return result.outerHTML;
         }
 
