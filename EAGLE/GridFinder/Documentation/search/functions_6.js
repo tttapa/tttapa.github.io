@@ -8,7 +8,7 @@ var searchData=
   ['getcurrentlength',['getCurrentLength',['../classBresenhamLine.html#ad93a4adf0535a9b4e649bce5ade1bc5e',1,'BresenhamLine']]],
   ['getduration',['getDuration',['../classPerfTimer.html#a4d76e90eda37bbfeb0cb1b79292d9640',1,'PerfTimer']]],
   ['getfirstlineestimate',['getFirstLineEstimate',['../classGridFinder.html#ac78760540b520bc08f716ef77127f1fc',1,'GridFinder::getFirstLineEstimate(Pixel point) const'],['../classGridFinder.html#a05628935998785212ee5320a7e146f2b',1,'GridFinder::getFirstLineEstimate(uint x) const'],['../classGridFinder.html#a0de487d16731e34827c6dbc08c0eeb1b',1,'GridFinder::getFirstLineEstimate() const']]],
-  ['getfirsttwolines',['getFirstTwoLines',['../classGridFinder.html#a6362b9939c8c68ce3cd876917eac95df',1,'GridFinder']]],
+  ['getfirsttwohalflines',['getFirstTwoHalfLines',['../classGridFinder.html#a8ac6a50ff32685b1e958cbb0a88ca4dc',1,'GridFinder']]],
   ['getindex',['getIndex',['../classAngle.html#a189165d5417fcc5489298a8c913a0e38',1,'Angle::getIndex() const'],['../classAngle.html#a63862e75b876b7b8555f05a54ac85628',1,'Angle::getIndex(double angle)']]],
   ['getmiddle',['getMiddle',['../classGridFinder.html#a187e8c44c7f99237645b49dc2c6745c8',1,'GridFinder']]],
   ['getmiddlewithretries',['getMiddleWithRetries',['../classGridFinder.html#a504ddc8af3a0cc68b68de387ac1a90ea',1,'GridFinder']]],

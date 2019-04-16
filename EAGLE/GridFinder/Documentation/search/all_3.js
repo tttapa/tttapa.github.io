@@ -14,5 +14,5 @@ var searchData=
   ['dlqr',['dlqr',['../DLQR_8hpp.html#ab8dcb1e59c9dc36c588cd927e69ebfbf',1,'DLQR.hpp']]],
   ['dlqr_2ehpp',['DLQR.hpp',['../DLQR_8hpp.html',1,'']]],
   ['dlqr_5fresult',['DLQR_result',['../structDLQR__result.html',1,'']]],
-  ['drawline',['drawLine',['../classGridFinder.html#a052706dc431a652170442a8995a0e864',1,'GridFinder::drawLine(Pixel pixel, int cos, int sin)'],['../classGridFinder.html#ae01e82a5f2ac5832d9b931aa305854b8',1,'GridFinder::drawLine(BresenhamLine line)'],['../classGridFinder.html#ae82f63d8aa4babb5d3ecbbd1f55f1454',1,'GridFinder::drawLine(Pixel pixel, double angle)'],['../classGridFinder.html#ae7296afac0b1184604dcdd5d62bcaebd',1,'GridFinder::drawLine(Pixel pixel, CosSin angle)']]]
+  ['drawline',['drawLine',['../classGridFinder.html#a052706dc431a652170442a8995a0e864',1,'GridFinder::drawLine(Pixel pixel, int cos, int sin)'],['../classGridFinder.html#ae01e82a5f2ac5832d9b931aa305854b8',1,'GridFinder::drawLine(BresenhamLine line)'],['../classGridFinder.html#ae7296afac0b1184604dcdd5d62bcaebd',1,'GridFinder::drawLine(Pixel pixel, CosSin angle)']]]
 ];

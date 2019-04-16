@@ -1,7 +1,7 @@
 var searchData=
 [
   ['schur',['schur',['../LQR_8hpp.html#a5301a5b87f63568bb67f29c815685836',1,'LQR.hpp']]],
-  ['set',['set',['../classGridFinder.html#a4731e8beac38bd8c278e76843a96ee66',1,'GridFinder']]],
+  ['set',['set',['../classGridFinder.html#a5fef4e6faa3242e689a3ecb6ef21fb1f',1,'GridFinder']]],
   ['sign',['sign',['../HouseholderQR_8hpp.html#ae91f1ecebb987562f092671e0cb75c40',1,'HouseholderQR.hpp']]],
   ['sin',['sin',['../classAngle.html#a3700fa4572ca0b7dfacf65cc11108668',1,'Angle::sin() const'],['../classAngle.html#adb9bfe045dd75dad8912cf1e741d2820',1,'Angle::sin(uint angleIndex)'],['../classBresenhamLine.html#a115d1f10a5ce1e0ef945258346b6f035',1,'BresenhamLine::sin()']]],
   ['sind',['sind',['../structCosSin.html#a427ffa2ad48206dcbb22eb6d08e924d4',1,'CosSin::sind()'],['../classAngle.html#a8e1bd6c3c781fdd6ade99388cb394b5e',1,'Angle::sind()']]],
