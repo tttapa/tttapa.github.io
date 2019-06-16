@@ -1,5 +1,16 @@
 var NAVTREEINDEX11 =
 {
+"d9/d78/classHardwareSerialMIDI__Interface.html":[4,3,8],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f":[4,3,8,19],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a0db0ea9a49ced7874f0a5b533e625a20":[4,3,8,11],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a16f99ed3ce5ed201fdf224f5d061f32a":[4,3,8,10],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a233779ba75cb9b7c13e41ddce2ec6610":[4,3,8,1],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a2433d8ab8343cbd45473ff578b8ed4e7":[4,3,8,12],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a2c79441f44b904566d237b05b8b3c2fb":[4,3,8,16],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a2c9b5e576f7e2ad2df057a30d13412d5":[4,3,8,24],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a3058e51eff2e68b7480b1c18c1aa8dbd":[4,3,8,9],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a3549169b2cfd90f2d11a19f551407b12":[4,3,8,13],
+"d9/d78/classHardwareSerialMIDI__Interface.html#a4923aed435b881567b3276614dad6d11":[4,3,8,3],
 "d9/d78/classHardwareSerialMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4":[4,3,8,23],
 "d9/d78/classHardwareSerialMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c":[4,3,8,22],
 "d9/d78/classHardwareSerialMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1":[4,3,8,8],
@@ -238,16 +249,5 @@ var NAVTREEINDEX11 =
 "d9/df9/classBankable_1_1MIDIButton.html#a4154c3302c845a9dc6a455600c4d0e2b":[6,0,0,8,16],
 "d9/df9/classBankable_1_1MIDIButton.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,8,21],
 "d9/df9/classBankable_1_1MIDIButton.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,0,8,10],
-"d9/df9/classBankable_1_1MIDIButton.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,8,22],
-"d9/df9/classBankable_1_1MIDIButton.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,0,8,2],
-"d9/df9/classBankable_1_1MIDIButton.html#a63b760e4554d4ea496ee012b2ba3d508":[6,0,0,8,12],
-"d9/df9/classBankable_1_1MIDIButton.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,0,8,4],
-"d9/df9/classBankable_1_1MIDIButton.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,0,8,5],
-"d9/df9/classBankable_1_1MIDIButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[6,0,0,8,11],
-"d9/df9/classBankable_1_1MIDIButton.html#a8740e88462af06d4e8cf61f78be24378":[6,0,0,8,0],
-"d9/df9/classBankable_1_1MIDIButton.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,0,8,14],
-"d9/df9/classBankable_1_1MIDIButton.html#a8af924e5b3b708eb042919703d175ed3":[6,0,0,8,18],
-"d9/df9/classBankable_1_1MIDIButton.html#a94025b62edefec63efcdc4eb432bb079":[6,0,0,8,19],
-"d9/df9/classBankable_1_1MIDIButton.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[6,0,0,8,9],
-"d9/df9/classBankable_1_1MIDIButton.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,0,8,3]
+"d9/df9/classBankable_1_1MIDIButton.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,8,22]
 };

@@ -11,6 +11,8 @@ var classMIDIFilteredAnalogAddressable =
     [ "enable", "d0/dd2/classMIDIFilteredAnalogAddressable.html#ad4273e4aa2f15de8dbe478af16af259e", null ],
     [ "enable", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
     [ "enable", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
+    [ "getRawValue", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a40846d2646805c2e194d07ad45eed949", null ],
+    [ "getValue", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a96bda4da347290269fa08fd6b686ba7b", null ],
     [ "isEnabled", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "map", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a5ec0fe30129b23392a6c44e75cb34ebc", null ],
     [ "update", "d0/dd2/classMIDIFilteredAnalogAddressable.html#af58ae91fee46147b80d04c31f753b3fa", null ],

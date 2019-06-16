@@ -11,6 +11,8 @@ var classCCPotentiometer =
     [ "enable", "db/d32/classCCPotentiometer.html#ad4273e4aa2f15de8dbe478af16af259e", null ],
     [ "enable", "db/d32/classCCPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
     [ "enable", "db/d32/classCCPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
+    [ "getRawValue", "db/d32/classCCPotentiometer.html#a40846d2646805c2e194d07ad45eed949", null ],
+    [ "getValue", "db/d32/classCCPotentiometer.html#a96bda4da347290269fa08fd6b686ba7b", null ],
     [ "isEnabled", "db/d32/classCCPotentiometer.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "map", "db/d32/classCCPotentiometer.html#a5ec0fe30129b23392a6c44e75cb34ebc", null ],
     [ "update", "db/d32/classCCPotentiometer.html#af58ae91fee46147b80d04c31f753b3fa", null ],

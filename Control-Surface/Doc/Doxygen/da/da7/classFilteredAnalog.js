@@ -8,5 +8,5 @@ var classFilteredAnalog =
     [ "analogPin", "da/da7/classFilteredAnalog.html#a5cfa5417c422763d54f81bce20f34366", null ],
     [ "filter", "da/da7/classFilteredAnalog.html#a10c62b18447081750a8ad13df38ffdc8", null ],
     [ "hysteresis", "da/da7/classFilteredAnalog.html#a2354c851dcf6688845bf9b3538003976", null ],
-    [ "mapFn", "da/da7/classFilteredAnalog.html#accf21866f19eda0d5e5cfeb95f7b8893", null ]
+    [ "mapFn", "da/da7/classFilteredAnalog.html#ae576a7ed810e72ff62b1f8976b895a05", null ]
 ];

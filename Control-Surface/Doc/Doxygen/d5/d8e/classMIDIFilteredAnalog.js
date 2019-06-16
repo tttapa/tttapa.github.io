@@ -11,6 +11,8 @@ var classMIDIFilteredAnalog =
     [ "enable", "d5/d8e/classMIDIFilteredAnalog.html#ad4273e4aa2f15de8dbe478af16af259e", null ],
     [ "enable", "d5/d8e/classMIDIFilteredAnalog.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
     [ "enable", "d5/d8e/classMIDIFilteredAnalog.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
+    [ "getRawValue", "d5/d8e/classMIDIFilteredAnalog.html#a6160665407d681644bf27c5edfd75c7f", null ],
+    [ "getValue", "d5/d8e/classMIDIFilteredAnalog.html#a1412e0a109e1abefd31f2c6417d10d02", null ],
     [ "isEnabled", "d5/d8e/classMIDIFilteredAnalog.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "map", "d5/d8e/classMIDIFilteredAnalog.html#ac086a501589947b698bea9af2dbd982f", null ],
     [ "update", "d5/d8e/classMIDIFilteredAnalog.html#af2934e41e40aba0d83670b1e4460579a", null ],

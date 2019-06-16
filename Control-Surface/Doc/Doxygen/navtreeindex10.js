@@ -1,5 +1,16 @@
 var NAVTREEINDEX10 =
 {
+"d8/de1/classMIDIButtonLatching.html#aefb3b2f7cfb598d2cd68a622c94ea772":[6,0,80,12],
+"d8/de1/classMIDIButtonLatching.html#af85a7d9712cc394ddc5e721a41d3d84f":[6,0,80,0],
+"d8/de1/classMIDIButtonLatching.html#afb0db394a9d011d776606dbb4c854dbb":[6,0,80,14],
+"d8/de7/Bankable_2NoteButtonLatching_8cpp.html":[7,0,206],
+"d8/de7/Bankable_2NoteButtonLatching_8cpp_source.html":[7,0,206],
+"d8/dec/MIDINoteLED_8cpp.html":[7,0,188],
+"d8/dec/MIDINoteLED_8cpp_source.html":[7,0,188],
+"d8/df3/FilteredAnalog_8hpp.html":[7,0,101],
+"d8/df3/FilteredAnalog_8hpp.html#a808ce7479a011306197072841ced6ded":[7,0,101,1],
+"d8/df3/FilteredAnalog_8hpp_source.html":[7,0,101],
+"d8/df7/classEncoderSelectorLEDs.html":[6,0,44],
 "d8/df7/classEncoderSelectorLEDs.html#a0f55e2edbd610515285e8cb54a5cd401":[6,0,44,3],
 "d8/df7/classEncoderSelectorLEDs.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,44,18],
 "d8/df7/classEncoderSelectorLEDs.html#a1c4bbfb29eb4aadd75f0aba78376dcd9":[6,0,44,0],
@@ -238,16 +249,5 @@ var NAVTREEINDEX10 =
 "d9/d73/classMIDI__Interface.html#ad61032be4eecf18e9a248f153b5e61a8":[6,0,74,6],
 "d9/d73/classMIDI__Interface.html#ad7c6304008159822ae69eeafbeff8c06":[6,0,74,25],
 "d9/d73/classMIDI__Interface.html#ae482648481f3c19ad024ecf6b7f473ea":[6,0,74,15],
-"d9/d73/classMIDI__Interface.html#af4f7be5b6b486b4d116b9fd6a38f22a4":[6,0,74,7],
-"d9/d78/classHardwareSerialMIDI__Interface.html":[4,3,8],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a095f45d6e0780a90e3d4482639196a8f":[4,3,8,19],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a0db0ea9a49ced7874f0a5b533e625a20":[4,3,8,11],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a16f99ed3ce5ed201fdf224f5d061f32a":[4,3,8,10],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a233779ba75cb9b7c13e41ddce2ec6610":[4,3,8,1],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a2433d8ab8343cbd45473ff578b8ed4e7":[4,3,8,12],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a2c79441f44b904566d237b05b8b3c2fb":[4,3,8,16],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a2c9b5e576f7e2ad2df057a30d13412d5":[4,3,8,24],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a3058e51eff2e68b7480b1c18c1aa8dbd":[4,3,8,9],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a3549169b2cfd90f2d11a19f551407b12":[4,3,8,13],
-"d9/d78/classHardwareSerialMIDI__Interface.html#a4923aed435b881567b3276614dad6d11":[4,3,8,3]
+"d9/d73/classMIDI__Interface.html#af4f7be5b6b486b4d116b9fd6a38f22a4":[6,0,74,7]
 };

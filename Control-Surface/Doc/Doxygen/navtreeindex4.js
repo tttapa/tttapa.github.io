@@ -1,5 +1,9 @@
 var NAVTREEINDEX4 =
 {
+"d3/d09/Hysteresis_8hpp.html":[7,0,108],
+"d3/d09/Hysteresis_8hpp_source.html":[7,0,108],
+"d3/d0b/classBankable_1_1MIDIButtonLatching.html":[6,0,0,10],
+"d3/d0b/classBankable_1_1MIDIButtonLatching.html#a1b550d81a44c65797651145102e39d70":[6,0,0,10,1],
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,0,10,6],
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a4154c3302c845a9dc6a455600c4d0e2b":[6,0,0,10,16],
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a49446abc516d4aef53a1701d734cae95":[6,0,0,10,19],
@@ -41,7 +45,8 @@ var NAVTREEINDEX4 =
 "d3/d10/classMIDICNChannelAddress.html#ae2c660a02f3b66fa943a79acb55b4c0f":[6,0,85,12],
 "d3/d10/classMIDICNChannelAddress.html#ae82ce192ab9177b8320e0e3d56591c9a":[6,0,85,16],
 "d3/d10/classMIDICNChannelAddress.html#af095bbce791e4b3540dd82d31d0227c1":[6,0,85,5],
-"d3/d15/CCRotaryEncoder_8ino-example.html":[8,2],
+"d3/d15/CCRotaryEncoder_8ino-example.html":[8,3],
+"d3/d26/CCPotentiometer-Map_8ino-example.html":[8,1],
 "d3/d2a/classCCButtonMatrix.html":[4,0,19],
 "d3/d2a/classCCButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef":[4,0,19,16],
 "d3/d2a/classCCButtonMatrix.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,19,6],
@@ -244,10 +249,5 @@ var NAVTREEINDEX4 =
 "d3/d6c/classNoteButtonLatching.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,27,6],
 "d3/d6c/classNoteButtonLatching.html#a4a13b63f90ec988cd14d871df9dbc53b":[4,0,27,14],
 "d3/d6c/classNoteButtonLatching.html#a4c1c6bd44da328dd5b4dc29503219d09":[4,0,27,10],
-"d3/d6c/classNoteButtonLatching.html#a57b6615469e554c514a9ff56dc24908f":[4,0,27,15],
-"d3/d6c/classNoteButtonLatching.html#a5c008d0d20b072e46c14b9c48ec6c45b":[4,0,27,2],
-"d3/d6c/classNoteButtonLatching.html#a698d89514186aa0c29ea6fbc5bef1e06":[4,0,27,4],
-"d3/d6c/classNoteButtonLatching.html#a6bae640621972b14ad9c28b6b399f08f":[4,0,27,5],
-"d3/d6c/classNoteButtonLatching.html#a883138a1262a82e8b9e05c75d576e36d":[4,0,27,11],
-"d3/d6c/classNoteButtonLatching.html#a8af924e5b3b708eb042919703d175ed3":[4,0,27,13]
+"d3/d6c/classNoteButtonLatching.html#a57b6615469e554c514a9ff56dc24908f":[4,0,27,15]
 };

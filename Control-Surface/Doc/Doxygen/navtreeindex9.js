@@ -1,5 +1,16 @@
 var NAVTREEINDEX9 =
 {
+"d8/d20/classMIDIRotaryEncoder.html#a080ccb8ce0680885275054cf6ee9e917":[6,0,100,19],
+"d8/d20/classMIDIRotaryEncoder.html#a2330758ba9146eeea1ae6cbcb120c1ae":[6,0,100,20],
+"d8/d20/classMIDIRotaryEncoder.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,100,6],
+"d8/d20/classMIDIRotaryEncoder.html#a304d05c16cb01f4678eecffeac8df325":[6,0,100,14],
+"d8/d20/classMIDIRotaryEncoder.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,100,16],
+"d8/d20/classMIDIRotaryEncoder.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,100,10],
+"d8/d20/classMIDIRotaryEncoder.html#a57b6615469e554c514a9ff56dc24908f":[6,0,100,17],
+"d8/d20/classMIDIRotaryEncoder.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,100,2],
+"d8/d20/classMIDIRotaryEncoder.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,100,4],
+"d8/d20/classMIDIRotaryEncoder.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,100,5],
+"d8/d20/classMIDIRotaryEncoder.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,100,11],
 "d8/d20/classMIDIRotaryEncoder.html#a8af924e5b3b708eb042919703d175ed3":[6,0,100,13],
 "d8/d20/classMIDIRotaryEncoder.html#a9a860311b04f6a040199afa41802b5b8":[6,0,100,0],
 "d8/d20/classMIDIRotaryEncoder.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[6,0,100,9],
@@ -238,16 +249,5 @@ var NAVTREEINDEX9 =
 "d8/de1/classMIDIButtonLatching.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,80,3],
 "d8/de1/classMIDIButtonLatching.html#ac1c120fd0dc42822cf4f12aa7f3ba571":[6,0,80,15],
 "d8/de1/classMIDIButtonLatching.html#acfabd4911411ebbfd96d4080103f4725":[6,0,80,7],
-"d8/de1/classMIDIButtonLatching.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,80,8],
-"d8/de1/classMIDIButtonLatching.html#aefb3b2f7cfb598d2cd68a622c94ea772":[6,0,80,12],
-"d8/de1/classMIDIButtonLatching.html#af85a7d9712cc394ddc5e721a41d3d84f":[6,0,80,0],
-"d8/de1/classMIDIButtonLatching.html#afb0db394a9d011d776606dbb4c854dbb":[6,0,80,14],
-"d8/de7/Bankable_2NoteButtonLatching_8cpp.html":[7,0,206],
-"d8/de7/Bankable_2NoteButtonLatching_8cpp_source.html":[7,0,206],
-"d8/dec/MIDINoteLED_8cpp.html":[7,0,188],
-"d8/dec/MIDINoteLED_8cpp_source.html":[7,0,188],
-"d8/df3/FilteredAnalog_8hpp.html":[7,0,101],
-"d8/df3/FilteredAnalog_8hpp.html#a808ce7479a011306197072841ced6ded":[7,0,101,1],
-"d8/df3/FilteredAnalog_8hpp_source.html":[7,0,101],
-"d8/df7/classEncoderSelectorLEDs.html":[6,0,44]
+"d8/de1/classMIDIButtonLatching.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,80,8]
 };

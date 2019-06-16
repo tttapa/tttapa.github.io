@@ -1,5 +1,10 @@
 var NAVTREEINDEX5 =
 {
+"d3/d6c/classNoteButtonLatching.html#a5c008d0d20b072e46c14b9c48ec6c45b":[4,0,27,2],
+"d3/d6c/classNoteButtonLatching.html#a698d89514186aa0c29ea6fbc5bef1e06":[4,0,27,4],
+"d3/d6c/classNoteButtonLatching.html#a6bae640621972b14ad9c28b6b399f08f":[4,0,27,5],
+"d3/d6c/classNoteButtonLatching.html#a883138a1262a82e8b9e05c75d576e36d":[4,0,27,11],
+"d3/d6c/classNoteButtonLatching.html#a8af924e5b3b708eb042919703d175ed3":[4,0,27,13],
 "d3/d6c/classNoteButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[4,0,27,9],
 "d3/d6c/classNoteButtonLatching.html#a9cf409bc7effa13042ebd1d1e02d1046":[4,0,27,3],
 "d3/d6c/classNoteButtonLatching.html#acfabd4911411ebbfd96d4080103f4725":[4,0,27,7],
@@ -9,7 +14,7 @@ var NAVTREEINDEX5 =
 "d3/d74/PBPotentiometer_8hpp_source.html":[7,0,225],
 "d3/d80/NoteButton_8hpp.html":[7,0,203],
 "d3/d80/NoteButton_8hpp_source.html":[7,0,203],
-"d3/d82/Ex_81_8Shift-Register-LED-Effects_8ino-example.html":[8,3],
+"d3/d82/Ex_81_8Shift-Register-LED-Effects_8ino-example.html":[8,4],
 "d3/d88/classMIDIButtonLatched.html":[6,0,79],
 "d3/d88/classMIDIButtonLatched.html#a0d00b33017b5363b3e4e1899226c4b84":[6,0,79,14],
 "d3/d88/classMIDIButtonLatched.html#a139cdf7fa68a19e2eca342aad1e10d70":[6,0,79,17],
@@ -244,10 +249,5 @@ var NAVTREEINDEX5 =
 "d4/d7c/NoteChordButton_8cpp.html":[7,0,218],
 "d4/d7c/NoteChordButton_8cpp_source.html":[7,0,218],
 "d4/d84/MIDI__Parser_8cpp.html":[7,0,142],
-"d4/d84/MIDI__Parser_8cpp_source.html":[7,0,142],
-"d4/d8c/Bankable_2Abstract_2MIDIButtonLatching_8hpp.html":[7,0,153],
-"d4/d8c/Bankable_2Abstract_2MIDIButtonLatching_8hpp_source.html":[7,0,153],
-"d4/d8e/Bankable_2Abstract_2MIDIFilteredAnalog_8cpp.html":[7,0,169],
-"d4/d8e/Bankable_2Abstract_2MIDIFilteredAnalog_8cpp_source.html":[7,0,169],
-"d4/d93/Updatable_8hpp.html":[7,0,272]
+"d4/d84/MIDI__Parser_8cpp_source.html":[7,0,142]
 };

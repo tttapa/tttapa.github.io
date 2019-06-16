@@ -1,5 +1,9 @@
 var NAVTREEINDEX3 =
 {
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a4a13b63f90ec988cd14d871df9dbc53b":[4,0,12,20],
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a4c1c6bd44da328dd5b4dc29503219d09":[4,0,12,10],
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f":[4,0,12,21],
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b":[4,0,12,2],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a63b760e4554d4ea496ee012b2ba3d508":[4,0,12,12],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a698d89514186aa0c29ea6fbc5bef1e06":[4,0,12,4],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a6a779804092487b4a4a135559b45daf5":[4,0,12,18],
@@ -16,7 +20,7 @@ var NAVTREEINDEX3 =
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,12,13],
 "d2/d33/DigitalCCSender_8cpp.html":[7,0,76],
 "d2/d33/DigitalCCSender_8cpp_source.html":[7,0,76],
-"d2/d35/CCPotentiometer_8ino-example.html":[8,1],
+"d2/d35/CCPotentiometer_8ino-example.html":[8,2],
 "d2/d35/TimeDisplayDisplay_8hpp.html":[7,0,268],
 "d2/d35/TimeDisplayDisplay_8hpp_source.html":[7,0,268],
 "d2/d3d/NoteButtons_8cpp.html":[7,0,215],
@@ -245,9 +249,5 @@ var NAVTREEINDEX3 =
 "d2/df6/structXBitmap.html#ae81f5ca02f09dc774c8150359e02f019":[6,0,154,1],
 "d2/df6/structXBitmap.html#af6717b9ebef66415a4dea6fc7799fadd":[6,0,154,0],
 "d3/d09/CCButtonLatching_8cpp.html":[7,0,37],
-"d3/d09/CCButtonLatching_8cpp_source.html":[7,0,37],
-"d3/d09/Hysteresis_8hpp.html":[7,0,108],
-"d3/d09/Hysteresis_8hpp_source.html":[7,0,108],
-"d3/d0b/classBankable_1_1MIDIButtonLatching.html":[6,0,0,10],
-"d3/d0b/classBankable_1_1MIDIButtonLatching.html#a1b550d81a44c65797651145102e39d70":[6,0,0,10,1]
+"d3/d09/CCButtonLatching_8cpp_source.html":[7,0,37]
 };

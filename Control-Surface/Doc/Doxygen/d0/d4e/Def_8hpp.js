@@ -13,7 +13,7 @@ var Def_8hpp =
     [ "ContinuousSendFunction14Bit", "d0/d4e/Def_8hpp.html#a340d8f15471358240d1ab3c7f8b323f9", null ],
     [ "ContinuousSendFunction7Bit", "d0/d4e/Def_8hpp.html#a07aaa0ba182f95bf623abc210207f928", null ],
     [ "DigitalSendFunction", "d0/d4e/Def_8hpp.html#a2889dcca0ddf95509a3a05a06d074b13", null ],
-    [ "MappingFunction", "d0/d4e/Def_8hpp.html#a94555d2b0466f627de27de309963783b", null ],
+    [ "MappingFunction", "d0/d4e/Def_8hpp.html#afa440ce58740e8dd2204e2ff7d6a6017", null ],
     [ "pin_t", "d0/d4e/Def_8hpp.html#a5dac1481c2337a983c60f5f2b9c704ef", null ],
     [ "PinList", "d0/d4e/Def_8hpp.html#a2cad4766e2eb5bb24649f97d53635b73", null ],
     [ "RelativeSendFunction", "d0/d4e/Def_8hpp.html#a4150949f2e293db161109e2becfd10c2", null ],
