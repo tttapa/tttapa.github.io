@@ -73,7 +73,7 @@ def main(print_to_pdf):
                         full_html = rawToFull(raw_html_path)
                     if print_to_pdf:
                         full_html = check_output(
-                            ["mjpage", '--output=CommonHTML', "--eqno=AMS",
+                            ["/home/pieter/node_modules/mathjax-node-page/bin/mjpage", '--output=CommonHTML', "--eqno=AMS",
                             '--fontURL=/MathJax/fonts/HTML-CSS'],
                             timeout=10, input=bytes(full_html, 'utf-8')
                         ).decode('utf-8')

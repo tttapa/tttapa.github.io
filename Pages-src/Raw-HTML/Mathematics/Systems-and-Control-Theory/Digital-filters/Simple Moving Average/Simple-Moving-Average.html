@@ -1,0 +1,497 @@
+<!--
+@title: Simple Moving Average
+@author: Pieter P
+@keywords: SMA, Simple Moving Average, FIR filter, filters, DSP
+@description: Digital simple moving average filters explained.
+-->
+
+<html>
+
+<h3>Difference equation</h3>
+
+<p>
+    $$ y[n] = \frac{1}{N} \sum_{i=0}^{N-1}x[n-i] $$
+    In this equation, \(y[n]\) is the current output, \(x[n]\) is the current
+    input, \(x[n-1]\) is the previous input, etc.<br>
+    \(N\) is the length of the average.    
+</p>
+<h3>Impulse and step response</h3>
+<p>
+    From the difference equation, we can now easily derive the impulse and step response.
+</p>
+<p>
+    The impulse response is the output of the filter when a Kronecker delta function is applied to the input.
+    $$ \delta[n] \triangleq \begin{cases}
+    1 &amp; n = 0 \\
+    0 &amp; n\ne0
+    \end{cases} $$
+    $$ y_{impulse}[n] = h[n] = \frac{1}{N} \sum_{i=0}^{N-1}\delta[n-i] = 
+    \begin{cases}
+    1/N &amp; 0 \le n \lt N \\
+    0 &amp; \text{otherwise}
+    \end{cases} $$
+    For example, if \(N = 15\), the impulse response is as follows:
+    <img src="images/Impulse-SMA.svg" />
+</p>
+<p>
+    The step response is the output of the filter when a Heaviside step function is applied to the input.
+    $$ H[n] \triangleq \begin{cases}
+    0 &amp; n \lt 0 \\
+    1 &amp; n \ge 0
+    \end{cases} $$
+    $$ y_{step}[n] = \begin{cases}
+    0 &amp; n \lt 0 \\
+    (n+1)/N &amp; 0 \le n \lt N \\
+    1 &amp; n \ge N \\
+    \end{cases} $$
+    For example, if \(N = 15\), the step response is as follows:
+    <img src="images/Step-SMA.svg" />
+</p>
+<h3>Transfer function</h3>
+<p>
+    Any discrete signal can be written as an infinite sum of scaled Kronecker deltas.
+    $$ x[n] = \sum_{k=0}^{+\infty} x[k] \delta[n-k] $$
+    You can easily see that all terms where \(n \ne k\) are zero, because the Kronecker delta is zero in that case.
+    Only the term for \(n = k\) is non-zero, in which case the Kronecker delta is one, so the result is just \(x[k]\).<br>
+    We'll use this property in the following proof.
+</p>
+<p>
+    You can express the output of discrete-time linear time-invariant systems, of which the SMA is an example,
+    as the convolution of the input with the impulse response.<br>
+</p>
+<h4>Proof</h4>
+<p>
+    If \(T\) is the transformation performed by the DTLTI system,
+    and by using the fact that \(T\) is a linear transformation and that it is time-invariant:
+    $$ \begin{split}
+    y[n] &amp;= T\left(x[n]\right) \\
+    &amp;= T\left(\sum_{k=0}^{\infty} x[k] \delta[n-k]\right) \\
+    &amp;= \sum_{k=0}^{\infty} T\left(x[k] \delta[n-k]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k] T\left(\delta[n-k]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k] h[n-k] \\
+    &amp;\triangleq x[n] * h[n]
+    \end{split} $$
+    The \(*\) symbol in the last step is called the convolution operator, and it
+    is defined as the sum in the step before it. \(\quad\Box\)
+</p>
+<p>
+    Analysis of such systems is usually easier in the Z-domain, in which the convolution is reduced to a simple
+    product. <br>
+    The (unilateral) Z-transform is defined as:
+    $$ {\cal Z}\{x[n]\} \triangleq \sum_{n=0}^{\infty} x[n] z^{-n} $$
+    If \(X(z) \triangleq {\cal Z}\{x[n]\}\), \(Y(z) \triangleq {\cal Z}\{y[n]\}\) and \(H(z) \triangleq {\cal Z}\{h[n]\}\)
+    are the Z-transforms of the input, output and impulse response respectively, then:
+    $$ \begin{split}
+    {\cal Z}\{y[n]\} &amp;= {\cal Z}\{x[n] * h[n]\} \\
+    = Y(z) &amp;= \sum_{n=0}^\infty x[n] * h[n] z^{-n}\\
+    &amp;= \sum_{n=0}^\infty \sum_{k=0}^\infty x[k] h[n-k] z^{-n} \\
+    &amp;= \sum_{k=0}^\infty \sum_{n=0}^\infty x[k] h[n-k] z^{-n + k - k} \\
+    &amp;= \sum_{k=0}^\infty x[k] z^{-k} \sum_{n=0}^\infty h[n-k] z^{-(n - k)} \\
+    &amp;\quad l \triangleq n - k \\
+    &amp;= \sum_{k=0}^\infty x[k] z^{-k} \sum_{l=-k}^\infty h[l] z^{-l} \\
+    &amp;= \sum_{k=0}^\infty x[k] z^{-k} \sum_{l=0}^\infty h[l] z^{-l} \\
+    &amp;= X(z) H(z) \\
+    H(z) &amp;= \frac{Y(z)}{X(z)}
+    \end{split} $$
+    \(H(z)\) is called the transfer function of the system.<br>
+    Changing the boundaries of the second summation is valid, because if \(l\ \lt 0\), then \(h[l]\)
+    is zero by definition of unilateral signals.
+</p>
+<p>
+    Let's calculate the transfer function of the SMA.<br>
+    We can use one of two approaches: use the difference equation and use some of
+    the properties of the Z-transform to calculate \(\frac{Y(z)}{X(z)}\), or apply
+    the definition of the Z-transform to the impulse response \(h[n]\) directly.
+    <h4>Using the difference equation</h4>
+    All you have to do is apply the time shifting property of the Z transform:
+    $$ \forall n_0 \in \mathbb{N}:
+       {\cal Z}\{y[n-n_0]\} = z^{-n_0}{\cal Z}\{y[n]\} $$
+    Then just use the fact that the Z-transform is linear, and the derivation is
+    trivial:
+    $$ \begin{split}
+    y[n] &amp;= \frac{1}{N} \sum_{i=0}^{N-1}x[n-i] \\
+    {\cal Z}\{y[n]\} &amp;= {\cal Z}\left\{\frac{1}{N} \sum_{i=0}^{N-1}x[n-i]\right\} \\
+    &amp;= \frac{1}{N} \sum_{i=0}^{N-1}{\cal Z}\{x[n-i]\} \\
+    &amp;= \frac{1}{N} \sum_{i=0}^{N-1}z^{-i}{\cal Z}\{x[n]\} \\
+    Y(z) &amp;= \frac{1}{N} \sum_{i=0}^{N-1}z^{-i}X(z) \\
+    H(z) &amp;\triangleq \frac{Y(z)}{X(z)} \\
+    &amp;= \frac{1}{N} \sum_{i=0}^{N-1}z^{-i} \\
+    &amp;= \frac{1}{N} \sum_{i=0}^{N-1}z^{-i+(N-1)-(N-1)} \\
+    &amp;= \frac{1}{N} z^{-(N-1)} \sum_{i=0}^{N-1}z^{(N-1)-i} \\
+    &amp;j \triangleq N-1-i \\
+    &amp;= \frac{1}{N} \frac{\sum_{j=0}^{N-1}z^{j}}{z^{N-1}} \\
+    \end{split} $$
+    In the last steps, we just rearrange some stuff to get only positive powers
+    of \(z\) in both the numerator and the denominator.
+    <h4>Using the impulse response</h4>
+    For this derivation, we can use the fact that the impulse response \(h[n]\)
+    is only non-zero for the first N terms.
+    $$ \sum_{n=0}^{N-1} r^n = \frac{1-r^N}{1-r} $$
+    $$ \begin{split}
+    H(z) &amp;= {\cal Z}\{h[n]\} \\
+    &amp;= \sum_{n=0}^{\infty} h[n] z^{-n} \\
+    &amp;= \sum_{n=0}^{N-1} \frac{1}{N} z^{-n} \\
+    \end{split} $$
+    It is clear that this expression is identical to the previous one.
+</p>
+<p>
+    We can solve the summation in a different way using the formula for the sum 
+    of a <a href="https://en.wikipedia.org/wiki/Geometric_series#Formula">
+        geometric series</a>:
+    $$ \begin{split} 
+    H(z) &amp;= \frac{1}{N} \sum_{n=0}^{N-1} z^{-n} \\
+    &amp;= \frac{1}{N} \sum_{n=0}^{N-1} \left(\frac{1}{z}\right)^n \\
+    &amp;= \frac{1}{N} \frac{1-z^{-N}}{1-z^{-1}} \\
+    \end{split} $$
+</p>
+<p>
+    In these expressions, \(z\) is a complex variable, and \(H(z)\) is a complex
+    function. <br>
+    There are a couple of interesting values for \(z\): values that result in 
+    the transfer function becoming zero, called <em>zeros</em>,
+    and values that result in the transfer function becoming undefined, 
+    called <em>poles</em>.<br>
+    They can be found as the roots of the numerator and the denominator 
+    respectively, after eliminating any common factors.
+</p>
+<p>
+    The roots of the numerator are the solutions of \(1-z^{-N} = 0\) or 
+    \(z^N = 1\). Note that this equation has \(N\) solutions, namely all 
+    \(N\)-th roots of unity. 
+    One of the solutions is \(z=1\), but there are \(N-1\) complex solutions as 
+    well, evenly spaced along the unit circle: 
+    \(e^{2\pi jn/N}\ |\ n \in [0, N-1]\).
+</p>
+<p>
+    The roots of the denominator are the solutions of \(1-z=0\). This has just 
+    one solution, \(z=1\).<br>
+    Since both the numerator and the denominator have this root in common, we 
+    have to factor out this common factor.
+    $$ \begin{split}
+    \text{zeros} &amp;= \left\{e^{2\pi jn/N}\ |\ n \in [1, N-1]\right\} \\
+    \text{poles} &amp;= \phi \\
+    \end{split} $$
+</p>
+<p>
+    The poles and zeros determine the overall effect of the transfer function,
+    so pole-zero plots are a very useful tool when describing filters.<br>
+    This is the pole-zero plot of the same example SMA as before, with 
+    \(N = 15\).
+    <img src="images/pole-zero.svg" />
+    The zeros are indicated by an <b>O</b>, and the poles by an <b>X</b> 
+    (as discussed before, the SMA doesn't have any poles).
+</p>
+
+<h3>Frequency response</h3>
+
+<p>
+    An important property of discrete-time linear time-invariant systems is that it preserves the frequency
+    of sinusoidal signals, only the phase shift and the amplitude are altered.<br>
+    This makes it relatively easy to express the frequency response (sometimes called magnitude response) of a filter.
+</p>
+<p>
+    We're interested in the spectrum of frequencies that a signal contains, so it makes sense to decompose it as a sum
+    of sines and cosines. That's exactly what the discrete-time Fourier transform does:
+    $$ X_{2\pi}\left(\omega\right) = \sum_{n=-\infty}^{\infty} x[n] e^{-i\omega n} $$
+    Note that this is just a special case of the Z-transform, where \(z = e^{i\omega}\).
+</p>
+<p>
+    The frequency response of the filter describes how the spectrum of a signal is altered when it passes
+    through the filter. It relates the spectrum of the output signal \(Y(\omega)\) to the spectrum 
+    of the input signal \(X(\omega)\). We already had an expression for the spectrum of the output divided
+    by the spectrum of the input, we called it the transfer function \(H(z) = Y(z) / X(z)\).
+    To get the frequency response of the filter, we can just evaluate the transfer function for \(z = e^{i\omega}\).
+    Also note that this is the DTFT of the impulse response \(h[k]\).<br>
+    We use the formula \(e^{j\theta}-e^{-j\theta} = 2j\sin(\theta)\).
+    $$ \begin{split}
+    {\cal F}_{DTFT}\{h[k]\} &amp;= \sum_{n=-\infty}^{\infty} h[n] e^{-i\omega n} \\
+    &amp;= H(e^{i\omega}) \\
+    &amp;= \frac{1}{N} \frac{1-e^{-j\omega N}}{1-e^{-j\omega}} \\
+    &amp;= \frac{1}{N} \frac{e^{-j\omega N/2}}{e^{-j\omega/2}} 
+    \frac{e^{j\omega N/2}-e^{-j\omega N/2}}{e^{j\omega/2}-e^{-j\omega/2}} \\
+    &amp;= \frac{1}{N} \frac{e^{-j\omega N/2}}{e^{-j\omega/2}} 
+    \frac{2j \sin\left(\frac{\omega N}{2}\right)}
+    {2j \sin\left(\frac{\omega}{2}\right)} \\
+    &amp;= \frac{e^{-\frac{j\omega}{2}\left(N-1\right)}}{N}
+    \frac{\sin\left(\frac{\omega N}{2}\right)}
+    {\sin\left(\frac{\omega}{2}\right)} \\
+    \end{split} $$
+    We can now calculate the amplitude of each frequency component in the output by taking the modulus
+    of \(H(e^{i\omega})\). For reasons that will become apparent in a minute, we'll calculate the modulus squared.
+    $$ \begin{split}
+    \left| H(e^{i\omega}) \right|^2 
+    &amp;= \left| \frac{e^{-\frac{j\omega}{2}\left(N-1\right)}}{N}
+    \frac{\sin\left(\frac{\omega N}{2}\right)}
+    {\sin\left(\frac{\omega}{2}\right)} \right|^2 \\
+    &amp;= \frac{1}{N^2} \frac{\sin^2\left(\frac{\omega N}{2}\right)}
+    {\sin^2\left(\frac{\omega}{2}\right)} \\
+    \end{split} $$
+
+    \(\omega\) is the normalized pulsatance (angular frequency) in radians per 
+    sample. You can substitute it with \(\omega = \frac{2\pi f}{f_s}\) where 
+    \(f\) is the frequency in Hertz, and \(f_s\) is the sample frequency of the
+    system in Hertz.
+</p>
+<p>
+    We can now plot the filter's gain in function of the frequency. These plots often use a logarithmic scale, to
+    show the gain in decibels. In order to calculate the power gain, the amplitude is squared.
+    $$ A_{dB}(\omega) = 10\ \log_{10} \left| H\left(e^{i\omega}\right)\right|^2 $$
+    Note that when a frequency is not present in the output signal, the gain will be \(-\infty\ dB\).
+    If a frequency has an amplitude of one in the output signal, the gain will be \(0\ dB\).
+</p>
+<p>
+    We can also plot the phase shift introduced by the SMA. This is just the
+    complex argument of the transfer function.
+    $$ \phi(\omega) = \angle H(e^{j\omega}) $$
+</p>
+<p>
+    The image below shows the bode plot of an SMA with a length of \(N = 15\), 
+    and a sample frequency of \(f_s = 360 \text{Hz}\). The frequency axis is 
+    limited between \(0\ Hz\) and the Nyquist frequency \(f_s/2\). This 
+    corresponds to a normalized pulsatance of \(\omega \in [0, \pi)\).
+    <img src="images/Bode-SMA.svg" />
+    You can clearly see the low-pass behavior of the SMA: low frequencies have a
+    near-unit gain, and high frequencies are attenuated.<br>
+    Also note the zeros, where the magnitude plot goes to \(-\infty dB\). 
+    In a zero, the transfer function changes sign, so the phase jumps \(180°\) 
+    as well.
+</p>
+<p>
+    To get a better understanding of where this curve comes from, we can plot 
+    the entire \(\left| H(z)\right|\) surface in the Z-domain.
+    As mentioned above, the DTFT is just a special case of the Z-transform, 
+    where \(z = e^{i\omega}\), i.e. the unit circle in the complex plane.
+    Remember that the point \(z = e^{i\omega}\) is a point with a distance 
+    of \(1\) to the origin, and with an angle of \(\omega\ \rad\)
+    between its position vector and the positive x axis.
+    <img src="images/magnitude-H-surf.png" title="TODO"/>
+    The image of the unit circle is shown in blue. Notice that this is the same curve as the blue curve in the
+    magnitude response graph above:
+    close to 0 when \(\omega → 0\) (the right half of the circle) and negative when \(\omega → \pi\) (the left half of
+    the circle).<br>
+</p>
+<h4>Cutoff frequency</h4>
+<p>
+    The cutoff frequency is defined as the frequency of the half-power point, where the power gain is a half. It's
+    often called the \(-3\ dB\)-point,
+    because \(10 \log_{10}\left(\frac{1}{2}\right) \approx -3.01\ dB\).<br>
+    To find it, just solve the following equation:
+    $$ \left| H\left(e^{i\omega_c}\right) \right|^2 = \frac{1}{2} $$
+    $$ \begin{split}
+    \frac{1}{N^2} \frac{\sin^2\left(\frac{\omega_c N}{2}\right)}
+    {\sin^2\left(\frac{\omega_c}{2}\right)} &amp;= \frac{1}{2} \\
+    \sin^2\left(\frac{\omega_c N}{2}\right) &amp;= \frac{N^2}{2}
+    \sin^2\left(\frac{\omega_c}{2}\right) \\
+    \sin^2\left(\frac{\omega_c N}{2}\right) - \frac{N^2}{2}
+    \sin^2\left(\frac{\omega_c}{2}\right) &amp;= 0 \\
+    \end{split} $$
+    This equation doesn't have a general analytical solution, but we can use 
+    numerical methods to determine the cut-off frequency.
+    <img src="images/SMA-cutoff-sin-intersection.svg">
+    Note that the intersections at zero and \(2\pi\) are not valid solutions. 
+    In these points the transfer function is undefined, because it evaluates to
+    \(0/0\). We only care about the first solution for 
+    \(\omega_c \in (0, \pi)\).<br>
+    A possible approach to find the intersection is to use the 
+    <a href="https://en.wikipedia.org/wiki/Newton%27s_method">Newton-Raphson 
+    method</a>.<br>
+    A good starting point seems to be at half the period of the high-frequency
+    sine wave.<br>
+    We don't have to keep the squares, because both sines will be positive in
+    the region of the intersection.
+    $$ \begin{split}
+    f(\omega_c) &amp;= \sin\left(\frac{\omega_c N}{2}\right) - \frac{N}{\sqrt{2}}
+    \sin\left(\frac{\omega_c}{2}\right) \\
+    f'(\omega_c) &amp;= \frac{N}{2} \cos\left(\frac{\omega_c N}{2}\right) - \frac{N}{2\sqrt{2}}
+    \cos\left(\frac{\omega_c}{2}\right) \\
+    \omega_c^{(0)} &amp;= \pi / N \\
+    \end{split} $$
+    A Python implementation can be found in the <code>get_sma_cutoff</code> 
+    function in the snippet below.
+</p>
+
+<h3>Plotting the frequency response, impulse response and step response in Python</h3>
+<p>
+    We can use the SciPy and Matplotlib modules to plot the frequency response in Python.<br>
+    This is the script that was used to generate the plots in the previous paragraphs.
+
+    <pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.optimize </span><span style="color: #af00db;">import</span><span style="color: #000000;"> newton</span></code>
+<code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> freqz, dimpulse, dstep</span></code>
+<code><span style="color: #af00db;">from</span><span style="color: #000000;"> math </span><span style="color: #af00db;">import</span><span style="color: #000000;"> sin, cos, sqrt, pi</span></code>
+<code><span style="color: #af00db;">import</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">as</span><span style="color: #000000;"> np</span></code>
+<code><span style="color: #af00db;">import</span><span style="color: #000000;"> matplotlib.pyplot </span><span style="color: #af00db;">as</span><span style="color: #000000;"> plt</span></code>
+<code></code>
+<code><span style="color: #008000;"># Function for calculating the cut-off frequency of a moving average filter</span></code>
+<code><span style="color: #0000ff;">def</span><span style="color: #000000;"> </span><span style="color: #795e26;">get_sma_cutoff</span><span style="color: #000000;">(</span><span style="color: #001080;">N</span><span style="color: #000000;">, </span><span style="color: #000000;">**</span><span style="color: #001080;">kwargs</span><span style="color: #000000;">):</span></code>
+<code><span style="color: #000000;">    func </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">lambda</span><span style="color: #000000;"> </span><span style="color: #001080;">w</span><span style="color: #000000;">: sin(N</span><span style="color: #000000;">*</span><span style="color: #000000;">w</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">-</span><span style="color: #000000;"> N</span><span style="color: #000000;">/</span><span style="color: #000000;">sqrt(</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">*</span><span style="color: #000000;"> sin(w</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;">)  </span><span style="color: #008000;"># |H(e^jω)| = √2/2</span></code>
+<code><span style="color: #000000;">    deriv </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">lambda</span><span style="color: #000000;"> </span><span style="color: #001080;">w</span><span style="color: #000000;">: cos(N</span><span style="color: #000000;">*</span><span style="color: #000000;">w</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">*</span><span style="color: #000000;"> N</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">-</span><span style="color: #000000;"> N</span><span style="color: #000000;">/</span><span style="color: #000000;">sqrt(</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">*</span><span style="color: #000000;"> cos(w</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">  </span><span style="color: #008000;"># dfunc/dx</span></code>
+<code><span style="color: #000000;">    omega_0 </span><span style="color: #000000;">=</span><span style="color: #000000;"> pi</span><span style="color: #000000;">/</span><span style="color: #000000;">N  </span><span style="color: #008000;"># Starting condition: halfway the first period of sin(Nω/2)</span></code>
+<code><span style="color: #000000;">    </span><span style="color: #af00db;">return</span><span style="color: #000000;"> newton(func, omega_0, deriv, </span><span style="color: #000000;">**</span><span style="color: #000000;">kwargs)</span></code>
+<code></code>
+<code><span style="color: #008000;"># Simple moving average design parameters</span></code>
+<code><span style="color: #000000;">f_s </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">100</span></code>
+<code><span style="color: #000000;">N </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">5</span></code>
+<code></code>
+<code><span style="color: #008000;"># Find the cut-off frequency of the SMA</span></code>
+<code><span style="color: #000000;">w_c </span><span style="color: #000000;">=</span><span style="color: #000000;"> get_sma_cutoff(N)</span></code>
+<code><span style="color: #000000;">f_c </span><span style="color: #000000;">=</span><span style="color: #000000;"> w_c </span><span style="color: #000000;">*</span><span style="color: #000000;"> f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> (</span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> pi)</span></code>
+<code></code>
+<code><span style="color: #008000;"># SMA coefficients</span></code>
+<code><span style="color: #000000;">b </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.ones(N)</span></code>
+<code><span style="color: #000000;">a </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.array([N] </span><span style="color: #000000;">+</span><span style="color: #000000;"> [</span><span style="color: #09885a;">0</span><span style="color: #000000;">]</span><span style="color: #000000;">*</span><span style="color: #000000;">(N</span><span style="color: #000000;">-</span><span style="color: #09885a;">1</span><span style="color: #000000;">))</span></code>
+<code></code>
+<code><span style="color: #008000;"># Calculate the frequency response</span></code>
+<code><span style="color: #000000;">w, h </span><span style="color: #000000;">=</span><span style="color: #000000;"> freqz(b, a, </span><span style="color: #001080;">worN</span><span style="color: #000000;">=</span><span style="color: #09885a;">4096</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">w </span><span style="color: #000000;">*=</span><span style="color: #000000;"> f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> (</span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> pi)                      </span><span style="color: #008000;"># Convert from rad/sample to Hz</span></code>
+<code></code>
+<code><span style="color: #008000;"># Plot the amplitude response</span></code>
+<code><span style="color: #000000;">plt.subplot(</span><span style="color: #09885a;">2</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.suptitle(</span><span style="color: #a31515;">'Bode Plot'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(w, </span><span style="color: #09885a;">20</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> np.log10(</span><span style="color: #795e26;">abs</span><span style="color: #000000;">(h)))       </span><span style="color: #008000;"># Convert modulus to dB</span></code>
+<code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Magnitude [dB]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlim(</span><span style="color: #09885a;">0</span><span style="color: #000000;">, f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">60</span><span style="color: #000000;">, </span><span style="color: #09885a;">10</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.axvline(f_c, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'red'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.axhline(</span><span style="color: #000000;">-</span><span style="color: #09885a;">3.01</span><span style="color: #000000;">, </span><span style="color: #001080;">linewidth</span><span style="color: #000000;">=</span><span style="color: #09885a;">0.8</span><span style="color: #000000;">, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'black'</span><span style="color: #000000;">, </span><span style="color: #001080;">linestyle</span><span style="color: #000000;">=</span><span style="color: #a31515;">':'</span><span style="color: #000000;">)</span></code>
+<code></code>
+<code><span style="color: #008000;"># Plot the phase response</span></code>
+<code><span style="color: #000000;">plt.subplot(</span><span style="color: #09885a;">2</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">, </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(w, </span><span style="color: #09885a;">180</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> np.angle(h) </span><span style="color: #000000;">/</span><span style="color: #000000;"> pi)      </span><span style="color: #008000;"># Convert argument to degrees</span></code>
+<code><span style="color: #000000;">plt.xlabel(</span><span style="color: #a31515;">'Frequency [Hz]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Phase [°]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlim(</span><span style="color: #09885a;">0</span><span style="color: #000000;">, f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">180</span><span style="color: #000000;">, </span><span style="color: #09885a;">90</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.yticks([</span><span style="color: #000000;">-</span><span style="color: #09885a;">180</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">135</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">90</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">45</span><span style="color: #000000;">, </span><span style="color: #09885a;">0</span><span style="color: #000000;">, </span><span style="color: #09885a;">45</span><span style="color: #000000;">, </span><span style="color: #09885a;">90</span><span style="color: #000000;">])</span></code>
+<code><span style="color: #000000;">plt.axvline(f_c, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'red'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.show()</span></code>
+<code></code>
+<code><span style="color: #008000;"># Plot the impulse response</span></code>
+<code><span style="color: #000000;">t, y </span><span style="color: #000000;">=</span><span style="color: #000000;"> dimpulse((b, a, </span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s), </span><span style="color: #001080;">n</span><span style="color: #000000;">=</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N)</span></code>
+<code><span style="color: #000000;">plt.suptitle(</span><span style="color: #a31515;">'Impulse Response'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">_, _, baseline </span><span style="color: #000000;">=</span><span style="color: #000000;"> plt.stem(t, y[</span><span style="color: #09885a;">0</span><span style="color: #000000;">], </span><span style="color: #001080;">basefmt</span><span style="color: #000000;">=</span><span style="color: #a31515;">'k:'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.setp(baseline, </span><span style="color: #a31515;">'linewidth'</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">baseline.set_xdata([</span><span style="color: #09885a;">0</span><span style="color: #000000;">,</span><span style="color: #09885a;">1</span><span style="color: #000000;">])</span></code>
+<code><span style="color: #000000;">baseline.set_transform(plt.gca().get_yaxis_transform())</span></code>
+<code><span style="color: #000000;">plt.xlabel(</span><span style="color: #a31515;">'Time [seconds]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Output'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s, </span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s)</span></code>
+<code><span style="color: #000000;">plt.yticks([</span><span style="color: #09885a;">0</span><span style="color: #000000;">, </span><span style="color: #09885a;">0.5</span><span style="color: #000000;">/</span><span style="color: #000000;">N, </span><span style="color: #09885a;">1.0</span><span style="color: #000000;">/</span><span style="color: #000000;">N])</span></code>
+<code><span style="color: #000000;">plt.show()</span></code>
+<code></code>
+<code><span style="color: #008000;"># Plot the step response</span></code>
+<code><span style="color: #000000;">t, y </span><span style="color: #000000;">=</span><span style="color: #000000;"> dstep((b, a, </span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s), </span><span style="color: #001080;">n</span><span style="color: #000000;">=</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N)</span></code>
+<code><span style="color: #000000;">plt.suptitle(</span><span style="color: #a31515;">'Step Response'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">_, _, baseline </span><span style="color: #000000;">=</span><span style="color: #000000;"> plt.stem(t, y[</span><span style="color: #09885a;">0</span><span style="color: #000000;">], </span><span style="color: #001080;">basefmt</span><span style="color: #000000;">=</span><span style="color: #a31515;">'k:'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.setp(baseline, </span><span style="color: #a31515;">'linewidth'</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">baseline.set_xdata([</span><span style="color: #09885a;">0</span><span style="color: #000000;">,</span><span style="color: #09885a;">1</span><span style="color: #000000;">])</span></code>
+<code><span style="color: #000000;">baseline.set_transform(plt.gca().get_yaxis_transform())</span></code>
+<code><span style="color: #000000;">plt.xlabel(</span><span style="color: #a31515;">'Time [seconds]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Output'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s, </span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s)</span></code>
+<code><span style="color: #000000;">plt.yticks([</span><span style="color: #09885a;">0</span><span style="color: #000000;">, </span><span style="color: #09885a;">0.2</span><span style="color: #000000;">, </span><span style="color: #09885a;">0.4</span><span style="color: #000000;">, </span><span style="color: #09885a;">0.6</span><span style="color: #000000;">, </span><span style="color: #09885a;">0.8</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">])</span></code>
+<code><span style="color: #000000;">plt.show()</span></code></pre>
+
+
+<h3>Comparing the Simple Moving Average filter to the Exponential Moving Average filter</h3>
+Using the same Python functions as before, we can plot the responses of the EMA and the SMA on top of each other. <br>
+First, the length \(N\) of the SMA is chosen, then its \(3\ dB\) cut-off frequency is calculated, and this frequency is then used to design the EMA. Do note that this is a fairly arbitrary decision.
+<img src="images/Bode-SMA-EMA.svg">
+<img src="images/Impulse-SMA-EMA.svg">
+<img src="images/Step-SMA-EMA.svg">
+
+<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.optimize </span><span style="color: #af00db;">import</span><span style="color: #000000;"> newton</span></code>
+<code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> freqz, dimpulse, dstep</span></code>
+<code><span style="color: #af00db;">from</span><span style="color: #000000;"> math </span><span style="color: #af00db;">import</span><span style="color: #000000;"> sin, cos, sqrt, pi</span></code>
+<code><span style="color: #af00db;">import</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">as</span><span style="color: #000000;"> np</span></code>
+<code><span style="color: #af00db;">import</span><span style="color: #000000;"> matplotlib.pyplot </span><span style="color: #af00db;">as</span><span style="color: #000000;"> plt</span></code>
+<code></code>
+<code><span style="color: #008000;"># Function for calculating the cut-off frequency of a moving average filter</span></code>
+<code><span style="color: #0000ff;">def</span><span style="color: #000000;"> </span><span style="color: #795e26;">get_sma_cutoff</span><span style="color: #000000;">(</span><span style="color: #001080;">N</span><span style="color: #000000;">, </span><span style="color: #000000;">**</span><span style="color: #001080;">kwargs</span><span style="color: #000000;">):</span></code>
+<code><span style="color: #000000;">    func </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">lambda</span><span style="color: #000000;"> </span><span style="color: #001080;">w</span><span style="color: #000000;">: sin(N</span><span style="color: #000000;">*</span><span style="color: #000000;">w</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">-</span><span style="color: #000000;"> N</span><span style="color: #000000;">/</span><span style="color: #000000;">sqrt(</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">*</span><span style="color: #000000;"> sin(w</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;">)  </span><span style="color: #008000;"># |H(e^jω)| = √2/2</span></code>
+<code><span style="color: #000000;">    deriv </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">lambda</span><span style="color: #000000;"> </span><span style="color: #001080;">w</span><span style="color: #000000;">: cos(N</span><span style="color: #000000;">*</span><span style="color: #000000;">w</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">*</span><span style="color: #000000;"> N</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">-</span><span style="color: #000000;"> N</span><span style="color: #000000;">/</span><span style="color: #000000;">sqrt(</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">*</span><span style="color: #000000;"> cos(w</span><span style="color: #000000;">/</span><span style="color: #09885a;">2</span><span style="color: #000000;">) </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">  </span><span style="color: #008000;"># dfunc/dx</span></code>
+<code><span style="color: #000000;">    omega_0 </span><span style="color: #000000;">=</span><span style="color: #000000;"> pi</span><span style="color: #000000;">/</span><span style="color: #000000;">N  </span><span style="color: #008000;"># Starting condition: halfway the first period of sin(Nω/2)</span></code>
+<code><span style="color: #000000;">    </span><span style="color: #af00db;">return</span><span style="color: #000000;"> newton(func, omega_0, deriv, </span><span style="color: #000000;">**</span><span style="color: #000000;">kwargs)</span></code>
+<code></code>
+<code><span style="color: #008000;"># Simple moving average design parameters</span></code>
+<code><span style="color: #000000;">f_s </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">360</span></code>
+<code><span style="color: #000000;">N </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">9</span></code>
+<code></code>
+<code><span style="color: #008000;"># Find the cut-off frequency of the SMA</span></code>
+<code><span style="color: #000000;">w_c </span><span style="color: #000000;">=</span><span style="color: #000000;"> get_sma_cutoff(N)</span></code>
+<code><span style="color: #000000;">f_c </span><span style="color: #000000;">=</span><span style="color: #000000;"> w_c </span><span style="color: #000000;">*</span><span style="color: #000000;"> f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> (</span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> pi)</span></code>
+<code></code>
+<code><span style="color: #008000;"># Calculate the pole location of the EMA with the same cut-off frequency</span></code>
+<code><span style="color: #000000;">b </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">-</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">cos(w_c)</span></code>
+<code><span style="color: #000000;">alpha </span><span style="color: #000000;">=</span><span style="color: #000000;"> (</span><span style="color: #000000;">-</span><span style="color: #000000;">b </span><span style="color: #000000;">+</span><span style="color: #000000;"> sqrt(b</span><span style="color: #000000;">**</span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">+</span><span style="color: #000000;"> </span><span style="color: #09885a;">4</span><span style="color: #000000;">*</span><span style="color: #000000;">b)) </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span></code>
+<code></code>
+<code><span style="color: #008000;"># SMA &amp; EMA coefficients</span></code>
+<code><span style="color: #000000;">b_sma </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.ones(N)</span></code>
+<code><span style="color: #000000;">a_sma </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.array([N] </span><span style="color: #000000;">+</span><span style="color: #000000;"> [</span><span style="color: #09885a;">0</span><span style="color: #000000;">]</span><span style="color: #000000;">*</span><span style="color: #000000;">(N</span><span style="color: #000000;">-</span><span style="color: #09885a;">1</span><span style="color: #000000;">))</span></code>
+<code></code>
+<code><span style="color: #000000;">b_ema </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.array((alpha, </span><span style="color: #09885a;">0</span><span style="color: #000000;">))</span></code>
+<code><span style="color: #000000;">a_ema </span><span style="color: #000000;">=</span><span style="color: #000000;"> np.array((</span><span style="color: #09885a;">1</span><span style="color: #000000;">, alpha </span><span style="color: #000000;">-</span><span style="color: #000000;"> </span><span style="color: #09885a;">1</span><span style="color: #000000;">))</span></code>
+<code></code>
+<code><span style="color: #008000;"># Calculate the frequency response</span></code>
+<code><span style="color: #000000;">w, h_sma </span><span style="color: #000000;">=</span><span style="color: #000000;"> freqz(b_sma, a_sma, </span><span style="color: #001080;">worN</span><span style="color: #000000;">=</span><span style="color: #09885a;">4096</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">w, h_ema </span><span style="color: #000000;">=</span><span style="color: #000000;"> freqz(b_ema, a_ema, w)</span></code>
+<code><span style="color: #000000;">w </span><span style="color: #000000;">*=</span><span style="color: #000000;"> f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> (</span><span style="color: #09885a;">2</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> pi)                      </span><span style="color: #008000;"># Convert from rad/sample to Hz</span></code>
+<code></code>
+<code><span style="color: #008000;"># Plot the amplitude response</span></code>
+<code><span style="color: #000000;">plt.subplot(</span><span style="color: #09885a;">2</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.suptitle(</span><span style="color: #a31515;">'Bode Plot'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(w, </span><span style="color: #09885a;">20</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> np.log10(</span><span style="color: #795e26;">abs</span><span style="color: #000000;">(h_sma)),   </span><span style="color: #008000;"># Convert modulus to dB</span></code>
+<code><span style="color: #000000;">         </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'blue'</span><span style="color: #000000;">, </span><span style="color: #001080;">label</span><span style="color: #000000;">=</span><span style="color: #a31515;">'SMA'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(w, </span><span style="color: #09885a;">20</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> np.log10(</span><span style="color: #795e26;">abs</span><span style="color: #000000;">(h_ema)),</span></code>
+<code><span style="color: #000000;">         </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'green'</span><span style="color: #000000;">, </span><span style="color: #001080;">label</span><span style="color: #000000;">=</span><span style="color: #a31515;">'EMA'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Magnitude [dB]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlim(</span><span style="color: #09885a;">0</span><span style="color: #000000;">, f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">60</span><span style="color: #000000;">, </span><span style="color: #09885a;">10</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.axvline(f_c, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'red'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.axhline(</span><span style="color: #000000;">-</span><span style="color: #09885a;">3.01</span><span style="color: #000000;">, </span><span style="color: #001080;">linewidth</span><span style="color: #000000;">=</span><span style="color: #09885a;">0.8</span><span style="color: #000000;">, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'black'</span><span style="color: #000000;">, </span><span style="color: #001080;">linestyle</span><span style="color: #000000;">=</span><span style="color: #a31515;">':'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.legend()</span></code>
+<code></code>
+<code><span style="color: #008000;"># Plot the phase response</span></code>
+<code><span style="color: #000000;">plt.subplot(</span><span style="color: #09885a;">2</span><span style="color: #000000;">, </span><span style="color: #09885a;">1</span><span style="color: #000000;">, </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(w, </span><span style="color: #09885a;">180</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> np.angle(h_sma) </span><span style="color: #000000;">/</span><span style="color: #000000;"> pi,  </span><span style="color: #008000;"># Convert argument to degrees</span></code>
+<code><span style="color: #000000;">         </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'blue'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(w, </span><span style="color: #09885a;">180</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> np.angle(h_ema) </span><span style="color: #000000;">/</span><span style="color: #000000;"> pi,</span></code>
+<code><span style="color: #000000;">         </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'green'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlabel(</span><span style="color: #a31515;">'Frequency [Hz]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Phase [°]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlim(</span><span style="color: #09885a;">0</span><span style="color: #000000;">, f_s </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">180</span><span style="color: #000000;">, </span><span style="color: #09885a;">90</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.yticks([</span><span style="color: #000000;">-</span><span style="color: #09885a;">180</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">135</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">90</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">45</span><span style="color: #000000;">, </span><span style="color: #09885a;">0</span><span style="color: #000000;">, </span><span style="color: #09885a;">45</span><span style="color: #000000;">, </span><span style="color: #09885a;">90</span><span style="color: #000000;">])</span></code>
+<code><span style="color: #000000;">plt.axvline(f_c, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'red'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.show()</span></code>
+<code></code>
+<code><span style="color: #008000;"># Plot the impulse response</span></code>
+<code><span style="color: #000000;">t, y_sma </span><span style="color: #000000;">=</span><span style="color: #000000;"> dimpulse((b_sma, a_sma, </span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s), </span><span style="color: #001080;">n</span><span style="color: #000000;">=</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N)</span></code>
+<code><span style="color: #000000;">t, y_ema </span><span style="color: #000000;">=</span><span style="color: #000000;"> dimpulse((b_ema, a_ema, </span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s), </span><span style="color: #001080;">n</span><span style="color: #000000;">=</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N)</span></code>
+<code><span style="color: #000000;">plt.suptitle(</span><span style="color: #a31515;">'Impulse Response'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(t, y_sma[</span><span style="color: #09885a;">0</span><span style="color: #000000;">], </span><span style="color: #a31515;">'o-'</span><span style="color: #000000;">,</span></code>
+<code><span style="color: #000000;">         </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'blue'</span><span style="color: #000000;">, </span><span style="color: #001080;">label</span><span style="color: #000000;">=</span><span style="color: #a31515;">'SMA'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(t, y_ema[</span><span style="color: #09885a;">0</span><span style="color: #000000;">], </span><span style="color: #a31515;">'o-'</span><span style="color: #000000;">,</span></code>
+<code><span style="color: #000000;">         </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'green'</span><span style="color: #000000;">, </span><span style="color: #001080;">label</span><span style="color: #000000;">=</span><span style="color: #a31515;">'EMA'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlabel(</span><span style="color: #a31515;">'Time [seconds]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Output'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s, </span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s)</span></code>
+<code><span style="color: #000000;">plt.legend()</span></code>
+<code><span style="color: #000000;">plt.show()</span></code>
+<code></code>
+<code><span style="color: #008000;"># Plot the step response</span></code>
+<code><span style="color: #000000;">t, y_sma </span><span style="color: #000000;">=</span><span style="color: #000000;"> dstep((b_sma, a_sma, </span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s), </span><span style="color: #001080;">n</span><span style="color: #000000;">=</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N)</span></code>
+<code><span style="color: #000000;">t, y_ema </span><span style="color: #000000;">=</span><span style="color: #000000;"> dstep((b_ema, a_ema, </span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s), </span><span style="color: #001080;">n</span><span style="color: #000000;">=</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N)</span></code>
+<code><span style="color: #000000;">plt.suptitle(</span><span style="color: #a31515;">'Step Response'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(t, y_sma[</span><span style="color: #09885a;">0</span><span style="color: #000000;">], </span><span style="color: #a31515;">'o-'</span><span style="color: #000000;">,</span></code>
+<code><span style="color: #000000;">         </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'blue'</span><span style="color: #000000;">, </span><span style="color: #001080;">label</span><span style="color: #000000;">=</span><span style="color: #a31515;">'SMA'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.plot(t, y_ema[</span><span style="color: #09885a;">0</span><span style="color: #000000;">], </span><span style="color: #a31515;">'o-'</span><span style="color: #000000;">,</span></code>
+<code><span style="color: #000000;">         </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'green'</span><span style="color: #000000;">, </span><span style="color: #001080;">label</span><span style="color: #000000;">=</span><span style="color: #a31515;">'EMA'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlabel(</span><span style="color: #a31515;">'Time [seconds]'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.ylabel(</span><span style="color: #a31515;">'Output'</span><span style="color: #000000;">)</span></code>
+<code><span style="color: #000000;">plt.xlim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s, </span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s)</span></code>
+<code><span style="color: #000000;">plt.legend()</span></code>
+<code><span style="color: #000000;">plt.show()</span></code></pre>
+
+</p>
+
+</html>

@@ -1,0 +1,33 @@
+\documentclass[class=minimal,border=0pt]{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\begin{document}
+
+\tikzstyle{block} = [draw, fill=gray!20, rectangle]
+\tikzstyle{delay} = [draw, fill=gray!20, rectangle, minimum width=0.9cm, minimum height=0.7cm]
+\tikzstyle{sum} = [draw, fill=gray!20, circle]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{scalar} = [draw, fill=gray!20, isosceles triangle, scale=0.6]
+
+\begin{tikzpicture}[auto,>=latex']
+	\path [use as bounding box] (0,0) rectangle (7.5,3);
+    \node [input, name=input] at (0,1.5) {};
+    \node [delay, right of=input, node distance=1.5cm] (delay) {$D$};
+    \node [sum, right of=delay, node distance=2.5cm] (sum) {$+$};
+    \node [scalar, right of=sum, node distance=2cm] (scalar) {$1/2$};
+    \node [output, right of=scalar, node distance=1.5cm] (output) {};
+
+    \coordinate [right of=input, node distance=0.5cm] (c1) {};
+    \coordinate [below of=delay, node distance=1cm] (c2) {};
+    
+    \draw [draw,->] (input) -- node[pos=0] {$x[n]$} (delay);
+    \draw [draw,->] (delay) -- node {$x[n-1]$} (sum);
+    \draw [draw,->] (c1) |- (c2) -| (sum);
+    \draw [draw,->] (sum) -- (scalar);
+    \draw [draw,->] (scalar) -- node[pos=1] {$y[n]$} (output);
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,182 @@
+<!--
+@title: Formularium
+@author: Pieter P
+@keywords: 
+@description: 
+-->
+
+<html>
+
+<h3>Basics</h3>
+
+<h4>Symbols</h4>
+<p>
+    <ul>
+        <li>Absolute temperature: \(T\)</li>
+        <li>Boltzmann constant: \(k = 1.38064852 × 10^{-23}\ \mathrm{m^2\ kg\ s^{-2}\ K^{-1}}\)</li>
+        <li>Intrinsic free carrier concentration: \(n_i\)</li>
+        <li>Electron concentration: \(n\)</li>
+        <li>Hole concentration: \(p\)</li>
+        <li>Effective density of states in conduction band: \(N_c\)</li>
+        <li>Effective density of states in valence band: \(N_v\)</li>
+        <li>Fermi level: \(\phi_f\)</li>
+        <li>Fermi energy: \(E_f\)</li>
+        <li>Quasi Fermi energy for electrons (no equilibrium): \(E_{fn}\)</li>
+        <li>Quasi Fermi energy for holes (no equilibrium): \(E_{fp}\)</li>
+        <li>Intrinsic Fermi energy: \(E_i\)</li>
+        <li>Valence band energy: \(E_v\)</li>
+        <li>Conduction band energy: \(E_c\)</li>
+        <li>Donor ionization energy: \(E_D\)</li>
+        <li>Acceptor ionization energy: \(E_A\)</li>
+        <li>Band gap energy: \(E_g \triangleq E_c - E_f\)</li>
+        <li>Number of ionized donor ions: \(N_D\)</li>
+        <li>Number of ionized acceptor ions: \(N_A\)</li>
+        <li>Number of equivalent energy minima in conduction band: \(M_c\)</li>
+        <li>Density-of-state effective electron mass: \(m_{de}\)</li>
+        <li>Density-of-state effective hole mass: \(m_{dh}\)</li>
+        <li>Recombination: \(R\)</li>
+        <li>Thermal generation: \(G_{th}\)</li>
+        <li>External generation: \(G\)</li>
+        <li>Net recombination rate of electrons and holes: \(U \triangleq R - G_{th}\)</li>
+        <li>Equilibrium electron concentration: \(n_{po}\)</li>
+        <li>Equilibrium hole concentration: \(p_{no}\)</li>
+        <li>Minority carrier effective lifetimes: \(\tau_n\), \(\tau_p\)</li>
+    </ul>
+</p>
+
+<h4>Concentration</h4>
+<p>
+$$ \begin{split}
+n &amp;= N_c \exp\left(\frac{E_f - E_c}{kT}\right) \\
+p &amp;= N_v \exp\left(\frac{E_v - E_f}{kT}\right) \\
+\end{split} $$
+
+$$ \begin{split}
+N_c &amp;= 2 \left(\frac{2\pi m_{de} kT}{h^2}\right)^{3/2} M_c \\
+N_v &amp;= 2 \left(\frac{2\pi m_{dh} kT}{h^2}\right)^{3/2} \\
+\end{split} $$
+</p>
+
+<h4>Pure Semiconductor in Equilibrium</h4>
+<p>
+$$ \begin{split} 
+n &amp;= p = n_i \\
+n_i^2 &amp;= np = N_c N_v \exp\left(\frac{-E_g}{kT}\right) \\
+E_f &amp;= E_i = \frac{E_c+E_v}{2} + \frac{kT}{2} \ln\left(\frac{N_v}{N_c}\right) \\
+\end{split} $$
+</p>
+
+<h4>Doped Semiconductor in Equilibrium</h4>
+<p>
+Charge neutrality:
+    $$ N_D + p = N_A + n $$
+N-type
+$$ \begin{split} 
+N_D &amp;\gt N_A \\
+n &amp;= \frac{1}{2}\left(N_D - N_A + 
+                          \sqrt{\left(N_D - N_A\right)^2 + 4 n_i^2}\right) \\
+&amp;\approx N_D - N_A \\
+p &amp;= \frac{n_i^2}{n} \\
+&amp;\approx \frac{n_i^2}{N_D - N_A} \\
+E_f &amp;\approx E_i + kT \ln\left(\frac{N_D - N_A}{n_i}\right) \gt E_i \\
+\end{split} $$
+
+P-type
+$$ \begin{split} 
+N_A &amp;\gt N_D \\
+p &amp;= \frac{1}{2}\left(N_A - N_D + 
+                          \sqrt{\left(N_A - N_D\right)^2 + 4 n_i^2}\right) \\
+&amp;\approx N_A - N_D \\
+n &amp;= \frac{n_i^2}{p} \\
+&amp;\approx \frac{n_i^2}{N_A - N_D} \\
+E_f &amp;\approx E_i - kT \ln\left(\frac{N_A - N_D}{n_i}\right) \lt E_i \\
+\end{split} $$
+</p>
+
+<h4>Semiconductor out of Equilibrium</h4>
+<p>
+$$ pn \gt n_i^2 $$
+$$ \begin{split} 
+n &amp;= N_c \exp\left(\frac{E_{fn} - E_c}{kT}\right) \\
+  &amp;= n_i \exp\left(\frac{E_{fn} - E_i}{kT}\right) \\
+p &amp;= N_v \exp\left(\frac{E_v - E_{fp}}{kT}\right) \\
+  &amp;= n_i \exp\left(\frac{E_i - E_{fp}}{kT}\right) \\
+np &amp;= N_c N_v \exp\left(\frac{(E_v - E_c) + (E_{fn} - E_{fp})}{kT}\right) \\
+  &amp;= n_i^2 \exp\left(\frac{E_{fn} - E_{fp}}{kT}\right) \\
+\end{split} $$
+</p>
+
+<h4>Carrier Recombination and Generation Mechanisms</h4>
+<p>
+$$ \begin{split}
+U_n \approx&amp;\frac{n-n_{po}}{\tau_n} \\
+U_p \approx&amp;\frac{p-p_{no}}{\tau_p} \\
+\frac{dn}{dt} &amp;= \frac{dp}{dt} = -U + G = G_{th} + G - R \\
+\end{split} $$
+</p>
+<h5>Shockley-Read-Hall generation and recombination</h5>
+<p>
+    Impurities with energy levels within the forbidden gap.
+$$ \begin{split}
+U_{SRH} &amp;= \text{staat hopelijk in het formularium} \\
+\end{split} $$
+
+
+<p>
+Effectieve levensduur
+$$ \frac{1}{\tau_p} = \frac{1}{\tau_{p,\text{rad}}} + 
+                      \frac{1}{\tau_{\text{p,Auger}}} $$
+$$ \tau_{\text{rad}} = \frac{1}{BN_D} $$
+$$ \tau_{\text{Auger}} = \frac{1}{G_{A,n}N_D^2} $$
+</p>
+
+<h3>PN-junction</h3>
+
+<h4>Symbols</h4>
+<p>
+    <ul>
+        <li></li>
+    </ul>
+</p>
+
+<p>
+
+</p>
+
+<h3>MOS-cap</h3>
+
+<p>
+
+</p>
+
+<h3>MOSFET</h3>
+
+<h4>N-FET</h4>
+<p>
+Fermi level
+$$ \phi_f = V_t \ln\left(\frac{N_A}{n_i}\right) $$
+Threshold voltage
+$$ V_T = V_{FB} + 2 \phi_f + \frac{\sqrt{2q\epsilon_sN_A}}{C_{ox}}\sqrt{2\phi_f - V_{BS}} $$
+
+Drain-Source current:
+$$ \begin{split} 
+I_{DS, \text{lin}} &amp;= \frac{\mu C_{ox}W}{L} \left(V_{GS} - V_T + \frac{V_{DS}}{2}\right) V_{DS} \\
+I_{DS, \text{sat}} &amp;= \frac{\mu C_{ox}W}{2L} \left(V_{GS} - V_T\right)^2 
+\end{split} $$
+</p>
+
+<h3>BJT</h3>
+
+<p>
+    
+</p>
+
+<h3>PV cell</h3>
+
+<p>
+$$ V_{oc} = V_t \ln\left(\frac{J_{sc}}{J_0}\right) $$
+$$ J_0 = q \sqrt{\frac{V_t\mu_p}{\tau_p}} \frac{n_i^2}{N_D} $$
+$$ I_{np} = I_{sc} - I_S \left[\exp\left(\frac{V_{pn}}{V_t}\right)-1 \right] $$
+</p>
+
+</html>
