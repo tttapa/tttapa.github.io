@@ -125,106 +125,20 @@
             <div>
 
 <p>
-    We can use MATLAB to visualize the effects of the filter.
-    </p><pre class="lineNumbers"><code>%% Visualization</code>
-<code></code>
-<code>close all;      % Close all open figures</code>
-<code></code>
-<code>alpha = 0.25;   % Filter factor of 1/4</code>
-<code></code>
-<code>f_s = 10000;     % 10 kHz sample frequency</code>
-<code>f_1 = 300;       % First sine wave with a frequency of 300 Hz</code>
-<code>f_2 = 2500;      % Second sine wave with a frequency of 2.5 kHz</code>
-<code></code>
-<code>samples = 100;  % Calculate/plot 100 samples</code>
-<code>n = linspace(0,samples-1,samples);  % Generate a vector with sample numbers</code>
-<code>t = n / f_s;    % Generate a vector with time</code>
-<code></code>
-<code>sine_1 = sin(2*pi*f_1*t);   % Calculate the (sampled) sine waves</code>
-<code>sine_2 = sin(2*pi*f_2*t);</code>
-<code>signal = (sine_1 + sine_2);     % Mix the two sine waves together</code>
-<code></code>
-<code>b = alpha;              % Coefficients of the numerator of the transfer function</code>
-<code>a = [1,-(1-alpha)];     % Coefficients of the denominator of the transfer function</code>
-<code>filtered = filter(b,a,signal);   % Filter the signal</code>
-<code></code>
-<code>oversample_continuous = 20;     % Create a version with ten times more samples</code>
-<code>                                % to display the smooth, continuous signal</code>
-<code>samples_continuous = oversample_continuous * samples;</code>
-<code>n_continuous = linspace(0, samples_continuous-1,samples_continuous) / oversample_continuous;</code>
-<code>t_continuous = n_continuous / f_s;</code>
-<code>sine_1_continuous = sin(2*pi*f_1*t_continuous);</code>
-<code>sine_2_continuous = sin(2*pi*f_2*t_continuous);</code>
-<code>signal_continuous = (sine_1_continuous + sine_2_continuous);</code>
-<code></code>
-<code>% Plot the two original sine waves</code>
-<code>figure('pos',[0,0,1200,400]);</code>
-<code>hold on;</code>
-<code>plot(t_continuous, sine_1_continuous, 'k');</code>
-<code>plot(t_continuous, sine_2_continuous, 'k');</code>
-<code>title('Original sine waves');</code>
-<code>xlabel('Time (s)');</code>
-<code>ylabel('Amplitude');</code>
-<code></code>
-<code>% Plot the continuous signal, the sampled version and the filtered output</code>
-<code>figure('pos',[0,0,1200,400]);</code>
-<code>hold on;</code>
-<code>plot(n_continuous, signal_continuous, 'k');</code>
-<code>plot(n, signal,'o');</code>
-<code>plot(n, filtered,'-o');</code>
-<code>title('Filtering the signal');</code>
-<code>xlabel('Sample');</code>
-<code>ylabel('Amplitude');</code>
-<code>legend('Original signal','Sampled signal','Filtered signal');</code>
-<code></code>
-<code>% Apply a fast fourier transform and plot the spectra of the </code>
-<code>% original signal and of the filtered output</code>
-<code>figure('pos',[0,0,1000,400]);</code>
-<code>hold on;</code>
-<code>f = linspace(0,samples-1,samples)*f_s/samples;</code>
-<code>original_spectrum = (abs(fft(signal))*2/samples).^2;</code>
-<code>filtered_spectrum = (abs(fft(filtered))*2/samples).^2;</code>
-<code>plot(f(1:1+samples/2),original_spectrum(1:1+samples/2),'-o');</code>
-<code>plot(f(1:1+samples/2),filtered_spectrum(1:1+samples/2),'-o');</code>
-<code>title('Power spectral density');</code>
-<code>xlabel('Frequency (Hz)');</code>
-<code>legend('Original signal','Filtered signal');</code>
-<code></code>
-<code>% Calculate the attenuation of the two sine waves</code>
-<code>f_1_index = f_1*samples/f_s+1;</code>
-<code>A_1 = filtered_spectrum(f_1_index) / original_spectrum(f_1_index);</code>
-<code>A_1_dB = 10*log10(A_1);</code>
-<code>fprintf('Attenuation of first sine wave (%.0f Hz) = %.02f dB\n', f_1, A_1_dB);</code>
-<code></code>
-<code>f_2_index = f_2*samples/f_s+1;</code>
-<code>A_2 = filtered_spectrum(f_2_index) / original_spectrum(f_2_index);</code>
-<code>A_2_dB = 10*log10(A_2);</code>
-<code>fprintf('Attenuation of second sine wave (%.0f Hz) = %.02f dB\n', f_2, A_2_dB);</code>
-<code></code>
-<code>% Open the filter visualization tool</code>
-<code>fvtool(b,a,'Fs',f_s);</code>
-<code></code>
-<code>%% WAV export</code>
-<code></code>
-<code>samples = f_s*2;    % 2 seconds of audio</code>
-<code>n = linspace(0,samples-1,samples);  % Generate a vector with sample numbers</code>
-<code>t = n / f_s;        % Generate a vector with time</code>
-<code></code>
-<code>sine_1 = sin(2*pi*f_1*t);   % Calculate the (sampled) sine waves</code>
-<code>sine_2 = sin(2*pi*f_2*t);</code>
-<code>signal = (sine_1 + sine_2)/2; % Mix the two sine waves together</code>
-<code></code>
-<code>filtered = filter(alpha,[1,-(1-alpha)],signal);   % Filter the signal</code>
-<code></code>
-<code>audiowrite('original.wav',signal,f_s);    % Export as audio</code>
-<code>audiowrite('filtered.wav',filtered,f_s);</code></pre>
+    We can use MATLAB to visualize the effects of the filter. The scripts used
+    can be found at the bottom of the page.
+</p>
+<p>
 First, we generate a test signal that consists of two sine waves.
 <img src="images/original-sine-waves.svg" style="width: 90%">
-Then we apply the filter to it and plot the result. You can clearly see how the high-frequency sine wave is attenuated. Also note the phase shift between the original and the filtered signal.
+Then we apply the filter to it and plot the result. You can clearly see how the 
+high-frequency sine wave is attenuated. 
+Also note the phase shift between the original and the filtered signal: the red
+curve is delayed slightly, it is shifted to the right.
 <img src="images/filtering-the-signal.svg" style="width: 90%">
 Finally, we can apply a fast fourier transform to inspect the frequency content.
 <img src="images/power-spectral-density.svg" style="width: 80%">
-<pre><code>Attenuation of first sine wave (30 Hz) = -1.53 dB
+</p><pre><code>Attenuation of first sine wave (30 Hz) = -1.53 dB
 Attenuation of second sine wave (250 Hz) = -13.97 dB</code></pre>
 You can hear the difference for yourself:
 <div>
@@ -238,18 +152,12 @@ You can hear the difference for yourself:
 <button onclick="document.getElementById('filtered_wav').currentTime = 0;document.getElementById('filtered_wav').play();document.getElementById('original_wav').pause()">Filtered</button>
 </div>
 <p></p>
+
+<h3><a name="audio" href="#audio">Audio</a></h3>
+
 <p>
     It can be used on music as well:
-    </p><pre class="lineNumbers"><code>[signal,f_s] = audioread('telegraph_road_original.wav');</code>
-<code></code>
-<code>alpha = 0.25;   % Filter factor of 1/4</code>
-<code></code>
-<code>b = alpha;              % Coefficients of the numerator of the transfer function</code>
-<code>a = [1,-(1-alpha)];     % Coefficients of the denominator of the transfer function</code>
-<code>filtered = filter(b,a,signal);   % Filter the signal</code>
-<code></code>
-<code>audiowrite('telegraph_road_filtered.wav',filtered,f_s);</code></pre>
-<div>
+</p><div>
 <audio id="telegraph_road_original_wav">
     <source src="images/telegraph_road_original.mp3" type="audio/mpeg">
 </audio>
@@ -261,9 +169,116 @@ You can hear the difference for yourself:
 </div>
 <p></p>
 
+<h3><a name="code" href="#code">Code</a></h3>
+
+<h4><a name="sine-wave-code" href="#sine-wave-code">Sine Wave Code</a></h4>
+<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><code><span style="color: #008000;">%% Visualization</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #001080;">close</span><span style="color: #a31515;"> all;      </span><span style="color: #008000;">% Close all open figures</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #795e26;">alpha</span><span style="color: #000000;"> = </span><span style="color: #09885a;">0.25</span><span style="color: #000000;">;   </span><span style="color: #008000;">% Filter factor of 1/4</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">f_s = </span><span style="color: #09885a;">10000</span><span style="color: #000000;">;     </span><span style="color: #008000;">% 10 kHz sample frequency</span></code></code>
+<code><code><span style="color: #000000;">f_1 = </span><span style="color: #09885a;">300</span><span style="color: #000000;">;       </span><span style="color: #008000;">% First sine wave with a frequency of 300 Hz</span></code></code>
+<code><code><span style="color: #000000;">f_2 = </span><span style="color: #09885a;">2500</span><span style="color: #000000;">;      </span><span style="color: #008000;">% Second sine wave with a frequency of 2.5 kHz</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">samples = </span><span style="color: #09885a;">100</span><span style="color: #000000;">;  </span><span style="color: #008000;">% Calculate/plot 100 samples</span></code></code>
+<code><code><span style="color: #000000;">n = </span><span style="color: #0000ff;">linspace</span><span style="color: #000000;">(</span><span style="color: #09885a;">0</span><span style="color: #000000;">,samples-</span><span style="color: #09885a;">1</span><span style="color: #000000;">,samples);  </span><span style="color: #008000;">% Generate a vector with sample numbers</span></code></code>
+<code><code><span style="color: #000000;">t = n </span><span style="color: #000000;">/</span><span style="color: #000000;"> f_s;    </span><span style="color: #008000;">% Generate a vector with time</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">sine_1 = </span><span style="color: #0000ff;">sin</span><span style="color: #000000;">(</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #0000ff;">pi</span><span style="color: #000000;">*f_1*t);   </span><span style="color: #008000;">% Calculate the (sampled) sine waves</span></code></code>
+<code><code><span style="color: #000000;">sine_2 = </span><span style="color: #0000ff;">sin</span><span style="color: #000000;">(</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #0000ff;">pi</span><span style="color: #000000;">*f_2*t);</span></code></code>
+<code><code><span style="color: #000000;">signal = (sine_1 </span><span style="color: #000000;">+</span><span style="color: #000000;"> sine_2);     </span><span style="color: #008000;">% Mix the two sine waves together</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">b = </span><span style="color: #795e26;">alpha</span><span style="color: #000000;">;              </span><span style="color: #008000;">% Coefficients of the numerator of the transfer function</span></code></code>
+<code><code><span style="color: #000000;">a = [</span><span style="color: #09885a;">1</span><span style="color: #000000;">,-(</span><span style="color: #09885a;">1</span><span style="color: #000000;">-</span><span style="color: #795e26;">alpha</span><span style="color: #000000;">)];     </span><span style="color: #008000;">% Coefficients of the denominator of the transfer function</span></code></code>
+<code><code><span style="color: #000000;">filtered = </span><span style="color: #0000ff;">filter</span><span style="color: #000000;">(b,a,signal);   </span><span style="color: #008000;">% Filter the signal</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">oversample_continuous = </span><span style="color: #09885a;">20</span><span style="color: #000000;">;     </span><span style="color: #008000;">% Create a version with ten times more samples</span></code></code>
+<code><code><span style="color: #000000;">                                </span><span style="color: #008000;">% to display the smooth, continuous signal</span></code></code>
+<code><code><span style="color: #000000;">samples_continuous = oversample_continuous </span><span style="color: #000000;">*</span><span style="color: #000000;"> samples;</span></code></code>
+<code><code><span style="color: #000000;">n_continuous = </span><span style="color: #0000ff;">linspace</span><span style="color: #000000;">(</span><span style="color: #09885a;">0</span><span style="color: #000000;">, samples_continuous-</span><span style="color: #09885a;">1</span><span style="color: #000000;">,samples_continuous) </span><span style="color: #000000;">/</span><span style="color: #000000;"> oversample_continuous;</span></code></code>
+<code><code><span style="color: #000000;">t_continuous = n_continuous </span><span style="color: #000000;">/</span><span style="color: #000000;"> f_s;</span></code></code>
+<code><code><span style="color: #000000;">sine_1_continuous = </span><span style="color: #0000ff;">sin</span><span style="color: #000000;">(</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #0000ff;">pi</span><span style="color: #000000;">*f_1*t_continuous);</span></code></code>
+<code><code><span style="color: #000000;">sine_2_continuous = </span><span style="color: #0000ff;">sin</span><span style="color: #000000;">(</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #0000ff;">pi</span><span style="color: #000000;">*f_2*t_continuous);</span></code></code>
+<code><code><span style="color: #000000;">signal_continuous = (sine_1_continuous </span><span style="color: #000000;">+</span><span style="color: #000000;"> sine_2_continuous);</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;">% Plot the two original sine waves</span></code></code>
+<code><code><span style="color: #795e26;">figure</span><span style="color: #000000;">(</span><span style="color: #a31515;">'pos'</span><span style="color: #000000;">,[</span><span style="color: #09885a;">0</span><span style="color: #000000;">,</span><span style="color: #09885a;">0</span><span style="color: #000000;">,</span><span style="color: #09885a;">1200</span><span style="color: #000000;">,</span><span style="color: #09885a;">400</span><span style="color: #000000;">]);</span></code></code>
+<code><code><span style="color: #001080;">hold</span><span style="color: #a31515;"> on;</span></code></code>
+<code><code><span style="color: #795e26;">plot</span><span style="color: #000000;">(t_continuous, sine_1_continuous, </span><span style="color: #a31515;">'k'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">plot</span><span style="color: #000000;">(t_continuous, sine_2_continuous, </span><span style="color: #a31515;">'k'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">title</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Original sine waves'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">xlabel</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Time (s)'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">ylabel</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Amplitude'</span><span style="color: #000000;">);</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;">% Plot the continuous signal, the sampled version and the filtered output</span></code></code>
+<code><code><span style="color: #795e26;">figure</span><span style="color: #000000;">(</span><span style="color: #a31515;">'pos'</span><span style="color: #000000;">,[</span><span style="color: #09885a;">0</span><span style="color: #000000;">,</span><span style="color: #09885a;">0</span><span style="color: #000000;">,</span><span style="color: #09885a;">1200</span><span style="color: #000000;">,</span><span style="color: #09885a;">400</span><span style="color: #000000;">]);</span></code></code>
+<code><code><span style="color: #001080;">hold</span><span style="color: #a31515;"> on;</span></code></code>
+<code><code><span style="color: #795e26;">plot</span><span style="color: #000000;">(n_continuous, signal_continuous, </span><span style="color: #a31515;">'k'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">plot</span><span style="color: #000000;">(n, signal,</span><span style="color: #a31515;">'o'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">plot</span><span style="color: #000000;">(n, filtered,</span><span style="color: #a31515;">'-o'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">title</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Filtering the signal'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">xlabel</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Sample'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">ylabel</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Amplitude'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">legend</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Original signal'</span><span style="color: #000000;">,</span><span style="color: #a31515;">'Sampled signal'</span><span style="color: #000000;">,</span><span style="color: #a31515;">'Filtered signal'</span><span style="color: #000000;">);</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;">% Apply a fast fourier transform and plot the spectra of the </span></code></code>
+<code><code><span style="color: #008000;">% original signal and of the filtered output</span></code></code>
+<code><code><span style="color: #795e26;">figure</span><span style="color: #000000;">(</span><span style="color: #a31515;">'pos'</span><span style="color: #000000;">,[</span><span style="color: #09885a;">0</span><span style="color: #000000;">,</span><span style="color: #09885a;">0</span><span style="color: #000000;">,</span><span style="color: #09885a;">1000</span><span style="color: #000000;">,</span><span style="color: #09885a;">400</span><span style="color: #000000;">]);</span></code></code>
+<code><code><span style="color: #001080;">hold</span><span style="color: #a31515;"> on;</span></code></code>
+<code><code><span style="color: #000000;">f = </span><span style="color: #0000ff;">linspace</span><span style="color: #000000;">(</span><span style="color: #09885a;">0</span><span style="color: #000000;">,samples-</span><span style="color: #09885a;">1</span><span style="color: #000000;">,samples)*f_s/samples;</span></code></code>
+<code><code><span style="color: #000000;">original_spectrum = (</span><span style="color: #0000ff;">abs</span><span style="color: #000000;">(</span><span style="color: #0000ff;">fft</span><span style="color: #000000;">(signal))*</span><span style="color: #09885a;">2</span><span style="color: #000000;">/samples).^2;</span></code></code>
+<code><code><span style="color: #000000;">filtered_spectrum = (</span><span style="color: #0000ff;">abs</span><span style="color: #000000;">(</span><span style="color: #0000ff;">fft</span><span style="color: #000000;">(filtered))*</span><span style="color: #09885a;">2</span><span style="color: #000000;">/samples).^2;</span></code></code>
+<code><code><span style="color: #795e26;">plot</span><span style="color: #000000;">(f(</span><span style="color: #09885a;">1</span><span style="color: #000000;">:</span><span style="color: #09885a;">1</span><span style="color: #000000;">+samples/</span><span style="color: #09885a;">2</span><span style="color: #000000;">),original_spectrum(</span><span style="color: #09885a;">1</span><span style="color: #000000;">:</span><span style="color: #09885a;">1</span><span style="color: #000000;">+samples/</span><span style="color: #09885a;">2</span><span style="color: #000000;">),</span><span style="color: #a31515;">'-o'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">plot</span><span style="color: #000000;">(f(</span><span style="color: #09885a;">1</span><span style="color: #000000;">:</span><span style="color: #09885a;">1</span><span style="color: #000000;">+samples/</span><span style="color: #09885a;">2</span><span style="color: #000000;">),filtered_spectrum(</span><span style="color: #09885a;">1</span><span style="color: #000000;">:</span><span style="color: #09885a;">1</span><span style="color: #000000;">+samples/</span><span style="color: #09885a;">2</span><span style="color: #000000;">),</span><span style="color: #a31515;">'-o'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">title</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Power spectral density'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">xlabel</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Frequency (Hz)'</span><span style="color: #000000;">);</span></code></code>
+<code><code><span style="color: #795e26;">legend</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Original signal'</span><span style="color: #000000;">,</span><span style="color: #a31515;">'Filtered signal'</span><span style="color: #000000;">);</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;">% Calculate the attenuation of the two sine waves</span></code></code>
+<code><code><span style="color: #000000;">f_1_index = f_1*samples/f_s+</span><span style="color: #09885a;">1</span><span style="color: #000000;">;</span></code></code>
+<code><code><span style="color: #000000;">A_1 = filtered_spectrum(f_1_index) </span><span style="color: #000000;">/</span><span style="color: #000000;"> original_spectrum(f_1_index);</span></code></code>
+<code><code><span style="color: #000000;">A_1_dB = </span><span style="color: #09885a;">10</span><span style="color: #000000;">*</span><span style="color: #0000ff;">log10</span><span style="color: #000000;">(A_1);</span></code></code>
+<code><code><span style="color: #0000ff;">fprintf</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Attenuation of first sine wave (</span><span style="color: #ff0000;">%.0f</span><span style="color: #a31515;"> Hz) = </span><span style="color: #ff0000;">%.02f</span><span style="color: #a31515;"> dB</span><span style="color: #ff0000;">\n</span><span style="color: #a31515;">'</span><span style="color: #000000;">, f_1, A_1_dB);</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">f_2_index = f_2*samples/f_s+</span><span style="color: #09885a;">1</span><span style="color: #000000;">;</span></code></code>
+<code><code><span style="color: #000000;">A_2 = filtered_spectrum(f_2_index) </span><span style="color: #000000;">/</span><span style="color: #000000;"> original_spectrum(f_2_index);</span></code></code>
+<code><code><span style="color: #000000;">A_2_dB = </span><span style="color: #09885a;">10</span><span style="color: #000000;">*</span><span style="color: #0000ff;">log10</span><span style="color: #000000;">(A_2);</span></code></code>
+<code><code><span style="color: #0000ff;">fprintf</span><span style="color: #000000;">(</span><span style="color: #a31515;">'Attenuation of second sine wave (</span><span style="color: #ff0000;">%.0f</span><span style="color: #a31515;"> Hz) = </span><span style="color: #ff0000;">%.02f</span><span style="color: #a31515;"> dB</span><span style="color: #ff0000;">\n</span><span style="color: #a31515;">'</span><span style="color: #000000;">, f_2, A_2_dB);</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;">% Open the filter visualization tool</span></code></code>
+<code><code><span style="color: #795e26;">fvtool</span><span style="color: #000000;">(b,a,</span><span style="color: #a31515;">'Fs'</span><span style="color: #000000;">,f_s);</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #008000;">%% WAV export</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">samples = f_s*</span><span style="color: #09885a;">2</span><span style="color: #000000;">;    </span><span style="color: #008000;">% 2 seconds of audio</span></code></code>
+<code><code><span style="color: #000000;">n = </span><span style="color: #0000ff;">linspace</span><span style="color: #000000;">(</span><span style="color: #09885a;">0</span><span style="color: #000000;">,samples-</span><span style="color: #09885a;">1</span><span style="color: #000000;">,samples);  </span><span style="color: #008000;">% Generate a vector with sample numbers</span></code></code>
+<code><code><span style="color: #000000;">t = n </span><span style="color: #000000;">/</span><span style="color: #000000;"> f_s;        </span><span style="color: #008000;">% Generate a vector with time</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">sine_1 = </span><span style="color: #0000ff;">sin</span><span style="color: #000000;">(</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #0000ff;">pi</span><span style="color: #000000;">*f_1*t);   </span><span style="color: #008000;">% Calculate the (sampled) sine waves</span></code></code>
+<code><code><span style="color: #000000;">sine_2 = </span><span style="color: #0000ff;">sin</span><span style="color: #000000;">(</span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #0000ff;">pi</span><span style="color: #000000;">*f_2*t);</span></code></code>
+<code><code><span style="color: #000000;">signal = (sine_1 </span><span style="color: #000000;">+</span><span style="color: #000000;"> sine_2)/</span><span style="color: #09885a;">2</span><span style="color: #000000;">; </span><span style="color: #008000;">% Mix the two sine waves together</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">filtered = </span><span style="color: #0000ff;">filter</span><span style="color: #000000;">(</span><span style="color: #795e26;">alpha</span><span style="color: #000000;">,[</span><span style="color: #09885a;">1</span><span style="color: #000000;">,-(</span><span style="color: #09885a;">1</span><span style="color: #000000;">-</span><span style="color: #795e26;">alpha</span><span style="color: #000000;">)],signal);   </span><span style="color: #008000;">% Filter the signal</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">audiowrite(</span><span style="color: #a31515;">'original.wav'</span><span style="color: #000000;">,signal,f_s);    </span><span style="color: #008000;">% Export as audio</span></code></code>
+<code><code><span style="color: #000000;">audiowrite(</span><span style="color: #a31515;">'filtered.wav'</span><span style="color: #000000;">,filtered,f_s);</span></code></code></pre>
+
+<h4><a name="audio-code" href="#audio-code">Audio Code</a></h4>
+<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><code><span style="color: #000000;">[signal,f_s] = audioread(</span><span style="color: #a31515;">'telegraph_road_original.wav'</span><span style="color: #000000;">);</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #795e26;">alpha</span><span style="color: #000000;"> = </span><span style="color: #09885a;">0.25</span><span style="color: #000000;">;   </span><span style="color: #008000;">% Filter factor of 1/4</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">b = </span><span style="color: #795e26;">alpha</span><span style="color: #000000;">;            </span><span style="color: #008000;">% Coefficients of the numerator of the transfer function</span></code></code>
+<code><code><span style="color: #000000;">a = [</span><span style="color: #09885a;">1</span><span style="color: #000000;">,-(</span><span style="color: #09885a;">1</span><span style="color: #000000;">-</span><span style="color: #795e26;">alpha</span><span style="color: #000000;">)];   </span><span style="color: #008000;">% Coefficients of the denominator of the transfer function</span></code></code>
+<code><code><span style="color: #000000;">filtered = </span><span style="color: #0000ff;">filter</span><span style="color: #000000;">(b,a,signal);   </span><span style="color: #008000;">% Filter the signal</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">audiowrite(</span><span style="color: #a31515;">'telegraph_road_filtered.wav'</span><span style="color: #000000;">,filtered,f_s);</span></code></code></pre>
+
 </div>
         </article>
-        <footer>Last edited: Sunday, 22 April 2018 21:39 UTC</footer>
+        <footer>Last edited: Thursday, 20 June 2019 16:12 UTC</footer>
     
 
 </body></html>
