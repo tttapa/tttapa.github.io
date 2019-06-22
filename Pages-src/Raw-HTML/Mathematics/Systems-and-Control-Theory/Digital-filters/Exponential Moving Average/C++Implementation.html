@@ -6,47 +6,125 @@
 -->
 <html>
 
-<h2>Dividing by 2</h2>
+<h3>Dividing by Powers of 2</h3>
 <p>
-    To get an efficient implementation, we can minimize the number of multiplications needed by rewriting the difference equation:
- $$ \begin{split}
-    y[n] &amp;= \alpha x[n] + (1-\alpha) y[n-1] \\
-    y[n] &amp;= y[n-1] + \alpha (x[n] - y[n-1]) 
+    The \(alpha\) in the difference equation of the Exponential Moving Average
+    filter is a number between zero and one. There are two main ways to 
+    implement this multiplication by \(alpha\): Either we use floating point 
+    numbers and calculate the multiplication directly, or we use integers, and 
+    express the multiplication as a division by \(1/\alpha \gt 1\).<br>
+    Both floating point numbers and divisions are relatively expensive 
+    operations, especially on embedded devices or microcontrollers.
+</p>
+<p>
+    We can, however, choose the value for \(\alpha\) in such a way that 
+    \(1/\alpha = 2^k, k \in \mathbb{N}\).
+    This is useful, because a division by a power of two can be replaced by a 
+    very fast right bitshift:
+    $$ \alpha x = \frac{x}{2^k} = x \gg k $$
+</p>
+<p>
+    We can now rewrite the difference equation of the EMA with this optimization
+    in mind:
+    $$ \begin{split}
+       y[n] &amp;= \alpha x[n] + (1 - \alpha) y[n-1] \\
+            &amp;= y[n-1] + \alpha \left(x[n] - y[n-1]\right) \\
+            &amp;= y[n-1] + \frac{x[n] - y[n-1]}{2^k} \\
+            &amp;= y[n-1] + \left(x[n] - y[n-1]\right) \gg k 
+       \end{split} $$
+</p>
+<h4>Negative Numbers</h4>
+<p>
+    There's one caveat though: this doesn't work for negative numbers. 
+    For example, if we try to calculate the integer division \(-15 / 4\) using 
+    this method, we get the following answer:
+    $$ \begin{split}
+       -15 / 4   &amp;= -15 \cdot 2^{-2} \\
+       -15 \gg 2 &amp;= 0b11110001 \gg 2 \\
+                 &amp;= 0b11111100 \\
+                 &amp;= -4
+       \end{split} $$
+    However, this is not what we expected! Integer division in programming
+    languages such as C++ returns the result truncated towards zero, so we would
+    expect a result of \(-3\). The result is close, but incorrect nonetheless.
+</p>
+<p>
+    This means we'll have to be careful not to use this trick on any negative
+    numbers. In our difference equation, both the input \(x[n]\) and the output
+    \(y[n]\) will generally be positive numbers, but their difference can be 
+    negative. This is a problem. We'll have to come up with a different 
+    representation of the difference equation that doesn't require us to divide
+    any negative numbers:
+    $$ \begin{split}
+       y[n] &amp;= y[n-1] + \alpha \left(x[n] - y[n-1]\right) \\
+       y[n] &amp;= y[n-1] + \frac{x[n] - y[n-1]}{2^k} \\
+       2^k y[n] &amp;= 2^k y[n-1] + x[n] - y[n-1] \\
+       &amp;\ z[n] \triangleq 2^k y[n] \Leftrightarrow y[n] = 2^{-k} z[n]\\
+       z[n] &amp;= z[n-1] + x[n] - 2^{-k} z[n-1]
+       \end{split} $$
+    We now have to prove that \(z[n-1]\) is greater than or equal to zero. 
+    We'll prove this using induction:
+    <div style="padding-left: 2em">
+        <u>Base case</u>: \(\quad n-1 = -1\)
+        <div style="padding: 0.75em">
+            The value of \(z[-1]\) is the initial state of the system. We can 
+            just choose any value, so we'll pick a value that's greater than or 
+            equal to zero: \(z[-1] \ge 0\).
+        </div>
+        <u>Induction step</u>: \(\quad n-1\)
+        <div style="padding: 0.75em">
+            Given that \(z[n-2] \ge 0\), we can now use the difference equation 
+            to prove that \(z[n-1]\) is also greater than zero:<br>
+            $$ z[n-1] = z[n-2] + x[n-1] - 2^{-k} z[n-2] $$
+            We know that the input \(x[n-1]\) is always zero or positive. <br>
+            Since \(k \gt 1 \Rightarrow 2^{-k} \lt 1\), and since \(z[n-2]\) is 
+            zero or positive as well, we know that \(z[n-2] \ge 2^{-k} z[n-2] 
+            \Rightarrow z[n-2] - 2^{-k} z[n-2] \ge 0\).<br>
+            Therefore, the entire right-hand side is always positive or zero, 
+            because it is a sum of two numbers that are themselves greater than
+            or equal to zero. \(\quad\Box\)
+        </div>
+    </div>
+</p>
+<h4>Rounding</h4>
+<p>
+    A final improvement we can make to our division algorithm is to round the
+    result to the nearest integer, instead of truncating it towards zero.<br>
+    Consider the rounded result of the division \(a/b\). We can then express it
+    as a flooring of the result plus one half:
+    $$ \begin{split} 
+       \left\lfloor \frac{a}{b} \right\rceil &amp;= 
+           \left\lfloor \frac{a}{b} + \frac{1}{2} \right\rfloor \\
+        &amp;= \left\lfloor \frac{a + \frac{b}{2}}{b} \right\rfloor \\
+       \end{split} $$
+    When \(b\) is a power of two, this is equivalent to:
+    $$ \begin{split} 
+    \left\lfloor \frac{a}{2^k} \right\rceil &amp;= 
+        \left\lfloor \frac{a}{2^k} + \frac{1}{2} \right\rfloor \\
+     &amp;= \left\lfloor \frac{a + \frac{2^k}{2}}{2^k} \right\rfloor \\
+     &amp;= \left\lfloor \frac{a + 2^{k-1}}{2^k} \right\rfloor \\
+     &amp;= \left(a + 1 \ll \left(k-1\right)\right) \gg k \\
     \end{split} $$
-    We now have to calculate two sums and one multiplication by a number between 0 and 1.
-    Floating point numbers are relatively inefficient on integrated systems, so we'll replace
-    the multiplication by a division by \(1/\alpha\), which is a positive integer.<br>
-    Going even further, we can pick value for \(\alpha\) in such a way that \(1/\alpha = 2^n, n \in \mathbb{N}\).
-    Division is pretty expensive, but by using powers of 2, it can be replaced by a very fast right bitshift:
- $$ \alpha x = \frac{x}{2^n} = x \gg n $$
 </p>
-<h2>Fixed-point arithmetic</h2>
+<h3>Implementation in C++</h3>
 <p>
-    As mentioned before, it's not a great idea to use floating point numbers. 
-    An alternative is to use integers, and interpret them as fixed-point numbers.<br>
-    For example, you could decide to place the radix point between bits 3 and 4.
-    In that case, you would interpret the number 0b00001001 (9 in decimal) as 0b0000.1001 = 1/2 + 1/16 = 0.5625.
-</p>
-<p>
-    To convert a normal integer to the fixed-point format, you can just bitshift it to the left.<br>
-    To convert a fixed-point value back to an integer, one half is added to the number, in order to round it,
-    and finally, it is bitshifted to the right again.
-</p>
-<p>
-    For example, let's use 3 fractional places to calculate 25 / 40.
- $$ \begin{split}
-    &amp; 25 = 0b00011001 → 25 \ll 3 = 0b11001.000 = 200 \\
-    &amp; 200 / 40 = 5 = 0b00000101 = 0.625 \\
-    &amp;→ 0b00000.101 = 0.5 + 0.125 = 0.625 = 25 / 40
-    \end{split} $$
-    Rounding the result:
- $$ \begin{split}
-    &amp;0.625 + 0.5 = 0b00000.101 + 0b00000.100 = 0b00001.001 \\
-    &amp;→ 0b00001001 \gg 3 = 0b00000001 = 1
-    \end{split} $$
-</p>
-<p>
-    TODO
+    We now have everything in place to write a first implementation of the EMA
+    in C++.
+    <pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #af00db;">#include</span><span style="color: #0000ff;"> </span><span style="color: #a31515;">&lt;stdint.h&gt;</span></code>
+<code></code>
+<code><span style="color: #0000ff;">template</span><span style="color: #000000;"> &lt;</span><span style="color: #0000ff;">uint8_t </span><span style="color: #267f99;">K</span><span style="color: #000000;">, </span><span style="color: #0000ff;">class </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;">&gt;</span></code>
+<code><span style="color: #0000ff;">class</span><span style="color: #000000;"> </span><span style="color: #267f99;">EMA</span><span style="color: #000000;"> {</span></code>
+<code><span style="color: #000000;">  </span><span style="color: #0000ff;">public:</span></code>
+<code><span style="color: #000000;">    </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> </span><span style="color: #795e26;">filter</span><span style="color: #000000;">(</span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> </span><span style="color: #001080;">x</span><span style="color: #000000;">) {</span></code>
+<code><span style="color: #000000;">        z </span><span style="color: #000000;">+=</span><span style="color: #000000;"> x;</span></code>
+<code><span style="color: #000000;">        </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> y </span><span style="color: #000000;">=</span><span style="color: #000000;"> (z </span><span style="color: #000000;">+</span><span style="color: #000000;"> (</span><span style="color: #09885a;">1</span><span style="color: #000000;"> </span><span style="color: #000000;">&lt;&lt;</span><span style="color: #000000;"> (K </span><span style="color: #000000;">-</span><span style="color: #000000;"> </span><span style="color: #09885a;">1</span><span style="color: #000000;">))) </span><span style="color: #000000;">&gt;&gt;</span><span style="color: #000000;"> K;</span></code>
+<code><span style="color: #000000;">        z </span><span style="color: #000000;">-=</span><span style="color: #000000;"> y;</span></code>
+<code><span style="color: #000000;">        </span><span style="color: #af00db;">return</span><span style="color: #000000;"> y;</span></code>
+<code><span style="color: #000000;">    }</span></code>
+<code></code>
+<code><span style="color: #000000;">  </span><span style="color: #0000ff;">private:</span></code>
+<code><span style="color: #000000;">    </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> z </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">0</span><span style="color: #000000;">;</span></code>
+<code><span style="color: #000000;">};</span></code></pre>
 </p>
 
 </html>

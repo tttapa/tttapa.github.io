@@ -1,0 +1,101 @@
+<!--
+@title: Impulse and Step Response
+@author: Pieter P
+@keywords: Impulse response, step response, impulse, step, filter, system, kronecker, delta, heaviside, step, DSP, LTI, DTLTI
+@description: Impulse and Step Response, the Kronecker delta function, the Heaviside step function, and their properties.
+-->
+<html>
+
+<p>
+    Here, we'll discuss two important signals that are often used in signal
+    processing, the delta function or unit impulse, and the unit step function.
+</p>
+
+<h3>The Kronecker Delta Function</h3>
+
+<p>
+    The Kronecker delta function or unit impulse \(\delta[n]\) is defined as a
+    discrete function that is one when \(n\) is zero, and zero everywhere else:
+
+    $$ \delta: \mathbb{Z} \rightarrow \mathbb{R}:
+    n \mapsto \delta[n] \triangleq
+    \begin{cases}
+    1 &amp; n = 0 \\
+    0 &amp; n\ne0
+    \end{cases} $$
+
+    An alternative notation is \(\delta_{n,k}\). This value is one if \(n = k\)
+    and zero if \(n \ne k\):
+    $$ \delta_{n,k} \triangleq \delta[n-k] $$
+
+    <img src="images/kronecker.svg" />
+</p>
+<h4>Impulse response</h4>
+<p>
+    The impulse response \(h[n]\) of a DTLTI system \(T\) is defined as the
+    output of the system when a Kronecker delta function is applied to its
+    input:
+    $$ h[n] \triangleq T\left(\delta[n]\right) $$
+    The letter \(h\) will be used to refer to the impulse response of a system.
+    As we'll see later, the impulse response can be used to define the system.
+</p>
+<h4>Properties of the Kronecker Delta Function</h4>
+<p>
+    The most important property of the Kronecker delta is its ability to select
+    a single term from an (infinite) sum:
+
+    $$ \begin{split}
+    &amp;\sum_{n=0}^\infty x[n]\cdot\delta[n-k]\\
+    =\;&amp; x[0]\cdot\delta[0-k] + x[1]\cdot\delta[1-k]
+    + \ldots + x[k]\cdot\delta[k-k] + \ldots \\
+    =\;&amp; x[k]
+    \end{split} $$
+    As you can see, all terms where \(n \ne k\) are zero, so only the \(k\)-th
+    term remains.<br>
+    This is sometimes referred to as the <b>sifting property</b> of the delta 
+    function.
+</p>
+<!--<p>
+    Another property that shows up a lot in digital signal processing is the 
+    expression as a sum of complex exponentials:
+    $$ \lim_{N\rightarrow\infty}
+       \frac{1}{N} \sum_{k=0}^{N-1} e^{2\pi j k \frac{n}{N}} = \delta[n]$$
+</p>-->
+
+<h3>The Heaviside Step Function</h3>
+
+<p>
+    The (discrete) Heaviside step function \(H[n]\) is defined as a discrete
+    function that is zero when \(n\) is negative, and one if \(n\) is zero or
+    positive:
+
+    $$ U: \mathbb{Z} \rightarrow \mathbb{R}:
+    n \mapsto U[n] \triangleq
+    \begin{cases}
+    0 &amp; n \lt 0 \\
+    1 &amp; n \ge 0
+    \end{cases} $$
+
+    <img src="images/heaviside.svg" />
+</p>
+<h4>Step Response</h4>
+<p>
+    Just like the impulse response, we can define the step response as the
+    output of the system when the Heaviside step function is applied to the
+    input:
+    $$ y_\text{step}[n] \triangleq T\left(U[n]\right) $$
+    The step response is an important tool when investigating how a system
+    responds to transients.
+</p>
+<p>
+    Unlike the impulse response, there is no specific symbol or letter for the
+    step response.
+</p>
+<h4>Properties of the Heaviside Step Function</h4>
+<p>
+    The step function can also be written as the cumulative sum of the delta
+    function:
+    $$ U[n] = \sum_{k=-\infty}^{n} \delta[k] $$
+</p>
+
+</html>

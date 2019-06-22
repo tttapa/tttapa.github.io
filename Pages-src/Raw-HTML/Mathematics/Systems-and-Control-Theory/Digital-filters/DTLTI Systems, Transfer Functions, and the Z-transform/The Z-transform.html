@@ -1,0 +1,51 @@
+<!--
+@title: The Z-transform
+@author: Pieter P
+@keywords: Z-transform, DSP, LTI, DTLTI
+@description: Derivation and properties of the Z transform.
+-->
+<html>
+
+<h3>Signals as a Sum of Delta Functions</h3>
+
+<p>
+    Any discrete signal can be written as an infinite sum of scaled Kronecker 
+    delta functions.
+    $$ x[n] = \sum_{k=0}^{+\infty} x[k] \delta[n-k] $$
+    You can easily see that all terms where \(n \ne k\) are zero, because the 
+    Kronecker delta is zero in that case.
+    Only the term for \(n = k\) is non-zero, in which case the Kronecker delta 
+    is one, so the result is just \(x[k]\). 
+    This is a consequence of the sifting property of the delta function, 
+    covered in the <a href="Impulse and Step Response.html">previous page</a>.
+</p>
+
+<h3>DTLTI Transformations as Convolutions</h3>
+
+<p>
+    You can express the output of any discrete-time linear time-invariant system
+    \(T\) as the convolution of the input with the impulse response of the 
+    system, \(h[n]\):
+    $$ T\left(x[n]\right) = x[n] * h[n] $$
+</p>
+<h4>Proof</h4>
+<p>
+    The proof itself is very simple: We just decompose the input as a sum of
+    delta functions, as described in the previous paragraph, and then we use the
+    linearity and time-invariance to bring the \(T\) operator inside of the 
+    summation.
+    $$ \begin{split}
+    y[n] &amp;= T\left(x[n]\right) \\
+    &amp;= T\left(\sum_{k=0}^{\infty} x[k] \delta[n-k]\right) \\
+    &amp;= \sum_{k=0}^{\infty} T\left(x[k] \delta[n-k]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k] T\left(\delta[n-k]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k] h[n-k] \\
+    &amp;\triangleq x[n] * h[n]
+    \end{split} $$
+    The \(*\) symbol in the last step is called the convolution operator, and it
+    is defined as the sum in the step before it. \(\quad\Box\)
+</p>
+
+<h3>Eigenfunctions - 🚧 Under Construction 🚧</h3>
+
+</html>
