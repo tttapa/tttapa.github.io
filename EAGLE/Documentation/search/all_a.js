@@ -1,12 +1,20 @@
 var searchData=
 [
-  ['l',['L',['../d1/d50/structDLQE__result.html#a08ae1402f9460f94e182a02cfb1259ca',1,'DLQE_result::L()'],['../d6/d12/classFullKalman.html#a24a03186c61cf5b251c0f8457d943442',1,'FullKalman::L()'],['../de/db8/structParams.html#abd54449481c7512d476c92f136431602',1,'Params::L()']]],
+  ['l',['L',['../d8/d1e/classAttitude_1_1KalmanObserver.html#a9d8b46a43adbd0f1e39c18a4bc18d9e6',1,'Attitude::KalmanObserver::L()'],['../dc/d4b/classAltitude_1_1KalmanObserver.html#a1588a288ca33b2a257cd3900d293ee7e',1,'Altitude::KalmanObserver::L()'],['../d1/d50/structDLQE__result.html#a08ae1402f9460f94e182a02cfb1259ca',1,'DLQE_result::L()']]],
+  ['lastenter',['lastenter',['../da/dd9/classStepResponseAnalyzer.html#a4a0d463504a019ee0d219eb853fae61e',1,'StepResponseAnalyzer']]],
+  ['lastexit',['lastexit',['../da/dd9/classStepResponseAnalyzer.html#ab4dd7823d79cd001c9447034aa7b64f2',1,'StepResponseAnalyzer']]],
+  ['lastextremum',['lastextremum',['../da/dd9/classStepResponseAnalyzer.html#ac0144a2b40beccb57f1baa17f2b547be',1,'StepResponseAnalyzer']]],
   ['leastsquares_2ehpp',['LeastSquares.hpp',['../d0/d7e/LeastSquares_8hpp.html',1,'']]],
-  ['length',['length',['../d7/d6a/structArray.html#aa30345f4441dc7d7d794301c0469b37a',1,'Array']]],
+  ['length',['length',['../d7/d6a/structArray.html#aac41e8914e639052f99def786107e824',1,'Array']]],
+  ['load',['load',['../d3/d2a/structDroneParamsAndMatrices.html#adacdec3d0bc26c93da462c407c282828',1,'DroneParamsAndMatrices::load()'],['../dd/d3b/structpybind11_1_1detail_1_1type__caster_3_01TMatrix_3_01T_00_01R_00_01C_01_4_01_4.html#a5abe098069b3f8359e43696f9a7dbee2',1,'pybind11::detail::type_caster&lt; TMatrix&lt; T, R, C &gt; &gt;::load()']]],
+  ['loaddouble',['loadDouble',['../d6/dfc/FileLoader_8hpp.html#a9923061190653accec81551659bdbd2d',1,'loadDouble(const std::string &amp;name):&#160;FileLoader.cpp'],['../d8/d25/FileLoader_8cpp.html#a9923061190653accec81551659bdbd2d',1,'loadDouble(const std::string &amp;name):&#160;FileLoader.cpp']]],
+  ['loadmatrix',['loadMatrix',['../d6/dfc/FileLoader_8hpp.html#a6a1ff7f4046f525c265aba6738d9fad8',1,'FileLoader.hpp']]],
+  ['loadpath',['loadPath',['../df/dfb/namespaceConfig_1_1Tuner.html#a0163b5fabcc1c1927a588797cacad47a',1,'Config::Tuner::loadPath()'],['../d2/dff/namespaceConfig.html#ac0d1942ac08574b8debfa589605e8f4e',1,'Config::loadPath()']]],
+  ['loadpythonplotmodule',['loadPythonPlotModule',['../d8/d0a/PlotHelpers_8hpp.html#a1ebfb87d99c3c9e51bb57ef27bfe9af6',1,'loadPythonPlotModule():&#160;PlotHelpers.cpp'],['../d9/d25/PlotHelpers_8cpp.html#a1ebfb87d99c3c9e51bb57ef27bfe9af6',1,'loadPythonPlotModule():&#160;PlotHelpers.cpp']]],
   ['lqr',['lqr',['../d0/d83/LQR_8hpp.html#a71c319365e890ca038e8b9b026226826',1,'LQR.hpp']]],
   ['lqr_2ehpp',['LQR.hpp',['../d0/d83/LQR_8hpp.html',1,'']]],
   ['lqr_5fresult',['LQR_result',['../d1/d34/structLQR__result.html',1,'']]],
-  ['lqrcontroller',['LQRController',['../db/dcf/classLQRController.html',1,'LQRController'],['../db/dcf/classLQRController.html#a41a52c5fa89819ae623667f37c759824',1,'LQRController::LQRController()']]],
+  ['lqrcontroller',['LQRController',['../dd/d21/classAttitude_1_1LQRController.html',1,'Attitude::LQRController'],['../d8/dd2/classAltitude_1_1LQRController.html',1,'Altitude::LQRController'],['../dd/d21/classAttitude_1_1LQRController.html#aea835596248512c326daa6912ae47808',1,'Attitude::LQRController::LQRController(const Matrix&lt; Nx+Nu, Ny &gt; &amp;G, const Matrix&lt; Nu, Nx - 1 &gt; &amp;K, double Ts)'],['../dd/d21/classAttitude_1_1LQRController.html#ab1590acef270ba60ada23de50b8c798b',1,'Attitude::LQRController::LQRController(const Matrix&lt; Nx, Nx &gt; &amp;A, const Matrix&lt; Nx, Nu &gt; &amp;B, const Matrix&lt; Ny, Nx &gt; &amp;C, const Matrix&lt; Ny, Nu &gt; &amp;D, const Matrix&lt; Nu, Nx - 1 &gt; &amp;K, double Ts)'],['../d8/dd2/classAltitude_1_1LQRController.html#a35efddb6da73cf5b8a89891694036e1c',1,'Altitude::LQRController::LQRController(const Matrix&lt; Nx+Nu, Ny &gt; &amp;G, const Matrix&lt; Ny, Nx &gt; &amp;C, const Matrix&lt; Nu, Nx+Ny &gt; &amp;K_pi, double Ts, double maxIntegral)'],['../d8/dd2/classAltitude_1_1LQRController.html#a1ce52694ff987dc9126abf7f3be9e75b',1,'Altitude::LQRController::LQRController(const Matrix&lt; Nx, Nx &gt; &amp;A, const Matrix&lt; Nx, Nu &gt; &amp;B, const Matrix&lt; Ny, Nx &gt; &amp;C, const Matrix&lt; Ny, Nu &gt; &amp;D, const Matrix&lt; Nu, Nx+Ny &gt; &amp;K_pi, double Ts, double maxIntegral)']]],
   ['lqrcontroller_2ehpp',['LQRController.hpp',['../d7/ddc/LQRController_8hpp.html',1,'']]],
   ['ltisystem',['LTISystem',['../dd/d5c/classLTISystem.html',1,'LTISystem&lt; Nx, Nu, Ny &gt;'],['../dd/d5c/classLTISystem.html#a2d785eec1b00b7c3fc6e75be89aec8b2',1,'LTISystem::LTISystem()']]]
 ];

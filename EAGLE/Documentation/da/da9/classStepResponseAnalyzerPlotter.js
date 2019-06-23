@@ -1,0 +1,28 @@
+var classStepResponseAnalyzerPlotter =
+[
+    [ "StepResponseAnalyzerPlotter", "da/da9/classStepResponseAnalyzerPlotter.html#a5f7b24be42d71447b8614e6ff8428e5c", null ],
+    [ "calculate", "da/da9/classStepResponseAnalyzerPlotter.html#a682b00402ac2c6e42fb86b7444698db2", null ],
+    [ "getDirection", "da/da9/classStepResponseAnalyzerPlotter.html#a642b86782fe8de07c91266743681c4d0", null ],
+    [ "getInside", "da/da9/classStepResponseAnalyzerPlotter.html#acdce19a0932a8c00c4905784a6a2efda", null ],
+    [ "getResult", "da/da9/classStepResponseAnalyzerPlotter.html#a8d7f0cc09f0d748c13b188f81a3613e5", null ],
+    [ "operator()", "da/da9/classStepResponseAnalyzerPlotter.html#ad6fcb112e99b3f528ce5e34e2d05ce67", null ],
+    [ "plot", "da/da9/classStepResponseAnalyzerPlotter.html#a2158bc2cde7a8f0c0a1a2abf07d29cfb", null ],
+    [ "plot", "da/da9/classStepResponseAnalyzerPlotter.html#aefd4397bc6e8f8829ffdf372f34c7fd5", null ],
+    [ "continueToEnd", "da/da9/classStepResponseAnalyzerPlotter.html#a7b77ce99b265c0c1d9959a6496febfdb", null ],
+    [ "dir", "da/da9/classStepResponseAnalyzerPlotter.html#aabe5aadde028022d6a6e8a41eed2bbd3", null ],
+    [ "extremumcount", "da/da9/classStepResponseAnalyzerPlotter.html#ac272af9a862780234490f36fa60cf31d", null ],
+    [ "inside", "da/da9/classStepResponseAnalyzerPlotter.html#a620a9a74892f2d4c13685a0d47845f6d", null ],
+    [ "lastenter", "da/da9/classStepResponseAnalyzerPlotter.html#a4a0d463504a019ee0d219eb853fae61e", null ],
+    [ "lastexit", "da/da9/classStepResponseAnalyzerPlotter.html#ab4dd7823d79cd001c9447034aa7b64f2", null ],
+    [ "lastextremum", "da/da9/classStepResponseAnalyzerPlotter.html#ac0144a2b40beccb57f1baa17f2b547be", null ],
+    [ "overshoot", "da/da9/classStepResponseAnalyzerPlotter.html#a632b7dc2d5b09605c0f02c44737c8463", null ],
+    [ "refdir", "da/da9/classStepResponseAnalyzerPlotter.html#af27ea396192ece39d432acf1e4b9ea3a", null ],
+    [ "risetime", "da/da9/classStepResponseAnalyzerPlotter.html#a2142237abe0fb30532da2e188d79444f", null ],
+    [ "settletime", "da/da9/classStepResponseAnalyzerPlotter.html#aa1dcb178dd97af53142cc7bc3912a338", null ],
+    [ "t_v", "da/da9/classStepResponseAnalyzerPlotter.html#a82e56a419215a19e479725772782e6d9", null ],
+    [ "x_adif", "da/da9/classStepResponseAnalyzerPlotter.html#a2abede745df7aec1648a6365e58cfd3e", null ],
+    [ "x_prev", "da/da9/classStepResponseAnalyzerPlotter.html#a13fc402d16d9964a8e8757cee492284c", null ],
+    [ "x_ref", "da/da9/classStepResponseAnalyzerPlotter.html#a0b27e869645a0785da2c184e759b2a08", null ],
+    [ "x_thr", "da/da9/classStepResponseAnalyzerPlotter.html#a4d7fab5d40976b98d04338000be2feb2", null ],
+    [ "x_v", "da/da9/classStepResponseAnalyzerPlotter.html#ab69ad32a54e842d798f31ccc91d56888", null ]
+];

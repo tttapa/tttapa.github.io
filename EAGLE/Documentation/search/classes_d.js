@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['schur_5fresult',['Schur_result',['../d5/d40/structSchur__result.html',1,'']]]
+  ['qr',['QR',['../da/d0b/structQR.html',1,'']]]
 ];

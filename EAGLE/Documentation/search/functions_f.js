@@ -1,8 +1,13 @@
 var searchData=
 [
-  ['randn',['randn',['../db/d73/Randn_8hpp.html#a13c12eeca0cd128b387793a4d6397cb6',1,'Randn.hpp']]],
-  ['red2quat',['red2quat',['../d6/d26/ReducedQuaternion_8hpp.html#ae32172061f16210364251a3400413be2',1,'ReducedQuaternion.hpp']]],
-  ['regex_5freplace',['regex_replace',['../d4/d19/RegexReplace_8hpp.html#a733eb1f61ac2c66a2af8874609440b98',1,'regex_replace(BidirIt first, BidirIt last, const std::basic_regex&lt; CharT, Traits &gt; &amp;re, UnaryFunction f):&#160;RegexReplace.hpp'],['../d4/d19/RegexReplace_8hpp.html#a3a5bf7945e7896e1fa2e9ba47bc44e67',1,'regex_replace(const std::string &amp;s, const std::basic_regex&lt; CharT, Traits &gt; &amp;re, UnaryFunction f):&#160;RegexReplace.hpp']]],
-  ['replacetagsinfile',['replaceTagsInFile',['../de/d51/CodeGen_8cpp.html#ad74bf447a1db6abc16664bdf9e2efa4e',1,'replaceTagsInFile(const std::string &amp;infilename, const std::string &amp;outfilename, const std::map&lt; std::string, DynamicMatrix &gt; &amp;matrixdict):&#160;CodeGen.cpp'],['../dc/df1/CodeGen_8hpp.html#ad74bf447a1db6abc16664bdf9e2efa4e',1,'replaceTagsInFile(const std::string &amp;infilename, const std::string &amp;outfilename, const std::map&lt; std::string, DynamicMatrix &gt; &amp;matrixdict):&#160;CodeGen.cpp']]],
-  ['round',['round',['../d9/d1c/Matrix_8hpp.html#a4d52dda400b179bc7cb4b9ba7fe3c0c8',1,'Matrix.hpp']]]
+  ['q',['Q',['../dd/d56/structWeights.html#a5267f3b1b8af5f0678c24303b2bbeba2',1,'Weights::Q()'],['../da/d0b/structQR.html#a32582d3e86096bc0ae8294798455116b',1,'QR::Q()']]],
+  ['quat2eul',['quat2eul',['../d3/d1f/Quaternion_8hpp.html#a3d2b851780df38875830aadd1b5263ed',1,'Quaternion.hpp']]],
+  ['quat2red',['quat2red',['../d6/d26/ReducedQuaternion_8hpp.html#a5fe62fc3875a27e2cdfb989670073287',1,'ReducedQuaternion.hpp']]],
+  ['quatconjugate',['quatconjugate',['../d3/d1f/Quaternion_8hpp.html#a1f32513659a5b38e8df5f2c20ab71cd0',1,'Quaternion.hpp']]],
+  ['quatdifference',['quatDifference',['../d3/d1f/Quaternion_8hpp.html#acd04d49075ff31e2e7eef1deb6da20d8',1,'Quaternion.hpp']]],
+  ['quaternionstatesadd',['quaternionStatesAdd',['../d6/d97/QuaternionStateAddSub_8hpp.html#a656a3ae10d4bf54c445f6dc6e375c4e3',1,'QuaternionStateAddSub.hpp']]],
+  ['quaternionstatessub',['quaternionStatesSub',['../d6/d97/QuaternionStateAddSub_8hpp.html#ab18748d10ac3aae1a44c51d72a8f662c',1,'QuaternionStateAddSub.hpp']]],
+  ['quatmultiply',['quatmultiply',['../d3/d1f/Quaternion_8hpp.html#a3bb5f3c98c5da818dd8f8062481245e7',1,'Quaternion.hpp']]],
+  ['quatrotate',['quatrotate',['../d3/d1f/Quaternion_8hpp.html#a0b06b430bc00346f1e27f02bbfc91814',1,'Quaternion.hpp']]],
+  ['qz_5fz',['qz_Z',['../d1/d8b/DLQR_8hpp.html#a1aef813db920b8197c070b00d9e6ec90',1,'DLQR.hpp']]]
 ];

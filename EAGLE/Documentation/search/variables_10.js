@@ -1,11 +1,21 @@
 var searchData=
 [
-  ['r',['R',['../da/d0b/structQR.html#ab91e0bf9d76e3bdbbff95fda21e76c2e',1,'QR::R()'],['../d2/dff/namespaceConfig.html#a293eb7baa950bdb3486d1d763087d5e0',1,'Config::R()']]],
+  ['r',['R',['../da/d0b/structQR.html#ab91e0bf9d76e3bdbbff95fda21e76c2e',1,'QR::R()'],['../d0/d7a/namespaceConfig_1_1Attitude.html#a211a2e8f289a9e2eab9f5551fe56dabd',1,'Config::Attitude::R()']]],
+  ['r_5fdiag',['R_diag',['../dd/d56/structWeights.html#a55721a1aa356e05f0aa0647652fcc3d3',1,'Weights']]],
+  ['r_5fdiag_5finitial',['R_diag_initial',['../df/dfb/namespaceConfig_1_1Tuner.html#a374d38dfe91e3fd2eab2b8814b4ddf82',1,'Config::Tuner']]],
+  ['rd',['rd',['../d0/d02/Chromosome_8hpp.html#a7071b0092ad8c5b57d6cc40c5f803df5',1,'Chromosome.hpp']]],
+  ['rdiag',['Rdiag',['../d0/d7a/namespaceConfig_1_1Attitude.html#ae99967301696a176a5d5e3d7a115ad5b',1,'Config::Attitude']]],
   ['red',['red',['../d4/d03/namespaceANSIColors.html#ae8f007b9b1717af1703bd05d5f9619db',1,'ANSIColors']]],
   ['redb',['redb',['../d4/d03/namespaceANSIColors.html#a522acb9dcd3888cdac77214490578831',1,'ANSIColors']]],
   ['ref0',['ref0',['../d4/de3/InputSignals_8hpp.html#af0feeb2639f76688a87e67ba43f47cbf',1,'InputSignals.hpp']]],
+  ['refdir',['refdir',['../da/dd9/classStepResponseAnalyzer.html#af27ea396192ece39d432acf1e4b9ea3a',1,'StepResponseAnalyzer']]],
+  ['reference',['reference',['../dd/d27/structDroneAttitudePlottable.html#ac26243484f5ed11c72d6e3a7931ceb9b',1,'DroneAttitudePlottable::reference()'],['../d7/de4/structDronePlottable.html#a3f3dfd4988ca2d9913457c7a39778552',1,'DronePlottable::reference()'],['../d4/daa/structContinuousModel_1_1ControllerSimulationResult.html#a4cfc45341d4b6149fec4eb5af434c0be',1,'ContinuousModel::ControllerSimulationResult::reference()']]],
+  ['references',['references',['../d3/d66/namespaceCostReferences.html#abe0d957eaeb0e820f1bdc8a3a1210281',1,'CostReferences']]],
   ['reset',['reset',['../d4/d03/namespaceANSIColors.html#a923babbed800df1b01db512486cba2ff',1,'ANSIColors']]],
   ['resultcode',['resultCode',['../de/d1c/structODEResultX.html#a178a9e8bca04d5164e35796c3c1a1253',1,'ODEResultX']]],
-  ['rho',['rho',['../de/db8/structParams.html#a994a31dc4b6e95221662363024c9447e',1,'Params']]],
-  ['rr',['rr',['../de/db8/structParams.html#a33e97019c10dfa1ebcd4cc5bbbfed121',1,'Params']]]
+  ['rgen',['rgen',['../d8/de5/classGaussianNoiseGenerator.html#abb51ce2c1534b647279d9b2fa68f890a',1,'GaussianNoiseGenerator']]],
+  ['rho',['rho',['../d3/d2a/structDroneParamsAndMatrices.html#a2cb5062c10258cddd7fe2c621b890b07',1,'DroneParamsAndMatrices']]],
+  ['risetime',['risetime',['../df/dd1/structCostWeights.html#a79ba041613a443c99d1e32102d4795be',1,'CostWeights::risetime()'],['../da/ddc/structStepResponseAnalyzer_1_1Result.html#a320829855b230910f545d320bc2be95d',1,'StepResponseAnalyzer::Result::risetime()'],['../da/dd9/classStepResponseAnalyzer.html#a2142237abe0fb30532da2e188d79444f',1,'StepResponseAnalyzer::risetime()']]],
+  ['rmax',['Rmax',['../df/dfb/namespaceConfig_1_1Tuner.html#a19c0e6a016e4d50743379a41c1917c90',1,'Config::Tuner']]],
+  ['rmin',['Rmin',['../df/dfb/namespaceConfig_1_1Tuner.html#a367798318866c0007f6da0e282e61314',1,'Config::Tuner']]]
 ];

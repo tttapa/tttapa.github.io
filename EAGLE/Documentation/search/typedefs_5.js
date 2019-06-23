@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['observersimulationresult',['ObserverSimulationResult',['../d3/d6d/classContinuousModel.html#ae9d50ec088ed44490c58aba952ed26ca',1,'ContinuousModel']]]
+  ['inputfunction',['InputFunction',['../d3/d6d/classContinuousModel.html#a990d21b7fe5cd1fa0773783b44419305',1,'ContinuousModel']]]
 ];

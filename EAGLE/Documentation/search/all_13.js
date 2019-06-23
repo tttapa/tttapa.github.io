@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['u',['U',['../da/d0b/structQR.html#a099679dcd460fd4ae34a31be9900f37e',1,'QR::U()'],['../d5/d40/structSchur__result.html#a546141e1f10b8ecde5ccce4e1bdbf1b3',1,'Schur_result::U()']]],
-  ['u_5fatt_5fmax',['u_att_max',['../d2/dff/namespaceConfig.html#a0ce1646b9d7dec9ef2aeb04f6d517d4b',1,'Config']]],
-  ['u_5fh',['u_h',['../d2/d93/classClampedGeneratedLQRController.html#a74f1730d7db82411ae981f0b8a5137d8',1,'ClampedGeneratedLQRController::u_h()'],['../d7/d66/classClampedDiscreteLQRController.html#afbae6eb61f8affe8ab765c5e7217d10f',1,'ClampedDiscreteLQRController::u_h()']]],
-  ['uh',['uh',['../de/db8/structParams.html#a9f827418c9e9eacd107489bc14ba0b45',1,'Params']]],
-  ['use_5fconstexpr_5farray_5fhelpers',['USE_CONSTEXPR_ARRAY_HELPERS',['../d5/db6/ArrayHelpers_8hpp.html#addd42f8d7a7cb2605e50325b9c54fefa',1,'ArrayHelpers.hpp']]]
+  ['u',['U',['../da/d0b/structQR.html#a099679dcd460fd4ae34a31be9900f37e',1,'QR::U()'],['../d5/d40/structSchur__result.html#a546141e1f10b8ecde5ccce4e1bdbf1b3',1,'Schur_result::U()'],['../dc/de0/classDroneControl.html#abdbb2a4f5b4a57ef46092736c3320dd4',1,'DroneControl::u()'],['../db/d5b/classDroneAttitudeControl.html#a86f90d4f6ac416d9db8fc23fdf14bf2f',1,'DroneAttitudeControl::u()']]],
+  ['u_5falt',['u_alt',['../da/df4/classDrone_1_1Controller.html#ab2a19941893170ac517e20f84b8231e5',1,'Drone::Controller']]],
+  ['uh',['uh',['../d2/d44/structDrone_1_1AttitudeModel.html#a62dc9cdf7d93cb60ae60f03f93c139d1',1,'Drone::AttitudeModel::uh()'],['../dc/d7e/classDrone_1_1FixedClampAttitudeController.html#ac1e327c0af6eb42c03207bea8472e244',1,'Drone::FixedClampAttitudeController::uh()'],['../d4/d72/classDrone_1_1FixedClampCAttitudeController.html#aa1b4efe240f4a846f2a472f5f8557f07',1,'Drone::FixedClampCAttitudeController::uh()'],['../da/df4/classDrone_1_1Controller.html#a427bab9bdbd02bc4c996cfd47f0444d8',1,'Drone::Controller::uh()'],['../d3/d2a/structDroneParamsAndMatrices.html#a6fffa045b0def652c5f1bb2d63c7dfd6',1,'DroneParamsAndMatrices::uh()']]],
+  ['unitquaternion',['unitQuaternion',['../d3/d1f/Quaternion_8hpp.html#a09450d899cd2ec9f68ea5b1123c187d6',1,'Quaternion.hpp']]]
 ];

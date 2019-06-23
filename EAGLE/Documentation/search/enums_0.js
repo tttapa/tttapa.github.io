@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['discretizationmethod',['DiscretizationMethod',['../d4/d25/System_8hpp.html#a49cb8d1956d095409e849fd014ab5841',1,'System.hpp']]]
+  ['angleformat',['AngleFormat',['../d3/d1f/Quaternion_8hpp.html#a30e9be845c31a8fb53d403bb863bcd08',1,'Quaternion.hpp']]]
 ];

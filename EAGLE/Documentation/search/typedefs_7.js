@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['reducedquaternion',['ReducedQuaternion',['../d6/d26/ReducedQuaternion_8hpp.html#a063a6479206665df627a7711c536157b',1,'ReducedQuaternion.hpp']]],
-  ['reducedstatex',['ReducedStateX',['../db/d00/attitude_8h.html#aeeb6f2d49dfeab4ae9636b54f1b6e040',1,'attitude.h']]],
-  ['referencefunction',['ReferenceFunction',['../d9/d85/classController.html#ac7b7bd5a7c58c6214258a6eac09031cd',1,'Controller::ReferenceFunction()'],['../d8/d12/classContinuousController.html#a171361d6bfbf945860a9510d5c811af0',1,'ContinuousController::ReferenceFunction()'],['../d4/d83/classDiscreteController.html#a5f023e950cf2881f8270302adb0c51c3',1,'DiscreteController::ReferenceFunction()'],['../d6/d18/classModel.html#a67e30b29cd4f57df17b7baad19076b25',1,'Model::ReferenceFunction()'],['../d3/d6d/classContinuousModel.html#a371045383756c20d61a68954205e9627',1,'ContinuousModel::ReferenceFunction()']]],
-  ['referencequaternion',['ReferenceQuaternion',['../db/d00/attitude_8h.html#a8dcda7fe3d8d01e74481ead0c8bd6966',1,'attitude.h']]],
-  ['rowvector',['RowVector',['../d9/d1c/Matrix_8hpp.html#a7a1f44b467b99779ebcc9870186077b6',1,'Matrix.hpp']]]
+  ['p_5faltitude_5fcontroller_5ft',['p_altitude_controller_t',['../da/df4/classDrone_1_1Controller.html#a3930ed6021f838c84f5f8a493ae75acb',1,'Drone::Controller']]],
+  ['p_5faltitude_5fobserver_5ft',['p_altitude_observer_t',['../da/d9c/classDrone_1_1Observer.html#a9a7b36df96aaa2de6d95c45ee0eaa90b',1,'Drone::Observer']]],
+  ['p_5fattitude_5fcontroller_5ft',['p_attitude_controller_t',['../da/df4/classDrone_1_1Controller.html#a32d1fbb4c087687b0b9dee9ff936c8d2',1,'Drone::Controller']]],
+  ['p_5fattitude_5fobserver_5ft',['p_attitude_observer_t',['../da/d9c/classDrone_1_1Observer.html#a0c473de5a2b96683d55843b3d922f816',1,'Drone::Observer']]],
+  ['pythongaussiannoisegeneratorinput',['PythonGaussianNoiseGeneratorInput',['../dd/d2c/PyDrone_8hpp.html#acaf64ab97f65b61539bc26979f28c9d6',1,'PyDrone.hpp']]],
+  ['pythongaussiannoisegeneratoroutput',['PythonGaussianNoiseGeneratorOutput',['../dd/d2c/PyDrone_8hpp.html#a3dfc4c7050b1f3582d5de55d1c37ae9e',1,'PyDrone.hpp']]]
 ];

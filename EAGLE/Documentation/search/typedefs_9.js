@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tcolvector',['TColVector',['../d9/d1c/Matrix_8hpp.html#a19ebe5918dddddcceb73d133609dbeb1',1,'Matrix.hpp']]],
-  ['tmatrix',['TMatrix',['../d9/d1c/Matrix_8hpp.html#a0f99629ecd4baa67407ecda9f834708d',1,'Matrix.hpp']]],
-  ['trowvector',['TRowVector',['../d9/d1c/Matrix_8hpp.html#a9080fd1212d23d3758c7023612148f5a',1,'Matrix.hpp']]]
+  ['reducedquaternion',['ReducedQuaternion',['../d6/d26/ReducedQuaternion_8hpp.html#a063a6479206665df627a7711c536157b',1,'ReducedQuaternion.hpp']]],
+  ['referencefunction',['ReferenceFunction',['../d4/d83/classDiscreteController.html#a67d570f77b0dee42a38e482c734a8430',1,'DiscreteController::ReferenceFunction()'],['../d3/d6d/classContinuousModel.html#a9dd01a789e764b5f6d37bc9a752ace91',1,'ContinuousModel::ReferenceFunction()']]],
+  ['rowvector',['RowVector',['../d9/d1c/Matrix_8hpp.html#a7a1f44b467b99779ebcc9870186077b6',1,'Matrix.hpp']]]
 ];

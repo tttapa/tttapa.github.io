@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['b',['B',['../dd/d5c/classLTISystem.html#ac36dc8c4e8a02272fda69f237ee6748c',1,'LTISystem::B()'],['../dd/d92/structDrone.html#afe65691afe289d9957ceea0b421ea334',1,'Drone::B()'],['../d6/d12/classFullKalman.html#a87ee51999a4d16792ab9c57238dc89e0',1,'FullKalman::B()']]],
+  ['b',['B',['../dc/d4b/classAltitude_1_1KalmanObserver.html#a9b52c3c830455e89bbe166330aeacffb',1,'Altitude::KalmanObserver::B()'],['../dd/d5c/classLTISystem.html#ac36dc8c4e8a02272fda69f237ee6748c',1,'LTISystem::B()']]],
   ['b1',['b1',['../d4/dfa/namespaceDormandPrinceConstants.html#a374a6fbe00feccf4fa4b1e8805fc53f9',1,'DormandPrinceConstants']]],
   ['b1p',['b1p',['../d4/dfa/namespaceDormandPrinceConstants.html#a03900029876ac0a5015d4516635bf220',1,'DormandPrinceConstants']]],
   ['b2',['b2',['../d4/dfa/namespaceDormandPrinceConstants.html#af693bb3d70ced85fa57ba2cb45a0de46',1,'DormandPrinceConstants']]],
@@ -15,10 +15,20 @@ var searchData=
   ['b6p',['b6p',['../d4/dfa/namespaceDormandPrinceConstants.html#a215aeaa74d475f68d5c9caadf71cc7ac',1,'DormandPrinceConstants']]],
   ['b7',['b7',['../d4/dfa/namespaceDormandPrinceConstants.html#a5a1638042ffa1250f09e493e43e72eb8',1,'DormandPrinceConstants']]],
   ['b7p',['b7p',['../d4/dfa/namespaceDormandPrinceConstants.html#ab50b2f4a4ffda71648867870b2aa24e5',1,'DormandPrinceConstants']]],
+  ['b_5fred',['B_red',['../d8/d1e/classAttitude_1_1KalmanObserver.html#a107fee3675971cc77e125f4ba9c31ed8',1,'Attitude::KalmanObserver']]],
+  ['ba_5falt',['Ba_alt',['../d3/d2a/structDroneParamsAndMatrices.html#a67c5a53ecd0010f3bb29cb059c07280e',1,'DroneParamsAndMatrices']]],
+  ['ba_5fatt',['Ba_att',['../d3/d2a/structDroneParamsAndMatrices.html#ae0e0a8ebc667a94fa36dd4f28bb2666f',1,'DroneParamsAndMatrices']]],
   ['balanced_5fmat',['balanced_mat',['../dd/d4c/structBalance__result.html#af19d03c004a2f84ca3dafbd04bf85210',1,'Balance_result']]],
   ['balanced_5fmatrix',['balanced_matrix',['../d6/ddd/structBalance__result__GEP.html#a492b324804d65cfebe4fa65b08f09dd0',1,'Balance_result_GEP']]],
   ['balanced_5fmatrix2',['balanced_matrix2',['../d6/ddd/structBalance__result__GEP.html#afa14bfd4f94683f36e9e4fd49c18acb4',1,'Balance_result_GEP']]],
   ['balancing_5fmat',['balancing_mat',['../dd/d4c/structBalance__result.html#a823384ffa9e76138c56539d0ac8a0ddc',1,'Balance_result']]],
   ['balancing_5fmatrix',['balancing_matrix',['../d6/ddd/structBalance__result__GEP.html#a15581730c68e609897b6c77eec0d623b',1,'Balance_result_GEP']]],
-  ['balancing_5fmatrix2',['balancing_matrix2',['../d6/ddd/structBalance__result__GEP.html#ac678036b58a979112737abf1474b93dd',1,'Balance_result_GEP']]]
+  ['balancing_5fmatrix2',['balancing_matrix2',['../d6/ddd/structBalance__result__GEP.html#ac678036b58a979112737abf1474b93dd',1,'Balance_result_GEP']]],
+  ['bd_5falt',['Bd_alt',['../d3/d2a/structDroneParamsAndMatrices.html#ad67b9537eadb91e98c72c9558f6817de',1,'DroneParamsAndMatrices']]],
+  ['bd_5fatt',['Bd_att',['../d3/d2a/structDroneParamsAndMatrices.html#aaf40d8647d0ada5d76229fe7e511c32b',1,'DroneParamsAndMatrices']]],
+  ['bd_5fatt_5fr',['Bd_att_r',['../d3/d2a/structDroneParamsAndMatrices.html#a329454ec9479acf022f263dd3be52c23',1,'DroneParamsAndMatrices']]],
+  ['black',['black',['../d4/d03/namespaceANSIColors.html#a1e9bbc477cb8dbf585e5cd37a633f981',1,'ANSIColors']]],
+  ['blackb',['blackb',['../d4/d03/namespaceANSIColors.html#a008f76b3ac1cdaafa10debc3d9f5ffb2',1,'ANSIColors']]],
+  ['blue',['blue',['../d4/d03/namespaceANSIColors.html#a2b83736d36bd9217b46f58988274cc5c',1,'ANSIColors']]],
+  ['blueb',['blueb',['../d4/d03/namespaceANSIColors.html#a28b0b281992e2c3b2c0c7db4663ff79b',1,'ANSIColors']]]
 ];

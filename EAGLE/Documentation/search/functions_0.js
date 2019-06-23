@@ -1,8 +1,17 @@
 var searchData=
 [
+  ['abs',['abs',['../de/d76/Array_8hpp.html#a54bae1a9c86ad6bc491b4f10495a759f',1,'Array.hpp']]],
+  ['add',['add',['../dd/d7a/classArgParser.html#aec28b7dca9c56d6541c56321535dac12',1,'ArgParser::add(const T &amp;argMatcher)'],['../dd/d7a/classArgParser.html#aba1b5853b8107ef0fd13456379285ee2',1,'ArgParser::add(const char *flag, const char *abbr, const std::function&lt; void(const char *argv[])&gt; &amp;onMatchFn)'],['../dd/d7a/classArgParser.html#a2dda0b6c278a5cb33089a2e6faf4ca20',1,'ArgParser::add(const char *flag, const std::function&lt; void(const char *argv[])&gt; &amp;onMatchFn)']]],
+  ['appendbesttofile',['appendBestToFile',['../d4/d55/PrintBest_8cpp.html#aba3955bc381fc18d88a56c218db40cc7',1,'appendBestToFile(const std::filesystem::path &amp;filename, size_t generation, const Weights &amp;best):&#160;PrintBest.cpp'],['../d0/dad/PrintBest_8hpp.html#aba3955bc381fc18d88a56c218db40cc7',1,'appendBestToFile(const std::filesystem::path &amp;filename, size_t generation, const Weights &amp;best):&#160;PrintBest.cpp']]],
   ['apply',['apply',['../da/d0b/structQR.html#aa61fe3635ba82acfc32da54920b79309',1,'QR']]],
   ['applytranspose',['applyTranspose',['../da/d0b/structQR.html#a8001dce66a751b468c5ae4b85d964ff2',1,'QR']]],
   ['are',['are',['../d0/d83/LQR_8hpp.html#a53780408b0208d123895221aadac10f6',1,'LQR.hpp']]],
+  ['argmatcher',['ArgMatcher',['../d0/d52/classArgMatcher.html#a675703e05e7002706d72045af74b2f50',1,'ArgMatcher']]],
+  ['argmatcherarguments',['ArgMatcherArguments',['../d2/d5f/classArgMatcherArguments.html#a2e9836dbb670752a4a397bdafd89a5a1',1,'ArgMatcherArguments::ArgMatcherArguments(const char *flag, const char *abbr, const std::function&lt; void(const char *argv[])&gt; &amp;onMatchFn)'],['../d2/d5f/classArgMatcherArguments.html#a78ef33dd72f08e032ea9455d961ce6ca',1,'ArgMatcherArguments::ArgMatcherArguments(const char *flag, const std::function&lt; void(const char *argv[])&gt; &amp;onMatchFn)'],['../d2/d5f/classArgMatcherArguments.html#a73415145659ea85e93316ad8b7e06aff',1,'ArgMatcherArguments::ArgMatcherArguments(const ArgMatcherArguments &amp;)=default']]],
+  ['aseulerangles',['asEulerAngles',['../d3/d1f/Quaternion_8hpp.html#aeca6697e563942825186225faa6e1762',1,'asEulerAngles(const EulerAngles &amp;e, AngleFormat format=radians, size_t precision=2):&#160;Quaternion.hpp'],['../d3/d1f/Quaternion_8hpp.html#a90068b9e0588e82541c21ba1cef59720',1,'asEulerAngles(const Quaternion &amp;q, AngleFormat format=radians, size_t precision=2):&#160;Quaternion.hpp']]],
+  ['asrowvector',['asrowvector',['../d9/d1c/Matrix_8hpp.html#a5396ac0689ea8f47e7ba2726b3b79357',1,'asrowvector(const ColVector&lt; N &gt; &amp;v, const char *sep=&quot; &quot;, size_t precision=2):&#160;Matrix.hpp'],['../d9/d1c/Matrix_8hpp.html#a6ff4bfee4dd43e43bdaeb7dfbfd38ac7',1,'asrowvector(const RowVector&lt; N &gt; &amp;v, const char *sep=&quot; &quot;, size_t precision=2):&#160;Matrix.hpp']]],
   ['assignblock',['assignBlock',['../d9/d1c/Matrix_8hpp.html#aa7a0a009ff4ef0cc5545c80716559f36',1,'Matrix.hpp']]],
-  ['at',['at',['../dc/da2/classDynamicMatrix.html#ac214af860374b431d14bb3376f7d0e30',1,'DynamicMatrix::at(size_t i)'],['../dc/da2/classDynamicMatrix.html#a2ec6e7dd164f8586849f4f5b37e7ff51',1,'DynamicMatrix::at(size_t i) const']]]
+  ['astex',['asTeX',['../d9/d1c/Matrix_8hpp.html#a2639e3ccd6ca3fc71cbe8d24dc96ec6f',1,'Matrix.hpp']]],
+  ['attitudemodel',['AttitudeModel',['../d2/d44/structDrone_1_1AttitudeModel.html#aeda56f953269e70fcb4b69dcbc0f5072',1,'Drone::AttitudeModel']]],
+  ['axes',['axes',['../dc/df3/Plot_8hpp.html#ab70c85dfc0960e0e62d64150163853ad',1,'axes(float w=1920, float h=1080):&#160;Plot.cpp'],['../da/d2d/Plot_8cpp.html#a54cefc3e3511cfdb073839456f0b742a',1,'axes(float w, float h):&#160;Plot.cpp']]]
 ];

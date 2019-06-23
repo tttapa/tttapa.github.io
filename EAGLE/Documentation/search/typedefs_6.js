@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['quaternion',['Quaternion',['../d3/d1f/Quaternion_8hpp.html#a838c63f5e61db5facc530a0eea4cb39f',1,'Quaternion.hpp']]]
+  ['matrix',['Matrix',['../d9/d1c/Matrix_8hpp.html#a09188de1b4315b8af6d7ce32b3008662',1,'Matrix.hpp']]],
+  ['mt',['MT',['../dd/d3b/structpybind11_1_1detail_1_1type__caster_3_01TMatrix_3_01T_00_01R_00_01C_01_4_01_4.html#a42b4128c450a83a84ccb125044130948',1,'pybind11::detail::type_caster&lt; TMatrix&lt; T, R, C &gt; &gt;']]]
 ];

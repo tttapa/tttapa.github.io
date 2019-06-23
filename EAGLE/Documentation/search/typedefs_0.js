@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['colvector',['ColVector',['../d9/d1c/Matrix_8hpp.html#a99e9937497f969c9f701b4ed27af7349',1,'Matrix.hpp']]],
-  ['controlleroutputu',['ControllerOutputU',['../db/d00/attitude_8h.html#a87a6f256272201d48c8190d3ae9bd420',1,'attitude.h']]]
+  ['args_5ft',['Args_t',['../d2/d5f/classArgMatcherArguments.html#ac36c22b14b284f06a57f86391ac992e6',1,'ArgMatcherArguments']]]
 ];

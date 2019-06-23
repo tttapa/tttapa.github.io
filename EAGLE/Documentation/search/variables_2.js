@@ -1,17 +1,24 @@
 var searchData=
 [
-  ['c',['C',['../dd/d5c/classLTISystem.html#a4882376ff9b40cc9833f3bb6e3badf21',1,'LTISystem::C()'],['../dd/d92/structDrone.html#a83be299862ccedb87b25fa1e1fecf565',1,'Drone::C()'],['../d6/d12/classFullKalman.html#a137c2dcc03c2f040597ca21a1e56a069',1,'FullKalman::C()']]],
+  ['c',['C',['../d8/d1e/classAttitude_1_1KalmanObserver.html#a46a5ab3478ef0b9036792f9d56bdbd14',1,'Attitude::KalmanObserver::C()'],['../dc/d4b/classAltitude_1_1KalmanObserver.html#aa219787e586dc5df494efb717aaabc9b',1,'Altitude::KalmanObserver::C()'],['../d8/dd2/classAltitude_1_1LQRController.html#afd38c24438aa40d7a64f76f6b660c42e',1,'Altitude::LQRController::C()'],['../dd/d5c/classLTISystem.html#a4882376ff9b40cc9833f3bb6e3badf21',1,'LTISystem::C()']]],
   ['c2',['c2',['../d4/dfa/namespaceDormandPrinceConstants.html#ac57ea73d65eb29ca5b26500a060897d7',1,'DormandPrinceConstants']]],
   ['c3',['c3',['../d4/dfa/namespaceDormandPrinceConstants.html#a5c1b16ddcd9064a3b9c8005e5ab92e1d',1,'DormandPrinceConstants']]],
   ['c4',['c4',['../d4/dfa/namespaceDormandPrinceConstants.html#a8b6cfc14df86d551b1f274fc1f739a1c',1,'DormandPrinceConstants']]],
   ['c5',['c5',['../d4/dfa/namespaceDormandPrinceConstants.html#afaf1bd5f4342701d185e7fc2b5809b48',1,'DormandPrinceConstants']]],
   ['c6',['c6',['../d4/dfa/namespaceDormandPrinceConstants.html#a1a037a38ef804994d05c2ca014cf9f31',1,'DormandPrinceConstants']]],
   ['c7',['c7',['../d4/dfa/namespaceDormandPrinceConstants.html#a6c468db2cceb3d7ab06ca88e3db7ea43',1,'DormandPrinceConstants']]],
-  ['clampcontroller',['clampController',['../d2/dff/namespaceConfig.html#a900347a4a0b4af9fd1563d97cbae799d',1,'Config']]],
+  ['ca_5falt',['Ca_alt',['../d3/d2a/structDroneParamsAndMatrices.html#a3f78ab5a82002e52b9e10d9e8bb5181a',1,'DroneParamsAndMatrices']]],
+  ['ca_5fatt',['Ca_att',['../d2/d44/structDrone_1_1AttitudeModel.html#acccd5dd95f01cb62d8ffd6d768daaeb9',1,'Drone::AttitudeModel::Ca_att()'],['../d3/d2a/structDroneParamsAndMatrices.html#acd9e3dbc0f78252b0bb4c58cece27339',1,'DroneParamsAndMatrices::Ca_att()']]],
+  ['cd_5falt',['Cd_alt',['../d3/d2a/structDroneParamsAndMatrices.html#aed54408a58ecba18082da1bf81ee5428',1,'DroneParamsAndMatrices']]],
+  ['cd_5fatt',['Cd_att',['../d3/d2a/structDroneParamsAndMatrices.html#ad7da51be2da3c66f72cc21b3bd7377bc',1,'DroneParamsAndMatrices']]],
+  ['cd_5fatt_5fr',['Cd_att_r',['../d3/d2a/structDroneParamsAndMatrices.html#a165a75f5602bb214d92ab16cde201fc6',1,'DroneParamsAndMatrices']]],
+  ['chromosome',['chromosome',['../d0/d44/classMember.html#a84af4a6ad30c3644fd908c33560fc368',1,'Member']]],
   ['code',['code',['../d9/deb/structODEResultCode.html#a191fb22b72242d88efac1d10bea89ae2',1,'ODEResultCode']]],
-  ['control',['control',['../d3/dfa/structModel_1_1ObserverSimulationResult.html#a3060cc89c68d561ea56b36e6cf3dd9ee',1,'Model::ObserverSimulationResult']]],
-  ['cp',['cp',['../de/db8/structParams.html#a6642836bd88ab82de0f8f3c5031aad95',1,'Params']]],
-  ['csv_5ffs',['CSV_fs',['../d2/dff/namespaceConfig.html#ac4cd7fef292d12818d03ee2c4ea74e12',1,'Config']]],
-  ['csv_5fts',['CSV_Ts',['../d2/dff/namespaceConfig.html#a64e0c5bd87857fa25813d128595e5c62',1,'Config']]],
-  ['ct',['ct',['../de/db8/structParams.html#a6f6b9f0aea2879be876fcad9972fb85c',1,'Params']]]
+  ['config',['config',['../d1/d81/classAttitude_1_1CLQRController.html#a99388d962c049de5071558b7f7604633',1,'Attitude::CLQRController::config()'],['../d3/de6/classAltitude_1_1CLQRController.html#ac0cb220aa02a19ed2e4137fdf3288447',1,'Altitude::CLQRController::config()']]],
+  ['continuetoend',['continueToEnd',['../da/da9/classStepResponseAnalyzerPlotter.html#a7b77ce99b265c0c1d9959a6496febfdb',1,'StepResponseAnalyzerPlotter']]],
+  ['control',['control',['../dd/d27/structDroneAttitudePlottable.html#a2513fc4c825eda4066d3fdd186949251',1,'DroneAttitudePlottable::control()'],['../d7/de4/structDronePlottable.html#add4ade5828b7c2f0ed0dccec1364b907',1,'DronePlottable::control()'],['../d4/daa/structContinuousModel_1_1ControllerSimulationResult.html#a1964d87d8c866ffcaa650b3b37df6dbb',1,'ContinuousModel::ControllerSimulationResult::control()']]],
+  ['cost',['cost',['../dd/d56/structWeights.html#a9fee221a4706dbd274ddc32ab008ab5c',1,'Weights']]],
+  ['ct',['ct',['../d3/d2a/structDroneParamsAndMatrices.html#a96f959da20ed343ef923421686359afd',1,'DroneParamsAndMatrices']]],
+  ['cyan',['cyan',['../d4/d03/namespaceANSIColors.html#ac8edbda75e4b7262606228b663a53c6f',1,'ANSIColors']]],
+  ['cyanb',['cyanb',['../d4/d03/namespaceANSIColors.html#a8e1ae7751ffd3389c6a8e557c482a705',1,'ANSIColors']]]
 ];

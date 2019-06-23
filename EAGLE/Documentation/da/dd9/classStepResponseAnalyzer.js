@@ -1,0 +1,26 @@
+var classStepResponseAnalyzer =
+[
+    [ "Result", "da/ddc/structStepResponseAnalyzer_1_1Result.html", "da/ddc/structStepResponseAnalyzer_1_1Result" ],
+    [ "StepResponseAnalyzer", "da/dd9/classStepResponseAnalyzer.html#af7fdf47970178d0a56c312de4868df50", null ],
+    [ "StepResponseAnalyzer", "da/dd9/classStepResponseAnalyzer.html#a9a3218a95692353a9b0a81e84b15547c", null ],
+    [ "calculate", "da/dd9/classStepResponseAnalyzer.html#a682b00402ac2c6e42fb86b7444698db2", null ],
+    [ "getDirection", "da/dd9/classStepResponseAnalyzer.html#a642b86782fe8de07c91266743681c4d0", null ],
+    [ "getInside", "da/dd9/classStepResponseAnalyzer.html#acdce19a0932a8c00c4905784a6a2efda", null ],
+    [ "getResult", "da/dd9/classStepResponseAnalyzer.html#a8d7f0cc09f0d748c13b188f81a3613e5", null ],
+    [ "operator()", "da/dd9/classStepResponseAnalyzer.html#a89b72f5b27ffd9167fcd50ef84ae5eda", null ],
+    [ "dir", "da/dd9/classStepResponseAnalyzer.html#aabe5aadde028022d6a6e8a41eed2bbd3", null ],
+    [ "extremumcount", "da/dd9/classStepResponseAnalyzer.html#ac272af9a862780234490f36fa60cf31d", null ],
+    [ "infinity", "da/dd9/classStepResponseAnalyzer.html#a11dad0deda99b1e6d4df7e4be74cb04c", null ],
+    [ "inside", "da/dd9/classStepResponseAnalyzer.html#a620a9a74892f2d4c13685a0d47845f6d", null ],
+    [ "lastenter", "da/dd9/classStepResponseAnalyzer.html#a4a0d463504a019ee0d219eb853fae61e", null ],
+    [ "lastexit", "da/dd9/classStepResponseAnalyzer.html#ab4dd7823d79cd001c9447034aa7b64f2", null ],
+    [ "lastextremum", "da/dd9/classStepResponseAnalyzer.html#ac0144a2b40beccb57f1baa17f2b547be", null ],
+    [ "overshoot", "da/dd9/classStepResponseAnalyzer.html#a632b7dc2d5b09605c0f02c44737c8463", null ],
+    [ "refdir", "da/dd9/classStepResponseAnalyzer.html#af27ea396192ece39d432acf1e4b9ea3a", null ],
+    [ "risetime", "da/dd9/classStepResponseAnalyzer.html#a2142237abe0fb30532da2e188d79444f", null ],
+    [ "settletime", "da/dd9/classStepResponseAnalyzer.html#aa1dcb178dd97af53142cc7bc3912a338", null ],
+    [ "x_adif", "da/dd9/classStepResponseAnalyzer.html#a2abede745df7aec1648a6365e58cfd3e", null ],
+    [ "x_prev", "da/dd9/classStepResponseAnalyzer.html#a13fc402d16d9964a8e8757cee492284c", null ],
+    [ "x_ref", "da/dd9/classStepResponseAnalyzer.html#a0b27e869645a0785da2c184e759b2a08", null ],
+    [ "x_thr", "da/dd9/classStepResponseAnalyzer.html#a4d7fab5d40976b98d04338000be2feb2", null ]
+];
