@@ -1,9 +1,10 @@
 var Settings_8hpp =
 [
+    [ "DEBUG_OUT", "db/d02/Settings_8hpp.html#a7cc5a6d57623c456857b1ba01ce919ee", null ],
     [ "FATAL_ERRORS", "db/d02/Settings_8hpp.html#a5894a0b22947afb71dca51783e61ac2c", null ],
     [ "IGNORE_SYSEX", "db/d02/Settings_8hpp.html#a2a82e3cbc4ddcf68ac47d0d464189e35", null ],
     [ "INDIVIDUAL_BUTTON_INVERT", "db/d02/Settings_8hpp.html#a0f4fabd413ae4e94b4f8d45cc1a249ad", null ],
-    [ "ANALOG_FILTER_TYPE", "db/d02/Settings_8hpp.html#ad2b664f9591b7426fbe6de4a8f0c29c2", null ],
+    [ "ANALOG_FILTER_TYPE", "db/d02/Settings_8hpp.html#a54d9b698d17a8435072d5de97b7c41f1", null ],
     [ "ANALOG_FILTER_SHIFT_FACTOR", "db/d02/Settings_8hpp.html#a74cef1adb51d95add8b2bea344b6c755", null ],
     [ "BUTTON_DEBOUNCE_TIME", "db/d02/Settings_8hpp.html#a838b0bb32d176701ae1362e3188c578d", null ],
     [ "defaultBaudRate", "db/d02/Settings_8hpp.html#ac1052a84bab455c13aac40a30d8cb4ba", null ],

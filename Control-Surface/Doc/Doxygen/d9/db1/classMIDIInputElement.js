@@ -1,5 +1,6 @@
 var classMIDIInputElement =
 [
+    [ "MIDIInputElement", "d9/db1/classMIDIInputElement.html#ac5f9fcab2f28d761493899ff22aa83d6", null ],
     [ "MIDIInputElement", "d9/db1/classMIDIInputElement.html#aa37227962f74df17dcfa8f2782c1ec40", null ],
     [ "~MIDIInputElement", "d9/db1/classMIDIInputElement.html#aa1d59446d9c82eab48e97318f35be7b8", null ],
     [ "begin", "d9/db1/classMIDIInputElement.html#a7ae18e103d62568ba35c1c2de2e37885", null ],

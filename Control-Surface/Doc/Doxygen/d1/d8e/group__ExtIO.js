@@ -24,9 +24,9 @@ var group__ExtIO =
       [ "update", "d7/d8d/classAnalogMultiplex.html#a5a90a6c5cafd95ddfdc0c43054c12250", null ],
       [ "addressPins", "d7/d8d/classAnalogMultiplex.html#ababe3a0859026a36e20873853ada38d0", null ],
       [ "analogPin", "d7/d8d/classAnalogMultiplex.html#a628d64a2f97f6e8019cf7b7fe3814d3b", null ],
-      [ "DISABLED", "d7/d8d/classAnalogMultiplex.html#a57f26279e831b5fdad039524836b1cd6", null ],
-      [ "ENABLED", "d7/d8d/classAnalogMultiplex.html#ade5742279d9030113637f86cf35498cf", null ],
       [ "enablePin", "d7/d8d/classAnalogMultiplex.html#a2d7896bcedc95c3aa74f57e7268078cd", null ],
+      [ "MUX_DISABLED", "d7/d8d/classAnalogMultiplex.html#a3ec8e2e72275f17b958b6225b6825e48", null ],
+      [ "MUX_ENABLED", "d7/d8d/classAnalogMultiplex.html#a521b79a2af4987b24e744e9bf7f83588", null ],
       [ "next", "d7/d8d/classAnalogMultiplex.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
       [ "previous", "d7/d8d/classAnalogMultiplex.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],

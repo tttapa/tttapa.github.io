@@ -1,8 +1,8 @@
 var classBluetoothMIDI__Interface =
 [
     [ "BluetoothMIDI_Interface", "d0/d89/classBluetoothMIDI__Interface.html#ae406d082db68de691732ccfa35dbc751", null ],
-    [ "addToBuffer", "d0/d89/classBluetoothMIDI__Interface.html#a667456e6010ac897406ac55b5824ce7f", null ],
-    [ "addToBuffer", "d0/d89/classBluetoothMIDI__Interface.html#a3c6c5ad85186a96450035793b6a6525e", null ],
+    [ "addToBuffer", "d0/d89/classBluetoothMIDI__Interface.html#a5d1c944b2d4e772109e274b864ec698f", null ],
+    [ "addToBuffer", "d0/d89/classBluetoothMIDI__Interface.html#ac67eba161a554b011d497267f49c0c31", null ],
     [ "begin", "d0/d89/classBluetoothMIDI__Interface.html#ae2600c727aede7a22e4f449e247f52a5", null ],
     [ "dispatchMIDIEvent", "d0/d89/classBluetoothMIDI__Interface.html#a58470aacb3262891701b456daadced6d", null ],
     [ "getBLEMIDI", "d0/d89/classBluetoothMIDI__Interface.html#a35bbecd3223854d76faccb163dc4f1ce", null ],

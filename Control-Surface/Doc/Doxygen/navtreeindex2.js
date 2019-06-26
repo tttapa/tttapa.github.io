@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"d1/d54/classSelector.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,126,8],
 "d1/d54/classSelector.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,126,9],
 "d1/d54/classSelector.html#a7bd638cee6ef0ac16f850278b60bb049":[6,0,126,2],
 "d1/d54/classSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1":[6,0,126,16],
@@ -86,7 +87,7 @@ var NAVTREEINDEX2 =
 "d1/d7f/IncrementSelector_8cpp_source.html":[7,0,117],
 "d1/d82/ManyAddresses_2CCPotentiometer_8hpp.html":[7,0,55],
 "d1/d82/ManyAddresses_2CCPotentiometer_8hpp_source.html":[7,0,55],
-"d1/d8d/Multiplexer-AnalogReadSerial_8ino-example.html":[8,7],
+"d1/d8d/Multiplexer-AnalogReadSerial_8ino-example.html":[8,10],
 "d1/d8e/group__ExtIO.html":[4,4],
 "d1/d8e/group__ExtIO.html#ga3ab4921db62494df27df05daf4b11e70":[4,4,4],
 "d1/d8e/group__ExtIO.html#ga3ab4921db62494df27df05daf4b11e70":[7,0,1,0],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "d2/d25/MAX7219_8hpp_source.html":[7,0,132],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html":[4,0,12],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef":[4,0,12,16],
-"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,12,6],
-"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a4154c3302c845a9dc6a455600c4d0e2b":[4,0,12,17]
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,12,6]
 };

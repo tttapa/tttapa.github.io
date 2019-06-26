@@ -51,7 +51,8 @@ var NAVTREEINDEX1 =
 "d0/dd3/classCCButtons.html#ad2d72afc7556c0d852669e7fbf9fe7e3":[4,0,20,17],
 "d0/dd3/classCCButtons.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,20,8],
 "d0/dd3/classCCButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,20,13],
-"d0/de3/PushButtonsLEDs_8ino-example.html":[8,13],
+"d0/de3/PushButtonsLEDs_8ino-example.html":[8,16],
+"d0/dfe/Bluetooth-BLE-MIDI-CCPotentiometer_8ino-example.html":[8,0],
 "d1/d02/ManyButtonsSelector_8hpp.html":[7,0,128],
 "d1/d02/ManyButtonsSelector_8hpp_source.html":[7,0,128],
 "d1/d08/classMCU_1_1AssignmentDisplay.html":[6,0,2,1],
@@ -248,6 +249,5 @@ var NAVTREEINDEX1 =
 "d1/d54/classSelector.html#a4cdf97a0ac9e4848892db4e2b6dc78d0":[6,0,126,20],
 "d1/d54/classSelector.html#a57b6615469e554c514a9ff56dc24908f":[6,0,126,24],
 "d1/d54/classSelector.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,126,3],
-"d1/d54/classSelector.html#a60c471a816b23b12cbd1f3ab797c065c":[6,0,126,25],
-"d1/d54/classSelector.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,126,8]
+"d1/d54/classSelector.html#a60c471a816b23b12cbd1f3ab797c065c":[6,0,126,25]
 };

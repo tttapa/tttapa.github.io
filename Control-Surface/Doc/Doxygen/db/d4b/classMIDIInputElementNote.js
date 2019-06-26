@@ -1,5 +1,6 @@
 var classMIDIInputElementNote =
 [
+    [ "MIDIInputElementNote", "db/d4b/classMIDIInputElementNote.html#aa935a10f4a7675a681bf7c74fa97ddbc", null ],
     [ "MIDIInputElementNote", "db/d4b/classMIDIInputElementNote.html#ac77730bbf5c3b01cf2537e2e599df1ae", null ],
     [ "~MIDIInputElementNote", "db/d4b/classMIDIInputElementNote.html#a0830ac1b41cacb52da6023f5b890a6b9", null ],
     [ "begin", "db/d4b/classMIDIInputElementNote.html#a7ae18e103d62568ba35c1c2de2e37885", null ],

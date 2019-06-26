@@ -1,5 +1,8 @@
 var examples =
 [
+    [ "Bluetooth-BLE-MIDI-CCPotentiometer.ino", "d0/dfe/Bluetooth-BLE-MIDI-CCPotentiometer_8ino-example.html", null ],
+    [ "Bluetooth-BLE-MIDI-NoteButton.ino", "d6/dc8/Bluetooth-BLE-MIDI-NoteButton_8ino-example.html", null ],
+    [ "Bluetooth-BLE-MIDI-NoteButton_Input.ino", "d4/d4d/Bluetooth-BLE-MIDI-NoteButton_Input_8ino-example.html", null ],
     [ "CCIncrementDecrementButtons.ino", "da/d54/CCIncrementDecrementButtons_8ino-example.html", null ],
     [ "CCPotentiometer-Map.ino", "d3/d26/CCPotentiometer-Map_8ino-example.html", null ],
     [ "CCPotentiometer.ino", "d2/d35/CCPotentiometer_8ino-example.html", null ],

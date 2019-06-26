@@ -4,7 +4,7 @@ var searchData=
   ['teensyusbtypes_2ehpp',['TeensyUSBTypes.hpp',['../d9/d98/TeensyUSBTypes_8hpp.html',1,'']]],
   ['text',['text',['../d5/d54/classMCU_1_1SevenSegmentDisplay.html#adc7a66657391fdd760e190bfc9ee5292',1,'MCU::SevenSegmentDisplay']]],
   ['thirdbyte',['thirdByte',['../d0/d0d/classSerialMIDI__Parser.html#a6ec69d1a24b2a0517a281cc352ad88d1',1,'SerialMIDI_Parser']]],
-  ['timedisplay',['TimeDisplay',['../df/d69/classMCU_1_1TimeDisplay.html',1,'MCU::TimeDisplay'],['../df/d69/classMCU_1_1TimeDisplay.html#ae24e4fc0a95f0a80ed8bc03059bc3b4d',1,'MCU::TimeDisplay::TimeDisplay()'],['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ae38d59728ad82430746231d6491d602e',1,'MCU::TimeDisplayDisplay::timedisplay()']]],
+  ['timedisplay',['TimeDisplay',['../df/d69/classMCU_1_1TimeDisplay.html',1,'MCU::TimeDisplay'],['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ae38d59728ad82430746231d6491d602e',1,'MCU::TimeDisplayDisplay::timedisplay()'],['../df/d69/classMCU_1_1TimeDisplay.html#ae24e4fc0a95f0a80ed8bc03059bc3b4d',1,'MCU::TimeDisplay::TimeDisplay()']]],
   ['timedisplay_2ecpp',['TimeDisplay.cpp',['../d1/d55/TimeDisplay_8cpp.html',1,'']]],
   ['timedisplay_2ehpp',['TimeDisplay.hpp',['../d9/dc9/TimeDisplay_8hpp.html',1,'']]],
   ['timedisplayaddress',['TimeDisplayAddress',['../d7/dc7/namespaceMCU.html#ad256c4dd4482b2fb96d8acc1230787da',1,'MCU']]],

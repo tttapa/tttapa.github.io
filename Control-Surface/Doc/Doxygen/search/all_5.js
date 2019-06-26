@@ -18,7 +18,6 @@ var searchData=
   ['ema_3c_20analog_5ffilter_5fshift_5ffactor_2c_20analog_5ffilter_5ftype_20_3e',['EMA&lt; ANALOG_FILTER_SHIFT_FACTOR, ANALOG_FILTER_TYPE &gt;',['../d7/d40/classEMA.html',1,'']]],
   ['ema_5ff',['EMA_f',['../db/d6f/classEMA__f.html',1,'EMA_f'],['../db/d6f/classEMA__f.html#a884fba1eb900c21bd0fedb3a891d3507',1,'EMA_f::EMA_f()']]],
   ['enable',['enable',['../d5/de0/classUpdatable.html#acfabd4911411ebbfd96d4080103f4725',1,'Updatable::enable()'],['../d5/de0/classUpdatable.html#a4c1c6bd44da328dd5b4dc29503219d09',1,'Updatable::enable(Updatable *element)'],['../d5/de0/classUpdatable.html#a9cac8063b3145e5ab36a79fe7e4f91b9',1,'Updatable::enable(Updatable &amp;element)'],['../d5/de0/classUpdatable.html#ad4273e4aa2f15de8dbe478af16af259e',1,'Updatable::enable(U(&amp;array)[N])']]],
-  ['enabled',['ENABLED',['../d7/d8d/classAnalogMultiplex.html#ade5742279d9030113637f86cf35498cf',1,'AnalogMultiplex']]],
   ['enablepin',['enablePin',['../d7/d8d/classAnalogMultiplex.html#a2d7896bcedc95c3aa74f57e7268078cd',1,'AnalogMultiplex']]],
   ['encoder',['encoder',['../d8/d20/classMIDIRotaryEncoder.html#ab9c6c6d4ec4b5889d751afb5065c9548',1,'MIDIRotaryEncoder::encoder()'],['../dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a293b51b313e7504e02a2b9aaa92cffd3',1,'Bankable::MIDIRotaryEncoder::encoder()'],['../d0/daf/classEncoderSelector__Base.html#af596b0ad8a8abe00fd4760c201e77cf3',1,'EncoderSelector_Base::encoder()']]],
   ['encoderpinlist',['EncoderPinList',['../dc/d81/structEncoderPinList.html',1,'']]],

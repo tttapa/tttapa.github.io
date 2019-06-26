@@ -1,5 +1,8 @@
 var NAVTREEINDEX9 =
 {
+"d8/d0b/classStreamDebugMIDI__Interface.html#af4f7be5b6b486b4d116b9fd6a38f22a4":[4,3,1,6],
+"d8/d0b/classStreamDebugMIDI__Interface.html#af8d66b27c1d62bb2632c838182cdc92f":[4,3,1,0],
+"d8/d20/classMIDIRotaryEncoder.html":[6,0,100],
 "d8/d20/classMIDIRotaryEncoder.html#a080ccb8ce0680885275054cf6ee9e917":[6,0,100,19],
 "d8/d20/classMIDIRotaryEncoder.html#a2330758ba9146eeea1ae6cbcb120c1ae":[6,0,100,20],
 "d8/d20/classMIDIRotaryEncoder.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,100,6],
@@ -57,11 +60,11 @@ var NAVTREEINDEX9 =
 "d8/d38/MIDICNChannelAddress_8hpp.html#a0ee852dbfcc124ea1e0b8335d696e508":[7,0,167,3],
 "d8/d38/MIDICNChannelAddress_8hpp_source.html":[7,0,167],
 "d8/d39/classBLEMIDI.html":[6,0,15],
+"d8/d39/classBLEMIDI.html#a0837955c58a375b0d9905bb50d7e0c30":[6,0,15,1],
 "d8/d39/classBLEMIDI.html#a0f3aacf3e230569a6875ee178eb925d0":[6,0,15,8],
 "d8/d39/classBLEMIDI.html#a2ca7c6da1363e29a421d37319ab49a8f":[6,0,15,4],
-"d8/d39/classBLEMIDI.html#a31b995dbd057d884e0517af15fa988a1":[6,0,15,1],
+"d8/d39/classBLEMIDI.html#a68259227235ebcb0abaa11501a88e579":[6,0,15,6],
 "d8/d39/classBLEMIDI.html#aca1f4f6626f2a405ac75bd288ca7e1c8":[6,0,15,2],
-"d8/d39/classBLEMIDI.html#acdba5ac6a8a01b1523935a7ec4b44bf7":[6,0,15,6],
 "d8/d39/classBLEMIDI.html#ad0ec35ba2ab499e3c42dda91c31df8be":[6,0,15,5],
 "d8/d39/classBLEMIDI.html#aeaf0a8d859bfc29cda7002a9b38cda2c":[6,0,15,3],
 "d8/d39/classBLEMIDI.html#af388b78447b485342da87dbc401bcfeb":[6,0,15,7],
@@ -246,8 +249,5 @@ var NAVTREEINDEX9 =
 "d8/de1/classMIDIButtonLatching.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,80,11],
 "d8/de1/classMIDIButtonLatching.html#a8af924e5b3b708eb042919703d175ed3":[6,0,80,13],
 "d8/de1/classMIDIButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[6,0,80,9],
-"d8/de1/classMIDIButtonLatching.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,80,3],
-"d8/de1/classMIDIButtonLatching.html#ac1c120fd0dc42822cf4f12aa7f3ba571":[6,0,80,15],
-"d8/de1/classMIDIButtonLatching.html#acfabd4911411ebbfd96d4080103f4725":[6,0,80,7],
-"d8/de1/classMIDIButtonLatching.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,80,8]
+"d8/de1/classMIDIButtonLatching.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,80,3]
 };

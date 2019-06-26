@@ -1,5 +1,6 @@
 var NAVTREEINDEX5 =
 {
+"d3/d6c/classNoteButtonLatching.html#a57b6615469e554c514a9ff56dc24908f":[4,0,27,15],
 "d3/d6c/classNoteButtonLatching.html#a5c008d0d20b072e46c14b9c48ec6c45b":[4,0,27,2],
 "d3/d6c/classNoteButtonLatching.html#a698d89514186aa0c29ea6fbc5bef1e06":[4,0,27,4],
 "d3/d6c/classNoteButtonLatching.html#a6bae640621972b14ad9c28b6b399f08f":[4,0,27,5],
@@ -14,7 +15,7 @@ var NAVTREEINDEX5 =
 "d3/d74/PBPotentiometer_8hpp_source.html":[7,0,225],
 "d3/d80/NoteButton_8hpp.html":[7,0,203],
 "d3/d80/NoteButton_8hpp_source.html":[7,0,203],
-"d3/d82/Ex_81_8Shift-Register-LED-Effects_8ino-example.html":[8,4],
+"d3/d82/Ex_81_8Shift-Register-LED-Effects_8ino-example.html":[8,7],
 "d3/d88/classMIDIButtonLatched.html":[6,0,79],
 "d3/d88/classMIDIButtonLatched.html#a0d00b33017b5363b3e4e1899226c4b84":[6,0,79,14],
 "d3/d88/classMIDIButtonLatched.html#a139cdf7fa68a19e2eca342aad1e10d70":[6,0,79,17],
@@ -213,6 +214,7 @@ var NAVTREEINDEX5 =
 "d4/d42/classMCU_1_1VUDisplay.html#ac4bf0fcba04b3fd9caf2717b6caf0058":[6,0,2,12,16],
 "d4/d42/classMCU_1_1VUDisplay.html#ac7e658b8a699ce49ddaf3f5d5e17c679":[6,0,2,12,4],
 "d4/d42/classMCU_1_1VUDisplay.html#afab0c9a4ede33a791b40f608825518ed":[6,0,2,12,6],
+"d4/d4d/Bluetooth-BLE-MIDI-NoteButton_Input_8ino-example.html":[8,2],
 "d4/d57/Bank_8hpp.html":[7,0,13],
 "d4/d57/Bank_8hpp_source.html":[7,0,13],
 "d4/d57/ExtendedIOElement_8hpp.html":[7,0,99],
@@ -247,7 +249,5 @@ var NAVTREEINDEX5 =
 "d4/d71/classMCU_1_1VU__Base.html#af5a7c8369f2ec58920efda3fdc886915":[6,0,2,11,10],
 "d4/d71/classMCU_1_1VU__Base.html#af777c4f515387d0c08b78496a6934804":[6,0,2,11,4],
 "d4/d7c/NoteChordButton_8cpp.html":[7,0,218],
-"d4/d7c/NoteChordButton_8cpp_source.html":[7,0,218],
-"d4/d84/MIDI__Parser_8cpp.html":[7,0,142],
-"d4/d84/MIDI__Parser_8cpp_source.html":[7,0,142]
+"d4/d7c/NoteChordButton_8cpp_source.html":[7,0,218]
 };

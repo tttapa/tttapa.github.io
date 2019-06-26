@@ -1,5 +1,6 @@
 var NAVTREEINDEX4 =
 {
+"d3/d09/CCButtonLatching_8cpp_source.html":[7,0,37],
 "d3/d09/Hysteresis_8hpp.html":[7,0,108],
 "d3/d09/Hysteresis_8hpp_source.html":[7,0,108],
 "d3/d0b/classBankable_1_1MIDIButtonLatching.html":[6,0,0,10],
@@ -45,8 +46,8 @@ var NAVTREEINDEX4 =
 "d3/d10/classMIDICNChannelAddress.html#ae2c660a02f3b66fa943a79acb55b4c0f":[6,0,85,12],
 "d3/d10/classMIDICNChannelAddress.html#ae82ce192ab9177b8320e0e3d56591c9a":[6,0,85,16],
 "d3/d10/classMIDICNChannelAddress.html#af095bbce791e4b3540dd82d31d0227c1":[6,0,85,5],
-"d3/d15/CCRotaryEncoder_8ino-example.html":[8,3],
-"d3/d26/CCPotentiometer-Map_8ino-example.html":[8,1],
+"d3/d15/CCRotaryEncoder_8ino-example.html":[8,6],
+"d3/d26/CCPotentiometer-Map_8ino-example.html":[8,4],
 "d3/d2a/classCCButtonMatrix.html":[4,0,19],
 "d3/d2a/classCCButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef":[4,0,19,16],
 "d3/d2a/classCCButtonMatrix.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,19,6],
@@ -248,6 +249,5 @@ var NAVTREEINDEX4 =
 "d3/d6c/classNoteButtonLatching.html#a2008b6b51e779d44e87129e43f5ccc3c":[4,0,27,1],
 "d3/d6c/classNoteButtonLatching.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,27,6],
 "d3/d6c/classNoteButtonLatching.html#a4a13b63f90ec988cd14d871df9dbc53b":[4,0,27,14],
-"d3/d6c/classNoteButtonLatching.html#a4c1c6bd44da328dd5b4dc29503219d09":[4,0,27,10],
-"d3/d6c/classNoteButtonLatching.html#a57b6615469e554c514a9ff56dc24908f":[4,0,27,15]
+"d3/d6c/classNoteButtonLatching.html#a4c1c6bd44da328dd5b4dc29503219d09":[4,0,27,10]
 };

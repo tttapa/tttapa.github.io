@@ -1,5 +1,8 @@
 var NAVTREEINDEX10 =
 {
+"d8/de1/classMIDIButtonLatching.html#ac1c120fd0dc42822cf4f12aa7f3ba571":[6,0,80,15],
+"d8/de1/classMIDIButtonLatching.html#acfabd4911411ebbfd96d4080103f4725":[6,0,80,7],
+"d8/de1/classMIDIButtonLatching.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,80,8],
 "d8/de1/classMIDIButtonLatching.html#aefb3b2f7cfb598d2cd68a622c94ea772":[6,0,80,12],
 "d8/de1/classMIDIButtonLatching.html#af85a7d9712cc394ddc5e721a41d3d84f":[6,0,80,0],
 "d8/de1/classMIDIButtonLatching.html#afb0db394a9d011d776606dbb4c854dbb":[6,0,80,14],
@@ -246,8 +249,5 @@ var NAVTREEINDEX10 =
 "d9/d73/classMIDI__Interface.html#abfbaa1922cc1c82123b8eb92e287d46f":[6,0,74,26],
 "d9/d73/classMIDI__Interface.html#ac179dad8f24eedfa6a9f4e8dbaef7b46":[6,0,74,22],
 "d9/d73/classMIDI__Interface.html#ad5ae5d35fa5f34ea11b7a21b7a57bb18":[6,0,74,5],
-"d9/d73/classMIDI__Interface.html#ad61032be4eecf18e9a248f153b5e61a8":[6,0,74,6],
-"d9/d73/classMIDI__Interface.html#ad7c6304008159822ae69eeafbeff8c06":[6,0,74,25],
-"d9/d73/classMIDI__Interface.html#ae482648481f3c19ad024ecf6b7f473ea":[6,0,74,15],
-"d9/d73/classMIDI__Interface.html#af4f7be5b6b486b4d116b9fd6a38f22a4":[6,0,74,7]
+"d9/d73/classMIDI__Interface.html#ad61032be4eecf18e9a248f153b5e61a8":[6,0,74,6]
 };

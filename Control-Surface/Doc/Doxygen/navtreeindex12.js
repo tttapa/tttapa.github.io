@@ -1,5 +1,9 @@
 var NAVTREEINDEX12 =
 {
+"d9/df9/classBankable_1_1MIDIButton.html#a4154c3302c845a9dc6a455600c4d0e2b":[6,0,0,8,16],
+"d9/df9/classBankable_1_1MIDIButton.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,0,8,21],
+"d9/df9/classBankable_1_1MIDIButton.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,0,8,10],
+"d9/df9/classBankable_1_1MIDIButton.html#a57b6615469e554c514a9ff56dc24908f":[6,0,0,8,22],
 "d9/df9/classBankable_1_1MIDIButton.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,0,8,2],
 "d9/df9/classBankable_1_1MIDIButton.html#a63b760e4554d4ea496ee012b2ba3d508":[6,0,0,8,12],
 "d9/df9/classBankable_1_1MIDIButton.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,0,8,4],
@@ -90,7 +94,7 @@ var NAVTREEINDEX12 =
 "da/d40/classBankable_1_1CCRotaryEncoder.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,8,13],
 "da/d51/VolumeControl_8hpp.html":[7,0,278],
 "da/d51/VolumeControl_8hpp_source.html":[7,0,278],
-"da/d54/CCIncrementDecrementButtons_8ino-example.html":[8,0],
+"da/d54/CCIncrementDecrementButtons_8ino-example.html":[8,3],
 "da/d66/IncrementDecrementButtons_8cpp.html":[7,0,111],
 "da/d66/IncrementDecrementButtons_8cpp_source.html":[7,0,111],
 "da/d69/PrintStream_8cpp.html":[7,0,228],
@@ -169,7 +173,7 @@ var NAVTREEINDEX12 =
 "da/d80/struct__Setbase.html#a71ff2a1cb6bd223fbe45707260f6182f":[6,0,3,0],
 "da/d85/CCButtonLatched_8hpp.html":[7,0,35],
 "da/d85/CCButtonLatched_8hpp_source.html":[7,0,35],
-"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,16],
+"da/d88/PushButtonsToggleLEDsShiftRegMultiplex_8ino-example.html":[8,19],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html":[6,0,2,0,0],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a07155d1404800da8eb51cbc6c6da0c6e":[6,0,2,0,0,32],
 "da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,2,0,0,20],
@@ -245,9 +249,5 @@ var NAVTREEINDEX12 =
 "da/db8/classTransposer.html#a48728b26460575796e5bc5e2e2439003":[6,0,146,3],
 "da/db8/classTransposer.html#a6366e4e300e29c9e4c282766faf41b39":[6,0,146,2],
 "da/db8/classTransposer.html#a84428fa44ab8703ba47eee0a896a3a96":[6,0,146,5],
-"da/db8/classTransposer.html#aae3dab5ca04181710b58c53a3e74449e":[6,0,146,0],
-"da/db8/classTransposer.html#ab4b91b7f4363e5e497b34e17a303bdbb":[6,0,146,4],
-"da/db8/classTransposer.html#ac643bffed4cdcf2a5f7afc030b50eddd":[6,0,146,6],
-"da/db8/classTransposer.html#ae04297ffcb2226afeb2449e9471f14a8":[6,0,146,1],
-"da/dc7/Abstract_2MIDIButtons_8cpp.html":[7,0,158]
+"da/db8/classTransposer.html#aae3dab5ca04181710b58c53a3e74449e":[6,0,146,0]
 };

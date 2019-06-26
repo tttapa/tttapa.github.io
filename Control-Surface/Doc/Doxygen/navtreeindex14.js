@@ -1,5 +1,11 @@
 var NAVTREEINDEX14 =
 {
+"db/d60/MCU_8hpp.html#a1ab1ff1f17b3f16251ae9d05f248beb3":[7,0,137,88],
+"db/d60/MCU_8hpp.html#a1b2096bf302a7a3ce6335964135fad7a":[7,0,137,48],
+"db/d60/MCU_8hpp.html#a1e12bf80abc469a26283bb19eaeb29c7":[7,0,137,123],
+"db/d60/MCU_8hpp.html#a20258b3ceee859c9555491f8d3867d57":[7,0,137,66],
+"db/d60/MCU_8hpp.html#a20fbb8022447ae23e5d4d20eb2bcd274":[7,0,137,9],
+"db/d60/MCU_8hpp.html#a252f0e7e263b059329af94d38e0de29f":[7,0,137,1],
 "db/d60/MCU_8hpp.html#a26bc799cbea29d2b0a29ca0bb032654d":[7,0,137,72],
 "db/d60/MCU_8hpp.html#a27d2d12dafed1e87c6f55740c87f9ca4":[7,0,137,0],
 "db/d60/MCU_8hpp.html#a2bd1086d18215b404a84b2eb9774e0b7":[7,0,137,10],
@@ -131,7 +137,7 @@ var NAVTREEINDEX14 =
 "db/d93/ArrayHelpers_8cpp_source.html":[7,0,4],
 "db/d9d/IncrementButton_8cpp.html":[7,0,109],
 "db/d9d/IncrementButton_8cpp_source.html":[7,0,109],
-"db/dac/PushButtons_8ino-example.html":[8,12],
+"db/dac/PushButtons_8ino-example.html":[8,15],
 "db/dac/classMCU_1_1VPotRing__Base.html":[6,0,2,7],
 "db/dac/classMCU_1_1VPotRing__Base.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,2,7,15],
 "db/dac/classMCU_1_1VPotRing__Base.html#a38d9872489fd94dee25077c16073e8cf":[6,0,2,7,21],
@@ -227,7 +233,7 @@ var NAVTREEINDEX14 =
 "db/dcf/VUDisplay_8cpp_source.html":[7,0,287],
 "db/dd1/ContinuousCCSender_8hpp.html":[7,0,64],
 "db/dd1/ContinuousCCSender_8hpp_source.html":[7,0,64],
-"db/dd1/SPIShiftRegisterBlink_8ino-example.html":[8,18],
+"db/dd1/SPIShiftRegisterBlink_8ino-example.html":[8,21],
 "db/dda/VU_8hpp.html":[7,0,286],
 "db/dda/VU_8hpp_source.html":[7,0,286],
 "db/ddc/IncrementSelectorLEDs_8cpp.html":[7,0,119],
@@ -243,11 +249,5 @@ var NAVTREEINDEX14 =
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,0,14,2],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a63b760e4554d4ea496ee012b2ba3d508":[6,0,0,14,12],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,0,14,4],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,0,14,5],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[6,0,0,14,11],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a72608be0106f4f08dc13d8c30bdad7f4":[6,0,0,14,23],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a79bb7e2fa5066744e984bbdc36892ca8":[6,0,0,14,18],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,0,14,16],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a8af924e5b3b708eb042919703d175ed3":[6,0,0,14,21],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a920214b7eadbced526a1457e847af415":[6,0,0,14,15]
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,0,14,5]
 };

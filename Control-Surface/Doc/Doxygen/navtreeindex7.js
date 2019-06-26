@@ -1,5 +1,7 @@
 var NAVTREEINDEX7 =
 {
+"d5/dc0/classChord.html#ac65922b35566e2407fa720e4b6b25539":[6,0,28,3],
+"d5/ddb/classMCU_1_1VPotRing.html":[6,0,2,6],
 "d5/ddb/classMCU_1_1VPotRing.html#a124d71e751819fc2880ea50654a55179":[6,0,2,6,10],
 "d5/ddb/classMCU_1_1VPotRing.html#a16f19760e2928c0c11130379b9456033":[6,0,2,6,0],
 "d5/ddb/classMCU_1_1VPotRing.html#a1aa71fafd60f18ef365091e09c0b3357":[6,0,2,6,11],
@@ -67,14 +69,14 @@ var NAVTREEINDEX7 =
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,6,8],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#ad96a50ea1490e5d061d57a6d208deaf7":[4,0,6,1],
 "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,6,13],
-"d5/dee/Getting-Started_8ino-example.html":[8,5],
+"d5/dee/Getting-Started_8ino-example.html":[8,8],
 "d5/df9/group__MIDIOutputElementConstructors.html":[4,0,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac":[4,0,0,25],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac":[4,0,29,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga0919df0f6f2cdff84c8e84cacee9d77b":[4,0,26,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga0919df0f6f2cdff84c8e84cacee9d77b":[4,0,0,20],
-"d5/df9/group__MIDIOutputElementConstructors.html#ga0c20ae8bbade548c518a0cae020609e8":[4,0,14,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga0c20ae8bbade548c518a0cae020609e8":[4,0,0,27],
+"d5/df9/group__MIDIOutputElementConstructors.html#ga0c20ae8bbade548c518a0cae020609e8":[4,0,14,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga105a377c32b45e7f117a636597a0e1ca":[4,0,0,30],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga105a377c32b45e7f117a636597a0e1ca":[4,0,31,0],
 "d5/df9/group__MIDIOutputElementConstructors.html#ga130cc2f6a40524d99a2bb908f8a15339":[4,0,30,0],
@@ -247,7 +249,5 @@ var NAVTREEINDEX7 =
 "d6/d72/classMIDIButton.html#a500ab1a23dcdbb686b31f1a475328e77":[6,0,78,13],
 "d6/d72/classMIDIButton.html#a57b6615469e554c514a9ff56dc24908f":[6,0,78,18],
 "d6/d72/classMIDIButton.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,78,2],
-"d6/d72/classMIDIButton.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,78,4],
-"d6/d72/classMIDIButton.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,78,5],
-"d6/d72/classMIDIButton.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,78,12]
+"d6/d72/classMIDIButton.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,78,4]
 };

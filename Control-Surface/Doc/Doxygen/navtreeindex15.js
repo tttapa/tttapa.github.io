@@ -1,5 +1,11 @@
 var NAVTREEINDEX15 =
 {
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[6,0,0,14,11],
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a72608be0106f4f08dc13d8c30bdad7f4":[6,0,0,14,23],
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a79bb7e2fa5066744e984bbdc36892ca8":[6,0,0,14,18],
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,0,14,16],
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a8af924e5b3b708eb042919703d175ed3":[6,0,0,14,21],
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a920214b7eadbced526a1457e847af415":[6,0,0,14,15],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[6,0,0,14,9],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,0,14,3],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a9f34809178ed809a8ff203220bd1b206":[6,0,0,14,17],
@@ -157,7 +163,7 @@ var NAVTREEINDEX15 =
 "dc/d81/structEncoderPinList.html":[6,0,41],
 "dc/d81/structEncoderPinList.html#a69bad79ba249be03c5b488a8f1afbed4":[6,0,41,0],
 "dc/d81/structEncoderPinList.html#abf9944693d2221e276d586e97f4db54e":[6,0,41,1],
-"dc/d82/ProgramChanger_8ino-example.html":[8,11],
+"dc/d82/ProgramChanger_8ino-example.html":[8,14],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp.html":[7,0,58],
 "dc/d8b/Bankable_2CCRotaryEncoder_8hpp_source.html":[7,0,58],
 "dc/d90/MIDIInputElement_8hpp.html":[7,0,177],
@@ -243,11 +249,5 @@ var NAVTREEINDEX15 =
 "dc/ddd/classSSD1306__DisplayInterface.html#a30f2f4e4492a7a1e0fc6d5661020b922":[6,0,138,3],
 "dc/ddd/classSSD1306__DisplayInterface.html#a36eb6f0c2a7bea4d21f3ddcdc61127b2":[6,0,138,9],
 "dc/ddd/classSSD1306__DisplayInterface.html#a37445a6dc517bc34bbfb67fc6eea3996":[6,0,138,1],
-"dc/ddd/classSSD1306__DisplayInterface.html#a3ea1419a78893fd19112117035cbcd09":[6,0,138,8],
-"dc/ddd/classSSD1306__DisplayInterface.html#a40de38f452cb99a89778109fd85ce668":[6,0,138,14],
-"dc/ddd/classSSD1306__DisplayInterface.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,138,20],
-"dc/ddd/classSSD1306__DisplayInterface.html#a4df7f9684c281df8b5167f2b7a7db1ed":[6,0,138,0],
-"dc/ddd/classSSD1306__DisplayInterface.html#a506cd4fecbf7dd3abd311ae391bc313f":[6,0,138,13],
-"dc/ddd/classSSD1306__DisplayInterface.html#a57b6615469e554c514a9ff56dc24908f":[6,0,138,21],
-"dc/ddd/classSSD1306__DisplayInterface.html#a7bdf3b452f9a794ddc73aab51b3ea145":[6,0,138,15]
+"dc/ddd/classSSD1306__DisplayInterface.html#a3ea1419a78893fd19112117035cbcd09":[6,0,138,8]
 };

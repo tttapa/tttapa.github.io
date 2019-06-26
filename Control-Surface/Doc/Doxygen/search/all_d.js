@@ -101,7 +101,7 @@ var searchData=
   ['midiincrementdecrementbuttons',['MIDIIncrementDecrementButtons',['../dc/dc2/classMIDIIncrementDecrementButtons.html',1,'MIDIIncrementDecrementButtons&lt; send &gt;'],['../d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html',1,'Bankable::MIDIIncrementDecrementButtons&lt; send &gt;'],['../dc/dc2/classMIDIIncrementDecrementButtons.html#ab8edb1c015131486e41cdf782066fd26',1,'MIDIIncrementDecrementButtons::MIDIIncrementDecrementButtons()'],['../d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ae1b13be900e70c8432a77db49cf3604b',1,'Bankable::MIDIIncrementDecrementButtons::MIDIIncrementDecrementButtons()']]],
   ['midiincrementdecrementbuttons_2ecpp',['MIDIIncrementDecrementButtons.cpp',['../d3/d47/MIDIIncrementDecrementButtons_8cpp.html',1,'']]],
   ['midiincrementdecrementbuttons_3c_20relativeccsender_3a_3asend_20_3e',['MIDIIncrementDecrementButtons&lt; RelativeCCSender::send &gt;',['../d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html',1,'Bankable']]],
-  ['midiinputelement',['MIDIInputElement',['../d9/db1/classMIDIInputElement.html',1,'MIDIInputElement'],['../d9/db1/classMIDIInputElement.html#aa37227962f74df17dcfa8f2782c1ec40',1,'MIDIInputElement::MIDIInputElement()']]],
+  ['midiinputelement',['MIDIInputElement',['../d9/db1/classMIDIInputElement.html',1,'MIDIInputElement'],['../d9/db1/classMIDIInputElement.html#ac5f9fcab2f28d761493899ff22aa83d6',1,'MIDIInputElement::MIDIInputElement()'],['../d9/db1/classMIDIInputElement.html#aa37227962f74df17dcfa8f2782c1ec40',1,'MIDIInputElement::MIDIInputElement(const MIDICNChannelAddress &amp;address)']]],
   ['midiinputelement_2ecpp',['MIDIInputElement.cpp',['../da/de8/MIDIInputElement_8cpp.html',1,'']]],
   ['midiinputelement_2ehpp',['MIDIInputElement.hpp',['../dc/d90/MIDIInputElement_8hpp.html',1,'']]],
   ['midiinputelementcc',['MIDIInputElementCC',['../d3/d96/classMIDIInputElementCC.html',1,'MIDIInputElementCC'],['../d3/d96/classMIDIInputElementCC.html#abe82f00a326bdad9d764c5128f30352e',1,'MIDIInputElementCC::MIDIInputElementCC()']]],
@@ -110,7 +110,7 @@ var searchData=
   ['midiinputelementchannelpressure',['MIDIInputElementChannelPressure',['../d1/df7/classMIDIInputElementChannelPressure.html',1,'MIDIInputElementChannelPressure'],['../d1/df7/classMIDIInputElementChannelPressure.html#a99ad2214b28c0715d94e0d657a7b2ae3',1,'MIDIInputElementChannelPressure::MIDIInputElementChannelPressure()']]],
   ['midiinputelementchannelpressure_2ecpp',['MIDIInputElementChannelPressure.cpp',['../d2/dcc/MIDIInputElementChannelPressure_8cpp.html',1,'']]],
   ['midiinputelementchannelpressure_2ehpp',['MIDIInputElementChannelPressure.hpp',['../d8/d4f/MIDIInputElementChannelPressure_8hpp.html',1,'']]],
-  ['midiinputelementnote',['MIDIInputElementNote',['../db/d4b/classMIDIInputElementNote.html',1,'MIDIInputElementNote'],['../db/d4b/classMIDIInputElementNote.html#ac77730bbf5c3b01cf2537e2e599df1ae',1,'MIDIInputElementNote::MIDIInputElementNote()']]],
+  ['midiinputelementnote',['MIDIInputElementNote',['../db/d4b/classMIDIInputElementNote.html',1,'MIDIInputElementNote'],['../db/d4b/classMIDIInputElementNote.html#aa935a10f4a7675a681bf7c74fa97ddbc',1,'MIDIInputElementNote::MIDIInputElementNote()'],['../db/d4b/classMIDIInputElementNote.html#ac77730bbf5c3b01cf2537e2e599df1ae',1,'MIDIInputElementNote::MIDIInputElementNote(const MIDICNChannelAddress &amp;address)']]],
   ['midiinputelementnote_2ecpp',['MIDIInputElementNote.cpp',['../d0/d31/MIDIInputElementNote_8cpp.html',1,'']]],
   ['midiinputelementnote_2ehpp',['MIDIInputElementNote.hpp',['../d5/d5f/MIDIInputElementNote_8hpp.html',1,'']]],
   ['midiinputelementpc',['MIDIInputElementPC',['../db/d1d/classMIDIInputElementPC.html',1,'MIDIInputElementPC'],['../db/d1d/classMIDIInputElementPC.html#a718797db358c5e87cadd02b3e90cd490',1,'MIDIInputElementPC::MIDIInputElementPC()']]],
@@ -167,6 +167,8 @@ var searchData=
   ['mute_5f7_5fheight',['mute_7_height',['../dd/d33/XBitmaps_8hpp.html',1,'XBitmaps.hpp']]],
   ['mute_5f7_5fwidth',['mute_7_width',['../dd/d33/XBitmaps_8hpp.html',1,'XBitmaps.hpp']]],
   ['mute_5f8',['MUTE_8',['../d7/dc7/namespaceMCU.html#abfa709b8012df710e1559ad6ad3a9d0a',1,'MCU']]],
+  ['mux_5fdisabled',['MUX_DISABLED',['../d7/d8d/classAnalogMultiplex.html#a3ec8e2e72275f17b958b6225b6825e48',1,'AnalogMultiplex']]],
+  ['mux_5fenabled',['MUX_ENABLED',['../d7/d8d/classAnalogMultiplex.html#a521b79a2af4987b24e744e9bf7f83588',1,'AnalogMultiplex']]],
   ['vuleds_2ecpp',['VULEDs.cpp',['../d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp.html',1,'']]],
   ['vuleds_2ehpp',['VULEDs.hpp',['../d3/d52/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8hpp.html',1,'']]]
 ];

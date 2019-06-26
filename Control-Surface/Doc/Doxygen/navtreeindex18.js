@@ -1,5 +1,11 @@
 var NAVTREEINDEX18 =
 {
+"de/d2d/classUSBDebugMIDI__Interface.html#a442f855cc109caa01e4bc2ebcf6d7783":[4,3,4,15],
+"de/d2d/classUSBDebugMIDI__Interface.html#a4923aed435b881567b3276614dad6d11":[4,3,4,3],
+"de/d2d/classUSBDebugMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4":[4,3,4,23],
+"de/d2d/classUSBDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c":[4,3,4,22],
+"de/d2d/classUSBDebugMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1":[4,3,4,8],
+"de/d2d/classUSBDebugMIDI__Interface.html#a58470aacb3262891701b456daadced6d":[4,3,4,2],
 "de/d2d/classUSBDebugMIDI__Interface.html#a5d07c9482f91e538e37600af27c844b1":[4,3,4,18],
 "de/d2d/classUSBDebugMIDI__Interface.html#a6c6df29de49ed235f77245d8d2647d73":[4,3,4,14],
 "de/d2d/classUSBDebugMIDI__Interface.html#a7002bfae1bf346eadead1397a238f9b6":[4,3,4,20],
@@ -160,7 +166,7 @@ var NAVTREEINDEX18 =
 "de/dd1/Button_8cpp_source.html":[7,0,26],
 "de/dd1/LinkedList_8hpp.html":[7,0,125],
 "de/dd1/LinkedList_8hpp_source.html":[7,0,125],
-"de/ddb/OLED-Demo_8ino-example.html":[8,10],
+"de/ddb/OLED-Demo_8ino-example.html":[8,13],
 "de/de3/Bankable_2NoteChordButton_8hpp.html":[7,0,219],
 "de/de3/Bankable_2NoteChordButton_8hpp_source.html":[7,0,219],
 "de/de7/classSelectable.html":[6,0,125],
@@ -243,11 +249,5 @@ var NAVTREEINDEX18 =
 "df/d38/classIncrementButton.html#a420ed67682567f9df6a00d437af8b029":[6,0,54,5],
 "df/d38/classIncrementButton.html#ad0133d3b080fa4093b24ade7acd2f2c1":[6,0,54,3],
 "df/d38/classIncrementButton.html#af1a0a9d8af01cd41a0f5b3cd87513d42":[6,0,54,8],
-"df/d3c/IncrementDecrementSelector_8hpp.html":[7,0,114],
-"df/d3c/IncrementDecrementSelector_8hpp_source.html":[7,0,114],
-"df/d3d/SelectorDisplay_8hpp.html":[7,0,241],
-"df/d3d/SelectorDisplay_8hpp_source.html":[7,0,241],
-"df/d42/classDisplayInterface.html":[6,0,35],
-"df/d42/classDisplayInterface.html#a038339dfbfd1a343040583e03f4be48b":[6,0,35,5],
-"df/d42/classDisplayInterface.html#a0545ac6471fcf272c3061c33c349b743":[6,0,35,3]
+"df/d3c/IncrementDecrementSelector_8hpp.html":[7,0,114]
 };

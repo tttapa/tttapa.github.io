@@ -37,5 +37,7 @@ var searchData=
   ['mute_5f6',['MUTE_6',['../d7/dc7/namespaceMCU.html#a1b2096bf302a7a3ce6335964135fad7a',1,'MCU']]],
   ['mute_5f7',['MUTE_7',['../d7/dc7/namespaceMCU.html#aef9d9576f611c1369ae72f6aa63d6e0b',1,'MCU']]],
   ['mute_5f7_5fbits',['mute_7_bits',['../dd/d93/namespaceXBM.html#a596a13328173294032c79999b6cbe905',1,'XBM']]],
-  ['mute_5f8',['MUTE_8',['../d7/dc7/namespaceMCU.html#abfa709b8012df710e1559ad6ad3a9d0a',1,'MCU']]]
+  ['mute_5f8',['MUTE_8',['../d7/dc7/namespaceMCU.html#abfa709b8012df710e1559ad6ad3a9d0a',1,'MCU']]],
+  ['mux_5fdisabled',['MUX_DISABLED',['../d7/d8d/classAnalogMultiplex.html#a3ec8e2e72275f17b958b6225b6825e48',1,'AnalogMultiplex']]],
+  ['mux_5fenabled',['MUX_ENABLED',['../d7/d8d/classAnalogMultiplex.html#a521b79a2af4987b24e744e9bf7f83588',1,'AnalogMultiplex']]]
 ];

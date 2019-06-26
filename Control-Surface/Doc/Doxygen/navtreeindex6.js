@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"d4/d84/MIDI__Parser_8cpp.html":[7,0,142],
+"d4/d84/MIDI__Parser_8cpp_source.html":[7,0,142],
 "d4/d8c/Bankable_2Abstract_2MIDIButtonLatching_8hpp.html":[7,0,153],
 "d4/d8c/Bankable_2Abstract_2MIDIButtonLatching_8hpp_source.html":[7,0,153],
 "d4/d8e/Bankable_2Abstract_2MIDIFilteredAnalog_8cpp.html":[7,0,169],
@@ -116,7 +118,7 @@ var NAVTREEINDEX6 =
 "d5/d20/classIncrementDecrementButtons.html#af661941dbb4a67e2b3919306bae23c8f":[6,0,55,5],
 "d5/d23/SelectorDisplay_8cpp.html":[7,0,240],
 "d5/d23/SelectorDisplay_8cpp_source.html":[7,0,240],
-"d5/d2a/VU-Bridge-Dual-Display_8ino-example.html":[8,19],
+"d5/d2a/VU-Bridge-Dual-Display_8ino-example.html":[8,22],
 "d5/d2d/classIncrementDecrementSelectorLEDs.html":[6,0,58],
 "d5/d2d/classIncrementDecrementSelectorLEDs.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,58,18],
 "d5/d2d/classIncrementDecrementSelectorLEDs.html#a1b9217b63785445fbf994e06f87d59b1":[6,0,58,3],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "d5/dc0/classChord.html#a1a64989e098f8b24b36342b2be2f4d32":[6,0,28,0],
 "d5/dc0/classChord.html#a26a0fe9822a94f1b93268ec812953d94":[6,0,28,6],
 "d5/dc0/classChord.html#a7f2a1eec37b2e4708e99bed3ad814c62":[6,0,28,1],
-"d5/dc0/classChord.html#aaf22065e6bd460f70e4907b28f91ad0c":[6,0,28,4],
-"d5/dc0/classChord.html#ac65922b35566e2407fa720e4b6b25539":[6,0,28,3],
-"d5/ddb/classMCU_1_1VPotRing.html":[6,0,2,6]
+"d5/dc0/classChord.html#aaf22065e6bd460f70e4907b28f91ad0c":[6,0,28,4]
 };

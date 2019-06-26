@@ -1,5 +1,11 @@
 var NAVTREEINDEX19 =
 {
+"df/d3c/IncrementDecrementSelector_8hpp_source.html":[7,0,114],
+"df/d3d/SelectorDisplay_8hpp.html":[7,0,241],
+"df/d3d/SelectorDisplay_8hpp_source.html":[7,0,241],
+"df/d42/classDisplayInterface.html":[6,0,35],
+"df/d42/classDisplayInterface.html#a038339dfbfd1a343040583e03f4be48b":[6,0,35,5],
+"df/d42/classDisplayInterface.html#a0545ac6471fcf272c3061c33c349b743":[6,0,35,3],
 "df/d42/classDisplayInterface.html#a2671ce07e6004bb5826ff532e26367e6":[6,0,35,0],
 "df/d42/classDisplayInterface.html#a2f3d1e56850611a0e0229dfc599cbd19":[6,0,35,10],
 "df/d42/classDisplayInterface.html#a340f52ad8338b0929ec78d4d0cb629c3":[6,0,35,4],
@@ -48,8 +54,8 @@ var NAVTREEINDEX19 =
 "df/d69/classMCU_1_1TimeDisplay.html#adcb98982679f02c01c46ac8d22722e1d":[6,0,2,3,18],
 "df/d69/classMCU_1_1TimeDisplay.html#ae24e4fc0a95f0a80ed8bc03059bc3b4d":[6,0,2,3,0],
 "df/d69/classMCU_1_1TimeDisplay.html#afebbe4f2a583d21e226a7db90718d451":[6,0,2,3,11],
-"df/d6e/namespaceMCU_1_1Bankable.html":[6,0,2,0],
 "df/d6e/namespaceMCU_1_1Bankable.html":[5,0,6,0],
+"df/d6e/namespaceMCU_1_1Bankable.html":[6,0,2,0],
 "df/d83/NoteButton_8cpp.html":[7,0,201],
 "df/d83/NoteButton_8cpp_source.html":[7,0,201],
 "df/d8b/group__MIDIInputElements.html":[4,1],
@@ -60,7 +66,7 @@ var NAVTREEINDEX19 =
 "df/d9b/classMIDICNChannel.html#adc1ff6e8f2fa717352eb5f858df81c78":[6,0,84,1],
 "df/da8/struct__Setprecision.html":[6,0,5],
 "df/da8/struct__Setprecision.html#aa82dfb10f40dfa22ccef2975f6719181":[6,0,5,0],
-"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,21],
+"df/dad/VUMeterLEDs-USB-DAC_8ino-example.html":[8,24],
 "df/db8/LinkedList_8cpp.html":[7,0,124],
 "df/db8/LinkedList_8cpp_source.html":[7,0,124],
 "df/dbc/AudioVU_8cpp.html":[7,0,8],
@@ -243,11 +249,5 @@ var NAVTREEINDEX19 =
 "globals_o.html":[7,1,0,14],
 "globals_p.html":[7,1,0,15],
 "globals_r.html":[7,1,0,16],
-"globals_s.html":[7,1,0,17],
-"globals_t.html":[7,1,0,18],
-"globals_type.html":[7,1,3],
-"globals_u.html":[7,1,0,19],
-"globals_v.html":[7,1,0,20],
-"globals_vars.html":[7,1,2],
-"globals_w.html":[7,1,0,21]
+"globals_s.html":[7,1,0,17]
 };

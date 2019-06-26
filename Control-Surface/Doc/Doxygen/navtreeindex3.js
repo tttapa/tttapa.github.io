@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a4154c3302c845a9dc6a455600c4d0e2b":[4,0,12,17],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a4a13b63f90ec988cd14d871df9dbc53b":[4,0,12,20],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a4c1c6bd44da328dd5b4dc29503219d09":[4,0,12,10],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f":[4,0,12,21],
@@ -20,7 +21,7 @@ var NAVTREEINDEX3 =
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,12,13],
 "d2/d33/DigitalCCSender_8cpp.html":[7,0,76],
 "d2/d33/DigitalCCSender_8cpp_source.html":[7,0,76],
-"d2/d35/CCPotentiometer_8ino-example.html":[8,2],
+"d2/d35/CCPotentiometer_8ino-example.html":[8,5],
 "d2/d35/TimeDisplayDisplay_8hpp.html":[7,0,268],
 "d2/d35/TimeDisplayDisplay_8hpp_source.html":[7,0,268],
 "d2/d3d/NoteButtons_8cpp.html":[7,0,215],
@@ -37,7 +38,7 @@ var NAVTREEINDEX3 =
 "d2/d48/classChannel.html#ada142fabcfc0e77e178af46139b2392f":[6,0,27,4],
 "d2/d56/BitArray_8cpp.html":[7,0,20],
 "d2/d56/BitArray_8cpp_source.html":[7,0,20],
-"d2/d77/VU-Bridge_8ino-example.html":[8,20],
+"d2/d77/VU-Bridge_8ino-example.html":[8,23],
 "d2/d7b/CCPotentiometer_8cpp.html":[7,0,52],
 "d2/d7b/CCPotentiometer_8cpp_source.html":[7,0,52],
 "d2/d87/classMIDIButtons.html":[6,0,82],
@@ -248,6 +249,5 @@ var NAVTREEINDEX3 =
 "d2/df6/structXBitmap.html#aadc2e950f43a466fb09b0b0239dcf3ee":[6,0,154,2],
 "d2/df6/structXBitmap.html#ae81f5ca02f09dc774c8150359e02f019":[6,0,154,1],
 "d2/df6/structXBitmap.html#af6717b9ebef66415a4dea6fc7799fadd":[6,0,154,0],
-"d3/d09/CCButtonLatching_8cpp.html":[7,0,37],
-"d3/d09/CCButtonLatching_8cpp_source.html":[7,0,37]
+"d3/d09/CCButtonLatching_8cpp.html":[7,0,37]
 };
