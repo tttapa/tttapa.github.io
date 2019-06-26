@@ -81,13 +81,13 @@ var NAVTREEINDEX =
 "d9/d73/classMIDI__Interface.html#ad7c6304008159822ae69eeafbeff8c06",
 "d9/df9/classBankable_1_1MIDIButton.html#a4154c3302c845a9dc6a455600c4d0e2b",
 "da/db8/classTransposer.html#ab4b91b7f4363e5e497b34e17a303bdbb",
-"db/d60/MCU_8hpp.html#a1ab1ff1f17b3f16251ae9d05f248beb3",
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a6ed605c9fd59aa3c5b42116b341ea9bb",
-"dc/ddd/classSSD1306__DisplayInterface.html#a40de38f452cb99a89778109fd85ce668",
-"dd/d80/PrintStream_8hpp.html#a495db53e37d033f4748f88d7d6579a4e",
-"de/d2d/classUSBDebugMIDI__Interface.html#a442f855cc109caa01e4bc2ebcf6d7783",
-"df/d3c/IncrementDecrementSelector_8hpp_source.html",
-"globals_t.html"
+"db/d60/MCU_8hpp.html#a1b2096bf302a7a3ce6335964135fad7a",
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a72608be0106f4f08dc13d8c30bdad7f4",
+"dc/ddd/classSSD1306__DisplayInterface.html#a4a13b63f90ec988cd14d871df9dbc53b",
+"dd/d80/PrintStream_8hpp.html#a5116ec6b4908a3a571278c6ed32e7693",
+"de/d2d/classUSBDebugMIDI__Interface.html#a4923aed435b881567b3276614dad6d11",
+"df/d3d/SelectorDisplay_8hpp.html",
+"globals_type.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

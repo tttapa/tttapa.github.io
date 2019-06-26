@@ -1,6 +1,5 @@
 var NAVTREEINDEX17 =
 {
-"dd/d80/PrintStream_8hpp.html#a495db53e37d033f4748f88d7d6579a4e":[7,0,229,15],
 "dd/d80/PrintStream_8hpp.html#a5116ec6b4908a3a571278c6ed32e7693":[7,0,229,25],
 "dd/d80/PrintStream_8hpp.html#a5527414c024fddf1fce6190623601f80":[7,0,229,23],
 "dd/d80/PrintStream_8hpp.html#a57bfabe8286b9f6938243b52a7779e86":[7,0,229,27],
@@ -109,8 +108,8 @@ var NAVTREEINDEX17 =
 "dd/dd4/classProgramChangeSelector.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,117,31],
 "dd/dd4/classProgramChangeSelector.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,117,15],
 "dd/dd4/classProgramChangeSelector.html#a4e0baeb085087d285a10bd82115b760d":[6,0,117,25],
-"dd/dd4/classProgramChangeSelector.html#a57b6615469e554c514a9ff56dc24908f":[6,0,117,33],
 "dd/dd4/classProgramChangeSelector.html#a57b6615469e554c514a9ff56dc24908f":[6,0,117,32],
+"dd/dd4/classProgramChangeSelector.html#a57b6615469e554c514a9ff56dc24908f":[6,0,117,33],
 "dd/dd4/classProgramChangeSelector.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,117,3],
 "dd/dd4/classProgramChangeSelector.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,117,8],
 "dd/dd4/classProgramChangeSelector.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,117,9],
@@ -249,5 +248,6 @@ var NAVTREEINDEX17 =
 "de/d2d/classUSBDebugMIDI__Interface.html#a2c79441f44b904566d237b05b8b3c2fb":[4,3,4,16],
 "de/d2d/classUSBDebugMIDI__Interface.html#a2c9b5e576f7e2ad2df057a30d13412d5":[4,3,4,24],
 "de/d2d/classUSBDebugMIDI__Interface.html#a3058e51eff2e68b7480b1c18c1aa8dbd":[4,3,4,9],
-"de/d2d/classUSBDebugMIDI__Interface.html#a3549169b2cfd90f2d11a19f551407b12":[4,3,4,13]
+"de/d2d/classUSBDebugMIDI__Interface.html#a3549169b2cfd90f2d11a19f551407b12":[4,3,4,13],
+"de/d2d/classUSBDebugMIDI__Interface.html#a442f855cc109caa01e4bc2ebcf6d7783":[4,3,4,15]
 };

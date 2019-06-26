@@ -1,6 +1,5 @@
 var NAVTREEINDEX14 =
 {
-"db/d60/MCU_8hpp.html#a1ab1ff1f17b3f16251ae9d05f248beb3":[7,0,137,88],
 "db/d60/MCU_8hpp.html#a1b2096bf302a7a3ce6335964135fad7a":[7,0,137,48],
 "db/d60/MCU_8hpp.html#a1e12bf80abc469a26283bb19eaeb29c7":[7,0,137,123],
 "db/d60/MCU_8hpp.html#a20258b3ceee859c9555491f8d3867d57":[7,0,137,66],
@@ -249,5 +248,6 @@ var NAVTREEINDEX14 =
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,0,14,2],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a63b760e4554d4ea496ee012b2ba3d508":[6,0,0,14,12],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a698d89514186aa0c29ea6fbc5bef1e06":[6,0,0,14,4],
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,0,14,5]
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a6bae640621972b14ad9c28b6b399f08f":[6,0,0,14,5],
+"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[6,0,0,14,11]
 };

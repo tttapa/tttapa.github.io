@@ -1,6 +1,5 @@
 var NAVTREEINDEX15 =
 {
-"db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[6,0,0,14,11],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a72608be0106f4f08dc13d8c30bdad7f4":[6,0,0,14,23],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a79bb7e2fa5066744e984bbdc36892ca8":[6,0,0,14,18],
 "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,0,14,16],
@@ -249,5 +248,6 @@ var NAVTREEINDEX15 =
 "dc/ddd/classSSD1306__DisplayInterface.html#a30f2f4e4492a7a1e0fc6d5661020b922":[6,0,138,3],
 "dc/ddd/classSSD1306__DisplayInterface.html#a36eb6f0c2a7bea4d21f3ddcdc61127b2":[6,0,138,9],
 "dc/ddd/classSSD1306__DisplayInterface.html#a37445a6dc517bc34bbfb67fc6eea3996":[6,0,138,1],
-"dc/ddd/classSSD1306__DisplayInterface.html#a3ea1419a78893fd19112117035cbcd09":[6,0,138,8]
+"dc/ddd/classSSD1306__DisplayInterface.html#a3ea1419a78893fd19112117035cbcd09":[6,0,138,8],
+"dc/ddd/classSSD1306__DisplayInterface.html#a40de38f452cb99a89778109fd85ce668":[6,0,138,14]
 };
