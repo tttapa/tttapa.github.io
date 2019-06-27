@@ -1,4 +1,8 @@
-import os, re, time, HTMLFormatter
+import os
+import re
+import time
+import sys
+import HTMLFormatter
 from os.path import join, getsize, basename, normpath, splitext
 from warnings import warn
 
@@ -7,7 +11,7 @@ from walk import html_dir, raw_html_dir, script_dir
 template_dir = join(script_dir, "../templates")
 
 author = "Pieter P"
-timeformat = "%A, %d %B %Y %H:%M"
+timeformat = r'%A, %d %B %Y %H:%M'
 
 meta_keys = None
 template_keys = None
@@ -41,22 +45,18 @@ with open(join(template_dir, "template_index_item.html"), "r") as template_index
 
 #########################################################################################
 
+
 def sortDirEntries(it):
-    entries = sorted(list(it),key=lambda entry: (entry.is_file(), entry.name))
-    # entries = sorted(list(it),key=lambda entry: entry.name)
-    # swapped = True
-    # while swapped:
-    #     swapped = False
-    #     for i in range(len(entries)-1):
-    #         if entries[i].is_file() and not entries[i+1].is_file():
-    #             swapped = True
-    #             entries[i], entries[i+1] = entries[i+1], entries[i]
+    entries = sorted(list(it), key=lambda entry: (
+        entry.is_file(), getSequence(entry), entry.name))
     return entries
+
 
 def escapeBackSlashes(string):
     return string.replace("\\", "\\\\")
 
 #########################################################################################
+
 
 def getDocumentProperties(content):
     properties = dict()
@@ -66,6 +66,7 @@ def getDocumentProperties(content):
             properties[key] = m.group(1)
     return properties
 
+
 def getDocumentHTMLContent(content):
     m = re.search(r"<html>([\s\S]*)</html>", content, re.IGNORECASE)
     if m:
@@ -74,10 +75,12 @@ def getDocumentHTMLContent(content):
     else:
         return ""
 
+
 def getDocumentMDate(path):
     mdate_time = time.gmtime(os.path.getmtime(path))
     mdate_str = time.strftime(timeformat, mdate_time)
     return mdate_str
+
 
 def getTemplateValues(path):
     raw_content = ""
@@ -85,12 +88,13 @@ def getTemplateValues(path):
         raw_content = f.read()
 
     values = getDocumentProperties(raw_content)
-    values["nav"] =  createNavIndex(path, raw_html_dir)
+    values["nav"] = createNavIndex(path, raw_html_dir)
     values["mdate"] = getDocumentMDate(path)
     values["html"] = getDocumentHTMLContent(raw_content)
     # print(values["html"])
 
     return values
+
 
 def getTitle(path):
     if os.path.isdir(path):
@@ -107,7 +111,19 @@ def getTitle(path):
     except:
         return None
 
+
+def getSequence(path):
+    try:
+        with open(path, "r") as f:
+            raw_content = f.read()
+        m = re.search(r"<!--[\s\S]*@sequence:\s*(.*)[\s\S]*-->", raw_content)
+        return int(m.group(1))
+    except:
+        return sys.maxsize
+
+
 #########################################################################################
+
 
 def createIndexPageListItem(path, filename, link):
     # print("\t"+join(path, filename))
@@ -125,13 +141,15 @@ def createIndexPageListItem(path, filename, link):
 
     properties["link"] = link
     # print("\t"+str(properties))
-    
+
     index_item = template_index_item
 
     for key in template_index_item_keys:
-        index_item = re.sub(r":"+key+r":", escapeBackSlashes(properties.get(key, "")), index_item)
-    
+        index_item = re.sub(
+            r":"+key+r":", escapeBackSlashes(properties.get(key, "")), index_item)
+
     return index_item
+
 
 def createIndexPageList(path):
     it = os.scandir(path)
@@ -141,7 +159,8 @@ def createIndexPageList(path):
         if isFolderToIgnore(entry):
             continue
         if not entry.is_file():
-            index += createIndexPageListItem(join(path, entry.name), "index.html", entry.name)
+            index += createIndexPageListItem(join(path,
+                                                  entry.name), "index.html", entry.name)
         elif entry.name != "index.html":
             index += createIndexPageListItem(path, entry.name, entry.name)
     '''print(path)
@@ -151,6 +170,7 @@ def createIndexPageList(path):
 
 #########################################################################################
 
+
 def rawToFull(path):
     values = getTemplateValues(path)
     values['filenamepdf'] = splitext(basename(path))[0] + '.pdf'
@@ -158,25 +178,28 @@ def rawToFull(path):
     content = template
 
     for key in template_keys:
-        content = re.sub(r":"+key+r":", escapeBackSlashes(values.get(key,"")), content)
+        content = re.sub(
+            r":"+key+r":", escapeBackSlashes(values.get(key, "")), content)
 
     return content
 
+
 def createIndexPage(path, root):
     values = getTemplateValues(path)
-        
+
     values["index"] = createIndexPageList(root)
     values['filenamepdf'] = 'index.pdf'
 
     content = template_index
 
     for key in template_index_keys:
-        content = re.sub(r":"+key+r":", escapeBackSlashes(values.get(key,"")), content)
+        content = re.sub(
+            r":"+key+r":", escapeBackSlashes(values.get(key, "")), content)
     # print(content)
     return content
 
+
 def createAutomaticIndexPage(root):
-    # warn("No index.html for " + path)
     print("Warning: No index.html for " + os.path.abspath(root))
 
     meta = dict()
@@ -186,16 +209,19 @@ def createAutomaticIndexPage(root):
     content = template_meta
 
     for key in template_index_keys:
-        content = re.sub(r":"+key+r":", escapeBackSlashes(meta.get(key,"")), content)
+        content = re.sub(
+            r":"+key+r":", escapeBackSlashes(meta.get(key, "")), content)
 
     with open(join(root, "index.html"), "w") as raw_index_file:
         raw_index_file.write(content)
 
 #########################################################################################
 
+
 def createNavIndex(open_directory, directory):
     nav = addListEntries(open_directory, directory)
     return nav
+
 
 def addListEntries(open_directory, directory, level=1, link="/Pages"):
     it = os.scandir(directory)
@@ -211,7 +237,7 @@ def addListEntries(open_directory, directory, level=1, link="/Pages"):
         print("  "*(level-1) + str(collapse))
         print()
     '''
-    listStr = "  "*(level-1) + "<ul>\r\n"
+    listStr = "  " * (level-1) + "<ul>\r\n"
     for entry in entries:
         newlink = join(link, entry.name)
         name = getTitle(join(directory, entry.name))
@@ -219,20 +245,34 @@ def addListEntries(open_directory, directory, level=1, link="/Pages"):
             name = entry.name
         rel = os.path.relpath(open_directory, join(directory, entry.name))
         open_entry = " class=\"openEntry\"" if rel == "." or rel == "index.html" else ""
-        if not entry.name.startswith('.') and entry.name != "index.html" and entry.is_file():
-            listStr += "  "*level + "<li><span class=\"ftriangle\"></span><a"+open_entry+" href=\"" + newlink + "\">" + name + "</a></li>\r\n"
+        if isFileToList(entry) and entry.is_file():
+            listStr += \
+                "  " * level + "<li><span class=\"ftriangle\"></span>" \
+                + "<a" + open_entry+" href=\"" + newlink + "\">" + name \
+                + "</a></li>\r\n"
         elif not entry.is_file() and not isFolderToIgnore(entry):
             collapse = ".." in rel
             expanded = "" if collapse else " class=\"expanded\""
-            triangle  = "<span class=\"dtriangle\" onclick=\"this.parentElement.classList.toggle('expanded');\">"
-            triangle += "" # "▶" if collapse else "◢"
+            triangle = "<span class=\"dtriangle\" onclick=\"this.parentElement.classList.toggle('expanded');\">"
             triangle += "</span>"
-            listStr += "  "*level + "<li" + expanded + ">"+triangle+"<a"+open_entry+" href=\"" + newlink + "\">" + name + "</a>\r\n" + \
-                       addListEntries(open_directory, join(directory, entry.name), level + 1, newlink) + \
-                       "  "*level + "</li>\r\n"
-    listStr += "  "*(level-1) + "</ul>\r\n"
+            listStr += \
+                "  " * level + "<li" + expanded + ">" + triangle \
+                + "<a" + open_entry + " href=\"" + newlink + "\">" \
+                + name + "</a>\r\n" \
+                + addListEntries(
+                    open_directory,
+                    join(directory, entry.name),
+                    level + 1,
+                    newlink) \
+                + "  " * level + "</li>\r\n"
+    listStr += "  " * (level-1) + "</ul>\r\n"
     return listStr
 
+
+def isFileToList(entry):
+    not entry.name.startswith('.') and entry.name != "index.html"
+
+
 def isFolderToIgnore(dirEntry):
-    name =  dirEntry.name
+    name = dirEntry.name
     return name == "images" or name.startswith(".")
