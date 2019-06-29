@@ -1,19 +1,26 @@
 #include <cassert>
+#include <chrono>
+#include <cstdio>
 #include <filesystem>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <map>
+#include <memory>
 #include <optional>
 #include <regex>
 #include <sstream>
 #include <string>
 #include <vector>
 
+#include <pybind11/embed.h>
+#include <pybind11/stl.h>
+
 #include "ANSIColors.hpp"
 #include "trim.hpp"
 
 namespace fs = std::filesystem;
+namespace py = pybind11;
 using std::cerr;
 using std::cout;
 using std::endl;
@@ -93,15 +100,51 @@ class PagesParser {
         root = load_page_directory(source_dir);
     }
 
-    void exportAll() { exportDirectory(root); }
+    void exportAll() {
+        py::scoped_interpreter interpreter{};
+        path file      = __FILE__;
+        path folder    = file.parent_path();
+        py::module sys = py::module::import("sys");
+        sys.attr("path").cast<py::list>().append(folder.string());
+        py::globals()["HTMLFormatter"] = py::module::import("HTMLFormatter");
+        exportDirectory(root);
+    }
+
+  private:
+    const path tmp_dir = "/tmp/Pages";
+    bool mjpage        = true;
+
+    void export_mjpage(const Page &page, const string &out) {
+        fs::create_directories(tmp_dir / page.rel_path.parent_path());
+        std::ofstream outfile(tmp_dir / page.rel_path);
+        outfile << out;
+        outfile.close();
+        string command = getenv("HOME");
+        command += "/node_modules/mathjax-node-page/bin/mjpage";
+        command += " --output=CommonHTML --eqno=AMS "
+                   "--fontURL=/MathJax/fonts/HTML-CSS";
+        command += " < \"";
+        command += tmp_dir / page.rel_path;
+        command += "\" > \"";
+        command += output_dir / page.rel_path;
+        command += "\"";
+        cout << command << endl;
+
+        if (system(command.c_str()) != 0) {
+        }  // TODO
+    }
 
     /**
      * @brief   Export a regular page.
      */
     void exportPage(const Page &page) {
         string out = createPage(page, page_template);
-        std::ofstream outfile(output_dir / page.rel_path);
-        outfile << out;
+        if (mjpage) {
+            export_mjpage(page, out);
+        } else {
+            std::ofstream outfile(output_dir / page.rel_path);
+            outfile << out;
+        }
     }
 
     /**
@@ -121,8 +164,9 @@ class PagesParser {
             replace(out, ":" + m.first + ":", m.second);
         replace(out, ":nav:", generateNavigation(page));
         replace(out, ":filenamepdf:", page.rel_path.stem().string() + ".pdf");
-        replace(out, ":html:", page.html);
-        replace(out, ":mdate:", formatDateTime(page.modified));
+        string html = page.html;
+        replace(out, ":html:", formatHTML(page.html));
+        replace(out, ":mdate:", formatFileTime(page.modified));
         return out;
     }
 
@@ -137,6 +181,11 @@ class PagesParser {
         // Export all other pages in this directory
         for (auto &page : dir.pages)
             exportPage(page);
+        // Copy all resource folders
+        for (auto &dir : dir.resources)
+            fs::copy(source_dir / dir, output_dir / dir,
+                     fs::copy_options::overwrite_existing |
+                         fs::copy_options::recursive);
     }
 
     static bool isPageToList(const Page &page) {
@@ -157,24 +206,25 @@ class PagesParser {
                               unsigned int level = 0) {
         string indentation_ul(4 * level, ' ');
         string indentation_li(4 * level + 4, ' ');
-        string rel = fs::relative(page.rel_path, root.rel_path.parent_path());
-        bool open_entry = rel == ".";
-        bool expanded   = rel.substr(0, 3) == "../";
 
         string result = indentation_ul;
         result += "<ul>\n";
         for (const auto &entry : root.subdirectories) {
             if (!isDirectoryToList(entry))
                 continue;
+            bool open_entry = page.rel_path == entry.rel_path;
+            string rel =
+                fs::relative(page.rel_path, entry.rel_path.parent_path());
+            bool expanded = rel.substr(0, 2) != "..";
             result += indentation_li;
             result += "<li";
             if (expanded)
                 result += " class=\"expanded\"";
             result += ">";
-            result +=
-                "<span class=\"dtriangle\" "
-                "onclick=\"this.parentElement.classList.toggle('expanded');\">"
-                "</span>";
+            result += "<span class=\"dtriangle\" "
+                      "onclick=\"this.parentElement.classList.toggle('"
+                      "expanded');\">"
+                      "</span>";
             result += "<a";
             if (open_entry)
                 result += " class=\"openEntry\"";
@@ -190,6 +240,8 @@ class PagesParser {
         for (const auto &entry : root.pages) {
             if (!isPageToList(entry))
                 continue;
+            string rel      = fs::relative(page.rel_path, entry.rel_path);
+            bool open_entry = rel == ".";
             result += indentation_li;
             result += "<li><span class=\"ftriangle\"></span>";
             result += "<a";
@@ -206,20 +258,25 @@ class PagesParser {
         return result;
     }
 
-    string generateIndexItem(const Page &page) {
+    string generateIndexItem(const Page &page, const path &root) {
         string item = index_item_template;
         replace(item, ":title:", page.getTitle());
-        replace(item, ":link:", page.rel_path.filename());
+        replace(item, ":link:", fs::relative(page.rel_path, root));
         replace(item, ":description:", page.getDescription());
         return item;
     }
 
     string generateIndex(const PageDirectory &dir) {
         string result;
+        for (const auto &entry : dir.subdirectories) {
+            if (!isDirectoryToList(entry))
+                continue;
+            result += generateIndexItem(entry, dir.rel_path.parent_path());
+        }
         for (const auto &entry : dir.pages) {
             if (!isPageToList(entry))
                 continue;
-            result += generateIndexItem(entry);
+            result += generateIndexItem(entry, dir.rel_path.parent_path());
         }
         return result;
     }
@@ -227,7 +284,10 @@ class PagesParser {
   private:
 #pragma region HTML formatter...................................................
 
-    void formatHTML(string &html) { (void) html; }
+    string formatHTML(const string &html) {
+        auto formatHTML = py::globals()["HTMLFormatter"].attr("formatHTML");
+        return formatHTML(html).cast<string>();
+    }
 
 #pragma endregion
 #pragma region String utilities.................................................
@@ -265,10 +325,14 @@ class PagesParser {
         return false;
     }
 
-    static string formatDateTime(file_time_t t) {
-        stringstream buffer;
-        std::time_t tt = std::chrono::system_clock::to_time_t(t);
-        std::tm *gmt   = gmtime(&tt);
+    static string formatFileTime(std::filesystem::file_time_type ft) {
+        std::stringstream buffer;
+        // buffer << "TODO";
+        // (void) ft;
+        // std::time_t tt = decltype(ft)::clock::to_time_t(ft);
+        std::time_t tt = ft.time_since_epoch().count() / 1'000'000'000 +
+                         6'437'664'000;  // TODO: ugly non-portable hack
+        std::tm *gmt = std::gmtime(&tt);
         buffer << std::put_time(gmt, "%A, %d %B %Y %H:%M");
         return buffer.str();
     }
@@ -405,7 +469,7 @@ class PagesParser {
         for (const auto &entry : fs::directory_iterator(directory)) {
             if (entry.is_directory()) {
                 if (is_resource_folder(entry)) {
-                    result.resources.push_back(entry);
+                    result.resources.push_back(fs::relative(entry, source_dir));
                 } else {
                     result.subdirectories.push_back(load_page_directory(entry));
                 }
@@ -438,8 +502,9 @@ class PagesParser {
     string index_item_template;
 };
 
-path source_dir   = "/home/pieter/GitHub/tttapa.github.io/Pages-src/Raw-HTML";
-path output_dir   = "/tmp";
+path source_dir = "/home/pieter/GitHub/tttapa.github.io/Pages-src/Raw-HTML";
+// path output_dir   = "/tmp";
+path output_dir   = "/home/pieter/GitHub/tttapa.github.io/Pages";
 path template_dir = "/home/pieter/GitHub/tttapa.github.io/Pages-src/templates";
 
 int main() {

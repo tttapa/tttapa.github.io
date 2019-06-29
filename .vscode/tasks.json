@@ -2,26 +2,15 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Create Pages",
             "type": "shell",
-            "command": "./Pages-src/scripts/walk.py # pdf",
+            "label": "Build & Run walk",
+            "command": "make && ./bin/walk",
+            "options": {
+                "cwd": "${workspaceFolder}/Pages-src/scripts/build"
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
-        },
-        {
-            "type": "shell",
-            "label": "g++-8 build active file",
-            "command": "/usr/bin/g++-8",
-            "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "/usr/bin"
             }
         }
     ]

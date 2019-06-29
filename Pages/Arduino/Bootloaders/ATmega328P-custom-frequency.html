@@ -1,123 +1,138 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-    <head>
-        <meta charset="UTF-8"/>
-        <meta name="author" content="Pieter P"/>
-        <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
-        <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
-        <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
-        <script type="text/x-mathjax-config">
-            MathJax.Hub.Config({
-              TeX: { equationNumbers: { autoNumber: "AMS" } },
-              "fast-preview": {
-                disabled: true
-              }
-            });
-        </script>
-        <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
-        <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
-        <meta name="theme-color" content="#ccc"/>
-        <meta name="keywords" content="Arduino, ATmega328P, Optiboot, clock speed, frequency, crystal, bootloader, Arduino IDE"/>
-        <meta name="description" content="A guide explaining how to compile the Optiboot bootloader for an ATmega328P (the microcontroller of an Arduino UNO) that runs at a non-standard clock speed, and how to add the custom CPU speed as an option in the Arduino IDE."/>
-        <title>Optiboot - ATmega328P at custom frequency</title>
-    </head>
-    <body>
-        <nav>
-            <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                    <path d="M0 0h48v48h-48z" fill="none"/>
-                    <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
-                </svg>
-                <h2><a href="/">Pages</a></h2>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
+            disabled: true
+            }
+        });
+    </script>
+    <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="theme-color" content="#ccc">
+    <meta name="keywords" content="Arduino, ATmega328P, Optiboot, clock speed, frequency, crystal, bootloader, Arduino IDE">
+    <meta name="description" content="A guide explaining how to compile the Optiboot bootloader for an ATmega328P (the microcontroller of an Arduino UNO) that runs at a non-standard clock speed, and how to add the custom CPU speed as an option in the Arduino IDE.">
+    <title>Compiling Optiboot - ATmega328P at custom frequency</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
+            </svg>
+            <h2><a href="/">Home</a></h2>
 <ul>
-  <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino">Arduino</a>
-  <ul>
-    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/Bootloaders">Bootloaders</a>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Arduino</a>
     <ul>
-    </ul>
-    </li>
-    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/ESP8266">ESP8266</a>
-    <ul>
-      <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/ESP8266/A-Beginner's-Guide">A Beginner's Guide to the ESP8266</a>
-      <ul>
-      </ul>
-      </li>
-      <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Arduino/ESP8266/Flashing">Flashing</a>
-      <ul>
-      </ul>
-      </li>
-    </ul>
-    </li>
-  </ul>
-  </li>
-  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics">Mathematics</a>
-  <ul>
-    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory">Systems and Control Theory</a>
-    <ul>
-      <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Analog-Filters">Analog Filters</a>
-      <ul>
-      </ul>
-      </li>
-      <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters">Digital filters</a>
-      <ul>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI Systems, Transfer Functions, and the Z-transform">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Bootloaders</a>
         <ul>
+            <li><span class="ftriangle"></span><a class="openEntry" href="ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
         </ul>
         </li>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization">Discretization</a>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../ESP8266/index.html">ESP8266</a>
         <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../ESP8266/A-Beginner's-Guide/index.html">A Beginner's Guide to the ESP8266</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../ESP8266/A-Beginner's-Guide/01.Introduction.html">Introduction</a></li>
+                <li><span class="ftriangle"></span><a href="../ESP8266/A-Beginner's-Guide/02.Hardware.html">Hardware</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
         </ul>
         </li>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average">Exponential Moving Average</a>
-        <ul>
-        </ul>
-        </li>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average">Simple Moving Average</a>
-        <ul>
-        </ul>
-        </li>
-      </ul>
-      </li>
     </ul>
     </li>
-  </ul>
-  </li>
-  <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu">Ubuntu</a>
-  <ul>
-    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="/Pages/Ubuntu/Software-Installation">Software Installation</a>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/index.html">Mathematics</a>
     <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital filters</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI Systems, Transfer Functions, and the Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI Systems, Transfer Functions, and the Z-transform/DLTI Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI Systems, Transfer Functions, and the Z-transform/Impulse and Step Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI Systems, Transfer Functions, and the Z-transform/The Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
     </ul>
     </li>
-  </ul>
-  </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
 </ul>
 
-                <i class="material-icons">
-                    <a href="/" title="Home">home</a>
-                </i>
-                <i class="material-icons">
-                    <a href="ATmega328P-custom-frequency.pdf" title="Download as PDF">get_app</a>
-                </i>
-                <i class="material-icons">
-                    <a href="javascript:window.print()" title="Print this article">print</a>
-                </i>
-                <i class="material-icons">
-                    <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">report</a>
-                </i>
-            </div>
-        </nav>
-        <article>
-            <h1 class="title">Optiboot - ATmega328P at custom frequency</h1>
-            <i class="author">Pieter P</i>
-            <div>
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="ATmega328P-custom-frequency.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article">print</a>
+            </i>
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">report</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Compiling Optiboot - ATmega328P at custom frequency</h1>
+        <i class="author">Pieter P</i>
+        <div>
 
         <div>This is a guide to use the ATmega328P (the microcontroller of an Arduino UNO) with a custom crystal, and run it at a different frequency than the standard 16 MHz.</div>
-        <h2><a name="downloading-optiboot" href="#downloading-optiboot">Downloading Optiboot</a></h2>
+        <h3><a name="downloading-optiboot" href="#downloading-optiboot">Downloading Optiboot</a></h3>
         <div>The Arduino has a bootloader in order to be able to upload sketches over the UART (serial) connection. When running at a different clock speed, you have to recompile the bootloader. To do this, you need Optiboot.</div>
         <div>First, install git (if you haven't already):<br><pre class="console"><code>sudo apt-get install git</code></pre> <br>Then clone Optiboot:<br><pre class="console"><code>git clone https://github.com/Optiboot/optiboot.git</code></pre> <br>Next, go to the
             'bootloaders' folder of your Arduino IDE installation, for example:<br><pre class="console"><code>cd ~/opt/arduino-1.8.1/hardware/arduino/avr/bootloaders</code></pre> <br>Rename the old 'optiboot' folder:<br><pre class="console"><code>mv optiboot optiboot.old</code></pre>            <br>
             And replace it by the new version of Optiboot you just cloned:<pre class="console"><code>cp -R ~/optiboot/optiboot/bootloaders/optiboot/ optiboot &amp;&amp; cd optiboot</code></pre></div>
-        <h2><a name="compiling-the-optiboot-bootloader" href="#compiling-the-optiboot-bootloader">Compiling the Optiboot bootloader</a></h2>
+        <h3><a name="compiling-the-optiboot-bootloader" href="#compiling-the-optiboot-bootloader">Compiling the Optiboot bootloader</a></h3>
         <div>Open the Makefile to add a new option with a custom frequency:<br><pre class="console"><code>gedit Makefile</code></pre><br>Then duplicate the atmega328 and atmega328_isp options, and rename them, for example, atmega328_12 and atmega328_12_isp. Change
             the CPU speeds, and save the file. The result could be something like this:<pre><code>#Atmega328p @12MHz
 atmega328_12: TARGET = atmega328
@@ -151,73 +166,74 @@ BAUD RATE CHECK: Desired: 115200, Real: 115200, UBRRL = 15, Error=0.0%
    text	   data	    bss	    dec	    hex	filename
     464	      0	      0	    464	    1d0	optiboot_atmega328_12.elf
 ../../../../tools/avr/bin/avr-objcopy -j .text -j .data -j .version --set-section-flags .version=alloc,load -O ihex optiboot_atmega328_12.elf optiboot_atmega328_12.hex
-../../../../tools/avr/bin/avr-objdump -h -S optiboot_atmega328_12.elf > optiboot_atmega328_12.lst</code></pre></div>
-        <h2><a name="adding-the-option-in-the-arduino-ide" href="#adding-the-option-in-the-arduino-ide">Adding the option in the Arduino IDE</a></h2>
+../../../../tools/avr/bin/avr-objdump -h -S optiboot_atmega328_12.elf &gt; optiboot_atmega328_12.lst</code></pre></div>
+        <h3><a name="adding-the-option-in-the-arduino-ide" href="#adding-the-option-in-the-arduino-ide">Adding the option in the Arduino IDE</a></h3>
         <div>The next step is to add a new option in the <i>Tools</i> menu in the Arduino IDE.</div>
         <div>Open the 'boards.txt' file for editing, for example:<br><pre class="console"><code>gedit ~/opt/arduino-1.8.1/hardware/arduino/avr/boards.txt</code></pre><br>You have to add a menu entry to select the speed, change the f_cpu value, and point to the
-            right bootloader. Edit the 'uno' entry, so it looks like this:<pre><code>uno.name=Arduino/Genuino Uno
-
-uno.vid.0=0x2341
-uno.pid.0=0x0043
-uno.vid.1=0x2341
-uno.pid.1=0x0001
-uno.vid.2=0x2A03
-uno.pid.2=0x0043
-uno.vid.3=0x2341
-uno.pid.3=0x0243
-
-uno.upload.tool=avrdude
-uno.upload.protocol=arduino
-uno.upload.maximum_size=32256
-uno.upload.maximum_data_size=2048
-uno.upload.speed=115200
-
-uno.bootloader.tool=avrdude
-uno.bootloader.low_fuses=0xFF
-uno.bootloader.high_fuses=0xDE
-uno.bootloader.extended_fuses=0x05
-uno.bootloader.unlock_bits=0x3F
-uno.bootloader.lock_bits=0x0F
-#uno.bootloader.file=optiboot/optiboot_atmega328.hex
-
-uno.build.mcu=atmega328p
-#uno.build.f_cpu=16000000L
-uno.build.board=AVR_UNO
-uno.build.core=arduino
-uno.build.variant=standard
-
-menu.speed=CPU Speed
-
-uno.menu.speed.16=16 MHz
-uno.menu.speed.12=12 MHz
-uno.menu.speed.16.bootloader.file=optiboot/optiboot_atmega328.hex
-uno.menu.speed.12.bootloader.file=optiboot/optiboot_atmega328_12.hex
-uno.menu.speed.16.build.f_cpu=16000000L
-uno.menu.speed.12.build.f_cpu=12000000L</code></pre> Note that the original f_cpu and bootloader.file lines are commented out. Also make sure that the speeds and bootloader filenames are the same as the ones in the Optiboot Makefile.</div>
+            right bootloader. Edit the 'uno' entry, so it looks like this:<pre class="lineNumbersEmphasis"><code>uno.name=Arduino/Genuino Uno</code>
+<code></code>
+<code>uno.vid.0=0x2341</code>
+<code>uno.pid.0=0x0043</code>
+<code>uno.vid.1=0x2341</code>
+<code>uno.pid.1=0x0001</code>
+<code>uno.vid.2=0x2A03</code>
+<code>uno.pid.2=0x0043</code>
+<code>uno.vid.3=0x2341</code>
+<code>uno.pid.3=0x0243</code>
+<code></code>
+<code>uno.upload.tool=avrdude</code>
+<code>uno.upload.protocol=arduino</code>
+<code>uno.upload.maximum_size=32256</code>
+<code>uno.upload.maximum_data_size=2048</code>
+<code>uno.upload.speed=115200</code>
+<code></code>
+<code>uno.bootloader.tool=avrdude</code>
+<code>uno.bootloader.low_fuses=0xFF</code>
+<code>uno.bootloader.high_fuses=0xDE</code>
+<code>uno.bootloader.extended_fuses=0x05</code>
+<code>uno.bootloader.unlock_bits=0x3F</code>
+<code>uno.bootloader.lock_bits=0x0F</code>
+<code class="emphasis"># uno.bootloader.file=optiboot/optiboot_atmega328.hex</code>
+<code></code>
+<code>uno.build.mcu=atmega328p</code>
+<code class="emphasis"># uno.build.f_cpu=16000000L</code>
+<code>uno.build.board=AVR_UNO</code>
+<code>uno.build.core=arduino</code>
+<code>uno.build.variant=standard</code>
+<code></code>
+<code class="emphasis">menu.speed=CPU Speed</code>
+<code></code>
+<code class="emphasis">uno.menu.speed.16=16 MHz</code>
+<code class="emphasis">uno.menu.speed.12=12 MHz</code>
+<code class="emphasis">uno.menu.speed.16.bootloader.file=optiboot/optiboot_atmega328.hex</code>
+<code class="emphasis">uno.menu.speed.12.bootloader.file=optiboot/optiboot_atmega328_12.hex</code>
+<code class="emphasis">uno.menu.speed.16.build.f_cpu=16000000L</code>
+<code class="emphasis">uno.menu.speed.12.build.f_cpu=12000000L</code></pre> Note that the original <code>f_cpu</code> and <code>bootloader.file</code> lines are commented out. Also make sure that the speeds and bootloader filenames are the same as the ones in the Optiboot Makefile.</div>
         <div>Restart the Arduino IDE for the changes to take effect. You should see the new options when opening the 'Tools' menu.<img src="/Images/ATmega328P-custom-freq-tools.png" style="display: block;"></div>
 
-        <h2><a name="flashing-the-bootloader-to-the-atmega328p" href="#flashing-the-bootloader-to-the-atmega328p">Flashing the bootloader to the ATmega328P</a></h2>
+        <h3><a name="flashing-the-bootloader-to-the-atmega328p" href="#flashing-the-bootloader-to-the-atmega328p">Flashing the bootloader to the ATmega328P</a></h3>
 
         <div>You'll need an Arduino Uno (or a second ATmega328P with bootloader + USB-UART converter, or an AVR ISP programmer) to upload the bootloader to the ATmega328P. </div>
-        <h3><a name="uploading-the-arduinoisp-firmware" href="#uploading-the-arduinoisp-firmware">Uploading the ArduinoISP firmware</a></h3>
+        <h4><a name="uploading-the-arduinoisp-firmware" href="#uploading-the-arduinoisp-firmware">Uploading the ArduinoISP firmware</a></h4>
         <div>Open the ArduinoISP firmware in the Arduino IDE (File &gt; Examples &gt; 11.ArduinoISP), and upload it to the Arduino Uno that will be used for programming the target ATmega328P. Make sure that you have the right clock speed selected in the Tools
             &gt; CPU Speed menu (16 MHz).</div>
-        <h3><a name="connecting-to-the-arduino" href="#connecting-to-the-arduino">Connecting to the Arduino</a></h3>
+        <h4><a name="connecting-to-the-arduino" href="#connecting-to-the-arduino">Connecting to the Arduino</a></h4>
         <div>First, connect the power and crystal to the target ATmega328P. Pins 8 &amp; 22 go to ground, pins 7 &amp; 20 go to +5V. Connect the crystal oscillator to pins 9 &amp; 10, with two 22pF capacitors from the 2 crystal pins to ground. Pull the reset
             pin (pin 1) high using a 10kΩ resistor. Add a 100nF bypass capacitor for stability.</div>
         <div>Connect the SPI pins for programming: pin D13 of the programmer Arduino to pin 19 of the target ATmega, D12 to pin 18, and D11 to pin 17. Connect pin D10 to the reset pin of the target ATmega. </div>
         <div>Check the result with the following image: <img src="https://www.arduino.cc/en/uploads/Tutorial/BreadboardAVR.png" style="display: block;"><small>Image source: <a href="https://www.arduino.cc/en/Tutorial/ArduinoISP">https://www.arduino.cc/en/Tutorial/ArduinoISP</a></small></div>
         <div style="margin-top: 10px;">Finally, add a 10µF capacitor between the reset pin of the programmer Arduino and ground, to prevent it from resetting while burning the bootloader.</div>
-        <h3><a name="burning-the-bootloader" href="#burning-the-bootloader">Burning the bootloader</a></h3>
-        <div>Now go to the Tools menu in the IDE, and under CPU Speed, select the new custom frequency. Then select "Arduino as ISP" under Tools > Programmer. Select the serial port of the programmer Arduino, and click 'Burn Bootloader'.</div>
+        <h4><a name="burning-the-bootloader" href="#burning-the-bootloader">Burning the bootloader</a></h4>
+        <div>Now go to the Tools menu in the IDE, and under CPU Speed, select the new custom frequency. Then select "Arduino as ISP" under Tools &gt; Programmer. Select the serial port of the programmer Arduino, and click 'Burn Bootloader'.</div>
         <div>The ATmega328P now has the bootloader installed, so you can upload sketches over UART.</div>
 
-        <h2><a name="testing" href="#testing">Testing</a></h2>
+        <h3><a name="testing" href="#testing">Testing</a></h3>
         <div>Connect the ATmega328P to a USB-to-Serial converter (an FTDI module, for example): TX (pin 3) to RX, and RX (pin 2) to TX. Connect the DTR pin of the FTDI to a 100nF capacitor, and connect the other lead of the capacitor to the reset pin of the
             ATmega. Add a diode with the anode to the reset pin, and the cathode to 5V.<br> Also add an LED (+ series resistor) between pin 19 (D13) and ground.</div>
         <div>Connect the Arduino to your computer, select the right port and the custom frequency, and try uploading Blink.<br>The LED on D13 should start blinking.</div>
 </div>
-        </article>
-        <footer>Last edited: Sunday, 22 April 2018 22:43 UTC</footer>
-    </body>
-</html>
+    </article>
+    <footer>Last edited: Friday, 28 June 2019 11:15 UTC</footer>
+
+
+</body></html>
