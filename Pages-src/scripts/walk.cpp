@@ -101,22 +101,30 @@ class PagesParser {
         root = load_page_directory(source_dir);
     }
 
-    void exportAll() {
+    void exportAll(bool mjpage = false, unsigned int num_threads = 0) {
         py::scoped_interpreter interpreter{};
         path file      = __FILE__;
         path folder    = file.parent_path();
         py::module sys = py::module::import("sys");
         sys.attr("path").cast<py::list>().append(folder.string());
         py::globals()["HTMLFormatter"] = py::module::import("HTMLFormatter");
+        this->mjpage                   = mjpage;
+        if (mjpage && num_threads <= 0)
+            num_threads = std::thread::hardware_concurrency();
+        if (mjpage) {
+            assert(num_threads > 0);
+            this->mjpage_futures.resize(num_threads);
+        }
         exportDirectory(root);
-        wait_all_mjpage();
+        if (mjpage)
+            wait_all_mjpage();
     }
 
   private:
     const path tmp_dir = "/tmp/Pages";
     bool mjpage        = true;
 
-    std::array<std::future<const Page &>, 8> mjpage_futures = {};
+    vector<std::future<const Page &>> mjpage_futures = {};
 
     void handle_finished_mjpage(const Page &page) {
         Green(cout) << "Page `" << page.getTitle() << "` finished" << endl;
@@ -138,9 +146,6 @@ class PagesParser {
         command += "\" > \"";
         command += output_dir / page.rel_path;
         command += "\"";
-
-        cout << __PRETTY_FUNCTION__ << ": " << page.getTitle() << endl
-             << command << endl;
 
         bool launched            = false;
         const Page *finishedPage = nullptr;
@@ -190,14 +195,12 @@ class PagesParser {
      */
     void exportPage(const Page &page) {
         string out = createPage(page, page_template);
-        cout << __PRETTY_FUNCTION__ << ": BEGIN " << page.getTitle() << endl;
         if (mjpage) {
             export_mjpage(page, out);
         } else {
             std::ofstream outfile(output_dir / page.rel_path);
             outfile << out;
         }
-        cout << __PRETTY_FUNCTION__ << ": END " << page.getTitle() << endl;
     }
 
     /**
@@ -560,8 +563,11 @@ path source_dir = "/home/pieter/GitHub/tttapa.github.io/Pages-src/Raw-HTML";
 path output_dir   = "/home/pieter/GitHub/tttapa.github.io/Pages";
 path template_dir = "/home/pieter/GitHub/tttapa.github.io/Pages-src/templates";
 
-int main() {
+int main(int argc, const char *argv[]) {
     PagesParser p = {source_dir, output_dir, template_dir};
     p.load();
-    p.exportAll();
+    if (argc > 1)
+        p.exportAll(true, std::atoi(argv[1]));
+    else
+        p.exportAll();
 }
