@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <filesystem>
 #include <fstream>
+#include <future>
 #include <iomanip>
 #include <iostream>
 #include <map>
@@ -108,14 +109,23 @@ class PagesParser {
         sys.attr("path").cast<py::list>().append(folder.string());
         py::globals()["HTMLFormatter"] = py::module::import("HTMLFormatter");
         exportDirectory(root);
+        wait_all_mjpage();
     }
 
   private:
     const path tmp_dir = "/tmp/Pages";
     bool mjpage        = true;
 
+    std::array<std::future<const Page &>, 8> mjpage_futures = {};
+
+    void handle_finished_mjpage(const Page &page) {
+        Green(cout) << "Page `" << page.getTitle() << "` finished" << endl;
+    }
+
     void export_mjpage(const Page &page, const string &out) {
+        using namespace std::chrono_literals;
         fs::create_directories(tmp_dir / page.rel_path.parent_path());
+        fs::create_directories(output_dir / page.rel_path.parent_path());
         std::ofstream outfile(tmp_dir / page.rel_path);
         outfile << out;
         outfile.close();
@@ -128,10 +138,51 @@ class PagesParser {
         command += "\" > \"";
         command += output_dir / page.rel_path;
         command += "\"";
-        cout << command << endl;
 
-        if (system(command.c_str()) != 0) {
-        }  // TODO
+        cout << __PRETTY_FUNCTION__ << ": " << page.getTitle() << endl
+             << command << endl;
+
+        bool launched            = false;
+        const Page *finishedPage = nullptr;
+        while (!launched) {
+            for (auto &fut : mjpage_futures) {
+                if (fut.valid() == false ||  // uninitialized
+                    fut.wait_for(1ms) == std::future_status::ready) {
+                    finishedPage = fut.valid() ? &(fut.get()) : nullptr;
+                    cout << "Started compiling Page `" << page.getTitle() << "`"
+                         << endl;
+                    auto launch = [command, &page]() -> const Page & {
+                        if (system(command.c_str()) != 0) {
+                        }  // TODO
+                        return page;
+                    };
+                    fut      = std::async(std::launch::async, launch);
+                    launched = true;
+                    break;  // for
+                }
+            }
+        }
+        if (finishedPage)
+            handle_finished_mjpage(*finishedPage);
+    }
+
+    void wait_all_mjpage() {
+        using namespace std::chrono_literals;
+        bool allReady = false;
+        while (!allReady) {
+            allReady = true;
+            for (auto &fut : mjpage_futures) {
+                if (fut.valid() == false ||  // uninitialized
+                    fut.wait_for(1ms) == std::future_status::ready) {
+                    if (fut.valid())
+                        handle_finished_mjpage(fut.get());
+                    fut = {};
+
+                } else {
+                    allReady = false;
+                }
+            }
+        }
     }
 
     /**
@@ -139,12 +190,14 @@ class PagesParser {
      */
     void exportPage(const Page &page) {
         string out = createPage(page, page_template);
+        cout << __PRETTY_FUNCTION__ << ": BEGIN " << page.getTitle() << endl;
         if (mjpage) {
             export_mjpage(page, out);
         } else {
             std::ofstream outfile(output_dir / page.rel_path);
             outfile << out;
         }
+        cout << __PRETTY_FUNCTION__ << ": END " << page.getTitle() << endl;
     }
 
     /**
