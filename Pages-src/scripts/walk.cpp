@@ -55,10 +55,10 @@ class PagesParser {
                 } catch (std::exception &) {
                     Yellow(cerr) << "Warning: invalid sequence number for "
                                  << abs_source_path << endl;
-                    return -1;
+                    return std::numeric_limits<int>::max();
                 }
             } else {
-                return -1;
+                return std::numeric_limits<int>::max();
             }
         }
 
