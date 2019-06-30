@@ -127,7 +127,9 @@ class PagesParser {
         exportDirectory(root);
         if (task == ServerSideLaTeX || task == ServerSideLaTeXPDF)
             wait_all_mjpage();
-        exportPDFDirectory(root);
+        exportDirectory(root);
+        if (task == ServerSideLaTeXPDF)
+            exportPDFDirectory(root);
     }
 
   private:
@@ -630,4 +632,5 @@ int main(int argc, const char *argv[]) {
         p.exportAll(PagesParser::ServerSideLaTeXPDF, std::atoi(argv[1]));
     else
         p.exportAll();
+    cout << "=== Done ===" << endl;
 }
