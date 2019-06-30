@@ -184,8 +184,8 @@ class PagesParser {
                 if (fut.valid() == false ||  // uninitialized
                     fut.wait_for(1ms) == std::future_status::ready) {
                     finishedPage = fut.valid() ? &(fut.get()) : nullptr;
-                    cout << "Started compiling Page `" << page.getTitle() << "`"
-                         << endl;
+                    Blue(cout) << "Started compiling Page `" << page.getTitle()
+                               << "`" << endl;
                     auto launch = [command, &page]() -> const Page & {
                         if (system(command.c_str()) != 0) {
                         }  // TODO
@@ -246,13 +246,14 @@ class PagesParser {
     string createPage(const Page &page, string pageTemplate) {
         string out = pageTemplate;
         replace(out, ":title:", page.getTitle());
-        for (auto &m : page.metadata)
-            replace(out, ":" + m.first + ":", m.second);
         replace(out, ":nav:", generateNavigation(page));
         replace(out, ":filenamepdf:", page.rel_path.stem().string() + ".pdf");
         string html = page.html;
         replace(out, ":html:", formatHTML(page.html));
         replace(out, ":mdate:", formatFileTime(page.modified));
+        for (const auto &[key, value] : page.metadata)
+            while (replace(out, ":" + key + ":", value))
+                ;
         return out;
     }
 
@@ -603,6 +604,12 @@ class PagesParser {
         sort_pages(result.subdirectories);
         if (!hasIndex)
             create_index_file(directory, result);
+        /*
+        cout << __func__ << endl << result.getTitle() << endl;
+        for (auto &[key, value] : result.metadata)
+            cout << key << " → " << value << endl;
+        cout << endl; 
+        // */
         return result;
     }
 #pragma endregion

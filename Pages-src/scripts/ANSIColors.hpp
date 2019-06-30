@@ -49,6 +49,11 @@ class Yellow : public Color {
     Yellow(std::ostream &os) : Color(os, ANSIColors::yellow) {}
 };
 
+class Blue : public Color {
+  public:
+    Blue(std::ostream &os) : Color(os, ANSIColors::blue) {}
+};
+
 class Red : public Color {
   public:
     Red(std::ostream &os) : Color(os, ANSIColors::red) {}
