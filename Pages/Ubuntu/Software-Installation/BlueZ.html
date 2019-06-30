@@ -1,0 +1,173 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
+            disabled: true
+            }
+        });
+    </script>
+    <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="theme-color" content="#ccc">
+    <meta name="keywords" content="BlueZ,BlueZ 5.50,Bluetooth,Ubuntu,Linux,Installation,MIDI,ALSA">
+    <meta name="description" content="Installation instructions for BlueZ 5.50, the official Linux Bluetooth protocol stack, on Ubuntu. It's useful if you want support for MIDI over BLE.">
+    <title>BlueZ with MIDI over BLE Support</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
+            </svg>
+            <h2><a href="/">Home</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/A-Beginner's-Guide/index.html">A Beginner's Guide to the ESP8266</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/ESP8266/A-Beginner's-Guide/01.Introduction.html">Introduction</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/ESP8266/A-Beginner's-Guide/02.Hardware.html">Hardware</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/index.html">Mathematics</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital filters</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI Systems, Transfer Functions, and the Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI Systems, Transfer Functions, and the Z-transform/DLTI Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI Systems, Transfer Functions, and the Z-transform/Impulse and Step Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI Systems, Transfer Functions, and the Z-transform/The Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Ubuntu</a>
+    <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Software Installation</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="openEntry" href="BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="Java.html">Java</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="BlueZ.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article">print</a>
+            </i>
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">report</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">BlueZ with MIDI over BLE Support</h1>
+        <i class="author">Pieter P</i>
+        <div>
+<p>This is an installation guide for the Eclipse IDE on Ubuntu.</p>
+
+<h3><a name="installing-the-dependencies" href="#installing-the-dependencies">Installing the Dependencies</a></h3>
+
+<p>
+    Use your package manager to install the following dependencies:
+    </p><pre class="console"><code>sudo apt install libudev-dev libical-dev libreadline-dev libdbus-1-dev libasound2-dev</code></pre>
+    You'll also need the usual build tools, so install them as well if you
+    haven't already:
+    <pre class="console"><code>sudo apt install build-essential</code></pre>
+<p></p>
+
+<h3><a name="downloading-bluez" href="#downloading-bluez">Downloading BlueZ</a></h3>
+
+<p>
+    You can download the latest version from
+    <a href="http://www.bluez.org/">www.bluez.org</a>, or download it directly
+    from the command line. Then extract the file you downloaded.
+    </p><pre class="console"><code>cd /tmp</code>
+<code>wget https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz</code>
+<code>tar -xf bluez-5.50.tar.xz</code></pre>
+<p></p>
+
+<h3><a name="building-and-installing-bluez" href="#building-and-installing-bluez">Building and Installing BlueZ</a></h3>
+
+<p>
+    Finally, run the configure script and make and install everything.
+    Also reinstall the version from the package manager, as explained
+    <a href="https://askubuntu.com/questions/1064406/installing-bluez-5-50-doesnt-update-bluetoothd">here</a>.
+    </p><pre class="console"><code>cd bluez-5.50</code>
+<code>./configure --enable-midi --with-systemdsystemunitdir=/etc/systemd/system</code>
+<code>make</code>
+<code>sudo make install</code>
+<code>sudo apt-get install --reinstall bluez</code></pre>
+    That's it! After rebooting, MIDI over BLE should work.<br>
+    The first time after rebooting, my computer seemed kind of slow, but
+    rebooting again solved that problem.
+<p></p>
+
+</div>
+    </article>
+    <footer>Last edited: Sunday, 30 June 2019 10:42 UTC</footer>
+
+
+</body></html>

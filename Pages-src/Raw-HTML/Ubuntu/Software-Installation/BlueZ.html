@@ -1,0 +1,50 @@
+<!--
+@title: BlueZ with MIDI over BLE Support
+@author: Pieter P
+@keywords: BlueZ,BlueZ 5.50,Bluetooth,Ubuntu,Linux,Installation,MIDI,ALSA
+@description: Installation instructions for BlueZ 5.50, the official Linux 
+              Bluetooth protocol stack, on Ubuntu. It's useful if you want 
+              support for MIDI over BLE.
+-->
+<html>
+<p>This is an installation guide for the Eclipse IDE on Ubuntu.</p>
+
+<h3>Installing the Dependencies</h3>
+
+<p>
+    Use your package manager to install the following dependencies:
+    <pre
+        class="console"><code>sudo apt install libudev-dev libical-dev libreadline-dev libdbus-1-dev libasound2-dev</code></pre>
+    You'll also need the usual build tools, so install them as well if you
+    haven't already:
+    <pre class="console"><code>sudo apt install build-essential</code></pre>
+</p>
+
+<h3>Downloading BlueZ</h3>
+
+<p>
+    You can download the latest version from
+    <a href="http://www.bluez.org/">www.bluez.org</a>, or download it directly
+    from the command line. Then extract the file you downloaded.
+    <pre class="console"><code>cd /tmp</code>
+<code>wget https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz</code>
+<code>tar -xf bluez-5.50.tar.xz</code></pre>
+</p>
+
+<h3>Building and Installing BlueZ</h3>
+
+<p>
+    Finally, run the configure script and make and install everything.
+    Also reinstall the version from the package manager, as explained
+    <a href="https://askubuntu.com/questions/1064406/installing-bluez-5-50-doesnt-update-bluetoothd">here</a>.
+    <pre class="console"><code>cd bluez-5.50</code>
+<code>./configure --enable-midi --with-systemdsystemunitdir=/etc/systemd/system</code>
+<code>make</code>
+<code>sudo make install</code>
+<code>sudo apt-get install --reinstall bluez</code></pre>
+    That's it! After rebooting, MIDI over BLE should work.<br>
+    The first time after rebooting, my computer seemed kind of slow, but
+    rebooting again solved that problem.
+</p>
+
+</html>
