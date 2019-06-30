@@ -101,28 +101,54 @@ class PagesParser {
         root = load_page_directory(source_dir);
     }
 
-    void exportAll(bool mjpage = false, unsigned int num_threads = 0) {
+    enum Task {
+        ClientSideLaTeX,
+        ServerSideLaTeX,
+        ServerSideLaTeXPDF,
+    } task;
+
+    void exportAll(Task task = ClientSideLaTeX, unsigned int num_threads = 0) {
         py::scoped_interpreter interpreter{};
         path file      = __FILE__;
         path folder    = file.parent_path();
         py::module sys = py::module::import("sys");
         sys.attr("path").cast<py::list>().append(folder.string());
         py::globals()["HTMLFormatter"] = py::module::import("HTMLFormatter");
-        this->mjpage                   = mjpage;
-        if (mjpage && num_threads <= 0)
-            num_threads = std::thread::hardware_concurrency();
-        if (mjpage) {
+        this->task                     = task;
+        if ((task == ServerSideLaTeX || task == ServerSideLaTeXPDF) &&
+            num_threads <= 0)
+            num_threads = 2 * std::thread::hardware_concurrency();
+        if (task == ServerSideLaTeX || task == ServerSideLaTeXPDF) {
             assert(num_threads > 0);
             this->mjpage_futures.resize(num_threads);
         }
+        if (task == ServerSideLaTeXPDF)
+            startHTTPandChromeServers();
         exportDirectory(root);
-        if (mjpage)
+        if (task == ServerSideLaTeX || task == ServerSideLaTeXPDF)
             wait_all_mjpage();
+        exportPDFDirectory(root);
     }
 
   private:
+    const int dev_port  = 9222;
+    const int http_port = 5741;
+
+    void startHTTPandChromeServers() {
+        string c = "cd \"" + output_dir.parent_path().string() +
+                   "\" && python3 -m http.server " + std::to_string(http_port) +
+                   " --bind 127.0.0.1 &";
+        cout << c << endl;
+        if (system(c.c_str()) != 0) {
+        }  // TODO
+        c = "google-chrome --headless --disable-gpu "
+            "--run-all-compositor-stages-before-draw --remote-debugging-port=" +
+            std::to_string(dev_port) + " &";
+        cout << c << endl;
+        if (system(c.c_str()) != 0) {
+        }  // TODO
+    }
     const path tmp_dir = "/tmp/Pages";
-    bool mjpage        = true;
 
     vector<std::future<const Page &>> mjpage_futures = {};
 
@@ -195,7 +221,7 @@ class PagesParser {
      */
     void exportPage(const Page &page) {
         string out = createPage(page, page_template);
-        if (mjpage) {
+        if (task == ServerSideLaTeX || task == ServerSideLaTeXPDF) {
             export_mjpage(page, out);
         } else {
             std::ofstream outfile(output_dir / page.rel_path);
@@ -242,6 +268,40 @@ class PagesParser {
             fs::copy(source_dir / dir, output_dir / dir,
                      fs::copy_options::overwrite_existing |
                          fs::copy_options::recursive);
+    }
+
+    void exportPDFPage(const Page &page) {
+        path file      = __FILE__;
+        path folder    = file.parent_path();
+        string command = "cd \"";
+        command += folder;
+        command += "\" && ";
+        command += "./print-to-pdf.js ";
+        command += std::to_string(dev_port);
+        command += " \"";
+        command += "http://localhost:";
+        command += std::to_string(http_port);
+        command += "/";
+        command += output_dir.filename();
+        command += "/";
+        command += page.rel_path;
+        command += "\" \"";
+        command +=
+            output_dir / page.rel_path.parent_path() / page.rel_path.stem();
+        command += ".pdf\"";
+        if (system(command.c_str()) != 0) {
+        }  // TODO
+    }
+
+    void exportPDFDirectory(const PageDirectory &dir) {
+        // Export the index page of the current directory
+        exportPDFPage(dir);
+        // Export all subdirectories
+        for (auto &subdir : dir.subdirectories)
+            exportPDFDirectory(subdir);
+        // Export all other pages in this directory
+        for (auto &page : dir.pages)
+            exportPDFPage(page);
     }
 
     static bool isPageToList(const Page &page) {
@@ -567,7 +627,7 @@ int main(int argc, const char *argv[]) {
     PagesParser p = {source_dir, output_dir, template_dir};
     p.load();
     if (argc > 1)
-        p.exportAll(true, std::atoi(argv[1]));
+        p.exportAll(PagesParser::ServerSideLaTeXPDF, std::atoi(argv[1]));
     else
         p.exportAll();
 }
