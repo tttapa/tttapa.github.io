@@ -21,6 +21,7 @@ const pdfFilePath = process.argv[4];
             // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-printToPDF
             console.log("Printing...")
             Page.printToPDF({
+                preferCSSPageSize: true,
                 displayHeaderFooter: true,
                 headerTemplate: '<div></div>',
                 footerTemplate: '<div class="text center"><span class="pageNumber"></span></div>',

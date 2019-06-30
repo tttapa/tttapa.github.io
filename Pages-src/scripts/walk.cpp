@@ -276,6 +276,11 @@ class PagesParser {
     }
 
     void exportPDFPage(const Page &page) {
+        path pdf_file = output_dir / page.rel_path;
+        pdf_file.replace_extension(".pdf");
+        if (fs::exists(pdf_file) &&
+            page.modified <= fs::last_write_time(pdf_file))
+            return;
         path file      = __FILE__;
         path folder    = file.parent_path();
         string command = "cd \"";
@@ -291,9 +296,8 @@ class PagesParser {
         command += "/";
         command += page.rel_path;
         command += "\" \"";
-        command +=
-            output_dir / page.rel_path.parent_path() / page.rel_path.stem();
-        command += ".pdf\"";
+        command += pdf_file;
+        command += "\"";
         if (system(command.c_str()) != 0) {
         }  // TODO
     }
@@ -540,7 +544,8 @@ class PagesParser {
     }
 
     bool is_resource_folder(const fs::directory_entry &entry) {
-        return entry.path().filename() == "images";
+        return entry.path().filename() == "images" ||
+               entry.path().filename() == "resources";
     }
 
     template <class Page>

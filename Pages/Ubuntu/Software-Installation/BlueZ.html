@@ -138,11 +138,11 @@
 
 <p>
     Use your package manager to install the following dependencies:
-    </p><pre class="console"><code>sudo apt install libudev-dev libical-dev libreadline-dev libdbus-1-dev libasound2-dev</code></pre>
+    <pre class="console"><code>sudo apt install libudev-dev libical-dev libreadline-dev libdbus-1-dev libasound2-dev</code></pre>
     You'll also need the usual build tools, so install them as well if you
     haven't already:
     <pre class="console"><code>sudo apt install build-essential</code></pre>
-<p></p>
+</p>
 
 <h3><a name="downloading-bluez" href="#downloading-bluez">Downloading BlueZ</a></h3>
 
@@ -171,9 +171,38 @@
     rebooting again solved that problem.
 <p></p>
 
+<h3><a name="shell-script" href="#shell-script">Shell Script</a></h3>
+
+<p>
+    Here's a shell script that executes the previous steps for you.
+
+    </p><pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><code><span style="color: #008000;">#!/usr/bin/env bash</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #795e26;">set</span><span style="color: #000000;"> -ex</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #000000;">sudo apt-get install -y \</span></code></code>
+<code><code><span style="color: #000000;">    libudev-dev libical-dev libreadline-dev libdbus-1-dev libasound2-dev \</span></code></code>
+<code><code><span style="color: #000000;">    build-essential</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #795e26;">cd</span><span style="color: #000000;"> /tmp </span></code></code>
+<code><code><span style="color: #000000;">wget https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz</span></code></code>
+<code><code><span style="color: #000000;">tar -xf bluez-5.50.tar.xz</span></code></code>
+<code><code></code></code>
+<code><code><span style="color: #795e26;">cd</span><span style="color: #000000;"> bluez-5.50</span></code></code>
+<code><code><span style="color: #000000;">./configure --enable-midi --with-systemdsystemunitdir=/etc/systemd/system</span></code></code>
+<code><code><span style="color: #000000;">make</span></code></code>
+<code><code><span style="color: #000000;">sudo make install</span></code></code>
+<code><code><span style="color: #000000;">sudo apt-get install --reinstall bluez</span></code></code></pre>
+
+    You can download it <a href="resources/bluez.sh">here</a>. Then allow
+    execution and run it:
+    <pre class="console"><code>chmod +x bluez.sh</code>
+<code>./bluez.sh</code></pre>
+<p></p>
+
 </div>
     </article>
-    <footer>Last edited: Sunday, 30 June 2019 12:23 UTC</footer>
+    <footer>Last edited: Sunday, 30 June 2019 13:07 UTC</footer>
 
 
 </body></html>

@@ -427,21 +427,28 @@ body {
 }
 
 /* --------PRINTING-------- */
+@page {
+    size: A4;
+    margin: 1.2cm 0;
+}
 @media print {
-    @page {
-        size: A4;
-        margin: 1.6cm;
-    }
     article {
         width: 100%;
         max-width: 100%;
-        margin: 0px 0px 0px 0px;
-        /* overflow-x: auto; */
+        margin: 0;
+        /* overflow-x: visible; */
         /* padding: 0px 36px 32px 36px; */
-        padding: 0;
+        padding: 0 1.6cm;
         box-shadow: none;
+        /* border-bottom: 1px solid #ccc; */
+        box-sizing: border-box;
+        display: block;
+        float: none;
+        overflow: visible;
+        position: relative;
+    }
+    article>div:last-child {
         border-bottom: 1px solid #ccc;
-        display: table;
     }
     body {
         font-size: 8.5pt;
@@ -461,9 +468,20 @@ body {
     footer {
         display: none;
     }
-}
-
-h1, h2, h3, h4, h5, h6 {
-    page-break-after: avoid;
-    -webkit-region-break-after: avoid;
+    pre {
+        font-size: 6.5pt;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        position: relative;
+        float: none;
+        display: block;
+        overflow: visible;
+        page-break-after: avoid;
+        -webkit-region-break-after: avoid;
+        page-break-inside: avoid;
+        -webkit-region-break-inside: avoid;
+    }
+    p, div {
+        page-break-before: avoid;
+    }
 }
