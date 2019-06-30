@@ -32,7 +32,7 @@ class Color {
 
   public:
     Color(std::ostream &os, const char *color) : os(os), color(color) {}
-    ~Color() { os << ANSIColors::reset; }
+    ~Color() { os << ANSIColors::reset << std::flush; }
     template <class T>
     std::ostream &operator<<(T &&t) const {
         return os << color << t;

@@ -91,6 +91,12 @@ class PagesParser {
         vector<path> resources;
     };
 
+    enum Task {
+        ClientSideLaTeX,
+        ServerSideLaTeX,
+        ServerSideLaTeXPDF,
+    };
+
   public:
     PagesParser(path source_dir, path output_dir, path template_dir)
         : source_dir(source_dir), output_dir(output_dir),
@@ -101,11 +107,7 @@ class PagesParser {
         root = load_page_directory(source_dir);
     }
 
-    enum Task {
-        ClientSideLaTeX,
-        ServerSideLaTeX,
-        ServerSideLaTeXPDF,
-    } task;
+    Task task;
 
     void exportAll(Task task = ClientSideLaTeX, unsigned int num_threads = 0) {
         py::scoped_interpreter interpreter{};
@@ -127,7 +129,7 @@ class PagesParser {
         exportDirectory(root);
         if (task == ServerSideLaTeX || task == ServerSideLaTeXPDF)
             wait_all_mjpage();
-        exportDirectory(root);
+        // cout << "LaTeX compilation done" << endl;
         if (task == ServerSideLaTeXPDF)
             exportPDFDirectory(root);
     }
@@ -135,6 +137,10 @@ class PagesParser {
   private:
     const int dev_port  = 9222;
     const int http_port = 5741;
+
+    const path tmp_dir = "/tmp/Pages";
+
+    vector<std::future<const Page &>> mjpage_futures = {};
 
     void startHTTPandChromeServers() {
         string c = "cd \"" + output_dir.parent_path().string() +
@@ -150,9 +156,6 @@ class PagesParser {
         if (system(c.c_str()) != 0) {
         }  // TODO
     }
-    const path tmp_dir = "/tmp/Pages";
-
-    vector<std::future<const Page &>> mjpage_futures = {};
 
     void handle_finished_mjpage(const Page &page) {
         Green(cout) << "Page `" << page.getTitle() << "` finished" << endl;
@@ -165,8 +168,7 @@ class PagesParser {
         std::ofstream outfile(tmp_dir / page.rel_path);
         outfile << out;
         outfile.close();
-        string command = getenv("HOME");
-        command += "/node_modules/mathjax-node-page/bin/mjpage";
+        string command = "mjpage";
         command += " --output=CommonHTML --eqno=AMS "
                    "--fontURL=/MathJax/fonts/HTML-CSS";
         command += " < \"";
@@ -445,9 +447,6 @@ class PagesParser {
 
     static string formatFileTime(std::filesystem::file_time_type ft) {
         std::stringstream buffer;
-        // buffer << "TODO";
-        // (void) ft;
-        // std::time_t tt = decltype(ft)::clock::to_time_t(ft);
         std::time_t tt = ft.time_since_epoch().count() / 1'000'000'000 +
                          6'437'664'000;  // TODO: ugly non-portable hack
         std::tm *gmt = std::gmtime(&tt);
@@ -530,9 +529,9 @@ class PagesParser {
             auto value = read_metadata_value(comment, key);
             if (value) {
                 dict[key] = *value;
-            } else {
-                // Yellow(cerr) << "Warning: missing value for key `" << key
-                //              << "` for " << file_entry << endl;
+            } else if (key != "sequence") {
+                Yellow(cerr) << "Warning: missing value for key `" << key
+                             << "` for " << file_entry << endl;
                 (void) file_entry;
             }
         }

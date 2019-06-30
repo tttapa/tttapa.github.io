@@ -1,34 +1,30 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
-<head>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
-    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-          TeX: { equationNumbers: { autoNumber: "AMS" } },
-          "fast-preview": {
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
             disabled: true
-          }
+            }
         });
     </script>
     <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <meta name="theme-color" content="#ccc">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <title>ANC</title>
+    <meta name="keywords" content="BlueZ,BlueZ 5.50,Bluetooth,Ubuntu,Linux,Installation,MIDI,ALSA">
+    <meta name="description" content="Installation instructions for BlueZ 5.50, the official Linux Bluetooth protocol stack, on Ubuntu. It's useful if you want support for MIDI over BLE.">
+    <title>BlueZ with MIDI over BLE Support</title>
 </head>
-
 <body>
     <nav>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                <path d="M0 0h48v48h-48z" fill="none" />
-                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z" />
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
             </svg>
             <h2><a href="/">Home</a></h2>
 <ul>
@@ -99,13 +95,13 @@
         </li>
     </ul>
     </li>
-    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/index.html">Ubuntu</a>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Ubuntu</a>
     <ul>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Software Installation</a>
         <ul>
-            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
-            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
-            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="openEntry" href="BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="Java.html">Java</a></li>
         </ul>
         </li>
     </ul>
@@ -116,7 +112,7 @@
                 <a href="/" title="Home">home</a>
             </i>
             <i class="material-icons">
-                <a href="index.pdf" title="Download as PDF">get_app</a>
+                <a href="BlueZ.pdf" title="Download as PDF">get_app</a>
             </i>
             <i class="material-icons">
                 <a href="javascript:window.print()" title="Print this article">print</a>
@@ -127,115 +123,51 @@
         </div>
     </nav>
     <article>
-        <h1 class="indexTitle">ANC</h1>
-        <i class="author">:author:</i>
+        <h1 class="title">BlueZ with MIDI over BLE Support</h1>
+        <i class="author">Pieter P</i>
         <div>
+<p>This is an installation guide for the Eclipse IDE on Ubuntu.</p>
 
-<H1></H1>
+<h3><a name="installing-the-dependencies" href="#installing-the-dependencies">Installing the Dependencies</a></h3>
 
-<h2><a name="attitude" href="#attitude">Attitude</a></h2>
+<p>
+    Use your package manager to install the following dependencies:
+    </p><pre class="console"><code>sudo apt install libudev-dev libical-dev libreadline-dev libdbus-1-dev libasound2-dev</code></pre>
+    You'll also need the usual build tools, so install them as well if you
+    haven't already:
+    <pre class="console"><code>sudo apt install build-essential</code></pre>
+<p></p>
 
-<h3><a name="model" href="#model">Model</a></h3>
+<h3><a name="downloading-bluez" href="#downloading-bluez">Downloading BlueZ</a></h3>
 
-<div>
-    $$ \begin{align}
-    \boldsymbol{\dot{q}} &= \frac{1}{2} \boldsymbol{q} \otimes \begin{pmatrix} 0 \\ \vec{\omega} \end{pmatrix} \\
-    \dot{\vec{\omega}} &= \Gamma_n \vec{n} + \Gamma_u \vec{u}
-    - I^{-1} \left(\vec{\omega} \times I \vec{\omega} \right) \\
-    \dot{\vec{n}} &= k_2 \left(k_1 \vec{u} - \vec{n}\right)
-    \end{align} $$
+<p>
+    You can download the latest version from
+    <a href="http://www.bluez.org/">www.bluez.org</a>, or download it directly
+    from the command line. Then extract the file you downloaded.
+    </p><pre class="console"><code>cd /tmp</code>
+<code>wget https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz</code>
+<code>tar -xf bluez-5.50.tar.xz</code></pre>
+<p></p>
 
-    There are 10 system states:
-    $$ x = \begin{pmatrix} q_0 & q_1 & q_2 & q_3 & \omega_x & \omega_y & \omega_z & n_x & n_y & n_x \end{pmatrix}^T \in
-    \mathbb{R}^{10×1} $$
+<h3><a name="building-and-installing-bluez" href="#building-and-installing-bluez">Building and Installing BlueZ</a></h3>
 
-    <ul>
-        <li>\(\boldsymbol{q}\) is the orientation of the drone, expressed as a unit quaternion.</li>
-        <li>\(\omega\) is the angular velocity of the drone.</li>
-        <li>\(n\) is the speed of the torque motors.</li>
-    </ul>
-
-    The input to the system is the control signal to the three torque motors:
-    $$ u = \begin{pmatrix} u_x & u_y & u_z \end{pmatrix}^T \in \mathbb{R}^{3×1} $$
-
-    The output (measurements) of the system are the orientation and the angular velocity:
-    $$ y = \begin{pmatrix} q_0 & q_1 & q_2 & q_3 & \omega_x & \omega_y & \omega_z \end{pmatrix}^T \in
-    \mathbb{R}^{7×1} $$
-
-    \(\Gamma_n\) and \(\Gamma_u\) are first order approximations of the motor torque in function of the motor speed and
-    control signal.
-
-</div>
-<h4><a name="linearisation" href="#linearisation">Linearisation</a></h4>
-<div>
-
-</div>
-
-<h3><a name="controller" href="#controller">Controller</a></h3>
-Linear Quadratic Regulator
-$$ Q = \begin{pmatrix}
-   1.4e+02 &        0 &        0 &        0 &        0 &        0 &        0 &        0 &        0\\
-         0 &  1.4e+02 &        0 &        0 &        0 &        0 &        0 &        0 &        0\\
-         0 &        0 &  2.4e+02 &        0 &        0 &        0 &        0 &        0 &        0\\
-         0 &        0 &        0 &     0.15 &        0 &        0 &        0 &        0 &        0\\
-         0 &        0 &        0 &        0 &     0.15 &        0 &        0 &        0 &        0\\
-         0 &        0 &        0 &        0 &        0 &    0.041 &        0 &        0 &        0\\
-         0 &        0 &        0 &        0 &        0 &        0 &    1e-10 &        0 &        0\\
-         0 &        0 &        0 &        0 &        0 &        0 &        0 &    1e-10 &        0\\
-         0 &        0 &        0 &        0 &        0 &        0 &        0 &        0 &    1e-10
-\end{pmatrix} $$
-$$ R = \begin{pmatrix}
-         1 &        0 &        0\\
-         0 &        1 &        0\\
-         0 &        0 &        1
-\end{pmatrix} $$
-
-<h3><a name="bias-rejection" href="#bias-rejection">Bias rejection</a></h3>
-<div>
-    $$ \begin{pmatrix}x_{k+1} \\ d_{k+1} \end{pmatrix} = \begin{pmatrix} A & 0 \\ 0 & I_6 \end{pmatrix} \begin{pmatrix} x_k \\ d_k \end{pmatrix} + \begin{pmatrix} B \\ 0 \end{pmatrix} u_k + \begin{pmatrix} I_9 & B & 0 \\ 0 & 0 & I_6 \end{pmatrix} \begin{pmatrix} \delta_x \\ \delta_u \\ \delta_d \end{pmatrix} \\
-    y_k = \begin{pmatrix} C & I_6 \end{pmatrix} \begin{pmatrix}x_k \\ d_k \end{pmatrix} + D u_k + v $$
-</div>
-
-<h2><a name="vragen" href="#vragen">Vragen</a></h2>
-<div><ol>
-    <li>Bias rejection attitude controller</li>
-    <li>Integral controller attitude controller</li>
-    <li>Flippen observer als yaw > 90°</li>
-    <li>SSH is traag</li>
-    <li>SSH fingerprint verandert heel de tijd</li>
-    <li>PWM limits: multiple defines</li>
-    <li>Router board bevestigen op de drone</li>
-    <li>Calibratie wanneer thrust geclamped wordt</li>
-    <li>Als de controller wegvalt, moet de drone stoppen!</li>
-</ol></div>
-
-<h2><a name="to-do" href="#to-do">To do</a></h2>
-<div><ol>
-    <li>✔ Bias rejection attitude controller</li>
-    <li>✔ Clamp thrust to 80%</li>
-    <li>✔ Vliegen RC attitude + filmpje</li>
-    <li>✔ Vliegen met altitude + filmpje</li>
-    <li>✔ Schema controllers/observers afwerken</li>
-    <li>✔ Montage GA</li>
-    <li>✔ Blender animation</li>
-    <li>Keep \(q_0\) positive (slide 135)</li>
-    <li>✔ Observer reset als thrust 0</li>
-    <li>Mousse IMU</li>
-    <li>When switching from altitude to attitude, gradually change thrust</li>
-</ol></div>
-
-
-<a href="images/ref-tracking.svg"><img src="images/ref-tracking.svg"></a>
-<a href="images/step-0-0-10.svg"><img src="images/step-0-0-10.svg"></a>
-<a href="images/step-0-10-10.svg"><img src="images/step-0-10-10.svg"></a>
-
-<!-- <video src="images/Drone.mp4"></video> -->
+<p>
+    Finally, run the configure script and make and install everything.
+    Also reinstall the version from the package manager, as explained
+    <a href="https://askubuntu.com/questions/1064406/installing-bluez-5-50-doesnt-update-bluetoothd">here</a>.
+    </p><pre class="console"><code>cd bluez-5.50</code>
+<code>./configure --enable-midi --with-systemdsystemunitdir=/etc/systemd/system</code>
+<code>make</code>
+<code>sudo make install</code>
+<code>sudo apt-get install --reinstall bluez</code></pre>
+    That's it! After rebooting, MIDI over BLE should work.<br>
+    The first time after rebooting, my computer seemed kind of slow, but
+    rebooting again solved that problem.
+<p></p>
 
 </div>
-        <hr>
-        <div class="indexContainer"></div>
     </article>
-    <footer>Last edited: Monday, 07 January 2019 16:16 UTC</footer>
-</body>
+    <footer>Last edited: Sunday, 30 June 2019 10:42 UTC</footer>
 
-</html>
+
+</body></html>
