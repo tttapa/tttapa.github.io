@@ -1,6 +1,6 @@
 var classMIDIButtonMatrix =
 [
-    [ "MIDIButtonMatrix", "d0/d54/classMIDIButtonMatrix.html#a33f8314ea373b7ba9a84a7c69ff7973f", null ],
+    [ "MIDIButtonMatrix", "d0/d54/classMIDIButtonMatrix.html#a301a88519e0d971340276caafac6622f", null ],
     [ "begin", "d0/d54/classMIDIButtonMatrix.html#af2de658359388553fbbfb0a985d1ce6e", null ],
     [ "beginAll", "d0/d54/classMIDIButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d0/d54/classMIDIButtonMatrix.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -17,7 +17,7 @@ var classMIDIButtonMatrix =
     [ "update", "d0/d54/classMIDIButtonMatrix.html#af4be5c4eb14eeea1be8e0252c570a780", null ],
     [ "updateAll", "d0/d54/classMIDIButtonMatrix.html#a8af924e5b3b708eb042919703d175ed3", null ],
     [ "addresses", "d0/d54/classMIDIButtonMatrix.html#a19c811307afad04151fe760f219ef664", null ],
-    [ "baseChannel", "d0/d54/classMIDIButtonMatrix.html#ad6697b95b9ed7ab7163e9e5916fcd5ad", null ],
+    [ "baseChannelCN", "d0/d54/classMIDIButtonMatrix.html#a26af432b777ab32aafadda5dacae5b93", null ],
     [ "next", "d0/d54/classMIDIButtonMatrix.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d0/d54/classMIDIButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

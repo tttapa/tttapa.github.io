@@ -10,7 +10,7 @@ var searchData=
   ['bank_5fselect_5flsb',['Bank_Select_LSB',['../d4/dbe/namespaceMIDI__CC.html#a3e17b64a384aae0ae4e21f30bc673930',1,'MIDI_CC']]],
   ['banksetting',['bankSetting',['../d9/d36/classOutputBank.html#a5bd1678610a11347f62e7af8c7bda4b5',1,'OutputBank']]],
   ['baseaddress',['baseAddress',['../d2/d87/classMIDIButtons.html#a33688ac1aae36fabb6ff45183a9c8be5',1,'MIDIButtons::baseAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a328e24602541106644e51fb9b4679f15',1,'Bankable::MIDIButtons::baseAddress()'],['../d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a656050d5d5657013853098bfb3c816fb',1,'Bankable::MIDIFilteredAnalogAddressable::baseAddress()']]],
-  ['basechannel',['baseChannel',['../d0/d54/classMIDIButtonMatrix.html#ad6697b95b9ed7ab7163e9e5916fcd5ad',1,'MIDIButtonMatrix::baseChannel()'],['../d3/d65/classBankable_1_1MIDIButtonMatrix.html#a3a59b2c010fc696a75b5d61b33390883',1,'Bankable::MIDIButtonMatrix::baseChannel()']]],
+  ['basechannelcn',['baseChannelCN',['../d0/d54/classMIDIButtonMatrix.html#a26af432b777ab32aafadda5dacae5b93',1,'MIDIButtonMatrix::baseChannelCN()'],['../d3/d65/classBankable_1_1MIDIButtonMatrix.html#a0fc35e64c388523b8e405260bd94361f',1,'Bankable::MIDIButtonMatrix::baseChannelCN()']]],
   ['baud',['baud',['../db/dc4/classSerialDebugMIDI__Interface.html#a29017961303b5040ee17afc9589e87f3',1,'SerialDebugMIDI_Interface::baud()'],['../d9/db8/classSerialMIDI__Interface.html#acbae10bfe3f32c2fc60b7a01fb35d1ad',1,'SerialMIDI_Interface::baud()']]],
   ['bb',['Bb',['../d7/d78/namespaceMIDI__Notes.html#a3fb964ab484d091e83ead44b3649d667',1,'MIDI_Notes']]],
   ['beats',['BEATS',['../d7/dc7/namespaceMCU.html#a4d49d2667fe2c176b37fe25d273391bc',1,'MCU']]],

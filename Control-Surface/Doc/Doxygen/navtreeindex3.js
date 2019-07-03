@@ -1,5 +1,8 @@
 var NAVTREEINDEX3 =
 {
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html":[4,0,12],
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef":[4,0,12,16],
+"d2/d2b/classBankable_1_1NoteButtonMatrix.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,12,6],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a4154c3302c845a9dc6a455600c4d0e2b":[4,0,12,17],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a4a13b63f90ec988cd14d871df9dbc53b":[4,0,12,20],
 "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a4c1c6bd44da328dd5b4dc29503219d09":[4,0,12,10],
@@ -38,7 +41,7 @@ var NAVTREEINDEX3 =
 "d2/d48/classChannel.html#ada142fabcfc0e77e178af46139b2392f":[6,0,27,4],
 "d2/d56/BitArray_8cpp.html":[7,0,20],
 "d2/d56/BitArray_8cpp_source.html":[7,0,20],
-"d2/d77/VU-Bridge_8ino-example.html":[8,23],
+"d2/d77/VU-Bridge_8ino-example.html":[8,24],
 "d2/d7b/CCPotentiometer_8cpp.html":[7,0,52],
 "d2/d7b/CCPotentiometer_8cpp_source.html":[7,0,52],
 "d2/d87/classMIDIButtons.html":[6,0,82],
@@ -69,8 +72,8 @@ var NAVTREEINDEX3 =
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a38d9872489fd94dee25077c16073e8cf":[6,0,2,0,1,25],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a39912b6c8d039c840aa9a1e73e645318":[6,0,2,0,1,16],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a3cdc427ed1a74ba765311e87dbdbe60b":[6,0,2,0,1,23],
-"d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,2,0,1,26],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,2,0,1,27],
+"d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,2,0,1,26],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,2,0,1,13],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a5723f4a7c22aea22a940f481c48bd798":[6,0,2,0,1,8],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,2,0,1,28],
@@ -117,6 +120,7 @@ var NAVTREEINDEX3 =
 "d2/daa/classCCButton.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,16,8],
 "d2/daa/classCCButton.html#adca6f4fa37b6061aacc171aaddd741af":[4,0,16,17],
 "d2/daa/classCCButton.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,16,13],
+"d2/dab/VU-Bridge-ESP32_8ino-example.html":[8,23],
 "d2/dac/Bankable_2CCButtonLatching_8hpp.html":[7,0,38],
 "d2/dac/Bankable_2CCButtonLatching_8hpp_source.html":[7,0,38],
 "d2/daf/classNoteButtonMatrix.html":[4,0,28],
@@ -245,9 +249,5 @@ var NAVTREEINDEX3 =
 "d2/def/classBankable_1_1CCButtons.html#ad4273e4aa2f15de8dbe478af16af259e":[4,0,5,8],
 "d2/def/classBankable_1_1CCButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf":[4,0,5,13],
 "d2/df6/structXBitmap.html":[6,0,154],
-"d2/df6/structXBitmap.html#aa4a95537e273a4a82603f1c2155f4f6d":[6,0,154,3],
-"d2/df6/structXBitmap.html#aadc2e950f43a466fb09b0b0239dcf3ee":[6,0,154,2],
-"d2/df6/structXBitmap.html#ae81f5ca02f09dc774c8150359e02f019":[6,0,154,1],
-"d2/df6/structXBitmap.html#af6717b9ebef66415a4dea6fc7799fadd":[6,0,154,0],
-"d3/d09/CCButtonLatching_8cpp.html":[7,0,37]
+"d2/df6/structXBitmap.html#aa4a95537e273a4a82603f1c2155f4f6d":[6,0,154,3]
 };

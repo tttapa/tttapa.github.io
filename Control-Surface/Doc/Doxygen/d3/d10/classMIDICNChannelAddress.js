@@ -1,6 +1,7 @@
 var classMIDICNChannelAddress =
 [
     [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a52a20f2627c4d9ff0cb391c7d55a7770", null ],
+    [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a799205f87bec7154e82dd80b60ae69c2", null ],
     [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a20a349458b4401d584e9ee713be0a8dc", null ],
     [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a65c831b77c8d5f0d89706e1d41303a77", null ],
     [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html#a3f570e6ccee7abc542cfdec6ff674f79", null ],

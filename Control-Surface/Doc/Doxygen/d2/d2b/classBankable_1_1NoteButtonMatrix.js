@@ -1,6 +1,6 @@
 var classBankable_1_1NoteButtonMatrix =
 [
-    [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga4d88a43d071b56eaceb9c9a73b646d8d", null ],
+    [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga93c14c6de83db24a63d451cff175c8a2", null ],
     [ "begin", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
     [ "beginAll", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

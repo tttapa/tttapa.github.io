@@ -1,5 +1,8 @@
 var NAVTREEINDEX1 =
 {
+"d0/dbb/SysExBuffer_8hpp.html":[7,0,263],
+"d0/dbb/SysExBuffer_8hpp_source.html":[7,0,263],
+"d0/dbf/VPotDisplay_8hpp.html":[7,0,280],
 "d0/dbf/VPotDisplay_8hpp_source.html":[7,0,280],
 "d0/dc9/BLEMIDI_8hpp.html":[7,0,23],
 "d0/dc9/BLEMIDI_8hpp.html#a823310164de4a8813b2f815c36553864":[7,0,23,2],
@@ -246,8 +249,5 @@ var NAVTREEINDEX1 =
 "d1/d54/classSelector.html#a414872fbd3ea45e7ac44a42fcf2fc88d":[6,0,126,6],
 "d1/d54/classSelector.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,126,23],
 "d1/d54/classSelector.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,126,14],
-"d1/d54/classSelector.html#a4cdf97a0ac9e4848892db4e2b6dc78d0":[6,0,126,20],
-"d1/d54/classSelector.html#a57b6615469e554c514a9ff56dc24908f":[6,0,126,24],
-"d1/d54/classSelector.html#a5c008d0d20b072e46c14b9c48ec6c45b":[6,0,126,3],
-"d1/d54/classSelector.html#a60c471a816b23b12cbd1f3ab797c065c":[6,0,126,25]
+"d1/d54/classSelector.html#a4cdf97a0ac9e4848892db4e2b6dc78d0":[6,0,126,20]
 };

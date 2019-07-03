@@ -1,6 +1,6 @@
 var classBankable_1_1CCButtonMatrix =
 [
-    [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga7265f7d7ef8d53a9d25250c4bafae5c6", null ],
+    [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga738e57488f03a423d3ac19e4246e949a", null ],
     [ "begin", "db/d2b/classBankable_1_1CCButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
     [ "beginAll", "db/d2b/classBankable_1_1CCButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "disable", "db/d2b/classBankable_1_1CCButtonMatrix.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

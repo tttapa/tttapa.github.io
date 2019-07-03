@@ -294,19 +294,13 @@ var files_dup =
       [ "MIDIInputElement", "d9/db1/classMIDIInputElement.html", "d9/db1/classMIDIInputElement" ]
     ] ],
     [ "MIDIInputElementCC.cpp", "d7/da6/MIDIInputElementCC_8cpp.html", null ],
-    [ "MIDIInputElementCC.hpp", "df/de0/MIDIInputElementCC_8hpp.html", [
-      [ "MIDIInputElementCC", "d3/d96/classMIDIInputElementCC.html", "d3/d96/classMIDIInputElementCC" ]
-    ] ],
+    [ "MIDIInputElementCC.hpp", "df/de0/MIDIInputElementCC_8hpp.html", "df/de0/MIDIInputElementCC_8hpp" ],
     [ "MIDIInputElementChannelPressure.cpp", "d2/dcc/MIDIInputElementChannelPressure_8cpp.html", null ],
-    [ "MIDIInputElementChannelPressure.hpp", "d8/d4f/MIDIInputElementChannelPressure_8hpp.html", [
-      [ "MIDIInputElementChannelPressure", "d1/df7/classMIDIInputElementChannelPressure.html", "d1/df7/classMIDIInputElementChannelPressure" ]
-    ] ],
+    [ "MIDIInputElementChannelPressure.hpp", "d8/d4f/MIDIInputElementChannelPressure_8hpp.html", "d8/d4f/MIDIInputElementChannelPressure_8hpp" ],
     [ "MIDIInputElementNote.cpp", "d0/d31/MIDIInputElementNote_8cpp.html", null ],
-    [ "MIDIInputElementNote.hpp", "d5/d5f/MIDIInputElementNote_8hpp.html", null ],
+    [ "MIDIInputElementNote.hpp", "d5/d5f/MIDIInputElementNote_8hpp.html", "d5/d5f/MIDIInputElementNote_8hpp" ],
     [ "MIDIInputElementPC.cpp", "d5/ddf/MIDIInputElementPC_8cpp.html", null ],
-    [ "MIDIInputElementPC.hpp", "d7/d33/MIDIInputElementPC_8hpp.html", [
-      [ "MIDIInputElementPC", "db/d1d/classMIDIInputElementPC.html", "db/d1d/classMIDIInputElementPC" ]
-    ] ],
+    [ "MIDIInputElementPC.hpp", "d7/d33/MIDIInputElementPC_8hpp.html", "d7/d33/MIDIInputElementPC_8hpp" ],
     [ "MIDINote.cpp", "d5/da5/MIDINote_8cpp.html", null ],
     [ "MIDINote.hpp", "d2/d97/MIDINote_8hpp.html", [
       [ "MIDINote_Base", "da/d1b/classMIDINote__Base.html", "da/d1b/classMIDINote__Base" ],

@@ -74,7 +74,7 @@ var group__MIDIOutputElements =
       [ "previous", "d9/df9/classBankable_1_1CCButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtonMatrix", "db/d2b/classBankable_1_1CCButtonMatrix.html", [
-      [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga7265f7d7ef8d53a9d25250c4bafae5c6", null ],
+      [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga738e57488f03a423d3ac19e4246e949a", null ],
       [ "begin", "db/d2b/classBankable_1_1CCButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
       [ "beginAll", "db/d2b/classBankable_1_1CCButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
       [ "disable", "db/d2b/classBankable_1_1CCButtonMatrix.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -266,7 +266,7 @@ var group__MIDIOutputElements =
       [ "previous", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtonMatrix", "d2/d2b/classBankable_1_1NoteButtonMatrix.html", [
-      [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga4d88a43d071b56eaceb9c9a73b646d8d", null ],
+      [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga93c14c6de83db24a63d451cff175c8a2", null ],
       [ "begin", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
       [ "beginAll", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
       [ "disable", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -425,7 +425,7 @@ var group__MIDIOutputElements =
       [ "previous", "d8/db0/classCCButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtonMatrix", "d3/d2a/classCCButtonMatrix.html", [
-      [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#gaca1ffefdf0adbd7df0285f18f5a67928", null ],
+      [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga68ef3378306671229f294e53fb5fff11", null ],
       [ "begin", "d3/d2a/classCCButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
       [ "beginAll", "d3/d2a/classCCButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
       [ "disable", "d3/d2a/classCCButtonMatrix.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],
@@ -622,7 +622,7 @@ var group__MIDIOutputElements =
       [ "previous", "d3/d6c/classNoteButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtonMatrix", "d2/daf/classNoteButtonMatrix.html", [
-      [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga87e7f8dd26c1b5395a767d7033ba1cce", null ],
+      [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga38540881190e4382108fee251b4a4ca0", null ],
       [ "begin", "d2/daf/classNoteButtonMatrix.html#af2de658359388553fbbfb0a985d1ce6e", null ],
       [ "beginAll", "d2/daf/classNoteButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
       [ "disable", "d2/daf/classNoteButtonMatrix.html#a9cf409bc7effa13042ebd1d1e02d1046", null ],

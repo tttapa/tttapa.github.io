@@ -53,7 +53,7 @@ var searchData=
   ['vpotringleds_2ecpp',['VPotRingLEDs.cpp',['../d4/de6/VPotRingLEDs_8cpp.html',1,'']]],
   ['vpotringleds_2ehpp',['VPotRingLEDs.hpp',['../dc/d48/VPotRingLEDs_8hpp.html',1,'']]],
   ['vpotringleds_5fbase',['VPotRingLEDs_Base',['../de/d52/classMCU_1_1VPotRingLEDs__Base.html',1,'MCU::VPotRingLEDs_Base'],['../de/d52/classMCU_1_1VPotRingLEDs__Base.html#a03c9f9b774ba669f0a02f7b326382c1c',1,'MCU::VPotRingLEDs_Base::VPotRingLEDs_Base()']]],
-  ['vu',['VU',['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable::VU&lt; N &gt;'],['../d8/d4c/classMCU_1_1VU.html',1,'MCU::VU'],['../d8/d4c/classMCU_1_1VU.html#ae95cc9bc3749b144ede2c50d5f92b322',1,'MCU::VU::VU()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a25224e1cd150901c02c38731801223f0',1,'MCU::Bankable::VU::VU()'],['../d4/d42/classMCU_1_1VUDisplay.html#ac4bf0fcba04b3fd9caf2717b6caf0058',1,'MCU::VUDisplay::vu()']]],
+  ['vu',['VU',['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable::VU&lt; N &gt;'],['../d8/d4c/classMCU_1_1VU.html',1,'MCU::VU'],['../d4/d42/classMCU_1_1VUDisplay.html#ac4bf0fcba04b3fd9caf2717b6caf0058',1,'MCU::VUDisplay::vu()'],['../d8/d4c/classMCU_1_1VU.html#ae95cc9bc3749b144ede2c50d5f92b322',1,'MCU::VU::VU()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a25224e1cd150901c02c38731801223f0',1,'MCU::Bankable::VU::VU()']]],
   ['vu_2ecpp',['VU.cpp',['../d6/d26/VU_8cpp.html',1,'']]],
   ['vu_2ehpp',['VU.hpp',['../db/dda/VU_8hpp.html',1,'']]],
   ['vu_3c_20m_20_3e',['VU&lt; M &gt;',['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable']]],
