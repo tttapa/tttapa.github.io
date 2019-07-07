@@ -581,7 +581,11 @@ class PagesParser {
                      << " has no index.html → default index created" << endl;
         path index               = directory / "index.html";
         std::ofstream index_file = index;
-        index_file << metadata_template;
+        string contents          = metadata_template;
+        Color(cerr, ANSIColors::magenta)
+            << index.parent_path().filename() << endl;
+        replace(contents, ":title:", index.parent_path().filename());
+        index_file << contents;
         index_file.close();
         load_page_file(fs::directory_entry(index), result);
     }

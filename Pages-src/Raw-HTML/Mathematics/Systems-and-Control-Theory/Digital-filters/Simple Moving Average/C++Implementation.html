@@ -1,0 +1,78 @@
+<!--
+@title: C++ Implementation
+@author: Pieter P
+@sequence: 30
+@keywords: SMA, Simple Moving Average, FIR filter, filters, DSP, C++, implementation, algorithm
+@description: A very fast and efficient Simple Moving Average implementation
+              in C++.
+-->
+
+<html>
+
+<h3>Simplifying the Difference Equation</h3>
+
+<p>
+Recall the Simple Moving Average difference equation:
+$$ \begin{equation} y[n] = \frac{1}{N} \sum_{i=0}^{N-1}x[n-i] \end{equation} $$
+A naive approach would be to implement the difference equation directly: keeping
+the last \(N-1\) inputs, and calculate the sum on each iteration, calculating 
+\(N-1\) additions at each time step.<br>
+However, we can do much better if we notice how only two terms of the sum change
+each time:
+
+$$ \begin{split}
+   y[n+1] &amp;= \frac{1}{N} \sum_{i=0}^{N-1}x[n+1-i] \\
+   &amp;= \frac{1}{N} \left(x[n+1] + \sum_{i=1}^{N-1}x[n+1-i]\right) \\
+   &amp;= \frac{1}{N} \left(x[n+1] + \sum_{i=1}^{N-1}x[n+1-i] + x[n+1-N] - x[n+1-N]\right) \\
+   &amp;= \frac{1}{N} \left(x[n+1] + \sum_{i=1}^{N}x[n+1-i] - x[n+1-N]\right) \\
+   &amp;= \frac{1}{N} \left(x[n+1] + \sum_{i=0}^{N-1}x[n-i] - x[n+1-N]\right) \\
+   &amp;= y[n] + \frac{1}{N} \Big(x[n+1] - x[n+1-N]\Big) \\
+   \end{split} $$
+
+We can now define the sum \(S[n]\) as follows:
+$$ \begin{split} 
+    S[n] &amp;\triangleq N\cdot y[n] \\
+    &amp;= \sum_{i=0}^{N-1}x[n-i] \\
+    \Leftrightarrow\; y[n] &amp;= S[n] / N 
+   \end{split} $$
+The difference equation then becomes:
+$$ \begin{equation} S[n+1] = S[n] + x[n+1] - x[n+1-N] \label{impl_diff} \end{equation} $$
+To update the sum, each iteration now requires only one addition and one 
+subtraction, as well as some housekeeping to remember the previous inputs.
+To get the output \(y[n]\), a division by \(N\) is needed.
+</p>
+
+<h3>C++ Implementation</h3>
+
+<p>
+We can now implement Equation \(\ref{impl_diff}\) directly, and we'll use a 
+rounding division instead of truncating the quotient. Note that this rounding 
+operation is valid for unsigned integer types only.<br>
+The previous inputs \(x[n-i]\) are kept in a circular buffer.
+
+<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #af00db;">#include</span><span style="color: #0000ff;"> </span><span style="color: #a31515;">&lt;stdint.h&gt;</span></code>
+<code></code>
+<code><span style="color: #0000ff;">template</span><span style="color: #000000;"> &lt;</span><span style="color: #0000ff;">uint8_t</span><span style="color: #000000;"> </span><span style="color: #267f99;">N</span><span style="color: #000000;">, </span><span style="color: #0000ff;">class </span><span style="color: #267f99;">input_t</span><span style="color: #000000;"> </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">uint16_t</span><span style="color: #000000;">, </span><span style="color: #0000ff;">class </span><span style="color: #267f99;">sum_t</span><span style="color: #000000;"> </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #0000ff;">uint32_t</span><span style="color: #000000;">&gt;</span></code>
+<code><span style="color: #0000ff;">class</span><span style="color: #000000;"> </span><span style="color: #267f99;">SMA</span><span style="color: #000000;"> {</span></code>
+<code><span style="color: #000000;">  </span><span style="color: #0000ff;">public:</span></code>
+<code><span style="color: #000000;">    </span><span style="color: #267f99;">input_t</span><span style="color: #000000;"> </span><span style="color: #af00db;">operator</span><span style="color: #000000;">()(</span><span style="color: #267f99;">input_t</span><span style="color: #000000;"> </span><span style="color: #001080;">input</span><span style="color: #000000;">) {</span></code>
+<code><span style="color: #000000;">        sum </span><span style="color: #000000;">-=</span><span style="color: #000000;"> </span><span style="color: #001080;">previousInputs</span><span style="color: #000000;">[index];</span></code>
+<code><span style="color: #000000;">        sum </span><span style="color: #000000;">+=</span><span style="color: #000000;"> input;</span></code>
+<code><span style="color: #000000;">        </span><span style="color: #001080;">previousInputs</span><span style="color: #000000;">[index] </span><span style="color: #000000;">=</span><span style="color: #000000;"> input;</span></code>
+<code><span style="color: #000000;">        </span><span style="color: #af00db;">if</span><span style="color: #000000;"> (</span><span style="color: #000000;">++</span><span style="color: #000000;">index </span><span style="color: #000000;">==</span><span style="color: #000000;"> N)</span></code>
+<code><span style="color: #000000;">            index </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">0</span><span style="color: #000000;">;</span></code>
+<code><span style="color: #000000;">        </span><span style="color: #af00db;">return</span><span style="color: #000000;"> (sum </span><span style="color: #000000;">+</span><span style="color: #000000;"> (N </span><span style="color: #000000;">/</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">)) </span><span style="color: #000000;">/</span><span style="color: #000000;"> N;</span></code>
+<code><span style="color: #000000;">        </span><span style="color: #795e26;">static_assert</span><span style="color: #000000;">(</span></code>
+<code><span style="color: #000000;">            </span><span style="color: #795e26;">sum_t</span><span style="color: #000000;">(</span><span style="color: #09885a;">0</span><span style="color: #000000;">) </span><span style="color: #000000;">&lt;</span><span style="color: #000000;"> </span><span style="color: #795e26;">sum_t</span><span style="color: #000000;">(</span><span style="color: #000000;">-</span><span style="color: #09885a;">1</span><span style="color: #000000;">),  </span><span style="color: #008000;">// Check that `sum_t` is an unsigned type</span></code>
+<code><span style="color: #000000;">            </span><span style="color: #a31515;">"Error: sum data type should be an unsigned integer, otherwise, "</span></code>
+<code><span style="color: #000000;">            </span><span style="color: #a31515;">"the rounding operation in the return statement is invalid."</span><span style="color: #000000;">);</span></code>
+<code><span style="color: #000000;">    }</span></code>
+<code></code>
+<code><span style="color: #000000;">  </span><span style="color: #0000ff;">private:</span></code>
+<code><span style="color: #000000;">    </span><span style="color: #0000ff;">uint8_t</span><span style="color: #000000;"> index             </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">0</span><span style="color: #000000;">;</span></code>
+<code><span style="color: #000000;">    </span><span style="color: #267f99;">input_t</span><span style="color: #000000;"> </span><span style="color: #001080;">previousInputs</span><span style="color: #000000;">[N] </span><span style="color: #000000;">=</span><span style="color: #000000;"> {};</span></code>
+<code><span style="color: #000000;">    </span><span style="color: #267f99;">sum_t</span><span style="color: #000000;"> sum                 </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">0</span><span style="color: #000000;">;</span></code>
+<code><span style="color: #000000;">};</span></code></pre>
+</p>
+
+</html>
