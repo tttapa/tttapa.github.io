@@ -3,6 +3,7 @@ var hierarchy =
     [ "_Setbase", "da/d80/struct__Setbase.html", null ],
     [ "_Setbytesep", "d6/d9e/struct__Setbytesep.html", null ],
     [ "_Setprecision", "df/da8/struct__Setprecision.html", null ],
+    [ "AudioVU::Analyzer", "d0/d18/classAudioVU_1_1Analyzer.html", null ],
     [ "Array< T, N >", "d7/d6a/structArray.html", null ],
     [ "Array< AudioMixer4 *, N >", "d7/d6a/structArray.html", null ],
     [ "Array< Button, NUMBER_OF_BUTTONS >", "d7/d6a/structArray.html", null ],
@@ -87,6 +88,7 @@ var hierarchy =
     [ "BLEServerCallbacks", null, [
       [ "BluetoothMIDI_Interface", "d0/d89/classBluetoothMIDI__Interface.html", null ]
     ] ],
+    [ "BresenhamLine", "d6/d99/classBresenhamLine.html", null ],
     [ "Button", "d1/d19/classButton.html", null ],
     [ "ButtonMatrix< nb_rows, nb_cols >", "d8/d6c/classButtonMatrix.html", [
       [ "Bankable::MIDIButtonMatrix< sendOn, sendOff, nb_rows, nb_cols >", "d3/d65/classBankable_1_1MIDIButtonMatrix.html", null ],
@@ -119,6 +121,7 @@ var hierarchy =
     ] ],
     [ "DoublyLinkable< DisplayElement >", "d4/d23/classDoublyLinkable.html", [
       [ "DisplayElement", "d8/d43/classDisplayElement.html", [
+        [ "MCU::AnalogVUDisplay", "dc/d95/classMCU_1_1AnalogVUDisplay.html", null ],
         [ "MCU::TimeDisplayDisplay", "d1/dc8/classMCU_1_1TimeDisplayDisplay.html", null ],
         [ "MCU::VPotDisplay", "d3/d98/classMCU_1_1VPotDisplay.html", null ],
         [ "MCU::VUDisplay", "d4/d42/classMCU_1_1VUDisplay.html", null ],
@@ -415,6 +418,7 @@ var hierarchy =
       [ "MIDIInputElementPC", "db/d1d/classMIDIInputElementPC.html", null ]
     ] ],
     [ "MotorFader", "d1/d0f/structMotorFader.html", null ],
+    [ "MovingCoilBallistics", "d0/d49/classMovingCoilBallistics.html", null ],
     [ "DoublyLinkedList< Node >::node_iterator_base< INode >", "db/d52/classDoublyLinkedList_1_1node__iterator__base.html", [
       [ "DoublyLinkedList< Node >::node_iterator< INode >", "dd/d02/classDoublyLinkedList_1_1node__iterator.html", null ],
       [ "DoublyLinkedList< Node >::reverse_node_iterator< INode >", "d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html", null ]
@@ -434,6 +438,7 @@ var hierarchy =
       [ "DisplayInterface", "df/d42/classDisplayInterface.html", null ]
     ] ],
     [ "Printable", null, [
+      [ "BresenhamLine::Pixel", "d4/d38/structBresenhamLine_1_1Pixel.html", null ],
       [ "MCU::SevenSegmentDisplay< LENGTH >", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", null ],
       [ "MCU::SevenSegmentDisplay< AssignmentDisplayLength >", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", null ],
       [ "MCU::SevenSegmentDisplay< TimeDisplayLength >", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", null ]

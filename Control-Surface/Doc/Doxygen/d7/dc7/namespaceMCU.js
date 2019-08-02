@@ -1,6 +1,7 @@
 var namespaceMCU =
 [
     [ "Bankable", "df/d6e/namespaceMCU_1_1Bankable.html", "df/d6e/namespaceMCU_1_1Bankable" ],
+    [ "AnalogVUDisplay", "dc/d95/classMCU_1_1AnalogVUDisplay.html", "dc/d95/classMCU_1_1AnalogVUDisplay" ],
     [ "AssignmentDisplay", "d1/d08/classMCU_1_1AssignmentDisplay.html", "d1/d08/classMCU_1_1AssignmentDisplay" ],
     [ "SevenSegmentDisplay", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", "d5/d54/classMCU_1_1SevenSegmentDisplay" ],
     [ "TimeDisplay", "df/d69/classMCU_1_1TimeDisplay.html", "df/d69/classMCU_1_1TimeDisplay" ],

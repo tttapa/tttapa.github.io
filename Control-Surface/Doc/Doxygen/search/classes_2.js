@@ -9,6 +9,7 @@ var searchData=
   ['bitarray_3c_208_20_2a8_20_3e',['BitArray&lt; 8 *8 &gt;',['../db/de9/classBitArray.html',1,'']]],
   ['blemidi',['BLEMIDI',['../d8/d39/classBLEMIDI.html',1,'']]],
   ['bluetoothmidi_5finterface',['BluetoothMIDI_Interface',['../d0/d89/classBluetoothMIDI__Interface.html',1,'']]],
+  ['bresenhamline',['BresenhamLine',['../d6/d99/classBresenhamLine.html',1,'']]],
   ['button',['Button',['../d1/d19/classButton.html',1,'']]],
   ['buttonmatrix',['ButtonMatrix',['../d8/d6c/classButtonMatrix.html',1,'']]]
 ];

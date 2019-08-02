@@ -16,6 +16,7 @@ var searchData=
   ['bluepins',['bluePins',['../d8/db4/classShiftRegisterOutBase.html#a4fc069f268ac935d5b478c04c8d74a0b',1,'ShiftRegisterOutBase']]],
   ['bluetoothmidi_5finterface',['BluetoothMIDI_Interface',['../d0/d89/classBluetoothMIDI__Interface.html#ae406d082db68de691732ccfa35dbc751',1,'BluetoothMIDI_Interface']]],
   ['boolalpha',['boolalpha',['../da/d69/PrintStream_8cpp.html#aa88c44c66680f55fd42b3a19095aff3f',1,'boolalpha(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#aa88c44c66680f55fd42b3a19095aff3f',1,'boolalpha(Print &amp;printer):&#160;PrintStream.cpp']]],
+  ['bresenhamline',['BresenhamLine',['../d6/d99/classBresenhamLine.html#a3467477bbbef1f53f7a233966e3c3ce9',1,'BresenhamLine::BresenhamLine(Pixel start, int cos, int sin)'],['../d6/d99/classBresenhamLine.html#a358c5c14cc8010e14fcdfdfb57cfa1e6',1,'BresenhamLine::BresenhamLine(Pixel start, float angle)']]],
   ['button',['Button',['../d1/d19/classButton.html#a3b36df1ae23c58aedb9e15a713159459',1,'Button::Button()'],['../d1/d19/classButton.html#a1ccc15ff0a38286a609ee5cda2b9e2f4',1,'Button::Button(pin_t pin)']]],
   ['buttonmatrix',['ButtonMatrix',['../d8/d6c/classButtonMatrix.html#ad77595d9dcb8623f01a73e6adc955a7b',1,'ButtonMatrix']]]
 ];

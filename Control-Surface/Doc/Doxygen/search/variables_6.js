@@ -12,7 +12,7 @@ var searchData=
   ['fader_5ftouch',['FADER_TOUCH',['../d7/dc7/namespaceMCU.html#adbd1f576b66e92943c2d8d3e19e08a46',1,'MCU']]],
   ['fader_5ftouch_5fmaster',['FADER_TOUCH_MASTER',['../d7/dc7/namespaceMCU.html#a0926b23e79c7619b77bb90e84f38a75c',1,'MCU']]],
   ['fast_5ffwd',['FAST_FWD',['../d7/dc7/namespaceMCU.html#af3a4109ef62d17f7b8d5b22666d37f3b',1,'MCU']]],
-  ['filter',['filter',['../d4/dce/classAudioVU.html#a02be22bcd193cfc550b11f9de415b327',1,'AudioVU::filter()'],['../da/da7/classFilteredAnalog.html#a10c62b18447081750a8ad13df38ffdc8',1,'FilteredAnalog::filter()']]],
+  ['filter',['filter',['../da/da7/classFilteredAnalog.html#a10c62b18447081750a8ad13df38ffdc8',1,'FilteredAnalog']]],
   ['filtered',['filtered',['../d7/d40/classEMA.html#ae4550b22dcf19b3e6c15e7ffa09aeefb',1,'EMA::filtered()'],['../db/d6f/classEMA__f.html#a51014d3b88b666e6565a6d8be53538fa',1,'EMA_f::filtered()']]],
   ['filtered_5finput_5fupdate_5finterval',['FILTERED_INPUT_UPDATE_INTERVAL',['../db/d02/Settings_8hpp.html#a888fcdd0f365245e3e32bb1144eb5fc8',1,'Settings.hpp']]],
   ['filteredanalog',['filteredAnalog',['../d4/de3/classVolumeControl.html#a6d6dac5db13da47c9147c81f2c8f9e29',1,'VolumeControl::filteredAnalog()'],['../d0/dd2/classMIDIFilteredAnalogAddressable.html#a943adc039dcc704d2d3aa8087ceb4fa2',1,'MIDIFilteredAnalogAddressable::filteredAnalog()'],['../d5/d8e/classMIDIFilteredAnalog.html#a45dd2083e7121832821f355ad5214ea2',1,'MIDIFilteredAnalog::filteredAnalog()'],['../d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#abfca8e8cf5b6b1c4164375d3503e5d5e',1,'Bankable::MIDIFilteredAnalogAddressable::filteredAnalog()'],['../db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a72608be0106f4f08dc13d8c30bdad7f4',1,'Bankable::MIDIFilteredAnalog::filteredAnalog()'],['../da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a885b86fde8a54b541103a716585de7e4',1,'ManyAddresses::MIDIFilteredAnalogAddressable::filteredAnalog()']]],
@@ -23,5 +23,6 @@ var searchData=
   ['floor_5fcorrection',['FLOOR_CORRECTION',['../da/d0a/classMCU_1_1VULEDs__Base.html#ae61be50843c5c44fc974e8a1d1ab1882',1,'MCU::VULEDs_Base']]],
   ['foot_5fcontroller',['Foot_Controller',['../d4/dbe/namespaceMIDI__CC.html#ad1b47e6a838ac359dfd884a7e08e2ba3',1,'MIDI_CC']]],
   ['foot_5fcontroller_5flsb',['Foot_Controller_LSB',['../d4/dbe/namespaceMIDI__CC.html#a45b427c1f69ff3bd7fcb7ad211cd7634',1,'MIDI_CC']]],
-  ['formatprintstream',['formatPrintStream',['../da/d69/PrintStream_8cpp.html#aa9cd8589bac070bb2ab968b4f9c15231',1,'PrintStream.cpp']]]
+  ['formatprintstream',['formatPrintStream',['../da/d69/PrintStream_8cpp.html#aa9cd8589bac070bb2ab968b4f9c15231',1,'PrintStream.cpp']]],
+  ['friction',['friction',['../d0/d49/classMovingCoilBallistics.html#af7cee52ab494dc6ec690a858cf516649',1,'MovingCoilBallistics']]]
 ];

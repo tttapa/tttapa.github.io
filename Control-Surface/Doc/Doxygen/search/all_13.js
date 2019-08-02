@@ -3,6 +3,10 @@ var searchData=
   ['teensy_20audio',['Teensy Audio',['../d3/d5c/group__Audio.html',1,'']]],
   ['teensyusbtypes_2ehpp',['TeensyUSBTypes.hpp',['../d9/d98/TeensyUSBTypes_8hpp.html',1,'']]],
   ['text',['text',['../d5/d54/classMCU_1_1SevenSegmentDisplay.html#adc7a66657391fdd760e190bfc9ee5292',1,'MCU::SevenSegmentDisplay']]],
+  ['theta',['theta',['../dc/d95/classMCU_1_1AnalogVUDisplay.html#a4100975ea21c8bdd80bd7cb77a2afd65',1,'MCU::AnalogVUDisplay']]],
+  ['theta_5fdiff',['theta_diff',['../dc/d95/classMCU_1_1AnalogVUDisplay.html#a662911e134a213cbffd5d6154dea13ff',1,'MCU::AnalogVUDisplay']]],
+  ['theta_5fdot',['theta_dot',['../dc/d95/classMCU_1_1AnalogVUDisplay.html#adba9d64f5f652ab4656dfd3b4f3316f1',1,'MCU::AnalogVUDisplay']]],
+  ['theta_5fmin',['theta_min',['../dc/d95/classMCU_1_1AnalogVUDisplay.html#a62f47b66ebc5f36d2754fb9c83ba1048',1,'MCU::AnalogVUDisplay']]],
   ['thirdbyte',['thirdByte',['../d0/d0d/classSerialMIDI__Parser.html#a6ec69d1a24b2a0517a281cc352ad88d1',1,'SerialMIDI_Parser']]],
   ['timedisplay',['TimeDisplay',['../df/d69/classMCU_1_1TimeDisplay.html',1,'MCU::TimeDisplay'],['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ae38d59728ad82430746231d6491d602e',1,'MCU::TimeDisplayDisplay::timedisplay()'],['../df/d69/classMCU_1_1TimeDisplay.html#ae24e4fc0a95f0a80ed8bc03059bc3b4d',1,'MCU::TimeDisplay::TimeDisplay()']]],
   ['timedisplay_2ecpp',['TimeDisplay.cpp',['../d1/d55/TimeDisplay_8cpp.html',1,'']]],
@@ -32,7 +36,8 @@ var searchData=
   ['transposer_2ecpp',['Transposer.cpp',['../d7/d0c/Transposer_8cpp.html',1,'']]],
   ['transposer_2ehpp',['Transposer.hpp',['../de/d5e/Transposer_8hpp.html',1,'']]],
   ['triple',['Triple',['../de/d77/namespaceBass.html#af083a59bb17985fa10d45f1428118f01',1,'Bass']]],
+  ['ts',['Ts',['../d0/d49/classMovingCoilBallistics.html#a971a9ecd2548f4c0be9ecced94d7ba7f',1,'MovingCoilBallistics']]],
   ['tunerequest',['TuneRequest',['../d7/d2d/MIDI__Parser_8hpp.html#a7b96baa7581ecc5a27af22f664b85d82',1,'MIDI_Parser.hpp']]],
   ['twos_5fcomplement',['TWOS_COMPLEMENT',['../d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71da9aa2a35d92976c7de970506c4d19a96c',1,'RelativeCCSender.hpp']]],
-  ['type',['type',['../de/db3/structremove__reference.html#a30f490ee1919861a173b5b68c4921ea5',1,'remove_reference::type()'],['../db/dba/structremove__reference_3_01T_01_6_01_4.html#a3f40f309be0072f0d8cfc51b7be64a9d',1,'remove_reference&lt; T &amp; &gt;::type()'],['../df/def/structremove__reference_3_01T_01_6_6_01_4.html#a4f3cfde5cdd501c6c28bf650548c8dec',1,'remove_reference&lt; T &amp;&amp; &gt;::type()'],['../db/d6e/classBankableMIDIInput.html#a3c1e7958b83dcc7bc1290cfa0c08c7f6',1,'BankableMIDIInput::type()'],['../d3/d43/classBankableMIDIOutput.html#af30bdbbffae9b018094cd8b69ed59a9d',1,'BankableMIDIOutput::type()'],['../dc/d17/structBankConfig.html#acc2e3e32465c917117d952d9d597ff8a',1,'BankConfig::type()'],['../d0/d24/structOutputBankConfig.html#a14f88e319bbd8b62202b4cdcab4cedfe',1,'OutputBankConfig::type()'],['../dd/d36/structMIDI__message__matcher.html#af7f16c7e548f29b5cb2e27de9d5a3369',1,'MIDI_message_matcher::type()']]]
+  ['type',['type',['../de/db3/structremove__reference.html#a30f490ee1919861a173b5b68c4921ea5',1,'remove_reference::type()'],['../db/dba/structremove__reference_3_01T_01_6_01_4.html#a3f40f309be0072f0d8cfc51b7be64a9d',1,'remove_reference&lt; T &amp; &gt;::type()'],['../df/def/structremove__reference_3_01T_01_6_6_01_4.html#a4f3cfde5cdd501c6c28bf650548c8dec',1,'remove_reference&lt; T &amp;&amp; &gt;::type()'],['../d0/d18/classAudioVU_1_1Analyzer.html#a4c4fd38789ab018b873541575b7a0892',1,'AudioVU::Analyzer::type()'],['../db/d6e/classBankableMIDIInput.html#a3c1e7958b83dcc7bc1290cfa0c08c7f6',1,'BankableMIDIInput::type()'],['../d3/d43/classBankableMIDIOutput.html#af30bdbbffae9b018094cd8b69ed59a9d',1,'BankableMIDIOutput::type()'],['../dc/d17/structBankConfig.html#acc2e3e32465c917117d952d9d597ff8a',1,'BankConfig::type()'],['../d0/d24/structOutputBankConfig.html#a14f88e319bbd8b62202b4cdcab4cedfe',1,'OutputBankConfig::type()'],['../dd/d36/structMIDI__message__matcher.html#af7f16c7e548f29b5cb2e27de9d5a3369',1,'MIDI_message_matcher::type()']]]
 ];

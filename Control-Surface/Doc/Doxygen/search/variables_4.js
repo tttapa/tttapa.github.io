@@ -30,5 +30,7 @@ var searchData=
   ['dominantseventh',['DominantSeventh',['../df/d20/namespaceChords.html#a17aff5e1f5f5536c33cf81a7c509dc9b',1,'Chords']]],
   ['double',['Double',['../de/d77/namespaceBass.html#a10c3f88a0158cd7bd2a0f590056e179d',1,'Bass']]],
   ['down',['DOWN',['../d7/dc7/namespaceMCU.html#ab6f4576f35e221608d71a38bb79787e2',1,'MCU']]],
-  ['drop',['DROP',['../d7/dc7/namespaceMCU.html#a68c13e6d8dbb6ccc6612ba4457efb7c3',1,'MCU']]]
+  ['drop',['DROP',['../d7/dc7/namespaceMCU.html#a68c13e6d8dbb6ccc6612ba4457efb7c3',1,'MCU']]],
+  ['dx',['dx',['../d6/d99/classBresenhamLine.html#a11415cb683e2d2fa6bfd3ac7e7360f84',1,'BresenhamLine']]],
+  ['dy',['dy',['../d6/d99/classBresenhamLine.html#a704bcf1c4bb4a259695f1b5844807ed1',1,'BresenhamLine']]]
 ];

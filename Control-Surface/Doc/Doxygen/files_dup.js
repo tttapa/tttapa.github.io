@@ -11,7 +11,9 @@ var files_dup =
     [ "AssignmentDisplay.cpp", "d3/d9c/AssignmentDisplay_8cpp.html", null ],
     [ "AssignmentDisplay.hpp", "de/d83/AssignmentDisplay_8hpp.html", "de/d83/AssignmentDisplay_8hpp" ],
     [ "AudioVU.cpp", "df/dbc/AudioVU_8cpp.html", null ],
-    [ "AudioVU.hpp", "dc/de8/AudioVU_8hpp.html", null ],
+    [ "AudioVU.hpp", "dc/de8/AudioVU_8hpp.html", [
+      [ "Analyzer", "d0/d18/classAudioVU_1_1Analyzer.html", "d0/d18/classAudioVU_1_1Analyzer" ]
+    ] ],
     [ "AudioVULEDs.cpp", "d6/d61/AudioVULEDs_8cpp.html", null ],
     [ "AudioVULEDs.hpp", "d4/dde/AudioVULEDs_8hpp.html", null ],
     [ "Bank.cpp", "db/dbd/Bank_8cpp.html", null ],
@@ -38,6 +40,10 @@ var files_dup =
     [ "BLEMIDI.hpp", "d0/dc9/BLEMIDI_8hpp.html", "d0/dc9/BLEMIDI_8hpp" ],
     [ "BluetoothMIDI_Interface.cpp", "d8/d2c/BluetoothMIDI__Interface_8cpp.html", null ],
     [ "BluetoothMIDI_Interface.hpp", "df/ded/BluetoothMIDI__Interface_8hpp.html", null ],
+    [ "Bresenham.hpp", "de/d7c/Bresenham_8hpp.html", [
+      [ "BresenhamLine", "d6/d99/classBresenhamLine.html", "d6/d99/classBresenhamLine" ],
+      [ "Pixel", "d4/d38/structBresenhamLine_1_1Pixel.html", "d4/d38/structBresenhamLine_1_1Pixel" ]
+    ] ],
     [ "Button.cpp", "de/dd1/Button_8cpp.html", null ],
     [ "Button.hpp", "d4/db3/Button_8hpp.html", [
       [ "Button", "d1/d19/classButton.html", "d1/d19/classButton" ]
@@ -328,6 +334,9 @@ var files_dup =
     ] ],
     [ "MillisTimer.cpp", "d9/d9e/MillisTimer_8cpp.html", null ],
     [ "MillisTimer.hpp", "d7/d74/MillisTimer_8hpp.html", "d7/d74/MillisTimer_8hpp" ],
+    [ "MovingCoilBallistics.hpp", "d9/d4f/MovingCoilBallistics_8hpp.html", [
+      [ "MovingCoilBallistics", "d0/d49/classMovingCoilBallistics.html", "d0/d49/classMovingCoilBallistics" ]
+    ] ],
     [ "NoteBitmapDisplay.cpp", "d1/de1/NoteBitmapDisplay_8cpp.html", null ],
     [ "NoteBitmapDisplay.hpp", "d2/d24/NoteBitmapDisplay_8hpp.html", [
       [ "NoteBitmapDisplay", "de/dc5/classNoteBitmapDisplay.html", "de/dc5/classNoteBitmapDisplay" ]
@@ -464,7 +473,8 @@ var files_dup =
     ] ],
     [ "VUDisplay.cpp", "db/dcf/VUDisplay_8cpp.html", null ],
     [ "VUDisplay.hpp", "d0/db9/VUDisplay_8hpp.html", [
-      [ "VUDisplay", "d4/d42/classMCU_1_1VUDisplay.html", "d4/d42/classMCU_1_1VUDisplay" ]
+      [ "VUDisplay", "d4/d42/classMCU_1_1VUDisplay.html", "d4/d42/classMCU_1_1VUDisplay" ],
+      [ "AnalogVUDisplay", "dc/d95/classMCU_1_1AnalogVUDisplay.html", "dc/d95/classMCU_1_1AnalogVUDisplay" ]
     ] ],
     [ "Hardware/LEDs/VULEDs.cpp", "d1/dff/Hardware_2LEDs_2VULEDs_8cpp.html", null ],
     [ "MIDI_Inputs/LEDs/MCU/VULEDs.cpp", "d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp.html", null ],

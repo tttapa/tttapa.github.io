@@ -4,7 +4,7 @@ var searchData=
   ['ignore_5fsysex',['IGNORE_SYSEX',['../db/d02/Settings_8hpp.html#a2a82e3cbc4ddcf68ac47d0d464189e35',1,'Settings.hpp']]],
   ['increment',['Increment',['../df/d38/classIncrementButton.html#a37fb5e087715edfdb4ab30209c83753ca1c40de72a61916bbe238020067501963',1,'IncrementButton::Increment()'],['../d5/d20/classIncrementDecrementButtons.html#aad41077d49378ea34dca4f6cf77ae06ba20e11204d63d579b5cf85a8698740f10',1,'IncrementDecrementButtons::Increment()'],['../dd/dd6/classIncrementor.html#a5f9ac3154cda1e503cbbe5194a706a39',1,'Incrementor::increment()'],['../d1/d54/classSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1',1,'Selector::increment()']]],
   ['incrementaddress',['incrementAddress',['../d2/d87/classMIDIButtons.html#abd040788a921f9a07974505612107e0d',1,'MIDIButtons::incrementAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a84fad1969a8634ab747f86fca0e62c96',1,'Bankable::MIDIButtons::incrementAddress()']]],
-  ['incrementbutton',['IncrementButton',['../df/d38/classIncrementButton.html',1,'IncrementButton'],['../df/d38/classIncrementButton.html#ad0133d3b080fa4093b24ade7acd2f2c1',1,'IncrementButton::IncrementButton()'],['../d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3',1,'IncrementDecrementButtons::incrementButton()']]],
+  ['incrementbutton',['IncrementButton',['../df/d38/classIncrementButton.html',1,'IncrementButton'],['../d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3',1,'IncrementDecrementButtons::incrementButton()'],['../df/d38/classIncrementButton.html#ad0133d3b080fa4093b24ade7acd2f2c1',1,'IncrementButton::IncrementButton()']]],
   ['incrementbutton_2ecpp',['IncrementButton.cpp',['../db/d9d/IncrementButton_8cpp.html',1,'']]],
   ['incrementbutton_2ehpp',['IncrementButton.hpp',['../d5/d04/IncrementButton_8hpp.html',1,'']]],
   ['incrementdecrementbuttons',['IncrementDecrementButtons',['../d5/d20/classIncrementDecrementButtons.html',1,'IncrementDecrementButtons'],['../d5/d20/classIncrementDecrementButtons.html#ac59f4c72e86f8d1cd8665d959f526ca9',1,'IncrementDecrementButtons::IncrementDecrementButtons()']]],
@@ -29,7 +29,7 @@ var searchData=
   ['individual_5fbutton_5finvert',['INDIVIDUAL_BUTTON_INVERT',['../db/d02/Settings_8hpp.html#a0f4fabd413ae4e94b4f8d45cc1a249ad',1,'Settings.hpp']]],
   ['individual_5fbutton_5finvert_5fstatic',['INDIVIDUAL_BUTTON_INVERT_STATIC',['../d2/dd5/SettingsWrapper_8hpp.html#a9483d053be25212d4085aea39e49d297',1,'SettingsWrapper.hpp']]],
   ['init',['init',['../da/dd0/classMAX7219__Base.html#abc1d2ae777d19ca9aaf8eb7d1f500716',1,'MAX7219_Base']]],
-  ['initial',['Initial',['../df/d38/classIncrementButton.html#a2d2b2085d52f929af3d02d0d87acdcb0a9ad38bb5716e1838cb302b5e10a9ee49',1,'IncrementButton::Initial()'],['../d5/d20/classIncrementDecrementButtons.html#a75e0d7f96fba9727a20b434a1dc63b32a6c9f2f79b4e7b8ccee93a79a4d7bc650',1,'IncrementDecrementButtons::Initial()']]],
+  ['initial',['Initial',['../df/d38/classIncrementButton.html#a956be597d2aeb1fda7d31f8cf15b2c74a9ad38bb5716e1838cb302b5e10a9ee49',1,'IncrementButton::Initial()'],['../d5/d20/classIncrementDecrementButtons.html#ab23c469b57b3a888837fd1d401ad3f07a6c9f2f79b4e7b8ccee93a79a4d7bc650',1,'IncrementDecrementButtons::Initial()']]],
   ['initialselection',['initialSelection',['../de/de7/classSelectable.html#a873f8a7df644bcde72cbc4f43a0b51fb',1,'Selectable']]],
   ['innerradius',['innerRadius',['../d3/d98/classMCU_1_1VPotDisplay.html#a4ae7b4d66b549898f628baa3b09cfe9e',1,'MCU::VPotDisplay']]],
   ['input',['INPUT',['../dd/ddf/ExtendedInputOutput_8hpp.html#a1c022e5fb9141ce12c7c22a000ce732a',1,'ExtendedInputOutput.hpp']]],
@@ -53,6 +53,6 @@ var searchData=
   ['isvalid',['isValid',['../da/dc7/classRelativeMIDICNChannelAddress.html#aa4acbfbf4f8fa9507a7d0b347fc606da',1,'RelativeMIDICNChannelAddress::isValid()'],['../d3/d10/classMIDICNChannelAddress.html#a5cc0927606de3d24f37c4e5461083a03',1,'MIDICNChannelAddress::isValid()']]],
   ['iterator',['iterator',['../dd/d16/classDoublyLinkedList.html#a00ad35f05ce61d50a4cb1e914aba50dd',1,'DoublyLinkedList']]],
   ['iterator_5fcategory',['iterator_category',['../dd/d02/classDoublyLinkedList_1_1node__iterator.html#aa787edffd90be4e79d4a0fc26686ea6f',1,'DoublyLinkedList::node_iterator::iterator_category()'],['../d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html#a75b6ebfbc28d2daea552509cd2d5ae31',1,'DoublyLinkedList::reverse_node_iterator::iterator_category()']]],
-  ['ivu',['IVU',['../d2/de9/classIVU.html',1,'']]],
+  ['ivu',['IVU',['../d2/de9/classIVU.html',1,'IVU'],['../d2/de9/classIVU.html#a47021e4368e7217ab280bc9d4e77d53c',1,'IVU::IVU()']]],
   ['installation',['Installation',['../d4/d6d/md_Installation.html',1,'']]]
 ];

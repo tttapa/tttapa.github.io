@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['h',['h',['../d6/d99/classBresenhamLine.html#ae9b32e490e5151516e9147d5d478def4',1,'BresenhamLine']]],
   ['hairless_5fbaud',['HAIRLESS_BAUD',['../db/d02/Settings_8hpp.html#aee625974250707110fbe8686b37ae3a1',1,'Settings.hpp']]],
   ['header',['header',['../de/df8/structMIDI__message.html#af73ddde8746b7f86712a180320aacbbd',1,'MIDI_message']]],
   ['height',['height',['../d2/df6/structXBitmap.html#aadc2e950f43a466fb09b0b0239dcf3ee',1,'XBitmap']]],

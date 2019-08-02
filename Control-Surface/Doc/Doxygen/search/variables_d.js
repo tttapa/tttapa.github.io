@@ -12,7 +12,7 @@ var searchData=
   ['margin',['margin',['../d2/dcb/classHysteresis.html#a48ccf79107552e1996e5c0cb8cb86ab4',1,'Hysteresis']]],
   ['marker',['MARKER',['../d7/dc7/namespaceMCU.html#a11e886ce2826514e8242f595dbded8f5',1,'MCU']]],
   ['master_5fvolume',['MASTER_VOLUME',['../d7/dc7/namespaceMCU.html#ad5c2c82aa39eb232b2c6f3e685f32070',1,'MCU']]],
-  ['max',['max',['../d4/dce/classAudioVU.html#a565519268be47317bbefb3f6df9311d7',1,'AudioVU']]],
+  ['max',['max',['../d2/de9/classIVU.html#a408969df9cb860216a8f03a694e2470b',1,'IVU']]],
   ['max_5ffps',['MAX_FPS',['../db/d02/Settings_8hpp.html#ab44cfa307e19c5688403a9506ea0555e',1,'Settings.hpp']]],
   ['max_5fmessage_5ftime',['MAX_MESSAGE_TIME',['../d0/d89/classBluetoothMIDI__Interface.html#ae6f39d010658aead9506362244925d97',1,'BluetoothMIDI_Interface']]],
   ['maxgain',['maxGain',['../d4/de3/classVolumeControl.html#ab2b63d2685b52f7ad584094c44f62754',1,'VolumeControl']]],

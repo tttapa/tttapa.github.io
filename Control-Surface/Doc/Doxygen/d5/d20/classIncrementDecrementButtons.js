@@ -1,8 +1,8 @@
 var classIncrementDecrementButtons =
 [
-    [ "Initial", "d5/d20/classIncrementDecrementButtons.html#a75e0d7f96fba9727a20b434a1dc63b32a6c9f2f79b4e7b8ccee93a79a4d7bc650", null ],
-    [ "LongPress", "d5/d20/classIncrementDecrementButtons.html#a75e0d7f96fba9727a20b434a1dc63b32a532c46a43208e18c8456c371b09f2155", null ],
-    [ "AfterReset", "d5/d20/classIncrementDecrementButtons.html#a75e0d7f96fba9727a20b434a1dc63b32a7bc3f5d4f7a8f4c49451ff83e5b4b498", null ],
+    [ "Initial", "d5/d20/classIncrementDecrementButtons.html#ab23c469b57b3a888837fd1d401ad3f07a6c9f2f79b4e7b8ccee93a79a4d7bc650", null ],
+    [ "LongPress", "d5/d20/classIncrementDecrementButtons.html#ab23c469b57b3a888837fd1d401ad3f07a532c46a43208e18c8456c371b09f2155", null ],
+    [ "AfterReset", "d5/d20/classIncrementDecrementButtons.html#ab23c469b57b3a888837fd1d401ad3f07a7bc3f5d4f7a8f4c49451ff83e5b4b498", null ],
     [ "State", "d5/d20/classIncrementDecrementButtons.html#aad41077d49378ea34dca4f6cf77ae06b", [
       [ "Nothing", "d5/d20/classIncrementDecrementButtons.html#aad41077d49378ea34dca4f6cf77ae06babc562801604090fe8ee5f9d23bcc1d09", null ],
       [ "Increment", "d5/d20/classIncrementDecrementButtons.html#aad41077d49378ea34dca4f6cf77ae06ba20e11204d63d579b5cf85a8698740f10", null ],
@@ -15,5 +15,5 @@ var classIncrementDecrementButtons =
     [ "decrementButton", "d5/d20/classIncrementDecrementButtons.html#a6eda84fe30527525c6f50eb757b9b12a", null ],
     [ "incrementButton", "d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3", null ],
     [ "longPressRepeat", "d5/d20/classIncrementDecrementButtons.html#ab9b9e6fe8c72d37648ecbca236eb4f15", null ],
-    [ "longPressState", "d5/d20/classIncrementDecrementButtons.html#ada706db36b36e22d6bf393f76ea28f65", null ]
+    [ "longPressState", "d5/d20/classIncrementDecrementButtons.html#a26a8ab1eb9f06caf14d5573c9dfd8f17", null ]
 ];

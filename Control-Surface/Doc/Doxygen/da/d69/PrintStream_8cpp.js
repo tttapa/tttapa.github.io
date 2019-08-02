@@ -1,7 +1,7 @@
 var PrintStream_8cpp =
 [
-    [ "LOWERCASE", "da/d69/PrintStream_8cpp.html#a6674af4819a4f85e8c40be5971746668af8ee0dcc4d45543df8763035c19ef2fc", null ],
-    [ "UPPERCASE", "da/d69/PrintStream_8cpp.html#a6674af4819a4f85e8c40be5971746668a19d6b87b851ddfd4fdc4f182e2ae0617", null ],
+    [ "LOWERCASE", "da/d69/PrintStream_8cpp.html#ad7d124b6cbf785b9fa6d89255b715fcbaf8ee0dcc4d45543df8763035c19ef2fc", null ],
+    [ "UPPERCASE", "da/d69/PrintStream_8cpp.html#ad7d124b6cbf785b9fa6d89255b715fcba19d6b87b851ddfd4fdc4f182e2ae0617", null ],
     [ "bin", "da/d69/PrintStream_8cpp.html#a99e9817ede325b42677fc53cfb468b7f", null ],
     [ "boolalpha", "da/d69/PrintStream_8cpp.html#aa88c44c66680f55fd42b3a19095aff3f", null ],
     [ "dec", "da/d69/PrintStream_8cpp.html#aa46b20141a495c428e33bcdcbf63c04e", null ],
@@ -41,7 +41,7 @@ var PrintStream_8cpp =
     [ "uppercase", "da/d69/PrintStream_8cpp.html#a2b44e6ada22b1b5a703617123ebd0598", null ],
     [ "boolalphaPrintStream", "da/d69/PrintStream_8cpp.html#ac031ea43b717d6e00396a00c3caef6f2", null ],
     [ "byteSeparatorPrintStream", "da/d69/PrintStream_8cpp.html#a643fcf8db7c14c0dc68d6ae017366506", null ],
-    [ "casePrintStream", "da/d69/PrintStream_8cpp.html#a0ea54e5be4d1c162631f25acd0d1d6c9", null ],
+    [ "casePrintStream", "da/d69/PrintStream_8cpp.html#ab0aae5c0acb344c0d99068b2444b408a", null ],
     [ "formatPrintStream", "da/d69/PrintStream_8cpp.html#aa9cd8589bac070bb2ab968b4f9c15231", null ],
     [ "leadingZerosPrintStream", "da/d69/PrintStream_8cpp.html#ac1bd36282d0562d941f2512da9243042", null ],
     [ "precisionPrintStream", "da/d69/PrintStream_8cpp.html#ad0b67665a208d879d805bc8d0bdc3506", null ],

@@ -7,6 +7,7 @@ var classMCU_1_1VULEDs =
     [ "clearOverloadHelper", "df/d36/classMCU_1_1VULEDs.html#af777c4f515387d0c08b78496a6934804", null ],
     [ "display", "df/d36/classMCU_1_1VULEDs.html#abc54b9402e8555c615aaee35235f3aa4", null ],
     [ "display", "df/d36/classMCU_1_1VULEDs.html#a3a12728d4a3d630e38748756c93a0587", null ],
+    [ "getMax", "df/d36/classMCU_1_1VULEDs.html#a0f8f6bf73807942ebcb61256c2365f0d", null ],
     [ "getOverload", "df/d36/classMCU_1_1VULEDs.html#a9a4d6084fd01383f5b288ca403f65387", null ],
     [ "getOverloadHelper", "df/d36/classMCU_1_1VULEDs.html#ae7b6c222b00073816f565bcc32103ed3", null ],
     [ "getValue", "df/d36/classMCU_1_1VULEDs.html#a104e3c7f67feee481b29e0104e75242d", null ],
@@ -20,6 +21,7 @@ var classMCU_1_1VULEDs =
     [ "updateImpl", "df/d36/classMCU_1_1VULEDs.html#af448f099f51e14a31e7017f855a12ec9", null ],
     [ "updateWith", "df/d36/classMCU_1_1VULEDs.html#adcb98982679f02c01c46ac8d22722e1d", null ],
     [ "address", "df/d36/classMCU_1_1VULEDs.html#a38d9872489fd94dee25077c16073e8cf", null ],
+    [ "max", "df/d36/classMCU_1_1VULEDs.html#a408969df9cb860216a8f03a694e2470b", null ],
     [ "next", "df/d36/classMCU_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "NO_DECAY", "df/d36/classMCU_1_1VULEDs.html#a39bed9bf8c604e890b8f82d10170e2fa", null ],
     [ "previous", "df/d36/classMCU_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f", null ]

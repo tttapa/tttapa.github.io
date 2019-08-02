@@ -16,6 +16,7 @@ var searchData=
   ['clearoverload',['clearOverload',['../d8/d4c/classMCU_1_1VU.html#ac166479a8b8ade7b7abf109362f72b86',1,'MCU::VU::clearOverload()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a0077ee33342180d5d9376a65fe0d7b73',1,'MCU::Bankable::VU::clearOverload()']]],
   ['clearoverloadhelper',['clearOverloadHelper',['../d4/d71/classMCU_1_1VU__Base.html#af777c4f515387d0c08b78496a6934804',1,'MCU::VU_Base']]],
   ['control_5fsurface_5f',['Control_Surface_',['../dc/d45/classControl__Surface__.html#acabe7a649d24807ffacba4c87aba6a79',1,'Control_Surface_::Control_Surface_(Control_Surface_ const &amp;)=delete'],['../dc/d45/classControl__Surface__.html#a2f0fa1ce738f9dcf481e6eb8ece14237',1,'Control_Surface_::Control_Surface_()=default']]],
+  ['cos',['cos',['../d6/d99/classBresenhamLine.html#ae4b0dd9c534a550583ae812695bbac59',1,'BresenhamLine']]],
   ['couldcontain',['couldContain',['../dd/d16/classDoublyLinkedList.html#ad5f6720a2d9ac9590fae337b2c5a744a',1,'DoublyLinkedList']]],
   ['createchannel',['createChannel',['../d2/d48/classChannel.html#a0bf038df9f1a74a0f342a2f07feeb664',1,'Channel']]]
 ];

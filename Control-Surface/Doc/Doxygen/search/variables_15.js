@@ -37,7 +37,7 @@ var searchData=
   ['volume_5f8',['VOLUME_8',['../d7/dc7/namespaceMCU.html#afa94ef24150a5eedfdc36c0a3a8cb5d6',1,'MCU']]],
   ['vpot',['vpot',['../d3/d98/classMCU_1_1VPotDisplay.html#aed87040b4359956abbd365f8784fc93a',1,'MCU::VPotDisplay']]],
   ['vpotringaddress',['VPotRingAddress',['../d7/dc7/namespaceMCU.html#a0681e0754a87bedc7364572d20743d3b',1,'MCU']]],
-  ['vu',['vu',['../d4/d42/classMCU_1_1VUDisplay.html#ac4bf0fcba04b3fd9caf2717b6caf0058',1,'MCU::VUDisplay']]],
+  ['vu',['vu',['../d4/d42/classMCU_1_1VUDisplay.html#ac4bf0fcba04b3fd9caf2717b6caf0058',1,'MCU::VUDisplay::vu()'],['../dc/d95/classMCU_1_1AnalogVUDisplay.html#ac82b4d41b614288c1f67d3ea6a775b5d',1,'MCU::AnalogVUDisplay::vu()']]],
   ['vu_5fpeak_5fdecay_5ftime',['VU_PEAK_DECAY_TIME',['../db/d02/Settings_8hpp.html#a8be794417540934c31a498143e8efafb',1,'Settings.hpp']]],
   ['vu_5fpeak_5fhold_5ftime',['VU_PEAK_HOLD_TIME',['../db/d02/Settings_8hpp.html#a774333c030e245d506acef0577246d7c',1,'Settings.hpp']]],
   ['vu_5fpeak_5fsmooth_5fdecay',['VU_PEAK_SMOOTH_DECAY',['../db/d02/Settings_8hpp.html#a5f630db6e6dc66cae6184da0276070b7',1,'Settings.hpp']]],

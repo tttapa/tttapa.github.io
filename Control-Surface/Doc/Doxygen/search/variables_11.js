@@ -1,6 +1,8 @@
 var searchData=
 [
+  ['r_5fsq',['r_sq',['../dc/d95/classMCU_1_1AnalogVUDisplay.html#a16a52682c56f3cf7798a24fdaac365bb',1,'MCU::AnalogVUDisplay']]],
   ['radius',['radius',['../d3/d98/classMCU_1_1VPotDisplay.html#a2b5d96099f8d327006e498fb8871a50b',1,'MCU::VPotDisplay']]],
+  ['realtimemessagecallback',['realTimeMessageCallback',['../dc/d45/classControl__Surface__.html#a7bec3fa56c3d8863c7b70ec0661f502e',1,'Control_Surface_']]],
   ['rec_5frdy_5f1',['REC_RDY_1',['../d7/dc7/namespaceMCU.html#aa0973f152233cfe4f9752ec9ca254216',1,'MCU']]],
   ['rec_5frdy_5f10b_5fbits',['rec_rdy_10B_bits',['../dd/d93/namespaceXBM.html#a0a15a6104a683728c8f7d7cf52d33cbf',1,'XBM']]],
   ['rec_5frdy_5f14b_5fbits',['rec_rdy_14B_bits',['../dd/d93/namespaceXBM.html#a508d75d9184d780a0213d5eef98f3deb',1,'XBM']]],

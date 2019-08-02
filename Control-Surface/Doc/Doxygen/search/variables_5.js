@@ -16,6 +16,8 @@ var searchData=
   ['encoder',['encoder',['../d8/d20/classMIDIRotaryEncoder.html#ab9c6c6d4ec4b5889d751afb5065c9548',1,'MIDIRotaryEncoder::encoder()'],['../dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a293b51b313e7504e02a2b9aaa92cffd3',1,'Bankable::MIDIRotaryEncoder::encoder()'],['../d0/daf/classEncoderSelector__Base.html#af596b0ad8a8abe00fd4760c201e77cf3',1,'EncoderSelector_Base::encoder()']]],
   ['end',['end',['../de/d4e/classExtendedIOElement.html#a649aee01a4874e63c540b2aafd8afc03',1,'ExtendedIOElement']]],
   ['enter',['ENTER',['../d7/dc7/namespaceMCU.html#a15ccf7b0f0e413bfa6854659da302245',1,'MCU']]],
+  ['error',['error',['../d6/d99/classBresenhamLine.html#a96c87015e50faead61c34a0e414e4c11',1,'BresenhamLine']]],
+  ['errorscalingfactor',['errorScalingFactor',['../d6/d99/classBresenhamLine.html#ae4b54244855b4241b8904314f497f63e',1,'BresenhamLine']]],
   ['expression_5fcontroller',['Expression_Controller',['../d4/dbe/namespaceMIDI__CC.html#a57ac81a6272003e7cd8c1c83ce1f470b',1,'MIDI_CC']]],
   ['expression_5fcontroller_5flsb',['Expression_Controller_LSB',['../d4/dbe/namespaceMIDI__CC.html#af0892fffd217b1e64f9e6a353d07660d',1,'MIDI_CC']]],
   ['external_5fcontroller',['EXTERNAL_CONTROLLER',['../d7/dc7/namespaceMCU.html#a128e3c76bbdf6ac405421bd9549a55e3',1,'MCU']]]

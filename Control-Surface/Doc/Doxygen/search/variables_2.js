@@ -3,6 +3,7 @@ var searchData=
   ['b',['B',['../d7/dc2/structEncoderSwitchPinList.html#a06aa08c5e4d60153ebff51920f308815',1,'EncoderSwitchPinList::B()'],['../dc/d81/structEncoderPinList.html#abf9944693d2221e276d586e97f4db54e',1,'EncoderPinList::B()'],['../d7/d78/namespaceMIDI__Notes.html#a5d3863f3260c9ccc894ed8c2827b9423',1,'MIDI_Notes::B()']]],
   ['balance',['Balance',['../d4/dbe/namespaceMIDI__CC.html#a41e0695dbfd7e67a7a516c1f68e24b58',1,'MIDI_CC']]],
   ['balance_5flsb',['Balance_LSB',['../d4/dbe/namespaceMIDI__CC.html#ad7490da9ab84be381f5d4671eeb79074',1,'MIDI_CC']]],
+  ['ballistics',['ballistics',['../d4/dce/classAudioVU.html#af64797c60ed232b1fd04aff5ddadb5df',1,'AudioVU']]],
   ['bank',['bank',['../db/d6e/classBankableMIDIInput.html#abf0c1d8da75edecd39505d52ea0dab1d',1,'BankableMIDIInput::bank()'],['../d3/d43/classBankableMIDIOutput.html#a2f9470a247cd26661a3bdc539e8341e3',1,'BankableMIDIOutput::bank()'],['../dc/d17/structBankConfig.html#ae780354d12556e3b5b47d800896d3b76',1,'BankConfig::bank()'],['../d0/d24/structOutputBankConfig.html#ac16b53d8c35e9df535327003c7fa78a9',1,'OutputBankConfig::bank()'],['../d1/d2f/classManyAddressesMIDIOutput.html#a645ccf02d891417aa53878442285e269',1,'ManyAddressesMIDIOutput::bank()']]],
   ['bank_5fleft',['BANK_LEFT',['../d7/dc7/namespaceMCU.html#a6091dee603ac25dca16a04a109298fe5',1,'MCU']]],
   ['bank_5fright',['BANK_RIGHT',['../d7/dc7/namespaceMCU.html#a8642e54228037d26c1d35c2b39490714',1,'MCU']]],

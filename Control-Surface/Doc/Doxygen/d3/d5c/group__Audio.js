@@ -1,14 +1,26 @@
 var group__Audio =
 [
     [ "AudioVU", "d4/dce/classAudioVU.html", [
-      [ "AudioVU", "d4/dce/classAudioVU.html#a19184507104129c9c4c2b614eaca0823", null ],
+      [ "Analyzer", "d0/d18/classAudioVU_1_1Analyzer.html", [
+        [ "Peak", "d0/d18/classAudioVU_1_1Analyzer.html#a117ed0a5c564436cbbea4de5663ec313aa7ffa644cdb3c25fc713e5d38a04b04d", null ],
+        [ "RMS", "d0/d18/classAudioVU_1_1Analyzer.html#a117ed0a5c564436cbbea4de5663ec313a153fd539febe11342d467dd3b0942c39", null ],
+        [ "Analyzer", "d0/d18/classAudioVU_1_1Analyzer.html#a6d80607f4f8f1ad1cf042b65dc4a8f7c", null ],
+        [ "Analyzer", "d0/d18/classAudioVU_1_1Analyzer.html#a456a57cf39db6cb560334aec076bb07f", null ],
+        [ "available", "d0/d18/classAudioVU_1_1Analyzer.html#afeed0749af884b0eb38e9b12bed772b4", null ],
+        [ "read", "d0/d18/classAudioVU_1_1Analyzer.html#a4f3ac16f906dc0f1dec8f014950ceccc", null ],
+        [ "analyzer", "d0/d18/classAudioVU_1_1Analyzer.html#a71f374cd364aa4de82b6368748c9005e", null ],
+        [ "type", "d0/d18/classAudioVU_1_1Analyzer.html#a4c4fd38789ab018b873541575b7a0892", null ]
+      ] ],
+      [ "AudioVU", "d4/dce/classAudioVU.html#a16291b18a720891a1de7dcb3bdc88660", null ],
+      [ "AudioVU", "d4/dce/classAudioVU.html#a70e029281a6a54a2c3b8e436ccb84b67", null ],
+      [ "getMax", "d4/dce/classAudioVU.html#a0f8f6bf73807942ebcb61256c2365f0d", null ],
       [ "getOverload", "d4/dce/classAudioVU.html#a8f0917212f149f0b068d52e5048c9bad", null ],
       [ "getValue", "d4/dce/classAudioVU.html#af0910f71215c7681b2577135e8fb4bb2", null ],
       [ "setGain", "d4/dce/classAudioVU.html#a3e2d23e9a4d13d95c9c423aad13010b5", null ],
-      [ "filter", "d4/dce/classAudioVU.html#a02be22bcd193cfc550b11f9de415b327", null ],
+      [ "ballistics", "d4/dce/classAudioVU.html#af64797c60ed232b1fd04aff5ddadb5df", null ],
       [ "gain", "d4/dce/classAudioVU.html#aaa14a6cb4fc96a9e889087fd284ca3d8", null ],
-      [ "level", "d4/dce/classAudioVU.html#ae1966e81a5c908350e7e85e378cf4b6f", null ],
-      [ "max", "d4/dce/classAudioVU.html#a565519268be47317bbefb3f6df9311d7", null ]
+      [ "level", "d4/dce/classAudioVU.html#ab2eacfa9506aac2fa194b99d0863c903", null ],
+      [ "max", "d4/dce/classAudioVU.html#a408969df9cb860216a8f03a694e2470b", null ]
     ] ],
     [ "AudioVULEDs", "d9/dbf/classAudioVULEDs.html", [
       [ "AudioVULEDs", "d9/dbf/classAudioVULEDs.html#a9b5a528eee3c6b8572a45201224c5d1d", null ],
@@ -24,6 +36,7 @@ var group__Audio =
       [ "enable", "d9/dbf/classAudioVULEDs.html#ad4273e4aa2f15de8dbe478af16af259e", null ],
       [ "enable", "d9/dbf/classAudioVULEDs.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
       [ "enable", "d9/dbf/classAudioVULEDs.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
+      [ "getMax", "d9/dbf/classAudioVULEDs.html#a0f8f6bf73807942ebcb61256c2365f0d", null ],
       [ "getOverload", "d9/dbf/classAudioVULEDs.html#a8f0917212f149f0b068d52e5048c9bad", null ],
       [ "getValue", "d9/dbf/classAudioVULEDs.html#af0910f71215c7681b2577135e8fb4bb2", null ],
       [ "isEnabled", "d9/dbf/classAudioVULEDs.html#a883138a1262a82e8b9e05c75d576e36d", null ],
@@ -31,6 +44,7 @@ var group__Audio =
       [ "setMode", "d9/dbf/classAudioVULEDs.html#a5cfea71b5983289f19fc957155c91af7", null ],
       [ "update", "d9/dbf/classAudioVULEDs.html#a19de641f54a4ab6559e6d5e8ca0865b3", null ],
       [ "updateAll", "d9/dbf/classAudioVULEDs.html#a8af924e5b3b708eb042919703d175ed3", null ],
+      [ "max", "d9/dbf/classAudioVULEDs.html#a408969df9cb860216a8f03a694e2470b", null ],
       [ "next", "d9/dbf/classAudioVULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
       [ "previous", "d9/dbf/classAudioVULEDs.html#a57b6615469e554c514a9ff56dc24908f", null ],
       [ "previousValue", "d9/dbf/classAudioVULEDs.html#a4052fac52dae1c8828f585146943f494", null ],

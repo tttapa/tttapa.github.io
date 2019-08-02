@@ -19,5 +19,6 @@ var searchData=
   ['isenabled',['isEnabled',['../d5/de0/classUpdatable.html#a883138a1262a82e8b9e05c75d576e36d',1,'Updatable']]],
   ['isreceiving',['isReceiving',['../d1/db1/classSysExBuffer.html#aee21293188fbdbf52eb28d84ddd4b476',1,'SysExBuffer']]],
   ['isstatus',['isStatus',['../df/d0c/classMIDI__Parser.html#a0030089e4fe636ae1ca7997dba7b86ae',1,'MIDI_Parser']]],
-  ['isvalid',['isValid',['../da/dc7/classRelativeMIDICNChannelAddress.html#aa4acbfbf4f8fa9507a7d0b347fc606da',1,'RelativeMIDICNChannelAddress::isValid()'],['../d3/d10/classMIDICNChannelAddress.html#a5cc0927606de3d24f37c4e5461083a03',1,'MIDICNChannelAddress::isValid()']]]
+  ['isvalid',['isValid',['../da/dc7/classRelativeMIDICNChannelAddress.html#aa4acbfbf4f8fa9507a7d0b347fc606da',1,'RelativeMIDICNChannelAddress::isValid()'],['../d3/d10/classMIDICNChannelAddress.html#a5cc0927606de3d24f37c4e5461083a03',1,'MIDICNChannelAddress::isValid()']]],
+  ['ivu',['IVU',['../d2/de9/classIVU.html#a47021e4368e7217ab280bc9d4e77d53c',1,'IVU']]]
 ];

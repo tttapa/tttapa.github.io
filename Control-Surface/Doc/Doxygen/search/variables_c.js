@@ -8,14 +8,14 @@ var searchData=
   ['leds',['leds',['../de/d52/classMCU_1_1VPotRingLEDs__Base.html#a807d80a7ebabe1286a83bb15f7899ba5',1,'MCU::VPotRingLEDs_Base::leds()'],['../da/d0a/classMCU_1_1VULEDs__Base.html#a763144b70b99dca14cde58a73de21513',1,'MCU::VULEDs_Base::leds()']]],
   ['left',['LEFT',['../d7/dc7/namespaceMCU.html#a90955e55b5b6ed836457992ab70f1c12',1,'MCU']]],
   ['legato_5ffootswitch',['Legato_Footswitch',['../d4/dbe/namespaceMIDI__CC.html#a9e44e15596fcea1fe9e001e1d2d1df37',1,'MIDI_CC']]],
-  ['length',['length',['../de/d4e/classExtendedIOElement.html#a018a3ac2d6a11014e27c8186a2feb684',1,'ExtendedIOElement::length()'],['../d7/d6a/structArray.html#a7615d7f35d563b104928b7029202690a',1,'Array::length()'],['../db/d45/structSysExMessage.html#a78b1ff8ef3a2ea530872927e23c96df4',1,'SysExMessage::length()']]],
-  ['level',['level',['../d4/dce/classAudioVU.html#ae1966e81a5c908350e7e85e378cf4b6f',1,'AudioVU']]],
+  ['length',['length',['../d6/d99/classBresenhamLine.html#a6aab564e78b97e607afc4df924531b50',1,'BresenhamLine::length()'],['../de/d4e/classExtendedIOElement.html#a018a3ac2d6a11014e27c8186a2feb684',1,'ExtendedIOElement::length()'],['../d7/d6a/structArray.html#a7615d7f35d563b104928b7029202690a',1,'Array::length()'],['../db/d45/structSysExMessage.html#a78b1ff8ef3a2ea530872927e23c96df4',1,'SysExMessage::length()']]],
+  ['level',['level',['../d4/dce/classAudioVU.html#ab2eacfa9506aac2fa194b99d0863c903',1,'AudioVU']]],
   ['loadpin',['loadPin',['../da/dd0/classMAX7219__Base.html#a8a874acdd0b9656a2fdac20ef8a1a0c2',1,'MAX7219_Base']]],
   ['local_5fcontrol',['Local_Control',['../d4/dbe/namespaceMIDI__CC.html#a5a4600f7f3daa48157ae1c70d9275d31',1,'MIDI_CC']]],
   ['lockedsetting',['lockedSetting',['../d3/d43/classBankableMIDIOutput.html#af7718c6fc90fbeb7799e3c3fb076e7ed',1,'BankableMIDIOutput::lockedSetting()'],['../d1/d2f/classManyAddressesMIDIOutput.html#a8ab181f32ee9fd78b5e13198bf4dd7b2',1,'ManyAddressesMIDIOutput::lockedSetting()']]],
   ['long_5fpress_5fdelay',['LONG_PRESS_DELAY',['../db/d02/Settings_8hpp.html#ae45a88a68c9a82d85febda88f7ecf96d',1,'Settings.hpp']]],
   ['long_5fpress_5frepeat_5fdelay',['LONG_PRESS_REPEAT_DELAY',['../db/d02/Settings_8hpp.html#a4c6482347c7ca829da34491dfb905773',1,'Settings.hpp']]],
   ['longpressrepeat',['longPressRepeat',['../df/d38/classIncrementButton.html#a007fe99c59cd8bc8bad9727ca1185e65',1,'IncrementButton::longPressRepeat()'],['../d5/d20/classIncrementDecrementButtons.html#ab9b9e6fe8c72d37648ecbca236eb4f15',1,'IncrementDecrementButtons::longPressRepeat()']]],
-  ['longpressstate',['longPressState',['../df/d38/classIncrementButton.html#af1a0a9d8af01cd41a0f5b3cd87513d42',1,'IncrementButton::longPressState()'],['../d5/d20/classIncrementDecrementButtons.html#ada706db36b36e22d6bf393f76ea28f65',1,'IncrementDecrementButtons::longPressState()']]],
+  ['longpressstate',['longPressState',['../df/d38/classIncrementButton.html#a99f37dde2c1142d61685c367f77b95a7',1,'IncrementButton::longPressState()'],['../d5/d20/classIncrementDecrementButtons.html#a26a8ab1eb9f06caf14d5573c9dfd8f17',1,'IncrementDecrementButtons::longPressState()']]],
   ['low',['LOW',['../dd/ddf/ExtendedInputOutput_8hpp.html#a948017cfe0ff222ceee310d1db10173d',1,'ExtendedInputOutput.hpp']]]
 ];
