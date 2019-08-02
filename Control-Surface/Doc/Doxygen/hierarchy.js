@@ -1,8 +1,5 @@
 var hierarchy =
 [
-    [ "_Setbase", "da/d80/struct__Setbase.html", null ],
-    [ "_Setbytesep", "d6/d9e/struct__Setbytesep.html", null ],
-    [ "_Setprecision", "df/da8/struct__Setprecision.html", null ],
     [ "AudioVU::Analyzer", "d0/d18/classAudioVU_1_1Analyzer.html", null ],
     [ "Array< T, N >", "d7/d6a/structArray.html", null ],
     [ "Array< AudioMixer4 *, N >", "d7/d6a/structArray.html", null ],

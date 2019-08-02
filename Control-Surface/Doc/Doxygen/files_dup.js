@@ -147,7 +147,9 @@ var files_dup =
     [ "FilteredAnalog.cpp", "dd/d47/FilteredAnalog_8cpp.html", null ],
     [ "FilteredAnalog.hpp", "d8/df3/FilteredAnalog_8hpp.html", "d8/df3/FilteredAnalog_8hpp" ],
     [ "Frequency.cpp", "d1/d64/Frequency_8cpp.html", null ],
-    [ "Frequency.hpp", "dc/d50/Frequency_8hpp.html", "dc/d50/Frequency_8hpp" ],
+    [ "Frequency.hpp", "dc/d50/Frequency_8hpp.html", [
+      [ "Frequency", "d7/d90/classFrequency.html", "d7/d90/classFrequency" ]
+    ] ],
     [ "Groups.h", "da/d0a/Groups_8h.html", null ],
     [ "Helpers.cpp", "de/dce/Helpers_8cpp.html", null ],
     [ "Helpers.hpp", "d7/dd7/Helpers_8hpp.html", [
@@ -274,7 +276,11 @@ var files_dup =
       [ "MIDIChordButton", "da/d96/classBankable_1_1MIDIChordButton.html", "da/d96/classBankable_1_1MIDIChordButton" ]
     ] ],
     [ "MIDICNChannelAddress.cpp", "d6/d65/MIDICNChannelAddress_8cpp.html", null ],
-    [ "MIDICNChannelAddress.hpp", "d8/d38/MIDICNChannelAddress_8hpp.html", "d8/d38/MIDICNChannelAddress_8hpp" ],
+    [ "MIDICNChannelAddress.hpp", "d8/d38/MIDICNChannelAddress_8hpp.html", [
+      [ "MIDICNChannel", "df/d9b/classMIDICNChannel.html", "df/d9b/classMIDICNChannel" ],
+      [ "RelativeMIDICNChannelAddress", "da/dc7/classRelativeMIDICNChannelAddress.html", "da/dc7/classRelativeMIDICNChannelAddress" ],
+      [ "MIDICNChannelAddress", "d3/d10/classMIDICNChannelAddress.html", "d3/d10/classMIDICNChannelAddress" ]
+    ] ],
     [ "Abstract/MIDIFilteredAnalog.cpp", "df/d2f/Abstract_2MIDIFilteredAnalog_8cpp.html", null ],
     [ "Bankable/Abstract/MIDIFilteredAnalog.cpp", "d4/d8e/Bankable_2Abstract_2MIDIFilteredAnalog_8cpp.html", null ],
     [ "Abstract/MIDIFilteredAnalog.hpp", "d3/de4/Abstract_2MIDIFilteredAnalog_8hpp.html", [
@@ -415,7 +421,7 @@ var files_dup =
     [ "ShiftRegisterOut.hpp", "d0/db4/ShiftRegisterOut_8hpp.html", null ],
     [ "ShiftRegisterOutBase.cpp", "dd/d08/ShiftRegisterOutBase_8cpp.html", null ],
     [ "ShiftRegisterOutBase.hpp", "d8/d93/ShiftRegisterOutBase_8hpp.html", null ],
-    [ "ShiftRegisterOutRGB.cpp", "db/d0b/ShiftRegisterOutRGB_8cpp.html", "db/d0b/ShiftRegisterOutRGB_8cpp" ],
+    [ "ShiftRegisterOutRGB.cpp", "db/d0b/ShiftRegisterOutRGB_8cpp.html", null ],
     [ "ShiftRegisterOutRGB.hpp", "d1/d1f/ShiftRegisterOutRGB_8hpp.html", [
       [ "ShiftRegisterOutRGB", "d5/d45/structShiftRegisterOutRGB.html", "d5/d45/structShiftRegisterOutRGB" ]
     ] ],
@@ -452,7 +458,7 @@ var files_dup =
     [ "USBMIDI_Parser.hpp", "d8/d21/USBMIDI__Parser_8hpp.html", "d8/d21/USBMIDI__Parser_8hpp" ],
     [ "VolumeControl.cpp", "dc/d55/VolumeControl_8cpp.html", null ],
     [ "VolumeControl.hpp", "da/d51/VolumeControl_8hpp.html", null ],
-    [ "VPotDisplay.cpp", "d7/db9/VPotDisplay_8cpp.html", "d7/db9/VPotDisplay_8cpp" ],
+    [ "VPotDisplay.cpp", "d7/db9/VPotDisplay_8cpp.html", null ],
     [ "VPotDisplay.hpp", "d0/dbf/VPotDisplay_8hpp.html", [
       [ "VPotDisplay", "d3/d98/classMCU_1_1VPotDisplay.html", "d3/d98/classMCU_1_1VPotDisplay" ]
     ] ],

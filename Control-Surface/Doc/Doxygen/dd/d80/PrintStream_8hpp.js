@@ -1,8 +1,5 @@
 var PrintStream_8hpp =
 [
-    [ "_Setbase", "da/d80/struct__Setbase.html", "da/d80/struct__Setbase" ],
-    [ "_Setprecision", "df/da8/struct__Setprecision.html", "df/da8/struct__Setprecision" ],
-    [ "_Setbytesep", "d6/d9e/struct__Setbytesep.html", "d6/d9e/struct__Setbytesep" ],
     [ "manipulator", "dd/d80/PrintStream_8hpp.html#ab82cf12919f956954b9bba423b696205", null ],
     [ "endl", "dd/d80/PrintStream_8hpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d", null ],
     [ "flush", "dd/d80/PrintStream_8hpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e", null ],

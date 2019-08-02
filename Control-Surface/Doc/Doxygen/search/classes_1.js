@@ -1,20 +1,15 @@
 var searchData=
 [
-  ['analogmultiplex',['AnalogMultiplex',['../d7/d8d/classAnalogMultiplex.html',1,'']]],
-  ['analogvudisplay',['AnalogVUDisplay',['../dc/d95/classMCU_1_1AnalogVUDisplay.html',1,'MCU']]],
-  ['analyzer',['Analyzer',['../d0/d18/classAudioVU_1_1Analyzer.html',1,'AudioVU']]],
-  ['array',['Array',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20audiomixer4_20_2a_2c_20n_20_3e',['Array&lt; AudioMixer4 *, N &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20button_2c_20number_5fof_5fbuttons_20_3e',['Array&lt; Button, NUMBER_OF_BUTTONS &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20int8_5ft_2c_20n_20_3e',['Array&lt; int8_t, N &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20midicnchanneladdress_2c_20n_20_3e',['Array&lt; MIDICNChannelAddress, N &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20n_20_3e',['Array&lt; N &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20nb_5fcols_20_3e',['Array&lt; nb_cols &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20nb_5frows_20_3e',['Array&lt; nb_rows &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20nb_5frows_2c_20nb_5fcols_20_3e',['Array&lt; nb_rows, nb_cols &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20pin_5ft_2c_20n_20_3e',['Array&lt; pin_t, N &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['array_3c_20uint8_5ft_2c_20n_20_3e',['Array&lt; uint8_t, N &gt;',['../d7/d6a/structArray.html',1,'']]],
-  ['assignmentdisplay',['AssignmentDisplay',['../d1/d08/classMCU_1_1AssignmentDisplay.html',1,'MCU']]],
-  ['audiovu',['AudioVU',['../d4/dce/classAudioVU.html',1,'']]],
-  ['audiovuleds',['AudioVULEDs',['../d9/dbf/classAudioVULEDs.html',1,'']]]
+  ['bank',['Bank',['../db/dbd/classBank.html',1,'']]],
+  ['bank_3c_20maximum_5fsemitones_20_2d_20minimum_5fsemitones_2b1_20_3e',['Bank&lt; MAXIMUM_SEMITONES - MINIMUM_SEMITONES+1 &gt;',['../db/dbd/classBank.html',1,'']]],
+  ['bankablemidiinput',['BankableMIDIInput',['../db/d6e/classBankableMIDIInput.html',1,'']]],
+  ['bankablemidioutput',['BankableMIDIOutput',['../d3/d43/classBankableMIDIOutput.html',1,'']]],
+  ['bankconfig',['BankConfig',['../dc/d17/structBankConfig.html',1,'']]],
+  ['bitarray',['BitArray',['../db/de9/classBitArray.html',1,'']]],
+  ['bitarray_3c_208_20_2a8_20_3e',['BitArray&lt; 8 *8 &gt;',['../db/de9/classBitArray.html',1,'']]],
+  ['blemidi',['BLEMIDI',['../d8/d39/classBLEMIDI.html',1,'']]],
+  ['bluetoothmidi_5finterface',['BluetoothMIDI_Interface',['../d0/d89/classBluetoothMIDI__Interface.html',1,'']]],
+  ['bresenhamline',['BresenhamLine',['../d6/d99/classBresenhamLine.html',1,'']]],
+  ['button',['Button',['../d1/d19/classButton.html',1,'']]],
+  ['buttonmatrix',['ButtonMatrix',['../d8/d6c/classButtonMatrix.html',1,'']]]
 ];

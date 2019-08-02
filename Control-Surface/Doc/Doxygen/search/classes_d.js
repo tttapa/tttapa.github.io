@@ -1,12 +1,9 @@
 var searchData=
 [
-  ['pbpotentiometer',['PBPotentiometer',['../de/d8c/classBankable_1_1PBPotentiometer.html',1,'Bankable::PBPotentiometer'],['../da/d6a/classPBPotentiometer.html',1,'PBPotentiometer']]],
-  ['pitchbendsender',['PitchBendSender',['../de/d46/classPitchBendSender.html',1,'']]],
-  ['pixel',['Pixel',['../d4/d38/structBresenhamLine_1_1Pixel.html',1,'BresenhamLine']]],
-  ['pixellocation',['PixelLocation',['../dc/dd2/structPixelLocation.html',1,'']]],
-  ['potentiometer',['Potentiometer',['../d5/d0f/structPotentiometer.html',1,'']]],
-  ['programchanger',['ProgramChanger',['../de/d43/classProgramChanger.html',1,'']]],
-  ['programchangeselector',['ProgramChangeSelector',['../dd/dd4/classProgramChangeSelector.html',1,'']]],
-  ['programchangeselector_5fbase',['ProgramChangeSelector_Base',['../d9/dc1/classProgramChangeSelector__Base.html',1,'']]],
-  ['programchangeselectorleds',['ProgramChangeSelectorLEDs',['../d9/dee/classProgramChangeSelectorLEDs.html',1,'']]]
+  ['relativeccsender',['RelativeCCSender',['../d3/dd0/classRelativeCCSender.html',1,'']]],
+  ['relativemidicnchanneladdress',['RelativeMIDICNChannelAddress',['../da/dc7/classRelativeMIDICNChannelAddress.html',1,'']]],
+  ['remove_5freference',['remove_reference',['../de/db3/structremove__reference.html',1,'']]],
+  ['remove_5freference_3c_20t_20_26_20_3e',['remove_reference&lt; T &amp; &gt;',['../db/dba/structremove__reference_3_01T_01_6_01_4.html',1,'']]],
+  ['remove_5freference_3c_20t_20_26_26_20_3e',['remove_reference&lt; T &amp;&amp; &gt;',['../df/def/structremove__reference_3_01T_01_6_6_01_4.html',1,'']]],
+  ['reverse_5fnode_5fiterator',['reverse_node_iterator',['../d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html',1,'DoublyLinkedList']]]
 ];

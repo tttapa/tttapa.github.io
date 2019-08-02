@@ -1,21 +1,12 @@
 var searchData=
 [
-  ['g',['G',['../d7/d78/namespaceMIDI__Notes.html#a7e6f3ec66b39be4c71e7d9a85dc6370a',1,'MIDI_Notes']]],
-  ['gain',['gain',['../d4/dce/classAudioVU.html#aaa14a6cb4fc96a9e889087fd284ca3d8',1,'AudioVU']]],
-  ['gb',['Gb',['../d7/d78/namespaceMIDI__Notes.html#ab83787ce70f99280924d2ed7dd09fbd8',1,'MIDI_Notes']]],
-  ['general_5fpurpose_5fcontroller_5f1',['General_Purpose_Controller_1',['../d4/dbe/namespaceMIDI__CC.html#a1c8acee58b40318f585c6bcae9927aa6',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f1_5flsb',['General_Purpose_Controller_1_LSB',['../d4/dbe/namespaceMIDI__CC.html#acc7f0e4e0089bd816976347a011cce56',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f2',['General_Purpose_Controller_2',['../d4/dbe/namespaceMIDI__CC.html#ac81539f928e838e7f57e5d0979bc4cf2',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f2_5flsb',['General_Purpose_Controller_2_LSB',['../d4/dbe/namespaceMIDI__CC.html#a26c32b8bce98263875dda97928fcef34',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f3',['General_Purpose_Controller_3',['../d4/dbe/namespaceMIDI__CC.html#abad32da5edb712fd72a3c2a289fd3fd3',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f3_5flsb',['General_Purpose_Controller_3_LSB',['../d4/dbe/namespaceMIDI__CC.html#ac315dee74abb96e780c40a6c05136c40',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f4',['General_Purpose_Controller_4',['../d4/dbe/namespaceMIDI__CC.html#a042d71ab0e3135bbb7262f8b13d74ee8',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f4_5flsb',['General_Purpose_Controller_4_LSB',['../d4/dbe/namespaceMIDI__CC.html#aaabea6c872da3229a9d550f952f052ee',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f5',['General_Purpose_Controller_5',['../d4/dbe/namespaceMIDI__CC.html#a515be32476b5407f044b7f386a1d4561',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f6',['General_Purpose_Controller_6',['../d4/dbe/namespaceMIDI__CC.html#a698dd0989acc992ca512d714163586f0',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f7',['General_Purpose_Controller_7',['../d4/dbe/namespaceMIDI__CC.html#a20394adb29bba22c3a8006650ea30c32',1,'MIDI_CC']]],
-  ['general_5fpurpose_5fcontroller_5f8',['General_Purpose_Controller_8',['../d4/dbe/namespaceMIDI__CC.html#ae1f17f3e59958dfae6c99260b7b5d34d',1,'MIDI_CC']]],
-  ['global_5fview',['GLOBAL_VIEW',['../d7/dc7/namespaceMCU.html#a4b2605222a62ed280cd95061ff7d6522',1,'MCU']]],
-  ['greenbit',['greenBit',['../d5/d45/structShiftRegisterOutRGB.html#ab969310ccdd300931776fdbcb598211f',1,'ShiftRegisterOutRGB']]],
-  ['group',['GROUP',['../d7/dc7/namespaceMCU.html#aaae72d5574f869865d76bcb55bd819f8',1,'MCU']]]
+  ['h',['h',['../d6/d99/classBresenhamLine.html#ae9b32e490e5151516e9147d5d478def4',1,'BresenhamLine']]],
+  ['hairless_5fbaud',['HAIRLESS_BAUD',['../db/d02/Settings_8hpp.html#aee625974250707110fbe8686b37ae3a1',1,'Settings.hpp']]],
+  ['header',['header',['../de/df8/structMIDI__message.html#af73ddde8746b7f86712a180320aacbbd',1,'MIDI_message']]],
+  ['height',['height',['../d2/df6/structXBitmap.html#aadc2e950f43a466fb09b0b0239dcf3ee',1,'XBitmap']]],
+  ['hertz',['hertz',['../d7/d90/classFrequency.html#a42d4284ade4160360eb7a54afccf5a4c',1,'Frequency']]],
+  ['high',['HIGH',['../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d',1,'ExtendedInputOutput.hpp']]],
+  ['high_5fresolution_5fvelocity_5fprefix',['High_Resolution_Velocity_Prefix',['../d4/dbe/namespaceMIDI__CC.html#ad7384a220e9d2f6115a8729356cf3787',1,'MIDI_CC']]],
+  ['hold_5f2',['Hold_2',['../d4/dbe/namespaceMIDI__CC.html#a4f4fbdf93ecdd1f1768b84b3dcd847eb',1,'MIDI_CC']]],
+  ['hysteresis',['hysteresis',['../da/da7/classFilteredAnalog.html#a2354c851dcf6688845bf9b3538003976',1,'FilteredAnalog']]]
 ];

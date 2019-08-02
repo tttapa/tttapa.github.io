@@ -1,7 +1,6 @@
 var Channel_8hpp =
 [
     [ "Channel", "d2/d48/classChannel.html", "d2/d48/classChannel" ],
-    [ "operator\"\"_ch", "d7/d42/Channel_8hpp.html#a47e5d27fda2cb7b93b15da9fa4ccfe5b", null ],
     [ "CHANNEL_1", "d7/d42/Channel_8hpp.html#a166aafd26c8b912f9e8bc7acb8b1cd17", null ],
     [ "CHANNEL_2", "d7/d42/Channel_8hpp.html#a120503340a038407793ee160e549dc54", null ],
     [ "CHANNEL_3", "d7/d42/Channel_8hpp.html#a6b8f56475f4094256ff0e8f0396f3dd3", null ],

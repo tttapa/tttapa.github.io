@@ -1,14 +1,15 @@
 var searchData=
 [
-  ['unique_5fptr',['unique_ptr',['../dd/d67/classunique__ptr.html',1,'']]],
-  ['unique_5fptr_3c_20const_20ichord_20_3e',['unique_ptr&lt; const IChord &gt;',['../dd/d67/classunique__ptr.html',1,'']]],
-  ['updatable',['Updatable',['../d5/de0/classUpdatable.html',1,'']]],
-  ['updatable_3c_20audiovu_20_3e',['Updatable&lt; AudioVU &gt;',['../d5/de0/classUpdatable.html',1,'']]],
-  ['updatable_3c_20normalupdatable_20_3e',['Updatable&lt; NormalUpdatable &gt;',['../d5/de0/classUpdatable.html',1,'']]],
-  ['updatable_3c_20potentiometer_20_3e',['Updatable&lt; Potentiometer &gt;',['../d5/de0/classUpdatable.html',1,'']]],
-  ['updatable_3c_3e',['Updatable&lt;&gt;',['../d5/de0/classUpdatable.html',1,'']]],
-  ['usbdebugmidi_5finterface',['USBDebugMIDI_Interface',['../de/d2d/classUSBDebugMIDI__Interface.html',1,'']]],
-  ['usbmidi_5finterface',['USBMIDI_Interface',['../de/d05/classUSBMIDI__Interface.html',1,'']]],
-  ['usbmidi_5fparser',['USBMIDI_Parser',['../db/db0/classUSBMIDI__Parser.html',1,'']]],
-  ['usbserialmidi_5finterface',['USBSerialMIDI_Interface',['../d8/d57/classUSBSerialMIDI__Interface.html',1,'']]]
+  ['volumecontrol',['VolumeControl',['../d4/de3/classVolumeControl.html',1,'']]],
+  ['vpotdisplay',['VPotDisplay',['../d3/d98/classMCU_1_1VPotDisplay.html',1,'MCU']]],
+  ['vpotring',['VPotRing',['../d5/ddb/classMCU_1_1VPotRing.html',1,'MCU::VPotRing'],['../da/d93/classMCU_1_1Bankable_1_1VPotRing.html',1,'MCU::Bankable::VPotRing&lt; N &gt;']]],
+  ['vpotring_5fbase',['VPotRing_Base',['../db/dac/classMCU_1_1VPotRing__Base.html',1,'MCU']]],
+  ['vpotringleds',['VPotRingLEDs',['../d6/d0d/classMCU_1_1VPotRingLEDs.html',1,'MCU::VPotRingLEDs'],['../d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html',1,'MCU::Bankable::VPotRingLEDs&lt; N &gt;']]],
+  ['vpotringleds_5fbase',['VPotRingLEDs_Base',['../de/d52/classMCU_1_1VPotRingLEDs__Base.html',1,'MCU']]],
+  ['vu',['VU',['../d8/d4c/classMCU_1_1VU.html',1,'MCU::VU'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable::VU&lt; N &gt;']]],
+  ['vu_3c_20m_20_3e',['VU&lt; M &gt;',['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable']]],
+  ['vu_5fbase',['VU_Base',['../d4/d71/classMCU_1_1VU__Base.html',1,'MCU']]],
+  ['vudisplay',['VUDisplay',['../d4/d42/classMCU_1_1VUDisplay.html',1,'MCU']]],
+  ['vuleds',['VULEDs',['../df/d36/classMCU_1_1VULEDs.html',1,'MCU::VULEDs&lt; N &gt;'],['../db/d17/classMCU_1_1Bankable_1_1VULEDs.html',1,'MCU::Bankable::VULEDs&lt; M, N &gt;']]],
+  ['vuleds_5fbase',['VULEDs_Base',['../da/d0a/classMCU_1_1VULEDs__Base.html',1,'MCU']]]
 ];
