@@ -6,6 +6,6 @@ var classManyAddressesMIDIOutput =
     [ "lock", "d1/d2f/classManyAddressesMIDIOutput.html#aae65e54ccb8f85f9d2151446e8a2d3f6", null ],
     [ "unlock", "d1/d2f/classManyAddressesMIDIOutput.html#aca643ae119ca8ce895a2af30ad2ce0f1", null ],
     [ "bank", "d1/d2f/classManyAddressesMIDIOutput.html#a645ccf02d891417aa53878442285e269", null ],
-    [ "lockedSetting", "d1/d2f/classManyAddressesMIDIOutput.html#a8ab181f32ee9fd78b5e13198bf4dd7b2", null ],
-    [ "UNLOCKED", "d1/d2f/classManyAddressesMIDIOutput.html#ab063fe4c171879ba73ece6cf17e8099f", null ]
+    [ "UNLOCKED", "d1/d2f/classManyAddressesMIDIOutput.html#ab063fe4c171879ba73ece6cf17e8099f", null ],
+    [ "lockedSetting", "d1/d2f/classManyAddressesMIDIOutput.html#a8ab181f32ee9fd78b5e13198bf4dd7b2", null ]
 ];
