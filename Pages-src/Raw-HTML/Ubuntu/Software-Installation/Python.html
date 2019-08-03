@@ -1,0 +1,186 @@
+<!--
+@title: Python
+@author: Pieter P
+@keywords: Python,Python3,build,source,Ubuntu,Installation
+@description: Build instructions for Python 3 on Ubuntu.
+-->
+
+<html>
+<p>
+    This page explains how to build Python 3 from source on Ubuntu.
+</p>
+
+<h3>Install dependencies and tools</h3>
+
+<p>
+    First, install GCC 9, GNU Make and GNU Wget if you haven't already.
+</p>
+<pre class=console><code>sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test  # Repository for GCC 9</code>
+<code>sudo apt update</code>
+<code>sudo apt install gcc-9 g++-9 make wget</code></pre>
+<p>
+    Also install the dependencies to build Python and its modules.
+</p>
+<pre
+    class=console><code>sudo apt install zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev libgdbm-dev liblzma-dev</code></pre>
+<p>
+    On Ubuntu 18.04, you'll need compatibility development files for GNU dbm.
+</p>
+<pre class=console><code>sudo apt install libgdbm-compat-dev</code></pre>
+<p>
+    You can try to build Python without these dependencies, but then some of the
+    optional modules will not be built.
+</p>
+
+<h3>Download and extract the source code</h3>
+
+<p>
+    Next, download and extract the Python source code.
+</p>
+<pre class=console><code>version="3.7.4"</code>
+<code>python="Python-$version"</code>
+<code>cd /tmp</code>
+<code>wget "https://www.python.org/ftp/python/$version/$python.tgz"  # Download</code>
+<code>tar xf $python.tgz  # Extract</code></pre>
+
+<h3>Configure the build settings</h3>
+
+<p>
+    You can now tune the settings for your build now. I'll use the standard
+    version with optimizations, link-time optimizations, and IPv6 enabled.
+    <code>--enable-shared</code> builds the shared libraries for Python. This
+    allows other programs to use and embed Python.<br>
+    The installation location is <code>~/.local</code>. This is a user-level
+    installation, it's just for the current user, doesn't require sudo, and
+    won't overwrite the Python version that comes with your Linux distribution.
+</p>
+<p>
+    On most distributions, <code>~/.local/lib</code> is not in the runtime
+    linker's search path. Therefore, we need to specify the <code>rpath</code>
+    during the linking stage.
+</p>
+<pre class=console><code>cd "$python"</code>
+<code>./configure --prefix="$HOME/.local" \
+        --enable-ipv6 \
+        --enable-shared --with-lto --enable-optimizations \
+        CC=gcc-9 CXX=g++-9 \
+        'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</code></pre>
+<p>
+    To see all options, run the following command.
+</p>
+<pre class=console><code>./configure --help</code></pre>
+
+<h3>Build Python</h3>
+
+<p>
+    Actually build Python. This can easily take up to an hour, especially if you
+    have optimizations enabled, because then it will run all tests.<br>
+    The <code>-j</code> option tells make to compile multiple files in parallel,
+    <code>nproc</code> gives the number of CPU cores of the system.
+</p>
+<pre class=console><code>make -j$(nproc)</code></pre>
+
+<h3>Install Python</h3>
+
+<p>
+    Finally, install Python to the location specified as <code>prefix</code> in
+    the configure step.
+</p>
+<p>
+    There are two possible install options: Either you install Python as the
+    main/default version: this means that it will be installed as
+    <code>python3</code>, and it will replace the previous default Python 3
+    version at the install location. The version you're installing will become
+    the new default.<br>
+    The second option is to install Python as an "alternative" version. The
+    default Python 3 version will be preserved, and the new version will be
+    installed as <code>python3.7</code>.
+</p>
+<pre class=console><code>make install  # Replace default version</code></pre>
+<pre class=console><code>make altinstall  # Install alongside existing version, preserve default</code></pre>
+<p>
+    If the installation location is not in your <code>PATH</code>, you'll have
+    to add it yourself.
+</p>
+<pre class=console><code>export PATH="$HOME/.local/bin:$PATH"</code></pre>
+<p>
+    To make it permanent, add it to your <code>~/.profile</code> file, so it is
+    added to your <code>PATH</code> every time you log in.
+</p>
+<pre class=console><code>echo "export PATH=\"$HOME/.local/bin:$PATH\"" >> ~/.profile</code></pre>
+
+<p>
+    Python itself will find its shared libraries without problems, because of
+    the <code>rpath</code> linker option we added previously. However, if you
+    are using other programs that require these libraries, you'll have to add
+    <code>~/.local/lib</code> to your <code>LD_LIBRARY_PATH</code> environment
+    variable.
+</p>
+<pre class=console><code>export LD_LIBRARY_PATH="$HOME/.local/lib"</code></pre>
+
+<h3>Shell Script</h3>
+
+<p>
+    Here's a shell script that executes the previous steps for you.
+</p>
+<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #008000;">#!/usr/bin/env bash</span></code>
+<code></code>
+<code><span style="color: #008000;"># Script to download and build Python 3 from source</span></code>
+<code></code>
+<code><span style="color: #795e26;">set</span><span style="color: #000000;"> -ex</span></code>
+<code></code>
+<code><span style="color: #000000;">version=</span><span style="color: #a31515;">"3.7.4"</span></code>
+<code><span style="color: #000000;">builddir=</span><span style="color: #a31515;">"/tmp"</span></code>
+<code><span style="color: #000000;">python=</span><span style="color: #a31515;">"Python-</span><span style="color: #001080;">$version</span><span style="color: #a31515;">"</span></code>
+<code><span style="color: #000000;">prefix=</span><span style="color: #a31515;">"</span><span style="color: #001080;">$HOME</span><span style="color: #a31515;">/.local"</span></code>
+<code></code>
+<code><span style="color: #008000;"># Install dependencies and build tools</span></code>
+<code><span style="color: #000000;">sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test</span></code>
+<code><span style="color: #000000;">sudo apt-get update</span></code>
+<code><span style="color: #000000;">sudo apt-get install -y \</span></code>
+<code><span style="color: #000000;">    zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev \</span></code>
+<code><span style="color: #000000;">    libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev \</span></code>
+<code><span style="color: #000000;">    libgdbm-dev liblzma-dev \</span></code>
+<code><span style="color: #000000;">    wget make gcc-9 g++-9</span></code>
+<code></code>
+<code><span style="color: #008000;"># For Ubuntu 18.04 and later, another dependency is required for GNU dbm</span></code>
+<code><span style="color: #795e26;">source</span><span style="color: #000000;"> /etc/os-release</span></code>
+<code><span style="color: #af00db;">if</span><span style="color: #000000;"> </span><span style="color: #a31515;">(( $(echo "</span><span style="color: #001080;">$VERSION_ID</span><span style="color: #a31515;"> </span><span style="color: #000000;">&gt;=</span><span style="color: #a31515;"> </span><span style="color: #09885a;">18</span><span style="color: #a31515;">.</span><span style="color: #09885a;">04</span><span style="color: #a31515;">" </span><span style="color: #000000;">|</span><span style="color: #a31515;"> bc </span><span style="color: #000000;">-</span><span style="color: #a31515;">l) ))</span><span style="color: #000000;">;</span></code>
+<code><span style="color: #af00db;">then</span></code>
+<code><span style="color: #000000;">    sudo apt-get install libgdbm-compat-dev</span></code>
+<code><span style="color: #af00db;">fi</span></code>
+<code></code>
+<code><span style="color: #008000;"># Download and extract the Python source code</span></code>
+<code><span style="color: #000000;">mkdir -p </span><span style="color: #a31515;">"</span><span style="color: #001080;">$builddir</span><span style="color: #a31515;">"</span></code>
+<code><span style="color: #795e26;">cd</span><span style="color: #000000;"> </span><span style="color: #001080;">$builddir</span></code>
+<code><span style="color: #af00db;">if</span><span style="color: #000000;"> [ </span><span style="color: #000000;">!</span><span style="color: #000000;"> </span><span style="color: #000000;">-d</span><span style="color: #000000;"> </span><span style="color: #a31515;">"</span><span style="color: #001080;">$python</span><span style="color: #a31515;">"</span><span style="color: #000000;"> ]</span></code>
+<code><span style="color: #af00db;">then</span></code>
+<code><span style="color: #000000;">    wget </span><span style="color: #a31515;">"https://www.python.org/ftp/python/</span><span style="color: #001080;">$version</span><span style="color: #a31515;">/</span><span style="color: #001080;">$python</span><span style="color: #a31515;">.tgz"</span></code>
+<code><span style="color: #000000;">    tar xf </span><span style="color: #001080;">$python</span><span style="color: #000000;">.tgz</span></code>
+<code><span style="color: #af00db;">fi</span></code>
+<code></code>
+<code><span style="color: #795e26;">cd</span><span style="color: #000000;"> </span><span style="color: #a31515;">"</span><span style="color: #001080;">$python</span><span style="color: #a31515;">"</span></code>
+<code><span style="color: #000000;">./configure --prefix=</span><span style="color: #a31515;">"</span><span style="color: #001080;">$prefix</span><span style="color: #a31515;">"</span><span style="color: #000000;"> \</span></code>
+<code><span style="color: #000000;">    --enable-ipv6 \</span></code>
+<code><span style="color: #000000;">    --enable-shared --with-lto --enable-optimizations \</span></code>
+<code><span style="color: #000000;">    CC=gcc-9 CXX=g++-9 \</span></code>
+<code><span style="color: #000000;">    </span><span style="color: #a31515;">'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</span></code>
+<code></code>
+<code><span style="color: #000000;">make -j$[</span><span style="color: #a31515;">$(nproc)</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> 2]</span></code>
+<code><span style="color: #000000;">make altinstall</span></code></pre>
+
+<p>
+    You can download it <a href="resources/python.sh">here</a>. Then allow
+    execution and run it:
+</p>
+<pre class="console"><code>chmod +x python.sh</code>
+<code>./python.sh</code></pre>
+
+<h3>Tested on</h3>
+
+<ul>
+    <li>Ubuntu 16.04</li>
+    <li>Ubuntu 18.04</li>
+</ul>
+
+</html>
