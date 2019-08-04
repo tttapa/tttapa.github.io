@@ -20,7 +20,5 @@ var searchData=
   ['hysteresis',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'Hysteresis&lt; BITS &gt;'],['../da/da7/classFilteredAnalog.html#a2354c851dcf6688845bf9b3538003976',1,'FilteredAnalog::hysteresis()']]],
   ['hysteresis_2ecpp',['Hysteresis.cpp',['../dd/d40/Hysteresis_8cpp.html',1,'']]],
   ['hysteresis_2ehpp',['Hysteresis.hpp',['../d3/d09/Hysteresis_8hpp.html',1,'']]],
-  ['hysteresis_3c_20adc_5fbits_20_2d_20precision_20_3e',['Hysteresis&lt; ADC_BITS - PRECISION &gt;',['../d2/dcb/classHysteresis.html',1,'']]],
-  ['vuleds_2ecpp',['VULEDs.cpp',['../d1/dff/Hardware_2LEDs_2VULEDs_8cpp.html',1,'']]],
-  ['vuleds_2ehpp',['VULEDs.hpp',['../d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html',1,'']]]
+  ['hysteresis_3c_20adc_5fbits_20_2d_20precision_20_3e',['Hysteresis&lt; ADC_BITS - PRECISION &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
 ];

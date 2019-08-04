@@ -11,5 +11,7 @@ var searchData=
   ['vu_2ecpp',['VU.cpp',['../d6/d26/VU_8cpp.html',1,'']]],
   ['vu_2ehpp',['VU.hpp',['../db/dda/VU_8hpp.html',1,'']]],
   ['vudisplay_2ecpp',['VUDisplay.cpp',['../db/dcf/VUDisplay_8cpp.html',1,'']]],
-  ['vudisplay_2ehpp',['VUDisplay.hpp',['../d0/db9/VUDisplay_8hpp.html',1,'']]]
+  ['vudisplay_2ehpp',['VUDisplay.hpp',['../d0/db9/VUDisplay_8hpp.html',1,'']]],
+  ['vuleds_2ecpp',['VULEDs.cpp',['../dd/d0f/VULEDs_8cpp.html',1,'']]],
+  ['vuleds_2ehpp',['VULEDs.hpp',['../de/d3d/VULEDs_8hpp.html',1,'']]]
 ];

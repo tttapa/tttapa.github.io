@@ -24,7 +24,7 @@ var searchData=
   ['bankconfig_2ehpp',['BankConfig.hpp',['../dd/d1f/BankConfig_8hpp.html',1,'']]],
   ['banksetting',['bankSetting',['../d9/d36/classOutputBank.html#a5bd1678610a11347f62e7af8c7bda4b5',1,'OutputBank']]],
   ['banktype',['BankType',['../dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1',1,'BankConfig.hpp']]],
-  ['bar',['Bar',['../d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html#af626aa654815b2c30bbc674379e8807aaddc35f88fa71b6ef142ae61f35364653',1,'VULEDs.hpp']]],
+  ['bar',['Bar',['../d6/d3a/DotBarDisplayLEDs_8hpp.html#af626aa654815b2c30bbc674379e8807aaddc35f88fa71b6ef142ae61f35364653',1,'DotBarDisplayLEDs.hpp']]],
   ['barmode',['barMode',['../d9/dbf/classAudioVULEDs.html#af581f043bd8e2d73332319de2ce5cc99',1,'AudioVULEDs::barMode()'],['../d1/d3e/classDotBarDisplayLEDs.html#aa9f7fa0064cfbb59d25143e00edce0e0',1,'DotBarDisplayLEDs::barMode()']]],
   ['baseaddress',['baseAddress',['../d2/d87/classMIDIButtons.html#a33688ac1aae36fabb6ff45183a9c8be5',1,'MIDIButtons::baseAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a328e24602541106644e51fb9b4679f15',1,'Bankable::MIDIButtons::baseAddress()'],['../d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a656050d5d5657013853098bfb3c816fb',1,'Bankable::MIDIFilteredAnalogAddressable::baseAddress()']]],
   ['basechannelcn',['baseChannelCN',['../d0/d54/classMIDIButtonMatrix.html#a26af432b777ab32aafadda5dacae5b93',1,'MIDIButtonMatrix::baseChannelCN()'],['../d3/d65/classBankable_1_1MIDIButtonMatrix.html#a0fc35e64c388523b8e405260bd94361f',1,'Bankable::MIDIButtonMatrix::baseChannelCN()']]],

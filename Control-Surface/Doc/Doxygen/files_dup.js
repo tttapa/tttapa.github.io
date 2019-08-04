@@ -120,6 +120,8 @@ var files_dup =
     [ "DisplayInterfaceSSD1306.hpp", "d3/d62/DisplayInterfaceSSD1306_8hpp.html", [
       [ "SSD1306_DisplayInterface", "dc/ddd/classSSD1306__DisplayInterface.html", "dc/ddd/classSSD1306__DisplayInterface" ]
     ] ],
+    [ "DotBarDisplayLEDs.cpp", "de/da7/DotBarDisplayLEDs_8cpp.html", null ],
+    [ "DotBarDisplayLEDs.hpp", "d6/d3a/DotBarDisplayLEDs_8hpp.html", "d6/d3a/DotBarDisplayLEDs_8hpp" ],
     [ "EMA.cpp", "d9/d0a/EMA_8cpp.html", null ],
     [ "EMA.hpp", "d3/df0/EMA_8hpp.html", [
       [ "EMA", "d7/d40/classEMA.html", "d7/d40/classEMA" ],
@@ -482,10 +484,8 @@ var files_dup =
       [ "VUDisplay", "d4/d42/classMCU_1_1VUDisplay.html", "d4/d42/classMCU_1_1VUDisplay" ],
       [ "AnalogVUDisplay", "dc/d95/classMCU_1_1AnalogVUDisplay.html", "dc/d95/classMCU_1_1AnalogVUDisplay" ]
     ] ],
-    [ "Hardware/LEDs/VULEDs.cpp", "d1/dff/Hardware_2LEDs_2VULEDs_8cpp.html", null ],
-    [ "MIDI_Inputs/LEDs/MCU/VULEDs.cpp", "d0/d24/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8cpp.html", null ],
-    [ "Hardware/LEDs/VULEDs.hpp", "d9/d28/Hardware_2LEDs_2VULEDs_8hpp.html", "d9/d28/Hardware_2LEDs_2VULEDs_8hpp" ],
-    [ "MIDI_Inputs/LEDs/MCU/VULEDs.hpp", "d3/d52/MIDI__Inputs_2LEDs_2MCU_2VULEDs_8hpp.html", [
+    [ "VULEDs.cpp", "dd/d0f/VULEDs_8cpp.html", null ],
+    [ "VULEDs.hpp", "de/d3d/VULEDs_8hpp.html", [
       [ "VULEDs_Base", "da/d0a/classMCU_1_1VULEDs__Base.html", "da/d0a/classMCU_1_1VULEDs__Base" ],
       [ "VULEDs", "df/d36/classMCU_1_1VULEDs.html", "df/d36/classMCU_1_1VULEDs" ],
       [ "VULEDs", "db/d17/classMCU_1_1Bankable_1_1VULEDs.html", "db/d17/classMCU_1_1Bankable_1_1VULEDs" ]

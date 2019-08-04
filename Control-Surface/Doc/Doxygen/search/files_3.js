@@ -15,5 +15,7 @@ var searchData=
   ['displayinterface_2ecpp',['DisplayInterface.cpp',['../da/ddf/DisplayInterface_8cpp.html',1,'']]],
   ['displayinterface_2ehpp',['DisplayInterface.hpp',['../dc/d77/DisplayInterface_8hpp.html',1,'']]],
   ['displayinterfacessd1306_2ecpp',['DisplayInterfaceSSD1306.cpp',['../db/d4b/DisplayInterfaceSSD1306_8cpp.html',1,'']]],
-  ['displayinterfacessd1306_2ehpp',['DisplayInterfaceSSD1306.hpp',['../d3/d62/DisplayInterfaceSSD1306_8hpp.html',1,'']]]
+  ['displayinterfacessd1306_2ehpp',['DisplayInterfaceSSD1306.hpp',['../d3/d62/DisplayInterfaceSSD1306_8hpp.html',1,'']]],
+  ['dotbardisplayleds_2ecpp',['DotBarDisplayLEDs.cpp',['../de/da7/DotBarDisplayLEDs_8cpp.html',1,'']]],
+  ['dotbardisplayleds_2ehpp',['DotBarDisplayLEDs.hpp',['../d6/d3a/DotBarDisplayLEDs_8hpp.html',1,'']]]
 ];
