@@ -1,6 +1,6 @@
 import re
 
-def format_anchor_name(match):
+def format_anchor_name(match, anchors):
     tag = match.group(1)
     fullname = match.group(2)
     name = fullname
@@ -11,14 +11,24 @@ def format_anchor_name(match):
     name = re.sub(r"[^a-z\d]", r"-", name)    # Only alphanumeric lowercase, replace everything else with '-'
     name = re.sub(r"-+", r"-", name)          # More than one '-' replaced with single '-'
     name = re.sub(r"/^-|-$", r"", name)       # Strip '-' from the start or end of the string
-    return "<h"+tag+"><a name=\"" + name \
-         + "\" href=\"#" + name \
+
+    # Don't allow duplicate IDs, so add a number at the end to make it unique
+    i = 1
+    newname = name
+    while newname in anchors:
+        newname = name + str(i)
+        i += 1
+    anchors.add(newname)
+
+    return "<h"+tag+"><a name=\"" + newname \
+         + "\" href=\"#" + newname \
          + "\">"+fullname+"</a></h" + tag + ">"
 
 def addAnchors(html):
+    anchors = set()
     html = re.sub(r"<h([1-6])>(((?!<a).)+)</h\1>", \
-                    format_anchor_name, \
-                    html)
+                  lambda match: format_anchor_name(match, anchors), \
+                  html)
     return html
 
 def addCodeLines(match):
