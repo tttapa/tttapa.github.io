@@ -1,55 +1,51 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
-<head>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
-    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-          TeX: { equationNumbers: { autoNumber: "AMS" } },
-          "fast-preview": {
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
             disabled: true
-          }
+            }
         });
     </script>
     <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <meta name="theme-color" content="#ccc">
-    <meta name="keywords" content="VU meter, Arduino, audio, visualization">
-    <meta name="description" content="Visualization of the sound level using Arduino-based VU meters.">
-    <title>VU Meters</title>
+    <meta name="keywords" content="Control Surface,Arduino,Documentation,Coverage,Doxygen,GCOV,LCOV,Developers">
+    <meta name="description" content="Generating the documentation and coverage information for the Control Surface library.">
+    <title>Generating Documentation</title>
 </head>
-
 <body>
     <nav>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                <path d="M0 0h48v48h-48z" fill="none" />
-                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z" />
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
             </svg>
             <h2><a href="/">Home</a></h2>
 <ul>
     <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../index.html">Arduino</a>
     <ul>
-        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Audio and Signal Processing</a>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
         <ul>
-            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry" href="index.html">VU Meters</a>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
             <ul>
             </ul>
             </li>
         </ul>
         </li>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/index.html">Control Surface</a>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Control Surface</a>
         <ul>
-            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/Developers/index.html">Developers</a>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Developers</a>
             <ul>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Installation.html">Installation</a></li>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Style.html">Style</a></li>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Tests.html">Tests</a></li>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+                <li><span class="ftriangle"></span><a href="Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a href="Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a href="Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry" href="Generating-Documentation.html">Generating Documentation</a></li>
             </ul>
             </li>
         </ul>
@@ -144,7 +140,7 @@
                 <a href="/" title="Home">home</a>
             </i>
             <i class="material-icons">
-                <a href="index.pdf" title="Download as PDF">get_app</a>
+                <a href="Generating-Documentation.pdf" title="Download as PDF">get_app</a>
             </i>
             <i class="material-icons">
                 <a href="javascript:window.print()" title="Print this article">print</a>
@@ -155,15 +151,56 @@
         </div>
     </nav>
     <article>
-        <h1 class="indexTitle">VU Meters</h1>
+        <h1 class="title">Generating Documentation</h1>
         <i class="author">Pieter P</i>
         <div>
-    
-</div>
-        <hr>
-        <div class="indexContainer"></div>
-    </article>
-    <footer>Last edited: Saturday, 06 July 2019 20:07 UTC</footer>
-</body>
 
-</html>
+<h3><a name="generating-the-documentation-using-doxygen" href="#generating-the-documentation-using-doxygen">Generating the documentation using Doxygen</a></h3>
+
+<p>
+    As mentioned before in the style guide, the library is documented using
+    Doxygen. It will parse the source code, create class diagrams, calling
+    networks, overviews of classes and functions, based on the comments in the
+    code. All of this results in a folder of HTML files you can open in the web
+    browser.
+</p>
+
+<h4><a name="generating-the-documentation-in-visual-studio-code" href="#generating-the-documentation-in-visual-studio-code">Generating the documentation in Visual Studio Code</a></h4>
+<p>
+    Press <code>CTRL+P</code>, and type "task", space, and then
+    "Generate Documentation".
+</p>
+
+<h4><a name="generating-the-documentation-from-the-terminal" href="#generating-the-documentation-from-the-terminal">Generating the documentation from the terminal</a></h4>
+<p>
+    Navigate to the <code>Control-Surface/build</code> directory, and run:
+</p>
+<pre class="console"><code>make documentation</code></pre>
+
+<h3><a name="generating-the-coverage-information-using-lcov" href="#generating-the-coverage-information-using-lcov">Generating the coverage information using LCOV</a></h3>
+
+<p>
+    It is important that as many lines, special cases, and functions are covered
+    by the unit tests. <br>
+    GCC has a tool called GCOV to check what lines of code are executed. LCOV is
+    a front-end for GCOV that exports the results as HTML pages.
+</p>
+
+<h4><a name="generating-the-coverage-information-in-visual-studio-code" href="#generating-the-coverage-information-in-visual-studio-code">Generating the coverage information in Visual Studio Code</a></h4>
+<p>
+    Press <code>CTRL+P</code>, and type "task", space, and then
+    "Generate Coverage Information".
+</p>
+
+<h4><a name="generating-the-coverage-information-from-the-terminal" href="#generating-the-coverage-information-from-the-terminal">Generating the coverage information from the terminal</a></h4>
+<p>
+    Navigate to the <code>Control-Surface/build</code> directory, and run:
+</p>
+<pre class="console"><code>make coverage</code></pre>
+
+</div>
+    </article>
+    <footer>Last edited: Monday, 05 August 2019 21:31 UTC</footer>
+
+
+</body></html>

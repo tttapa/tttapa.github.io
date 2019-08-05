@@ -1,55 +1,51 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
-<head>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
-    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-          TeX: { equationNumbers: { autoNumber: "AMS" } },
-          "fast-preview": {
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
             disabled: true
-          }
+            }
         });
     </script>
     <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <meta name="theme-color" content="#ccc">
-    <meta name="keywords" content="VU meter, Arduino, audio, visualization">
-    <meta name="description" content="Visualization of the sound level using Arduino-based VU meters.">
-    <title>VU Meters</title>
+    <meta name="keywords" content="Control Surface,Arduino,Style,Developers">
+    <meta name="description" content="Style guide for writing code for the Control Surface library.">
+    <title>Style</title>
 </head>
-
 <body>
     <nav>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                <path d="M0 0h48v48h-48z" fill="none" />
-                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z" />
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
             </svg>
             <h2><a href="/">Home</a></h2>
 <ul>
     <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../index.html">Arduino</a>
     <ul>
-        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Audio and Signal Processing</a>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
         <ul>
-            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry" href="index.html">VU Meters</a>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
             <ul>
             </ul>
             </li>
         </ul>
         </li>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/index.html">Control Surface</a>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Control Surface</a>
         <ul>
-            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/Developers/index.html">Developers</a>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Developers</a>
             <ul>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Installation.html">Installation</a></li>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Style.html">Style</a></li>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Tests.html">Tests</a></li>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+                <li><span class="ftriangle"></span><a href="Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry" href="Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a href="Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a href="Generating-Documentation.html">Generating Documentation</a></li>
             </ul>
             </li>
         </ul>
@@ -144,7 +140,7 @@
                 <a href="/" title="Home">home</a>
             </i>
             <i class="material-icons">
-                <a href="index.pdf" title="Download as PDF">get_app</a>
+                <a href="Style.pdf" title="Download as PDF">get_app</a>
             </i>
             <i class="material-icons">
                 <a href="javascript:window.print()" title="Print this article">print</a>
@@ -155,15 +151,93 @@
         </div>
     </nav>
     <article>
-        <h1 class="indexTitle">VU Meters</h1>
+        <h1 class="title">Style</h1>
         <i class="author">Pieter P</i>
         <div>
-    
-</div>
-        <hr>
-        <div class="indexContainer"></div>
-    </article>
-    <footer>Last edited: Saturday, 06 July 2019 20:07 UTC</footer>
-</body>
 
-</html>
+<p>
+    <b>The main rule of the style guide is to preserve and follow the style of
+        existing code.</b>
+</p>
+
+<h3><a name="comments-and-documentation" href="#comments-and-documentation">Comments and documentation</a></h3>
+
+<h4><a name="documentation" href="#documentation">Documentation</a></h4>
+<p>
+    Documentation explain the public API to users, and important parts of the
+    private API to other developers.
+</p>
+<p>
+    Write documentation above the declaration of classes, functions and
+    variables. In most cases, this will be in the header files.
+</p>
+<p>
+    Documentation follows the Doxygen rules. Here's an example. Note the
+    indentation.
+</p>
+<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><code><span style="color: #008000;">/**</span></code></code>
+<code><code><span style="color: #008000;"> * @brief   Short overview of the function/class.</span></code></code>
+<code><code><span style="color: #008000;"> * </span></code></code>
+<code><code><span style="color: #008000;"> * Elaborate explanation.</span></code></code>
+<code><code><span style="color: #008000;"> * </span></code></code>
+<code><code><span style="color: #008000;"> * @note    Important remark.</span></code></code>
+<code><code><span style="color: #008000;"> * </span></code></code>
+<code><code><span style="color: #008000;"> * @tparam  TemplateParameterName</span></code></code>
+<code><code><span style="color: #008000;"> *          Template parameter documentation.</span></code></code>
+<code><code><span style="color: #008000;"> * </span></code></code>
+<code><code><span style="color: #008000;"> * @param   parameterName</span></code></code>
+<code><code><span style="color: #008000;"> *          Parameter documentation.</span></code></code>
+<code><code><span style="color: #008000;"> * @param   anotherParameterName</span></code></code>
+<code><code><span style="color: #008000;"> *          Parameter documentation.</span></code></code>
+<code><code><span style="color: #008000;"> * </span></code></code>
+<code><code><span style="color: #008000;"> * @return  Explanation of what the function returns.</span></code></code>
+<code><code><span style="color: #008000;"> */</span></code></code></pre>
+
+<h4><a name="comments" href="#comments">Comments</a></h4>
+<p>
+    For comments about the implementation of a function, write a short
+    explanation of the approach you're using. Use <code>/*...*/</code>-style
+    comments for this section. <br>
+    Between lines of code, explain what the line/statement is doing,
+    if necessary. In this case, use <code>//</code>-style comments.
+</p>
+<p>
+    Please take the time to add comments. If I can't understand your code, I
+    cannot accept the pull request.
+</p>
+
+<h3><a name="code-formatting" href="#code-formatting">Code formatting</a></h3>
+
+<p>
+    The repository contains a <code>.clang-format</code> file for
+    auto-formatting the code. You have to format all files before committing
+    them. <br>
+    If you don't format the code before committing there will be many
+    unintelligible changes on the next commit, when someone else edits the code
+    and does apply the auto-formatter.
+</p>
+<p>
+    You can call the formatter using the <code>CTRL+Shift+P</code> menu, by
+    selecting "Format Document". <br>
+    I recommend assigning an easy keyboard short cut to this action, because
+    you're going to use it all the time.
+</p>
+
+<h3><a name="unit-tests" href="#unit-tests">Unit tests</a></h3>
+
+<p>
+    All code has to have some kind of unit tests, and all tests have to be run
+    (and passed) before committing. <br>
+    On top of that, all examples must compile successfully.
+</p>
+<p>
+    More information on tests can be found on the <a href="Tests.html">next
+        page</a>.
+</p>
+
+</div>
+    </article>
+    <footer>Last edited: Monday, 05 August 2019 21:37 UTC</footer>
+
+
+</body></html>

@@ -1,55 +1,51 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
-<head>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
-    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-          TeX: { equationNumbers: { autoNumber: "AMS" } },
-          "fast-preview": {
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
             disabled: true
-          }
+            }
         });
     </script>
     <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <meta name="theme-color" content="#ccc">
-    <meta name="keywords" content="VU meter, Arduino, audio, visualization">
-    <meta name="description" content="Visualization of the sound level using Arduino-based VU meters.">
-    <title>VU Meters</title>
+    <meta name="keywords" content="Control Surface,Arduino,Tests,Developers">
+    <meta name="description" content="Building and running the tests, and compiling the examples of the Control Surface library.">
+    <title>Tests</title>
 </head>
-
 <body>
     <nav>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                <path d="M0 0h48v48h-48z" fill="none" />
-                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z" />
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
             </svg>
             <h2><a href="/">Home</a></h2>
 <ul>
     <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../index.html">Arduino</a>
     <ul>
-        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Audio and Signal Processing</a>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
         <ul>
-            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry" href="index.html">VU Meters</a>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
             <ul>
             </ul>
             </li>
         </ul>
         </li>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/index.html">Control Surface</a>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Control Surface</a>
         <ul>
-            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/Developers/index.html">Developers</a>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Developers</a>
             <ul>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Installation.html">Installation</a></li>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Style.html">Style</a></li>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Tests.html">Tests</a></li>
-                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+                <li><span class="ftriangle"></span><a href="Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a href="Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry" href="Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a href="Generating-Documentation.html">Generating Documentation</a></li>
             </ul>
             </li>
         </ul>
@@ -144,7 +140,7 @@
                 <a href="/" title="Home">home</a>
             </i>
             <i class="material-icons">
-                <a href="index.pdf" title="Download as PDF">get_app</a>
+                <a href="Tests.pdf" title="Download as PDF">get_app</a>
             </i>
             <i class="material-icons">
                 <a href="javascript:window.print()" title="Print this article">print</a>
@@ -155,15 +151,86 @@
         </div>
     </nav>
     <article>
-        <h1 class="indexTitle">VU Meters</h1>
+        <h1 class="title">Tests</h1>
         <i class="author">Pieter P</i>
         <div>
-    
-</div>
-        <hr>
-        <div class="indexContainer"></div>
-    </article>
-    <footer>Last edited: Saturday, 06 July 2019 20:07 UTC</footer>
-</body>
 
-</html>
+<h3><a name="compiling-the-library-and-the-unit-tests" href="#compiling-the-library-and-the-unit-tests">Compiling the library and the unit tests</a></h3>
+
+<p>
+    It's crucial to compile your code regularly while you're writing code. It'll
+    uncover problems that your IDE doesn't know about.
+</p>
+
+<h4><a name="running-cmake" href="#running-cmake">Running CMake</a></h4>
+<p>
+    The first step to compiling is running CMake. CMake will generate the
+    Makefiles that are used to build the project. <br>
+    Usually, you only have to do this once, the very first time, and afterwards
+    every time you add a new implementation (<code>.cpp</code>) file.
+</p>
+<p>
+    It's easiest to run this in the command line. In Visual Studio Code, go to
+    the "Terminal" menu, and select "New Terminal". <br>
+    The working directory of the terminal should be
+    <code>Control-Surface/build</code>.
+</p>
+<pre class="console"><code>cmake ..</code></pre>
+
+<h4><a name="compiling-in-visual-studio-code" href="#compiling-in-visual-studio-code">Compiling in Visual Studio Code</a></h4>
+<p>
+    To compile the Control Surface library and its unit tests, you can use the
+    <code>CTRL+SHIFT+B</code> shortcut (build).<br>
+    Alternatively, you can press <code>CTRL+P</code>, type "task", space, and
+    then "Make All".
+</p>
+
+<h4><a name="compiling-using-a-terminal" href="#compiling-using-a-terminal">Compiling using a terminal</a></h4>
+<p>
+    If you're not using VSCode, you can compile everything from a terminal. <br>
+    Simply navigate to the <code>Control-Surface/build</code> directory, and
+    invoke GNU Make. <br>
+    You can speed up the compilation by compiling multiple files in parallel
+    using the <code>-j</code> option. <code>nproc</code> returns the number of
+    CPUs available on your machine.
+</p>
+<pre class="console"><code>make -j`nproc`</code></pre>
+
+<h4><a name="running-the-tests-in-visual-studio-code" href="#running-the-tests-in-visual-studio-code">Running the tests in Visual Studio Code</a></h4>
+<p>
+    To run the tests, press <code>CTRL+Shift+P</code>, type "Tasks: Run Test
+    Task". There should be three options.
+</p>
+<ul>
+    <li>Make Check: builds any files that were modified, runs the tests, and
+        prints the output to the console.</li>
+    <li>Make Test: equivalent to Make Check, but it only prints the test results
+        to the console, not the output (print statements) of the tests.</li>
+    <li>Make &amp; Test &amp; Build examples: the same as Make Test, and after running
+        the tests, it also compiles all Arduino examples. This can take a
+        significant amount of time.</li>
+</ul>
+<p>
+    Before committing, Make &amp; Test &amp; Build examples has to pass.
+</p>
+
+<h4><a name="running-the-tests-using-a-terminal" href="#running-the-tests-using-a-terminal">Running the tests using a terminal</a></h4>
+<p>
+    Open a terminal in the <code>Control-Surface/build</code> directory, build
+    the library and tests, and run them:
+</p>
+<pre class="console"><code>make -j`nproc`</code>
+<code>make test</code>
+<code>make check</code></pre>
+<p>
+    To compile all arduino examples, open a terminal in the
+    <code>Control-Surface/scripts</code> directory, and run:
+</p>
+<pre class="console"><code>./build-arduino.sh `nproc`</code></pre>
+
+</div>
+    </article>
+    <footer>Last edited: Monday, 05 August 2019 21:21 UTC</footer>
+
+
+</body></html>
