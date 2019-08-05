@@ -182,7 +182,7 @@ class PagesParser {
         while (!launched) {
             for (auto &fut : mjpage_futures) {
                 if (fut.valid() == false ||  // uninitialized
-                    fut.wait_for(1ms) == std::future_status::ready) {
+                    fut.wait_for(10ms) == std::future_status::ready) {
                     finishedPage = fut.valid() ? &(fut.get()) : nullptr;
                     Blue(cout) << "Started compiling Page `" << page.getTitle()
                                << "`" << endl;
