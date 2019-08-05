@@ -3,7 +3,7 @@ var searchData=
   ['undefined_5frealtime_5fmessage_5f1',['UNDEFINED_REALTIME_MESSAGE_1',['../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968a9c5039b041ff99ffaa87a91c82be2d8b',1,'MIDI_Parser.hpp']]],
   ['undefined_5frealtime_5fmessage_5f2',['UNDEFINED_REALTIME_MESSAGE_2',['../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968ac15e8acd84bad4b5b6fb28579effafc4',1,'MIDI_Parser.hpp']]],
   ['undo',['UNDO',['../d7/dc7/namespaceMCU.html#af9039b04b0aeb935dde6a395ad7d0236',1,'MCU']]],
-  ['unique_5fptr',['unique_ptr',['../dd/d67/classunique__ptr.html',1,'unique_ptr&lt; T &gt;'],['../dd/d67/classunique__ptr.html#a6e3af357111c85a31e63be2905651305',1,'unique_ptr::unique_ptr()=default'],['../dd/d67/classunique__ptr.html#a50b2bd4f0e4d6adfcb7c8f735d47a48a',1,'unique_ptr::unique_ptr(T *p)']]],
+  ['unique_5fptr',['unique_ptr',['../dd/d67/classunique__ptr.html',1,'unique_ptr&lt; T &gt;'],['../dd/d67/classunique__ptr.html#a6e3af357111c85a31e63be2905651305',1,'unique_ptr::unique_ptr()=default'],['../dd/d67/classunique__ptr.html#a50b2bd4f0e4d6adfcb7c8f735d47a48a',1,'unique_ptr::unique_ptr(T *p)'],['../dd/d67/classunique__ptr.html#a1874702fab380c04715e349fa6a5b25e',1,'unique_ptr::unique_ptr(unique_ptr&lt; U &gt; &amp;&amp;r)']]],
   ['unique_5fptr_2ehpp',['unique_ptr.hpp',['../d1/d17/unique__ptr_8hpp.html',1,'']]],
   ['unique_5fptr_3c_20const_20ichord_20_3e',['unique_ptr&lt; const IChord &gt;',['../dd/d67/classunique__ptr.html',1,'']]],
   ['unlock',['unlock',['../d3/d43/classBankableMIDIOutput.html#a4154c3302c845a9dc6a455600c4d0e2b',1,'BankableMIDIOutput::unlock()'],['../d1/d2f/classManyAddressesMIDIOutput.html#aca643ae119ca8ce895a2af30ad2ce0f1',1,'ManyAddressesMIDIOutput::unlock()']]],

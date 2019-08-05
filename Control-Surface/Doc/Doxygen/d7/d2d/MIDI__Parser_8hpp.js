@@ -2,6 +2,7 @@ var MIDI__Parser_8hpp =
 [
     [ "MIDI_message", "de/df8/structMIDI__message.html", "de/df8/structMIDI__message" ],
     [ "SysExMessage", "db/d45/structSysExMessage.html", "db/d45/structSysExMessage" ],
+    [ "RealTimeMessage", "d6/d99/structRealTimeMessage.html", "d6/d99/structRealTimeMessage" ],
     [ "MIDI_Parser", "df/d0c/classMIDI__Parser.html", "df/d0c/classMIDI__Parser" ],
     [ "MIDI_read_t", "d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968", [
       [ "NO_MESSAGE", "d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968afcfbf42d4adcad6219734d45c640804e", null ],

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['realtimemessage',['RealTimeMessage',['../d6/d99/structRealTimeMessage.html',1,'']]],
   ['relativeccsender',['RelativeCCSender',['../d3/dd0/classRelativeCCSender.html',1,'']]],
   ['relativemidicnchanneladdress',['RelativeMIDICNChannelAddress',['../da/dc7/classRelativeMIDICNChannelAddress.html',1,'']]],
   ['remove_5freference',['remove_reference',['../de/db3/structremove__reference.html',1,'']]],

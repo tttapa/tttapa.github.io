@@ -6,5 +6,6 @@ var searchData=
   ['filter',['filter',['../d7/d40/classEMA.html#ab0d7694cffaee5280d7e68f5a71f725e',1,'EMA::filter()'],['../db/d6f/classEMA__f.html#a9339706642d9af6af0dd54ac5534d0f7',1,'EMA_f::filter()']]],
   ['filteredanalog',['FilteredAnalog',['../da/da7/classFilteredAnalog.html#a388578a292755baa536508b491e3da7c',1,'FilteredAnalog']]],
   ['flush',['flush',['../da/d69/PrintStream_8cpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp']]],
+  ['forward',['forward',['../d1/d17/unique__ptr_8hpp.html#aca194852504260487316aa9513761f1d',1,'forward(typename remove_reference&lt; T &gt;::type &amp;t) noexcept:&#160;unique_ptr.hpp'],['../d1/d17/unique__ptr_8hpp.html#af2367dbfe1d0dad015bd5250bb5c630a',1,'forward(typename remove_reference&lt; T &gt;::type &amp;&amp;t) noexcept:&#160;unique_ptr.hpp']]],
   ['frequency',['Frequency',['../d7/d90/classFrequency.html#a74f669a1568087cc2c134363faa18186',1,'Frequency']]]
 ];

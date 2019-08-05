@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['m2',['m2',['../da/dd4/namespaceIntervals.html#a3ae063eac2cb3034c4c9bf41641f8cad',1,'Intervals::m2()'],['../da/dd4/namespaceIntervals.html#a24badc22181dd0156e1cbbece4795332',1,'Intervals::M2()']]],
+  ['m2',['M2',['../da/dd4/namespaceIntervals.html#a24badc22181dd0156e1cbbece4795332',1,'Intervals::M2()'],['../da/dd4/namespaceIntervals.html#a3ae063eac2cb3034c4c9bf41641f8cad',1,'Intervals::m2()']]],
   ['m3',['m3',['../da/dd4/namespaceIntervals.html#a87b3fbf4d404906dbc30ce0357099734',1,'Intervals::m3()'],['../da/dd4/namespaceIntervals.html#a0bba7f36cf4e22efafe7b4b029d37d96',1,'Intervals::M3()']]],
   ['m6',['m6',['../da/dd4/namespaceIntervals.html#a113a63113079585e980675007ea59791',1,'Intervals::m6()'],['../da/dd4/namespaceIntervals.html#ae990da8805f898263d30e3377e4aba78',1,'Intervals::M6()']]],
   ['m7',['m7',['../da/dd4/namespaceIntervals.html#a46249007f68970d4493844be8df14f41',1,'Intervals::m7()'],['../da/dd4/namespaceIntervals.html#ac4b40453c5311d0dfc527214c0d401e9',1,'Intervals::M7()']]],
@@ -16,6 +16,7 @@ var searchData=
   ['max_5ffps',['MAX_FPS',['../db/d02/Settings_8hpp.html#ab44cfa307e19c5688403a9506ea0555e',1,'Settings.hpp']]],
   ['max_5fmessage_5ftime',['MAX_MESSAGE_TIME',['../d0/d89/classBluetoothMIDI__Interface.html#ae6f39d010658aead9506362244925d97',1,'BluetoothMIDI_Interface']]],
   ['maxgain',['maxGain',['../d4/de3/classVolumeControl.html#ab2b63d2685b52f7ad584094c44f62754',1,'VolumeControl']]],
+  ['message',['message',['../d6/d99/structRealTimeMessage.html#aa7f242e694be99c46889c5d38b004072',1,'RealTimeMessage']]],
   ['midi_5fstatus_5ftype_5fnames',['MIDI_STATUS_TYPE_NAMES',['../db/d55/DebugMIDI__Interface_8hpp.html#a616c796c1a81f07d22ac41b80d84f5e7',1,'DebugMIDI_Interface.hpp']]],
   ['midimsg',['midimsg',['../df/d0c/classMIDI__Parser.html#a1eb2260f33070b05d25d771cc0078672',1,'MIDI_Parser']]],
   ['minor',['Minor',['../df/d20/namespaceChords.html#a8fe1f903e6374981e0e7a5bf3f276548',1,'Chords']]],

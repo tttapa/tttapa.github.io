@@ -2,6 +2,7 @@ var classunique__ptr =
 [
     [ "unique_ptr", "dd/d67/classunique__ptr.html#a6e3af357111c85a31e63be2905651305", null ],
     [ "unique_ptr", "dd/d67/classunique__ptr.html#a50b2bd4f0e4d6adfcb7c8f735d47a48a", null ],
+    [ "unique_ptr", "dd/d67/classunique__ptr.html#a1874702fab380c04715e349fa6a5b25e", null ],
     [ "~unique_ptr", "dd/d67/classunique__ptr.html#a04aa24373551bde1135f0c83ded9e2fc", null ],
     [ "operator=", "dd/d67/classunique__ptr.html#a593890003288d43e04bccd474fb1dbb3", null ],
     [ "reset", "dd/d67/classunique__ptr.html#a2992c69bcf29cd4081f6aa8bf7daa428", null ],

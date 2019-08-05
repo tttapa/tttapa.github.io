@@ -2,7 +2,7 @@ var classControl__Surface__ =
 [
     [ "ChannelMessageCallback", "dc/d45/classControl__Surface__.html#ad7710a37df754755a3a3b57de54828d4", null ],
     [ "SysExMessageCallback", "dc/d45/classControl__Surface__.html#ae647a6e44a9ec71d446912be232bfe53", null ],
-    [ "RealTimeMessageCallback", "dc/d45/classControl__Surface__.html#ac9f7e995df0b998287da442587f73e1b", null ],
+    [ "RealTimeMessageCallback", "dc/d45/classControl__Surface__.html#a3a94b82accc26cf5873619c777fa96f4", null ],
     [ "Control_Surface_", "dc/d45/classControl__Surface__.html#acabe7a649d24807ffacba4c87aba6a79", null ],
     [ "Control_Surface_", "dc/d45/classControl__Surface__.html#a2f0fa1ce738f9dcf481e6eb8ece14237", null ],
     [ "operator=", "dc/d45/classControl__Surface__.html#ab3f014ac4122db40d411efb69e12fa5a", null ],

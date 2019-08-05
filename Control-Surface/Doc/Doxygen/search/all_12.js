@@ -36,6 +36,7 @@ var searchData=
   ['transposer_2ecpp',['Transposer.cpp',['../d7/d0c/Transposer_8cpp.html',1,'']]],
   ['transposer_2ehpp',['Transposer.hpp',['../de/d5e/Transposer_8hpp.html',1,'']]],
   ['triple',['Triple',['../de/d77/namespaceBass.html#af083a59bb17985fa10d45f1428118f01',1,'Bass']]],
+  ['true_5ftype',['true_type',['../d1/d17/unique__ptr_8hpp.html#a6f713a9713bf1d7cf06ea53219e4ce92',1,'unique_ptr.hpp']]],
   ['ts',['Ts',['../d0/d49/classMovingCoilBallistics.html#a971a9ecd2548f4c0be9ecced94d7ba7f',1,'MovingCoilBallistics']]],
   ['tunerequest',['TuneRequest',['../d7/d2d/MIDI__Parser_8hpp.html#a7b96baa7581ecc5a27af22f664b85d82',1,'MIDI_Parser.hpp']]],
   ['twos_5fcomplement',['TWOS_COMPLEMENT',['../d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71da9aa2a35d92976c7de970506c4d19a96c',1,'RelativeCCSender.hpp']]],

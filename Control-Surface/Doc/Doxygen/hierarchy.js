@@ -348,6 +348,10 @@ var hierarchy =
     [ "IncrementButton", "df/d38/classIncrementButton.html", null ],
     [ "IncrementDecrementButtons", "d5/d20/classIncrementDecrementButtons.html", null ],
     [ "Incrementor< T, V >", "dd/dd6/classIncrementor.html", null ],
+    [ "integral_constant< T, v >", "df/d54/structintegral__constant.html", [
+      [ "is_lvalue_reference< T >", "db/dd4/structis__lvalue__reference.html", null ],
+      [ "is_lvalue_reference< T & >", "d6/d0e/structis__lvalue__reference_3_01T_01_6_01_4.html", null ]
+    ] ],
     [ "is_unsigned< T >", "d7/dc9/structis__unsigned.html", null ],
     [ "IVU", "d2/de9/classIVU.html", [
       [ "AudioVU", "d4/dce/classAudioVU.html", [
@@ -440,6 +444,7 @@ var hierarchy =
       [ "MCU::SevenSegmentDisplay< AssignmentDisplayLength >", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", null ],
       [ "MCU::SevenSegmentDisplay< TimeDisplayLength >", "d5/d54/classMCU_1_1SevenSegmentDisplay.html", null ]
     ] ],
+    [ "RealTimeMessage", "d6/d99/structRealTimeMessage.html", null ],
     [ "RelativeCCSender", "d3/dd0/classRelativeCCSender.html", null ],
     [ "RelativeMIDICNChannelAddress", "da/dc7/classRelativeMIDICNChannelAddress.html", null ],
     [ "remove_reference< T >", "de/db3/structremove__reference.html", null ],
