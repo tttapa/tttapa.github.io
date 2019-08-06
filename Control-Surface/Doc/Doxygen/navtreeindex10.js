@@ -1,5 +1,7 @@
 var NAVTREEINDEX10 =
 {
+"d8/d6c/classButtonMatrix.html#ad77595d9dcb8623f01a73e6adc955a7b":[6,0,16,0],
+"d8/d6c/classButtonMatrix.html#af3adb9370f0220eb3235885e1406e9e3":[6,0,16,8],
 "d8/d6c/classButtonMatrix.html#afe7062c9c1745bdf556a79f4a3d75364":[6,0,16,11],
 "d8/d7d/MIDIOutput_2PushButtonsLEDs_2PushButtonsLEDs_8ino-example.html":[8,23],
 "d8/d8b/MAX7219__Base_8cpp.html":[7,0,138],
@@ -247,7 +249,5 @@ var NAVTREEINDEX10 =
 "d9/d43/Control__Change_8hpp.html#a20dc249ff93148b640953595b6ca7c31":[7,0,68,1],
 "d9/d43/Control__Change_8hpp.html#a25bb5a787a1d7e457ccd77bfb72f9988":[7,0,68,34],
 "d9/d43/Control__Change_8hpp.html#a26c32b8bce98263875dda97928fcef34":[7,0,68,29],
-"d9/d43/Control__Change_8hpp.html#a275be85a4b26d3765c5e74ae314781be":[7,0,68,47],
-"d9/d43/Control__Change_8hpp.html#a28541aadfc7e36623b264046905b9cb6":[7,0,68,69],
-"d9/d43/Control__Change_8hpp.html#a305f0ec8c6fe138e124df49d044c2e11":[7,0,68,32]
+"d9/d43/Control__Change_8hpp.html#a275be85a4b26d3765c5e74ae314781be":[7,0,68,47]
 };

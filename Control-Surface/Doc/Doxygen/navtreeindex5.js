@@ -1,5 +1,7 @@
 var NAVTREEINDEX5 =
 {
+"d3/d65/classBankable_1_1MIDIButtonMatrix.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,0,11,12],
+"d3/d65/classBankable_1_1MIDIButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf":[6,0,0,11,6],
 "d3/d69/classManyButtonsSelector.html":[6,0,70],
 "d3/d69/classManyButtonsSelector.html#a1250b18b06f75d2eaef3a1906b7d94cf":[6,0,70,6],
 "d3/d69/classManyButtonsSelector.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[6,0,70,16],
@@ -247,7 +249,5 @@ var NAVTREEINDEX5 =
 "d4/d42/classMCU_1_1VUDisplay.html#aa037234d0ea1fea98682e6c04175e813":[6,0,2,13,16],
 "d4/d42/classMCU_1_1VUDisplay.html#aa6ca46af292dd5582535d8f35d35b370":[6,0,2,13,7],
 "d4/d42/classMCU_1_1VUDisplay.html#aa7219d841ca5db8894cfed444b71acd2":[6,0,2,13,14],
-"d4/d42/classMCU_1_1VUDisplay.html#ab2cc9ad72b720035a3e39c6a9b0c10f3":[6,0,2,13,17],
-"d4/d42/classMCU_1_1VUDisplay.html#aba0a27ec523a19d2968180b1e3f51c56":[6,0,2,13,8],
-"d4/d42/classMCU_1_1VUDisplay.html#abcb247a48cd14b7815f1fb930b6fedd1":[6,0,2,13,2]
+"d4/d42/classMCU_1_1VUDisplay.html#ab2cc9ad72b720035a3e39c6a9b0c10f3":[6,0,2,13,17]
 };

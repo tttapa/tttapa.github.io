@@ -1,5 +1,6 @@
 var NAVTREEINDEX3 =
 {
+"d1/df7/classMIDIInputElementChannelPressure.html#afd32e17bd94b1a83c8e29559a28b7b9f":[6,0,92,13],
 "d1/df7/classMIDIInputElementChannelPressure.html#afdcc31485ef46e0de7a942d6dc0a7da9":[6,0,92,12],
 "d2/d03/CCButtons_8hpp.html":[7,0,48],
 "d2/d03/CCButtons_8hpp_source.html":[7,0,48],
@@ -94,8 +95,8 @@ var NAVTREEINDEX3 =
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,2,0,1,27],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,2,0,1,21],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a5723f4a7c22aea22a940f481c48bd798":[6,0,2,0,1,4],
-"d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,2,0,1,29],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,2,0,1,28],
+"d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,2,0,1,29],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a5d638e14de4b2e6508131c110d028ab4":[6,0,2,0,1,3],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a5ee198cc0d3fdcb32e4aa8c83a367944":[6,0,2,0,1,23],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#a6d425d7489541b6ff8b89e5f9c2cb5e1":[6,0,2,0,1,20],
@@ -114,6 +115,7 @@ var NAVTREEINDEX3 =
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#aee737e5e10cdda105bc65c0424f71cc0":[6,0,2,0,1,19],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#afdcc31485ef46e0de7a942d6dc0a7da9":[6,0,2,0,1,15],
 "d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html#afef7aed594d218edd4b328e87bcd4e59":[6,0,2,0,1,7],
+"d2/d91/namespaceDebugMIDIMessageNames.html":[5,0,3],
 "d2/d97/MIDINote_8hpp.html":[7,0,190],
 "d2/d97/MIDINote_8hpp_source.html":[7,0,190],
 "d2/da8/NoteButtonMatrix_8hpp.html":[7,0,217],
@@ -247,7 +249,5 @@ var NAVTREEINDEX3 =
 "d2/deb/classIncrementDecrementSelector.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,56,15],
 "d2/deb/classIncrementDecrementSelector.html#ab567692bb6cb8509a2856a6cd6f46361":[6,0,56,8],
 "d2/deb/classIncrementDecrementSelector.html#acfabd4911411ebbfd96d4080103f4725":[6,0,56,11],
-"d2/deb/classIncrementDecrementSelector.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,56,14],
-"d2/deb/classIncrementDecrementSelector.html#ae2cbffe96620dc9268d8bbaa2a7ca9b2":[6,0,56,2],
-"d2/def/classBankable_1_1CCButtons.html":[4,0,5]
+"d2/deb/classIncrementDecrementSelector.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,56,14]
 };

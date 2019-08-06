@@ -54,7 +54,7 @@ var group__MIDIInterfaces =
       [ "sendImpl", "d8/d0b/classStreamDebugMIDI__Interface.html#adf806604ebf59c65426a0a50ef6edb46", null ],
       [ "sendImpl", "d8/d0b/classStreamDebugMIDI__Interface.html#aa5c2792162e83f94af7a652f3db472a1", null ],
       [ "sendImpl", "d8/d0b/classStreamDebugMIDI__Interface.html#aa29fae3f030821baa124800bff44bb29", null ],
-      [ "hexCharToNibble", "d8/d0b/classStreamDebugMIDI__Interface.html#a68e98b029031d6260972bed02e0aa59c", null ],
+      [ "hexCharToNibble", "d8/d0b/classStreamDebugMIDI__Interface.html#a3c86b30e1b0ca036cde1e75080860dd0", null ],
       [ "setCallbacks", "d8/d0b/classStreamDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c", null ],
       [ "begin", "d8/d0b/classStreamDebugMIDI__Interface.html#a05774372079d1583cbd532649d681baa", null ],
       [ "send", "d8/d0b/classStreamDebugMIDI__Interface.html#a2433d8ab8343cbd45473ff578b8ed4e7", null ],

@@ -1,5 +1,6 @@
 var NAVTREEINDEX18 =
 {
+"dd/dd4/classProgramChangeSelector.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,119,28],
 "dd/dd4/classProgramChangeSelector.html#a8af924e5b3b708eb042919703d175ed3":[6,0,119,12],
 "dd/dd4/classProgramChangeSelector.html#a8d1ba3f9cf10fbfb32cf7b3bb4976a15":[6,0,119,7],
 "dd/dd4/classProgramChangeSelector.html#a97a344a693c0926e2f70f9a078181d4f":[6,0,119,11],
@@ -248,6 +249,5 @@ var NAVTREEINDEX18 =
 "de/d6e/BankableMIDIInput_8hpp.html":[7,0,15],
 "de/d6e/BankableMIDIInput_8hpp_source.html":[7,0,15],
 "de/d76/Array_8hpp.html":[7,0,3],
-"de/d76/Array_8hpp_source.html":[7,0,3],
-"de/d77/namespaceBass.html":[5,0,1]
+"de/d76/Array_8hpp_source.html":[7,0,3]
 };

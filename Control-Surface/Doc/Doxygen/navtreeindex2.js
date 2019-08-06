@@ -1,5 +1,6 @@
 var NAVTREEINDEX2 =
 {
+"d1/d49/SerialMIDI__Parser_8cpp_source.html":[7,0,250],
 "d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html":[6,0,38,2],
 "d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html#a01d12a00d7d445801f8c1e7d3e4e2dd2":[6,0,38,2,7],
 "d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html#a2029b54f3ab20d72a3be04f59daff71a":[6,0,38,2,5],
@@ -248,6 +249,5 @@ var NAVTREEINDEX2 =
 "d1/df7/classMIDIInputElementChannelPressure.html#abc54b9402e8555c615aaee35235f3aa4":[6,0,92,9],
 "d1/df7/classMIDIInputElementChannelPressure.html#ad3482e456c02421df5207531e50bbec1":[6,0,92,5],
 "d1/df7/classMIDIInputElementChannelPressure.html#ad3d45f882302e552a8754a5e96ae6b6e":[6,0,92,10],
-"d1/df7/classMIDIInputElementChannelPressure.html#adcb7da06e470ced36073d5cbeb5ad6c0":[6,0,92,3],
-"d1/df7/classMIDIInputElementChannelPressure.html#afd32e17bd94b1a83c8e29559a28b7b9f":[6,0,92,13]
+"d1/df7/classMIDIInputElementChannelPressure.html#adcb7da06e470ced36073d5cbeb5ad6c0":[6,0,92,3]
 };

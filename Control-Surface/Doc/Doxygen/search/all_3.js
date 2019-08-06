@@ -20,6 +20,7 @@ var searchData=
   ['debugfn',['DEBUGFN',['../df/dee/Debug_8hpp.html#a5e1b7520df0706433ae295a78471fb3c',1,'Debug.hpp']]],
   ['debugmidi_5finterface_2ecpp',['DebugMIDI_Interface.cpp',['../d1/d40/DebugMIDI__Interface_8cpp.html',1,'']]],
   ['debugmidi_5finterface_2ehpp',['DebugMIDI_Interface.hpp',['../db/d55/DebugMIDI__Interface_8hpp.html',1,'']]],
+  ['debugmidimessagenames',['DebugMIDIMessageNames',['../d2/d91/namespaceDebugMIDIMessageNames.html',1,'']]],
   ['debugref',['DEBUGREF',['../df/dee/Debug_8hpp.html#afedb5ed0c0a4ef76c6b968368af014c7',1,'Debug.hpp']]],
   ['debugtime',['DEBUGTIME',['../df/dee/Debug_8hpp.html#a95d4440a4127650cdd221322b1780833',1,'Debug.hpp']]],
   ['debugval',['DEBUGVAL',['../df/dee/Debug_8hpp.html#aab96fed8c4f7d9e0f985b05cc6a419b2',1,'Debug.hpp']]],

@@ -6,5 +6,5 @@ var searchData=
   ['hasspacefor',['hasSpaceFor',['../d0/d89/classBluetoothMIDI__Interface.html#a6417f6d48fc3043fd97363b67649a363',1,'BluetoothMIDI_Interface']]],
   ['hasspaceleft',['hasSpaceLeft',['../d1/db1/classSysExBuffer.html#a0bb1a353d17c2bcc3a09a6d981adf819',1,'SysExBuffer']]],
   ['hex',['hex',['../da/d69/PrintStream_8cpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f',1,'hex(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f',1,'hex(Print &amp;printer):&#160;PrintStream.cpp']]],
-  ['hexchartonibble',['hexCharToNibble',['../d8/d0b/classStreamDebugMIDI__Interface.html#a68e98b029031d6260972bed02e0aa59c',1,'StreamDebugMIDI_Interface']]]
+  ['hexchartonibble',['hexCharToNibble',['../d8/d0b/classStreamDebugMIDI__Interface.html#a3c86b30e1b0ca036cde1e75080860dd0',1,'StreamDebugMIDI_Interface']]]
 ];

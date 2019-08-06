@@ -1,5 +1,7 @@
 var NAVTREEINDEX8 =
 {
+"d6/d5b/classBankable_1_1NoteButtons.html#a8af924e5b3b708eb042919703d175ed3":[4,0,13,18],
+"d6/d5b/classBankable_1_1NoteButtons.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[4,0,13,10],
 "d6/d5b/classBankable_1_1NoteButtons.html#a9cf409bc7effa13042ebd1d1e02d1046":[4,0,13,12],
 "d6/d5b/classBankable_1_1NoteButtons.html#a9f34809178ed809a8ff203220bd1b206":[4,0,13,6],
 "d6/d5b/classBankable_1_1NoteButtons.html#acfabd4911411ebbfd96d4080103f4725":[4,0,13,8],
@@ -64,7 +66,7 @@ var NAVTREEINDEX8 =
 "d6/d72/classMIDIButton.html#acfabd4911411ebbfd96d4080103f4725":[6,0,79,4],
 "d6/d72/classMIDIButton.html#ad2f21d9f10fcc4796b7d1a4f1148c25c":[6,0,79,16],
 "d6/d72/classMIDIButton.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,79,7],
-"d6/d79/namespaceManyAddresses.html":[5,0,5],
+"d6/d79/namespaceManyAddresses.html":[5,0,6],
 "d6/d79/namespaceManyAddresses.html":[6,0,1],
 "d6/d99/classBresenhamLine.html":[6,0,14],
 "d6/d99/classBresenhamLine.html#a10d505e30945f42a5cd0270c315b104f":[6,0,14,5],
@@ -184,7 +186,7 @@ var NAVTREEINDEX8 =
 "d7/d74/MillisTimer_8hpp.html":[7,0,200],
 "d7/d74/MillisTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3":[7,0,200,1],
 "d7/d74/MillisTimer_8hpp_source.html":[7,0,200],
-"d7/d78/namespaceMIDI__Notes.html":[5,0,8],
+"d7/d78/namespaceMIDI__Notes.html":[5,0,9],
 "d7/d7b/Getting-Started_2Getting-Started_8ino-example.html":[8,12],
 "d7/d81/VPotRing_8hpp.html":[7,0,286],
 "d7/d81/VPotRing_8hpp.html#a0681e0754a87bedc7364572d20743d3b":[7,0,286,5],
@@ -247,7 +249,5 @@ var NAVTREEINDEX8 =
 "d7/dc0/classBankable_1_1CCPotentiometer.html#a63b760e4554d4ea496ee012b2ba3d508":[4,0,7,18],
 "d7/dc0/classBankable_1_1CCPotentiometer.html#a698d89514186aa0c29ea6fbc5bef1e06":[4,0,7,13],
 "d7/dc0/classBankable_1_1CCPotentiometer.html#a6bae640621972b14ad9c28b6b399f08f":[4,0,7,12],
-"d7/dc0/classBankable_1_1CCPotentiometer.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[4,0,7,17],
-"d7/dc0/classBankable_1_1CCPotentiometer.html#a883138a1262a82e8b9e05c75d576e36d":[4,0,7,14],
-"d7/dc0/classBankable_1_1CCPotentiometer.html#a8af924e5b3b708eb042919703d175ed3":[4,0,7,16]
+"d7/dc0/classBankable_1_1CCPotentiometer.html#a6ed605c9fd59aa3c5b42116b341ea9bb":[4,0,7,17]
 };

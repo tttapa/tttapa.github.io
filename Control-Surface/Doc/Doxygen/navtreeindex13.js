@@ -1,5 +1,7 @@
 var NAVTREEINDEX13 =
 {
+"da/d69/PrintStream_8cpp.html#af3f3e169c625ed3418298a1795a6823b":[7,0,232,45],
+"da/d69/PrintStream_8cpp.html#af5c2099a0aa00cf6d5a554b6fcc71431":[7,0,232,32],
 "da/d69/PrintStream_8cpp.html#afe87cba57f9519b52f58d00a7ecaba02":[7,0,232,33],
 "da/d69/PrintStream_8cpp.html#aff5eada882f71bd90e0de66c48faaeb3":[7,0,232,5],
 "da/d69/PrintStream_8cpp_source.html":[7,0,232],
@@ -130,7 +132,7 @@ var NAVTREEINDEX13 =
 "da/dd0/classMAX7219__Base.html#abc1d2ae777d19ca9aaf8eb7d1f500716":[6,0,74,1],
 "da/dd0/classMAX7219__Base.html#ac3181c37a955d14f8c741dcb28013702":[6,0,74,9],
 "da/dd0/classMAX7219__Base.html#ad5fae5a26168c869305c426dc8b48d49":[6,0,74,4],
-"da/dd4/namespaceIntervals.html":[5,0,4],
+"da/dd4/namespaceIntervals.html":[5,0,5],
 "da/dd5/Bankable_2Abstract_2MIDIRotaryEncoder_8hpp.html":[7,0,198],
 "da/dd5/Bankable_2Abstract_2MIDIRotaryEncoder_8hpp_source.html":[7,0,198],
 "da/ddf/DisplayInterface_8cpp.html":[7,0,85],
@@ -203,8 +205,8 @@ var NAVTREEINDEX13 =
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a39bed9bf8c604e890b8f82d10170e2fa":[6,0,2,0,3,29],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a3a12728d4a3d630e38748756c93a0587":[6,0,2,0,3,28],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a408969df9cb860216a8f03a694e2470b":[6,0,2,0,3,35],
-"db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,2,0,3,32],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,2,0,3,31],
+"db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,2,0,3,32],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a4b4095c85e5a4be88baef10c778811ca":[6,0,2,0,3,25],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,2,0,3,34],
 "db/d17/classMCU_1_1Bankable_1_1VULEDs.html#a57b6615469e554c514a9ff56dc24908f":[6,0,2,0,3,33],
@@ -247,7 +249,5 @@ var NAVTREEINDEX13 =
 "db/d1d/classMIDIInputElementPC.html#ad3d45f882302e552a8754a5e96ae6b6e":[6,0,94,10],
 "db/d1d/classMIDIInputElementPC.html#afdcc31485ef46e0de7a942d6dc0a7da9":[6,0,94,12],
 "db/d20/Abstract_2MIDIIncrementDecrementButtons_8hpp.html":[7,0,177],
-"db/d20/Abstract_2MIDIIncrementDecrementButtons_8hpp_source.html":[7,0,177],
-"db/d24/IncrementSelectorLEDs_8hpp.html":[7,0,125],
-"db/d24/IncrementSelectorLEDs_8hpp_source.html":[7,0,125]
+"db/d20/Abstract_2MIDIIncrementDecrementButtons_8hpp_source.html":[7,0,177]
 };

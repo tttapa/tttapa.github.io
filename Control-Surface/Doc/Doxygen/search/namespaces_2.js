@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['extio',['ExtIO',['../d8/d3d/namespaceExtIO.html',1,'']]]
+  ['debugmidimessagenames',['DebugMIDIMessageNames',['../d2/d91/namespaceDebugMIDIMessageNames.html',1,'']]]
 ];

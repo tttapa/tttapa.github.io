@@ -1,5 +1,7 @@
 var NAVTREEINDEX6 =
 {
+"d4/d42/classMCU_1_1VUDisplay.html#aba0a27ec523a19d2968180b1e3f51c56":[6,0,2,13,8],
+"d4/d42/classMCU_1_1VUDisplay.html#abcb247a48cd14b7815f1fb930b6fedd1":[6,0,2,13,2],
 "d4/d42/classMCU_1_1VUDisplay.html#ac4bf0fcba04b3fd9caf2717b6caf0058":[6,0,2,13,5],
 "d4/d42/classMCU_1_1VUDisplay.html#ac7e658b8a699ce49ddaf3f5d5e17c679":[6,0,2,13,3],
 "d4/d42/classMCU_1_1VUDisplay.html#afab0c9a4ede33a791b40f608825518ed":[6,0,2,13,11],
@@ -54,7 +56,7 @@ var NAVTREEINDEX6 =
 "d4/db7/NoteButtons_8hpp_source.html":[7,0,221],
 "d4/dba/ManyAddresses_2Abstract_2MIDIFilteredAnalog_8hpp.html":[7,0,175],
 "d4/dba/ManyAddresses_2Abstract_2MIDIFilteredAnalog_8hpp_source.html":[7,0,175],
-"d4/dbe/namespaceMIDI__CC.html":[5,0,7],
+"d4/dbe/namespaceMIDI__CC.html":[5,0,8],
 "d4/dce/classAudioVU.html":[4,2,0],
 "d4/dce/classAudioVU.html#a0f8f6bf73807942ebcb61256c2365f0d":[4,2,0,6],
 "d4/dce/classAudioVU.html#a16291b18a720891a1de7dcb3bdc88660":[4,2,0,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX6 =
 "d5/d8e/classMIDIFilteredAnalog.html#af7c547efa4151f9a0a76cc9374a40cc5":[6,0,87,18],
 "d5/d98/ProgramChanger_8cpp.html":[7,0,234],
 "d5/d98/ProgramChanger_8cpp_source.html":[7,0,234],
-"d5/d9b/CCButtonMatrix_8hpp.html":[7,0,44],
-"d5/d9b/CCButtonMatrix_8hpp_source.html":[7,0,44],
-"d5/da2/IncrementSelector_8hpp.html":[7,0,123]
+"d5/d9b/CCButtonMatrix_8hpp.html":[7,0,44]
 };

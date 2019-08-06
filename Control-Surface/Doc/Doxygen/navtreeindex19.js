@@ -1,5 +1,6 @@
 var NAVTREEINDEX19 =
 {
+"de/d77/namespaceBass.html":[5,0,1],
 "de/d7c/Bresenham_8hpp.html":[7,0,26],
 "de/d7c/Bresenham_8hpp_source.html":[7,0,26],
 "de/d83/AssignmentDisplay_8hpp.html":[7,0,7],
@@ -195,7 +196,7 @@ var NAVTREEINDEX19 =
 "df/d69/classMCU_1_1TimeDisplay.html#ae24e4fc0a95f0a80ed8bc03059bc3b4d":[6,0,2,4,0],
 "df/d69/classMCU_1_1TimeDisplay.html#afdcc31485ef46e0de7a942d6dc0a7da9":[6,0,2,4,18],
 "df/d69/classMCU_1_1TimeDisplay.html#afebbe4f2a583d21e226a7db90718d451":[6,0,2,4,1],
-"df/d6e/namespaceMCU_1_1Bankable.html":[5,0,6,0],
+"df/d6e/namespaceMCU_1_1Bankable.html":[5,0,7,0],
 "df/d6e/namespaceMCU_1_1Bankable.html":[6,0,2,0],
 "df/d83/NoteButton_8cpp.html":[7,0,205],
 "df/d83/NoteButton_8cpp_source.html":[7,0,205],
@@ -248,6 +249,5 @@ var NAVTREEINDEX19 =
 "df/dca/classBankable_1_1MIDIButtonLatched.html#ad5e74ea989833fb7430849e6ecf84ebc":[6,0,0,9,24],
 "df/dca/classBankable_1_1MIDIButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835":[6,0,0,9,5],
 "df/dca/classBankable_1_1MIDIButtonLatched.html#aed23f3f2aa510d90e21e3741ad8b9d88":[6,0,0,9,23],
-"df/dca/classBankable_1_1MIDIButtonLatched.html#af8c3b3200bfae07e61d25fa99efd9dcf":[6,0,0,9,8],
-"df/de0/MIDIInputElementCC_8hpp.html":[7,0,182]
+"df/dca/classBankable_1_1MIDIButtonLatched.html#af8c3b3200bfae07e61d25fa99efd9dcf":[6,0,0,9,8]
 };

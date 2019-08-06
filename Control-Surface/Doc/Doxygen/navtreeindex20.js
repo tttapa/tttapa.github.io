@@ -1,5 +1,6 @@
 var NAVTREEINDEX20 =
 {
+"df/de0/MIDIInputElementCC_8hpp.html":[7,0,182],
 "df/de0/MIDIInputElementCC_8hpp.html#a46cf1332de99737106450bdfcdca9073":[7,0,182,1],
 "df/de0/MIDIInputElementCC_8hpp_source.html":[7,0,182],
 "df/de2/NoteChordButton_8hpp.html":[7,0,224],
@@ -56,8 +57,8 @@ var NAVTREEINDEX20 =
 "df/df5/IncrementDecrementButtons_8hpp_source.html":[7,0,117],
 "examples.html":[8],
 "files.html":[7,0],
-"functions.html":[6,3,0,0],
 "functions.html":[6,3,0],
+"functions.html":[6,3,0,0],
 "functions_b.html":[6,3,0,1],
 "functions_c.html":[6,3,0,2],
 "functions_d.html":[6,3,0,3],
@@ -102,8 +103,8 @@ var NAVTREEINDEX20 =
 "functions_type.html":[6,3,3],
 "functions_u.html":[6,3,0,17],
 "functions_v.html":[6,3,0,18],
-"functions_vars.html":[6,3,2,0],
 "functions_vars.html":[6,3,2],
+"functions_vars.html":[6,3,2,0],
 "functions_vars_b.html":[6,3,2,1],
 "functions_vars_c.html":[6,3,2,2],
 "functions_vars_d.html":[6,3,2,3],

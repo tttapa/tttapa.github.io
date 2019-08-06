@@ -1,5 +1,6 @@
 var NAVTREEINDEX17 =
 {
+"dd/d02/classDoublyLinkedList_1_1node__iterator.html#aa5c7135be55c1462576b8e46644095b4":[6,0,38,0,6],
 "dd/d02/classDoublyLinkedList_1_1node__iterator.html#aa787edffd90be4e79d4a0fc26686ea6f":[6,0,38,0,4],
 "dd/d02/classDoublyLinkedList_1_1node__iterator.html#abc1e9ab9e2bd8eff754999c65ac54bd4":[6,0,38,0,0],
 "dd/d02/classDoublyLinkedList_1_1node__iterator.html#ae80d10b3b8d42307d7997181af7331f1":[6,0,38,0,2],
@@ -222,7 +223,7 @@ var NAVTREEINDEX17 =
 "dd/d8b/classSelectorLEDs.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,131,14],
 "dd/d91/Abstract_2MIDIButtonLatching_8cpp.html":[7,0,153],
 "dd/d91/Abstract_2MIDIButtonLatching_8cpp_source.html":[7,0,153],
-"dd/d93/namespaceXBM.html":[5,0,9],
+"dd/d93/namespaceXBM.html":[5,0,10],
 "dd/da0/todo.html":[3],
 "dd/dad/IncrementDecrementSelectorLEDs_8cpp.html":[7,0,120],
 "dd/dad/IncrementDecrementSelectorLEDs_8cpp_source.html":[7,0,120],
@@ -237,8 +238,8 @@ var NAVTREEINDEX17 =
 "dd/dd4/classProgramChangeSelector.html#a3ce65d79721847cdb45833c7a3cc2e52":[6,0,119,5],
 "dd/dd4/classProgramChangeSelector.html#a414872fbd3ea45e7ac44a42fcf2fc88d":[6,0,119,19],
 "dd/dd4/classProgramChangeSelector.html#a48d81bcb12f23fa6e77c2d727280d085":[6,0,119,0],
-"dd/dd4/classProgramChangeSelector.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,119,31],
 "dd/dd4/classProgramChangeSelector.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,119,30],
+"dd/dd4/classProgramChangeSelector.html#a4a13b63f90ec988cd14d871df9dbc53b":[6,0,119,31],
 "dd/dd4/classProgramChangeSelector.html#a4c1c6bd44da328dd5b4dc29503219d09":[6,0,119,21],
 "dd/dd4/classProgramChangeSelector.html#a57b6615469e554c514a9ff56dc24908f":[6,0,119,33],
 "dd/dd4/classProgramChangeSelector.html#a57b6615469e554c514a9ff56dc24908f":[6,0,119,32],
@@ -248,6 +249,5 @@ var NAVTREEINDEX17 =
 "dd/dd4/classProgramChangeSelector.html#a6fc83784539703d695885127be1cf021":[6,0,119,4],
 "dd/dd4/classProgramChangeSelector.html#a77e0f0816c9394f48a685888309504db":[6,0,119,8],
 "dd/dd4/classProgramChangeSelector.html#a7b211fe388c251c277df8457bd3d0959":[6,0,119,2],
-"dd/dd4/classProgramChangeSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1":[6,0,119,18],
-"dd/dd4/classProgramChangeSelector.html#a883138a1262a82e8b9e05c75d576e36d":[6,0,119,28]
+"dd/dd4/classProgramChangeSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1":[6,0,119,18]
 };

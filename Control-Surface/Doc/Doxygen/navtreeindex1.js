@@ -245,9 +245,9 @@ var NAVTREEINDEX1 =
 "d1/d40/BitArray_8hpp.html":[7,0,21],
 "d1/d40/BitArray_8hpp_source.html":[7,0,21],
 "d1/d40/DebugMIDI__Interface_8cpp.html":[7,0,75],
+"d1/d40/DebugMIDI__Interface_8cpp.html#a6200462f0cf9165667ddd098ca032556":[7,0,75,0],
 "d1/d40/DebugMIDI__Interface_8cpp_source.html":[7,0,75],
 "d1/d41/MIDIOutputElement_8hpp.html":[7,0,194],
 "d1/d41/MIDIOutputElement_8hpp_source.html":[7,0,194],
-"d1/d49/SerialMIDI__Parser_8cpp.html":[7,0,250],
-"d1/d49/SerialMIDI__Parser_8cpp_source.html":[7,0,250]
+"d1/d49/SerialMIDI__Parser_8cpp.html":[7,0,250]
 };

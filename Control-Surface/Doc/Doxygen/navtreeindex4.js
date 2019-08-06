@@ -1,5 +1,7 @@
 var NAVTREEINDEX4 =
 {
+"d2/deb/classIncrementDecrementSelector.html#ae2cbffe96620dc9268d8bbaa2a7ca9b2":[6,0,56,2],
+"d2/def/classBankable_1_1CCButtons.html":[4,0,5],
 "d2/def/classBankable_1_1CCButtons.html#a0898f089b0bf29c6296550ba05fc53b3":[4,0,5,1],
 "d2/def/classBankable_1_1CCButtons.html#a28dfbd31c4cb424f9b32480b1aeb0bbf":[4,0,5,13],
 "d2/def/classBankable_1_1CCButtons.html#a4154c3302c845a9dc6a455600c4d0e2b":[4,0,5,7],
@@ -247,7 +249,5 @@ var NAVTREEINDEX4 =
 "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a9cf409bc7effa13042ebd1d1e02d1046":[6,0,0,11,13],
 "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a9f34809178ed809a8ff203220bd1b206":[6,0,0,11,7],
 "d3/d65/classBankable_1_1MIDIButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95":[6,0,0,11,1],
-"d3/d65/classBankable_1_1MIDIButtonMatrix.html#acfabd4911411ebbfd96d4080103f4725":[6,0,0,11,9],
-"d3/d65/classBankable_1_1MIDIButtonMatrix.html#ad4273e4aa2f15de8dbe478af16af259e":[6,0,0,11,12],
-"d3/d65/classBankable_1_1MIDIButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf":[6,0,0,11,6]
+"d3/d65/classBankable_1_1MIDIButtonMatrix.html#acfabd4911411ebbfd96d4080103f4725":[6,0,0,11,9]
 };

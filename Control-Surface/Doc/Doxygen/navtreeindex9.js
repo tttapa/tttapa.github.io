@@ -1,5 +1,7 @@
 var NAVTREEINDEX9 =
 {
+"d7/dc0/classBankable_1_1CCPotentiometer.html#a883138a1262a82e8b9e05c75d576e36d":[4,0,7,14],
+"d7/dc0/classBankable_1_1CCPotentiometer.html#a8af924e5b3b708eb042919703d175ed3":[4,0,7,16],
 "d7/dc0/classBankable_1_1CCPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9":[4,0,7,8],
 "d7/dc0/classBankable_1_1CCPotentiometer.html#a9cf409bc7effa13042ebd1d1e02d1046":[4,0,7,10],
 "d7/dc0/classBankable_1_1CCPotentiometer.html#a9f34809178ed809a8ff203220bd1b206":[4,0,7,20],
@@ -15,7 +17,7 @@ var NAVTREEINDEX9 =
 "d7/dc2/structEncoderSwitchPinList.html#a0bc9a283cfa2c285593e6e5fa7168f3f":[6,0,45,1],
 "d7/dc2/structEncoderSwitchPinList.html#a9a0bd296a073aba05f1054f7c91b80b9":[6,0,45,2],
 "d7/dc2/structEncoderSwitchPinList.html#abf75aeca2274d3b82225f36a40f9f8fc":[6,0,45,0],
-"d7/dc7/namespaceMCU.html":[5,0,6],
+"d7/dc7/namespaceMCU.html":[5,0,7],
 "d7/dc7/namespaceMCU.html":[6,0,2],
 "d7/dc9/structis__unsigned.html":[6,0,66],
 "d7/dc9/structis__unsigned.html#a4eb00c4455bb6f1f79e7a3318afff73b":[6,0,66,0],
@@ -67,13 +69,13 @@ var NAVTREEINDEX9 =
 "d8/d0b/classStreamDebugMIDI__Interface.html#a3549169b2cfd90f2d11a19f551407b12":[4,3,1,14],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a3664cef95dcdfc01c3d543e84939dfb8":[4,3,1,25],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a3a0e3395289d6ecbe2bbc773f2890a32":[4,3,1,16],
+"d8/d0b/classStreamDebugMIDI__Interface.html#a3c86b30e1b0ca036cde1e75080860dd0":[4,3,1,5],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a492bc5b64a98b3b9dbef8542c2356be2":[4,3,1,11],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a4a65c24407953467490db83689d12dc4":[4,3,1,17],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a4cc60259e20bec7d1cf3a62a7a9cfad4":[4,3,1,18],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a4d14f5afa53ca7af17734c5b5744b10c":[4,3,1,6],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1":[4,3,1,23],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a58470aacb3262891701b456daadced6d":[4,3,1,24],
-"d8/d0b/classStreamDebugMIDI__Interface.html#a68e98b029031d6260972bed02e0aa59c":[4,3,1,5],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a70967d594ff3bae938a3f1b30a319018":[4,3,1,28],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a80c4843f88185a213ebe20a26c0fd579":[4,3,1,12],
 "d8/d0b/classStreamDebugMIDI__Interface.html#a98c1745757137226f6b942be1be0a0fc":[4,3,1,21],
@@ -157,7 +159,7 @@ var NAVTREEINDEX9 =
 "d8/d39/classBLEMIDI.html#aeaf0a8d859bfc29cda7002a9b38cda2c":[6,0,12,4],
 "d8/d39/classBLEMIDI.html#af388b78447b485342da87dbc401bcfeb":[6,0,12,6],
 "d8/d39/classBLEMIDI.html#afdb4cce97116f63be21b155903ac7c08":[6,0,12,0],
-"d8/d3d/namespaceExtIO.html":[5,0,3],
+"d8/d3d/namespaceExtIO.html":[5,0,4],
 "d8/d43/classDisplayElement.html":[6,0,34],
 "d8/d43/classDisplayElement.html#a06767ad010cf69aa1be97076df09be92":[6,0,34,2],
 "d8/d43/classDisplayElement.html#a1169603ef985e177ac928012474474d6":[6,0,34,1],
@@ -247,7 +249,5 @@ var NAVTREEINDEX9 =
 "d8/d6c/classButtonMatrix.html#a75a8c44788ae7029d544cf1398539eec":[6,0,16,4],
 "d8/d6c/classButtonMatrix.html#a8d6b7965c08300559c22de5325f2164f":[6,0,16,5],
 "d8/d6c/classButtonMatrix.html#a9d01928f942d82328d92ed561fac5dc0":[6,0,16,7],
-"d8/d6c/classButtonMatrix.html#ab6ec60a0b7c885ea5569cd8b1e8140ab":[6,0,16,1],
-"d8/d6c/classButtonMatrix.html#ad77595d9dcb8623f01a73e6adc955a7b":[6,0,16,0],
-"d8/d6c/classButtonMatrix.html#af3adb9370f0220eb3235885e1406e9e3":[6,0,16,8]
+"d8/d6c/classButtonMatrix.html#ab6ec60a0b7c885ea5569cd8b1e8140ab":[6,0,16,1]
 };
