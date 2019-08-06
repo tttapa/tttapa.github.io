@@ -1,6 +1,6 @@
 var MIDI__Parser_8hpp =
 [
-    [ "MIDI_message", "de/df8/structMIDI__message.html", "de/df8/structMIDI__message" ],
+    [ "ChannelMessage", "d7/d3f/structChannelMessage.html", "d7/d3f/structChannelMessage" ],
     [ "SysExMessage", "db/d45/structSysExMessage.html", "db/d45/structSysExMessage" ],
     [ "RealTimeMessage", "d6/d99/structRealTimeMessage.html", "d6/d99/structRealTimeMessage" ],
     [ "MIDI_Parser", "df/d0c/classMIDI__Parser.html", "df/d0c/classMIDI__Parser" ],

@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 3c28459668a1d0476ee95b605bbd1f240bede289 - src/MIDI_Inputs/MCU/VU.hpp</title>
+  <title>LCOV - d9baf5760863b0368a44009bfe51dee4fdb7a6fa - src/MIDI_Inputs/MCU/VU.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">3c28459668a1d0476ee95b605bbd1f240bede289</td>
+            <td class="headerValue">d9baf5760863b0368a44009bfe51dee4fdb7a6fa</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">71</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-08-06 01:55:18</td>
+            <td class="headerValue">2019-08-06 02:09:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">31</td>
@@ -133,7 +133,7 @@
 <a name="63"><span class="lineNum">      63 </span><span class="lineCov">          1 :     }</span></a>
 <a name="64"><span class="lineNum">      64 </span>            : </a>
 <a name="65"><span class="lineNum">      65 </span>            :     MIDICNChannelAddress</a>
-<a name="66"><span class="lineNum">      66 </span><span class="lineCov">         15 :     getTarget(const MIDI_message_matcher &amp;midimsg) const override {</span></a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">         15 :     getTarget(const ChannelMessageMatcher &amp;midimsg) const override {</span></a>
 <a name="67"><span class="lineNum">      67 </span>            :         return {</a>
 <a name="68"><span class="lineNum">      68 </span><span class="lineCov">         15 :             int8_t(midimsg.data1 &gt;&gt; 4),</span></a>
 <a name="69"><span class="lineNum">      69 </span><span class="lineCov">         15 :             Channel(midimsg.channel),</span></a>
@@ -208,7 +208,7 @@
 <a name="138"><span class="lineNum">     138 </span><span class="lineCov">          5 :     VU(const MIDICNChannelAddress &amp;address, unsigned int decayTime = 150)</span></a>
 <a name="139"><span class="lineNum">     139 </span><span class="lineCov">          5 :         : VU_Base(address, decayTime) {}</span></a>
 <a name="140"><span class="lineNum">     140 </span>            : </a>
-<a name="141"><span class="lineNum">     141 </span><span class="lineCov">          8 :     bool updateImpl(const MIDI_message_matcher &amp;midimsg,</span></a>
+<a name="141"><span class="lineNum">     141 </span><span class="lineCov">          8 :     bool updateImpl(const ChannelMessageMatcher &amp;midimsg,</span></a>
 <a name="142"><span class="lineNum">     142 </span>            :                     UNUSED_PARAM const MIDICNChannelAddress &amp;target) override {</a>
 <a name="143"><span class="lineNum">     143 </span><span class="lineCov">          8 :         uint8_t data = midimsg.data1 &amp; 0x0F;</span></a>
 <a name="144"><span class="lineNum">     144 </span><span class="lineCov">          8 :         switch (data) {</span></a>
@@ -274,7 +274,7 @@
 <a name="204"><span class="lineNum">     204 </span>            :        unsigned int decayTime = 150)</a>
 <a name="205"><span class="lineNum">     205 </span><span class="lineCov">          4 :         : VU_Base(address, decayTime), BankableMIDIInput&lt;N&gt;(config) {}</span></a>
 <a name="206"><span class="lineNum">     206 </span>            : </a>
-<a name="207"><span class="lineNum">     207 </span><span class="lineCov">          7 :     bool updateImpl(const MIDI_message_matcher &amp;midimsg,</span></a>
+<a name="207"><span class="lineNum">     207 </span><span class="lineCov">          7 :     bool updateImpl(const ChannelMessageMatcher &amp;midimsg,</span></a>
 <a name="208"><span class="lineNum">     208 </span>            :                     const MIDICNChannelAddress &amp;target) override {</a>
 <a name="209"><span class="lineNum">     209 </span><span class="lineCov">          7 :         uint8_t index =</span></a>
 <a name="210"><span class="lineNum">     210 </span><span class="lineCov">          7 :             this-&gt;getIndex(target, address) % N; // Todo: modulo everywhere?</span></a>

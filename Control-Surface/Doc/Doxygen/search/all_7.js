@@ -7,7 +7,7 @@ var searchData=
   ['hardwareserialmidi_5finterface',['HardwareSerialMIDI_Interface',['../d9/d78/classHardwareSerialMIDI__Interface.html',1,'HardwareSerialMIDI_Interface'],['../d9/d78/classHardwareSerialMIDI__Interface.html#a689765de0ae6ff2e288782ff640054a6',1,'HardwareSerialMIDI_Interface::HardwareSerialMIDI_Interface()']]],
   ['hasspacefor',['hasSpaceFor',['../d0/d89/classBluetoothMIDI__Interface.html#a6417f6d48fc3043fd97363b67649a363',1,'BluetoothMIDI_Interface']]],
   ['hasspaceleft',['hasSpaceLeft',['../d1/db1/classSysExBuffer.html#a0bb1a353d17c2bcc3a09a6d981adf819',1,'SysExBuffer']]],
-  ['header',['header',['../de/df8/structMIDI__message.html#af73ddde8746b7f86712a180320aacbbd',1,'MIDI_message']]],
+  ['header',['header',['../d7/d3f/structChannelMessage.html#a4a90c0b5ab52e44c5bb035868f3bc9c5',1,'ChannelMessage']]],
   ['height',['height',['../d2/df6/structXBitmap.html#aadc2e950f43a466fb09b0b0239dcf3ee',1,'XBitmap']]],
   ['helpers_2ecpp',['Helpers.cpp',['../de/dce/Helpers_8cpp.html',1,'']]],
   ['helpers_2ehpp',['Helpers.hpp',['../d7/dd7/Helpers_8hpp.html',1,'']]],

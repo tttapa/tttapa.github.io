@@ -24,7 +24,7 @@ var classHardwareSerialMIDI__Interface =
     [ "onSysExMessage", "d9/d78/classHardwareSerialMIDI__Interface.html#a3058e51eff2e68b7480b1c18c1aa8dbd", null ],
     [ "onRealtimeMessage", "d9/d78/classHardwareSerialMIDI__Interface.html#a5455d6ad189a4ee548aaaf7065b1b6e1", null ],
     [ "dispatchMIDIEvent", "d9/d78/classHardwareSerialMIDI__Interface.html#a58470aacb3262891701b456daadced6d", null ],
-    [ "getChannelMessage", "d9/d78/classHardwareSerialMIDI__Interface.html#a4923aed435b881567b3276614dad6d11", null ],
+    [ "getChannelMessage", "d9/d78/classHardwareSerialMIDI__Interface.html#a3664cef95dcdfc01c3d543e84939dfb8", null ],
     [ "getSysExMessage", "d9/d78/classHardwareSerialMIDI__Interface.html#af4f7be5b6b486b4d116b9fd6a38f22a4", null ],
     [ "getCN", "d9/d78/classHardwareSerialMIDI__Interface.html#ad5ae5d35fa5f34ea11b7a21b7a57bb18", null ],
     [ "parser", "d9/d78/classHardwareSerialMIDI__Interface.html#a2c9b5e576f7e2ad2df057a30d13412d5", null ],

@@ -1,7 +1,7 @@
 var classMCU_1_1Bankable_1_1VU =
 [
     [ "VU", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a25224e1cd150901c02c38731801223f0", null ],
-    [ "updateImpl", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a443c9c1f35df5ac3637e4f0f10da91ff", null ],
+    [ "updateImpl", "d0/d43/classMCU_1_1Bankable_1_1VU.html#ae57a47a82c7dc3ed4a8733de43f253ae", null ],
     [ "match", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a1ce171c65fdad2a6796ab53e60facd49", null ],
     [ "reset", "d0/d43/classMCU_1_1Bankable_1_1VU.html#ac2be4f2ef28a73e960e7cd8e2f0ae4b7", null ],
     [ "decayAll", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a3d5a922666f341d3c8463f7ee7572131", null ],
@@ -19,10 +19,10 @@ var classMCU_1_1Bankable_1_1VU =
     [ "beginAll", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a0bc33aa8712fd07c9c218ed35cc7dce3", null ],
     [ "resetAll", "d0/d43/classMCU_1_1Bankable_1_1VU.html#adcb7da06e470ced36073d5cbeb5ad6c0", null ],
     [ "updateAll", "d0/d43/classMCU_1_1Bankable_1_1VU.html#aa32cdb3125e337090f73f8f3358a8a73", null ],
-    [ "updateAllWith", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a4b08a75485926ddd3fa6396b6a4da2a1", null ],
+    [ "updateAllWith", "d0/d43/classMCU_1_1Bankable_1_1VU.html#ad3482e456c02421df5207531e50bbec1", null ],
     [ "begin", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a7ae18e103d62568ba35c1c2de2e37885", null ],
     [ "display", "d0/d43/classMCU_1_1Bankable_1_1VU.html#abc54b9402e8555c615aaee35235f3aa4", null ],
-    [ "updateWith", "d0/d43/classMCU_1_1Bankable_1_1VU.html#adcb98982679f02c01c46ac8d22722e1d", null ],
+    [ "updateWith", "d0/d43/classMCU_1_1Bankable_1_1VU.html#afdcc31485ef46e0de7a942d6dc0a7da9", null ],
     [ "getMax", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a0f8f6bf73807942ebcb61256c2365f0d", null ],
     [ "getSelection", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a2fdea3e28754c3d62016417cff451d29", null ],
     [ "getIndex", "d0/d43/classMCU_1_1Bankable_1_1VU.html#a239ccb004b25fa96f720406e271ac881", null ],

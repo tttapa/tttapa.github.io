@@ -17,6 +17,8 @@ var searchData=
   ['ccrotaryencoder_2ehpp',['CCRotaryEncoder.hpp',['../dd/dd9/CCRotaryEncoder_8hpp.html',1,'']]],
   ['channel_2ecpp',['Channel.cpp',['../d1/dc4/Channel_8cpp.html',1,'']]],
   ['channel_2ehpp',['Channel.hpp',['../d7/d42/Channel_8hpp.html',1,'']]],
+  ['channelmessagematcher_2ecpp',['ChannelMessageMatcher.cpp',['../d8/d63/ChannelMessageMatcher_8cpp.html',1,'']]],
+  ['channelmessagematcher_2ehpp',['ChannelMessageMatcher.hpp',['../db/df6/ChannelMessageMatcher_8hpp.html',1,'']]],
   ['chords_2ehpp',['Chords.hpp',['../d9/dac/Chords_8hpp.html',1,'']]],
   ['continuousccsender_2ecpp',['ContinuousCCSender.cpp',['../d9/d94/ContinuousCCSender_8cpp.html',1,'']]],
   ['continuousccsender_2ehpp',['ContinuousCCSender.hpp',['../db/dd1/ContinuousCCSender_8hpp.html',1,'']]],

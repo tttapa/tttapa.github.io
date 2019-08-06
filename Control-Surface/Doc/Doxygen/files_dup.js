@@ -84,6 +84,10 @@ var files_dup =
     [ "CCRotaryEncoder.hpp", "dd/dd9/CCRotaryEncoder_8hpp.html", null ],
     [ "Channel.cpp", "d1/dc4/Channel_8cpp.html", null ],
     [ "Channel.hpp", "d7/d42/Channel_8hpp.html", "d7/d42/Channel_8hpp" ],
+    [ "ChannelMessageMatcher.cpp", "d8/d63/ChannelMessageMatcher_8cpp.html", null ],
+    [ "ChannelMessageMatcher.hpp", "db/df6/ChannelMessageMatcher_8hpp.html", [
+      [ "ChannelMessageMatcher", "df/d8f/structChannelMessageMatcher.html", "df/d8f/structChannelMessageMatcher" ]
+    ] ],
     [ "Chords.hpp", "d9/dac/Chords_8hpp.html", "d9/dac/Chords_8hpp" ],
     [ "ContinuousCCSender.cpp", "d9/d94/ContinuousCCSender_8cpp.html", null ],
     [ "ContinuousCCSender.hpp", "db/dd1/ContinuousCCSender_8hpp.html", [
@@ -225,10 +229,6 @@ var files_dup =
     [ "MCU.hpp", "db/d60/MCU_8hpp.html", "db/d60/MCU_8hpp" ],
     [ "MIDI_Interface.cpp", "de/d0f/MIDI__Interface_8cpp.html", null ],
     [ "MIDI_Interface.hpp", "d6/d04/MIDI__Interface_8hpp.html", "d6/d04/MIDI__Interface_8hpp" ],
-    [ "MIDI_message_matcher.cpp", "dd/d0a/MIDI__message__matcher_8cpp.html", null ],
-    [ "MIDI_message_matcher.hpp", "d1/d30/MIDI__message__matcher_8hpp.html", [
-      [ "MIDI_message_matcher", "dd/d36/structMIDI__message__matcher.html", "dd/d36/structMIDI__message__matcher" ]
-    ] ],
     [ "MIDI_Parser.cpp", "d4/d84/MIDI__Parser_8cpp.html", null ],
     [ "MIDI_Parser.hpp", "d7/d2d/MIDI__Parser_8hpp.html", "d7/d2d/MIDI__Parser_8hpp" ],
     [ "Abstract/MIDIButton.cpp", "d9/d97/Abstract_2MIDIButton_8cpp.html", null ],

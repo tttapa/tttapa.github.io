@@ -1,7 +1,7 @@
 var classMCU_1_1VU =
 [
     [ "VU", "d8/d4c/classMCU_1_1VU.html#ae95cc9bc3749b144ede2c50d5f92b322", null ],
-    [ "updateImpl", "d8/d4c/classMCU_1_1VU.html#af448f099f51e14a31e7017f855a12ec9", null ],
+    [ "updateImpl", "d8/d4c/classMCU_1_1VU.html#a8dd73e3ada96656fd5c1b372f5c4c729", null ],
     [ "reset", "d8/d4c/classMCU_1_1VU.html#a4efdfbf2ae9dae15b7620435a63397f1", null ],
     [ "decayAll", "d8/d4c/classMCU_1_1VU.html#a2ce41ad7942ab2d16e9af13ac4829501", null ],
     [ "getRawValue", "d8/d4c/classMCU_1_1VU.html#ae5d0d2516b98a7bbaf3c2538d4c5d7f1", null ],
@@ -18,10 +18,10 @@ var classMCU_1_1VU =
     [ "beginAll", "d8/d4c/classMCU_1_1VU.html#a0bc33aa8712fd07c9c218ed35cc7dce3", null ],
     [ "resetAll", "d8/d4c/classMCU_1_1VU.html#adcb7da06e470ced36073d5cbeb5ad6c0", null ],
     [ "updateAll", "d8/d4c/classMCU_1_1VU.html#aa32cdb3125e337090f73f8f3358a8a73", null ],
-    [ "updateAllWith", "d8/d4c/classMCU_1_1VU.html#a4b08a75485926ddd3fa6396b6a4da2a1", null ],
+    [ "updateAllWith", "d8/d4c/classMCU_1_1VU.html#ad3482e456c02421df5207531e50bbec1", null ],
     [ "begin", "d8/d4c/classMCU_1_1VU.html#a7ae18e103d62568ba35c1c2de2e37885", null ],
     [ "display", "d8/d4c/classMCU_1_1VU.html#abc54b9402e8555c615aaee35235f3aa4", null ],
-    [ "updateWith", "d8/d4c/classMCU_1_1VU.html#adcb98982679f02c01c46ac8d22722e1d", null ],
+    [ "updateWith", "d8/d4c/classMCU_1_1VU.html#afdcc31485ef46e0de7a942d6dc0a7da9", null ],
     [ "getMax", "d8/d4c/classMCU_1_1VU.html#a0f8f6bf73807942ebcb61256c2365f0d", null ],
     [ "value", "d8/d4c/classMCU_1_1VU.html#ad40f40b1f9913e074d92c463b40b6f57", null ],
     [ "NO_DECAY", "d8/d4c/classMCU_1_1VU.html#a39bed9bf8c604e890b8f82d10170e2fa", null ],

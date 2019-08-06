@@ -16,8 +16,6 @@ var searchData=
   ['midi_2dover_2dusb_2emd',['MIDI-over-USB.md',['../dc/df4/MIDI-over-USB_8md.html',1,'']]],
   ['midi_5finterface_2ecpp',['MIDI_Interface.cpp',['../de/d0f/MIDI__Interface_8cpp.html',1,'']]],
   ['midi_5finterface_2ehpp',['MIDI_Interface.hpp',['../d6/d04/MIDI__Interface_8hpp.html',1,'']]],
-  ['midi_5fmessage_5fmatcher_2ecpp',['MIDI_message_matcher.cpp',['../dd/d0a/MIDI__message__matcher_8cpp.html',1,'']]],
-  ['midi_5fmessage_5fmatcher_2ehpp',['MIDI_message_matcher.hpp',['../d1/d30/MIDI__message__matcher_8hpp.html',1,'']]],
   ['midi_5fparser_2ecpp',['MIDI_Parser.cpp',['../d4/d84/MIDI__Parser_8cpp.html',1,'']]],
   ['midi_5fparser_2ehpp',['MIDI_Parser.hpp',['../d7/d2d/MIDI__Parser_8hpp.html',1,'']]],
   ['midicnchanneladdress_2ecpp',['MIDICNChannelAddress.cpp',['../d6/d65/MIDICNChannelAddress_8cpp.html',1,'']]],

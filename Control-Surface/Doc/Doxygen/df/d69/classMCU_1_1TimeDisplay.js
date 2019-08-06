@@ -14,11 +14,11 @@ var classMCU_1_1TimeDisplay =
     [ "beginAll", "df/d69/classMCU_1_1TimeDisplay.html#aac5c0e4f25ae8a1996d1ef7bb894c802", null ],
     [ "updateAll", "df/d69/classMCU_1_1TimeDisplay.html#a9d3f3fb69c11536a5d795df42cb722a5", null ],
     [ "resetAll", "df/d69/classMCU_1_1TimeDisplay.html#a1aa71fafd60f18ef365091e09c0b3357", null ],
-    [ "updateAllWith", "df/d69/classMCU_1_1TimeDisplay.html#a3cdc427ed1a74ba765311e87dbdbe60b", null ],
+    [ "updateAllWith", "df/d69/classMCU_1_1TimeDisplay.html#a88626eec5c747e4af29b93beb330c489", null ],
     [ "begin", "df/d69/classMCU_1_1TimeDisplay.html#a7ae18e103d62568ba35c1c2de2e37885", null ],
     [ "display", "df/d69/classMCU_1_1TimeDisplay.html#abc54b9402e8555c615aaee35235f3aa4", null ],
     [ "update", "df/d69/classMCU_1_1TimeDisplay.html#ab487eb31758e7be2b98731bd0f255588", null ],
-    [ "updateWith", "df/d69/classMCU_1_1TimeDisplay.html#adcb98982679f02c01c46ac8d22722e1d", null ],
+    [ "updateWith", "df/d69/classMCU_1_1TimeDisplay.html#afdcc31485ef46e0de7a942d6dc0a7da9", null ],
     [ "address", "df/d69/classMCU_1_1TimeDisplay.html#a38d9872489fd94dee25077c16073e8cf", null ],
     [ "next", "df/d69/classMCU_1_1TimeDisplay.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "df/d69/classMCU_1_1TimeDisplay.html#a57b6615469e554c514a9ff56dc24908f", null ]

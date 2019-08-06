@@ -97,6 +97,8 @@ var hierarchy =
       ] ]
     ] ],
     [ "Channel", "d2/d48/classChannel.html", null ],
+    [ "ChannelMessage", "d7/d3f/structChannelMessage.html", null ],
+    [ "ChannelMessageMatcher", "df/d8f/structChannelMessageMatcher.html", null ],
     [ "ContinuousCCSender", "da/d07/classContinuousCCSender.html", null ],
     [ "DigitalCCSender", "d5/db5/classDigitalCCSender.html", null ],
     [ "DigitalNoteSender", "dc/dd4/classDigitalNoteSender.html", null ],
@@ -404,8 +406,6 @@ var hierarchy =
       ] ],
       [ "USBMIDI_Interface", "de/d05/classUSBMIDI__Interface.html", null ]
     ] ],
-    [ "MIDI_message", "de/df8/structMIDI__message.html", null ],
-    [ "MIDI_message_matcher", "dd/d36/structMIDI__message__matcher.html", null ],
     [ "MIDI_Parser", "df/d0c/classMIDI__Parser.html", [
       [ "SerialMIDI_Parser", "d0/d0d/classSerialMIDI__Parser.html", null ],
       [ "USBMIDI_Parser", "db/db0/classUSBMIDI__Parser.html", null ]
