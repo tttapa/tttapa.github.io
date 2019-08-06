@@ -1,9 +1,9 @@
 var classBankable_1_1MIDIChordButton =
 [
-    [ "MIDIChordButton", "da/d96/classBankable_1_1MIDIChordButton.html#afc39c4564b806d3596e106a7834a7781", null ],
-    [ "begin", "da/d96/classBankable_1_1MIDIChordButton.html#ab2a657d6fc4b190e0c44197af9d3876b", null ],
-    [ "update", "da/d96/classBankable_1_1MIDIChordButton.html#aad3b22954e8635cef722bf4b8f805645", null ],
-    [ "setChord", "da/d96/classBankable_1_1MIDIChordButton.html#ae3d27e83c8c6e521dc44c4a7abeb9d28", null ],
+    [ "MIDIChordButton", "da/d96/classBankable_1_1MIDIChordButton.html#ab074064cd696f78144841fde425e712a", null ],
+    [ "begin", "da/d96/classBankable_1_1MIDIChordButton.html#a9a1546b7f12ad9f3de2362dd9453b139", null ],
+    [ "update", "da/d96/classBankable_1_1MIDIChordButton.html#a37b918b72f21b551c3302a62d6f076d0", null ],
+    [ "setChord", "da/d96/classBankable_1_1MIDIChordButton.html#a43c01cd1457461dfc9c892c02dee8a64", null ],
     [ "getAddressOffset", "da/d96/classBankable_1_1MIDIChordButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "da/d96/classBankable_1_1MIDIChordButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "da/d96/classBankable_1_1MIDIChordButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -20,10 +20,11 @@ var classBankable_1_1MIDIChordButton =
     [ "isEnabled", "da/d96/classBankable_1_1MIDIChordButton.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "da/d96/classBankable_1_1MIDIChordButton.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "da/d96/classBankable_1_1MIDIChordButton.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "button", "da/d96/classBankable_1_1MIDIChordButton.html#a9612d4e8bc77d9afe11bf89b810e168c", null ],
-    [ "address", "da/d96/classBankable_1_1MIDIChordButton.html#a014135dc7f8d80bc0fa58d5b8979d7ec", null ],
-    [ "chord", "da/d96/classBankable_1_1MIDIChordButton.html#a54917ddfb45d24e5459fdc7ac5276bbf", null ],
-    [ "newChord", "da/d96/classBankable_1_1MIDIChordButton.html#ac9916fbd7db5de38f56f4e0dad738018", null ],
+    [ "button", "da/d96/classBankable_1_1MIDIChordButton.html#adabac8297a3bd18c7ab45713fdfc70ba", null ],
+    [ "address", "da/d96/classBankable_1_1MIDIChordButton.html#a229262cdb950085c7a3f00674b1e9c16", null ],
+    [ "chord", "da/d96/classBankable_1_1MIDIChordButton.html#a05225921dd9f158c61697d2d3c891303", null ],
+    [ "newChord", "da/d96/classBankable_1_1MIDIChordButton.html#aa3f829ebaa6482dfb894d2d9756b20bd", null ],
+    [ "sender", "da/d96/classBankable_1_1MIDIChordButton.html#ac48ab181781c04b91c1b06ce83b68314", null ],
     [ "next", "da/d96/classBankable_1_1MIDIChordButton.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "da/d96/classBankable_1_1MIDIChordButton.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

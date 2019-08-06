@@ -1,11 +1,11 @@
 var classBankable_1_1MIDIFilteredAnalog =
 [
-    [ "MIDIFilteredAnalog", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#afd5f459b9c33fc29b6e3b616c410738b", null ],
-    [ "begin", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a1f687fc423ca089c93f7e43fdfcf0fee", null ],
-    [ "update", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#ab1a0f9e5acac4550476df16a31036a10", null ],
-    [ "map", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a79bb7e2fa5066744e984bbdc36892ca8", null ],
-    [ "getRawValue", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#aac29d6edbd07bc32e8288c5950c04228", null ],
-    [ "getValue", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a920214b7eadbced526a1457e847af415", null ],
+    [ "MIDIFilteredAnalog", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a3a16c103f5582899ea44a0a10e327c0e", null ],
+    [ "begin", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a9b583128e30ece8bbd31f439b6a19ba4", null ],
+    [ "update", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a58bbace1afd66f636d2b176db8c7f464", null ],
+    [ "map", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a98f5a4931fb81e7ad8645ab6838ab0a0", null ],
+    [ "getRawValue", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a57a168b8153417bebfcc4719ae7bf6f3", null ],
+    [ "getValue", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#aee1ccbeafed8d697b7bfd9809416e96c", null ],
     [ "enable", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -22,8 +22,9 @@ var classBankable_1_1MIDIFilteredAnalog =
     [ "getSelection", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
     [ "lock", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a9f34809178ed809a8ff203220bd1b206", null ],
     [ "unlock", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4154c3302c845a9dc6a455600c4d0e2b", null ],
-    [ "filteredAnalog", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a72608be0106f4f08dc13d8c30bdad7f4", null ],
-    [ "address", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a152a9da69ce9e29a540de7deed705dbf", null ],
+    [ "filteredAnalog", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#ace4fcf9a68e92165372c69a3c174a48f", null ],
+    [ "address", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a56cb2f5e810f983a529dd3285dfc327f", null ],
+    [ "sender", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#ad4f9de76e05f6b1eb9222b95830ada1d", null ],
     [ "next", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "db/ddc/classBankable_1_1MIDIFilteredAnalog.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

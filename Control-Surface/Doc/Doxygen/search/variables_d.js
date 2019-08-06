@@ -2,7 +2,7 @@ var searchData=
 [
   ['n',['N',['../da/db8/classTransposer.html#ac643bffed4cdcf2a5f7afc030b50eddd',1,'Transposer']]],
   ['name_5fvalue',['NAME_VALUE',['../d7/dc7/namespaceMCU.html#aa7dd1780dbb355bf59050db18088a45a',1,'MCU']]],
-  ['newchord',['newChord',['../dd/d29/classMIDIChordButton.html#a5fb0091ad5ea75c014e971f69f44a2ff',1,'MIDIChordButton::newChord()'],['../da/d96/classBankable_1_1MIDIChordButton.html#ac9916fbd7db5de38f56f4e0dad738018',1,'Bankable::MIDIChordButton::newChord()']]],
+  ['newchord',['newChord',['../dd/d29/classMIDIChordButton.html#ab7b99d57fe8cba2c9440e467971970c1',1,'MIDIChordButton::newChord()'],['../da/d96/classBankable_1_1MIDIChordButton.html#aa3f829ebaa6482dfb894d2d9756b20bd',1,'Bankable::MIDIChordButton::newChord()']]],
   ['next',['next',['../d4/d23/classDoublyLinkable.html#a4a13b63f90ec988cd14d871df9dbc53b',1,'DoublyLinkable']]],
   ['no_5faddress',['NO_ADDRESS',['../d0/d4e/Def_8hpp.html#a40b8f348da991a3b8052117ec81ccef3',1,'Def.hpp']]],
   ['no_5fdecay',['NO_DECAY',['../d4/d71/classMCU_1_1VU__Base.html#a39bed9bf8c604e890b8f82d10170e2fa',1,'MCU::VU_Base']]],

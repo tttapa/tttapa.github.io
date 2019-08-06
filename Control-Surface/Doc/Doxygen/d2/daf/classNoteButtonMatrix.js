@@ -1,8 +1,8 @@
 var classNoteButtonMatrix =
 [
-    [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga38540881190e4382108fee251b4a4ca0", null ],
-    [ "begin", "d2/daf/classNoteButtonMatrix.html#af2de658359388553fbbfb0a985d1ce6e", null ],
-    [ "update", "d2/daf/classNoteButtonMatrix.html#af4be5c4eb14eeea1be8e0252c570a780", null ],
+    [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga23e45eeee7965faa832397bc1a842446", null ],
+    [ "begin", "d2/daf/classNoteButtonMatrix.html#a5dbffe216515e2ba2c3bd75a68262d18", null ],
+    [ "update", "d2/daf/classNoteButtonMatrix.html#a8882f74a53c6e8777d814e335cf31dbc", null ],
     [ "enable", "d2/daf/classNoteButtonMatrix.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d2/daf/classNoteButtonMatrix.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d2/daf/classNoteButtonMatrix.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

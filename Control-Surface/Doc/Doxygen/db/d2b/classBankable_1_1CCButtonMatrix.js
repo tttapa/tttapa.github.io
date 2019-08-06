@@ -1,8 +1,8 @@
 var classBankable_1_1CCButtonMatrix =
 [
-    [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga738e57488f03a423d3ac19e4246e949a", null ],
-    [ "begin", "db/d2b/classBankable_1_1CCButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
-    [ "update", "db/d2b/classBankable_1_1CCButtonMatrix.html#a6a779804092487b4a4a135559b45daf5", null ],
+    [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#gadaee9321972d081443806814e37bfb54", null ],
+    [ "begin", "db/d2b/classBankable_1_1CCButtonMatrix.html#a33ae7903c54ef607839040546d16f2e7", null ],
+    [ "update", "db/d2b/classBankable_1_1CCButtonMatrix.html#a2d8de9b7ddfda6b89ebedd96036c9cf5", null ],
     [ "getAddressOffset", "db/d2b/classBankable_1_1CCButtonMatrix.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "db/d2b/classBankable_1_1CCButtonMatrix.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "db/d2b/classBankable_1_1CCButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

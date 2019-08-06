@@ -1,9 +1,9 @@
 var classBankable_1_1NoteChordButton =
 [
-    [ "NoteChordButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga0c20ae8bbade548c518a0cae020609e8", null ],
-    [ "begin", "d8/d9d/classBankable_1_1NoteChordButton.html#ab2a657d6fc4b190e0c44197af9d3876b", null ],
-    [ "update", "d8/d9d/classBankable_1_1NoteChordButton.html#aad3b22954e8635cef722bf4b8f805645", null ],
-    [ "setChord", "d8/d9d/classBankable_1_1NoteChordButton.html#ae3d27e83c8c6e521dc44c4a7abeb9d28", null ],
+    [ "NoteChordButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga65f205840bcca6ae626f469b214fcf4f", null ],
+    [ "begin", "d8/d9d/classBankable_1_1NoteChordButton.html#a9a1546b7f12ad9f3de2362dd9453b139", null ],
+    [ "update", "d8/d9d/classBankable_1_1NoteChordButton.html#a37b918b72f21b551c3302a62d6f076d0", null ],
+    [ "setChord", "d8/d9d/classBankable_1_1NoteChordButton.html#a43c01cd1457461dfc9c892c02dee8a64", null ],
     [ "getAddressOffset", "d8/d9d/classBankable_1_1NoteChordButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d8/d9d/classBankable_1_1NoteChordButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d8/d9d/classBankable_1_1NoteChordButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

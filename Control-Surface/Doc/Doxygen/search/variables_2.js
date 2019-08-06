@@ -29,7 +29,7 @@ var searchData=
   ['channel_5fvolume_5flsb',['Channel_Volume_LSB',['../d4/dbe/namespaceMIDI__CC.html#a97555456b283694aafed8d4718310bb4',1,'MIDI_CC']]],
   ['channelmessagecallback',['channelMessageCallback',['../dc/d45/classControl__Surface__.html#a6b41a4641809104eb5daca3c47ff9bed',1,'Control_Surface_']]],
   ['characteristic_5fuuid',['CHARACTERISTIC_UUID',['../d0/dc9/BLEMIDI_8hpp.html#a823310164de4a8813b2f815c36553864',1,'BLEMIDI.hpp']]],
-  ['chord',['chord',['../dd/d29/classMIDIChordButton.html#a1d973108a0e0f3cefb63aaf40a5790e3',1,'MIDIChordButton::chord()'],['../da/d96/classBankable_1_1MIDIChordButton.html#a54917ddfb45d24e5459fdc7ac5276bbf',1,'Bankable::MIDIChordButton::chord()']]],
+  ['chord',['chord',['../dd/d29/classMIDIChordButton.html#acdde258e9d1b89daee054a8d5ff98d4f',1,'MIDIChordButton::chord()'],['../da/d96/classBankable_1_1MIDIChordButton.html#a05225921dd9f158c61697d2d3c891303',1,'Bankable::MIDIChordButton::chord()']]],
   ['click',['CLICK',['../d7/dc7/namespaceMCU.html#a422bcc84cdcbb157228d08ae7a8431a0',1,'MCU']]],
   ['clockpin',['clockPin',['../d1/d5c/classShiftRegisterOut.html#a59c9de6869394eb0103fc61aa836d708',1,'ShiftRegisterOut']]],
   ['cmd_5falt',['CMD_ALT',['../d7/dc7/namespaceMCU.html#af0c41657188efac282a9d8d73ab5cf1a',1,'MCU']]],

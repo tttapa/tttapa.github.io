@@ -1,11 +1,11 @@
 var classBankable_1_1CCButtonLatched =
 [
-    [ "CCButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#ga3704393cd206dca32969c42af28d79a7", null ],
-    [ "begin", "d9/d1d/classBankable_1_1CCButtonLatched.html#ac100ef66e13d05bbeddb1691a6fd2ce0", null ],
-    [ "update", "d9/d1d/classBankable_1_1CCButtonLatched.html#a972bc7066b12eb065adf7405bba8b806", null ],
-    [ "toggleState", "d9/d1d/classBankable_1_1CCButtonLatched.html#a1b311122504657e75c797c93e0cbd0e3", null ],
-    [ "getState", "d9/d1d/classBankable_1_1CCButtonLatched.html#a78016f9587b3591ddeff9eec02d32f4b", null ],
-    [ "setState", "d9/d1d/classBankable_1_1CCButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835", null ],
+    [ "CCButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#gab7a0038e67551b86e569aa58dee5624c", null ],
+    [ "begin", "d9/d1d/classBankable_1_1CCButtonLatched.html#a98f0891cbbe3deb94e76aaab6c126718", null ],
+    [ "update", "d9/d1d/classBankable_1_1CCButtonLatched.html#a8d533b707538276166747df9cbccf4a1", null ],
+    [ "toggleState", "d9/d1d/classBankable_1_1CCButtonLatched.html#a78de1a356f4836ed91f531bef6b7e301", null ],
+    [ "getState", "d9/d1d/classBankable_1_1CCButtonLatched.html#aa81859982800e212c45fa6ccac55faf2", null ],
+    [ "setState", "d9/d1d/classBankable_1_1CCButtonLatched.html#ad4838c3c651e499b3754750185c5d188", null ],
     [ "getAddressOffset", "d9/d1d/classBankable_1_1CCButtonLatched.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d9/d1d/classBankable_1_1CCButtonLatched.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d9/d1d/classBankable_1_1CCButtonLatched.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

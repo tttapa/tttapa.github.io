@@ -1,8 +1,8 @@
 var classNoteButtons =
 [
-    [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac", null ],
-    [ "begin", "d1/dbd/classNoteButtons.html#a97464005c2dc0f838e1b512b8468b322", null ],
-    [ "update", "d1/dbd/classNoteButtons.html#ae57920009161d5983962dced5aa27b97", null ],
+    [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga5c2842b54ed2101d9c87d04c9b6dbb26", null ],
+    [ "begin", "d1/dbd/classNoteButtons.html#a9b3e8d962ac0f429856db84d9ac80dc3", null ],
+    [ "update", "d1/dbd/classNoteButtons.html#a901779e24e556e482f9f121e2e34c834", null ],
     [ "enable", "d1/dbd/classNoteButtons.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d1/dbd/classNoteButtons.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d1/dbd/classNoteButtons.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

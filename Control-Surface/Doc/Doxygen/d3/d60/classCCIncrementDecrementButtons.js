@@ -1,9 +1,10 @@
 var classCCIncrementDecrementButtons =
 [
-    [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#gaac377d1594c4bfa72f38e166a77c6607", null ],
-    [ "begin", "d3/d60/classCCIncrementDecrementButtons.html#ad96a50ea1490e5d061d57a6d208deaf7", null ],
-    [ "update", "d3/d60/classCCIncrementDecrementButtons.html#a372b8a0173315cad364f906ff7587dc1", null ],
-    [ "reset", "d3/d60/classCCIncrementDecrementButtons.html#ab8367a2ad36d7a4530277e3d709ad16f", null ],
+    [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#gaec3c4660adfe0fc2712809c56680b381", null ],
+    [ "begin", "d3/d60/classCCIncrementDecrementButtons.html#a4990154c64d7be64c83d8e74ba2546cb", null ],
+    [ "update", "d3/d60/classCCIncrementDecrementButtons.html#afb859b92b315cd74bd4cf008840cccd2", null ],
+    [ "send", "d3/d60/classCCIncrementDecrementButtons.html#a8e99d3157f2ad3ce718898cf0b69d023", null ],
+    [ "reset", "d3/d60/classCCIncrementDecrementButtons.html#a6f48ad9c63a4d1ffa875e298d3b31249", null ],
     [ "getAddressOffset", "d3/d60/classCCIncrementDecrementButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d3/d60/classCCIncrementDecrementButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d3/d60/classCCIncrementDecrementButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

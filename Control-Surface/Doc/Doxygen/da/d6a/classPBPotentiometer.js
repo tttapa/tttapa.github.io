@@ -1,11 +1,11 @@
 var classPBPotentiometer =
 [
-    [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga105a377c32b45e7f117a636597a0e1ca", null ],
-    [ "begin", "da/d6a/classPBPotentiometer.html#a1f687fc423ca089c93f7e43fdfcf0fee", null ],
-    [ "update", "da/d6a/classPBPotentiometer.html#ab1a0f9e5acac4550476df16a31036a10", null ],
-    [ "map", "da/d6a/classPBPotentiometer.html#a79bb7e2fa5066744e984bbdc36892ca8", null ],
-    [ "getRawValue", "da/d6a/classPBPotentiometer.html#aac29d6edbd07bc32e8288c5950c04228", null ],
-    [ "getValue", "da/d6a/classPBPotentiometer.html#a920214b7eadbced526a1457e847af415", null ],
+    [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga817835e613dc440529ce819217e15b3d", null ],
+    [ "begin", "da/d6a/classPBPotentiometer.html#a9b583128e30ece8bbd31f439b6a19ba4", null ],
+    [ "update", "da/d6a/classPBPotentiometer.html#a58bbace1afd66f636d2b176db8c7f464", null ],
+    [ "map", "da/d6a/classPBPotentiometer.html#a98f5a4931fb81e7ad8645ab6838ab0a0", null ],
+    [ "getRawValue", "da/d6a/classPBPotentiometer.html#a57a168b8153417bebfcc4719ae7bf6f3", null ],
+    [ "getValue", "da/d6a/classPBPotentiometer.html#aee1ccbeafed8d697b7bfd9809416e96c", null ],
     [ "enable", "da/d6a/classPBPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "da/d6a/classPBPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "da/d6a/classPBPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

@@ -1,9 +1,9 @@
 var classBankable_1_1MIDIButtonMatrix =
 [
-    [ "MIDIButtonMatrix", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a72536906cf46edff3a2dafb3246bf0aa", null ],
-    [ "begin", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
-    [ "update", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a6a779804092487b4a4a135559b45daf5", null ],
-    [ "onButtonChanged", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a290e5d1cd97fcf9d73c8706507a8f4b2", null ],
+    [ "MIDIButtonMatrix", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a04dcbea7e8724dbf3b63e42a4bcaa5fe", null ],
+    [ "begin", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a33ae7903c54ef607839040546d16f2e7", null ],
+    [ "update", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a2d8de9b7ddfda6b89ebedd96036c9cf5", null ],
+    [ "onButtonChanged", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#ac9985b7e695adca12f30b8a2cd16bf69", null ],
     [ "getAddressOffset", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -21,9 +21,10 @@ var classBankable_1_1MIDIButtonMatrix =
     [ "beginAll", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a8af924e5b3b708eb042919703d175ed3", null ],
     [ "refresh", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a1ba9c4b8860d3d9115a70f8d97f21cef", null ],
-    [ "addresses", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a0492548f393e8f24882d6718cbdfb065", null ],
-    [ "baseChannelCN", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a0fc35e64c388523b8e405260bd94361f", null ],
-    [ "activeButtons", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a8137282518fa08f8d80f259a17e62159", null ],
+    [ "addresses", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a6a9476145cc692b0700e29ca1452a93f", null ],
+    [ "baseChannelCN", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#af8b80329a38e465a26ac96401c535dd9", null ],
+    [ "activeButtons", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a45231b95d3496570d751278879e9d486", null ],
+    [ "sender", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a54f6e5d415285f921c11e756ef579d63", null ],
     [ "next", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d3/d65/classBankable_1_1MIDIButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

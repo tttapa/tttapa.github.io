@@ -1,8 +1,8 @@
 var classBankable_1_1MIDIButton =
 [
-    [ "MIDIButton", "d9/df9/classBankable_1_1MIDIButton.html#a8740e88462af06d4e8cf61f78be24378", null ],
-    [ "begin", "d9/df9/classBankable_1_1MIDIButton.html#a125820966ab551393b8b4df765cd6447", null ],
-    [ "update", "d9/df9/classBankable_1_1MIDIButton.html#adca6f4fa37b6061aacc171aaddd741af", null ],
+    [ "MIDIButton", "d9/df9/classBankable_1_1MIDIButton.html#ab4a01361161815f87bfa04dae7fa0a3a", null ],
+    [ "begin", "d9/df9/classBankable_1_1MIDIButton.html#a990ae3d3d7441d51458064580e738722", null ],
+    [ "update", "d9/df9/classBankable_1_1MIDIButton.html#a71353bf7f61b315806046ab3ce7ebc9b", null ],
     [ "getAddressOffset", "d9/df9/classBankable_1_1MIDIButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d9/df9/classBankable_1_1MIDIButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d9/df9/classBankable_1_1MIDIButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -19,8 +19,9 @@ var classBankable_1_1MIDIButton =
     [ "isEnabled", "d9/df9/classBankable_1_1MIDIButton.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "d9/df9/classBankable_1_1MIDIButton.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "d9/df9/classBankable_1_1MIDIButton.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "button", "d9/df9/classBankable_1_1MIDIButton.html#a3132582c0ee622fa5318a2ea7bb6a73a", null ],
-    [ "address", "d9/df9/classBankable_1_1MIDIButton.html#a94025b62edefec63efcdc4eb432bb079", null ],
+    [ "button", "d9/df9/classBankable_1_1MIDIButton.html#aea811793d33b4ffe181a99d8a8a17b2f", null ],
+    [ "address", "d9/df9/classBankable_1_1MIDIButton.html#a623faed4866de44b37f6260126c1b566", null ],
+    [ "sender", "d9/df9/classBankable_1_1MIDIButton.html#ad36cff1aa1fc601197e3853f6e56b43f", null ],
     [ "next", "d9/df9/classBankable_1_1MIDIButton.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d9/df9/classBankable_1_1MIDIButton.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

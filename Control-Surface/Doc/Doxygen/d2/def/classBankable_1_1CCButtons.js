@@ -1,8 +1,8 @@
 var classBankable_1_1CCButtons =
 [
-    [ "CCButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga59bd54a6d2d0f31b1d326c30187c258a", null ],
-    [ "begin", "d2/def/classBankable_1_1CCButtons.html#a0898f089b0bf29c6296550ba05fc53b3", null ],
-    [ "update", "d2/def/classBankable_1_1CCButtons.html#ad2d72afc7556c0d852669e7fbf9fe7e3", null ],
+    [ "CCButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga7ebb0006cae96605c70b56b99bca39b3", null ],
+    [ "begin", "d2/def/classBankable_1_1CCButtons.html#aa133f56fbbe5c528afce5eadb998e39c", null ],
+    [ "update", "d2/def/classBankable_1_1CCButtons.html#a36075a11017c0729e8d21aa45f2f9dcf", null ],
     [ "getAddressOffset", "d2/def/classBankable_1_1CCButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d2/def/classBankable_1_1CCButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d2/def/classBankable_1_1CCButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

@@ -1,8 +1,8 @@
 var classBankable_1_1MIDIButtonLatching =
 [
-    [ "MIDIButtonLatching", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#ac4a4255356e6a03481b2b4f0893d449e", null ],
-    [ "begin", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a1b550d81a44c65797651145102e39d70", null ],
-    [ "update", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a4ee20ec0f37d2f24009c9d89815310e5", null ],
+    [ "MIDIButtonLatching", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a616344ccaa73d24922a0a9b3a80bd672", null ],
+    [ "begin", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a18c6b56bb23f8b1fc5d5eea3be02264c", null ],
+    [ "update", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a5c2d89e69e4d800de47af9eb5f39d50f", null ],
     [ "enable", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -19,8 +19,9 @@ var classBankable_1_1MIDIButtonLatching =
     [ "getSelection", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
     [ "lock", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a9f34809178ed809a8ff203220bd1b206", null ],
     [ "unlock", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a4154c3302c845a9dc6a455600c4d0e2b", null ],
-    [ "button", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#aedf38b6c7c6e45fd6ed57e8d1caf1506", null ],
-    [ "address", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a49446abc516d4aef53a1701d734cae95", null ],
+    [ "button", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#acfc3bd78683e7dba33a34e5df3bf40f9", null ],
+    [ "address", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a38b6a2bdc10e9f0674e8552c06699220", null ],
+    [ "sender", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a8f884ed149b284f72816c5ecc1ba104f", null ],
     [ "next", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d3/d0b/classBankable_1_1MIDIButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

@@ -1,7 +1,7 @@
 var searchData=
 [
   ['increment',['increment',['../dd/dd6/classIncrementor.html#a5f9ac3154cda1e503cbbe5194a706a39',1,'Incrementor']]],
-  ['incrementaddress',['incrementAddress',['../d2/d87/classMIDIButtons.html#abd040788a921f9a07974505612107e0d',1,'MIDIButtons::incrementAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a84fad1969a8634ab747f86fca0e62c96',1,'Bankable::MIDIButtons::incrementAddress()']]],
+  ['incrementaddress',['incrementAddress',['../d2/d87/classMIDIButtons.html#a233def73722cfb67d27021135e5de1be',1,'MIDIButtons::incrementAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a7a08ac85758d9ca0b2a9c45ba8132c4c',1,'Bankable::MIDIButtons::incrementAddress()']]],
   ['incrementbutton',['incrementButton',['../d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3',1,'IncrementDecrementButtons']]],
   ['index',['index',['../d0/d89/classBluetoothMIDI__Interface.html#a014aa95f1daee067e4acc0bacc9739c0',1,'BluetoothMIDI_Interface']]],
   ['initialselection',['initialSelection',['../de/de7/classSelectable.html#a873f8a7df644bcde72cbc4f43a0b51fb',1,'Selectable']]],

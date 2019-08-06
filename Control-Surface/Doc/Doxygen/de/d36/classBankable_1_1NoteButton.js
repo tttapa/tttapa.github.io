@@ -1,8 +1,8 @@
 var classBankable_1_1NoteButton =
 [
-    [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga18afb0520a2a6e0fa012b9474c1a48b8", null ],
-    [ "begin", "de/d36/classBankable_1_1NoteButton.html#a125820966ab551393b8b4df765cd6447", null ],
-    [ "update", "de/d36/classBankable_1_1NoteButton.html#adca6f4fa37b6061aacc171aaddd741af", null ],
+    [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga813142aef59b4cb6be9c75e33df3dadc", null ],
+    [ "begin", "de/d36/classBankable_1_1NoteButton.html#a990ae3d3d7441d51458064580e738722", null ],
+    [ "update", "de/d36/classBankable_1_1NoteButton.html#a71353bf7f61b315806046ab3ce7ebc9b", null ],
     [ "getAddressOffset", "de/d36/classBankable_1_1NoteButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "de/d36/classBankable_1_1NoteButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "de/d36/classBankable_1_1NoteButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

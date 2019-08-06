@@ -1,11 +1,11 @@
 var classManyAddresses_1_1CCPotentiometer =
 [
-    [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gafb2a0204708a879948c9dbf5e5cb7097", null ],
-    [ "begin", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#aaedf2ad118dde65170552e52f818bdbc", null ],
-    [ "update", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a4af47cd073d44cd6107421c51866a5e3", null ],
-    [ "map", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a98a017591b30cb6d985ea4dbb7595ec4", null ],
-    [ "getRawValue", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a6f93dbf321730b28c7dc8cecfe1ee9bd", null ],
-    [ "getValue", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a339b4dea34b922c4d201078ceb350faf", null ],
+    [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga20a8a6e1f37e8359bfee3f4eaaada282", null ],
+    [ "begin", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#aaa2d0725b411ab25c08f59a416029aab", null ],
+    [ "update", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a06dce4a407416074464114f0998a7835", null ],
+    [ "map", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a756c22ec15f94de41b4db929ba7d8a4c", null ],
+    [ "getRawValue", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#aff2fefc33b3a1fdab13dab994c0f707c", null ],
+    [ "getValue", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a029468a69b3c4c32226481fc364e0198", null ],
     [ "enable", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

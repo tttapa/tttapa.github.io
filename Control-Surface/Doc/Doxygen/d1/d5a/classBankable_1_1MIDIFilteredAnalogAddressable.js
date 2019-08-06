@@ -1,11 +1,11 @@
 var classBankable_1_1MIDIFilteredAnalogAddressable =
 [
-    [ "MIDIFilteredAnalogAddressable", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a4e6092a27b2a672b8f9aab98dd53465f", null ],
-    [ "begin", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#ae85019a4e24c8ecb21651246f56c20ff", null ],
-    [ "update", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#acd9133ced9420d466ff2f9e7519d50f5", null ],
-    [ "map", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a2fbabc5ac3d1299b6a482de44bd02570", null ],
-    [ "getRawValue", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#aedbbe61253bf35fda3738a9c2eb7f452", null ],
-    [ "getValue", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a416ed313254927121db9c9a0895d354b", null ],
+    [ "MIDIFilteredAnalogAddressable", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#ae4f1866e57c332dbaa774a8de11e8355", null ],
+    [ "begin", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#ac70c7cdfc4057c4ded0c05f7bd5f801f", null ],
+    [ "update", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#abfde2474c75455ba3c135d95d5ed3aaf", null ],
+    [ "map", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#ac65877e6d00051f8287b7384701787a1", null ],
+    [ "getRawValue", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a813b25e43bb33471c7b9e4333710c4a5", null ],
+    [ "getValue", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#ab0fa7eb3e559b2c763e26694fd1389c1", null ],
     [ "enable", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -22,8 +22,9 @@ var classBankable_1_1MIDIFilteredAnalogAddressable =
     [ "getSelection", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
     [ "lock", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a9f34809178ed809a8ff203220bd1b206", null ],
     [ "unlock", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a4154c3302c845a9dc6a455600c4d0e2b", null ],
-    [ "filteredAnalog", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#abfca8e8cf5b6b1c4164375d3503e5d5e", null ],
-    [ "baseAddress", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a656050d5d5657013853098bfb3c816fb", null ],
+    [ "filteredAnalog", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a640ba79e1691ef1d4226db02193c87e9", null ],
+    [ "baseAddress", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a800beb8d4773d32c80b8e84807ea04da", null ],
+    [ "sender", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#ad52cec5c8223cfe50a2cc12f71e80742", null ],
     [ "next", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d1/d5a/classBankable_1_1MIDIFilteredAnalogAddressable.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

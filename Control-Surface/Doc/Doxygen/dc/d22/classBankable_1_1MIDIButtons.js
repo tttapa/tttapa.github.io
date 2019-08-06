@@ -1,8 +1,8 @@
 var classBankable_1_1MIDIButtons =
 [
-    [ "MIDIButtons", "dc/d22/classBankable_1_1MIDIButtons.html#a46b4e2b50567c8ecb9abe200c03bfcd6", null ],
-    [ "begin", "dc/d22/classBankable_1_1MIDIButtons.html#a0898f089b0bf29c6296550ba05fc53b3", null ],
-    [ "update", "dc/d22/classBankable_1_1MIDIButtons.html#ad2d72afc7556c0d852669e7fbf9fe7e3", null ],
+    [ "MIDIButtons", "dc/d22/classBankable_1_1MIDIButtons.html#ab921990be5d8da2bc3b7e274a278f46b", null ],
+    [ "begin", "dc/d22/classBankable_1_1MIDIButtons.html#aa133f56fbbe5c528afce5eadb998e39c", null ],
+    [ "update", "dc/d22/classBankable_1_1MIDIButtons.html#a36075a11017c0729e8d21aa45f2f9dcf", null ],
     [ "getAddressOffset", "dc/d22/classBankable_1_1MIDIButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "dc/d22/classBankable_1_1MIDIButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "dc/d22/classBankable_1_1MIDIButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -19,10 +19,11 @@ var classBankable_1_1MIDIButtons =
     [ "isEnabled", "dc/d22/classBankable_1_1MIDIButtons.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "dc/d22/classBankable_1_1MIDIButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "dc/d22/classBankable_1_1MIDIButtons.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "buttons", "dc/d22/classBankable_1_1MIDIButtons.html#ae77d60d8e91e33ceb80bbc4b73c84314", null ],
-    [ "baseAddress", "dc/d22/classBankable_1_1MIDIButtons.html#a328e24602541106644e51fb9b4679f15", null ],
-    [ "incrementAddress", "dc/d22/classBankable_1_1MIDIButtons.html#a84fad1969a8634ab747f86fca0e62c96", null ],
-    [ "activeButtons", "dc/d22/classBankable_1_1MIDIButtons.html#ae23e7812580c3099e0cb65b4e4dc640f", null ],
+    [ "buttons", "dc/d22/classBankable_1_1MIDIButtons.html#a2b1d11630b480bd3ca7131889feb6911", null ],
+    [ "baseAddress", "dc/d22/classBankable_1_1MIDIButtons.html#a11fe5fff308eecafc13a6b2bb965552f", null ],
+    [ "incrementAddress", "dc/d22/classBankable_1_1MIDIButtons.html#a7a08ac85758d9ca0b2a9c45ba8132c4c", null ],
+    [ "sender", "dc/d22/classBankable_1_1MIDIButtons.html#a1ab7c018abbb8c92432a22b9896acdac", null ],
+    [ "activeButtons", "dc/d22/classBankable_1_1MIDIButtons.html#a40bb88f912bc8b2ea9c68aaab2e9b248", null ],
     [ "next", "dc/d22/classBankable_1_1MIDIButtons.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "dc/d22/classBankable_1_1MIDIButtons.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

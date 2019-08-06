@@ -1,11 +1,11 @@
 var classBankable_1_1CCPotentiometer =
 [
-    [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga5c6a4f18f1b2d13f3d82cf365013b3d1", null ],
-    [ "begin", "d7/dc0/classBankable_1_1CCPotentiometer.html#ae85019a4e24c8ecb21651246f56c20ff", null ],
-    [ "update", "d7/dc0/classBankable_1_1CCPotentiometer.html#acd9133ced9420d466ff2f9e7519d50f5", null ],
-    [ "map", "d7/dc0/classBankable_1_1CCPotentiometer.html#a2fbabc5ac3d1299b6a482de44bd02570", null ],
-    [ "getRawValue", "d7/dc0/classBankable_1_1CCPotentiometer.html#aedbbe61253bf35fda3738a9c2eb7f452", null ],
-    [ "getValue", "d7/dc0/classBankable_1_1CCPotentiometer.html#a416ed313254927121db9c9a0895d354b", null ],
+    [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga9863074f0c1ea1842daee84a49f3a510", null ],
+    [ "begin", "d7/dc0/classBankable_1_1CCPotentiometer.html#ac70c7cdfc4057c4ded0c05f7bd5f801f", null ],
+    [ "update", "d7/dc0/classBankable_1_1CCPotentiometer.html#abfde2474c75455ba3c135d95d5ed3aaf", null ],
+    [ "map", "d7/dc0/classBankable_1_1CCPotentiometer.html#ac65877e6d00051f8287b7384701787a1", null ],
+    [ "getRawValue", "d7/dc0/classBankable_1_1CCPotentiometer.html#a813b25e43bb33471c7b9e4333710c4a5", null ],
+    [ "getValue", "d7/dc0/classBankable_1_1CCPotentiometer.html#ab0fa7eb3e559b2c763e26694fd1389c1", null ],
     [ "enable", "d7/dc0/classBankable_1_1CCPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d7/dc0/classBankable_1_1CCPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d7/dc0/classBankable_1_1CCPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

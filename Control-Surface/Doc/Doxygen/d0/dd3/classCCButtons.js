@@ -1,8 +1,8 @@
 var classCCButtons =
 [
-    [ "CCButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga5e8472fee2c0ef7d704bbbbddcd95465", null ],
-    [ "begin", "d0/dd3/classCCButtons.html#a0898f089b0bf29c6296550ba05fc53b3", null ],
-    [ "update", "d0/dd3/classCCButtons.html#ad2d72afc7556c0d852669e7fbf9fe7e3", null ],
+    [ "CCButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga1ce759ac477ba2b0b72aba409ace7c99", null ],
+    [ "begin", "d0/dd3/classCCButtons.html#aa133f56fbbe5c528afce5eadb998e39c", null ],
+    [ "update", "d0/dd3/classCCButtons.html#a36075a11017c0729e8d21aa45f2f9dcf", null ],
     [ "getAddressOffset", "d0/dd3/classCCButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d0/dd3/classCCButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d0/dd3/classCCButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

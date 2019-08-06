@@ -1,9 +1,9 @@
 var classMIDIChordButton =
 [
-    [ "MIDIChordButton", "dd/d29/classMIDIChordButton.html#a6155b1f89d91fbbd73d3a7f4b7a58a18", null ],
-    [ "begin", "dd/d29/classMIDIChordButton.html#a412fc03ced2084ce31d2c3f547a62fd8", null ],
-    [ "update", "dd/d29/classMIDIChordButton.html#af87dedb546f6334f395bedc178a925f1", null ],
-    [ "setChord", "dd/d29/classMIDIChordButton.html#adbcf265b805f01be8203112a261decc2", null ],
+    [ "MIDIChordButton", "dd/d29/classMIDIChordButton.html#a54dc0c295614dc73002281d5ff9a1ef4", null ],
+    [ "begin", "dd/d29/classMIDIChordButton.html#a8be036ba316354bf82112ae73040ac57", null ],
+    [ "update", "dd/d29/classMIDIChordButton.html#a1dab786cd92de03e00877e1a82e8fd5f", null ],
+    [ "setChord", "dd/d29/classMIDIChordButton.html#a749e90624f76102048faa1cb8c835e3b", null ],
     [ "enable", "dd/d29/classMIDIChordButton.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "dd/d29/classMIDIChordButton.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "dd/d29/classMIDIChordButton.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -15,10 +15,11 @@ var classMIDIChordButton =
     [ "isEnabled", "dd/d29/classMIDIChordButton.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "dd/d29/classMIDIChordButton.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "dd/d29/classMIDIChordButton.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "button", "dd/d29/classMIDIChordButton.html#afdfad29cea74d4cfd81023242be6eccc", null ],
-    [ "address", "dd/d29/classMIDIChordButton.html#a08de2a8b4d379845ead58de560c445ee", null ],
-    [ "chord", "dd/d29/classMIDIChordButton.html#a1d973108a0e0f3cefb63aaf40a5790e3", null ],
-    [ "newChord", "dd/d29/classMIDIChordButton.html#a5fb0091ad5ea75c014e971f69f44a2ff", null ],
+    [ "button", "dd/d29/classMIDIChordButton.html#a3a7ff4d4828679722693b2cbec15daf7", null ],
+    [ "address", "dd/d29/classMIDIChordButton.html#a8396f932f1684821b060aa5295e534cf", null ],
+    [ "chord", "dd/d29/classMIDIChordButton.html#acdde258e9d1b89daee054a8d5ff98d4f", null ],
+    [ "newChord", "dd/d29/classMIDIChordButton.html#ab7b99d57fe8cba2c9440e467971970c1", null ],
+    [ "sender", "dd/d29/classMIDIChordButton.html#a68ecb33da72a12e3f3cf33e13f7f3d33", null ],
     [ "next", "dd/d29/classMIDIChordButton.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "dd/d29/classMIDIChordButton.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

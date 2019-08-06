@@ -1,11 +1,11 @@
 var classBankable_1_1MIDIButtonLatched =
 [
-    [ "MIDIButtonLatched", "df/dca/classBankable_1_1MIDIButtonLatched.html#aa5c53043efecbab41701f2b14983a4c7", null ],
-    [ "begin", "df/dca/classBankable_1_1MIDIButtonLatched.html#ac100ef66e13d05bbeddb1691a6fd2ce0", null ],
-    [ "update", "df/dca/classBankable_1_1MIDIButtonLatched.html#a972bc7066b12eb065adf7405bba8b806", null ],
-    [ "toggleState", "df/dca/classBankable_1_1MIDIButtonLatched.html#a1b311122504657e75c797c93e0cbd0e3", null ],
-    [ "getState", "df/dca/classBankable_1_1MIDIButtonLatched.html#a78016f9587b3591ddeff9eec02d32f4b", null ],
-    [ "setState", "df/dca/classBankable_1_1MIDIButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835", null ],
+    [ "MIDIButtonLatched", "df/dca/classBankable_1_1MIDIButtonLatched.html#a02585581642c8562d95f9e325c28a51c", null ],
+    [ "begin", "df/dca/classBankable_1_1MIDIButtonLatched.html#a98f0891cbbe3deb94e76aaab6c126718", null ],
+    [ "update", "df/dca/classBankable_1_1MIDIButtonLatched.html#a8d533b707538276166747df9cbccf4a1", null ],
+    [ "toggleState", "df/dca/classBankable_1_1MIDIButtonLatched.html#a78de1a356f4836ed91f531bef6b7e301", null ],
+    [ "getState", "df/dca/classBankable_1_1MIDIButtonLatched.html#aa81859982800e212c45fa6ccac55faf2", null ],
+    [ "setState", "df/dca/classBankable_1_1MIDIButtonLatched.html#ad4838c3c651e499b3754750185c5d188", null ],
     [ "getAddressOffset", "df/dca/classBankable_1_1MIDIButtonLatched.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "df/dca/classBankable_1_1MIDIButtonLatched.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "df/dca/classBankable_1_1MIDIButtonLatched.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -22,9 +22,10 @@ var classBankable_1_1MIDIButtonLatched =
     [ "isEnabled", "df/dca/classBankable_1_1MIDIButtonLatched.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "df/dca/classBankable_1_1MIDIButtonLatched.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "df/dca/classBankable_1_1MIDIButtonLatched.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "button", "df/dca/classBankable_1_1MIDIButtonLatched.html#aa0065ddde33ce9e184a3794876213316", null ],
-    [ "address", "df/dca/classBankable_1_1MIDIButtonLatched.html#aed23f3f2aa510d90e21e3741ad8b9d88", null ],
-    [ "state", "df/dca/classBankable_1_1MIDIButtonLatched.html#ad5e74ea989833fb7430849e6ecf84ebc", null ],
+    [ "button", "df/dca/classBankable_1_1MIDIButtonLatched.html#a21f21456c6f8c12b4343c05cc1ccc993", null ],
+    [ "address", "df/dca/classBankable_1_1MIDIButtonLatched.html#a724afd6d1f03a95001d5d50b14130890", null ],
+    [ "state", "df/dca/classBankable_1_1MIDIButtonLatched.html#af4f9cf22ddfe6b82c902bc10b3f1fe86", null ],
+    [ "sender", "df/dca/classBankable_1_1MIDIButtonLatched.html#af8a96df3721d75f583786e49b85a7436", null ],
     [ "next", "df/dca/classBankable_1_1MIDIButtonLatched.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "df/dca/classBankable_1_1MIDIButtonLatched.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

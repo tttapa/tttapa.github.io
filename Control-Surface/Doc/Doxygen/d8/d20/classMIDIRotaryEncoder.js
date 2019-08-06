@@ -1,8 +1,8 @@
 var classMIDIRotaryEncoder =
 [
-    [ "MIDIRotaryEncoder", "d8/d20/classMIDIRotaryEncoder.html#a9a860311b04f6a040199afa41802b5b8", null ],
-    [ "begin", "d8/d20/classMIDIRotaryEncoder.html#ace9489f2ffd66a7352a4f67b57394ea2", null ],
-    [ "update", "d8/d20/classMIDIRotaryEncoder.html#aa0937f911bacc46090b1b39c1f1150f4", null ],
+    [ "MIDIRotaryEncoder", "d8/d20/classMIDIRotaryEncoder.html#aa694198baa284768867402eec74c54e1", null ],
+    [ "begin", "d8/d20/classMIDIRotaryEncoder.html#adee6b3435afe3ea4ffb45a8651cde4dd", null ],
+    [ "update", "d8/d20/classMIDIRotaryEncoder.html#a90564713163ad54c5afd8393f7de73c6", null ],
     [ "enable", "d8/d20/classMIDIRotaryEncoder.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d8/d20/classMIDIRotaryEncoder.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d8/d20/classMIDIRotaryEncoder.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -14,11 +14,12 @@ var classMIDIRotaryEncoder =
     [ "isEnabled", "d8/d20/classMIDIRotaryEncoder.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "d8/d20/classMIDIRotaryEncoder.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "d8/d20/classMIDIRotaryEncoder.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "encoder", "d8/d20/classMIDIRotaryEncoder.html#ab9c6c6d4ec4b5889d751afb5065c9548", null ],
-    [ "address", "d8/d20/classMIDIRotaryEncoder.html#a304d05c16cb01f4678eecffeac8df325", null ],
-    [ "speedMultiply", "d8/d20/classMIDIRotaryEncoder.html#a2330758ba9146eeea1ae6cbcb120c1ae", null ],
-    [ "pulsesPerStep", "d8/d20/classMIDIRotaryEncoder.html#a080ccb8ce0680885275054cf6ee9e917", null ],
-    [ "previousPosition", "d8/d20/classMIDIRotaryEncoder.html#ac1ed8c9dd39dfa4def6354ad2c251e7d", null ],
+    [ "encoder", "d8/d20/classMIDIRotaryEncoder.html#a3d3256d09de61d6b3c5ccbe56b32fcc9", null ],
+    [ "address", "d8/d20/classMIDIRotaryEncoder.html#a127a7477a1a5bf92c604bd8d40ac189a", null ],
+    [ "speedMultiply", "d8/d20/classMIDIRotaryEncoder.html#a58d0629b9df27f152e3c55e77c3e4cf6", null ],
+    [ "pulsesPerStep", "d8/d20/classMIDIRotaryEncoder.html#a34f82edac20e0af05cb480c461987224", null ],
+    [ "sender", "d8/d20/classMIDIRotaryEncoder.html#a06561a51b918487084f9819aa28ec289", null ],
+    [ "previousPosition", "d8/d20/classMIDIRotaryEncoder.html#a221a53647dc2c58e4df2118998c9861b", null ],
     [ "next", "d8/d20/classMIDIRotaryEncoder.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d8/d20/classMIDIRotaryEncoder.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

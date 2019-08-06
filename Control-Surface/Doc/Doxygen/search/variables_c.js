@@ -27,7 +27,7 @@ var searchData=
   ['modulation_5fwheel',['Modulation_Wheel',['../d4/dbe/namespaceMIDI__CC.html#a20dc249ff93148b640953595b6ca7c31',1,'MIDI_CC']]],
   ['modulation_5fwheel_5flsb',['Modulation_Wheel_LSB',['../d4/dbe/namespaceMIDI__CC.html#a97969b88d3b56cea29f6ae0d3a6a25fb',1,'MIDI_CC']]],
   ['mono_5fmode_5fon',['Mono_Mode_On',['../d4/dbe/namespaceMIDI__CC.html#a3fd3aa3eeda78ac93b6c253b4f6bfc89',1,'MIDI_CC']]],
-  ['multiplier',['multiplier',['../d3/d51/classSelectorDisplay.html#a86249bca64198a89fc7631ecbc71b43e',1,'SelectorDisplay::multiplier()'],['../dc/dc2/classMIDIIncrementDecrementButtons.html#ace4e0bbe5a27d91b941cef39f0f4cf36',1,'MIDIIncrementDecrementButtons::multiplier()'],['../d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ae9084dbf09ec7abe000e69637f555553',1,'Bankable::MIDIIncrementDecrementButtons::multiplier()']]],
+  ['multiplier',['multiplier',['../d3/d51/classSelectorDisplay.html#a86249bca64198a89fc7631ecbc71b43e',1,'SelectorDisplay::multiplier()'],['../dc/dc2/classMIDIIncrementDecrementButtons.html#ae56a20d5e4378d17f22356bce2f1f927',1,'MIDIIncrementDecrementButtons::multiplier()'],['../d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ae842046fd5114a3a257cfae74d53d6b1',1,'Bankable::MIDIIncrementDecrementButtons::multiplier()']]],
   ['mute_5f1',['MUTE_1',['../d7/dc7/namespaceMCU.html#ad037ada6c7ebd64eeec862a410184229',1,'MCU']]],
   ['mute_5f10b_5fbits',['mute_10B_bits',['../dd/d93/namespaceXBM.html#ae85c09a5b728bbe7a14f1617ee61ae7b',1,'XBM']]],
   ['mute_5f14b_5fbits',['mute_14B_bits',['../dd/d93/namespaceXBM.html#ac59973b685433259da1444364bac0257',1,'XBM']]],

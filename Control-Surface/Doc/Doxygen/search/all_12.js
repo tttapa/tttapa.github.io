@@ -27,7 +27,7 @@ var searchData=
   ['tmp_5foutput',['tmp_OUTPUT',['../dd/ddf/ExtendedInputOutput_8hpp.html#aedde090878c0ab4e055a58658f07266b',1,'ExtendedInputOutput.hpp']]],
   ['tobinaryoffset7bit',['toBinaryOffset7bit',['../d3/dd0/classRelativeCCSender.html#ac406ede5761aeb3a427816f3d477e87c',1,'RelativeCCSender']]],
   ['todo_20list',['Todo List',['../dd/da0/todo.html',1,'']]],
-  ['togglestate',['toggleState',['../d3/d88/classMIDIButtonLatched.html#a0d00b33017b5363b3e4e1899226c4b84',1,'MIDIButtonLatched::toggleState()'],['../df/dca/classBankable_1_1MIDIButtonLatched.html#a1b311122504657e75c797c93e0cbd0e3',1,'Bankable::MIDIButtonLatched::toggleState()']]],
+  ['togglestate',['toggleState',['../d3/d88/classMIDIButtonLatched.html#a719ba588173a33e866af0efd7019b66a',1,'MIDIButtonLatched::toggleState()'],['../df/dca/classBankable_1_1MIDIButtonLatched.html#a78de1a356f4836ed91f531bef6b7e301',1,'Bankable::MIDIButtonLatched::toggleState()']]],
   ['tosignedmagnitude7bit',['toSignedMagnitude7bit',['../d3/dd0/classRelativeCCSender.html#a38d4cea14065c527fc3b505a0a93d8fe',1,'RelativeCCSender']]],
   ['totwoscomplement7bit',['toTwosComplement7bit',['../d3/dd0/classRelativeCCSender.html#afa2d94bd34b48761f1103fe0b6dbecdf',1,'RelativeCCSender']]],
   ['tracksperbank',['tracksPerBank',['../d9/d36/classOutputBank.html#a2391244d107dc76c48a63c59181b82d9',1,'OutputBank']]],

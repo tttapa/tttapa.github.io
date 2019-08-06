@@ -1,8 +1,8 @@
 var classBankable_1_1CCRotaryEncoder =
 [
-    [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#ga75c3c0dd2734eb91b8d4dd1038df9b43", null ],
-    [ "begin", "da/d40/classBankable_1_1CCRotaryEncoder.html#aa13d45bfd55adbcc06acdd3e6946666f", null ],
-    [ "update", "da/d40/classBankable_1_1CCRotaryEncoder.html#abcb877f25341f8097a6f2a5d353a3dc2", null ],
+    [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#ga3b7a3f34253f487072457c9d090e254a", null ],
+    [ "begin", "da/d40/classBankable_1_1CCRotaryEncoder.html#abf576338b1479d0dea8bca9fe9c434c1", null ],
+    [ "update", "da/d40/classBankable_1_1CCRotaryEncoder.html#ab86590da32cc29e585da7b04bd6d1429", null ],
     [ "getAddressOffset", "da/d40/classBankable_1_1CCRotaryEncoder.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "da/d40/classBankable_1_1CCRotaryEncoder.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "da/d40/classBankable_1_1CCRotaryEncoder.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

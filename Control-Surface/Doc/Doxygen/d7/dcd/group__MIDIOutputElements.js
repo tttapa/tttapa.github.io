@@ -2,9 +2,9 @@ var group__MIDIOutputElements =
 [
     [ "MIDI Output Element Constructors", "d5/df9/group__MIDIOutputElementConstructors.html", "d5/df9/group__MIDIOutputElementConstructors" ],
     [ "CCButton", "d1/dd4/classBankable_1_1CCButton.html", [
-      [ "CCButton", "d5/df9/group__MIDIOutputElementConstructors.html#gac601fb489674f7f027a1276b9b161bf8", null ],
-      [ "begin", "d1/dd4/classBankable_1_1CCButton.html#a125820966ab551393b8b4df765cd6447", null ],
-      [ "update", "d1/dd4/classBankable_1_1CCButton.html#adca6f4fa37b6061aacc171aaddd741af", null ],
+      [ "CCButton", "d5/df9/group__MIDIOutputElementConstructors.html#gaa8b7a84edf4c9e771d1456eb2bbcef22", null ],
+      [ "begin", "d1/dd4/classBankable_1_1CCButton.html#a990ae3d3d7441d51458064580e738722", null ],
+      [ "update", "d1/dd4/classBankable_1_1CCButton.html#a71353bf7f61b315806046ab3ce7ebc9b", null ],
       [ "getAddressOffset", "d1/dd4/classBankable_1_1CCButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d1/dd4/classBankable_1_1CCButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d1/dd4/classBankable_1_1CCButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -25,12 +25,12 @@ var group__MIDIOutputElements =
       [ "previous", "d1/dd4/classBankable_1_1CCButton.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtonLatched", "d9/d1d/classBankable_1_1CCButtonLatched.html", [
-      [ "CCButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#ga3704393cd206dca32969c42af28d79a7", null ],
-      [ "begin", "d9/d1d/classBankable_1_1CCButtonLatched.html#ac100ef66e13d05bbeddb1691a6fd2ce0", null ],
-      [ "update", "d9/d1d/classBankable_1_1CCButtonLatched.html#a972bc7066b12eb065adf7405bba8b806", null ],
-      [ "toggleState", "d9/d1d/classBankable_1_1CCButtonLatched.html#a1b311122504657e75c797c93e0cbd0e3", null ],
-      [ "getState", "d9/d1d/classBankable_1_1CCButtonLatched.html#a78016f9587b3591ddeff9eec02d32f4b", null ],
-      [ "setState", "d9/d1d/classBankable_1_1CCButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835", null ],
+      [ "CCButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#gab7a0038e67551b86e569aa58dee5624c", null ],
+      [ "begin", "d9/d1d/classBankable_1_1CCButtonLatched.html#a98f0891cbbe3deb94e76aaab6c126718", null ],
+      [ "update", "d9/d1d/classBankable_1_1CCButtonLatched.html#a8d533b707538276166747df9cbccf4a1", null ],
+      [ "toggleState", "d9/d1d/classBankable_1_1CCButtonLatched.html#a78de1a356f4836ed91f531bef6b7e301", null ],
+      [ "getState", "d9/d1d/classBankable_1_1CCButtonLatched.html#aa81859982800e212c45fa6ccac55faf2", null ],
+      [ "setState", "d9/d1d/classBankable_1_1CCButtonLatched.html#ad4838c3c651e499b3754750185c5d188", null ],
       [ "getAddressOffset", "d9/d1d/classBankable_1_1CCButtonLatched.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d9/d1d/classBankable_1_1CCButtonLatched.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d9/d1d/classBankable_1_1CCButtonLatched.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -51,9 +51,9 @@ var group__MIDIOutputElements =
       [ "previous", "d9/d1d/classBankable_1_1CCButtonLatched.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtonLatching", "d9/df9/classBankable_1_1CCButtonLatching.html", [
-      [ "CCButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga463f2149d8ef74e8fb5d0a8994332d0e", null ],
-      [ "begin", "d9/df9/classBankable_1_1CCButtonLatching.html#a1b550d81a44c65797651145102e39d70", null ],
-      [ "update", "d9/df9/classBankable_1_1CCButtonLatching.html#a4ee20ec0f37d2f24009c9d89815310e5", null ],
+      [ "CCButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga1f10e22f7e2cbaab4f6da274bdcedc1b", null ],
+      [ "begin", "d9/df9/classBankable_1_1CCButtonLatching.html#a18c6b56bb23f8b1fc5d5eea3be02264c", null ],
+      [ "update", "d9/df9/classBankable_1_1CCButtonLatching.html#a5c2d89e69e4d800de47af9eb5f39d50f", null ],
       [ "enable", "d9/df9/classBankable_1_1CCButtonLatching.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d9/df9/classBankable_1_1CCButtonLatching.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d9/df9/classBankable_1_1CCButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -74,9 +74,9 @@ var group__MIDIOutputElements =
       [ "previous", "d9/df9/classBankable_1_1CCButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtonMatrix", "db/d2b/classBankable_1_1CCButtonMatrix.html", [
-      [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga738e57488f03a423d3ac19e4246e949a", null ],
-      [ "begin", "db/d2b/classBankable_1_1CCButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
-      [ "update", "db/d2b/classBankable_1_1CCButtonMatrix.html#a6a779804092487b4a4a135559b45daf5", null ],
+      [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#gadaee9321972d081443806814e37bfb54", null ],
+      [ "begin", "db/d2b/classBankable_1_1CCButtonMatrix.html#a33ae7903c54ef607839040546d16f2e7", null ],
+      [ "update", "db/d2b/classBankable_1_1CCButtonMatrix.html#a2d8de9b7ddfda6b89ebedd96036c9cf5", null ],
       [ "getAddressOffset", "db/d2b/classBankable_1_1CCButtonMatrix.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "db/d2b/classBankable_1_1CCButtonMatrix.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "db/d2b/classBankable_1_1CCButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -98,9 +98,9 @@ var group__MIDIOutputElements =
       [ "previous", "db/d2b/classBankable_1_1CCButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtons", "d2/def/classBankable_1_1CCButtons.html", [
-      [ "CCButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga59bd54a6d2d0f31b1d326c30187c258a", null ],
-      [ "begin", "d2/def/classBankable_1_1CCButtons.html#a0898f089b0bf29c6296550ba05fc53b3", null ],
-      [ "update", "d2/def/classBankable_1_1CCButtons.html#ad2d72afc7556c0d852669e7fbf9fe7e3", null ],
+      [ "CCButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga7ebb0006cae96605c70b56b99bca39b3", null ],
+      [ "begin", "d2/def/classBankable_1_1CCButtons.html#aa133f56fbbe5c528afce5eadb998e39c", null ],
+      [ "update", "d2/def/classBankable_1_1CCButtons.html#a36075a11017c0729e8d21aa45f2f9dcf", null ],
       [ "getAddressOffset", "d2/def/classBankable_1_1CCButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d2/def/classBankable_1_1CCButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d2/def/classBankable_1_1CCButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -121,10 +121,11 @@ var group__MIDIOutputElements =
       [ "previous", "d2/def/classBankable_1_1CCButtons.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCIncrementDecrementButtons", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html", [
-      [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga1e06a6afc8420c3bd2a23b498265a21c", null ],
-      [ "begin", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#ad96a50ea1490e5d061d57a6d208deaf7", null ],
-      [ "update", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a372b8a0173315cad364f906ff7587dc1", null ],
-      [ "reset", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#ab8367a2ad36d7a4530277e3d709ad16f", null ],
+      [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#gad7ecf81b4f0514941d189f780f74e4bb", null ],
+      [ "begin", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a4990154c64d7be64c83d8e74ba2546cb", null ],
+      [ "update", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#afb859b92b315cd74bd4cf008840cccd2", null ],
+      [ "send", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a8e99d3157f2ad3ce718898cf0b69d023", null ],
+      [ "reset", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a6f48ad9c63a4d1ffa875e298d3b31249", null ],
       [ "getAddressOffset", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -145,12 +146,12 @@ var group__MIDIOutputElements =
       [ "previous", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCPotentiometer", "d7/dc0/classBankable_1_1CCPotentiometer.html", [
-      [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga5c6a4f18f1b2d13f3d82cf365013b3d1", null ],
-      [ "begin", "d7/dc0/classBankable_1_1CCPotentiometer.html#ae85019a4e24c8ecb21651246f56c20ff", null ],
-      [ "update", "d7/dc0/classBankable_1_1CCPotentiometer.html#acd9133ced9420d466ff2f9e7519d50f5", null ],
-      [ "map", "d7/dc0/classBankable_1_1CCPotentiometer.html#a2fbabc5ac3d1299b6a482de44bd02570", null ],
-      [ "getRawValue", "d7/dc0/classBankable_1_1CCPotentiometer.html#aedbbe61253bf35fda3738a9c2eb7f452", null ],
-      [ "getValue", "d7/dc0/classBankable_1_1CCPotentiometer.html#a416ed313254927121db9c9a0895d354b", null ],
+      [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga9863074f0c1ea1842daee84a49f3a510", null ],
+      [ "begin", "d7/dc0/classBankable_1_1CCPotentiometer.html#ac70c7cdfc4057c4ded0c05f7bd5f801f", null ],
+      [ "update", "d7/dc0/classBankable_1_1CCPotentiometer.html#abfde2474c75455ba3c135d95d5ed3aaf", null ],
+      [ "map", "d7/dc0/classBankable_1_1CCPotentiometer.html#ac65877e6d00051f8287b7384701787a1", null ],
+      [ "getRawValue", "d7/dc0/classBankable_1_1CCPotentiometer.html#a813b25e43bb33471c7b9e4333710c4a5", null ],
+      [ "getValue", "d7/dc0/classBankable_1_1CCPotentiometer.html#ab0fa7eb3e559b2c763e26694fd1389c1", null ],
       [ "enable", "d7/dc0/classBankable_1_1CCPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d7/dc0/classBankable_1_1CCPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d7/dc0/classBankable_1_1CCPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -171,9 +172,9 @@ var group__MIDIOutputElements =
       [ "previous", "d7/dc0/classBankable_1_1CCPotentiometer.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCRotaryEncoder", "da/d40/classBankable_1_1CCRotaryEncoder.html", [
-      [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#ga75c3c0dd2734eb91b8d4dd1038df9b43", null ],
-      [ "begin", "da/d40/classBankable_1_1CCRotaryEncoder.html#aa13d45bfd55adbcc06acdd3e6946666f", null ],
-      [ "update", "da/d40/classBankable_1_1CCRotaryEncoder.html#abcb877f25341f8097a6f2a5d353a3dc2", null ],
+      [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#ga3b7a3f34253f487072457c9d090e254a", null ],
+      [ "begin", "da/d40/classBankable_1_1CCRotaryEncoder.html#abf576338b1479d0dea8bca9fe9c434c1", null ],
+      [ "update", "da/d40/classBankable_1_1CCRotaryEncoder.html#ab86590da32cc29e585da7b04bd6d1429", null ],
       [ "getAddressOffset", "da/d40/classBankable_1_1CCRotaryEncoder.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "da/d40/classBankable_1_1CCRotaryEncoder.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "da/d40/classBankable_1_1CCRotaryEncoder.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -194,9 +195,9 @@ var group__MIDIOutputElements =
       [ "previous", "da/d40/classBankable_1_1CCRotaryEncoder.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButton", "de/d36/classBankable_1_1NoteButton.html", [
-      [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga18afb0520a2a6e0fa012b9474c1a48b8", null ],
-      [ "begin", "de/d36/classBankable_1_1NoteButton.html#a125820966ab551393b8b4df765cd6447", null ],
-      [ "update", "de/d36/classBankable_1_1NoteButton.html#adca6f4fa37b6061aacc171aaddd741af", null ],
+      [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga813142aef59b4cb6be9c75e33df3dadc", null ],
+      [ "begin", "de/d36/classBankable_1_1NoteButton.html#a990ae3d3d7441d51458064580e738722", null ],
+      [ "update", "de/d36/classBankable_1_1NoteButton.html#a71353bf7f61b315806046ab3ce7ebc9b", null ],
       [ "getAddressOffset", "de/d36/classBankable_1_1NoteButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "de/d36/classBankable_1_1NoteButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "de/d36/classBankable_1_1NoteButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -217,12 +218,12 @@ var group__MIDIOutputElements =
       [ "previous", "de/d36/classBankable_1_1NoteButton.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtonLatched", "d2/dbf/classBankable_1_1NoteButtonLatched.html", [
-      [ "NoteButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#ga647a185dea0bf18940d53a0d5846fd45", null ],
-      [ "begin", "d2/dbf/classBankable_1_1NoteButtonLatched.html#ac100ef66e13d05bbeddb1691a6fd2ce0", null ],
-      [ "update", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a972bc7066b12eb065adf7405bba8b806", null ],
-      [ "toggleState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a1b311122504657e75c797c93e0cbd0e3", null ],
-      [ "getState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a78016f9587b3591ddeff9eec02d32f4b", null ],
-      [ "setState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835", null ],
+      [ "NoteButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#gaebeb22e255735a811bdbee91df794c7e", null ],
+      [ "begin", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a98f0891cbbe3deb94e76aaab6c126718", null ],
+      [ "update", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a8d533b707538276166747df9cbccf4a1", null ],
+      [ "toggleState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a78de1a356f4836ed91f531bef6b7e301", null ],
+      [ "getState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#aa81859982800e212c45fa6ccac55faf2", null ],
+      [ "setState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#ad4838c3c651e499b3754750185c5d188", null ],
       [ "getAddressOffset", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d2/dbf/classBankable_1_1NoteButtonLatched.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -243,9 +244,9 @@ var group__MIDIOutputElements =
       [ "previous", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtonLatching", "d9/d3f/classBankable_1_1NoteButtonLatching.html", [
-      [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga8dc98ebbfbfef00af8bf09a7140dc7d0", null ],
-      [ "begin", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a1b550d81a44c65797651145102e39d70", null ],
-      [ "update", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a4ee20ec0f37d2f24009c9d89815310e5", null ],
+      [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#gabb553e3b7aa96c3c9bf2dbcb43cfda32", null ],
+      [ "begin", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a18c6b56bb23f8b1fc5d5eea3be02264c", null ],
+      [ "update", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a5c2d89e69e4d800de47af9eb5f39d50f", null ],
       [ "enable", "d9/d3f/classBankable_1_1NoteButtonLatching.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -266,9 +267,9 @@ var group__MIDIOutputElements =
       [ "previous", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtonMatrix", "d2/d2b/classBankable_1_1NoteButtonMatrix.html", [
-      [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga93c14c6de83db24a63d451cff175c8a2", null ],
-      [ "begin", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
-      [ "update", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a6a779804092487b4a4a135559b45daf5", null ],
+      [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga7ee7d1011685c93a3eaf0804963cb285", null ],
+      [ "begin", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a33ae7903c54ef607839040546d16f2e7", null ],
+      [ "update", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a2d8de9b7ddfda6b89ebedd96036c9cf5", null ],
       [ "getAddressOffset", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -290,9 +291,9 @@ var group__MIDIOutputElements =
       [ "previous", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtons", "d6/d5b/classBankable_1_1NoteButtons.html", [
-      [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#gab8e2c7323d83241e1ac25e9e0b4fce23", null ],
-      [ "begin", "d6/d5b/classBankable_1_1NoteButtons.html#a0898f089b0bf29c6296550ba05fc53b3", null ],
-      [ "update", "d6/d5b/classBankable_1_1NoteButtons.html#ad2d72afc7556c0d852669e7fbf9fe7e3", null ],
+      [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga62c2da3b0e21191a1a1933a087305e98", null ],
+      [ "begin", "d6/d5b/classBankable_1_1NoteButtons.html#aa133f56fbbe5c528afce5eadb998e39c", null ],
+      [ "update", "d6/d5b/classBankable_1_1NoteButtons.html#a36075a11017c0729e8d21aa45f2f9dcf", null ],
       [ "getAddressOffset", "d6/d5b/classBankable_1_1NoteButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d6/d5b/classBankable_1_1NoteButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d6/d5b/classBankable_1_1NoteButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -313,10 +314,10 @@ var group__MIDIOutputElements =
       [ "previous", "d6/d5b/classBankable_1_1NoteButtons.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteChordButton", "d8/d9d/classBankable_1_1NoteChordButton.html", [
-      [ "NoteChordButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga0c20ae8bbade548c518a0cae020609e8", null ],
-      [ "begin", "d8/d9d/classBankable_1_1NoteChordButton.html#ab2a657d6fc4b190e0c44197af9d3876b", null ],
-      [ "update", "d8/d9d/classBankable_1_1NoteChordButton.html#aad3b22954e8635cef722bf4b8f805645", null ],
-      [ "setChord", "d8/d9d/classBankable_1_1NoteChordButton.html#ae3d27e83c8c6e521dc44c4a7abeb9d28", null ],
+      [ "NoteChordButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga65f205840bcca6ae626f469b214fcf4f", null ],
+      [ "begin", "d8/d9d/classBankable_1_1NoteChordButton.html#a9a1546b7f12ad9f3de2362dd9453b139", null ],
+      [ "update", "d8/d9d/classBankable_1_1NoteChordButton.html#a37b918b72f21b551c3302a62d6f076d0", null ],
+      [ "setChord", "d8/d9d/classBankable_1_1NoteChordButton.html#a43c01cd1457461dfc9c892c02dee8a64", null ],
       [ "getAddressOffset", "d8/d9d/classBankable_1_1NoteChordButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d8/d9d/classBankable_1_1NoteChordButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d8/d9d/classBankable_1_1NoteChordButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -337,12 +338,12 @@ var group__MIDIOutputElements =
       [ "previous", "d8/d9d/classBankable_1_1NoteChordButton.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "PBPotentiometer", "de/d8c/classBankable_1_1PBPotentiometer.html", [
-      [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gacbbac40867807872e222789e2b29b0b3", null ],
-      [ "begin", "de/d8c/classBankable_1_1PBPotentiometer.html#a1f687fc423ca089c93f7e43fdfcf0fee", null ],
-      [ "update", "de/d8c/classBankable_1_1PBPotentiometer.html#ab1a0f9e5acac4550476df16a31036a10", null ],
-      [ "map", "de/d8c/classBankable_1_1PBPotentiometer.html#a79bb7e2fa5066744e984bbdc36892ca8", null ],
-      [ "getRawValue", "de/d8c/classBankable_1_1PBPotentiometer.html#aac29d6edbd07bc32e8288c5950c04228", null ],
-      [ "getValue", "de/d8c/classBankable_1_1PBPotentiometer.html#a920214b7eadbced526a1457e847af415", null ],
+      [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gaa4a7f0ff8b59ca2963afd405dbce569f", null ],
+      [ "begin", "de/d8c/classBankable_1_1PBPotentiometer.html#a9b583128e30ece8bbd31f439b6a19ba4", null ],
+      [ "update", "de/d8c/classBankable_1_1PBPotentiometer.html#a58bbace1afd66f636d2b176db8c7f464", null ],
+      [ "map", "de/d8c/classBankable_1_1PBPotentiometer.html#a98f5a4931fb81e7ad8645ab6838ab0a0", null ],
+      [ "getRawValue", "de/d8c/classBankable_1_1PBPotentiometer.html#a57a168b8153417bebfcc4719ae7bf6f3", null ],
+      [ "getValue", "de/d8c/classBankable_1_1PBPotentiometer.html#aee1ccbeafed8d697b7bfd9809416e96c", null ],
       [ "enable", "de/d8c/classBankable_1_1PBPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "de/d8c/classBankable_1_1PBPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "de/d8c/classBankable_1_1PBPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -363,9 +364,9 @@ var group__MIDIOutputElements =
       [ "previous", "de/d8c/classBankable_1_1PBPotentiometer.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButton", "d2/daa/classCCButton.html", [
-      [ "CCButton", "d5/df9/group__MIDIOutputElementConstructors.html#gacb6bc6a729fef4046ea899b8ef7f480c", null ],
-      [ "begin", "d2/daa/classCCButton.html#a125820966ab551393b8b4df765cd6447", null ],
-      [ "update", "d2/daa/classCCButton.html#adca6f4fa37b6061aacc171aaddd741af", null ],
+      [ "CCButton", "d5/df9/group__MIDIOutputElementConstructors.html#gaa3ac31c576a07d4407626ca47227106b", null ],
+      [ "begin", "d2/daa/classCCButton.html#a990ae3d3d7441d51458064580e738722", null ],
+      [ "update", "d2/daa/classCCButton.html#a71353bf7f61b315806046ab3ce7ebc9b", null ],
       [ "getAddressOffset", "d2/daa/classCCButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d2/daa/classCCButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d2/daa/classCCButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -386,12 +387,12 @@ var group__MIDIOutputElements =
       [ "previous", "d2/daa/classCCButton.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtonLatched", "d5/da6/classCCButtonLatched.html", [
-      [ "CCButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#gaa259726dce4cf70144c468cb83023f7a", null ],
-      [ "begin", "d5/da6/classCCButtonLatched.html#ac12d94686b713f745b22c0343f8d1349", null ],
-      [ "update", "d5/da6/classCCButtonLatched.html#a4776b093f3fb05ee9ec5d2e7543958ff", null ],
-      [ "toggleState", "d5/da6/classCCButtonLatched.html#a0d00b33017b5363b3e4e1899226c4b84", null ],
-      [ "getState", "d5/da6/classCCButtonLatched.html#a8acd3f0f62aa9ef48e65350920510849", null ],
-      [ "setState", "d5/da6/classCCButtonLatched.html#a9dbbd5afbce8ae323c3a628fbf730549", null ],
+      [ "CCButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#ga3508a138278441ca6aa4b9c23de20d5b", null ],
+      [ "begin", "d5/da6/classCCButtonLatched.html#ad3a30fdfe4a521edb8a144456bf3166d", null ],
+      [ "update", "d5/da6/classCCButtonLatched.html#a30aa22dd2256830b3db9950aba9d3cab", null ],
+      [ "toggleState", "d5/da6/classCCButtonLatched.html#a719ba588173a33e866af0efd7019b66a", null ],
+      [ "getState", "d5/da6/classCCButtonLatched.html#af1677221077374f7a5b285cd2c9de884", null ],
+      [ "setState", "d5/da6/classCCButtonLatched.html#a6992cf4efaef88884f6a8cf0b39f821f", null ],
       [ "enable", "d5/da6/classCCButtonLatched.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d5/da6/classCCButtonLatched.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d5/da6/classCCButtonLatched.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -407,9 +408,9 @@ var group__MIDIOutputElements =
       [ "previous", "d5/da6/classCCButtonLatched.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtonLatching", "d8/db0/classCCButtonLatching.html", [
-      [ "CCButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga6504e3fa38d762a7321ef52be08a962f", null ],
-      [ "begin", "d8/db0/classCCButtonLatching.html#a2008b6b51e779d44e87129e43f5ccc3c", null ],
-      [ "update", "d8/db0/classCCButtonLatching.html#aefb3b2f7cfb598d2cd68a622c94ea772", null ],
+      [ "CCButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga5e7c95c478f7c809dcd53a6a40d32377", null ],
+      [ "begin", "d8/db0/classCCButtonLatching.html#a7013079fe5acbea4a3cf25bd5bdefdb3", null ],
+      [ "update", "d8/db0/classCCButtonLatching.html#ae18cb71efe09ebeab1cac9ed84e770b0", null ],
       [ "enable", "d8/db0/classCCButtonLatching.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d8/db0/classCCButtonLatching.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d8/db0/classCCButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -425,9 +426,9 @@ var group__MIDIOutputElements =
       [ "previous", "d8/db0/classCCButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtonMatrix", "d3/d2a/classCCButtonMatrix.html", [
-      [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga68ef3378306671229f294e53fb5fff11", null ],
-      [ "begin", "d3/d2a/classCCButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
-      [ "update", "d3/d2a/classCCButtonMatrix.html#a6a779804092487b4a4a135559b45daf5", null ],
+      [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga16509f776ba7efabfaa3ee2d12d52925", null ],
+      [ "begin", "d3/d2a/classCCButtonMatrix.html#a33ae7903c54ef607839040546d16f2e7", null ],
+      [ "update", "d3/d2a/classCCButtonMatrix.html#a2d8de9b7ddfda6b89ebedd96036c9cf5", null ],
       [ "getAddressOffset", "d3/d2a/classCCButtonMatrix.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d3/d2a/classCCButtonMatrix.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d3/d2a/classCCButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -449,9 +450,9 @@ var group__MIDIOutputElements =
       [ "previous", "d3/d2a/classCCButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCButtons", "d0/dd3/classCCButtons.html", [
-      [ "CCButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga5e8472fee2c0ef7d704bbbbddcd95465", null ],
-      [ "begin", "d0/dd3/classCCButtons.html#a0898f089b0bf29c6296550ba05fc53b3", null ],
-      [ "update", "d0/dd3/classCCButtons.html#ad2d72afc7556c0d852669e7fbf9fe7e3", null ],
+      [ "CCButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga1ce759ac477ba2b0b72aba409ace7c99", null ],
+      [ "begin", "d0/dd3/classCCButtons.html#aa133f56fbbe5c528afce5eadb998e39c", null ],
+      [ "update", "d0/dd3/classCCButtons.html#a36075a11017c0729e8d21aa45f2f9dcf", null ],
       [ "getAddressOffset", "d0/dd3/classCCButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d0/dd3/classCCButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d0/dd3/classCCButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -472,10 +473,11 @@ var group__MIDIOutputElements =
       [ "previous", "d0/dd3/classCCButtons.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCIncrementDecrementButtons", "d3/d60/classCCIncrementDecrementButtons.html", [
-      [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#gaac377d1594c4bfa72f38e166a77c6607", null ],
-      [ "begin", "d3/d60/classCCIncrementDecrementButtons.html#ad96a50ea1490e5d061d57a6d208deaf7", null ],
-      [ "update", "d3/d60/classCCIncrementDecrementButtons.html#a372b8a0173315cad364f906ff7587dc1", null ],
-      [ "reset", "d3/d60/classCCIncrementDecrementButtons.html#ab8367a2ad36d7a4530277e3d709ad16f", null ],
+      [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#gaec3c4660adfe0fc2712809c56680b381", null ],
+      [ "begin", "d3/d60/classCCIncrementDecrementButtons.html#a4990154c64d7be64c83d8e74ba2546cb", null ],
+      [ "update", "d3/d60/classCCIncrementDecrementButtons.html#afb859b92b315cd74bd4cf008840cccd2", null ],
+      [ "send", "d3/d60/classCCIncrementDecrementButtons.html#a8e99d3157f2ad3ce718898cf0b69d023", null ],
+      [ "reset", "d3/d60/classCCIncrementDecrementButtons.html#a6f48ad9c63a4d1ffa875e298d3b31249", null ],
       [ "getAddressOffset", "d3/d60/classCCIncrementDecrementButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d3/d60/classCCIncrementDecrementButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d3/d60/classCCIncrementDecrementButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -496,12 +498,12 @@ var group__MIDIOutputElements =
       [ "previous", "d3/d60/classCCIncrementDecrementButtons.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCPotentiometer", "db/d32/classCCPotentiometer.html", [
-      [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga7dec56405ad50a0834b4e3f4ed5ed1fa", null ],
-      [ "begin", "db/d32/classCCPotentiometer.html#a377e5bfccb2304c4e0d6061b1b922a91", null ],
-      [ "update", "db/d32/classCCPotentiometer.html#af58ae91fee46147b80d04c31f753b3fa", null ],
-      [ "map", "db/d32/classCCPotentiometer.html#a5ec0fe30129b23392a6c44e75cb34ebc", null ],
-      [ "getRawValue", "db/d32/classCCPotentiometer.html#a40846d2646805c2e194d07ad45eed949", null ],
-      [ "getValue", "db/d32/classCCPotentiometer.html#a96bda4da347290269fa08fd6b686ba7b", null ],
+      [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gacf0d748aa8553b031a5d641e34c73414", null ],
+      [ "begin", "db/d32/classCCPotentiometer.html#aa091559490a8fa86a5adf29ca385142b", null ],
+      [ "update", "db/d32/classCCPotentiometer.html#a4d5a7b53049ddd50e21ae7ba19c62a39", null ],
+      [ "map", "db/d32/classCCPotentiometer.html#a282d93ced7a7917ec4073f70b6061d08", null ],
+      [ "getRawValue", "db/d32/classCCPotentiometer.html#a3d92b3194921ab1b5adbfb105044ade6", null ],
+      [ "getValue", "db/d32/classCCPotentiometer.html#a39ea8ef70ce0dc049711cafa2b138268", null ],
       [ "enable", "db/d32/classCCPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "db/d32/classCCPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "db/d32/classCCPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -517,9 +519,9 @@ var group__MIDIOutputElements =
       [ "previous", "db/d32/classCCPotentiometer.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCRotaryEncoder", "d3/d62/classCCRotaryEncoder.html", [
-      [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#gae72cec73d19c10369bc81410bae4a265", null ],
-      [ "begin", "d3/d62/classCCRotaryEncoder.html#ace9489f2ffd66a7352a4f67b57394ea2", null ],
-      [ "update", "d3/d62/classCCRotaryEncoder.html#aa0937f911bacc46090b1b39c1f1150f4", null ],
+      [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#ga149c3dfc86ee4909d2b7b59519564212", null ],
+      [ "begin", "d3/d62/classCCRotaryEncoder.html#adee6b3435afe3ea4ffb45a8651cde4dd", null ],
+      [ "update", "d3/d62/classCCRotaryEncoder.html#a90564713163ad54c5afd8393f7de73c6", null ],
       [ "enable", "d3/d62/classCCRotaryEncoder.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d3/d62/classCCRotaryEncoder.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d3/d62/classCCRotaryEncoder.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -535,12 +537,12 @@ var group__MIDIOutputElements =
       [ "previous", "d3/d62/classCCRotaryEncoder.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "CCPotentiometer", "d7/df2/classManyAddresses_1_1CCPotentiometer.html", [
-      [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gafb2a0204708a879948c9dbf5e5cb7097", null ],
-      [ "begin", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#aaedf2ad118dde65170552e52f818bdbc", null ],
-      [ "update", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a4af47cd073d44cd6107421c51866a5e3", null ],
-      [ "map", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a98a017591b30cb6d985ea4dbb7595ec4", null ],
-      [ "getRawValue", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a6f93dbf321730b28c7dc8cecfe1ee9bd", null ],
-      [ "getValue", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a339b4dea34b922c4d201078ceb350faf", null ],
+      [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga20a8a6e1f37e8359bfee3f4eaaada282", null ],
+      [ "begin", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#aaa2d0725b411ab25c08f59a416029aab", null ],
+      [ "update", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a06dce4a407416074464114f0998a7835", null ],
+      [ "map", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a756c22ec15f94de41b4db929ba7d8a4c", null ],
+      [ "getRawValue", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#aff2fefc33b3a1fdab13dab994c0f707c", null ],
+      [ "getValue", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a029468a69b3c4c32226481fc364e0198", null ],
       [ "enable", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -560,9 +562,9 @@ var group__MIDIOutputElements =
       [ "previous", "d7/df2/classManyAddresses_1_1CCPotentiometer.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButton", "d1/d9f/classNoteButton.html", [
-      [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga4e817c4bf6f1e0481e253832440539a2", null ],
-      [ "begin", "d1/d9f/classNoteButton.html#a125820966ab551393b8b4df765cd6447", null ],
-      [ "update", "d1/d9f/classNoteButton.html#adca6f4fa37b6061aacc171aaddd741af", null ],
+      [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga0713b126fb093b4b4cb96434d609f514", null ],
+      [ "begin", "d1/d9f/classNoteButton.html#a990ae3d3d7441d51458064580e738722", null ],
+      [ "update", "d1/d9f/classNoteButton.html#a71353bf7f61b315806046ab3ce7ebc9b", null ],
       [ "getAddressOffset", "d1/d9f/classNoteButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
       [ "getRawBankSetting", "d1/d9f/classNoteButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
       [ "getSelection", "d1/d9f/classNoteButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -583,12 +585,12 @@ var group__MIDIOutputElements =
       [ "previous", "d1/d9f/classNoteButton.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtonLatched", "de/def/classNoteButtonLatched.html", [
-      [ "NoteButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#ga0919df0f6f2cdff84c8e84cacee9d77b", null ],
-      [ "begin", "de/def/classNoteButtonLatched.html#ac12d94686b713f745b22c0343f8d1349", null ],
-      [ "update", "de/def/classNoteButtonLatched.html#a4776b093f3fb05ee9ec5d2e7543958ff", null ],
-      [ "toggleState", "de/def/classNoteButtonLatched.html#a0d00b33017b5363b3e4e1899226c4b84", null ],
-      [ "getState", "de/def/classNoteButtonLatched.html#a8acd3f0f62aa9ef48e65350920510849", null ],
-      [ "setState", "de/def/classNoteButtonLatched.html#a9dbbd5afbce8ae323c3a628fbf730549", null ],
+      [ "NoteButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#ga91c02a70dc7e8e8d9cb8bfc5737f3c7f", null ],
+      [ "begin", "de/def/classNoteButtonLatched.html#ad3a30fdfe4a521edb8a144456bf3166d", null ],
+      [ "update", "de/def/classNoteButtonLatched.html#a30aa22dd2256830b3db9950aba9d3cab", null ],
+      [ "toggleState", "de/def/classNoteButtonLatched.html#a719ba588173a33e866af0efd7019b66a", null ],
+      [ "getState", "de/def/classNoteButtonLatched.html#af1677221077374f7a5b285cd2c9de884", null ],
+      [ "setState", "de/def/classNoteButtonLatched.html#a6992cf4efaef88884f6a8cf0b39f821f", null ],
       [ "enable", "de/def/classNoteButtonLatched.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "de/def/classNoteButtonLatched.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "de/def/classNoteButtonLatched.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -604,9 +606,9 @@ var group__MIDIOutputElements =
       [ "previous", "de/def/classNoteButtonLatched.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtonLatching", "d3/d6c/classNoteButtonLatching.html", [
-      [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga516da4239fef7e463ff8bfcda208feb7", null ],
-      [ "begin", "d3/d6c/classNoteButtonLatching.html#a2008b6b51e779d44e87129e43f5ccc3c", null ],
-      [ "update", "d3/d6c/classNoteButtonLatching.html#aefb3b2f7cfb598d2cd68a622c94ea772", null ],
+      [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#gaa30fc99f4c63a86515375b73ba568b0f", null ],
+      [ "begin", "d3/d6c/classNoteButtonLatching.html#a7013079fe5acbea4a3cf25bd5bdefdb3", null ],
+      [ "update", "d3/d6c/classNoteButtonLatching.html#ae18cb71efe09ebeab1cac9ed84e770b0", null ],
       [ "enable", "d3/d6c/classNoteButtonLatching.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d3/d6c/classNoteButtonLatching.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d3/d6c/classNoteButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -622,9 +624,9 @@ var group__MIDIOutputElements =
       [ "previous", "d3/d6c/classNoteButtonLatching.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtonMatrix", "d2/daf/classNoteButtonMatrix.html", [
-      [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga38540881190e4382108fee251b4a4ca0", null ],
-      [ "begin", "d2/daf/classNoteButtonMatrix.html#af2de658359388553fbbfb0a985d1ce6e", null ],
-      [ "update", "d2/daf/classNoteButtonMatrix.html#af4be5c4eb14eeea1be8e0252c570a780", null ],
+      [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga23e45eeee7965faa832397bc1a842446", null ],
+      [ "begin", "d2/daf/classNoteButtonMatrix.html#a5dbffe216515e2ba2c3bd75a68262d18", null ],
+      [ "update", "d2/daf/classNoteButtonMatrix.html#a8882f74a53c6e8777d814e335cf31dbc", null ],
       [ "enable", "d2/daf/classNoteButtonMatrix.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d2/daf/classNoteButtonMatrix.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d2/daf/classNoteButtonMatrix.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -641,9 +643,9 @@ var group__MIDIOutputElements =
       [ "previous", "d2/daf/classNoteButtonMatrix.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteButtons", "d1/dbd/classNoteButtons.html", [
-      [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga005a51d24af5a981b756bfea19e857ac", null ],
-      [ "begin", "d1/dbd/classNoteButtons.html#a97464005c2dc0f838e1b512b8468b322", null ],
-      [ "update", "d1/dbd/classNoteButtons.html#ae57920009161d5983962dced5aa27b97", null ],
+      [ "NoteButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga5c2842b54ed2101d9c87d04c9b6dbb26", null ],
+      [ "begin", "d1/dbd/classNoteButtons.html#a9b3e8d962ac0f429856db84d9ac80dc3", null ],
+      [ "update", "d1/dbd/classNoteButtons.html#a901779e24e556e482f9f121e2e34c834", null ],
       [ "enable", "d1/dbd/classNoteButtons.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d1/dbd/classNoteButtons.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d1/dbd/classNoteButtons.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -659,10 +661,10 @@ var group__MIDIOutputElements =
       [ "previous", "d1/dbd/classNoteButtons.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "NoteChordButton", "d3/d3b/classNoteChordButton.html", [
-      [ "NoteChordButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga130cc2f6a40524d99a2bb908f8a15339", null ],
-      [ "begin", "d3/d3b/classNoteChordButton.html#a412fc03ced2084ce31d2c3f547a62fd8", null ],
-      [ "update", "d3/d3b/classNoteChordButton.html#af87dedb546f6334f395bedc178a925f1", null ],
-      [ "setChord", "d3/d3b/classNoteChordButton.html#adbcf265b805f01be8203112a261decc2", null ],
+      [ "NoteChordButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga4a8ce9177811b0955b3e881c970410cc", null ],
+      [ "begin", "d3/d3b/classNoteChordButton.html#a8be036ba316354bf82112ae73040ac57", null ],
+      [ "update", "d3/d3b/classNoteChordButton.html#a1dab786cd92de03e00877e1a82e8fd5f", null ],
+      [ "setChord", "d3/d3b/classNoteChordButton.html#a749e90624f76102048faa1cb8c835e3b", null ],
       [ "enable", "d3/d3b/classNoteChordButton.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "d3/d3b/classNoteChordButton.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "d3/d3b/classNoteChordButton.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -678,12 +680,12 @@ var group__MIDIOutputElements =
       [ "previous", "d3/d3b/classNoteChordButton.html#a57b6615469e554c514a9ff56dc24908f", null ]
     ] ],
     [ "PBPotentiometer", "da/d6a/classPBPotentiometer.html", [
-      [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga105a377c32b45e7f117a636597a0e1ca", null ],
-      [ "begin", "da/d6a/classPBPotentiometer.html#a1f687fc423ca089c93f7e43fdfcf0fee", null ],
-      [ "update", "da/d6a/classPBPotentiometer.html#ab1a0f9e5acac4550476df16a31036a10", null ],
-      [ "map", "da/d6a/classPBPotentiometer.html#a79bb7e2fa5066744e984bbdc36892ca8", null ],
-      [ "getRawValue", "da/d6a/classPBPotentiometer.html#aac29d6edbd07bc32e8288c5950c04228", null ],
-      [ "getValue", "da/d6a/classPBPotentiometer.html#a920214b7eadbced526a1457e847af415", null ],
+      [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga817835e613dc440529ce819217e15b3d", null ],
+      [ "begin", "da/d6a/classPBPotentiometer.html#a9b583128e30ece8bbd31f439b6a19ba4", null ],
+      [ "update", "da/d6a/classPBPotentiometer.html#a58bbace1afd66f636d2b176db8c7f464", null ],
+      [ "map", "da/d6a/classPBPotentiometer.html#a98f5a4931fb81e7ad8645ab6838ab0a0", null ],
+      [ "getRawValue", "da/d6a/classPBPotentiometer.html#a57a168b8153417bebfcc4719ae7bf6f3", null ],
+      [ "getValue", "da/d6a/classPBPotentiometer.html#aee1ccbeafed8d697b7bfd9809416e96c", null ],
       [ "enable", "da/d6a/classPBPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
       [ "enable", "da/d6a/classPBPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
       [ "enable", "da/d6a/classPBPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

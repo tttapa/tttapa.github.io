@@ -1,11 +1,11 @@
 var classMIDIButtonLatched =
 [
-    [ "MIDIButtonLatched", "d3/d88/classMIDIButtonLatched.html#a8077ba9d3da8c6b46ea4d927b9f26936", null ],
-    [ "begin", "d3/d88/classMIDIButtonLatched.html#ac12d94686b713f745b22c0343f8d1349", null ],
-    [ "update", "d3/d88/classMIDIButtonLatched.html#a4776b093f3fb05ee9ec5d2e7543958ff", null ],
-    [ "toggleState", "d3/d88/classMIDIButtonLatched.html#a0d00b33017b5363b3e4e1899226c4b84", null ],
-    [ "getState", "d3/d88/classMIDIButtonLatched.html#a8acd3f0f62aa9ef48e65350920510849", null ],
-    [ "setState", "d3/d88/classMIDIButtonLatched.html#a9dbbd5afbce8ae323c3a628fbf730549", null ],
+    [ "MIDIButtonLatched", "d3/d88/classMIDIButtonLatched.html#a8ec65e85dc8574f8d171f218cede6cde", null ],
+    [ "begin", "d3/d88/classMIDIButtonLatched.html#ad3a30fdfe4a521edb8a144456bf3166d", null ],
+    [ "update", "d3/d88/classMIDIButtonLatched.html#a30aa22dd2256830b3db9950aba9d3cab", null ],
+    [ "toggleState", "d3/d88/classMIDIButtonLatched.html#a719ba588173a33e866af0efd7019b66a", null ],
+    [ "getState", "d3/d88/classMIDIButtonLatched.html#af1677221077374f7a5b285cd2c9de884", null ],
+    [ "setState", "d3/d88/classMIDIButtonLatched.html#a6992cf4efaef88884f6a8cf0b39f821f", null ],
     [ "enable", "d3/d88/classMIDIButtonLatched.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d3/d88/classMIDIButtonLatched.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d3/d88/classMIDIButtonLatched.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -17,9 +17,10 @@ var classMIDIButtonLatched =
     [ "isEnabled", "d3/d88/classMIDIButtonLatched.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "d3/d88/classMIDIButtonLatched.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "d3/d88/classMIDIButtonLatched.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "button", "d3/d88/classMIDIButtonLatched.html#aedfde329baf58ab601202016432d8d55", null ],
-    [ "address", "d3/d88/classMIDIButtonLatched.html#a139cdf7fa68a19e2eca342aad1e10d70", null ],
-    [ "state", "d3/d88/classMIDIButtonLatched.html#a4a3b97f664ec55bc35766b754ddac25b", null ],
+    [ "button", "d3/d88/classMIDIButtonLatched.html#aaf83fb8a47292576d03b1a5a53ad4c3f", null ],
+    [ "address", "d3/d88/classMIDIButtonLatched.html#a9be264ddd9fe8f51156b9139bdee1c55", null ],
+    [ "sender", "d3/d88/classMIDIButtonLatched.html#af7a51472bb599cf5b580c28d97ce63c8", null ],
+    [ "state", "d3/d88/classMIDIButtonLatched.html#a4de329e6d5dfb408b5212ece4ec3f736", null ],
     [ "next", "d3/d88/classMIDIButtonLatched.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d3/d88/classMIDIButtonLatched.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

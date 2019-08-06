@@ -1,9 +1,10 @@
 var classBankable_1_1MIDIIncrementDecrementButtons =
 [
-    [ "MIDIIncrementDecrementButtons", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ae1b13be900e70c8432a77db49cf3604b", null ],
-    [ "begin", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ad96a50ea1490e5d061d57a6d208deaf7", null ],
-    [ "update", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a372b8a0173315cad364f906ff7587dc1", null ],
-    [ "reset", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ab8367a2ad36d7a4530277e3d709ad16f", null ],
+    [ "MIDIIncrementDecrementButtons", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a04be5444a31da752b09990502489e093", null ],
+    [ "begin", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a4990154c64d7be64c83d8e74ba2546cb", null ],
+    [ "update", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#afb859b92b315cd74bd4cf008840cccd2", null ],
+    [ "send", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a8e99d3157f2ad3ce718898cf0b69d023", null ],
+    [ "reset", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a6f48ad9c63a4d1ffa875e298d3b31249", null ],
     [ "getAddressOffset", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -20,12 +21,12 @@ var classBankable_1_1MIDIIncrementDecrementButtons =
     [ "isEnabled", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "buttons", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ac4c5d2d797a3f04758ffccbc7235f542", null ],
-    [ "address", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a0cde2dcf097cb672c8fdc8bd8e26c1c5", null ],
-    [ "multiplier", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ae9084dbf09ec7abe000e69637f555553", null ],
-    [ "resetAddress", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a075f144b0a11550fa929a4bfc69b1e9a", null ],
-    [ "sendOn", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a8cecce4e0cbcc199e08777703b877d26", null ],
-    [ "sendOff", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a236f811942309f8511d354b78c56b443", null ],
+    [ "buttons", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#aa6f0fc997b0bdd7f1111ee6831b266d2", null ],
+    [ "address", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a6e4b99894fd97615f45b8cc85b780707", null ],
+    [ "multiplier", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ae842046fd5114a3a257cfae74d53d6b1", null ],
+    [ "resetAddress", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#aebe482cb592ff1af6ff8228fb3e7c49b", null ],
+    [ "relativeSender", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a528ec39631d22e65b692d97f1dbe33f7", null ],
+    [ "resetSender", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a04a98e3145b442a9653e1a5cfd507975", null ],
     [ "next", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

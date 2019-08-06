@@ -1,8 +1,8 @@
 var classBankable_1_1NoteButtonLatching =
 [
-    [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#ga8dc98ebbfbfef00af8bf09a7140dc7d0", null ],
-    [ "begin", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a1b550d81a44c65797651145102e39d70", null ],
-    [ "update", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a4ee20ec0f37d2f24009c9d89815310e5", null ],
+    [ "NoteButtonLatching", "d5/df9/group__MIDIOutputElementConstructors.html#gabb553e3b7aa96c3c9bf2dbcb43cfda32", null ],
+    [ "begin", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a18c6b56bb23f8b1fc5d5eea3be02264c", null ],
+    [ "update", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a5c2d89e69e4d800de47af9eb5f39d50f", null ],
     [ "enable", "d9/d3f/classBankable_1_1NoteButtonLatching.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d9/d3f/classBankable_1_1NoteButtonLatching.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

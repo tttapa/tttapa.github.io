@@ -1,8 +1,8 @@
 var classCCButtonMatrix =
 [
-    [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga68ef3378306671229f294e53fb5fff11", null ],
-    [ "begin", "d3/d2a/classCCButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
-    [ "update", "d3/d2a/classCCButtonMatrix.html#a6a779804092487b4a4a135559b45daf5", null ],
+    [ "CCButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga16509f776ba7efabfaa3ee2d12d52925", null ],
+    [ "begin", "d3/d2a/classCCButtonMatrix.html#a33ae7903c54ef607839040546d16f2e7", null ],
+    [ "update", "d3/d2a/classCCButtonMatrix.html#a2d8de9b7ddfda6b89ebedd96036c9cf5", null ],
     [ "getAddressOffset", "d3/d2a/classCCButtonMatrix.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d3/d2a/classCCButtonMatrix.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d3/d2a/classCCButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

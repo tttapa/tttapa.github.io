@@ -1,8 +1,8 @@
 var classCCRotaryEncoder =
 [
-    [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#gae72cec73d19c10369bc81410bae4a265", null ],
-    [ "begin", "d3/d62/classCCRotaryEncoder.html#ace9489f2ffd66a7352a4f67b57394ea2", null ],
-    [ "update", "d3/d62/classCCRotaryEncoder.html#aa0937f911bacc46090b1b39c1f1150f4", null ],
+    [ "CCRotaryEncoder", "d5/df9/group__MIDIOutputElementConstructors.html#ga149c3dfc86ee4909d2b7b59519564212", null ],
+    [ "begin", "d3/d62/classCCRotaryEncoder.html#adee6b3435afe3ea4ffb45a8651cde4dd", null ],
+    [ "update", "d3/d62/classCCRotaryEncoder.html#a90564713163ad54c5afd8393f7de73c6", null ],
     [ "enable", "d3/d62/classCCRotaryEncoder.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d3/d62/classCCRotaryEncoder.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d3/d62/classCCRotaryEncoder.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

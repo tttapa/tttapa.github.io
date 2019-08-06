@@ -1,11 +1,11 @@
 var classManyAddresses_1_1MIDIFilteredAnalogAddressable =
 [
-    [ "MIDIFilteredAnalogAddressable", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a5d17ef529402d0be678336f88ac0496e", null ],
-    [ "begin", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#aaedf2ad118dde65170552e52f818bdbc", null ],
-    [ "update", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a4af47cd073d44cd6107421c51866a5e3", null ],
-    [ "map", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a98a017591b30cb6d985ea4dbb7595ec4", null ],
-    [ "getRawValue", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a6f93dbf321730b28c7dc8cecfe1ee9bd", null ],
-    [ "getValue", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a339b4dea34b922c4d201078ceb350faf", null ],
+    [ "MIDIFilteredAnalogAddressable", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a694ebcf85949382937796038630ce439", null ],
+    [ "begin", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#aaa2d0725b411ab25c08f59a416029aab", null ],
+    [ "update", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a06dce4a407416074464114f0998a7835", null ],
+    [ "map", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a756c22ec15f94de41b4db929ba7d8a4c", null ],
+    [ "getRawValue", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#aff2fefc33b3a1fdab13dab994c0f707c", null ],
+    [ "getValue", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a029468a69b3c4c32226481fc364e0198", null ],
     [ "enable", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -21,8 +21,9 @@ var classManyAddresses_1_1MIDIFilteredAnalogAddressable =
     [ "getSelection", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#afd41ec707b50753edd2c39567efe8517", null ],
     [ "lock", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#aae65e54ccb8f85f9d2151446e8a2d3f6", null ],
     [ "unlock", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#aca643ae119ca8ce895a2af30ad2ce0f1", null ],
-    [ "filteredAnalog", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a885b86fde8a54b541103a716585de7e4", null ],
-    [ "addresses", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a08ed31d073555c8ca5c8a1e88f5f29bc", null ],
+    [ "filteredAnalog", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#ae2d1441d0cb95c60c2d94e539cb9e753", null ],
+    [ "addresses", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#ada9160329de212ba8f2bbb077f05a1cb", null ],
+    [ "sender", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a9d5afa2e7a31e91fb9bc14e4b4dd42ad", null ],
     [ "next", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "da/df5/classManyAddresses_1_1MIDIFilteredAnalogAddressable.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

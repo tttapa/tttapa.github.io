@@ -1,8 +1,8 @@
 var classNoteButton =
 [
-    [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga4e817c4bf6f1e0481e253832440539a2", null ],
-    [ "begin", "d1/d9f/classNoteButton.html#a125820966ab551393b8b4df765cd6447", null ],
-    [ "update", "d1/d9f/classNoteButton.html#adca6f4fa37b6061aacc171aaddd741af", null ],
+    [ "NoteButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga0713b126fb093b4b4cb96434d609f514", null ],
+    [ "begin", "d1/d9f/classNoteButton.html#a990ae3d3d7441d51458064580e738722", null ],
+    [ "update", "d1/d9f/classNoteButton.html#a71353bf7f61b315806046ab3ce7ebc9b", null ],
     [ "getAddressOffset", "d1/d9f/classNoteButton.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d1/d9f/classNoteButton.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d1/d9f/classNoteButton.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

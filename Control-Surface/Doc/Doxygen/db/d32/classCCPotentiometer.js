@@ -1,11 +1,11 @@
 var classCCPotentiometer =
 [
-    [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#ga7dec56405ad50a0834b4e3f4ed5ed1fa", null ],
-    [ "begin", "db/d32/classCCPotentiometer.html#a377e5bfccb2304c4e0d6061b1b922a91", null ],
-    [ "update", "db/d32/classCCPotentiometer.html#af58ae91fee46147b80d04c31f753b3fa", null ],
-    [ "map", "db/d32/classCCPotentiometer.html#a5ec0fe30129b23392a6c44e75cb34ebc", null ],
-    [ "getRawValue", "db/d32/classCCPotentiometer.html#a40846d2646805c2e194d07ad45eed949", null ],
-    [ "getValue", "db/d32/classCCPotentiometer.html#a96bda4da347290269fa08fd6b686ba7b", null ],
+    [ "CCPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gacf0d748aa8553b031a5d641e34c73414", null ],
+    [ "begin", "db/d32/classCCPotentiometer.html#aa091559490a8fa86a5adf29ca385142b", null ],
+    [ "update", "db/d32/classCCPotentiometer.html#a4d5a7b53049ddd50e21ae7ba19c62a39", null ],
+    [ "map", "db/d32/classCCPotentiometer.html#a282d93ced7a7917ec4073f70b6061d08", null ],
+    [ "getRawValue", "db/d32/classCCPotentiometer.html#a3d92b3194921ab1b5adbfb105044ade6", null ],
+    [ "getValue", "db/d32/classCCPotentiometer.html#a39ea8ef70ce0dc049711cafa2b138268", null ],
     [ "enable", "db/d32/classCCPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "db/d32/classCCPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "db/d32/classCCPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

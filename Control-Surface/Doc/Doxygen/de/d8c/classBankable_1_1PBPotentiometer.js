@@ -1,11 +1,11 @@
 var classBankable_1_1PBPotentiometer =
 [
-    [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gacbbac40867807872e222789e2b29b0b3", null ],
-    [ "begin", "de/d8c/classBankable_1_1PBPotentiometer.html#a1f687fc423ca089c93f7e43fdfcf0fee", null ],
-    [ "update", "de/d8c/classBankable_1_1PBPotentiometer.html#ab1a0f9e5acac4550476df16a31036a10", null ],
-    [ "map", "de/d8c/classBankable_1_1PBPotentiometer.html#a79bb7e2fa5066744e984bbdc36892ca8", null ],
-    [ "getRawValue", "de/d8c/classBankable_1_1PBPotentiometer.html#aac29d6edbd07bc32e8288c5950c04228", null ],
-    [ "getValue", "de/d8c/classBankable_1_1PBPotentiometer.html#a920214b7eadbced526a1457e847af415", null ],
+    [ "PBPotentiometer", "d5/df9/group__MIDIOutputElementConstructors.html#gaa4a7f0ff8b59ca2963afd405dbce569f", null ],
+    [ "begin", "de/d8c/classBankable_1_1PBPotentiometer.html#a9b583128e30ece8bbd31f439b6a19ba4", null ],
+    [ "update", "de/d8c/classBankable_1_1PBPotentiometer.html#a58bbace1afd66f636d2b176db8c7f464", null ],
+    [ "map", "de/d8c/classBankable_1_1PBPotentiometer.html#a98f5a4931fb81e7ad8645ab6838ab0a0", null ],
+    [ "getRawValue", "de/d8c/classBankable_1_1PBPotentiometer.html#a57a168b8153417bebfcc4719ae7bf6f3", null ],
+    [ "getValue", "de/d8c/classBankable_1_1PBPotentiometer.html#aee1ccbeafed8d697b7bfd9809416e96c", null ],
     [ "enable", "de/d8c/classBankable_1_1PBPotentiometer.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "de/d8c/classBankable_1_1PBPotentiometer.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "de/d8c/classBankable_1_1PBPotentiometer.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

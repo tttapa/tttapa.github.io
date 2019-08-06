@@ -1,11 +1,11 @@
 var classBankable_1_1NoteButtonLatched =
 [
-    [ "NoteButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#ga647a185dea0bf18940d53a0d5846fd45", null ],
-    [ "begin", "d2/dbf/classBankable_1_1NoteButtonLatched.html#ac100ef66e13d05bbeddb1691a6fd2ce0", null ],
-    [ "update", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a972bc7066b12eb065adf7405bba8b806", null ],
-    [ "toggleState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a1b311122504657e75c797c93e0cbd0e3", null ],
-    [ "getState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a78016f9587b3591ddeff9eec02d32f4b", null ],
-    [ "setState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#ad929f9a5f2dc457b44514f20e4b55835", null ],
+    [ "NoteButtonLatched", "d5/df9/group__MIDIOutputElementConstructors.html#gaebeb22e255735a811bdbee91df794c7e", null ],
+    [ "begin", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a98f0891cbbe3deb94e76aaab6c126718", null ],
+    [ "update", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a8d533b707538276166747df9cbccf4a1", null ],
+    [ "toggleState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a78de1a356f4836ed91f531bef6b7e301", null ],
+    [ "getState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#aa81859982800e212c45fa6ccac55faf2", null ],
+    [ "setState", "d2/dbf/classBankable_1_1NoteButtonLatched.html#ad4838c3c651e499b3754750185c5d188", null ],
     [ "getAddressOffset", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d2/dbf/classBankable_1_1NoteButtonLatched.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d2/dbf/classBankable_1_1NoteButtonLatched.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

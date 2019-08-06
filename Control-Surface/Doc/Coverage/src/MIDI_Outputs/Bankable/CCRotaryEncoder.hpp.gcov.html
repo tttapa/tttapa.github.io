@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 7bd1972e953d91702292c14076b3396af639796b - src/MIDI_Outputs/Bankable/CCRotaryEncoder.hpp</title>
+  <title>LCOV - b972b7ec9477550fcc26f9a83cb3812170311c00 - src/MIDI_Outputs/Bankable/CCRotaryEncoder.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,20 +28,20 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">7bd1972e953d91702292c14076b3396af639796b</td>
+            <td class="headerValue">b972b7ec9477550fcc26f9a83cb3812170311c00</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">6</td>
+            <td class="headerCovTableEntry">6</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-08-06 16:32:30</td>
+            <td class="headerValue">2019-08-06 23:27:04</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">2</td>
+            <td class="headerCovTableEntry">2</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -88,7 +88,7 @@
 <a name="18"><span class="lineNum">      18 </span>            :  *</a>
 <a name="19"><span class="lineNum">      19 </span>            :  * @ingroup MIDIOutputElements</a>
 <a name="20"><span class="lineNum">      20 </span>            :  */</a>
-<a name="21"><span class="lineNum">      21 </span>            : class CCRotaryEncoder : public MIDIRotaryEncoder&lt;RelativeCCSender::send&gt; {</a>
+<a name="21"><span class="lineNum">      21 </span>            : class CCRotaryEncoder : public MIDIRotaryEncoder&lt;RelativeCCSender&gt; {</a>
 <a name="22"><span class="lineNum">      22 </span>            :   public:</a>
 <a name="23"><span class="lineNum">      23 </span>            :     /**</a>
 <a name="24"><span class="lineNum">      24 </span>            :      * @brief   Construct a new Bankable CCRotaryEncoder object with the given </a>
@@ -119,23 +119,25 @@
 <a name="49"><span class="lineNum">      49 </span>            :      * </a>
 <a name="50"><span class="lineNum">      50 </span>            :      * @ingroup MIDIOutputElementConstructors</a>
 <a name="51"><span class="lineNum">      51 </span>            :      */</a>
-<a name="52"><span class="lineNum">      52 </span>            :     CCRotaryEncoder(const OutputBankConfig &amp;config, const EncoderPinList &amp;pins,</a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineCov">          1 :     CCRotaryEncoder(const OutputBankConfig &amp;config, const EncoderPinList &amp;pins,</span></a>
 <a name="53"><span class="lineNum">      53 </span>            :                     const MIDICNChannelAddress &amp;address,</a>
-<a name="54"><span class="lineNum">      54 </span>            :                     uint8_t speedMultiplier, uint8_t pulsesPerStep)</a>
-<a name="55"><span class="lineNum">      55 </span>            :         : MIDIRotaryEncoder&lt;RelativeCCSender::send&gt;(</a>
-<a name="56"><span class="lineNum">      56 </span>            :               config, pins, address, speedMultiplier, pulsesPerStep) {}</a>
-<a name="57"><span class="lineNum">      57 </span>            : </a>
-<a name="58"><span class="lineNum">      58 </span>            : // For tests only (PJRC Encoder library's copy constructor doesn't work)</a>
-<a name="59"><span class="lineNum">      59 </span>            : #ifndef ARDUINO</a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineCov">          1 :     CCRotaryEncoder(const OutputBankConfig &amp;config, const Encoder &amp;encoder,</span></a>
-<a name="61"><span class="lineNum">      61 </span>            :                     const MIDICNChannelAddress &amp;address,</a>
-<a name="62"><span class="lineNum">      62 </span>            :                     uint8_t speedMultiplier, uint8_t pulsesPerStep)</a>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          1 :         : MIDIRotaryEncoder&lt;RelativeCCSender::send&gt;(</span></a>
-<a name="64"><span class="lineNum">      64 </span><span class="lineCov">          1 :               config, encoder, address, speedMultiplier, pulsesPerStep) {}</span></a>
-<a name="65"><span class="lineNum">      65 </span>            : #endif</a>
-<a name="66"><span class="lineNum">      66 </span>            : };</a>
-<a name="67"><span class="lineNum">      67 </span>            : </a>
-<a name="68"><span class="lineNum">      68 </span>            : } // namespace Bankable</a>
+<a name="54"><span class="lineNum">      54 </span>            :                     uint8_t speedMultiplier, uint8_t pulsesPerStep,</a>
+<a name="55"><span class="lineNum">      55 </span>            :                     const RelativeCCSender &amp;sender = {})</a>
+<a name="56"><span class="lineNum">      56 </span><span class="lineCov">          1 :         : MIDIRotaryEncoder(config, pins, address, speedMultiplier,</span></a>
+<a name="57"><span class="lineNum">      57 </span><span class="lineCov">          1 :                             pulsesPerStep, sender) {}</span></a>
+<a name="58"><span class="lineNum">      58 </span>            : </a>
+<a name="59"><span class="lineNum">      59 </span>            : // For tests only (PJRC Encoder library's copy constructor doesn't work)</a>
+<a name="60"><span class="lineNum">      60 </span>            : #ifndef ARDUINO</a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">          1 :     CCRotaryEncoder(const OutputBankConfig &amp;config, const Encoder &amp;encoder,</span></a>
+<a name="62"><span class="lineNum">      62 </span>            :                     const MIDICNChannelAddress &amp;address,</a>
+<a name="63"><span class="lineNum">      63 </span>            :                     uint8_t speedMultiplier = 1, uint8_t pulsesPerStep = 4,</a>
+<a name="64"><span class="lineNum">      64 </span>            :                     const RelativeCCSender &amp;sender = {})</a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          1 :         : MIDIRotaryEncoder(config, encoder, address, speedMultiplier,</span></a>
+<a name="66"><span class="lineNum">      66 </span><span class="lineCov">          1 :                             pulsesPerStep, sender) {}</span></a>
+<a name="67"><span class="lineNum">      67 </span>            : #endif</a>
+<a name="68"><span class="lineNum">      68 </span>            : };</a>
+<a name="69"><span class="lineNum">      69 </span>            : </a>
+<a name="70"><span class="lineNum">      70 </span>            : } // namespace Bankable</a>
 </pre>
       </td>
     </tr>

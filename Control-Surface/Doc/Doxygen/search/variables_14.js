@@ -18,7 +18,7 @@ var searchData=
   ['v_5fpot_5fselect_5f8',['V_POT_SELECT_8',['../d7/dc7/namespaceMCU.html#a7199347ed39a2aeb702548b3c81342a4',1,'MCU']]],
   ['value',['value',['../dd/dd6/classIncrementor.html#affd2ff24a11c4d73badca7a25b9b9609',1,'Incrementor::value()'],['../d7/dc9/structis__unsigned.html#a4eb00c4455bb6f1f79e7a3318afff73b',1,'is_unsigned::value()'],['../df/d54/structintegral__constant.html#a46f77751ab0f4654dd21445d1033ddc8',1,'integral_constant::value()'],['../d5/ddb/classMCU_1_1VPotRing.html#ae6da95de5aa4b8abc892ee8d942ea678',1,'MCU::VPotRing::value()'],['../d8/d4c/classMCU_1_1VU.html#ad40f40b1f9913e074d92c463b40b6f57',1,'MCU::VU::value()'],['../de/d18/classMIDINote.html#ac73ae709f8043b526448cdcdf988af3e',1,'MIDINote::value()']]],
   ['values',['values',['../da/d93/classMCU_1_1Bankable_1_1VPotRing.html#a07155d1404800da8eb51cbc6c6da0c6e',1,'MCU::Bankable::VPotRing::values()'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html#a4cfb57a29c7c03b92b8a40be2186078f',1,'MCU::Bankable::VU::values()'],['../d0/d42/classBankable_1_1MIDINote.html#a805e8788ac7a9c07784ea04c37885b39',1,'Bankable::MIDINote::values()']]],
-  ['velocity',['velocity',['../dc/dd4/classDigitalNoteSender.html#a63d346c623fcb986d1ff3c1aa92b1869',1,'DigitalNoteSender']]],
+  ['velocity',['velocity',['../dc/dd4/classDigitalNoteSender.html#a307744782305229fe1e26816fbf5d415',1,'DigitalNoteSender']]],
   ['view_5faudio',['VIEW_AUDIO',['../d7/dc7/namespaceMCU.html#a14d3846c3aff80a8b057b9036843fb70',1,'MCU']]],
   ['view_5faux',['VIEW_AUX',['../d7/dc7/namespaceMCU.html#a51d4db48cbaeaad5075a6372c7c8632a',1,'MCU']]],
   ['view_5fbusses',['VIEW_BUSSES',['../d7/dc7/namespaceMCU.html#a0aa2154c420b61e79ee13f5617f998fb',1,'MCU']]],

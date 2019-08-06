@@ -1,8 +1,8 @@
 var classBankable_1_1NoteButtonMatrix =
 [
-    [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga93c14c6de83db24a63d451cff175c8a2", null ],
-    [ "begin", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#ab2ddbdbcd677b9df8dc385b5fc0dce95", null ],
-    [ "update", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a6a779804092487b4a4a135559b45daf5", null ],
+    [ "NoteButtonMatrix", "d5/df9/group__MIDIOutputElementConstructors.html#ga7ee7d1011685c93a3eaf0804963cb285", null ],
+    [ "begin", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a33ae7903c54ef607839040546d16f2e7", null ],
+    [ "update", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a2d8de9b7ddfda6b89ebedd96036c9cf5", null ],
     [ "getAddressOffset", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d2/d2b/classBankable_1_1NoteButtonMatrix.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

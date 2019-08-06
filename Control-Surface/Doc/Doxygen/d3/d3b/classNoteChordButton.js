@@ -1,9 +1,9 @@
 var classNoteChordButton =
 [
-    [ "NoteChordButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga130cc2f6a40524d99a2bb908f8a15339", null ],
-    [ "begin", "d3/d3b/classNoteChordButton.html#a412fc03ced2084ce31d2c3f547a62fd8", null ],
-    [ "update", "d3/d3b/classNoteChordButton.html#af87dedb546f6334f395bedc178a925f1", null ],
-    [ "setChord", "d3/d3b/classNoteChordButton.html#adbcf265b805f01be8203112a261decc2", null ],
+    [ "NoteChordButton", "d5/df9/group__MIDIOutputElementConstructors.html#ga4a8ce9177811b0955b3e881c970410cc", null ],
+    [ "begin", "d3/d3b/classNoteChordButton.html#a8be036ba316354bf82112ae73040ac57", null ],
+    [ "update", "d3/d3b/classNoteChordButton.html#a1dab786cd92de03e00877e1a82e8fd5f", null ],
+    [ "setChord", "d3/d3b/classNoteChordButton.html#a749e90624f76102048faa1cb8c835e3b", null ],
     [ "enable", "d3/d3b/classNoteChordButton.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d3/d3b/classNoteChordButton.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d3/d3b/classNoteChordButton.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],

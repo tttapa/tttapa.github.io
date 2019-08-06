@@ -1,11 +1,11 @@
 var classMIDIFilteredAnalogAddressable =
 [
-    [ "MIDIFilteredAnalogAddressable", "d0/dd2/classMIDIFilteredAnalogAddressable.html#af75323080b1f2226c3ff0d329817ff08", null ],
-    [ "begin", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a377e5bfccb2304c4e0d6061b1b922a91", null ],
-    [ "update", "d0/dd2/classMIDIFilteredAnalogAddressable.html#af58ae91fee46147b80d04c31f753b3fa", null ],
-    [ "map", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a5ec0fe30129b23392a6c44e75cb34ebc", null ],
-    [ "getRawValue", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a40846d2646805c2e194d07ad45eed949", null ],
-    [ "getValue", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a96bda4da347290269fa08fd6b686ba7b", null ],
+    [ "MIDIFilteredAnalogAddressable", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a9847e6d4592b82f18e5450d82255ccca", null ],
+    [ "begin", "d0/dd2/classMIDIFilteredAnalogAddressable.html#aa091559490a8fa86a5adf29ca385142b", null ],
+    [ "update", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a4d5a7b53049ddd50e21ae7ba19c62a39", null ],
+    [ "map", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a282d93ced7a7917ec4073f70b6061d08", null ],
+    [ "getRawValue", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a3d92b3194921ab1b5adbfb105044ade6", null ],
+    [ "getValue", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a39ea8ef70ce0dc049711cafa2b138268", null ],
     [ "enable", "d0/dd2/classMIDIFilteredAnalogAddressable.html#acfabd4911411ebbfd96d4080103f4725", null ],
     [ "enable", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a4c1c6bd44da328dd5b4dc29503219d09", null ],
     [ "enable", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a9cac8063b3145e5ab36a79fe7e4f91b9", null ],
@@ -17,8 +17,9 @@ var classMIDIFilteredAnalogAddressable =
     [ "isEnabled", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "filteredAnalog", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a943adc039dcc704d2d3aa8087ceb4fa2", null ],
-    [ "address", "d0/dd2/classMIDIFilteredAnalogAddressable.html#ae4ff3566feaf50da3938488473b60efc", null ],
+    [ "filteredAnalog", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a4d568de87777b202314093b9d4ca5a1a", null ],
+    [ "address", "d0/dd2/classMIDIFilteredAnalogAddressable.html#aa08171489223c8c8ba7b9ed1ec4744e4", null ],
+    [ "sender", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a96f5f707e59f9a34049a9f1fc32ca7b7", null ],
     [ "next", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "d0/dd2/classMIDIFilteredAnalogAddressable.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];

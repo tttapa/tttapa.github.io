@@ -1,9 +1,10 @@
 var classBankable_1_1CCIncrementDecrementButtons =
 [
-    [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#ga1e06a6afc8420c3bd2a23b498265a21c", null ],
-    [ "begin", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#ad96a50ea1490e5d061d57a6d208deaf7", null ],
-    [ "update", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a372b8a0173315cad364f906ff7587dc1", null ],
-    [ "reset", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#ab8367a2ad36d7a4530277e3d709ad16f", null ],
+    [ "CCIncrementDecrementButtons", "d5/df9/group__MIDIOutputElementConstructors.html#gad7ecf81b4f0514941d189f780f74e4bb", null ],
+    [ "begin", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a4990154c64d7be64c83d8e74ba2546cb", null ],
+    [ "update", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#afb859b92b315cd74bd4cf008840cccd2", null ],
+    [ "send", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a8e99d3157f2ad3ce718898cf0b69d023", null ],
+    [ "reset", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a6f48ad9c63a4d1ffa875e298d3b31249", null ],
     [ "getAddressOffset", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],

@@ -1,8 +1,8 @@
 var classBankable_1_1MIDIRotaryEncoder =
 [
-    [ "MIDIRotaryEncoder", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a2a135ed9c63f3bcc6fe59de3c262be00", null ],
-    [ "begin", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#aa13d45bfd55adbcc06acdd3e6946666f", null ],
-    [ "update", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#abcb877f25341f8097a6f2a5d353a3dc2", null ],
+    [ "MIDIRotaryEncoder", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#af047e66d1d40e03e9929a712796ef8c2", null ],
+    [ "begin", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#abf576338b1479d0dea8bca9fe9c434c1", null ],
+    [ "update", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#ab86590da32cc29e585da7b04bd6d1429", null ],
     [ "getAddressOffset", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a6ed605c9fd59aa3c5b42116b341ea9bb", null ],
     [ "getRawBankSetting", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a63b760e4554d4ea496ee012b2ba3d508", null ],
     [ "getSelection", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#af8c3b3200bfae07e61d25fa99efd9dcf", null ],
@@ -19,11 +19,12 @@ var classBankable_1_1MIDIRotaryEncoder =
     [ "isEnabled", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a883138a1262a82e8b9e05c75d576e36d", null ],
     [ "beginAll", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a5c008d0d20b072e46c14b9c48ec6c45b", null ],
     [ "updateAll", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a8af924e5b3b708eb042919703d175ed3", null ],
-    [ "encoder", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a293b51b313e7504e02a2b9aaa92cffd3", null ],
-    [ "address", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#aa36bcdf99c565df918d78222e8843eb2", null ],
-    [ "speedMultiply", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#ab7c206aca4177c77ddd8f8c801379e13", null ],
-    [ "pulsesPerStep", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a295639bed8aea8de367dc32021739fd8", null ],
-    [ "previousPosition", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a4fb434b4eb27c1446031d0b0d62b2e6c", null ],
+    [ "encoder", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a64a108a0c9764840522de9af678a932b", null ],
+    [ "address", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#afe2b87160d5a94424999d763611447e1", null ],
+    [ "speedMultiply", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a5b820bebf55a5ebdd5e6579c9a342e1b", null ],
+    [ "pulsesPerStep", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#af8781289dff9177eb83b36307884e13f", null ],
+    [ "sender", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#adb27a70699528060beca5b7443f586a1", null ],
+    [ "previousPosition", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a502af316e62b1ff5f4ed428aa8d7feef", null ],
     [ "next", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a4a13b63f90ec988cd14d871df9dbc53b", null ],
     [ "previous", "dc/dd5/classBankable_1_1MIDIRotaryEncoder.html#a57b6615469e554c514a9ff56dc24908f", null ]
 ];
