@@ -9,14 +9,6 @@
 <link href="../../tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../jquery.js"></script>
 <script type="text/javascript" src="../../dynsections.js"></script>
-<link href="../../navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="../../resize.js"></script>
-<script type="text/javascript" src="../../navtreedata.js"></script>
-<script type="text/javascript" src="../../navtree.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-  $(document).ready(initResizable);
-/* @license-end */</script>
 <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
@@ -62,23 +54,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
-    </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
-</div>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
-$(document).ready(function(){initNavTree('d5/d0b/SysExBuffer_8cpp_source.html','../../');});
-/* @license-end */
-</script>
-<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -93,13 +68,17 @@ $(document).ready(function(){initNavTree('d5/d0b/SysExBuffer_8cpp_source.html','
 </iframe>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9c9f4aef8027530753ea2ed5df8d4f38.html">MIDI_Parsers</a></li>  </ul>
+</div>
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
 <div class="title">SysExBuffer.cpp</div>  </div>
 </div><!--header-->
 <div class="contents">
 <a href="../../d5/d0b/SysExBuffer_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d0/dbb/SysExBuffer_8hpp.html">SysExBuffer.hpp</a>&quot;</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div><div class="line"><a name="l00003"></a><span class="lineno"><a class="line" href="../../d1/db1/classSysExBuffer.html#a3fa91b8bb0a048d8cb99fff92b3af034">    3</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d1/db1/classSysExBuffer.html#a3fa91b8bb0a048d8cb99fff92b3af034">SysExBuffer::start</a>() {</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    <a class="code" href="../../d1/db1/classSysExBuffer.html#ad7237386b1c61c45483ad1c4a5313023">SysExLength</a> = 0; <span class="comment">// if the previous message wasn&#39;t finished, overwrite it</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    <a class="code" href="../../d1/db1/classSysExBuffer.html#a9fbcc48c3f4b2342fbe3ece1ea6ab0ba">receiving</a> = <span class="keyword">true</span>;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <a class="code" href="../../df/dee/Debug_8hpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d">DEBUG</a>(<span class="stringliteral">&quot;Start SysEx&quot;</span>);</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;}</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div><div class="line"><a name="l00009"></a><span class="lineno"><a class="line" href="../../d1/db1/classSysExBuffer.html#a1f7af4669c4fca392bec6767a0c31f1a">    9</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="../../d1/db1/classSysExBuffer.html#a1f7af4669c4fca392bec6767a0c31f1a">SysExBuffer::end</a>() {</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <a class="code" href="../../d1/db1/classSysExBuffer.html#a9fbcc48c3f4b2342fbe3ece1ea6ab0ba">receiving</a> = <span class="keyword">false</span>;</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="../../df/dee/Debug_8hpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d">DEBUG</a>(<span class="stringliteral">&quot;End SysEx&quot;</span>);</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;}</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="../../d1/db1/classSysExBuffer.html#adbf58e6ad564b86d3b0a4934456d3f2f">   14</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../d1/db1/classSysExBuffer.html#adbf58e6ad564b86d3b0a4934456d3f2f">SysExBuffer::add</a>(uint8_t data) {</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="../../d1/db1/classSysExBuffer.html#a0bb1a353d17c2bcc3a09a6d981adf819">hasSpaceLeft</a>()) <span class="comment">// if the buffer is full</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;        <span class="keywordflow">return</span> <span class="keyword">false</span>;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="../../d1/db1/classSysExBuffer.html">SysExBuffer</a>[<a class="code" href="../../d1/db1/classSysExBuffer.html#ad7237386b1c61c45483ad1c4a5313023">SysExLength</a>] = data; <span class="comment">// add the data to the buffer</span></div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    ++<a class="code" href="../../d1/db1/classSysExBuffer.html#ad7237386b1c61c45483ad1c4a5313023">SysExLength</a>;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">true</span>;</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;}</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div><div class="line"><a name="l00022"></a><span class="lineno"><a class="line" href="../../d1/db1/classSysExBuffer.html#a0bb1a353d17c2bcc3a09a6d981adf819">   22</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../d1/db1/classSysExBuffer.html#a0bb1a353d17c2bcc3a09a6d981adf819">SysExBuffer::hasSpaceLeft</a>()<span class="keyword"> const </span>{</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordtype">bool</span> avail = <a class="code" href="../../d1/db1/classSysExBuffer.html#ad7237386b1c61c45483ad1c4a5313023">SysExLength</a> &lt; <a class="code" href="../../db/d02/Settings_8hpp.html#a3081f3937d694684489a38a344815b29">SYSEX_BUFFER_SIZE</a>;</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">if</span> (!avail)</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        <a class="code" href="../../df/dee/Debug_8hpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d">DEBUG</a>(<span class="stringliteral">&quot;SysEx buffer full&quot;</span>);</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <span class="keywordflow">return</span> avail;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;}</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="../../d1/db1/classSysExBuffer.html#aee21293188fbdbf52eb28d84ddd4b476">   29</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="../../d1/db1/classSysExBuffer.html#aee21293188fbdbf52eb28d84ddd4b476">SysExBuffer::isReceiving</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="../../d1/db1/classSysExBuffer.html#a9fbcc48c3f4b2342fbe3ece1ea6ab0ba">receiving</a>; }</div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div><div class="line"><a name="l00031"></a><span class="lineno"><a class="line" href="../../d1/db1/classSysExBuffer.html#ae2b59281931fa49ca440b0fa1d3e97ad">   31</a></span>&#160;<span class="keyword">const</span> uint8_t *<a class="code" href="../../d1/db1/classSysExBuffer.html#ae2b59281931fa49ca440b0fa1d3e97ad">SysExBuffer::getBuffer</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="../../d1/db1/classSysExBuffer.html#a95db1843599829ea0e3ebe27b25fb243">SysExBuffer</a>; }</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div><div class="line"><a name="l00033"></a><span class="lineno"><a class="line" href="../../d1/db1/classSysExBuffer.html#a01d7b1864ad0a82aad502958738aa502">   33</a></span>&#160;<span class="keywordtype">size_t</span> <a class="code" href="../../d1/db1/classSysExBuffer.html#a01d7b1864ad0a82aad502958738aa502">SysExBuffer::getLength</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <a class="code" href="../../d1/db1/classSysExBuffer.html#ad7237386b1c61c45483ad1c4a5313023">SysExLength</a>; }</div></div><!-- fragment --></div><!-- contents -->
-</div><!-- doc-content -->
 <div class="ttc" id="aSysExBuffer_8hpp_html"><div class="ttname"><a href="../../d0/dbb/SysExBuffer_8hpp.html">SysExBuffer.hpp</a></div></div>
 <div class="ttc" id="aclassSysExBuffer_html_adbf58e6ad564b86d3b0a4934456d3f2f"><div class="ttname"><a href="../../d1/db1/classSysExBuffer.html#adbf58e6ad564b86d3b0a4934456d3f2f">SysExBuffer::add</a></div><div class="ttdeci">bool add(uint8_t data)</div><div class="ttdoc">Add a byte to the current SysEx message.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d0b/SysExBuffer_8cpp_source.html#l00014">SysExBuffer.cpp:14</a></div></div>
 <div class="ttc" id="aclassSysExBuffer_html_a01d7b1864ad0a82aad502958738aa502"><div class="ttname"><a href="../../d1/db1/classSysExBuffer.html#a01d7b1864ad0a82aad502958738aa502">SysExBuffer::getLength</a></div><div class="ttdeci">size_t getLength() const</div><div class="ttdoc">Get the length of the SysEx message in the buffer.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d0b/SysExBuffer_8cpp_source.html#l00033">SysExBuffer.cpp:33</a></div></div>
@@ -115,13 +94,10 @@ $(document).ready(function(){initNavTree('d5/d0b/SysExBuffer_8cpp_source.html','
 <div class="ttc" id="aclassSysExBuffer_html_a1f7af4669c4fca392bec6767a0c31f1a"><div class="ttname"><a href="../../d1/db1/classSysExBuffer.html#a1f7af4669c4fca392bec6767a0c31f1a">SysExBuffer::end</a></div><div class="ttdeci">void end()</div><div class="ttdoc">Finish the current SysEx message.</div><div class="ttdef"><b>Definition:</b> <a href="../../d5/d0b/SysExBuffer_8cpp_source.html#l00009">SysExBuffer.cpp:9</a></div></div>
 <div class="ttc" id="aclassSysExBuffer_html_a95db1843599829ea0e3ebe27b25fb243"><div class="ttname"><a href="../../d1/db1/classSysExBuffer.html#a95db1843599829ea0e3ebe27b25fb243">SysExBuffer::SysExBuffer</a></div><div class="ttdeci">uint8_t SysExBuffer[SYSEX_BUFFER_SIZE]</div><div class="ttdef"><b>Definition:</b> <a href="../../d0/dbb/SysExBuffer_8hpp_source.html#l00007">SysExBuffer.hpp:7</a></div></div>
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="../../dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="../../dir_9c9f4aef8027530753ea2ed5df8d4f38.html">MIDI_Parsers</a></li><li class="navelem"><a class="el" href="../../d5/d0b/SysExBuffer_8cpp.html">SysExBuffer.cpp</a></li>
-    <li class="footer">Generated by
-    <a href="http://www.doxygen.org/index.html">
-    <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.8.16 </li>
-  </ul>
-</div>
+<hr class="footer"/><address class="footer"><small>
+Generated by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.16
+</small></address>
 </body>
 </html>

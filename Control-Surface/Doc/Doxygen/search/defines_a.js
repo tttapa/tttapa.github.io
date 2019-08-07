@@ -1,11 +1,4 @@
 var searchData=
 [
-  ['solo_5f10b_5fheight',['solo_10B_height',['../dd/d33/XBitmaps_8hpp.html',1,'XBitmaps.hpp']]],
-  ['solo_5f10b_5fwidth',['solo_10B_width',['../dd/d33/XBitmaps_8hpp.html',1,'XBitmaps.hpp']]],
-  ['solo_5f14b_5fheight',['solo_14B_height',['../dd/d33/XBitmaps_8hpp.html',1,'XBitmaps.hpp']]],
-  ['solo_5f14b_5fwidth',['solo_14B_width',['../dd/d33/XBitmaps_8hpp.html',1,'XBitmaps.hpp']]],
-  ['solo_5f7_5fheight',['solo_7_height',['../dd/d33/XBitmaps_8hpp.html',1,'XBitmaps.hpp']]],
-  ['solo_5f7_5fwidth',['solo_7_width',['../dd/d33/XBitmaps_8hpp.html',1,'XBitmaps.hpp']]],
-  ['str',['STR',['../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502',1,'Debug.hpp']]],
-  ['str_5fhelper',['STR_HELPER',['../df/dee/Debug_8hpp.html#a890d84b9b5d0b0aede9eea1092a7a10a',1,'Debug.hpp']]]
+  ['tracktion_5frelative',['TRACKTION_RELATIVE',['../d9/d24/RelativeCCSender_8hpp.html#a369404d12152030191e1ddd44d12a675',1,'RelativeCCSender.hpp']]]
 ];

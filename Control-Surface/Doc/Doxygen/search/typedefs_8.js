@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['setting_5ft',['setting_t',['../d0/d4e/Def_8hpp.html#a51d33bc7af1fb6a6705f272add970db0',1,'Def.hpp']]],
-  ['sysexmessagecallback',['SysExMessageCallback',['../dc/d45/classControl__Surface__.html#ae647a6e44a9ec71d446912be232bfe53',1,'Control_Surface_']]]
+  ['timefunction',['timefunction',['../d7/d74/MillisTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3',1,'MillisTimer.hpp']]]
 ];

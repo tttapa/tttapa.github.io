@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tracktion_5frelative',['TRACKTION_RELATIVE',['../d9/d24/RelativeCCSender_8hpp.html#a369404d12152030191e1ddd44d12a675',1,'RelativeCCSender.hpp']]]
+  ['usb_5fmidi_5fnumber_5fof_5fcables',['USB_MIDI_NUMBER_OF_CABLES',['../d8/d21/USBMIDI__Parser_8hpp.html#a8c8cc78d95d6600f2d4fdeab96154332',1,'USBMIDI_Parser.hpp']]],
+  ['use_5fconstexpr_5farray_5fhelpers',['USE_CONSTEXPR_ARRAY_HELPERS',['../d5/db6/ArrayHelpers_8hpp.html#addd42f8d7a7cb2605e50325b9c54fefa',1,'ArrayHelpers.hpp']]]
 ];

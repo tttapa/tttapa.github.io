@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['m2',['M2',['../da/dd4/namespaceIntervals.html#a24badc22181dd0156e1cbbece4795332',1,'Intervals::M2()'],['../da/dd4/namespaceIntervals.html#a3ae063eac2cb3034c4c9bf41641f8cad',1,'Intervals::m2()']]],
-  ['m3',['m3',['../da/dd4/namespaceIntervals.html#a87b3fbf4d404906dbc30ce0357099734',1,'Intervals::m3()'],['../da/dd4/namespaceIntervals.html#a0bba7f36cf4e22efafe7b4b029d37d96',1,'Intervals::M3()']]],
+  ['m2',['m2',['../da/dd4/namespaceIntervals.html#a3ae063eac2cb3034c4c9bf41641f8cad',1,'Intervals::m2()'],['../da/dd4/namespaceIntervals.html#a24badc22181dd0156e1cbbece4795332',1,'Intervals::M2()']]],
+  ['m3',['M3',['../da/dd4/namespaceIntervals.html#a0bba7f36cf4e22efafe7b4b029d37d96',1,'Intervals::M3()'],['../da/dd4/namespaceIntervals.html#a87b3fbf4d404906dbc30ce0357099734',1,'Intervals::m3()']]],
   ['m6',['m6',['../da/dd4/namespaceIntervals.html#a113a63113079585e980675007ea59791',1,'Intervals::m6()'],['../da/dd4/namespaceIntervals.html#ae990da8805f898263d30e3377e4aba78',1,'Intervals::M6()']]],
   ['m7',['m7',['../da/dd4/namespaceIntervals.html#a46249007f68970d4493844be8df14f41',1,'Intervals::m7()'],['../da/dd4/namespaceIntervals.html#ac4b40453c5311d0dfc527214c0d401e9',1,'Intervals::M7()']]],
   ['major',['Major',['../df/d20/namespaceChords.html#a35787176ae6383c1f7f5108b755709fc',1,'Chords']]],
@@ -29,15 +29,14 @@ var searchData=
   ['mono_5fmode_5fon',['Mono_Mode_On',['../d4/dbe/namespaceMIDI__CC.html#a3fd3aa3eeda78ac93b6c253b4f6bfc89',1,'MIDI_CC']]],
   ['multiplier',['multiplier',['../d3/d51/classSelectorDisplay.html#a86249bca64198a89fc7631ecbc71b43e',1,'SelectorDisplay::multiplier()'],['../dc/dc2/classMIDIIncrementDecrementButtons.html#ae56a20d5e4378d17f22356bce2f1f927',1,'MIDIIncrementDecrementButtons::multiplier()'],['../d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#ae842046fd5114a3a257cfae74d53d6b1',1,'Bankable::MIDIIncrementDecrementButtons::multiplier()']]],
   ['mute_5f1',['MUTE_1',['../d7/dc7/namespaceMCU.html#ad037ada6c7ebd64eeec862a410184229',1,'MCU']]],
-  ['mute_5f10b_5fbits',['mute_10B_bits',['../dd/d93/namespaceXBM.html#ae85c09a5b728bbe7a14f1617ee61ae7b',1,'XBM']]],
-  ['mute_5f14b_5fbits',['mute_14B_bits',['../dd/d93/namespaceXBM.html#ac59973b685433259da1444364bac0257',1,'XBM']]],
+  ['mute_5f10b',['mute_10B',['../dd/d93/namespaceXBM.html#a4ece555b9ed41ce8fcd524a7172dd58f',1,'XBM']]],
+  ['mute_5f14b',['mute_14B',['../dd/d93/namespaceXBM.html#a8ce1c2b95ae49d53747f7004db9e138f',1,'XBM']]],
   ['mute_5f2',['MUTE_2',['../d7/dc7/namespaceMCU.html#ac68849b1dd54d44a472212e04eccfc28',1,'MCU']]],
   ['mute_5f3',['MUTE_3',['../d7/dc7/namespaceMCU.html#aff4b1ae44544ef0f8a3bb796be4eb9de',1,'MCU']]],
   ['mute_5f4',['MUTE_4',['../d7/dc7/namespaceMCU.html#a14a7cfd850ae0f5213ed83ad326d19d6',1,'MCU']]],
   ['mute_5f5',['MUTE_5',['../d7/dc7/namespaceMCU.html#afe56acab364a0f0173d9724f37dc02df',1,'MCU']]],
   ['mute_5f6',['MUTE_6',['../d7/dc7/namespaceMCU.html#a1b2096bf302a7a3ce6335964135fad7a',1,'MCU']]],
-  ['mute_5f7',['MUTE_7',['../d7/dc7/namespaceMCU.html#aef9d9576f611c1369ae72f6aa63d6e0b',1,'MCU']]],
-  ['mute_5f7_5fbits',['mute_7_bits',['../dd/d93/namespaceXBM.html#a596a13328173294032c79999b6cbe905',1,'XBM']]],
+  ['mute_5f7',['mute_7',['../dd/d93/namespaceXBM.html#a9773c78accf50f283106a8f441af04de',1,'XBM::mute_7()'],['../d7/dc7/namespaceMCU.html#aef9d9576f611c1369ae72f6aa63d6e0b',1,'MCU::MUTE_7()']]],
   ['mute_5f8',['MUTE_8',['../d7/dc7/namespaceMCU.html#abfa709b8012df710e1559ad6ad3a9d0a',1,'MCU']]],
   ['mux_5fdisabled',['MUX_DISABLED',['../d7/d8d/classAnalogMultiplex.html#a3ec8e2e72275f17b958b6225b6825e48',1,'AnalogMultiplex']]],
   ['mux_5fenabled',['MUX_ENABLED',['../d7/d8d/classAnalogMultiplex.html#a521b79a2af4987b24e744e9bf7f83588',1,'AnalogMultiplex']]]

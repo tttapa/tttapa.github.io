@@ -1,8 +1,0 @@
-var classSelectable =
-[
-    [ "Selectable", "de/de7/classSelectable.html#a2d6a37f1527d18f22bb440899b395002", null ],
-    [ "select", "de/de7/classSelectable.html#a2654b231e11c02a41f20f5a0d7cce2dc", null ],
-    [ "validateSetting", "de/de7/classSelectable.html#a84428fa44ab8703ba47eee0a896a3a96", null ],
-    [ "getInitialSelection", "de/de7/classSelectable.html#ae04297ffcb2226afeb2449e9471f14a8", null ],
-    [ "initialSelection", "de/de7/classSelectable.html#a873f8a7df644bcde72cbc4f43a0b51fb", null ]
-];
