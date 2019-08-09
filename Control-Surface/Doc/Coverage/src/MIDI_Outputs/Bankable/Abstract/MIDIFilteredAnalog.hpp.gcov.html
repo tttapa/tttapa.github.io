@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 0b2ad90b48c292ccecd04fefc7bf5d74e6a3961c - src/MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp</title>
+  <title>LCOV - 873eee95429b63f030b1d0e29c1dcf81cebe3620 - src/MIDI_Outputs/Bankable/Abstract/MIDIFilteredAnalog.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">0b2ad90b48c292ccecd04fefc7bf5d74e6a3961c</td>
+            <td class="headerValue">873eee95429b63f030b1d0e29c1dcf81cebe3620</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">6</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-08-09 03:10:11</td>
+            <td class="headerValue">2019-08-09 17:36:46</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -121,96 +121,100 @@
 <a name="51"><span class="lineNum">      51 </span>            :      *</a>
 <a name="52"><span class="lineNum">      52 </span>            :      * @param   fn</a>
 <a name="53"><span class="lineNum">      53 </span>            :      *          A function pointer to the mapping function. This function</a>
-<a name="54"><span class="lineNum">      54 </span>            :      *          should take the filtered analog value of `PRECISION` bits as a </a>
-<a name="55"><span class="lineNum">      55 </span>            :      *          parameter, and should return a value of `PRECISION` bits.</a>
-<a name="56"><span class="lineNum">      56 </span>            :      */</a>
-<a name="57"><span class="lineNum">      57 </span>            :     void map(MappingFunction fn) { filteredAnalog.map(fn); }</a>
-<a name="58"><span class="lineNum">      58 </span>            : </a>
-<a name="59"><span class="lineNum">      59 </span>            :     /**</a>
-<a name="60"><span class="lineNum">      60 </span>            :      * @brief   Get the raw value of the analog input (this is the value </a>
-<a name="61"><span class="lineNum">      61 </span>            :      *          without applying the mapping function first).</a>
-<a name="62"><span class="lineNum">      62 </span>            :      */</a>
-<a name="63"><span class="lineNum">      63 </span>            :     uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }</a>
-<a name="64"><span class="lineNum">      64 </span>            : </a>
-<a name="65"><span class="lineNum">      65 </span>            :     /**</a>
-<a name="66"><span class="lineNum">      66 </span>            :      * @brief   Get the value of the analog input (this is the value after first</a>
-<a name="67"><span class="lineNum">      67 </span>            :      *          applying the mapping function).</a>
-<a name="68"><span class="lineNum">      68 </span>            :      */</a>
-<a name="69"><span class="lineNum">      69 </span>            :     uint8_t getValue() const { return filteredAnalog.getValue(); }</a>
-<a name="70"><span class="lineNum">      70 </span>            : </a>
-<a name="71"><span class="lineNum">      71 </span>            :   private:</a>
-<a name="72"><span class="lineNum">      72 </span>            :     FilteredAnalog&lt;PRECISION&gt; filteredAnalog;</a>
-<a name="73"><span class="lineNum">      73 </span>            :     const MIDICNChannelAddress baseAddress;</a>
-<a name="74"><span class="lineNum">      74 </span>            :     Sender sender;</a>
-<a name="75"><span class="lineNum">      75 </span>            : };</a>
-<a name="76"><span class="lineNum">      76 </span>            : </a>
-<a name="77"><span class="lineNum">      77 </span>            : // -------------------------------------------------------------------------- //</a>
+<a name="54"><span class="lineNum">      54 </span>            :      *          should take the filtered analog value of 10 bits as a </a>
+<a name="55"><span class="lineNum">      55 </span>            :      *          parameter, and should return a value of 10 bits.</a>
+<a name="56"><span class="lineNum">      56 </span>            :      * </a>
+<a name="57"><span class="lineNum">      57 </span>            :      * @see     FilteredAnalog::map     </a>
+<a name="58"><span class="lineNum">      58 </span>            :      */</a>
+<a name="59"><span class="lineNum">      59 </span>            :     void map(MappingFunction fn) { filteredAnalog.map(fn); }</a>
+<a name="60"><span class="lineNum">      60 </span>            : </a>
+<a name="61"><span class="lineNum">      61 </span>            :     /**</a>
+<a name="62"><span class="lineNum">      62 </span>            :      * @brief   Get the raw value of the analog input (this is the value </a>
+<a name="63"><span class="lineNum">      63 </span>            :      *          without applying the mapping function first).</a>
+<a name="64"><span class="lineNum">      64 </span>            :      */</a>
+<a name="65"><span class="lineNum">      65 </span>            :     uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }</a>
+<a name="66"><span class="lineNum">      66 </span>            : </a>
+<a name="67"><span class="lineNum">      67 </span>            :     /**</a>
+<a name="68"><span class="lineNum">      68 </span>            :      * @brief   Get the value of the analog input (this is the value after first</a>
+<a name="69"><span class="lineNum">      69 </span>            :      *          applying the mapping function).</a>
+<a name="70"><span class="lineNum">      70 </span>            :      */</a>
+<a name="71"><span class="lineNum">      71 </span>            :     uint8_t getValue() const { return filteredAnalog.getValue(); }</a>
+<a name="72"><span class="lineNum">      72 </span>            : </a>
+<a name="73"><span class="lineNum">      73 </span>            :   private:</a>
+<a name="74"><span class="lineNum">      74 </span>            :     FilteredAnalog&lt;PRECISION&gt; filteredAnalog;</a>
+<a name="75"><span class="lineNum">      75 </span>            :     const MIDICNChannelAddress baseAddress;</a>
+<a name="76"><span class="lineNum">      76 </span>            :     Sender sender;</a>
+<a name="77"><span class="lineNum">      77 </span>            : };</a>
 <a name="78"><span class="lineNum">      78 </span>            : </a>
-<a name="79"><span class="lineNum">      79 </span>            : /**</a>
-<a name="80"><span class="lineNum">      80 </span>            :  * @brief   A class for potentiometers and faders that send MIDI events (with</a>
-<a name="81"><span class="lineNum">      81 </span>            :  *          only a channel, no address) and that can be added to a Bank.</a>
-<a name="82"><span class="lineNum">      82 </span>            :  *</a>
-<a name="83"><span class="lineNum">      83 </span>            :  * The analog input is filtered and hysteresis is applied.</a>
+<a name="79"><span class="lineNum">      79 </span>            : // -------------------------------------------------------------------------- //</a>
+<a name="80"><span class="lineNum">      80 </span>            : </a>
+<a name="81"><span class="lineNum">      81 </span>            : /**</a>
+<a name="82"><span class="lineNum">      82 </span>            :  * @brief   A class for potentiometers and faders that send MIDI events (with</a>
+<a name="83"><span class="lineNum">      83 </span>            :  *          only a channel, no address) and that can be added to a Bank.</a>
 <a name="84"><span class="lineNum">      84 </span>            :  *</a>
-<a name="85"><span class="lineNum">      85 </span>            :  * @tparam  PRECISION</a>
-<a name="86"><span class="lineNum">      86 </span>            :  *          The analog precision in bits.</a>
-<a name="87"><span class="lineNum">      87 </span>            :  *</a>
-<a name="88"><span class="lineNum">      88 </span>            :  * @see     FilteredAnalog</a>
-<a name="89"><span class="lineNum">      89 </span>            :  */</a>
-<a name="90"><span class="lineNum">      90 </span>            : template &lt;class Sender, uint8_t PRECISION&gt;</a>
-<a name="91"><span class="lineNum">      91 </span><span class="lineCov">          1 : class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {</span></a>
-<a name="92"><span class="lineNum">      92 </span>            :   protected:</a>
-<a name="93"><span class="lineNum">      93 </span>            :     /**</a>
-<a name="94"><span class="lineNum">      94 </span>            :      * @brief   Construct a new MIDIFilteredAnalog.</a>
-<a name="95"><span class="lineNum">      95 </span>            :      *</a>
-<a name="96"><span class="lineNum">      96 </span>            :      * @param   analogPin</a>
-<a name="97"><span class="lineNum">      97 </span>            :      *          The analog input pin with the wiper of the potentiometer</a>
-<a name="98"><span class="lineNum">      98 </span>            :      *          connected.</a>
-<a name="99"><span class="lineNum">      99 </span>            :      * @todo    Bank Config</a>
-<a name="100"><span class="lineNum">     100 </span>            :      */</a>
-<a name="101"><span class="lineNum">     101 </span><span class="lineCov">          1 :     MIDIFilteredAnalog(const OutputBankConfig &amp;bank, pin_t analogPin,</span></a>
-<a name="102"><span class="lineNum">     102 </span>            :                        const MIDICNChannel &amp;address, const Sender &amp;sender)</a>
-<a name="103"><span class="lineNum">     103 </span>            :         : BankableMIDIOutput{bank},</a>
-<a name="104"><span class="lineNum">     104 </span><span class="lineCov">          2 :           filteredAnalog{analogPin}, address{address}, sender{sender} {}</span></a>
-<a name="105"><span class="lineNum">     105 </span>            : </a>
-<a name="106"><span class="lineNum">     106 </span>            :   public:</a>
-<a name="107"><span class="lineNum">     107 </span><span class="lineNoCov">          0 :     void begin() final override {}</span></a>
-<a name="108"><span class="lineNum">     108 </span><span class="lineNoCov">          0 :     void update() final override {</span></a>
-<a name="109"><span class="lineNum">     109 </span><span class="lineNoCov">          0 :         if (filteredAnalog.update())</span></a>
-<a name="110"><span class="lineNum">     110 </span><span class="lineNoCov">          0 :             sender.send(filteredAnalog.getValue(),</span></a>
-<a name="111"><span class="lineNum">     111 </span><span class="lineNoCov">          0 :                         address + getAddressOffset());</span></a>
-<a name="112"><span class="lineNum">     112 </span><span class="lineNoCov">          0 :     }</span></a>
-<a name="113"><span class="lineNum">     113 </span>            : </a>
-<a name="114"><span class="lineNum">     114 </span>            :     /**</a>
-<a name="115"><span class="lineNum">     115 </span>            :      * @brief   Specify a mapping function that is applied to the raw</a>
-<a name="116"><span class="lineNum">     116 </span>            :      *          analog value before sending.</a>
-<a name="117"><span class="lineNum">     117 </span>            :      *</a>
-<a name="118"><span class="lineNum">     118 </span>            :      * @param   fn</a>
-<a name="119"><span class="lineNum">     119 </span>            :      *          A function pointer to the mapping function. This function</a>
-<a name="120"><span class="lineNum">     120 </span>            :      *          should take the filtered analog value of `PRECISION` bits as a </a>
-<a name="121"><span class="lineNum">     121 </span>            :      *          parameter, and should return a value of `PRECISION` bits.</a>
-<a name="122"><span class="lineNum">     122 </span>            :      */</a>
-<a name="123"><span class="lineNum">     123 </span>            :     void map(MappingFunction fn) { filteredAnalog.map(fn); }</a>
-<a name="124"><span class="lineNum">     124 </span>            : </a>
-<a name="125"><span class="lineNum">     125 </span>            :     /**</a>
-<a name="126"><span class="lineNum">     126 </span>            :      * @brief   Get the raw value of the analog input (this is the value </a>
-<a name="127"><span class="lineNum">     127 </span>            :      *          without applying the mapping function first).</a>
-<a name="128"><span class="lineNum">     128 </span>            :      */</a>
-<a name="129"><span class="lineNum">     129 </span>            :     uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }</a>
-<a name="130"><span class="lineNum">     130 </span>            : </a>
-<a name="131"><span class="lineNum">     131 </span>            :     /**</a>
-<a name="132"><span class="lineNum">     132 </span>            :      * @brief   Get the value of the analog input (this is the value after first</a>
-<a name="133"><span class="lineNum">     133 </span>            :      *          applying the mapping function).</a>
-<a name="134"><span class="lineNum">     134 </span>            :      */</a>
-<a name="135"><span class="lineNum">     135 </span>            :     uint8_t getValue() const { return filteredAnalog.getValue(); }</a>
-<a name="136"><span class="lineNum">     136 </span>            : </a>
-<a name="137"><span class="lineNum">     137 </span>            :   private:</a>
-<a name="138"><span class="lineNum">     138 </span>            :     FilteredAnalog&lt;PRECISION&gt; filteredAnalog;</a>
-<a name="139"><span class="lineNum">     139 </span>            :     const MIDICNChannelAddress address;</a>
-<a name="140"><span class="lineNum">     140 </span>            :     Sender sender;</a>
-<a name="141"><span class="lineNum">     141 </span>            : };</a>
-<a name="142"><span class="lineNum">     142 </span>            : </a>
-<a name="143"><span class="lineNum">     143 </span>            : } // namespace Bankable</a>
+<a name="85"><span class="lineNum">      85 </span>            :  * The analog input is filtered and hysteresis is applied.</a>
+<a name="86"><span class="lineNum">      86 </span>            :  *</a>
+<a name="87"><span class="lineNum">      87 </span>            :  * @tparam  PRECISION</a>
+<a name="88"><span class="lineNum">      88 </span>            :  *          The analog precision in bits.</a>
+<a name="89"><span class="lineNum">      89 </span>            :  *</a>
+<a name="90"><span class="lineNum">      90 </span>            :  * @see     FilteredAnalog</a>
+<a name="91"><span class="lineNum">      91 </span>            :  */</a>
+<a name="92"><span class="lineNum">      92 </span>            : template &lt;class Sender, uint8_t PRECISION&gt;</a>
+<a name="93"><span class="lineNum">      93 </span><span class="lineCov">          1 : class MIDIFilteredAnalog : public MIDIOutputElement, public BankableMIDIOutput {</span></a>
+<a name="94"><span class="lineNum">      94 </span>            :   protected:</a>
+<a name="95"><span class="lineNum">      95 </span>            :     /**</a>
+<a name="96"><span class="lineNum">      96 </span>            :      * @brief   Construct a new MIDIFilteredAnalog.</a>
+<a name="97"><span class="lineNum">      97 </span>            :      *</a>
+<a name="98"><span class="lineNum">      98 </span>            :      * @param   analogPin</a>
+<a name="99"><span class="lineNum">      99 </span>            :      *          The analog input pin with the wiper of the potentiometer</a>
+<a name="100"><span class="lineNum">     100 </span>            :      *          connected.</a>
+<a name="101"><span class="lineNum">     101 </span>            :      * @todo    Bank Config</a>
+<a name="102"><span class="lineNum">     102 </span>            :      */</a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineCov">          1 :     MIDIFilteredAnalog(const OutputBankConfig &amp;bank, pin_t analogPin,</span></a>
+<a name="104"><span class="lineNum">     104 </span>            :                        const MIDICNChannel &amp;address, const Sender &amp;sender)</a>
+<a name="105"><span class="lineNum">     105 </span>            :         : BankableMIDIOutput{bank},</a>
+<a name="106"><span class="lineNum">     106 </span><span class="lineCov">          2 :           filteredAnalog{analogPin}, address{address}, sender{sender} {}</span></a>
+<a name="107"><span class="lineNum">     107 </span>            : </a>
+<a name="108"><span class="lineNum">     108 </span>            :   public:</a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineNoCov">          0 :     void begin() final override {}</span></a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineNoCov">          0 :     void update() final override {</span></a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineNoCov">          0 :         if (filteredAnalog.update())</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineNoCov">          0 :             sender.send(filteredAnalog.getValue(),</span></a>
+<a name="113"><span class="lineNum">     113 </span><span class="lineNoCov">          0 :                         address + getAddressOffset());</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineNoCov">          0 :     }</span></a>
+<a name="115"><span class="lineNum">     115 </span>            : </a>
+<a name="116"><span class="lineNum">     116 </span>            :     /**</a>
+<a name="117"><span class="lineNum">     117 </span>            :      * @brief   Specify a mapping function that is applied to the raw</a>
+<a name="118"><span class="lineNum">     118 </span>            :      *          analog value before sending.</a>
+<a name="119"><span class="lineNum">     119 </span>            :      *</a>
+<a name="120"><span class="lineNum">     120 </span>            :      * @param   fn</a>
+<a name="121"><span class="lineNum">     121 </span>            :      *          A function pointer to the mapping function. This function</a>
+<a name="122"><span class="lineNum">     122 </span>            :      *          should take the filtered analog value of 10 bits as a </a>
+<a name="123"><span class="lineNum">     123 </span>            :      *          parameter, and should return a value of 10 bits.</a>
+<a name="124"><span class="lineNum">     124 </span>            :      * </a>
+<a name="125"><span class="lineNum">     125 </span>            :      * @see     FilteredAnalog::map     </a>
+<a name="126"><span class="lineNum">     126 </span>            :      */</a>
+<a name="127"><span class="lineNum">     127 </span>            :     void map(MappingFunction fn) { filteredAnalog.map(fn); }</a>
+<a name="128"><span class="lineNum">     128 </span>            : </a>
+<a name="129"><span class="lineNum">     129 </span>            :     /**</a>
+<a name="130"><span class="lineNum">     130 </span>            :      * @brief   Get the raw value of the analog input (this is the value </a>
+<a name="131"><span class="lineNum">     131 </span>            :      *          without applying the mapping function first).</a>
+<a name="132"><span class="lineNum">     132 </span>            :      */</a>
+<a name="133"><span class="lineNum">     133 </span>            :     uint8_t getRawValue() const { return filteredAnalog.getRawValue(); }</a>
+<a name="134"><span class="lineNum">     134 </span>            : </a>
+<a name="135"><span class="lineNum">     135 </span>            :     /**</a>
+<a name="136"><span class="lineNum">     136 </span>            :      * @brief   Get the value of the analog input (this is the value after first</a>
+<a name="137"><span class="lineNum">     137 </span>            :      *          applying the mapping function).</a>
+<a name="138"><span class="lineNum">     138 </span>            :      */</a>
+<a name="139"><span class="lineNum">     139 </span>            :     uint8_t getValue() const { return filteredAnalog.getValue(); }</a>
+<a name="140"><span class="lineNum">     140 </span>            : </a>
+<a name="141"><span class="lineNum">     141 </span>            :   private:</a>
+<a name="142"><span class="lineNum">     142 </span>            :     FilteredAnalog&lt;PRECISION&gt; filteredAnalog;</a>
+<a name="143"><span class="lineNum">     143 </span>            :     const MIDICNChannelAddress address;</a>
+<a name="144"><span class="lineNum">     144 </span>            :     Sender sender;</a>
+<a name="145"><span class="lineNum">     145 </span>            : };</a>
+<a name="146"><span class="lineNum">     146 </span>            : </a>
+<a name="147"><span class="lineNum">     147 </span>            : } // namespace Bankable</a>
 </pre>
       </td>
     </tr>
