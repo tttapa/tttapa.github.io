@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 6256c11cb7c5643fa6c4dea3ed6f7ea49e10df08 - src/MIDI_Outputs/Bankable/Abstract/MIDIIncrementDecrementButtons.hpp</title>
+  <title>LCOV - 0b2ad90b48c292ccecd04fefc7bf5d74e6a3961c - src/MIDI_Outputs/Bankable/Abstract/MIDIIncrementDecrementButtons.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">6256c11cb7c5643fa6c4dea3ed6f7ea49e10df08</td>
+            <td class="headerValue">0b2ad90b48c292ccecd04fefc7bf5d74e6a3961c</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntry">21</td>
-            <td class="headerCovTableEntryLo">9.5 %</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-08-08 00:12:42</td>
+            <td class="headerValue">2019-08-09 03:10:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">5</td>
-            <td class="headerCovTableEntryLo">20.0 %</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntry">0</td>
+            <td class="headerCovTableEntryHi">-</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -85,7 +85,7 @@
 <a name="15"><span class="lineNum">      15 </span>            :  * @todo    Combine RelativeSender and ResetSender?</a>
 <a name="16"><span class="lineNum">      16 </span>            :  */</a>
 <a name="17"><span class="lineNum">      17 </span>            : template &lt;class RelativeSender, class ResetSender&gt;</a>
-<a name="18"><span class="lineNum">      18 </span>            : class MIDIIncrementDecrementButtons : public BankableMIDIOutput,</a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          2 : class MIDIIncrementDecrementButtons : public BankableMIDIOutput,</span></a>
 <a name="19"><span class="lineNum">      19 </span>            :                                       public MIDIOutputElement {</a>
 <a name="20"><span class="lineNum">      20 </span>            :   protected:</a>
 <a name="21"><span class="lineNum">      21 </span>            :     /**</a>
@@ -102,34 +102,34 @@
 <a name="32"><span class="lineNum">      32 </span>            :                                   const ResetSender &amp;resetSender)</a>
 <a name="33"><span class="lineNum">      33 </span>            :         : BankableMIDIOutput{config}, buttons(buttons), address(address),</a>
 <a name="34"><span class="lineNum">      34 </span>            :           multiplier(multiplier), resetAddress(resetAddress),</a>
-<a name="35"><span class="lineNum">      35 </span><span class="lineCov">          1 :           relativeSender{relativeSender}, resetSender{resetSender} {}</span></a>
+<a name="35"><span class="lineNum">      35 </span><span class="lineCov">          2 :           relativeSender{relativeSender}, resetSender{resetSender} {}</span></a>
 <a name="36"><span class="lineNum">      36 </span>            : </a>
 <a name="37"><span class="lineNum">      37 </span>            :   public:</a>
-<a name="38"><span class="lineNum">      38 </span><span class="lineNoCov">          0 :     void begin() override { buttons.begin(); }</span></a>
+<a name="38"><span class="lineNum">      38 </span>            :     void begin() override { buttons.begin(); }</a>
 <a name="39"><span class="lineNum">      39 </span>            : </a>
-<a name="40"><span class="lineNum">      40 </span><span class="lineNoCov">          0 :     void update() override {</span></a>
+<a name="40"><span class="lineNum">      40 </span>            :     void update() override {</a>
 <a name="41"><span class="lineNum">      41 </span>            :         using IncrDecrButtons = IncrementDecrementButtons;</a>
-<a name="42"><span class="lineNum">      42 </span><span class="lineNoCov">          0 :         MIDICNChannelAddress address = this-&gt;address + getAddressOffset();</span></a>
-<a name="43"><span class="lineNum">      43 </span><span class="lineNoCov">          0 :         switch (buttons.getState()) {</span></a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineNoCov">          0 :             case IncrDecrButtons::Increment: send(multiplier, address); break;</span></a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineNoCov">          0 :             case IncrDecrButtons::Decrement: send(-multiplier, address); break;</span></a>
-<a name="46"><span class="lineNum">      46 </span><span class="lineNoCov">          0 :             case IncrDecrButtons::Reset: reset(); break;</span></a>
-<a name="47"><span class="lineNum">      47 </span><span class="lineNoCov">          0 :             case IncrDecrButtons::Nothing: break;</span></a>
-<a name="48"><span class="lineNum">      48 </span><span class="lineNoCov">          0 :             default: break;</span></a>
+<a name="42"><span class="lineNum">      42 </span>            :         MIDICNChannelAddress address = this-&gt;address + getAddressOffset();</a>
+<a name="43"><span class="lineNum">      43 </span>            :         switch (buttons.getState()) {</a>
+<a name="44"><span class="lineNum">      44 </span>            :             case IncrDecrButtons::Increment: send(multiplier, address); break;</a>
+<a name="45"><span class="lineNum">      45 </span>            :             case IncrDecrButtons::Decrement: send(-multiplier, address); break;</a>
+<a name="46"><span class="lineNum">      46 </span>            :             case IncrDecrButtons::Reset: reset(); break;</a>
+<a name="47"><span class="lineNum">      47 </span>            :             case IncrDecrButtons::Nothing: break;</a>
+<a name="48"><span class="lineNum">      48 </span>            :             default: break;</a>
 <a name="49"><span class="lineNum">      49 </span>            :         }</a>
-<a name="50"><span class="lineNum">      50 </span><span class="lineNoCov">          0 :     }</span></a>
+<a name="50"><span class="lineNum">      50 </span>            :     }</a>
 <a name="51"><span class="lineNum">      51 </span>            : </a>
-<a name="52"><span class="lineNum">      52 </span><span class="lineNoCov">          0 :     void send(long delta, const MIDICNChannelAddress &amp;address) {</span></a>
-<a name="53"><span class="lineNum">      53 </span><span class="lineNoCov">          0 :         relativeSender.send(delta, address);</span></a>
-<a name="54"><span class="lineNum">      54 </span><span class="lineNoCov">          0 :     }</span></a>
+<a name="52"><span class="lineNum">      52 </span>            :     void send(long delta, const MIDICNChannelAddress &amp;address) {</a>
+<a name="53"><span class="lineNum">      53 </span>            :         relativeSender.send(delta, address);</a>
+<a name="54"><span class="lineNum">      54 </span>            :     }</a>
 <a name="55"><span class="lineNum">      55 </span>            : </a>
-<a name="56"><span class="lineNum">      56 </span><span class="lineNoCov">          0 :     void reset() {</span></a>
-<a name="57"><span class="lineNum">      57 </span><span class="lineNoCov">          0 :         if (resetAddress) {</span></a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineNoCov">          0 :             MIDICNChannelAddress address = resetAddress + getAddressOffset();</span></a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineNoCov">          0 :             resetSender.sendOn(address);</span></a>
-<a name="60"><span class="lineNum">      60 </span><span class="lineNoCov">          0 :             resetSender.sendOff(address);</span></a>
+<a name="56"><span class="lineNum">      56 </span>            :     void reset() {</a>
+<a name="57"><span class="lineNum">      57 </span>            :         if (resetAddress) {</a>
+<a name="58"><span class="lineNum">      58 </span>            :             MIDICNChannelAddress address = resetAddress + getAddressOffset();</a>
+<a name="59"><span class="lineNum">      59 </span>            :             resetSender.sendOn(address);</a>
+<a name="60"><span class="lineNum">      60 </span>            :             resetSender.sendOff(address);</a>
 <a name="61"><span class="lineNum">      61 </span>            :         }</a>
-<a name="62"><span class="lineNum">      62 </span><span class="lineNoCov">          0 :     }</span></a>
+<a name="62"><span class="lineNum">      62 </span>            :     }</a>
 <a name="63"><span class="lineNum">      63 </span>            : </a>
 <a name="64"><span class="lineNum">      64 </span>            : #ifdef INDIVIDUAL_BUTTON_INVERT</a>
 <a name="65"><span class="lineNum">      65 </span>            :     void invert() { buttons.invert(); }</a>

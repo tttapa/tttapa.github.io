@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 6256c11cb7c5643fa6c4dea3ed6f7ea49e10df08 - src/MIDI_Interfaces/DebugMIDI_Interface.cpp</title>
+  <title>LCOV - 0b2ad90b48c292ccecd04fefc7bf5d74e6a3961c - src/MIDI_Interfaces/DebugMIDI_Interface.cpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">6256c11cb7c5643fa6c4dea3ed6f7ea49e10df08</td>
+            <td class="headerValue">0b2ad90b48c292ccecd04fefc7bf5d74e6a3961c</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">53</td>
+            <td class="headerCovTableEntry">52</td>
             <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-08-08 00:12:42</td>
+            <td class="headerValue">2019-08-09 03:10:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -119,33 +119,33 @@
 <a name="49"><span class="lineNum">      49 </span>            :         }</a>
 <a name="50"><span class="lineNum">      50 </span><span class="lineNoCov">          0 :         if (firstChar &amp;&amp; secondChar) {</span></a>
 <a name="51"><span class="lineNum">      51 </span>            :             // if we received two hex characters</a>
-<a name="52"><span class="lineNum">      52 </span>            :             uint8_t midiByte =</a>
+<a name="52"><span class="lineNum">      52 </span><span class="lineNoCov">          0 :             uint8_t midiByte =</span></a>
 <a name="53"><span class="lineNum">      53 </span><span class="lineNoCov">          0 :                 hexCharToNibble(firstChar) &lt;&lt; 4 | hexCharToNibble(secondChar);</span></a>
 <a name="54"><span class="lineNum">      54 </span><span class="lineNoCov">          0 :             firstChar = '\0';</span></a>
 <a name="55"><span class="lineNum">      55 </span><span class="lineNoCov">          0 :             secondChar = '\0';</span></a>
 <a name="56"><span class="lineNum">      56 </span><span class="lineNoCov">          0 :             MIDI_read_t parseResult = parser.parse(midiByte);</span></a>
 <a name="57"><span class="lineNum">      57 </span><span class="lineNoCov">          0 :             if (parseResult != NO_MESSAGE)</span></a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineNoCov">          0 :                 return parseResult;</span></a>
+<a name="58"><span class="lineNum">      58 </span>            :                 return parseResult;</a>
 <a name="59"><span class="lineNum">      59 </span><span class="lineNoCov">          0 :         } else if (!isxdigit(data) &amp;&amp; firstChar) {</span></a>
 <a name="60"><span class="lineNum">      60 </span>            :             // if we received one hex character followed by whitespace/other</a>
 <a name="61"><span class="lineNum">      61 </span><span class="lineNoCov">          0 :             uint8_t midiByte = hexCharToNibble(firstChar);</span></a>
 <a name="62"><span class="lineNum">      62 </span><span class="lineNoCov">          0 :             firstChar = '\0';</span></a>
 <a name="63"><span class="lineNum">      63 </span><span class="lineNoCov">          0 :             MIDI_read_t parseResult = parser.parse(midiByte);</span></a>
 <a name="64"><span class="lineNum">      64 </span><span class="lineNoCov">          0 :             if (parseResult != NO_MESSAGE)</span></a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineNoCov">          0 :                 return parseResult;</span></a>
+<a name="65"><span class="lineNum">      65 </span>            :                 return parseResult;</a>
 <a name="66"><span class="lineNum">      66 </span>            :         } else {</a>
 <a name="67"><span class="lineNum">      67 </span>            :             // Ignore any characters other than whitespace and hexadecimal</a>
 <a name="68"><span class="lineNum">      68 </span>            :             // digits</a>
 <a name="69"><span class="lineNum">      69 </span>            :         }</a>
 <a name="70"><span class="lineNum">      70 </span>            :     }</a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineNoCov">          0 :     return NO_MESSAGE;</span></a>
+<a name="71"><span class="lineNum">      71 </span>            :     return NO_MESSAGE;</a>
 <a name="72"><span class="lineNum">      72 </span>            : }</a>
 <a name="73"><span class="lineNum">      73 </span>            : </a>
 <a name="74"><span class="lineNum">      74 </span><span class="lineNoCov">          0 : void StreamDebugMIDI_Interface::sendImpl(uint8_t m, uint8_t c, uint8_t d1,</span></a>
 <a name="75"><span class="lineNum">      75 </span>            :                                          uint8_t d2, uint8_t cn) {</a>
 <a name="76"><span class="lineNum">      76 </span><span class="lineNoCov">          0 :     uint8_t messageType = (m &gt;&gt; 4) - 8;</span></a>
 <a name="77"><span class="lineNum">      77 </span><span class="lineNoCov">          0 :     if (messageType &gt;= 7)</span></a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineNoCov">          0 :         return;</span></a>
+<a name="78"><span class="lineNum">      78 </span>            :         return;</a>
 <a name="79"><span class="lineNum">      79 </span><span class="lineNoCov">          0 :     stream.print(DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]);</span></a>
 <a name="80"><span class="lineNum">      80 </span><span class="lineNoCov">          0 :     stream.print(&quot;\tChannel: &quot;);</span></a>
 <a name="81"><span class="lineNum">      81 </span><span class="lineNoCov">          0 :     stream.print(c + 1);</span></a>
@@ -163,7 +163,7 @@
 <a name="93"><span class="lineNum">      93 </span>            :                                          uint8_t cn) {</a>
 <a name="94"><span class="lineNum">      94 </span><span class="lineNoCov">          0 :     uint8_t messageType = (m &gt;&gt; 4) - 8;</span></a>
 <a name="95"><span class="lineNum">      95 </span><span class="lineNoCov">          0 :     if (messageType &gt;= 7)</span></a>
-<a name="96"><span class="lineNum">      96 </span><span class="lineNoCov">          0 :         return;</span></a>
+<a name="96"><span class="lineNum">      96 </span>            :         return;</a>
 <a name="97"><span class="lineNum">      97 </span><span class="lineNoCov">          0 :     stream.print(DebugMIDIMessageNames::MIDIStatusTypeNames[messageType]);</span></a>
 <a name="98"><span class="lineNum">      98 </span><span class="lineNoCov">          0 :     stream.print(&quot;\tChannel: &quot;);</span></a>
 <a name="99"><span class="lineNum">      99 </span><span class="lineNoCov">          0 :     stream.print(c + 1);</span></a>
@@ -177,9 +177,9 @@
 <a name="107"><span class="lineNum">     107 </span>            : </a>
 <a name="108"><span class="lineNum">     108 </span><span class="lineNoCov">          0 : void StreamDebugMIDI_Interface::sendImpl(const uint8_t *data, size_t length,</span></a>
 <a name="109"><span class="lineNum">     109 </span>            :                                          uint8_t cn) {</a>
-<a name="110"><span class="lineNum">     110 </span>            :     (void)data;</a>
-<a name="111"><span class="lineNum">     111 </span>            :     (void)length;</a>
-<a name="112"><span class="lineNum">     112 </span>            :     (void)cn; // TODO</a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineNoCov">          0 :     (void)data;</span></a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineNoCov">          0 :     (void)length;</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineNoCov">          0 :     (void)cn; // TODO</span></a>
 <a name="113"><span class="lineNum">     113 </span><span class="lineNoCov">          0 : }</span></a>
 </pre>
       </td>

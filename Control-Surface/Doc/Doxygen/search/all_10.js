@@ -36,7 +36,6 @@ var searchData=
   ['relativeccsender_2ehpp',['RelativeCCSender.hpp',['../d9/d24/RelativeCCSender_8hpp.html',1,'']]],
   ['relativemidicnchanneladdress',['RelativeMIDICNChannelAddress',['../da/dc7/classRelativeMIDICNChannelAddress.html',1,'RelativeMIDICNChannelAddress'],['../da/dc7/classRelativeMIDICNChannelAddress.html#a2cc96fe8f8522e5476db8c0a7d23f04c',1,'RelativeMIDICNChannelAddress::RelativeMIDICNChannelAddress()'],['../da/dc7/classRelativeMIDICNChannelAddress.html#a736c99cc8ecfd8caec5fa54649b00dfd',1,'RelativeMIDICNChannelAddress::RelativeMIDICNChannelAddress(int deltaAddress, int deltaChannel=0, int deltaCableNumber=0)']]],
   ['relativesender',['relativeSender',['../dc/dc2/classMIDIIncrementDecrementButtons.html#af9dd6e6e8d967619b2c13ae3e700d324',1,'MIDIIncrementDecrementButtons::relativeSender()'],['../d1/d2f/classBankable_1_1MIDIIncrementDecrementButtons.html#a528ec39631d22e65b692d97f1dbe33f7',1,'Bankable::MIDIIncrementDecrementButtons::relativeSender()']]],
-  ['relativesendfunction',['RelativeSendFunction',['../d0/d4e/Def_8hpp.html#a4150949f2e293db161109e2becfd10c2',1,'Def.hpp']]],
   ['relay',['RELAY',['../d7/dc7/namespaceMCU.html#a2d8d192fddf3c5f33317833a439a135e',1,'MCU']]],
   ['release',['release',['../dd/d67/classunique__ptr.html#ac759a525593de8f5febb013371f0fa5f',1,'unique_ptr']]],
   ['released',['Released',['../d1/d19/classButton.html#ae15938c6b06f6bbf909314f987938fd6adb03baf23280c464d97fd551f384fc66',1,'Button']]],

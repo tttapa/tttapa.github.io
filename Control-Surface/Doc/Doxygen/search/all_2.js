@@ -85,8 +85,6 @@ var searchData=
   ['continuousccsender',['ContinuousCCSender',['../da/d07/classContinuousCCSender.html',1,'']]],
   ['continuousccsender_2ecpp',['ContinuousCCSender.cpp',['../d9/d94/ContinuousCCSender_8cpp.html',1,'']]],
   ['continuousccsender_2ehpp',['ContinuousCCSender.hpp',['../db/dd1/ContinuousCCSender_8hpp.html',1,'']]],
-  ['continuoussendfunction14bit',['ContinuousSendFunction14Bit',['../d0/d4e/Def_8hpp.html#a340d8f15471358240d1ab3c7f8b323f9',1,'Def.hpp']]],
-  ['continuoussendfunction7bit',['ContinuousSendFunction7Bit',['../d0/d4e/Def_8hpp.html#a07aaa0ba182f95bf623abc210207f928',1,'Def.hpp']]],
   ['control',['CONTROL',['../d7/dc7/namespaceMCU.html#a96b6768f27bc6657ff892af5fd93ccce',1,'MCU']]],
   ['control_5fchange',['CONTROL_CHANGE',['../d7/d2d/MIDI__Parser_8hpp.html#a222dd918246e7470a36e3537724d5a17',1,'MIDI_Parser.hpp']]],
   ['control_5fchange_2ehpp',['Control_Change.hpp',['../d9/d43/Control__Change_8hpp.html',1,'']]],

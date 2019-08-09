@@ -1,7 +1,7 @@
 var searchData=
 [
   ['m2',['m2',['../da/dd4/namespaceIntervals.html#a3ae063eac2cb3034c4c9bf41641f8cad',1,'Intervals::m2()'],['../da/dd4/namespaceIntervals.html#a24badc22181dd0156e1cbbece4795332',1,'Intervals::M2()']]],
-  ['m3',['M3',['../da/dd4/namespaceIntervals.html#a0bba7f36cf4e22efafe7b4b029d37d96',1,'Intervals::M3()'],['../da/dd4/namespaceIntervals.html#a87b3fbf4d404906dbc30ce0357099734',1,'Intervals::m3()']]],
+  ['m3',['m3',['../da/dd4/namespaceIntervals.html#a87b3fbf4d404906dbc30ce0357099734',1,'Intervals::m3()'],['../da/dd4/namespaceIntervals.html#a0bba7f36cf4e22efafe7b4b029d37d96',1,'Intervals::M3()']]],
   ['m6',['m6',['../da/dd4/namespaceIntervals.html#a113a63113079585e980675007ea59791',1,'Intervals::m6()'],['../da/dd4/namespaceIntervals.html#ae990da8805f898263d30e3377e4aba78',1,'Intervals::M6()']]],
   ['m7',['m7',['../da/dd4/namespaceIntervals.html#a46249007f68970d4493844be8df14f41',1,'Intervals::m7()'],['../da/dd4/namespaceIntervals.html#ac4b40453c5311d0dfc527214c0d401e9',1,'Intervals::M7()']]],
   ['major',['Major',['../df/d20/namespaceChords.html#a35787176ae6383c1f7f5108b755709fc',1,'Chords']]],

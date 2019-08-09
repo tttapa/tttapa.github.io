@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 6256c11cb7c5643fa6c4dea3ed6f7ea49e10df08 - src/MIDI_Inputs/MIDINote.hpp</title>
+  <title>LCOV - 0b2ad90b48c292ccecd04fefc7bf5d74e6a3961c - src/MIDI_Inputs/MIDINote.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">6256c11cb7c5643fa6c4dea3ed6f7ea49e10df08</td>
+            <td class="headerValue">0b2ad90b48c292ccecd04fefc7bf5d74e6a3961c</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">11</td>
@@ -37,11 +37,11 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-08-08 00:12:42</td>
+            <td class="headerValue">2019-08-09 03:10:11</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">8</td>
-            <td class="headerCovTableEntry">8</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntry">3</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -73,32 +73,32 @@
 <a name="3"><span class="lineNum">       3 </span>            : #include &quot;MIDIInputElementNote.hpp&quot;</a>
 <a name="4"><span class="lineNum">       4 </span>            : </a>
 <a name="5"><span class="lineNum">       5 </span>            : /** An abstract base class for MIDI note input. */</a>
-<a name="6"><span class="lineNum">       6 </span>            : class MIDINote_Base : public MIDIInputElementNote {</a>
+<a name="6"><span class="lineNum">       6 </span><span class="lineCov">          5 : class MIDINote_Base : public MIDIInputElementNote {</span></a>
 <a name="7"><span class="lineNum">       7 </span>            :   protected:</a>
 <a name="8"><span class="lineNum">       8 </span>            :     MIDINote_Base() {} // not used, only for virtual inheritance</a>
-<a name="9"><span class="lineNum">       9 </span><span class="lineCov">          5 :     MIDINote_Base(const MIDICNChannelAddress &amp;address)</span></a>
-<a name="10"><span class="lineNum">      10 </span><span class="lineCov">          5 :         : MIDIInputElementNote(address) {}</span></a>
+<a name="9"><span class="lineNum">       9 </span>            :     MIDINote_Base(const MIDICNChannelAddress &amp;address)</a>
+<a name="10"><span class="lineNum">      10 </span><span class="lineCov">          2 :         : MIDIInputElementNote(address) {}</span></a>
 <a name="11"><span class="lineNum">      11 </span>            : </a>
 <a name="12"><span class="lineNum">      12 </span>            :   public:</a>
 <a name="13"><span class="lineNum">      13 </span>            :     virtual uint8_t getValue() const = 0;</a>
 <a name="14"><span class="lineNum">      14 </span><span class="lineCov">          8 :     bool getState() const { return getValue() &gt;= NOTE_VELOCITY_THRESHOLD; }</span></a>
 <a name="15"><span class="lineNum">      15 </span>            : </a>
 <a name="16"><span class="lineNum">      16 </span>            :   protected:</a>
-<a name="17"><span class="lineNum">      17 </span><span class="lineCov">          8 :     uint8_t getValueFromMIDIMessage(const ChannelMessageMatcher &amp;midimsg) {</span></a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          8 :         return midimsg.type == NOTE_ON ? midimsg.data2 : 0;</span></a>
+<a name="17"><span class="lineNum">      17 </span>            :     uint8_t getValueFromMIDIMessage(const ChannelMessageMatcher &amp;midimsg) {</a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          6 :         return midimsg.type == NOTE_ON ? midimsg.data2 : 0;</span></a>
 <a name="19"><span class="lineNum">      19 </span>            :     }</a>
 <a name="20"><span class="lineNum">      20 </span>            : };</a>
 <a name="21"><span class="lineNum">      21 </span>            : </a>
 <a name="22"><span class="lineNum">      22 </span>            : // -------------------------------------------------------------------------- //</a>
 <a name="23"><span class="lineNum">      23 </span>            : </a>
 <a name="24"><span class="lineNum">      24 </span>            : /** A class for MIDI note input. */</a>
-<a name="25"><span class="lineNum">      25 </span>            : class MIDINote : virtual public MIDINote_Base {</a>
+<a name="25"><span class="lineNum">      25 </span><span class="lineCov">          5 : class MIDINote : virtual public MIDINote_Base {</span></a>
 <a name="26"><span class="lineNum">      26 </span>            :   public:</a>
-<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          5 :     MIDINote(const MIDICNChannelAddress &amp;address) : MIDINote_Base(address) {}</span></a>
+<a name="27"><span class="lineNum">      27 </span><span class="lineCov">          9 :     MIDINote(const MIDICNChannelAddress &amp;address) : MIDINote_Base(address) {}</span></a>
 <a name="28"><span class="lineNum">      28 </span>            : </a>
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">         14 :     uint8_t getValue() const override { return value; }</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">          6 :     uint8_t getValue() const override { return value; }</span></a>
 <a name="30"><span class="lineNum">      30 </span>            : </a>
-<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          2 :     void reset() override { value = 0; }</span></a>
+<a name="31"><span class="lineNum">      31 </span><span class="lineCov">          1 :     void reset() override { value = 0; }</span></a>
 <a name="32"><span class="lineNum">      32 </span>            : </a>
 <a name="33"><span class="lineNum">      33 </span>            :   private:</a>
 <a name="34"><span class="lineNum">      34 </span><span class="lineCov">          8 :     bool updateImpl(const ChannelMessageMatcher &amp;midimsg,</span></a>

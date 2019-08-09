@@ -37,7 +37,7 @@ var searchData=
   ['solo_5f4',['SOLO_4',['../d7/dc7/namespaceMCU.html#ae4887527db0f87cb3caa2457d2881f8f',1,'MCU']]],
   ['solo_5f5',['SOLO_5',['../d7/dc7/namespaceMCU.html#a8487fcfd7495b03a65945ffc0af32bf5',1,'MCU']]],
   ['solo_5f6',['SOLO_6',['../d7/dc7/namespaceMCU.html#a1ab1ff1f17b3f16251ae9d05f248beb3',1,'MCU']]],
-  ['solo_5f7',['solo_7',['../dd/d93/namespaceXBM.html#a439e20ae22c87befd7c4dfda4b4d80c1',1,'XBM::solo_7()'],['../d7/dc7/namespaceMCU.html#a8dc9fd22834328f4e685ed66234386c1',1,'MCU::SOLO_7()']]],
+  ['solo_5f7',['SOLO_7',['../d7/dc7/namespaceMCU.html#a8dc9fd22834328f4e685ed66234386c1',1,'MCU::SOLO_7()'],['../dd/d93/namespaceXBM.html#a439e20ae22c87befd7c4dfda4b4d80c1',1,'XBM::solo_7()']]],
   ['solo_5f8',['SOLO_8',['../d7/dc7/namespaceMCU.html#af861683f5a82f8a12e612d7a88fdade9',1,'MCU']]],
   ['sostenuto',['Sostenuto',['../d4/dbe/namespaceMIDI__CC.html#a25bb5a787a1d7e457ccd77bfb72f9988',1,'MIDI_CC']]],
   ['sound_5fcontroller_5f1',['Sound_Controller_1',['../d4/dbe/namespaceMIDI__CC.html#ac25c7ae145b1289979d799d28e84a291',1,'MIDI_CC']]],
