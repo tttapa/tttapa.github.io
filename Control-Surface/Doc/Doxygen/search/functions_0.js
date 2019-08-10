@@ -11,7 +11,7 @@ var searchData=
   ['analyzer',['Analyzer',['../d0/d18/classAudioVU_1_1Analyzer.html#a6d80607f4f8f1ad1cf042b65dc4a8f7c',1,'AudioVU::Analyzer::Analyzer(AudioAnalyzePeak &amp;analyzer)'],['../d0/d18/classAudioVU_1_1Analyzer.html#a456a57cf39db6cb560334aec076bb07f',1,'AudioVU::Analyzer::Analyzer(AudioAnalyzeRMS &amp;analyzer)']]],
   ['append',['append',['../dd/d16/classDoublyLinkedList.html#a3c067d3d91d183268148650708108be6',1,'DoublyLinkedList::append(Node *node)'],['../dd/d16/classDoublyLinkedList.html#a57fafae0be8c04f523bbfc06aa2c9bf9',1,'DoublyLinkedList::append(Node &amp;node)']]],
   ['assignmentdisplay',['AssignmentDisplay',['../d1/d08/classMCU_1_1AssignmentDisplay.html#a2e894184f69e1acaec6ccc1bf50a0184',1,'MCU::AssignmentDisplay']]],
-  ['audiovu',['AudioVU',['../d4/dce/classAudioVU.html#a16291b18a720891a1de7dcb3bdc88660',1,'AudioVU::AudioVU(T &amp;level, float gain=1.0, uint8_t max=100)'],['../d4/dce/classAudioVU.html#a70e029281a6a54a2c3b8e436ccb84b67',1,'AudioVU::AudioVU(T &amp;level, MovingCoilBallistics ballistics, float gain=1.0, uint8_t max=100)']]],
+  ['audiovu',['AudioVU',['../d4/dce/classAudioVU.html#abe3e257cf7f2ca4d5992e4bdfd0934fc',1,'AudioVU::AudioVU(T &amp;level, float gain=1.0, uint8_t max=255)'],['../d4/dce/classAudioVU.html#aa446a77893ef9a311f9de6906bd87914',1,'AudioVU::AudioVU(T &amp;level, MovingCoilBallistics ballistics, float gain=1.0, uint8_t max=255)']]],
   ['audiovuleds',['AudioVULEDs',['../d9/dbf/classAudioVULEDs.html#a9b5a528eee3c6b8572a45201224c5d1d',1,'AudioVULEDs']]],
   ['available',['available',['../d0/d18/classAudioVU_1_1Analyzer.html#afeed0749af884b0eb38e9b12bed772b4',1,'AudioVU::Analyzer']]]
 ];

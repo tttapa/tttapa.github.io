@@ -46,6 +46,7 @@ var searchData=
   ['getdisplay',['getDisplay',['../d8/d43/classDisplayElement.html#abcb247a48cd14b7815f1fb930b6fedd1',1,'DisplayElement::getDisplay()'],['../d8/d43/classDisplayElement.html#ac7e658b8a699ce49ddaf3f5d5e17c679',1,'DisplayElement::getDisplay() const']]],
   ['getend',['getEnd',['../de/d4e/classExtendedIOElement.html#a916fb2b6f637e2d35c162677f5d95a64',1,'ExtendedIOElement']]],
   ['getfirst',['getFirst',['../dd/d16/classDoublyLinkedList.html#ab4f64cd2515175a4e159001cd29905b8',1,'DoublyLinkedList']]],
+  ['getfloatvalue',['getFloatValue',['../d4/dce/classAudioVU.html#a64d025e480f7786efb63a9107f792ffe',1,'AudioVU::getFloatValue()'],['../da/da7/classFilteredAnalog.html#a92c06222a4320ae7356041b4312bcb81',1,'FilteredAnalog::getFloatValue()'],['../d2/de9/classIVU.html#a8916f03ed84904d785bff696e865a3f5',1,'IVU::getFloatValue()']]],
   ['getframes',['getFrames',['../df/d69/classMCU_1_1TimeDisplay.html#a3c9c49395893147a4a7d40d40e76ac5c',1,'MCU::TimeDisplay']]],
   ['getindex',['getIndex',['../db/d6e/classBankableMIDIInput.html#a239ccb004b25fa96f720406e271ac881',1,'BankableMIDIInput']]],
   ['getinitialselection',['getInitialSelection',['../de/de7/classSelectable.html#ae04297ffcb2226afeb2449e9471f14a8',1,'Selectable']]],

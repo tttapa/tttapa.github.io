@@ -60,7 +60,7 @@ var searchData=
   ['assignmentdisplay_2ehpp',['AssignmentDisplay.hpp',['../de/d83/AssignmentDisplay_8hpp.html',1,'']]],
   ['assignmentdisplayaddress',['AssignmentDisplayAddress',['../d7/dc7/namespaceMCU.html#a14b615065ed90c08185f281223aa4dfd',1,'MCU']]],
   ['assignmentdisplaylength',['AssignmentDisplayLength',['../d7/dc7/namespaceMCU.html#a8c20ffed4d233063d04fea83f51636df',1,'MCU']]],
-  ['audiovu',['AudioVU',['../d4/dce/classAudioVU.html',1,'AudioVU'],['../d4/dce/classAudioVU.html#a16291b18a720891a1de7dcb3bdc88660',1,'AudioVU::AudioVU(T &amp;level, float gain=1.0, uint8_t max=100)'],['../d4/dce/classAudioVU.html#a70e029281a6a54a2c3b8e436ccb84b67',1,'AudioVU::AudioVU(T &amp;level, MovingCoilBallistics ballistics, float gain=1.0, uint8_t max=100)']]],
+  ['audiovu',['AudioVU',['../d4/dce/classAudioVU.html',1,'AudioVU'],['../d4/dce/classAudioVU.html#abe3e257cf7f2ca4d5992e4bdfd0934fc',1,'AudioVU::AudioVU(T &amp;level, float gain=1.0, uint8_t max=255)'],['../d4/dce/classAudioVU.html#aa446a77893ef9a311f9de6906bd87914',1,'AudioVU::AudioVU(T &amp;level, MovingCoilBallistics ballistics, float gain=1.0, uint8_t max=255)']]],
   ['audiovu_2ecpp',['AudioVU.cpp',['../df/dbc/AudioVU_8cpp.html',1,'']]],
   ['audiovu_2ehpp',['AudioVU.hpp',['../dc/de8/AudioVU_8hpp.html',1,'']]],
   ['audiovuleds',['AudioVULEDs',['../d9/dbf/classAudioVULEDs.html',1,'AudioVULEDs&lt; N &gt;'],['../d9/dbf/classAudioVULEDs.html#a9b5a528eee3c6b8572a45201224c5d1d',1,'AudioVULEDs::AudioVULEDs()']]],
