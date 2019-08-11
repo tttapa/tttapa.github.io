@@ -58,3 +58,23 @@ class Red : public Color {
   public:
     Red(std::ostream &os) : Color(os, ANSIColors::red) {}
 };
+
+class GreenB : public Color {
+  public:
+    GreenB(std::ostream &os) : Color(os, ANSIColors::greenb) {}
+};
+
+class YellowB : public Color {
+  public:
+    YellowB(std::ostream &os) : Color(os, ANSIColors::yellowb) {}
+};
+
+class BlueB : public Color {
+  public:
+    BlueB(std::ostream &os) : Color(os, ANSIColors::blueb) {}
+};
+
+class RedB : public Color {
+  public:
+    RedB(std::ostream &os) : Color(os, ANSIColors::redb) {}
+};

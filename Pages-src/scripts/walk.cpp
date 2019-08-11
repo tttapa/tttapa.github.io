@@ -319,7 +319,7 @@ class PagesParser {
     }
 
     static bool isDirectoryToList(const PageDirectory &dir) {
-        string dirname = dir.rel_path.parent_path();
+        string dirname = dir.rel_path.parent_path().filename();
         return dirname[0] != '.';
     }
 

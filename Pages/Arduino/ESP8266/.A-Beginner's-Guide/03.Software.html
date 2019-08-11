@@ -1,34 +1,30 @@
-<!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
-<head>
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
-    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
-          TeX: { equationNumbers: { autoNumber: "AMS" } },
-          "fast-preview": {
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
             disabled: true
-          }
+            }
         });
     </script>
     <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <meta name="theme-color" content="#ccc">
-    <meta name="keywords" content="ESP8266, WiFi">
+    <meta name="keywords" content="ESP8266, WiFi, Arduino, Beginner's Guide, Getting Started, Beginner, Tutorial, Software">
     <meta name="description" content="A Beginner's Guide to the ESP8266.">
-    <title>A Beginner's Guide to the ESP8266</title>
+    <title>Software</title>
 </head>
-
 <body>
     <nav>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                <path d="M0 0h48v48h-48z" fill="none" />
-                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z" />
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
             </svg>
             <h2><a href="/">Home</a></h2>
 <ul>
@@ -61,12 +57,6 @@
         </li>
         <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">ESP8266</a>
         <ul>
-            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry" href="index.html">A Beginner's Guide to the ESP8266</a>
-            <ul>
-                <li><span class="ftriangle"></span><a href="01.Introduction.html">Introduction</a></li>
-                <li><span class="ftriangle"></span><a href="02.Hardware.html">Hardware</a></li>
-            </ul>
-            </li>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../Flashing/index.html">Flashing</a>
             <ul>
                 <li><span class="ftriangle"></span><a href="../Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
@@ -144,7 +134,7 @@
                 <a href="/" title="Home">home</a>
             </i>
             <i class="material-icons">
-                <a href="index.pdf" title="Download as PDF">get_app</a>
+                <a href="03.Software.pdf" title="Download as PDF">get_app</a>
             </i>
             <i class="material-icons">
                 <a href="javascript:window.print()" title="Print this article">print</a>
@@ -155,23 +145,56 @@
         </div>
     </nav>
     <article>
-        <h1 class="indexTitle">A Beginner's Guide to the ESP8266</h1>
+        <h1 class="title">Software</h1>
         <i class="author">Pieter P</i>
         <div>
 
-An updated version of the <a href="https://tttapa.github.io/ESP8266/Chap01%20-%20ESP8266.html">original guide</a>.
+   <h2><a name="software" href="#software">Software</a></h2>
+   <h3><a name="installation-of-the-required-software" href="#installation-of-the-required-software">Installation of the required software</a></h3>
+   <div>
+        The first step is to download and install the Arduino IDE. I explained this in <a href="https://www.instructables.com/id/A-Beginners-Guide-to-Arduino/step3/Software/">A Beginner's Guide to Arduino</a>. (As of February 7th 2017, the latest stable version of the IDE is 1.8.1.)
+   </div>
+   <div>
+        <br>
+   </div>
+   <div>
+        To program the ESP8266, you'll need a plugin for the Arduino IDE, it can be downloaded from <a href="https://github.com/esp8266/Arduino">GitHub</a> manually, but it is easier to just add the URL in the Arduino IDE:
+   </div>
+   <div>
+       <ol>
+           <li>Open the Arduino IDE.</li>
+           <li>Go to File &gt; Preferences.</li>
+           <li>Paste the URL <a href="http://arduino.esp8266.com/stable/package_esp8266com_index.json">http://arduino.esp8266.com/stable/package_esp8266com_index.json</a> into the <i>Additional Board Manager URLs </i>field.<br>
+            (You can add multiple URLs, separating them with commas.)</li>
+           <li>Go to Tools &gt; Board &gt; Board Manager and search for 'esp8266'. Select the newest version, and click install. (As of February 7th 2017, the latest stable version is 2.3.0.)</li>
+       </ol>
+    </div>
+    <div>
+        You can check out the official install guide <a href="https://github.com/esp8266/Arduino/blob/master/doc/installing.md">here</a>.
+    </div>
+    <h4><a name="drivers" href="#drivers">Drivers</a></h4>
+    <div>
+        If you are using a board with the CH340(G) USB-to-Serial chip, like the NodeMCU, you'll probably have to install the USB drivers for it.
+    </div>
+    <div>
+        They can be found on <a href="https://github.com/nodemcu/nodemcu-devkit/tree/master/Drivers">GitHub</a>. 
+    </div>
+    <div>
+        If you are using a board with the CP2104 USB-to-Serial chip, like the Adafruit Feather HUZZAH board, you'll probably have to install USB drivers as well. You can find them on the <a href="http://www.silabs.com/products/mcu/pages/usbtouartbridgevcpdrivers.aspx">Silicon Labs website</a>.
+    </div>
+    <div>
+        Boards with an FTDI chip should work right out of the box, without the need of installing any drivers.
+    </div>
+
+    <h3><a name="python" href="#python">Python</a></h3>
+    <div>If you want to use Over The Air updates on Windows, you have to install Python 2.7. You can download it from <a href="http://python.org/">python.org</a>. During the installation, you have to select the option to add Python to your path. If you don't do this, the Arduino IDE won't be able to find the Python executable.</div>
+    
+    <h3><a name="examples" href="#examples">Examples</a></h3>
+    <div>You can find all examples used in this article <a href="https://github.com/tttapa/ESP8266">on my GitHub</a>. Just download it as a .ZIP file, unzip it to a convenient location, and you're good to go!</div>
 
 </div>
-        <hr>
-        <div class="indexContainer"><a href="01.Introduction.html">
-    <h2>Introduction</h2>
-    <p>Introduction.</p>
-</a><a href="02.Hardware.html">
-    <h2>Hardware</h2>
-    <p>Hardware.</p>
-</a></div>
     </article>
-    <footer>Last edited: Monday, 07 January 2019 16:16 UTC</footer>
-</body>
+    <footer>Last edited: Sunday, 11 August 2019 14:10 UTC</footer>
 
-</html>
+
+</body></html>
