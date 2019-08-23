@@ -17,8 +17,9 @@ var searchData=
   ['high',['HIGH',['../dd/ddf/ExtendedInputOutput_8hpp.html#acecd29798f132930ae1bfbe527f41e8d',1,'ExtendedInputOutput.hpp']]],
   ['high_5fresolution_5fvelocity_5fprefix',['High_Resolution_Velocity_Prefix',['../d4/dbe/namespaceMIDI__CC.html#ad7384a220e9d2f6115a8729356cf3787',1,'MIDI_CC']]],
   ['hold_5f2',['Hold_2',['../d4/dbe/namespaceMIDI__CC.html#a4f4fbdf93ecdd1f1768b84b3dcd847eb',1,'MIDI_CC']]],
-  ['hysteresis',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'Hysteresis&lt; BITS &gt;'],['../da/da7/classFilteredAnalog.html#a2354c851dcf6688845bf9b3538003976',1,'FilteredAnalog::hysteresis()']]],
+  ['hysteresis',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'Hysteresis&lt; BITS, T_in, T_out &gt;'],['../da/da7/classFilteredAnalog.html#ac5ad73e3ce37b61f4021d79ce6f33647',1,'FilteredAnalog::hysteresis()']]],
   ['hysteresis_2ecpp',['Hysteresis.cpp',['../dd/d40/Hysteresis_8cpp.html',1,'']]],
   ['hysteresis_2ehpp',['Hysteresis.hpp',['../d3/d09/Hysteresis_8hpp.html',1,'']]],
-  ['hysteresis_3c_20adc_5fbits_20_2d_20precision_20_3e',['Hysteresis&lt; ADC_BITS - PRECISION &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
+  ['hysteresis_3c_20adc_5fbits_2b0_20_2d_20precision_2c_20analog_5ft_2c_20analog_5ft_20_3e',['Hysteresis&lt; ADC_BITS+0 - PRECISION, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]],
+  ['hysteresis_3c_20adc_5fbits_2bupsample_20_2d_20precision_2c_20analog_5ft_2c_20analog_5ft_20_3e',['Hysteresis&lt; ADC_BITS+UPSAMPLE - PRECISION, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
 ];

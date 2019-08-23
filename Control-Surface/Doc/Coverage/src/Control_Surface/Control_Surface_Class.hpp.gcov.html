@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 84d8affeda3a309d0ab34529bbb298f74ea89e8a - src/Control_Surface/Control_Surface_Class.hpp</title>
+  <title>LCOV - af8c10b73e73f9798e31f449ab5aae1d126c2fcc - src/Control_Surface/Control_Surface_Class.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">84d8affeda3a309d0ab34529bbb298f74ea89e8a</td>
+            <td class="headerValue">af8c10b73e73f9798e31f449ab5aae1d126c2fcc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">1</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-08-13 11:32:55</td>
+            <td class="headerValue">2019-08-19 15:19:48</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -138,57 +138,58 @@
 <a name="68"><span class="lineNum">      68 </span>            :      * @brief   The callback to be called when a MIDI channel message is</a>
 <a name="69"><span class="lineNum">      69 </span>            :      *          received.</a>
 <a name="70"><span class="lineNum">      70 </span>            :      */</a>
-<a name="71"><span class="lineNum">      71 </span>            :     void onChannelMessage(MIDI_Interface &amp;midi) override;</a>
+<a name="71"><span class="lineNum">      71 </span>            :     void onChannelMessage(Parsing_MIDI_Interface &amp;midi) override;</a>
 <a name="72"><span class="lineNum">      72 </span>            : </a>
 <a name="73"><span class="lineNum">      73 </span>            :     /** </a>
 <a name="74"><span class="lineNum">      74 </span>            :      * @brief   The callback to be called when a MIDI System Exclusive message</a>
 <a name="75"><span class="lineNum">      75 </span>            :      *          is received.</a>
 <a name="76"><span class="lineNum">      76 </span>            :      */</a>
-<a name="77"><span class="lineNum">      77 </span>            :     void onSysExMessage(MIDI_Interface &amp;midi) override;</a>
+<a name="77"><span class="lineNum">      77 </span>            :     void onSysExMessage(Parsing_MIDI_Interface &amp;midi) override;</a>
 <a name="78"><span class="lineNum">      78 </span>            : </a>
 <a name="79"><span class="lineNum">      79 </span>            :     /** </a>
 <a name="80"><span class="lineNum">      80 </span>            :      * @brief   The callback to be called when a MIDI Real-Time message is </a>
 <a name="81"><span class="lineNum">      81 </span>            :      *          received.</a>
 <a name="82"><span class="lineNum">      82 </span>            :      */</a>
-<a name="83"><span class="lineNum">      83 </span>            :     void onRealtimeMessage(MIDI_Interface &amp;midi, uint8_t message) override;</a>
-<a name="84"><span class="lineNum">      84 </span>            : </a>
-<a name="85"><span class="lineNum">      85 </span>            :     /// A timer to know when to update the analog inputs.</a>
-<a name="86"><span class="lineNum">      86 </span>            :     Timer&lt;micros&gt; potentiometerTimer = {FILTERED_INPUT_UPDATE_INTERVAL};</a>
-<a name="87"><span class="lineNum">      87 </span>            :     /// A timer to know when to refresh the displays.</a>
-<a name="88"><span class="lineNum">      88 </span>            :     Timer&lt;micros&gt; displayTimer = {1000000UL / MAX_FPS};</a>
-<a name="89"><span class="lineNum">      89 </span>            : </a>
-<a name="90"><span class="lineNum">      90 </span>            :   public:</a>
-<a name="91"><span class="lineNum">      91 </span>            :     /// Callback function type for channel messages. Return true if handling is</a>
-<a name="92"><span class="lineNum">      92 </span>            :     /// done in the user-provided callback, false if `Control_Surface`</a>
-<a name="93"><span class="lineNum">      93 </span>            :     /// should handle the message.</a>
-<a name="94"><span class="lineNum">      94 </span>            :     using ChannelMessageCallback = bool (*)(ChannelMessage);</a>
-<a name="95"><span class="lineNum">      95 </span>            :     /// Callback function type for SysEx messages. Return true if handling is</a>
-<a name="96"><span class="lineNum">      96 </span>            :     /// done in the user-provided callback, false if `Control_Surface`</a>
-<a name="97"><span class="lineNum">      97 </span>            :     /// should handle the message.</a>
-<a name="98"><span class="lineNum">      98 </span>            :     using SysExMessageCallback = bool (*)(SysExMessage);</a>
-<a name="99"><span class="lineNum">      99 </span>            :     /// Callback function type for Real-Time messages. Return true if handling</a>
-<a name="100"><span class="lineNum">     100 </span>            :     /// is done in the user-provided callback, false if `Control_Surface`</a>
-<a name="101"><span class="lineNum">     101 </span>            :     /// should handle the message.</a>
-<a name="102"><span class="lineNum">     102 </span>            :     using RealTimeMessageCallback = bool (*)(RealTimeMessage);</a>
-<a name="103"><span class="lineNum">     103 </span>            : </a>
-<a name="104"><span class="lineNum">     104 </span>            :     /// Set the MIDI input callbacks.</a>
-<a name="105"><span class="lineNum">     105 </span>            :     void</a>
-<a name="106"><span class="lineNum">     106 </span>            :     setMIDIInputCallbacks(ChannelMessageCallback channelMessageCallback,</a>
-<a name="107"><span class="lineNum">     107 </span>            :                           SysExMessageCallback sysExMessageCallback,</a>
-<a name="108"><span class="lineNum">     108 </span>            :                           RealTimeMessageCallback realTimeMessageCallback) {</a>
-<a name="109"><span class="lineNum">     109 </span>            :         this-&gt;channelMessageCallback = channelMessageCallback;</a>
-<a name="110"><span class="lineNum">     110 </span>            :         this-&gt;sysExMessageCallback = sysExMessageCallback;</a>
-<a name="111"><span class="lineNum">     111 </span>            :         this-&gt;realTimeMessageCallback = realTimeMessageCallback;</a>
-<a name="112"><span class="lineNum">     112 </span>            :     }</a>
-<a name="113"><span class="lineNum">     113 </span>            : </a>
-<a name="114"><span class="lineNum">     114 </span>            :   private:</a>
-<a name="115"><span class="lineNum">     115 </span>            :     ChannelMessageCallback channelMessageCallback = nullptr;</a>
-<a name="116"><span class="lineNum">     116 </span>            :     SysExMessageCallback sysExMessageCallback = nullptr;</a>
-<a name="117"><span class="lineNum">     117 </span>            :     RealTimeMessageCallback realTimeMessageCallback = nullptr;</a>
-<a name="118"><span class="lineNum">     118 </span>            : };</a>
-<a name="119"><span class="lineNum">     119 </span>            : </a>
-<a name="120"><span class="lineNum">     120 </span>            : /// A predefined instance of the Control Surface to use in the Arduino sketches.</a>
-<a name="121"><span class="lineNum">     121 </span>            : extern Control_Surface_ &amp;Control_Surface;</a>
+<a name="83"><span class="lineNum">      83 </span>            :     void onRealtimeMessage(Parsing_MIDI_Interface &amp;midi,</a>
+<a name="84"><span class="lineNum">      84 </span>            :                            uint8_t message) override;</a>
+<a name="85"><span class="lineNum">      85 </span>            : </a>
+<a name="86"><span class="lineNum">      86 </span>            :     /// A timer to know when to update the analog inputs.</a>
+<a name="87"><span class="lineNum">      87 </span>            :     Timer&lt;micros&gt; potentiometerTimer = {FILTERED_INPUT_UPDATE_INTERVAL};</a>
+<a name="88"><span class="lineNum">      88 </span>            :     /// A timer to know when to refresh the displays.</a>
+<a name="89"><span class="lineNum">      89 </span>            :     Timer&lt;micros&gt; displayTimer = {1000000UL / MAX_FPS};</a>
+<a name="90"><span class="lineNum">      90 </span>            : </a>
+<a name="91"><span class="lineNum">      91 </span>            :   public:</a>
+<a name="92"><span class="lineNum">      92 </span>            :     /// Callback function type for channel messages. Return true if handling is</a>
+<a name="93"><span class="lineNum">      93 </span>            :     /// done in the user-provided callback, false if `Control_Surface`</a>
+<a name="94"><span class="lineNum">      94 </span>            :     /// should handle the message.</a>
+<a name="95"><span class="lineNum">      95 </span>            :     using ChannelMessageCallback = bool (*)(ChannelMessage);</a>
+<a name="96"><span class="lineNum">      96 </span>            :     /// Callback function type for SysEx messages. Return true if handling is</a>
+<a name="97"><span class="lineNum">      97 </span>            :     /// done in the user-provided callback, false if `Control_Surface`</a>
+<a name="98"><span class="lineNum">      98 </span>            :     /// should handle the message.</a>
+<a name="99"><span class="lineNum">      99 </span>            :     using SysExMessageCallback = bool (*)(SysExMessage);</a>
+<a name="100"><span class="lineNum">     100 </span>            :     /// Callback function type for Real-Time messages. Return true if handling</a>
+<a name="101"><span class="lineNum">     101 </span>            :     /// is done in the user-provided callback, false if `Control_Surface`</a>
+<a name="102"><span class="lineNum">     102 </span>            :     /// should handle the message.</a>
+<a name="103"><span class="lineNum">     103 </span>            :     using RealTimeMessageCallback = bool (*)(RealTimeMessage);</a>
+<a name="104"><span class="lineNum">     104 </span>            : </a>
+<a name="105"><span class="lineNum">     105 </span>            :     /// Set the MIDI input callbacks.</a>
+<a name="106"><span class="lineNum">     106 </span>            :     void</a>
+<a name="107"><span class="lineNum">     107 </span>            :     setMIDIInputCallbacks(ChannelMessageCallback channelMessageCallback,</a>
+<a name="108"><span class="lineNum">     108 </span>            :                           SysExMessageCallback sysExMessageCallback,</a>
+<a name="109"><span class="lineNum">     109 </span>            :                           RealTimeMessageCallback realTimeMessageCallback) {</a>
+<a name="110"><span class="lineNum">     110 </span>            :         this-&gt;channelMessageCallback = channelMessageCallback;</a>
+<a name="111"><span class="lineNum">     111 </span>            :         this-&gt;sysExMessageCallback = sysExMessageCallback;</a>
+<a name="112"><span class="lineNum">     112 </span>            :         this-&gt;realTimeMessageCallback = realTimeMessageCallback;</a>
+<a name="113"><span class="lineNum">     113 </span>            :     }</a>
+<a name="114"><span class="lineNum">     114 </span>            : </a>
+<a name="115"><span class="lineNum">     115 </span>            :   private:</a>
+<a name="116"><span class="lineNum">     116 </span>            :     ChannelMessageCallback channelMessageCallback = nullptr;</a>
+<a name="117"><span class="lineNum">     117 </span>            :     SysExMessageCallback sysExMessageCallback = nullptr;</a>
+<a name="118"><span class="lineNum">     118 </span>            :     RealTimeMessageCallback realTimeMessageCallback = nullptr;</a>
+<a name="119"><span class="lineNum">     119 </span>            : };</a>
+<a name="120"><span class="lineNum">     120 </span>            : </a>
+<a name="121"><span class="lineNum">     121 </span>            : /// A predefined instance of the Control Surface to use in the Arduino sketches.</a>
+<a name="122"><span class="lineNum">     122 </span>            : extern Control_Surface_ &amp;Control_Surface;</a>
 </pre>
       </td>
     </tr>

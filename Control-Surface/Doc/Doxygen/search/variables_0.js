@@ -14,7 +14,7 @@ var searchData=
   ['alpha',['alpha',['../db/d6f/classEMA__f.html#a11afd61759842d93397f4e4581142f9a',1,'EMA_f']]],
   ['alphachars',['AlphaChars',['../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a421add2f41548ad816d5d9bb028cfa6f',1,'MAX7219SevenSegmentDisplay.hpp']]],
   ['analog_5ffilter_5fshift_5ffactor',['ANALOG_FILTER_SHIFT_FACTOR',['../db/d02/Settings_8hpp.html#a74cef1adb51d95add8b2bea344b6c755',1,'Settings.hpp']]],
-  ['analogpin',['analogPin',['../d7/d8d/classAnalogMultiplex.html#a628d64a2f97f6e8019cf7b7fe3814d3b',1,'AnalogMultiplex::analogPin()'],['../da/da7/classFilteredAnalog.html#a5cfa5417c422763d54f81bce20f34366',1,'FilteredAnalog::analogPin()']]],
+  ['analogpin',['analogPin',['../d7/d8d/classAnalogMultiplex.html#a628d64a2f97f6e8019cf7b7fe3814d3b',1,'AnalogMultiplex::analogPin()'],['../da/da7/classFilteredAnalog.html#a91bf4e893f9a6f7778bf9ce194b5ebd0',1,'FilteredAnalog::analogPin()']]],
   ['analyzer',['analyzer',['../d0/d18/classAudioVU_1_1Analyzer.html#a71f374cd364aa4de82b6368748c9005e',1,'AudioVU::Analyzer']]],
   ['anglespacing',['angleSpacing',['../d3/d98/classMCU_1_1VPotDisplay.html#a809b8e848cdc11d12d18ba3ccf0ee4bf',1,'MCU::VPotDisplay']]],
   ['assign_5feq',['ASSIGN_EQ',['../d7/dc7/namespaceMCU.html#a27d2d12dafed1e87c6f55740c87f9ca4',1,'MCU']]],

@@ -40,5 +40,6 @@ var searchData=
   ['midioutputelement_2ehpp',['MIDIOutputElement.hpp',['../d1/d41/MIDIOutputElement_8hpp.html',1,'']]],
   ['millistimer_2ecpp',['MillisTimer.cpp',['../d9/d9e/MillisTimer_8cpp.html',1,'']]],
   ['millistimer_2ehpp',['MillisTimer.hpp',['../d7/d74/MillisTimer_8hpp.html',1,'']]],
-  ['movingcoilballistics_2ehpp',['MovingCoilBallistics.hpp',['../d9/d4f/MovingCoilBallistics_8hpp.html',1,'']]]
+  ['movingcoilballistics_2ehpp',['MovingCoilBallistics.hpp',['../d9/d4f/MovingCoilBallistics_8hpp.html',1,'']]],
+  ['multimidi_5finterface_2ehpp',['MultiMIDI_Interface.hpp',['../dc/dfa/MultiMIDI__Interface_8hpp.html',1,'']]]
 ];

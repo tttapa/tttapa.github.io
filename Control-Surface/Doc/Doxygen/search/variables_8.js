@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['increasebitdepthimpl',['increaseBitDepthImpl',['../d5/dee/IncreaseBitDepth_8hpp.html#a36378e93b67390afaa8ee1c3966151dc',1,'IncreaseBitDepth.hpp']]],
   ['increment',['increment',['../dd/dd6/classIncrementor.html#a5f9ac3154cda1e503cbbe5194a706a39',1,'Incrementor']]],
   ['incrementaddress',['incrementAddress',['../d2/d87/classMIDIButtons.html#a233def73722cfb67d27021135e5de1be',1,'MIDIButtons::incrementAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a7a08ac85758d9ca0b2a9c45ba8132c4c',1,'Bankable::MIDIButtons::incrementAddress()']]],
   ['incrementbutton',['incrementButton',['../d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3',1,'IncrementDecrementButtons']]],
@@ -10,6 +11,7 @@ var searchData=
   ['input_5fpullup',['INPUT_PULLUP',['../dd/ddf/ExtendedInputOutput_8hpp.html#a7821f03e2c35ca4bf4a867e64994bcfd',1,'ExtendedInputOutput.hpp']]],
   ['inputbankables',['inputBankables',['../db/dbd/classBank.html#a912875f2dcd454240890d99c8aec0348',1,'Bank']]],
   ['intensity',['INTENSITY',['../da/dd0/classMAX7219__Base.html#a3aff37e2ea6bea2a289fc3d8dc132954',1,'MAX7219_Base']]],
+  ['interfaces',['interfaces',['../dd/d81/classMultiMIDI__Interface.html#a75a7de2d4fcf8a0f3b8f7b638ad6a477',1,'MultiMIDI_Interface']]],
   ['interval',['interval',['../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d',1,'Timer']]],
   ['invertstate',['invertState',['../d1/d19/classButton.html#a6cb2c9aec2b114232a342846ed944205',1,'Button']]]
 ];

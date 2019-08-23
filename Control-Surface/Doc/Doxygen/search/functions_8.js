@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['increasebitdepth',['increaseBitDepth',['../d5/dee/IncreaseBitDepth_8hpp.html#a46fa72568df66520decc1fd69b4d37be',1,'IncreaseBitDepth.hpp']]],
+  ['increasebitdepthimpl',['increaseBitDepthImpl',['../d5/dee/IncreaseBitDepth_8hpp.html#ac280f213c66093398e47063bd590c558',1,'increaseBitDepthImpl(T_in in):&#160;IncreaseBitDepth.hpp'],['../d5/dee/IncreaseBitDepth_8hpp.html#a81732cad945f7211b9eca053452d4b85',1,'increaseBitDepthImpl(T_in in):&#160;IncreaseBitDepth.hpp']]],
   ['increment',['increment',['../d1/d54/classSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1',1,'Selector']]],
   ['incrementbutton',['IncrementButton',['../df/d38/classIncrementButton.html#ad0133d3b080fa4093b24ade7acd2f2c1',1,'IncrementButton']]],
   ['incrementdecrementbuttons',['IncrementDecrementButtons',['../d5/d20/classIncrementDecrementButtons.html#ac59f4c72e86f8d1cd8665d959f526ca9',1,'IncrementDecrementButtons']]],

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['increasebitdepth_2ehpp',['IncreaseBitDepth.hpp',['../d5/dee/IncreaseBitDepth_8hpp.html',1,'']]],
   ['incrementbutton_2ecpp',['IncrementButton.cpp',['../db/d9d/IncrementButton_8cpp.html',1,'']]],
   ['incrementbutton_2ehpp',['IncrementButton.hpp',['../d5/d04/IncrementButton_8hpp.html',1,'']]],
   ['incrementdecrementbuttons_2ecpp',['IncrementDecrementButtons.cpp',['../da/d66/IncrementDecrementButtons_8cpp.html',1,'']]],

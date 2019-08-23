@@ -2,6 +2,9 @@ var searchData=
 [
   ['ichord',['IChord',['../db/dbe/classIChord.html',1,'']]],
   ['ignore_5fsysex',['IGNORE_SYSEX',['../db/d02/Settings_8hpp.html#a2a82e3cbc4ddcf68ac47d0d464189e35',1,'Settings.hpp']]],
+  ['increasebitdepth',['increaseBitDepth',['../d5/dee/IncreaseBitDepth_8hpp.html#a46fa72568df66520decc1fd69b4d37be',1,'IncreaseBitDepth.hpp']]],
+  ['increasebitdepth_2ehpp',['IncreaseBitDepth.hpp',['../d5/dee/IncreaseBitDepth_8hpp.html',1,'']]],
+  ['increasebitdepthimpl',['increaseBitDepthImpl',['../d5/dee/IncreaseBitDepth_8hpp.html#a36378e93b67390afaa8ee1c3966151dc',1,'increaseBitDepthImpl():&#160;IncreaseBitDepth.hpp'],['../d5/dee/IncreaseBitDepth_8hpp.html#ac280f213c66093398e47063bd590c558',1,'increaseBitDepthImpl(T_in in):&#160;IncreaseBitDepth.hpp'],['../d5/dee/IncreaseBitDepth_8hpp.html#a81732cad945f7211b9eca053452d4b85',1,'increaseBitDepthImpl(T_in in):&#160;IncreaseBitDepth.hpp']]],
   ['increment',['Increment',['../df/d38/classIncrementButton.html#a37fb5e087715edfdb4ab30209c83753ca1c40de72a61916bbe238020067501963',1,'IncrementButton::Increment()'],['../d5/d20/classIncrementDecrementButtons.html#aad41077d49378ea34dca4f6cf77ae06ba20e11204d63d579b5cf85a8698740f10',1,'IncrementDecrementButtons::Increment()'],['../dd/dd6/classIncrementor.html#a5f9ac3154cda1e503cbbe5194a706a39',1,'Incrementor::increment()'],['../d1/d54/classSelector.html#a814eee5a56aa3d1f7ebfb1d1ab6ca9a1',1,'Selector::increment()']]],
   ['incrementaddress',['incrementAddress',['../d2/d87/classMIDIButtons.html#a233def73722cfb67d27021135e5de1be',1,'MIDIButtons::incrementAddress()'],['../dc/d22/classBankable_1_1MIDIButtons.html#a7a08ac85758d9ca0b2a9c45ba8132c4c',1,'Bankable::MIDIButtons::incrementAddress()']]],
   ['incrementbutton',['IncrementButton',['../df/d38/classIncrementButton.html',1,'IncrementButton'],['../d5/d20/classIncrementDecrementButtons.html#a606c093331d3be8597ac308ef7dc37e3',1,'IncrementDecrementButtons::incrementButton()'],['../df/d38/classIncrementButton.html#ad0133d3b080fa4093b24ade7acd2f2c1',1,'IncrementButton::IncrementButton()']]],
@@ -40,6 +43,7 @@ var searchData=
   ['insertsorted',['insertSorted',['../dd/d16/classDoublyLinkedList.html#aaac21d927c86879dd877dc4c9cbdf81d',1,'DoublyLinkedList::insertSorted(Node *node, Compare cmp)'],['../dd/d16/classDoublyLinkedList.html#ae75df28899191ac4cb60d3390a11210a',1,'DoublyLinkedList::insertSorted(Node *node)']]],
   ['installation_2emd',['Installation.md',['../d2/d2c/Installation_8md.html',1,'']]],
   ['intensity',['INTENSITY',['../da/dd0/classMAX7219__Base.html#a3aff37e2ea6bea2a289fc3d8dc132954',1,'MAX7219_Base']]],
+  ['interfaces',['interfaces',['../dd/d81/classMultiMIDI__Interface.html#a75a7de2d4fcf8a0f3b8f7b638ad6a477',1,'MultiMIDI_Interface']]],
   ['interval',['interval',['../dc/dea/classTimer.html#ad74f3b503f038643f12fb6445a7e581d',1,'Timer']]],
   ['intervals',['Intervals',['../da/dd4/namespaceIntervals.html',1,'']]],
   ['intervals_2ehpp',['Intervals.hpp',['../d1/d12/Intervals_8hpp.html',1,'']]],
