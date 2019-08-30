@@ -1,0 +1,93 @@
+<!--
+@sequence: 10
+@title: Installing and Setting up Ubuntu
+@author: Pieter P
+@keywords:
+@description: Installing Ubuntu Server 18.04 on the Raspberry Pi 3B+
+              and configuring it so you can easily find it on your network 
+              using mDNS, and so you can easily connect to it over SSH.
+-->
+<html>
+
+<style>
+    article li {
+        padding: 0.4em 0;
+    }
+
+    pre.pi>code::before {
+        content: "pi $";
+        width: initial;
+        font-weight: bold;
+    }
+</style>
+
+<h3>Installation</h3>
+<ol>
+    <li>
+        Download the Ubuntu Server image from <a
+            href="https://ubuntu.com/download/iot/raspberry-pi-2-3">https://ubuntu.com/download/iot/raspberry-pi-2-3</a>
+        <pre
+            class="console"><code>wget -P /tmp/ http://cdimage.ubuntu.com/releases/bionic/release/ubuntu-18.04.3-preinstalled-server-arm64+raspi3.img.xz</code></pre>
+    </li>
+    <li>
+        Then write the disk image to your SD card
+        <pre
+            class="console"><code>xzcat /tmp/ubuntu-18.04.3-preinstalled-server-arm64+raspi3.img.xz | sudo dd of=/dev/mmcblk0 bs=32M</code></pre>
+        Be careful when using <code>dd</code>, if you specify the wrong output (<code>of=...</code>), it'll overwrite
+        everything on that device, so it's easy to accidentally destroy your computer.
+    </li>
+    <li>
+        Install the SD card into the Raspberry Pi, connect it to a network using Ethernet, and power it up.
+    </li>
+    <li>
+        Use your favorite method to find its IP address. You can find it in your router's settings, with an app like
+        Fing, or by using a command line tool like <code>nmap</code>.
+    </li>
+    <li>
+        Connect to the Raspberry Pi over SSH
+        <pre class="console"><code>ssh ubuntu@192.168.1.100</code></pre>
+        Replace the IP address with the one you found in the previous step. <br>
+        You'll be prompted a password, the default one is <code>ubuntu</code>.
+    </li>
+    <li>
+        Follow the instructions to change the default password and connect again.
+    </li>
+</ol>
+
+<h3>SSH Configuration</h3>
+<ol>
+    <li>Set the hostname:
+        <pre class="console pi"><code>sudo hostnamectl set-hostname rpi-3</code></pre>
+    </li>
+    <li>Install the <code>avahi-daemon</code> package to enable mDNS:
+        <pre class="console pi"><code>sudo apt install avahi-daemon</code></pre>
+    </li>
+    <li>If you already had the <code>avahi-daemon</code> installed, you have to restart it to use the new hostname:
+        <pre class="console pi"><code>sudo service avahi-daemon restart</code></pre>
+    </li>
+    <li>Close the SSH connection:
+        <pre class="console pi"><code>exit</code></pre>
+    </li>
+    <li>You should now be able to reach the Pi using its mDNS hostname:
+        <pre class="console"><code>ping rpi-3.local -c3</code></pre>
+    </li>
+    <li>Add your public key to the Pi's <code>authorized_keys</code>, so you can connect to it without entering the
+        password each time:
+        <pre
+            class="console"><code>cat .ssh/id_rsa.pub | ssh ubuntu@rpi-3.local -T "cat >> .ssh/authorized_keys"</code></pre>
+    </li>
+    <li>
+        Create an SSH configuration for the Pi on you computer:
+        <pre class="console"><code>cat >> ~/.ssh/config &lt;&lt; 'EOF'
+Host RPi3
+    HostName rpi-3.local
+    User ubuntu
+EOF</code></pre>
+    </li>
+    <li>
+        You can now connect to it without having to specify the hostname or username:
+        <pre class="console"><code>ssh RPi3</code></pre>
+    </li>
+</ol>
+
+</html>
