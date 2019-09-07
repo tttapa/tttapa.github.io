@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - af8c10b73e73f9798e31f449ab5aae1d126c2fcc - src/MIDI_Interfaces/DebugMIDI_Interface.hpp</title>
+  <title>LCOV - d0b4ce5790a3925b2db533053f882c2f3d846c9a - src/MIDI_Interfaces/DebugMIDI_Interface.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">af8c10b73e73f9798e31f449ab5aae1d126c2fcc</td>
+            <td class="headerValue">d0b4ce5790a3925b2db533053f882c2f3d846c9a</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">0</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-08-19 15:19:48</td>
+            <td class="headerValue">2019-09-07 12:57:21</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -190,31 +190,34 @@
 <a name="120"><span class="lineNum">     120 </span>            :         : SerialDebugMIDI_Interface(Serial, baud) {}</a>
 <a name="121"><span class="lineNum">     121 </span>            : };</a>
 <a name="122"><span class="lineNum">     122 </span>            : </a>
-<a name="123"><span class="lineNum">     123 </span>            : #if defined(__AVR__) || defined(CORE_TEENSY)</a>
-<a name="124"><span class="lineNum">     124 </span>            : #include &lt;SoftwareSerial.h&gt;</a>
-<a name="125"><span class="lineNum">     125 </span>            : /**</a>
-<a name="126"><span class="lineNum">     126 </span>            :  * @brief   A class for debug MIDI interfaces sending and receiving </a>
-<a name="127"><span class="lineNum">     127 </span>            :  *          human-readable MIDI messages over a SoftwareSerial interface.</a>
-<a name="128"><span class="lineNum">     128 </span>            :  * </a>
-<a name="129"><span class="lineNum">     129 </span>            :  * @ingroup MIDIInterfaces</a>
-<a name="130"><span class="lineNum">     130 </span>            :  */</a>
-<a name="131"><span class="lineNum">     131 </span>            : class SoftwareSerialDebugMIDI_Interface</a>
-<a name="132"><span class="lineNum">     132 </span>            :     : public SerialDebugMIDI_Interface&lt;SoftwareSerial&gt; {</a>
-<a name="133"><span class="lineNum">     133 </span>            :   public:</a>
-<a name="134"><span class="lineNum">     134 </span>            :     /**</a>
-<a name="135"><span class="lineNum">     135 </span>            :      * @brief   Construct a SoftwareSerialDebugMIDI_Interface on the given </a>
-<a name="136"><span class="lineNum">     136 </span>            :      *          SoftwareSerial interface with the given baud rate.</a>
-<a name="137"><span class="lineNum">     137 </span>            :      * </a>
-<a name="138"><span class="lineNum">     138 </span>            :      * @param   serial</a>
-<a name="139"><span class="lineNum">     139 </span>            :      *          The SoftwareSerial interface.</a>
-<a name="140"><span class="lineNum">     140 </span>            :      * @param   baud</a>
-<a name="141"><span class="lineNum">     141 </span>            :      *          The baud rate for the serial interface.</a>
-<a name="142"><span class="lineNum">     142 </span>            :      */</a>
-<a name="143"><span class="lineNum">     143 </span>            :     SoftwareSerialDebugMIDI_Interface(SoftwareSerial &amp;serial,</a>
-<a name="144"><span class="lineNum">     144 </span>            :                                       unsigned long baud)</a>
-<a name="145"><span class="lineNum">     145 </span>            :         : SerialDebugMIDI_Interface(serial, baud) {}</a>
-<a name="146"><span class="lineNum">     146 </span>            : };</a>
-<a name="147"><span class="lineNum">     147 </span>            : #endif</a>
+<a name="123"><span class="lineNum">     123 </span>            : // TODO: Teensy 4.0 SoftwareSerial bug</a>
+<a name="124"><span class="lineNum">     124 </span>            : #if defined(__AVR__) || (defined(TEENSYDUINO) &amp;&amp; TEENSYDUINO != 147) ||        \</a>
+<a name="125"><span class="lineNum">     125 </span>            :     (defined(TEENSYDUINO) &amp;&amp; !defined(__IMXRT1052__) &amp;&amp;                        \</a>
+<a name="126"><span class="lineNum">     126 </span>            :      !defined(__IMXRT1062__))</a>
+<a name="127"><span class="lineNum">     127 </span>            : #include &lt;SoftwareSerial.h&gt;</a>
+<a name="128"><span class="lineNum">     128 </span>            : /**</a>
+<a name="129"><span class="lineNum">     129 </span>            :  * @brief   A class for debug MIDI interfaces sending and receiving </a>
+<a name="130"><span class="lineNum">     130 </span>            :  *          human-readable MIDI messages over a SoftwareSerial interface.</a>
+<a name="131"><span class="lineNum">     131 </span>            :  * </a>
+<a name="132"><span class="lineNum">     132 </span>            :  * @ingroup MIDIInterfaces</a>
+<a name="133"><span class="lineNum">     133 </span>            :  */</a>
+<a name="134"><span class="lineNum">     134 </span>            : class SoftwareSerialDebugMIDI_Interface</a>
+<a name="135"><span class="lineNum">     135 </span>            :     : public SerialDebugMIDI_Interface&lt;SoftwareSerial&gt; {</a>
+<a name="136"><span class="lineNum">     136 </span>            :   public:</a>
+<a name="137"><span class="lineNum">     137 </span>            :     /**</a>
+<a name="138"><span class="lineNum">     138 </span>            :      * @brief   Construct a SoftwareSerialDebugMIDI_Interface on the given </a>
+<a name="139"><span class="lineNum">     139 </span>            :      *          SoftwareSerial interface with the given baud rate.</a>
+<a name="140"><span class="lineNum">     140 </span>            :      * </a>
+<a name="141"><span class="lineNum">     141 </span>            :      * @param   serial</a>
+<a name="142"><span class="lineNum">     142 </span>            :      *          The SoftwareSerial interface.</a>
+<a name="143"><span class="lineNum">     143 </span>            :      * @param   baud</a>
+<a name="144"><span class="lineNum">     144 </span>            :      *          The baud rate for the serial interface.</a>
+<a name="145"><span class="lineNum">     145 </span>            :      */</a>
+<a name="146"><span class="lineNum">     146 </span>            :     SoftwareSerialDebugMIDI_Interface(SoftwareSerial &amp;serial,</a>
+<a name="147"><span class="lineNum">     147 </span>            :                                       unsigned long baud)</a>
+<a name="148"><span class="lineNum">     148 </span>            :         : SerialDebugMIDI_Interface(serial, baud) {}</a>
+<a name="149"><span class="lineNum">     149 </span>            : };</a>
+<a name="150"><span class="lineNum">     150 </span>            : #endif</a>
 </pre>
       </td>
     </tr>

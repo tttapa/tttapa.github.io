@@ -1,5 +1,5 @@
 /*
-@ @licstart  The following is the entire license notice for the
+@licstart  The following is the entire license notice for the
 JavaScript code in this file.
 
 Copyright (C) 1997-2019 by Dimitri van Heesch
