@@ -33,16 +33,16 @@ def addAnchors(html):
 
 def addCodeLines(match):
     pre = match.group(1)
+    pre = re.sub(r"(<pre.*?>)(?:\r\n|\n)*", r"\g<1><code>", pre)
     pre = re.sub(r"\r\n|\n", r"</code>\g<0><code>", pre)
     pre = re.sub(r"</pre>", r"</code></pre>", pre)
-    pre = re.sub(r"<pre.*?>", r"\g<0><code>", pre)
     return pre
 
 def addLineNumbersEmphasis(match):
     pre = match.group(1)
+    pre = re.sub(r"(<pre.*?>)(?:\r\n|\n)*", r"\g<1><code>", pre)
     pre = re.sub(r"\r\n|\n",r"</code>\g<0><code>", pre)
     pre = re.sub(r"</pre>", r"</code></pre>", pre)
-    pre = re.sub(r"<pre.*?>", r"\g<0><code>", pre)
     pre = re.sub(r"<code>\*\*\*", r'<code class="emphasis">', pre)
     return pre
 

@@ -1,0 +1,35 @@
+<!--
+@title: Doxygen
+@author: Pieter P
+@keywords: Doxygen,Build,Source,Compile,Ubuntu,Linux,Installation,Documentation
+@description: Instructions for building Doxygen.
+-->
+<html>
+
+<p>
+    These are instructions to build Doxygen from source.
+</p>
+
+<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #795e26;">cd</span><span style="color: #000000;"> /tmp</span></code>
+<code><span style="color: #000000;">git clone --branch Release_1_8_16 --depth 1 https://github.com/doxygen/doxygen.git</span></code>
+<code><span style="color: #000000;">mkdir doxygen/build </span><span style="color: #000000;">&amp;&amp;</span><span style="color: #000000;"> </span><span style="color: #795e26;">cd</span><span style="color: #000000;"> doxygen/build</span></code>
+<code><span style="color: #000000;">cmake -G </span><span style="color: #a31515;">"Unix Makefiles"</span><span style="color: #000000;"> -DCMAKE_INSTALL_PREFIX=</span><span style="color: #001080;">$HOME</span><span style="color: #000000;">/.local ..</span></code>
+<code><span style="color: #000000;">make -j</span><span style="color: #a31515;">`nproc`</span></code>
+<code><span style="color: #000000;">make install</span></code></pre>
+
+<p>
+    Make sure that <code>~/.local/bin</code> is in your <code>$PATH</code>.
+</p>
+<p>
+    You can download the shell script here: <a href="resources/doxygen.sh">doxygen.sh</a>
+</p>
+
+<h3>Tested on</h3>
+
+<ul>
+    <li>Ubuntu 16.04</li>
+    <li>Ubuntu 18.04</li>
+    <li>CentOS 7</li>
+</ul>
+
+</html>

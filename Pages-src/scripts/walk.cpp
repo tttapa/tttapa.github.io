@@ -225,9 +225,13 @@ class PagesParser {
      */
     void exportPage(const Page &page) {
         string out = createPage(page, page_template);
-        if (task == ServerSideLaTeX || task == ServerSideLaTeXPDF) {
+        bool hasLaTeX =
+            out.find("\\(") != string::npos || out.find("$$") != string::npos;
+        if ((task == ServerSideLaTeX || task == ServerSideLaTeXPDF) &&
+            hasLaTeX) {
             export_mjpage(page, out);
         } else {
+            Green(cout) << "Exporting page `" << page.getTitle() << "`" << endl;
             std::ofstream outfile(output_dir / page.rel_path);
             outfile << out;
         }
@@ -260,6 +264,11 @@ class PagesParser {
     void exportDirectory(const PageDirectory &dir) {
         // Create the folder structure in the output directory
         fs::create_directories(output_dir / dir.rel_path.parent_path());
+        // Copy all resource folders
+        for (auto &dir : dir.resources)
+            fs::copy(source_dir / dir, output_dir / dir,
+                     fs::copy_options::overwrite_existing |
+                         fs::copy_options::recursive);
         // Export the index page of the current directory
         exportPage(dir);
         // Export all subdirectories
@@ -268,11 +277,6 @@ class PagesParser {
         // Export all other pages in this directory
         for (auto &page : dir.pages)
             exportPage(page);
-        // Copy all resource folders
-        for (auto &dir : dir.resources)
-            fs::copy(source_dir / dir, output_dir / dir,
-                     fs::copy_options::overwrite_existing |
-                         fs::copy_options::recursive);
     }
 
     void exportPDFPage(const Page &page) {
@@ -298,6 +302,7 @@ class PagesParser {
         command += "\" \"";
         command += pdf_file;
         command += "\"";
+        cerr << command << endl;
         if (system(command.c_str()) != 0) {
         }  // TODO
     }

@@ -1,9 +1,11 @@
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Pieter P">
-    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
-    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
+    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
             TeX: { equationNumbers: { autoNumber: "AMS" } },
@@ -13,23 +15,29 @@
         });
     </script>
     <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <meta name="theme-color" content="#ccc">
-    <meta name="keywords" content="Arduino, ATmega328P, Optiboot, clock speed, frequency, crystal, bootloader, Arduino IDE">
-    <meta name="description" content="A guide explaining how to compile the Optiboot bootloader for an ATmega328P (the microcontroller of an Arduino UNO) that runs at a non-standard clock speed, and how to add the custom CPU speed as an option in the Arduino IDE.">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="Arduino, ATmega328P, Optiboot, clock speed, frequency, crystal, bootloader, Arduino IDE"/>
+    <meta name="description" content="A guide explaining how to compile the Optiboot bootloader for an ATmega328P (the microcontroller of an Arduino UNO) that runs at a non-standard clock speed, and how to add the custom CPU speed as an option in the Arduino IDE."/>
     <title>Compiling Optiboot - ATmega328P at custom frequency</title>
 </head>
 <body>
     <nav>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                <path d="M0 0h48v48h-48z" fill="none"></path>
-                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
             </svg>
             <h2><a href="/">Home</a></h2>
 <ul>
     <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/index.html">Raspberry Pi</a>
     <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
         <ul>
         </ul>
@@ -38,7 +46,6 @@
         <ul>
         </ul>
         </li>
-        <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
     </ul>
     </li>
     <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Arduino</a>
@@ -133,6 +140,7 @@
             </ul>
             </li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Java.html">Java</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Python.html">Python</a></li>
@@ -202,7 +210,7 @@ BAUD RATE CHECK: Desired: 115200, Real: 115200, UBRRL = 15, Error=0.0%
    text	   data	    bss	    dec	    hex	filename
     464	      0	      0	    464	    1d0	optiboot_atmega328_12.elf
 ../../../../tools/avr/bin/avr-objcopy -j .text -j .data -j .version --set-section-flags .version=alloc,load -O ihex optiboot_atmega328_12.elf optiboot_atmega328_12.hex
-../../../../tools/avr/bin/avr-objdump -h -S optiboot_atmega328_12.elf &gt; optiboot_atmega328_12.lst</code></pre></div>
+../../../../tools/avr/bin/avr-objdump -h -S optiboot_atmega328_12.elf > optiboot_atmega328_12.lst</code></pre></div>
         <h3><a name="adding-the-option-in-the-arduino-ide" href="#adding-the-option-in-the-arduino-ide">Adding the option in the Arduino IDE</a></h3>
         <div>The next step is to add a new option in the <i>Tools</i> menu in the Arduino IDE.</div>
         <div>Open the 'boards.txt' file for editing, for example:<br><pre class="console"><code>gedit ~/opt/arduino-1.8.1/hardware/arduino/avr/boards.txt</code></pre><br>You have to add a menu entry to select the speed, change the f_cpu value, and point to the
@@ -260,7 +268,7 @@ BAUD RATE CHECK: Desired: 115200, Real: 115200, UBRRL = 15, Error=0.0%
         <div>Check the result with the following image: <img src="https://www.arduino.cc/en/uploads/Tutorial/BreadboardAVR.png" style="display: block;"><small>Image source: <a href="https://www.arduino.cc/en/Tutorial/ArduinoISP">https://www.arduino.cc/en/Tutorial/ArduinoISP</a></small></div>
         <div style="margin-top: 10px;">Finally, add a 10µF capacitor between the reset pin of the programmer Arduino and ground, to prevent it from resetting while burning the bootloader.</div>
         <h4><a name="burning-the-bootloader" href="#burning-the-bootloader">Burning the bootloader</a></h4>
-        <div>Now go to the Tools menu in the IDE, and under CPU Speed, select the new custom frequency. Then select "Arduino as ISP" under Tools &gt; Programmer. Select the serial port of the programmer Arduino, and click 'Burn Bootloader'.</div>
+        <div>Now go to the Tools menu in the IDE, and under CPU Speed, select the new custom frequency. Then select "Arduino as ISP" under Tools > Programmer. Select the serial port of the programmer Arduino, and click 'Burn Bootloader'.</div>
         <div>The ATmega328P now has the bootloader installed, so you can upload sketches over UART.</div>
 
         <h3><a name="testing" href="#testing">Testing</a></h3>
@@ -270,6 +278,6 @@ BAUD RATE CHECK: Desired: 115200, Real: 115200, UBRRL = 15, Error=0.0%
 </div>
     </article>
     <footer>Last edited: Sunday, 30 June 2019 12:12 UTC</footer>
+</body>
 
-
-</body></html>
+</html>

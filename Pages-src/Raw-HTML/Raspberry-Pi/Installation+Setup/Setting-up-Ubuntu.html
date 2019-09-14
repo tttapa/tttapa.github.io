@@ -38,7 +38,9 @@
         everything on that device, so it's easy to accidentally destroy your computer.
     </li>
     <li>
-        Install the SD card into the Raspberry Pi, connect it to a network using Ethernet, and power it up.
+        Install the SD card into the Raspberry Pi, connect it to a network using Ethernet, and power it up.<br>
+        If you don't have an Ethernet network to connect the Pi to, you can configure the WiFi first, as explained here:
+        <a href="WiFi-Setup.html">WiFi Setup</a>
     </li>
     <li>
         Use your favorite method to find its IP address. You can find it in your router's settings, with an app like
@@ -59,7 +61,7 @@
 
 <ol>
     <li>Set the hostname:
-        <pre class="console pi"><code>sudo hostnamectl set-hostname rpi-3</code></pre>
+        <pre class="console pi"><code>sudo hostnamectl set-hostname rpi3</code></pre>
     </li>
     <li>Install the <code>avahi-daemon</code> package to enable mDNS:
         <pre class="console pi"><code>sudo apt install avahi-daemon</code></pre>
@@ -71,23 +73,28 @@
         <pre class="console pi"><code>exit</code></pre>
     </li>
     <li>You should now be able to reach the Pi using its mDNS hostname:
-        <pre class="console"><code>ping rpi-3.local -c3</code></pre>
-    </li>
-    <li>Add your public key to the Pi's <code>authorized_keys</code>, so you can connect to it without entering the
-        password each time:
-        <pre
-            class="console"><code>cat .ssh/id_rsa.pub | ssh ubuntu@rpi-3.local -T "cat >> .ssh/authorized_keys"</code></pre>
+        <pre class="console"><code>ping rpi3.local -c3</code></pre>
     </li>
     <li>
-        Create an SSH configuration for the Pi on you computer:
+        Create an SSH configuration for the Pi on your computer, so you can
+        connect to it without having to specify the hostname or username:
         <pre class="console"><code>cat >> ~/.ssh/config &lt;&lt; 'EOF'
 Host RPi3
-    HostName rpi-3.local
+    HostName rpi3.local
     User ubuntu
 EOF</code></pre>
     </li>
+    <li>Add your public key to the Pi's <code>authorized_keys</code>, so you can connect to it without entering the
+        password each time:
+        <pre class="console"><code>ssh-copy-id -i ~/.ssh/id_rsa.pub RPi3</code></pre>
+        If you don't have an SSH key pair yet, you can follow these instructions on how
+        to create one:
+        <a
+            href="https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-1804">https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys-on-ubuntu-1804</a>.
+    </li>
     <li>
-        You can now connect to it without having to specify the hostname or username:
+        You can now try to connect to it without having to specify the hostname
+        or username, and without having to enter your password:
         <pre class="console"><code>ssh RPi3</code></pre>
     </li>
 </ol>

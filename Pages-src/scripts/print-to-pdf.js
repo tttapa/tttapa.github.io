@@ -9,6 +9,7 @@ const url = process.argv[3];
 const pdfFilePath = process.argv[4];
 
 (async function () {
+    console.log("Start");
     const protocol = await CDP({ port: port });
 
     // Extract the DevTools protocol domains we need and enable them.
@@ -17,6 +18,7 @@ const pdfFilePath = process.argv[4];
     await Page.enable();
 
     Page.loadEventFired(function () {
+        console.log("loadEventFired");
         setTimeout(function () {
             // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-printToPDF
             console.log("Printing...")
@@ -27,12 +29,16 @@ const pdfFilePath = process.argv[4];
                 footerTemplate: '<div class="text center"><span class="pageNumber"></span></div>',
                 // footerTemplate: '<div class="text center"><span class="pageNumber"></span> of <span class="totalPages"></span></div>'
             }).then((base64EncodedPdf) => {
+                console.log("Writing to file");
                 fs.writeFileSync(pdfFilePath, Buffer.from(base64EncodedPdf.data, 'base64'), 'utf8');
-                console.log("Done")
+                console.log("Closing");
                 protocol.close();
+                console.log("Done");
             });
-        }, 25);
+        }, 50);
     });
 
+    console.log("Navigating to file");
     Page.navigate({ url: url });
+    console.log("Navigated");
 })();
