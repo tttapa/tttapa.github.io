@@ -43,6 +43,7 @@ class PagesParser {
     struct Page {
         string_map metadata;
         string html;
+        unsigned int lineno; ///< line number where <html> starts
         file_time_t modified;
         path abs_source_path;
         path rel_path;
@@ -253,7 +254,8 @@ class PagesParser {
         replace(out, ":nav:", generateNavigation(page));
         replace(out, ":filenamepdf:", page.rel_path.stem().string() + ".pdf");
         string html = page.html;
-        replace(out, ":html:", formatHTML(page.html, page.abs_source_path));
+        replace(out, ":html:",
+                formatHTML(page.html, page.abs_source_path, page.lineno));
         replace(out, ":mdate:", formatFileTime(page.modified));
         for (const auto &[key, value] : page.metadata)
             while (replace(out, ":" + key + ":", value))
@@ -415,9 +417,10 @@ class PagesParser {
   private:
 #pragma region HTML formatter...................................................
 
-    string formatHTML(const string &html, const fs::path &path) {
+    string formatHTML(const string &html, const fs::path &path,
+                      unsigned int lineno) {
         auto formatHTML = py::globals()["HTMLFormatter"].attr("formatHTML");
-        return formatHTML(html, path.parent_path().string()).cast<string>();
+        return formatHTML(html, path.string(), lineno).cast<string>();
     }
 
 #pragma endregion
@@ -519,16 +522,19 @@ class PagesParser {
         return std::nullopt;
     }
 
-    static string read_html(const fs::directory_entry &file_entry,
-                            const string &content) {
+    static std::tuple<string, unsigned int>
+    read_html(const fs::directory_entry &file_entry, const string &content) {
         size_t offset = 6;
         size_t start  = content.find("<html>");
         size_t end    = content.rfind("</html>");
         if (start != string::npos && end != string::npos) {
-            return content.substr(start + offset, end - start - offset);
+            string html = content.substr(start + offset, end - start - offset);
+            unsigned int lineno =
+                std::count(content.begin(), content.begin() + start, '\n') + 1;
+            return std::make_tuple(html, lineno);
         } else {
             Yellow(cerr) << "Warning: no valid html for " << file_entry << endl;
-            return "";
+            return std::make_tuple<string>("", 0);
         }
     }
 
@@ -570,7 +576,9 @@ class PagesParser {
     void load_page_file(const fs::directory_entry &file_entry, Page &page) {
         string content       = read_file(file_entry.path());
         page.metadata        = read_metadata(file_entry, content);
-        page.html            = read_html(file_entry, content);
+        auto [html, lineno]  = read_html(file_entry, content);
+        page.html            = html;
+        page.lineno          = lineno;
         page.modified        = file_entry.last_write_time();
         page.abs_source_path = file_entry;
         page.rel_path        = fs::relative(file_entry, source_dir);
