@@ -44,6 +44,7 @@
         </li>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/C++-Development/index.html">C++ Development</a>
         <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
         </ul>
         </li>
     </ul>
@@ -214,45 +215,45 @@ BAUD RATE CHECK: Desired: 115200, Real: 115200, UBRRL = 15, Error=0.0%
         <h3><a name="adding-the-option-in-the-arduino-ide" href="#adding-the-option-in-the-arduino-ide">Adding the option in the Arduino IDE</a></h3>
         <div>The next step is to add a new option in the <i>Tools</i> menu in the Arduino IDE.</div>
         <div>Open the 'boards.txt' file for editing, for example:<br><pre class="console"><code>gedit ~/opt/arduino-1.8.1/hardware/arduino/avr/boards.txt</code></pre><br>You have to add a menu entry to select the speed, change the f_cpu value, and point to the
-            right bootloader. Edit the 'uno' entry, so it looks like this:<pre class="lineNumbersEmphasis"><code>uno.name=Arduino/Genuino Uno</code>
-<code></code>
-<code>uno.vid.0=0x2341</code>
-<code>uno.pid.0=0x0043</code>
-<code>uno.vid.1=0x2341</code>
-<code>uno.pid.1=0x0001</code>
-<code>uno.vid.2=0x2A03</code>
-<code>uno.pid.2=0x0043</code>
-<code>uno.vid.3=0x2341</code>
-<code>uno.pid.3=0x0243</code>
-<code></code>
-<code>uno.upload.tool=avrdude</code>
-<code>uno.upload.protocol=arduino</code>
-<code>uno.upload.maximum_size=32256</code>
-<code>uno.upload.maximum_data_size=2048</code>
-<code>uno.upload.speed=115200</code>
-<code></code>
-<code>uno.bootloader.tool=avrdude</code>
-<code>uno.bootloader.low_fuses=0xFF</code>
-<code>uno.bootloader.high_fuses=0xDE</code>
-<code>uno.bootloader.extended_fuses=0x05</code>
-<code>uno.bootloader.unlock_bits=0x3F</code>
-<code>uno.bootloader.lock_bits=0x0F</code>
-<code class="emphasis"># uno.bootloader.file=optiboot/optiboot_atmega328.hex</code>
-<code></code>
-<code>uno.build.mcu=atmega328p</code>
-<code class="emphasis"># uno.build.f_cpu=16000000L</code>
-<code>uno.build.board=AVR_UNO</code>
-<code>uno.build.core=arduino</code>
-<code>uno.build.variant=standard</code>
-<code></code>
-<code class="emphasis">menu.speed=CPU Speed</code>
-<code></code>
-<code class="emphasis">uno.menu.speed.16=16 MHz</code>
-<code class="emphasis">uno.menu.speed.12=12 MHz</code>
-<code class="emphasis">uno.menu.speed.16.bootloader.file=optiboot/optiboot_atmega328.hex</code>
-<code class="emphasis">uno.menu.speed.12.bootloader.file=optiboot/optiboot_atmega328_12.hex</code>
-<code class="emphasis">uno.menu.speed.16.build.f_cpu=16000000L</code>
-<code class="emphasis">uno.menu.speed.12.build.f_cpu=12000000L</code></pre> Note that the original <code>f_cpu</code> and <code>bootloader.file</code> lines are commented out. Also make sure that the speeds and bootloader filenames are the same as the ones in the Optiboot Makefile.</div>
+            right bootloader. Edit the 'uno' entry, so it looks like this:<pre class="lineNumbersEmphasis"><code><code>uno.name=Arduino/Genuino Uno</code></code>
+<code><code></code></code>
+<code><code>uno.vid.0=0x2341</code></code>
+<code><code>uno.pid.0=0x0043</code></code>
+<code><code>uno.vid.1=0x2341</code></code>
+<code><code>uno.pid.1=0x0001</code></code>
+<code><code>uno.vid.2=0x2A03</code></code>
+<code><code>uno.pid.2=0x0043</code></code>
+<code><code>uno.vid.3=0x2341</code></code>
+<code><code>uno.pid.3=0x0243</code></code>
+<code><code></code></code>
+<code><code>uno.upload.tool=avrdude</code></code>
+<code><code>uno.upload.protocol=arduino</code></code>
+<code><code>uno.upload.maximum_size=32256</code></code>
+<code><code>uno.upload.maximum_data_size=2048</code></code>
+<code><code>uno.upload.speed=115200</code></code>
+<code><code></code></code>
+<code><code>uno.bootloader.tool=avrdude</code></code>
+<code><code>uno.bootloader.low_fuses=0xFF</code></code>
+<code><code>uno.bootloader.high_fuses=0xDE</code></code>
+<code><code>uno.bootloader.extended_fuses=0x05</code></code>
+<code><code>uno.bootloader.unlock_bits=0x3F</code></code>
+<code><code>uno.bootloader.lock_bits=0x0F</code></code>
+<code><code class="emphasis"># uno.bootloader.file=optiboot/optiboot_atmega328.hex</code></code>
+<code><code></code></code>
+<code><code>uno.build.mcu=atmega328p</code></code>
+<code><code class="emphasis"># uno.build.f_cpu=16000000L</code></code>
+<code><code>uno.build.board=AVR_UNO</code></code>
+<code><code>uno.build.core=arduino</code></code>
+<code><code>uno.build.variant=standard</code></code>
+<code><code></code></code>
+<code><code class="emphasis">menu.speed=CPU Speed</code></code>
+<code><code></code></code>
+<code><code class="emphasis">uno.menu.speed.16=16 MHz</code></code>
+<code><code class="emphasis">uno.menu.speed.12=12 MHz</code></code>
+<code><code class="emphasis">uno.menu.speed.16.bootloader.file=optiboot/optiboot_atmega328.hex</code></code>
+<code><code class="emphasis">uno.menu.speed.12.bootloader.file=optiboot/optiboot_atmega328_12.hex</code></code>
+<code><code class="emphasis">uno.menu.speed.16.build.f_cpu=16000000L</code></code>
+<code><code class="emphasis">uno.menu.speed.12.build.f_cpu=12000000L</code></code></pre> Note that the original <code>f_cpu</code> and <code>bootloader.file</code> lines are commented out. Also make sure that the speeds and bootloader filenames are the same as the ones in the Optiboot Makefile.</div>
         <div>Restart the Arduino IDE for the changes to take effect. You should see the new options when opening the 'Tools' menu.<img src="/Images/ATmega328P-custom-freq-tools.png" style="display: block;"></div>
 
         <h3><a name="flashing-the-bootloader-to-the-atmega328p" href="#flashing-the-bootloader-to-the-atmega328p">Flashing the bootloader to the ATmega328P</a></h3>

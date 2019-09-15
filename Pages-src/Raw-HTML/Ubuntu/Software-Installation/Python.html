@@ -123,51 +123,12 @@
 <p>
     Here's a shell script that executes the previous steps for you.
 </p>
-<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #008000;">#!/usr/bin/env bash</span></code>
-<code></code>
-<code><span style="color: #008000;"># Script to download and build Python 3 from source</span></code>
-<code></code>
-<code><span style="color: #795e26;">set</span><span style="color: #000000;"> -ex</span></code>
-<code></code>
-<code><span style="color: #000000;">version=</span><span style="color: #a31515;">"3.7.4"</span></code>
-<code><span style="color: #000000;">builddir=</span><span style="color: #a31515;">"/tmp"</span></code>
-<code><span style="color: #000000;">python=</span><span style="color: #a31515;">"Python-</span><span style="color: #001080;">$version</span><span style="color: #a31515;">"</span></code>
-<code><span style="color: #000000;">prefix=</span><span style="color: #a31515;">"</span><span style="color: #001080;">$HOME</span><span style="color: #a31515;">/.local"</span></code>
-<code></code>
-<code><span style="color: #008000;"># Install dependencies and build tools</span></code>
-<code><span style="color: #000000;">sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test</span></code>
-<code><span style="color: #000000;">sudo apt-get update</span></code>
-<code><span style="color: #000000;">sudo apt-get install -y \</span></code>
-<code><span style="color: #000000;">    zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev \</span></code>
-<code><span style="color: #000000;">    libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev \</span></code>
-<code><span style="color: #000000;">    libgdbm-dev liblzma-dev \</span></code>
-<code><span style="color: #000000;">    wget make gcc-9 g++-9</span></code>
-<code></code>
-<code><span style="color: #008000;"># For Ubuntu 18.04 and later, another dependency is required for GNU dbm</span></code>
-<code><span style="color: #795e26;">source</span><span style="color: #000000;"> /etc/os-release</span></code>
-<code><span style="color: #af00db;">if</span><span style="color: #000000;"> </span><span style="color: #a31515;">(( $(echo "</span><span style="color: #001080;">$VERSION_ID</span><span style="color: #a31515;"> </span><span style="color: #000000;">&gt;=</span><span style="color: #a31515;"> </span><span style="color: #09885a;">18</span><span style="color: #a31515;">.</span><span style="color: #09885a;">04</span><span style="color: #a31515;">" </span><span style="color: #000000;">|</span><span style="color: #a31515;"> bc </span><span style="color: #000000;">-</span><span style="color: #a31515;">l) ))</span><span style="color: #000000;">;</span></code>
-<code><span style="color: #af00db;">then</span></code>
-<code><span style="color: #000000;">    sudo apt-get install libgdbm-compat-dev</span></code>
-<code><span style="color: #af00db;">fi</span></code>
-<code></code>
-<code><span style="color: #008000;"># Download and extract the Python source code</span></code>
-<code><span style="color: #000000;">mkdir -p </span><span style="color: #a31515;">"</span><span style="color: #001080;">$builddir</span><span style="color: #a31515;">"</span></code>
-<code><span style="color: #795e26;">cd</span><span style="color: #000000;"> </span><span style="color: #001080;">$builddir</span></code>
-<code><span style="color: #af00db;">if</span><span style="color: #000000;"> [ </span><span style="color: #000000;">!</span><span style="color: #000000;"> </span><span style="color: #000000;">-d</span><span style="color: #000000;"> </span><span style="color: #a31515;">"</span><span style="color: #001080;">$python</span><span style="color: #a31515;">"</span><span style="color: #000000;"> ]</span></code>
-<code><span style="color: #af00db;">then</span></code>
-<code><span style="color: #000000;">    wget </span><span style="color: #a31515;">"https://www.python.org/ftp/python/</span><span style="color: #001080;">$version</span><span style="color: #a31515;">/</span><span style="color: #001080;">$python</span><span style="color: #a31515;">.tgz"</span></code>
-<code><span style="color: #000000;">    tar xf </span><span style="color: #001080;">$python</span><span style="color: #000000;">.tgz</span></code>
-<code><span style="color: #af00db;">fi</span></code>
-<code></code>
-<code><span style="color: #795e26;">cd</span><span style="color: #000000;"> </span><span style="color: #a31515;">"</span><span style="color: #001080;">$python</span><span style="color: #a31515;">"</span></code>
-<code><span style="color: #000000;">./configure --prefix=</span><span style="color: #a31515;">"</span><span style="color: #001080;">$prefix</span><span style="color: #a31515;">"</span><span style="color: #000000;"> \</span></code>
-<code><span style="color: #000000;">    --enable-ipv6 \</span></code>
-<code><span style="color: #000000;">    --enable-shared --with-lto --enable-optimizations \</span></code>
-<code><span style="color: #000000;">    CC=gcc-9 CXX=g++-9 \</span></code>
-<code><span style="color: #000000;">    </span><span style="color: #a31515;">'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</span></code>
-<code></code>
-<code><span style="color: #000000;">make -j$[</span><span style="color: #a31515;">$(nproc)</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> 2]</span></code>
-<code><span style="color: #000000;">make altinstall</span></code></pre>
+
+@codesnippet{
+    "name": "python.sh",
+    "file": "resources/python.sh",
+    "startline": 7
+}
 
 <p>
     You can download it <a href="resources/python.sh">here</a>. Then allow

@@ -1,4 +1,10 @@
 import re
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import guess_lexer_for_filename
+from json import JSONDecoder
+from pprint import pformat
+from os import getenv
 
 def format_anchor_name(match, anchors):
     tag = match.group(1)
@@ -47,8 +53,8 @@ def addLineNumbersEmphasis(match):
     return pre
 
 def formatCode(html):
-    findPre = r"(<pre[^>]* class=\"lineNumbers\"[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
-    findPreEmph = r"(<pre[^>]* class=\"lineNumbersEmphasis\"[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
+    findPre = r"(<pre[^>]* class=\"lineNumbers[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
+    findPreEmph = r"(<pre[^>]* class=\"lineNumbersEmphasis[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
 
     html = re.sub(findPre, addCodeLines, html)
     html = re.sub(findPreEmph, addLineNumbersEmphasis, html)
@@ -59,7 +65,51 @@ def formatCode(html):
 
     return html
 
-def formatHTML(html):
+def formatPygmentsCode(html, path):
+    keyword = '@codesnippet{'
+    index = html.find(keyword)
+    while index >= 0:
+        data, endindex = JSONDecoder().raw_decode(html, index + len(keyword)-1)
+        startline = data.get('startline', 1)
+        endline = data.get('endline')
+        file = data['file']
+        file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
+        if file[0] != '/':
+            file = path + '/' + file
+
+        emptylines = 0
+        nonemptylineencountered = False
+        filecontents = ""
+        with open(file) as f:
+            for i, line in enumerate(f):
+                if i >= (startline - 1):
+                    filecontents += line
+                    if not nonemptylineencountered and line == '\n':
+                        emptylines += 1
+                    else:
+                        nonemptylineencountered = True
+                if endline is not None and i >= (endline - 1):
+                    break
+
+        lexer = guess_lexer_for_filename(file, filecontents)
+        formatter = HtmlFormatter(cssclass='pygments')
+        css = formatter.get_style_defs('.pygments')
+        ctrstart = emptylines + startline - 1
+        css += '.pygments pre.snippet{} {{ counter-reset: line {}; }}' \
+            .format(index, ctrstart)
+        htmlc = highlight(filecontents, lexer, formatter)
+        htmlc = htmlc.replace('<pre>', 
+                    '<pre class="lineNumbers snippet{}">'.format(index))
+        htmlc = htmlc.replace('\n</pre></div>', '</pre></div>')
+        datastr = '<div><style>' + css + '</style>'
+        datastr += formatCode(htmlc)
+        html = html[:index] + datastr + html[endindex:] + '</div>'
+        index = html.find(keyword, index + len(datastr))
+    return html
+    
+
+def formatHTML(html, path):
     html = formatCode(html)
     html = addAnchors(html)
+    html = formatPygmentsCode(html, path)
     return html

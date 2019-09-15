@@ -35,7 +35,7 @@ const pdfFilePath = process.argv[4];
                 protocol.close();
                 console.log("Done");
             });
-        }, 50);
+        }, 1);
     });
 
     console.log("Navigating to file");

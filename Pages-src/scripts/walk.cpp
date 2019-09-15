@@ -253,7 +253,7 @@ class PagesParser {
         replace(out, ":nav:", generateNavigation(page));
         replace(out, ":filenamepdf:", page.rel_path.stem().string() + ".pdf");
         string html = page.html;
-        replace(out, ":html:", formatHTML(page.html));
+        replace(out, ":html:", formatHTML(page.html, page.abs_source_path));
         replace(out, ":mdate:", formatFileTime(page.modified));
         for (const auto &[key, value] : page.metadata)
             while (replace(out, ":" + key + ":", value))
@@ -302,9 +302,10 @@ class PagesParser {
         command += "\" \"";
         command += pdf_file;
         command += "\"";
-        cerr << command << endl;
-        if (system(command.c_str()) != 0) {
-        }  // TODO
+        if (int status = system(command.c_str()); status != 0) {
+            Red(cerr) << "print-to-pdf.js for `" << page.getTitle()
+                      << "` failed with exit status " << status << endl;
+        }
     }
 
     void exportPDFDirectory(const PageDirectory &dir) {
@@ -414,9 +415,9 @@ class PagesParser {
   private:
 #pragma region HTML formatter...................................................
 
-    string formatHTML(const string &html) {
+    string formatHTML(const string &html, const fs::path &path) {
         auto formatHTML = py::globals()["HTMLFormatter"].attr("formatHTML");
-        return formatHTML(html).cast<string>();
+        return formatHTML(html, path.parent_path().string()).cast<string>();
     }
 
 #pragma endregion

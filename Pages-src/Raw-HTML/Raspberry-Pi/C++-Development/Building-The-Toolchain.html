@@ -1,0 +1,116 @@
+<!--
+@sequence: 10
+@title: Building the Cross-Compilation Toolchain
+@author: Pieter P
+@keywords:
+@description: To compile software for the Raspberry Pi, you need a 
+              cross-compilation toolchain. This page contains instructions for
+              how to build one.
+-->
+<html>
+
+<p>
+    To compile software for the Raspberry Pi, you need a cross-compilation toolchain. It's a collection of files and
+    programs that you can run on your computer, and that produce a binary that can be executed on the Raspberry Pi.
+</p>
+
+<h3>Docker</h3>
+
+<p>
+    I don't like to do a lot of installations on my main Linux box, so I build most of it inside of a Docker container.
+    This has the added benefit that all builds are reproducible, and it's easy to undo the previous step or even start
+    from scratch.
+</p>
+<h4>Installation</h4>
+<p>
+    You need Docker and Docker Compose to build the toolchain.<br>
+    You can find detailed installation instructions here:
+    <ul>
+        <li><a href="https://www.digitalocean.com/community/tutorial_collections/39">
+                DigitalOcean - How to Install and Use Docker</a></li>
+        <li><a href="https://www.digitalocean.com/community/tutorial_collections/48">
+                DigitalOcean - How to Install Docker Compose</a></li>
+    </ul>
+</p>
+<h4>Dockefiles</h4>
+<p>
+    The actual Dockerfiles are on my GitHub, I'll briefly go over them on this page.
+</p>
+<p>
+    <a href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker">
+        https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker</a>
+</p>
+
+<h3>Crosstool-NG</h3>
+
+<p>
+    The toolchain is built using <a href="https://github.com/crosstool-ng/crosstool-ng">Crosstool-NG</a>.
+</p>
+<p>
+    It is installed in a CentOS 7 Docker container, because CentOS 7 was the oldest OS that I had to run the toolchain
+    on. In this context, oldest refers to the Linux kernel version and the glibc version. They are backwards compatible,
+    so you can run software compiled for an old version on a computer with a newer version, but you can't run software
+    compiled for a new version on a computer with an older version.
+</p>
+<p>
+    The following Dockerfile downloads, builds and installs Crosstool-NG to the <code>~/.local</code> directory
+    of the container.
+</p>
+@codesnippet{
+"name": "Dockerfile",
+"file": "$HOME/GitHub/RPi-Toolchain/toolchain/docker/crosstool-ng/Dockerfile"
+}
+<p>
+    The list of dependencies can be found on Crosstool-NG's GitHub:
+    <a href="https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/centos7/Dockerfile">
+        https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/centos7/Dockerfile</a>
+</p>
+
+<h3>Raspberry Pi 3B+ 64-bit Cross-Compilation Toolchain</h3>
+
+<p>
+    The following Dockerfile builds the toolchain for a Raspberry Pi 3B+ running a 64-bit operating system.
+</p>
+@codesnippet{
+"name": "Dockerfile",
+"file": "$HOME/GitHub/RPi-Toolchain/toolchain/docker/aarch64-toolchain/Dockerfile"
+}
+<p>
+    The configuration is based on the <code>aarch64-rpi3-linux-gnu</code> sample that comes with Crosstool-NG:
+    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu">
+        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu</a>
+</p>
+<p>
+    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
+    that the Ubuntu Server 18.04 image ships with.
+</p>
+<p>
+    The build took around 25 minutes on a 2018 Dell XPS i7-8750H, and 45 minutes on a 2017 Dell XPS i7-7700HQ.
+</p>
+
+<h3>Raspberry Pi 3B+ 32-bit Cross-Compilation Toolchain</h3>
+
+<p>
+    Even though the Raspberry Pi 3B+ has a 64-bit ARMv8/AArch64 CPU, at the time of writing, the Raspbian distribution
+    is still only 32 bits. To be able to cross-compile software for this platform, you'll need a 32-bit cross-compiler.
+</p>
+@codesnippet{
+"name": "Dockerfile",
+"file": "$HOME/GitHub/RPi-Toolchain/toolchain/docker/aarch32-toolchain/Dockerfile"
+}
+<p>
+    The configuration is based on the <code>armv8-rpi3-linux-gnueabihf</code> sample that comes with Crosstool-NG:
+    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf">
+        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf</a>
+</p>
+<p>
+    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
+    that the Raspbian Stretch image ships with. <br>
+    Even though the CPU will be running in 32-bit mode, you can still use the ARMv8 NEON instructions, so I changed the
+    compiler's default FPU flag to <code>neon-fp-armv8</code>. I haven't tested if it actually makes any difference.
+</p>
+<p>
+    The build took around 25 minutes on a 2018 Dell XPS i7-8750H, and 45 minutes on a 2017 Dell XPS i7-7700HQ.
+</p>
+
+</html>

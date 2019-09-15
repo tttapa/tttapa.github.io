@@ -44,6 +44,7 @@
         </li>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/C++-Development/index.html">C++ Development</a>
         <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
         </ul>
         </li>
     </ul>
@@ -221,24 +222,92 @@
 <p>
     Here's a shell script that executes the previous steps for you.
 
-    <pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><code><span style="color: #008000;">#!/usr/bin/env bash</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #795e26;">set</span><span style="color: #000000;"> -ex</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #000000;">sudo apt-get install -y \</span></code></code>
-<code><code><span style="color: #000000;">    libudev-dev libical-dev libreadline-dev libdbus-1-dev libasound2-dev \</span></code></code>
-<code><code><span style="color: #000000;">    build-essential</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #795e26;">cd</span><span style="color: #000000;"> /tmp </span></code></code>
-<code><code><span style="color: #000000;">wget https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz</span></code></code>
-<code><code><span style="color: #000000;">tar -xf bluez-5.50.tar.xz</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #795e26;">cd</span><span style="color: #000000;"> bluez-5.50</span></code></code>
-<code><code><span style="color: #000000;">./configure --enable-midi --with-systemdsystemunitdir=/etc/systemd/system</span></code></code>
-<code><code><span style="color: #000000;">make</span></code></code>
-<code><code><span style="color: #000000;">sudo make install</span></code></code>
-<code><code><span style="color: #000000;">sudo apt-get install --reinstall bluez</span></code></code></pre>
+</p>
 
+<div><style>.pygments .hll { background-color: #ffffcc }
+.pygments  { background: #f8f8f8; }
+.pygments .c { color: #408080; font-style: italic } /* Comment */
+.pygments .err { border: 1px solid #FF0000 } /* Error */
+.pygments .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments .o { color: #666666 } /* Operator */
+.pygments .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments .gd { color: #A00000 } /* Generic.Deleted */
+.pygments .ge { font-style: italic } /* Generic.Emph */
+.pygments .gr { color: #FF0000 } /* Generic.Error */
+.pygments .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments .gi { color: #00A000 } /* Generic.Inserted */
+.pygments .go { color: #888888 } /* Generic.Output */
+.pygments .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments .gs { font-weight: bold } /* Generic.Strong */
+.pygments .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments .gt { color: #0044DD } /* Generic.Traceback */
+.pygments .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments .kt { color: #B00040 } /* Keyword.Type */
+.pygments .m { color: #666666 } /* Literal.Number */
+.pygments .s { color: #BA2121 } /* Literal.String */
+.pygments .na { color: #7D9029 } /* Name.Attribute */
+.pygments .nb { color: #008000 } /* Name.Builtin */
+.pygments .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments .no { color: #880000 } /* Name.Constant */
+.pygments .nd { color: #AA22FF } /* Name.Decorator */
+.pygments .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments .nf { color: #0000FF } /* Name.Function */
+.pygments .nl { color: #A0A000 } /* Name.Label */
+.pygments .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments .nv { color: #19177C } /* Name.Variable */
+.pygments .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments .mf { color: #666666 } /* Literal.Number.Float */
+.pygments .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments .sx { color: #008000 } /* Literal.String.Other */
+.pygments .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments .vc { color: #19177C } /* Name.Variable.Class */
+.pygments .vg { color: #19177C } /* Name.Variable.Global */
+.pygments .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments .il { color: #666666 } /* Literal.Number.Integer.Long */.pygments pre.snippet2136 { counter-reset: line 4; }</style><div class="pygments"><pre class="lineNumbers snippet2136"><code><span></span>sudo apt-get install -y <span class="se">\</span></code>
+<code>    libudev-dev libical-dev libreadline-dev libdbus-1-dev libasound2-dev <span class="se">\</span></code>
+<code>    build-essential</code>
+<code></code>
+<code><span class="nb">cd</span> /tmp </code>
+<code>wget https://mirrors.edge.kernel.org/pub/linux/bluetooth/bluez-5.50.tar.xz</code>
+<code>tar -xf bluez-5.50.tar.xz</code>
+<code></code>
+<code><span class="nb">cd</span> bluez-5.50</code>
+<code>./configure --enable-midi --with-systemdsystemunitdir<span class="o">=</span>/etc/systemd/system</code>
+<code>make</code>
+<code>sudo make install</code>
+<code>sudo apt-get install --reinstall bluez</code></pre></div>
+
+
+<p>
     You can download it <a href="resources/bluez.sh">here</a>. Then allow
     execution and run it:
     <pre class="console"><code>chmod +x bluez.sh</code>
@@ -251,9 +320,9 @@
     <li>Ubuntu 16.04 - BlueZ 5.50</li>
 </ul>
 
-</div>
+</div></div>
     </article>
-    <footer>Last edited: Monday, 05 August 2019 14:00 UTC</footer>
+    <footer>Last edited: Sunday, 15 September 2019 15:34 UTC</footer>
 </body>
 
 </html>

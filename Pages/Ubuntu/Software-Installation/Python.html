@@ -42,6 +42,7 @@
         </li>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/C++-Development/index.html">C++ Development</a>
         <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
         </ul>
         </li>
     </ul>
@@ -283,51 +284,115 @@
 <p>
     Here's a shell script that executes the previous steps for you.
 </p>
-<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><code><span style="color: #008000;">#!/usr/bin/env bash</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #008000;"># Script to download and build Python 3 from source</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #795e26;">set</span><span style="color: #000000;"> -ex</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #000000;">version=</span><span style="color: #a31515;">"3.7.4"</span></code></code>
-<code><code><span style="color: #000000;">builddir=</span><span style="color: #a31515;">"/tmp"</span></code></code>
-<code><code><span style="color: #000000;">python=</span><span style="color: #a31515;">"Python-</span><span style="color: #001080;">$version</span><span style="color: #a31515;">"</span></code></code>
-<code><code><span style="color: #000000;">prefix=</span><span style="color: #a31515;">"</span><span style="color: #001080;">$HOME</span><span style="color: #a31515;">/.local"</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #008000;"># Install dependencies and build tools</span></code></code>
-<code><code><span style="color: #000000;">sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test</span></code></code>
-<code><code><span style="color: #000000;">sudo apt-get update</span></code></code>
-<code><code><span style="color: #000000;">sudo apt-get install -y \</span></code></code>
-<code><code><span style="color: #000000;">    zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev \</span></code></code>
-<code><code><span style="color: #000000;">    libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev \</span></code></code>
-<code><code><span style="color: #000000;">    libgdbm-dev liblzma-dev \</span></code></code>
-<code><code><span style="color: #000000;">    wget make gcc-9 g++-9</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #008000;"># For Ubuntu 18.04 and later, another dependency is required for GNU dbm</span></code></code>
-<code><code><span style="color: #795e26;">source</span><span style="color: #000000;"> /etc/os-release</span></code></code>
-<code><code><span style="color: #af00db;">if</span><span style="color: #000000;"> </span><span style="color: #a31515;">(( $(echo "</span><span style="color: #001080;">$VERSION_ID</span><span style="color: #a31515;"> </span><span style="color: #000000;">&gt;=</span><span style="color: #a31515;"> </span><span style="color: #09885a;">18</span><span style="color: #a31515;">.</span><span style="color: #09885a;">04</span><span style="color: #a31515;">" </span><span style="color: #000000;">|</span><span style="color: #a31515;"> bc </span><span style="color: #000000;">-</span><span style="color: #a31515;">l) ))</span><span style="color: #000000;">;</span></code></code>
-<code><code><span style="color: #af00db;">then</span></code></code>
-<code><code><span style="color: #000000;">    sudo apt-get install libgdbm-compat-dev</span></code></code>
-<code><code><span style="color: #af00db;">fi</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #008000;"># Download and extract the Python source code</span></code></code>
-<code><code><span style="color: #000000;">mkdir -p </span><span style="color: #a31515;">"</span><span style="color: #001080;">$builddir</span><span style="color: #a31515;">"</span></code></code>
-<code><code><span style="color: #795e26;">cd</span><span style="color: #000000;"> </span><span style="color: #001080;">$builddir</span></code></code>
-<code><code><span style="color: #af00db;">if</span><span style="color: #000000;"> [ </span><span style="color: #000000;">!</span><span style="color: #000000;"> </span><span style="color: #000000;">-d</span><span style="color: #000000;"> </span><span style="color: #a31515;">"</span><span style="color: #001080;">$python</span><span style="color: #a31515;">"</span><span style="color: #000000;"> ]</span></code></code>
-<code><code><span style="color: #af00db;">then</span></code></code>
-<code><code><span style="color: #000000;">    wget </span><span style="color: #a31515;">"https://www.python.org/ftp/python/</span><span style="color: #001080;">$version</span><span style="color: #a31515;">/</span><span style="color: #001080;">$python</span><span style="color: #a31515;">.tgz"</span></code></code>
-<code><code><span style="color: #000000;">    tar xf </span><span style="color: #001080;">$python</span><span style="color: #000000;">.tgz</span></code></code>
-<code><code><span style="color: #af00db;">fi</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #795e26;">cd</span><span style="color: #000000;"> </span><span style="color: #a31515;">"</span><span style="color: #001080;">$python</span><span style="color: #a31515;">"</span></code></code>
-<code><code><span style="color: #000000;">./configure --prefix=</span><span style="color: #a31515;">"</span><span style="color: #001080;">$prefix</span><span style="color: #a31515;">"</span><span style="color: #000000;"> \</span></code></code>
-<code><code><span style="color: #000000;">    --enable-ipv6 \</span></code></code>
-<code><code><span style="color: #000000;">    --enable-shared --with-lto --enable-optimizations \</span></code></code>
-<code><code><span style="color: #000000;">    CC=gcc-9 CXX=g++-9 \</span></code></code>
-<code><code><span style="color: #000000;">    </span><span style="color: #a31515;">'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #000000;">make -j$[</span><span style="color: #a31515;">$(nproc)</span><span style="color: #000000;"> </span><span style="color: #000000;">*</span><span style="color: #000000;"> 2]</span></code></code>
-<code><code><span style="color: #000000;">make altinstall</span></code></code></pre>
+
+<div><style>.pygments .hll { background-color: #ffffcc }
+.pygments  { background: #f8f8f8; }
+.pygments .c { color: #408080; font-style: italic } /* Comment */
+.pygments .err { border: 1px solid #FF0000 } /* Error */
+.pygments .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments .o { color: #666666 } /* Operator */
+.pygments .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments .gd { color: #A00000 } /* Generic.Deleted */
+.pygments .ge { font-style: italic } /* Generic.Emph */
+.pygments .gr { color: #FF0000 } /* Generic.Error */
+.pygments .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments .gi { color: #00A000 } /* Generic.Inserted */
+.pygments .go { color: #888888 } /* Generic.Output */
+.pygments .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments .gs { font-weight: bold } /* Generic.Strong */
+.pygments .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments .gt { color: #0044DD } /* Generic.Traceback */
+.pygments .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments .kt { color: #B00040 } /* Keyword.Type */
+.pygments .m { color: #666666 } /* Literal.Number */
+.pygments .s { color: #BA2121 } /* Literal.String */
+.pygments .na { color: #7D9029 } /* Name.Attribute */
+.pygments .nb { color: #008000 } /* Name.Builtin */
+.pygments .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments .no { color: #880000 } /* Name.Constant */
+.pygments .nd { color: #AA22FF } /* Name.Decorator */
+.pygments .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments .nf { color: #0000FF } /* Name.Function */
+.pygments .nl { color: #A0A000 } /* Name.Label */
+.pygments .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments .nv { color: #19177C } /* Name.Variable */
+.pygments .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments .mf { color: #666666 } /* Literal.Number.Float */
+.pygments .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments .sx { color: #008000 } /* Literal.String.Other */
+.pygments .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments .vc { color: #19177C } /* Name.Variable.Class */
+.pygments .vg { color: #19177C } /* Name.Variable.Global */
+.pygments .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments .il { color: #666666 } /* Literal.Number.Integer.Long */.pygments pre.snippet5077 { counter-reset: line 6; }</style><div class="pygments"><pre class="lineNumbers snippet5077"><code><span></span><span class="nv">version</span><span class="o">=</span><span class="s2">"3.7.4"</span></code>
+<code><span class="nv">builddir</span><span class="o">=</span><span class="s2">"/tmp"</span></code>
+<code><span class="nv">python</span><span class="o">=</span><span class="s2">"Python-</span><span class="nv">$version</span><span class="s2">"</span></code>
+<code><span class="nv">prefix</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local"</span></code>
+<code></code>
+<code><span class="c1"># Install dependencies and build tools</span></code>
+<code>sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test</code>
+<code>sudo apt-get update</code>
+<code>sudo apt-get install -y <span class="se">\</span></code>
+<code>	zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev <span class="se">\</span></code>
+<code>	libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev <span class="se">\</span></code>
+<code>	libgdbm-dev liblzma-dev <span class="se">\</span></code>
+<code>	wget make gcc-9 g++-9</code>
+<code></code>
+<code><span class="c1"># For Ubuntu 18.04 and later, another dependency is required for GNU dbm</span></code>
+<code><span class="nb">source</span> /etc/os-release</code>
+<code><span class="k">if</span> <span class="o">((</span> <span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$VERSION_ID</span><span class="s2"> &gt;= 18.04"</span> <span class="p">|</span> bc -l<span class="k">)</span> <span class="o">))</span><span class="p">;</span></code>
+<code><span class="k">then</span></code>
+<code>	sudo apt-get install libgdbm-compat-dev</code>
+<code><span class="k">fi</span></code>
+<code></code>
+<code><span class="c1"># Download and extract the Python source code</span></code>
+<code>mkdir -p <span class="s2">"</span><span class="nv">$builddir</span><span class="s2">"</span></code>
+<code><span class="nb">cd</span> <span class="nv">$builddir</span></code>
+<code><span class="k">if</span> <span class="o">[</span> ! -d <span class="s2">"</span><span class="nv">$python</span><span class="s2">"</span> <span class="o">]</span></code>
+<code><span class="k">then</span></code>
+<code>	wget <span class="s2">"https://www.python.org/ftp/python/</span><span class="nv">$version</span><span class="s2">/</span><span class="nv">$python</span><span class="s2">.tgz"</span></code>
+<code>	tar xf <span class="nv">$python</span>.tgz</code>
+<code><span class="k">fi</span></code>
+<code></code>
+<code><span class="nb">cd</span> <span class="s2">"</span><span class="nv">$python</span><span class="s2">"</span></code>
+<code>./configure --prefix<span class="o">=</span><span class="s2">"</span><span class="nv">$prefix</span><span class="s2">"</span> <span class="se">\</span></code>
+<code>	--enable-ipv6 <span class="se">\</span></code>
+<code>	--enable-shared --with-lto --enable-optimizations <span class="se">\</span></code>
+<code>	<span class="nv">CC</span><span class="o">=</span>gcc-9 <span class="nv">CXX</span><span class="o">=</span>g++-9 <span class="se">\</span></code>
+<code>	<span class="s1">'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</span></code>
+<code></code>
+<code>make -j$<span class="o">[</span><span class="k">$(</span>nproc<span class="k">)</span> * <span class="m">2</span><span class="o">]</span></code>
+<code>make altinstall</code></pre></div>
+
 
 <p>
     You can download it <a href="resources/python.sh">here</a>. Then allow
@@ -343,9 +408,9 @@
     <li>Ubuntu 18.04 - Python 3.7.4</li>
 </ul>
 
-</div>
+</div></div>
     </article>
-    <footer>Last edited: Monday, 05 August 2019 14:00 UTC</footer>
+    <footer>Last edited: Sunday, 15 September 2019 15:37 UTC</footer>
 
 
 </body></html>
