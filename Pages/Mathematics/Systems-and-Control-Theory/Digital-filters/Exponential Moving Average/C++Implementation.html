@@ -410,30 +410,103 @@
 <p>
     We now have everything in place to write an implementation of the EMA in 
     C++:
-    </p><pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><code><span style="color: #af00db;">#include</span><span style="color: #0000ff;"> </span><span style="color: #a31515;">&lt;stdint.h&gt;</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #0000ff;">template</span><span style="color: #000000;"> &lt;</span><span style="color: #0000ff;">uint8_t </span><span style="color: #267f99;">K</span><span style="color: #000000;">, </span><span style="color: #0000ff;">class </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;">&gt;</span></code></code>
-<code><code><span style="color: #0000ff;">class</span><span style="color: #000000;"> </span><span style="color: #267f99;">EMA</span><span style="color: #000000;"> {</span></code></code>
-<code><code><span style="color: #000000;">  </span><span style="color: #0000ff;">public:</span></code></code>
-<code><code><span style="color: #000000;">    </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> </span><span style="color: #795e26;">filter</span><span style="color: #000000;">(</span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> </span><span style="color: #001080;">x</span><span style="color: #000000;">) {</span></code></code>
-<code><code><span style="color: #000000;">        z </span><span style="color: #000000;">+=</span><span style="color: #000000;"> x;</span></code></code>
-<code><code><span style="color: #000000;">        </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> y </span><span style="color: #000000;">=</span><span style="color: #000000;"> (z </span><span style="color: #000000;">+</span><span style="color: #000000;"> (</span><span style="color: #09885a;">1</span><span style="color: #000000;"> </span><span style="color: #000000;">&lt;&lt;</span><span style="color: #000000;"> (K </span><span style="color: #000000;">-</span><span style="color: #000000;"> </span><span style="color: #09885a;">1</span><span style="color: #000000;">))) </span><span style="color: #000000;">&gt;&gt;</span><span style="color: #000000;"> K;</span></code></code>
-<code><code><span style="color: #000000;">        z </span><span style="color: #000000;">-=</span><span style="color: #000000;"> y;</span></code></code>
-<code><code><span style="color: #000000;">        </span><span style="color: #af00db;">return</span><span style="color: #000000;"> y;</span></code></code>
-<code><code><span style="color: #000000;">    }</span></code></code>
-<code><code></code></code>
-<code><code><span style="color: #000000;">  </span><span style="color: #0000ff;">private:</span></code></code>
-<code><code><span style="color: #000000;">    </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> z </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">0</span><span style="color: #000000;">;</span></code></code>
-<code><code><span style="color: #000000;">};</span></code></code></pre>
+</p>
+
+<div><style>.pygments .hll { background-color: #ffffcc }
+.pygments  { background: #f8f8f8; }
+.pygments .c { color: #408080; font-style: italic } /* Comment */
+.pygments .err { border: 1px solid #FF0000 } /* Error */
+.pygments .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments .o { color: #666666 } /* Operator */
+.pygments .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments .gd { color: #A00000 } /* Generic.Deleted */
+.pygments .ge { font-style: italic } /* Generic.Emph */
+.pygments .gr { color: #FF0000 } /* Generic.Error */
+.pygments .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments .gi { color: #00A000 } /* Generic.Inserted */
+.pygments .go { color: #888888 } /* Generic.Output */
+.pygments .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments .gs { font-weight: bold } /* Generic.Strong */
+.pygments .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments .gt { color: #0044DD } /* Generic.Traceback */
+.pygments .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments .kt { color: #B00040 } /* Keyword.Type */
+.pygments .m { color: #666666 } /* Literal.Number */
+.pygments .s { color: #BA2121 } /* Literal.String */
+.pygments .na { color: #7D9029 } /* Name.Attribute */
+.pygments .nb { color: #008000 } /* Name.Builtin */
+.pygments .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments .no { color: #880000 } /* Name.Constant */
+.pygments .nd { color: #AA22FF } /* Name.Decorator */
+.pygments .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments .nf { color: #0000FF } /* Name.Function */
+.pygments .nl { color: #A0A000 } /* Name.Label */
+.pygments .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments .nv { color: #19177C } /* Name.Variable */
+.pygments .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments .mf { color: #666666 } /* Literal.Number.Float */
+.pygments .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments .sx { color: #008000 } /* Literal.String.Other */
+.pygments .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments .vc { color: #19177C } /* Name.Variable.Class */
+.pygments .vg { color: #19177C } /* Name.Variable.Global */
+.pygments .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments .il { color: #666666 } /* Literal.Number.Integer.Long */.pygments pre.snippet5300 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet5300"><code><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span></code>
+<code></code>
+<code><span class="k">template</span> <span class="o">&lt;</span><span class="kt">uint8_t</span> <span class="n">K</span><span class="p">,</span> <span class="k">class</span> <span class="nc">uint_t</span><span class="o">&gt;</span></code>
+<code><span class="k">class</span> <span class="nc">EMA</span> <span class="p">{</span></code>
+<code>  <span class="k">public</span><span class="o">:</span></code>
+<code>    <span class="n">uint_t</span> <span class="n">filter</span><span class="p">(</span><span class="n">uint_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="n">z</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span></code>
+<code>        <span class="n">uint_t</span> <span class="n">y</span> <span class="o">=</span> <span class="p">(</span><span class="n">z</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">&gt;&gt;</span> <span class="n">K</span><span class="p">;</span></code>
+<code>        <span class="n">z</span> <span class="o">-=</span> <span class="n">y</span><span class="p">;</span></code>
+<code>        <span class="k">return</span> <span class="n">y</span><span class="p">;</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>  <span class="k">private</span><span class="o">:</span></code>
+<code>    <span class="n">uint_t</span> <span class="n">z</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code><span class="p">};</span></code></pre></div>
+
+
+<p>
     Note how we save <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="z[n] - 2^{-k} z[n]"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em; padding-right: 0.003em;">z</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">[</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">n</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">]</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-msubsup MJXc-space2"><span class="mjx-base"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span class="mjx-texatom" style=""><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span></span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em; padding-right: 0.003em;">z</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">[</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">n</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">]</span></span></span></span></span></span> instead of just <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="z[n]"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em; padding-right: 0.003em;">z</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">[</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">n</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">]</span></span></span></span></span></span>. Otherwise,
     we would have to calculate <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="2^{-k} z[n]"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span class="mjx-texatom" style=""><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span></span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em; padding-right: 0.003em;">z</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">[</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">n</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">]</span></span></span></span></span></span> twice (once to calculate 
     <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="y[n]"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.519em; padding-right: 0.006em;">y</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">[</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">n</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">]</span></span></span></span></span></span>, and once on the next iteration to calculate <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="2^{-k} z[n-1]"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span class="mjx-texatom" style=""><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span></span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em; padding-right: 0.003em;">z</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">[</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">n</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">]</span></span></span></span></span></span>),
     and that would be unnecessary.
-<p></p>
+</p>
 
-</div>
+</div></div>
     </article>
-    <footer>Last edited: Sunday, 30 June 2019 18:55 UTC</footer>
+    <footer>Last edited: Sunday, 15 September 2019 16:38 UTC</footer>
 
 
 </body></html>

@@ -113,21 +113,14 @@
 <p>
     We now have everything in place to write an implementation of the EMA in 
     C++:
-    <pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #af00db;">#include</span><span style="color: #0000ff;"> </span><span style="color: #a31515;">&lt;stdint.h&gt;</span></code>
-<code></code>
-<code><span style="color: #0000ff;">template</span><span style="color: #000000;"> &lt;</span><span style="color: #0000ff;">uint8_t </span><span style="color: #267f99;">K</span><span style="color: #000000;">, </span><span style="color: #0000ff;">class </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;">&gt;</span></code>
-<code><span style="color: #0000ff;">class</span><span style="color: #000000;"> </span><span style="color: #267f99;">EMA</span><span style="color: #000000;"> {</span></code>
-<code><span style="color: #000000;">  </span><span style="color: #0000ff;">public:</span></code>
-<code><span style="color: #000000;">    </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> </span><span style="color: #795e26;">filter</span><span style="color: #000000;">(</span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> </span><span style="color: #001080;">x</span><span style="color: #000000;">) {</span></code>
-<code><span style="color: #000000;">        z </span><span style="color: #000000;">+=</span><span style="color: #000000;"> x;</span></code>
-<code><span style="color: #000000;">        </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> y </span><span style="color: #000000;">=</span><span style="color: #000000;"> (z </span><span style="color: #000000;">+</span><span style="color: #000000;"> (</span><span style="color: #09885a;">1</span><span style="color: #000000;"> </span><span style="color: #000000;">&lt;&lt;</span><span style="color: #000000;"> (K </span><span style="color: #000000;">-</span><span style="color: #000000;"> </span><span style="color: #09885a;">1</span><span style="color: #000000;">))) </span><span style="color: #000000;">&gt;&gt;</span><span style="color: #000000;"> K;</span></code>
-<code><span style="color: #000000;">        z </span><span style="color: #000000;">-=</span><span style="color: #000000;"> y;</span></code>
-<code><span style="color: #000000;">        </span><span style="color: #af00db;">return</span><span style="color: #000000;"> y;</span></code>
-<code><span style="color: #000000;">    }</span></code>
-<code></code>
-<code><span style="color: #000000;">  </span><span style="color: #0000ff;">private:</span></code>
-<code><span style="color: #000000;">    </span><span style="color: #267f99;">uint_t</span><span style="color: #000000;"> z </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">0</span><span style="color: #000000;">;</span></code>
-<code><span style="color: #000000;">};</span></code></pre>
+</p>
+
+@codesnippet{
+"name": "EMA.cpp",
+"file": "resources/EMA.cpp"
+}
+
+<p>
     Note how we save \(z[n] - 2^{-k} z[n]\) instead of just \(z[n]\). Otherwise,
     we would have to calculate \(2^{-k} z[n]\) twice (once to calculate 
     \(y[n]\), and once on the next iteration to calculate \(2^{-k} z[n-1]\)),
