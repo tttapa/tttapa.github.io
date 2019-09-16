@@ -6,6 +6,7 @@ from json import JSONDecoder
 from pprint import pformat
 from os import getenv
 from os import path
+from os.path import exists
 import sys
 
 def format_anchor_name(match, anchors):
@@ -70,49 +71,107 @@ def formatCode(html):
 def getlinenumber(string: str, index: int) -> int:
     return string.count('\n', 0, index)
 
-def formatPygmentsCode(html, filepath, lineno):
-    keyword = '@codesnippet{'
-    index = html.find(keyword)
+def getlinesbetween(string: str, startindex: int, endindex: int) -> int:
+    return string.count('\n', startindex, endindex)
+
+def getlines(string: str) -> int:
+    return string.count('\n')
+
+def formatPygmentsCodeSnippet(data, html, filepath, lineno):
+    startline = data.get('startline', 1)
+    endline = data.get('endline')
+    file = data['file']
+    file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
+    if file[0] != '/':
+        file = path.dirname(filepath) + '/' + file
+
+    emptylines = 0
+    nonemptylineencountered = False
+    filecontents = ""
+
+    with open(file) as f:
+        for i, line in enumerate(f):
+            if i >= (startline - 1):
+                filecontents += line
+                if not nonemptylineencountered and line == '\n':
+                    emptylines += 1
+                else:
+                    nonemptylineencountered = True
+            if endline is not None and i >= (endline - 1):
+                break
+
+    lexer = guess_lexer_for_filename(file, filecontents)
+    formatter = HtmlFormatter(cssclass='pygments')
+    css = formatter.get_style_defs('.pygments')
+    ctrstart = emptylines + startline - 1
+    css += '\n.pygments pre.snippet{} {{ counter-reset: line {}; }}' \
+        .format(lineno, ctrstart)
+    htmlc = highlight(filecontents, lexer, formatter)
+    htmlc = htmlc.replace('<pre>', 
+                '<pre class="lineNumbers snippet{}">'.format(lineno))
+    htmlc = htmlc.replace('\n</pre></div>', '</pre></div>')
+    datastr = '<div><style>' + css + '</style>'
+    datastr += htmlc + '</div>'
+    return datastr
+
+def formatImage(data, html, filepath, lineno):
+    file = data['file']
+    # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
+    if file[0] != '/': 
+        fullfile = path.dirname(filepath) + '/' + file
+    else:
+        raise Exception('Image file "' + file + '" is an absolute path')
+    if not exists(fullfile):
+        raise Exception('Image file "' + fullfile + '" does not exist')
+
+    displayfile = data.get('display-file', file)
+    # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
+    if displayfile[0] != '/': 
+        fulldisplayfile = path.dirname(filepath) + '/' + displayfile
+    else: 
+        raise Exception('Image file "' + displayfile + '" is an absolute path')
+    if not exists(fulldisplayfile):
+        raise Exception('Image file "' + fulldisplayfile + '" does not exist')
+
+    alt = data.get('alt', data.get('caption', file))
+
+    htmlstr = '<a href="{src}"><img src="{dispsrc}" alt="{alt}"/></a>' \
+        .format(src=file, dispsrc=displayfile, alt=alt)
+        
+    cap = data.get('caption')
+    if cap:
+        htmlstr += '<figcaption>' + cap + '</figcaption>'
+
+    return htmlstr
+
+def getKeyWord(keywords: dict, html, index):
+    for kw in keywords.keys():
+        if kw + '{' == html[index:index + len(kw) + 1]:
+            return kw
+    return None
+
+def replaceTags(html, filepath, lineno):
+    keywordhandlers = {
+        'codesnippet': formatPygmentsCodeSnippet,
+        'image': formatImage,
+    }
+
+    index = html.find('@')
     while index >= 0:
+        keyword = getKeyWord(keywordhandlers, html, index + 1)
+        if not keyword:
+            index = html.find('@', index + 1)
+            continue
         try:
-            jsonstartindex = index + len(keyword) - 1
+            jsonstartindex = index + len(keyword) + 1
             data, endindex = JSONDecoder().raw_decode(html, jsonstartindex)
-            startline = data.get('startline', 1)
-            endline = data.get('endline')
-            file = data['file']
-            file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
-            if file[0] != '/':
-                file = path.dirname(filepath) + '/' + file
-
-            emptylines = 0
-            nonemptylineencountered = False
-            filecontents = ""
-
-            with open(file) as f:
-                for i, line in enumerate(f):
-                    if i >= (startline - 1):
-                        filecontents += line
-                        if not nonemptylineencountered and line == '\n':
-                            emptylines += 1
-                        else:
-                            nonemptylineencountered = True
-                    if endline is not None and i >= (endline - 1):
-                        break
-
-            lexer = guess_lexer_for_filename(file, filecontents)
-            formatter = HtmlFormatter(cssclass='pygments')
-            css = formatter.get_style_defs('.pygments')
-            ctrstart = emptylines + startline - 1
-            css += '.pygments pre.snippet{} {{ counter-reset: line {}; }}' \
-                .format(index, ctrstart)
-            htmlc = highlight(filecontents, lexer, formatter)
-            htmlc = htmlc.replace('<pre>', 
-                        '<pre class="lineNumbers snippet{}">'.format(index))
-            htmlc = htmlc.replace('\n</pre></div>', '</pre></div>')
-            datastr = '<div><style>' + css + '</style>'
-            datastr += formatCode(htmlc)
-            html = html[:index] + datastr + html[endindex:] + '</div>'
-            index = html.find(keyword, index + len(datastr))
+            handler = keywordhandlers[keyword]
+            taglineno = lineno + getlinenumber(html, index)
+            newdata = handler(data, html, filepath, taglineno)
+            lineno += getlinesbetween(html, index, endindex)
+            lineno -= getlines(newdata)
+            html = html[:index] + newdata + html[endindex:]
+            index = html.find('@', index + len(newdata))
         except Exception as e:
             fileline = filepath + ':' + str(lineno + getlinenumber(html, index))
             print('\nError adding code snippet:', file=sys.stderr)
@@ -122,10 +181,9 @@ def formatPygmentsCode(html, filepath, lineno):
             print(file=sys.stderr)
             raise e
     return html
-    
 
 def formatHTML(html, filepath, lineno):
+    html = replaceTags(html, filepath, lineno)
     html = formatCode(html)
     html = addAnchors(html)
-    html = formatPygmentsCode(html, filepath, lineno)
     return html
