@@ -17,9 +17,9 @@
     <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="theme-color" content="#ccc"/>
-    <meta name="keywords" content=""/>
-    <meta name="description" content="To compile software for the Raspberry Pi, you need a cross-compilation toolchain. This page contains instructions for how to build one."/>
-    <title>Building the Cross-Compilation Toolchain</title>
+    <meta name="keywords" content="cross-compile,raspberry,raspberry pi,build,compile,from source, source,Zlib,OpenSSL,FFI,Bzip2,GNU ncurses,GNU readline,GNU dbm, SQLite,UUID,Python 3.7.4,ZBar,Raspberry Pi Userland,VideoCore, FFmpeg,OpenCV,NumPy"/>
+    <meta name="description" content="Using the cross-compilation toolchain to build the libraries you need for your project, as well as their dependencies."/>
+    <title>Cross-Compiling the Dependencies</title>
 </head>
 <body>
     <nav>
@@ -44,8 +44,8 @@
         </li>
         <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">C++ Development</a>
         <ul>
-            <li><span class="ftriangle"></span><a class="openEntry" href="Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
-            <li><span class="ftriangle"></span><a href="Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a href="Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="openEntry" href="Dependencies.html">Cross-Compiling the Dependencies</a></li>
         </ul>
         </li>
     </ul>
@@ -157,7 +157,7 @@
                 <a href="/" title="Home">home</a>
             </i>
             <i class="material-icons">
-                <a href="Building-The-Toolchain.pdf" title="Download as PDF">get_app</a>
+                <a href="Dependencies.pdf" title="Download as PDF">get_app</a>
             </i>
             <i class="material-icons">
                 <a href="javascript:window.print()" title="Print this article">print</a>
@@ -168,57 +168,17 @@
         </div>
     </nav>
     <article>
-        <h1 class="title">Building the Cross-Compilation Toolchain</h1>
+        <h1 class="title">Cross-Compiling the Dependencies</h1>
         <i class="author">Pieter P</i>
         <div>
 
-<p>
-    To compile software for the Raspberry Pi, you need a cross-compilation toolchain. It's a collection of files and
-    programs that you can run on your computer, and that produce a binary that can be executed on the Raspberry Pi.
-</p>
-
-<h3><a name="docker" href="#docker">Docker</a></h3>
+<h3><a name="base-image" href="#base-image">Base Image</a></h3>
 
 <p>
-    I don't like to do a lot of installations on my main Linux box, so I build most of it inside of a Docker container.
-    This has the added benefit that all builds are reproducible, and it's easy to undo the previous step or even start
-    from scratch.
-</p>
-<h4><a name="installation" href="#installation">Installation</a></h4>
-<p>
-    You need Docker and Docker Compose to build the toolchain.<br>
-    You can find detailed installation instructions here:
-    <ul>
-        <li><a href="https://www.digitalocean.com/community/tutorial_collections/39">
-                DigitalOcean - How to Install and Use Docker</a></li>
-        <li><a href="https://www.digitalocean.com/community/tutorial_collections/48">
-                DigitalOcean - How to Install Docker Compose</a></li>
-    </ul>
-</p>
-<h4><a name="dockefiles" href="#dockefiles">Dockefiles</a></h4>
-<p>
-    The actual Dockerfiles are on my GitHub, I'll briefly go over them on this page.
-</p>
-<p>
-    <a href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker">
-        https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker</a>
+    Before building the dependencies, I created a base image with Ubuntu and the
+    necessary tools installed.
 </p>
 
-<h3><a name="crosstool-ng" href="#crosstool-ng">Crosstool-NG</a></h3>
-
-<p>
-    The toolchain is built using <a href="https://github.com/crosstool-ng/crosstool-ng">Crosstool-NG</a>.
-</p>
-<p>
-    It is installed in a CentOS 7 Docker container, because CentOS 7 was the oldest OS that I had to run the toolchain
-    on. In this context, oldest refers to the Linux kernel version and the glibc version. They are backwards compatible,
-    so you can run software compiled for an old version on a computer with a newer version, but you can't run software
-    compiled for a new version on a computer with an older version.
-</p>
-<p>
-    The following Dockerfile downloads, builds and installs Crosstool-NG to the <code>~/.local</code> directory
-    of the container.
-</p>
 <div><style>.pygments .hll { background-color: #ffffcc }
 .pygments  { background: #f8f8f8; }
 .pygments .c { color: #408080; font-style: italic } /* Comment */
@@ -288,44 +248,53 @@
 .pygments .vi { color: #19177C } /* Name.Variable.Instance */
 .pygments .vm { color: #19177C } /* Name.Variable.Magic */
 .pygments .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments pre.snippet59 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet59"><code><span></span><span class="k">FROM</span><span class="s"> centos:7 as ct-ng</span></code>
+.pygments pre.snippet21 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet21"><code><span></span><span class="k">FROM</span><span class="s"> ubuntu:latest as base-ubuntu</span></code>
 <code></code>
-<code><span class="c"># Install dependencies to build toolchain</span></code>
-<code><span class="k">RUN</span> yum -y update <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    yum install -y epel-release <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    yum install -y autoconf gperf bison file flex texinfo help2man gcc-c++ <span class="se">\</span></code>
-<code>    libtool make patch ncurses-devel python36-devel perl-Thread-Queue bzip2 <span class="se">\</span></code>
-<code>    git wget which xz unzip <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    yum clean all</code>
+<code><span class="c"># Install some tools and compilers + clean up</span></code>
+<code><span class="k">RUN</span> apt-get update <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    apt-get install -y sudo git wget <span class="se">\</span></code>
+<code>                       gcc g++ cmake make autoconf automake <span class="se">\</span></code>
+<code>                       gperf diffutils bzip2 xz-utils <span class="se">\</span></code>
+<code>                       flex gawk help2man libncurses-dev patch bison <span class="se">\</span></code>
+<code>                       python-dev gnupg2 texinfo unzip libtool-bin <span class="se">\</span></code>
+<code>                       autogen libtool m4 gettext pkg-config <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    apt-get clean autoclean <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    apt-get autoremove -y <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    rm -rf /var/lib/apt/lists/*</code>
 <code></code>
-<code><span class="c"># Add a user called `develop` and add him to the sudo group</span></code>
-<code><span class="k">RUN</span> useradd -m develop <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;develop:develop&quot;</span> <span class="p">|</span> chpasswd <span class="o">&amp;&amp;</span> usermod -aG wheel develop</code>
+<code><span class="c"># Add a user called `develop`</span></code>
+<code><span class="k">RUN</span> useradd -m develop <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    <span class="nb">echo</span> <span class="s2">&quot;develop:develop&quot;</span> <span class="p">|</span> <span class="se">\</span></code>
+<code>    chpasswd <span class="o">&amp;&amp;</span> adduser develop sudo</code>
 <code></code>
 <code><span class="k">USER</span><span class="s"> develop</span></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
-<code></code>
-<code><span class="k">ENV</span> <span class="nv">CT_NG_VERSION</span><span class="o">=</span><span class="m">1</span>.24.0</code>
-<code><span class="k">RUN</span> git clone -b crosstool-ng-<span class="si">${</span><span class="nv">CT_NG_VERSION</span><span class="si">}</span> --single-branch --depth <span class="m">1</span> <span class="se">\</span></code>
-<code>        https://github.com/crosstool-ng/crosstool-ng.git</code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop/crosstool-ng</span></code>
-<code><span class="k">RUN</span> ./bootstrap <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    ./configure --prefix<span class="o">=</span>/home/develop/.local <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    make install <span class="o">&amp;&amp;</span>  <span class="se">\</span></code>
-<code>    <span class="nb">cd</span> <span class="o">&amp;&amp;</span> rm -rf crosstool-ng</code>
-<code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span>/home/develop/.local/bin:<span class="nv">$PATH</span></code></pre></div>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
 </div>
-<p>
-    The list of dependencies can be found on Crosstool-NG's GitHub:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/centos7/Dockerfile">
-        https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/centos7/Dockerfile</a>
-</p>
 
-<h3><a name="raspberry-pi-3b-64-bit-cross-compilation-toolchain" href="#raspberry-pi-3b-64-bit-cross-compilation-toolchain">Raspberry Pi 3B+ 64-bit Cross-Compilation Toolchain</a></h3>
+<h3><a name="compiling-the-dependencies-for-a-64-bit-raspberry-pi-3b" href="#compiling-the-dependencies-for-a-64-bit-raspberry-pi-3b">Compiling the Dependencies for a 64-bit Raspberry Pi 3B+</a></h3>
+
+<h4><a name="preparing-the-sysroot-and-staging-area" href="#preparing-the-sysroot-and-staging-area">Preparing the Sysroot and Staging Area</a></h4>
 
 <p>
-    The following Dockerfile builds the toolchain for a Raspberry Pi 3B+ running a 64-bit operating system.
+    Because we don't have access to the actual root directory of the Raspberry Pi, the toolchain uses
+    a so-called sysroot to install the files to. It contains the necessary libraries, such as glibc and 
+    the C++ standard library. It's also the folder where the configure scripts of other libraries will
+    look for the necessary libraries and headers.
 </p>
+<p>
+    The sysroot of the toolchain is read-only, to keep it clean for future projects.<br>
+    We'll make a copy of the sysroot for this build, and make it writable. We'll use it as the sysroot
+    for all compilations, and we'll also install all files to this folder.
+</p>
+<p>
+    Apart from the sysroot, we also need a folder containing the files we want to install to the Pi.
+    It doesn't contain the system libraries, because the Pi already has these installed.
+</p>
+<p>
+    Having both a sysroot and a staging area means we have to install every library twice, once in 
+    each of the two folders.
+</p>
+
 <div><style>.pygments .hll { background-color: #ffffcc }
 .pygments  { background: #f8f8f8; }
 .pygments .c { color: #408080; font-style: italic } /* Comment */
@@ -395,40 +364,43 @@
 .pygments .vi { color: #19177C } /* Name.Variable.Instance */
 .pygments .vm { color: #19177C } /* Name.Variable.Magic */
 .pygments .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments pre.snippet74 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet74"><code><span></span><span class="k">FROM</span><span class="s"> crosstool-ng:v1 as aarch64-toolchain</span></code>
+.pygments pre.snippet50 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet50"><code><span></span><span class="k">FROM</span><span class="s"> base-ubuntu:v1 as python</span></code>
 <code></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
-<code><span class="k">RUN</span> mkdir /home/develop/RPi3</code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop/RPi3</span></code>
-<code><span class="k">RUN</span> ct-ng aarch64-rpi3-linux-gnu</code>
-<code><span class="k">RUN</span> sed -i <span class="s1">&#39;s/CT_GCC_VERSION=\&quot;[0-9.]*\&quot;/CT_GCC_VERSION=&quot;9.1.0&quot;/g&#39;</span> .config <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    sed -i <span class="s1">&#39;s/CT_LINUX_VERSION=\&quot;[0-9.]*\&quot;/CT_LINUX_VERSION=&quot;4.15&quot;/g&#39;</span> .config <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    sed -i <span class="s1">&#39;s/CT_GLIBC_VERSION=\&quot;[0-9.]*\&quot;/CT_GLIBC_VERSION=&quot;2.27&quot;/g&#39;</span> .config</code>
-<code><span class="k">RUN</span> ct-ng build <span class="o">&amp;&amp;</span> rm -rf .build</code>
-<code></code>
+<code><span class="c"># Copy the toolchain from the previous Docker image</span></code>
+<code><span class="k">COPY</span> --from<span class="o">=</span>aarch64-toolchain:v1 <span class="se">\</span></code>
+<code>    /home/develop/x-tools/aarch64-rpi3-linux-gnu <span class="se">\</span></code>
+<code>    /home/develop/x-tools/aarch64-rpi3-linux-gnu</code>
+<code><span class="c"># Set the path to the toolchain executables</span></code>
 <code><span class="k">ENV</span> <span class="nv">TOOLCHAIN_PATH</span><span class="o">=</span>/home/develop/x-tools/aarch64-rpi3-linux-gnu</code>
-<code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">TOOLCHAIN_PATH</span><span class="si">}</span>/bin:<span class="nv">$PATH</span></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
+<code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}</span>:<span class="si">${</span><span class="nv">TOOLCHAIN_PATH</span><span class="si">}</span>/bin</code>
+<code></code>
+<code><span class="c"># Create a sysroot and staging area for the RPi</span></code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
+<code><span class="k">ENV</span> <span class="nv">RPI3_SYSROOT</span><span class="o">=</span>/home/develop/RPi3-sysroot</code>
+<code><span class="k">ENV</span> <span class="nv">RPI3_STAGING</span><span class="o">=</span>/home/develop/RPi3-staging</code>
+<code><span class="k">RUN</span> mkdir RPi3-sysroot <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    cp -rp <span class="nv">$TOOLCHAIN_PATH</span>/aarch64-rpi3-linux-gnu/sysroot/* ~/RPi3-sysroot/ <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    chmod -R u+w /home/develop/RPi3-sysroot</code></pre></div>
 </div>
-<p>
-    The configuration is based on the <code>aarch64-rpi3-linux-gnu</code> sample that comes with Crosstool-NG:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu">
-        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu</a>
-</p>
-<p>
-    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
-    that the Ubuntu Server 18.04 image ships with.
-</p>
-<p>
-    The build took around 25 minutes on a 2018 Dell XPS i7-8750H, and 45 minutes on a 2017 Dell XPS i7-7700HQ.
-</p>
 
-<h3><a name="raspberry-pi-3b-32-bit-cross-compilation-toolchain" href="#raspberry-pi-3b-32-bit-cross-compilation-toolchain">Raspberry Pi 3B+ 32-bit Cross-Compilation Toolchain</a></h3>
+<h4><a name="building-the-python-dependencies" href="#building-the-python-dependencies">Building the Python Dependencies</a></h4>
 
 <p>
-    Even though the Raspberry Pi 3B+ has a 64-bit ARMv8/AArch64 CPU, at the time of writing, the Raspbian distribution
-    is still only 32 bits. To be able to cross-compile software for this platform, you'll need a 32-bit cross-compiler.
+    For most packages, the build procedure is very simple: 
+    <ol>
+        <li>Download</li>
+        <li>Extract</li>
+        <li>Create a build directory</li>
+        <li>Run the <code>configure</code> script with the right options</li>
+        <li><code>make</code></li>
+        <li><code>make install</code></li>
+    </ol>
 </p>
+<p>
+    In the first section, we'll build most packages for both the build machine (the Docker container)
+    and for the host machine (the Raspberry Pi).
+</p>
+
 <div><style>.pygments .hll { background-color: #ffffcc }
 .pygments  { background: #f8f8f8; }
 .pygments .c { color: #408080; font-style: italic } /* Comment */
@@ -498,41 +470,132 @@
 .pygments .vi { color: #19177C } /* Name.Variable.Instance */
 .pygments .vm { color: #19177C } /* Name.Variable.Magic */
 .pygments .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments pre.snippet97 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet97"><code><span></span><span class="k">FROM</span><span class="s"> crosstool-ng:v1 as aarch32-toolchain</span></code>
-<code></code>
+.pygments pre.snippet74 { counter-reset: line 18; }</style><div class="pygments"><pre class="lineNumbers snippet74"><code><span></span><span class="c"># Zlib Download</span></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
-<code><span class="k">RUN</span> sed -i <span class="s1">&#39;s/CT_ARCH_FPU=\&quot;neon-vfpv4\&quot;/CT_ARCH_FPU=&quot;neon-fp-armv8&quot;/g&#39;</span> <span class="se">\</span></code>
-<code>    .local/share/crosstool-ng/samples/armv8-rpi3-linux-gnueabihf/crosstool.config</code>
-<code><span class="k">RUN</span> mkdir /home/develop/RPi3</code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop/RPi3</span></code>
-<code><span class="k">RUN</span> ct-ng armv8-rpi3-linux-gnueabihf</code>
-<code><span class="k">RUN</span> sed -i <span class="s1">&#39;s/CT_GCC_VERSION=\&quot;[0-9.]*\&quot;/CT_GCC_VERSION=&quot;9.1.0&quot;/g&#39;</span> .config <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    sed -i <span class="s1">&#39;s/CT_LINUX_VERSION=\&quot;[0-9.]*\&quot;/CT_LINUX_VERSION=&quot;4.14&quot;/g&#39;</span> .config <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    sed -i <span class="s1">&#39;s/CT_GLIBC_VERSION=\&quot;[0-9.]*\&quot;/CT_GLIBC_VERSION=&quot;2.24&quot;/g&#39;</span> .config</code>
-<code><span class="k">RUN</span> ct-ng build <span class="o">&amp;&amp;</span> rm -rf .build</code>
+<code><span class="k">RUN</span> wget https://downloads.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    tar xzf zlib-1.2.11.tar.gz <span class="o">&amp;&amp;</span> rm zlib-1.2.11.tar.gz</code>
+<code> </code>
+<code><span class="c"># Zlib build</span></code>
+<code><span class="k">RUN</span> mkdir zlib-1.2.11/build</code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/zlib-1.2.11/build</span></code>
+<code><span class="k">RUN</span> ../configure <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span></code>
+<code><span class="k">USER</span><span class="s"> root</span></code>
+<code><span class="k">RUN</span> make install</code>
+<code><span class="k">USER</span><span class="s"> develop</span></code>
+<code><span class="k">RUN</span> <span class="nb">cd</span> <span class="o">&amp;&amp;</span> rm -rf zlib-1.2.11/build</code>
 <code></code>
-<code><span class="k">ENV</span> <span class="nv">TOOLCHAIN_PATH</span><span class="o">=</span>/home/develop/x-tools/armv8-rpi3-linux-gnueabihf</code>
-<code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">TOOLCHAIN_PATH</span><span class="si">}</span>/bin:<span class="nv">$PATH</span></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
+<code><span class="c"># Use the pkg-config folder inside of the RPi&#39;s root filesystem </span></code>
+<code><span class="k">ENV</span> <span class="nv">PKG_CONFIG_LIBDIR</span><span class="o">=</span>/home/develop/RPi3-sysroot/usr/local/lib <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span>/home/develop/RPi3-sysroot/usr/local/lib/pkgconfig <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_SYSROOT_DIR</span><span class="o">=</span>/home/develop/RPi3-sysroot</code>
+<code> </code>
+<code><span class="c"># Zlib ARM</span></code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
+<code><span class="k">RUN</span> mkdir zlib-1.2.11/build-arm</code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/zlib-1.2.11/build-arm</span></code>
+<code><span class="k">RUN</span> <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;--sysroot=</span><span class="si">${</span><span class="nv">RPI3_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span></code>
+<code>    <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;--sysroot=</span><span class="si">${</span><span class="nv">RPI3_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span></code>
+<code>    <span class="nv">CC</span><span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu-gcc&quot;</span> <span class="se">\</span></code>
+<code>    <span class="nv">LD</span><span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu-ld&quot;</span> <span class="se">\</span></code>
+<code>    ../configure <span class="se">\</span></code>
+<code>        --prefix<span class="o">=</span><span class="s2">&quot;/usr/local&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make install <span class="nv">DESTDIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RPI3_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make install <span class="nv">DESTDIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RPI3_STAGING</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    <span class="nb">cd</span> <span class="o">&amp;&amp;</span> rm -rf zlib-1.2.11</code>
+<code> </code>
+<code><span class="c"># OpenSSL Download</span></code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
+<code><span class="k">RUN</span> wget https://github.com/openssl/openssl/archive/OpenSSL_1_1_1c.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    tar xzf OpenSSL_1_1_1c.tar.gz</code>
+<code></code>
+<code><span class="c"># Use the build system&#39;s pkg-config folders</span></code>
+<code><span class="k">ENV</span> <span class="nv">PKG_CONFIG_LIBDIR</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_SYSROOT_DIR</span><span class="o">=</span><span class="s2">&quot;&quot;</span></code>
+<code> </code>
+<code><span class="c"># OpenSSL build</span></code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/openssl-OpenSSL_1_1_1c</span></code>
+<code><span class="k">RUN</span> ./config --prefix<span class="o">=</span><span class="s2">&quot;/usr/local&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span></code>
+<code><span class="k">USER</span><span class="s"> root</span></code>
+<code><span class="k">RUN</span> make install_sw <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make distclean <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    <span class="nb">cd</span> <span class="o">&amp;&amp;</span> rm -rf openssl-OpenSSL_1_1_1c</code>
+<code><span class="k">USER</span><span class="s"> develop</span></code>
+<code> </code>
+<code><span class="c"># Use the pkg-config folder inside of the RPi&#39;s root filesystem </span></code>
+<code><span class="k">ENV</span> <span class="nv">PKG_CONFIG_LIBDIR</span><span class="o">=</span>/home/develop/RPi3-sysroot/usr/local/lib <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span>/home/develop/RPi3-sysroot/usr/local/lib/pkgconfig <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_SYSROOT_DIR</span><span class="o">=</span>/home/develop/RPi3-sysroot</code>
+<code> </code>
+<code><span class="c"># OpenSSL ARM</span></code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
+<code><span class="k">RUN</span> tar xzf OpenSSL_1_1_1c.tar.gz <span class="o">&amp;&amp;</span> rm OpenSSL_1_1_1c.tar.gz</code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/openssl-OpenSSL_1_1_1c</span></code>
+<code><span class="k">RUN</span> ./Configure <span class="se">\</span></code>
+<code>        --prefix<span class="o">=</span><span class="s2">&quot;/usr/local&quot;</span> <span class="se">\</span></code>
+<code>        --cross-compile-prefix<span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu-&quot;</span> <span class="se">\</span></code>
+<code>        <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;--sysroot=</span><span class="si">${</span><span class="nv">RPI3_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span></code>
+<code>        <span class="nv">CPPFLAGS</span><span class="o">=</span><span class="s2">&quot;--sysroot=</span><span class="si">${</span><span class="nv">RPI3_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span></code>
+<code>        <span class="nv">LDFLAGS</span><span class="o">=</span><span class="s2">&quot;--sysroot=</span><span class="si">${</span><span class="nv">RPI3_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span></code>
+<code>        linux-aarch64 <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make install_sw <span class="nv">DESTDIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RPI3_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make install_sw <span class="nv">DESTDIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RPI3_STAGING</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    <span class="nb">cd</span> <span class="o">&amp;&amp;</span> rm -rf openssl-OpenSSL_1_1_1c</code>
+<code> </code>
+<code><span class="c"># FFI Download</span></code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
+<code><span class="k">RUN</span> wget -O libffi-3.2.1.tar.gz https://codeload.github.com/libffi/libffi/tar.gz/v3.2.1 <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    tar xzf libffi-3.2.1.tar.gz <span class="o">&amp;&amp;</span> rm libffi-3.2.1.tar.gz</code>
+<code></code>
+<code><span class="c"># Use the build system&#39;s pkg-config folders</span></code>
+<code><span class="k">ENV</span> <span class="nv">PKG_CONFIG_LIBDIR</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_SYSROOT_DIR</span><span class="o">=</span><span class="s2">&quot;&quot;</span></code>
+<code></code>
+<code><span class="c"># FFI build</span></code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/libffi-3.2.1</span></code>
+<code><span class="k">RUN</span> ./autogen.sh <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    mkdir build</code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/libffi-3.2.1/build</span></code>
+<code><span class="k">RUN</span> ../configure <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-O2&quot;</span> <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;-O2&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span></code>
+<code><span class="k">USER</span><span class="s"> root</span></code>
+<code><span class="k">RUN</span> make install</code>
+<code><span class="k">USER</span><span class="s"> develop</span></code>
+<code><span class="k">RUN</span> <span class="nb">cd</span> <span class="o">&amp;&amp;</span> rm -rf libffi-3.2.1/build</code>
+<code></code>
+<code><span class="c"># Use the pkg-config folder inside of the RPi&#39;s root filesystem  </span></code>
+<code><span class="k">ENV</span> <span class="nv">PKG_CONFIG_LIBDIR</span><span class="o">=</span>/home/develop/RPi3-sysroot/usr/local/lib <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span>/home/develop/RPi3-sysroot/usr/local/lib/pkgconfig <span class="se">\</span></code>
+<code>    <span class="nv">PKG_CONFIG_SYSROOT_DIR</span><span class="o">=</span>/home/develop/RPi3-sysroot</code>
+<code> </code>
+<code><span class="c"># FFI ARM</span></code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/libffi-3.2.1</span></code>
+<code><span class="k">RUN</span> mkdir build-arm</code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/libffi-3.2.1/build-arm</span></code>
+<code><span class="k">RUN</span> ../configure <span class="se">\</span></code>
+<code>        --host<span class="o">=</span><span class="s2">&quot;aarch64-linux-gnu&quot;</span> <span class="se">\</span></code>
+<code>        --prefix<span class="o">=</span><span class="s2">&quot;/usr/local&quot;</span> <span class="se">\</span></code>
+<code>        <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-O2&quot;</span> <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;-O2&quot;</span> <span class="se">\</span></code>
+<code>        --with-sysroot<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RPI3_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span></code>
+<code>        <span class="nv">CC</span><span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu-gcc&quot;</span> <span class="se">\</span></code>
+<code>        <span class="nv">CXX</span><span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu-g++&quot;</span> <span class="se">\</span></code>
+<code>        <span class="nv">LD</span><span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu-ld&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make install <span class="nv">DESTDIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RPI3_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    make install <span class="nv">DESTDIR</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RPI3_STAGING</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    <span class="nb">cd</span> <span class="o">&amp;&amp;</span> rm -rf libffi-3.2.1</code></pre></div>
 </div>
-<p>
-    The configuration is based on the <code>armv8-rpi3-linux-gnueabihf</code> sample that comes with Crosstool-NG:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf">
-        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf</a>
-</p>
-<p>
-    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
-    that the Raspbian Stretch image ships with. <br>
-    Even though the CPU will be running in 32-bit mode, you can still use the ARMv8 NEON instructions, so I changed the
-    compiler's default FPU flag to <code>neon-fp-armv8</code>. I haven't tested if it actually makes any difference.
-</p>
-<p>
-    The build took around 25 minutes on a 2018 Dell XPS i7-8750H, and 45 minutes on a 2017 Dell XPS i7-7700HQ.
-</p>
+
+<h3><a name="compiling-the-dependencies-for-a-32-bit-raspberry-pi-3b" href="#compiling-the-dependencies-for-a-32-bit-raspberry-pi-3b">Compiling the Dependencies for a 32-bit Raspberry Pi 3B+</a></h3>
 
 </div>
     </article>
-    <footer>Last edited: Sunday, 15 September 2019 17:41 UTC</footer>
+    <footer>Last edited: Monday, 16 September 2019 14:02 UTC</footer>
 </body>
 
 </html>

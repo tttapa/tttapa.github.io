@@ -82,6 +82,7 @@ def formatPygmentsCodeSnippet(data, html, filepath, lineno):
     endline = data.get('endline')
     file = data['file']
     file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
+    file = re.sub(r'\$\{(\w+)\}', lambda m: getenv(m.group(1)), file)
     if file[0] != '/':
         file = path.dirname(filepath) + '/' + file
 

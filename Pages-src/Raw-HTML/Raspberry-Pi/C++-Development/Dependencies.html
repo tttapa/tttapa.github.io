@@ -1,0 +1,84 @@
+<!--
+@sequence: 20
+@title: Cross-Compiling the Dependencies
+@author: Pieter P
+@keywords: cross-compile,raspberry,raspberry pi,build,compile,from source,
+           source,Zlib,OpenSSL,FFI,Bzip2,GNU ncurses,GNU readline,GNU dbm,
+           SQLite,UUID,Python 3.7.4,ZBar,Raspberry Pi Userland,VideoCore,
+           FFmpeg,OpenCV,NumPy
+@description: Using the cross-compilation toolchain to build the libraries you
+              need for your project, as well as their dependencies.
+-->
+<html>
+
+<h3>Base Image</h3>
+
+<p>
+    Before building the dependencies, I created a base image with Ubuntu and the
+    necessary tools installed.
+</p>
+
+@codesnippet{
+    "name": "Dockerfile",
+    "file": "${HOME}/GitHub/RPi-Cpp-Toolchain/toolchain/docker/base-ubuntu/Dockerfile"
+}
+
+<h3>Compiling the Dependencies for a 64-bit Raspberry Pi 3B+</h3>
+
+<h4>Preparing the Sysroot and Staging Area</h4>
+
+<p>
+    Because we don't have access to the actual root directory of the Raspberry Pi, the toolchain uses
+    a so-called sysroot to install the files to. It contains the necessary libraries, such as glibc and 
+    the C++ standard library. It's also the folder where the configure scripts of other libraries will
+    look for the necessary libraries and headers.
+</p>
+<p>
+    The sysroot of the toolchain is read-only, to keep it clean for future projects.<br>
+    We'll make a copy of the sysroot for this build, and make it writable. We'll use it as the sysroot
+    for all compilations, and we'll also install all files to this folder.
+</p>
+<p>
+    Apart from the sysroot, we also need a folder containing the files we want to install to the Pi.
+    It doesn't contain the system libraries, because the Pi already has these installed.
+</p>
+<p>
+    Having both a sysroot and a staging area means we have to install every library twice, once in 
+    each of the two folders.
+</p>
+
+@codesnippet{
+    "name": "Dockerfile",
+    "file": "${HOME}/GitHub/RPi-Cpp-Toolchain/toolchain/docker/aarch64-installed/Dockerfile",
+    "endline": 17
+}
+
+<h4>Building the Python Dependencies</h4>
+
+<p>
+    For most packages, the build procedure is very simple: 
+    <ol>
+        <li>Download</li>
+        <li>Extract</li>
+        <li>Create a build directory</li>
+        <li>Run the <code>configure</code> script with the right options</li>
+        <li><code>make</code></li>
+        <li><code>make install</code></li>
+    </ol>
+</p>
+<p>
+    In the first section, we'll build most packages for both the build machine (the Docker container)
+    and for the host machine (the Raspberry Pi), because we need to build Python for both machines
+    in order to cross-compile the OpenCV and NumPy modules later on.
+</p>
+
+@codesnippet{
+    "name": "Dockerfile",
+    "file": "${HOME}/GitHub/RPi-Cpp-Toolchain/toolchain/docker/aarch64-installed/Dockerfile",
+    "startline": 18,
+    "endline": 137
+}
+
+<h3>Compiling the Dependencies for a 32-bit Raspberry Pi 3B+</h3>
+
+</html>
