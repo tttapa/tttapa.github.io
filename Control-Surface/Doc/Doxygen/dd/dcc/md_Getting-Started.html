@@ -217,7 +217,8 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../db/dbf/Control__Surface_8h.html">Control_Surface.h</a>&gt;</span></div>
 </div><!-- fragment --><h2>2. Instantiate a MIDI Interface</h2>
 <p>See <a class="el" href="../../dd/dcc/md_Getting-Started.html#first-output-midi-interface">First Output: Instantiate a MIDI Interface</a>.</p>
-<h2>3. Add Extended Input/Output elements (optional)</h2>
+<div class="fragment"><div class="line"><a class="code" href="../../de/d05/classUSBMIDI__Interface.html">USBMIDI_Interface</a> midi;</div>
+</div><!-- fragment --><h2>3. Add Extended Input/Output elements (optional)</h2>
 <p>See <a class="el" href="../../dd/dcc/md_Getting-Started.html#first-output-extio">First Output: Add Extended Input/Output elements</a>.</p>
 <p>In this example, we'll use a 74HC595 8-bit serial in/parallel out shift register. This allows us to drive eight <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> using just the SPI bus and a single digital pin. You can daisy chain as many shift registers as you want, without requiring any more pins.</p>
 <p>Each of the eight outputs of the shift register can be connected to the anode of an LED. Connect the cathodes to ground through a current-limiting resistor.</p>
@@ -226,7 +227,7 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="line">  10,       <span class="comment">// Latch pin (ST_CP)</span></div>
 <div class="line">  MSBFIRST, <span class="comment">// Bit order</span></div>
 <div class="line">};</div>
-</div><!-- fragment --><p>The <code>8</code> between angle brackets (<code>&lt;&gt;</code>) is the number of bits of the shift register. If you would daisy chain two 8-bit shift registers together, you would use <code>16</code>, for example. <br  />
+</div><!-- fragment --><p>The <code>8</code> between angle brackets (<code>&lt;&gt;</code>) is the number of bits of the shift register. If you daisy chain two 8-bit shift registers together, you would use <code>16</code> instead of <code>8</code>, for example. <br  />
  The bit order determines which pin of the shift register is the first pin in the program. <code>MSBFIRST</code> means "most significant bit first". You can also use <code>LSBFIRST</code> (least significant bit first).</p>
 <h2>4. Add MIDI Control Elements</h2>
 <p>Now, we can specify the objects that listen for MIDI input, and update the status of the <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> accordingly.</p>
@@ -256,9 +257,15 @@ picture-in-picture" allowfullscreen></iframe>
 <div class="line">};</div>
 </div><!-- fragment --><h2>5. Initialize the Control Surface</h2>
 <p>See <a class="el" href="../../dd/dcc/md_Getting-Started.html#first-output-init">First Output: Initialize the Control Surface</a>.</p>
-<h2>6. Continuously Update the Control Surface</h2>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> setup() {</div>
+<div class="line">  <a class="code" href="../../d9/d38/Control__Surface__Class_8cpp.html#af7a5d250297d82b2b29605dd7ac250df">Control_Surface</a>.<a class="code" href="../../dc/d45/classControl__Surface__.html#a1fda63983d83a8be20302e9fef48f63e">begin</a>();</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2>6. Continuously Update the Control Surface</h2>
 <p>See <a class="el" href="../../dd/dcc/md_Getting-Started.html#first-output-loop">First Output: Continuously Update the Control Surface</a>.</p>
-<h2>The finished sketch</h2>
+<div class="fragment"><div class="line"><span class="keywordtype">void</span> loop() {</div>
+<div class="line">  <a class="code" href="../../d9/d38/Control__Surface__Class_8cpp.html#af7a5d250297d82b2b29605dd7ac250df">Control_Surface</a>.<a class="code" href="../../dc/d45/classControl__Surface__.html#a69fd0ae13604c39d6dc0da12fc94a18f">loop</a>();</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2>The finished sketch</h2>
 <p>That's it! <br  />
  Now you can just upload the sketch to your Arduino, open up your favorite audio software, redirect the MIDI output to the Arduino, and start playing!</p>
 <div class="fragment"><div class="line"><span class="comment">// Include the library</span></div>
