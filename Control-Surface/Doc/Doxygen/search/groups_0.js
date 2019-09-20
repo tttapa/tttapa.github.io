@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['display_20elements_3132',['Display Elements',['../d5/d1e/group__DisplayElements.html',1,'']]]
+  ['bankable_20midi_20output_20elements_3133',['Bankable MIDI Output Elements',['../d2/d00/group__BankableMIDIOutputElements.html',1,'']]]
 ];
