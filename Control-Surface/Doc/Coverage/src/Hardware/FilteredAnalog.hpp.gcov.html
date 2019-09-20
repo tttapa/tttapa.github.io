@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 7624f0f00ea84cec5a51da2e63a8fb0fc2333bbf - src/Hardware/FilteredAnalog.hpp</title>
+  <title>LCOV - 6a53197a9fb3c24fa078f73a6da504c61b30a263 - src/Hardware/FilteredAnalog.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">7624f0f00ea84cec5a51da2e63a8fb0fc2333bbf</td>
+            <td class="headerValue">6a53197a9fb3c24fa078f73a6da504c61b30a263</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntryHi">100.0 %</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntryLo">11.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-09-07 17:06:03</td>
+            <td class="headerValue">2019-09-20 19:31:18</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntryHi">-</td>
+            <td class="headerCovTableEntry">3</td>
+            <td class="headerCovTableEntryLo">0.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -127,12 +127,12 @@
 <a name="57"><span class="lineNum">      57 </span>            :      * @return  false</a>
 <a name="58"><span class="lineNum">      58 </span>            :      *          The value is still the same.</a>
 <a name="59"><span class="lineNum">      59 </span>            :      */</a>
-<a name="60"><span class="lineNum">      60 </span>            :     bool update() {</a>
-<a name="61"><span class="lineNum">      61 </span>            :         analog_t input = getRawValue();  // read the raw analog input value</a>
-<a name="62"><span class="lineNum">      62 </span>            :         input = filter.filter(input);    // apply a low-pass EMA filter</a>
-<a name="63"><span class="lineNum">      63 </span>            :         if (mapFn)                       // If a mapping function is specified,</a>
-<a name="64"><span class="lineNum">      64 </span>            :             input = mapFn(input);        // apply it</a>
-<a name="65"><span class="lineNum">      65 </span>            :         return hysteresis.update(input); // apply hysteresis, and return true if</a>
+<a name="60"><span class="lineNum">      60 </span><span class="lineNoCov">          0 :     bool update() {</span></a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineNoCov">          0 :         analog_t input = getRawValue();  // read the raw analog input value</span></a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineNoCov">          0 :         input = filter.filter(input);    // apply a low-pass EMA filter</span></a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineNoCov">          0 :         if (mapFn)                       // If a mapping function is specified,</span></a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineNoCov">          0 :             input = mapFn(input);        // apply it</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineNoCov">          0 :         return hysteresis.update(input); // apply hysteresis, and return true if</span></a>
 <a name="66"><span class="lineNum">      66 </span>            :         // the value changed since last time</a>
 <a name="67"><span class="lineNum">      67 </span>            :     }</a>
 <a name="68"><span class="lineNum">      68 </span>            : </a>
@@ -143,7 +143,7 @@
 <a name="73"><span class="lineNum">      73 </span>            :      * @return  The filtered value of the analog input, as a number</a>
 <a name="74"><span class="lineNum">      74 </span>            :      *          of `PRECISION` bits wide.</a>
 <a name="75"><span class="lineNum">      75 </span>            :      */</a>
-<a name="76"><span class="lineNum">      76 </span>            :     analog_t getValue() const { return hysteresis.getValue(); }</a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineNoCov">          0 :     analog_t getValue() const { return hysteresis.getValue(); }</span></a>
 <a name="77"><span class="lineNum">      77 </span>            : </a>
 <a name="78"><span class="lineNum">      78 </span>            :     /**</a>
 <a name="79"><span class="lineNum">      79 </span>            :      * @brief   Get the filtered value of the analog input with the mapping </a>
@@ -162,7 +162,7 @@
 <a name="92"><span class="lineNum">      92 </span>            :      */</a>
 <a name="93"><span class="lineNum">      93 </span>            :     analog_t getRawValue() const {</a>
 <a name="94"><span class="lineNum">      94 </span>            :         return increaseBitDepth&lt;ADC_BITS + UPSAMPLE, ADC_BITS, analog_t,</a>
-<a name="95"><span class="lineNum">      95 </span>            :                                 analog_t&gt;(ExtIO::analogRead(analogPin));</a>
+<a name="95"><span class="lineNum">      95 </span><span class="lineNoCov">          0 :                                 analog_t&gt;(ExtIO::analogRead(analogPin));</span></a>
 <a name="96"><span class="lineNum">      96 </span>            :     }</a>
 <a name="97"><span class="lineNum">      97 </span>            : </a>
 <a name="98"><span class="lineNum">      98 </span>            :   private:</a>
