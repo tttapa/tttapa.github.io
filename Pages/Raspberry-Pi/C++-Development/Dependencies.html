@@ -179,7 +179,7 @@
     necessary tools installed.
 </p>
 
-<div><style>.pygments .hll { background-color: #ffffcc }
+<div class="codesnippet"><style>.pygments .hll { background-color: #ffffcc }
 .pygments  { background: #f8f8f8; }
 .pygments .c { color: #408080; font-style: italic } /* Comment */
 .pygments .err { border: 1px solid #FF0000 } /* Error */
@@ -262,10 +262,10 @@
 <code>    apt-get autoremove -y <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    rm -rf /var/lib/apt/lists/*</code>
 <code></code>
-<code><span class="c"># Add a user called `develop`</span></code>
+<code><span class="c"># Add a user called `develop`, and add him to the sudo group</span></code>
 <code><span class="k">RUN</span> useradd -m develop <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    <span class="nb">echo</span> <span class="s2">&quot;develop:develop&quot;</span> <span class="p">|</span> <span class="se">\</span></code>
-<code>    chpasswd <span class="o">&amp;&amp;</span> adduser develop sudo</code>
+<code>    <span class="nb">echo</span> <span class="s2">&quot;develop:develop&quot;</span> <span class="p">|</span> chpasswd <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    adduser develop sudo</code>
 <code></code>
 <code><span class="k">USER</span><span class="s"> develop</span></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
@@ -295,7 +295,7 @@
     each of the two folders.
 </p>
 
-<div><style>.pygments .hll { background-color: #ffffcc }
+<div class="codesnippet"><style>.pygments .hll { background-color: #ffffcc }
 .pygments  { background: #f8f8f8; }
 .pygments .c { color: #408080; font-style: italic } /* Comment */
 .pygments .err { border: 1px solid #FF0000 } /* Error */
@@ -397,11 +397,22 @@
     </ol>
 </p>
 <p>
+    To cross-compile the libraries, we have to specify the right compiler (the one we built in the previous step),
+    and we have to tell the compiler to use our copy of the sysroot instead of the toolchain's sysroot, using 
+    GCC's <code>--sysroot</code> option.
+</p>
+<p>
+    Software that isn't managed by the system's package manager should be installed to <code>/usr/local</code>, 
+    so we specify that path as the installation prefix. <br>
+    Finally, we'll install everything in the sysroot and in the staging area.
+</p>
+<p>
     In the first section, we'll build most packages for both the build machine (the Docker container)
-    and for the host machine (the Raspberry Pi).
+    and for the host machine (the Raspberry Pi), because we need to build Python for both machines
+    in order to cross-compile the OpenCV and NumPy modules later on.
 </p>
 
-<div><style>.pygments .hll { background-color: #ffffcc }
+<div class="codesnippet"><style>.pygments .hll { background-color: #ffffcc }
 .pygments  { background: #f8f8f8; }
 .pygments .c { color: #408080; font-style: italic } /* Comment */
 .pygments .err { border: 1px solid #FF0000 } /* Error */
@@ -470,7 +481,7 @@
 .pygments .vi { color: #19177C } /* Name.Variable.Instance */
 .pygments .vm { color: #19177C } /* Name.Variable.Magic */
 .pygments .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments pre.snippet74 { counter-reset: line 18; }</style><div class="pygments"><pre class="lineNumbers snippet74"><code><span></span><span class="c"># Zlib Download</span></code>
+.pygments pre.snippet85 { counter-reset: line 18; }</style><div class="pygments"><pre class="lineNumbers snippet85"><code><span></span><span class="c"># Zlib Download</span></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
 <code><span class="k">RUN</span> wget https://downloads.sourceforge.net/project/libpng/zlib/1.2.11/zlib-1.2.11.tar.gz <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    tar xzf zlib-1.2.11.tar.gz <span class="o">&amp;&amp;</span> rm zlib-1.2.11.tar.gz</code>
@@ -595,7 +606,7 @@
 
 </div>
     </article>
-    <footer>Last edited: Monday, 16 September 2019 14:02 UTC</footer>
+    <footer>Last edited: Wednesday, 18 September 2019 08:18 UTC</footer>
 </body>
 
 </html>

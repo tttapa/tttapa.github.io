@@ -127,4 +127,51 @@
     and that would be unnecessary.
 </p>
 
+<h3>Signed Rounding Division</h3>
+
+<p>
+    It's possible to implement a signed division using bit shifts as well. The 
+    only difference is that we have to subtract 1 from the dividend if it's 
+    negative.
+</p>
+<p>
+    On ARM and x86 platforms, the performance difference between the signed and 
+    unsigned version is small, because determining whether the dividend is 
+    negative can easily be done by shifting the sign bit to the least 
+    significant place (a right shift of 31 bits).
+</p>
+<p>
+    On architectures where bit shifts are more expensive, like the AVR 
+    architecture used by Arduino microcontrollers, the signed version is much 
+    slower.<br>
+    The reason for this is that the AVR architecture only has an instruction to
+    shift a single bit, not to shift an arbitrary number of bits.<br>
+    Determining the sign of a number is therefore more complicated.
+</p>
+
+<h4>Implementation of Signed and Unsigned Division by a Multiple of Two</h4>
+@codesnippet{
+    "file": "resources/Rounding-Division.cpp"
+}
+<h4>Assembly Generated on x86_64</h4>
+@codesnippet{
+    "file": "resources/Rounding-Division-x86_64.S"
+}
+<h4>Assembly Generated on ARM</h4>
+@codesnippet{
+    "file": "resources/Rounding-Division-ARM.S"
+}
+<h4>Assembly Generated on AVR</h4>
+@codesnippet{
+    "file": "resources/Rounding-Division-AVR.S"
+}
+<p>
+    Keep in mind that an <code>int</code> on AVR is only 16 bits wide, whereas an <code>int</code> on ARM or x86 is
+    32 bits wide.<br>
+    If you use 32-bit integers on AVR, the result is even more atrocious.
+</p>
+<p>
+    You can try it for yourself on the <a href="https://godbolt.org/z/YdVpS7">Compiler Explorer</a>.
+</p>
+
 </html>

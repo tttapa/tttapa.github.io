@@ -413,7 +413,7 @@
     C++:
 </p>
 
-<div><style>.pygments .hll { background-color: #ffffcc }
+<div class="codesnippet"><style>.pygments .hll { background-color: #ffffcc }
 .pygments  { background: #f8f8f8; }
 .pygments .c { color: #408080; font-style: italic } /* Comment */
 .pygments .err { border: 1px solid #FF0000 } /* Error */
@@ -506,9 +506,386 @@
     and that would be unnecessary.
 </p>
 
+<h3><a name="signed-rounding-division" href="#signed-rounding-division">Signed Rounding Division</a></h3>
+
+<p>
+    It's possible to implement a signed division using bit shifts as well. The 
+    only difference is that we have to subtract 1 from the dividend if it's 
+    negative.
+</p>
+<p>
+    On ARM and x86 platforms, the performance difference between the signed and 
+    unsigned version is small, because determining whether the dividend is 
+    negative can easily be done by shifting the sign bit to the least 
+    significant place (a right shift of 31 bits).
+</p>
+<p>
+    On architectures where bit shifts are more expensive, like the AVR 
+    architecture used by Arduino microcontrollers, the signed version is much 
+    slower.<br>
+    The reason for this is that the AVR architecture only has an instruction to
+    shift a single bit, not to shift an arbitrary number of bits.<br>
+    Determining the sign of a number is therefore more complicated.
+</p>
+
+<h4><a name="implementation-of-signed-and-unsigned-division-by-a-multiple-of-two" href="#implementation-of-signed-and-unsigned-division-by-a-multiple-of-two">Implementation of Signed and Unsigned Division by a Multiple of Two</a></h4>
+<div class="codesnippet"><style>.pygments .hll { background-color: #ffffcc }
+.pygments  { background: #f8f8f8; }
+.pygments .c { color: #408080; font-style: italic } /* Comment */
+.pygments .err { border: 1px solid #FF0000 } /* Error */
+.pygments .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments .o { color: #666666 } /* Operator */
+.pygments .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments .gd { color: #A00000 } /* Generic.Deleted */
+.pygments .ge { font-style: italic } /* Generic.Emph */
+.pygments .gr { color: #FF0000 } /* Generic.Error */
+.pygments .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments .gi { color: #00A000 } /* Generic.Inserted */
+.pygments .go { color: #888888 } /* Generic.Output */
+.pygments .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments .gs { font-weight: bold } /* Generic.Strong */
+.pygments .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments .gt { color: #0044DD } /* Generic.Traceback */
+.pygments .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments .kt { color: #B00040 } /* Keyword.Type */
+.pygments .m { color: #666666 } /* Literal.Number */
+.pygments .s { color: #BA2121 } /* Literal.String */
+.pygments .na { color: #7D9029 } /* Name.Attribute */
+.pygments .nb { color: #008000 } /* Name.Builtin */
+.pygments .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments .no { color: #880000 } /* Name.Constant */
+.pygments .nd { color: #AA22FF } /* Name.Decorator */
+.pygments .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments .nf { color: #0000FF } /* Name.Function */
+.pygments .nl { color: #A0A000 } /* Name.Label */
+.pygments .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments .nv { color: #19177C } /* Name.Variable */
+.pygments .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments .mf { color: #666666 } /* Literal.Number.Float */
+.pygments .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments .sx { color: #008000 } /* Literal.String.Other */
+.pygments .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments .vc { color: #19177C } /* Name.Variable.Class */
+.pygments .vg { color: #19177C } /* Name.Variable.Global */
+.pygments .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments pre.snippet153 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet153"><code><span></span><span class="k">constexpr</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span></code>
+<code></code>
+<code><span class="kt">signed</span> <span class="kt">int</span> <span class="nf">div_s</span><span class="p">(</span><span class="kt">signed</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="kt">int</span> <span class="n">neg</span> <span class="o">=</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="kt">int</span> <span class="n">shiftval</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="n">neg</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">K</span><span class="p">;</span></code>
+<code>    <span class="k">return</span> <span class="n">shiftval</span><span class="p">;</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">div_u</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">&gt;&gt;</span> <span class="n">K</span><span class="p">;</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<h4><a name="assembly-generated-on-x86-64" href="#assembly-generated-on-x86-64">Assembly Generated on x86_64</a></h4>
+<div class="codesnippet"><style>.pygments .hll { background-color: #ffffcc }
+.pygments  { background: #f8f8f8; }
+.pygments .c { color: #408080; font-style: italic } /* Comment */
+.pygments .err { border: 1px solid #FF0000 } /* Error */
+.pygments .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments .o { color: #666666 } /* Operator */
+.pygments .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments .gd { color: #A00000 } /* Generic.Deleted */
+.pygments .ge { font-style: italic } /* Generic.Emph */
+.pygments .gr { color: #FF0000 } /* Generic.Error */
+.pygments .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments .gi { color: #00A000 } /* Generic.Inserted */
+.pygments .go { color: #888888 } /* Generic.Output */
+.pygments .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments .gs { font-weight: bold } /* Generic.Strong */
+.pygments .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments .gt { color: #0044DD } /* Generic.Traceback */
+.pygments .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments .kt { color: #B00040 } /* Keyword.Type */
+.pygments .m { color: #666666 } /* Literal.Number */
+.pygments .s { color: #BA2121 } /* Literal.String */
+.pygments .na { color: #7D9029 } /* Name.Attribute */
+.pygments .nb { color: #008000 } /* Name.Builtin */
+.pygments .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments .no { color: #880000 } /* Name.Constant */
+.pygments .nd { color: #AA22FF } /* Name.Decorator */
+.pygments .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments .nf { color: #0000FF } /* Name.Function */
+.pygments .nl { color: #A0A000 } /* Name.Label */
+.pygments .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments .nv { color: #19177C } /* Name.Variable */
+.pygments .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments .mf { color: #666666 } /* Literal.Number.Float */
+.pygments .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments .sx { color: #008000 } /* Literal.String.Other */
+.pygments .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments .vc { color: #19177C } /* Name.Variable.Class */
+.pygments .vg { color: #19177C } /* Name.Variable.Global */
+.pygments .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments pre.snippet157 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet157"><code><span></span><span class="nf">div_s</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">lea</span>     <span class="n">eax</span><span class="p">,</span> <span class="n">[rdi</span><span class="m">+4</span><span class="n">]</span></code>
+<code>        <span class="n">shr</span>     <span class="n">edi</span><span class="p">,</span> <span class="m">31</span></code>
+<code>        <span class="n">sub</span>     <span class="n">eax</span><span class="p">,</span> <span class="n">edi</span></code>
+<code>        <span class="n">sar</span>     <span class="n">eax</span><span class="p">,</span> <span class="m">3</span></code>
+<code>        <span class="n">ret</span></code>
+<code><span class="nf">div_u</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">lea</span>     <span class="n">eax</span><span class="p">,</span> <span class="n">[rdi</span><span class="m">+4</span><span class="n">]</span></code>
+<code>        <span class="n">shr</span>     <span class="n">eax</span><span class="p">,</span> <span class="m">3</span></code>
+<code>        <span class="n">ret</span></code></pre></div>
+</div>
+<h4><a name="assembly-generated-on-arm" href="#assembly-generated-on-arm">Assembly Generated on ARM</a></h4>
+<div class="codesnippet"><style>.pygments .hll { background-color: #ffffcc }
+.pygments  { background: #f8f8f8; }
+.pygments .c { color: #408080; font-style: italic } /* Comment */
+.pygments .err { border: 1px solid #FF0000 } /* Error */
+.pygments .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments .o { color: #666666 } /* Operator */
+.pygments .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments .gd { color: #A00000 } /* Generic.Deleted */
+.pygments .ge { font-style: italic } /* Generic.Emph */
+.pygments .gr { color: #FF0000 } /* Generic.Error */
+.pygments .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments .gi { color: #00A000 } /* Generic.Inserted */
+.pygments .go { color: #888888 } /* Generic.Output */
+.pygments .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments .gs { font-weight: bold } /* Generic.Strong */
+.pygments .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments .gt { color: #0044DD } /* Generic.Traceback */
+.pygments .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments .kt { color: #B00040 } /* Keyword.Type */
+.pygments .m { color: #666666 } /* Literal.Number */
+.pygments .s { color: #BA2121 } /* Literal.String */
+.pygments .na { color: #7D9029 } /* Name.Attribute */
+.pygments .nb { color: #008000 } /* Name.Builtin */
+.pygments .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments .no { color: #880000 } /* Name.Constant */
+.pygments .nd { color: #AA22FF } /* Name.Decorator */
+.pygments .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments .nf { color: #0000FF } /* Name.Function */
+.pygments .nl { color: #A0A000 } /* Name.Label */
+.pygments .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments .nv { color: #19177C } /* Name.Variable */
+.pygments .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments .mf { color: #666666 } /* Literal.Number.Float */
+.pygments .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments .sx { color: #008000 } /* Literal.String.Other */
+.pygments .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments .vc { color: #19177C } /* Name.Variable.Class */
+.pygments .vg { color: #19177C } /* Name.Variable.Global */
+.pygments .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments pre.snippet161 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet161"><code><span></span><span class="nf">div_s</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">add</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="c1">#4</span></code>
+<code>        <span class="n">sub</span>     <span class="n">r0</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">lsr</span> <span class="c1">#31</span></code>
+<code>        <span class="n">asr</span>     <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="c1">#3</span></code>
+<code>        <span class="n">bx</span>      <span class="n">lr</span></code>
+<code><span class="nf">div_u</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">add</span>     <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="c1">#4</span></code>
+<code>        <span class="n">lsr</span>     <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="c1">#3</span></code>
+<code>        <span class="n">bx</span>      <span class="n">lr</span></code></pre></div>
+</div>
+<h4><a name="assembly-generated-on-avr" href="#assembly-generated-on-avr">Assembly Generated on AVR</a></h4>
+<div class="codesnippet"><style>.pygments .hll { background-color: #ffffcc }
+.pygments  { background: #f8f8f8; }
+.pygments .c { color: #408080; font-style: italic } /* Comment */
+.pygments .err { border: 1px solid #FF0000 } /* Error */
+.pygments .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments .o { color: #666666 } /* Operator */
+.pygments .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments .gd { color: #A00000 } /* Generic.Deleted */
+.pygments .ge { font-style: italic } /* Generic.Emph */
+.pygments .gr { color: #FF0000 } /* Generic.Error */
+.pygments .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments .gi { color: #00A000 } /* Generic.Inserted */
+.pygments .go { color: #888888 } /* Generic.Output */
+.pygments .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments .gs { font-weight: bold } /* Generic.Strong */
+.pygments .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments .gt { color: #0044DD } /* Generic.Traceback */
+.pygments .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments .kt { color: #B00040 } /* Keyword.Type */
+.pygments .m { color: #666666 } /* Literal.Number */
+.pygments .s { color: #BA2121 } /* Literal.String */
+.pygments .na { color: #7D9029 } /* Name.Attribute */
+.pygments .nb { color: #008000 } /* Name.Builtin */
+.pygments .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments .no { color: #880000 } /* Name.Constant */
+.pygments .nd { color: #AA22FF } /* Name.Decorator */
+.pygments .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments .nf { color: #0000FF } /* Name.Function */
+.pygments .nl { color: #A0A000 } /* Name.Label */
+.pygments .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments .nv { color: #19177C } /* Name.Variable */
+.pygments .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments .mf { color: #666666 } /* Literal.Number.Float */
+.pygments .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments .sx { color: #008000 } /* Literal.String.Other */
+.pygments .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments .vc { color: #19177C } /* Name.Variable.Class */
+.pygments .vg { color: #19177C } /* Name.Variable.Global */
+.pygments .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments pre.snippet165 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet165"><code><span></span><span class="n">__zero_reg__</span> <span class="o">=</span> <span class="m">1</span></code>
+<code><span class="nf">div_s</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">mov</span> <span class="n">r18</span><span class="p">,</span><span class="n">r24</span></code>
+<code>        <span class="n">mov</span> <span class="n">r19</span><span class="p">,</span><span class="n">r25</span></code>
+<code>        <span class="n">subi</span> <span class="n">r18</span><span class="p">,</span><span class="m">-4</span></code>
+<code>        <span class="n">sbci</span> <span class="n">r19</span><span class="p">,</span><span class="m">-1</span></code>
+<code>        <span class="n">mov</span> <span class="n">r24</span><span class="p">,</span><span class="n">r25</span></code>
+<code>        <span class="n">rol</span> <span class="n">r24</span></code>
+<code>        <span class="n">clr</span> <span class="n">r24</span></code>
+<code>        <span class="n">rol</span> <span class="n">r24</span></code>
+<code>        <span class="n">mov</span> <span class="n">r20</span><span class="p">,</span><span class="n">r18</span></code>
+<code>        <span class="n">mov</span> <span class="n">r21</span><span class="p">,</span><span class="n">r19</span></code>
+<code>        <span class="n">sub</span> <span class="n">r20</span><span class="p">,</span><span class="n">r24</span></code>
+<code>        <span class="n">sbc</span> <span class="n">r21</span><span class="p">,</span><span class="n">__zero_reg__</span></code>
+<code>        <span class="n">mov</span> <span class="n">r24</span><span class="p">,</span><span class="n">r20</span></code>
+<code>        <span class="n">mov</span> <span class="n">r25</span><span class="p">,</span><span class="n">r21</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span></code>
+<code>        <span class="n">ret</span></code>
+<code><span class="nf">div_u</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">adiw</span> <span class="n">r24</span><span class="p">,</span><span class="m">4</span></code>
+<code>        <span class="n">lsr</span> <span class="n">r25</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span></code>
+<code>        <span class="n">lsr</span> <span class="n">r25</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span></code>
+<code>        <span class="n">lsr</span> <span class="n">r25</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span></code>
+<code>        <span class="n">ret</span></code></pre></div>
+</div>
+<p>
+    Keep in mind that an <code>int</code> on AVR is only 16 bits wide, whereas an <code>int</code> on ARM or x86 is
+    32 bits wide.<br>
+    If you use 32-bit integers on AVR, the result is even more atrocious.
+</p>
+<p>
+    You can try it for yourself on the <a href="https://godbolt.org/z/YdVpS7">Compiler Explorer</a>.
+</p>
+
 </div>
     </article>
-    <footer>Last edited: Sunday, 15 September 2019 16:38 UTC</footer>
+    <footer>Last edited: Friday, 20 September 2019 10:41 UTC</footer>
 
 
 </body></html>

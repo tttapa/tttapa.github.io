@@ -111,7 +111,7 @@ def formatPygmentsCodeSnippet(data, html, filepath, lineno):
     htmlc = htmlc.replace('<pre>', 
                 '<pre class="lineNumbers snippet{}">'.format(lineno))
     htmlc = htmlc.replace('\n</pre></div>', '</pre></div>')
-    datastr = '<div><style>' + css + '</style>'
+    datastr = '<div class="codesnippet"><style>' + css + '</style>'
     datastr += htmlc + '</div>'
     return datastr
 

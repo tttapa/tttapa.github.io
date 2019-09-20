@@ -67,6 +67,16 @@
     </ol>
 </p>
 <p>
+    To cross-compile the libraries, we have to specify the right compiler (the one we built in the previous step),
+    and we have to tell the compiler to use our copy of the sysroot instead of the toolchain's sysroot, using 
+    GCC's <code>--sysroot</code> option.
+</p>
+<p>
+    Software that isn't managed by the system's package manager should be installed to <code>/usr/local</code>, 
+    so we specify that path as the installation prefix. <br>
+    Finally, we'll install everything in the sysroot and in the staging area.
+</p>
+<p>
     In the first section, we'll build most packages for both the build machine (the Docker container)
     and for the host machine (the Raspberry Pi), because we need to build Python for both machines
     in order to cross-compile the OpenCV and NumPy modules later on.
