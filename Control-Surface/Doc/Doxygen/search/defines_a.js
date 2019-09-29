@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tracktion_5frelative_3130',['TRACKTION_RELATIVE',['../d9/d24/RelativeCCSender_8hpp.html#a369404d12152030191e1ddd44d12a675',1,'RelativeCCSender.hpp']]]
+  ['str_3149',['STR',['../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502',1,'Debug.hpp']]],
+  ['str_5fhelper_3150',['STR_HELPER',['../df/dee/Debug_8hpp.html#a890d84b9b5d0b0aede9eea1092a7a10a',1,'Debug.hpp']]]
 ];

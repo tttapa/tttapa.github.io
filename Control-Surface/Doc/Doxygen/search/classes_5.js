@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['filteredanalog_1569',['FilteredAnalog',['../da/da7/classFilteredAnalog.html',1,'']]],
-  ['filteredanalog_3c_207_20_3e_1570',['FilteredAnalog&lt; 7 &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
-  ['filteredanalog_3c_20precision_20_3e_1571',['FilteredAnalog&lt; PRECISION &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
-  ['filteredanalog_3c_20precision_2c_206_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1572',['FilteredAnalog&lt; PRECISION, 6, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
-  ['frequency_1573',['Frequency',['../d7/d90/classFrequency.html',1,'']]]
+  ['filteredanalog_1581',['FilteredAnalog',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['filteredanalog_3c_207_20_3e_1582',['FilteredAnalog&lt; 7 &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['filteredanalog_3c_20continuousccsender_20_3a_3aprecision_28_29_2c_2016_20_2d_20adc_5fbits_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1583',['FilteredAnalog&lt; ContinuousCCSender ::precision(), 16 - ADC_BITS, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['filteredanalog_3c_20pitchbendsender_3c_2010_20_3e_20_3a_3aprecision_28_29_2c_2016_20_2d_20adc_5fbits_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1584',['FilteredAnalog&lt; PitchBendSender&lt; 10 &gt; ::precision(), 16 - ADC_BITS, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['filteredanalog_3c_20sender_3a_3aprecision_28_29_2c_2016_20_2d_20adc_5fbits_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1585',['FilteredAnalog&lt; Sender::precision(), 16 - ADC_BITS, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['frequency_1586',['Frequency',['../d7/d90/classFrequency.html',1,'']]]
 ];

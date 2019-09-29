@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['endl_3111',['ENDL',['../df/dee/Debug_8hpp.html#a90dc3f3ee970394e0080300526390a84',1,'Debug.hpp']]],
-  ['error_3112',['ERROR',['../d1/d93/Error_8hpp.html#a72337c44fb2364f15aa51d3c4223f1c5',1,'Error.hpp']]],
-  ['ext_5fpin_3113',['EXT_PIN',['../dd/ddf/ExtendedInputOutput_8hpp.html#a187bb7f7f473287a8e4a847289d33c41',1,'ExtendedInputOutput.hpp']]]
+  ['debug_3126',['DEBUG',['../df/dee/Debug_8hpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d',1,'Debug.hpp']]],
+  ['debugfn_3127',['DEBUGFN',['../df/dee/Debug_8hpp.html#a5e1b7520df0706433ae295a78471fb3c',1,'Debug.hpp']]],
+  ['debugref_3128',['DEBUGREF',['../df/dee/Debug_8hpp.html#afedb5ed0c0a4ef76c6b968368af014c7',1,'Debug.hpp']]],
+  ['debugtime_3129',['DEBUGTIME',['../df/dee/Debug_8hpp.html#a95d4440a4127650cdd221322b1780833',1,'Debug.hpp']]],
+  ['debugval_3130',['DEBUGVAL',['../df/dee/Debug_8hpp.html#aab96fed8c4f7d9e0f985b05cc6a419b2',1,'Debug.hpp']]]
 ];
