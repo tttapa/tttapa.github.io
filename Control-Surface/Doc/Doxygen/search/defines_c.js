@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['unused_5fparam_3152',['UNUSED_PARAM',['../d0/d4e/Def_8hpp.html#a32dce3380228f1a23cdc1f784263762b',1,'Def.hpp']]],
-  ['usb_5fmidi_5fnumber_5fof_5fcables_3153',['USB_MIDI_NUMBER_OF_CABLES',['../d8/d21/USBMIDI__Parser_8hpp.html#a8c8cc78d95d6600f2d4fdeab96154332',1,'USBMIDI_Parser.hpp']]],
-  ['use_5fconstexpr_5farray_5fhelpers_3154',['USE_CONSTEXPR_ARRAY_HELPERS',['../d5/db6/ArrayHelpers_8hpp.html#addd42f8d7a7cb2605e50325b9c54fefa',1,'ArrayHelpers.hpp']]],
-  ['use_5fcs_5fnamespace_3155',['USE_CS_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#af8965d6cfaa5bf9433e75d5f8618570e',1,'NamespaceSettings.hpp']]]
+  ['tracktion_5frelative_3198',['TRACKTION_RELATIVE',['../d9/d24/RelativeCCSender_8hpp.html#a369404d12152030191e1ddd44d12a675',1,'RelativeCCSender.hpp']]]
 ];
