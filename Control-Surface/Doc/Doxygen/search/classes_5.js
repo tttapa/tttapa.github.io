@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['filteredanalog_1734',['FilteredAnalog',['../da/da7/classFilteredAnalog.html',1,'']]],
-  ['filteredanalog_3c_207_20_3e_1735',['FilteredAnalog&lt; 7 &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
-  ['filteredanalog_3c_20continuousccsender_20_3a_3aprecision_28_29_2c_2016_20_2d_20adc_5fbits_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1736',['FilteredAnalog&lt; ContinuousCCSender ::precision(), 16 - ADC_BITS, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
-  ['filteredanalog_3c_20pitchbendsender_3c_2010_20_3e_20_3a_3aprecision_28_29_2c_2016_20_2d_20adc_5fbits_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1737',['FilteredAnalog&lt; PitchBendSender&lt; 10 &gt; ::precision(), 16 - ADC_BITS, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
-  ['filteredanalog_3c_20sender_3a_3aprecision_28_29_2c_2016_20_2d_20adc_5fbits_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1738',['FilteredAnalog&lt; Sender::precision(), 16 - ADC_BITS, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
-  ['frequency_1739',['Frequency',['../d7/d90/classFrequency.html',1,'']]]
+  ['filteredanalog_1735',['FilteredAnalog',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['filteredanalog_3c_207_20_3e_1736',['FilteredAnalog&lt; 7 &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['filteredanalog_3c_20continuousccsender_20_3a_3aprecision_28_29_2c_2016_20_2d_20adc_5fbits_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1737',['FilteredAnalog&lt; ContinuousCCSender ::precision(), 16 - ADC_BITS, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['filteredanalog_3c_20pitchbendsender_3c_2010_20_3e_20_3a_3aprecision_28_29_2c_2016_20_2d_20adc_5fbits_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1738',['FilteredAnalog&lt; PitchBendSender&lt; 10 &gt; ::precision(), 16 - ADC_BITS, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['filteredanalog_3c_20sender_3a_3aprecision_28_29_2c_2016_20_2d_20adc_5fbits_2c_20analog_5ffilter_5fshift_5ffactor_2c_20uint32_5ft_20_3e_1739',['FilteredAnalog&lt; Sender::precision(), 16 - ADC_BITS, ANALOG_FILTER_SHIFT_FACTOR, uint32_t &gt;',['../da/da7/classFilteredAnalog.html',1,'']]],
+  ['frequency_1740',['Frequency',['../d7/d90/classFrequency.html',1,'']]]
 ];
