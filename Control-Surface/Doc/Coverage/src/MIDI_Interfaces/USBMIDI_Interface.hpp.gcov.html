@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - ad618c6efcb1a134ab127bd7a9b9a02b38b2eaf0 - src/MIDI_Interfaces/USBMIDI_Interface.hpp</title>
+  <title>LCOV - 5a7eaea1b399a29720cbb0b5b2822a541b82e594 - src/MIDI_Interfaces/USBMIDI_Interface.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">ad618c6efcb1a134ab127bd7a9b9a02b38b2eaf0</td>
+            <td class="headerValue">5a7eaea1b399a29720cbb0b5b2822a541b82e594</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">14</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-04 22:15:50</td>
+            <td class="headerValue">2019-10-04 22:46:51</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -111,7 +111,7 @@
 <a name="41"><span class="lineNum">      41 </span>            :     /**</a>
 <a name="42"><span class="lineNum">      42 </span>            :      * @brief   Construct a new USBMIDI_Interface.</a>
 <a name="43"><span class="lineNum">      43 </span>            :      */</a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         18 :     USBMIDI_Interface() : Parsing_MIDI_Interface(parser) {}</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         20 :     USBMIDI_Interface() : Parsing_MIDI_Interface(parser) {}</span></a>
 <a name="45"><span class="lineNum">      45 </span>            : </a>
 <a name="46"><span class="lineNum">      46 </span>            :   private:</a>
 <a name="47"><span class="lineNum">      47 </span>            :     USBMIDI_Parser parser;</a>
@@ -125,7 +125,7 @@
 <a name="55"><span class="lineNum">      55 </span>            : #pragma GCC diagnostic push</a>
 <a name="56"><span class="lineNum">      56 </span>            : #pragma GCC diagnostic ignored &quot;-Wsuggest-override&quot;</a>
 <a name="57"><span class="lineNum">      57 </span>            : #endif</a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         32 :     MOCK_METHOD5(writeUSBPacket,</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">         34 :     MOCK_METHOD5(writeUSBPacket,</span></a>
 <a name="59"><span class="lineNum">      59 </span>            :                  void(uint8_t, uint8_t, uint8_t, uint8_t, uint8_t));</a>
 <a name="60"><span class="lineNum">      60 </span><span class="lineNoCov">          0 :     MOCK_METHOD0(read, MIDI_read_t(void));</span></a>
 <a name="61"><span class="lineNum">      61 </span>            : #if __GNUC__ &gt;= 5</a>
@@ -176,23 +176,23 @@
 <a name="106"><span class="lineNum">     106 </span><span class="lineNoCov">          0 :         sendImpl(m, c, d1, 0, cn);</span></a>
 <a name="107"><span class="lineNum">     107 </span><span class="lineNoCov">          0 :     }</span></a>
 <a name="108"><span class="lineNum">     108 </span>            : </a>
-<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          8 :     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {</span></a>
-<a name="110"><span class="lineNum">     110 </span><span class="lineCov">          8 :         if (length &lt; 3) {</span></a>
+<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          9 :     void sendImpl(const uint8_t *data, size_t length, uint8_t cn) override {</span></a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineCov">          9 :         if (length &lt; 2) {</span></a>
 <a name="111"><span class="lineNum">     111 </span><span class="lineCov">          2 :             ERROR(F(&quot;Error: invalid SysEx length&quot;), 0x7F7F);</span></a>
 <a name="112"><span class="lineNum">     112 </span>            :             return;</a>
 <a name="113"><span class="lineNum">     113 </span>            :         }</a>
-<a name="114"><span class="lineNum">     114 </span><span class="lineCov">         16 :         while (length &gt; 3) {</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">         17 :         while (length &gt; 3) {</span></a>
 <a name="115"><span class="lineNum">     115 </span><span class="lineCov">          9 :             writeUSBPacket(cn, 0x4, data[0], data[1], data[2]);</span></a>
 <a name="116"><span class="lineNum">     116 </span><span class="lineCov">          9 :             data += 3;</span></a>
 <a name="117"><span class="lineNum">     117 </span><span class="lineCov">          9 :             length -= 3;</span></a>
 <a name="118"><span class="lineNum">     118 </span>            :         }</a>
-<a name="119"><span class="lineNum">     119 </span><span class="lineCov">          7 :         switch (length) {</span></a>
+<a name="119"><span class="lineNum">     119 </span><span class="lineCov">          8 :         switch (length) {</span></a>
 <a name="120"><span class="lineNum">     120 </span><span class="lineCov">          3 :             case 3: writeUSBPacket(cn, 0x7, data[0], data[1], data[2]); break;</span></a>
-<a name="121"><span class="lineNum">     121 </span><span class="lineCov">          2 :             case 2: writeUSBPacket(cn, 0x6, data[0], data[1], 0); break;</span></a>
+<a name="121"><span class="lineNum">     121 </span><span class="lineCov">          3 :             case 2: writeUSBPacket(cn, 0x6, data[0], data[1], 0); break;</span></a>
 <a name="122"><span class="lineNum">     122 </span><span class="lineCov">          2 :             case 1: writeUSBPacket(cn, 0x5, data[0], 0, 0); break;</span></a>
 <a name="123"><span class="lineNum">     123 </span>            :             default: break;</a>
 <a name="124"><span class="lineNum">     124 </span>            :         }</a>
-<a name="125"><span class="lineNum">     125 </span><span class="lineCov">          7 :         flush();</span></a>
+<a name="125"><span class="lineNum">     125 </span><span class="lineCov">          8 :         flush();</span></a>
 <a name="126"><span class="lineNum">     126 </span>            :     }</a>
 <a name="127"><span class="lineNum">     127 </span>            : </a>
 <a name="128"><span class="lineNum">     128 </span>            :   public:</a>
