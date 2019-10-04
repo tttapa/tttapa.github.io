@@ -20,7 +20,7 @@ var searchData=
   ['leds_3c_2011_20_3e_786',['LEDs&lt; 11 &gt;',['../d2/d1b/classLEDs.html',1,'']]],
   ['left_787',['LEFT',['../d7/dc7/namespaceMCU.html#a90955e55b5b6ed836457992ab70f1c12',1,'MCU']]],
   ['legato_5ffootswitch_788',['Legato_Footswitch',['../d4/dbe/namespaceMIDI__CC.html#a9e44e15596fcea1fe9e001e1d2d1df37',1,'MIDI_CC']]],
-  ['length_789',['length',['../d6/d99/classBresenhamLine.html#a6aab564e78b97e607afc4df924531b50',1,'BresenhamLine::length()'],['../de/d4e/classExtendedIOElement.html#a018a3ac2d6a11014e27c8186a2feb684',1,'ExtendedIOElement::length()'],['../d7/d6a/structArray.html#a7615d7f35d563b104928b7029202690a',1,'Array::length()'],['../db/d45/structSysExMessage.html#a78b1ff8ef3a2ea530872927e23c96df4',1,'SysExMessage::length()'],['../d1/d13/classStaticSizeExtendedIOElement.html#a6ce52b89e7782b4a24c06e8e859f05d3',1,'StaticSizeExtendedIOElement::length()']]],
+  ['length_789',['length',['../d6/d99/classBresenhamLine.html#a6aab564e78b97e607afc4df924531b50',1,'BresenhamLine::length()'],['../de/d4e/classExtendedIOElement.html#a018a3ac2d6a11014e27c8186a2feb684',1,'ExtendedIOElement::length()'],['../d7/d6a/structArray.html#a7615d7f35d563b104928b7029202690a',1,'Array::length()'],['../db/d45/structSysExMessage.html#ae706c095aaa845ed3a06409afdbbd46c',1,'SysExMessage::length()'],['../d1/d13/classStaticSizeExtendedIOElement.html#a6ce52b89e7782b4a24c06e8e859f05d3',1,'StaticSizeExtendedIOElement::length()']]],
   ['level_790',['level',['../d4/dce/classAudioVU.html#ab2eacfa9506aac2fa194b99d0863c903',1,'AudioVU']]],
   ['linkedlist_2ecpp_791',['LinkedList.cpp',['../df/db8/LinkedList_8cpp.html',1,'']]],
   ['linkedlist_2ehpp_792',['LinkedList.hpp',['../de/dd1/LinkedList_8hpp.html',1,'']]],
