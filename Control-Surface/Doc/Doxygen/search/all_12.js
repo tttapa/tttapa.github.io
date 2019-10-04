@@ -12,7 +12,7 @@ var searchData=
   ['theta_5fdot_1460',['theta_dot',['../dc/d95/classMCU_1_1AnalogVUDisplay.html#adba9d64f5f652ab4656dfd3b4f3316f1',1,'MCU::AnalogVUDisplay']]],
   ['theta_5fmin_1461',['theta_min',['../dc/d95/classMCU_1_1AnalogVUDisplay.html#a62f47b66ebc5f36d2754fb9c83ba1048',1,'MCU::AnalogVUDisplay']]],
   ['thirdbyte_1462',['thirdByte',['../d0/d0d/classSerialMIDI__Parser.html#a6ec69d1a24b2a0517a281cc352ad88d1',1,'SerialMIDI_Parser']]],
-  ['timedisplay_1463',['TimeDisplay',['../df/d69/classMCU_1_1TimeDisplay.html',1,'MCU::TimeDisplay'],['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ae38d59728ad82430746231d6491d602e',1,'MCU::TimeDisplayDisplay::timedisplay()'],['../df/d69/classMCU_1_1TimeDisplay.html#ae24e4fc0a95f0a80ed8bc03059bc3b4d',1,'MCU::TimeDisplay::TimeDisplay()']]],
+  ['timedisplay_1463',['TimeDisplay',['../df/d69/classMCU_1_1TimeDisplay.html',1,'MCU::TimeDisplay'],['../df/d69/classMCU_1_1TimeDisplay.html#ae24e4fc0a95f0a80ed8bc03059bc3b4d',1,'MCU::TimeDisplay::TimeDisplay()'],['../d1/dc8/classMCU_1_1TimeDisplayDisplay.html#ae38d59728ad82430746231d6491d602e',1,'MCU::TimeDisplayDisplay::timedisplay()']]],
   ['timedisplay_2ecpp_1464',['TimeDisplay.cpp',['../d1/d55/TimeDisplay_8cpp.html',1,'']]],
   ['timedisplay_2ehpp_1465',['TimeDisplay.hpp',['../d9/dc9/TimeDisplay_8hpp.html',1,'']]],
   ['timedisplayaddress_1466',['TimeDisplayAddress',['../d7/dc7/namespaceMCU.html#ad256c4dd4482b2fb96d8acc1230787da',1,'MCU']]],

@@ -34,7 +34,7 @@ var searchData=
   ['fixedpointahalf_551',['fixedPointAHalf',['../d7/d40/classEMA.html#a0738ba021e9d79bbb005b5ea7d59d90a',1,'EMA']]],
   ['flip_552',['FLIP',['../d7/dc7/namespaceMCU.html#a09ff3d36e06dc759e5fc8a4f5752f761',1,'MCU']]],
   ['floor_5fcorrection_553',['FLOOR_CORRECTION',['../da/d0a/classMCU_1_1VULEDs__Base.html#ae61be50843c5c44fc974e8a1d1ab1882',1,'MCU::VULEDs_Base']]],
-  ['flush_554',['flush',['../da/d69/PrintStream_8cpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp']]],
+  ['flush_554',['flush',['../de/d05/classUSBMIDI__Interface.html#aa3149654e80863f0777fb6f5a16c4f15',1,'USBMIDI_Interface::flush()'],['../da/d69/PrintStream_8cpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp'],['../dd/d80/PrintStream_8hpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e',1,'flush(Print &amp;printer):&#160;PrintStream.cpp']]],
   ['flush_5fon_5fevery_5fdebug_5fstatement_555',['FLUSH_ON_EVERY_DEBUG_STATEMENT',['../df/dee/Debug_8hpp.html#a7ff58a0631676f068e4db329a2ca8d28',1,'Debug.hpp']]],
   ['flute_556',['Flute',['../da/da6/namespaceMIDI__PC.html#a4b4a6d75a0e68209cdfa050e5f199e67',1,'MIDI_PC']]],
   ['foot_5fcontroller_557',['Foot_Controller',['../d4/dbe/namespaceMIDI__CC.html#ad1b47e6a838ac359dfd884a7e08e2ba3',1,'MIDI_CC']]],

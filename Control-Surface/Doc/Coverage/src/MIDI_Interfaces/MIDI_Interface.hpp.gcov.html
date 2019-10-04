@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 6d0c682c06b9a1d7919aa383cbe0cec344834f0f - src/MIDI_Interfaces/MIDI_Interface.hpp</title>
+  <title>LCOV - ad618c6efcb1a134ab127bd7a9b9a02b38b2eaf0 - src/MIDI_Interfaces/MIDI_Interface.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">6d0c682c06b9a1d7919aa383cbe0cec344834f0f</td>
+            <td class="headerValue">ad618c6efcb1a134ab127bd7a9b9a02b38b2eaf0</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">3</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-04 21:55:14</td>
+            <td class="headerValue">2019-10-04 22:15:50</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -196,95 +196,106 @@
 <a name="126"><span class="lineNum">     126 </span>            :     virtual void setCallbacks(MIDI_Callbacks *cb) = 0;</a>
 <a name="127"><span class="lineNum">     127 </span>            : </a>
 <a name="128"><span class="lineNum">     128 </span>            :     /**</a>
-<a name="129"><span class="lineNum">     129 </span>            :      * @brief   Low-level function for sending a 3-byte MIDI message.</a>
-<a name="130"><span class="lineNum">     130 </span>            :      */</a>
-<a name="131"><span class="lineNum">     131 </span>            :     virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,</a>
-<a name="132"><span class="lineNum">     132 </span>            :                           uint8_t cn) = 0;</a>
-<a name="133"><span class="lineNum">     133 </span>            :     /**</a>
-<a name="134"><span class="lineNum">     134 </span>            :      * @brief   Low-level function for sending a 2-byte MIDI message.</a>
+<a name="129"><span class="lineNum">     129 </span>            :      * @brief   Set the callbacks that will be called when a MIDI message is </a>
+<a name="130"><span class="lineNum">     130 </span>            :      *          received.</a>
+<a name="131"><span class="lineNum">     131 </span>            :      * </a>
+<a name="132"><span class="lineNum">     132 </span>            :      * @param   cb</a>
+<a name="133"><span class="lineNum">     133 </span>            :      *          A reference to an object that implements the MIDI_Callbacks </a>
+<a name="134"><span class="lineNum">     134 </span>            :      *          class.</a>
 <a name="135"><span class="lineNum">     135 </span>            :      */</a>
-<a name="136"><span class="lineNum">     136 </span>            :     virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) = 0;</a>
+<a name="136"><span class="lineNum">     136 </span>            :     void setCallbacks(MIDI_Callbacks &amp;cb) { setCallbacks(&amp;cb); }</a>
 <a name="137"><span class="lineNum">     137 </span>            : </a>
 <a name="138"><span class="lineNum">     138 </span>            :     /**</a>
-<a name="139"><span class="lineNum">     139 </span>            :      * @brief   Low-level function for sending a system exclusive MIDI message.</a>
+<a name="139"><span class="lineNum">     139 </span>            :      * @brief   Low-level function for sending a 3-byte MIDI message.</a>
 <a name="140"><span class="lineNum">     140 </span>            :      */</a>
-<a name="141"><span class="lineNum">     141 </span>            :     virtual void sendImpl(const uint8_t *data, size_t length, uint8_t cn) = 0;</a>
-<a name="142"><span class="lineNum">     142 </span>            : </a>
-<a name="143"><span class="lineNum">     143 </span>            :   private:</a>
-<a name="144"><span class="lineNum">     144 </span>            :     static MIDI_Interface *DefaultMIDI_Interface;</a>
-<a name="145"><span class="lineNum">     145 </span>            : };</a>
-<a name="146"><span class="lineNum">     146 </span>            : </a>
-<a name="147"><span class="lineNum">     147 </span>            : /**</a>
-<a name="148"><span class="lineNum">     148 </span>            :  * @brief   An abstract class for MIDI interfaces.</a>
-<a name="149"><span class="lineNum">     149 </span>            :  */</a>
-<a name="150"><span class="lineNum">     150 </span><span class="lineCov">         10 : class Parsing_MIDI_Interface : public MIDI_Interface {</span></a>
-<a name="151"><span class="lineNum">     151 </span>            :   protected:</a>
-<a name="152"><span class="lineNum">     152 </span>            :     /**</a>
-<a name="153"><span class="lineNum">     153 </span>            :      * @brief   Construct a MIDI interface with the given parser.</a>
-<a name="154"><span class="lineNum">     154 </span>            :      *</a>
-<a name="155"><span class="lineNum">     155 </span>            :      *          Also set this interface as the default MIDI interface.</a>
-<a name="156"><span class="lineNum">     156 </span>            :      *</a>
-<a name="157"><span class="lineNum">     157 </span>            :      * @param   parser</a>
-<a name="158"><span class="lineNum">     158 </span>            :      *          The MIDI parser to use for the interface.</a>
-<a name="159"><span class="lineNum">     159 </span>            :      */</a>
-<a name="160"><span class="lineNum">     160 </span>            :     Parsing_MIDI_Interface(MIDI_Parser &amp;parser);</a>
-<a name="161"><span class="lineNum">     161 </span>            : </a>
-<a name="162"><span class="lineNum">     162 </span>            :   public:</a>
-<a name="163"><span class="lineNum">     163 </span>            :     MIDI_Parser &amp;getParser() { return parser; }</a>
-<a name="164"><span class="lineNum">     164 </span>            : </a>
-<a name="165"><span class="lineNum">     165 </span>            :     /**</a>
-<a name="166"><span class="lineNum">     166 </span>            :      * @brief   Return the received channel message.</a>
-<a name="167"><span class="lineNum">     167 </span>            :      */</a>
-<a name="168"><span class="lineNum">     168 </span>            :     ChannelMessage getChannelMessage();</a>
-<a name="169"><span class="lineNum">     169 </span>            : </a>
-<a name="170"><span class="lineNum">     170 </span>            :     /**</a>
-<a name="171"><span class="lineNum">     171 </span>            :      * @brief   Return the received system exclusive message.</a>
-<a name="172"><span class="lineNum">     172 </span>            :      */</a>
-<a name="173"><span class="lineNum">     173 </span>            :     SysExMessage getSysExMessage() const;</a>
+<a name="141"><span class="lineNum">     141 </span>            :     virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2,</a>
+<a name="142"><span class="lineNum">     142 </span>            :                           uint8_t cn) = 0;</a>
+<a name="143"><span class="lineNum">     143 </span>            :     /**</a>
+<a name="144"><span class="lineNum">     144 </span>            :      * @brief   Low-level function for sending a 2-byte MIDI message.</a>
+<a name="145"><span class="lineNum">     145 </span>            :      */</a>
+<a name="146"><span class="lineNum">     146 </span>            :     virtual void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) = 0;</a>
+<a name="147"><span class="lineNum">     147 </span>            : </a>
+<a name="148"><span class="lineNum">     148 </span>            :     /**</a>
+<a name="149"><span class="lineNum">     149 </span>            :      * @brief   Low-level function for sending a system exclusive MIDI message.</a>
+<a name="150"><span class="lineNum">     150 </span>            :      */</a>
+<a name="151"><span class="lineNum">     151 </span>            :     virtual void sendImpl(const uint8_t *data, size_t length, uint8_t cn) = 0;</a>
+<a name="152"><span class="lineNum">     152 </span>            : </a>
+<a name="153"><span class="lineNum">     153 </span>            :   private:</a>
+<a name="154"><span class="lineNum">     154 </span>            :     static MIDI_Interface *DefaultMIDI_Interface;</a>
+<a name="155"><span class="lineNum">     155 </span>            : };</a>
+<a name="156"><span class="lineNum">     156 </span>            : </a>
+<a name="157"><span class="lineNum">     157 </span>            : /**</a>
+<a name="158"><span class="lineNum">     158 </span>            :  * @brief   An abstract class for MIDI interfaces.</a>
+<a name="159"><span class="lineNum">     159 </span>            :  */</a>
+<a name="160"><span class="lineNum">     160 </span><span class="lineCov">         10 : class Parsing_MIDI_Interface : public MIDI_Interface {</span></a>
+<a name="161"><span class="lineNum">     161 </span>            :   protected:</a>
+<a name="162"><span class="lineNum">     162 </span>            :     /**</a>
+<a name="163"><span class="lineNum">     163 </span>            :      * @brief   Construct a MIDI interface with the given parser.</a>
+<a name="164"><span class="lineNum">     164 </span>            :      *</a>
+<a name="165"><span class="lineNum">     165 </span>            :      *          Also set this interface as the default MIDI interface.</a>
+<a name="166"><span class="lineNum">     166 </span>            :      *</a>
+<a name="167"><span class="lineNum">     167 </span>            :      * @param   parser</a>
+<a name="168"><span class="lineNum">     168 </span>            :      *          The MIDI parser to use for the interface.</a>
+<a name="169"><span class="lineNum">     169 </span>            :      */</a>
+<a name="170"><span class="lineNum">     170 </span>            :     Parsing_MIDI_Interface(MIDI_Parser &amp;parser);</a>
+<a name="171"><span class="lineNum">     171 </span>            : </a>
+<a name="172"><span class="lineNum">     172 </span>            :   public:</a>
+<a name="173"><span class="lineNum">     173 </span>            :     MIDI_Parser &amp;getParser() { return parser; }</a>
 <a name="174"><span class="lineNum">     174 </span>            : </a>
 <a name="175"><span class="lineNum">     175 </span>            :     /**</a>
-<a name="176"><span class="lineNum">     176 </span>            :      * @brief   Return the cable number of the received message.</a>
+<a name="176"><span class="lineNum">     176 </span>            :      * @brief   Return the received channel message.</a>
 <a name="177"><span class="lineNum">     177 </span>            :      */</a>
-<a name="178"><span class="lineNum">     178 </span>            :     uint8_t getCN() const;</a>
+<a name="178"><span class="lineNum">     178 </span>            :     ChannelMessage getChannelMessage();</a>
 <a name="179"><span class="lineNum">     179 </span>            : </a>
-<a name="180"><span class="lineNum">     180 </span>            :     void update() override;</a>
-<a name="181"><span class="lineNum">     181 </span>            : </a>
-<a name="182"><span class="lineNum">     182 </span><span class="lineCov">          9 :     void setCallbacks(MIDI_Callbacks *cb) override { this-&gt;callbacks = cb; }</span></a>
-<a name="183"><span class="lineNum">     183 </span>            : </a>
-<a name="184"><span class="lineNum">     184 </span>            :   protected:</a>
-<a name="185"><span class="lineNum">     185 </span>            :     bool dispatchMIDIEvent(MIDI_read_t event);</a>
-<a name="186"><span class="lineNum">     186 </span>            : </a>
-<a name="187"><span class="lineNum">     187 </span>            :   private:</a>
-<a name="188"><span class="lineNum">     188 </span>            :     /**</a>
-<a name="189"><span class="lineNum">     189 </span>            :      * @todo    Documentation</a>
-<a name="190"><span class="lineNum">     190 </span>            :      */</a>
-<a name="191"><span class="lineNum">     191 </span>            :     virtual MIDI_read_t read() = 0;</a>
-<a name="192"><span class="lineNum">     192 </span>            : </a>
-<a name="193"><span class="lineNum">     193 </span>            :     void onRealtimeMessage(uint8_t message);</a>
+<a name="180"><span class="lineNum">     180 </span>            :     /**</a>
+<a name="181"><span class="lineNum">     181 </span>            :      * @brief   Return the received system exclusive message.</a>
+<a name="182"><span class="lineNum">     182 </span>            :      */</a>
+<a name="183"><span class="lineNum">     183 </span>            :     SysExMessage getSysExMessage() const;</a>
+<a name="184"><span class="lineNum">     184 </span>            : </a>
+<a name="185"><span class="lineNum">     185 </span>            :     /**</a>
+<a name="186"><span class="lineNum">     186 </span>            :      * @brief   Return the cable number of the received message.</a>
+<a name="187"><span class="lineNum">     187 </span>            :      */</a>
+<a name="188"><span class="lineNum">     188 </span>            :     uint8_t getCN() const;</a>
+<a name="189"><span class="lineNum">     189 </span>            : </a>
+<a name="190"><span class="lineNum">     190 </span>            :     void update() override;</a>
+<a name="191"><span class="lineNum">     191 </span>            : </a>
+<a name="192"><span class="lineNum">     192 </span><span class="lineCov">          9 :     void setCallbacks(MIDI_Callbacks *cb) override { this-&gt;callbacks = cb; }</span></a>
+<a name="193"><span class="lineNum">     193 </span>            :     using MIDI_Interface::setCallbacks;</a>
 <a name="194"><span class="lineNum">     194 </span>            : </a>
-<a name="195"><span class="lineNum">     195 </span>            :     void onChannelMessage();</a>
-<a name="196"><span class="lineNum">     196 </span>            : </a>
-<a name="197"><span class="lineNum">     197 </span>            :     void onSysExMessage();</a>
-<a name="198"><span class="lineNum">     198 </span>            : </a>
-<a name="199"><span class="lineNum">     199 </span>            :   private:</a>
-<a name="200"><span class="lineNum">     200 </span>            :     MIDI_Parser &amp;parser;</a>
-<a name="201"><span class="lineNum">     201 </span>            :     MIDI_Callbacks *callbacks = nullptr;</a>
-<a name="202"><span class="lineNum">     202 </span>            : };</a>
+<a name="195"><span class="lineNum">     195 </span>            :   protected:</a>
+<a name="196"><span class="lineNum">     196 </span>            :     bool dispatchMIDIEvent(MIDI_read_t event);</a>
+<a name="197"><span class="lineNum">     197 </span>            : </a>
+<a name="198"><span class="lineNum">     198 </span>            :   private:</a>
+<a name="199"><span class="lineNum">     199 </span>            :     /**</a>
+<a name="200"><span class="lineNum">     200 </span>            :      * @todo    Documentation</a>
+<a name="201"><span class="lineNum">     201 </span>            :      */</a>
+<a name="202"><span class="lineNum">     202 </span>            :     virtual MIDI_read_t read() = 0;</a>
 <a name="203"><span class="lineNum">     203 </span>            : </a>
-<a name="204"><span class="lineNum">     204 </span>            : /**</a>
-<a name="205"><span class="lineNum">     205 </span>            :  * @brief   A class for callbacks from MIDI input.</a>
-<a name="206"><span class="lineNum">     206 </span>            :  */</a>
-<a name="207"><span class="lineNum">     207 </span>            : class MIDI_Callbacks {</a>
-<a name="208"><span class="lineNum">     208 </span>            :   public:</a>
-<a name="209"><span class="lineNum">     209 </span>            :     virtual void onChannelMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi) {}</a>
-<a name="210"><span class="lineNum">     210 </span>            :     virtual void onSysExMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi) {}</a>
-<a name="211"><span class="lineNum">     211 </span>            :     virtual void onRealtimeMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi,</a>
-<a name="212"><span class="lineNum">     212 </span>            :                                    UNUSED_PARAM uint8_t message) {}</a>
-<a name="213"><span class="lineNum">     213 </span>            : </a>
-<a name="214"><span class="lineNum">     214 </span>            :     virtual ~MIDI_Callbacks() = default;</a>
-<a name="215"><span class="lineNum">     215 </span>            : };</a>
-<a name="216"><span class="lineNum">     216 </span>            : </a>
-<a name="217"><span class="lineNum">     217 </span>            : END_CS_NAMESPACE</a>
+<a name="204"><span class="lineNum">     204 </span>            :     void onRealtimeMessage(uint8_t message);</a>
+<a name="205"><span class="lineNum">     205 </span>            : </a>
+<a name="206"><span class="lineNum">     206 </span>            :     void onChannelMessage();</a>
+<a name="207"><span class="lineNum">     207 </span>            : </a>
+<a name="208"><span class="lineNum">     208 </span>            :     void onSysExMessage();</a>
+<a name="209"><span class="lineNum">     209 </span>            : </a>
+<a name="210"><span class="lineNum">     210 </span>            :   private:</a>
+<a name="211"><span class="lineNum">     211 </span>            :     MIDI_Parser &amp;parser;</a>
+<a name="212"><span class="lineNum">     212 </span>            :     MIDI_Callbacks *callbacks = nullptr;</a>
+<a name="213"><span class="lineNum">     213 </span>            : };</a>
+<a name="214"><span class="lineNum">     214 </span>            : </a>
+<a name="215"><span class="lineNum">     215 </span>            : /**</a>
+<a name="216"><span class="lineNum">     216 </span>            :  * @brief   A class for callbacks from MIDI input.</a>
+<a name="217"><span class="lineNum">     217 </span>            :  */</a>
+<a name="218"><span class="lineNum">     218 </span>            : class MIDI_Callbacks {</a>
+<a name="219"><span class="lineNum">     219 </span>            :   public:</a>
+<a name="220"><span class="lineNum">     220 </span>            :     virtual void onChannelMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi) {}</a>
+<a name="221"><span class="lineNum">     221 </span>            :     virtual void onSysExMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi) {}</a>
+<a name="222"><span class="lineNum">     222 </span>            :     virtual void onRealtimeMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi,</a>
+<a name="223"><span class="lineNum">     223 </span>            :                                    UNUSED_PARAM uint8_t message) {}</a>
+<a name="224"><span class="lineNum">     224 </span>            : </a>
+<a name="225"><span class="lineNum">     225 </span>            :     virtual ~MIDI_Callbacks() = default;</a>
+<a name="226"><span class="lineNum">     226 </span>            : };</a>
+<a name="227"><span class="lineNum">     227 </span>            : </a>
+<a name="228"><span class="lineNum">     228 </span>            : END_CS_NAMESPACE</a>
 </pre>
       </td>
     </tr>
