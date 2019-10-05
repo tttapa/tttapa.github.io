@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 5a7eaea1b399a29720cbb0b5b2822a541b82e594 - src/MIDI_Outputs/Bankable/NoteButtonLatching.hpp</title>
+  <title>LCOV - d2ff71d9fc6283b4e42dc1857c8c2650a661a161 - src/MIDI_Outputs/Bankable/NoteButtonLatching.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">5a7eaea1b399a29720cbb0b5b2822a541b82e594</td>
+            <td class="headerValue">d2ff71d9fc6283b4e42dc1857c8c2650a661a161</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">4</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-04 22:46:51</td>
+            <td class="headerValue">2019-10-06 01:40:34</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">1</td>
@@ -106,19 +106,27 @@
 <a name="36"><span class="lineNum">      36 </span>            :      *          The MIDI address containing the note number [0, 127], </a>
 <a name="37"><span class="lineNum">      37 </span>            :      *          channel [CHANNEL_1, CHANNEL_16], and optional cable number </a>
 <a name="38"><span class="lineNum">      38 </span>            :      *          [0, 15].</a>
-<a name="39"><span class="lineNum">      39 </span>            :      * @param   sender</a>
-<a name="40"><span class="lineNum">      40 </span>            :      *          The MIDI sender to use.</a>
+<a name="39"><span class="lineNum">      39 </span>            :      * @param   velocity</a>
+<a name="40"><span class="lineNum">      40 </span>            :      *          The velocity of the MIDI Note events.</a>
 <a name="41"><span class="lineNum">      41 </span>            :      */</a>
 <a name="42"><span class="lineNum">      42 </span><span class="lineCov">          4 :     NoteButtonLatching(const OutputBankConfig &amp;config, pin_t pin,</span></a>
 <a name="43"><span class="lineNum">      43 </span>            :                        const MIDICNChannelAddress &amp;address,</a>
-<a name="44"><span class="lineNum">      44 </span>            :                        const DigitalNoteSender &amp;sender = {})</a>
+<a name="44"><span class="lineNum">      44 </span>            :                        uint8_t velocity = 0x7F)</a>
 <a name="45"><span class="lineNum">      45 </span><span class="lineCov">          4 :         : MIDIButtonLatching&lt;SingleAddress, DigitalNoteSender&gt;{</span></a>
-<a name="46"><span class="lineNum">      46 </span><span class="lineCov">          4 :               {config, address}, pin, sender} {}</span></a>
-<a name="47"><span class="lineNum">      47 </span>            : };</a>
-<a name="48"><span class="lineNum">      48 </span>            : </a>
-<a name="49"><span class="lineNum">      49 </span>            : } // namespace Bankable</a>
+<a name="46"><span class="lineNum">      46 </span>            :               {config, address},</a>
+<a name="47"><span class="lineNum">      47 </span>            :               pin,</a>
+<a name="48"><span class="lineNum">      48 </span>            :               {velocity},</a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          4 :           } {}</span></a>
 <a name="50"><span class="lineNum">      50 </span>            : </a>
-<a name="51"><span class="lineNum">      51 </span>            : END_CS_NAMESPACE</a>
+<a name="51"><span class="lineNum">      51 </span>            :     /// Set the velocity of the MIDI Note events.</a>
+<a name="52"><span class="lineNum">      52 </span>            :     void setVelocity(uint8_t velocity) { this-&gt;sender.setVelocity(velocity); }</a>
+<a name="53"><span class="lineNum">      53 </span>            :     /// Get the velocity of the MIDI Note events.</a>
+<a name="54"><span class="lineNum">      54 </span>            :     uint8_t getVelocity() const { return this-&gt;sender.getVelocity(); }</a>
+<a name="55"><span class="lineNum">      55 </span>            : };</a>
+<a name="56"><span class="lineNum">      56 </span>            : </a>
+<a name="57"><span class="lineNum">      57 </span>            : } // namespace Bankable</a>
+<a name="58"><span class="lineNum">      58 </span>            : </a>
+<a name="59"><span class="lineNum">      59 </span>            : END_CS_NAMESPACE</a>
 </pre>
       </td>
     </tr>

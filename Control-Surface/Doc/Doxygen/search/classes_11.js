@@ -1,15 +1,14 @@
 var searchData=
 [
-  ['volumecontrol_1909',['VolumeControl',['../d4/de3/classVolumeControl.html',1,'']]],
-  ['vpotdisplay_1910',['VPotDisplay',['../d3/d98/classMCU_1_1VPotDisplay.html',1,'MCU']]],
-  ['vpotring_1911',['VPotRing',['../da/d93/classMCU_1_1Bankable_1_1VPotRing.html',1,'MCU::Bankable::VPotRing&lt; N &gt;'],['../d5/ddb/classMCU_1_1VPotRing.html',1,'MCU::VPotRing']]],
-  ['vpotring_5fbase_1912',['VPotRing_Base',['../db/dac/classMCU_1_1VPotRing__Base.html',1,'MCU']]],
-  ['vpotringleds_1913',['VPotRingLEDs',['../d6/d0d/classMCU_1_1VPotRingLEDs.html',1,'MCU::VPotRingLEDs'],['../d2/d89/classMCU_1_1Bankable_1_1VPotRingLEDs.html',1,'MCU::Bankable::VPotRingLEDs&lt; N &gt;']]],
-  ['vpotringleds_5fbase_1914',['VPotRingLEDs_Base',['../de/d52/classMCU_1_1VPotRingLEDs__Base.html',1,'MCU']]],
-  ['vu_1915',['VU',['../d8/d4c/classMCU_1_1VU.html',1,'MCU::VU'],['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable::VU&lt; N &gt;']]],
-  ['vu_3c_20m_20_3e_1916',['VU&lt; M &gt;',['../d0/d43/classMCU_1_1Bankable_1_1VU.html',1,'MCU::Bankable']]],
-  ['vu_5fbase_1917',['VU_Base',['../d4/d71/classMCU_1_1VU__Base.html',1,'MCU']]],
-  ['vudisplay_1918',['VUDisplay',['../d4/d42/classMCU_1_1VUDisplay.html',1,'MCU']]],
-  ['vuleds_1919',['VULEDs',['../db/d17/classMCU_1_1Bankable_1_1VULEDs.html',1,'MCU::Bankable::VULEDs&lt; M, N &gt;'],['../df/d36/classMCU_1_1VULEDs.html',1,'MCU::VULEDs&lt; N &gt;']]],
-  ['vuleds_5fbase_1920',['VULEDs_Base',['../da/d0a/classMCU_1_1VULEDs__Base.html',1,'MCU']]]
+  ['unique_5fptr_2092',['unique_ptr',['../dd/d67/classunique__ptr.html',1,'']]],
+  ['unique_5fptr_3c_20const_20ichord_20_3e_2093',['unique_ptr&lt; const IChord &gt;',['../dd/d67/classunique__ptr.html',1,'']]],
+  ['updatable_2094',['Updatable',['../d5/de0/classUpdatable.html',1,'']]],
+  ['updatable_3c_20audiovu_20_3e_2095',['Updatable&lt; AudioVU &gt;',['../d5/de0/classUpdatable.html',1,'']]],
+  ['updatable_3c_20normalupdatable_20_3e_2096',['Updatable&lt; NormalUpdatable &gt;',['../d5/de0/classUpdatable.html',1,'']]],
+  ['updatable_3c_20potentiometer_20_3e_2097',['Updatable&lt; Potentiometer &gt;',['../d5/de0/classUpdatable.html',1,'']]],
+  ['updatable_3c_3e_2098',['Updatable&lt;&gt;',['../d5/de0/classUpdatable.html',1,'']]],
+  ['usbdebugmidi_5finterface_2099',['USBDebugMIDI_Interface',['../de/d2d/classUSBDebugMIDI__Interface.html',1,'']]],
+  ['usbmidi_5finterface_2100',['USBMIDI_Interface',['../de/d05/classUSBMIDI__Interface.html',1,'']]],
+  ['usbmidi_5fparser_2101',['USBMIDI_Parser',['../db/db0/classUSBMIDI__Parser.html',1,'']]],
+  ['usbserialmidi_5finterface_2102',['USBSerialMIDI_Interface',['../d8/d57/classUSBSerialMIDI__Interface.html',1,'']]]
 ];

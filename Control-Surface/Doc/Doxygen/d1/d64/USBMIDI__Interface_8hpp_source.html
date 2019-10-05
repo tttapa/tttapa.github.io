@@ -127,7 +127,7 @@ $(function() {
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    MOCK_METHOD0(<a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a03c8b16e5cb1c044c1b7bcf8cb1b464e">read</a>, <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968">MIDI_read_t</a>(<span class="keywordtype">void</span>));</div>
 <div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="preprocessor">#if __GNUC__ &gt;= 5</span></div>
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="preprocessor">#pragma GCC diagnostic pop</span></div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#aa3149654e80863f0777fb6f5a16c4f15">flush</a>(){};</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#aa3149654e80863f0777fb6f5a16c4f15">flush</a>() {}</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">// If it&#39;s a Teensy board</span></div>
@@ -140,7 +140,7 @@ $(function() {
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                              (d1 &lt;&lt; 16) |      <span class="comment">// data 1</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;                              (d2 &lt;&lt; 24));      <span class="comment">// data 2</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    }</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="../../de/d05/classUSBMIDI__Interface.html#aa3149654e80863f0777fb6f5a16c4f15">   76</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#aa3149654e80863f0777fb6f5a16c4f15">flush</a>(){};</div>
+<div class="line"><a name="l00076"></a><span class="lineno"><a class="line" href="../../de/d05/classUSBMIDI__Interface.html#aa3149654e80863f0777fb6f5a16c4f15">   76</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#aa3149654e80863f0777fb6f5a16c4f15">flush</a>() {}</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;<span class="comment">// If the main MCU has a USB connection but is not a Teensy</span></div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#elif defined(USBCON)</span></div>
@@ -196,7 +196,7 @@ $(function() {
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">// If it&#39;s a Teensy board</span></div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#if defined(TEENSYDUINO)</span></div>
 <div class="line"><a name="l00131"></a><span class="lineno"><a class="line" href="../../de/d05/classUSBMIDI__Interface.html#a03c8b16e5cb1c044c1b7bcf8cb1b464e">  131</a></span>&#160;    <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968">MIDI_read_t</a> <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a03c8b16e5cb1c044c1b7bcf8cb1b464e">read</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">while</span> (1) {</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;        <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 32; ++i) {</div>
 <div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">rx_packet</a> == <span class="keyword">nullptr</span>) { <span class="comment">// If there&#39;s no previous packet</span></div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <span class="keywordflow">if</span> (!usb_configuration) <span class="comment">// Check USB configuration</span></div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;                    <span class="keywordflow">return</span> <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968afcfbf42d4adcad6219734d45c640804e">NO_MESSAGE</a>;</div>
@@ -232,51 +232,50 @@ $(function() {
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;            <span class="keywordflow">if</span> (parseResult != <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968afcfbf42d4adcad6219734d45c640804e">NO_MESSAGE</a>)</div>
 <div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;                <span class="keywordflow">return</span> parseResult;</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;        }</div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;    }</div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="comment">// If the main MCU has a USB connection but is not a Teensy → MIDIUSB library</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">#elif defined(USBCON)</span></div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968">MIDI_read_t</a> <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a03c8b16e5cb1c044c1b7bcf8cb1b464e">read</a>()<span class="keyword"> override </span>{</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordflow">while</span> (1) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            midiEventPacket_t midipacket = MidiUSB.read();</div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">rx_packet</a> = reinterpret_cast&lt;uint8_t *&gt;(&amp;midipacket);</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            <span class="keywordflow">if</span> (!midipacket.header)</div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968afcfbf42d4adcad6219734d45c640804e">NO_MESSAGE</a>;</div>
-<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968">MIDI_read_t</a> parseResult = <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#af6945ad96d523946517ecd07aeab4693">parser</a>.<a class="code" href="../../db/db0/classUSBMIDI__Parser.html#a03634837ca0a0f30996ad19eec3bdfa5">parse</a>(<a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">rx_packet</a>);</div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;            <span class="keywordflow">if</span> (parseResult != <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968afcfbf42d4adcad6219734d45c640804e">NO_MESSAGE</a>)</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;                <span class="keywordflow">return</span> parseResult;</div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;        }</div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    }</div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160; </div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;  <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="comment">// If it&#39;s a Teensy board</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="preprocessor">#if defined(TEENSYDUINO)</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno"><a class="line" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">  188</a></span>&#160;    usb_packet_t *<a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">rx_packet</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="comment">// If the main MCU has a USB connection but is not a Teensy</span></div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;<span class="preprocessor">#elif defined(USBCON)</span></div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    uint8_t *<a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">rx_packet</a> = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;};</div>
-<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">// If the main MCU doesn&#39;t have a USB connection:</span></div>
-<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">// Fall back on Serial connection at the hardware MIDI baud rate.</span></div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="comment">// (Can be used with HIDUINO or USBMidiKliK.)</span></div>
-<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;<span class="preprocessor">#elif !defined(USBCON) &amp;&amp; !defined(TEENSYDUINO)</span></div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160; </div>
-<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d1/d23/SerialMIDI__Interface_8hpp.html">SerialMIDI_Interface.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160; </div>
-<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#a9432e3744c64fcf8e711ef91eff6a5cd">BEGIN_CS_NAMESPACE</a></div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160; </div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;<span class="keyword">class </span><a class="code" href="../../de/d05/classUSBMIDI__Interface.html">USBMIDI_Interface</a> : <span class="keyword">public</span> <a class="code" href="../../d8/d57/classUSBSerialMIDI__Interface.html">USBSerialMIDI_Interface</a> {</div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;  <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a933cea02e8686a7e04a5ac89c5549044">USBMIDI_Interface</a>() : <a class="code" href="../../d8/d57/classUSBSerialMIDI__Interface.html">USBSerialMIDI_Interface</a>(<a class="code" href="../../d6/d04/MIDI__Interface_8hpp.html#adaee3043b21cce545a72d3ea3a0e9c0b">MIDI_BAUD</a>){};</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;};</div>
-<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160; </div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#a9305dd4bad1398506431b42a5a100f8d">END_CS_NAMESPACE</a></div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968afcfbf42d4adcad6219734d45c640804e">NO_MESSAGE</a>;</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    }</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="comment">// If the main MCU has a USB connection but is not a Teensy → MIDIUSB library</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;<span class="preprocessor">#elif defined(USBCON)</span></div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968">MIDI_read_t</a> <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a03c8b16e5cb1c044c1b7bcf8cb1b464e">read</a>()<span class="keyword"> override </span>{</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;        <span class="keywordflow">for</span> (uint8_t i = 0; i &lt; 32; ++i) {</div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;            midiEventPacket_t midipacket = MidiUSB.read();</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;            uint8_t <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">rx_packet</a>[4] = {midipacket.header, midipacket.byte1,</div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;                                    midipacket.byte2, midipacket.byte3};</div>
+<div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;            <span class="keywordflow">if</span> (!midipacket.header)</div>
+<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;                <span class="keywordflow">return</span> <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968afcfbf42d4adcad6219734d45c640804e">NO_MESSAGE</a>;</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;            <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968">MIDI_read_t</a> parseResult = <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#af6945ad96d523946517ecd07aeab4693">parser</a>.<a class="code" href="../../db/db0/classUSBMIDI__Parser.html#a03634837ca0a0f30996ad19eec3bdfa5">parse</a>(<a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">rx_packet</a>);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;            <span class="keywordflow">if</span> (parseResult != <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968afcfbf42d4adcad6219734d45c640804e">NO_MESSAGE</a>)</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;                <span class="keywordflow">return</span> parseResult;</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;        }</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="../../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968afcfbf42d4adcad6219734d45c640804e">NO_MESSAGE</a>;</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    }</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;  <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;<span class="comment">// If it&#39;s a Teensy board</span></div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="preprocessor">#if defined(TEENSYDUINO)</span></div>
+<div class="line"><a name="l00191"></a><span class="lineno"><a class="line" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">  191</a></span>&#160;    usb_packet_t *<a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">rx_packet</a> = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;};</div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160; </div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;<span class="comment">// If the main MCU doesn&#39;t have a USB connection:</span></div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;<span class="comment">// Fall back on Serial connection at the hardware MIDI baud rate.</span></div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;<span class="comment">// (Can be used with HIDUINO or USBMidiKliK.)</span></div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;<span class="preprocessor">#elif !defined(USBCON) &amp;&amp; !defined(TEENSYDUINO)</span></div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../d1/d23/SerialMIDI__Interface_8hpp.html">SerialMIDI_Interface.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160; </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#a9432e3744c64fcf8e711ef91eff6a5cd">BEGIN_CS_NAMESPACE</a></div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;<span class="keyword">class </span><a class="code" href="../../de/d05/classUSBMIDI__Interface.html">USBMIDI_Interface</a> : <span class="keyword">public</span> <a class="code" href="../../d8/d57/classUSBSerialMIDI__Interface.html">USBSerialMIDI_Interface</a> {</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;  <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;    <a class="code" href="../../de/d05/classUSBMIDI__Interface.html#a933cea02e8686a7e04a5ac89c5549044">USBMIDI_Interface</a>() : <a class="code" href="../../d8/d57/classUSBSerialMIDI__Interface.html">USBSerialMIDI_Interface</a>(<a class="code" href="../../d6/d04/MIDI__Interface_8hpp.html#adaee3043b21cce545a72d3ea3a0e9c0b">MIDI_BAUD</a>){};</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;};</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160; </div>
+<div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160; </div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;<a class="code" href="../../dc/dc7/NamespaceSettings_8hpp.html#a9305dd4bad1398506431b42a5a100f8d">END_CS_NAMESPACE</a></div>
 </div><!-- fragment --></div><!-- contents -->
 <div class="ttc" id="aclassUSBMIDI__Interface_html"><div class="ttname"><a href="../../de/d05/classUSBMIDI__Interface.html">USBMIDI_Interface</a></div><div class="ttdoc">A class for MIDI interfaces sending MIDI messages over a USB MIDI connection.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d64/USBMIDI__Interface_8hpp_source.html#l00039">USBMIDI_Interface.hpp:39</a></div></div>
 <div class="ttc" id="aclassUSBMIDI__Interface_html_a4191895fbe99aa940eda14669265a0f0"><div class="ttname"><a href="../../de/d05/classUSBMIDI__Interface.html#a4191895fbe99aa940eda14669265a0f0">USBMIDI_Interface::sendImpl</a></div><div class="ttdeci">void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t d2, uint8_t cn) override</div><div class="ttdoc">Low-level function for sending a 3-byte MIDI message.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d64/USBMIDI__Interface_8hpp_source.html#l00096">USBMIDI_Interface.hpp:96</a></div></div>
@@ -300,7 +299,7 @@ $(function() {
 <div class="ttc" id="aclassUSBMIDI__Interface_html_a27b3f6a6df957cee331a7449f2d219bc"><div class="ttname"><a href="../../de/d05/classUSBMIDI__Interface.html#a27b3f6a6df957cee331a7449f2d219bc">USBMIDI_Interface::writeUSBPacket</a></div><div class="ttdeci">void writeUSBPacket(uint8_t cn, uint8_t cin, uint8_t d0, uint8_t d1, uint8_t d2)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d64/USBMIDI__Interface_8hpp_source.html#l00069">USBMIDI_Interface.hpp:69</a></div></div>
 <div class="ttc" id="aNamespaceSettings_8hpp_html_a9305dd4bad1398506431b42a5a100f8d"><div class="ttname"><a href="../../dc/dc7/NamespaceSettings_8hpp.html#a9305dd4bad1398506431b42a5a100f8d">END_CS_NAMESPACE</a></div><div class="ttdeci">#define END_CS_NAMESPACE</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/dc7/NamespaceSettings_8hpp_source.html#l00010">NamespaceSettings.hpp:10</a></div></div>
 <div class="ttc" id="aclassUSBMIDI__Interface_html_a03c8b16e5cb1c044c1b7bcf8cb1b464e"><div class="ttname"><a href="../../de/d05/classUSBMIDI__Interface.html#a03c8b16e5cb1c044c1b7bcf8cb1b464e">USBMIDI_Interface::read</a></div><div class="ttdeci">MIDI_read_t read() override</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d64/USBMIDI__Interface_8hpp_source.html#l00131">USBMIDI_Interface.hpp:131</a></div></div>
-<div class="ttc" id="aclassUSBMIDI__Interface_html_a049291f0c1197a8292e5412704576a32"><div class="ttname"><a href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">USBMIDI_Interface::rx_packet</a></div><div class="ttdeci">usb_packet_t * rx_packet</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d64/USBMIDI__Interface_8hpp_source.html#l00188">USBMIDI_Interface.hpp:188</a></div></div>
+<div class="ttc" id="aclassUSBMIDI__Interface_html_a049291f0c1197a8292e5412704576a32"><div class="ttname"><a href="../../de/d05/classUSBMIDI__Interface.html#a049291f0c1197a8292e5412704576a32">USBMIDI_Interface::rx_packet</a></div><div class="ttdeci">usb_packet_t * rx_packet</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d64/USBMIDI__Interface_8hpp_source.html#l00191">USBMIDI_Interface.hpp:191</a></div></div>
 <div class="ttc" id="aMIDI__Interface_8hpp_html"><div class="ttname"><a href="../../d6/d04/MIDI__Interface_8hpp.html">MIDI_Interface.hpp</a></div></div>
 <div class="ttc" id="aclassUSBMIDI__Interface_html_a2a97c5b3b919010f1d00da2b7d134400"><div class="ttname"><a href="../../de/d05/classUSBMIDI__Interface.html#a2a97c5b3b919010f1d00da2b7d134400">USBMIDI_Interface::sendImpl</a></div><div class="ttdeci">void sendImpl(uint8_t m, uint8_t c, uint8_t d1, uint8_t cn) override</div><div class="ttdoc">Low-level function for sending a 2-byte MIDI message.</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d64/USBMIDI__Interface_8hpp_source.html#l00105">USBMIDI_Interface.hpp:105</a></div></div>
 <div class="ttc" id="anamespaceMIDI__Notes_html_a43bb6e39eb685f48594d3241b1bc55e1"><div class="ttname"><a href="../../d7/d78/namespaceMIDI__Notes.html#a43bb6e39eb685f48594d3241b1bc55e1">MIDI_Notes::F</a></div><div class="ttdeci">constexpr int8_t F</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc5/Notes_8hpp_source.html#l00019">Notes.hpp:19</a></div></div>

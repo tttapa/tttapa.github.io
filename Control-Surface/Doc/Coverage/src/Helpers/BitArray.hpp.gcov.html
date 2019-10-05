@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 5a7eaea1b399a29720cbb0b5b2822a541b82e594 - src/Helpers/BitArray.hpp</title>
+  <title>LCOV - d2ff71d9fc6283b4e42dc1857c8c2650a661a161 - src/Helpers/BitArray.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">5a7eaea1b399a29720cbb0b5b2822a541b82e594</td>
+            <td class="headerValue">d2ff71d9fc6283b4e42dc1857c8c2650a661a161</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">14</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-04 22:46:51</td>
+            <td class="headerValue">2019-10-06 01:40:34</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">3</td>
@@ -137,7 +137,7 @@
 <a name="67"><span class="lineNum">      67 </span><span class="lineCov">         69 :     uint8_t safeIndex(uint8_t byteIndex) const {</span></a>
 <a name="68"><span class="lineNum">      68 </span><span class="lineCov">         69 :         if (byteIndex &gt;= getBufferLength()) {</span></a>
 <a name="69"><span class="lineNum">      69 </span><span class="lineNoCov">          0 :             ERROR(F(&quot;Error: index out of bounds (&quot;)</span></a>
-<a name="70"><span class="lineNum">      70 </span>            :                       &lt;&lt; +byteIndex &lt;&lt; F(&quot;, length is &quot;) &lt;&lt; +getBufferLength()</a>
+<a name="70"><span class="lineNum">      70 </span>            :                       &lt;&lt; byteIndex &lt;&lt; F(&quot;, length is &quot;) &lt;&lt; getBufferLength()</a>
 <a name="71"><span class="lineNum">      71 </span>            :                       &lt;&lt; ')',</a>
 <a name="72"><span class="lineNum">      72 </span>            :                   0xFFFF);</a>
 <a name="73"><span class="lineNum">      73 </span>            :             return getBufferLength() - 1;</a>
@@ -153,30 +153,31 @@
 <a name="83"><span class="lineNum">      83 </span>            :      * </a>
 <a name="84"><span class="lineNum">      84 </span>            :      * @note    No bounds checking is performed.</a>
 <a name="85"><span class="lineNum">      85 </span>            :      * </a>
-<a name="86"><span class="lineNum">      86 </span>            :      * @param   The index of the byte within the array. </a>
-<a name="87"><span class="lineNum">      87 </span>            :      */</a>
-<a name="88"><span class="lineNum">      88 </span>            :     uint8_t getByte(uint8_t byteIndex) const {</a>
-<a name="89"><span class="lineNum">      89 </span>            :         return buffer[byteIndex];</a>
-<a name="90"><span class="lineNum">      90 </span>            :         // return buffer[safeIndex(byteIndex)];</a>
-<a name="91"><span class="lineNum">      91 </span>            :     }</a>
-<a name="92"><span class="lineNum">      92 </span>            : </a>
-<a name="93"><span class="lineNum">      93 </span>            :     /**</a>
-<a name="94"><span class="lineNum">      94 </span>            :      * @brief   Get the buffer length in bytes.</a>
-<a name="95"><span class="lineNum">      95 </span>            :      */</a>
-<a name="96"><span class="lineNum">      96 </span>            :     uint8_t getBufferLength() const { return bufferLength; }</a>
-<a name="97"><span class="lineNum">      97 </span>            : </a>
-<a name="98"><span class="lineNum">      98 </span>            :   private:</a>
-<a name="99"><span class="lineNum">      99 </span>            :     uint8_t getBufferIndex(uint8_t bitIndex) const {</a>
-<a name="100"><span class="lineNum">     100 </span><span class="lineCov">         64 :         return safeIndex(bitIndex / 8);</span></a>
-<a name="101"><span class="lineNum">     101 </span>            :     }</a>
-<a name="102"><span class="lineNum">     102 </span><span class="lineCov">         66 :     uint8_t getBufferBit(uint8_t bitIndex) const { return bitIndex % 8; }</span></a>
-<a name="103"><span class="lineNum">     103 </span>            :     uint8_t getBufferMask(uint8_t bitIndex) const {</a>
-<a name="104"><span class="lineNum">     104 </span><span class="lineCov">         68 :         return 1 &lt;&lt; getBufferBit(bitIndex);</span></a>
-<a name="105"><span class="lineNum">     105 </span>            :     }</a>
-<a name="106"><span class="lineNum">     106 </span>            : </a>
-<a name="107"><span class="lineNum">     107 </span>            :     constexpr static uint8_t bufferLength = (uint8_t)((N + 7) / 8);</a>
-<a name="108"><span class="lineNum">     108 </span>            :     uint8_t buffer[bufferLength] = {};</a>
-<a name="109"><span class="lineNum">     109 </span>            : };</a>
+<a name="86"><span class="lineNum">      86 </span>            :      * @param   byteIndex</a>
+<a name="87"><span class="lineNum">      87 </span>            :      *          The index of the byte within the array. </a>
+<a name="88"><span class="lineNum">      88 </span>            :      */</a>
+<a name="89"><span class="lineNum">      89 </span>            :     uint8_t getByte(uint8_t byteIndex) const {</a>
+<a name="90"><span class="lineNum">      90 </span>            :         return buffer[byteIndex];</a>
+<a name="91"><span class="lineNum">      91 </span>            :         // return buffer[safeIndex(byteIndex)];</a>
+<a name="92"><span class="lineNum">      92 </span>            :     }</a>
+<a name="93"><span class="lineNum">      93 </span>            : </a>
+<a name="94"><span class="lineNum">      94 </span>            :     /**</a>
+<a name="95"><span class="lineNum">      95 </span>            :      * @brief   Get the buffer length in bytes.</a>
+<a name="96"><span class="lineNum">      96 </span>            :      */</a>
+<a name="97"><span class="lineNum">      97 </span>            :     uint8_t getBufferLength() const { return bufferLength; }</a>
+<a name="98"><span class="lineNum">      98 </span>            : </a>
+<a name="99"><span class="lineNum">      99 </span>            :   private:</a>
+<a name="100"><span class="lineNum">     100 </span>            :     uint8_t getBufferIndex(uint8_t bitIndex) const {</a>
+<a name="101"><span class="lineNum">     101 </span><span class="lineCov">         64 :         return safeIndex(bitIndex / 8);</span></a>
+<a name="102"><span class="lineNum">     102 </span>            :     }</a>
+<a name="103"><span class="lineNum">     103 </span><span class="lineCov">         66 :     uint8_t getBufferBit(uint8_t bitIndex) const { return bitIndex % 8; }</span></a>
+<a name="104"><span class="lineNum">     104 </span>            :     uint8_t getBufferMask(uint8_t bitIndex) const {</a>
+<a name="105"><span class="lineNum">     105 </span><span class="lineCov">         68 :         return 1 &lt;&lt; getBufferBit(bitIndex);</span></a>
+<a name="106"><span class="lineNum">     106 </span>            :     }</a>
+<a name="107"><span class="lineNum">     107 </span>            : </a>
+<a name="108"><span class="lineNum">     108 </span>            :     constexpr static uint8_t bufferLength = (uint8_t)((N + 7) / 8);</a>
+<a name="109"><span class="lineNum">     109 </span>            :     uint8_t buffer[bufferLength] = {};</a>
+<a name="110"><span class="lineNum">     110 </span>            : };</a>
 </pre>
       </td>
     </tr>
