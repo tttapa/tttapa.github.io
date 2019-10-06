@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 3531a2e042e4ae54dee4b3e2acb434e2d2973ace - src/Helpers/ArrayHelpers.hpp</title>
+  <title>LCOV - 4bddc91513cac16ab59d5c7c888e664ca39283b2 - src/Helpers/ArrayHelpers.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">3531a2e042e4ae54dee4b3e2acb434e2d2973ace</td>
+            <td class="headerValue">4bddc91513cac16ab59d5c7c888e664ca39283b2</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntry">16</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-06 17:20:10</td>
+            <td class="headerValue">2019-10-07 00:55:17</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">0</td>
@@ -135,76 +135,97 @@
 <a name="65"><span class="lineNum">      65 </span><span class="lineCov">          1 :     return array;</span></a>
 <a name="66"><span class="lineNum">      66 </span>            : }</a>
 <a name="67"><span class="lineNum">      67 </span>            : </a>
-<a name="68"><span class="lineNum">      68 </span>            : template &lt;class T, size_t N, class... Args&gt;</a>
-<a name="69"><span class="lineNum">      69 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt; fillArray(Args... args) {</a>
-<a name="70"><span class="lineNum">      70 </span><span class="lineCov">          4 :     return generateArray&lt;T, N&gt;([&amp;]() { return T{args...}; });</span></a>
-<a name="71"><span class="lineNum">      71 </span>            : }</a>
-<a name="72"><span class="lineNum">      72 </span>            : </a>
-<a name="73"><span class="lineNum">      73 </span>            : /**</a>
-<a name="74"><span class="lineNum">      74 </span>            :  * @brief   Generate an array where the first value is given, and the subsequent</a>
-<a name="75"><span class="lineNum">      75 </span>            :  *          values are calculated as the previous value incremented with a given</a>
-<a name="76"><span class="lineNum">      76 </span>            :  *          value:  </a>
-<a name="77"><span class="lineNum">      77 </span>            :  *          @f$ x[0] = start @f$  </a>
-<a name="78"><span class="lineNum">      78 </span>            :  *          @f$ x[k+1] = x[k] + increment @f$.</a>
-<a name="79"><span class="lineNum">      79 </span>            :  * </a>
-<a name="80"><span class="lineNum">      80 </span>            :  * For example:  </a>
-<a name="81"><span class="lineNum">      81 </span>            :  * ```</a>
-<a name="82"><span class="lineNum">      82 </span>            :  * auto x = generateIncrementalArray&lt;unsigned int, 4&gt;(2, 3);</a>
-<a name="83"><span class="lineNum">      83 </span>            :  * ```</a>
-<a name="84"><span class="lineNum">      84 </span>            :  * is equivalent to  </a>
-<a name="85"><span class="lineNum">      85 </span>            :  * ```</a>
-<a name="86"><span class="lineNum">      86 </span>            :  * Array&lt;unsigned int, 4&gt; x = {2, 5, 8, 11};</a>
-<a name="87"><span class="lineNum">      87 </span>            :  * ```</a>
-<a name="88"><span class="lineNum">      88 </span>            :  * </a>
-<a name="89"><span class="lineNum">      89 </span>            :  * @tparam  T </a>
-<a name="90"><span class="lineNum">      90 </span>            :  *          The type of the elements in the array.</a>
-<a name="91"><span class="lineNum">      91 </span>            :  * @tparam  N </a>
-<a name="92"><span class="lineNum">      92 </span>            :  *          The number of elements in the array.</a>
-<a name="93"><span class="lineNum">      93 </span>            :  * @tparam  U </a>
-<a name="94"><span class="lineNum">      94 </span>            :  *          The type of the initial value.</a>
-<a name="95"><span class="lineNum">      95 </span>            :  * @tparam  V</a>
-<a name="96"><span class="lineNum">      96 </span>            :  *          The type of the value that will be added to each subsequent element.</a>
-<a name="97"><span class="lineNum">      97 </span>            :  * </a>
-<a name="98"><span class="lineNum">      98 </span>            :  * @param   start</a>
-<a name="99"><span class="lineNum">      99 </span>            :  *          The first value in the array.</a>
-<a name="100"><span class="lineNum">     100 </span>            :  * @param   increment</a>
-<a name="101"><span class="lineNum">     101 </span>            :  *          The value to add to each subsequent element of the array.</a>
-<a name="102"><span class="lineNum">     102 </span>            :  * </a>
-<a name="103"><span class="lineNum">     103 </span>            :  * @return  The generated array.</a>
-<a name="104"><span class="lineNum">     104 </span>            :  */</a>
-<a name="105"><span class="lineNum">     105 </span>            : template &lt;class T, size_t N, class U, class V = U&gt;</a>
-<a name="106"><span class="lineNum">     106 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt;</a>
-<a name="107"><span class="lineNum">     107 </span>            : generateIncrementalArray(U start = 0, V increment = 1) {</a>
-<a name="108"><span class="lineNum">     108 </span><span class="lineCov">          1 :     Incrementor&lt;U, V&gt; g(start, increment);</span></a>
-<a name="109"><span class="lineNum">     109 </span><span class="lineCov">          1 :     return generateArray&lt;T, N&gt;(g);</span></a>
-<a name="110"><span class="lineNum">     110 </span>            : }</a>
-<a name="111"><span class="lineNum">     111 </span>            : </a>
-<a name="112"><span class="lineNum">     112 </span>            : /**</a>
-<a name="113"><span class="lineNum">     113 </span>            :  * @brief   Concatenate two arrays.</a>
-<a name="114"><span class="lineNum">     114 </span>            :  * </a>
-<a name="115"><span class="lineNum">     115 </span>            :  * @tparam  T</a>
-<a name="116"><span class="lineNum">     116 </span>            :  *          The type of the elements in the array. </a>
-<a name="117"><span class="lineNum">     117 </span>            :  * @tparam  M</a>
-<a name="118"><span class="lineNum">     118 </span>            :  *          The number of elements in the first array.</a>
-<a name="119"><span class="lineNum">     119 </span>            :  * @tparam  N </a>
-<a name="120"><span class="lineNum">     120 </span>            :  *          The number of elements in the second array.</a>
-<a name="121"><span class="lineNum">     121 </span>            :  * @param   a </a>
-<a name="122"><span class="lineNum">     122 </span>            :  *          The first array.</a>
-<a name="123"><span class="lineNum">     123 </span>            :  * @param   b </a>
-<a name="124"><span class="lineNum">     124 </span>            :  *          The second array.</a>
-<a name="125"><span class="lineNum">     125 </span>            :  * @return  A new array containing the elements of both input arrays (in order). </a>
-<a name="126"><span class="lineNum">     126 </span>            :  */</a>
-<a name="127"><span class="lineNum">     127 </span>            : template &lt;class T, size_t M, size_t N&gt;</a>
-<a name="128"><span class="lineNum">     128 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, M + N&gt; cat(const Array&lt;T, M&gt; &amp;a,</a>
-<a name="129"><span class="lineNum">     129 </span>            :                                                 const Array&lt;T, N&gt; &amp;b) {</a>
-<a name="130"><span class="lineNum">     130 </span>            :     Array&lt;T, M + N&gt; result = {};</a>
-<a name="131"><span class="lineNum">     131 </span>            :     size_t r = 0;</a>
-<a name="132"><span class="lineNum">     132 </span>            :     for (size_t i = 0; i &lt; M; ++i, ++r)</a>
-<a name="133"><span class="lineNum">     133 </span>            :         result[r] = a[i];</a>
-<a name="134"><span class="lineNum">     134 </span>            :     for (size_t i = 0; i &lt; N; ++i, ++r)</a>
-<a name="135"><span class="lineNum">     135 </span>            :         result[r] = b[i];</a>
-<a name="136"><span class="lineNum">     136 </span>            :     return result;</a>
-<a name="137"><span class="lineNum">     137 </span>            : }</a>
+<a name="68"><span class="lineNum">      68 </span>            : /**</a>
+<a name="69"><span class="lineNum">      69 </span>            :  * @brief   Copy an Array to an Array of a different type.</a>
+<a name="70"><span class="lineNum">      70 </span>            :  * </a>
+<a name="71"><span class="lineNum">      71 </span>            :  * @tparam  T </a>
+<a name="72"><span class="lineNum">      72 </span>            :  *          The type of the new array.</a>
+<a name="73"><span class="lineNum">      73 </span>            :  * @tparam  N </a>
+<a name="74"><span class="lineNum">      74 </span>            :  *          The number of elements in the arrays.</a>
+<a name="75"><span class="lineNum">      75 </span>            :  * @tparam  U </a>
+<a name="76"><span class="lineNum">      76 </span>            :  *          The type of the source array.</a>
+<a name="77"><span class="lineNum">      77 </span>            :  * </a>
+<a name="78"><span class="lineNum">      78 </span>            :  * @param   src </a>
+<a name="79"><span class="lineNum">      79 </span>            :  *          The source array to be copied.</a>
+<a name="80"><span class="lineNum">      80 </span>            :  */</a>
+<a name="81"><span class="lineNum">      81 </span>            : template &lt;class T, size_t N, class U&gt;</a>
+<a name="82"><span class="lineNum">      82 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt; copyAs(const Array&lt;U, N&gt; &amp;src) {</a>
+<a name="83"><span class="lineNum">      83 </span><span class="lineCov">          1 :     Array&lt;T, N&gt; dest{};</span></a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">          5 :     for (size_t i = 0; i &lt; N; ++i)</span></a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">          4 :         dest[i] = src[i];</span></a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineCov">          1 :     return dest;</span></a>
+<a name="87"><span class="lineNum">      87 </span>            : }</a>
+<a name="88"><span class="lineNum">      88 </span>            : </a>
+<a name="89"><span class="lineNum">      89 </span>            : template &lt;class T, size_t N, class... Args&gt;</a>
+<a name="90"><span class="lineNum">      90 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt; fillArray(Args... args) {</a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">          4 :     return generateArray&lt;T, N&gt;([&amp;]() { return T{args...}; });</span></a>
+<a name="92"><span class="lineNum">      92 </span>            : }</a>
+<a name="93"><span class="lineNum">      93 </span>            : </a>
+<a name="94"><span class="lineNum">      94 </span>            : /**</a>
+<a name="95"><span class="lineNum">      95 </span>            :  * @brief   Generate an array where the first value is given, and the subsequent</a>
+<a name="96"><span class="lineNum">      96 </span>            :  *          values are calculated as the previous value incremented with a given</a>
+<a name="97"><span class="lineNum">      97 </span>            :  *          value:  </a>
+<a name="98"><span class="lineNum">      98 </span>            :  *          @f$ x[0] = start @f$  </a>
+<a name="99"><span class="lineNum">      99 </span>            :  *          @f$ x[k+1] = x[k] + increment @f$.</a>
+<a name="100"><span class="lineNum">     100 </span>            :  * </a>
+<a name="101"><span class="lineNum">     101 </span>            :  * For example:  </a>
+<a name="102"><span class="lineNum">     102 </span>            :  * ```</a>
+<a name="103"><span class="lineNum">     103 </span>            :  * auto x = generateIncrementalArray&lt;unsigned int, 4&gt;(2, 3);</a>
+<a name="104"><span class="lineNum">     104 </span>            :  * ```</a>
+<a name="105"><span class="lineNum">     105 </span>            :  * is equivalent to  </a>
+<a name="106"><span class="lineNum">     106 </span>            :  * ```</a>
+<a name="107"><span class="lineNum">     107 </span>            :  * Array&lt;unsigned int, 4&gt; x = {2, 5, 8, 11};</a>
+<a name="108"><span class="lineNum">     108 </span>            :  * ```</a>
+<a name="109"><span class="lineNum">     109 </span>            :  * </a>
+<a name="110"><span class="lineNum">     110 </span>            :  * @tparam  T </a>
+<a name="111"><span class="lineNum">     111 </span>            :  *          The type of the elements in the array.</a>
+<a name="112"><span class="lineNum">     112 </span>            :  * @tparam  N </a>
+<a name="113"><span class="lineNum">     113 </span>            :  *          The number of elements in the array.</a>
+<a name="114"><span class="lineNum">     114 </span>            :  * @tparam  U </a>
+<a name="115"><span class="lineNum">     115 </span>            :  *          The type of the initial value.</a>
+<a name="116"><span class="lineNum">     116 </span>            :  * @tparam  V</a>
+<a name="117"><span class="lineNum">     117 </span>            :  *          The type of the value that will be added to each subsequent element.</a>
+<a name="118"><span class="lineNum">     118 </span>            :  * </a>
+<a name="119"><span class="lineNum">     119 </span>            :  * @param   start</a>
+<a name="120"><span class="lineNum">     120 </span>            :  *          The first value in the array.</a>
+<a name="121"><span class="lineNum">     121 </span>            :  * @param   increment</a>
+<a name="122"><span class="lineNum">     122 </span>            :  *          The value to add to each subsequent element of the array.</a>
+<a name="123"><span class="lineNum">     123 </span>            :  * </a>
+<a name="124"><span class="lineNum">     124 </span>            :  * @return  The generated array.</a>
+<a name="125"><span class="lineNum">     125 </span>            :  */</a>
+<a name="126"><span class="lineNum">     126 </span>            : template &lt;class T, size_t N, class U, class V = U&gt;</a>
+<a name="127"><span class="lineNum">     127 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt;</a>
+<a name="128"><span class="lineNum">     128 </span>            : generateIncrementalArray(U start = 0, V increment = 1) {</a>
+<a name="129"><span class="lineNum">     129 </span><span class="lineCov">          1 :     Incrementor&lt;U, V&gt; g(start, increment);</span></a>
+<a name="130"><span class="lineNum">     130 </span><span class="lineCov">          1 :     return generateArray&lt;T, N&gt;(g);</span></a>
+<a name="131"><span class="lineNum">     131 </span>            : }</a>
+<a name="132"><span class="lineNum">     132 </span>            : </a>
+<a name="133"><span class="lineNum">     133 </span>            : /**</a>
+<a name="134"><span class="lineNum">     134 </span>            :  * @brief   Concatenate two arrays.</a>
+<a name="135"><span class="lineNum">     135 </span>            :  * </a>
+<a name="136"><span class="lineNum">     136 </span>            :  * @tparam  T</a>
+<a name="137"><span class="lineNum">     137 </span>            :  *          The type of the elements in the array. </a>
+<a name="138"><span class="lineNum">     138 </span>            :  * @tparam  M</a>
+<a name="139"><span class="lineNum">     139 </span>            :  *          The number of elements in the first array.</a>
+<a name="140"><span class="lineNum">     140 </span>            :  * @tparam  N </a>
+<a name="141"><span class="lineNum">     141 </span>            :  *          The number of elements in the second array.</a>
+<a name="142"><span class="lineNum">     142 </span>            :  * @param   a </a>
+<a name="143"><span class="lineNum">     143 </span>            :  *          The first array.</a>
+<a name="144"><span class="lineNum">     144 </span>            :  * @param   b </a>
+<a name="145"><span class="lineNum">     145 </span>            :  *          The second array.</a>
+<a name="146"><span class="lineNum">     146 </span>            :  * @return  A new array containing the elements of both input arrays (in order). </a>
+<a name="147"><span class="lineNum">     147 </span>            :  */</a>
+<a name="148"><span class="lineNum">     148 </span>            : template &lt;class T, size_t M, size_t N&gt;</a>
+<a name="149"><span class="lineNum">     149 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, M + N&gt; cat(const Array&lt;T, M&gt; &amp;a,</a>
+<a name="150"><span class="lineNum">     150 </span>            :                                                 const Array&lt;T, N&gt; &amp;b) {</a>
+<a name="151"><span class="lineNum">     151 </span>            :     Array&lt;T, M + N&gt; result = {};</a>
+<a name="152"><span class="lineNum">     152 </span>            :     size_t r = 0;</a>
+<a name="153"><span class="lineNum">     153 </span>            :     for (size_t i = 0; i &lt; M; ++i, ++r)</a>
+<a name="154"><span class="lineNum">     154 </span>            :         result[r] = a[i];</a>
+<a name="155"><span class="lineNum">     155 </span>            :     for (size_t i = 0; i &lt; N; ++i, ++r)</a>
+<a name="156"><span class="lineNum">     156 </span>            :         result[r] = b[i];</a>
+<a name="157"><span class="lineNum">     157 </span>            :     return result;</a>
+<a name="158"><span class="lineNum">     158 </span>            : }</a>
 </pre>
       </td>
     </tr>

@@ -24,7 +24,7 @@ var searchData=
   ['ccincrementdecrementbuttons_256',['CCIncrementDecrementButtons',['../d5/dec/classBankable_1_1CCIncrementDecrementButtons.html',1,'Bankable::CCIncrementDecrementButtons'],['../d3/d60/classCCIncrementDecrementButtons.html',1,'CCIncrementDecrementButtons'],['../dc/db3/classBankable_1_1ManyAddresses_1_1CCIncrementDecrementButtons.html',1,'Bankable::ManyAddresses::CCIncrementDecrementButtons&lt; N &gt;'],['../d5/dec/classBankable_1_1CCIncrementDecrementButtons.html#ad7ecf81b4f0514941d189f780f74e4bb',1,'Bankable::CCIncrementDecrementButtons::CCIncrementDecrementButtons()'],['../d3/d60/classCCIncrementDecrementButtons.html#aec3c4660adfe0fc2712809c56680b381',1,'CCIncrementDecrementButtons::CCIncrementDecrementButtons()'],['../dc/db3/classBankable_1_1ManyAddresses_1_1CCIncrementDecrementButtons.html#aab06644b1a8afeecc5539f7d0cd08936',1,'Bankable::ManyAddresses::CCIncrementDecrementButtons::CCIncrementDecrementButtons()']]],
   ['ccincrementdecrementbuttons_2ecpp_257',['CCIncrementDecrementButtons.cpp',['../d2/dcb/CCIncrementDecrementButtons_8cpp.html',1,'']]],
   ['ccincrementdecrementbuttons_2ehpp_258',['CCIncrementDecrementButtons.hpp',['../d1/de5/CCIncrementDecrementButtons_8hpp.html',1,'']]],
-  ['ccpotentiometer_259',['CCPotentiometer',['../db/d32/classCCPotentiometer.html',1,'CCPotentiometer'],['../d7/dc0/classBankable_1_1CCPotentiometer.html',1,'Bankable::CCPotentiometer'],['../d5/d71/classBankable_1_1ManyAddresses_1_1CCPotentiometer.html',1,'Bankable::ManyAddresses::CCPotentiometer&lt; N &gt;'],['../d7/dc0/classBankable_1_1CCPotentiometer.html#a9863074f0c1ea1842daee84a49f3a510',1,'Bankable::CCPotentiometer::CCPotentiometer()'],['../db/d32/classCCPotentiometer.html#acf0d748aa8553b031a5d641e34c73414',1,'CCPotentiometer::CCPotentiometer()'],['../d5/d71/classBankable_1_1ManyAddresses_1_1CCPotentiometer.html#a4ccb8162e93dec67019c85f4bba53509',1,'Bankable::ManyAddresses::CCPotentiometer::CCPotentiometer()']]],
+  ['ccpotentiometer_259',['CCPotentiometer',['../d7/dc0/classBankable_1_1CCPotentiometer.html',1,'Bankable::CCPotentiometer'],['../db/d32/classCCPotentiometer.html',1,'CCPotentiometer'],['../d5/d71/classBankable_1_1ManyAddresses_1_1CCPotentiometer.html',1,'Bankable::ManyAddresses::CCPotentiometer&lt; N &gt;'],['../d7/dc0/classBankable_1_1CCPotentiometer.html#a9863074f0c1ea1842daee84a49f3a510',1,'Bankable::CCPotentiometer::CCPotentiometer()'],['../db/d32/classCCPotentiometer.html#acf0d748aa8553b031a5d641e34c73414',1,'CCPotentiometer::CCPotentiometer()'],['../d5/d71/classBankable_1_1ManyAddresses_1_1CCPotentiometer.html#a4ccb8162e93dec67019c85f4bba53509',1,'Bankable::ManyAddresses::CCPotentiometer::CCPotentiometer()']]],
   ['ccpotentiometer_2ecpp_260',['CCPotentiometer.cpp',['../d2/d7b/CCPotentiometer_8cpp.html',1,'']]],
   ['ccpotentiometer_2ehpp_261',['CCPotentiometer.hpp',['../d4/df0/CCPotentiometer_8hpp.html',1,'']]],
   ['ccrotaryencoder_262',['CCRotaryEncoder',['../da/d40/classBankable_1_1CCRotaryEncoder.html',1,'Bankable::CCRotaryEncoder'],['../d3/d62/classCCRotaryEncoder.html',1,'CCRotaryEncoder'],['../da/d40/classBankable_1_1CCRotaryEncoder.html#a3b7a3f34253f487072457c9d090e254a',1,'Bankable::CCRotaryEncoder::CCRotaryEncoder()'],['../d3/d62/classCCRotaryEncoder.html#a149c3dfc86ee4909d2b7b59519564212',1,'CCRotaryEncoder::CCRotaryEncoder()']]],
@@ -107,10 +107,11 @@ var searchData=
   ['control_5fsurface_5fclass_2ecpp_339',['Control_Surface_Class.cpp',['../d9/d38/Control__Surface__Class_8cpp.html',1,'']]],
   ['control_5fsurface_5fclass_2ehpp_340',['Control_Surface_Class.hpp',['../d3/d37/Control__Surface__Class_8hpp.html',1,'']]],
   ['controlchange_341',['ControlChange',['../d2/d91/namespaceDebugMIDIMessageNames.html#a9cd9398d05b8c73269a4219ecc63ad88',1,'DebugMIDIMessageNames']]],
-  ['cos_342',['cos',['../d6/d99/classBresenhamLine.html#ae4b0dd9c534a550583ae812695bbac59',1,'BresenhamLine']]],
-  ['couldcontain_343',['couldContain',['../dd/d16/classDoublyLinkedList.html#ad5f6720a2d9ac9590fae337b2c5a744a',1,'DoublyLinkedList']]],
-  ['createchannel_344',['createChannel',['../d2/d48/classChannel.html#a0bf038df9f1a74a0f342a2f07feeb664',1,'Channel']]],
-  ['cs_5fnamespace_5fname_345',['CS_NAMESPACE_NAME',['../dc/dc7/NamespaceSettings_8hpp.html#a353461c7ea8d0f14aca0516594049e30',1,'NamespaceSettings.hpp']]],
-  ['cycle_346',['CYCLE',['../d7/dc7/namespaceMCU.html#a65c72ef00bd2b41fe87e365bdfe6ae8b',1,'MCU']]],
-  ['control_20surface_347',['Control Surface',['../index.html',1,'']]]
+  ['copyas_342',['copyAs',['../d5/db6/ArrayHelpers_8hpp.html#afabc9f5a80a8d4c068141c62de619714',1,'ArrayHelpers.hpp']]],
+  ['cos_343',['cos',['../d6/d99/classBresenhamLine.html#ae4b0dd9c534a550583ae812695bbac59',1,'BresenhamLine']]],
+  ['couldcontain_344',['couldContain',['../dd/d16/classDoublyLinkedList.html#ad5f6720a2d9ac9590fae337b2c5a744a',1,'DoublyLinkedList']]],
+  ['createchannel_345',['createChannel',['../d2/d48/classChannel.html#a0bf038df9f1a74a0f342a2f07feeb664',1,'Channel']]],
+  ['cs_5fnamespace_5fname_346',['CS_NAMESPACE_NAME',['../dc/dc7/NamespaceSettings_8hpp.html#a353461c7ea8d0f14aca0516594049e30',1,'NamespaceSettings.hpp']]],
+  ['cycle_347',['CYCLE',['../d7/dc7/namespaceMCU.html#a65c72ef00bd2b41fe87e365bdfe6ae8b',1,'MCU']]],
+  ['control_20surface_348',['Control Surface',['../index.html',1,'']]]
 ];

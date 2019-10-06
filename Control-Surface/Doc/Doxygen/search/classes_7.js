@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['hairlessmidi_5finterface_1940',['HairlessMIDI_Interface',['../dc/dff/classHairlessMIDI__Interface.html',1,'']]],
-  ['hardwareserialdebugmidi_5finterface_1941',['HardwareSerialDebugMIDI_Interface',['../d8/d29/classHardwareSerialDebugMIDI__Interface.html',1,'']]],
-  ['hardwareserialmidi_5finterface_1942',['HardwareSerialMIDI_Interface',['../d9/d78/classHardwareSerialMIDI__Interface.html',1,'']]],
-  ['hysteresis_1943',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'']]],
-  ['hysteresis_3c_20adc_5fbits_2b0_20_2d_20precision_2c_20analog_5ft_2c_20analog_5ft_20_3e_1944',['Hysteresis&lt; ADC_BITS+0 - PRECISION, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]],
-  ['hysteresis_3c_20adc_5fbits_2bupsample_20_2d_20precision_2c_20analog_5ft_2c_20analog_5ft_20_3e_1945',['Hysteresis&lt; ADC_BITS+UPSAMPLE - PRECISION, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
+  ['hairlessmidi_5finterface_1943',['HairlessMIDI_Interface',['../dc/dff/classHairlessMIDI__Interface.html',1,'']]],
+  ['hardwareserialdebugmidi_5finterface_1944',['HardwareSerialDebugMIDI_Interface',['../d8/d29/classHardwareSerialDebugMIDI__Interface.html',1,'']]],
+  ['hardwareserialmidi_5finterface_1945',['HardwareSerialMIDI_Interface',['../d9/d78/classHardwareSerialMIDI__Interface.html',1,'']]],
+  ['hysteresis_1946',['Hysteresis',['../d2/dcb/classHysteresis.html',1,'']]],
+  ['hysteresis_3c_20adc_5fbits_2b0_20_2d_20precision_2c_20analog_5ft_2c_20analog_5ft_20_3e_1947',['Hysteresis&lt; ADC_BITS+0 - PRECISION, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]],
+  ['hysteresis_3c_20adc_5fbits_2bupsample_20_2d_20precision_2c_20analog_5ft_2c_20analog_5ft_20_3e_1948',['Hysteresis&lt; ADC_BITS+UPSAMPLE - PRECISION, analog_t, analog_t &gt;',['../d2/dcb/classHysteresis.html',1,'']]]
 ];
