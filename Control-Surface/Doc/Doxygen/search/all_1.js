@@ -131,5 +131,6 @@ var searchData=
   ['notebuttons_2ehpp_230',['NoteButtons.hpp',['../dd/dbb/Bankable_2NoteButtons_8hpp.html',1,'']]],
   ['notechordbutton_2ehpp_231',['NoteChordButton.hpp',['../de/de3/Bankable_2NoteChordButton_8hpp.html',1,'']]],
   ['pbpotentiometer_2ecpp_232',['PBPotentiometer.cpp',['../de/d09/Bankable_2PBPotentiometer_8cpp.html',1,'']]],
-  ['pbpotentiometer_2ehpp_233',['PBPotentiometer.hpp',['../d9/d99/Bankable_2PBPotentiometer_8hpp.html',1,'']]]
+  ['pbpotentiometer_2ehpp_233',['PBPotentiometer.hpp',['../d9/d99/Bankable_2PBPotentiometer_8hpp.html',1,'']]],
+  ['pcbutton_2ehpp_234',['PCButton.hpp',['../d0/d52/Bankable_2PCButton_8hpp.html',1,'']]]
 ];
