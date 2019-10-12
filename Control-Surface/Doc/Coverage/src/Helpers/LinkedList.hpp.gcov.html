@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 4bddc91513cac16ab59d5c7c888e664ca39283b2 - src/Helpers/LinkedList.hpp</title>
+  <title>LCOV - b0b0f4db8161c823b919f385300af80bf620a5bc - src/Helpers/LinkedList.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">4bddc91513cac16ab59d5c7c888e664ca39283b2</td>
+            <td class="headerValue">b0b0f4db8161c823b919f385300af80bf620a5bc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">72</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-07 00:55:17</td>
+            <td class="headerValue">2019-10-12 02:58:29</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">2</td>
@@ -87,16 +87,16 @@
 <a name="17"><span class="lineNum">      17 </span>            :  *          The type of the nodes of the list.</a>
 <a name="18"><span class="lineNum">      18 </span>            :  */</a>
 <a name="19"><span class="lineNum">      19 </span>            : template &lt;class Node&gt;</a>
-<a name="20"><span class="lineNum">      20 </span><span class="lineCov">         11 : class DoublyLinkedList {</span></a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">         20 : class DoublyLinkedList {</span></a>
 <a name="21"><span class="lineNum">      21 </span>            :   public:</a>
 <a name="22"><span class="lineNum">      22 </span>            :     /// Base class for doubly linked list iterators</a>
 <a name="23"><span class="lineNum">      23 </span>            :     template &lt;class INode&gt;</a>
 <a name="24"><span class="lineNum">      24 </span>            :     class node_iterator_base {</a>
 <a name="25"><span class="lineNum">      25 </span>            :       public:</a>
-<a name="26"><span class="lineNum">      26 </span><span class="lineCov">        147 :         node_iterator_base(INode *node) : node(node) {}</span></a>
+<a name="26"><span class="lineNum">      26 </span><span class="lineCov">        190 :         node_iterator_base(INode *node) : node(node) {}</span></a>
 <a name="27"><span class="lineNum">      27 </span>            : </a>
 <a name="28"><span class="lineNum">      28 </span>            :         bool operator!=(const node_iterator_base &amp;rhs) const {</a>
-<a name="29"><span class="lineNum">      29 </span><span class="lineCov">        236 :             return node != rhs.node;</span></a>
+<a name="29"><span class="lineNum">      29 </span><span class="lineCov">        314 :             return node != rhs.node;</span></a>
 <a name="30"><span class="lineNum">      30 </span>            :         }</a>
 <a name="31"><span class="lineNum">      31 </span>            : </a>
 <a name="32"><span class="lineNum">      32 </span>            :         INode &amp;operator*() const {</a>
@@ -112,7 +112,7 @@
 <a name="42"><span class="lineNum">      42 </span>            :     template &lt;class INode&gt;</a>
 <a name="43"><span class="lineNum">      43 </span>            :     class node_iterator : public node_iterator_base&lt;INode&gt; {</a>
 <a name="44"><span class="lineNum">      44 </span>            :       public:</a>
-<a name="45"><span class="lineNum">      45 </span><span class="lineCov">        145 :         node_iterator(INode *node) : node_iterator_base&lt;INode&gt;(node) {}</span></a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">        188 :         node_iterator(INode *node) : node_iterator_base&lt;INode&gt;(node) {}</span></a>
 <a name="46"><span class="lineNum">      46 </span>            : </a>
 <a name="47"><span class="lineNum">      47 </span>            : #ifndef __AVR__</a>
 <a name="48"><span class="lineNum">      48 </span>            :         using difference_type = void;</a>
@@ -125,8 +125,8 @@
 <a name="55"><span class="lineNum">      55 </span>            :         /// Prefix increment operator</a>
 <a name="56"><span class="lineNum">      56 </span>            :         node_iterator &amp;operator++() {</a>
 <a name="57"><span class="lineNum">      57 </span>            :             // TODO: check node != nullptr</a>
-<a name="58"><span class="lineNum">      58 </span><span class="lineCov">        218 :             this-&gt;node = this-&gt;node-&gt;next;</span></a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">        218 :             return *this;</span></a>
+<a name="58"><span class="lineNum">      58 </span><span class="lineCov">        253 :             this-&gt;node = this-&gt;node-&gt;next;</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">        253 :             return *this;</span></a>
 <a name="60"><span class="lineNum">      60 </span>            :         }</a>
 <a name="61"><span class="lineNum">      61 </span>            : </a>
 <a name="62"><span class="lineNum">      62 </span>            :         /// Prefix decrement operator</a>
@@ -178,13 +178,13 @@
 <a name="108"><span class="lineNum">     108 </span>            :      *          A pointer to the node to be appended.</a>
 <a name="109"><span class="lineNum">     109 </span>            :      */</a>
 <a name="110"><span class="lineNum">     110 </span>            :     void append(Node *node) {</a>
-<a name="111"><span class="lineNum">     111 </span><span class="lineCov">        157 :         if (first == nullptr)</span></a>
-<a name="112"><span class="lineNum">     112 </span><span class="lineCov">        139 :             first = node;</span></a>
-<a name="113"><span class="lineNum">     113 </span><span class="lineCov">        199 :         node-&gt;previous = last;</span></a>
-<a name="114"><span class="lineNum">     114 </span><span class="lineCov">        195 :         if (node-&gt;previous != nullptr)</span></a>
+<a name="111"><span class="lineNum">     111 </span><span class="lineCov">        176 :         if (first == nullptr)</span></a>
+<a name="112"><span class="lineNum">     112 </span><span class="lineCov">        158 :             first = node;</span></a>
+<a name="113"><span class="lineNum">     113 </span><span class="lineCov">        218 :         node-&gt;previous = last;</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">        214 :         if (node-&gt;previous != nullptr)</span></a>
 <a name="115"><span class="lineNum">     115 </span><span class="lineCov">         56 :             node-&gt;previous-&gt;next = node;</span></a>
-<a name="116"><span class="lineNum">     116 </span><span class="lineCov">        195 :         last = node;</span></a>
-<a name="117"><span class="lineNum">     117 </span><span class="lineCov">        151 :         node-&gt;next = nullptr;</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineCov">        214 :         last = node;</span></a>
+<a name="117"><span class="lineNum">     117 </span><span class="lineCov">        154 :         node-&gt;next = nullptr;</span></a>
 <a name="118"><span class="lineNum">     118 </span>            :     }</a>
 <a name="119"><span class="lineNum">     119 </span>            : </a>
 <a name="120"><span class="lineNum">     120 </span>            :     /**</a>
@@ -261,16 +261,16 @@
 <a name="191"><span class="lineNum">     191 </span>            :      *          A pointer to the node to be removed.</a>
 <a name="192"><span class="lineNum">     192 </span>            :      */</a>
 <a name="193"><span class="lineNum">     193 </span>            :     void remove(Node *node) {</a>
-<a name="194"><span class="lineNum">     194 </span><span class="lineCov">        133 :         if (node-&gt;previous != nullptr)</span></a>
+<a name="194"><span class="lineNum">     194 </span><span class="lineCov">        152 :         if (node-&gt;previous != nullptr)</span></a>
 <a name="195"><span class="lineNum">     195 </span><span class="lineCov">          7 :             node-&gt;previous-&gt;next = node-&gt;next;</span></a>
-<a name="196"><span class="lineNum">     196 </span><span class="lineCov">        131 :         if (node == last)</span></a>
-<a name="197"><span class="lineNum">     197 </span><span class="lineCov">        131 :             last = node-&gt;previous;</span></a>
-<a name="198"><span class="lineNum">     198 </span><span class="lineCov">        133 :         if (node-&gt;next != nullptr)</span></a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineCov">        150 :         if (node == last)</span></a>
+<a name="197"><span class="lineNum">     197 </span><span class="lineCov">        150 :             last = node-&gt;previous;</span></a>
+<a name="198"><span class="lineNum">     198 </span><span class="lineCov">        152 :         if (node-&gt;next != nullptr)</span></a>
 <a name="199"><span class="lineNum">     199 </span><span class="lineCov">          2 :             node-&gt;next-&gt;previous = node-&gt;previous;</span></a>
-<a name="200"><span class="lineNum">     200 </span><span class="lineCov">        131 :         if (node == first)</span></a>
-<a name="201"><span class="lineNum">     201 </span><span class="lineCov">        126 :             first = node-&gt;next;</span></a>
-<a name="202"><span class="lineNum">     202 </span><span class="lineCov">         10 :         node-&gt;previous = nullptr;</span></a>
-<a name="203"><span class="lineNum">     203 </span><span class="lineCov">         10 :         node-&gt;next = nullptr;</span></a>
+<a name="200"><span class="lineNum">     200 </span><span class="lineCov">        150 :         if (node == first)</span></a>
+<a name="201"><span class="lineNum">     201 </span><span class="lineCov">        145 :             first = node-&gt;next;</span></a>
+<a name="202"><span class="lineNum">     202 </span><span class="lineCov">         19 :         node-&gt;previous = nullptr;</span></a>
+<a name="203"><span class="lineNum">     203 </span><span class="lineCov">         19 :         node-&gt;next = nullptr;</span></a>
 <a name="204"><span class="lineNum">     204 </span><span class="lineCov">         80 :     }</span></a>
 <a name="205"><span class="lineNum">     205 </span>            : </a>
 <a name="206"><span class="lineNum">     206 </span>            :     /**</a>
@@ -293,8 +293,8 @@
 <a name="223"><span class="lineNum">     223 </span>            :      *          A pointer to the node to be moved down.</a>
 <a name="224"><span class="lineNum">     224 </span>            :      */</a>
 <a name="225"><span class="lineNum">     225 </span>            :     void moveDown(Node *node) {</a>
-<a name="226"><span class="lineNum">     226 </span><span class="lineCov">         27 :         Node *nodeB = node-&gt;previous;</span></a>
-<a name="227"><span class="lineNum">     227 </span><span class="lineCov">         27 :         if (nodeB == nullptr) // Can't move first node further down</span></a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineCov">         35 :         Node *nodeB = node-&gt;previous;</span></a>
+<a name="227"><span class="lineNum">     227 </span><span class="lineCov">         35 :         if (nodeB == nullptr) // Can't move first node further down</span></a>
 <a name="228"><span class="lineNum">     228 </span>            :             return;</a>
 <a name="229"><span class="lineNum">     229 </span><span class="lineCov">          3 :         Node *nodeA = nodeB-&gt;previous;</span></a>
 <a name="230"><span class="lineNum">     230 </span><span class="lineCov">          3 :         Node *nodeD = node-&gt;next;</span></a>
@@ -333,8 +333,8 @@
 <a name="263"><span class="lineNum">     263 </span><span class="lineNoCov">          0 :                         node-&gt;previous != nullptr);</span></a>
 <a name="264"><span class="lineNum">     264 </span>            :     }</a>
 <a name="265"><span class="lineNum">     265 </span>            : </a>
-<a name="266"><span class="lineNum">     266 </span><span class="lineCov">        144 :     iterator begin() { return {first}; }</span></a>
-<a name="267"><span class="lineNum">     267 </span><span class="lineCov">        144 :     iterator end() { return {nullptr}; }</span></a>
+<a name="266"><span class="lineNum">     266 </span><span class="lineCov">        187 :     iterator begin() { return {first}; }</span></a>
+<a name="267"><span class="lineNum">     267 </span><span class="lineCov">        187 :     iterator end() { return {nullptr}; }</span></a>
 <a name="268"><span class="lineNum">     268 </span>            : </a>
 <a name="269"><span class="lineNum">     269 </span><span class="lineCov">          1 :     const_iterator begin() const { return {first}; }</span></a>
 <a name="270"><span class="lineNum">     270 </span><span class="lineCov">          1 :     const_iterator end() const { return {nullptr}; }</span></a>
@@ -362,7 +362,7 @@
 <a name="292"><span class="lineNum">     292 </span>            :  *          The type of the nodes of the list.</a>
 <a name="293"><span class="lineNum">     293 </span>            :  */</a>
 <a name="294"><span class="lineNum">     294 </span>            : template &lt;class Node&gt;</a>
-<a name="295"><span class="lineNum">     295 </span><span class="lineCov">         86 : class DoublyLinkable {</span></a>
+<a name="295"><span class="lineNum">     295 </span><span class="lineCov">         95 : class DoublyLinkable {</span></a>
 <a name="296"><span class="lineNum">     296 </span>            :   protected:</a>
 <a name="297"><span class="lineNum">     297 </span>            :     friend class DoublyLinkedList&lt;Node&gt;;</a>
 <a name="298"><span class="lineNum">     298 </span>            :     Node *next = nullptr;</a>

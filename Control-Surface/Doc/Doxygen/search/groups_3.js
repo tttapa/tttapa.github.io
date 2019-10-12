@@ -1,7 +1,4 @@
 var searchData=
 [
-  ['midi_20input_20elements_20leds_3824',['MIDI Input Elements LEDs',['../d7/de4/group__midi-input-elements-leds.html',1,'']]],
-  ['midi_20input_20elements_3825',['MIDI Input Elements',['../df/d8b/group__MIDIInputElements.html',1,'']]],
-  ['midi_20interfaces_3826',['MIDI Interfaces',['../dc/df0/group__MIDIInterfaces.html',1,'']]],
-  ['midi_20output_20elements_3827',['MIDI Output Elements',['../d7/dcd/group__MIDIOutputElements.html',1,'']]]
+  ['extended_20input_2foutput_4021',['Extended Input/Output',['../d1/d8e/group__ExtIO.html',1,'']]]
 ];

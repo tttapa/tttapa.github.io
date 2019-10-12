@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['extended_20input_2foutput_3823',['Extended Input/Output',['../d1/d8e/group__ExtIO.html',1,'']]]
+  ['display_20elements_4020',['Display Elements',['../d5/d1e/group__DisplayElements.html',1,'']]]
 ];

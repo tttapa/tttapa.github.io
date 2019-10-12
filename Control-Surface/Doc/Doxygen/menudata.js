@@ -76,7 +76,8 @@ var menudata={children:[
 {text:"v",url:"namespacemembers_vars_v.html#index_v"},
 {text:"w",url:"namespacemembers_vars_w.html#index_w"},
 {text:"x",url:"namespacemembers_vars_x.html#index_x"},
-{text:"z",url:"namespacemembers_vars_z.html#index_z"}]}]}]},
+{text:"z",url:"namespacemembers_vars_z.html#index_z"}]},
+{text:"Typedefs",url:"namespacemembers_type.html"}]}]},
 {text:"Classes",url:"annotated.html",children:[
 {text:"Class List",url:"annotated.html"},
 {text:"Class Index",url:"classes.html"},

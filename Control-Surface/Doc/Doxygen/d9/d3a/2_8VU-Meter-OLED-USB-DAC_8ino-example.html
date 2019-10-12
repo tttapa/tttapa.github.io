@@ -74,7 +74,7 @@ $(function() {
 <div class="title">2.VU-Meter-OLED-USB-DAC.ino</div>  </div>
 </div><!--header-->
 <div class="contents">
-<h1><a class="anchor" id="autotoc_md78"></a>
+<h1><a class="anchor" id="autotoc_md94"></a>
 2.VU-Meter-OLED-USB-DAC</h1>
 <p>This example shows the usage of the <a class="el" href="../../d4/dce/classAudioVU.html" title="A VU meter that reads from an Audio stream using the Analyzer class.">AudioVU</a> and AnalogVUDisplay classes of the Control Surface library. <br  />
 </p>
@@ -82,7 +82,7 @@ $(function() {
  The VU meters imitate the inertia and ballistics of real analog VU meters.</p>
 <p>It acts as a USB Audio DAC (Digital-to-Analog Converter).</p>
 <dl class="section user"><dt>Boards:</dt><dd>Teensy 3.x</dd></dl>
-<h2><a class="anchor" id="autotoc_md79"></a>
+<h2><a class="anchor" id="autotoc_md95"></a>
 Connections</h2>
 <ul>
 <li>A0: wiper of a potentiometer to change the output volume</li>
@@ -97,18 +97,18 @@ Connections</h2>
 <li>10: Left OLED Cable Select</li>
 <li>18: Right OLED Cable Select</li>
 </ul>
-<p>Add a capacitor between the reset pin of the display and ground, and a resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ work fine. <br  />
- You do need some way to reset the display, without it, it won't work. <br  />
- Alternatively, you could use an IO pin from the Teensy to reset the display, but this just "wastes" a pin.</p>
-<h2><a class="anchor" id="autotoc_md80"></a>
+<p>Add a capacitor between the reset pin of the displays and ground, and a resistor from reset to 3.3V. The values are not critical, 0.1µF and 10kΩ work fine. <br  />
+ You do need some way to reset the displays, without it, it won't work. <br  />
+ Alternatively, you could use an IO pin from the Teensy to reset the displays, but this just "wastes" a pin.</p>
+<h2><a class="anchor" id="autotoc_md96"></a>
 Behavior</h2>
 <p>Upload the sketch, and select the Control Surface as the audio output of your computer. Connect the output of the DAC to a pair of headphones or powered speakers, and play some music. <br  />
  You should see the VU meters come to life and jump around to the music.</p>
 <p>You can now adjust the volume using the potentiometer on pin A0, and the gain/sensitivity of the meters using the potentiometer on pin A1.</p>
-<h2><a class="anchor" id="autotoc_md81"></a>
+<h2><a class="anchor" id="autotoc_md97"></a>
 Mapping</h2>
 <p>None.</p>
-<h2><a class="anchor" id="autotoc_md82"></a>
+<h2><a class="anchor" id="autotoc_md98"></a>
 Demo</h2>
 <dl class="todo"><dt><b><a class="el" href="../../dd/da0/todo.html#_todo000001">Todo:</a></b></dt><dd>Add a demo video.</dd></dl>
 <p>Written by PieterP, 2019-08-09 <br  />
@@ -134,13 +134,15 @@ Demo</h2>
 <div class="line">constexpr uint32_t SPI_Frequency = <a name="a0"></a><a class="code" href="../../db/d02/Settings_8hpp.html#a5b86686a1a39f3bd4c50998dc17706e6">SPI_MAX_SPEED</a>;</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Instantiate the displays</span></div>
-<div class="line">Adafruit_SSD1306 ssd1306Display_L = {SCREEN_WIDTH, SCREEN_HEIGHT, &amp;SPI,</div>
-<div class="line">                                     OLED_DC,      OLED_reset,    OLED_CS_L,</div>
-<div class="line">                                     SPI_Frequency};</div>
+<div class="line">Adafruit_SSD1306 ssd1306Display_L = {</div>
+<div class="line">  SCREEN_WIDTH, SCREEN_HEIGHT, &amp;SPI,          OLED_DC,</div>
+<div class="line">  OLED_reset,   OLED_CS_L,     SPI_Frequency,</div>
+<div class="line">};</div>
 <div class="line"><span class="comment">// Instantiate the displays</span></div>
-<div class="line">Adafruit_SSD1306 ssd1306Display_R = {SCREEN_WIDTH, SCREEN_HEIGHT, &amp;SPI,</div>
-<div class="line">                                     OLED_DC,      OLED_reset,    OLED_CS_R,</div>
-<div class="line">                                     SPI_Frequency};</div>
+<div class="line">Adafruit_SSD1306 ssd1306Display_R = {</div>
+<div class="line">  SCREEN_WIDTH, SCREEN_HEIGHT, &amp;SPI,          OLED_DC,</div>
+<div class="line">  OLED_reset,   OLED_CS_R,     SPI_Frequency,</div>
+<div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// --------------------------- Display interface ---------------------------- //</span></div>
 <div class="line"><span class="comment">// ========================================================================== //</span></div>
@@ -201,13 +203,13 @@ Demo</h2>
 <div class="line"><a name="_a7"></a><a class="code" href="../../d4/dce/classAudioVU.html">AudioVU</a> vu_L = {rms_L, <a name="a8"></a><a class="code" href="../../d0/d49/classMovingCoilBallistics.html#aa419c4e8eebabb73aad89838fa073fa2">MovingCoilBallistics::noOvershoot</a>(), 1, 25};</div>
 <div class="line"><a class="code" href="../../d4/dce/classAudioVU.html">AudioVU</a> vu_R = {rms_R, <a class="code" href="../../d0/d49/classMovingCoilBallistics.html#aa419c4e8eebabb73aad89838fa073fa2">MovingCoilBallistics::noOvershoot</a>(), 1, 25};</div>
 <div class="line"> </div>
-<div class="line"><a name="_a9"></a><a class="code" href="../../d4/d42/classMCU_1_1VUDisplay.html">MCU::VUDisplay</a> vu_disp_L = {display_L, vu_L, {0, 127}, 64, 4, 1, WHITE};</div>
-<div class="line"><a class="code" href="../../d4/d42/classMCU_1_1VUDisplay.html">MCU::VUDisplay</a> vu_disp_R = {display_R, vu_R, {0, 127}, 64, 4, 1, WHITE};</div>
+<div class="line"><a name="_a9"></a><a class="code" href="../../d4/d42/classMCU_1_1VUDisplay.html">MCU::VUDisplay</a> vu_display_L = {display_L, vu_L, {0, 127}, 64, 4, 1, WHITE};</div>
+<div class="line"><a class="code" href="../../d4/d42/classMCU_1_1VUDisplay.html">MCU::VUDisplay</a> vu_display_R = {display_R, vu_R, {0, 127}, 64, 4, 1, WHITE};</div>
 <div class="line"><span class="preprocessor">#else</span></div>
 <div class="line"><a class="code" href="../../d4/dce/classAudioVU.html">AudioVU</a> vu_L = {rms_L, <a name="a10"></a><a class="code" href="../../d0/d49/classMovingCoilBallistics.html#ac62a70eda14779a73fa517ee4669e5c1">MovingCoilBallistics::responsiveVU</a>(1)};</div>
 <div class="line"><a class="code" href="../../d4/dce/classAudioVU.html">AudioVU</a> vu_R = {rms_R, <a class="code" href="../../d0/d49/classMovingCoilBallistics.html#ac62a70eda14779a73fa517ee4669e5c1">MovingCoilBallistics::responsiveVU</a>(1)};</div>
 <div class="line"> </div>
-<div class="line"><a name="_a11"></a><a class="code" href="../../dc/d95/classMCU_1_1AnalogVUDisplay.html">MCU::AnalogVUDisplay</a> vu_disp_L = {</div>
+<div class="line"><a name="_a11"></a><a class="code" href="../../dc/d95/classMCU_1_1AnalogVUDisplay.html">MCU::AnalogVUDisplay</a> vu_display_L = {</div>
 <div class="line">  display_L,       <span class="comment">// Display to display on</span></div>
 <div class="line">  vu_L,            <span class="comment">// VU meter to display</span></div>
 <div class="line">  {63, 63},        <span class="comment">// Location of the needle pivot</span></div>
@@ -219,7 +221,7 @@ Demo</h2>
 <div class="line"><span class="comment">// Note that the y axis points downwards (as is common in computer graphics).</span></div>
 <div class="line"><span class="comment">// This means that a positive angle is clockwise, and -140° lies in the top left</span></div>
 <div class="line"><span class="comment">// quadrant</span></div>
-<div class="line"><a class="code" href="../../dc/d95/classMCU_1_1AnalogVUDisplay.html">MCU::AnalogVUDisplay</a> vu_disp_R = {</div>
+<div class="line"><a class="code" href="../../dc/d95/classMCU_1_1AnalogVUDisplay.html">MCU::AnalogVUDisplay</a> vu_display_R = {</div>
 <div class="line">  display_R, vu_R, {63, 63}, 63, -140 * PI / 180, 100 * PI / 180, WHITE,</div>
 <div class="line">};</div>
 <div class="line"><span class="preprocessor">#endif</span></div>
@@ -254,8 +256,8 @@ Demo</h2>
 <div class="line">    <a name="a15"></a><a class="code" href="../../d9/d38/Control__Surface__Class_8cpp.html#af7a5d250297d82b2b29605dd7ac250df">Control_Surface</a>.<a name="a16"></a><a class="code" href="../../dc/d45/classControl__Surface__.html#aff515a0b3c0cd86ab716bb2ff01a07ef">updateDisplays</a>();      <span class="comment">// Update displays</span></div>
 <div class="line">    <a class="code" href="../../d5/de0/classUpdatable.html#a8af924e5b3b708eb042919703d175ed3">Updatable&lt;Potentiometer&gt;::updateAll</a>(); <span class="comment">// Update volume controls</span></div>
 <div class="line">  }</div>
-<div class="line">  <span class="keywordflow">if</span> (gainKnob.<a name="a17"></a><a class="code" href="../../da/da7/classFilteredAnalog.html#a0c36898c7b53b1ac7d97abb36642e76d">update</a>()) {</div>
-<div class="line">    <span class="keywordtype">float</span> gain = gainKnob.<a name="a18"></a><a class="code" href="../../da/da7/classFilteredAnalog.html#a44eb48a4a0b54be54dfa81d4719ab069">getFloatValue</a>() * maxGain;</div>
+<div class="line">  <span class="keywordflow">if</span> (gainKnob.<a name="a17"></a><a class="code" href="../../da/da7/classFilteredAnalog.html#ae245facd9e6081fc47edf07cf44bd869">update</a>()) {</div>
+<div class="line">    <span class="keywordtype">float</span> gain = gainKnob.<a name="a18"></a><a class="code" href="../../da/da7/classFilteredAnalog.html#abdc64d646cdb9c3e29f2a0d96ebf4877">getFloatValue</a>() * maxGain;</div>
 <div class="line">    vu_L.<a name="a19"></a><a class="code" href="../../d4/dce/classAudioVU.html#a3e2d23e9a4d13d95c9c423aad13010b5">setGain</a>(gain);</div>
 <div class="line">    vu_R.<a class="code" href="../../d4/dce/classAudioVU.html#a3e2d23e9a4d13d95c9c423aad13010b5">setGain</a>(gain);</div>
 <div class="line">  }</div>
@@ -267,20 +269,20 @@ Demo</h2>
 <div class="ttc" id="aclassAudioVU_html"><div class="ttname"><a href="../../d4/dce/classAudioVU.html">AudioVU</a></div><div class="ttdoc">A VU meter that reads from an Audio stream using the Analyzer class.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/de8/AudioVU_8hpp_source.html#l00017">AudioVU.hpp:17</a></div></div>
 <div class="ttc" id="aclassUpdatable_html_a8af924e5b3b708eb042919703d175ed3"><div class="ttname"><a href="../../d5/de0/classUpdatable.html#a8af924e5b3b708eb042919703d175ed3">Updatable::updateAll</a></div><div class="ttdeci">static void updateAll()</div><div class="ttdoc">Update all enabled instances of this class.</div><div class="ttdef"><b>Definition:</b> <a href="../../d4/d93/Updatable_8hpp_source.html#l00075">Updatable.hpp:75</a></div></div>
 <div class="ttc" id="aControl__Surface_8h_html"><div class="ttname"><a href="../../db/dbf/Control__Surface_8h.html">Control_Surface.h</a></div><div class="ttdoc">The main header file that includes all Control-Surface header files.</div></div>
-<div class="ttc" id="aclassMCU_1_1AnalogVUDisplay_html"><div class="ttname"><a href="../../dc/d95/classMCU_1_1AnalogVUDisplay.html">MCU::AnalogVUDisplay</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/db9/VUDisplay_8hpp_source.html#l00075">VUDisplay.hpp:75</a></div></div>
-<div class="ttc" id="aclassFilteredAnalog_html_a44eb48a4a0b54be54dfa81d4719ab069"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html#a44eb48a4a0b54be54dfa81d4719ab069">FilteredAnalog::getFloatValue</a></div><div class="ttdeci">float getFloatValue() const</div><div class="ttdoc">Get the filtered value of the analog input with the mapping function applied as a floating point numb...</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00087">FilteredAnalog.hpp:87</a></div></div>
+<div class="ttc" id="aclassMCU_1_1AnalogVUDisplay_html"><div class="ttname"><a href="../../dc/d95/classMCU_1_1AnalogVUDisplay.html">MCU::AnalogVUDisplay</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/db9/VUDisplay_8hpp_source.html#l00093">VUDisplay.hpp:93</a></div></div>
 <div class="ttc" id="aclassSSD1306__DisplayInterface_html"><div class="ttname"><a href="../../dc/ddd/classSSD1306__DisplayInterface.html">SSD1306_DisplayInterface</a></div><div class="ttdoc">This class creates a mapping between the Adafruit_SSD1306 display driver and the general display inte...</div><div class="ttdef"><b>Definition:</b> <a href="../../d3/d62/DisplayInterfaceSSD1306_8hpp_source.html#l00013">DisplayInterfaceSSD1306.hpp:13</a></div></div>
-<div class="ttc" id="aControl__Surface__Class_8cpp_html_af7a5d250297d82b2b29605dd7ac250df"><div class="ttname"><a href="../../d9/d38/Control__Surface__Class_8cpp.html#af7a5d250297d82b2b29605dd7ac250df">Control_Surface</a></div><div class="ttdeci">Control_Surface_ &amp; Control_Surface</div><div class="ttdoc">A predefined instance of the Control Surface to use in the Arduino sketches.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d38/Control__Surface__Class_8cpp_source.html#l00169">Control_Surface_Class.cpp:169</a></div></div>
+<div class="ttc" id="aControl__Surface__Class_8cpp_html_af7a5d250297d82b2b29605dd7ac250df"><div class="ttname"><a href="../../d9/d38/Control__Surface__Class_8cpp.html#af7a5d250297d82b2b29605dd7ac250df">Control_Surface</a></div><div class="ttdeci">Control_Surface_ &amp; Control_Surface</div><div class="ttdoc">A predefined instance of the Control Surface to use in the Arduino sketches.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d38/Control__Surface__Class_8cpp_source.html#l00168">Control_Surface_Class.cpp:168</a></div></div>
 <div class="ttc" id="aclassSSD1306__DisplayInterface_html_abf69327077a1c7379753cd1201ea89fc"><div class="ttname"><a href="../../dc/ddd/classSSD1306__DisplayInterface.html#abf69327077a1c7379753cd1201ea89fc">SSD1306_DisplayInterface::drawBackground</a></div><div class="ttdeci">void drawBackground() override=0</div><div class="ttdoc">Draw a custom background.</div></div>
-<div class="ttc" id="aSettings_8hpp_html_a5b86686a1a39f3bd4c50998dc17706e6"><div class="ttname"><a href="../../db/d02/Settings_8hpp.html#a5b86686a1a39f3bd4c50998dc17706e6">SPI_MAX_SPEED</a></div><div class="ttdeci">constexpr static Frequency SPI_MAX_SPEED</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d02/Settings_8hpp_source.html#l00090">Settings.hpp:90</a></div></div>
+<div class="ttc" id="aclassFilteredAnalog_html_abdc64d646cdb9c3e29f2a0d96ebf4877"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html#abdc64d646cdb9c3e29f2a0d96ebf4877">FilteredAnalog::getFloatValue</a></div><div class="ttdeci">float getFloatValue() const</div><div class="ttdoc">Get the filtered value of the analog input with the mapping function applied as a floating point numb...</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00117">FilteredAnalog.hpp:117</a></div></div>
+<div class="ttc" id="aSettings_8hpp_html_a5b86686a1a39f3bd4c50998dc17706e6"><div class="ttname"><a href="../../db/d02/Settings_8hpp.html#a5b86686a1a39f3bd4c50998dc17706e6">SPI_MAX_SPEED</a></div><div class="ttdeci">constexpr static Frequency SPI_MAX_SPEED</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d02/Settings_8hpp_source.html#l00099">Settings.hpp:99</a></div></div>
 <div class="ttc" id="aError_8hpp_html_a0b62c6f534e36153a951f1188cf9729f"><div class="ttname"><a href="../../d1/d93/Error_8hpp.html#a0b62c6f534e36153a951f1188cf9729f">FATAL_ERROR</a></div><div class="ttdeci">#define FATAL_ERROR(x, e)</div><div class="ttdef"><b>Definition:</b> <a href="../../d1/d93/Error_8hpp_source.html#l00035">Error.hpp:35</a></div></div>
-<div class="ttc" id="aSettings_8hpp_html_ab44cfa307e19c5688403a9506ea0555e"><div class="ttname"><a href="../../db/d02/Settings_8hpp.html#ab44cfa307e19c5688403a9506ea0555e">MAX_FPS</a></div><div class="ttdeci">constexpr uint8_t MAX_FPS</div><div class="ttdoc">The maximum frame rate of the displays.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d02/Settings_8hpp_source.html#l00088">Settings.hpp:88</a></div></div>
+<div class="ttc" id="aSettings_8hpp_html_ab44cfa307e19c5688403a9506ea0555e"><div class="ttname"><a href="../../db/d02/Settings_8hpp.html#ab44cfa307e19c5688403a9506ea0555e">MAX_FPS</a></div><div class="ttdeci">constexpr uint8_t MAX_FPS</div><div class="ttdoc">The maximum frame rate of the displays.</div><div class="ttdef"><b>Definition:</b> <a href="../../db/d02/Settings_8hpp_source.html#l00097">Settings.hpp:97</a></div></div>
+<div class="ttc" id="aclassFilteredAnalog_html_ae245facd9e6081fc47edf07cf44bd869"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html#ae245facd9e6081fc47edf07cf44bd869">FilteredAnalog::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">Read the analog input value, apply the mapping function, and update the average.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00092">FilteredAnalog.hpp:92</a></div></div>
 <div class="ttc" id="aDisplayInterfaceSSD1306_8hpp_html"><div class="ttname"><a href="../../d3/d62/DisplayInterfaceSSD1306_8hpp.html">DisplayInterfaceSSD1306.hpp</a></div></div>
 <div class="ttc" id="aclassMCU_1_1VUDisplay_html"><div class="ttname"><a href="../../d4/d42/classMCU_1_1VUDisplay.html">MCU::VUDisplay</a></div><div class="ttdef"><b>Definition:</b> <a href="../../d0/db9/VUDisplay_8hpp_source.html#l00010">VUDisplay.hpp:10</a></div></div>
-<div class="ttc" id="aclassControl__Surface___html_aff515a0b3c0cd86ab716bb2ff01a07ef"><div class="ttname"><a href="../../dc/d45/classControl__Surface__.html#aff515a0b3c0cd86ab716bb2ff01a07ef">Control_Surface_::updateDisplays</a></div><div class="ttdeci">void updateDisplays()</div><div class="ttdoc">Clear, draw and display all displays.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d38/Control__Surface__Class_8cpp_source.html#l00153">Control_Surface_Class.cpp:153</a></div></div>
-<div class="ttc" id="aclassFilteredAnalog_html_a0c36898c7b53b1ac7d97abb36642e76d"><div class="ttname"><a href="../../da/da7/classFilteredAnalog.html#a0c36898c7b53b1ac7d97abb36642e76d">FilteredAnalog::update</a></div><div class="ttdeci">bool update()</div><div class="ttdoc">Read the analog input value, apply the mapping function, and update the average.</div><div class="ttdef"><b>Definition:</b> <a href="../../d8/df3/FilteredAnalog_8hpp_source.html#l00062">FilteredAnalog.hpp:62</a></div></div>
+<div class="ttc" id="aclassControl__Surface___html_aff515a0b3c0cd86ab716bb2ff01a07ef"><div class="ttname"><a href="../../dc/d45/classControl__Surface__.html#aff515a0b3c0cd86ab716bb2ff01a07ef">Control_Surface_::updateDisplays</a></div><div class="ttdeci">void updateDisplays()</div><div class="ttdoc">Clear, draw and display all displays.</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/d38/Control__Surface__Class_8cpp_source.html#l00152">Control_Surface_Class.cpp:152</a></div></div>
 <div class="ttc" id="aclassVolumeControl_html"><div class="ttname"><a href="../../d4/de3/classVolumeControl.html">VolumeControl</a></div><div class="ttdoc">A class for controlling the volume of AudioMixer4 objects using a potentiometer.</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d51/VolumeControl_8hpp_source.html#l00023">VolumeControl.hpp:23</a></div></div>
-<div class="ttc" id="aclassAudioVU_html_a3e2d23e9a4d13d95c9c423aad13010b5"><div class="ttname"><a href="../../d4/dce/classAudioVU.html#a3e2d23e9a4d13d95c9c423aad13010b5">AudioVU::setGain</a></div><div class="ttdeci">void setGain(float gain)</div><div class="ttdoc">Set the gain for the VU meter.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/de8/AudioVU_8hpp_source.html#l00089">AudioVU.hpp:89</a></div></div>
+<div class="ttc" id="aclassAudioVU_html_a3e2d23e9a4d13d95c9c423aad13010b5"><div class="ttname"><a href="../../d4/dce/classAudioVU.html#a3e2d23e9a4d13d95c9c423aad13010b5">AudioVU::setGain</a></div><div class="ttdeci">void setGain(float gain)</div><div class="ttdoc">Set the gain for the VU meter.</div><div class="ttdef"><b>Definition:</b> <a href="../../dc/de8/AudioVU_8hpp_source.html#l00091">AudioVU.hpp:91</a></div></div>
 <div class="ttc" id="aclassDisplayInterface_html_a37445a6dc517bc34bbfb67fc6eea3996"><div class="ttname"><a href="../../df/d42/classDisplayInterface.html#a37445a6dc517bc34bbfb67fc6eea3996">DisplayInterface::begin</a></div><div class="ttdeci">virtual void begin()</div><div class="ttdoc">Initialize the display.</div><div class="ttdef"><b>Definition:</b> <a href="../../da/ddf/DisplayInterface_8cpp_source.html#l00007">DisplayInterface.cpp:7</a></div></div>
 <div class="ttc" id="anamespaceMIDI__Notes_html_a43bb6e39eb685f48594d3241b1bc55e1"><div class="ttname"><a href="../../d7/d78/namespaceMIDI__Notes.html#a43bb6e39eb685f48594d3241b1bc55e1">MIDI_Notes::F</a></div><div class="ttdeci">constexpr int8_t F</div><div class="ttdef"><b>Definition:</b> <a href="../../d9/dc5/Notes_8hpp_source.html#l00019">Notes.hpp:19</a></div></div>
 <!-- start footer part -->
