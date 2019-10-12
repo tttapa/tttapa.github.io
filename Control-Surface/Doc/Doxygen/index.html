@@ -115,8 +115,14 @@ The Control Surface library vs. The MIDI Controller library</h1>
 <h1><a class="anchor" id="autotoc_md135"></a>
 Recent Breaking Changes</h1>
 <ul>
+<li>3c01c7d5eb60e59720540d5a77095468e6984a58 <br  />
+ The <b>maximum supported ADC resolution is now used by default</b> (e.g. 13 bits on Teensy 3.x, 12 bits on ESP32). <br  />
+ This increases the accuracy of analog inputs and controls for the Control Surface library, but could cause problems if your code uses other libraries that expect the resolution to be 10 bits. <br  />
+ You can change the default resolution to 10 bits in <a href="https://tttapa.github.io/Control-Surface/Doc/Doxygen/db/d02/Settings_8hpp.html#a8db0fcdeeb644f813c9b29211ce0a1ae"><code>src/Settings/Settings.hpp</code></a> if you have to.</li>
 <li>31edaa6b76477fdf152c19fd34f7e4e8506561e6 <br  />
- The mapping function is now applied before applying hysteresis. This means that the input and output values of the function should be 16 bits wide instead of 7. The signature of the mapping function is now <code>analog_t f(analog_t raw)</code>, where the return value and raw are both numbers in [0, 65535].</li>
+ The <b>mapping function</b> is now applied before applying hysteresis. <br  />
+ This means that the input and output values of the function should be 16 - <code>ANALOG_FILTER_SHIFT_FACTOR</code> bits wide instead of 7. By default this is <b>14 bits</b>. <br  />
+ The signature of the mapping function is now <code>analog_t f(analog_t raw)</code>, where the return value and raw are both numbers in [0, 16383].</li>
 </ul>
 <h1><a class="anchor" id="autotoc_md136"></a>
 Work in progress</h1>

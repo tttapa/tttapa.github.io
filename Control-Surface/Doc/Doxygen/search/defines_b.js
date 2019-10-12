@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['str_4009',['STR',['../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502',1,'Debug.hpp']]],
-  ['str_5fhelper_4010',['STR_HELPER',['../df/dee/Debug_8hpp.html#a890d84b9b5d0b0aede9eea1092a7a10a',1,'Debug.hpp']]]
+  ['namedvalue_4014',['NAMEDVALUE',['../df/dee/Debug_8hpp.html#a35654913b4a1f9d9300f847fab14b3d3',1,'Debug.hpp']]]
 ];

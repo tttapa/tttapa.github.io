@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['debug_3986',['DEBUG',['../df/dee/Debug_8hpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d',1,'Debug.hpp']]],
-  ['debugfn_3987',['DEBUGFN',['../df/dee/Debug_8hpp.html#a5e1b7520df0706433ae295a78471fb3c',1,'Debug.hpp']]],
-  ['debugref_3988',['DEBUGREF',['../df/dee/Debug_8hpp.html#afedb5ed0c0a4ef76c6b968368af014c7',1,'Debug.hpp']]],
-  ['debugtime_3989',['DEBUGTIME',['../df/dee/Debug_8hpp.html#a95d4440a4127650cdd221322b1780833',1,'Debug.hpp']]],
-  ['debugval_3990',['DEBUGVAL',['../df/dee/Debug_8hpp.html#aab96fed8c4f7d9e0f985b05cc6a419b2',1,'Debug.hpp']]]
+  ['cs_5fnamespace_5fname_3993',['CS_NAMESPACE_NAME',['../dc/dc7/NamespaceSettings_8hpp.html#a353461c7ea8d0f14aca0516594049e30',1,'NamespaceSettings.hpp']]]
 ];

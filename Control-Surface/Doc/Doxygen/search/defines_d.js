@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['unused_5fparam_4012',['UNUSED_PARAM',['../d0/d4e/Def_8hpp.html#a32dce3380228f1a23cdc1f784263762b',1,'Def.hpp']]],
-  ['usb_5fmidi_5fnumber_5fof_5fcables_4013',['USB_MIDI_NUMBER_OF_CABLES',['../d8/d21/USBMIDI__Parser_8hpp.html#a8c8cc78d95d6600f2d4fdeab96154332',1,'USBMIDI_Parser.hpp']]],
-  ['use_5fconstexpr_5farray_5fhelpers_4014',['USE_CONSTEXPR_ARRAY_HELPERS',['../d5/db6/ArrayHelpers_8hpp.html#addd42f8d7a7cb2605e50325b9c54fefa',1,'ArrayHelpers.hpp']]],
-  ['use_5fcs_5fnamespace_4015',['USE_CS_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#af8965d6cfaa5bf9433e75d5f8618570e',1,'NamespaceSettings.hpp']]],
-  ['using_5fcs_5fnamespace_4016',['USING_CS_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#a22f1f286cc3391571c5f05f89470b8a1',1,'NamespaceSettings.hpp']]]
+  ['str_4018',['STR',['../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502',1,'Debug.hpp']]],
+  ['str_5fhelper_4019',['STR_HELPER',['../df/dee/Debug_8hpp.html#a890d84b9b5d0b0aede9eea1092a7a10a',1,'Debug.hpp']]]
 ];

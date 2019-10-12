@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cs_5fnamespace_5fname_3985',['CS_NAMESPACE_NAME',['../dc/dc7/NamespaceSettings_8hpp.html#a353461c7ea8d0f14aca0516594049e30',1,'NamespaceSettings.hpp']]]
+  ['begin_5fcs_5fnamespace_3992',['BEGIN_CS_NAMESPACE',['../dc/dc7/NamespaceSettings_8hpp.html#a9432e3744c64fcf8e711ef91eff6a5cd',1,'NamespaceSettings.hpp']]]
 ];

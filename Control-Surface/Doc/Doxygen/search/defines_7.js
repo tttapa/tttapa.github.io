@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['location_4003',['LOCATION',['../df/dee/Debug_8hpp.html#ac27b81440ce6781d5bfcab7a9bbdef99',1,'Debug.hpp']]]
+  ['has_5fanalog_5fread_5fresolution_4008',['HAS_ANALOG_READ_RESOLUTION',['../d7/d7c/ADCConfig_8hpp.html#a4af2da2db9e536067c953baac53b70e6',1,'ADCConfig.hpp']]]
 ];
