@@ -31,18 +31,18 @@
             <td class="headerValue">b0b0f4db8161c823b919f385300af80bf620a5bc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">3</td>
-            <td class="headerCovTableEntry">4</td>
-            <td class="headerCovTableEntryMed">75.0 %</td>
+            <td class="headerCovTableEntry">5</td>
+            <td class="headerCovTableEntry">10</td>
+            <td class="headerCovTableEntryLo">50.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-12 02:58:29</td>
+            <td class="headerValue">2019-10-12 03:28:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">0</td>
-            <td class="headerCovTableEntry">2</td>
-            <td class="headerCovTableEntryLo">0.0 %</td>
+            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">16</td>
+            <td class="headerCovTableEntryLo">68.8 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -175,9 +175,9 @@
 <a name="105"><span class="lineNum">     105 </span>            :     void send(SysExMessage message);</a>
 <a name="106"><span class="lineNum">     106 </span>            :     /// Send a MIDI System Exclusive message.</a>
 <a name="107"><span class="lineNum">     107 </span>            :     template &lt;size_t N&gt;</a>
-<a name="108"><span class="lineNum">     108 </span>            :     void send(const uint8_t (&amp;sysexdata)[N], uint8_t cn = 0) {</a>
+<a name="108"><span class="lineNum">     108 </span><span class="lineCov">          9 :     void send(const uint8_t (&amp;sysexdata)[N], uint8_t cn = 0) {</span></a>
 <a name="109"><span class="lineNum">     109 </span><span class="lineCov">          9 :         send(SysExMessage{sysexdata, N, cn});</span></a>
-<a name="110"><span class="lineNum">     110 </span>            :     }</a>
+<a name="110"><span class="lineNum">     110 </span><span class="lineCov">          8 :     }</span></a>
 <a name="111"><span class="lineNum">     111 </span>            : </a>
 <a name="112"><span class="lineNum">     112 </span>            :     /**</a>
 <a name="113"><span class="lineNum">     113 </span>            :      * @brief   Read the MIDI interface and call the callback if a message is</a>
@@ -236,7 +236,7 @@
 <a name="166"><span class="lineNum">     166 </span>            : /**</a>
 <a name="167"><span class="lineNum">     167 </span>            :  * @brief   An abstract class for MIDI interfaces.</a>
 <a name="168"><span class="lineNum">     168 </span>            :  */</a>
-<a name="169"><span class="lineNum">     169 </span><span class="lineCov">         10 : class Parsing_MIDI_Interface : public MIDI_Interface {</span></a>
+<a name="169"><span class="lineNum">     169 </span>            : class Parsing_MIDI_Interface : public MIDI_Interface {</a>
 <a name="170"><span class="lineNum">     170 </span>            :   protected:</a>
 <a name="171"><span class="lineNum">     171 </span>            :     /**</a>
 <a name="172"><span class="lineNum">     172 </span>            :      * @brief   Construct a MIDI interface with the given parser.</a>
@@ -296,12 +296,12 @@
 <a name="226"><span class="lineNum">     226 </span>            :  */</a>
 <a name="227"><span class="lineNum">     227 </span>            : class MIDI_Callbacks {</a>
 <a name="228"><span class="lineNum">     228 </span>            :   public:</a>
-<a name="229"><span class="lineNum">     229 </span>            :     virtual void onChannelMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi) {}</a>
-<a name="230"><span class="lineNum">     230 </span>            :     virtual void onSysExMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi) {}</a>
-<a name="231"><span class="lineNum">     231 </span>            :     virtual void onRealtimeMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi,</a>
-<a name="232"><span class="lineNum">     232 </span>            :                                    UNUSED_PARAM uint8_t message) {}</a>
+<a name="229"><span class="lineNum">     229 </span><span class="lineNoCov">          0 :     virtual void onChannelMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi) {}</span></a>
+<a name="230"><span class="lineNum">     230 </span><span class="lineNoCov">          0 :     virtual void onSysExMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi) {}</span></a>
+<a name="231"><span class="lineNum">     231 </span><span class="lineNoCov">          0 :     virtual void onRealtimeMessage(UNUSED_PARAM Parsing_MIDI_Interface &amp;midi,</span></a>
+<a name="232"><span class="lineNum">     232 </span><span class="lineNoCov">          0 :                                    UNUSED_PARAM uint8_t message) {}</span></a>
 <a name="233"><span class="lineNum">     233 </span>            : </a>
-<a name="234"><span class="lineNum">     234 </span>            :     virtual ~MIDI_Callbacks() = default;</a>
+<a name="234"><span class="lineNum">     234 </span><span class="lineCov">         11 :     virtual ~MIDI_Callbacks() = default;</span></a>
 <a name="235"><span class="lineNum">     235 </span>            : };</a>
 <a name="236"><span class="lineNum">     236 </span>            : </a>
 <a name="237"><span class="lineNum">     237 </span>            : END_CS_NAMESPACE</a>

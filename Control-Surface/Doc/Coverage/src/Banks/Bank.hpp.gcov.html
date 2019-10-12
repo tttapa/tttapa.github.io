@@ -37,12 +37,12 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-12 02:58:29</td>
+            <td class="headerValue">2019-10-12 03:28:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntryHi">91.7 %</td>
+            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">18</td>
+            <td class="headerCovTableEntryHi">94.4 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -101,7 +101,7 @@
 <a name="31"><span class="lineNum">      31 </span><span class="lineCov">         38 :     OutputBank(uint8_t tracksPerBank = 1, setting_t initialSelection = 0)</span></a>
 <a name="32"><span class="lineNum">      32 </span><span class="lineCov">         38 :         : tracksPerBank(tracksPerBank), bankSetting(initialSelection) {</span></a>
 <a name="33"><span class="lineNum">      33 </span><span class="lineCov">         38 :         if (tracksPerBank == 0)</span></a>
-<a name="34"><span class="lineNum">      34 </span><span class="lineCov">          2 :             FATAL_ERROR(F(&quot;A Bank must have a non-zero number of tracks.&quot;),</span></a>
+<a name="34"><span class="lineNum">      34 </span><span class="lineCov">          1 :             FATAL_ERROR(F(&quot;A Bank must have a non-zero number of tracks.&quot;),</span></a>
 <a name="35"><span class="lineNum">      35 </span>            :                         0x4573);</a>
 <a name="36"><span class="lineNum">      36 </span><span class="lineCov">         37 :     }</span></a>
 <a name="37"><span class="lineNum">      37 </span>            : </a>
@@ -111,18 +111,18 @@
 <a name="41"><span class="lineNum">      41 </span>            :      * @param   setting</a>
 <a name="42"><span class="lineNum">      42 </span>            :      *          The new setting to select.</a>
 <a name="43"><span class="lineNum">      43 </span>            :      */</a>
-<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         56 :     void select(setting_t setting) { bankSetting = setting; }</span></a>
+<a name="44"><span class="lineNum">      44 </span><span class="lineCov">         61 :     void select(setting_t setting) { bankSetting = setting; }</span></a>
 <a name="45"><span class="lineNum">      45 </span>            : </a>
 <a name="46"><span class="lineNum">      46 </span>            :     /**</a>
 <a name="47"><span class="lineNum">      47 </span>            :      * @brief   Get the current bank setting.</a>
 <a name="48"><span class="lineNum">      48 </span>            :      */</a>
-<a name="49"><span class="lineNum">      49 </span><span class="lineCov">          5 :     virtual setting_t getSelection() const { return bankSetting; }</span></a>
+<a name="49"><span class="lineNum">      49 </span><span class="lineCov">        191 :     virtual setting_t getSelection() const { return bankSetting; }</span></a>
 <a name="50"><span class="lineNum">      50 </span>            : </a>
 <a name="51"><span class="lineNum">      51 </span>            :     /**</a>
 <a name="52"><span class="lineNum">      52 </span>            :      * @brief   Get the number of tracks per bank.</a>
 <a name="53"><span class="lineNum">      53 </span>            :      * This is the number of addresses/tracks to skip for each bank setting.</a>
 <a name="54"><span class="lineNum">      54 </span>            :      */</a>
-<a name="55"><span class="lineNum">      55 </span><span class="lineCov">         89 :     uint8_t getTracksPerBank() const { return tracksPerBank; }</span></a>
+<a name="55"><span class="lineNum">      55 </span><span class="lineCov">        112 :     uint8_t getTracksPerBank() const { return tracksPerBank; }</span></a>
 <a name="56"><span class="lineNum">      56 </span>            : </a>
 <a name="57"><span class="lineNum">      57 </span>            :   private:</a>
 <a name="58"><span class="lineNum">      58 </span>            :     uint8_t tracksPerBank;</a>
@@ -151,9 +151,9 @@
 <a name="81"><span class="lineNum">      81 </span>            :      * @param   initialSelection</a>
 <a name="82"><span class="lineNum">      82 </span>            :      *          The initial bank setting.</a>
 <a name="83"><span class="lineNum">      83 </span>            :      */</a>
-<a name="84"><span class="lineNum">      84 </span><span class="lineCov">         19 :     Bank(uint8_t tracksPerBank = 1, setting_t initialSelection = 0)</span></a>
+<a name="84"><span class="lineNum">      84 </span><span class="lineCov">         21 :     Bank(uint8_t tracksPerBank = 1, setting_t initialSelection = 0)</span></a>
 <a name="85"><span class="lineNum">      85 </span>            :         : Selectable&lt;N&gt;(initialSelection),</a>
-<a name="86"><span class="lineNum">      86 </span><span class="lineCov">         20 :           OutputBank(tracksPerBank, initialSelection) {}</span></a>
+<a name="86"><span class="lineNum">      86 </span><span class="lineCov">         21 :           OutputBank(tracksPerBank, initialSelection) {}</span></a>
 <a name="87"><span class="lineNum">      87 </span>            : </a>
 <a name="88"><span class="lineNum">      88 </span>            :     /**</a>
 <a name="89"><span class="lineNum">      89 </span>            :      * @brief   Select the given bank setting.</a>

@@ -31,17 +31,17 @@
             <td class="headerValue">b0b0f4db8161c823b919f385300af80bf620a5bc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">11</td>
-            <td class="headerCovTableEntry">11</td>
+            <td class="headerCovTableEntry">22</td>
+            <td class="headerCovTableEntry">22</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-12 02:58:29</td>
+            <td class="headerValue">2019-10-12 03:28:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">9</td>
+            <td class="headerCovTableEntry">9</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -104,8 +104,8 @@
 <a name="34"><span class="lineNum">      34 </span>            : struct is_lvalue_reference&lt;T &amp;&gt; : true_type {};</a>
 <a name="35"><span class="lineNum">      35 </span>            : </a>
 <a name="36"><span class="lineNum">      36 </span>            : template &lt;class T&gt;</a>
-<a name="37"><span class="lineNum">      37 </span>            : inline T &amp;&amp;forward(typename remove_reference&lt;T&gt;::type &amp;t) noexcept {</a>
-<a name="38"><span class="lineNum">      38 </span>            :     return static_cast&lt;T &amp;&amp;&gt;(t);</a>
+<a name="37"><span class="lineNum">      37 </span><span class="lineCov">          1 : inline T &amp;&amp;forward(typename remove_reference&lt;T&gt;::type &amp;t) noexcept {</span></a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">          1 :     return static_cast&lt;T &amp;&amp;&gt;(t);</span></a>
 <a name="39"><span class="lineNum">      39 </span>            : }</a>
 <a name="40"><span class="lineNum">      40 </span>            : </a>
 <a name="41"><span class="lineNum">      41 </span>            : template &lt;class T&gt;</a>
@@ -126,29 +126,29 @@
 <a name="56"><span class="lineNum">      56 </span>            : class unique_ptr {</a>
 <a name="57"><span class="lineNum">      57 </span>            :   public:</a>
 <a name="58"><span class="lineNum">      58 </span>            :     unique_ptr() = default;</a>
-<a name="59"><span class="lineNum">      59 </span><span class="lineCov">          2 :     explicit unique_ptr(T *p) : p(p) {}</span></a>
+<a name="59"><span class="lineNum">      59 </span><span class="lineCov">          7 :     explicit unique_ptr(T *p) : p(p) {}</span></a>
 <a name="60"><span class="lineNum">      60 </span>            :     template &lt;class U&gt;</a>
-<a name="61"><span class="lineNum">      61 </span>            :     unique_ptr(unique_ptr&lt;U&gt; &amp;&amp;r) {</a>
+<a name="61"><span class="lineNum">      61 </span><span class="lineCov">          1 :     unique_ptr(unique_ptr&lt;U&gt; &amp;&amp;r) {</span></a>
 <a name="62"><span class="lineNum">      62 </span><span class="lineCov">          1 :         reset(r.release());</span></a>
-<a name="63"><span class="lineNum">      63 </span>            :     }</a>
+<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          1 :     }</span></a>
 <a name="64"><span class="lineNum">      64 </span>            : </a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          6 :     ~unique_ptr() { delete p; }</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          8 :     ~unique_ptr() { delete p; }</span></a>
 <a name="66"><span class="lineNum">      66 </span>            : </a>
-<a name="67"><span class="lineNum">      67 </span>            :     unique_ptr&lt;T&gt; &amp;operator=(unique_ptr&lt;T&gt; &amp;&amp;r) {</a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          2 :     unique_ptr&lt;T&gt; &amp;operator=(unique_ptr&lt;T&gt; &amp;&amp;r) {</span></a>
 <a name="68"><span class="lineNum">      68 </span><span class="lineCov">          2 :         reset(r.release());</span></a>
-<a name="69"><span class="lineNum">      69 </span>            :         return *this;</a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          2 :         return *this;</span></a>
 <a name="70"><span class="lineNum">      70 </span>            :     }</a>
 <a name="71"><span class="lineNum">      71 </span>            : </a>
-<a name="72"><span class="lineNum">      72 </span>            :     void reset(T *newP = nullptr) {</a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">          6 :     void reset(T *newP = nullptr) {</span></a>
 <a name="73"><span class="lineNum">      73 </span><span class="lineCov">          6 :         T *old_ptr = p;</span></a>
-<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          5 :         p = newP;</span></a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          5 :         delete old_ptr;</span></a>
-<a name="76"><span class="lineNum">      76 </span>            :     }</a>
+<a name="74"><span class="lineNum">      74 </span><span class="lineCov">          6 :         p = newP;</span></a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          6 :         delete old_ptr;</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          6 :     }</span></a>
 <a name="77"><span class="lineNum">      77 </span>            : </a>
-<a name="78"><span class="lineNum">      78 </span>            :     T *release() {</a>
-<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          1 :         T *old_ptr = p;</span></a>
-<a name="80"><span class="lineNum">      80 </span><span class="lineCov">          1 :         p = nullptr;</span></a>
-<a name="81"><span class="lineNum">      81 </span>            :         return old_ptr;</a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          4 :     T *release() {</span></a>
+<a name="79"><span class="lineNum">      79 </span><span class="lineCov">          4 :         T *old_ptr = p;</span></a>
+<a name="80"><span class="lineNum">      80 </span><span class="lineCov">          4 :         p = nullptr;</span></a>
+<a name="81"><span class="lineNum">      81 </span><span class="lineCov">          4 :         return old_ptr;</span></a>
 <a name="82"><span class="lineNum">      82 </span>            :     }</a>
 <a name="83"><span class="lineNum">      83 </span>            : </a>
 <a name="84"><span class="lineNum">      84 </span>            :     explicit operator bool() const { return p != nullptr; }</a>
@@ -156,7 +156,7 @@
 <a name="86"><span class="lineNum">      86 </span>            :     T *get() { return p; }</a>
 <a name="87"><span class="lineNum">      87 </span>            :     const T *get() const { return p; }</a>
 <a name="88"><span class="lineNum">      88 </span>            : </a>
-<a name="89"><span class="lineNum">      89 </span>            :     T *operator-&gt;() { return p; }</a>
+<a name="89"><span class="lineNum">      89 </span><span class="lineCov">          2 :     T *operator-&gt;() { return p; }</span></a>
 <a name="90"><span class="lineNum">      90 </span>            :     const T *operator-&gt;() const { return p; }</a>
 <a name="91"><span class="lineNum">      91 </span>            :     T &amp;operator*() { return *p; }</a>
 <a name="92"><span class="lineNum">      92 </span>            :     const T &amp;operator*() const { return *p; }</a>

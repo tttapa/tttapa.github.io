@@ -31,13 +31,13 @@
             <td class="headerValue">b0b0f4db8161c823b919f385300af80bf620a5bc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">51</td>
-            <td class="headerCovTableEntry">102</td>
-            <td class="headerCovTableEntryLo">50.0 %</td>
+            <td class="headerCovTableEntry">52</td>
+            <td class="headerCovTableEntry">105</td>
+            <td class="headerCovTableEntryLo">49.5 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-12 02:58:29</td>
+            <td class="headerValue">2019-10-12 03:28:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">15</td>
@@ -182,8 +182,8 @@
 <a name="112"><span class="lineNum">     112 </span>            : </a>
 <a name="113"><span class="lineNum">     113 </span><span class="lineNoCov">          0 : void Parsing_MIDI_Interface::update() {</span></a>
 <a name="114"><span class="lineNum">     114 </span><span class="lineNoCov">          0 :     if (callbacks == nullptr)</span></a>
-<a name="115"><span class="lineNum">     115 </span>            :         return;</a>
-<a name="116"><span class="lineNum">     116 </span>            :     bool repeat = true;</a>
+<a name="115"><span class="lineNum">     115 </span><span class="lineNoCov">          0 :         return;</span></a>
+<a name="116"><span class="lineNum">     116 </span><span class="lineNoCov">          0 :     bool repeat = true;</span></a>
 <a name="117"><span class="lineNum">     117 </span><span class="lineNoCov">          0 :     while (repeat) {</span></a>
 <a name="118"><span class="lineNum">     118 </span><span class="lineNoCov">          0 :         MIDI_read_t event = read();</span></a>
 <a name="119"><span class="lineNum">     119 </span><span class="lineNoCov">          0 :         repeat = dispatchMIDIEvent(event);</span></a>
@@ -195,7 +195,7 @@
 <a name="125"><span class="lineNum">     125 </span>            : </a>
 <a name="126"><span class="lineNum">     126 </span><span class="lineCov">         61 : bool Parsing_MIDI_Interface::dispatchMIDIEvent(MIDI_read_t event) {</span></a>
 <a name="127"><span class="lineNum">     127 </span><span class="lineCov">         61 :     switch (event) {</span></a>
-<a name="128"><span class="lineNum">     128 </span>            :         case NO_MESSAGE: return false;</a>
+<a name="128"><span class="lineNum">     128 </span><span class="lineCov">         42 :         case NO_MESSAGE: return false;</span></a>
 <a name="129"><span class="lineNum">     129 </span><span class="lineCov">         13 :         case CHANNEL_MESSAGE: onChannelMessage(); return true;</span></a>
 <a name="130"><span class="lineNum">     130 </span><span class="lineCov">          4 :         case SYSEX_MESSAGE: onSysExMessage(); return true;</span></a>
 <a name="131"><span class="lineNum">     131 </span><span class="lineCov">          2 :         default: onRealtimeMessage(static_cast&lt;uint8_t&gt;(event)); return true;</span></a>

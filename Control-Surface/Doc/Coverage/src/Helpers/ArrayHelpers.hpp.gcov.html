@@ -31,17 +31,17 @@
             <td class="headerValue">b0b0f4db8161c823b919f385300af80bf620a5bc</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">17</td>
-            <td class="headerCovTableEntry">17</td>
+            <td class="headerCovTableEntry">24</td>
+            <td class="headerCovTableEntry">24</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-12 02:58:29</td>
+            <td class="headerValue">2019-10-12 03:28:31</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">1</td>
-            <td class="headerCovTableEntry">1</td>
+            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">12</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
@@ -82,11 +82,11 @@
 <a name="12"><span class="lineNum">      12 </span>            : </a>
 <a name="13"><span class="lineNum">      13 </span>            : /// https://en.cppreference.com/w/cpp/algorithm/generate</a>
 <a name="14"><span class="lineNum">      14 </span>            : template &lt;class ForwardIt, class Generator&gt;</a>
-<a name="15"><span class="lineNum">      15 </span>            : USE_CONSTEXPR_ARRAY_HELPERS void generate(ForwardIt first, ForwardIt last,</a>
+<a name="15"><span class="lineNum">      15 </span><span class="lineCov">         15 : USE_CONSTEXPR_ARRAY_HELPERS void generate(ForwardIt first, ForwardIt last,</span></a>
 <a name="16"><span class="lineNum">      16 </span>            :                                           Generator g) {</a>
 <a name="17"><span class="lineNum">      17 </span><span class="lineCov">         15 :     while (first != last)</span></a>
-<a name="18"><span class="lineNum">      18 </span><span class="lineCov">          4 :         *first++ = g();</span></a>
-<a name="19"><span class="lineNum">      19 </span>            : }</a>
+<a name="18"><span class="lineNum">      18 </span><span class="lineCov">         12 :         *first++ = g();</span></a>
+<a name="19"><span class="lineNum">      19 </span><span class="lineCov">          3 : }</span></a>
 <a name="20"><span class="lineNum">      20 </span>            : </a>
 <a name="21"><span class="lineNum">      21 </span>            : /** </a>
 <a name="22"><span class="lineNum">      22 </span>            :  * @brief   Utility class that acts as a functor to return incremental values.</a>
@@ -102,10 +102,10 @@
 <a name="32"><span class="lineNum">      32 </span>            :   public:</a>
 <a name="33"><span class="lineNum">      33 </span><span class="lineCov">          1 :     USE_CONSTEXPR_ARRAY_HELPERS Incrementor(T start = 0, V increment = 1)</span></a>
 <a name="34"><span class="lineNum">      34 </span><span class="lineCov">          1 :         : value(start), increment(increment) {}</span></a>
-<a name="35"><span class="lineNum">      35 </span>            :     USE_CONSTEXPR_ARRAY_HELPERS T operator()() {</a>
+<a name="35"><span class="lineNum">      35 </span><span class="lineCov">          4 :     USE_CONSTEXPR_ARRAY_HELPERS T operator()() {</span></a>
 <a name="36"><span class="lineNum">      36 </span><span class="lineCov">          4 :         T temp = value;</span></a>
 <a name="37"><span class="lineNum">      37 </span><span class="lineCov">          4 :         value += increment;</span></a>
-<a name="38"><span class="lineNum">      38 </span>            :         return temp;</a>
+<a name="38"><span class="lineNum">      38 </span><span class="lineCov">          4 :         return temp;</span></a>
 <a name="39"><span class="lineNum">      39 </span>            :     }</a>
 <a name="40"><span class="lineNum">      40 </span>            : </a>
 <a name="41"><span class="lineNum">      41 </span>            :   private:</a>
@@ -129,10 +129,10 @@
 <a name="59"><span class="lineNum">      59 </span>            :  * @return  The generated array.</a>
 <a name="60"><span class="lineNum">      60 </span>            :  */</a>
 <a name="61"><span class="lineNum">      61 </span>            : template &lt;class T, size_t N, class G&gt;</a>
-<a name="62"><span class="lineNum">      62 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt; generateArray(G generator) {</a>
+<a name="62"><span class="lineNum">      62 </span><span class="lineCov">          3 : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt; generateArray(G generator) {</span></a>
 <a name="63"><span class="lineNum">      63 </span><span class="lineCov">          3 :     Array&lt;T, N&gt; array{};</span></a>
 <a name="64"><span class="lineNum">      64 </span><span class="lineCov">          3 :     generate(array.begin(), array.end(), generator);</span></a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          1 :     return array;</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          3 :     return array;</span></a>
 <a name="66"><span class="lineNum">      66 </span>            : }</a>
 <a name="67"><span class="lineNum">      67 </span>            : </a>
 <a name="68"><span class="lineNum">      68 </span>            : /**</a>
@@ -157,8 +157,8 @@
 <a name="87"><span class="lineNum">      87 </span>            : }</a>
 <a name="88"><span class="lineNum">      88 </span>            : </a>
 <a name="89"><span class="lineNum">      89 </span>            : template &lt;class T, size_t N, class... Args&gt;</a>
-<a name="90"><span class="lineNum">      90 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt; fillArray(Args... args) {</a>
-<a name="91"><span class="lineNum">      91 </span><span class="lineCov">          4 :     return generateArray&lt;T, N&gt;([&amp;]() { return T{args...}; });</span></a>
+<a name="90"><span class="lineNum">      90 </span><span class="lineCov">          1 : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt; fillArray(Args... args) {</span></a>
+<a name="91"><span class="lineNum">      91 </span><span class="lineCov">          5 :     return generateArray&lt;T, N&gt;([&amp;]() { return T{args...}; });</span></a>
 <a name="92"><span class="lineNum">      92 </span>            : }</a>
 <a name="93"><span class="lineNum">      93 </span>            : </a>
 <a name="94"><span class="lineNum">      94 </span>            : /**</a>
@@ -195,9 +195,9 @@
 <a name="125"><span class="lineNum">     125 </span>            :  */</a>
 <a name="126"><span class="lineNum">     126 </span>            : template &lt;class T, size_t N, class U, class V = U&gt;</a>
 <a name="127"><span class="lineNum">     127 </span>            : USE_CONSTEXPR_ARRAY_HELPERS Array&lt;T, N&gt;</a>
-<a name="128"><span class="lineNum">     128 </span>            : generateIncrementalArray(U start = 0, V increment = 1) {</a>
+<a name="128"><span class="lineNum">     128 </span><span class="lineCov">          1 : generateIncrementalArray(U start = 0, V increment = 1) {</span></a>
 <a name="129"><span class="lineNum">     129 </span><span class="lineCov">          1 :     Incrementor&lt;U, V&gt; g(start, increment);</span></a>
-<a name="130"><span class="lineNum">     130 </span><span class="lineCov">          1 :     return generateArray&lt;T, N&gt;(g);</span></a>
+<a name="130"><span class="lineNum">     130 </span><span class="lineCov">          2 :     return generateArray&lt;T, N&gt;(g);</span></a>
 <a name="131"><span class="lineNum">     131 </span>            : }</a>
 <a name="132"><span class="lineNum">     132 </span>            : </a>
 <a name="133"><span class="lineNum">     133 </span>            : /**</a>
