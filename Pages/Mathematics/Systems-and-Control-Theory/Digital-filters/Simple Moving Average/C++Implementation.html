@@ -340,76 +340,76 @@
     The previous inputs <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="x[n-i]"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">x</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">[</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.225em; padding-bottom: 0.298em;">n</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mi MJXc-space2"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.446em; padding-bottom: 0.298em;">i</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">]</span></span></span></span></span></span> are kept in a circular buffer.
 </p>
 
-<div class="codesnippet"><style>.pygments .hll { background-color: #ffffcc }
-.pygments  { background: #f8f8f8; }
-.pygments .c { color: #408080; font-style: italic } /* Comment */
-.pygments .err { border: 1px solid #FF0000 } /* Error */
-.pygments .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments .o { color: #666666 } /* Operator */
-.pygments .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments .gd { color: #A00000 } /* Generic.Deleted */
-.pygments .ge { font-style: italic } /* Generic.Emph */
-.pygments .gr { color: #FF0000 } /* Generic.Error */
-.pygments .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments .gi { color: #00A000 } /* Generic.Inserted */
-.pygments .go { color: #888888 } /* Generic.Output */
-.pygments .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments .gs { font-weight: bold } /* Generic.Strong */
-.pygments .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments .gt { color: #0044DD } /* Generic.Traceback */
-.pygments .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments .kt { color: #B00040 } /* Keyword.Type */
-.pygments .m { color: #666666 } /* Literal.Number */
-.pygments .s { color: #BA2121 } /* Literal.String */
-.pygments .na { color: #7D9029 } /* Name.Attribute */
-.pygments .nb { color: #008000 } /* Name.Builtin */
-.pygments .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments .no { color: #880000 } /* Name.Constant */
-.pygments .nd { color: #AA22FF } /* Name.Decorator */
-.pygments .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments .nf { color: #0000FF } /* Name.Function */
-.pygments .nl { color: #A0A000 } /* Name.Label */
-.pygments .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments .nv { color: #19177C } /* Name.Variable */
-.pygments .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments .mf { color: #666666 } /* Literal.Number.Float */
-.pygments .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments .sx { color: #008000 } /* Literal.String.Other */
-.pygments .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments .vc { color: #19177C } /* Name.Variable.Class */
-.pygments .vg { color: #19177C } /* Name.Variable.Global */
-.pygments .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments pre.snippet54 { counter-reset: line 0; }</style><div class="pygments"><pre class="lineNumbers snippet54"><code><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span></code>
+<div class="codesnippet"><style>.pygments54 .hll { background-color: #ffffcc }
+.pygments54  { background: #f8f8f8; }
+.pygments54 .c { color: #408080; font-style: italic } /* Comment */
+.pygments54 .err { border: 1px solid #FF0000 } /* Error */
+.pygments54 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments54 .o { color: #666666 } /* Operator */
+.pygments54 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments54 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments54 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments54 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments54 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments54 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments54 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments54 .ge { font-style: italic } /* Generic.Emph */
+.pygments54 .gr { color: #FF0000 } /* Generic.Error */
+.pygments54 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments54 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments54 .go { color: #888888 } /* Generic.Output */
+.pygments54 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments54 .gs { font-weight: bold } /* Generic.Strong */
+.pygments54 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments54 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments54 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments54 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments54 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments54 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments54 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments54 .kt { color: #B00040 } /* Keyword.Type */
+.pygments54 .m { color: #666666 } /* Literal.Number */
+.pygments54 .s { color: #BA2121 } /* Literal.String */
+.pygments54 .na { color: #7D9029 } /* Name.Attribute */
+.pygments54 .nb { color: #008000 } /* Name.Builtin */
+.pygments54 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments54 .no { color: #880000 } /* Name.Constant */
+.pygments54 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments54 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments54 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments54 .nf { color: #0000FF } /* Name.Function */
+.pygments54 .nl { color: #A0A000 } /* Name.Label */
+.pygments54 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments54 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments54 .nv { color: #19177C } /* Name.Variable */
+.pygments54 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments54 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments54 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments54 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments54 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments54 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments54 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments54 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments54 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments54 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments54 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments54 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments54 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments54 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments54 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments54 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments54 .sx { color: #008000 } /* Literal.String.Other */
+.pygments54 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments54 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments54 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments54 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments54 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments54 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments54 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments54 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments54 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments54 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments54 pre.snippet54 { counter-reset: line 0; }</style><div class="pygments54"><pre class="lineNumbers snippet54"><code><span></span><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span></code>
 <code></code>
 <code><span class="k">template</span> <span class="o">&lt;</span><span class="kt">uint8_t</span> <span class="n">N</span><span class="p">,</span> <span class="k">class</span> <span class="nc">input_t</span> <span class="o">=</span> <span class="kt">uint16_t</span><span class="p">,</span> <span class="k">class</span> <span class="nc">sum_t</span> <span class="o">=</span> <span class="kt">uint32_t</span><span class="o">&gt;</span></code>
 <code><span class="k">class</span> <span class="nc">SMA</span> <span class="p">{</span></code>
@@ -421,11 +421,12 @@
 <code>        <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">index</span> <span class="o">==</span> <span class="n">N</span><span class="p">)</span></code>
 <code>            <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
 <code>        <span class="k">return</span> <span class="p">(</span><span class="n">sum</span> <span class="o">+</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="n">N</span><span class="p">;</span></code>
-<code>        <span class="k">static_assert</span><span class="p">(</span></code>
-<code>            <span class="n">sum_t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">sum_t</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>  <span class="c1">// Check that `sum_t` is an unsigned type</span></code>
-<code>            <span class="s">"Error: sum data type should be an unsigned integer, otherwise, "</span></code>
-<code>            <span class="s">"the rounding operation in the return statement is invalid."</span><span class="p">);</span></code>
 <code>    <span class="p">}</span></code>
+<code></code>
+<code>    <span class="k">static_assert</span><span class="p">(</span></code>
+<code>        <span class="n">sum_t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">sum_t</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>  <span class="c1">// Check that `sum_t` is an unsigned type</span></code>
+<code>        <span class="s">"Error: sum data type should be an unsigned integer, otherwise, "</span></code>
+<code>        <span class="s">"the rounding operation in the return statement is invalid."</span><span class="p">);</span></code>
 <code></code>
 <code>  <span class="k">private</span><span class="o">:</span></code>
 <code>    <span class="kt">uint8_t</span> <span class="n">index</span>             <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
@@ -434,9 +435,126 @@
 <code><span class="p">};</span></code></pre></div>
 </div>
 
+<h3><a name="arduino-example" href="#arduino-example">Arduino Example</a></h3> 
+
+<p>
+As a basic example, you can use this filter for smoothing analog inputs on 
+microcontrollers. Keep in mind that an exponential moving average filter is 
+often more appropriate than a simple moving average filter. 
+The SMA uses much more memory, and is much slower than the EMA. 
+The exponential impulse response of the EMA may be better as well.<br>
+You can find an Arduino example using an EMA 
+<a href="../Exponential%20Moving%20Average/C++Implementation.html#arduino-example">here</a>. 
+</p> 
+
+<div class="codesnippet"><style>.pygments71 .hll { background-color: #ffffcc }
+.pygments71  { background: #ffffff; }
+.pygments71 .c { color: #95a5a6 } /* Comment */
+.pygments71 .err { color: #a61717 } /* Error */
+.pygments71 .k { color: #728E00 } /* Keyword */
+.pygments71 .n { color: #434f54 } /* Name */
+.pygments71 .o { color: #728E00 } /* Operator */
+.pygments71 .ch { color: #95a5a6 } /* Comment.Hashbang */
+.pygments71 .cm { color: #95a5a6 } /* Comment.Multiline */
+.pygments71 .cp { color: #728E00 } /* Comment.Preproc */
+.pygments71 .cpf { color: #95a5a6 } /* Comment.PreprocFile */
+.pygments71 .c1 { color: #95a5a6 } /* Comment.Single */
+.pygments71 .cs { color: #95a5a6 } /* Comment.Special */
+.pygments71 .kc { color: #00979D } /* Keyword.Constant */
+.pygments71 .kd { color: #728E00 } /* Keyword.Declaration */
+.pygments71 .kn { color: #728E00 } /* Keyword.Namespace */
+.pygments71 .kp { color: #00979D } /* Keyword.Pseudo */
+.pygments71 .kr { color: #00979D } /* Keyword.Reserved */
+.pygments71 .kt { color: #00979D } /* Keyword.Type */
+.pygments71 .m { color: #8A7B52 } /* Literal.Number */
+.pygments71 .s { color: #7F8C8D } /* Literal.String */
+.pygments71 .na { color: #434f54 } /* Name.Attribute */
+.pygments71 .nb { color: #728E00 } /* Name.Builtin */
+.pygments71 .nc { color: #434f54 } /* Name.Class */
+.pygments71 .no { color: #434f54 } /* Name.Constant */
+.pygments71 .nd { color: #434f54 } /* Name.Decorator */
+.pygments71 .ni { color: #434f54 } /* Name.Entity */
+.pygments71 .ne { color: #434f54 } /* Name.Exception */
+.pygments71 .nf { color: #D35400 } /* Name.Function */
+.pygments71 .nl { color: #434f54 } /* Name.Label */
+.pygments71 .nn { color: #434f54 } /* Name.Namespace */
+.pygments71 .nx { color: #728E00 } /* Name.Other */
+.pygments71 .py { color: #434f54 } /* Name.Property */
+.pygments71 .nt { color: #434f54 } /* Name.Tag */
+.pygments71 .nv { color: #434f54 } /* Name.Variable */
+.pygments71 .ow { color: #728E00 } /* Operator.Word */
+.pygments71 .mb { color: #8A7B52 } /* Literal.Number.Bin */
+.pygments71 .mf { color: #8A7B52 } /* Literal.Number.Float */
+.pygments71 .mh { color: #8A7B52 } /* Literal.Number.Hex */
+.pygments71 .mi { color: #8A7B52 } /* Literal.Number.Integer */
+.pygments71 .mo { color: #8A7B52 } /* Literal.Number.Oct */
+.pygments71 .sa { color: #7F8C8D } /* Literal.String.Affix */
+.pygments71 .sb { color: #7F8C8D } /* Literal.String.Backtick */
+.pygments71 .sc { color: #7F8C8D } /* Literal.String.Char */
+.pygments71 .dl { color: #7F8C8D } /* Literal.String.Delimiter */
+.pygments71 .sd { color: #7F8C8D } /* Literal.String.Doc */
+.pygments71 .s2 { color: #7F8C8D } /* Literal.String.Double */
+.pygments71 .se { color: #7F8C8D } /* Literal.String.Escape */
+.pygments71 .sh { color: #7F8C8D } /* Literal.String.Heredoc */
+.pygments71 .si { color: #7F8C8D } /* Literal.String.Interpol */
+.pygments71 .sx { color: #7F8C8D } /* Literal.String.Other */
+.pygments71 .sr { color: #7F8C8D } /* Literal.String.Regex */
+.pygments71 .s1 { color: #7F8C8D } /* Literal.String.Single */
+.pygments71 .ss { color: #7F8C8D } /* Literal.String.Symbol */
+.pygments71 .bp { color: #728E00 } /* Name.Builtin.Pseudo */
+.pygments71 .fm { color: #D35400 } /* Name.Function.Magic */
+.pygments71 .vc { color: #434f54 } /* Name.Variable.Class */
+.pygments71 .vg { color: #434f54 } /* Name.Variable.Global */
+.pygments71 .vi { color: #434f54 } /* Name.Variable.Instance */
+.pygments71 .vm { color: #434f54 } /* Name.Variable.Magic */
+.pygments71 .il { color: #8A7B52 } /* Literal.Number.Integer.Long */
+.pygments71 pre.snippet71 { counter-reset: line 0; }</style><div class="pygments71"><pre class="lineNumbers snippet71"><code><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="kr">uint8_t</span> <span class="n">N</span><span class="p">,</span> <span class="kr">class</span> <span class="nc">input_t</span> <span class="o">=</span> <span class="kr">uint16_t</span><span class="p">,</span> <span class="kr">class</span> <span class="nc">sum_t</span> <span class="o">=</span> <span class="kr">uint32_t</span><span class="o">&gt;</span></code>
+<code><span class="kr">class</span> <span class="nc">SMA</span> <span class="p">{</span></code>
+<code>  <span class="kr">public</span><span class="o">:</span></code>
+<code>    <span class="n">input_t</span> <span class="kr">operator</span><span class="p">()(</span><span class="n">input_t</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="n">sum</span> <span class="o">-=</span> <span class="n">previousInputs</span><span class="p">[</span><span class="n">index</span><span class="p">];</span></code>
+<code>        <span class="n">sum</span> <span class="o">+=</span> <span class="n">input</span><span class="p">;</span></code>
+<code>        <span class="n">previousInputs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">input</span><span class="p">;</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="o">++</span><span class="n">index</span> <span class="o">==</span> <span class="n">N</span><span class="p">)</span></code>
+<code>            <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>        <span class="k">return</span> <span class="p">(</span><span class="n">sum</span> <span class="o">+</span> <span class="p">(</span><span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="n">N</span><span class="p">;</span></code>
+<code>    <span class="p">}</span></code>
+<code>    </code>
+<code>    <span class="n">static_assert</span><span class="p">(</span></code>
+<code>        <span class="n">sum_t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">sum_t</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>  <span class="c1">// Check that `sum_t` is an unsigned type</span></code>
+<code>        <span class="s">"Error: sum data type should be an unsigned integer, otherwise, "</span></code>
+<code>        <span class="s">"the rounding operation in the return statement is invalid."</span><span class="p">);</span></code>
+<code></code>
+<code>  <span class="kr">private</span><span class="o">:</span></code>
+<code>    <span class="kr">uint8_t</span> <span class="n">index</span>             <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="n">input_t</span> <span class="n">previousInputs</span><span class="p">[</span><span class="n">N</span><span class="p">]</span> <span class="o">=</span> <span class="p">{};</span></code>
+<code>    <span class="n">sum_t</span> <span class="n">sum</span>                 <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code><span class="p">};</span></code>
+<code></code>
+<code><span class="kr">void</span> <span class="nb">setup</span><span class="p">()</span> <span class="p">{</span></code>
+<code>  <span class="nf">Serial</span><span class="p">.</span><span class="nf">begin</span><span class="p">(</span><span class="mi">115200</span><span class="p">);</span></code>
+<code>  <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nf">Serial</span><span class="p">);</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="kr">const</span> <span class="kr">unsigned</span> <span class="kr">long</span> <span class="n">interval</span> <span class="o">=</span> <span class="mi">10000</span><span class="p">;</span> <span class="c1">// 100 Hz</span></code>
+<code></code>
+<code><span class="kr">void</span> <span class="nb">loop</span><span class="p">()</span> <span class="p">{</span></code>
+<code>  <span class="kr">static</span> <span class="n">SMA</span><span class="o">&lt;</span><span class="mi">20</span><span class="o">&gt;</span> <span class="n">filter</span><span class="p">;</span></code>
+<code>  <span class="kr">static</span> <span class="kr">unsigned</span> <span class="kr">long</span> <span class="n">prevMicros</span> <span class="o">=</span> <span class="nf">micros</span><span class="p">();</span></code>
+<code>  <span class="k">if</span> <span class="p">(</span><span class="nf">micros</span><span class="p">()</span> <span class="o">-</span> <span class="n">prevMicros</span> <span class="o">&gt;=</span> <span class="n">interval</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="kr">int</span> <span class="n">rawValue</span> <span class="o">=</span> <span class="nf">analogRead</span><span class="p">(</span><span class="n">A0</span><span class="p">);</span></code>
+<code>    <span class="kr">int</span> <span class="n">filteredValue</span> <span class="o">=</span> <span class="n">filter</span><span class="p">(</span><span class="n">rawValue</span><span class="p">);</span></code>
+<code>    <span class="nf">Serial</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="n">rawValue</span><span class="p">);</span></code>
+<code>    <span class="nf">Serial</span><span class="p">.</span><span class="nf">print</span><span class="p">(</span><span class="sc">'\t'</span><span class="p">);</span></code>
+<code>    <span class="nf">Serial</span><span class="p">.</span><span class="nf">println</span><span class="p">(</span><span class="n">filteredValue</span><span class="p">);</span></code>
+<code>    <span class="n">prevMicros</span> <span class="o">+=</span> <span class="n">interval</span><span class="p">;</span></code>
+<code>  <span class="p">}</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+
 </div>
     </article>
-    <footer>Last edited: Sunday, 15 September 2019 15:59 UTC</footer>
+    <footer>Last edited: Sunday, 13 October 2019 01:09 UTC</footer>
 
 
 </body></html>

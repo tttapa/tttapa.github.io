@@ -1,5 +1,3 @@
-#include <stdint.h>
-
 template <uint8_t K, class uint_t = uint16_t>
 class EMA {
   public:
@@ -18,3 +16,23 @@ class EMA {
   private:
     uint_t z = 0;
 };
+
+void setup() {
+  Serial.begin(115200);
+  while (!Serial);
+}
+
+const unsigned long interval = 10000; // 100 Hz
+
+void loop() {
+  static EMA<2> filter;
+  static unsigned long prevMicros = micros();
+  if (micros() - prevMicros >= interval) {
+    int rawValue = analogRead(A0);
+    int filteredValue = filter(rawValue);
+    Serial.print(rawValue);
+    Serial.print('\t');
+    Serial.println(filteredValue);
+    prevMicros += interval;
+  }
+}

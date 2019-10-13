@@ -102,11 +102,15 @@ def formatPygmentsCodeSnippet(data, html, filepath, lineno):
                 break
 
     lexer = guess_lexer_for_filename(file, filecontents)
-    formatter = HtmlFormatter(cssclass='pygments')
-    css = formatter.get_style_defs('.pygments')
+    cssclass = 'pygments{}'.format(lineno)
+    if lexer.name == "Arduino":
+        formatter = HtmlFormatter(cssclass=cssclass, style='arduino')
+    else:
+        formatter = HtmlFormatter(cssclass=cssclass, style='default')
+    css = formatter.get_style_defs('.' + cssclass)
     ctrstart = emptylines + startline - 1
-    css += '\n.pygments pre.snippet{} {{ counter-reset: line {}; }}' \
-        .format(lineno, ctrstart)
+    css += '\n.pygments{} pre.snippet{} {{ counter-reset: line {}; }}' \
+        .format(lineno, lineno, ctrstart)
     htmlc = highlight(filecontents, lexer, formatter)
     htmlc = htmlc.replace('<pre>', 
                 '<pre class="lineNumbers snippet{}">'.format(lineno))
