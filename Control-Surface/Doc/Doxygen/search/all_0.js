@@ -26,7 +26,7 @@ var searchData=
   ['agogo_23',['Agogo',['../da/da6/namespaceMIDI__PC.html#a264acb0651e215029b12405793ea32b0',1,'MIDI_PC']]],
   ['all_5fnotes_5foff_24',['All_Notes_Off',['../d4/dbe/namespaceMIDI__CC.html#aa95ef7ed16f71da6c4331f2d360df773',1,'MIDI_CC']]],
   ['all_5fsound_5foff_25',['All_Sound_Off',['../d4/dbe/namespaceMIDI__CC.html#a1f190469bb17b078fce59bcf1aa029f8',1,'MIDI_CC']]],
-  ['alpha_26',['alpha',['../db/d6f/classEMA__f.html#a11afd61759842d93397f4e4581142f9a',1,'EMA_f']]],
+  ['alpha_26',['alpha',['../db/d6f/classEMA__f.html#af58e572bca4ff38225db2f28a562bd10',1,'EMA_f']]],
   ['alphachars_27',['AlphaChars',['../d5/d0c/MAX7219SevenSegmentDisplay_8hpp.html#a421add2f41548ad816d5d9bb028cfa6f',1,'MAX7219SevenSegmentDisplay.hpp']]],
   ['alto_5fsax_28',['Alto_Sax',['../da/da6/namespaceMIDI__PC.html#aa72e697e20da91b4bbdb17179438777b',1,'MIDI_PC']]],
   ['analog_5ffilter_5fshift_5ffactor_29',['ANALOG_FILTER_SHIFT_FACTOR',['../db/d02/Settings_8hpp.html#a74cef1adb51d95add8b2bea344b6c755',1,'Settings.hpp']]],
