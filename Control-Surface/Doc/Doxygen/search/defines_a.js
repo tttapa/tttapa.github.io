@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mackie_5fcontrol_5frelative_4017',['MACKIE_CONTROL_RELATIVE',['../d9/d24/RelativeCCSender_8hpp.html#af7774143941c236448d7c53f4347276b',1,'RelativeCCSender.hpp']]]
+  ['mackie_5fcontrol_5frelative_4018',['MACKIE_CONTROL_RELATIVE',['../d9/d24/RelativeCCSender_8hpp.html#af7774143941c236448d7c53f4347276b',1,'RelativeCCSender.hpp']]]
 ];
