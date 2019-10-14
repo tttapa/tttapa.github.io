@@ -128,163 +128,138 @@ $(function() {
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;<span class="preprocessor">#else // No Arduino</span></div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#include &lt;iomanip&gt;</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#aa88c44c66680f55fd42b3a19095aff3f">std::boolalpha</a>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keyword">using</span> std::cout;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#aa46b20141a495c428e33bcdcbf63c04e">std::dec</a>;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d">std::endl</a>;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e">std::flush</a>;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f">std::hex</a>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#a6f91d974c1da2e228efad12693a46386">std::noboolalpha</a>;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#a8ae8a20941a7cf9957efc590d5a56ef4">std::noshowbase</a>;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#aff5eada882f71bd90e0de66c48faaeb3">std::nouppercase</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#a707ccd00d4ab39a72ed982ec0a58fee3">std::setbase</a>;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#a84d169b856e83ea462a841bde851dd94">std::setprecision</a>;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#a43ae2a66eb945be61773cbb24d9b6608">std::showbase</a>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">using</span> <a class="code" href="../../da/d69/PrintStream_8cpp.html#a2b44e6ada22b1b5a703617123ebd0598">std::uppercase</a>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="preprocessor">#define F(x) (x)</span></div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a890d84b9b5d0b0aede9eea1092a7a10a">   70</a></span>&#160;<span class="preprocessor">#define STR_HELPER(x) #x</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502">   71</a></span>&#160;<span class="preprocessor">#define STR(x) STR_HELPER(x)</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00073"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#af70a086ec2671f38a23cd71019e6e9fc">   73</a></span>&#160;<span class="preprocessor">#define FUNC_LOCATION                                                          \</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">  &#39;[&#39; &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; F(&quot; @ line &quot; STR(__LINE__) &quot;]:\t&quot;)</span></div>
-<div class="line"><a name="l00075"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#ac27b81440ce6781d5bfcab7a9bbdef99">   75</a></span>&#160;<span class="preprocessor">#define LOCATION &quot;[&quot; __FILE__ &quot;:&quot; STR(__LINE__) &quot;]:\t&quot;</span></div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
-<div class="line"><a name="l00077"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a35654913b4a1f9d9300f847fab14b3d3">   77</a></span>&#160;<span class="preprocessor">#define NAMEDVALUE(x) F(STR(x) &quot; = &quot;) &lt;&lt; x</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#define F(x) (x)</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="../../dd/d80/PrintStream_8hpp.html">PrintStream.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a890d84b9b5d0b0aede9eea1092a7a10a">   56</a></span>&#160;<span class="preprocessor">#define STR_HELPER(x) #x</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a18d295a837ac71add5578860b55e5502">   57</a></span>&#160;<span class="preprocessor">#define STR(x) STR_HELPER(x)</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160; </div>
+<div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#af70a086ec2671f38a23cd71019e6e9fc">   59</a></span>&#160;<span class="preprocessor">#define FUNC_LOCATION                                                          \</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="preprocessor">  &#39;[&#39; &lt;&lt; __PRETTY_FUNCTION__ &lt;&lt; F(&quot; @ line &quot; STR(__LINE__) &quot;]:\t&quot;)</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#ac27b81440ce6781d5bfcab7a9bbdef99">   61</a></span>&#160;<span class="preprocessor">#define LOCATION &quot;[&quot; __FILE__ &quot;:&quot; STR(__LINE__) &quot;]:\t&quot;</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a35654913b4a1f9d9300f847fab14b3d3">   63</a></span>&#160;<span class="preprocessor">#define NAMEDVALUE(x) F(STR(x) &quot; = &quot;) &lt;&lt; x</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="preprocessor">#ifdef DEBUG_OUT</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="preprocessor">#pragma message(&quot;Debugging enabled on output &quot; STR(DEBUG_OUT))</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#define DEBUG(x)                                                               \</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; x &lt;&lt; ENDL;                                                    \</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="preprocessor">#define DEBUGREF(x)                                                            \</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; F(LOCATION) &lt;&lt; x &lt;&lt; ENDL;                                     \</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;<span class="preprocessor">  } while (0)</span></div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#ifdef DEBUG_OUT</span></div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">#pragma message(&quot;Debugging enabled on output &quot; STR(DEBUG_OUT))</span></div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="preprocessor">#define DEBUG(x)                                                               \</span></div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; x &lt;&lt; ENDL;                                                    \</span></div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">#define DEBUGREF(x)                                                            \</span></div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; F(LOCATION) &lt;&lt; x &lt;&lt; ENDL;                                     \</span></div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">#define DEBUGFN(x)                                                             \</span></div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; FUNC_LOCATION &lt;&lt; x &lt;&lt; ENDL;                                   \</span></div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;<span class="preprocessor">#define DEBUGFN(x)                                                             \</span></div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; FUNC_LOCATION &lt;&lt; x &lt;&lt; ENDL;                                   \</span></div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#define DEBUGTIME(x)                                                           \</span></div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="preprocessor">    unsigned long t = millis();                                                \</span></div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;<span class="preprocessor">    unsigned long h = t / (60UL * 60 * 1000);                                  \</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="preprocessor">    unsigned long m = (t / (60UL * 1000)) % 60;                                \</span></div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="preprocessor">    unsigned long s = (t / (1000UL)) % 60;                                     \</span></div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="preprocessor">    unsigned long ms = t % 1000;                                               \</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="preprocessor">    const char *ms_zeros = ms &gt; 99 ? &quot;&quot; : (ms &gt; 9 ? &quot;0&quot; : &quot;00&quot;);               \</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; &#39;[&#39; &lt;&lt; h &lt;&lt; &#39;:&#39; &lt;&lt; m &lt;&lt; &#39;:&#39; &lt;&lt; s &lt;&lt; &#39;.&#39; &lt;&lt; ms_zeros &lt;&lt; ms     \</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="preprocessor">              &lt;&lt; &quot;]:\t&quot; &lt;&lt; x &lt;&lt; ENDL;                                          \</span></div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;<span class="preprocessor">#define DEBUGTIME(x)                                                           \</span></div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">    unsigned long t = millis();                                                \</span></div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;<span class="preprocessor">    unsigned long h = t / (60UL * 60 * 1000);                                  \</span></div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">    unsigned long m = (t / (60UL * 1000)) % 60;                                \</span></div>
-<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">    unsigned long s = (t / (1000UL)) % 60;                                     \</span></div>
-<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">    unsigned long ms = t % 1000;                                               \</span></div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">    const char *ms_zeros = ms &gt; 99 ? &quot;&quot; : (ms &gt; 9 ? &quot;0&quot; : &quot;00&quot;);               \</span></div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; &#39;[&#39; &lt;&lt; h &lt;&lt; &#39;:&#39; &lt;&lt; m &lt;&lt; &#39;:&#39; &lt;&lt; s &lt;&lt; &#39;.&#39; &lt;&lt; ms_zeros &lt;&lt; ms     \</span></div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">              &lt;&lt; &quot;]:\t&quot; &lt;&lt; x &lt;&lt; ENDL;                                          \</span></div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">#define DEBUGVAL(...) DEBUGVALN(COUNT(__VA_ARGS__))(__VA_ARGS__)</span></div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">#define COUNT(...) COUNT_HELPER(__VA_ARGS__, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)</span></div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">#define COUNT_HELPER(N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, N, ...) N</span></div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160; </div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#define DEBUGVALN(N) DEBUGVALN_HELPER(N)</span></div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">#define DEBUGVALN_HELPER(N) DEBUGVAL##N</span></div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160; </div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">#define DEBUGVAL10(x, ...)                                                     \</span></div>
-<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
-<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">    DEBUGVAL9(__VA_ARGS__);                                                    \</span></div>
-<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">#define DEBUGVAL9(x, ...)                                                      \</span></div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">    DEBUGVAL8(__VA_ARGS__);                                                    \</span></div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">#define DEBUGVAL8(x, ...)                                                      \</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">    DEBUGVAL7(__VA_ARGS__);                                                    \</span></div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">#define DEBUGVAL7(x, ...)                                                      \</span></div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">    DEBUGVAL6(__VA_ARGS__);                                                    \</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">#define DEBUGVAL6(x, ...)                                                      \</span></div>
-<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">    DEBUGVAL5(__VA_ARGS__);                                                    \</span></div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">#define DEBUGVAL5(x, ...)                                                      \</span></div>
-<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
-<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">    DEBUGVAL4(__VA_ARGS__);                                                    \</span></div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">#define DEBUGVAL4(x, ...)                                                      \</span></div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">    DEBUGVAL3(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;<span class="preprocessor">#define DEBUGVAL(...) DEBUGVALN(COUNT(__VA_ARGS__))(__VA_ARGS__)</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; </div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;<span class="preprocessor">#define COUNT(...) COUNT_HELPER(__VA_ARGS__, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1)</span></div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#define COUNT_HELPER(N1, N2, N3, N4, N5, N6, N7, N8, N9, N10, N, ...) N</span></div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;<span class="preprocessor">#define DEBUGVALN(N) DEBUGVALN_HELPER(N)</span></div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;<span class="preprocessor">#define DEBUGVALN_HELPER(N) DEBUGVAL##N</span></div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160; </div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;<span class="preprocessor">#define DEBUGVAL10(x, ...)                                                     \</span></div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;<span class="preprocessor">    DEBUGVAL9(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;<span class="preprocessor">#define DEBUGVAL9(x, ...)                                                      \</span></div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="preprocessor">    DEBUGVAL8(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#define DEBUGVAL8(x, ...)                                                      \</span></div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;<span class="preprocessor">    DEBUGVAL7(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;<span class="preprocessor">#define DEBUGVAL7(x, ...)                                                      \</span></div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;<span class="preprocessor">    DEBUGVAL6(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;<span class="preprocessor">#define DEBUGVAL6(x, ...)                                                      \</span></div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="preprocessor">    DEBUGVAL5(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;<span class="preprocessor">#define DEBUGVAL5(x, ...)                                                      \</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;<span class="preprocessor">    DEBUGVAL4(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="preprocessor">#define DEBUGVAL4(x, ...)                                                      \</span></div>
+<div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;<span class="preprocessor">    DEBUGVAL3(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;<span class="preprocessor">#define DEBUGVAL3(x, ...)                                                      \</span></div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;<span class="preprocessor">    DEBUGVAL2(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="preprocessor">#define DEBUGVAL2(x, ...)                                                      \</span></div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;<span class="preprocessor">    DEBUGVAL1(__VA_ARGS__);                                                    \</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">#define DEBUGVAL1(x)                                                           \</span></div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; ENDL;                                        \</span></div>
 <div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;<span class="preprocessor">#define DEBUGVAL3(x, ...)                                                      \</span></div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
-<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;<span class="preprocessor">    DEBUGVAL2(__VA_ARGS__);                                                    \</span></div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">#define DEBUGVAL2(x, ...)                                                      \</span></div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; &quot;, &quot;;                                        \</span></div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">    DEBUGVAL1(__VA_ARGS__);                                                    \</span></div>
-<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">#define DEBUGVAL1(x)                                                           \</span></div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">    DEBUG_OUT &lt;&lt; NAMEDVALUE(x) &lt;&lt; ENDL;                                        \</span></div>
-<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160; </div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">#else // Debugging disabled</span></div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d">  172</a></span>&#160;<span class="preprocessor">#define DEBUG(x)                                                               \</span></div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;<span class="preprocessor">#else // Debugging disabled</span></div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00158"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a3dfa58b1c5c2943dd49d8aa1981d377d">  158</a></span>&#160;<span class="preprocessor">#define DEBUG(x)                                                               \</span></div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00161"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#afedb5ed0c0a4ef76c6b968368af014c7">  161</a></span>&#160;<span class="preprocessor">#define DEBUGREF(x)                                                            \</span></div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00164"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a5e1b7520df0706433ae295a78471fb3c">  164</a></span>&#160;<span class="preprocessor">#define DEBUGFN(x)                                                             \</span></div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
+<div class="line"><a name="l00168"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a95d4440a4127650cdd221322b1780833">  168</a></span>&#160;<span class="preprocessor">#define DEBUGTIME(x)                                                           \</span></div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;<span class="preprocessor">  } while (0)</span></div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00172"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#aab96fed8c4f7d9e0f985b05cc6a419b2">  172</a></span>&#160;<span class="preprocessor">#define DEBUGVAL(...)                                                          \</span></div>
 <div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
 <div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00175"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#afedb5ed0c0a4ef76c6b968368af014c7">  175</a></span>&#160;<span class="preprocessor">#define DEBUGREF(x)                                                            \</span></div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00178"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a5e1b7520df0706433ae295a78471fb3c">  178</a></span>&#160;<span class="preprocessor">#define DEBUGFN(x)                                                             \</span></div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;<span class="preprocessor">#ifdef ARDUINO</span></div>
-<div class="line"><a name="l00182"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#a95d4440a4127650cdd221322b1780833">  182</a></span>&#160;<span class="preprocessor">#define DEBUGTIME(x)                                                           \</span></div>
-<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00186"></a><span class="lineno"><a class="line" href="../../df/dee/Debug_8hpp.html#aab96fed8c4f7d9e0f985b05cc6a419b2">  186</a></span>&#160;<span class="preprocessor">#define DEBUGVAL(...)                                                          \</span></div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;<span class="preprocessor">  do {                                                                         \</span></div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;<span class="preprocessor">  } while (0)</span></div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160; </div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;<span class="preprocessor">#endif</span></div>
 </div><!-- fragment --></div><!-- contents -->
-<div class="ttc" id="aPrintStream_8cpp_html_a84d169b856e83ea462a841bde851dd94"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#a84d169b856e83ea462a841bde851dd94">setprecision</a></div><div class="ttdeci">_Setprecision setprecision(int __n)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00191">PrintStream.cpp:191</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_aa88c44c66680f55fd42b3a19095aff3f"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#aa88c44c66680f55fd42b3a19095aff3f">boolalpha</a></div><div class="ttdeci">Print &amp; boolalpha(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00082">PrintStream.cpp:82</a></div></div>
 <div class="ttc" id="aPrintStream_8hpp_html_ab82cf12919f956954b9bba423b696205"><div class="ttname"><a href="../../dd/d80/PrintStream_8hpp.html#ab82cf12919f956954b9bba423b696205">manipulator</a></div><div class="ttdeci">Print &amp; manipulator(Print &amp;)</div><div class="ttdoc">PrintStream library</div><div class="ttdef"><b>Definition:</b> <a href="../../dd/d80/PrintStream_8hpp_source.html#l00010">PrintStream.hpp:10</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_a8ae8a20941a7cf9957efc590d5a56ef4"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#a8ae8a20941a7cf9957efc590d5a56ef4">noshowbase</a></div><div class="ttdeci">Print &amp; noshowbase(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00050">PrintStream.cpp:50</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_ad656b6d999d4a9c4ec16a7d7c9d6ab5e"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#ad656b6d999d4a9c4ec16a7d7c9d6ab5e">flush</a></div><div class="ttdeci">Print &amp; flush(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00055">PrintStream.cpp:55</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_a707ccd00d4ab39a72ed982ec0a58fee3"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#a707ccd00d4ab39a72ed982ec0a58fee3">setbase</a></div><div class="ttdeci">_Setbase setbase(uint8_t __base)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00175">PrintStream.cpp:175</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_a6f91d974c1da2e228efad12693a46386"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#a6f91d974c1da2e228efad12693a46386">noboolalpha</a></div><div class="ttdeci">Print &amp; noboolalpha(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00086">PrintStream.cpp:86</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_a2b44e6ada22b1b5a703617123ebd0598"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#a2b44e6ada22b1b5a703617123ebd0598">uppercase</a></div><div class="ttdeci">Print &amp; uppercase(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00035">PrintStream.cpp:35</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_aff5eada882f71bd90e0de66c48faaeb3"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#aff5eada882f71bd90e0de66c48faaeb3">nouppercase</a></div><div class="ttdeci">Print &amp; nouppercase(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00040">PrintStream.cpp:40</a></div></div>
 <div class="ttc" id="aPrintStream_8cpp_html_a64b1b8497d66d4d85cc3908cfac827b5"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#a64b1b8497d66d4d85cc3908cfac827b5">operator&lt;&lt;</a></div><div class="ttdeci">Print &amp; operator&lt;&lt;(Print &amp;printer, const __FlashStringHelper *s)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00100">PrintStream.cpp:100</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_aa46b20141a495c428e33bcdcbf63c04e"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#aa46b20141a495c428e33bcdcbf63c04e">dec</a></div><div class="ttdeci">Print &amp; dec(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00077">PrintStream.cpp:77</a></div></div>
 <div class="ttc" id="aPrintStream_8cpp_html_aae13bd0e8ea7184cf85b86bcd1a01e2d"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#aae13bd0e8ea7184cf85b86bcd1a01e2d">endl</a></div><div class="ttdeci">Print &amp; endl(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00027">PrintStream.cpp:27</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_aa47b34b5f85fef7f8b050c0d0a715d2f"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#aa47b34b5f85fef7f8b050c0d0a715d2f">hex</a></div><div class="ttdeci">Print &amp; hex(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00062">PrintStream.cpp:62</a></div></div>
 <div class="ttc" id="aPrintStream_8hpp_html"><div class="ttname"><a href="../../dd/d80/PrintStream_8hpp.html">PrintStream.hpp</a></div></div>
 <div class="ttc" id="aSettingsWrapper_8hpp_html"><div class="ttname"><a href="../../d2/dd5/SettingsWrapper_8hpp.html">SettingsWrapper.hpp</a></div></div>
-<div class="ttc" id="aPrintStream_8cpp_html_a43ae2a66eb945be61773cbb24d9b6608"><div class="ttname"><a href="../../da/d69/PrintStream_8cpp.html#a43ae2a66eb945be61773cbb24d9b6608">showbase</a></div><div class="ttdeci">Print &amp; showbase(Print &amp;printer)</div><div class="ttdef"><b>Definition:</b> <a href="../../da/d69/PrintStream_8cpp_source.html#l00045">PrintStream.cpp:45</a></div></div>
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by &#160;<a href="http://www.doxygen.org/index.html">
