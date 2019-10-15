@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['timefunction_3984',['timefunction',['../d1/dd0/MillisMicrosTimer_8hpp.html#a4086ab91003e2f23ab3d8d590d6f2fe3',1,'MillisMicrosTimer.hpp']]],
-  ['type_3985',['type',['../d8/df5/structenable__if_3_01true_00_01T_01_4.html#ab83a8093e1970e57ad25521ed0780705',1,'enable_if&lt; true, T &gt;']]]
+  ['value_5ftype_4033',['value_type',['../dd/d02/classDoublyLinkedList_1_1node__iterator.html#a79f262f02acb92f91c33d959a69b7efd',1,'DoublyLinkedList::node_iterator::value_type()'],['../d1/d4c/classDoublyLinkedList_1_1reverse__node__iterator.html#af320c0819dd6afeca2f1679c1b9fb6be',1,'DoublyLinkedList::reverse_node_iterator::value_type()']]]
 ];
