@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 1a4af071208bfbbbd770244e6210b8763c52071b - src/MIDI_Inputs/MIDIInputElement.hpp</title>
+  <title>LCOV - 5257dd361f38800fae7ebe090b63ce1fa3ad3950 - src/MIDI_Inputs/MIDIInputElement.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">1a4af071208bfbbbd770244e6210b8763c52071b</td>
+            <td class="headerValue">5257dd361f38800fae7ebe090b63ce1fa3ad3950</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">12</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-14 23:02:34</td>
+            <td class="headerValue">2019-10-15 11:37:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">5</td>
@@ -126,28 +126,31 @@
 <a name="56"><span class="lineNum">      56 </span>            :      * @brief   Extract the target address from a MIDI message.</a>
 <a name="57"><span class="lineNum">      57 </span>            :      * @note    This base version of the function is only valid for messages </a>
 <a name="58"><span class="lineNum">      58 </span>            :      *          that use data1 as an address (i.e. Note On, Note Off, Polyphonic</a>
-<a name="59"><span class="lineNum">      59 </span>            :      *          Key Pressure and Control Change).</a>
-<a name="60"><span class="lineNum">      60 </span>            :      */</a>
-<a name="61"><span class="lineNum">      61 </span>            :     virtual MIDICNChannelAddress</a>
-<a name="62"><span class="lineNum">      62 </span><span class="lineCov">        101 :     getTarget(const ChannelMessageMatcher &amp;midimsg) const {</span></a>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">        101 :         return {int8_t(midimsg.data1), Channel(midimsg.channel), midimsg.CN};</span></a>
-<a name="64"><span class="lineNum">      64 </span>            :     }</a>
-<a name="65"><span class="lineNum">      65 </span>            : </a>
-<a name="66"><span class="lineNum">      66 </span>            :     /**</a>
-<a name="67"><span class="lineNum">      67 </span>            :      * @brief   Check if the address of the incoming MIDI message matches an </a>
-<a name="68"><span class="lineNum">      68 </span>            :      *          address of this element.</a>
-<a name="69"><span class="lineNum">      69 </span>            :      * @note    This base version of the function is only valid for non-Bankable</a>
-<a name="70"><span class="lineNum">      70 </span>            :      *          MIDI input elements.</a>
-<a name="71"><span class="lineNum">      71 </span>            :      */</a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">         12 :     virtual bool match(const MIDICNChannelAddress &amp;target) const {</span></a>
-<a name="73"><span class="lineNum">      73 </span><span class="lineCov">         12 :         return MIDICNChannelAddress::matchSingle(this-&gt;address, target);</span></a>
-<a name="74"><span class="lineNum">      74 </span>            :     }</a>
-<a name="75"><span class="lineNum">      75 </span>            : </a>
-<a name="76"><span class="lineNum">      76 </span>            :   protected:</a>
-<a name="77"><span class="lineNum">      77 </span>            :     const MIDICNChannelAddress address;</a>
-<a name="78"><span class="lineNum">      78 </span>            : };</a>
-<a name="79"><span class="lineNum">      79 </span>            : </a>
-<a name="80"><span class="lineNum">      80 </span>            : END_CS_NAMESPACE</a>
+<a name="59"><span class="lineNum">      59 </span>            :      *          Key Pressure and Control Change), because it assumes that the</a>
+<a name="60"><span class="lineNum">      60 </span>            :      *          target address consists of the address (data 1), the MIDI </a>
+<a name="61"><span class="lineNum">      61 </span>            :      *          channel and the cable number.</a>
+<a name="62"><span class="lineNum">      62 </span>            :      */</a>
+<a name="63"><span class="lineNum">      63 </span>            :     virtual MIDICNChannelAddress</a>
+<a name="64"><span class="lineNum">      64 </span><span class="lineCov">        101 :     getTarget(const ChannelMessageMatcher &amp;midimsg) const {</span></a>
+<a name="65"><span class="lineNum">      65 </span><span class="lineCov">        101 :         return {int8_t(midimsg.data1), Channel(midimsg.channel), midimsg.CN};</span></a>
+<a name="66"><span class="lineNum">      66 </span>            :     }</a>
+<a name="67"><span class="lineNum">      67 </span>            : </a>
+<a name="68"><span class="lineNum">      68 </span>            :     /**</a>
+<a name="69"><span class="lineNum">      69 </span>            :      * @brief   Check if the address of the incoming MIDI message matches an </a>
+<a name="70"><span class="lineNum">      70 </span>            :      *          address of this element.</a>
+<a name="71"><span class="lineNum">      71 </span>            :      * @note    This base version of the function is only valid for non-Bankable</a>
+<a name="72"><span class="lineNum">      72 </span>            :      *          MIDI input elements, it only matches if the address is equal to </a>
+<a name="73"><span class="lineNum">      73 </span>            :      *          the address of this element.</a>
+<a name="74"><span class="lineNum">      74 </span>            :      */</a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">         12 :     virtual bool match(const MIDICNChannelAddress &amp;target) const {</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">         12 :         return MIDICNChannelAddress::matchSingle(this-&gt;address, target);</span></a>
+<a name="77"><span class="lineNum">      77 </span>            :     }</a>
+<a name="78"><span class="lineNum">      78 </span>            : </a>
+<a name="79"><span class="lineNum">      79 </span>            :   protected:</a>
+<a name="80"><span class="lineNum">      80 </span>            :     const MIDICNChannelAddress address;</a>
+<a name="81"><span class="lineNum">      81 </span>            : };</a>
+<a name="82"><span class="lineNum">      82 </span>            : </a>
+<a name="83"><span class="lineNum">      83 </span>            : END_CS_NAMESPACE</a>
 </pre>
       </td>
     </tr>

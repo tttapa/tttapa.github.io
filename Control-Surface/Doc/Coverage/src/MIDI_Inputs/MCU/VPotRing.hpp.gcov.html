@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 1a4af071208bfbbbd770244e6210b8763c52071b - src/MIDI_Inputs/MCU/VPotRing.hpp</title>
+  <title>LCOV - 5257dd361f38800fae7ebe090b63ce1fa3ad3950 - src/MIDI_Inputs/MCU/VPotRing.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">1a4af071208bfbbbd770244e6210b8763c52071b</td>
+            <td class="headerValue">5257dd361f38800fae7ebe090b63ce1fa3ad3950</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">53</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-14 23:02:34</td>
+            <td class="headerValue">2019-10-15 11:37:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">40</td>
@@ -261,35 +261,37 @@
 <a name="191"><span class="lineNum">     191 </span><span class="lineCov">          4 :         return BankableMIDIInput&lt;NumBanks&gt;::getBankIndex(target, this-&gt;address);</span></a>
 <a name="192"><span class="lineNum">     192 </span>            :     }</a>
 <a name="193"><span class="lineNum">     193 </span>            : </a>
-<a name="194"><span class="lineNum">     194 </span><span class="lineCov">          4 :     bool match(const MIDICNChannelAddress &amp;target) const override {</span></a>
-<a name="195"><span class="lineNum">     195 </span><span class="lineCov">          8 :         return BankableMIDIInput&lt;NumBanks&gt;::matchBankable(target,</span></a>
-<a name="196"><span class="lineNum">     196 </span><span class="lineCov">          4 :                                                           this-&gt;address);</span></a>
-<a name="197"><span class="lineNum">     197 </span>            :     }</a>
-<a name="198"><span class="lineNum">     198 </span>            : </a>
-<a name="199"><span class="lineNum">     199 </span><span class="lineCov">          4 :     void onBankSettingChange() override { this-&gt;callback.update(*this); }</span></a>
-<a name="200"><span class="lineNum">     200 </span>            : };</a>
-<a name="201"><span class="lineNum">     201 </span>            : </a>
-<a name="202"><span class="lineNum">     202 </span>            : /** </a>
-<a name="203"><span class="lineNum">     203 </span>            :  * @brief   A class for MIDI input elements that represent Mackie Control</a>
-<a name="204"><span class="lineNum">     204 </span>            :  *          Universal V-Pots.  </a>
-<a name="205"><span class="lineNum">     205 </span>            :  *          This version can be banked.</a>
-<a name="206"><span class="lineNum">     206 </span>            :  * </a>
-<a name="207"><span class="lineNum">     207 </span>            :  * @tparam  NumBanks </a>
-<a name="208"><span class="lineNum">     208 </span>            :  *          The number of banks.</a>
-<a name="209"><span class="lineNum">     209 </span>            :  */</a>
-<a name="210"><span class="lineNum">     210 </span>            : template &lt;uint8_t NumBanks&gt;</a>
-<a name="211"><span class="lineNum">     211 </span>            : class VPotRing : public GenericVPotRing&lt;NumBanks&gt; {</a>
-<a name="212"><span class="lineNum">     212 </span>            :   public:</a>
-<a name="213"><span class="lineNum">     213 </span><span class="lineCov">          3 :     VPotRing(BankConfig&lt;NumBanks&gt; config, uint8_t track,</span></a>
-<a name="214"><span class="lineNum">     214 </span>            :              MIDICNChannel channelCN = CHANNEL_1)</a>
-<a name="215"><span class="lineNum">     215 </span><span class="lineCov">          3 :         : GenericVPotRing&lt;NumBanks&gt;{config, track, channelCN, {}} {}</span></a>
-<a name="216"><span class="lineNum">     216 </span>            : };</a>
-<a name="217"><span class="lineNum">     217 </span>            : </a>
-<a name="218"><span class="lineNum">     218 </span>            : } // namespace Bankable</a>
+<a name="194"><span class="lineNum">     194 </span>            :     /// Check if the address of the incoming MIDI message is in one of the banks</a>
+<a name="195"><span class="lineNum">     195 </span>            :     /// of this element.</a>
+<a name="196"><span class="lineNum">     196 </span><span class="lineCov">          4 :     bool match(const MIDICNChannelAddress &amp;target) const override {</span></a>
+<a name="197"><span class="lineNum">     197 </span><span class="lineCov">          8 :         return BankableMIDIInput&lt;NumBanks&gt;::matchBankable(target,</span></a>
+<a name="198"><span class="lineNum">     198 </span><span class="lineCov">          4 :                                                           this-&gt;address);</span></a>
+<a name="199"><span class="lineNum">     199 </span>            :     }</a>
+<a name="200"><span class="lineNum">     200 </span>            : </a>
+<a name="201"><span class="lineNum">     201 </span><span class="lineCov">          4 :     void onBankSettingChange() override { this-&gt;callback.update(*this); }</span></a>
+<a name="202"><span class="lineNum">     202 </span>            : };</a>
+<a name="203"><span class="lineNum">     203 </span>            : </a>
+<a name="204"><span class="lineNum">     204 </span>            : /** </a>
+<a name="205"><span class="lineNum">     205 </span>            :  * @brief   A class for MIDI input elements that represent Mackie Control</a>
+<a name="206"><span class="lineNum">     206 </span>            :  *          Universal V-Pots.  </a>
+<a name="207"><span class="lineNum">     207 </span>            :  *          This version can be banked.</a>
+<a name="208"><span class="lineNum">     208 </span>            :  * </a>
+<a name="209"><span class="lineNum">     209 </span>            :  * @tparam  NumBanks </a>
+<a name="210"><span class="lineNum">     210 </span>            :  *          The number of banks.</a>
+<a name="211"><span class="lineNum">     211 </span>            :  */</a>
+<a name="212"><span class="lineNum">     212 </span>            : template &lt;uint8_t NumBanks&gt;</a>
+<a name="213"><span class="lineNum">     213 </span>            : class VPotRing : public GenericVPotRing&lt;NumBanks&gt; {</a>
+<a name="214"><span class="lineNum">     214 </span>            :   public:</a>
+<a name="215"><span class="lineNum">     215 </span><span class="lineCov">          3 :     VPotRing(BankConfig&lt;NumBanks&gt; config, uint8_t track,</span></a>
+<a name="216"><span class="lineNum">     216 </span>            :              MIDICNChannel channelCN = CHANNEL_1)</a>
+<a name="217"><span class="lineNum">     217 </span><span class="lineCov">          3 :         : GenericVPotRing&lt;NumBanks&gt;{config, track, channelCN, {}} {}</span></a>
+<a name="218"><span class="lineNum">     218 </span>            : };</a>
 <a name="219"><span class="lineNum">     219 </span>            : </a>
-<a name="220"><span class="lineNum">     220 </span>            : } // namespace MCU</a>
+<a name="220"><span class="lineNum">     220 </span>            : } // namespace Bankable</a>
 <a name="221"><span class="lineNum">     221 </span>            : </a>
-<a name="222"><span class="lineNum">     222 </span>            : END_CS_NAMESPACE</a>
+<a name="222"><span class="lineNum">     222 </span>            : } // namespace MCU</a>
+<a name="223"><span class="lineNum">     223 </span>            : </a>
+<a name="224"><span class="lineNum">     224 </span>            : END_CS_NAMESPACE</a>
 </pre>
       </td>
     </tr>

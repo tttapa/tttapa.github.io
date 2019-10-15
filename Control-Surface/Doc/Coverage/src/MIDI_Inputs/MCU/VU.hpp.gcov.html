@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 1a4af071208bfbbbd770244e6210b8763c52071b - src/MIDI_Inputs/MCU/VU.hpp</title>
+  <title>LCOV - 5257dd361f38800fae7ebe090b63ce1fa3ad3950 - src/MIDI_Inputs/MCU/VU.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">1a4af071208bfbbbd770244e6210b8763c52071b</td>
+            <td class="headerValue">5257dd361f38800fae7ebe090b63ce1fa3ad3950</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">67</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-14 23:02:34</td>
+            <td class="headerValue">2019-10-15 11:37:58</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">65</td>
@@ -400,81 +400,82 @@
 <a name="330"><span class="lineNum">     330 </span><span class="lineCov">          9 :         return BankableMIDIInput&lt;NumBanks&gt;::getBankIndex(target, this-&gt;address);</span></a>
 <a name="331"><span class="lineNum">     331 </span>            :     }</a>
 <a name="332"><span class="lineNum">     332 </span>            : </a>
-<a name="333"><span class="lineNum">     333 </span><span class="lineCov">          9 :     bool match(const MIDICNChannelAddress &amp;target) const override {</span></a>
-<a name="334"><span class="lineNum">     334 </span>            : </a>
-<a name="335"><span class="lineNum">     335 </span><span class="lineCov">         18 :         return BankableMIDIInput&lt;NumBanks&gt;::matchBankable(target,</span></a>
-<a name="336"><span class="lineNum">     336 </span><span class="lineCov">          9 :                                                           this-&gt;address);</span></a>
-<a name="337"><span class="lineNum">     337 </span>            :     }</a>
-<a name="338"><span class="lineNum">     338 </span>            : </a>
-<a name="339"><span class="lineNum">     339 </span><span class="lineCov">         12 :     void onBankSettingChange() override { this-&gt;callback.update(*this); }</span></a>
-<a name="340"><span class="lineNum">     340 </span>            : };</a>
-<a name="341"><span class="lineNum">     341 </span>            : </a>
-<a name="342"><span class="lineNum">     342 </span>            : /**</a>
-<a name="343"><span class="lineNum">     343 </span>            :  * @brief   A class for MIDI input elements that represent Mackie Control</a>
-<a name="344"><span class="lineNum">     344 </span>            :  *          Universal VU meters.  </a>
-<a name="345"><span class="lineNum">     345 </span>            :  * </a>
-<a name="346"><span class="lineNum">     346 </span>            :  * @tparam  NumBanks </a>
-<a name="347"><span class="lineNum">     347 </span>            :  *          The number of banks.</a>
-<a name="348"><span class="lineNum">     348 </span>            :  * </a>
-<a name="349"><span class="lineNum">     349 </span>            :  * @ingroup BankableMIDIInputElements</a>
-<a name="350"><span class="lineNum">     350 </span>            :  */</a>
-<a name="351"><span class="lineNum">     351 </span>            : template &lt;uint8_t NumBanks&gt;</a>
-<a name="352"><span class="lineNum">     352 </span>            : class VU : public GenericVU&lt;NumBanks&gt; {</a>
-<a name="353"><span class="lineNum">     353 </span>            :   public:</a>
-<a name="354"><span class="lineNum">     354 </span>            :     /** </a>
-<a name="355"><span class="lineNum">     355 </span>            :      * @brief   Construct a new Bankable VU object.</a>
-<a name="356"><span class="lineNum">     356 </span>            :      * </a>
-<a name="357"><span class="lineNum">     357 </span>            :      * @param   config</a>
-<a name="358"><span class="lineNum">     358 </span>            :      *          The bank configuration to use.</a>
-<a name="359"><span class="lineNum">     359 </span>            :      * @param   track</a>
-<a name="360"><span class="lineNum">     360 </span>            :      *          The track of the VU meter. [1, 8]</a>
-<a name="361"><span class="lineNum">     361 </span>            :      * @param   channelCN</a>
-<a name="362"><span class="lineNum">     362 </span>            :      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable</a>
-<a name="363"><span class="lineNum">     363 </span>            :      *          Number [0, 15].</a>
-<a name="364"><span class="lineNum">     364 </span>            :      * @param   decayTime</a>
-<a name="365"><span class="lineNum">     365 </span>            :      *          The time in milliseconds it takes for the value to decay one</a>
-<a name="366"><span class="lineNum">     366 </span>            :      *          step.  </a>
-<a name="367"><span class="lineNum">     367 </span>            :      *          The MCU protocol uses 300 ms per division, and two steps</a>
-<a name="368"><span class="lineNum">     368 </span>            :      *          per division, so the default is 150 ms per step.  </a>
-<a name="369"><span class="lineNum">     369 </span>            :      *          Some software doesn't work if the VU meter decays automatically, </a>
-<a name="370"><span class="lineNum">     370 </span>            :      *          in that case, you can set the decay time to zero to disable </a>
-<a name="371"><span class="lineNum">     371 </span>            :      *          the decay.</a>
-<a name="372"><span class="lineNum">     372 </span>            :      */</a>
-<a name="373"><span class="lineNum">     373 </span><span class="lineCov">          4 :     VU(const BankConfig&lt;NumBanks&gt; &amp;config, uint8_t track,</span></a>
-<a name="374"><span class="lineNum">     374 </span>            :        const MIDICNChannel &amp;channelCN,</a>
-<a name="375"><span class="lineNum">     375 </span>            :        unsigned int decayTime = VUDecay::Default)</a>
-<a name="376"><span class="lineNum">     376 </span>            :         : GenericVU&lt;NumBanks&gt;{</a>
-<a name="377"><span class="lineNum">     377 </span>            :               config, track, channelCN, decayTime, {},</a>
-<a name="378"><span class="lineNum">     378 </span><span class="lineCov">          4 :           } {}</span></a>
-<a name="379"><span class="lineNum">     379 </span>            : </a>
-<a name="380"><span class="lineNum">     380 </span>            :     /** </a>
-<a name="381"><span class="lineNum">     381 </span>            :      * @brief   Construct a new Bankable VU object.</a>
-<a name="382"><span class="lineNum">     382 </span>            :      * </a>
-<a name="383"><span class="lineNum">     383 </span>            :      * @param   config</a>
-<a name="384"><span class="lineNum">     384 </span>            :      *          The bank configuration to use.</a>
-<a name="385"><span class="lineNum">     385 </span>            :      * @param   track</a>
-<a name="386"><span class="lineNum">     386 </span>            :      *          The track of the VU meter. [1, 8]</a>
-<a name="387"><span class="lineNum">     387 </span>            :      * @param   decayTime</a>
-<a name="388"><span class="lineNum">     388 </span>            :      *          The time in milliseconds it takes for the value to decay one</a>
-<a name="389"><span class="lineNum">     389 </span>            :      *          step.  </a>
-<a name="390"><span class="lineNum">     390 </span>            :      *          The MCU protocol uses 300 ms per division, and two steps</a>
-<a name="391"><span class="lineNum">     391 </span>            :      *          per division, so the default is 150 ms per step.  </a>
-<a name="392"><span class="lineNum">     392 </span>            :      *          Some software doesn't work if the VU meter decays automatically, </a>
-<a name="393"><span class="lineNum">     393 </span>            :      *          in that case, you can set the decay time to zero to disable </a>
-<a name="394"><span class="lineNum">     394 </span>            :      *          the decay.</a>
-<a name="395"><span class="lineNum">     395 </span>            :      */</a>
-<a name="396"><span class="lineNum">     396 </span>            :     VU(const BankConfig&lt;NumBanks&gt; &amp;config, uint8_t track,</a>
-<a name="397"><span class="lineNum">     397 </span>            :        unsigned int decayTime = VUDecay::Default)</a>
-<a name="398"><span class="lineNum">     398 </span>            :         : GenericVU&lt;NumBanks&gt;{</a>
-<a name="399"><span class="lineNum">     399 </span>            :               config, track, CHANNEL_1, decayTime, {},</a>
-<a name="400"><span class="lineNum">     400 </span>            :           } {}</a>
-<a name="401"><span class="lineNum">     401 </span>            : };</a>
-<a name="402"><span class="lineNum">     402 </span>            : </a>
-<a name="403"><span class="lineNum">     403 </span>            : } // namespace Bankable</a>
-<a name="404"><span class="lineNum">     404 </span>            : </a>
-<a name="405"><span class="lineNum">     405 </span>            : } // namespace MCU</a>
-<a name="406"><span class="lineNum">     406 </span>            : </a>
-<a name="407"><span class="lineNum">     407 </span>            : END_CS_NAMESPACE</a>
+<a name="333"><span class="lineNum">     333 </span>            :     /// Check if the address of the incoming MIDI message is in one of the banks</a>
+<a name="334"><span class="lineNum">     334 </span>            :     /// of this element.</a>
+<a name="335"><span class="lineNum">     335 </span><span class="lineCov">          9 :     bool match(const MIDICNChannelAddress &amp;target) const override {</span></a>
+<a name="336"><span class="lineNum">     336 </span><span class="lineCov">         18 :         return BankableMIDIInput&lt;NumBanks&gt;::matchBankable(target,</span></a>
+<a name="337"><span class="lineNum">     337 </span><span class="lineCov">          9 :                                                           this-&gt;address);</span></a>
+<a name="338"><span class="lineNum">     338 </span>            :     }</a>
+<a name="339"><span class="lineNum">     339 </span>            : </a>
+<a name="340"><span class="lineNum">     340 </span><span class="lineCov">         12 :     void onBankSettingChange() override { this-&gt;callback.update(*this); }</span></a>
+<a name="341"><span class="lineNum">     341 </span>            : };</a>
+<a name="342"><span class="lineNum">     342 </span>            : </a>
+<a name="343"><span class="lineNum">     343 </span>            : /**</a>
+<a name="344"><span class="lineNum">     344 </span>            :  * @brief   A class for MIDI input elements that represent Mackie Control</a>
+<a name="345"><span class="lineNum">     345 </span>            :  *          Universal VU meters.  </a>
+<a name="346"><span class="lineNum">     346 </span>            :  * </a>
+<a name="347"><span class="lineNum">     347 </span>            :  * @tparam  NumBanks </a>
+<a name="348"><span class="lineNum">     348 </span>            :  *          The number of banks.</a>
+<a name="349"><span class="lineNum">     349 </span>            :  * </a>
+<a name="350"><span class="lineNum">     350 </span>            :  * @ingroup BankableMIDIInputElements</a>
+<a name="351"><span class="lineNum">     351 </span>            :  */</a>
+<a name="352"><span class="lineNum">     352 </span>            : template &lt;uint8_t NumBanks&gt;</a>
+<a name="353"><span class="lineNum">     353 </span>            : class VU : public GenericVU&lt;NumBanks&gt; {</a>
+<a name="354"><span class="lineNum">     354 </span>            :   public:</a>
+<a name="355"><span class="lineNum">     355 </span>            :     /** </a>
+<a name="356"><span class="lineNum">     356 </span>            :      * @brief   Construct a new Bankable VU object.</a>
+<a name="357"><span class="lineNum">     357 </span>            :      * </a>
+<a name="358"><span class="lineNum">     358 </span>            :      * @param   config</a>
+<a name="359"><span class="lineNum">     359 </span>            :      *          The bank configuration to use.</a>
+<a name="360"><span class="lineNum">     360 </span>            :      * @param   track</a>
+<a name="361"><span class="lineNum">     361 </span>            :      *          The track of the VU meter. [1, 8]</a>
+<a name="362"><span class="lineNum">     362 </span>            :      * @param   channelCN</a>
+<a name="363"><span class="lineNum">     363 </span>            :      *          The MIDI channel [CHANNEL_1, CHANNEL_16] and optional Cable</a>
+<a name="364"><span class="lineNum">     364 </span>            :      *          Number [0, 15].</a>
+<a name="365"><span class="lineNum">     365 </span>            :      * @param   decayTime</a>
+<a name="366"><span class="lineNum">     366 </span>            :      *          The time in milliseconds it takes for the value to decay one</a>
+<a name="367"><span class="lineNum">     367 </span>            :      *          step.  </a>
+<a name="368"><span class="lineNum">     368 </span>            :      *          The MCU protocol uses 300 ms per division, and two steps</a>
+<a name="369"><span class="lineNum">     369 </span>            :      *          per division, so the default is 150 ms per step.  </a>
+<a name="370"><span class="lineNum">     370 </span>            :      *          Some software doesn't work if the VU meter decays automatically, </a>
+<a name="371"><span class="lineNum">     371 </span>            :      *          in that case, you can set the decay time to zero to disable </a>
+<a name="372"><span class="lineNum">     372 </span>            :      *          the decay.</a>
+<a name="373"><span class="lineNum">     373 </span>            :      */</a>
+<a name="374"><span class="lineNum">     374 </span><span class="lineCov">          4 :     VU(const BankConfig&lt;NumBanks&gt; &amp;config, uint8_t track,</span></a>
+<a name="375"><span class="lineNum">     375 </span>            :        const MIDICNChannel &amp;channelCN,</a>
+<a name="376"><span class="lineNum">     376 </span>            :        unsigned int decayTime = VUDecay::Default)</a>
+<a name="377"><span class="lineNum">     377 </span>            :         : GenericVU&lt;NumBanks&gt;{</a>
+<a name="378"><span class="lineNum">     378 </span>            :               config, track, channelCN, decayTime, {},</a>
+<a name="379"><span class="lineNum">     379 </span><span class="lineCov">          4 :           } {}</span></a>
+<a name="380"><span class="lineNum">     380 </span>            : </a>
+<a name="381"><span class="lineNum">     381 </span>            :     /** </a>
+<a name="382"><span class="lineNum">     382 </span>            :      * @brief   Construct a new Bankable VU object.</a>
+<a name="383"><span class="lineNum">     383 </span>            :      * </a>
+<a name="384"><span class="lineNum">     384 </span>            :      * @param   config</a>
+<a name="385"><span class="lineNum">     385 </span>            :      *          The bank configuration to use.</a>
+<a name="386"><span class="lineNum">     386 </span>            :      * @param   track</a>
+<a name="387"><span class="lineNum">     387 </span>            :      *          The track of the VU meter. [1, 8]</a>
+<a name="388"><span class="lineNum">     388 </span>            :      * @param   decayTime</a>
+<a name="389"><span class="lineNum">     389 </span>            :      *          The time in milliseconds it takes for the value to decay one</a>
+<a name="390"><span class="lineNum">     390 </span>            :      *          step.  </a>
+<a name="391"><span class="lineNum">     391 </span>            :      *          The MCU protocol uses 300 ms per division, and two steps</a>
+<a name="392"><span class="lineNum">     392 </span>            :      *          per division, so the default is 150 ms per step.  </a>
+<a name="393"><span class="lineNum">     393 </span>            :      *          Some software doesn't work if the VU meter decays automatically, </a>
+<a name="394"><span class="lineNum">     394 </span>            :      *          in that case, you can set the decay time to zero to disable </a>
+<a name="395"><span class="lineNum">     395 </span>            :      *          the decay.</a>
+<a name="396"><span class="lineNum">     396 </span>            :      */</a>
+<a name="397"><span class="lineNum">     397 </span>            :     VU(const BankConfig&lt;NumBanks&gt; &amp;config, uint8_t track,</a>
+<a name="398"><span class="lineNum">     398 </span>            :        unsigned int decayTime = VUDecay::Default)</a>
+<a name="399"><span class="lineNum">     399 </span>            :         : GenericVU&lt;NumBanks&gt;{</a>
+<a name="400"><span class="lineNum">     400 </span>            :               config, track, CHANNEL_1, decayTime, {},</a>
+<a name="401"><span class="lineNum">     401 </span>            :           } {}</a>
+<a name="402"><span class="lineNum">     402 </span>            : };</a>
+<a name="403"><span class="lineNum">     403 </span>            : </a>
+<a name="404"><span class="lineNum">     404 </span>            : } // namespace Bankable</a>
+<a name="405"><span class="lineNum">     405 </span>            : </a>
+<a name="406"><span class="lineNum">     406 </span>            : } // namespace MCU</a>
+<a name="407"><span class="lineNum">     407 </span>            : </a>
+<a name="408"><span class="lineNum">     408 </span>            : END_CS_NAMESPACE</a>
 </pre>
       </td>
     </tr>
