@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - ae82eccd976f5bc9c830e722664cdab9be0f43a8 - src/MIDI_Outputs/Bankable/Abstract/MIDIButton.hpp</title>
+  <title>LCOV - efd79e4cc7ee4902ff55334cc0f438889fa128da - src/MIDI_Outputs/Bankable/Abstract/MIDIButton.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../../../gcov.css">
 </head>
 
@@ -28,21 +28,21 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">ae82eccd976f5bc9c830e722664cdab9be0f43a8</td>
+            <td class="headerValue">efd79e4cc7ee4902ff55334cc0f438889fa128da</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">12</td>
-            <td class="headerCovTableEntry">12</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">14</td>
             <td class="headerCovTableEntryHi">100.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-15 21:30:36</td>
+            <td class="headerValue">2019-10-17 02:13:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
-            <td class="headerCovTableEntry">9</td>
-            <td class="headerCovTableEntry">15</td>
-            <td class="headerCovTableEntryLo">60.0 %</td>
+            <td class="headerCovTableEntry">14</td>
+            <td class="headerCovTableEntry">25</td>
+            <td class="headerCovTableEntryLo">56.0 %</td>
           </tr>
           <tr>
             <td class="headerItem">Legend:</td>
@@ -87,7 +87,7 @@
 <a name="17"><span class="lineNum">      17 </span>            :  * @see     Button</a>
 <a name="18"><span class="lineNum">      18 </span>            :  */</a>
 <a name="19"><span class="lineNum">      19 </span>            : template &lt;class BankAddress, class Sender&gt;</a>
-<a name="20"><span class="lineNum">      20 </span>            : class MIDIButton : public MIDIOutputElement {</a>
+<a name="20"><span class="lineNum">      20 </span><span class="lineCov">         11 : class MIDIButton : public MIDIOutputElement {</span></a>
 <a name="21"><span class="lineNum">      21 </span>            :   public:</a>
 <a name="22"><span class="lineNum">      22 </span>            :     /**</a>
 <a name="23"><span class="lineNum">      23 </span>            :      * @brief   Construct a new bankable MIDIButton.</a>
@@ -101,7 +101,7 @@
 <a name="31"><span class="lineNum">      31 </span>            :      *          The MIDI sender to use.</a>
 <a name="32"><span class="lineNum">      32 </span>            :      */</a>
 <a name="33"><span class="lineNum">      33 </span><span class="lineCov">         11 :     MIDIButton(const BankAddress &amp;bankAddress, pin_t pin, const Sender &amp;sender)</span></a>
-<a name="34"><span class="lineNum">      34 </span><span class="lineCov">         11 :         : address{bankAddress}, button{pin}, sender{sender} {}</span></a>
+<a name="34"><span class="lineNum">      34 </span><span class="lineCov">         22 :         : address{bankAddress}, button{pin}, sender{sender} {}</span></a>
 <a name="35"><span class="lineNum">      35 </span>            : </a>
 <a name="36"><span class="lineNum">      36 </span><span class="lineCov">          6 :     void begin() override { button.begin(); }</span></a>
 <a name="37"><span class="lineNum">      37 </span><span class="lineCov">         26 :     void update() override {</span></a>
@@ -109,10 +109,10 @@
 <a name="39"><span class="lineNum">      39 </span><span class="lineCov">         26 :         if (state == Button::Falling) {</span></a>
 <a name="40"><span class="lineNum">      40 </span><span class="lineCov">          7 :             address.lock();</span></a>
 <a name="41"><span class="lineNum">      41 </span><span class="lineCov">          7 :             sender.sendOn(address.getActiveAddress());</span></a>
-<a name="42"><span class="lineNum">      42 </span><span class="lineCov">         19 :         } else if (state == Button::Rising) {</span></a>
+<a name="42"><span class="lineNum">      42 </span><span class="lineCov">         26 :         } else if (state == Button::Rising) {</span></a>
 <a name="43"><span class="lineNum">      43 </span><span class="lineCov">          7 :             sender.sendOff(address.getActiveAddress());</span></a>
 <a name="44"><span class="lineNum">      44 </span><span class="lineCov">          7 :             address.unlock();</span></a>
-<a name="45"><span class="lineNum">      45 </span>            :         }</a>
+<a name="45"><span class="lineNum">      45 </span><span class="lineCov">          7 :         }</span></a>
 <a name="46"><span class="lineNum">      46 </span><span class="lineCov">         26 :     }</span></a>
 <a name="47"><span class="lineNum">      47 </span>            : </a>
 <a name="48"><span class="lineNum">      48 </span>            : #ifdef INDIVIDUAL_BUTTON_INVERT</a>

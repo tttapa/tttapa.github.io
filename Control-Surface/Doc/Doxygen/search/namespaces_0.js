@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['bankable_2360',['Bankable',['../d1/dd0/namespaceBankable.html',1,'']]],
-  ['bass_2361',['Bass',['../de/d77/namespaceBass.html',1,'']]],
-  ['manyaddresses_2362',['ManyAddresses',['../db/d14/namespaceBankable_1_1ManyAddresses.html',1,'Bankable']]]
+  ['bankable_2354',['Bankable',['../d1/dd0/namespaceBankable.html',1,'']]],
+  ['bass_2355',['Bass',['../de/d77/namespaceBass.html',1,'']]],
+  ['manyaddresses_2356',['ManyAddresses',['../db/d14/namespaceBankable_1_1ManyAddresses.html',1,'Bankable']]]
 ];

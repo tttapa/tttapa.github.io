@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - ae82eccd976f5bc9c830e722664cdab9be0f43a8 - src/Banks/BankableMIDIInput.hpp</title>
+  <title>LCOV - efd79e4cc7ee4902ff55334cc0f438889fa128da - src/Banks/BankableMIDIInput.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,16 +28,16 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">ae82eccd976f5bc9c830e722664cdab9be0f43a8</td>
+            <td class="headerValue">efd79e4cc7ee4902ff55334cc0f438889fa128da</td>
             <td></td>
             <td class="headerItem">Lines:</td>
-            <td class="headerCovTableEntry">63</td>
-            <td class="headerCovTableEntry">75</td>
-            <td class="headerCovTableEntryMed">84.0 %</td>
+            <td class="headerCovTableEntry">58</td>
+            <td class="headerCovTableEntry">69</td>
+            <td class="headerCovTableEntryMed">84.1 %</td>
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-15 21:30:36</td>
+            <td class="headerValue">2019-10-17 02:13:40</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">20</td>
@@ -141,18 +141,18 @@
 <a name="71"><span class="lineNum">      71 </span><span class="lineCov">         21 :     uint8_t getBankIndex(const MIDICNChannelAddress &amp;target,</span></a>
 <a name="72"><span class="lineNum">      72 </span>            :                          const MIDICNChannelAddress &amp;base) const {</a>
 <a name="73"><span class="lineNum">      73 </span><span class="lineCov">         21 :         switch (type) {</span></a>
-<a name="74"><span class="lineNum">      74 </span><span class="lineCov">         11 :             case CHANGE_ADDRESS:</span></a>
-<a name="75"><span class="lineNum">      75 </span><span class="lineCov">         11 :                 return (target.getAddress() - base.getAddress()) /</span></a>
+<a name="74"><span class="lineNum">      74 </span>            :             case CHANGE_ADDRESS:</a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">         22 :                 return (target.getAddress() - base.getAddress()) /</span></a>
 <a name="76"><span class="lineNum">      76 </span><span class="lineCov">         11 :                        bank.getTracksPerBank();</span></a>
-<a name="77"><span class="lineNum">      77 </span><span class="lineCov">          7 :             case CHANGE_CHANNEL:</span></a>
-<a name="78"><span class="lineNum">      78 </span><span class="lineCov">          7 :                 return (target.getRawChannel() - base.getRawChannel()) /</span></a>
+<a name="77"><span class="lineNum">      77 </span>            :             case CHANGE_CHANNEL:</a>
+<a name="78"><span class="lineNum">      78 </span><span class="lineCov">         14 :                 return (target.getRawChannel() - base.getRawChannel()) /</span></a>
 <a name="79"><span class="lineNum">      79 </span><span class="lineCov">          7 :                        bank.getTracksPerBank();</span></a>
-<a name="80"><span class="lineNum">      80 </span><span class="lineCov">          3 :             case CHANGE_CABLENB:</span></a>
-<a name="81"><span class="lineNum">      81 </span><span class="lineCov">          3 :                 return (target.getCableNumber() - base.getCableNumber()) /</span></a>
+<a name="80"><span class="lineNum">      80 </span>            :             case CHANGE_CABLENB:</a>
+<a name="81"><span class="lineNum">      81 </span><span class="lineCov">          6 :                 return (target.getCableNumber() - base.getCableNumber()) /</span></a>
 <a name="82"><span class="lineNum">      82 </span><span class="lineCov">          3 :                        bank.getTracksPerBank();</span></a>
 <a name="83"><span class="lineNum">      83 </span><span class="lineNoCov">          0 :             default: return 0;</span></a>
 <a name="84"><span class="lineNum">      84 </span>            :         }</a>
-<a name="85"><span class="lineNum">      85 </span>            :     }</a>
+<a name="85"><span class="lineNum">      85 </span><span class="lineCov">         21 :     }</span></a>
 <a name="86"><span class="lineNum">      86 </span>            : </a>
 <a name="87"><span class="lineNum">      87 </span>            :   protected:</a>
 <a name="88"><span class="lineNum">      88 </span>            :     /**</a>
@@ -181,7 +181,7 @@
 <a name="111"><span class="lineNum">     111 </span><span class="lineCov">         19 :     bool matchBankable(uint8_t toMatch, uint8_t base) const {</span></a>
 <a name="112"><span class="lineNum">     112 </span><span class="lineCov">         19 :         uint8_t diff = toMatch - base;</span></a>
 <a name="113"><span class="lineNum">     113 </span><span class="lineCov">         36 :         return toMatch &gt;= base &amp;&amp; diff &lt; N * bank.getTracksPerBank() &amp;&amp;</span></a>
-<a name="114"><span class="lineNum">     114 </span><span class="lineCov">         36 :                diff % bank.getTracksPerBank() == 0;</span></a>
+<a name="114"><span class="lineNum">     114 </span><span class="lineCov">         17 :                diff % bank.getTracksPerBank() == 0;</span></a>
 <a name="115"><span class="lineNum">     115 </span>            :     }</a>
 <a name="116"><span class="lineNum">     116 </span>            : </a>
 <a name="117"><span class="lineNum">     117 </span>            :     /**</a>
@@ -201,7 +201,7 @@
 <a name="131"><span class="lineNum">     131 </span>            :                               uint8_t length) const {</a>
 <a name="132"><span class="lineNum">     132 </span><span class="lineCov">          9 :         uint8_t diff = toMatch - base;</span></a>
 <a name="133"><span class="lineNum">     133 </span><span class="lineCov">         15 :         return toMatch &gt;= base &amp;&amp; diff &lt; N * bank.getTracksPerBank() &amp;&amp;</span></a>
-<a name="134"><span class="lineNum">     134 </span><span class="lineCov">         15 :                diff % bank.getTracksPerBank() &lt; length;</span></a>
+<a name="134"><span class="lineNum">     134 </span><span class="lineCov">          6 :                diff % bank.getTracksPerBank() &lt; length;</span></a>
 <a name="135"><span class="lineNum">     135 </span>            :     }</a>
 <a name="136"><span class="lineNum">     136 </span>            : </a>
 <a name="137"><span class="lineNum">     137 </span>            :     /**</a>
@@ -245,26 +245,26 @@
 <a name="175"><span class="lineNum">     175 </span><span class="lineCov">         19 :         if (!toMatch.isValid() || !base.isValid())</span></a>
 <a name="176"><span class="lineNum">     176 </span><span class="lineNoCov">          0 :             return false;</span></a>
 <a name="177"><span class="lineNum">     177 </span><span class="lineCov">         19 :         switch (type) {</span></a>
-<a name="178"><span class="lineNum">     178 </span><span class="lineCov">          7 :             case CHANGE_ADDRESS: {</span></a>
+<a name="178"><span class="lineNum">     178 </span>            :             case CHANGE_ADDRESS: {</a>
 <a name="179"><span class="lineNum">     179 </span><span class="lineCov">         14 :                 return toMatch.getChannel() == base.getChannel() &amp;&amp;</span></a>
-<a name="180"><span class="lineNum">     180 </span><span class="lineCov">         14 :                        toMatch.getCableNumber() == base.getCableNumber() &amp;&amp;</span></a>
-<a name="181"><span class="lineNum">     181 </span><span class="lineCov">         14 :                        matchBankable(toMatch.getAddress(), base.getAddress());</span></a>
+<a name="180"><span class="lineNum">     180 </span><span class="lineCov">          7 :                        toMatch.getCableNumber() == base.getCableNumber() &amp;&amp;</span></a>
+<a name="181"><span class="lineNum">     181 </span><span class="lineCov">          7 :                        matchBankable(toMatch.getAddress(), base.getAddress());</span></a>
 <a name="182"><span class="lineNum">     182 </span>            :             }</a>
-<a name="183"><span class="lineNum">     183 </span><span class="lineCov">          9 :             case CHANGE_CHANNEL: {</span></a>
+<a name="183"><span class="lineNum">     183 </span>            :             case CHANGE_CHANNEL: {</a>
 <a name="184"><span class="lineNum">     184 </span><span class="lineCov">         18 :                 return toMatch.getAddress() == base.getAddress() &amp;&amp;</span></a>
-<a name="185"><span class="lineNum">     185 </span><span class="lineCov">         18 :                        toMatch.getCableNumber() == base.getCableNumber() &amp;&amp;</span></a>
-<a name="186"><span class="lineNum">     186 </span><span class="lineCov">          9 :                        matchBankable(toMatch.getRawChannel(),</span></a>
-<a name="187"><span class="lineNum">     187 </span><span class="lineCov">         18 :                                      base.getRawChannel());</span></a>
+<a name="185"><span class="lineNum">     185 </span><span class="lineCov">          9 :                        toMatch.getCableNumber() == base.getCableNumber() &amp;&amp;</span></a>
+<a name="186"><span class="lineNum">     186 </span><span class="lineCov">         18 :                        matchBankable(toMatch.getRawChannel(),</span></a>
+<a name="187"><span class="lineNum">     187 </span><span class="lineCov">          9 :                                      base.getRawChannel());</span></a>
 <a name="188"><span class="lineNum">     188 </span>            :             }</a>
-<a name="189"><span class="lineNum">     189 </span><span class="lineCov">          3 :             case CHANGE_CABLENB: {</span></a>
+<a name="189"><span class="lineNum">     189 </span>            :             case CHANGE_CABLENB: {</a>
 <a name="190"><span class="lineNum">     190 </span><span class="lineCov">          6 :                 return toMatch.getAddress() == base.getAddress() &amp;&amp;</span></a>
-<a name="191"><span class="lineNum">     191 </span><span class="lineCov">          6 :                        toMatch.getChannel() == base.getChannel() &amp;&amp;</span></a>
-<a name="192"><span class="lineNum">     192 </span><span class="lineCov">          3 :                        matchBankable(toMatch.getCableNumber(),</span></a>
-<a name="193"><span class="lineNum">     193 </span><span class="lineCov">          6 :                                      base.getCableNumber());</span></a>
+<a name="191"><span class="lineNum">     191 </span><span class="lineCov">          3 :                        toMatch.getChannel() == base.getChannel() &amp;&amp;</span></a>
+<a name="192"><span class="lineNum">     192 </span><span class="lineCov">          6 :                        matchBankable(toMatch.getCableNumber(),</span></a>
+<a name="193"><span class="lineNum">     193 </span><span class="lineCov">          3 :                                      base.getCableNumber());</span></a>
 <a name="194"><span class="lineNum">     194 </span>            :             }</a>
 <a name="195"><span class="lineNum">     195 </span><span class="lineNoCov">          0 :             default: return false;</span></a>
 <a name="196"><span class="lineNum">     196 </span>            :         }</a>
-<a name="197"><span class="lineNum">     197 </span>            :     }</a>
+<a name="197"><span class="lineNum">     197 </span><span class="lineCov">         19 :     }</span></a>
 <a name="198"><span class="lineNum">     198 </span>            : </a>
 <a name="199"><span class="lineNum">     199 </span>            :     /**</a>
 <a name="200"><span class="lineNum">     200 </span>            :      * @brief   Check whether a given address is part of the bank relative to</a>
@@ -283,19 +283,19 @@
 <a name="213"><span class="lineNum">     213 </span><span class="lineCov">         20 :         if (!toMatch.isValid() || !base.isValid())</span></a>
 <a name="214"><span class="lineNum">     214 </span><span class="lineNoCov">          0 :             return false;</span></a>
 <a name="215"><span class="lineNum">     215 </span><span class="lineCov">         20 :         switch (type) {</span></a>
-<a name="216"><span class="lineNum">     216 </span><span class="lineCov">         10 :             case CHANGE_ADDRESS: {</span></a>
+<a name="216"><span class="lineNum">     216 </span>            :             case CHANGE_ADDRESS: {</a>
 <a name="217"><span class="lineNum">     217 </span><span class="lineCov">         19 :                 return toMatch.getChannel() == base.getChannel() &amp;&amp;</span></a>
-<a name="218"><span class="lineNum">     218 </span><span class="lineCov">         19 :                        toMatch.getCableNumber() == base.getCableNumber() &amp;&amp;</span></a>
-<a name="219"><span class="lineNum">     219 </span><span class="lineCov">          9 :                        matchBankableInRange(toMatch.getAddress(),</span></a>
-<a name="220"><span class="lineNum">     220 </span><span class="lineCov">         19 :                                             base.getAddress(), length);</span></a>
+<a name="218"><span class="lineNum">     218 </span><span class="lineCov">          9 :                        toMatch.getCableNumber() == base.getCableNumber() &amp;&amp;</span></a>
+<a name="219"><span class="lineNum">     219 </span><span class="lineCov">         18 :                        matchBankableInRange(toMatch.getAddress(),</span></a>
+<a name="220"><span class="lineNum">     220 </span><span class="lineCov">          9 :                                             base.getAddress(), length);</span></a>
 <a name="221"><span class="lineNum">     221 </span>            :             }</a>
-<a name="222"><span class="lineNum">     222 </span><span class="lineCov">         10 :             case CHANGE_CHANNEL: {</span></a>
-<a name="223"><span class="lineNum">     223 </span><span class="lineCov">         10 :                 return inRange(toMatch.getAddress(), base.getAddress(),</span></a>
-<a name="224"><span class="lineNum">     224 </span><span class="lineCov">          6 :                                length) &amp;&amp;</span></a>
-<a name="225"><span class="lineNum">     225 </span><span class="lineCov">         16 :                        toMatch.getCableNumber() == base.getCableNumber() &amp;&amp;</span></a>
-<a name="226"><span class="lineNum">     226 </span><span class="lineCov">         10 :                        matchBankable(toMatch.getChannel(), base.getChannel());</span></a>
+<a name="222"><span class="lineNum">     222 </span>            :             case CHANGE_CHANNEL: {</a>
+<a name="223"><span class="lineNum">     223 </span><span class="lineCov">         26 :                 return inRange(toMatch.getAddress(), base.getAddress(),</span></a>
+<a name="224"><span class="lineNum">     224 </span><span class="lineCov">         20 :                                length) &amp;&amp;</span></a>
+<a name="225"><span class="lineNum">     225 </span><span class="lineCov">          6 :                        toMatch.getCableNumber() == base.getCableNumber() &amp;&amp;</span></a>
+<a name="226"><span class="lineNum">     226 </span><span class="lineCov">          6 :                        matchBankable(toMatch.getChannel(), base.getChannel());</span></a>
 <a name="227"><span class="lineNum">     227 </span>            :             }</a>
-<a name="228"><span class="lineNum">     228 </span><span class="lineNoCov">          0 :             case CHANGE_CABLENB: {</span></a>
+<a name="228"><span class="lineNum">     228 </span>            :             case CHANGE_CABLENB: {</a>
 <a name="229"><span class="lineNum">     229 </span><span class="lineNoCov">          0 :                 return inRange(toMatch.getAddress(), base.getAddress(),</span></a>
 <a name="230"><span class="lineNum">     230 </span><span class="lineNoCov">          0 :                                length) &amp;&amp;</span></a>
 <a name="231"><span class="lineNum">     231 </span><span class="lineNoCov">          0 :                        toMatch.getChannel() == base.getChannel() &amp;&amp;</span></a>
@@ -304,7 +304,7 @@
 <a name="234"><span class="lineNum">     234 </span>            :             }</a>
 <a name="235"><span class="lineNum">     235 </span><span class="lineNoCov">          0 :             default: return false;</span></a>
 <a name="236"><span class="lineNum">     236 </span>            :         }</a>
-<a name="237"><span class="lineNum">     237 </span>            :     }</a>
+<a name="237"><span class="lineNum">     237 </span><span class="lineCov">         20 :     }</span></a>
 <a name="238"><span class="lineNum">     238 </span>            : </a>
 <a name="239"><span class="lineNum">     239 </span>            :   private:</a>
 <a name="240"><span class="lineNum">     240 </span>            :     Bank&lt;N&gt; &amp;bank;</a>

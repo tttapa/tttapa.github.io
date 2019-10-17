@@ -121,6 +121,5 @@ var searchData=
   ['createchannel_364',['createChannel',['../d2/d48/classChannel.html#a0bf038df9f1a74a0f342a2f07feeb664',1,'Channel']]],
   ['cs_365',['CS',['../db/df8/namespaceCS.html',1,'']]],
   ['cs_5fnamespace_5fname_366',['CS_NAMESPACE_NAME',['../dc/dc7/NamespaceSettings_8hpp.html#a353461c7ea8d0f14aca0516594049e30',1,'NamespaceSettings.hpp']]],
-  ['cycle_367',['CYCLE',['../d7/dc7/namespaceMCU.html#a65c72ef00bd2b41fe87e365bdfe6ae8b',1,'MCU']]],
-  ['control_20surface_368',['Control Surface',['../index.html',1,'']]]
+  ['cycle_367',['CYCLE',['../d7/dc7/namespaceMCU.html#a65c72ef00bd2b41fe87e365bdfe6ae8b',1,'MCU']]]
 ];
