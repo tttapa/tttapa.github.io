@@ -1,9 +1,15 @@
 constexpr unsigned int K = 3;
 
-signed int div_s(signed int val) {
+signed int div_s1(signed int val) {
+    int round = val + (1 << (K - 1));
+    if (val < 0)
+        round -= 1;
+    return round >> K;
+}
+
+signed int div_s2(signed int val) {
     int neg = val < 0 ? 1 : 0;
-    int shiftval = (val + (1 << (K - 1)) - neg) >> K;
-    return shiftval;
+    return (val + (1 << (K - 1)) - neg) >> K;
 }
 
 unsigned int div_u(unsigned int val) {

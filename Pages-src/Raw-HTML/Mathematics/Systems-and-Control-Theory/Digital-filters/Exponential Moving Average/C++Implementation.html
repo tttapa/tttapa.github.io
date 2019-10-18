@@ -136,32 +136,31 @@
 </p>
 <p>
     On ARM and x86 platforms, the performance difference between the signed and 
-    unsigned version is small, because determining whether the dividend is 
-    negative can easily be done by shifting the sign bit to the least 
-    significant place (a right shift of 31 bits).
+    unsigned version is small.<br>
+    On some other architectures, like the AVR architecture used by some Arduino 
+    microcontrollers, the signed version is significantly slower.
 </p>
 <p>
-    On architectures where bit shifts are more expensive, like the AVR 
-    architecture used by Arduino microcontrollers, the signed version is much 
-    slower.<br>
-    The reason for this is that the AVR architecture only has an instruction to
-    shift a single bit, not to shift an arbitrary number of bits.<br>
-    Determining the sign of a number is therefore more complicated.
+    I provided two implementations of the signed division. Notice how on x86 and
+    ARM the second one is faster, while on AVR, the first one is faster.
+</p>
+<p>
+    The code was compiled using the <code>-O2</code> optimization level.
 </p>
 
 <h4>Implementation of Signed and Unsigned Division by a Multiple of Two</h4>
 @codesnippet{
     "file": "resources/Rounding-Division.cpp"
 }
-<h4>Assembly Generated on x86_64</h4>
+<h4>Assembly Generated on x86_64 (GCC 9.2)</h4>
 @codesnippet{
     "file": "resources/Rounding-Division-x86_64.S"
 }
-<h4>Assembly Generated on ARM</h4>
+<h4>Assembly Generated on ARM 64 (GCC 8.2)</h4>
 @codesnippet{
     "file": "resources/Rounding-Division-ARM.S"
 }
-<h4>Assembly Generated on AVR</h4>
+<h4>Assembly Generated on AVR (GCC 5.3)</h4>
 @codesnippet{
     "file": "resources/Rounding-Division-AVR.S"
 }
@@ -171,13 +170,13 @@
     If you use 32-bit integers on AVR, the result is even more atrocious.
 </p>
 <p>
-    You can try it for yourself on the <a href="https://godbolt.org/z/YdVpS7">Compiler Explorer</a>.
+    You can try it for yourself on the <a href="https://godbolt.org/z/cmQJ7W">Compiler Explorer</a>.
 </p>
 
 <h3>Arduino Example</h3>
 
 @codesnippet{
     "file": "resources/EMA-Arduino.ino"
-}
+} 
 
 </html>

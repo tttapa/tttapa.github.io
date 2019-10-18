@@ -520,360 +520,403 @@
 </p>
 <p>
     On ARM and x86 platforms, the performance difference between the signed and 
-    unsigned version is small, because determining whether the dividend is 
-    negative can easily be done by shifting the sign bit to the least 
-    significant place (a right shift of 31 bits).
+    unsigned version is small.<br>
+    On some other architectures, like the AVR architecture used by some Arduino 
+    microcontrollers, the signed version is significantly slower.
 </p>
 <p>
-    On architectures where bit shifts are more expensive, like the AVR 
-    architecture used by Arduino microcontrollers, the signed version is much 
-    slower.<br>
-    The reason for this is that the AVR architecture only has an instruction to
-    shift a single bit, not to shift an arbitrary number of bits.<br>
-    Determining the sign of a number is therefore more complicated.
+    I provided two implementations of the signed division. Notice how on x86 and
+    ARM the second one is faster, while on AVR, the first one is faster.
+</p>
+<p>
+    The code was compiled using the <code>-O2</code> optimization level.
 </p>
 
 <h4><a name="implementation-of-signed-and-unsigned-division-by-a-multiple-of-two" href="#implementation-of-signed-and-unsigned-division-by-a-multiple-of-two">Implementation of Signed and Unsigned Division by a Multiple of Two</a></h4>
-<div class="codesnippet"><style>.pygments153 .hll { background-color: #ffffcc }
-.pygments153  { background: #f8f8f8; }
-.pygments153 .c { color: #408080; font-style: italic } /* Comment */
-.pygments153 .err { border: 1px solid #FF0000 } /* Error */
-.pygments153 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments153 .o { color: #666666 } /* Operator */
-.pygments153 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments153 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments153 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments153 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments153 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments153 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments153 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments153 .ge { font-style: italic } /* Generic.Emph */
-.pygments153 .gr { color: #FF0000 } /* Generic.Error */
-.pygments153 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments153 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments153 .go { color: #888888 } /* Generic.Output */
-.pygments153 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments153 .gs { font-weight: bold } /* Generic.Strong */
-.pygments153 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments153 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments153 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments153 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments153 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments153 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments153 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments153 .kt { color: #B00040 } /* Keyword.Type */
-.pygments153 .m { color: #666666 } /* Literal.Number */
-.pygments153 .s { color: #BA2121 } /* Literal.String */
-.pygments153 .na { color: #7D9029 } /* Name.Attribute */
-.pygments153 .nb { color: #008000 } /* Name.Builtin */
-.pygments153 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments153 .no { color: #880000 } /* Name.Constant */
-.pygments153 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments153 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments153 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments153 .nf { color: #0000FF } /* Name.Function */
-.pygments153 .nl { color: #A0A000 } /* Name.Label */
-.pygments153 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments153 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments153 .nv { color: #19177C } /* Name.Variable */
-.pygments153 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments153 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments153 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments153 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments153 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments153 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments153 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments153 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments153 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments153 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments153 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments153 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments153 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments153 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments153 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments153 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments153 .sx { color: #008000 } /* Literal.String.Other */
-.pygments153 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments153 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments153 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments153 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments153 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments153 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments153 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments153 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments153 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments153 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments153 pre.snippet153 { counter-reset: line 0; }</style><div class="pygments153"><pre class="lineNumbers snippet153"><code><span></span><span class="k">constexpr</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span></code>
+<div class="codesnippet"><style>.pygments152 .hll { background-color: #ffffcc }
+.pygments152  { background: #f8f8f8; }
+.pygments152 .c { color: #408080; font-style: italic } /* Comment */
+.pygments152 .err { border: 1px solid #FF0000 } /* Error */
+.pygments152 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments152 .o { color: #666666 } /* Operator */
+.pygments152 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments152 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments152 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments152 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments152 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments152 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments152 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments152 .ge { font-style: italic } /* Generic.Emph */
+.pygments152 .gr { color: #FF0000 } /* Generic.Error */
+.pygments152 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments152 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments152 .go { color: #888888 } /* Generic.Output */
+.pygments152 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments152 .gs { font-weight: bold } /* Generic.Strong */
+.pygments152 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments152 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments152 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments152 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments152 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments152 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments152 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments152 .kt { color: #B00040 } /* Keyword.Type */
+.pygments152 .m { color: #666666 } /* Literal.Number */
+.pygments152 .s { color: #BA2121 } /* Literal.String */
+.pygments152 .na { color: #7D9029 } /* Name.Attribute */
+.pygments152 .nb { color: #008000 } /* Name.Builtin */
+.pygments152 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments152 .no { color: #880000 } /* Name.Constant */
+.pygments152 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments152 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments152 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments152 .nf { color: #0000FF } /* Name.Function */
+.pygments152 .nl { color: #A0A000 } /* Name.Label */
+.pygments152 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments152 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments152 .nv { color: #19177C } /* Name.Variable */
+.pygments152 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments152 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments152 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments152 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments152 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments152 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments152 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments152 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments152 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments152 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments152 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments152 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments152 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments152 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments152 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments152 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments152 .sx { color: #008000 } /* Literal.String.Other */
+.pygments152 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments152 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments152 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments152 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments152 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments152 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments152 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments152 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments152 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments152 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments152 pre.snippet152 { counter-reset: line 0; }</style><div class="pygments152"><pre class="lineNumbers snippet152"><code><span></span><span class="k">constexpr</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">K</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span></code>
 <code></code>
-<code><span class="kt">signed</span> <span class="kt">int</span> <span class="nf">div_s</span><span class="p">(</span><span class="kt">signed</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span></code>
+<code><span class="kt">signed</span> <span class="kt">int</span> <span class="nf">div_s1</span><span class="p">(</span><span class="kt">signed</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="kt">int</span> <span class="n">round</span> <span class="o">=</span> <span class="n">val</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span></code>
+<code>    <span class="k">if</span> <span class="p">(</span><span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span></code>
+<code>        <span class="n">round</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span></code>
+<code>    <span class="k">return</span> <span class="n">round</span> <span class="o">&gt;&gt;</span> <span class="n">K</span><span class="p">;</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="kt">signed</span> <span class="kt">int</span> <span class="nf">div_s2</span><span class="p">(</span><span class="kt">signed</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span></code>
 <code>    <span class="kt">int</span> <span class="n">neg</span> <span class="o">=</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span></code>
-<code>    <span class="kt">int</span> <span class="n">shiftval</span> <span class="o">=</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="n">neg</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">K</span><span class="p">;</span></code>
-<code>    <span class="k">return</span> <span class="n">shiftval</span><span class="p">;</span></code>
+<code>    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="n">neg</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="n">K</span><span class="p">;</span></code>
 <code><span class="p">}</span></code>
 <code></code>
 <code><span class="kt">unsigned</span> <span class="kt">int</span> <span class="nf">div_u</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span></code>
 <code>    <span class="k">return</span> <span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">K</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">&gt;&gt;</span> <span class="n">K</span><span class="p">;</span></code>
 <code><span class="p">}</span></code></pre></div>
 </div>
-<h4><a name="assembly-generated-on-x86-64" href="#assembly-generated-on-x86-64">Assembly Generated on x86_64</a></h4>
-<div class="codesnippet"><style>.pygments157 .hll { background-color: #ffffcc }
-.pygments157  { background: #f8f8f8; }
-.pygments157 .c { color: #408080; font-style: italic } /* Comment */
-.pygments157 .err { border: 1px solid #FF0000 } /* Error */
-.pygments157 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments157 .o { color: #666666 } /* Operator */
-.pygments157 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments157 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments157 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments157 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments157 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments157 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments157 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments157 .ge { font-style: italic } /* Generic.Emph */
-.pygments157 .gr { color: #FF0000 } /* Generic.Error */
-.pygments157 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments157 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments157 .go { color: #888888 } /* Generic.Output */
-.pygments157 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments157 .gs { font-weight: bold } /* Generic.Strong */
-.pygments157 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments157 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments157 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments157 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments157 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments157 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments157 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments157 .kt { color: #B00040 } /* Keyword.Type */
-.pygments157 .m { color: #666666 } /* Literal.Number */
-.pygments157 .s { color: #BA2121 } /* Literal.String */
-.pygments157 .na { color: #7D9029 } /* Name.Attribute */
-.pygments157 .nb { color: #008000 } /* Name.Builtin */
-.pygments157 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments157 .no { color: #880000 } /* Name.Constant */
-.pygments157 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments157 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments157 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments157 .nf { color: #0000FF } /* Name.Function */
-.pygments157 .nl { color: #A0A000 } /* Name.Label */
-.pygments157 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments157 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments157 .nv { color: #19177C } /* Name.Variable */
-.pygments157 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments157 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments157 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments157 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments157 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments157 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments157 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments157 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments157 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments157 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments157 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments157 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments157 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments157 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments157 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments157 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments157 .sx { color: #008000 } /* Literal.String.Other */
-.pygments157 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments157 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments157 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments157 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments157 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments157 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments157 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments157 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments157 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments157 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments157 pre.snippet157 { counter-reset: line 0; }</style><div class="pygments157"><pre class="lineNumbers snippet157"><code><span></span><span class="nf">div_s</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<h4><a name="assembly-generated-on-x86-64-gcc-9-2" href="#assembly-generated-on-x86-64-gcc-9-2">Assembly Generated on x86_64 (GCC 9.2)</a></h4>
+<div class="codesnippet"><style>.pygments156 .hll { background-color: #ffffcc }
+.pygments156  { background: #f8f8f8; }
+.pygments156 .c { color: #408080; font-style: italic } /* Comment */
+.pygments156 .err { border: 1px solid #FF0000 } /* Error */
+.pygments156 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments156 .o { color: #666666 } /* Operator */
+.pygments156 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments156 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments156 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments156 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments156 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments156 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments156 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments156 .ge { font-style: italic } /* Generic.Emph */
+.pygments156 .gr { color: #FF0000 } /* Generic.Error */
+.pygments156 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments156 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments156 .go { color: #888888 } /* Generic.Output */
+.pygments156 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments156 .gs { font-weight: bold } /* Generic.Strong */
+.pygments156 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments156 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments156 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments156 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments156 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments156 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments156 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments156 .kt { color: #B00040 } /* Keyword.Type */
+.pygments156 .m { color: #666666 } /* Literal.Number */
+.pygments156 .s { color: #BA2121 } /* Literal.String */
+.pygments156 .na { color: #7D9029 } /* Name.Attribute */
+.pygments156 .nb { color: #008000 } /* Name.Builtin */
+.pygments156 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments156 .no { color: #880000 } /* Name.Constant */
+.pygments156 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments156 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments156 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments156 .nf { color: #0000FF } /* Name.Function */
+.pygments156 .nl { color: #A0A000 } /* Name.Label */
+.pygments156 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments156 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments156 .nv { color: #19177C } /* Name.Variable */
+.pygments156 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments156 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments156 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments156 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments156 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments156 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments156 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments156 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments156 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments156 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments156 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments156 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments156 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments156 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments156 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments156 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments156 .sx { color: #008000 } /* Literal.String.Other */
+.pygments156 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments156 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments156 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments156 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments156 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments156 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments156 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments156 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments156 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments156 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments156 pre.snippet156 { counter-reset: line 0; }</style><div class="pygments156"><pre class="lineNumbers snippet156"><code><span></span><span class="nf">div_s1</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">mov</span>     <span class="n">eax</span><span class="p">,</span> <span class="n">edi</span></code>
+<code>        <span class="n">not</span>     <span class="n">eax</span></code>
+<code>        <span class="n">shr</span>     <span class="n">eax</span><span class="p">,</span> <span class="m">31</span></code>
+<code>        <span class="n">lea</span>     <span class="n">eax</span><span class="p">,</span> <span class="n">[rax</span><span class="m">+3</span><span class="o">+</span><span class="n">rdi]</span></code>
+<code>        <span class="n">sar</span>     <span class="n">eax</span><span class="p">,</span> <span class="m">3</span></code>
+<code>        <span class="n">ret</span></code>
+<code></code>
+<code><span class="nf">div_s2</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
 <code>        <span class="n">lea</span>     <span class="n">eax</span><span class="p">,</span> <span class="n">[rdi</span><span class="m">+4</span><span class="n">]</span></code>
 <code>        <span class="n">shr</span>     <span class="n">edi</span><span class="p">,</span> <span class="m">31</span></code>
 <code>        <span class="n">sub</span>     <span class="n">eax</span><span class="p">,</span> <span class="n">edi</span></code>
 <code>        <span class="n">sar</span>     <span class="n">eax</span><span class="p">,</span> <span class="m">3</span></code>
 <code>        <span class="n">ret</span></code>
+<code></code>
 <code><span class="nf">div_u</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
 <code>        <span class="n">lea</span>     <span class="n">eax</span><span class="p">,</span> <span class="n">[rdi</span><span class="m">+4</span><span class="n">]</span></code>
 <code>        <span class="n">shr</span>     <span class="n">eax</span><span class="p">,</span> <span class="m">3</span></code>
 <code>        <span class="n">ret</span></code></pre></div>
 </div>
-<h4><a name="assembly-generated-on-arm" href="#assembly-generated-on-arm">Assembly Generated on ARM</a></h4>
-<div class="codesnippet"><style>.pygments161 .hll { background-color: #ffffcc }
-.pygments161  { background: #f8f8f8; }
-.pygments161 .c { color: #408080; font-style: italic } /* Comment */
-.pygments161 .err { border: 1px solid #FF0000 } /* Error */
-.pygments161 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments161 .o { color: #666666 } /* Operator */
-.pygments161 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments161 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments161 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments161 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments161 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments161 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments161 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments161 .ge { font-style: italic } /* Generic.Emph */
-.pygments161 .gr { color: #FF0000 } /* Generic.Error */
-.pygments161 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments161 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments161 .go { color: #888888 } /* Generic.Output */
-.pygments161 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments161 .gs { font-weight: bold } /* Generic.Strong */
-.pygments161 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments161 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments161 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments161 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments161 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments161 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments161 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments161 .kt { color: #B00040 } /* Keyword.Type */
-.pygments161 .m { color: #666666 } /* Literal.Number */
-.pygments161 .s { color: #BA2121 } /* Literal.String */
-.pygments161 .na { color: #7D9029 } /* Name.Attribute */
-.pygments161 .nb { color: #008000 } /* Name.Builtin */
-.pygments161 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments161 .no { color: #880000 } /* Name.Constant */
-.pygments161 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments161 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments161 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments161 .nf { color: #0000FF } /* Name.Function */
-.pygments161 .nl { color: #A0A000 } /* Name.Label */
-.pygments161 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments161 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments161 .nv { color: #19177C } /* Name.Variable */
-.pygments161 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments161 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments161 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments161 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments161 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments161 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments161 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments161 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments161 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments161 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments161 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments161 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments161 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments161 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments161 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments161 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments161 .sx { color: #008000 } /* Literal.String.Other */
-.pygments161 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments161 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments161 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments161 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments161 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments161 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments161 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments161 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments161 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments161 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments161 pre.snippet161 { counter-reset: line 0; }</style><div class="pygments161"><pre class="lineNumbers snippet161"><code><span></span><span class="nf">div_s</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
-<code>        <span class="n">add</span>     <span class="n">r3</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="c1">#4</span></code>
-<code>        <span class="n">sub</span>     <span class="n">r0</span><span class="p">,</span> <span class="n">r3</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="n">lsr</span> <span class="c1">#31</span></code>
-<code>        <span class="n">asr</span>     <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="c1">#3</span></code>
-<code>        <span class="n">bx</span>      <span class="n">lr</span></code>
+<h4><a name="assembly-generated-on-arm-64-gcc-8-2" href="#assembly-generated-on-arm-64-gcc-8-2">Assembly Generated on ARM 64 (GCC 8.2)</a></h4>
+<div class="codesnippet"><style>.pygments160 .hll { background-color: #ffffcc }
+.pygments160  { background: #f8f8f8; }
+.pygments160 .c { color: #408080; font-style: italic } /* Comment */
+.pygments160 .err { border: 1px solid #FF0000 } /* Error */
+.pygments160 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments160 .o { color: #666666 } /* Operator */
+.pygments160 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments160 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments160 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments160 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments160 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments160 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments160 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments160 .ge { font-style: italic } /* Generic.Emph */
+.pygments160 .gr { color: #FF0000 } /* Generic.Error */
+.pygments160 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments160 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments160 .go { color: #888888 } /* Generic.Output */
+.pygments160 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments160 .gs { font-weight: bold } /* Generic.Strong */
+.pygments160 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments160 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments160 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments160 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments160 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments160 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments160 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments160 .kt { color: #B00040 } /* Keyword.Type */
+.pygments160 .m { color: #666666 } /* Literal.Number */
+.pygments160 .s { color: #BA2121 } /* Literal.String */
+.pygments160 .na { color: #7D9029 } /* Name.Attribute */
+.pygments160 .nb { color: #008000 } /* Name.Builtin */
+.pygments160 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments160 .no { color: #880000 } /* Name.Constant */
+.pygments160 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments160 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments160 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments160 .nf { color: #0000FF } /* Name.Function */
+.pygments160 .nl { color: #A0A000 } /* Name.Label */
+.pygments160 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments160 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments160 .nv { color: #19177C } /* Name.Variable */
+.pygments160 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments160 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments160 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments160 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments160 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments160 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments160 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments160 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments160 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments160 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments160 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments160 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments160 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments160 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments160 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments160 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments160 .sx { color: #008000 } /* Literal.String.Other */
+.pygments160 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments160 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments160 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments160 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments160 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments160 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments160 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments160 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments160 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments160 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments160 pre.snippet160 { counter-reset: line 0; }</style><div class="pygments160"><pre class="lineNumbers snippet160"><code><span></span><span class="nf">div_s1</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">mvn</span>     <span class="n">w1</span><span class="p">,</span> <span class="n">w0</span></code>
+<code>        <span class="n">add</span>     <span class="n">w0</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">lsr</span> <span class="m">31</span></code>
+<code>        <span class="n">add</span>     <span class="n">w0</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="m">3</span></code>
+<code>        <span class="n">asr</span>     <span class="n">w0</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="m">3</span></code>
+<code>        <span class="n">ret</span></code>
+<code></code>
+<code><span class="nf">div_s2</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">add</span>     <span class="n">w1</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="m">4</span></code>
+<code>        <span class="n">sub</span>     <span class="n">w0</span><span class="p">,</span> <span class="n">w1</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="n">lsr</span> <span class="m">31</span></code>
+<code>        <span class="n">asr</span>     <span class="n">w0</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="m">3</span></code>
+<code>        <span class="n">ret</span></code>
+<code></code>
 <code><span class="nf">div_u</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
-<code>        <span class="n">add</span>     <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="c1">#4</span></code>
-<code>        <span class="n">lsr</span>     <span class="n">r0</span><span class="p">,</span> <span class="n">r0</span><span class="p">,</span> <span class="c1">#3</span></code>
-<code>        <span class="n">bx</span>      <span class="n">lr</span></code></pre></div>
+<code>        <span class="n">add</span>     <span class="n">w0</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="m">4</span></code>
+<code>        <span class="n">lsr</span>     <span class="n">w0</span><span class="p">,</span> <span class="n">w0</span><span class="p">,</span> <span class="m">3</span></code>
+<code>        <span class="n">ret</span></code></pre></div>
 </div>
-<h4><a name="assembly-generated-on-avr" href="#assembly-generated-on-avr">Assembly Generated on AVR</a></h4>
-<div class="codesnippet"><style>.pygments165 .hll { background-color: #ffffcc }
-.pygments165  { background: #f8f8f8; }
-.pygments165 .c { color: #408080; font-style: italic } /* Comment */
-.pygments165 .err { border: 1px solid #FF0000 } /* Error */
-.pygments165 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments165 .o { color: #666666 } /* Operator */
-.pygments165 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments165 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments165 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments165 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments165 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments165 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments165 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments165 .ge { font-style: italic } /* Generic.Emph */
-.pygments165 .gr { color: #FF0000 } /* Generic.Error */
-.pygments165 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments165 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments165 .go { color: #888888 } /* Generic.Output */
-.pygments165 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments165 .gs { font-weight: bold } /* Generic.Strong */
-.pygments165 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments165 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments165 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments165 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments165 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments165 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments165 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments165 .kt { color: #B00040 } /* Keyword.Type */
-.pygments165 .m { color: #666666 } /* Literal.Number */
-.pygments165 .s { color: #BA2121 } /* Literal.String */
-.pygments165 .na { color: #7D9029 } /* Name.Attribute */
-.pygments165 .nb { color: #008000 } /* Name.Builtin */
-.pygments165 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments165 .no { color: #880000 } /* Name.Constant */
-.pygments165 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments165 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments165 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments165 .nf { color: #0000FF } /* Name.Function */
-.pygments165 .nl { color: #A0A000 } /* Name.Label */
-.pygments165 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments165 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments165 .nv { color: #19177C } /* Name.Variable */
-.pygments165 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments165 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments165 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments165 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments165 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments165 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments165 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments165 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments165 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments165 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments165 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments165 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments165 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments165 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments165 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments165 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments165 .sx { color: #008000 } /* Literal.String.Other */
-.pygments165 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments165 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments165 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments165 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments165 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments165 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments165 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments165 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments165 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments165 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments165 pre.snippet165 { counter-reset: line 0; }</style><div class="pygments165"><pre class="lineNumbers snippet165"><code><span></span><span class="n">__zero_reg__</span> <span class="o">=</span> <span class="m">1</span></code>
-<code><span class="nf">div_s</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
-<code>        <span class="n">mov</span> <span class="n">r18</span><span class="p">,</span><span class="n">r24</span></code>
-<code>        <span class="n">mov</span> <span class="n">r19</span><span class="p">,</span><span class="n">r25</span></code>
-<code>        <span class="n">subi</span> <span class="n">r18</span><span class="p">,</span><span class="m">-4</span></code>
-<code>        <span class="n">sbci</span> <span class="n">r19</span><span class="p">,</span><span class="m">-1</span></code>
-<code>        <span class="n">mov</span> <span class="n">r24</span><span class="p">,</span><span class="n">r25</span></code>
-<code>        <span class="n">rol</span> <span class="n">r24</span></code>
-<code>        <span class="n">clr</span> <span class="n">r24</span></code>
-<code>        <span class="n">rol</span> <span class="n">r24</span></code>
-<code>        <span class="n">mov</span> <span class="n">r20</span><span class="p">,</span><span class="n">r18</span></code>
-<code>        <span class="n">mov</span> <span class="n">r21</span><span class="p">,</span><span class="n">r19</span></code>
-<code>        <span class="n">sub</span> <span class="n">r20</span><span class="p">,</span><span class="n">r24</span></code>
-<code>        <span class="n">sbc</span> <span class="n">r21</span><span class="p">,</span><span class="n">__zero_reg__</span></code>
-<code>        <span class="n">mov</span> <span class="n">r24</span><span class="p">,</span><span class="n">r20</span></code>
-<code>        <span class="n">mov</span> <span class="n">r25</span><span class="p">,</span><span class="n">r21</span></code>
-<code>        <span class="n">asr</span> <span class="n">r25</span></code>
-<code>        <span class="n">ror</span> <span class="n">r24</span></code>
-<code>        <span class="n">asr</span> <span class="n">r25</span></code>
+<h4><a name="assembly-generated-on-avr-gcc-5-3" href="#assembly-generated-on-avr-gcc-5-3">Assembly Generated on AVR (GCC 5.3)</a></h4>
+<div class="codesnippet"><style>.pygments164 .hll { background-color: #ffffcc }
+.pygments164  { background: #f8f8f8; }
+.pygments164 .c { color: #408080; font-style: italic } /* Comment */
+.pygments164 .err { border: 1px solid #FF0000 } /* Error */
+.pygments164 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments164 .o { color: #666666 } /* Operator */
+.pygments164 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments164 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments164 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments164 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments164 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments164 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments164 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments164 .ge { font-style: italic } /* Generic.Emph */
+.pygments164 .gr { color: #FF0000 } /* Generic.Error */
+.pygments164 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments164 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments164 .go { color: #888888 } /* Generic.Output */
+.pygments164 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments164 .gs { font-weight: bold } /* Generic.Strong */
+.pygments164 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments164 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments164 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments164 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments164 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments164 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments164 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments164 .kt { color: #B00040 } /* Keyword.Type */
+.pygments164 .m { color: #666666 } /* Literal.Number */
+.pygments164 .s { color: #BA2121 } /* Literal.String */
+.pygments164 .na { color: #7D9029 } /* Name.Attribute */
+.pygments164 .nb { color: #008000 } /* Name.Builtin */
+.pygments164 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments164 .no { color: #880000 } /* Name.Constant */
+.pygments164 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments164 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments164 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments164 .nf { color: #0000FF } /* Name.Function */
+.pygments164 .nl { color: #A0A000 } /* Name.Label */
+.pygments164 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments164 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments164 .nv { color: #19177C } /* Name.Variable */
+.pygments164 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments164 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments164 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments164 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments164 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments164 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments164 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments164 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments164 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments164 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments164 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments164 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments164 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments164 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments164 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments164 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments164 .sx { color: #008000 } /* Literal.String.Other */
+.pygments164 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments164 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments164 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments164 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments164 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments164 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments164 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments164 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments164 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments164 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments164 pre.snippet164 { counter-reset: line 0; }</style><div class="pygments164"><pre class="lineNumbers snippet164"><code><span></span><span class="n">__zero_reg__</span> <span class="o">=</span> <span class="m">1</span></code>
+<code><span class="nf">div_s1</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">sbrc</span> <span class="n">r25</span><span class="p">,</span><span class="m">7</span>  <span class="c1"># Skip if Bit in Register is Cleared: val &lt; 0</span></code>
+<code>        <span class="n">rjmp</span> <span class="n">.L2</span></code>
+<code>                    <span class="c1"># val &gt;= 0</span></code>
+<code>        <span class="n">adiw</span> <span class="n">r24</span><span class="p">,</span><span class="m">4</span>  <span class="c1"># Add Immediate to Word: val + (1 &lt;&lt; (K - 1)) = val + 4</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span>     <span class="c1"># Arithmetic Shift Right: shift high byte (preserve sign)</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span>     <span class="c1"># Rotate Right through Carry: shift low byte</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span>     <span class="c1"># Two more times</span></code>
 <code>        <span class="n">ror</span> <span class="n">r24</span></code>
 <code>        <span class="n">asr</span> <span class="n">r25</span></code>
 <code>        <span class="n">ror</span> <span class="n">r24</span></code>
 <code>        <span class="n">ret</span></code>
-<code><span class="nf">div_u</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
-<code>        <span class="n">adiw</span> <span class="n">r24</span><span class="p">,</span><span class="m">4</span></code>
-<code>        <span class="n">lsr</span> <span class="n">r25</span></code>
+<code><span class="n">.L2</span><span class="o">:</span>                </code>
+<code>                    <span class="c1"># val &lt; 0</span></code>
+<code>        <span class="n">adiw</span> <span class="n">r24</span><span class="p">,</span><span class="m">3</span>  <span class="c1"># Add Immediate to Word: val + (1 &lt;&lt; (K - 1)) - 1 = val + 3</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span>     <span class="c1"># Arithmetic Shift Right: shift high byte (preserve sign)</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span>     <span class="c1"># Rotate Right through Carry: shift low byte</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span>     <span class="c1"># Two more times</span></code>
 <code>        <span class="n">ror</span> <span class="n">r24</span></code>
-<code>        <span class="n">lsr</span> <span class="n">r25</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span></code>
+<code>        <span class="n">ret</span></code>
+<code></code>
+<code><span class="nf">div_s2</span><span class="p">(</span><span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">movw</span> <span class="n">r18</span><span class="p">,</span><span class="n">r24</span></code>
+<code>        <span class="n">subi</span> <span class="n">r18</span><span class="p">,</span><span class="m">-4</span>   <span class="c1"># Subtract immediate: val + (1 &lt;&lt; (K - 1)) = val + 4</span></code>
+<code>        <span class="n">sbci</span> <span class="n">r19</span><span class="p">,</span><span class="m">-1</span>   <span class="c1"># Subtract Immediate with Carry: (low byte)</span></code>
+<code>        <span class="n">mov</span> <span class="n">r24</span><span class="p">,</span><span class="n">r25</span></code>
+<code>        <span class="n">rol</span> <span class="n">r24</span>       <span class="c1"># Rotate Left through Carry: C flag is now sign bit</span></code>
+<code>        <span class="n">clr</span> <span class="n">r24</span>       <span class="c1"># Clear Register: set 24 to 0</span></code>
+<code>        <span class="n">rol</span> <span class="n">r24</span>       <span class="c1"># Rotate Left through Carry: lsb is now sign bit</span></code>
+<code>        <span class="n">movw</span> <span class="n">r20</span><span class="p">,</span><span class="n">r18</span></code>
+<code>        <span class="n">sub</span> <span class="n">r20</span><span class="p">,</span><span class="n">r24</span>   <span class="c1"># Subtract without Carry: val + 4 - neg</span></code>
+<code>        <span class="n">sbc</span> <span class="n">r21</span><span class="p">,</span><span class="n">__zero_reg__</span>  <span class="c1"># Subtract with Carry: (low byte)</span></code>
+<code>        <span class="n">movw</span> <span class="n">r24</span><span class="p">,</span><span class="n">r20</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span>       <span class="c1"># Arithmetic Shift Right: shift high byte (preserve sign)</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span>       <span class="c1"># Rotate Right through Carry: shift low byte</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span>       <span class="c1"># Two more times</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span></code>
+<code>        <span class="n">asr</span> <span class="n">r25</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span></code>
+<code>        <span class="n">ret</span></code>
+<code></code>
+<code><span class="nf">div_u</span><span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span><span class="p">)</span><span class="o">:</span></code>
+<code>        <span class="n">adiw</span> <span class="n">r24</span><span class="p">,</span><span class="m">4</span>  <span class="c1"># Add Immediate to Word: val + (1 &lt;&lt; (K - 1)) = val + 4</span></code>
+<code>        <span class="n">lsr</span> <span class="n">r25</span>     <span class="c1"># Logical Shift Right: shift high byte (no sign extension)</span></code>
+<code>        <span class="n">ror</span> <span class="n">r24</span>     <span class="c1"># Rotate Right through Carry: shift low byte</span></code>
+<code>        <span class="n">lsr</span> <span class="n">r25</span>     <span class="c1"># Two more times</span></code>
 <code>        <span class="n">ror</span> <span class="n">r24</span></code>
 <code>        <span class="n">lsr</span> <span class="n">r25</span></code>
 <code>        <span class="n">ror</span> <span class="n">r24</span></code>
@@ -885,73 +928,73 @@
     If you use 32-bit integers on AVR, the result is even more atrocious.
 </p>
 <p>
-    You can try it for yourself on the <a href="https://godbolt.org/z/YdVpS7">Compiler Explorer</a>.
+    You can try it for yourself on the <a href="https://godbolt.org/z/cmQJ7W">Compiler Explorer</a>.
 </p>
 
 <h3><a name="arduino-example" href="#arduino-example">Arduino Example</a></h3>
 
-<div class="codesnippet"><style>.pygments179 .hll { background-color: #ffffcc }
-.pygments179  { background: #ffffff; }
-.pygments179 .c { color: #95a5a6 } /* Comment */
-.pygments179 .err { color: #a61717 } /* Error */
-.pygments179 .k { color: #728E00 } /* Keyword */
-.pygments179 .n { color: #434f54 } /* Name */
-.pygments179 .o { color: #728E00 } /* Operator */
-.pygments179 .ch { color: #95a5a6 } /* Comment.Hashbang */
-.pygments179 .cm { color: #95a5a6 } /* Comment.Multiline */
-.pygments179 .cp { color: #728E00 } /* Comment.Preproc */
-.pygments179 .cpf { color: #95a5a6 } /* Comment.PreprocFile */
-.pygments179 .c1 { color: #95a5a6 } /* Comment.Single */
-.pygments179 .cs { color: #95a5a6 } /* Comment.Special */
-.pygments179 .kc { color: #00979D } /* Keyword.Constant */
-.pygments179 .kd { color: #728E00 } /* Keyword.Declaration */
-.pygments179 .kn { color: #728E00 } /* Keyword.Namespace */
-.pygments179 .kp { color: #00979D } /* Keyword.Pseudo */
-.pygments179 .kr { color: #00979D } /* Keyword.Reserved */
-.pygments179 .kt { color: #00979D } /* Keyword.Type */
-.pygments179 .m { color: #8A7B52 } /* Literal.Number */
-.pygments179 .s { color: #7F8C8D } /* Literal.String */
-.pygments179 .na { color: #434f54 } /* Name.Attribute */
-.pygments179 .nb { color: #728E00 } /* Name.Builtin */
-.pygments179 .nc { color: #434f54 } /* Name.Class */
-.pygments179 .no { color: #434f54 } /* Name.Constant */
-.pygments179 .nd { color: #434f54 } /* Name.Decorator */
-.pygments179 .ni { color: #434f54 } /* Name.Entity */
-.pygments179 .ne { color: #434f54 } /* Name.Exception */
-.pygments179 .nf { color: #D35400 } /* Name.Function */
-.pygments179 .nl { color: #434f54 } /* Name.Label */
-.pygments179 .nn { color: #434f54 } /* Name.Namespace */
-.pygments179 .nx { color: #728E00 } /* Name.Other */
-.pygments179 .py { color: #434f54 } /* Name.Property */
-.pygments179 .nt { color: #434f54 } /* Name.Tag */
-.pygments179 .nv { color: #434f54 } /* Name.Variable */
-.pygments179 .ow { color: #728E00 } /* Operator.Word */
-.pygments179 .mb { color: #8A7B52 } /* Literal.Number.Bin */
-.pygments179 .mf { color: #8A7B52 } /* Literal.Number.Float */
-.pygments179 .mh { color: #8A7B52 } /* Literal.Number.Hex */
-.pygments179 .mi { color: #8A7B52 } /* Literal.Number.Integer */
-.pygments179 .mo { color: #8A7B52 } /* Literal.Number.Oct */
-.pygments179 .sa { color: #7F8C8D } /* Literal.String.Affix */
-.pygments179 .sb { color: #7F8C8D } /* Literal.String.Backtick */
-.pygments179 .sc { color: #7F8C8D } /* Literal.String.Char */
-.pygments179 .dl { color: #7F8C8D } /* Literal.String.Delimiter */
-.pygments179 .sd { color: #7F8C8D } /* Literal.String.Doc */
-.pygments179 .s2 { color: #7F8C8D } /* Literal.String.Double */
-.pygments179 .se { color: #7F8C8D } /* Literal.String.Escape */
-.pygments179 .sh { color: #7F8C8D } /* Literal.String.Heredoc */
-.pygments179 .si { color: #7F8C8D } /* Literal.String.Interpol */
-.pygments179 .sx { color: #7F8C8D } /* Literal.String.Other */
-.pygments179 .sr { color: #7F8C8D } /* Literal.String.Regex */
-.pygments179 .s1 { color: #7F8C8D } /* Literal.String.Single */
-.pygments179 .ss { color: #7F8C8D } /* Literal.String.Symbol */
-.pygments179 .bp { color: #728E00 } /* Name.Builtin.Pseudo */
-.pygments179 .fm { color: #D35400 } /* Name.Function.Magic */
-.pygments179 .vc { color: #434f54 } /* Name.Variable.Class */
-.pygments179 .vg { color: #434f54 } /* Name.Variable.Global */
-.pygments179 .vi { color: #434f54 } /* Name.Variable.Instance */
-.pygments179 .vm { color: #434f54 } /* Name.Variable.Magic */
-.pygments179 .il { color: #8A7B52 } /* Literal.Number.Integer.Long */
-.pygments179 pre.snippet179 { counter-reset: line 0; }</style><div class="pygments179"><pre class="lineNumbers snippet179"><code><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="kr">uint8_t</span> <span class="n">K</span><span class="p">,</span> <span class="kr">class</span> <span class="nc">uint_t</span> <span class="o">=</span> <span class="kr">uint16_t</span><span class="o">&gt;</span></code>
+<div class="codesnippet"><style>.pygments178 .hll { background-color: #ffffcc }
+.pygments178  { background: #ffffff; }
+.pygments178 .c { color: #95a5a6 } /* Comment */
+.pygments178 .err { color: #a61717 } /* Error */
+.pygments178 .k { color: #728E00 } /* Keyword */
+.pygments178 .n { color: #434f54 } /* Name */
+.pygments178 .o { color: #728E00 } /* Operator */
+.pygments178 .ch { color: #95a5a6 } /* Comment.Hashbang */
+.pygments178 .cm { color: #95a5a6 } /* Comment.Multiline */
+.pygments178 .cp { color: #728E00 } /* Comment.Preproc */
+.pygments178 .cpf { color: #95a5a6 } /* Comment.PreprocFile */
+.pygments178 .c1 { color: #95a5a6 } /* Comment.Single */
+.pygments178 .cs { color: #95a5a6 } /* Comment.Special */
+.pygments178 .kc { color: #00979D } /* Keyword.Constant */
+.pygments178 .kd { color: #728E00 } /* Keyword.Declaration */
+.pygments178 .kn { color: #728E00 } /* Keyword.Namespace */
+.pygments178 .kp { color: #00979D } /* Keyword.Pseudo */
+.pygments178 .kr { color: #00979D } /* Keyword.Reserved */
+.pygments178 .kt { color: #00979D } /* Keyword.Type */
+.pygments178 .m { color: #8A7B52 } /* Literal.Number */
+.pygments178 .s { color: #7F8C8D } /* Literal.String */
+.pygments178 .na { color: #434f54 } /* Name.Attribute */
+.pygments178 .nb { color: #728E00 } /* Name.Builtin */
+.pygments178 .nc { color: #434f54 } /* Name.Class */
+.pygments178 .no { color: #434f54 } /* Name.Constant */
+.pygments178 .nd { color: #434f54 } /* Name.Decorator */
+.pygments178 .ni { color: #434f54 } /* Name.Entity */
+.pygments178 .ne { color: #434f54 } /* Name.Exception */
+.pygments178 .nf { color: #D35400 } /* Name.Function */
+.pygments178 .nl { color: #434f54 } /* Name.Label */
+.pygments178 .nn { color: #434f54 } /* Name.Namespace */
+.pygments178 .nx { color: #728E00 } /* Name.Other */
+.pygments178 .py { color: #434f54 } /* Name.Property */
+.pygments178 .nt { color: #434f54 } /* Name.Tag */
+.pygments178 .nv { color: #434f54 } /* Name.Variable */
+.pygments178 .ow { color: #728E00 } /* Operator.Word */
+.pygments178 .mb { color: #8A7B52 } /* Literal.Number.Bin */
+.pygments178 .mf { color: #8A7B52 } /* Literal.Number.Float */
+.pygments178 .mh { color: #8A7B52 } /* Literal.Number.Hex */
+.pygments178 .mi { color: #8A7B52 } /* Literal.Number.Integer */
+.pygments178 .mo { color: #8A7B52 } /* Literal.Number.Oct */
+.pygments178 .sa { color: #7F8C8D } /* Literal.String.Affix */
+.pygments178 .sb { color: #7F8C8D } /* Literal.String.Backtick */
+.pygments178 .sc { color: #7F8C8D } /* Literal.String.Char */
+.pygments178 .dl { color: #7F8C8D } /* Literal.String.Delimiter */
+.pygments178 .sd { color: #7F8C8D } /* Literal.String.Doc */
+.pygments178 .s2 { color: #7F8C8D } /* Literal.String.Double */
+.pygments178 .se { color: #7F8C8D } /* Literal.String.Escape */
+.pygments178 .sh { color: #7F8C8D } /* Literal.String.Heredoc */
+.pygments178 .si { color: #7F8C8D } /* Literal.String.Interpol */
+.pygments178 .sx { color: #7F8C8D } /* Literal.String.Other */
+.pygments178 .sr { color: #7F8C8D } /* Literal.String.Regex */
+.pygments178 .s1 { color: #7F8C8D } /* Literal.String.Single */
+.pygments178 .ss { color: #7F8C8D } /* Literal.String.Symbol */
+.pygments178 .bp { color: #728E00 } /* Name.Builtin.Pseudo */
+.pygments178 .fm { color: #D35400 } /* Name.Function.Magic */
+.pygments178 .vc { color: #434f54 } /* Name.Variable.Class */
+.pygments178 .vg { color: #434f54 } /* Name.Variable.Global */
+.pygments178 .vi { color: #434f54 } /* Name.Variable.Instance */
+.pygments178 .vm { color: #434f54 } /* Name.Variable.Magic */
+.pygments178 .il { color: #8A7B52 } /* Literal.Number.Integer.Long */
+.pygments178 pre.snippet178 { counter-reset: line 0; }</style><div class="pygments178"><pre class="lineNumbers snippet178"><code><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="kr">uint8_t</span> <span class="n">K</span><span class="p">,</span> <span class="kr">class</span> <span class="nc">uint_t</span> <span class="o">=</span> <span class="kr">uint16_t</span><span class="o">&gt;</span></code>
 <code><span class="kr">class</span> <span class="nc">EMA</span> <span class="p">{</span></code>
 <code>  <span class="kr">public</span><span class="o">:</span></code>
 <code>    <span class="n">uint_t</span> <span class="kr">operator</span><span class="p">()(</span><span class="n">uint_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
@@ -989,11 +1032,11 @@
 <code>    <span class="n">prevMicros</span> <span class="o">+=</span> <span class="n">interval</span><span class="p">;</span></code>
 <code>  <span class="p">}</span></code>
 <code><span class="p">}</span></code></pre></div>
-</div>
+</div> 
 
 </div>
     </article>
-    <footer>Last edited: Sunday, 13 October 2019 00:53 UTC</footer>
+    <footer>Last edited: Friday, 18 October 2019 23:39 UTC</footer>
 
 
 </body></html>

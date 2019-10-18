@@ -1,9 +1,17 @@
-div_s(int):
-        add     r3, r0, #4
-        sub     r0, r3, r0, lsr #31
-        asr     r0, r0, #3
-        bx      lr
+div_s1(int):
+        mvn     w1, w0
+        add     w0, w0, w1, lsr 31
+        add     w0, w0, 3
+        asr     w0, w0, 3
+        ret
+
+div_s2(int):
+        add     w1, w0, 4
+        sub     w0, w1, w0, lsr 31
+        asr     w0, w0, 3
+        ret
+
 div_u(unsigned int):
-        add     r0, r0, #4
-        lsr     r0, r0, #3
-        bx      lr
+        add     w0, w0, 4
+        lsr     w0, w0, 3
+        ret
