@@ -122,7 +122,7 @@ var searchData=
   ['getmax_864',['getMax',['../d2/de9/classIVU.html#a0f8f6bf73807942ebcb61256c2365f0d',1,'IVU']]],
   ['getmcunamefromnotenumber_865',['getMCUNameFromNoteNumber',['../d7/dc7/namespaceMCU.html#afd5164c7229cdc453d86314a30cb3b4f',1,'MCU']]],
   ['getmode_866',['getMode',['../da/d50/classMCU_1_1IVPotRing.html#a6139fb66c45a38a9779791d1ee200e61',1,'MCU::IVPotRing::getMode() const'],['../da/d50/classMCU_1_1IVPotRing.html#a3c5253ee1362c6275d79e1ed3fa0c3c6',1,'MCU::IVPotRing::getMode(uint8_t value)']]],
-  ['getname_867',['getName',['../d1/d19/classButton.html#a5e92368e2a142fb2d246e6de0a5e89c5',1,'Button']]],
+  ['getname_867',['getName',['../d1/d19/classButton.html#a59f0e45c5303372e5f5f5bc601a86bde',1,'Button']]],
   ['getnumberofbanks_868',['getNumberOfBanks',['../db/dbd/classBank.html#a7a8b2fca717d8275cb38ccff29db8ccf',1,'Bank']]],
   ['getoffset_869',['getOffset',['../d9/d36/classOutputBank.html#a8e063da9b770b79d471df9652e060232',1,'OutputBank']]],
   ['getoffsets_870',['getOffsets',['../d5/dc0/classChord.html#ac65922b35566e2407fa720e4b6b25539',1,'Chord']]],
