@@ -4,7 +4,7 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <title>LCOV - 67f628f98c7f44ed08a2760fcfd46c8b48043ba9 - src/Selectors/IncrementDecrementSelector.hpp</title>
+  <title>LCOV - 870d2786c3da7a277823ece91759e0a21d3cc896 - src/Selectors/IncrementDecrementSelector.hpp</title>
   <link rel="stylesheet" type="text/css" href="../../gcov.css">
 </head>
 
@@ -28,7 +28,7 @@
           </tr>
           <tr>
             <td class="headerItem">Test:</td>
-            <td class="headerValue">67f628f98c7f44ed08a2760fcfd46c8b48043ba9</td>
+            <td class="headerValue">870d2786c3da7a277823ece91759e0a21d3cc896</td>
             <td></td>
             <td class="headerItem">Lines:</td>
             <td class="headerCovTableEntry">23</td>
@@ -37,7 +37,7 @@
           </tr>
           <tr>
             <td class="headerItem">Date:</td>
-            <td class="headerValue">2019-10-19 22:50:56</td>
+            <td class="headerValue">2019-10-22 11:16:28</td>
             <td></td>
             <td class="headerItem">Functions:</td>
             <td class="headerCovTableEntry">18</td>
@@ -95,7 +95,7 @@
 <a name="25"><span class="lineNum">      25 </span><span class="lineCov">         19 :     void update() override {</span></a>
 <a name="26"><span class="lineNum">      26 </span><span class="lineCov">         19 :         Parent::update();</span></a>
 <a name="27"><span class="lineNum">      27 </span>            :         using IncrDecrButtons = IncrementDecrementButtons;</a>
-<a name="28"><span class="lineNum">      28 </span><span class="lineCov">         19 :         switch (buttons.getState()) {</span></a>
+<a name="28"><span class="lineNum">      28 </span><span class="lineCov">         19 :         switch (buttons.update()) {</span></a>
 <a name="29"><span class="lineNum">      29 </span><span class="lineCov">          5 :             case IncrDecrButtons::Increment: this-&gt;increment(wrap); break;</span></a>
 <a name="30"><span class="lineNum">      30 </span><span class="lineCov">          5 :             case IncrDecrButtons::Decrement: this-&gt;decrement(wrap); break;</span></a>
 <a name="31"><span class="lineNum">      31 </span><span class="lineCov">          1 :             case IncrDecrButtons::Reset: this-&gt;reset(); break;</span></a>
@@ -108,42 +108,46 @@
 <a name="38"><span class="lineNum">      38 </span>            :     void invert() { buttons.invert(); }</a>
 <a name="39"><span class="lineNum">      39 </span>            : #endif</a>
 <a name="40"><span class="lineNum">      40 </span>            : </a>
-<a name="41"><span class="lineNum">      41 </span>            :   private:</a>
-<a name="42"><span class="lineNum">      42 </span>            :     IncrementDecrementButtons buttons;</a>
-<a name="43"><span class="lineNum">      43 </span>            :     Wrap wrap;</a>
-<a name="44"><span class="lineNum">      44 </span>            : };</a>
-<a name="45"><span class="lineNum">      45 </span>            : </a>
-<a name="46"><span class="lineNum">      46 </span>            : // -------------------------------------------------------------------------- //</a>
-<a name="47"><span class="lineNum">      47 </span>            : </a>
-<a name="48"><span class="lineNum">      48 </span>            : /**</a>
-<a name="49"><span class="lineNum">      49 </span>            :  * @brief   Selector with two buttons (one to increment, one to decrement).</a>
-<a name="50"><span class="lineNum">      50 </span>            :  * </a>
-<a name="51"><span class="lineNum">      51 </span>            :  * Pressing two buttons simultaneously resets to the default setting.</a>
-<a name="52"><span class="lineNum">      52 </span>            :  * </a>
-<a name="53"><span class="lineNum">      53 </span>            :  * @htmlonly </a>
-<a name="54"><span class="lineNum">      54 </span>            :  * &lt;object type=&quot;image/svg+xml&quot; data=&quot;../../selector-increment-decrement-LED.svg&quot;&gt;&lt;/object&gt;</a>
-<a name="55"><span class="lineNum">      55 </span>            :  * @endhtmlonly</a>
+<a name="41"><span class="lineNum">      41 </span>            :     IncrementDecrementButtons::State getButtonsState() const {</a>
+<a name="42"><span class="lineNum">      42 </span>            :         return buttons.getState();</a>
+<a name="43"><span class="lineNum">      43 </span>            :     }</a>
+<a name="44"><span class="lineNum">      44 </span>            : </a>
+<a name="45"><span class="lineNum">      45 </span>            :   private:</a>
+<a name="46"><span class="lineNum">      46 </span>            :     IncrementDecrementButtons buttons;</a>
+<a name="47"><span class="lineNum">      47 </span>            :     Wrap wrap;</a>
+<a name="48"><span class="lineNum">      48 </span>            : };</a>
+<a name="49"><span class="lineNum">      49 </span>            : </a>
+<a name="50"><span class="lineNum">      50 </span>            : // -------------------------------------------------------------------------- //</a>
+<a name="51"><span class="lineNum">      51 </span>            : </a>
+<a name="52"><span class="lineNum">      52 </span>            : /**</a>
+<a name="53"><span class="lineNum">      53 </span>            :  * @brief   Selector with two buttons (one to increment, one to decrement).</a>
+<a name="54"><span class="lineNum">      54 </span>            :  * </a>
+<a name="55"><span class="lineNum">      55 </span>            :  * Pressing two buttons simultaneously resets to the default setting.</a>
 <a name="56"><span class="lineNum">      56 </span>            :  * </a>
-<a name="57"><span class="lineNum">      57 </span>            :  * @ingroup Selectors </a>
-<a name="58"><span class="lineNum">      58 </span>            :  * </a>
-<a name="59"><span class="lineNum">      59 </span>            :  * @tparam  N </a>
-<a name="60"><span class="lineNum">      60 </span>            :  *          The number of settings.</a>
-<a name="61"><span class="lineNum">      61 </span>            :  */</a>
-<a name="62"><span class="lineNum">      62 </span>            : template &lt;setting_t N&gt;</a>
-<a name="63"><span class="lineNum">      63 </span><span class="lineCov">          6 : class IncrementDecrementSelector : public GenericIncrementDecrementSelector&lt;N&gt; {</span></a>
-<a name="64"><span class="lineNum">      64 </span>            :   public:</a>
-<a name="65"><span class="lineNum">      65 </span><span class="lineCov">          6 :     IncrementDecrementSelector(Selectable&lt;N&gt; &amp;selectable,</span></a>
-<a name="66"><span class="lineNum">      66 </span>            :                                const IncrementDecrementButtons &amp;buttons,</a>
-<a name="67"><span class="lineNum">      67 </span>            :                                Wrap wrap = Wrap::Wrap)</a>
-<a name="68"><span class="lineNum">      68 </span><span class="lineCov">          6 :         : GenericIncrementDecrementSelector&lt;N&gt;{</span></a>
-<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          6 :               selectable,</span></a>
-<a name="70"><span class="lineNum">      70 </span>            :               {},</a>
-<a name="71"><span class="lineNum">      71 </span><span class="lineCov">          6 :               buttons,</span></a>
-<a name="72"><span class="lineNum">      72 </span><span class="lineCov">          6 :               wrap,</span></a>
-<a name="73"><span class="lineNum">      73 </span><span class="lineCov">         12 :           } {}</span></a>
-<a name="74"><span class="lineNum">      74 </span>            : };</a>
-<a name="75"><span class="lineNum">      75 </span>            : </a>
-<a name="76"><span class="lineNum">      76 </span>            : END_CS_NAMESPACE</a>
+<a name="57"><span class="lineNum">      57 </span>            :  * @htmlonly </a>
+<a name="58"><span class="lineNum">      58 </span>            :  * &lt;object type=&quot;image/svg+xml&quot; data=&quot;../../selector-increment-decrement-LED.svg&quot;&gt;&lt;/object&gt;</a>
+<a name="59"><span class="lineNum">      59 </span>            :  * @endhtmlonly</a>
+<a name="60"><span class="lineNum">      60 </span>            :  * </a>
+<a name="61"><span class="lineNum">      61 </span>            :  * @ingroup Selectors </a>
+<a name="62"><span class="lineNum">      62 </span>            :  * </a>
+<a name="63"><span class="lineNum">      63 </span>            :  * @tparam  N </a>
+<a name="64"><span class="lineNum">      64 </span>            :  *          The number of settings.</a>
+<a name="65"><span class="lineNum">      65 </span>            :  */</a>
+<a name="66"><span class="lineNum">      66 </span>            : template &lt;setting_t N&gt;</a>
+<a name="67"><span class="lineNum">      67 </span><span class="lineCov">          6 : class IncrementDecrementSelector : public GenericIncrementDecrementSelector&lt;N&gt; {</span></a>
+<a name="68"><span class="lineNum">      68 </span>            :   public:</a>
+<a name="69"><span class="lineNum">      69 </span><span class="lineCov">          6 :     IncrementDecrementSelector(Selectable&lt;N&gt; &amp;selectable,</span></a>
+<a name="70"><span class="lineNum">      70 </span>            :                                const IncrementDecrementButtons &amp;buttons,</a>
+<a name="71"><span class="lineNum">      71 </span>            :                                Wrap wrap = Wrap::Wrap)</a>
+<a name="72"><span class="lineNum">      72 </span><span class="lineCov">          6 :         : GenericIncrementDecrementSelector&lt;N&gt;{</span></a>
+<a name="73"><span class="lineNum">      73 </span><span class="lineCov">          6 :               selectable,</span></a>
+<a name="74"><span class="lineNum">      74 </span>            :               {},</a>
+<a name="75"><span class="lineNum">      75 </span><span class="lineCov">          6 :               buttons,</span></a>
+<a name="76"><span class="lineNum">      76 </span><span class="lineCov">          6 :               wrap,</span></a>
+<a name="77"><span class="lineNum">      77 </span><span class="lineCov">         12 :           } {}</span></a>
+<a name="78"><span class="lineNum">      78 </span>            : };</a>
+<a name="79"><span class="lineNum">      79 </span>            : </a>
+<a name="80"><span class="lineNum">      80 </span>            : END_CS_NAMESPACE</a>
 </pre>
       </td>
     </tr>
