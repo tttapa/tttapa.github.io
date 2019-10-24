@@ -122,7 +122,6 @@ var searchData=
   ['cos_376',['cos',['../d6/d99/classBresenhamLine.html#ae4b0dd9c534a550583ae812695bbac59',1,'BresenhamLine']]],
   ['couldcontain_377',['couldContain',['../dd/d16/classDoublyLinkedList.html#ad5f6720a2d9ac9590fae337b2c5a744a',1,'DoublyLinkedList']]],
   ['createchannel_378',['createChannel',['../d2/d48/classChannel.html#a0bf038df9f1a74a0f342a2f07feeb664',1,'Channel']]],
-  ['cs_379',['CS',['../db/df8/namespaceCS.html',1,'']]],
-  ['cs_5fnamespace_5fname_380',['CS_NAMESPACE_NAME',['../dc/dc7/NamespaceSettings_8hpp.html#a353461c7ea8d0f14aca0516594049e30',1,'NamespaceSettings.hpp']]],
-  ['cycle_381',['CYCLE',['../d7/dc7/namespaceMCU.html#a65c72ef00bd2b41fe87e365bdfe6ae8b',1,'MCU']]]
+  ['cs_5fnamespace_5fname_379',['CS_NAMESPACE_NAME',['../dc/dc7/NamespaceSettings_8hpp.html#a353461c7ea8d0f14aca0516594049e30',1,'NamespaceSettings.hpp']]],
+  ['cycle_380',['CYCLE',['../d7/dc7/namespaceMCU.html#a65c72ef00bd2b41fe87e365bdfe6ae8b',1,'MCU']]]
 ];
