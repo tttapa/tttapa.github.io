@@ -4,7 +4,7 @@
 
 set -ex
 
-version="3.7.4"
+version="3.8.0"
 builddir="/tmp"
 python="Python-$version"
 prefix="$HOME/.local"

@@ -6,7 +6,7 @@ from json import JSONDecoder
 from pprint import pformat
 from os import getenv
 from os import path
-from os.path import exists
+from os.path import exists, splitext
 import sys
 
 def format_anchor_name(match, anchors):
@@ -117,7 +117,7 @@ def formatPygmentsCodeSnippet(data, html, filepath, lineno):
     htmlc = htmlc.replace('\n</pre></div>', '</pre></div>')
     datastr = '<div class="codesnippet"><style>' + css + '</style>'
     datastr += htmlc + '</div>'
-    return datastr
+    return datastr, file
 
 def formatImage(data, html, filepath, lineno):
     file = data['file']
@@ -147,7 +147,7 @@ def formatImage(data, html, filepath, lineno):
     if cap:
         htmlstr += '<figcaption>' + cap + '</figcaption>'
 
-    return htmlstr
+    return htmlstr, None
 
 def getKeyWord(keywords: dict, html, index):
     for kw in keywords.keys():
@@ -155,12 +155,13 @@ def getKeyWord(keywords: dict, html, index):
             return kw
     return None
 
-def replaceTags(html, filepath, lineno):
+def replaceTags(html, filepath, lineno, outpath):
     keywordhandlers = {
         'codesnippet': formatPygmentsCodeSnippet,
         'image': formatImage,
     }
 
+    deps = []
     index = html.find('@')
     while index >= 0:
         keyword = getKeyWord(keywordhandlers, html, index + 1)
@@ -172,7 +173,8 @@ def replaceTags(html, filepath, lineno):
             data, endindex = JSONDecoder().raw_decode(html, jsonstartindex)
             handler = keywordhandlers[keyword]
             taglineno = lineno + getlinenumber(html, index)
-            newdata = handler(data, html, filepath, taglineno)
+            newdata, dep = handler(data, html, filepath, taglineno)
+            if dep: deps.append(dep)
             lineno += getlinesbetween(html, index, endindex)
             lineno -= getlines(newdata)
             html = html[:index] + newdata + html[endindex:]
@@ -185,10 +187,14 @@ def replaceTags(html, filepath, lineno):
             print(e, file=sys.stderr)
             print(file=sys.stderr)
             raise e
+    if deps:
+        depfname = path.splitext(outpath)[0] + '.dep'
+        with open(depfname, 'w') as f:
+            f.write('\n'.join(deps))
     return html
 
-def formatHTML(html, filepath, lineno):
-    html = replaceTags(html, filepath, lineno)
+def formatHTML(html, filepath, lineno, outpath):
+    html = replaceTags(html, filepath, lineno, outpath)
     html = formatCode(html)
     html = addAnchors(html)
     return html

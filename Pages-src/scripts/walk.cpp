@@ -43,8 +43,9 @@ class PagesParser {
     struct Page {
         string_map metadata;
         string html;
-        unsigned int lineno; ///< line number where <html> starts
+        unsigned int lineno;  ///< line number where <html> starts
         file_time_t modified;
+        file_time_t depmodified;
         path abs_source_path;
         path rel_path;
 
@@ -255,7 +256,8 @@ class PagesParser {
         replace(out, ":filenamepdf:", page.rel_path.stem().string() + ".pdf");
         string html = page.html;
         replace(out, ":html:",
-                formatHTML(page.html, page.abs_source_path, page.lineno));
+                formatHTML(page.html, page.abs_source_path, page.lineno,
+                           output_dir / page.rel_path));
         replace(out, ":mdate:", formatFileTime(page.modified));
         for (const auto &[key, value] : page.metadata)
             while (replace(out, ":" + key + ":", value))
@@ -285,7 +287,8 @@ class PagesParser {
         path pdf_file = output_dir / page.rel_path;
         pdf_file.replace_extension(".pdf");
         if (fs::exists(pdf_file) &&
-            page.modified <= fs::last_write_time(pdf_file))
+            page.modified <= fs::last_write_time(pdf_file) &&
+            page.depmodified <= fs::last_write_time(pdf_file))
             return;
         path file      = __FILE__;
         path folder    = file.parent_path();
@@ -418,9 +421,10 @@ class PagesParser {
 #pragma region HTML formatter...................................................
 
     string formatHTML(const string &html, const fs::path &path,
-                      unsigned int lineno) {
+                      unsigned int lineno, const fs::path &outpath) {
         auto formatHTML = py::globals()["HTMLFormatter"].attr("formatHTML");
-        return formatHTML(html, path.string(), lineno).cast<string>();
+        return formatHTML(html, path.string(), lineno, outpath.string())
+            .cast<string>();
     }
 
 #pragma endregion
@@ -459,7 +463,7 @@ class PagesParser {
         return false;
     }
 
-    static string formatFileTime(std::filesystem::file_time_type ft) {
+    static string formatFileTime(file_time_t ft) {
         std::stringstream buffer;
         std::time_t tt = ft.time_since_epoch().count() / 1'000'000'000 +
                          6'437'664'000;  // TODO: ugly non-portable hack
@@ -555,6 +559,17 @@ class PagesParser {
         return dict;
     }
 
+    file_time_t get_dep_modified(const fs::path &rpath) {
+        std::ifstream file(output_dir / rpath.parent_path() /
+                           (rpath.stem().string() + ".dep"));
+        file_time_t time = file_time_t::min();
+        std::string depfilename;
+        while (std::getline(file, depfilename))
+            if (auto deptime = fs::last_write_time(depfilename); deptime > time)
+                time = deptime;
+        return time;
+    }
+
     bool is_resource_folder(const fs::directory_entry &entry) {
         return entry.path().filename() == "images" ||
                entry.path().filename() == "resources";
@@ -582,6 +597,7 @@ class PagesParser {
         page.modified        = file_entry.last_write_time();
         page.abs_source_path = file_entry;
         page.rel_path        = fs::relative(file_entry, source_dir);
+        page.depmodified     = get_dep_modified(page.rel_path);
     }
 
     Page load_page_file(const fs::directory_entry &file) {
