@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['m2_3750',['m2',['../da/dd4/namespaceIntervals.html#a3ae063eac2cb3034c4c9bf41641f8cad',1,'Intervals::m2()'],['../da/dd4/namespaceIntervals.html#a24badc22181dd0156e1cbbece4795332',1,'Intervals::M2()']]],
+  ['m2_3750',['M2',['../da/dd4/namespaceIntervals.html#a24badc22181dd0156e1cbbece4795332',1,'Intervals::M2()'],['../da/dd4/namespaceIntervals.html#a3ae063eac2cb3034c4c9bf41641f8cad',1,'Intervals::m2()']]],
   ['m3_3751',['m3',['../da/dd4/namespaceIntervals.html#a87b3fbf4d404906dbc30ce0357099734',1,'Intervals::m3()'],['../da/dd4/namespaceIntervals.html#a0bba7f36cf4e22efafe7b4b029d37d96',1,'Intervals::M3()']]],
   ['m6_3752',['m6',['../da/dd4/namespaceIntervals.html#a113a63113079585e980675007ea59791',1,'Intervals::m6()'],['../da/dd4/namespaceIntervals.html#ae990da8805f898263d30e3377e4aba78',1,'Intervals::M6()']]],
-  ['m7_3753',['M7',['../da/dd4/namespaceIntervals.html#ac4b40453c5311d0dfc527214c0d401e9',1,'Intervals::M7()'],['../da/dd4/namespaceIntervals.html#a46249007f68970d4493844be8df14f41',1,'Intervals::m7()']]],
+  ['m7_3753',['m7',['../da/dd4/namespaceIntervals.html#a46249007f68970d4493844be8df14f41',1,'Intervals::m7()'],['../da/dd4/namespaceIntervals.html#ac4b40453c5311d0dfc527214c0d401e9',1,'Intervals::M7()']]],
   ['m_5fbase_3754',['M_base',['../d3/d55/structSetbase.html#a8ff13cdfc11f94e5a92c136648b296c8',1,'Setbase']]],
   ['m_5fbytesep_3755',['M_bytesep',['../d5/d93/structSetbytesep.html#aae3b7063d949661cdedb23d77e4ff74c',1,'Setbytesep']]],
   ['m_5fn_3756',['M_n',['../d7/d70/structSetprecision.html#a0938bbcf6988d5a3e473bd14ca87287b',1,'Setprecision']]],

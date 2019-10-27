@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['undefined_5frealtime_5fmessage_5f1_4173',['UNDEFINED_REALTIME_MESSAGE_1',['../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968a9c5039b041ff99ffaa87a91c82be2d8b',1,'MIDI_Parser.hpp']]],
-  ['undefined_5frealtime_5fmessage_5f2_4174',['UNDEFINED_REALTIME_MESSAGE_2',['../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968ac15e8acd84bad4b5b6fb28579effafc4',1,'MIDI_Parser.hpp']]],
-  ['uppercase_4175',['UPPERCASE',['../da/d69/PrintStream_8cpp.html#ad7d124b6cbf785b9fa6d89255b715fcba19d6b87b851ddfd4fdc4f182e2ae0617',1,'PrintStream.cpp']]]
+  ['timing_5fclock_5fmessage_4175',['TIMING_CLOCK_MESSAGE',['../d7/d2d/MIDI__Parser_8hpp.html#a483a274bc01f8f1209e4af86d135e968acba9fd1ff1f2ab08cc6c785b8b00898b',1,'MIDI_Parser.hpp']]],
+  ['tracktion_5frelative_4176',['TRACKTION_RELATIVE',['../d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71da6ee78ca6dc2affda5d76bf4ea7bd5b2e',1,'RelativeCCSender.hpp']]],
+  ['twos_5fcomplement_4177',['TWOS_COMPLEMENT',['../d9/d24/RelativeCCSender_8hpp.html#a793b4d05f50a2c3af3ddeeef50e7a71da9aa2a35d92976c7de970506c4d19a96c',1,'RelativeCCSender.hpp']]]
 ];
