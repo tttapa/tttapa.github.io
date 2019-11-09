@@ -230,7 +230,7 @@ The finished sketch</h2>
 </div><!-- fragment --><h1><a class="anchor" id="first-input"></a>
 First Input: Getting Feedback from the MIDI Software</h1>
 <p>Unlike the MIDI Controller library, the Control Surface library does support MIDI input. <br  />
- This example shows how to use the <code>MIDINoteLED</code> class to turn on and off <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> when MIDI Note On/Off messages are received. <br  />
+ This example shows how to use the <code><a class="el" href="../../d3/dd5/classNoteValueLED.html">NoteValueLED</a></code> class to turn on and off <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> when MIDI Note On/Off messages are received. <br  />
  The example shows the use of a shift register to drive the <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a>, but you can of course use any pins you want.</p>
 <p> 
 <iframe width="560" height="315"
@@ -263,19 +263,19 @@ picture-in-picture" allowfullscreen></iframe>
 <p>Now, we can specify the objects that listen for MIDI input, and update the status of the <a class="el" href="../../d2/d1b/classLEDs.html" title="A class for collections of LEDs that can display ranges.">LEDs</a> accordingly.</p>
 <p>I'll refer to the overview of MIDI Input Elements <a href="https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/dcd/group__MIDIInputElements.html">here</a>.</p>
 <p>Let's define a single LED on pin <code>13</code> that listens for MIDI Note events for a middle C on channel 1. <br  />
- In the <a href="https://tttapa.github.io/Control-Surface/Doc/Doxygen/d9/d0d/classMIDINoteLED.html">documentation</a>, you'll find that the first argument for the <code>MIDINoteLED</code> constructor is the number of the pin with the LED connected, and the second is the MIDI address. <br  />
+ In the <a href="https://tttapa.github.io/Control-Surface/Doc/Doxygen/d3/dd5/classNoteValueLED.html">documentation</a>, you'll find that the first argument for the <code><a class="el" href="../../d3/dd5/classNoteValueLED.html">NoteValueLED</a></code> constructor is the number of the pin with the LED connected, and the second is the MIDI address. <br  />
  The MIDI address is a structure that consists of an address number, the MIDI channel, and the cable number. <br  />
  In this case, the address number is the note number, which is a number from 0 to 127. The MIDI channel is a channel from <code>CHANNEL_1</code> until <code>CHANNEL_16</code>. We'll ignore the cable number for now, if you don't specifically set it, it'll just use the default cable. <br  />
 </p>
 <p>For the MIDI note numbers, you can use the note constants and the <code>note</code> function in the <a href="https://tttapa.github.io/Control-Surface/Doc/Doxygen/d7/d78/namespaceMIDI__Notes.html"><code>MIDI_Notes</code> namespace</a>, or you can just use a number.</p>
 <div class="fragment"><div class="line"><span class="keyword">using namespace </span><a class="code" href="../../d7/d78/namespaceMIDI__Notes.html">MIDI_Notes</a>;</div>
-<div class="line"><a class="code" href="../../d3/dd5/classNoteValueLED.html">MIDINoteLED</a> noteLed = { 13, {<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a559f01ec7251fdc9c5a5bc0e26b97372">note</a>(<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#ac199d8a68ddb5b6aab199fc827947900">C</a>, 4), <a class="code" href="../../d7/d42/Channel_8hpp.html#a166aafd26c8b912f9e8bc7acb8b1cd17">CHANNEL_1</a>} };  <span class="comment">// C4 = middle C</span></div>
+<div class="line"><a class="code" href="../../d3/dd5/classNoteValueLED.html">NoteValueLED</a> noteLed = { 13, {<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a559f01ec7251fdc9c5a5bc0e26b97372">note</a>(<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#ac199d8a68ddb5b6aab199fc827947900">C</a>, 4), <a class="code" href="../../d7/d42/Channel_8hpp.html#a166aafd26c8b912f9e8bc7acb8b1cd17">CHANNEL_1</a>} };  <span class="comment">// C4 = middle C</span></div>
 </div><!-- fragment --><p>In our case, we don't want a single LED, we want eight. It's much easier to define them in an array. <br  />
  Also note how we state that it should use the pins of the shift register we defined in the previous step. We omit the channel here, so it'll just use the default channel, <code>CHANNEL_1</code>.</p>
 <blockquote class="doxtable">
 <p><b>Note</b>: The first pin is <code>pin(0)</code>, not <code>pin(1)</code>. </p>
 </blockquote>
-<div class="fragment"><div class="line"><a class="code" href="../../d3/dd5/classNoteValueLED.html">MIDINoteLED</a> leds[] = {</div>
+<div class="fragment"><div class="line"><a class="code" href="../../d3/dd5/classNoteValueLED.html">NoteValueLED</a> leds[] = {</div>
 <div class="line">  {sreg.<a class="code" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03">pin</a>(0), <a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a559f01ec7251fdc9c5a5bc0e26b97372">note</a>(<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#ac199d8a68ddb5b6aab199fc827947900">C</a>, 4)},</div>
 <div class="line">  {sreg.<a class="code" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03">pin</a>(1), <a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a559f01ec7251fdc9c5a5bc0e26b97372">note</a>(<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a17f67c20013bf43a299a253d4a1926cb">D</a>, 4)},</div>
 <div class="line">  {sreg.<a class="code" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03">pin</a>(2), <a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a559f01ec7251fdc9c5a5bc0e26b97372">note</a>(<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#abbbb37697caf646f1842b14ec8f868fd">E</a>, 4)},</div>
@@ -317,7 +317,7 @@ The finished sketch</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Create an array of LEDs that listen to MIDI Note messages, turning on and off</span></div>
 <div class="line"><span class="comment">// the LEDs connected to the eight input pins of the shift register</span></div>
-<div class="line"><a class="code" href="../../d3/dd5/classNoteValueLED.html">MIDINoteLED</a> leds[] = {</div>
+<div class="line"><a class="code" href="../../d3/dd5/classNoteValueLED.html">NoteValueLED</a> leds[] = {</div>
 <div class="line">  {sreg.<a class="code" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03">pin</a>(0), <a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a559f01ec7251fdc9c5a5bc0e26b97372">note</a>(<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#ac199d8a68ddb5b6aab199fc827947900">C</a>, 4)}, <span class="comment">// LED pin, address (note number, channel, cable)</span></div>
 <div class="line">  {sreg.<a class="code" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03">pin</a>(1), <a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a559f01ec7251fdc9c5a5bc0e26b97372">note</a>(<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a17f67c20013bf43a299a253d4a1926cb">D</a>, 4)}, <span class="comment">//</span></div>
 <div class="line">  {sreg.<a class="code" href="../../de/d4e/classExtendedIOElement.html#a163cffb9da0f3b7fdcb3c49b58393c03">pin</a>(2), <a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#a559f01ec7251fdc9c5a5bc0e26b97372">note</a>(<a class="code" href="../../d7/d78/namespaceMIDI__Notes.html#abbbb37697caf646f1842b14ec8f868fd">E</a>, 4)}, <span class="comment">//</span></div>
