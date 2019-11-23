@@ -30,21 +30,40 @@ It's only second order, finite impulse response, so very fast and always stable,
      evaluated along the unit circle \(z = e^{j\omega}\). In other words, we just need a transfer function that is zero
      when the frequency equals \(\omega_{c,d}\), or when \(z = e^{j\omega_{c,d}}\). Because the transer function must have
      real coefficients, the complex conjugate will be a zero as well: \(z = e^{-j\omega_{c,d}}\).
-     $$ H(z) = \left(z - e^{j\omega_{c,d}}\right)\left(z - e^{-j\omega_{c,d}}\right) $$
+     $$ H'(z) = \left(z - e^{j\omega_{c,d}}\right)\left(z - e^{-j\omega_{c,d}}\right) $$
      We can further simplify this function by expanding it, and using the identity 
      \(\cos(\theta) = \frac{e^{j\theta} + e^{-j\theta}}{2}\):
-     $$ \begin{split} H(z) &= z^2 - z\left(e^{j\omega_{c,d}} + e^{-j\omega_{c,d}}\right) + e^{j\omega_{c,d}}e^{-j\omega_{c,d}} \\
+     $$ \begin{split} H'(z) &= z^2 - z\left(e^{j\omega_{c,d}} + e^{-j\omega_{c,d}}\right) + e^{j\omega_{c,d}}e^{-j\omega_{c,d}} \\
      &= z^2 - 2\cos\left(\omega_{c,d}\right)z + 1 \end{split} $$
 </p>
+
+<h3>A Proper Transfer Function</h3>
+
+<p>
+    The transfer functions of all physical processes are proper. This means that 
+    the degree of the numerator is not larger than the degree of the denominator.<br>
+    This is clearly not the case for \(H'(z)\) (the degree of the numerator is 2
+    and the degree of the denominator is 0).
+</p>
+<p>
+    The solution is simple: we'll just add two poles in \(z = 0\). This won't
+    affect the frequency response.
+    $$ H(z) = \frac{H'(z)}{z^2} = 
+       \frac{z^2 - 2\cos\left(\omega_{c,d}\right)z + 1}
+            {z^2} =
+       1 - 2\cos\left(\omega_{c,d}\right)z^{-1} + z^{-2} $$
+
 <h3>Normalization</h3>
 <p>
     If we want a filter with a unit DC gain (\(H(1) = 1\)), we can just normalize the transfer function:
-    $$ H_n(z) = \frac{H(z)}{H(1)} = \frac{z^2 - 2\cos\left(\omega_{c,d}\right)z + 1}{2 - 2\cos\left(\omega_{c,d}\right)} $$
+    $$ H_n(z) = \frac{H(z)}{H(1)} = 
+       \frac{1 - 2\cos\left(\omega_{c,d}\right)z^{-1} + z^{-2}}
+            {2 - 2\cos\left(\omega_{c,d}\right)} $$
 </p>
 <h3>Numerical Result</h3>
 <p>
     Finally, we can just plug in the value of \(\omega_{c,d}\):
-    $$ H_n(z) \approx \frac{z^2 - 1.286z + 1}{0.7144} = 1.400z^2 - 1.800z + 1.400 $$
+    $$ H_n(z) \approx \frac{1 - 1.286z^{-1} + z^{-2}}{0.7144} = 1.400 - 1.800z^{-1} + 1.400z^{-2} $$
 
 </p>
 <h3>Bode Plot &amp; Zero Map</h3>
@@ -58,45 +77,28 @@ It's only second order, finite impulse response, so very fast and always stable,
     You can clearly see the expected linear phase of a FIR filter, with a 180 phase jump when the frequency crosses the zero.
     The notch itself is not at all narrow. If you want a narrower notch, you could a higher FIR order, or place some poles 
     close to the unit circle to cancel the effect of the zero.
-
-    <pre class="lineNumbers">from scipy.signal import butter, freqz 
-import matplotlib.pyplot as plt
-from math import pi, cos
-import numpy as np
-
-f_s = 360    # Sample frequency in Hz
-f_c = 50     # Notch frequency in Hz
-
-omega_c = 2 * pi * f_c       # Notch angular frequency
-omega_c_d = omega_c / f_s    # Normalized notch frequency (digital)
-
-h_0 = 2 - 2 * cos(omega_c_d)
-b = np.array((1, -2 * cos(omega_c_d), 1))   # Calculate coefficients
-b /= h_0                                    # Normalize
-a = 1
-print("a =", a)                      # Print the coefficients
-print("b =", b)
-
-w, h = freqz(b, a)                   # Calculate the frequency response
-w *= f_s / (2 * pi)                  # Convert from rad/sample to Hz
-
-plt.subplot(2, 1, 1)                 # Plot the amplitude response
-plt.suptitle('Bode Plot')            
-plt.plot(w, 20 * np.log10(abs(h)))   # Convert to dB
-plt.ylabel('Magnitude [dB]')
-plt.xlim(0, f_s / 2)
-plt.ylim(-60, 20)
-plt.axvline(f_c, color='red')
-
-plt.subplot(2, 1, 2)                 # Plot the phase response
-plt.plot(w, 180 * np.angle(h) / pi)  # Convert argument to degrees
-plt.xlabel('Frequency [Hz]')
-plt.ylabel('Phase [°]')
-plt.xlim(0, f_s / 2)
-plt.ylim(-90, 135)
-plt.yticks([-90, -45, 0, 45, 90, 135])
-plt.axvline(f_c, color='red')
-plt.show()</pre>
-
 </p>
+
+<p>
+    The magnitude of the transfer function in function of the complex variable
+    \(z\) looks like this.
+@image{
+    "file": "images/FIR-Notch-H-surf.png"
+}
+    <small class="image-code-link"><a href="resources/FIR-Notch-H-surf-Mayavi.py">Image source code</a></small>
+</p>
+<p>
+    The red curve is the image of the unit circle in the complex plane 
+    (\(\left|z\right| = 1\)). The vertical axis uses a logarithmic scale, just 
+    like on the Bode plot above. The elevation of the surface along the top half
+    of the unit circle corresponds to magnitude value on the Bode plot along the
+    horizontal axis.<br>
+    Note the two zeros on the unit circle that cause the magnitude to go to 
+    \(-\infty\;\mathrm{dB}\) for these frequencies, as well as the two poles in the origin
+    that cause the high spike.
+</p>
+
+@codesnippet{
+    "file": "resources/FIR-Notch.py"
+}
 </html>

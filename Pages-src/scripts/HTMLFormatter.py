@@ -147,7 +147,7 @@ def formatImage(data, html, filepath, lineno):
     if cap:
         htmlstr += '<figcaption>' + cap + '</figcaption>'
 
-    return htmlstr, None
+    return htmlstr, fullfile
 
 def getKeyWord(keywords: dict, html, index):
     for kw in keywords.keys():
