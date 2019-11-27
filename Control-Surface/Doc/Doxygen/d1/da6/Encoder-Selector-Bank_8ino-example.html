@@ -82,10 +82,13 @@ Encoder-Selector-Bank</h1>
 <div class="line"><span class="comment">// Encoder must be included before Control Surface</span></div>
 <div class="line"><span class="preprocessor">#include &lt;<a class="code" href="../../db/dbf/Control__Surface_8h.html">Control_Surface.h</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"><span class="comment">// MIDI Interface to use</span></div>
 <div class="line"><a name="_a0"></a><a class="code" href="../../de/d05/classUSBMIDI__Interface.html">USBMIDI_Interface</a> midi;</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">// Bank with 120 settings in total, increments of 1 address at a time</span></div>
 <div class="line"><a name="_a1"></a><a class="code" href="../../db/dbd/classBank.html">Bank&lt;120&gt;</a> bank = {1};</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">// A rotary encoder to select one of the 120 bank settings</span></div>
 <div class="line"><a name="_a2"></a><a class="code" href="../../d3/dc5/classEncoderSelector.html">EncoderSelector&lt;120&gt;</a> selector = {</div>
 <div class="line">  bank,        <span class="comment">// bank to manage</span></div>
 <div class="line">  {2, 3},      <span class="comment">// encoder pins</span></div>
@@ -93,6 +96,8 @@ Encoder-Selector-Bank</h1>
 <div class="line">  <a name="a3"></a><a class="code" href="../../d6/d16/Selector_8hpp.html#aa387053cf4222bcbf8bfa5d3c5da9db5a08825280e3f8137556325061ba67ff8c">Wrap::Clamp</a>, <span class="comment">// clamp or wrap around when going beyond maximum/minimum setting</span></div>
 <div class="line">};</div>
 <div class="line"> </div>
+<div class="line"><span class="comment">// The potentiometer that sends MIDI messages</span></div>
+<div class="line"><span class="comment">// the address (controller number) depends on the bank setting</span></div>
 <div class="line"><a name="_a4"></a><a class="code" href="../../d7/dc0/classBankable_1_1CCPotentiometer.html">Bankable::CCPotentiometer</a> potentiometer = {</div>
 <div class="line">  {bank, <a name="a5"></a><a class="code" href="../../dd/d1f/BankConfig_8hpp.html#a6fe085db0aa80588322c415f46d74bf1a8e818986f5a41a491dde170eeeb4fd29">BankType::CHANGE_ADDRESS</a>}, <span class="comment">// Bank configuration</span></div>
 <div class="line">  A0,                               <span class="comment">// Analog pin for potentiometer</span></div>
