@@ -58,6 +58,11 @@ figcaption {
     text-align: right;
 }
 
+code {
+    background-color: #f7f7ff;
+    padding: 1px;
+}
+
 pre {
     background: #f5f5f5;
     white-space: pre-wrap;
@@ -79,7 +84,10 @@ pre>code {
     border: 1px solid #eee
 }
 
-pre.lineNumbers, pre.lineNumbersEmphasis, pre.console {
+pre.lineNumbers, 
+pre.lineNumbersEmphasis, 
+pre.console,
+pre.console-docker {
     display: block;
     counter-reset: line;
     /* margin-left: 3.2em; */
@@ -89,11 +97,15 @@ pre.lineNumbers, pre.lineNumbersEmphasis, pre.console {
     border: 1px solid #eee;
 }
 
-pre.console {
+pre.console,
+pre.console-docker {
     padding-left: 3em;
 }
 
-pre.lineNumbers>code, pre.lineNumbersEmphasis>code, pre.console>code {
+pre.lineNumbers>code, 
+pre.lineNumbersEmphasis>code, 
+pre.console>code,
+pre.console-docker>code {
     display: inline;
     padding: 0;
     border: none;
@@ -157,7 +169,8 @@ div.pygments span + span.lineno {
     background-color: initial;
 }
 
-pre.console>code::before {
+pre.console>code::before, 
+pre.console-docker>code::before {
     content: "$";
     display: inline-block;
     /* border-right: 1px solid #ddd; */
@@ -166,6 +179,17 @@ pre.console>code::before {
     color: #555;
     text-align: right;
     width: 1em;
+}
+
+pre.console>code::before {
+    content: "$";
+}
+
+pre.console-docker>code::before {
+    content: "[docker] $";
+    width: 6.6em;
+    font-weight: bold;
+    color: #9999A2;
 }
 
 pre.center {
@@ -259,6 +283,10 @@ a:hover, h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover, h5 a:hover, h6 a:hover 
     opacity: 0.6;
 }
 
+h2 {
+    margin-top: 1.2em;
+}
+
 h3 {
     padding-bottom: 2px;
     border-bottom: 1px solid #ccc;
@@ -267,6 +295,10 @@ h3 {
 
 h4 {
     font-size: 1.05em;
+}
+
+h5 {
+    margin-bottom: 0.6em;
 }
 
 div.back {
