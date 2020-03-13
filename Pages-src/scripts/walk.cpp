@@ -170,7 +170,9 @@ class PagesParser {
         std::ofstream outfile(tmp_dir / page.rel_path);
         outfile << out;
         outfile.close();
-        string command = "mjpage";
+        path scripts_dir  = source_dir.parent_path() / "scripts";
+        path node_modules = scripts_dir / "node_modules";
+        string command = node_modules / "mathjax-node-page" / "bin" / "mjpage";
         command += " --output=CommonHTML --eqno=AMS "
                    "--fontURL=/MathJax/fonts/HTML-CSS";
         command += " < \"";
