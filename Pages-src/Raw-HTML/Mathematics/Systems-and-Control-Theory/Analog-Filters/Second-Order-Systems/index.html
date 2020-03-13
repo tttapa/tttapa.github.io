@@ -1,0 +1,190 @@
+<!--
+@sequence: 0
+@title: Second-Order Systems
+@author: Pieter P
+@keywords: second-order system, second-order, harmonic oscillator, oscillator,
+           universal oscillator, universal oscillator equation
+@description: In-depth analysis of second-order systems, such as the harmonic
+              oscillator.
+-->
+<html>
+
+<h2>The Harmonic Oscillator</h2>
+
+<p>
+    The harmonic oscillator is one of the simplest dynamical systems, but a study of
+    its properties can lead to great insight in more complex systems as well.
+</p>
+<p>
+    A mathematical description of the harmonic oscillator can be very easily
+    derived from Newton's second law (Equation \(\ref{newton2}\)) and Hooke's
+    law (Equation \(\ref{hooke}\)):
+    $$
+    \begin{equation}
+    F_\text{tot} = m a = m \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2}\label{newton2}
+    \end{equation}
+    $$
+    \(F_\text{tot}\) is the total force exerted on an object, and \(a\) the
+    acceleration of the object.
+    $$
+    \begin{equation}
+    F_s = -k x(t) \label{hooke}
+    \end{equation}
+    $$
+    \(F_s\) is the restoring force of the spring, for displacement \(x\). <br>
+    \(k\) is the spring constant.
+</p>
+<p>
+    In addition to the restoring force of the spring, an external force \(f\cdot u(t)\) is applied as well. \(f\) is a
+    constant factor, and \(u(t)\) is some time-varying input signal.<br>
+    For the purpose of this general derivation, we'll assume that the damping (friction, resistance, drag) is
+    proportional to the velocity of the object, with a damping coefficient \(d\).
+</p>
+<p>
+    This results in the following equation:
+
+    $$ F_\text{tot} = -k x(t) -d \frac{\mathrm{d}x(t)}{\mathrm{d}t} + f u(t) = m \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2}
+    $$
+
+    Grouping all terms in \(x\):
+
+    $$
+    \begin{equation}
+    m \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2} + d \frac{\mathrm{d} x(t)}{\mathrm{d}t} + k x(t) = f u(t) \label{ode_mdkf}
+    \end{equation}
+    $$
+    It is common to define two new variables, \(\zeta\) and \(\omega_0\), for reasons that will become apparent once we
+    obtain an expression for the solution of Equation \(\ref{ode_mdkf}\).
+    $$
+    \begin{align}
+    \omega_n \;&\triangleq\; \sqrt{\frac{k}{m}} \\
+    \zeta \;&\triangleq\; \frac{d}{2\sqrt{km}} \\
+    \end{align}
+    $$
+    Dividing both sides of Equation \(\ref{ode_mdkf}\) by \(m\) and substituting \(\omega_n\) and \(\zeta\) results in
+    the well-known general second-order ordinary differential equation
+    $$
+    \begin{equation}
+    \frac{\mathrm{d}^2 x(t)}{\mathrm{d}t^2} + 2\zeta\omega_n \frac{\mathrm{d} x(t)}{\mathrm{d}t} + \omega_n^2 x(t) =
+    \frac{f}{m} u(t). \label{ode}
+    \end{equation}
+    $$
+    Since only time derivatives are involved, we'll use \(x'(t)\) and \(x''(t)\) for the first and second time
+    derivatives of \(x(t)\) respectively:
+    $$
+    \begin{equation}
+    x''(t) + 2\zeta\omega_n x'(t) + \omega_n^2 x(t) = \frac{f}{m} u(t). \label{ode_prime}
+    \end{equation}
+    $$
+</p>
+<p>
+    Lastly, we'll also define the linear differential operator \(L\) as follows:
+    $$
+    \begin{equation}
+    L\;\triangleq\;\frac{\mathrm{d}^2}{\mathrm{d}t^2} + 2\zeta\omega_n \frac{\mathrm{d}}{\mathrm{d}t} + \omega_n^2,
+    \label{lin_diff_operator}
+    \end{equation}
+    $$
+    such that Equation \(\ref{ode}\) becomes
+    $$
+    \begin{equation}
+    L x(t) = \frac{f}{m} u(t). \label{ode_L}
+    \end{equation}
+    $$
+    Do note that this does not represent actual multiplication, it's just a tool to make the notation simpler.
+</p>
+
+<h3>Solving the differential equation</h3>
+
+<p>
+    For simple inputs \(u(t)\), this differential equation can be easily solved using by first finding an expression for
+    the set of homogeneous solutions \(\left\{x_h(t)\right\}\), and finding one particular solution \(x_p(t)\).<br>
+    The homogeneous solutions satisfy the homogeneous differential equation
+    $$
+    \begin{equation}
+    x_h''(t) + 2\zeta\omega_n x_h'(t) + \omega_n^2 x_h(t) = 0 \quad \text{or} \quad L x_h(t) = 0. \label{ode_homog}
+    \end{equation}
+    $$
+    The particular solution satisfies the original ODE (Equation \(\ref{ode_prime}\)):
+    $$
+    \begin{equation}
+    x_p''(t) + 2\zeta\omega_n x_p'(t) + \omega_n^2 x_p(t) = \frac{f}{m} u(t) \quad \text{or} \quad L x_p(t) =
+    \frac{f}{m} u(t). \label{ode_part}
+    \end{equation}
+    $$
+    To prove that the sum of the homogeneous solutions and the particular solution is a solution to the original ODE,
+    you can just fill in \(x_h(t) + x_p(t)\) into Equation \(\ref{ode_L}\):
+    $$
+    \begin{split}
+    &L\left(x_h(t) + x_p(t)\right) \\
+    =\;&L x_h(t) + L x_p(t)
+    \end{split}
+    $$
+    From Equations \(\ref{ode_homog}\) and \(\ref{ode_part}\), we know that the first term is zero, and the second term
+    equals the right-hand side of the original ODE, so
+    $$
+    \begin{split}
+    &L\left(x_h(t) + x_p(t)\right) \\
+    =\;&0 + \frac{f}{m} u(t),
+    \end{split}
+    $$
+    which means that \(x_h(t) + x_p(t)\) is indeed a solution of Equation \(\ref{ode_L}\).
+</p>
+
+<h4>Finding the homogeneous solutions</h4>
+
+<p>
+    The set of homogeneous solutions \(x_h(t)\) consists of all functions
+    $$ \begin{equation}
+    c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t}, \label{exp_homog_sol}
+    \end{equation}
+    $$
+    for any \(c_1, c_2\), and where \(\lambda_1\) and \(\lambda_2\) are the roots
+    of the characteristic polynomial
+    $$ \lambda^2 + 2\zeta\omega_n\lambda + \omega_n^2 = 0. $$
+    The solutions to this equation are
+    $$
+    \begin{equation}
+    \begin{split}
+    \lambda_{1,2} &\;=\; \frac{-2\zeta\omega_n \pm \omega_n \sqrt{4\zeta^2\omega_n^2-4\omega_n^2}}{2} \\
+    &\;=\; -\zeta\omega_n \pm \omega_n \sqrt{\zeta^2-1}. \label{roots}
+    \end{split}
+    \end{equation}
+    $$
+    You can relatively quickly convince yourself that Equation \(\ref{exp_homog_sol}\) is in fact a solution by
+    differentiating it twice (it's a sum of exponentials, so this is very easy) and substituting it into the original
+    \ref{ode_homog}.
+</p>
+<h4>Linearly dependent solutions</h4>
+<p>
+    In the special case where \(\zeta = 1\), \(\lambda_1 = \lambda_2\), and the two terms in Equation
+    \ref{exp_homog_sol}
+    are linearly dependent. This would mean that the solution space has dimension 1, which is impossible for a
+    differential equation of order 2.
+</p>
+<!-- 
+<p>
+    \(L: V \rightarrow W\) is a linear operator that maps from an \(n+1\)-dimensional function space \(V\) to a
+    \(1\)-dimensional function space \(W\). The set of all solutions of the differential equation is, by definition, the
+    kernel of \(L\) (\(Lx = 0 \Leftrightarrow x \in \mathrm{Ker}\left(L\right)\)). <br>
+    According to the <a href="https://en.wikipedia.org/wiki/Rank%E2%80%93nullity_theorem">rank-nullity theorem</a> of
+    linear algebra,
+    the dimension of the codomain and the dimension of the kernel should sum to the dimension of the domain:
+    $$
+    \begin{equation}
+    \mathrm{dim}\left(W\right) + \mathrm{dim}\left(\mathrm{Ker}\left(L\right)\right) = \mathrm{dim}\left(V\right).
+    \label{rank_nullity}
+    \end{equation}
+    $$
+    For a linear differential operator \(L\) of order \(n\), the dimension of the codomain is \(1\), because the image
+    of \(Lx\) is a single function. The dimension of the domain is \(n+1\), because \(L\) creates a linear combination
+    of \(x\) and its \(n\) first derivatives.
+    Therefore, the kernel of \(L\), i.e. the space of solutions of the ODE should have dimension \(n+1-1 = n\).
+</p>
+-->
+<p>
+    This all means that the proposed solution in equation \ref{exp_homog_sol} is insufficient, and we need to find a second, linearly independent solution.
+</p>
+
+
+</html>
