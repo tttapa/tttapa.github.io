@@ -48,6 +48,8 @@ class PagesParser {
         file_time_t depmodified;
         path abs_source_path;
         path rel_path;
+        const Page *previous = nullptr, *next = nullptr;
+        const Page *parent = nullptr;
 
         int getSequenceNumber() const {
             if (auto seq_str_it = metadata.find("sequence");
@@ -150,12 +152,14 @@ class PagesParser {
                    " --bind 127.0.0.1 &";
         cout << c << endl;
         if (system(c.c_str()) != 0) {
+            assert(false);
         }  // TODO
         c = "google-chrome --headless --disable-gpu "
             "--run-all-compositor-stages-before-draw --remote-debugging-port=" +
             std::to_string(dev_port) + " &";
         cout << c << endl;
         if (system(c.c_str()) != 0) {
+            assert(false);
         }  // TODO
     }
 
@@ -190,6 +194,7 @@ class PagesParser {
                                << "`" << endl;
                     auto launch = [command, &page]() -> const Page & {
                         if (system(command.c_str()) != 0) {
+                            assert(false);
                         }  // TODO
                         return page;
                     };
@@ -258,6 +263,10 @@ class PagesParser {
         replace(out, ":html:",
                 formatHTML(page.html, page.abs_source_path, page.lineno,
                            output_dir / page.rel_path));
+        bool showNextUpPrev = page.metadata.count("shownextupprevpage") > 0 &&
+                              page.metadata.at("shownextupprevpage") == "true";
+        replace(out, ":nextupprev:",
+                showNextUpPrev ? generateNextUpPrevNav(page) : "");
         replace(out, ":mdate:", formatFileTime(page.modified));
         for (const auto &[key, value] : page.metadata)
             while (replace(out, ":" + key + ":", value))
@@ -392,6 +401,38 @@ class PagesParser {
         result += indentation_ul;
         result += "</ul>\n";
         return result;
+    }
+
+    string generateNextUpPrevNav(const Page &page) {
+        string res = "";
+        res += R"(<div class="prevpage">)";
+        if (page.previous) {
+            res += R"(<a href=")";
+            res += page.previous->rel_path.filename();
+            res += R"(" title=")";
+            res += page.previous->getTitle();
+            res += R"(">ᐊ Previous Page</a>)";
+        }
+        res += R"(</div>)";
+        res += R"(<div class="uppage">)";
+        if (true) {
+            res += R"(<a href=")";
+            res += "index.html";
+            res += R"(" title=")";
+            res += page.parent ? page.parent->getTitle() : "Up";
+            res += R"(">Index</a>)";
+        }
+        res += R"(</div>)";
+        res += R"(<div class="nextpage">)";
+        if (page.next) {
+            res += R"(<a href=")";
+            res += page.next->rel_path.filename();
+            res += R"(" title=")";
+            res += page.next->getTitle();
+            res += R"(">Next Page ᐅ</a>)";
+        }
+        res += R"(</div>)";
+        return res;
     }
 
     string generateIndexItem(const Page &page, const path &root) {
@@ -643,12 +684,19 @@ class PagesParser {
         sort_pages(result.subdirectories);
         if (!hasIndex)
             create_index_file(directory, result);
-        /*
-        cout << __func__ << endl << result.getTitle() << endl;
-        for (auto &[key, value] : result.metadata)
-            cout << key << " → " << value << endl;
-        cout << endl; 
-        // */
+        // Add the "next" and "previous" pointers to all pages in this directory
+        if (result.pages.size() > 1) {
+            result.pages[0].next = &result.pages[1];
+            for (size_t i = 1; i < result.pages.size() - 1; ++i) {
+                result.pages[i].next     = &result.pages[i + 1];
+                result.pages[i].previous = &result.pages[i - 1];
+            }
+            result.pages.end()[-1].previous = &result.pages.end()[-2];
+        }
+        // Add the "up" pointer to the pages in the subdirectoriesfor (Page &page : result.subdirectories.back().pages)
+        for (auto &subdir : result.subdirectories)
+            for (Page &page : subdir.pages)
+                page.parent = &subdir;
         return result;
     }
 #pragma endregion
