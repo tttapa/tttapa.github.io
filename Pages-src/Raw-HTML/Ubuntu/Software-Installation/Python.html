@@ -13,11 +13,11 @@
 <h3>Install dependencies and tools</h3>
 
 <p>
-    First, install GCC 9, GNU Make and GNU Wget if you haven't already.
+    First, install GCC, GNU Make and GNU Wget if you haven't already.
 </p>
-<pre class=console><code>sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test  # Repository for GCC 9</code>
+<pre class=console>
 <code>sudo apt update</code>
-<code>sudo apt install gcc-9 g++-9 make wget</code></pre>
+<code>sudo apt install gcc g++ make wget</code></pre>
 <p>
     Also install the dependencies to build Python and its modules.
 </p>
@@ -37,7 +37,7 @@
 <p>
     Next, download and extract the Python source code.
 </p>
-<pre class=console><code>version="3.7.4"</code>
+<pre class=console><code>version="3.8.2"</code>
 <code>python="Python-$version"</code>
 <code>cd /tmp</code>
 <code>wget "https://www.python.org/ftp/python/$version/$python.tgz"  # Download</code>
@@ -62,8 +62,8 @@
 <pre class=console><code>cd "$python"</code>
 <code>./configure --prefix="$HOME/.local" \
         --enable-ipv6 \
-        --enable-shared --with-lto --enable-optimizations \
-        CC=gcc-9 CXX=g++-9 \
+        --enable-shared \
+        --with-lto --enable-optimizations \
         'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</code></pre>
 <p>
     To see all options, run the following command.
@@ -94,12 +94,14 @@
     the new default.<br>
     The second option is to install Python as an "alternative" version. The
     default Python 3 version will be preserved, and the new version will be
-    installed as <code>python3.7</code>.
+    installed as <code>python3.8</code>.
 </p>
 <pre class=console><code>make install  # Replace default version</code></pre>
 <pre class=console><code>make altinstall  # Install alongside existing version, preserve default</code></pre>
+
+<h4>Adding Python to the <code>PATH</code></h4>
 <p>
-    If the installation location is not in your <code>PATH</code>, you'll have
+    If the installation location <code>~/.local/bin</code> is not in your <code>PATH</code>, you'll have
     to add it yourself.
 </p>
 <pre class=console><code>export PATH="$HOME/.local/bin:$PATH"</code></pre>
@@ -107,8 +109,9 @@
     To make it permanent, add it to your <code>~/.profile</code> file, so it is
     added to your <code>PATH</code> every time you log in.
 </p>
-<pre class=console><code>echo "export PATH=\"$HOME/.local/bin:$PATH\"" >> ~/.profile</code></pre>
+<pre class=console><code>echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.profile</code></pre>
 
+<h4>Finding the shared libraries</h4>
 <p>
     Python itself will find its shared libraries without problems, because of
     the <code>rpath</code> linker option we added previously. However, if you
@@ -117,6 +120,14 @@
     variable.
 </p>
 <pre class=console><code>export LD_LIBRARY_PATH="$HOME/.local/lib"</code></pre>
+<p>
+    Setting <code>LD_LIBRARY_PATH</code> is not the most elegant solution, so if you have root privileges, you can add
+    the <code>~/.local/lib</code> folder to the <code>ld</code> configuration folder:
+</p>
+<pre class=console>
+<code>echo "$HOME/.local/lib" | sudo tee -a /etc/ld.so.conf.d/home.local.conf</code>
+<code>sudo ldconfig</code>
+</pre>
 
 <h3>Shell Script</h3>
 
@@ -125,9 +136,9 @@
 </p>
 
 @codesnippet{
-    "name": "python.sh",
-    "file": "resources/python.sh",
-    "startline": 7
+"name": "python.sh",
+"file": "resources/python.sh",
+"startline": 7
 }
 
 <p>
@@ -143,6 +154,8 @@
     <li>Ubuntu 16.04 - Python 3.7.3</li>
     <li>Ubuntu 16.04 - Python 3.8.0</li>
     <li>Ubuntu 18.04 - Python 3.7.4</li>
+    <li>Ubuntu 19.10 - Python 3.8.1</li>
+    <li>Ubuntu 19.10 - Python 3.8.2</li>
 </ul>
 
 </html>

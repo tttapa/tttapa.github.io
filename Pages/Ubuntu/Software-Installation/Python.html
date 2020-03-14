@@ -179,11 +179,10 @@
 <h3><a name="install-dependencies-and-tools" href="#install-dependencies-and-tools">Install dependencies and tools</a></h3>
 
 <p>
-    First, install GCC 9, GNU Make and GNU Wget if you haven't already.
+    First, install GCC, GNU Make and GNU Wget if you haven't already.
 </p>
-<pre class="console"><code>sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test  # Repository for GCC 9</code>
-<code>sudo apt update</code>
-<code>sudo apt install gcc-9 g++-9 make wget</code></pre>
+<pre class="console"><code>sudo apt update</code>
+<code>sudo apt install gcc g++ make wget</code></pre>
 <p>
     Also install the dependencies to build Python and its modules.
 </p>
@@ -202,7 +201,7 @@
 <p>
     Next, download and extract the Python source code.
 </p>
-<pre class="console"><code>version="3.7.4"</code>
+<pre class="console"><code>version="3.8.2"</code>
 <code>python="Python-$version"</code>
 <code>cd /tmp</code>
 <code>wget "https://www.python.org/ftp/python/$version/$python.tgz"  # Download</code>
@@ -227,8 +226,8 @@
 <pre class="console"><code>cd "$python"</code>
 <code>./configure --prefix="$HOME/.local" \
         --enable-ipv6 \
-        --enable-shared --with-lto --enable-optimizations \
-        CC=gcc-9 CXX=g++-9 \
+        --enable-shared \
+        --with-lto --enable-optimizations \
         'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</code></pre>
 <p>
     To see all options, run the following command.
@@ -259,12 +258,14 @@
     the new default.<br>
     The second option is to install Python as an "alternative" version. The
     default Python 3 version will be preserved, and the new version will be
-    installed as <code>python3.7</code>.
+    installed as <code>python3.8</code>.
 </p>
 <pre class="console"><code>make install  # Replace default version</code></pre>
 <pre class="console"><code>make altinstall  # Install alongside existing version, preserve default</code></pre>
+
+<h4><a name="adding-python-to-the-path" href="#adding-python-to-the-path">Adding Python to the <code>PATH</code></a></h4>
 <p>
-    If the installation location is not in your <code>PATH</code>, you'll have
+    If the installation location <code>~/.local/bin</code> is not in your <code>PATH</code>, you'll have
     to add it yourself.
 </p>
 <pre class="console"><code>export PATH="$HOME/.local/bin:$PATH"</code></pre>
@@ -272,8 +273,9 @@
     To make it permanent, add it to your <code>~/.profile</code> file, so it is
     added to your <code>PATH</code> every time you log in.
 </p>
-<pre class="console"><code>echo "export PATH=\"$HOME/.local/bin:$PATH\"" &gt;&gt; ~/.profile</code></pre>
+<pre class="console"><code>echo 'export PATH="$HOME/.local/bin:$PATH"' &gt;&gt; ~/.profile</code></pre>
 
+<h4><a name="finding-the-shared-libraries" href="#finding-the-shared-libraries">Finding the shared libraries</a></h4>
 <p>
     Python itself will find its shared libraries without problems, because of
     the <code>rpath</code> linker option we added previously. However, if you
@@ -282,6 +284,13 @@
     variable.
 </p>
 <pre class="console"><code>export LD_LIBRARY_PATH="$HOME/.local/lib"</code></pre>
+<p>
+    Setting <code>LD_LIBRARY_PATH</code> is not the most elegant solution, so if you have root privileges, you can add
+    the <code>~/.local/lib</code> folder to the <code>ld</code> configuration folder:
+</p>
+<pre class="console"><code>echo "$HOME/.local/lib" | sudo tee -a /etc/ld.so.conf.d/home.local.conf</code>
+<code>sudo ldconfig</code>
+</pre>
 
 <h3><a name="shell-script" href="#shell-script">Shell Script</a></h3>
 
@@ -289,94 +298,94 @@
     Here's a shell script that executes the previous steps for you.
 </p>
 
-<div class="codesnippet"><style>.pygments127 .hll { background-color: #ffffcc }
-.pygments127  { background: #f8f8f8; }
-.pygments127 .c { color: #408080; font-style: italic } /* Comment */
-.pygments127 .err { border: 1px solid #FF0000 } /* Error */
-.pygments127 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments127 .o { color: #666666 } /* Operator */
-.pygments127 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments127 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments127 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments127 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments127 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments127 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments127 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments127 .ge { font-style: italic } /* Generic.Emph */
-.pygments127 .gr { color: #FF0000 } /* Generic.Error */
-.pygments127 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments127 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments127 .go { color: #888888 } /* Generic.Output */
-.pygments127 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments127 .gs { font-weight: bold } /* Generic.Strong */
-.pygments127 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments127 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments127 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments127 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments127 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments127 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments127 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments127 .kt { color: #B00040 } /* Keyword.Type */
-.pygments127 .m { color: #666666 } /* Literal.Number */
-.pygments127 .s { color: #BA2121 } /* Literal.String */
-.pygments127 .na { color: #7D9029 } /* Name.Attribute */
-.pygments127 .nb { color: #008000 } /* Name.Builtin */
-.pygments127 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments127 .no { color: #880000 } /* Name.Constant */
-.pygments127 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments127 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments127 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments127 .nf { color: #0000FF } /* Name.Function */
-.pygments127 .nl { color: #A0A000 } /* Name.Label */
-.pygments127 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments127 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments127 .nv { color: #19177C } /* Name.Variable */
-.pygments127 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments127 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments127 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments127 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments127 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments127 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments127 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments127 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments127 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments127 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments127 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments127 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments127 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments127 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments127 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments127 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments127 .sx { color: #008000 } /* Literal.String.Other */
-.pygments127 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments127 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments127 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments127 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments127 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments127 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments127 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments127 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments127 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments127 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments127 pre.snippet127 { counter-reset: line 6; }</style><div class="pygments127"><pre class="lineNumbers snippet127"><code><span></span><span class="nv">version</span><span class="o">=</span><span class="s2">"3.8.0"</span></code>
+<div class="codesnippet"><style>.pygments138 .hll { background-color: #ffffcc }
+.pygments138  { background: #f8f8f8; }
+.pygments138 .c { color: #408080; font-style: italic } /* Comment */
+.pygments138 .err { border: 1px solid #FF0000 } /* Error */
+.pygments138 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments138 .o { color: #666666 } /* Operator */
+.pygments138 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments138 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments138 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments138 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments138 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments138 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments138 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments138 .ge { font-style: italic } /* Generic.Emph */
+.pygments138 .gr { color: #FF0000 } /* Generic.Error */
+.pygments138 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments138 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments138 .go { color: #888888 } /* Generic.Output */
+.pygments138 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments138 .gs { font-weight: bold } /* Generic.Strong */
+.pygments138 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments138 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments138 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments138 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments138 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments138 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments138 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments138 .kt { color: #B00040 } /* Keyword.Type */
+.pygments138 .m { color: #666666 } /* Literal.Number */
+.pygments138 .s { color: #BA2121 } /* Literal.String */
+.pygments138 .na { color: #7D9029 } /* Name.Attribute */
+.pygments138 .nb { color: #008000 } /* Name.Builtin */
+.pygments138 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments138 .no { color: #880000 } /* Name.Constant */
+.pygments138 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments138 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments138 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments138 .nf { color: #0000FF } /* Name.Function */
+.pygments138 .nl { color: #A0A000 } /* Name.Label */
+.pygments138 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments138 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments138 .nv { color: #19177C } /* Name.Variable */
+.pygments138 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments138 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments138 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments138 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments138 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments138 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments138 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments138 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments138 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments138 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments138 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments138 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments138 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments138 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments138 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments138 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments138 .sx { color: #008000 } /* Literal.String.Other */
+.pygments138 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments138 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments138 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments138 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments138 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments138 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments138 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments138 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments138 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments138 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments138 pre.snippet138 { counter-reset: line 6; }</style><a href="https://github.com/tttapa/tttapa.github.io/blob/51671e6aa79f4cc9507ae1dc7f7d5685cf48103a/Pages-src/Raw-HTML/Ubuntu/Software-Installation/resources/python.sh#L7" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments138"><pre class="lineNumbers snippet138"><code><span></span><span class="nv">version</span><span class="o">=</span><span class="s2">"3.8.2"</span></code>
 <code><span class="nv">builddir</span><span class="o">=</span><span class="s2">"/tmp"</span></code>
 <code><span class="nv">python</span><span class="o">=</span><span class="s2">"Python-</span><span class="nv">$version</span><span class="s2">"</span></code>
 <code><span class="nv">prefix</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local"</span></code>
 <code></code>
 <code><span class="c1"># Install dependencies and build tools</span></code>
-<code>sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test</code>
 <code>sudo apt-get update</code>
 <code>sudo apt-get install -y <span class="se">\</span></code>
-<code>	zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev <span class="se">\</span></code>
-<code>	libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev <span class="se">\</span></code>
-<code>	libgdbm-dev liblzma-dev <span class="se">\</span></code>
-<code>	wget make gcc-9 g++-9</code>
+<code>    zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev <span class="se">\</span></code>
+<code>    libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev <span class="se">\</span></code>
+<code>    libgdbm-dev liblzma-dev <span class="se">\</span></code>
+<code>    gcc g++ make wget</code>
 <code></code>
 <code><span class="c1"># For Ubuntu 18.04 and later, another dependency is required for GNU dbm</span></code>
 <code><span class="nb">source</span> /etc/os-release</code>
 <code><span class="k">if</span> <span class="o">((</span> <span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$VERSION_ID</span><span class="s2"> &gt;= 18.04"</span> <span class="p">|</span> bc -l<span class="k">)</span> <span class="o">))</span><span class="p">;</span></code>
 <code><span class="k">then</span></code>
-<code>	sudo apt-get install libgdbm-compat-dev</code>
+<code>    sudo apt-get install libgdbm-compat-dev</code>
 <code><span class="k">fi</span></code>
 <code></code>
 <code><span class="c1"># Download and extract the Python source code</span></code>
@@ -384,18 +393,18 @@
 <code><span class="nb">cd</span> <span class="nv">$builddir</span></code>
 <code><span class="k">if</span> <span class="o">[</span> ! -d <span class="s2">"</span><span class="nv">$python</span><span class="s2">"</span> <span class="o">]</span></code>
 <code><span class="k">then</span></code>
-<code>	wget <span class="s2">"https://www.python.org/ftp/python/</span><span class="nv">$version</span><span class="s2">/</span><span class="nv">$python</span><span class="s2">.tgz"</span></code>
-<code>	tar xf <span class="nv">$python</span>.tgz</code>
+<code>    wget <span class="s2">"https://www.python.org/ftp/python/</span><span class="nv">$version</span><span class="s2">/</span><span class="nv">$python</span><span class="s2">.tgz"</span></code>
+<code>    tar xf <span class="nv">$python</span>.tgz</code>
 <code><span class="k">fi</span></code>
 <code></code>
 <code><span class="nb">cd</span> <span class="s2">"</span><span class="nv">$python</span><span class="s2">"</span></code>
 <code>./configure --prefix<span class="o">=</span><span class="s2">"</span><span class="nv">$prefix</span><span class="s2">"</span> <span class="se">\</span></code>
-<code>	--enable-ipv6 <span class="se">\</span></code>
-<code>	--enable-shared --with-lto --enable-optimizations <span class="se">\</span></code>
-<code>	<span class="nv">CC</span><span class="o">=</span>gcc-9 <span class="nv">CXX</span><span class="o">=</span>g++-9 <span class="se">\</span></code>
-<code>	<span class="s1">'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</span></code>
+<code>    --enable-ipv6 <span class="se">\</span></code>
+<code>    --enable-shared <span class="se">\</span></code>
+<code>    --with-lto --enable-optimizations <span class="se">\</span></code>
+<code>    <span class="s1">'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</span></code>
 <code></code>
-<code>make -j$<span class="o">[</span><span class="k">$(</span>nproc<span class="k">)</span> * <span class="m">2</span><span class="o">]</span></code>
+<code>make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span></code>
 <code>make altinstall</code></pre></div>
 </div>
 
@@ -412,13 +421,15 @@
     <li>Ubuntu 16.04 - Python 3.7.3</li>
     <li>Ubuntu 16.04 - Python 3.8.0</li>
     <li>Ubuntu 18.04 - Python 3.7.4</li>
+    <li>Ubuntu 19.10 - Python 3.8.1</li>
+    <li>Ubuntu 19.10 - Python 3.8.2</li>
 </ul>
 
 </div>
         <hr id="end-of-article">
         <div class="nextupprev"></div>
     </article>
-    <footer>Last edited: Friday, 25 October 2019 12:52 UTC</footer>
+    <footer>Last edited: Saturday, 14 March 2020 18:39 UTC</footer>
 
 
 </body></html>
