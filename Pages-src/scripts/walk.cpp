@@ -152,14 +152,14 @@ class PagesParser {
                    " --bind 127.0.0.1 &";
         cout << c << endl;
         if (system(c.c_str()) != 0) {
-            assert(false);
+            throw std::runtime_error("Command '" + c + "' failed.");
         }  // TODO
         c = "google-chrome --headless --disable-gpu "
             "--run-all-compositor-stages-before-draw --remote-debugging-port=" +
             std::to_string(dev_port) + " &";
         cout << c << endl;
         if (system(c.c_str()) != 0) {
-            assert(false);
+            throw std::runtime_error("Command '" + c + "' failed.");
         }  // TODO
     }
 
@@ -196,7 +196,8 @@ class PagesParser {
                                << "`" << endl;
                     auto launch = [command, &page]() -> const Page & {
                         if (system(command.c_str()) != 0) {
-                            assert(false);
+                            throw std::runtime_error("Command '" + command +
+                                                     "' failed.");
                         }  // TODO
                         return page;
                     };
