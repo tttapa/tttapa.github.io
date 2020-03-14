@@ -6,8 +6,66 @@ from json import JSONDecoder
 from pprint import pformat
 from os import getenv
 from os import path
-from os.path import exists, splitext
+from os.path import exists, splitext, dirname, relpath
 import sys
+from subprocess import check_output, CalledProcessError
+
+
+def get_git_remote_link(file, startline, endline):
+    """
+    E.g. https://github.com/tttapa/RPi-Cpp-Toolchain/blob/acd5b556709de02fa2de5f0cd05e5d24be6f7768/applications/hello-world/hello-world.cpp#L1-L3
+    """
+
+    # First check if the directory is in a Git repository
+    directory = dirname(file)
+    try:
+        git_dir = check_output(["git", "rev-parse", "--show-toplevel"], 
+                               cwd=directory)
+    except CalledProcessError as e:
+        return None, None
+    
+    # Get the relative path of the file, relative to the toplevel git folder
+    git_dir = git_dir.decode('utf-8').strip()
+    rel = relpath(file, git_dir)
+
+    # Get the hash of the latest commit
+    commit = check_output(["git", "rev-parse", "HEAD"],
+                          cwd=directory)
+    commit = commit.decode('utf-8').strip()
+
+    # Get the remote of the repository
+    remote = check_output(["git", "remote", "get-url", "origin"],
+                          cwd=directory)
+    remote = remote.decode('utf-8').strip()
+    if m := re.match(r'^\w+@([\w.]+):([\w/.-]+)$', remote):
+        remote = 'https://' + m.group(1) + '/' + m.group(2)
+    if m := re.match(r'^(.*)\.git$', remote):
+        remote = m.group(1)
+    m = re.match(r'^https://(\w+)\..+$', remote)
+    if m is None:
+        print("Warning: unknown Git remote: " + remote)
+        return None, None
+    service = m.group(1)
+    
+    # Append the commit hash and file path
+    remote += '/' + 'blob' + '/' + commit + '/' + rel
+
+    # Add the line numbers
+    if startline is not None:
+        remote += '#L' + str(startline)
+        if endline is not None:
+            if service == 'github':
+                remote += '-L' + str(endline)
+            else:
+                remote += '-' + str(endline)
+    else:
+        if endline is not None:
+            if service == 'github':
+                remote += '#L1-L' + str(endline)
+            else:
+                remote += '#L1-' + str(endline)
+
+    return service, remote
 
 def format_anchor_name(match, anchors):
     tag = match.group(1)
@@ -77,15 +135,18 @@ def getlinesbetween(string: str, startindex: int, endindex: int) -> int:
 def getlines(string: str) -> int:
     return string.count('\n')
 
-def formatPygmentsCodeSnippet(data, html, filepath, lineno):
-    startline = data.get('startline', 1)
-    endline = data.get('endline')
+def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
+    startline = data.get('startline', None)
+    endline = data.get('endline', None)
     file = data['file']
     file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
     file = re.sub(r'\$\{(\w+)\}', lambda m: getenv(m.group(1)), file)
     if file[0] != '/':
         file = path.dirname(filepath) + '/' + file
 
+    git_service, git_link = get_git_remote_link(file, startline, endline)
+    
+    startline = 1 if startline is None else startline
     emptylines = 0
     nonemptylineencountered = False
     filecontents = ""
@@ -119,6 +180,14 @@ def formatPygmentsCodeSnippet(data, html, filepath, lineno):
                 '<pre class="lineNumbers snippet{}">'.format(lineno))
     htmlc = htmlc.replace('\n</pre></div>', '</pre></div>')
     datastr = '<div class="codesnippet"><style>' + css + '</style>'
+    if git_link is not None and git_service == 'github':
+        datastr += '<a href="' + git_link + '" title="Open on GitHub">'
+        datastr += '<img class="github-mark" src="/Images/GitHub-Mark.svg"/>' 
+        datastr += '</a>\n'
+    if git_link is not None and git_service == 'gitlab':
+        datastr += '<a href="' + git_link + '" title="Open on GitLab">'
+        datastr += '<img class="gitlab-mark" src="/Images/GitLab-Mark.svg"/>' 
+        datastr += '</a>\n'
     datastr += htmlc + '</div>'
     return datastr, file
 
