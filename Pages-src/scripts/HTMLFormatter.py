@@ -101,7 +101,10 @@ def formatPygmentsCodeSnippet(data, html, filepath, lineno):
             if endline is not None and i >= (endline - 1):
                 break
 
-    lexer = guess_lexer_for_filename(file, filecontents)
+    lex_filename = path.basename(file)
+    if lex_filename == 'CMakeLists.txt':
+        lex_filename += '.cmake'
+    lexer = guess_lexer_for_filename(lex_filename, filecontents)
     cssclass = 'pygments{}'.format(lineno)
     if lexer.name == "Arduino":
         formatter = HtmlFormatter(cssclass=cssclass, style='arduino')
