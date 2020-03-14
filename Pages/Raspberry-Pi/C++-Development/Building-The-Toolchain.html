@@ -92,12 +92,12 @@
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
         <ul>
-            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters</a>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
             <ul>
                 <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
             </ul>
             </li>
-            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital filters</a>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
             <ul>
                 <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
                 <ul>
@@ -176,6 +176,10 @@
     To compile software for the Raspberry Pi, you need a cross-compilation toolchain. It's a collection of files and
     programs that you can run on your computer, and that produce a binary that can be executed on the Raspberry Pi.
 </p>
+<p>
+    If you want to do development on the Pi itself, you'll need a native toolchain as well. This is a toolchain that
+    runs on the Pi, and produces binaries for the Pi.
+</p>
 
 <h3><a name="docker" href="#docker">Docker</a></h3>
 
@@ -184,9 +188,11 @@
     This has the added benefit that all builds are reproducible, and it's easy to undo the previous step or even start
     from scratch.
 </p>
+
 <h4><a name="installation" href="#installation">Installation</a></h4>
+
 <p>
-    You need Docker and Docker Compose to build the toolchain.<br>
+    You need Docker to build the toolchain. Docker Compose is optional. <br>
     You can find detailed installation instructions here:
     <ul>
         <li><a href="https://www.digitalocean.com/community/tutorial_collections/39">
@@ -195,14 +201,73 @@
                 DigitalOcean - How to Install Docker Compose</a></li>
     </ul>
 </p>
+
 <h4><a name="dockefiles" href="#dockefiles">Dockefiles</a></h4>
+
 <p>
-    The actual Dockerfiles are on my GitHub, I'll briefly go over them on this page.
+    The actual Dockerfiles can be found <a href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain">on
+        my GitHub</a>, I'll briefly go over them on this page.
+</p>
+
+<h3><a name="building-the-toolchain-using-the-provided-shell-scripts" href="#building-the-toolchain-using-the-provided-shell-scripts">Building the toolchain using the provided shell scripts</a></h3>
+
+<p>
+    If you just want to build the toolchain, without understanding how it works,
+    and without changing anything to the configuration, you can use the shell
+    scripts provided in the <code>toolchain</code> folder:
+</p>
+
+<pre class="console">
+<code>./toolchain/build-and-export-toolchain.sh &lt;board&gt;</code>
+</pre>
+<p>
+    Where <code>&lt;board&gt;</code> is one of the following:
+    <ul>
+        <li><code>rpi</code>: Raspberry Pi 1 or Zero, cross-compilation toolchain</li>
+        <li><code>rpi-dev</code>: Raspberry Pi 1 or Zero, cross-compilation toolchain and native toolchain</li>
+        <li><code>rpi3-armv8</code>: Raspberry Pi 3, 32-bit, cross-compilation toolchain</li>
+        <li><code>rpi3-armv8-dev</code>: Raspberry Pi 3, 32-bit, cross-compilation toolchain and native toolchain</li>
+        <li><code>rpi3-aarch64</code>: Raspberry Pi 3, 64-bit, cross-compilation toolchain</li>
+        <li><code>rpi3-aarch64-dev</code>: Raspberry Pi 3, 64-bit, cross-compilation toolchain and native toolchain</li>
+    </ul>
 </p>
 <p>
-    <a href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker">
-        https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker</a>
+    Building one toolchain took around 25 minutes on a 2018 Dell XPS i7-8750H, and 40 minutes on a 2017 Dell XPS i7-7700HQ.
 </p>
+<p>
+    The cross-compilation toolchain will be located in
+    <code>toolchain/x-tools/&lt;arch&gt;-rpi*-linux-&lt;abi&gt;</code>,
+    and the native toolchain will be in
+    <code>toolchain/x-tools/HOST-&lt;arch&gt;-linux-&lt;abi&gt;/&lt;arch&gt;-rpi*-linux-&lt;abi&gt;</code>.
+</p>
+
+<h4><a name="deleting-the-toolchains" href="#deleting-the-toolchains">Deleting the toolchains</a></h4>
+
+<p>
+    The toolchains are read-only, to prevent you from accidentally breaking them during a build. If you try to delete
+    them using the usual methods, you'll
+    get <code>Permission denied</code>. The solution is to make them writable first, using <code>chmod</code>.
+</p>
+<p>
+    The <code>toolchain/clean.sh</code> script will do this for you, and deletes all toolchains in the
+    <code>toolchain</code> folder:
+</p>
+
+<pre class="console">
+<code>./toolchain/clean.sh</code>
+</pre>
+<p>
+    The toolchains will still be available in the Docker images used to build them. This means that next time you run
+    the <code>build-and-export-toolchain.sh</code> script, it will finish in just a couple of seconds, as it just has
+    to export the toolchain, it doesn't build it from scratch.
+</p>
+<p>
+    If you want to delete these Docker images as well (to save disk space, for instance), you can use
+    <code>docker image ls</code> to inspect all images on your system, and then you can delete them using
+    <code>docker image rm &lt;image&gt;</code>.
+</p>
+
+<h2><a name="detailed-information-about-configuring-and-building-toolchains" href="#detailed-information-about-configuring-and-building-toolchains">Detailed information about configuring and building toolchains</a></h2>
 
 <h3><a name="crosstool-ng" href="#crosstool-ng">Crosstool-NG</a></h3>
 
@@ -219,76 +284,76 @@
     The following Dockerfile downloads, builds and installs Crosstool-NG to the <code>~/.local</code> directory
     of the container.
 </p>
-<div class="codesnippet"><style>.pygments59 .hll { background-color: #ffffcc }
-.pygments59  { background: #f8f8f8; }
-.pygments59 .c { color: #408080; font-style: italic } /* Comment */
-.pygments59 .err { border: 1px solid #FF0000 } /* Error */
-.pygments59 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments59 .o { color: #666666 } /* Operator */
-.pygments59 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments59 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments59 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments59 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments59 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments59 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments59 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments59 .ge { font-style: italic } /* Generic.Emph */
-.pygments59 .gr { color: #FF0000 } /* Generic.Error */
-.pygments59 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments59 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments59 .go { color: #888888 } /* Generic.Output */
-.pygments59 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments59 .gs { font-weight: bold } /* Generic.Strong */
-.pygments59 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments59 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments59 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments59 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments59 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments59 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments59 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments59 .kt { color: #B00040 } /* Keyword.Type */
-.pygments59 .m { color: #666666 } /* Literal.Number */
-.pygments59 .s { color: #BA2121 } /* Literal.String */
-.pygments59 .na { color: #7D9029 } /* Name.Attribute */
-.pygments59 .nb { color: #008000 } /* Name.Builtin */
-.pygments59 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments59 .no { color: #880000 } /* Name.Constant */
-.pygments59 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments59 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments59 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments59 .nf { color: #0000FF } /* Name.Function */
-.pygments59 .nl { color: #A0A000 } /* Name.Label */
-.pygments59 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments59 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments59 .nv { color: #19177C } /* Name.Variable */
-.pygments59 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments59 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments59 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments59 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments59 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments59 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments59 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments59 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments59 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments59 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments59 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments59 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments59 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments59 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments59 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments59 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments59 .sx { color: #008000 } /* Literal.String.Other */
-.pygments59 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments59 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments59 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments59 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments59 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments59 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments59 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments59 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments59 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments59 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments59 pre.snippet59 { counter-reset: line 0; }</style><div class="pygments59"><pre class="lineNumbers snippet59"><code><span></span><span class="k">FROM</span><span class="s"> centos:7 as ct-ng</span></code>
+<div class="codesnippet"><style>.pygments125 .hll { background-color: #ffffcc }
+.pygments125  { background: #f8f8f8; }
+.pygments125 .c { color: #408080; font-style: italic } /* Comment */
+.pygments125 .err { border: 1px solid #FF0000 } /* Error */
+.pygments125 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments125 .o { color: #666666 } /* Operator */
+.pygments125 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments125 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments125 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments125 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments125 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments125 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments125 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments125 .ge { font-style: italic } /* Generic.Emph */
+.pygments125 .gr { color: #FF0000 } /* Generic.Error */
+.pygments125 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments125 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments125 .go { color: #888888 } /* Generic.Output */
+.pygments125 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments125 .gs { font-weight: bold } /* Generic.Strong */
+.pygments125 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments125 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments125 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments125 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments125 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments125 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments125 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments125 .kt { color: #B00040 } /* Keyword.Type */
+.pygments125 .m { color: #666666 } /* Literal.Number */
+.pygments125 .s { color: #BA2121 } /* Literal.String */
+.pygments125 .na { color: #7D9029 } /* Name.Attribute */
+.pygments125 .nb { color: #008000 } /* Name.Builtin */
+.pygments125 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments125 .no { color: #880000 } /* Name.Constant */
+.pygments125 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments125 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments125 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments125 .nf { color: #0000FF } /* Name.Function */
+.pygments125 .nl { color: #A0A000 } /* Name.Label */
+.pygments125 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments125 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments125 .nv { color: #19177C } /* Name.Variable */
+.pygments125 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments125 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments125 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments125 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments125 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments125 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments125 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments125 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments125 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments125 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments125 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments125 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments125 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments125 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments125 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments125 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments125 .sx { color: #008000 } /* Literal.String.Other */
+.pygments125 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments125 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments125 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments125 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments125 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments125 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments125 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments125 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments125 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments125 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments125 pre.snippet125 { counter-reset: line 0; }</style><div class="pygments125"><pre class="lineNumbers snippet125"><code><span></span><span class="k">FROM</span> <span class="s">centos:7</span> <span class="k">as</span> <span class="s">ct-ng</span></code>
 <code></code>
 <code><span class="c"># Install dependencies to build toolchain</span></code>
 <code><span class="k">RUN</span> yum -y update <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
@@ -299,13 +364,14 @@
 <code>    yum clean all</code>
 <code></code>
 <code><span class="c"># Add a user called `develop` and add him to the sudo group</span></code>
-<code><span class="k">RUN</span> useradd -m develop <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;develop:develop&quot;</span> <span class="p">|</span> chpasswd <span class="o">&amp;&amp;</span> usermod -aG wheel develop</code>
+<code><span class="k">RUN</span> useradd -m develop <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">&quot;develop:develop&quot;</span> <span class="p">|</span> chpasswd <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code>    usermod -aG wheel develop</code>
 <code></code>
 <code><span class="k">USER</span><span class="s"> develop</span></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
 <code></code>
-<code><span class="k">ENV</span> <span class="nv">CT_NG_VERSION</span><span class="o">=</span><span class="m">1</span>.24.0</code>
-<code><span class="k">RUN</span> git clone -b crosstool-ng-<span class="si">${</span><span class="nv">CT_NG_VERSION</span><span class="si">}</span> --single-branch --depth <span class="m">1</span> <span class="se">\</span></code>
+<code><span class="c"># Download and install the latest version of crosstool-ng</span></code>
+<code><span class="k">RUN</span> git clone -b master --single-branch --depth <span class="m">1</span> <span class="se">\</span></code>
 <code>        https://github.com/crosstool-ng/crosstool-ng.git</code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop/crosstool-ng</span></code>
 <code><span class="k">RUN</span> ./bootstrap <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
@@ -321,97 +387,99 @@
         https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/centos7/Dockerfile</a>
 </p>
 
-<h3><a name="raspberry-pi-3b-64-bit-cross-compilation-toolchain" href="#raspberry-pi-3b-64-bit-cross-compilation-toolchain">Raspberry Pi 3B+ 64-bit Cross-Compilation Toolchain</a></h3>
+<h3><a name="cross-compilation-toolchain" href="#cross-compilation-toolchain">Cross-Compilation Toolchain</a></h3>
 
 <p>
-    The following Dockerfile builds the toolchain for a Raspberry Pi 3B+ running a 64-bit operating system.
+    The following Dockerfile builds the toolchain, all settings can be found in the <code>config</code> files on <a
+        href="https://github.com/tttapa/RPi-Cpp-Toolchain">GitHub</a>.
 </p>
-<div class="codesnippet"><style>.pygments74 .hll { background-color: #ffffcc }
-.pygments74  { background: #f8f8f8; }
-.pygments74 .c { color: #408080; font-style: italic } /* Comment */
-.pygments74 .err { border: 1px solid #FF0000 } /* Error */
-.pygments74 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments74 .o { color: #666666 } /* Operator */
-.pygments74 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments74 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments74 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments74 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments74 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments74 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments74 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments74 .ge { font-style: italic } /* Generic.Emph */
-.pygments74 .gr { color: #FF0000 } /* Generic.Error */
-.pygments74 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments74 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments74 .go { color: #888888 } /* Generic.Output */
-.pygments74 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments74 .gs { font-weight: bold } /* Generic.Strong */
-.pygments74 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments74 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments74 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments74 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments74 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments74 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments74 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments74 .kt { color: #B00040 } /* Keyword.Type */
-.pygments74 .m { color: #666666 } /* Literal.Number */
-.pygments74 .s { color: #BA2121 } /* Literal.String */
-.pygments74 .na { color: #7D9029 } /* Name.Attribute */
-.pygments74 .nb { color: #008000 } /* Name.Builtin */
-.pygments74 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments74 .no { color: #880000 } /* Name.Constant */
-.pygments74 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments74 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments74 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments74 .nf { color: #0000FF } /* Name.Function */
-.pygments74 .nl { color: #A0A000 } /* Name.Label */
-.pygments74 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments74 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments74 .nv { color: #19177C } /* Name.Variable */
-.pygments74 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments74 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments74 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments74 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments74 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments74 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments74 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments74 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments74 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments74 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments74 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments74 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments74 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments74 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments74 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments74 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments74 .sx { color: #008000 } /* Literal.String.Other */
-.pygments74 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments74 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments74 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments74 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments74 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments74 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments74 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments74 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments74 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments74 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments74 pre.snippet74 { counter-reset: line 0; }</style><div class="pygments74"><pre class="lineNumbers snippet74"><code><span></span><span class="k">FROM</span><span class="s"> crosstool-ng:v1 as aarch64-toolchain</span></code>
+<div class="codesnippet"><style>.pygments141 .hll { background-color: #ffffcc }
+.pygments141  { background: #f8f8f8; }
+.pygments141 .c { color: #408080; font-style: italic } /* Comment */
+.pygments141 .err { border: 1px solid #FF0000 } /* Error */
+.pygments141 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments141 .o { color: #666666 } /* Operator */
+.pygments141 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments141 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments141 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments141 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments141 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments141 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments141 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments141 .ge { font-style: italic } /* Generic.Emph */
+.pygments141 .gr { color: #FF0000 } /* Generic.Error */
+.pygments141 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments141 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments141 .go { color: #888888 } /* Generic.Output */
+.pygments141 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments141 .gs { font-weight: bold } /* Generic.Strong */
+.pygments141 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments141 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments141 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments141 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments141 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments141 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments141 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments141 .kt { color: #B00040 } /* Keyword.Type */
+.pygments141 .m { color: #666666 } /* Literal.Number */
+.pygments141 .s { color: #BA2121 } /* Literal.String */
+.pygments141 .na { color: #7D9029 } /* Name.Attribute */
+.pygments141 .nb { color: #008000 } /* Name.Builtin */
+.pygments141 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments141 .no { color: #880000 } /* Name.Constant */
+.pygments141 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments141 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments141 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments141 .nf { color: #0000FF } /* Name.Function */
+.pygments141 .nl { color: #A0A000 } /* Name.Label */
+.pygments141 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments141 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments141 .nv { color: #19177C } /* Name.Variable */
+.pygments141 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments141 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments141 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments141 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments141 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments141 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments141 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments141 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments141 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments141 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments141 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments141 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments141 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments141 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments141 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments141 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments141 .sx { color: #008000 } /* Literal.String.Other */
+.pygments141 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments141 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments141 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments141 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments141 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments141 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments141 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments141 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments141 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments141 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments141 pre.snippet141 { counter-reset: line 0; }</style><div class="pygments141"><pre class="lineNumbers snippet141"><code><span></span><span class="k">FROM</span> <span class="s">crosstool-ng-master</span> <span class="k">as</span> <span class="s">aarch64-toolchain</span></code>
 <code></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
-<code><span class="k">RUN</span> mkdir /home/develop/RPi3</code>
+<code><span class="k">RUN</span> mkdir /home/develop/RPi3 <span class="o">&amp;&amp;</span> mkdir /home/develop/src</code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop/RPi3</span></code>
-<code><span class="k">RUN</span> ct-ng aarch64-rpi3-linux-gnu</code>
-<code><span class="k">RUN</span> sed -i <span class="s1">&#39;s/CT_GCC_VERSION=\&quot;[0-9.]*\&quot;/CT_GCC_VERSION=&quot;9.1.0&quot;/g&#39;</span> .config <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    sed -i <span class="s1">&#39;s/CT_LINUX_VERSION=\&quot;[0-9.]*\&quot;/CT_LINUX_VERSION=&quot;4.15&quot;/g&#39;</span> .config <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    sed -i <span class="s1">&#39;s/CT_GLIBC_VERSION=\&quot;[0-9.]*\&quot;/CT_GLIBC_VERSION=&quot;2.27&quot;/g&#39;</span> .config</code>
-<code><span class="k">RUN</span> ct-ng build <span class="o">&amp;&amp;</span> rm -rf .build</code>
+<code><span class="k">COPY</span> config .config</code>
+<code></code>
+<code><span class="k">RUN</span> ct-ng build <span class="o">||</span> <span class="o">{</span> cat build.log <span class="o">&amp;&amp;</span> false<span class="p">;</span> <span class="o">}</span> <span class="o">&amp;&amp;</span> rm -rf .build</code>
 <code></code>
 <code><span class="k">ENV</span> <span class="nv">TOOLCHAIN_PATH</span><span class="o">=</span>/home/develop/x-tools/aarch64-rpi3-linux-gnu</code>
 <code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">TOOLCHAIN_PATH</span><span class="si">}</span>/bin:<span class="nv">$PATH</span></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
 </div>
+
+<h4><a name="raspberry-pi-3-64-bit-aarch64" href="#raspberry-pi-3-64-bit-aarch64">Raspberry Pi 3, 64-bit (AArch64)</a></h4>
+
 <p>
-    The configuration is based on the <code>aarch64-rpi3-linux-gnu</code> sample that comes with Crosstool-NG:
+    This configuration is based on the <code>aarch64-rpi3-linux-gnu</code> sample that comes with Crosstool-NG:
     <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu">
         https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu</a>
 </p>
@@ -420,119 +488,163 @@
     that the Ubuntu Server 18.04 image ships with.
 </p>
 <p>
-    The build took around 25 minutes on a 2018 Dell XPS i7-8750H, and 45 minutes on a 2017 Dell XPS i7-7700HQ.
+    The configuration file can be found on my GitHub: <a
+        href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/master/toolchain/docker/rpi3/aarch64/aarch64-cross-toolchain/config">https://github.com/tttapa/RPi-Cpp-Toolchain/blob/master/toolchain/docker/rpi3/aarch64/aarch64-cross-toolchain/config</a>
 </p>
 
-<h3><a name="raspberry-pi-3b-32-bit-cross-compilation-toolchain" href="#raspberry-pi-3b-32-bit-cross-compilation-toolchain">Raspberry Pi 3B+ 32-bit Cross-Compilation Toolchain</a></h3>
+<h4><a name="raspberry-pi-3-32-bit-armv8" href="#raspberry-pi-3-32-bit-armv8">Raspberry Pi 3, 32-bit (ARMv8)</a></h4>
 
 <p>
-    Even though the Raspberry Pi 3B+ has a 64-bit ARMv8/AArch64 CPU, at the time of writing, the Raspbian distribution
-    is still only 32 bits. To be able to cross-compile software for this platform, you'll need a 32-bit cross-compiler.
-</p>
-<div class="codesnippet"><style>.pygments97 .hll { background-color: #ffffcc }
-.pygments97  { background: #f8f8f8; }
-.pygments97 .c { color: #408080; font-style: italic } /* Comment */
-.pygments97 .err { border: 1px solid #FF0000 } /* Error */
-.pygments97 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments97 .o { color: #666666 } /* Operator */
-.pygments97 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments97 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments97 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments97 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments97 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments97 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments97 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments97 .ge { font-style: italic } /* Generic.Emph */
-.pygments97 .gr { color: #FF0000 } /* Generic.Error */
-.pygments97 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments97 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments97 .go { color: #888888 } /* Generic.Output */
-.pygments97 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments97 .gs { font-weight: bold } /* Generic.Strong */
-.pygments97 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments97 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments97 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments97 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments97 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments97 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments97 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments97 .kt { color: #B00040 } /* Keyword.Type */
-.pygments97 .m { color: #666666 } /* Literal.Number */
-.pygments97 .s { color: #BA2121 } /* Literal.String */
-.pygments97 .na { color: #7D9029 } /* Name.Attribute */
-.pygments97 .nb { color: #008000 } /* Name.Builtin */
-.pygments97 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments97 .no { color: #880000 } /* Name.Constant */
-.pygments97 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments97 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments97 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments97 .nf { color: #0000FF } /* Name.Function */
-.pygments97 .nl { color: #A0A000 } /* Name.Label */
-.pygments97 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments97 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments97 .nv { color: #19177C } /* Name.Variable */
-.pygments97 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments97 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments97 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments97 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments97 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments97 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments97 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments97 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments97 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments97 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments97 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments97 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments97 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments97 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments97 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments97 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments97 .sx { color: #008000 } /* Literal.String.Other */
-.pygments97 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments97 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments97 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments97 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments97 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments97 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments97 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments97 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments97 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments97 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments97 pre.snippet97 { counter-reset: line 0; }</style><div class="pygments97"><pre class="lineNumbers snippet97"><code><span></span><span class="k">FROM</span><span class="s"> crosstool-ng:v1 as aarch32-toolchain</span></code>
-<code></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
-<code><span class="k">RUN</span> sed -i <span class="s1">&#39;s/CT_ARCH_FPU=\&quot;neon-vfpv4\&quot;/CT_ARCH_FPU=&quot;neon-fp-armv8&quot;/g&#39;</span> <span class="se">\</span></code>
-<code>    .local/share/crosstool-ng/samples/armv8-rpi3-linux-gnueabihf/crosstool.config</code>
-<code><span class="k">RUN</span> mkdir /home/develop/RPi3</code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop/RPi3</span></code>
-<code><span class="k">RUN</span> ct-ng armv8-rpi3-linux-gnueabihf</code>
-<code><span class="k">RUN</span> sed -i <span class="s1">&#39;s/CT_GCC_VERSION=\&quot;[0-9.]*\&quot;/CT_GCC_VERSION=&quot;9.1.0&quot;/g&#39;</span> .config <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    sed -i <span class="s1">&#39;s/CT_LINUX_VERSION=\&quot;[0-9.]*\&quot;/CT_LINUX_VERSION=&quot;4.14&quot;/g&#39;</span> .config <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    sed -i <span class="s1">&#39;s/CT_GLIBC_VERSION=\&quot;[0-9.]*\&quot;/CT_GLIBC_VERSION=&quot;2.24&quot;/g&#39;</span> .config</code>
-<code><span class="k">RUN</span> ct-ng build <span class="o">&amp;&amp;</span> rm -rf .build</code>
-<code></code>
-<code><span class="k">ENV</span> <span class="nv">TOOLCHAIN_PATH</span><span class="o">=</span>/home/develop/x-tools/armv8-rpi3-linux-gnueabihf</code>
-<code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">TOOLCHAIN_PATH</span><span class="si">}</span>/bin:<span class="nv">$PATH</span></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
-</div>
-<p>
-    The configuration is based on the <code>armv8-rpi3-linux-gnueabihf</code> sample that comes with Crosstool-NG:
+    This configuration is based on the <code>armv8-rpi3-linux-gnueabihf</code> sample that comes with Crosstool-NG:
     <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf">
         https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf</a>
 </p>
 <p>
-    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
-    that the Raspbian Stretch image ships with. <br>
     Even though the CPU will be running in 32-bit mode, you can still use the ARMv8 NEON instructions, so I changed the
     compiler's default FPU flag to <code>neon-fp-armv8</code>. I haven't tested if it actually makes any difference.
 </p>
 <p>
-    The build took around 25 minutes on a 2018 Dell XPS i7-8750H, and 45 minutes on a 2017 Dell XPS i7-7700HQ.
+    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
+    that the Ubuntu Server 18.04 image ships with. These are also supported on Raspbian Buster.
 </p>
 
+<h4><a name="raspberry-pi-1-zero-32-bit-armv6" href="#raspberry-pi-1-zero-32-bit-armv6">Raspberry Pi 1 &amp; Zero, 32-bit (ARMv6)</a></h4>
+
+<p>
+    This configuration is based on the <code>armv6-rpi-linux-gnueabihf</code> sample that comes with Crosstool-NG:
+    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv6-rpi-linux-gnueabi">
+        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv6-rpi-linux-gnueabi</a>
+</p>
+
+<h3><a name="native-toolchain" href="#native-toolchain">Native toolchain</a></h3>
+
+<p>
+    Building the native toolchain for the Raspberry Pi is very similar.
+</p>
+<div class="codesnippet"><style>.pygments191 .hll { background-color: #ffffcc }
+.pygments191  { background: #f8f8f8; }
+.pygments191 .c { color: #408080; font-style: italic } /* Comment */
+.pygments191 .err { border: 1px solid #FF0000 } /* Error */
+.pygments191 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments191 .o { color: #666666 } /* Operator */
+.pygments191 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments191 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments191 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments191 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments191 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments191 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments191 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments191 .ge { font-style: italic } /* Generic.Emph */
+.pygments191 .gr { color: #FF0000 } /* Generic.Error */
+.pygments191 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments191 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments191 .go { color: #888888 } /* Generic.Output */
+.pygments191 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments191 .gs { font-weight: bold } /* Generic.Strong */
+.pygments191 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments191 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments191 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments191 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments191 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments191 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments191 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments191 .kt { color: #B00040 } /* Keyword.Type */
+.pygments191 .m { color: #666666 } /* Literal.Number */
+.pygments191 .s { color: #BA2121 } /* Literal.String */
+.pygments191 .na { color: #7D9029 } /* Name.Attribute */
+.pygments191 .nb { color: #008000 } /* Name.Builtin */
+.pygments191 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments191 .no { color: #880000 } /* Name.Constant */
+.pygments191 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments191 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments191 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments191 .nf { color: #0000FF } /* Name.Function */
+.pygments191 .nl { color: #A0A000 } /* Name.Label */
+.pygments191 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments191 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments191 .nv { color: #19177C } /* Name.Variable */
+.pygments191 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments191 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments191 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments191 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments191 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments191 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments191 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments191 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments191 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments191 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments191 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments191 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments191 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments191 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments191 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments191 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments191 .sx { color: #008000 } /* Literal.String.Other */
+.pygments191 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments191 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments191 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments191 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments191 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments191 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments191 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments191 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments191 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments191 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments191 pre.snippet191 { counter-reset: line 0; }</style><div class="pygments191"><pre class="lineNumbers snippet191"><code><span></span><span class="k">FROM</span> <span class="s">aarch64-cross-toolchain</span> <span class="k">as</span> <span class="s">aarch64-cross-native-toolchain</span></code>
+<code></code>
+<code><span class="k">RUN</span> rm -rf /home/develop/RPi3 <span class="o">&amp;&amp;</span> mkdir /home/develop/RPi3</code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/RPi3</span></code>
+<code><span class="k">COPY</span> config .config</code>
+<code><span class="k">RUN</span> ct-ng build <span class="o">||</span> <span class="o">{</span> cat build.log <span class="o">&amp;&amp;</span> false<span class="p">;</span> <span class="o">}</span> <span class="o">&amp;&amp;</span> rm -rf .build</code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
 </div>
+
+<p>
+    The toolchain type is "Cross-Native", and is implemented as a special case
+    of the "Canadian Cross" toolchain.
+    It uses the cross-compilation toolchain that was built earlier.
+    More information can be found in the <a href="https://crosstool-ng.github.io/docs/toolchain-types/">Crosstool-NG
+        documentation</a>.
+</p>
+
+<h3><a name="customizing-the-toolchain" href="#customizing-the-toolchain">Customizing the toolchain</a></h3>
+
+<p>
+    You can customize all previously mentioned toolchains by running <code>ct-ng menuconfig</code> on the corresponding
+    configuration file.
+    The easiest way to do this is by running it inside of <code>crosstool-ng-master</code> Docker container.
+</p>
+
+<pre class="console">
+<code>cd RPi-Cpp-Toolchain/</code>
+<code>./toolchain/docker/crosstool-ng-master/build.sh</code>
+<code>docker run -it --rm --volume "$PWD/toolchain/docker:/mnt" crosstool-ng-master</code>
+</pre>
+<pre class="console-docker">
+<code>cd /mnt/rpi3/aarch64/aarch64-cross-toolchain/  # Choose RPi model and architecture</code>
+<code>cp config .config</code>
+<code>ct-ng menuconfig</code>
+</pre>
+<p>
+    Now make your changes and save the result to <code>.config</code>.
+</p>
+<pre class="console-docker">
+<code>mv config config.old  # rename old configuration</code>
+<code>mv .config config     # replace with new configuration</code>
+<code>exit</code>
+</pre>
+
+<p>
+    Now you can build the toolchain again using the <code>build-and-export-toolchain.sh</code> script, as explained
+    earlier.
+</p>
+
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="C++ Development">Index</a></div><div class="nextpage"><a href="Dependencies.html" title="Cross-Compiling the Dependencies">Next Page ᐅ</a></div></div>
     </article>
-    <footer>Last edited: Sunday, 15 September 2019 17:41 UTC</footer>
+    <footer>Last edited: Saturday, 14 March 2020 00:30 UTC</footer>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 <!--
 @sequence: 10
+@shownextupprevpage: true
 @title: Building the Cross-Compilation Toolchain
 @author: Pieter P
 @keywords:
@@ -13,6 +14,10 @@
     To compile software for the Raspberry Pi, you need a cross-compilation toolchain. It's a collection of files and
     programs that you can run on your computer, and that produce a binary that can be executed on the Raspberry Pi.
 </p>
+<p>
+    If you want to do development on the Pi itself, you'll need a native toolchain as well. This is a toolchain that
+    runs on the Pi, and produces binaries for the Pi.
+</p>
 
 <h3>Docker</h3>
 
@@ -21,9 +26,11 @@
     This has the added benefit that all builds are reproducible, and it's easy to undo the previous step or even start
     from scratch.
 </p>
+
 <h4>Installation</h4>
+
 <p>
-    You need Docker and Docker Compose to build the toolchain.<br>
+    You need Docker to build the toolchain. Docker Compose is optional. <br>
     You can find detailed installation instructions here:
     <ul>
         <li><a href="https://www.digitalocean.com/community/tutorial_collections/39">
@@ -32,14 +39,73 @@
                 DigitalOcean - How to Install Docker Compose</a></li>
     </ul>
 </p>
+
 <h4>Dockefiles</h4>
+
 <p>
-    The actual Dockerfiles are on my GitHub, I'll briefly go over them on this page.
+    The actual Dockerfiles can be found <a href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain">on
+        my GitHub</a>, I'll briefly go over them on this page.
+</p>
+
+<h3>Building the toolchain using the provided shell scripts</h3>
+
+<p>
+    If you just want to build the toolchain, without understanding how it works,
+    and without changing anything to the configuration, you can use the shell
+    scripts provided in the <code>toolchain</code> folder:
+</p>
+
+<pre class="console">
+<code>./toolchain/build-and-export-toolchain.sh &lt;board&gt;</code>
+</pre>
+<p>
+    Where <code>&lt;board&gt;</code> is one of the following:
+    <ul>
+        <li><code>rpi</code>: Raspberry Pi 1 or Zero, cross-compilation toolchain</li>
+        <li><code>rpi-dev</code>: Raspberry Pi 1 or Zero, cross-compilation toolchain and native toolchain</li>
+        <li><code>rpi3-armv8</code>: Raspberry Pi 3, 32-bit, cross-compilation toolchain</li>
+        <li><code>rpi3-armv8-dev</code>: Raspberry Pi 3, 32-bit, cross-compilation toolchain and native toolchain</li>
+        <li><code>rpi3-aarch64</code>: Raspberry Pi 3, 64-bit, cross-compilation toolchain</li>
+        <li><code>rpi3-aarch64-dev</code>: Raspberry Pi 3, 64-bit, cross-compilation toolchain and native toolchain</li>
+    </ul>
 </p>
 <p>
-    <a href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker">
-        https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker</a>
+    Building one toolchain took around 25 minutes on a 2018 Dell XPS i7-8750H, and 40 minutes on a 2017 Dell XPS i7-7700HQ.
 </p>
+<p>
+    The cross-compilation toolchain will be located in
+    <code>toolchain/x-tools/&lt;arch&gt;-rpi*-linux-&lt;abi&gt;</code>,
+    and the native toolchain will be in
+    <code>toolchain/x-tools/HOST-&lt;arch&gt;-linux-&lt;abi&gt;/&lt;arch&gt;-rpi*-linux-&lt;abi&gt;</code>.
+</p>
+
+<h4>Deleting the toolchains</h4>
+
+<p>
+    The toolchains are read-only, to prevent you from accidentally breaking them during a build. If you try to delete
+    them using the usual methods, you'll
+    get <code>Permission denied</code>. The solution is to make them writable first, using <code>chmod</code>.
+</p>
+<p>
+    The <code>toolchain/clean.sh</code> script will do this for you, and deletes all toolchains in the
+    <code>toolchain</code> folder:
+</p>
+
+<pre class="console">
+<code>./toolchain/clean.sh</code>
+</pre>
+<p>
+    The toolchains will still be available in the Docker images used to build them. This means that next time you run
+    the <code>build-and-export-toolchain.sh</code> script, it will finish in just a couple of seconds, as it just has
+    to export the toolchain, it doesn't build it from scratch.
+</p>
+<p>
+    If you want to delete these Docker images as well (to save disk space, for instance), you can use
+    <code>docker image ls</code> to inspect all images on your system, and then you can delete them using
+    <code>docker image rm &lt;image&gt;</code>.
+</p>
+
+<h2>Detailed information about configuring and building toolchains</h2>
 
 <h3>Crosstool-NG</h3>
 
@@ -58,7 +124,7 @@
 </p>
 @codesnippet{
 "name": "Dockerfile",
-"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/crosstool-ng/Dockerfile"
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/crosstool-ng-master/Dockerfile"
 }
 <p>
     The list of dependencies can be found on Crosstool-NG's GitHub:
@@ -66,17 +132,21 @@
         https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/centos7/Dockerfile</a>
 </p>
 
-<h3>Raspberry Pi 3B+ 64-bit Cross-Compilation Toolchain</h3>
+<h3>Cross-Compilation Toolchain</h3>
 
 <p>
-    The following Dockerfile builds the toolchain for a Raspberry Pi 3B+ running a 64-bit operating system.
+    The following Dockerfile builds the toolchain, all settings can be found in the <code>config</code> files on <a
+        href="https://github.com/tttapa/RPi-Cpp-Toolchain">GitHub</a>.
 </p>
 @codesnippet{
 "name": "Dockerfile",
-"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/aarch64-toolchain/Dockerfile"
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/rpi3/aarch64/aarch64-cross-toolchain/Dockerfile"
 }
+
+<h4>Raspberry Pi 3, 64-bit (AArch64)</h4>
+
 <p>
-    The configuration is based on the <code>aarch64-rpi3-linux-gnu</code> sample that comes with Crosstool-NG:
+    This configuration is based on the <code>aarch64-rpi3-linux-gnu</code> sample that comes with Crosstool-NG:
     <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu">
         https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu</a>
 </p>
@@ -85,32 +155,83 @@
     that the Ubuntu Server 18.04 image ships with.
 </p>
 <p>
-    The build took around 25 minutes on a 2018 Dell XPS i7-8750H, and 45 minutes on a 2017 Dell XPS i7-7700HQ.
+    The configuration file can be found on my GitHub: <a
+        href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/master/toolchain/docker/rpi3/aarch64/aarch64-cross-toolchain/config">https://github.com/tttapa/RPi-Cpp-Toolchain/blob/master/toolchain/docker/rpi3/aarch64/aarch64-cross-toolchain/config</a>
 </p>
 
-<h3>Raspberry Pi 3B+ 32-bit Cross-Compilation Toolchain</h3>
+<h4>Raspberry Pi 3, 32-bit (ARMv8)</h4>
 
 <p>
-    Even though the Raspberry Pi 3B+ has a 64-bit ARMv8/AArch64 CPU, at the time of writing, the Raspbian distribution
-    is still only 32 bits. To be able to cross-compile software for this platform, you'll need a 32-bit cross-compiler.
-</p>
-@codesnippet{
-"name": "Dockerfile",
-"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/aarch32-toolchain/Dockerfile"
-}
-<p>
-    The configuration is based on the <code>armv8-rpi3-linux-gnueabihf</code> sample that comes with Crosstool-NG:
+    This configuration is based on the <code>armv8-rpi3-linux-gnueabihf</code> sample that comes with Crosstool-NG:
     <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf">
         https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf</a>
 </p>
 <p>
-    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
-    that the Raspbian Stretch image ships with. <br>
     Even though the CPU will be running in 32-bit mode, you can still use the ARMv8 NEON instructions, so I changed the
     compiler's default FPU flag to <code>neon-fp-armv8</code>. I haven't tested if it actually makes any difference.
 </p>
 <p>
-    The build took around 25 minutes on a 2018 Dell XPS i7-8750H, and 45 minutes on a 2017 Dell XPS i7-7700HQ.
+    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
+    that the Ubuntu Server 18.04 image ships with. These are also supported on Raspbian Buster.
 </p>
+
+<h4>Raspberry Pi 1 &amp; Zero, 32-bit (ARMv6)</h4>
+
+<p>
+    This configuration is based on the <code>armv6-rpi-linux-gnueabihf</code> sample that comes with Crosstool-NG:
+    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv6-rpi-linux-gnueabi">
+        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv6-rpi-linux-gnueabi</a>
+</p>
+
+<h3>Native toolchain</h3>
+
+<p>
+    Building the native toolchain for the Raspberry Pi is very similar.
+</p>
+@codesnippet{
+"name": "Dockerfile",
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/rpi3/aarch64/aarch64-cross-native-toolchain/Dockerfile"
+}
+
+<p>
+    The toolchain type is "Cross-Native", and is implemented as a special case
+    of the "Canadian Cross" toolchain.
+    It uses the cross-compilation toolchain that was built earlier.
+    More information can be found in the <a href="https://crosstool-ng.github.io/docs/toolchain-types/">Crosstool-NG
+        documentation</a>.
+</p>
+
+<h3>Customizing the toolchain</h3>
+
+<p>
+    You can customize all previously mentioned toolchains by running <code>ct-ng menuconfig</code> on the corresponding
+    configuration file.
+    The easiest way to do this is by running it inside of <code>crosstool-ng-master</code> Docker container.
+</p>
+
+<pre class="console">
+<code>cd RPi-Cpp-Toolchain/</code>
+<code>./toolchain/docker/crosstool-ng-master/build.sh</code>
+<code>docker run -it --rm --volume "$PWD/toolchain/docker:/mnt" crosstool-ng-master</code>
+</pre>
+<pre class="console-docker">
+<code>cd /mnt/rpi3/aarch64/aarch64-cross-toolchain/  # Choose RPi model and architecture</code>
+<code>cp config .config</code>
+<code>ct-ng menuconfig</code>
+</pre>
+<p>
+    Now make your changes and save the result to <code>.config</code>.
+</p>
+<pre class="console-docker">
+<code>mv config config.old  # rename old configuration</code>
+<code>mv .config config     # replace with new configuration</code>
+<code>exit</code>
+</pre>
+
+<p>
+    Now you can build the toolchain again using the <code>build-and-export-toolchain.sh</code> script, as explained
+    earlier.
+</p>
+
 
 </html>
