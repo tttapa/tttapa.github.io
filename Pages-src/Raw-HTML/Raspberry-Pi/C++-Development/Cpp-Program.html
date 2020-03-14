@@ -1,0 +1,69 @@
+<!--
+@title: Cross-Compiling the C++ Example Project
+@sequence: 40
+@shownextupprevpage: true
+@author: Pieter P
+@keywords: cross-compile,raspberry,raspberry pi,build,compile,c++,cpp
+@description: Using the cross-compilation toolchain to build your own C++ 
+              project.
+-->
+<html>
+
+<h3>The Greeter Library</h3>
+
+<p>
+    For this example, we'll create a very simple library function that just takes a name and an output stream as
+    arguments, and that prints a greeting message to this stream. It's basically a "Hello, World!" example, but as a
+    library for demonstration purposes.
+</p>
+<p>
+    The structure of the library will be as follows:
+</p>
+<pre class="code">
+<code>greeter</code>
+<code>   ├── CMakeLists.txt</code>
+<code>   ├── include</code>
+<code>   │   └── greeter</code>
+<code>   │       └── greeter.hpp</code>
+<code>   ├── src</code>
+<code>   │   └── greeter.cpp</code>
+<code>   └── test</code>
+<code>       ├── CMakeLists.txt</code>
+<code>       └── greeter.test.cpp</code>
+</pre>
+<p>
+    As is very common for C++ libraries, the function prototypes/declarations will be in the header file
+    <code>greeter.hpp</code>. The implementations for these functions are in the implementation file
+    <code>greeter.cpp</code>.<br>
+    The <code>CMakeLists.txt</code> file in the <code>greeter</code> directory specifies how the library should be
+    compiled, and where to find the headers.<br>
+    Additionally, there's a <code>test</code> folder with unit tests in <code>greeter.test.cpp</code>. The
+    <code>CMakeLists.txt</code> file in this folder specifies how to compile and link the tests executable.
+</p>
+
+@codesnippet{
+"name": "greeter.hpp",
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/src/greeter/include/greeter/greeter.hpp"
+}
+@codesnippet{
+"name": "greeter.cpp",
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/src/greeter/src/greeter.cpp"
+}
+@codesnippet{
+"name": "CMakeLists.txt",
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/src/greeter/CMakeLists.txt"
+}
+@codesnippet{
+"name": "CMakeLists.txt",
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/applications/hello-world/CMakeLists.txt"
+}
+@codesnippet{
+"name": "hello-world.cpp",
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/applications/hello-world/hello-world.cpp"
+}
+@codesnippet{
+"name": "CMakeLists.txt",
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/applications/hello-world/CMakeLists.txt"
+}
+
+</html>

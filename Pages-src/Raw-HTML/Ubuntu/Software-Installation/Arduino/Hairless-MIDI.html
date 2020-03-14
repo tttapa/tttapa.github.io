@@ -1,0 +1,68 @@
+<!--
+@title: The Hairless MIDI to Serial Bridge
+@sequence: 20
+@author: Pieter P
+@keywords: Arduino,Hairless,Hairless MIDI,MIDI,Installation,Ubuntu
+@description: Installation instructions for Hairless MIDI on Ubuntu.
+-->
+<html>
+
+<p>
+    This is an installation guide for the Hairless MIDI to Serial Bridge on Ubuntu.
+</p>
+
+<h3>Install the dependencies</h3>
+<p>
+    The Hairless program is a 32-bit executable, so on most modern 64-bit Linux distributions, you'll have to explicitly
+    install some 32-bit libraries to be able to run it:
+</p>
+<pre class="console">
+<code>sudo apt install libasound2:i386 libsm6:i386 libxrender1:i386 libfontconfig1:i386 libasound2-plugins:i386</code>
+</pre>
+
+<h3>Download and extract</h3>
+<p>
+    Download Hairless from the <a href="https://projectgus.github.io/hairless-midiserial/">website</a> (<a
+        href="https://github.com/downloads/projectgus/hairless-midiserial/hairless-midiserial-0.4-linux.tgz">direct
+        link</a>).
+</p>
+<p>
+    Extract the archive, and save it where you store your software, for example <code>~/opt</code>.
+</p>
+<p>
+    The following commands download, extract, and move Hairless to <code>~/opt</code>:
+</p>
+<pre class="console">
+<code>cd /tmp</code>
+<code>wget https://github.com/downloads/projectgus/hairless-midiserial/hairless-midiserial-0.4-linux.tgz</code>
+<code>tar xzf hairless-midiserial-0.4-linux.tgz</code>
+<code>mkdir -p ~/opt</code>
+<code>mv hairless-midiserial ~/opt</code>
+</pre>
+
+<p>
+    Now you can already run Hairless by running the following command in a terminal:
+</p>
+
+<pre class="console">
+<code>~/opt/hairless-midiserial/hairless-midiserial</code>
+</pre>
+
+<p>
+    You can add Hairless to your <code>PATH</code> by creating a symbolic link in <code>~/.local/bin</code>:
+</p>
+<pre class="console">
+<code>mkdir -p ~/.local/bin</code>
+<code>ln -s ../../opt/hairless-midiserial/hairless-midiserial ~/.local/bin</code>
+</pre>
+<p>
+    You can now run it by just typing <code>hairless-midiserial</code> in a terminal.
+</p>
+
+<h3>Tested on</h3>
+
+<ul>
+    <li>Ubuntu 19.10 - Hairless 0.4</li>
+</ul>
+
+</html>
