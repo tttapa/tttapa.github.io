@@ -38,9 +38,9 @@ def get_git_remote_link(file, startline, endline):
     remote = check_output(["git", "remote", "get-url", "origin"],
                           cwd=directory)
     remote = remote.decode('utf-8').strip()
-    if m := re.match(r'^\w+@([\w.]+):([\w/.-]+)$', remote):
+    if m := re.match(r'^\w+@([\w.]+):([\w/.-]+)$', remote): # if SSH URL
         remote = 'https://' + m.group(1) + '/' + m.group(2)
-    if m := re.match(r'^(.*)\.git$', remote):
+    if m := re.match(r'^(.*)\.git$', remote): # Remove .git suffix
         remote = m.group(1)
     m = re.match(r'^https://(\w+)\..+$', remote)
     if m is None:
@@ -210,7 +210,7 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
     datastr = ''
     if name is not None:
         datastr += '<h4 class="snippet-name">' + name + '</h4>\n'
-    datastr += '<div class="codesnippet"><style>' + css + '</style>'
+    datastr += '<div class="codesnippet"><style>' + css + '</style>\n'
     if git_link is not None and git_service == 'github':
         datastr += '<a href="' + git_link + '" title="Open on GitHub">'
         datastr += '<img class="github-mark" src="/Images/GitHub-Mark.svg"/>' 

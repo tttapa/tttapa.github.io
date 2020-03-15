@@ -12,9 +12,9 @@
 <h3>The Greeter Library</h3>
 
 <p>
-    For this example, we'll create a very simple library function that just takes a name and an output stream as
-    arguments, and that prints a greeting message to this stream. It's basically a "Hello, World!" example, but as a
-    library for demonstration purposes.
+    For this example, we'll create a very simple library with a single function that just takes a name and an output
+    stream as arguments, and that prints a greeting message to this stream. It's basically a "Hello, World!" example,
+    but as a library for demonstration purposes.
 </p>
 <p>
     The structure of the library will be as follows:
@@ -32,7 +32,7 @@
 <code>       └── greeter.test.cpp</code>
 </pre>
 <p>
-    As is very common for C++ libraries, the function prototypes/declarations will be in the header file
+    This structure is very common for C++ libraries: the function prototypes/declarations will be in the header file
     <code>greeter.hpp</code>. The implementations for these functions are in the implementation file
     <code>greeter.cpp</code>.<br>
     The <code>CMakeLists.txt</code> file in the <code>greeter</code> directory specifies how the library should be
@@ -53,10 +53,32 @@
 "name": "CMakeLists.txt",
 "file": "$HOME/GitHub/RPi-Cpp-Toolchain/src/greeter/CMakeLists.txt"
 }
+
+<h3>The unit tests</h3>
+
+<p>
+    The test file only contains a single unit test, and just serves as an example. It uses the
+    <a href="https://github.com/google/googletest">Google Test framework</a>.
+</p>
+<p>
+    The tests can only be run on the build computer if we're not cross-compiling.
+</p>
+
 @codesnippet{
-"name": "CMakeLists.txt",
-"file": "$HOME/GitHub/RPi-Cpp-Toolchain/applications/hello-world/CMakeLists.txt"
+"name": "greeter.test.cpp",
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/src/greeter/test/greeter.test.cpp"
 }
+@codesnippet{
+"name": "test/CMakeLists.txt",
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/src/greeter/test/CMakeLists.txt"
+}
+
+<h3>The main Hello World program</h3>
+
+<p>
+    Finally, the Greeter library can be used to create a simple Hello World program.
+</p>
+
 @codesnippet{
 "name": "hello-world.cpp",
 "file": "$HOME/GitHub/RPi-Cpp-Toolchain/applications/hello-world/hello-world.cpp"
