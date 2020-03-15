@@ -10,6 +10,7 @@ from os.path import exists, splitext, dirname, relpath
 import sys
 from subprocess import check_output, CalledProcessError
 
+# region Git links
 
 def get_git_remote_link(file, startline, endline):
     """
@@ -21,7 +22,7 @@ def get_git_remote_link(file, startline, endline):
     try:
         git_dir = check_output(["git", "rev-parse", "--show-toplevel"], 
                                cwd=directory)
-    except CalledProcessError as e:
+    except CalledProcessError:
         return None, None
     
     # Get the relative path of the file, relative to the toplevel git folder
@@ -29,8 +30,8 @@ def get_git_remote_link(file, startline, endline):
     rel = relpath(file, git_dir)
 
     # Get the hash of the latest commit
-    commit = check_output(["git", "rev-parse", "HEAD"],
-                          cwd=directory)
+    commit = check_output(["git", "rev-list", "-1", "HEAD", "--", rel],
+                          cwd=git_dir)
     commit = commit.decode('utf-8').strip()
 
     # Get the remote of the repository
@@ -67,9 +68,14 @@ def get_git_remote_link(file, startline, endline):
 
     return service, remote
 
+# endregion
+
+# region Header anchors
+
 def format_anchor_name(match, anchors):
     tag = match.group(1)
-    fullname = match.group(2)
+    attr = match.group(2)
+    fullname = match.group(3)
     name = fullname
     name = name.lower()                       # To lowercase
     name = re.sub(r"&(?:[a-z\d]+|#\d+|#x[a-f\d]+);", r"-", name)     # Replace HTML entities with '-'
@@ -87,16 +93,20 @@ def format_anchor_name(match, anchors):
         i += 1
     anchors.add(newname)
 
-    return "<h"+tag+"><a name=\"" + newname \
+    return "<h" + tag + attr + "><a name=\"" + newname \
          + "\" href=\"#" + newname \
          + "\">"+fullname+"</a></h" + tag + ">"
 
 def addAnchors(html):
     anchors = set()
-    html = re.sub(r"<h([1-6])>(((?!<a).)+)</h\1>", \
+    html = re.sub(r"<h([1-6])([^>]*)>(((?!<a).)+)</h\1>", \
                   lambda match: format_anchor_name(match, anchors), \
                   html)
     return html
+
+# endregion
+
+# region Code line numbers
 
 def addCodeLines(match):
     pre = match.group(1)
@@ -110,11 +120,11 @@ def addLineNumbersEmphasis(match):
     pre = re.sub(r"(<pre.*?>)(?:\r\n|\n)*", r"\g<1><code>", pre)
     pre = re.sub(r"\r\n|\n",r"</code>\g<0><code>", pre)
     pre = re.sub(r"</pre>", r"</code></pre>", pre)
-    pre = re.sub(r"<code>\*\*\*", r'<code class="emphasis">', pre)
+    pre = re.sub(r"<code>(\s*)\*\*\*", r'<code class="emphasis">\g<1>', pre)
     return pre
 
 def formatCode(html):
-    findPre = r"(<pre[^>]* class=\"lineNumbers[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
+    findPre = r"(<pre[^>]* class=\"lineNumbers( |\")[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
     findPreEmph = r"(<pre[^>]* class=\"lineNumbersEmphasis[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
 
     html = re.sub(findPre, addCodeLines, html)
@@ -126,26 +136,18 @@ def formatCode(html):
 
     return html
 
-def getlinenumber(string: str, index: int) -> int:
-    return string.count('\n', 0, index)
+# endregion
 
-def getlinesbetween(string: str, startindex: int, endindex: int) -> int:
-    return string.count('\n', startindex, endindex)
+# region Code syntax highlighting
 
-def getlines(string: str) -> int:
-    return string.count('\n')
-
-def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
-    startline = data.get('startline', None)
-    endline = data.get('endline', None)
-    file = data['file']
+def full_filepath(file, fpath):
     file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
     file = re.sub(r'\$\{(\w+)\}', lambda m: getenv(m.group(1)), file)
     if file[0] != '/':
-        file = path.dirname(filepath) + '/' + file
+        file = path.dirname(fpath) + '/' + file
+    return file
 
-    git_service, git_link = get_git_remote_link(file, startline, endline)
-    
+def clip_file_contents(file, startline, endline):
     startline = 1 if startline is None else startline
     emptylines = 0
     nonemptylineencountered = False
@@ -162,24 +164,53 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
             if endline is not None and i >= (endline - 1):
                 break
 
+    ctrstart = emptylines + startline - 1
+    return filecontents, ctrstart
+
+def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
+    startline = data.get('startline', None)
+    endline = data.get('endline', None)
+    name = data.get('name', None)
+    file = full_filepath(data['file'], filepath)
+
+    # Get the GitHub/GitLab links for this file
+    git_service, git_link = get_git_remote_link(file, startline, endline)
+
+    # Select the lines between startline and endline
+    filecontents, ctrstart = clip_file_contents(file, startline, endline)
+
+    # Select the right lexer based on the filename and contents
     lex_filename = path.basename(file)
     if lex_filename == 'CMakeLists.txt':
         lex_filename += '.cmake'
     lexer = guess_lexer_for_filename(lex_filename, filecontents)
+    
+    # Select the right formatter based on the lexer
     cssclass = 'pygments{}'.format(lineno)
-    if lexer.name == "Arduino":
+    if lexer.name == "Arduino" and not "style" in data:
         formatter = HtmlFormatter(cssclass=cssclass, style='arduino')
     else:
-        formatter = HtmlFormatter(cssclass=cssclass, style='default')
+        style = data.get('style', 'default')
+        formatter = HtmlFormatter(cssclass=cssclass, style=style)
+    
+    # Extract the CSS from the formatter, and set the line number offset
     css = formatter.get_style_defs('.' + cssclass)
-    ctrstart = emptylines + startline - 1
     css += '\n.pygments{} pre.snippet{} {{ counter-reset: line {}; }}' \
         .format(lineno, lineno, ctrstart)
+    
+    # Syntax highlight the code
     htmlc = highlight(filecontents, lexer, formatter)
+    
+    # Set the right classes
     htmlc = htmlc.replace('<pre>', 
                 '<pre class="lineNumbers snippet{}">'.format(lineno))
     htmlc = htmlc.replace('\n</pre></div>', '</pre></div>')
-    datastr = '<div class="codesnippet"><style>' + css + '</style>'
+
+    # Construct the final HTML code
+    datastr = ''
+    if name is not None:
+        datastr += '<h4 class="snippet-name">' + name + '</h4>\n'
+    datastr += '<div class="codesnippet"><style>' + css + '</style>'
     if git_link is not None and git_service == 'github':
         datastr += '<a href="' + git_link + '" title="Open on GitHub">'
         datastr += '<img class="github-mark" src="/Images/GitHub-Mark.svg"/>' 
@@ -191,13 +222,17 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
     datastr += htmlc + '</div>'
     return datastr, file
 
+# endregion
+
+# region Image linking
+
 def formatImage(data, html, filepath, lineno):
     file = data['file']
     # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
     if file[0] != '/': 
         fullfile = path.dirname(filepath) + '/' + file
     else:
-        raise Exception('Image file "' + file + '" is an absolute path')
+        raise Exception('Image file "' + file + '" cannot be an absolute path')
     if not exists(fullfile):
         raise Exception('Image file "' + fullfile + '" does not exist')
 
@@ -206,7 +241,8 @@ def formatImage(data, html, filepath, lineno):
     if displayfile[0] != '/': 
         fulldisplayfile = path.dirname(filepath) + '/' + displayfile
     else: 
-        raise Exception('Image file "' + displayfile + '" is an absolute path')
+        raise Exception('Image file "' + displayfile
+                      + '" cannot be an absolute path')
     if not exists(fulldisplayfile):
         raise Exception('Image file "' + fulldisplayfile + '" does not exist')
 
@@ -220,6 +256,19 @@ def formatImage(data, html, filepath, lineno):
         htmlstr += '<figcaption>' + cap + '</figcaption>'
 
     return htmlstr, fullfile
+
+# endregion
+
+# region Replace @ JSON tags
+
+def getlinenumber(string: str, index: int) -> int:
+    return string.count('\n', 0, index)
+
+def getlinesbetween(string: str, startindex: int, endindex: int) -> int:
+    return string.count('\n', startindex, endindex)
+
+def getlines(string: str) -> int:
+    return string.count('\n')
 
 def getKeyWord(keywords: dict, html, index):
     for kw in keywords.keys():
@@ -264,6 +313,8 @@ def replaceTags(html, filepath, lineno, outpath):
         with open(depfname, 'w') as f:
             f.write('\n'.join(deps))
     return html
+
+# endregion
 
 def formatHTML(html, filepath, lineno, outpath):
     html = replaceTags(html, filepath, lineno, outpath)
