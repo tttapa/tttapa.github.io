@@ -98,7 +98,7 @@ def format_anchor_name(match, anchors):
          + "\" href=\"#" + newname \
          + "\">"+fullname+"</a></h" + tag + ">"
 
-def addAnchors(html: str):
+def addAnchors(html: str, metadata: dict) -> str:
     anchors = dict()
     html = re.sub(r"<h([1-6])([^>]*)>(((?!<a).)+)</h\1>",
                   lambda match: format_anchor_name(match, anchors),
@@ -107,15 +107,26 @@ def addAnchors(html: str):
     if len(anchors) == 0:
         return html
 
-    toc = '\n<div class="toc">'
+    toc = metadata.get('tableofcontents', 'false').lower()
+    if not toc in ['true', '1', 't', 'y', 'yes']:
+        return html
+
+    toc = '\n<div class="toc" id="toc">\n'
+    toc += '  <script>\n'
+    toc += '  function updateTocSize() {\n'
+    toc += '    let toc = document.getElementById("toc");\n'
+    toc += "    toc.style.maxHeight = toc.scrollHeight + 'px';\n"
+    toc += '  }\n'
+    toc += '  </script>'
     toc += '  <h4 class="toc" '
     toc += 'onclick="'
-    toc += "if (this.parentElement.classList.toggle('expanded')) "
-    toc += "this.parentElement.style.maxHeight = "
-    toc += "this.parentElement.scrollHeight + 'px'; "
-    toc += "else "
+    toc += "if (this.parentElement.classList.toggle('expanded')) {"
+    toc += "updateTocSize();"
+    toc += "window.addEventListener('resize', updateTocSize);"
+    toc += "} else {"
     toc += "this.parentElement.style = undefined;"
-    toc += '">'
+    toc += "window.removeEventListener('resize', updateTocSize);"
+    toc += '}">'
     toc += 'Table of Contents '
     toc += '<i class="material-icons">list</i>'
     toc += '</h4>\n'
@@ -142,7 +153,7 @@ def addAnchors(html: str):
         toc += '    ' * (current_level+1) + '</ul>\n'
         # toc += '    ' * current_level + '</li>\n'
     toc += '  </ul>'
-    toc += '</div>'
+    toc += '</div>\n'
     return toc + html
 
 # endregion
@@ -164,7 +175,7 @@ def addLineNumbersEmphasis(match):
     pre = re.sub(r"<code>(\s*)\*\*\*", r'<code class="emphasis">\g<1>', pre)
     return pre
 
-def formatCode(html):
+def formatCode(html, metadata):
     findPre = r"(<pre[^>]* class=\"lineNumbers( |\")[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
     findPreEmph = r"(<pre[^>]* class=\"lineNumbersEmphasis[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
 
@@ -317,7 +328,7 @@ def getKeyWord(keywords: dict, html, index):
             return kw
     return None
 
-def replaceTags(html, filepath, lineno, outpath):
+def replaceTags(html, filepath, lineno, outpath, metadata):
     keywordhandlers = {
         'codesnippet': formatPygmentsCodeSnippet,
         'image': formatImage,
@@ -357,8 +368,8 @@ def replaceTags(html, filepath, lineno, outpath):
 
 # endregion
 
-def formatHTML(html, filepath, lineno, outpath):
-    html = replaceTags(html, filepath, lineno, outpath)
-    html = formatCode(html)
-    html = addAnchors(html)
+def formatHTML(html, filepath, lineno, outpath, metadata):
+    html = replaceTags(html, filepath, lineno, outpath, metadata)
+    html = formatCode(html, metadata)
+    html = addAnchors(html, metadata)
     return html

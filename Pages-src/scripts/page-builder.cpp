@@ -121,17 +121,18 @@ class PagesParser {
         sys.attr("path").cast<py::list>().append(folder.string());
         py::globals()["HTMLFormatter"] = py::module::import("HTMLFormatter");
         this->task                     = task;
-        if ((task == ServerSideLaTeX || task == ServerSideLaTeXPDF) &&
-            num_threads <= 0)
+        bool exportLaTeX =
+            task == ServerSideLaTeX || task == ServerSideLaTeXPDF;
+        if (exportLaTeX && num_threads <= 0)
             num_threads = 2 * std::thread::hardware_concurrency();
-        if (task == ServerSideLaTeX || task == ServerSideLaTeXPDF) {
+        if (exportLaTeX) {
             assert(num_threads > 0);
             this->mjpage_futures.resize(num_threads);
         }
         if (task == ServerSideLaTeXPDF)
             startHTTPandChromeServers();
         exportDirectory(root);
-        if (task == ServerSideLaTeX || task == ServerSideLaTeXPDF)
+        if (exportLaTeX)
             wait_all_mjpage();
         // cout << "LaTeX compilation done" << endl;
         if (task == ServerSideLaTeXPDF)
@@ -234,11 +235,14 @@ class PagesParser {
      * @brief   Export a regular page.
      */
     void exportPage(const Page &page) {
-        string out = createPage(page, page_template);
-        bool hasLaTeX =
-            out.find("\\(") != string::npos || out.find("$$") != string::npos;
-        if ((task == ServerSideLaTeX || task == ServerSideLaTeXPDF) &&
-            hasLaTeX) {
+        string out    = createPage(page, page_template);
+        bool hasLaTeX = false;
+        hasLaTeX      = hasLaTeX || out.find("\\(") != string::npos;
+        hasLaTeX      = hasLaTeX || out.find("$$") != string::npos;
+        hasLaTeX      = hasLaTeX || out.find("\\[") != string::npos;
+        bool exportLaTeX =
+            task == ServerSideLaTeX || task == ServerSideLaTeXPDF;
+        if (exportLaTeX && hasLaTeX) {
             export_mjpage(page, out);
         } else {
             Green(cout) << "Exporting page `" << page.getTitle() << "`" << endl;
@@ -265,7 +269,7 @@ class PagesParser {
         string html = page.html;
         replace(out, ":html:",
                 formatHTML(page.html, page.abs_source_path, page.lineno,
-                           output_dir / page.rel_path));
+                           output_dir / page.rel_path, page.metadata));
         bool showNextUpPrev = page.metadata.count("shownextupprevpage") > 0 &&
                               page.metadata.at("shownextupprevpage") == "true";
         replace(out, ":nextupprev:",
@@ -465,9 +469,11 @@ class PagesParser {
 #pragma region HTML formatter...................................................
 
     string formatHTML(const string &html, const fs::path &path,
-                      unsigned int lineno, const fs::path &outpath) {
+                      unsigned int lineno, const fs::path &outpath,
+                      const string_map &metadata) {
         auto formatHTML = py::globals()["HTMLFormatter"].attr("formatHTML");
-        return formatHTML(html, path.string(), lineno, outpath.string())
+        return formatHTML(html, path.string(), lineno, outpath.string(),
+                          metadata)
             .cast<string>();
     }
 
@@ -597,7 +603,6 @@ class PagesParser {
             } else if (key != "sequence") {
                 Yellow(cerr) << "Warning: missing value for key `" << key
                              << "` for " << file_entry << endl;
-                (void) file_entry;
             }
         }
         return dict;
@@ -609,8 +614,13 @@ class PagesParser {
         file_time_t time = file_time_t::min();
         std::string depfilename;
         while (std::getline(file, depfilename))
-            if (auto deptime = fs::last_write_time(depfilename); deptime > time)
-                time = deptime;
+            try {
+                auto deptime = fs::last_write_time(depfilename);
+                if (deptime > time)
+                    time = deptime;
+            } catch (fs::filesystem_error &e) {
+                Red(cerr) << e.what() << std::endl;
+            }
         return time;
     }
 
