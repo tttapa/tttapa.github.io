@@ -91,18 +91,59 @@ def format_anchor_name(match, anchors):
     while newname in anchors:
         newname = name + str(i)
         i += 1
-    anchors.add(newname)
+    code_snip = tag == '4' and 'class="snippet-name"' in attr
+    anchors[newname] = (fullname, int(tag), code_snip)
 
     return "<h" + tag + attr + "><a name=\"" + newname \
          + "\" href=\"#" + newname \
          + "\">"+fullname+"</a></h" + tag + ">"
 
-def addAnchors(html):
-    anchors = set()
-    html = re.sub(r"<h([1-6])([^>]*)>(((?!<a).)+)</h\1>", \
-                  lambda match: format_anchor_name(match, anchors), \
+def addAnchors(html: str):
+    anchors = dict()
+    html = re.sub(r"<h([1-6])([^>]*)>(((?!<a).)+)</h\1>",
+                  lambda match: format_anchor_name(match, anchors),
                   html)
-    return html
+
+    if len(anchors) == 0:
+        return html
+
+    toc = '\n<div class="toc">'
+    toc += '  <h4 class="toc" '
+    toc += 'onclick="'
+    toc += "if (this.parentElement.classList.toggle('expanded')) "
+    toc += "this.parentElement.style.maxHeight = "
+    toc += "this.parentElement.scrollHeight + 'px'; "
+    toc += "else "
+    toc += "this.parentElement.style = undefined;"
+    toc += '">'
+    toc += 'Table of Contents '
+    toc += '<i class="material-icons">list</i>'
+    toc += '</h4>\n'
+    toc += '  <ul>\n'
+    current_level = min(map(lambda x: x[1],  anchors.values()))
+    for name, v in anchors.items():
+        title, level, code_snippet = v
+        if code_snippet:
+            continue
+        while current_level < level:
+            # toc += '    ' * current_level + '<li>\n'
+            toc += '    ' * current_level + '  <ul>\n'
+            current_level += 1
+        while current_level > level:
+            current_level -= 1
+            toc += '    ' * current_level + '  </ul>\n'
+            # toc += '    ' * current_level + '</li>\n'
+        toc += '    ' * current_level
+        toc += '<li>'
+        toc += f'<a href="#{name}">{title}</a>'
+        toc += '</li>\n'
+    while current_level > 1:
+        current_level -= 1
+        toc += '    ' * (current_level+1) + '</ul>\n'
+        # toc += '    ' * current_level + '</li>\n'
+    toc += '  </ul>'
+    toc += '</div>'
+    return toc + html
 
 # endregion
 
