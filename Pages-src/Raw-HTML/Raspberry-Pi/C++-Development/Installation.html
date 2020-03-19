@@ -1,0 +1,178 @@
+<!--
+@title: Installation and setup
+@sequence: 0
+@shownextupprevpage: true
+@tableofcontents: true
+@author: Pieter P
+@keywords: ubuntu,linux,toolchain,raspberry,pi
+@description: Installing the necessary tools and dependencies.
+-->
+<html>
+
+<h3>Operating Systems</h3>
+
+<p>
+    This guide is focussed on Linux as an operating system. While it should be possible to do most of it on Windows as
+    well, I wouldn't recommend it at all. Development tools are harder to install on Windows, and building the
+    Docker containers will take much longer, especially if you don't have Windows Pro or Enterprise (Windows Home
+    doesn't have Hyper-V and Containers support).<br>
+    I've worked in a team where some developers preferred Windows, and I (eventually) got most of it to run correctly,
+    but it wasn't worth it. Compiling large projects in a virtualized Docker container was many times slower than doing
+    the same thing natively on Linux, the network configuration to connect to the Raspberry Pi directly was a pain,
+    on-target debugging was not supported, because the Windows tools don't support <code>gdb-server</code>, etc.<br>
+    In the end, everyone moved to Linux, because it was so much faster and easier to use.<br>
+    If you want to get serious about developing C/C++ software for the Raspberry Pi, installing Linux is definitely
+    worth it.
+</p>
+<p>
+    I'll be using Ubuntu 19.10 throughout this guide, but pretty much everything applies to other Linux distributions as
+    well. The most significant difference will be the package manager used. On Ubuntu, I'll use APT and Snap, but most
+    packages should be available in your distro's package manager as well.
+</p>
+
+<h3>Git</h3>
+
+<p>
+    The <code>RPi-Cpp-Toolchain</code> repository uses Git as a version control system. Install it so you can 
+    download the repository in the next step.
+</p>
+
+<h4>Installation</h4>
+
+<p>
+    Either download Git from the <a href="https://git-scm.com/downloads">website</a>, or install it using your
+    package manager:
+</p>
+<pre class="console">
+<code>sudo apt install git</code>
+</pre>
+
+<h3>The <span style="font-family: monospace;">RPi-Cpp-Toolchain</span> repository</h3>
+
+<p>
+    Clone the repository from GitHub. We'll clone it to <code>~/GitHub/RPi-Cpp-Toolchain</code>, but feel
+    free to put it where ever you like.
+</p>
+<pre class="console">
+<code>mkdir -p ~/GitHub</code>
+<code>cd ~/GitHub</code>
+<code>git clone https://github.com/tttapa/RPi-Cpp-Toolchain.git</code>
+</pre>
+
+<h3>Docker</h3>
+
+<p>
+    I don't like to do a lot of installations on my main Linux box, so I built the toolchain and most of the libraries
+    inside of a Docker container.
+    This has the added benefit that all builds are reproducible, and it's easy to undo the previous step or even start
+    from scratch. <br>
+    You can find more information about the use of Docker on the next page.
+</p>
+
+<h4>Installation</h4>
+
+<p>
+    You need Docker to pull or build the toolchain. Docker Compose is optional.
+    <!-- TODO: explain why you need Docker Compose -->
+    <br> You can find detailed installation instructions here:
+    <ul>
+        <li><a href="https://www.digitalocean.com/community/tutorial_collections/39">
+                DigitalOcean - How to Install and Use Docker</a></li>
+        <li><a href="https://www.digitalocean.com/community/tutorial_collections/48">
+                DigitalOcean - How to Install Docker Compose</a></li>
+    </ul>
+</p>
+
+<h3>Visual Studio Code</h3>
+
+<p>
+    This guide uses Visual Studio Code as the main editor, and the repository contains the necessary configuration
+    files, build tasks, debug configurations, etc. If you know what you're doing, you can of course use any editor
+    or IDE, with your own configuration files, but if you're a beginner, I'd recommend VSCode to follow along.
+</p>
+
+<h4>Installation</h4>
+
+<p>
+    You can either download VSCode from <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>,
+    or if you're on Linux, you can install it as a <a href="https://snapcraft.io/code">Snap</a>:
+</p>
+<pre class="console">
+<code>sudo snap install code --classic</code>
+</pre>
+
+<h4>Extensions</h4>
+
+<p>
+    The two most important extensions we'll use in this project, are the
+    <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C/C++ extension</a> and the
+    <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools">CMake Tools extension</a>.<br>
+    I'd also recommend installing <a href="https://marketplace.visualstudio.com/items?itemName=twxs.cmake">CMake
+        language support</a> for syntax highlighting and suggestions in CMake code.
+    If you plan on editing the Dockerfiles to modify the toolchain or the libraries, you might find the
+    <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">Docker extension</a>
+    useful as well.
+</p>
+@image{
+"file": "images/Screenshot from 2020-03-18 22-05-53.png",
+"caption": "Visual Studio Code with the recommended extensions installed."
+}
+
+<h3>Build tools</h3>
+
+<h4>CMake</h4>
+
+<p>
+    CMake is a tool to configure C/C++ projects. It takes care of dependencies between parts of your project,
+    external libraries, and generates build files that are later used to compile the code.
+</p>
+<p>
+    You can download the latest version of CMake from the official <a href="https://cmake.org/">website</a>, or
+    you can install it using your package manager:
+</p>
+<pre class="console">
+<code>sudo apt install cmake</code>
+</pre>
+
+<h4>Make</h4>
+
+<p>
+    After the project is configured using CMake, Make is used to build everything. It tracks dependencies and
+    invokes the compiler and other tools to compile all code with the options determined by CMake.
+</p>
+<p>
+    You can download the source code for Make from the <a href="https://www.gnu.org/software/make/">website</a>,
+    but it's much easier to just install it using the package manager:
+</p>
+<pre class="console">
+<code>sudo apt install make</code>
+</pre>
+<p>
+    If you've installed CMake using the package manager, Make will probably already be installed.
+</p>
+
+<h4>GCC (optional)</h4>
+
+<p>
+    GCC is a collection of compilers, including C, C++ and Fortran compilers. We'll build our own GCC
+    cross-compilation toolchain later, so you don't really need to install a native version of GCC on your
+    computer, but I'd recommend it nonetheless. It's very useful for testing and debugging parts of your code that don't
+    <i>have</i> to be run on the Raspberry Pi.
+</p>
+<p>
+    You can install your distro's default version of GCC using the package manager:
+</p>
+<pre class="console">
+<code>sudo apt install gcc g++</code>
+</pre>
+<p>
+    However, the default version is often out of date, especially on LTS releases of Ubuntu. Luckily, you
+    can easily install the latest version from the <code>ubuntu-toolchain-r/test</code> PPA:
+</p>
+<pre class="console">
+<code>sudo add-apt-repository ppa:ubuntu-toolchain-r/test</code>
+<code>sudo apt-get update</code>
+<code>sudo apt install gcc-9 g++-9</code>
+</pre>
+
+</html>

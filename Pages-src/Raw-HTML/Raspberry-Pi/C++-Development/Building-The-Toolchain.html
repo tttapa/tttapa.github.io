@@ -23,29 +23,33 @@
 <h3>Docker</h3>
 
 <p>
-    I don't like to do a lot of installations on my main Linux box, so I build most of it inside of a Docker container.
-    This has the added benefit that all builds are reproducible, and it's easy to undo the previous step or even start
-    from scratch.
+    As explained on the previous page, building the toolchain happens inside of a Docker container.
+    This allows you to experiment in a sandbox-like environment. Starting from scratch is really easy, and
+    you don't have to worry about messing up your main Linux installation.
+</p>
+<p>
+    You can compare a Docker container with a virtual machine, but without the virtualization. Programs that run
+    inside of the container use the same kernel as your main Linux OS, and there's almost no performance overhead.
+</p>
+<p>
+    It's very easy to share Docker images, so you don't have to build everything from scratch yourself, you can just
+    pull it from Docker Hub.
 </p>
 
-<h4>Installation</h4>
+<h4>Dockerfiles</h4>
 
 <p>
-    You need Docker to build the toolchain. Docker Compose is optional. <br>
-    You can find detailed installation instructions here:
-    <ul>
-        <li><a href="https://www.digitalocean.com/community/tutorial_collections/39">
-                DigitalOcean - How to Install and Use Docker</a></li>
-        <li><a href="https://www.digitalocean.com/community/tutorial_collections/48">
-                DigitalOcean - How to Install Docker Compose</a></li>
-    </ul>
+    A Dockerfile describes how the Docker image is built. In this project, we'll start from a standard Ubuntu
+    image, install some build tools, and then compile the toolchain and the dependencies.
+    Each step of the build process creates a new layer in the image. This is handy, because it means that if a build
+    fails in one of the last steps, you can just fix it in your Dockerfile, and build it again. It'll then start from
+    the last layer that was successfully built before, you don't have to start from the beginning (which would take a
+    while, since we'll be building many large projects.)
 </p>
-
-<h4>Dockefiles</h4>
-
 <p>
-    The actual Dockerfiles can be found <a href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain">on
-        my GitHub</a>, I'll briefly go over them on this page.
+    The actual Dockerfiles used for the build can be found <a
+        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain">on my GitHub</a>, I'll briefly go over
+    them on this page.
 </p>
 
 <h3>Building the toolchain using the provided shell scripts</h3>
@@ -71,7 +75,8 @@
     </ul>
 </p>
 <p>
-    Building one toolchain took around 25 minutes on a 2018 Dell XPS i7-8750H, and 40 minutes on a 2017 Dell XPS i7-7700HQ.
+    Building one toolchain took around 25 minutes on a 2018 Dell XPS i7-8750H, and 40 minutes on a 2017 Dell XPS
+    i7-7700HQ.
 </p>
 <p>
     The cross-compilation toolchain will be located in
