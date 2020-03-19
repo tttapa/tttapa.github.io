@@ -49,7 +49,8 @@ find_package(pybind11 REQUIRED)
 
 find_package(Threads REQUIRED)
 
-add_executable(page-builder page-builder.cpp)
+add_executable(page-builder page-builder.cpp parse-metadata.cpp)
+target_include_directories(page-builder PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_link_libraries(page-builder
     PUBLIC
         stdc++fs

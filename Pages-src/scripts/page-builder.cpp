@@ -18,6 +18,7 @@
 #include <pybind11/stl.h>
 
 #include "ANSIColors.hpp"
+#include "parse-metadata.hpp"
 #include "trim.hpp"
 
 namespace fs = std::filesystem;
@@ -35,7 +36,7 @@ using std::stringstream;
 using std::vector;
 using std::filesystem::path;
 
-using string_map  = std::map<string, string>;
+using string_map = std::map<string, string>;
 using file_time_t = std::filesystem::file_time_type;
 
 class PagesParser {
@@ -43,7 +44,7 @@ class PagesParser {
     struct Page {
         string_map metadata;
         string html;
-        unsigned int lineno;  ///< line number where <html> starts
+        unsigned int lineno; ///< line number where <html> starts
         file_time_t modified;
         file_time_t depmodified;
         path abs_source_path;
@@ -115,12 +116,12 @@ class PagesParser {
 
     void exportAll(Task task = ClientSideLaTeX, unsigned int num_threads = 0) {
         py::scoped_interpreter interpreter{};
-        path file      = __FILE__;
-        path folder    = file.parent_path();
+        path file = __FILE__;
+        path folder = file.parent_path();
         py::module sys = py::module::import("sys");
         sys.attr("path").cast<py::list>().append(folder.string());
         py::globals()["HTMLFormatter"] = py::module::import("HTMLFormatter");
-        this->task                     = task;
+        this->task = task;
         bool exportLaTeX =
             task == ServerSideLaTeX || task == ServerSideLaTeXPDF;
         if (exportLaTeX && num_threads <= 0)
@@ -140,7 +141,7 @@ class PagesParser {
     }
 
   private:
-    const int dev_port  = 9222;
+    const int dev_port = 9222;
     const int http_port = 5741;
 
     const path tmp_dir = "/tmp/Pages";
@@ -154,14 +155,14 @@ class PagesParser {
         cout << c << endl;
         if (system(c.c_str()) != 0) {
             throw std::runtime_error("Command '" + c + "' failed.");
-        }  // TODO
+        } // TODO
         c = "google-chrome --headless --disable-gpu "
             "--run-all-compositor-stages-before-draw --remote-debugging-port=" +
             std::to_string(dev_port) + " &";
         cout << c << endl;
         if (system(c.c_str()) != 0) {
             throw std::runtime_error("Command '" + c + "' failed.");
-        }  // TODO
+        } // TODO
     }
 
     void handle_finished_mjpage(const Page &page) {
@@ -175,7 +176,7 @@ class PagesParser {
         std::ofstream outfile(tmp_dir / page.rel_path);
         outfile << out;
         outfile.close();
-        path scripts_dir  = source_dir.parent_path() / "scripts";
+        path scripts_dir = source_dir.parent_path() / "scripts";
         path node_modules = scripts_dir / "node_modules";
         string command = node_modules / "mathjax-node-page" / "bin" / "mjpage";
         command += " --output=CommonHTML --eqno=AMS "
@@ -186,11 +187,11 @@ class PagesParser {
         command += output_dir / page.rel_path;
         command += "\"";
 
-        bool launched            = false;
+        bool launched = false;
         const Page *finishedPage = nullptr;
         while (!launched) {
             for (auto &fut : mjpage_futures) {
-                if (fut.valid() == false ||  // uninitialized
+                if (fut.valid() == false || // uninitialized
                     fut.wait_for(10ms) == std::future_status::ready) {
                     finishedPage = fut.valid() ? &(fut.get()) : nullptr;
                     Blue(cout) << "Started compiling Page `" << page.getTitle()
@@ -199,12 +200,12 @@ class PagesParser {
                         if (system(command.c_str()) != 0) {
                             throw std::runtime_error("Command '" + command +
                                                      "' failed.");
-                        }  // TODO
+                        } // TODO
                         return page;
                     };
-                    fut      = std::async(std::launch::async, launch);
+                    fut = std::async(std::launch::async, launch);
                     launched = true;
-                    break;  // for
+                    break; // for
                 }
             }
         }
@@ -218,7 +219,7 @@ class PagesParser {
         while (!allReady) {
             allReady = true;
             for (auto &fut : mjpage_futures) {
-                if (fut.valid() == false ||  // uninitialized
+                if (fut.valid() == false || // uninitialized
                     fut.wait_for(1ms) == std::future_status::ready) {
                     if (fut.valid())
                         handle_finished_mjpage(fut.get());
@@ -235,11 +236,11 @@ class PagesParser {
      * @brief   Export a regular page.
      */
     void exportPage(const Page &page) {
-        string out    = createPage(page, page_template);
+        string out = createPage(page, page_template);
         bool hasLaTeX = false;
-        hasLaTeX      = hasLaTeX || out.find("\\(") != string::npos;
-        hasLaTeX      = hasLaTeX || out.find("$$") != string::npos;
-        hasLaTeX      = hasLaTeX || out.find("\\[") != string::npos;
+        hasLaTeX = hasLaTeX || out.find("\\(") != string::npos;
+        hasLaTeX = hasLaTeX || out.find("$$") != string::npos;
+        hasLaTeX = hasLaTeX || out.find("\\[") != string::npos;
         bool exportLaTeX =
             task == ServerSideLaTeX || task == ServerSideLaTeXPDF;
         if (exportLaTeX && hasLaTeX) {
@@ -306,8 +307,8 @@ class PagesParser {
             page.modified <= fs::last_write_time(pdf_file) &&
             page.depmodified <= fs::last_write_time(pdf_file))
             return;
-        path file      = __FILE__;
-        path folder    = file.parent_path();
+        path file = __FILE__;
+        path folder = file.parent_path();
         string command = "cd \"";
         command += folder;
         command += "\" && ";
@@ -392,7 +393,7 @@ class PagesParser {
         for (const auto &entry : root.pages) {
             if (!isPageToList(entry))
                 continue;
-            string rel      = fs::relative(page.rel_path, entry.rel_path);
+            string rel = fs::relative(page.rel_path, entry.rel_path);
             bool open_entry = rel == ".";
             result += indentation_li;
             result += "<li><span class=\"ftriangle\"></span>";
@@ -516,7 +517,7 @@ class PagesParser {
     static string formatFileTime(file_time_t ft) {
         std::stringstream buffer;
         std::time_t tt = ft.time_since_epoch().count() / 1'000'000'000 +
-                         6'437'664'000;  // TODO: ugly non-portable hack
+                         6'437'664'000; // TODO: ugly non-portable hack
         std::tm *gmt = std::gmtime(&tt);
         buffer << std::put_time(gmt, "%A, %d %B %Y %H:%M");
         return buffer.str();
@@ -527,7 +528,7 @@ class PagesParser {
 
     void init() {
         load_template();
-        page_template  = read_file(template_dir / "template.html");
+        page_template = read_file(template_dir / "template.html");
         index_template = read_file(template_dir / "template_index.html");
         index_item_template =
             read_file(template_dir / "template_index_item.html");
@@ -542,7 +543,7 @@ class PagesParser {
 
     void load_template() {
         metadata_template = read_file(template_dir / "template_meta.html");
-        string comment    = get_first_comment(metadata_template);
+        string comment = get_first_comment(metadata_template);
         if (comment.empty())
             Yellow(cerr) << "Warning: invalid metadata template ("
                          << (template_dir / "template_meta.html") << ")"
@@ -563,7 +564,7 @@ class PagesParser {
     static optional<string> read_metadata_value(const string &comment,
                                                 const string &key) {
         std::string::size_type offset = key.size() + 3;
-        auto first_match              = comment.find("\n@" + key + ':');
+        auto first_match = comment.find("\n@" + key + ':');
         auto end_match = comment.find("\n@", first_match + offset);
         if (end_match == std::string::npos)
             end_match = comment.size();
@@ -579,8 +580,8 @@ class PagesParser {
     static std::tuple<string, unsigned int>
     read_html(const fs::directory_entry &file_entry, const string &content) {
         size_t offset = 6;
-        size_t start  = content.find("<html>");
-        size_t end    = content.rfind("</html>");
+        size_t start = content.find("<html>");
+        size_t end = content.rfind("</html>");
         if (start != string::npos && end != string::npos) {
             string html = content.substr(start + offset, end - start - offset);
             unsigned int lineno =
@@ -594,18 +595,20 @@ class PagesParser {
 
     string_map read_metadata(const fs::directory_entry &file_entry,
                              const string &content) {
-        string_map dict;
-        string comment = get_first_comment(content);
+        auto md = parse_metadata(content.c_str(), file_entry.path().c_str());
+        // Trim the whitespace from the values
+        for (auto &[k, v] : md) {
+            trim(v);
+            v = remove_double_spaces(remove_newlines(v));
+        }
+        // Check if all keys from the template are present
         for (const auto &key : metadata_keys) {
-            auto value = read_metadata_value(comment, key);
-            if (value) {
-                dict[key] = *value;
-            } else if (key != "sequence") {
+            if (md.find(key) == md.end()) {
                 Yellow(cerr) << "Warning: missing value for key `" << key
                              << "` for " << file_entry << endl;
             }
         }
-        return dict;
+        return md;
     }
 
     file_time_t get_dep_modified(const fs::path &rpath) {
@@ -618,8 +621,12 @@ class PagesParser {
                 auto deptime = fs::last_write_time(depfilename);
                 if (deptime > time)
                     time = deptime;
-            } catch (fs::filesystem_error &e) {
-                Red(cerr) << e.what() << std::endl;
+            } catch (fs::filesystem_error &) {
+                Yellow(cerr) << "Warning: Unable to determine modification "
+                                "date of file \""
+                             << depfilename << "\"\n"
+                             << "         (dependency of " << source_dir / rpath
+                             << ")" << std::endl;
             }
         return time;
     }
@@ -643,15 +650,15 @@ class PagesParser {
     }
 
     void load_page_file(const fs::directory_entry &file_entry, Page &page) {
-        string content       = read_file(file_entry.path());
-        page.metadata        = read_metadata(file_entry, content);
-        auto [html, lineno]  = read_html(file_entry, content);
-        page.html            = html;
-        page.lineno          = lineno;
-        page.modified        = file_entry.last_write_time();
+        string content = read_file(file_entry.path());
+        page.metadata = read_metadata(file_entry, content);
+        auto [html, lineno] = read_html(file_entry, content);
+        page.html = std::move(html);
+        page.lineno = lineno;
+        page.modified = file_entry.last_write_time();
         page.abs_source_path = file_entry;
-        page.rel_path        = fs::relative(file_entry, source_dir);
-        page.depmodified     = get_dep_modified(page.rel_path);
+        page.rel_path = fs::relative(file_entry, source_dir);
+        page.depmodified = get_dep_modified(page.rel_path);
     }
 
     Page load_page_file(const fs::directory_entry &file) {
@@ -663,9 +670,9 @@ class PagesParser {
     void create_index_file(const path &directory, PageDirectory &result) {
         Yellow(cerr) << "Warning: " << directory
                      << " has no index.html → default index created" << endl;
-        path index               = directory / "index.html";
+        path index = directory / "index.html";
         std::ofstream index_file = index;
-        string contents          = metadata_template;
+        string contents = metadata_template;
         Color(cerr, ANSIColors::magenta)
             << index.parent_path().filename() << endl;
         replace(contents, ":title:", index.parent_path().filename());
@@ -701,7 +708,7 @@ class PagesParser {
         if (result.pages.size() > 1) {
             result.pages[0].next = &result.pages[1];
             for (size_t i = 1; i < result.pages.size() - 1; ++i) {
-                result.pages[i].next     = &result.pages[i + 1];
+                result.pages[i].next = &result.pages[i + 1];
                 result.pages[i].previous = &result.pages[i - 1];
             }
             result.pages.end()[-1].previous = &result.pages.end()[-2];
@@ -728,7 +735,7 @@ class PagesParser {
 
 path source_dir = "/home/pieter/GitHub/tttapa.github.io/Pages-src/Raw-HTML";
 // path output_dir   = "/tmp";
-path output_dir   = "/home/pieter/GitHub/tttapa.github.io/Pages";
+path output_dir = "/home/pieter/GitHub/tttapa.github.io/Pages";
 path template_dir = "/home/pieter/GitHub/tttapa.github.io/Pages-src/templates";
 
 int main(int argc, const char *argv[]) {

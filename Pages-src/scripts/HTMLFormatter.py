@@ -8,101 +8,53 @@ from os import getenv
 from os import path
 from os.path import exists, splitext, dirname, relpath
 import sys
-from subprocess import check_output, CalledProcessError
 
-# region Git links
-
-def get_git_remote_link(file, startline, endline):
-    """
-    E.g. https://github.com/tttapa/RPi-Cpp-Toolchain/blob/acd5b556709de02fa2de5f0cd05e5d24be6f7768/applications/hello-world/hello-world.cpp#L1-L3
-    """
-
-    # First check if the directory is in a Git repository
-    directory = dirname(file)
-    try:
-        git_dir = check_output(["git", "rev-parse", "--show-toplevel"], 
-                               cwd=directory)
-    except CalledProcessError:
-        return None, None
-    
-    # Get the relative path of the file, relative to the toplevel git folder
-    git_dir = git_dir.decode('utf-8').strip()
-    rel = relpath(file, git_dir)
-
-    # Get the hash of the latest commit
-    commit = check_output(["git", "rev-list", "-1", "HEAD", "--", rel],
-                          cwd=git_dir)
-    commit = commit.decode('utf-8').strip()
-
-    # Get the remote of the repository
-    remote = check_output(["git", "remote", "get-url", "origin"],
-                          cwd=directory)
-    remote = remote.decode('utf-8').strip()
-    if m := re.match(r'^\w+@([\w.]+):([\w/.-]+)$', remote): # if SSH URL
-        remote = 'https://' + m.group(1) + '/' + m.group(2)
-    if m := re.match(r'^(.*)\.git$', remote): # Remove .git suffix
-        remote = m.group(1)
-    m = re.match(r'^https://(\w+)\..+$', remote)
-    if m is None:
-        print("Warning: unknown Git remote: " + remote)
-        return None, None
-    service = m.group(1)
-    
-    # Append the commit hash and file path
-    remote += '/' + 'blob' + '/' + commit + '/' + rel
-
-    # Add the line numbers
-    if startline is not None:
-        remote += '#L' + str(startline)
-        if endline is not None:
-            if service == 'github':
-                remote += '-L' + str(endline)
-            else:
-                remote += '-' + str(endline)
-    else:
-        if endline is not None:
-            if service == 'github':
-                remote += '#L1-L' + str(endline)
-            else:
-                remote += '#L1-' + str(endline)
-
-    return service, remote
-
-# endregion
+from git import get_git_remote_link
 
 # region Header anchors
+
+
+def remove_special_chars(name):
+    # To lowercase
+    name = name.lower()
+    # Replace HTML entities with '-'
+    name = re.sub(r"&(?:[a-z\d]+|#\d+|#x[a-f\d]+);", r"-", name)
+    # Leave out HTML tags
+    name = re.sub(r"(<|</)([^<>])+>", r"", name)
+    # Only alphanumeric lowercase, replace everything else with '-'
+    name = re.sub(r"[^a-z\d]", r"-", name)
+    # More than one '-' replaced with single '-'
+    name = re.sub(r"-+", r"-", name)
+    # Strip '-' from the start or end of the string
+    name = re.sub(r"/^-|-$", r"", name)
+    return name
+
 
 def format_anchor_name(match, anchors):
     tag = match.group(1)
     attr = match.group(2)
     fullname = match.group(3)
-    name = fullname
-    name = name.lower()                       # To lowercase
-    name = re.sub(r"&(?:[a-z\d]+|#\d+|#x[a-f\d]+);", r"-", name)     # Replace HTML entities with '-'
-    
-    name = re.sub(r"(<|</)([^<>])+>", r"", name)      # Leave out HTML tags
-    name = re.sub(r"[^a-z\d]", r"-", name)    # Only alphanumeric lowercase, replace everything else with '-'
-    name = re.sub(r"-+", r"-", name)          # More than one '-' replaced with single '-'
-    name = re.sub(r"/^-|-$", r"", name)       # Strip '-' from the start or end of the string
+
+    a_name = remove_special_chars(fullname)
 
     # Don't allow duplicate IDs, so add a number at the end to make it unique
     i = 1
-    newname = name
-    while newname in anchors:
-        newname = name + str(i)
+    new_a_name = a_name
+    while new_a_name in anchors:
+        new_a_name = a_name + str(i)
         i += 1
     code_snip = tag == '4' and 'class="snippet-name"' in attr
-    anchors[newname] = (fullname, int(tag), code_snip)
+    anchors[new_a_name] = (fullname, int(tag), code_snip)
 
-    return "<h" + tag + attr + "><a name=\"" + newname \
-         + "\" href=\"#" + newname \
+    return "<h" + tag + attr + "><a name=\"" + new_a_name \
+         + "\" href=\"#" + new_a_name \
          + "\">"+fullname+"</a></h" + tag + ">"
+
 
 def addAnchors(html: str, metadata: dict) -> str:
     anchors = dict()
     html = re.sub(r"<h([1-6])([^>]*)>(((?!<a).)+)</h\1>",
-                  lambda match: format_anchor_name(match, anchors),
-                  html)
+                  lambda match: format_anchor_name(match, anchors), html)
 
     if len(anchors) == 0:
         return html
@@ -131,7 +83,7 @@ def addAnchors(html: str, metadata: dict) -> str:
     toc += '<i class="material-icons">list</i>'
     toc += '</h4>\n'
     toc += '  <ul>\n'
-    current_level = min(map(lambda x: x[1],  anchors.values()))
+    current_level = min(map(lambda x: x[1], anchors.values()))
     for name, v in anchors.items():
         title, level, code_snippet = v
         if code_snippet:
@@ -150,15 +102,17 @@ def addAnchors(html: str, metadata: dict) -> str:
         toc += '</li>\n'
     while current_level > 1:
         current_level -= 1
-        toc += '    ' * (current_level+1) + '</ul>\n'
+        toc += '    ' * (current_level + 1) + '</ul>\n'
         # toc += '    ' * current_level + '</li>\n'
     toc += '  </ul>'
     toc += '</div>\n'
     return toc + html
 
+
 # endregion
 
 # region Code line numbers
+
 
 def addCodeLines(match):
     pre = match.group(1)
@@ -167,13 +121,15 @@ def addCodeLines(match):
     pre = re.sub(r"</pre>", r"</code></pre>", pre)
     return pre
 
+
 def addLineNumbersEmphasis(match):
     pre = match.group(1)
     pre = re.sub(r"(<pre.*?>)(?:\r\n|\n)*", r"\g<1><code>", pre)
-    pre = re.sub(r"\r\n|\n",r"</code>\g<0><code>", pre)
+    pre = re.sub(r"\r\n|\n", r"</code>\g<0><code>", pre)
     pre = re.sub(r"</pre>", r"</code></pre>", pre)
     pre = re.sub(r"<code>(\s*)\*\*\*", r'<code class="emphasis">\g<1>', pre)
     return pre
+
 
 def formatCode(html, metadata):
     findPre = r"(<pre[^>]* class=\"lineNumbers( |\")[^>]*>((?!<pre).|\r\n|\n)*</pre>)"
@@ -188,9 +144,11 @@ def formatCode(html, metadata):
 
     return html
 
+
 # endregion
 
 # region Code syntax highlighting
+
 
 def full_filepath(file, fpath):
     file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
@@ -198,6 +156,7 @@ def full_filepath(file, fpath):
     if file[0] != '/':
         file = path.dirname(fpath) + '/' + file
     return file
+
 
 def clip_file_contents(file, startline, endline):
     startline = 1 if startline is None else startline
@@ -219,6 +178,7 @@ def clip_file_contents(file, startline, endline):
     ctrstart = emptylines + startline - 1
     return filecontents, ctrstart
 
+
 def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
     startline = data.get('startline', None)
     endline = data.get('endline', None)
@@ -236,7 +196,7 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
     if lex_filename == 'CMakeLists.txt':
         lex_filename += '.cmake'
     lexer = guess_lexer_for_filename(lex_filename, filecontents)
-    
+
     # Select the right formatter based on the lexer
     cssclass = 'pygments{}'.format(lineno)
     if lexer.name == "Arduino" and not "style" in data:
@@ -244,18 +204,18 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
     else:
         style = data.get('style', 'default')
         formatter = HtmlFormatter(cssclass=cssclass, style=style)
-    
+
     # Extract the CSS from the formatter, and set the line number offset
     css = formatter.get_style_defs('.' + cssclass)
     css += '\n.pygments{} pre.snippet{} {{ counter-reset: line {}; }}' \
         .format(lineno, lineno, ctrstart)
-    
+
     # Syntax highlight the code
     htmlc = highlight(filecontents, lexer, formatter)
-    
+
     # Set the right classes
-    htmlc = htmlc.replace('<pre>', 
-                '<pre class="lineNumbers snippet{}">'.format(lineno))
+    htmlc = htmlc.replace('<pre>',
+                          '<pre class="lineNumbers snippet{}">'.format(lineno))
     htmlc = htmlc.replace('\n</pre></div>', '</pre></div>')
 
     # Construct the final HTML code
@@ -265,23 +225,25 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
     datastr += '<div class="codesnippet"><style>' + css + '</style>\n'
     if git_link is not None and git_service == 'github':
         datastr += '<a href="' + git_link + '" title="Open on GitHub">'
-        datastr += '<img class="github-mark" src="/Images/GitHub-Mark.svg"/>' 
+        datastr += '<img class="github-mark" src="/Images/GitHub-Mark.svg"/>'
         datastr += '</a>\n'
     if git_link is not None and git_service == 'gitlab':
         datastr += '<a href="' + git_link + '" title="Open on GitLab">'
-        datastr += '<img class="gitlab-mark" src="/Images/GitLab-Mark.svg"/>' 
+        datastr += '<img class="gitlab-mark" src="/Images/GitLab-Mark.svg"/>'
         datastr += '</a>\n'
     datastr += htmlc + '</div>'
     return datastr, file
+
 
 # endregion
 
 # region Image linking
 
+
 def formatImage(data, html, filepath, lineno):
     file = data['file']
     # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
-    if file[0] != '/': 
+    if file[0] != '/':
         fullfile = path.dirname(filepath) + '/' + file
     else:
         raise Exception('Image file "' + file + '" cannot be an absolute path')
@@ -290,11 +252,11 @@ def formatImage(data, html, filepath, lineno):
 
     displayfile = data.get('display-file', file)
     # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
-    if displayfile[0] != '/': 
+    if displayfile[0] != '/':
         fulldisplayfile = path.dirname(filepath) + '/' + displayfile
-    else: 
-        raise Exception('Image file "' + displayfile
-                      + '" cannot be an absolute path')
+    else:
+        raise Exception('Image file "' + displayfile +
+                        '" cannot be an absolute path')
     if not exists(fulldisplayfile):
         raise Exception('Image file "' + fulldisplayfile + '" does not exist')
 
@@ -302,31 +264,37 @@ def formatImage(data, html, filepath, lineno):
 
     htmlstr = '<a href="{src}"><img src="{dispsrc}" alt="{alt}"/></a>' \
         .format(src=file, dispsrc=displayfile, alt=alt)
-        
+
     cap = data.get('caption')
     if cap:
         htmlstr += '<figcaption>' + cap + '</figcaption>'
 
     return htmlstr, fullfile
 
+
 # endregion
 
 # region Replace @ JSON tags
 
+
 def getlinenumber(string: str, index: int) -> int:
     return string.count('\n', 0, index)
+
 
 def getlinesbetween(string: str, startindex: int, endindex: int) -> int:
     return string.count('\n', startindex, endindex)
 
+
 def getlines(string: str) -> int:
     return string.count('\n')
+
 
 def getKeyWord(keywords: dict, html, index):
     for kw in keywords.keys():
         if kw + '{' == html[index:index + len(kw) + 1]:
             return kw
     return None
+
 
 def replaceTags(html, filepath, lineno, outpath, metadata):
     keywordhandlers = {
@@ -353,7 +321,8 @@ def replaceTags(html, filepath, lineno, outpath, metadata):
             html = html[:index] + newdata + html[endindex:]
             index = html.find('@', index + len(newdata))
         except Exception as e:
-            fileline = filepath + ':' + str(lineno + getlinenumber(html, index))
+            fileline = filepath + ':' + str(lineno +
+                                            getlinenumber(html, index))
             print('\nError adding code snippet:', file=sys.stderr)
             print(fileline, file=sys.stderr)
             print(type(e).__name__, file=sys.stderr)
@@ -366,7 +335,9 @@ def replaceTags(html, filepath, lineno, outpath, metadata):
             f.write('\n'.join(deps))
     return html
 
+
 # endregion
+
 
 def formatHTML(html, filepath, lineno, outpath, metadata):
     html = replaceTags(html, filepath, lineno, outpath, metadata)
