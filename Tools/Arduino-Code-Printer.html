@@ -32,20 +32,46 @@
             </ol>
             <h4>Add page breaks</h4>
             You can add a page break after a line by adding three dashes (---) at the end of the line.<br>
-            By default, lines of code that only contain comments with lines (<code>//---</code> or <code>//===</code> or <code>//___</code>) will be replaced by page breaks as well.
+            By default, lines of code that only contain comments with lines (<code>//---</code> or <code>//===</code> or
+            <code>//___</code>) will be replaced by page breaks as well.
             <h4>Settings</h4>
             <table>
-                <tr><td><label for="emphasize">Emphasize: </label></td>
-                <td><input type="checkbox" id="emphasize" onchange="format();saveEmphasize();"></td></tr>
-                <tr><td>Title: </td>
-                <td><input id="title" placeholder="Title" oninput="format();saveTitle();"></td></tr>
-                <tr><td>Author: </td>
-                <td><input id="author" placeholder="Author" oninput="format();saveAuthor();"></td></tr>
+                <tr>
+                    <td><label for="emphasize">Emphasize: </label></td>
+                    <td><input type="checkbox" id="emphasize" onchange="format();saveEmphasize();" value="true"></td>
+                </tr>
+                <tr>
+                    <td>Title: </td>
+                    <td><input id="title" placeholder="Title" oninput="format();saveTitle();" value="Control Surface Example"></td>
+                </tr>
+                <tr>
+                    <td>Author: </td>
+                    <td><input id="author" placeholder="Author" oninput="format();saveAuthor();" value="PieterP"></td>
+                </tr>
             </table>
         </div>
         <div class="container">
             <h3>Raw HTML code</h3>
-            <textarea id="input" oninput="format();saveInput();"></textarea>
+            <textarea id="input" oninput="format();saveInput();" >
+<pre><font color="#5e6d03">#include</font> <font color="#434f54">&lt;</font><b><font color="#d35400">Control_Surface</font></b><font color="#434f54">.</font><font color="#000000">h</font><font color="#434f54">&gt;</font> <font color="#434f54">&#47;&#47; Include the Control Surface library</font>
+
+<font color="#434f54">&#47;&#47; Instantiate a MIDI over USB interface.</font>
+<b><font color="#d35400">USBMIDI_Interface</font></b> <font color="#00979c">midi</font><font color="#000000">;</font>
+
+***<font color="#434f54">&#47;&#47; Instantiate a CCPotentiometer object</font>
+***<b><font color="#d35400">CCPotentiometer</font></b> <font color="#000000">potentiometer</font> <font color="#434f54">=</font> <font color="#000000">{</font>
+*** &nbsp;<font color="#000000">A0</font><font color="#434f54">,</font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#434f54">&#47;&#47; Analog pin connected to potentiometer</font>
+*** &nbsp;<font color="#000000">{</font><b><font color="#d35400">MIDI_CC</font></b><font color="#434f54">:</font><font color="#434f54">:</font><font color="#00979c">Channel_Volume</font><font color="#434f54">,</font> <font color="#00979c">CHANNEL_1</font><font color="#000000">}</font><font color="#434f54">,</font> <font color="#434f54">&#47;&#47; Channel volume of channel 1</font>
+***<font color="#000000">}</font><font color="#000000">;</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">setup</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;<b><font color="#d35400">Control_Surface</font></b><font color="#434f54">.</font><font color="#d35400">begin</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#434f54">&#47;&#47; Initialize Control Surface</font>
+<font color="#000000">}</font>
+
+<font color="#00979c">void</font> <font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font> <font color="#000000">{</font>
+ &nbsp;<b><font color="#d35400">Control_Surface</font></b><font color="#434f54">.</font><font color="#5e6d03">loop</font><font color="#000000">(</font><font color="#000000">)</font><font color="#000000">;</font> <font color="#434f54">&#47;&#47; Update the Control Surface</font>
+<font color="#000000">}</font></pre>
+            </textarea>
 
             <h3>Formatted HTML code</h3>
             <button onclick="copy()" id="button">Copy HTML code</button>
@@ -64,21 +90,26 @@
             max-height: 30vh;
             overflow: auto;
         }
+
         code.pagebreak {
             display: block !important;
             border-bottom: #888 1px solid;
             margin-bottom: 1em;
         }
+
         article {
             min-height: 100em;
         }
+
         table {
             table-layout: fixed;
             width: 100%;
         }
+
         td>input {
             max-width: 100%;
         }
+
         @media screen and (max-width: 769px) {
             article {
                 width: 100vw;
@@ -86,6 +117,7 @@
                 margin: 0px 0px 0px 0px;
                 padding: 16px 36px 32px 36px;
             }
+
             body {
                 padding: 0px;
                 margin: 0;
@@ -93,96 +125,99 @@
         }
     </style>
 
-<style id="lineNumbers">
-    pre.lineNumbers {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        display: block;
-        padding-left: 4em;
-        counter-reset: line;
-        width: 100%;
-        box-sizing: border-box;
-        /* border: 1px solid #eee; */
-    }
-
-    pre.lineNumbers>code {
-        display: inline;
-    }
-
-    pre.lineNumbers>code:before {
-        counter-increment: line;
-        content: counter(line);
-        display: inline-block;
-        /* border-right: 1px solid #ddd; */
-        padding: 0 1.5em 0 0;
-        margin-left: -3.7em;
-        width: 2.2em;
-        color: #555;
-        text-align: right;
-    }
-</style>
-<style id="lineNumbersEmphasis">
-    pre.lineNumbersEmphasis {
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        display: block;
-        padding-left: 4em;
-        counter-reset: line;
-        width: 100%;
-        box-sizing: border-box;
-        /* border: 1px solid #eee; */
-    }
-
-    pre.lineNumbersEmphasis>code {
-        display: inline;
-    }
-
-    pre.lineNumbersEmphasis>code {
-        opacity: 0.5;
-        /* filter: grayscale(40%); */
-    }
-
-    pre.lineNumbersEmphasis>code.emphasis {
-        opacity: 1;
-        /* filter: grayscale(0%); */
-    }
-
-    pre.lineNumbersEmphasis>code.emphasis:before {
-        font-weight: bold;
-    }
-
-    pre.lineNumbersEmphasis>code:before {
-        counter-increment: line;
-        content: counter(line);
-        display: inline-block;
-        /* border-right: 1px solid #ddd; */
-        padding: 0 1.5em 0 0;
-        margin-left: -3.7em;
-        width: 2.2em;
-        color: #555;
-        text-align: right;
+    <style id="lineNumbers">
+        pre.lineNumbers {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            display: block;
+            padding-left: 4em;
+            counter-reset: line;
+            width: 100%;
+            box-sizing: border-box;
+            /* border: 1px solid #eee; */
         }
-</style>
 
-<style id="general">
-    body {
-        font-family: 'Roboto', sans-serif;
-    }
-    i.subtitle {
-        color: #888;
-        margin-bottom: 1.5em;
-        display: block;
-    }
-    @media print {
-        code.pagebreak {
-            page-break-after: always;
-            display: block !important;
+        pre.lineNumbers>code {
+            display: inline;
         }
-        pre {
-            margin-bottom: 0 !important;
+
+        pre.lineNumbers>code:before {
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            /* border-right: 1px solid #ddd; */
+            padding: 0 1.5em 0 0;
+            margin-left: -3.7em;
+            width: 2.2em;
+            color: #555;
+            text-align: right;
         }
-    }
-</style>
+    </style>
+    <style id="lineNumbersEmphasis">
+        pre.lineNumbersEmphasis {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            display: block;
+            padding-left: 4em;
+            counter-reset: line;
+            width: 100%;
+            box-sizing: border-box;
+            /* border: 1px solid #eee; */
+        }
+
+        pre.lineNumbersEmphasis>code {
+            display: inline;
+        }
+
+        pre.lineNumbersEmphasis>code {
+            opacity: 0.5;
+            /* filter: grayscale(40%); */
+        }
+
+        pre.lineNumbersEmphasis>code.emphasis {
+            opacity: 1;
+            /* filter: grayscale(0%); */
+        }
+
+        pre.lineNumbersEmphasis>code.emphasis:before {
+            font-weight: bold;
+        }
+
+        pre.lineNumbersEmphasis>code:before {
+            counter-increment: line;
+            content: counter(line);
+            display: inline-block;
+            /* border-right: 1px solid #ddd; */
+            padding: 0 1.5em 0 0;
+            margin-left: -3.7em;
+            width: 2.2em;
+            color: #555;
+            text-align: right;
+        }
+    </style>
+
+    <style id="general">
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        i.subtitle {
+            color: #888;
+            margin-bottom: 1.5em;
+            display: block;
+        }
+
+        @media print {
+            code.pagebreak {
+                page-break-after: always;
+                display: block !important;
+            }
+
+            pre {
+                margin-bottom: 0 !important;
+            }
+        }
+    </style>
 
     <script>
         let input = document.getElementById("input");
@@ -192,7 +227,7 @@
 
         let lnstyle = document.getElementById("lineNumbers").outerHTML;
         let lnestyle = document.getElementById("lineNumbersEmphasis").outerHTML;
-        let generalstyle =  document.getElementById("general").outerHTML;
+        let generalstyle = document.getElementById("general").outerHTML;
 
         function copy() {
             output.select();
@@ -202,7 +237,7 @@
                 window.setTimeout(function () {
                     button.textContent = "Copy HTML code";
                 }, 2000);
-            } catch(e) {
+            } catch (e) {
                 console.error("Unable to copy", e);
             }
         }
@@ -236,7 +271,7 @@
                 emphasize ?
                     '<code class="emphasis">'
                     : '<code>');
-            
+
             content = content.replace(
                 /<code>(.*)---\s*<\/code>/g,
                 '<code class="pagebreak">$1</code>');
@@ -253,12 +288,12 @@
                 /&nbsp;/g,
                 ' ');
             let heading = getHeading();
-            output.value = (emphasize ? lnestyle : lnstyle) + "\r\n" 
-                + generalstyle + "\r\n\r\n" 
-                + heading + "\r\n" 
+            output.value = (emphasize ? lnestyle : lnstyle) + "\r\n"
+                + generalstyle + "\r\n\r\n"
+                + heading + "\r\n"
                 + content;
             button.textContent = "Copy HTML code";
-            result.innerHTML = heading + "\r\n" 
+            result.innerHTML = heading + "\r\n"
                 + content;
             if (printWindow)
                 printWindow.close();
