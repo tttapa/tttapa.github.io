@@ -47,11 +47,11 @@
 <h3>Cross-Compiling the dependencies using the provided shell scripts</h3>
 
 <p>
-    If you just want to build all dependencies and libraries, without you can use the shell scripts provided in the
+    To build all dependencies, you can use the shell script provided in the
     <code>toolchain</code> folder:
 </p>
 <pre class="console">
-<code>./toolchain/build-and-export.sh &lt;board&gt;</code>
+<code>./toolchain/toolchain.sh &lt;board&gt; --export</code>
 </pre>
 
 <p>
@@ -80,7 +80,9 @@
         <li><strong>GNU dbm</strong>: library for key-value data (Python dependency)</li>
         <li><strong>SQLite</strong>: library for embedded databases (Python dependency)</li>
         <li><strong>UUID</strong>: library for unique identifiers (Python dependency)</li>
-        <li><strong>Python 3.8.1</strong>: Python interpreter and libraries</li>
+        <li><strong>libX11</strong>: X11 protocol client library (Tk dependency)</li>
+        <li><strong>Tcl/Tk</strong>: graphical user interface toolkit (Python/Tkinter dependency)</li>
+        <li><strong>Python 3.8.2</strong>: Python interpreter and libraries</li>
         <li><strong>ZBar</strong>: Bar and QR code decoding library</li>
         <li><strong>Raspberry Pi Userland</strong>: VideoCore GPU drivers</li>
         <li><strong>VPX</strong>: VP8/VP9 codec SDK</li>
@@ -98,6 +100,7 @@
     <ul>
         <li><strong>GCC 9.2.0</strong>: C, C++ and Fortran compilers (see native toolchain on the previous page)</li>
         <li><strong>GNU Make</strong>: build automation tool</li>
+        <li><strong>Ninja</strong>: faster, more light-weight build tool</li>
         <li><strong>CMake</strong>: build system</li>
         <li><strong>Distcc</strong>: distributed compiler wrapper (uses your computer to speed up compilation on the
             RPi)</li>
@@ -106,6 +109,18 @@
         <li><strong>Git</strong>: version control system</li>
     </ul>
 </p>
+
+<h3>Pulling the cross-compiled dependencies from Docker Hub</h3>
+
+<p>
+    If you don't want to change anything to the build process, or if you have a 
+    slow computer, you can just pull the Docker images that I compiled from 
+    Docker Hub:
+</p>
+
+<pre class="console">
+<code>./toolchain/toolchain.sh &lt;board&gt; --pull --export</code>
+</pre>
 
 <h2>Detailed information about cross-compilation of libraries</h2>
 
@@ -167,7 +182,7 @@
 <h4>Compiling a library for the Docker container</h4>
 
 <p>
-    In the first section of the main Dockerfile, most packages are built for both the build machine (the Docker
+    In the first section of the main Dockerfile, some packages are built for both the build machine (the Docker
     container) and for the host machine (the Raspberry Pi), because we need to build Python for both machines in order
     to cross-compile the OpenCV and NumPy modules later on.
 </p>
@@ -213,9 +228,10 @@
 <p>
     Many older libraries use GNU Autoconf to configure the project before building. Autoconf generates the
     <code>configure</code> script, and then the <code>configure</code> script generates the makefiles that are used to
-    actually compile and install the software. When downloading a library directly from GitHub (or other source control
-    host), you usually have to run Autoconf before configuring. If you download a released tarball from the project's
-    website, this isn't usually required.
+    actually compile and install the software. When downloading a library directly from GitHub (or some other source
+    control host), it usually doesn't include the <code>configure</code>. In that case, you have to run Autoconf before
+    configuring. If you download a released tarball from the
+    project's website, this isn't usually required.
 </p>
 <h5>Configure</h5>
 <p>
@@ -226,9 +242,9 @@
     Software that isn't managed by the system's package manager should be installed to <code>/usr/local</code>.<br>
     You can add your own compiler flags if you want, using the <code>CFLAGS</code>, <code>CXXFLAGS</code> and
     <code>LDFLAGS</code> variables. Finally, we tell the configure script to use our custom sysroot, instead of the
-    toolchain's default. Some configure scripts don't support this. In that case, you can add the
-    <code>--sysroot="..."</code> option to the <code>CFLAGS</code>, <code>CXXFLAGS</code> and <code>LDFLAGS</code>
-    variables.
+    toolchain's default. Some configure scripts don't support the <code>--with-sysroot</code> flag. In that case, you
+    can add the <code>--sysroot="..."</code> option to the <code>CFLAGS</code>, <code>CXXFLAGS</code> and
+    <code>LDFLAGS</code> environment variables.
 </p>
 <p>
     To find out what options you can pass to the <code>configure</code> script, you can run
@@ -255,8 +271,8 @@
 </p>
 <h5>Cleanup</h5>
 <p>
-    Finally, we just delete the entire build directory to keep the size of the Docker image low. When debugging, you 
-    might want to keep the build directory, so you can start a docker container and try out some things in an 
+    Finally, we just delete the entire build directory to keep the size of the Docker image low. When debugging, you
+    might want to keep the build directory, so you can start a docker container and try out some things in an
     interactive shell.
 </p>
 
