@@ -1,7 +1,7 @@
 import re
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
-from pygments.lexers import guess_lexer_for_filename
+from pygments.lexers import guess_lexer_for_filename, find_lexer_class_by_name
 from json import JSONDecoder
 from pprint import pformat
 from os import getenv
@@ -192,10 +192,13 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
     filecontents, ctrstart = clip_file_contents(file, startline, endline)
 
     # Select the right lexer based on the filename and contents
-    lex_filename = path.basename(file)
-    if lex_filename == 'CMakeLists.txt':
-        lex_filename += '.cmake'
-    lexer = guess_lexer_for_filename(lex_filename, filecontents)
+    if 'lexer' in data:
+        lexer = find_lexer_class_by_name(data['lexer'])()
+    else:
+        lex_filename = path.basename(file)
+        if lex_filename == 'CMakeLists.txt':
+            lex_filename += '.cmake'
+        lexer = guess_lexer_for_filename(lex_filename, filecontents)
 
     # Select the right formatter based on the lexer
     cssclass = 'pygments{}'.format(lineno)
