@@ -52,16 +52,19 @@
     them on this page.
 </p>
 
-<h3>Building the toolchain using the provided shell scripts</h3>
+<h3>Pulling the toolchain from Docker Hub</h3>
 
 <p>
-    If you just want to build the toolchain, without understanding how it works,
-    and without changing anything to the configuration, you can use the shell
-    scripts provided in the <code>toolchain</code> folder:
+    If you just want to use the toolchain, without understanding how it works,
+    and without changing anything to the configuration, you can just pull the
+    toolchains I built from Docker Hub.
+</p>
+<p>
+    To pull and export the toolchain, you can use:
 </p>
 
 <pre class="console">
-<code>./toolchain/build-and-export-toolchain.sh &lt;board&gt;</code>
+<code>./toolchain/toolchain.sh &lt;board&gt; --export-toolchain</code>
 </pre>
 <p>
     Where <code>&lt;board&gt;</code> is one of the following:
@@ -74,10 +77,22 @@
         <li><code>rpi3-aarch64-dev</code>: Raspberry Pi 3, 64-bit, cross-compilation toolchain and native toolchain</li>
     </ul>
 </p>
+
+<h3>Building the toolchain using the provided shell scripts</h3>
+
+<p>
+    Instead of pulling from Docker Hub, you can build the toolchain locally
+    instead. I would only recommend this if you made changes to the toolchain
+    configuration files, or if you have a really fast computer with a slow
+    internet connection.
+</p>
 <p>
     Building one toolchain took around 25 minutes on a 2018 Dell XPS i7-8750H, and 40 minutes on a 2017 Dell XPS
     i7-7700HQ.
 </p>
+<pre class="console">
+<code>./toolchain/toolchain.sh &lt;board&gt; --export-toolchain --build-toolchain</code>
+</pre>
 <p>
     The cross-compilation toolchain will be located in
     <code>toolchain/x-tools/&lt;arch&gt;-rpi*-linux-&lt;abi&gt;</code>,
@@ -141,13 +156,19 @@
 <h3>Cross-Compilation Toolchain</h3>
 
 <p>
-    The following Dockerfile builds the toolchain, all settings can be found in the <code>config</code> files on <a
-        href="https://github.com/tttapa/RPi-Cpp-Toolchain">GitHub</a>.
+    The following Dockerfile builds the toolchain:
 </p>
 @codesnippet{
 "name": "Dockerfile",
-"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/rpi3/aarch64/aarch64-cross-toolchain/Dockerfile"
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/merged/cross-toolchain/Dockerfile"
 }
+<p>
+    The different configuration files have names that contain the full <a
+        href="https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Specifying-Target-Triplets.html">target
+        triplet</a>. They can be found in <a
+        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker/merged/cross-toolchain">same
+        folder</a> as the Dockerfile.
+</p>
 
 <h4>Raspberry Pi 3, 64-bit (AArch64)</h4>
 
@@ -159,10 +180,6 @@
 <p>
     I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
     that the Ubuntu Server 18.04 image ships with.
-</p>
-<p>
-    The configuration file can be found on my GitHub: <a
-        href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/master/toolchain/docker/rpi3/aarch64/aarch64-cross-toolchain/config">https://github.com/tttapa/RPi-Cpp-Toolchain/blob/master/toolchain/docker/rpi3/aarch64/aarch64-cross-toolchain/config</a>
 </p>
 
 <h4>Raspberry Pi 3, 32-bit (ARMv8)</h4>
@@ -196,7 +213,7 @@
 </p>
 @codesnippet{
 "name": "Dockerfile",
-"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/rpi3/aarch64/aarch64-cross-native-toolchain/Dockerfile"
+"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/merged/cross-native-toolchain/Dockerfile"
 }
 
 <p>
@@ -218,26 +235,30 @@
 <pre class="console">
 <code>cd RPi-Cpp-Toolchain/</code>
 <code>./toolchain/docker/crosstool-ng-master/build.sh</code>
-<code>docker run -it --rm --volume "$PWD/toolchain/docker:/mnt" crosstool-ng-master</code>
+<code>docker run -it --rm --volume "$PWD/toolchain/docker:/mnt" tttapa/crosstool-ng-master</code>
 </pre>
 <pre class="console-docker">
-<code>cd /mnt/rpi3/aarch64/aarch64-cross-toolchain/  # Choose RPi model and architecture</code>
-<code>cp config .config</code>
+<code>cd /mnt/merged/cross-toolchain/</code>
+<code>cp aarch64-rpi3-linux-gnu.config .config  # Choose RPi model and architecture</code>
 <code>ct-ng menuconfig</code>
 </pre>
 <p>
     Now make your changes and save the result to <code>.config</code>.
 </p>
 <pre class="console-docker">
-<code>mv config config.old  # rename old configuration</code>
-<code>mv .config config     # replace with new configuration</code>
+<code># Rename the old configuration</code>
+<code>mv aarch64-rpi3-linux-gnu.config aarch64-rpi3-linux-gnu.config.old</code>
+<code># Replace with new configuration</code>
+<code>mv .config aarch64-rpi3-linux-gnu.config</code>
 <code>exit</code>
 </pre>
 
 <p>
-    Now you can build the toolchain again using the <code>build-and-export-toolchain.sh</code> script, as explained
-    earlier.
+    Now you can build the toolchain again using the <code>./toolchain.sh</code> script, as explained
+    earlier:
 </p>
-
+<pre class="console">
+<code>./toolchain/docker/toolchain.sh --build-toolchain</code>
+</pre>
 
 </html>

@@ -131,12 +131,12 @@
 <p>
     The main Dockerfile discussed below sets up the build environment, and then runs the installation scripts in the
     <a
-        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker/rpi3/aarch64/aarch64-cross-build/install-scripts"><code>toolchain/docker/rpi3/aarch64/aarch64-cross-build/install-scripts</code></a>
+        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker/merged/cross-build/install-scripts"><code>toolchain/docker/merged/cross-build/install-scripts</code></a>
     folder. If you want to omit some of the libraries, you can comment them out in the Dockerfile, but keep in mind that
     it might break other libraries that depend on it.<br>
     Some libraries such as SciPy need to be patched to get them to cross-compile correctly. These patches can be found
     in the <a
-        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker/rpi3/aarch64/aarch64-cross-build/patches"><code>patches</code></a>
+        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker/merged/cross-build/patches"><code>patches</code></a>
     folder.
 </p>
 <p>
@@ -151,12 +151,17 @@
     An example is given below.
 </p>
 
-<h4>Preparing the Sysroot and Staging Area</h4>
+<h4>Board-specific configuration</h4>
+
+<p>
+    The configuration for the different Raspberry Pi models is passed to the
+    build scripts using environment variables. For example:
+</p>
 
 @codesnippet{
-"name": "Dockerfile",
-"file": "${HOME}/GitHub/RPi-Cpp-Toolchain/toolchain/docker/rpi3/aarch64/aarch64-cross-build/Dockerfile",
-"endline": 26
+"name": "aarch64-rpi3-linux-gnu.env",
+"file": "${HOME}/GitHub/RPi-Cpp-Toolchain/toolchain/docker/merged/env/aarch64-rpi3-linux-gnu.env",
+"lexer": "bash"
 }
 
 <h4>Compiling a library for the Docker container</h4>
@@ -175,8 +180,9 @@
 <h4>Cross-Compiling a library for the Raspberry Pi</h4>
 
 <p>
-    Cross-compiling is a bit harder, because most libraries don't provide good documentation about cross-compilation.
-    However, once you understand the concepts, you'll be able to apply them to almost any library.
+    Cross-compiling is a bit harder, because most libraries don't provide good documentation about the cross-compilation
+    process. However, once you understand the concepts, you'll be able to apply them to almost any library, and with
+    the necessary tweaks, you should be able to get it working.
 </p>
 <p>
     We'll have a look at a typical example, compiling <code>libffi</code>, a foreign function interface library
@@ -186,7 +192,7 @@
 @codesnippet{
 "name": "libffi.sh",
 "file":
-"${HOME}/GitHub/RPi-Cpp-Toolchain/toolchain/docker/rpi3/aarch64/aarch64-cross-build/install-scripts/libffi.sh"
+"${HOME}/GitHub/RPi-Cpp-Toolchain/toolchain/docker/merged/cross-build/install-scripts/libffi.sh"
 }
 
 <h5>Downloading and extracting</h5>
@@ -249,7 +255,9 @@
 </p>
 <h5>Cleanup</h5>
 <p>
-    Finally, we just delete the entire build directory to keep the size of the Docker image low.
+    Finally, we just delete the entire build directory to keep the size of the Docker image low. When debugging, you 
+    might want to keep the build directory, so you can start a docker container and try out some things in an 
+    interactive shell.
 </p>
 
 </html>
