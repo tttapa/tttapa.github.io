@@ -40,6 +40,9 @@ def get_git_remote_link(file, startline, endline):
         return None, None
     service = m.group(1)
     
+    if remote == 'https://github.com/tttapa/tttapa.github.io':
+        commit = 'master'
+
     # Append the commit hash and file path
     remote += '/' + 'blob' + '/' + commit + '/' + rel
 
