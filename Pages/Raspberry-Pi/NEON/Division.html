@@ -1,0 +1,1407 @@
+<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
+            disabled: true
+            }
+        });
+    </script>
+    <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="theme-color" content="#ccc">
+    <meta name="keywords" content="Division,NEON,integer,power of two,signed,unsigned,255,shift">
+    <meta name="description" content="Snippets for dividing integers using NEON.">
+    <title>Division</title>
+<style type="text/css">.mjx-chtml {display: inline-block; line-height: 0; text-indent: 0; text-align: left; text-transform: none; font-style: normal; font-weight: normal; font-size: 100%; font-size-adjust: none; letter-spacing: normal; word-wrap: normal; word-spacing: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; margin: 0; padding: 1px 0}
+.MJXc-display {display: block; text-align: center; margin: 1em 0; padding: 0}
+.mjx-chtml[tabindex]:focus, body :focus .mjx-chtml[tabindex] {display: inline-table}
+.mjx-full-width {text-align: center; display: table-cell!important; width: 10000em}
+.mjx-math {display: inline-block; border-collapse: separate; border-spacing: 0}
+.mjx-math * {display: inline-block; -webkit-box-sizing: content-box!important; -moz-box-sizing: content-box!important; box-sizing: content-box!important; text-align: left}
+.mjx-numerator {display: block; text-align: center}
+.mjx-denominator {display: block; text-align: center}
+.MJXc-stacked {height: 0; position: relative}
+.MJXc-stacked > * {position: absolute}
+.MJXc-bevelled > * {display: inline-block}
+.mjx-stack {display: inline-block}
+.mjx-op {display: block}
+.mjx-under {display: table-cell}
+.mjx-over {display: block}
+.mjx-over > * {padding-left: 0px!important; padding-right: 0px!important}
+.mjx-under > * {padding-left: 0px!important; padding-right: 0px!important}
+.mjx-stack > .mjx-sup {display: block}
+.mjx-stack > .mjx-sub {display: block}
+.mjx-prestack > .mjx-presup {display: block}
+.mjx-prestack > .mjx-presub {display: block}
+.mjx-delim-h > .mjx-char {display: inline-block}
+.mjx-surd {vertical-align: top}
+.mjx-mphantom * {visibility: hidden}
+.mjx-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 2px 3px; font-style: normal; font-size: 90%}
+.mjx-annotation-xml {line-height: normal}
+.mjx-menclose > svg {fill: none; stroke: currentColor}
+.mjx-mtr {display: table-row}
+.mjx-mlabeledtr {display: table-row}
+.mjx-mtd {display: table-cell; text-align: center}
+.mjx-label {display: table-row}
+.mjx-box {display: inline-block}
+.mjx-block {display: block}
+.mjx-span {display: inline}
+.mjx-char {display: block; white-space: pre}
+.mjx-itable {display: inline-table; width: auto}
+.mjx-row {display: table-row}
+.mjx-cell {display: table-cell}
+.mjx-table {display: table; width: 100%}
+.mjx-line {display: block; height: 0}
+.mjx-strut {width: 0; padding-top: 1em}
+.mjx-vsize {width: 0}
+.MJXc-space1 {margin-left: .167em}
+.MJXc-space2 {margin-left: .222em}
+.MJXc-space3 {margin-left: .278em}
+.mjx-test.mjx-test-display {display: table!important}
+.mjx-test.mjx-test-inline {display: inline!important; margin-right: -1px}
+.mjx-test.mjx-test-default {display: block!important; clear: both}
+.mjx-ex-box {display: inline-block!important; position: absolute; overflow: hidden; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0; width: 1px; height: 60ex}
+.mjx-test-inline .mjx-left-box {display: inline-block; width: 0; float: left}
+.mjx-test-inline .mjx-right-box {display: inline-block; width: 0; float: right}
+.mjx-test-display .mjx-right-box {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
+.MJXc-TeX-unknown-R {font-family: monospace; font-style: normal; font-weight: normal}
+.MJXc-TeX-unknown-I {font-family: monospace; font-style: italic; font-weight: normal}
+.MJXc-TeX-unknown-B {font-family: monospace; font-style: normal; font-weight: bold}
+.MJXc-TeX-unknown-BI {font-family: monospace; font-style: italic; font-weight: bold}
+.MJXc-TeX-ams-R {font-family: MJXc-TeX-ams-R,MJXc-TeX-ams-Rw}
+.MJXc-TeX-cal-B {font-family: MJXc-TeX-cal-B,MJXc-TeX-cal-Bx,MJXc-TeX-cal-Bw}
+.MJXc-TeX-frak-R {font-family: MJXc-TeX-frak-R,MJXc-TeX-frak-Rw}
+.MJXc-TeX-frak-B {font-family: MJXc-TeX-frak-B,MJXc-TeX-frak-Bx,MJXc-TeX-frak-Bw}
+.MJXc-TeX-math-BI {font-family: MJXc-TeX-math-BI,MJXc-TeX-math-BIx,MJXc-TeX-math-BIw}
+.MJXc-TeX-sans-R {font-family: MJXc-TeX-sans-R,MJXc-TeX-sans-Rw}
+.MJXc-TeX-sans-B {font-family: MJXc-TeX-sans-B,MJXc-TeX-sans-Bx,MJXc-TeX-sans-Bw}
+.MJXc-TeX-sans-I {font-family: MJXc-TeX-sans-I,MJXc-TeX-sans-Ix,MJXc-TeX-sans-Iw}
+.MJXc-TeX-script-R {font-family: MJXc-TeX-script-R,MJXc-TeX-script-Rw}
+.MJXc-TeX-type-R {font-family: MJXc-TeX-type-R,MJXc-TeX-type-Rw}
+.MJXc-TeX-cal-R {font-family: MJXc-TeX-cal-R,MJXc-TeX-cal-Rw}
+.MJXc-TeX-main-B {font-family: MJXc-TeX-main-B,MJXc-TeX-main-Bx,MJXc-TeX-main-Bw}
+.MJXc-TeX-main-I {font-family: MJXc-TeX-main-I,MJXc-TeX-main-Ix,MJXc-TeX-main-Iw}
+.MJXc-TeX-main-R {font-family: MJXc-TeX-main-R,MJXc-TeX-main-Rw}
+.MJXc-TeX-math-I {font-family: MJXc-TeX-math-I,MJXc-TeX-math-Ix,MJXc-TeX-math-Iw}
+.MJXc-TeX-size1-R {font-family: MJXc-TeX-size1-R,MJXc-TeX-size1-Rw}
+.MJXc-TeX-size2-R {font-family: MJXc-TeX-size2-R,MJXc-TeX-size2-Rw}
+.MJXc-TeX-size3-R {font-family: MJXc-TeX-size3-R,MJXc-TeX-size3-Rw}
+.MJXc-TeX-size4-R {font-family: MJXc-TeX-size4-R,MJXc-TeX-size4-Rw}
+.MJXc-TeX-vec-R {font-family: MJXc-TeX-vec-R,MJXc-TeX-vec-Rw}
+.MJXc-TeX-vec-B {font-family: MJXc-TeX-vec-B,MJXc-TeX-vec-Bx,MJXc-TeX-vec-Bw}
+@font-face {font-family: MJXc-TeX-ams-R; src: local('MathJax_AMS'), local('MathJax_AMS-Regular')}
+@font-face {font-family: MJXc-TeX-ams-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_AMS-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_AMS-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_AMS-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-cal-B; src: local('MathJax_Caligraphic Bold'), local('MathJax_Caligraphic-Bold')}
+@font-face {font-family: MJXc-TeX-cal-Bx; src: local('MathJax_Caligraphic'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-cal-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Caligraphic-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-frak-R; src: local('MathJax_Fraktur'), local('MathJax_Fraktur-Regular')}
+@font-face {font-family: MJXc-TeX-frak-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Fraktur-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-frak-B; src: local('MathJax_Fraktur Bold'), local('MathJax_Fraktur-Bold')}
+@font-face {font-family: MJXc-TeX-frak-Bx; src: local('MathJax_Fraktur'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-frak-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Fraktur-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-math-BI; src: local('MathJax_Math BoldItalic'), local('MathJax_Math-BoldItalic')}
+@font-face {font-family: MJXc-TeX-math-BIx; src: local('MathJax_Math'); font-weight: bold; font-style: italic}
+@font-face {font-family: MJXc-TeX-math-BIw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Math-BoldItalic.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Math-BoldItalic.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Math-BoldItalic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-sans-R; src: local('MathJax_SansSerif'), local('MathJax_SansSerif-Regular')}
+@font-face {font-family: MJXc-TeX-sans-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-sans-B; src: local('MathJax_SansSerif Bold'), local('MathJax_SansSerif-Bold')}
+@font-face {font-family: MJXc-TeX-sans-Bx; src: local('MathJax_SansSerif'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-sans-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-sans-I; src: local('MathJax_SansSerif Italic'), local('MathJax_SansSerif-Italic')}
+@font-face {font-family: MJXc-TeX-sans-Ix; src: local('MathJax_SansSerif'); font-style: italic}
+@font-face {font-family: MJXc-TeX-sans-Iw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Italic.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Italic.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Italic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-script-R; src: local('MathJax_Script'), local('MathJax_Script-Regular')}
+@font-face {font-family: MJXc-TeX-script-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Script-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Script-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Script-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-type-R; src: local('MathJax_Typewriter'), local('MathJax_Typewriter-Regular')}
+@font-face {font-family: MJXc-TeX-type-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Typewriter-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Typewriter-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Typewriter-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-cal-R; src: local('MathJax_Caligraphic'), local('MathJax_Caligraphic-Regular')}
+@font-face {font-family: MJXc-TeX-cal-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Caligraphic-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-main-B; src: local('MathJax_Main Bold'), local('MathJax_Main-Bold')}
+@font-face {font-family: MJXc-TeX-main-Bx; src: local('MathJax_Main'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-main-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Main-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-main-I; src: local('MathJax_Main Italic'), local('MathJax_Main-Italic')}
+@font-face {font-family: MJXc-TeX-main-Ix; src: local('MathJax_Main'); font-style: italic}
+@font-face {font-family: MJXc-TeX-main-Iw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Main-Italic.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-main-R; src: local('MathJax_Main'), local('MathJax_Main-Regular')}
+@font-face {font-family: MJXc-TeX-main-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Main-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-math-I; src: local('MathJax_Math Italic'), local('MathJax_Math-Italic')}
+@font-face {font-family: MJXc-TeX-math-Ix; src: local('MathJax_Math'); font-style: italic}
+@font-face {font-family: MJXc-TeX-math-Iw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Math-Italic.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size1-R; src: local('MathJax_Size1'), local('MathJax_Size1-Regular')}
+@font-face {font-family: MJXc-TeX-size1-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Size1-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size2-R; src: local('MathJax_Size2'), local('MathJax_Size2-Regular')}
+@font-face {font-family: MJXc-TeX-size2-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Size2-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size3-R; src: local('MathJax_Size3'), local('MathJax_Size3-Regular')}
+@font-face {font-family: MJXc-TeX-size3-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Size3-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-size4-R; src: local('MathJax_Size4'), local('MathJax_Size4-Regular')}
+@font-face {font-family: MJXc-TeX-size4-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Size4-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-vec-R; src: local('MathJax_Vector'), local('MathJax_Vector-Regular')}
+@font-face {font-family: MJXc-TeX-vec-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Vector-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Vector-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Vector-Regular.otf') format('opentype')}
+@font-face {font-family: MJXc-TeX-vec-B; src: local('MathJax_Vector Bold'), local('MathJax_Vector-Bold')}
+@font-face {font-family: MJXc-TeX-vec-Bx; src: local('MathJax_Vector'); font-weight: bold}
+@font-face {font-family: MJXc-TeX-vec-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Vector-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Vector-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Vector-Bold.otf') format('opentype')}
+</style></head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
+            </svg>
+            <h2><a href="/">Home</a></h2>
+<ul>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a href="../Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../C++-Development/index.html">C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="openEntry" href="Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/index.html">Mathematics</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Division.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article">print</a>
+            </i>
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Division</h1>
+        <i class="author">Pieter P</i>
+        <div>
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+        <li><a href="#dividing-by-powers-of-two">Dividing by powers of two</a></li>
+          <ul>
+            <li><a href="#unsigned-integers">Unsigned integers</a></li>
+              <ul>
+                <li><a href="#flooring">Flooring</a></li>
+                <li><a href="#rounding">Rounding</a></li>
+              </ul>
+            <li><a href="#signed-integers">Signed integers</a></li>
+              <ul>
+                <li><a href="#flooring1">Flooring</a></li>
+                <li><a href="#rounding1">Rounding</a></li>
+              </ul>
+          </ul>
+        <li><a href="#dividing-by-255">Dividing by 255</a></li>
+          <ul>
+            <li><a href="#approximating-by-a-division-by-256">Approximating by a division by 256</a></li>
+            <li><a href="#true-division-by-255">True division by 255</a></li>
+              <ul>
+                <li><a href="#flooring2">Flooring</a></li>
+                <li><a href="#rounding2">Rounding</a></li>
+                </ul>
+            </ul>
+        </ul>
+  </div>
+
+
+<p>
+    NEON doesn't have any integer division instructions, because they are expensive to implement in hardware. Luckily,
+    you can often replace divisions by other instructions, like bit shifts and multiplications.
+</p>
+
+<h2><a name="dividing-by-powers-of-two" href="#dividing-by-powers-of-two">Dividing by powers of two</a></h2>
+
+<h3><a name="unsigned-integers" href="#unsigned-integers">Unsigned integers</a></h3>
+
+<h4><a name="flooring" href="#flooring">Flooring</a></h4>
+
+<p>
+    To divide an unsigned integer by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="2^k"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span class="mjx-mi" style=""><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span></span></span></span></span>, you can just use a bit shift by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="k"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span></span></span> bits to the right.
+</p>
+
+<div class="codesnippet"><style>.pygments27 .hll { background-color: #ffffcc }
+.pygments27  { background: #f8f8f8; }
+.pygments27 .c { color: #408080; font-style: italic } /* Comment */
+.pygments27 .err { border: 1px solid #FF0000 } /* Error */
+.pygments27 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments27 .o { color: #666666 } /* Operator */
+.pygments27 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments27 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments27 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments27 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments27 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments27 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments27 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments27 .ge { font-style: italic } /* Generic.Emph */
+.pygments27 .gr { color: #FF0000 } /* Generic.Error */
+.pygments27 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments27 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments27 .go { color: #888888 } /* Generic.Output */
+.pygments27 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments27 .gs { font-weight: bold } /* Generic.Strong */
+.pygments27 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments27 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments27 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments27 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments27 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments27 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments27 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments27 .kt { color: #B00040 } /* Keyword.Type */
+.pygments27 .m { color: #666666 } /* Literal.Number */
+.pygments27 .s { color: #BA2121 } /* Literal.String */
+.pygments27 .na { color: #7D9029 } /* Name.Attribute */
+.pygments27 .nb { color: #008000 } /* Name.Builtin */
+.pygments27 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments27 .no { color: #880000 } /* Name.Constant */
+.pygments27 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments27 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments27 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments27 .nf { color: #0000FF } /* Name.Function */
+.pygments27 .nl { color: #A0A000 } /* Name.Label */
+.pygments27 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments27 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments27 .nv { color: #19177C } /* Name.Variable */
+.pygments27 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments27 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments27 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments27 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments27 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments27 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments27 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments27 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments27 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments27 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments27 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments27 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments27 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments27 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments27 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments27 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments27 .sx { color: #008000 } /* Literal.String.Other */
+.pygments27 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments27 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments27 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments27 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments27 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments27 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments27 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments27 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments27 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments27 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments27 pre.snippet27 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_unsigned.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments27"><pre class="lineNumbers snippet27"><code><span></span><span class="kt">uint16_t</span> <span class="nf">div_by_16_a</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">16</span><span class="p">;</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="kt">uint16_t</span> <span class="nf">div_by_16_b</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">return</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// 16 = 2⁴</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+
+<p>
+    Of course, any half-decent compiler will produce the same instructions for both of the functions above, so it's much
+    better to write <code>x&nbsp;/&nbsp;16</code>, because it clearly shows your intent.
+</p>
+
+<p>
+    To write the same division for NEON, you can use the <code>vshr_n_u16</code> intrinsic:
+</p>
+<div class="codesnippet"><style>.pygments39 .hll { background-color: #ffffcc }
+.pygments39  { background: #f8f8f8; }
+.pygments39 .c { color: #408080; font-style: italic } /* Comment */
+.pygments39 .err { border: 1px solid #FF0000 } /* Error */
+.pygments39 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments39 .o { color: #666666 } /* Operator */
+.pygments39 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments39 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments39 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments39 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments39 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments39 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments39 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments39 .ge { font-style: italic } /* Generic.Emph */
+.pygments39 .gr { color: #FF0000 } /* Generic.Error */
+.pygments39 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments39 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments39 .go { color: #888888 } /* Generic.Output */
+.pygments39 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments39 .gs { font-weight: bold } /* Generic.Strong */
+.pygments39 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments39 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments39 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments39 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments39 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments39 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments39 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments39 .kt { color: #B00040 } /* Keyword.Type */
+.pygments39 .m { color: #666666 } /* Literal.Number */
+.pygments39 .s { color: #BA2121 } /* Literal.String */
+.pygments39 .na { color: #7D9029 } /* Name.Attribute */
+.pygments39 .nb { color: #008000 } /* Name.Builtin */
+.pygments39 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments39 .no { color: #880000 } /* Name.Constant */
+.pygments39 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments39 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments39 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments39 .nf { color: #0000FF } /* Name.Function */
+.pygments39 .nl { color: #A0A000 } /* Name.Label */
+.pygments39 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments39 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments39 .nv { color: #19177C } /* Name.Variable */
+.pygments39 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments39 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments39 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments39 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments39 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments39 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments39 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments39 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments39 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments39 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments39 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments39 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments39 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments39 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments39 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments39 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments39 .sx { color: #008000 } /* Literal.String.Other */
+.pygments39 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments39 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments39 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments39 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments39 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments39 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments39 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments39 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments39 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments39 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments39 pre.snippet39 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_unsigned_vector.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments39"><pre class="lineNumbers snippet39"><code><span></span><span class="cp">#include</span> <span class="cpf">&lt;arm_neon.h&gt;</span><span class="cp"></span></code>
+<code></code>
+<code><span class="n">uint16x4_t</span> <span class="nf">div_by_16</span><span class="p">(</span><span class="n">uint16x4_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">return</span> <span class="n">vshr_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// 16 = 2⁴</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="n">uint16x8_t</span> <span class="nf">div_by_16</span><span class="p">(</span><span class="n">uint16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">return</span> <span class="n">vshrq_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// 16 = 2⁴</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<p>
+    The name is derived from <u>v</u>ector <u>sh</u>ift <u>r</u>ight, <code>n</code> indicates a fixed number of bits is
+    used, and <code>u16</code> is the type of elements in the vector (16-bit unsigned integers in this example).<br>
+    There are two versions, the one without the <code>q</code> suffix operates on double-word vector registers (2×32
+    bits), and the one with the <code>q</code> suffix operates on quad-word vector registers (4×32 bits).
+</p>
+
+<h4><a name="rounding" href="#rounding">Rounding</a></h4>
+
+<p>
+    NEON also has instructions for rounding right shifts, for example, <code>vrshr_n_u16</code> (note the <code>r</code>
+    prefix):
+</p>
+<div class="codesnippet"><style>.pygments55 .hll { background-color: #ffffcc }
+.pygments55  { background: #f8f8f8; }
+.pygments55 .c { color: #408080; font-style: italic } /* Comment */
+.pygments55 .err { border: 1px solid #FF0000 } /* Error */
+.pygments55 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments55 .o { color: #666666 } /* Operator */
+.pygments55 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments55 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments55 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments55 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments55 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments55 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments55 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments55 .ge { font-style: italic } /* Generic.Emph */
+.pygments55 .gr { color: #FF0000 } /* Generic.Error */
+.pygments55 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments55 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments55 .go { color: #888888 } /* Generic.Output */
+.pygments55 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments55 .gs { font-weight: bold } /* Generic.Strong */
+.pygments55 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments55 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments55 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments55 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments55 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments55 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments55 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments55 .kt { color: #B00040 } /* Keyword.Type */
+.pygments55 .m { color: #666666 } /* Literal.Number */
+.pygments55 .s { color: #BA2121 } /* Literal.String */
+.pygments55 .na { color: #7D9029 } /* Name.Attribute */
+.pygments55 .nb { color: #008000 } /* Name.Builtin */
+.pygments55 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments55 .no { color: #880000 } /* Name.Constant */
+.pygments55 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments55 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments55 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments55 .nf { color: #0000FF } /* Name.Function */
+.pygments55 .nl { color: #A0A000 } /* Name.Label */
+.pygments55 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments55 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments55 .nv { color: #19177C } /* Name.Variable */
+.pygments55 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments55 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments55 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments55 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments55 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments55 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments55 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments55 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments55 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments55 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments55 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments55 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments55 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments55 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments55 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments55 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments55 .sx { color: #008000 } /* Literal.String.Other */
+.pygments55 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments55 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments55 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments55 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments55 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments55 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments55 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments55 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments55 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments55 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments55 pre.snippet55 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_unsigned_vector_round.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments55"><pre class="lineNumbers snippet55"><code><span></span><span class="n">uint16x8_t</span> <span class="nf">div_by_16_round</span><span class="p">(</span><span class="n">uint16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">return</span> <span class="n">vrshrq_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// 16 = 2⁴</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+
+<h3><a name="signed-integers" href="#signed-integers">Signed integers</a></h3>
+
+<h4><a name="flooring1" href="#flooring1">Flooring</a></h4>
+
+<p>
+    Dividing signed integers by a power of two is a little bit trickier than dividing unsigned integers, because you
+    cannot simply use a bit shift.
+    Consider <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-7 / 16"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">7</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span></span></span></span></span> as an example: you would expect the result to be <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="0"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span></span></span>. However, <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-7 \gg 4"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">7</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">≫</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">4</span></span></span></span></span></span> turns out to be
+    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-1"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span></span></span></span></span>.
+</p>
+<p>
+    To get around this problem, you have to add the divisor minus one if the dividend is negative:
+</p>
+<div class="codesnippet"><style>.pygments72 .hll { background-color: #ffffcc }
+.pygments72  { background: #f8f8f8; }
+.pygments72 .c { color: #408080; font-style: italic } /* Comment */
+.pygments72 .err { border: 1px solid #FF0000 } /* Error */
+.pygments72 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments72 .o { color: #666666 } /* Operator */
+.pygments72 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments72 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments72 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments72 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments72 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments72 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments72 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments72 .ge { font-style: italic } /* Generic.Emph */
+.pygments72 .gr { color: #FF0000 } /* Generic.Error */
+.pygments72 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments72 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments72 .go { color: #888888 } /* Generic.Output */
+.pygments72 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments72 .gs { font-weight: bold } /* Generic.Strong */
+.pygments72 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments72 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments72 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments72 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments72 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments72 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments72 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments72 .kt { color: #B00040 } /* Keyword.Type */
+.pygments72 .m { color: #666666 } /* Literal.Number */
+.pygments72 .s { color: #BA2121 } /* Literal.String */
+.pygments72 .na { color: #7D9029 } /* Name.Attribute */
+.pygments72 .nb { color: #008000 } /* Name.Builtin */
+.pygments72 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments72 .no { color: #880000 } /* Name.Constant */
+.pygments72 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments72 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments72 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments72 .nf { color: #0000FF } /* Name.Function */
+.pygments72 .nl { color: #A0A000 } /* Name.Label */
+.pygments72 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments72 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments72 .nv { color: #19177C } /* Name.Variable */
+.pygments72 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments72 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments72 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments72 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments72 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments72 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments72 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments72 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments72 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments72 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments72 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments72 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments72 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments72 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments72 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments72 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments72 .sx { color: #008000 } /* Literal.String.Other */
+.pygments72 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments72 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments72 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments72 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments72 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments72 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments72 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments72 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments72 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments72 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments72 pre.snippet72 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_signed.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments72"><pre class="lineNumbers snippet72"><code><span></span><span class="kt">int16_t</span> <span class="nf">div_by_16_a</span><span class="p">(</span><span class="kt">int16_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">return</span> <span class="n">x</span> <span class="o">/</span> <span class="mi">16</span><span class="p">;</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="kt">int16_t</span> <span class="nf">div_by_16_b</span><span class="p">(</span><span class="kt">int16_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span></code>
+<code>        <span class="n">x</span> <span class="o">+=</span> <span class="mi">16</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span></code>
+<code>    <span class="k">return</span> <span class="n">x</span> <span class="o">&gt;&gt;</span> <span class="mi">4</span><span class="p">;</span> <span class="c1">// 16 = 2⁴</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+
+<p>
+    NEON doesn't have any conditional instructions, but it does have compare instructions that can be used to generate
+    a mask.
+    The compare instructions return either all zeros (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x0000}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x0000</span></span></span></span></span></span></span></span>) or all ones (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xFFFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFFFF</span></span></span></span></span></span></span></span>), so by
+    using a bitwise AND, they can be used to conditionally enable or disable the correction term.
+</p>
+<div class="codesnippet"><style>.pygments82 .hll { background-color: #ffffcc }
+.pygments82  { background: #f8f8f8; }
+.pygments82 .c { color: #408080; font-style: italic } /* Comment */
+.pygments82 .err { border: 1px solid #FF0000 } /* Error */
+.pygments82 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments82 .o { color: #666666 } /* Operator */
+.pygments82 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments82 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments82 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments82 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments82 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments82 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments82 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments82 .ge { font-style: italic } /* Generic.Emph */
+.pygments82 .gr { color: #FF0000 } /* Generic.Error */
+.pygments82 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments82 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments82 .go { color: #888888 } /* Generic.Output */
+.pygments82 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments82 .gs { font-weight: bold } /* Generic.Strong */
+.pygments82 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments82 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments82 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments82 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments82 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments82 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments82 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments82 .kt { color: #B00040 } /* Keyword.Type */
+.pygments82 .m { color: #666666 } /* Literal.Number */
+.pygments82 .s { color: #BA2121 } /* Literal.String */
+.pygments82 .na { color: #7D9029 } /* Name.Attribute */
+.pygments82 .nb { color: #008000 } /* Name.Builtin */
+.pygments82 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments82 .no { color: #880000 } /* Name.Constant */
+.pygments82 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments82 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments82 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments82 .nf { color: #0000FF } /* Name.Function */
+.pygments82 .nl { color: #A0A000 } /* Name.Label */
+.pygments82 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments82 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments82 .nv { color: #19177C } /* Name.Variable */
+.pygments82 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments82 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments82 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments82 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments82 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments82 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments82 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments82 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments82 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments82 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments82 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments82 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments82 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments82 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments82 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments82 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments82 .sx { color: #008000 } /* Literal.String.Other */
+.pygments82 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments82 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments82 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments82 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments82 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments82 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments82 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments82 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments82 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments82 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments82 pre.snippet82 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_signed_vector.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments82"><pre class="lineNumbers snippet82"><code><span></span><span class="n">int16x8_t</span> <span class="nf">div_by_16</span><span class="p">(</span><span class="n">int16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="n">int16x8_t</span> <span class="n">negative</span> <span class="o">=</span> <span class="n">vcltzq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="c1">// compare less than zero</span></code>
+<code>    <span class="n">int16x8_t</span> <span class="n">correction</span> <span class="o">=</span> <span class="n">vdupq_n_s16</span><span class="p">(</span><span class="mi">16</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span></code>
+<code>    <span class="n">correction</span> <span class="o">=</span> <span class="n">vandq_s16</span><span class="p">(</span><span class="n">negative</span><span class="p">,</span> <span class="n">correction</span><span class="p">);</span> <span class="c1">// only add correction if &lt; 0</span></code>
+<code>    <span class="n">x</span> <span class="o">=</span> <span class="n">vaddq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">correction</span><span class="p">);</span></code>
+<code>    <span class="k">return</span> <span class="n">vshrq_n_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// 16 = 2⁴</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<p>
+    In this snippet, <code>vdupq_n_s16</code> is used to duplicate a single value across all lanes of a vector register.
+    Sadly, we cannot use the correction (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="16-1"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span></span></span></span></span>) as an immediate argument to the AND instruction, because you can only
+    set one of the bytes of the immediate value at a time. The other byte is always implicitly <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFF</span></span></span></span></span></span></span></span>. In
+    other words, the only possible immediate operands to AND for 16-bit numbers are <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xFFXY}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFFXY</span></span></span></span></span></span></span></span> and
+    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xXYFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xXYFF</span></span></span></span></span></span></span></span>. <br>
+    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="16-1 = \texttt{0x000F}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-texatom MJXc-space3"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x000F</span></span></span></span></span></span></span></span> doesn't fit this pattern. However, <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="1-16 = \texttt{0xFFF1}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-texatom MJXc-space3"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFFF1</span></span></span></span></span></span></span></span> does. By replacing the
+    addition of 15 by a subtraction of -15, we can save one move instruction (<code>vdupq_n_s16</code>), and use an
+    immediate AND instruction instead.
+</p>
+<div class="codesnippet"><style>.pygments95 .hll { background-color: #ffffcc }
+.pygments95  { background: #f8f8f8; }
+.pygments95 .c { color: #408080; font-style: italic } /* Comment */
+.pygments95 .err { border: 1px solid #FF0000 } /* Error */
+.pygments95 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments95 .o { color: #666666 } /* Operator */
+.pygments95 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments95 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments95 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments95 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments95 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments95 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments95 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments95 .ge { font-style: italic } /* Generic.Emph */
+.pygments95 .gr { color: #FF0000 } /* Generic.Error */
+.pygments95 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments95 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments95 .go { color: #888888 } /* Generic.Output */
+.pygments95 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments95 .gs { font-weight: bold } /* Generic.Strong */
+.pygments95 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments95 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments95 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments95 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments95 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments95 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments95 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments95 .kt { color: #B00040 } /* Keyword.Type */
+.pygments95 .m { color: #666666 } /* Literal.Number */
+.pygments95 .s { color: #BA2121 } /* Literal.String */
+.pygments95 .na { color: #7D9029 } /* Name.Attribute */
+.pygments95 .nb { color: #008000 } /* Name.Builtin */
+.pygments95 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments95 .no { color: #880000 } /* Name.Constant */
+.pygments95 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments95 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments95 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments95 .nf { color: #0000FF } /* Name.Function */
+.pygments95 .nl { color: #A0A000 } /* Name.Label */
+.pygments95 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments95 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments95 .nv { color: #19177C } /* Name.Variable */
+.pygments95 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments95 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments95 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments95 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments95 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments95 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments95 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments95 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments95 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments95 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments95 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments95 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments95 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments95 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments95 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments95 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments95 .sx { color: #008000 } /* Literal.String.Other */
+.pygments95 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments95 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments95 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments95 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments95 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments95 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments95 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments95 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments95 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments95 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments95 pre.snippet95 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_signed_vector_immediate.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments95"><pre class="lineNumbers snippet95"><code><span></span><span class="cp">#define vandq_n_u16(a, b)                                                      \</span></code>
+<code><span class="cp">    __extension__({                                                            \</span></code>
+<code><span class="cp">        uint16x8_t a_ = (a);                                                   \</span></code>
+<code><span class="cp">        uint16_t b_ = ~(b);                                                    \</span></code>
+<code><span class="cp">        __asm__("bic %0.8h, #%1" : "+w"(a_) : "i"(b_) : </span><span class="cm">/* No clobbers */</span><span class="cp">);    \</span></code>
+<code><span class="cp">        a_;                                                                    \</span></code>
+<code><span class="cp">    })</span></code>
+<code></code>
+<code><span class="n">int16x8_t</span> <span class="nf">div_by_16</span><span class="p">(</span><span class="n">int16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="n">uint16x8_t</span> <span class="n">negative</span> <span class="o">=</span> <span class="n">vcltzq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="c1">// compare less than zero</span></code>
+<code>    <span class="n">uint16x8_t</span> <span class="n">correction</span> <span class="o">=</span> <span class="n">vandq_n_u16</span><span class="p">(</span><span class="n">negative</span><span class="p">,</span> <span class="mi">1</span> <span class="o">-</span> <span class="mi">16</span><span class="p">);</span></code>
+<code>    <span class="n">x</span> <span class="o">=</span> <span class="n">vsubq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vreinterpretq_s16_u16</span><span class="p">(</span><span class="n">correction</span><span class="p">));</span></code>
+<code>    <span class="k">return</span> <span class="n">vshrq_n_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span> <span class="c1">// 16 = 2⁴</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<p>
+    There is no actual AND instruction, the BIC (bit clear) instruction is used instead. There's no intrinsic for it, so
+    we had to add a line of inline assembly.
+</p>
+<p>
+    This trick will only work for divisors less than or equal to 256, since the immediate field of the BIC instruction
+    is only 8 bits wide. For divisors 512 and larger, the correction term will be 9 bits or more.
+</p>
+
+<h4><a name="rounding1" href="#rounding1">Rounding</a></h4>
+
+<p>
+    For the rounding division by a power of two, we'll again use the rounding right shift. If the dividend is negative,
+    we still need a correction. This time we just have to subtract one as a correction.
+</p>
+<div class="codesnippet"><style>.pygments113 .hll { background-color: #ffffcc }
+.pygments113  { background: #f8f8f8; }
+.pygments113 .c { color: #408080; font-style: italic } /* Comment */
+.pygments113 .err { border: 1px solid #FF0000 } /* Error */
+.pygments113 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments113 .o { color: #666666 } /* Operator */
+.pygments113 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments113 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments113 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments113 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments113 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments113 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments113 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments113 .ge { font-style: italic } /* Generic.Emph */
+.pygments113 .gr { color: #FF0000 } /* Generic.Error */
+.pygments113 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments113 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments113 .go { color: #888888 } /* Generic.Output */
+.pygments113 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments113 .gs { font-weight: bold } /* Generic.Strong */
+.pygments113 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments113 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments113 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments113 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments113 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments113 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments113 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments113 .kt { color: #B00040 } /* Keyword.Type */
+.pygments113 .m { color: #666666 } /* Literal.Number */
+.pygments113 .s { color: #BA2121 } /* Literal.String */
+.pygments113 .na { color: #7D9029 } /* Name.Attribute */
+.pygments113 .nb { color: #008000 } /* Name.Builtin */
+.pygments113 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments113 .no { color: #880000 } /* Name.Constant */
+.pygments113 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments113 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments113 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments113 .nf { color: #0000FF } /* Name.Function */
+.pygments113 .nl { color: #A0A000 } /* Name.Label */
+.pygments113 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments113 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments113 .nv { color: #19177C } /* Name.Variable */
+.pygments113 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments113 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments113 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments113 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments113 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments113 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments113 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments113 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments113 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments113 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments113 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments113 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments113 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments113 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments113 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments113 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments113 .sx { color: #008000 } /* Literal.String.Other */
+.pygments113 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments113 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments113 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments113 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments113 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments113 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments113 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments113 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments113 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments113 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments113 pre.snippet113 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_signed_vector_round.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments113"><pre class="lineNumbers snippet113"><code><span></span><span class="n">int16x8_t</span> <span class="nf">div_by_16_round</span><span class="p">(</span><span class="n">int16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="n">uint16x8_t</span> <span class="n">sign</span> <span class="o">=</span> <span class="n">vshrq_n_u16</span><span class="p">(</span><span class="n">vreinterpretq_u16_s16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mi">15</span><span class="p">);</span> <span class="c1">// sign bit</span></code>
+<code>    <span class="n">x</span> <span class="o">=</span> <span class="n">vqsubq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vreinterpretq_s16_u16</span><span class="p">(</span><span class="n">sign</span><span class="p">));</span> <span class="c1">// subtract 1 if &lt; 0</span></code>
+<code>    <span class="k">return</span> <span class="n">vrshrq_n_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span>                      <span class="c1">// 16 = 2⁴</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<p>
+    Subtracting one from a negative number has an annoying edge case: if the dividend is <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-65536,"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65536</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.144em; padding-bottom: 0.519em;">,</span></span></span></span></span></span> subtracting one
+    will wrap around to <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="65535,"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65535</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.144em; padding-bottom: 0.519em;">,</span></span></span></span></span></span> which is not what we want.<br>
+    The solution is to use a saturating subtraction, such that <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-65536 - 1 \mapsto -65536"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65536</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.372em;">↦</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65536</span></span></span></span></span></span>. Saturating intrinsics have
+    a <code>q</code> prefix.
+</p>
+<p>
+    To determine the sign of the dividend, we just extract the sign bit by shifting it 15 bits to the right. It's
+    important to use an unsigned bit shift, because a signed shift would sign extend the number after shifting,
+    resulting in <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xFFFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFFFF</span></span></span></span></span></span></span></span> instead of <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x0001}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x0001</span></span></span></span></span></span></span></span>.<br>
+    The sign bit is one if the number is negative, zero if it's positive or zero.
+</p>
+
+<h2><a name="dividing-by-255" href="#dividing-by-255">Dividing by 255</a></h2>
+
+<p>
+    When working with images, most data is represented by 8-bit bytes, as a value from 0 to 255. For example, when
+    alpha blending two images, you'll often need to multiply two 8-bit values together, and afterwards, you have to
+    re-normalize 16-bit products by dividing by 255.
+</p>
+
+<h3><a name="approximating-by-a-division-by-256" href="#approximating-by-a-division-by-256">Approximating by a division by 256</a></h3>
+<p>
+    As a first approximation, you could start by dividing by 256, because this is simply a right bit shift by 8, as
+    discussed above. To convert from the 16-bit product back to an 8-bit number, you can use a narrowing bit shift:
+</p>
+<div class="codesnippet"><style>.pygments142 .hll { background-color: #ffffcc }
+.pygments142  { background: #f8f8f8; }
+.pygments142 .c { color: #408080; font-style: italic } /* Comment */
+.pygments142 .err { border: 1px solid #FF0000 } /* Error */
+.pygments142 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments142 .o { color: #666666 } /* Operator */
+.pygments142 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments142 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments142 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments142 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments142 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments142 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments142 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments142 .ge { font-style: italic } /* Generic.Emph */
+.pygments142 .gr { color: #FF0000 } /* Generic.Error */
+.pygments142 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments142 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments142 .go { color: #888888 } /* Generic.Output */
+.pygments142 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments142 .gs { font-weight: bold } /* Generic.Strong */
+.pygments142 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments142 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments142 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments142 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments142 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments142 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments142 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments142 .kt { color: #B00040 } /* Keyword.Type */
+.pygments142 .m { color: #666666 } /* Literal.Number */
+.pygments142 .s { color: #BA2121 } /* Literal.String */
+.pygments142 .na { color: #7D9029 } /* Name.Attribute */
+.pygments142 .nb { color: #008000 } /* Name.Builtin */
+.pygments142 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments142 .no { color: #880000 } /* Name.Constant */
+.pygments142 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments142 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments142 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments142 .nf { color: #0000FF } /* Name.Function */
+.pygments142 .nl { color: #A0A000 } /* Name.Label */
+.pygments142 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments142 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments142 .nv { color: #19177C } /* Name.Variable */
+.pygments142 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments142 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments142 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments142 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments142 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments142 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments142 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments142 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments142 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments142 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments142 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments142 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments142 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments142 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments142 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments142 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments142 .sx { color: #008000 } /* Literal.String.Other */
+.pygments142 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments142 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments142 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments142 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments142 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments142 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments142 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments142 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments142 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments142 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments142 pre.snippet142 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_256_vector_narrow.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments142"><pre class="lineNumbers snippet142"><code><span></span><span class="n">uint8x8_t</span> <span class="nf">div_by_256</span><span class="p">(</span><span class="n">uint16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> </code>
+<code>    <span class="k">return</span> <span class="n">vshrn_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">8</span><span class="p">);</span> <span class="c1">// 256 = 2⁸</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<p>
+    Narrowing intrinsics have an <code>n</code> suffix. You can also realize a rounding division by using
+    <code>v<b>r</b>shrn_n_u16</code>.
+</p>
+<p>
+    The main problem with this approach is that it will produce a result that's one unit too low, about 50% of the
+    time. For example, blending white with white will result in really light gray, but not quite white
+    (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255\cdot 255/256 \approx 254.00 \not= 255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.004em; padding-bottom: 0.298em;">⋅</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">256</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.298em;">≈</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">254.00</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">≠</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span>). In this case, rounding won't help either.<br>
+    For most real-time applications, this is not an issue, and speed might be more important than perfect
+    accuracy.
+</p>
+
+<h3><a name="true-division-by-255" href="#true-division-by-255">True division by 255</a></h3>
+
+<h4><a name="flooring2" href="#flooring2">Flooring</a></h4>
+
+<p>
+    The divisor of <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span> can be approximated by the fraction
+    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x800000}/\texttt{0x8081} = 2^{23}/\texttt{0x8081} \approx 254.996"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x800000</span></span></span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8081</span></span></span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-msubsup MJXc-space3"><span class="mjx-base"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span class="mjx-texatom" style=""><span class="mjx-mrow"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">23</span></span></span></span></span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8081</span></span></span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.298em;">≈</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">254.996</span></span></span></span></span></span>.
+    This means that you can replace the division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span> by a multiplication by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x8081}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8081</span></span></span></span></span></span></span></span>, followed by a
+    right bit shift by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="23"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">23</span></span></span></span></span></span> bits.
+</p>
+<p>
+    The downside of this approach is that a 32-bit multiplication is required. NEON doesn't have any multiplication
+    instructions that return the high half of the product. It does have an instruction that can be used to extract
+    all high half-words from two vector registers and merge them into a single register, as a deinterleaving or
+    unzip operation.
+    This is equivalent with a right bitshift of 16 bits. The instruction is <code>uzp2</code>, we'll use the
+    <code>vuzp2q_u16</code> intrinsic.
+</p>
+<div class="codesnippet"><style>.pygments175 .hll { background-color: #ffffcc }
+.pygments175  { background: #f8f8f8; }
+.pygments175 .c { color: #408080; font-style: italic } /* Comment */
+.pygments175 .err { border: 1px solid #FF0000 } /* Error */
+.pygments175 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments175 .o { color: #666666 } /* Operator */
+.pygments175 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments175 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments175 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments175 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments175 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments175 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments175 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments175 .ge { font-style: italic } /* Generic.Emph */
+.pygments175 .gr { color: #FF0000 } /* Generic.Error */
+.pygments175 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments175 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments175 .go { color: #888888 } /* Generic.Output */
+.pygments175 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments175 .gs { font-weight: bold } /* Generic.Strong */
+.pygments175 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments175 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments175 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments175 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments175 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments175 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments175 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments175 .kt { color: #B00040 } /* Keyword.Type */
+.pygments175 .m { color: #666666 } /* Literal.Number */
+.pygments175 .s { color: #BA2121 } /* Literal.String */
+.pygments175 .na { color: #7D9029 } /* Name.Attribute */
+.pygments175 .nb { color: #008000 } /* Name.Builtin */
+.pygments175 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments175 .no { color: #880000 } /* Name.Constant */
+.pygments175 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments175 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments175 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments175 .nf { color: #0000FF } /* Name.Function */
+.pygments175 .nl { color: #A0A000 } /* Name.Label */
+.pygments175 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments175 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments175 .nv { color: #19177C } /* Name.Variable */
+.pygments175 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments175 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments175 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments175 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments175 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments175 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments175 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments175 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments175 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments175 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments175 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments175 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments175 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments175 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments175 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments175 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments175 .sx { color: #008000 } /* Literal.String.Other */
+.pygments175 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments175 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments175 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments175 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments175 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments175 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments175 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments175 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments175 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments175 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments175 pre.snippet175 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_255_vector.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments175"><pre class="lineNumbers snippet175"><code><span></span><span class="n">uint8x8_t</span> <span class="nf">div_by_255</span><span class="p">(</span><span class="n">uint16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="c1">// Multiply by 0x8081 as 32-bit integers (high and low words separately)</span></code>
+<code>    <span class="c1">// 0x800000/0x8081 ≃ 255</span></code>
+<code>    <span class="n">uint32x4_t</span> <span class="n">h</span> <span class="o">=</span> <span class="n">vmull_high_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mh">0x8081</span><span class="p">);</span></code>
+<code>    <span class="n">uint32x4_t</span> <span class="n">l</span> <span class="o">=</span> <span class="n">vmull_n_u16</span><span class="p">(</span><span class="n">vget_low_u16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mh">0x8081</span><span class="p">);</span></code>
+<code>    <span class="c1">// Extract the 16 high bits of all 32-bit products (division by 0x10000)</span></code>
+<code>    <span class="n">x</span> <span class="o">=</span> <span class="n">vuzp2q_u16</span><span class="p">(</span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">h</span><span class="p">));</span></code>
+<code>    <span class="c1">// Divide by 0x80 and narrow from 16 bits to 8 bits</span></code>
+<code>    <span class="k">return</span> <span class="n">vshrn_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<p>
+    The effect of the <code>uzp2</code> instruction is visualized in the following diagram. Each cell is a 16-bit
+    half-word.
+    The two rows on the left represent the two 128-bit vector registers containing the products of the four high and low
+    elements respectively (variables <code>h</code> and <code>l</code> in the code). Two 16-bit cells make up one of
+    the eight 32-bit products.
+</p>
+
+<style>
+    table.border {
+        border-collapse: collapse;
+        border-spacing: 0;
+        padding: 0.8em;
+    }
+
+    table.border td {
+        border: 1px solid black;
+        padding: 0.4em 0;
+        width: 2.1em;
+        text-align: center;
+    }
+
+    table.half td:nth-child(even) {
+        border-left: 1px dotted #aaa;
+    }
+
+    table.half td:nth-child(odd) {
+        border-right: none;
+    }
+
+    .flex_container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-flow: row wrap;
+    }
+</style>
+<div class="flex_container">
+    <table class="border half">
+        <tbody><tr>
+            <td>H<sub>7</sub></td>
+            <td>L<sub>7</sub></td>
+            <td>H<sub>6</sub>
+            </td><td>L<sub>6</sub></td>
+            <td>H<sub>5</sub></td>
+            <td>L<sub>5</sub></td>
+            <td>H<sub>4</sub>
+            </td><td>L<sub>4</sub></td>
+        </tr>
+        <tr>
+            <td>H<sub>3</sub></td>
+            <td>L<sub>3</sub></td>
+            <td>H<sub>2</sub>
+            </td><td>L<sub>3</sub></td>
+            <td>H<sub>1</sub></td>
+            <td>L<sub>1</sub></td>
+            <td>H<sub>0</sub>
+            </td><td>L<sub>0</sub></td>
+        </tr>
+    </tbody></table>
+    <div style="text-align: center; padding: 1em;">UZP2<br>→</div>
+    <table class="border">
+        <tbody><tr>
+            <td>H<sub>7</sub></td>
+            <td>H<sub>6</sub>
+            </td><td>H<sub>5</sub></td>
+            <td>H<sub>4</sub>
+            </td><td>H<sub>3</sub></td>
+            <td>H<sub>2</sub>
+            </td><td>H<sub>1</sub></td>
+            <td>H<sub>0</sub>
+        </td></tr>
+    </tbody></table>
+</div>
+<p>
+    <code><span style="border: 1px solid black; padding: 2px;">H<sub>7</sub> L<sub>7</sub></span> = x[7] * 0x8081</code>,
+    where <code>x[7]</code> is the seventh element of the input, 16 bits wide. <code>0x8081</code> is the constant
+    factor and is also 16 bits wide.
+    Their product will be 32 bits wide, it consists of a high half-word (<code>H<sub>7</sub></code>) and a low
+    half-word (<code>L<sub>7</sub></code>). The low half-words will be discarded by the unzip operation, effectively
+    dividing each product by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x10000}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x10000</span></span></span></span></span></span></span></span>.
+</p>
+<p>
+    For this unzip operation to work, the vector registers have to be interpreted as 8×16-bit values (even though they
+    actually contain 4×32-bit values).
+</p>
+<p>
+    Finally, the 16-bit high half-words of the products are narrowed to 8-bit bytes, while shifting them another 7 bits
+    to the right for the final division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x80}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x80</span></span></span></span></span></span></span></span>.
+</p>
+<p>
+    The result is exact for all possible values of <code>x</code>.
+</p>
+
+<h4><a name="rounding2" href="#rounding2">Rounding</a></h4>
+
+<p>
+    It is tempting to just replace the final shift (<code>vshrn_n_u16</code>) with a rounding shift
+    (<code>vrshrn_n_u16</code>), in an attempt to implement a rounding division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span>.
+    Unfortunately, this doesn't work, because rounding the final division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="128"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">128</span></span></span></span></span></span> is not the same as rounding the
+    original division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span>. For some inputs, the output will be one unit too low.
+    It is a pretty good approximation though, producing an incorrect result for only 127 out of all 65536 possible input
+    values (it is correct in <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="99.806\%"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">99.806</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.372em;">%</span></span></span></span></span></span> of the cases, with an error of either 0 or -1).
+</p>
+<p>
+    The correct solution is to add the rounding constant <i>before</i> the multiplication. However, we're adding a
+    rounding constant of <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="128 = 256/2"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">128</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">256</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span></span></span></span>, while in theory, we should be using <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="127.5 = 255/2"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">127.5</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span></span></span></span>. It turns out that this
+    error of <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="0.5"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">0.5</span></span></span></span></span></span> can be compensated by changing the factor in the next step from <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x8081}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8081</span></span></span></span></span></span></span></span> to
+    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x8080}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8080</span></span></span></span></span></span></span></span>.
+</p>
+<div class="codesnippet"><style>.pygments288 .hll { background-color: #ffffcc }
+.pygments288  { background: #f8f8f8; }
+.pygments288 .c { color: #408080; font-style: italic } /* Comment */
+.pygments288 .err { border: 1px solid #FF0000 } /* Error */
+.pygments288 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments288 .o { color: #666666 } /* Operator */
+.pygments288 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments288 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments288 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments288 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments288 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments288 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments288 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments288 .ge { font-style: italic } /* Generic.Emph */
+.pygments288 .gr { color: #FF0000 } /* Generic.Error */
+.pygments288 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments288 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments288 .go { color: #888888 } /* Generic.Output */
+.pygments288 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments288 .gs { font-weight: bold } /* Generic.Strong */
+.pygments288 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments288 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments288 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments288 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments288 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments288 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments288 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments288 .kt { color: #B00040 } /* Keyword.Type */
+.pygments288 .m { color: #666666 } /* Literal.Number */
+.pygments288 .s { color: #BA2121 } /* Literal.String */
+.pygments288 .na { color: #7D9029 } /* Name.Attribute */
+.pygments288 .nb { color: #008000 } /* Name.Builtin */
+.pygments288 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments288 .no { color: #880000 } /* Name.Constant */
+.pygments288 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments288 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments288 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments288 .nf { color: #0000FF } /* Name.Function */
+.pygments288 .nl { color: #A0A000 } /* Name.Label */
+.pygments288 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments288 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments288 .nv { color: #19177C } /* Name.Variable */
+.pygments288 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments288 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments288 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments288 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments288 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments288 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments288 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments288 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments288 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments288 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments288 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments288 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments288 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments288 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments288 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments288 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments288 .sx { color: #008000 } /* Literal.String.Other */
+.pygments288 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments288 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments288 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments288 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments288 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments288 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments288 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments288 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments288 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments288 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments288 pre.snippet288 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_255_vector_round.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments288"><pre class="lineNumbers snippet288"><code><span></span><span class="n">uint8x8_t</span> <span class="nf">div_by_255_round</span><span class="p">(</span><span class="n">uint16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="c1">// Add the rounding constant</span></code>
+<code>    <span class="n">x</span> <span class="o">=</span> <span class="n">vaddq_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vdupq_n_u16</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span><span class="p">));</span></code>
+<code>    <span class="c1">// Multiply by 0x8080 as 32-bit integers (high and low words separately)</span></code>
+<code>    <span class="n">uint32x4_t</span> <span class="n">h</span> <span class="o">=</span> <span class="n">vmull_high_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mh">0x8080</span><span class="p">);</span></code>
+<code>    <span class="n">uint32x4_t</span> <span class="n">l</span> <span class="o">=</span> <span class="n">vmull_n_u16</span><span class="p">(</span><span class="n">vget_low_u16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mh">0x8080</span><span class="p">);</span></code>
+<code>    <span class="c1">// Extract the 16 high bits of all 32-bit products (division by 0x10000)</span></code>
+<code>    <span class="n">x</span> <span class="o">=</span> <span class="n">vuzp2q_u16</span><span class="p">(</span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">l</span><span class="p">),</span> <span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">h</span><span class="p">));</span></code>
+<code>    <span class="c1">// Divide by 0x80 and narrow from 16 bits to 8 bits</span></code>
+<code>    <span class="k">return</span> <span class="n">vshrn_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">7</span><span class="p">);</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<p>
+    The result of this function is correct as long as the addition of the rounding constant doesn't cause overflow. This
+    condition is satisfied if the input is less than <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="2^{16} - 128 = 65408"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span class="mjx-texatom" style=""><span class="mjx-mrow"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span></span></span></span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">128</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65408</span></span></span></span></span></span>. Luckily, in this case, the result would
+    be meaningless anyway, because the quotient would be too large to fit an 8-bit byte (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="65408/255 \approx 256.5 >
+    255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65408</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.298em;">≈</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">256.5</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.372em;">&gt;</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span>).
+</p>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="NEON">Index</a></div><div class="nextpage"></div></div>
+    </article>
+    <footer>Last edited: Wednesday, 29 April 2020 00:14 UTC</footer>
+
+
+</body></html>

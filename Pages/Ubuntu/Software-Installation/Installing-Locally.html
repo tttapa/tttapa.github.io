@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
+    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
+            disabled: true
+            }
+        });
+    </script>
+    <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="Install,locally,home/.local,local,build,source,Ubuntu,Installation"/>
+    <meta name="description" content="Information about installing packages locally, in <code>~/.local</code>."/>
+    <title>Installing Locally</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/">Home</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/C++-Development/index.html">C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/index.html">Mathematics</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Ubuntu</a>
+    <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a href="Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="openEntry" href="Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a href="BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a href="Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a href="Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a href="Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a href="VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Installing-Locally.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article">print</a>
+            </i>
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Installing Locally</h1>
+        <i class="author">Pieter P</i>
+        <div>
+
+<p>
+    When installing packages locally, you might have to set up some paths. It's easiest to just add them to your
+    <code>~/.profile</code> file.
+</p>
+
+<h4 class="snippet-name"><a name="-profile" href="#-profile">.profile</a></h4>
+<div class="codesnippet"><style>.pygments17 .hll { background-color: #ffffcc }
+.pygments17  { background: #f8f8f8; }
+.pygments17 .c { color: #408080; font-style: italic } /* Comment */
+.pygments17 .err { border: 1px solid #FF0000 } /* Error */
+.pygments17 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments17 .o { color: #666666 } /* Operator */
+.pygments17 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments17 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments17 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments17 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments17 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments17 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments17 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments17 .ge { font-style: italic } /* Generic.Emph */
+.pygments17 .gr { color: #FF0000 } /* Generic.Error */
+.pygments17 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments17 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments17 .go { color: #888888 } /* Generic.Output */
+.pygments17 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments17 .gs { font-weight: bold } /* Generic.Strong */
+.pygments17 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments17 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments17 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments17 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments17 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments17 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments17 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments17 .kt { color: #B00040 } /* Keyword.Type */
+.pygments17 .m { color: #666666 } /* Literal.Number */
+.pygments17 .s { color: #BA2121 } /* Literal.String */
+.pygments17 .na { color: #7D9029 } /* Name.Attribute */
+.pygments17 .nb { color: #008000 } /* Name.Builtin */
+.pygments17 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments17 .no { color: #880000 } /* Name.Constant */
+.pygments17 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments17 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments17 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments17 .nf { color: #0000FF } /* Name.Function */
+.pygments17 .nl { color: #A0A000 } /* Name.Label */
+.pygments17 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments17 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments17 .nv { color: #19177C } /* Name.Variable */
+.pygments17 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments17 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments17 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments17 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments17 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments17 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments17 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments17 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments17 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments17 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments17 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments17 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments17 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments17 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments17 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments17 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments17 .sx { color: #008000 } /* Literal.String.Other */
+.pygments17 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments17 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments17 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments17 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments17 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments17 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments17 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments17 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments17 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments17 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments17 pre.snippet17 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Ubuntu/Software-Installation/resources/.profile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments17"><pre class="lineNumbers snippet17"><code><span></span><span class="c1"># set PATH so it includes user&#39;s private bin if it exists</span></code>
+<code><span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/bin&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span></code>
+<code>    <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span></code>
+<code><span class="k">fi</span></code>
+<code><span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/bin&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span></code>
+<code>    <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span></code>
+<code><span class="k">fi</span></code>
+<code><span class="nb">export</span> PATH</code>
+<code></code>
+<code><span class="c1"># set MANPATH so it includes user&#39;s private man if it exists</span></code>
+<code><span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/man&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span></code>
+<code>    <span class="nv">MANPATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/man:&quot;</span></code>
+<code><span class="k">fi</span></code>
+<code><span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/share/man&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span></code>
+<code>    <span class="nv">MANPATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/share/man:</span><span class="nv">$MANPATH</span><span class="s2">&quot;</span></code>
+<code><span class="k">fi</span></code>
+<code><span class="nb">export</span> MANPATH</code>
+<code></code>
+<code><span class="c1"># set PKG_CONFIG_PATH so it includes user&#39;s private pkgconfig if it exists</span></code>
+<code><span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/lib/pkgconfig&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span></code>
+<code>    <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/lib/pkgconfig:</span><span class="nv">$PKG_CONFIG_PATH</span><span class="s2">&quot;</span></code>
+<code><span class="k">fi</span></code>
+<code><span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/share/pkgconfig&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span></code>
+<code>    <span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local/share/pkgconfig:</span><span class="nv">$PKG_CONFIG_PATH</span><span class="s2">&quot;</span></code>
+<code><span class="k">fi</span></code>
+<code><span class="nb">export</span> PKG_CONFIG_PATH</code>
+<code></code>
+<code><span class="c1"># set CMAKE_PREFIX_PATH so it includes user&#39;s private prefix if it exists</span></code>
+<code><span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local&quot;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span></code>
+<code>    <span class="nv">CMAKE_PREFIX_PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local:</span><span class="nv">$CMAKE_PREFIX_PATH</span><span class="s2">&quot;</span></code>
+<code><span class="k">fi</span></code>
+<code><span class="nb">export</span> CMAKE_PREFIX_PATH</code></pre></div>
+</div>
+
+<p>
+    The <code>PATH</code> variable specifies the search path where your system looks for executables and binaries.<br>
+    <a
+        href="https://help.ubuntu.com/community/EnvironmentVariables#Persistent_environment_variables">https://help.ubuntu.com/community/EnvironmentVariables</a>
+</p>
+<p>
+    The <code>MANPATH</code> variables specifies the directories that contain documentation for the <code>man</code>
+    command.<br>
+    <a
+        href="http://manpages.ubuntu.com/manpages/focal/en/man1/manpath.1.html#environment">http://manpages.ubuntu.com/manpages/focal/en/man1/manpath.1.html</a>
+</p>
+<p>
+    The <code>PKG_CONFIG_PATH</code> variable allows the <code>pkg-config</code> tool to find locally installed
+    libraries.<br>
+    <a
+        href="http://manpages.ubuntu.com/manpages/focal/en/man1/pkg-config.1.html#environment%20variables">http://manpages.ubuntu.com/manpages/focal/en/man1/pkg-config.1.html</a>
+</p>
+<p>
+    The <code>CMAKE_PREFIX_PATH</code> variable allows CMake to find locally installed libraries and tools.<br>
+    <a
+        href="https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html">https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html</a>
+</p>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"></div>
+    </article>
+    <footer>Last edited: Tuesday, 28 April 2020 11:21 UTC</footer>
+</body>
+
+</html>

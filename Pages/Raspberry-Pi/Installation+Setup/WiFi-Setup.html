@@ -52,6 +52,11 @@
             <li><span class="ftriangle"></span><a href="../C++-Development/Speedrun.html">Speedrun</a></li>
         </ul>
         </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
     </ul>
     </li>
     <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/index.html">Arduino</a>
@@ -146,9 +151,11 @@
                 <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
             </ul>
             </li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Java.html">Java</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Python.html">Python</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
@@ -168,7 +175,7 @@
                 <a href="javascript:window.print()" title="Print this article">print</a>
             </i>
             <i class="material-icons">
-                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">report</a>
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
             </i>
         </div>
     </nav>
@@ -206,7 +213,7 @@
 </style>
 
 <p>
-    Ubuntu Server 18.04 uses <a href="https://netplan.io/">Netplan</a> to configure the network interfaces.
+    Ubuntu Server uses <a href="https://netplan.io/">Netplan</a> to configure the network interfaces.
     This page contains a simple configuration file to get the Raspberry Pi connected to a WiFi network.<br>
     For the full documentation and more advanced configurations, I'll refer to the
     <a href="https://netplan.io/reference">Netplan reference</a>.
@@ -245,10 +252,9 @@
 </p>
 <h4><a name="disabling-cloud-init" href="#disabling-cloud-init">Disabling Cloud Init</a></h4>
 <p>
-    By default, Ubuntu uses Cloud Init to automatically configure the network.
-    This is useful when installing it on a server that you don't have physical
-    access to, but we want to configure the network ourselves here, so we'll
-    disable it:
+    By default, Ubuntu Server uses Cloud Init to automatically configure the network.
+    This is useful when installing it on a server that you don't have physical access to, but we want to configure the
+    network ourselves here, so we'll disable it:
     <pre
         class="console pi"><code>sudo bash -c "echo 'network: {config: disabled}' > /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"</code></pre>
 </p>
@@ -259,78 +265,78 @@
     If you just want a simple WiFi and Ethernet configuration, you can use the following:
 </p>
 <h4 class="snippet-name"><a name="10-my-config-yaml" href="#10-my-config-yaml">10-my-config.yaml</a></h4>
-<div class="codesnippet"><style>.pygments74 .hll { background-color: #ffffcc }
-.pygments74  { background: #f8f8f8; }
-.pygments74 .c { color: #408080; font-style: italic } /* Comment */
-.pygments74 .err { border: 1px solid #FF0000 } /* Error */
-.pygments74 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments74 .o { color: #666666 } /* Operator */
-.pygments74 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments74 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments74 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments74 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments74 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments74 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments74 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments74 .ge { font-style: italic } /* Generic.Emph */
-.pygments74 .gr { color: #FF0000 } /* Generic.Error */
-.pygments74 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments74 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments74 .go { color: #888888 } /* Generic.Output */
-.pygments74 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments74 .gs { font-weight: bold } /* Generic.Strong */
-.pygments74 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments74 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments74 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments74 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments74 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments74 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments74 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments74 .kt { color: #B00040 } /* Keyword.Type */
-.pygments74 .m { color: #666666 } /* Literal.Number */
-.pygments74 .s { color: #BA2121 } /* Literal.String */
-.pygments74 .na { color: #7D9029 } /* Name.Attribute */
-.pygments74 .nb { color: #008000 } /* Name.Builtin */
-.pygments74 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments74 .no { color: #880000 } /* Name.Constant */
-.pygments74 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments74 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments74 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments74 .nf { color: #0000FF } /* Name.Function */
-.pygments74 .nl { color: #A0A000 } /* Name.Label */
-.pygments74 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments74 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments74 .nv { color: #19177C } /* Name.Variable */
-.pygments74 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments74 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments74 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments74 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments74 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments74 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments74 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments74 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments74 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments74 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments74 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments74 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments74 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments74 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments74 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments74 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments74 .sx { color: #008000 } /* Literal.String.Other */
-.pygments74 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments74 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments74 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments74 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments74 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments74 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments74 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments74 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments74 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments74 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments74 pre.snippet74 { counter-reset: line 0; }</style>
+<div class="codesnippet"><style>.pygments73 .hll { background-color: #ffffcc }
+.pygments73  { background: #f8f8f8; }
+.pygments73 .c { color: #408080; font-style: italic } /* Comment */
+.pygments73 .err { border: 1px solid #FF0000 } /* Error */
+.pygments73 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments73 .o { color: #666666 } /* Operator */
+.pygments73 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments73 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments73 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments73 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments73 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments73 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments73 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments73 .ge { font-style: italic } /* Generic.Emph */
+.pygments73 .gr { color: #FF0000 } /* Generic.Error */
+.pygments73 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments73 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments73 .go { color: #888888 } /* Generic.Output */
+.pygments73 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments73 .gs { font-weight: bold } /* Generic.Strong */
+.pygments73 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments73 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments73 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments73 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments73 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments73 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments73 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments73 .kt { color: #B00040 } /* Keyword.Type */
+.pygments73 .m { color: #666666 } /* Literal.Number */
+.pygments73 .s { color: #BA2121 } /* Literal.String */
+.pygments73 .na { color: #7D9029 } /* Name.Attribute */
+.pygments73 .nb { color: #008000 } /* Name.Builtin */
+.pygments73 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments73 .no { color: #880000 } /* Name.Constant */
+.pygments73 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments73 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments73 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments73 .nf { color: #0000FF } /* Name.Function */
+.pygments73 .nl { color: #A0A000 } /* Name.Label */
+.pygments73 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments73 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments73 .nv { color: #19177C } /* Name.Variable */
+.pygments73 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments73 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments73 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments73 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments73 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments73 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments73 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments73 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments73 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments73 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments73 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments73 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments73 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments73 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments73 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments73 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments73 .sx { color: #008000 } /* Literal.String.Other */
+.pygments73 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments73 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments73 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments73 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments73 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments73 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments73 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments73 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments73 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments73 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments73 pre.snippet73 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/Installation+Setup/resources/10-my-config.yaml" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments74"><pre class="lineNumbers snippet74"><code><span></span><span class="nt">network</span><span class="p">:</span></code>
+<div class="pygments73"><pre class="lineNumbers snippet73"><code><span></span><span class="nt">network</span><span class="p">:</span></code>
 <code>  <span class="nt">version</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span></code>
 <code>  <span class="nt">ethernets</span><span class="p">:</span></code>
 <code>    <span class="nt">eth0</span><span class="p">:</span></code>
@@ -358,27 +364,27 @@
 
 <p>
     If you can't reach the Pi's console, because you have no Ethernet connection
-    and if you can't connect to the serial port either, you can configure the 
+    and if you can't connect to the serial port either, you can configure the
     network by editing the files on the SD card.
 </p>
 <p>
-    Mount the <code>writable</code> partition of the SD card on your computer, 
-    and follow the same steps as in the case where you do have access to the 
+    Mount the <code>writable</code> partition of the SD card on your computer,
+    and follow the same steps as in the case where you do have access to the
     console.
 </p>
 <pre class="console"><code>sudo bash -c "echo 'network: {config: disabled}' > /media/$USER/writable/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"</code>
 <code>sudo nano /media/$USER/writable/etc/netplan/10-my-config.yaml</code></pre>
 <p>
     Now close the terminal, and safely remove the SD card. You don't have to run
-    any <code>netplan</code> commands, the configuration will be applied 
+    any <code>netplan</code> commands, the configuration will be applied
     automatically when you boot the Pi.
 </p>
 
 </div>
         <hr id="end-of-article">
-        <div class="nextupprev"><div class="prevpage"><a href="Setting-up-Ubuntu.html" title="Installing and Setting up Ubuntu">ᐊ Previous Page</a></div><div class="uppage"><a href="index.html" title="Installation and Setup">Index</a></div><div class="nextpage"></div></div>
+        <div class="nextupprev"><div class="prevpage"><a href="Setting-up-Ubuntu.html" title="Installing and Setting up Ubuntu"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Installation and Setup">Index</a></div><div class="nextpage"></div></div>
     </article>
-    <footer>Last edited: Monday, 16 March 2020 22:30 UTC</footer>
+    <footer>Last edited: Saturday, 25 April 2020 13:01 UTC</footer>
 </body>
 
 </html>
