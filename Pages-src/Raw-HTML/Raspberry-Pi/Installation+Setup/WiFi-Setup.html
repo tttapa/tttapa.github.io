@@ -19,7 +19,7 @@
 </style>
 
 <p>
-    Ubuntu Server 18.04 uses <a href="https://netplan.io/">Netplan</a> to configure the network interfaces.
+    Ubuntu Server uses <a href="https://netplan.io/">Netplan</a> to configure the network interfaces.
     This page contains a simple configuration file to get the Raspberry Pi connected to a WiFi network.<br>
     For the full documentation and more advanced configurations, I'll refer to the
     <a href="https://netplan.io/reference">Netplan reference</a>.
@@ -58,10 +58,9 @@
 </p>
 <h4>Disabling Cloud Init</h4>
 <p>
-    By default, Ubuntu uses Cloud Init to automatically configure the network.
-    This is useful when installing it on a server that you don't have physical
-    access to, but we want to configure the network ourselves here, so we'll
-    disable it:
+    By default, Ubuntu Server uses Cloud Init to automatically configure the network.
+    This is useful when installing it on a server that you don't have physical access to, but we want to configure the
+    network ourselves here, so we'll disable it:
     <pre
         class="console pi"><code>sudo bash -c "echo 'network: {config: disabled}' > /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"</code></pre>
 </p>
@@ -72,8 +71,8 @@
     If you just want a simple WiFi and Ethernet configuration, you can use the following:
 </p>
 @codesnippet{
-    "name": "10-my-config.yaml",
-    "file": "resources/10-my-config.yaml"
+"name": "10-my-config.yaml",
+"file": "resources/10-my-config.yaml"
 }
 <p>
     Be sure to fill in your WiFi network details, and then use <code>Ctrl+X</code> to exit. Answer <code>y</code> to the
@@ -89,19 +88,19 @@
 
 <p>
     If you can't reach the Pi's console, because you have no Ethernet connection
-    and if you can't connect to the serial port either, you can configure the 
+    and if you can't connect to the serial port either, you can configure the
     network by editing the files on the SD card.
 </p>
 <p>
-    Mount the <code>writable</code> partition of the SD card on your computer, 
-    and follow the same steps as in the case where you do have access to the 
+    Mount the <code>writable</code> partition of the SD card on your computer,
+    and follow the same steps as in the case where you do have access to the
     console.
 </p>
 <pre class="console"><code>sudo bash -c "echo 'network: {config: disabled}' > /media/$USER/writable/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg"</code>
 <code>sudo nano /media/$USER/writable/etc/netplan/10-my-config.yaml</code></pre>
 <p>
     Now close the terminal, and safely remove the SD card. You don't have to run
-    any <code>netplan</code> commands, the configuration will be applied 
+    any <code>netplan</code> commands, the configuration will be applied
     automatically when you boot the Pi.
 </p>
 

@@ -42,6 +42,7 @@ using file_time_t = std::filesystem::file_time_type;
 class PagesParser {
   public:
     struct Page {
+        bool is_folder = false;
         string_map metadata;
         string html;
         unsigned int lineno; ///< line number where <html> starts
@@ -94,6 +95,7 @@ class PagesParser {
         vector<Page> pages;
         vector<PageDirectory> subdirectories;
         vector<path> resources;
+        PageDirectory() { is_folder = true; }
     };
 
     enum Task {
@@ -419,7 +421,9 @@ class PagesParser {
             res += page.previous->rel_path.filename();
             res += R"(" title=")";
             res += page.previous->getTitle();
-            res += R"(">ᐊ Previous Page</a>)";
+            res += R"("><i class="material-icons")"
+                   R"( style="vertical-align: middle; text-decoration: none">)"
+                   R"(chevron_left </i>Previous Page</a>)";
         }
         res += R"(</div>)";
         res += R"(<div class="uppage">)";
@@ -437,14 +441,18 @@ class PagesParser {
             res += page.next->rel_path.filename();
             res += R"(" title=")";
             res += page.next->getTitle();
-            res += R"(">Next Page ᐅ</a>)";
+            res += R"(">Next Page)"
+                   R"(<i class="material-icons")"
+                   R"( style="vertical-align: middle; text-decoration: none">)"
+                   R"( chevron_right</i></a>)";
         }
         res += R"(</div>)";
         return res;
     }
 
     string generateIndexItem(const Page &page, const path &root) {
-        string item = index_item_template;
+        string item = page.is_folder ? index_item_folder_template //
+                                     : index_item_template;
         replace(item, ":title:", page.getTitle());
         replace(item, ":link:", fs::relative(page.rel_path, root));
         replace(item, ":description:", page.getDescription());
@@ -532,6 +540,8 @@ class PagesParser {
         index_template = read_file(template_dir / "template_index.html");
         index_item_template =
             read_file(template_dir / "template_index_item.html");
+        index_item_folder_template =
+            read_file(template_dir / "template_index_item_folder.html");
     }
 
     static string read_file(path filename) {
@@ -731,6 +741,7 @@ class PagesParser {
     string page_template;
     string index_template;
     string index_item_template;
+    string index_item_folder_template;
 };
 
 path source_dir = "/home/pieter/GitHub/tttapa.github.io/Pages-src/Raw-HTML";

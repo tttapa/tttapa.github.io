@@ -5,7 +5,7 @@
 @shownextupprevpage: true
 @tableofcontents: false
 @keywords:
-@description: Installing Ubuntu Server 18.04 on the Raspberry Pi 3B+
+@description: Installing Ubuntu Server 20.04 on the Raspberry Pi 3B+
               and configuring it so you can easily find it on your network 
               using mDNS, and so you can easily connect to it over SSH.
 -->
@@ -28,14 +28,14 @@
 <ol>
     <li>
         Download the Ubuntu Server image from <a
-            href="https://ubuntu.com/download/iot/raspberry-pi-2-3">https://ubuntu.com/download/iot/raspberry-pi-2-3</a>
+            href="https://ubuntu.com/download/raspberry-pi">https://ubuntu.com/download/raspberry-pi</a>
         <pre
-            class="console"><code>wget -P /tmp/ http://cdimage.ubuntu.com/releases/bionic/release/ubuntu-18.04.3-preinstalled-server-arm64+raspi3.img.xz</code></pre>
+            class="console"><code>wget -P /tmp/ http://cdimage.ubuntu.com/releases/focal/release/ubuntu-20.04-preinstalled-server-arm64+raspi.img.xz</code></pre>
     </li>
     <li>
         Then write the disk image to your SD card
         <pre
-            class="console"><code>xzcat /tmp/ubuntu-18.04.3-preinstalled-server-arm64+raspi3.img.xz | sudo dd of=/dev/mmcblk0 bs=32M</code></pre>
+            class="console"><code>xzcat /tmp/ubuntu-20.04-preinstalled-server-arm64+raspi.img.xz | sudo dd of=/dev/mmcblk0 bs=32M</code></pre>
         Be careful when using <code>dd</code>, if you specify the wrong output (<code>of=...</code>), it'll overwrite
         everything on that device, so it's easy to accidentally destroy your computer.
     </li>
@@ -46,16 +46,19 @@
     </li>
     <li>
         Use your favorite method to find its IP address. You can find it in your router's settings, with an app like
-        Fing, or by using a command line tool like <code>nmap</code>.
+        Fing, or by using a command line tool like <code>nmap</code>. If you have a router that automatically adds the
+        hostnames of the devices on the local network to its IP records, you might be able to just use the hostname
+        <code>ubuntu</code>, without needing to find its IP address manually.
     </li>
     <li>
         Connect to the Raspberry Pi over SSH
-        <pre class="console"><code>ssh ubuntu@192.168.1.100</code></pre>
+        <pre class="console"><code>ssh ubuntu@192.168.1.100</code>
+<code>ssh ubuntu@ubuntu # if you have a smart DNS server in your router</code></pre>
         Replace the IP address with the one you found in the previous step. <br>
         You'll be prompted a password, the default one is <code>ubuntu</code>.
     </li>
     <li>
-        Follow the instructions to change the default password and connect again.
+        Follow the instructions to change the default password and connect again with the new password.
     </li>
 </ol>
 
@@ -91,13 +94,23 @@ EOF</code></pre>
         <pre class="console"><code>ssh-copy-id -i ~/.ssh/id_rsa.pub RPi3</code></pre>
         If you don't have an SSH key pair yet, you can follow these instructions on how
         to create one:
-        <a
-            href="https://www.digitalocean.com/community/tutorial_collections/7">DigitalOcean - How to Set Up SSH Keys</a>.
+        <a href="https://www.digitalocean.com/community/tutorial_collections/7">DigitalOcean - How to Set Up SSH
+            Keys</a>.
     </li>
     <li>
         You can now try to connect to it without having to specify the hostname
         or username, and without having to enter your password:
         <pre class="console"><code>ssh RPi3</code></pre>
+    </li>
+    <li>
+        For security reasons, it's a good idea to disallow password login. Edit the <code>/etc/ssh/sshd_config</code>
+        file:
+        <pre class="console pi"><code>sudo nano /etc/ssh/sshd_config</code></pre>
+        Locate the line <code>PasswordAuthentication yes</code>, and replace it with
+        <code>PasswordAuthentication no</code>. Then save the file and exit the editor using <code>Ctrl+X</code>. <br>
+        Finally, restart the SSH server to apply the settings:
+        <pre class="console pi"><code>sudo service ssh restart</code></pre>
+        Now you'll only be able to log into the Pi using the SSH key we installed in step 7.
     </li>
 </ol>
 

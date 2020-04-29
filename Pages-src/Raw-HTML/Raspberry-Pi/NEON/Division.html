@@ -1,0 +1,298 @@
+<!--
+@title: Division
+@sequence: 10
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: Division,NEON,integer,power of two,signed,unsigned,255,shift
+@description: Snippets for dividing integers using NEON.
+-->
+<html>
+
+<p>
+    NEON doesn't have any integer division instructions, because they are expensive to implement in hardware. Luckily,
+    you can often replace divisions by other instructions, like bit shifts and multiplications.
+</p>
+
+<h2>Dividing by powers of two</h2>
+
+<h3>Unsigned integers</h3>
+
+<h4>Flooring</h4>
+
+<p>
+    To divide an unsigned integer by \(2^k\), you can just use a bit shift by \(k\) bits to the right.
+</p>
+
+@codesnippet{
+"file": "resources/div_by_16_unsigned.cpp"
+}
+
+<p>
+    Of course, any half-decent compiler will produce the same instructions for both of the functions above, so it's much
+    better to write <code>x&nbsp;/&nbsp;16</code>, because it clearly shows your intent.
+</p>
+
+<p>
+    To write the same division for NEON, you can use the <code>vshr_n_u16</code> intrinsic:
+</p>
+@codesnippet{
+"file": "resources/div_by_16_unsigned_vector.cpp"
+}
+<p>
+    The name is derived from <u>v</u>ector <u>sh</u>ift <u>r</u>ight, <code>n</code> indicates a fixed number of bits is
+    used, and <code>u16</code> is the type of elements in the vector (16-bit unsigned integers in this example).<br>
+    There are two versions, the one without the <code>q</code> suffix operates on double-word vector registers (2×32
+    bits), and the one with the <code>q</code> suffix operates on quad-word vector registers (4×32 bits).
+</p>
+
+<h4>Rounding</h4>
+
+<p>
+    NEON also has instructions for rounding right shifts, for example, <code>vrshr_n_u16</code> (note the <code>r</code>
+    prefix):
+</p>
+@codesnippet{
+"file": "resources/div_by_16_unsigned_vector_round.cpp"
+}
+
+<h3>Signed integers</h3>
+
+<h4>Flooring</h4>
+
+<p>
+    Dividing signed integers by a power of two is a little bit trickier than dividing unsigned integers, because you
+    cannot simply use a bit shift.
+    Consider \(-7 / 16\) as an example: you would expect the result to be \(0\). However, \(-7 \gg 4\) turns out to be
+    \(-1\).
+</p>
+<p>
+    To get around this problem, you have to add the divisor minus one if the dividend is negative:
+</p>
+@codesnippet{
+"file": "resources/div_by_16_signed.cpp"
+}
+
+<p>
+    NEON doesn't have any conditional instructions, but it does have compare instructions that can be used to generate
+    a mask.
+    The compare instructions return either all zeros (\(\texttt{0x0000}\)) or all ones (\(\texttt{0xFFFF}\)), so by
+    using a bitwise AND, they can be used to conditionally enable or disable the correction term.
+</p>
+@codesnippet{
+"file": "resources/div_by_16_signed_vector.cpp"
+}
+<p>
+    In this snippet, <code>vdupq_n_s16</code> is used to duplicate a single value across all lanes of a vector register.
+    Sadly, we cannot use the correction (\(16-1\)) as an immediate argument to the AND instruction, because you can only
+    set one of the bytes of the immediate value at a time. The other byte is always implicitly \(\texttt{0xFF}\). In
+    other words, the only possible immediate operands to AND for 16-bit numbers are \(\texttt{0xFFXY}\) and
+    \(\texttt{0xXYFF}\). <br>
+    \(16-1 = \texttt{0x000F}\) doesn't fit this pattern. However, \(1-16 = \texttt{0xFFF1}\) does. By replacing the
+    addition of 15 by a subtraction of -15, we can save one move instruction (<code>vdupq_n_s16</code>), and use an
+    immediate AND instruction instead.
+</p>
+@codesnippet{
+"file": "resources/div_by_16_signed_vector_immediate.cpp"
+}
+<p>
+    There is no actual AND instruction, the BIC (bit clear) instruction is used instead. There's no intrinsic for it, so
+    we had to add a line of inline assembly.
+</p>
+<p>
+    This trick will only work for divisors less than or equal to 256, since the immediate field of the BIC instruction
+    is only 8 bits wide. For divisors 512 and larger, the correction term will be 9 bits or more.
+</p>
+
+<h4>Rounding</h4>
+
+<p>
+    For the rounding division by a power of two, we'll again use the rounding right shift. If the dividend is negative,
+    we still need a correction. This time we just have to subtract one as a correction.
+</p>
+@codesnippet{
+"file": "resources/div_by_16_signed_vector_round.cpp"
+}
+<p>
+    Subtracting one from a negative number has an annoying edge case: if the dividend is \(-65536,\) subtracting one
+    will wrap around to \(65535,\) which is not what we want.<br>
+    The solution is to use a saturating subtraction, such that \(-65536 - 1 \mapsto -65536\). Saturating intrinsics have
+    a <code>q</code> prefix.
+</p>
+<p>
+    To determine the sign of the dividend, we just extract the sign bit by shifting it 15 bits to the right. It's
+    important to use an unsigned bit shift, because a signed shift would sign extend the number after shifting,
+    resulting in \(\texttt{0xFFFF}\) instead of \(\texttt{0x0001}\).<br>
+    The sign bit is one if the number is negative, zero if it's positive or zero.
+</p>
+
+<h2>Dividing by 255</h2>
+
+<p>
+    When working with images, most data is represented by 8-bit bytes, as a value from 0 to 255. For example, when
+    alpha blending two images, you'll often need to multiply two 8-bit values together, and afterwards, you have to
+    re-normalize 16-bit products by dividing by 255.
+</p>
+
+<h3>Approximating by a division by 256</h3>
+<p>
+    As a first approximation, you could start by dividing by 256, because this is simply a right bit shift by 8, as
+    discussed above. To convert from the 16-bit product back to an 8-bit number, you can use a narrowing bit shift:
+</p>
+@codesnippet{
+"file": "resources/div_by_256_vector_narrow.cpp"
+}
+<p>
+    Narrowing intrinsics have an <code>n</code> suffix. You can also realize a rounding division by using
+    <code>v<b>r</b>shrn_n_u16</code>.
+</p>
+<p>
+    The main problem with this approach is that it will produce a result that's one unit too low, about 50% of the
+    time. For example, blending white with white will result in really light gray, but not quite white
+    (\(255\cdot 255/256 \approx 254.00 \not= 255\)). In this case, rounding won't help either.<br>
+    For most real-time applications, this is not an issue, and speed might be more important than perfect
+    accuracy.
+</p>
+
+<h3>True division by 255</h3>
+
+<h4>Flooring</h4>
+
+<p>
+    The divisor of \(255\) can be approximated by the fraction
+    \(\texttt{0x800000}/\texttt{0x8081} = 2^{23}/\texttt{0x8081} \approx 254.996\).
+    This means that you can replace the division by \(255\) by a multiplication by \(\texttt{0x8081}\), followed by a
+    right bit shift by \(23\) bits.
+</p>
+<p>
+    The downside of this approach is that a 32-bit multiplication is required. NEON doesn't have any multiplication
+    instructions that return the high half of the product. It does have an instruction that can be used to extract
+    all high half-words from two vector registers and merge them into a single register, as a deinterleaving or
+    unzip operation.
+    This is equivalent with a right bitshift of 16 bits. The instruction is <code>uzp2</code>, we'll use the
+    <code>vuzp2q_u16</code> intrinsic.
+</p>
+@codesnippet{
+"file": "resources/div_by_255_vector.cpp"
+}
+<p>
+    The effect of the <code>uzp2</code> instruction is visualized in the following diagram. Each cell is a 16-bit
+    half-word.
+    The two rows on the left represent the two 128-bit vector registers containing the products of the four high and low
+    elements respectively (variables <code>h</code> and <code>l</code> in the code). Two 16-bit cells make up one of
+    the eight 32-bit products.
+</p>
+
+<style>
+    table.border {
+        border-collapse: collapse;
+        border-spacing: 0;
+        padding: 0.8em;
+    }
+
+    table.border td {
+        border: 1px solid black;
+        padding: 0.4em 0;
+        width: 2.1em;
+        text-align: center;
+    }
+
+    table.half td:nth-child(even) {
+        border-left: 1px dotted #aaa;
+    }
+
+    table.half td:nth-child(odd) {
+        border-right: none;
+    }
+
+    .flex_container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        flex-flow: row wrap;
+    }
+</style>
+<div class="flex_container">
+    <table class="border half">
+        <tr>
+            <td>H<sub>7</sub></td>
+            <td>L<sub>7</sub></td>
+            <td>H<sub>6</sub>
+            <td>L<sub>6</sub></td>
+            <td>H<sub>5</sub></td>
+            <td>L<sub>5</sub></td>
+            <td>H<sub>4</sub>
+            <td>L<sub>4</sub></td>
+        </tr>
+        <tr>
+            <td>H<sub>3</sub></td>
+            <td>L<sub>3</sub></td>
+            <td>H<sub>2</sub>
+            <td>L<sub>3</sub></td>
+            <td>H<sub>1</sub></td>
+            <td>L<sub>1</sub></td>
+            <td>H<sub>0</sub>
+            <td>L<sub>0</sub></td>
+        </tr>
+    </table>
+    <div style="text-align: center; padding: 1em;">UZP2<br>→</div>
+    <table class="border">
+        <tr>
+            <td>H<sub>7</sub></td>
+            <td>H<sub>6</sub>
+            <td>H<sub>5</sub></td>
+            <td>H<sub>4</sub>
+            <td>H<sub>3</sub></td>
+            <td>H<sub>2</sub>
+            <td>H<sub>1</sub></td>
+            <td>H<sub>0</sub>
+        </tr>
+    </table>
+</div>
+<p>
+    <code><span style="border: 1px solid black; padding: 2px;">H<sub>7</sub> L<sub>7</sub></span> = x[7] * 0x8081</code>,
+    where <code>x[7]</code> is the seventh element of the input, 16 bits wide. <code>0x8081</code> is the constant
+    factor and is also 16 bits wide.
+    Their product will be 32 bits wide, it consists of a high half-word (<code>H<sub>7</sub></code>) and a low
+    half-word (<code>L<sub>7</sub></code>). The low half-words will be discarded by the unzip operation, effectively
+    dividing each product by \(\texttt{0x10000}\).
+</p>
+<p>
+    For this unzip operation to work, the vector registers have to be interpreted as 8×16-bit values (even though they
+    actually contain 4×32-bit values).
+</p>
+<p>
+    Finally, the 16-bit high half-words of the products are narrowed to 8-bit bytes, while shifting them another 7 bits
+    to the right for the final division by \(\texttt{0x80}\).
+</p>
+<p>
+    The result is exact for all possible values of <code>x</code>.
+</p>
+
+<h4>Rounding</h4>
+
+<p>
+    It is tempting to just replace the final shift (<code>vshrn_n_u16</code>) with a rounding shift
+    (<code>vrshrn_n_u16</code>), in an attempt to implement a rounding division by \(255\).
+    Unfortunately, this doesn't work, because rounding the final division by \(128\) is not the same as rounding the
+    original division by \(255\). For some inputs, the output will be one unit too low.
+    It is a pretty good approximation though, producing an incorrect result for only 127 out of all 65536 possible input
+    values (it is correct in \(99.806\%\) of the cases, with an error of either 0 or -1).
+</p>
+<p>
+    The correct solution is to add the rounding constant <i>before</i> the multiplication. However, we're adding a
+    rounding constant of \(128 = 256/2\), while in theory, we should be using \(127.5 = 255/2\). It turns out that this
+    error of \(0.5\) can be compensated by changing the factor in the next step from \(\texttt{0x8081}\) to
+    \(\texttt{0x8080}\).
+</p>
+@codesnippet{
+"file": "resources/div_by_255_vector_round.cpp"
+}
+<p>
+    The result of this function is correct as long as the addition of the rounding constant doesn't cause overflow. This
+    condition is satisfied if the input is less than \(2^{16} - 128 = 65408\). Luckily, in this case, the result would
+    be meaningless anyway, because the quotient would be too large to fit an 8-bit byte (\(65408/255 \approx 256.5 &gt;
+    255\)).
+</p>
+
+</html>
