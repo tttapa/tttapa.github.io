@@ -1,5 +1,5 @@
 uint8x8_t div_by_255(uint16x8_t x) {
-    // Multiply by 0x8081 as 32-bit integers (high and low words separately)
+    // Multiply by 0x8081 as 32-bit integers (high and low elements separately)
     // 0x800000/0x8081 ≃ 255
     uint32x4_t h = vmull_high_n_u16(x, 0x8081);
     uint32x4_t l = vmull_n_u16(vget_low_u16(x), 0x8081);

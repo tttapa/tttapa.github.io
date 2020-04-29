@@ -1187,7 +1187,7 @@
 .pygments175 pre.snippet175 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_255_vector.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments175"><pre class="lineNumbers snippet175"><code><span></span><span class="n">uint8x8_t</span> <span class="nf">div_by_255</span><span class="p">(</span><span class="n">uint16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
-<code>    <span class="c1">// Multiply by 0x8081 as 32-bit integers (high and low words separately)</span></code>
+<code>    <span class="c1">// Multiply by 0x8081 as 32-bit integers (high and low elements separately)</span></code>
 <code>    <span class="c1">// 0x800000/0x8081 ≃ 255</span></code>
 <code>    <span class="n">uint32x4_t</span> <span class="n">h</span> <span class="o">=</span> <span class="n">vmull_high_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mh">0x8081</span><span class="p">);</span></code>
 <code>    <span class="n">uint32x4_t</span> <span class="n">l</span> <span class="o">=</span> <span class="n">vmull_n_u16</span><span class="p">(</span><span class="n">vget_low_u16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mh">0x8081</span><span class="p">);</span></code>
@@ -1381,7 +1381,7 @@
 <div class="pygments288"><pre class="lineNumbers snippet288"><code><span></span><span class="n">uint8x8_t</span> <span class="nf">div_by_255_round</span><span class="p">(</span><span class="n">uint16x8_t</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span></code>
 <code>    <span class="c1">// Add the rounding constant</span></code>
 <code>    <span class="n">x</span> <span class="o">=</span> <span class="n">vaddq_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">vdupq_n_u16</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">7</span><span class="p">));</span></code>
-<code>    <span class="c1">// Multiply by 0x8080 as 32-bit integers (high and low words separately)</span></code>
+<code>    <span class="c1">// Multiply by 0x8080 as 32-bit integers (high and low elements separately)</span></code>
 <code>    <span class="n">uint32x4_t</span> <span class="n">h</span> <span class="o">=</span> <span class="n">vmull_high_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mh">0x8080</span><span class="p">);</span></code>
 <code>    <span class="n">uint32x4_t</span> <span class="n">l</span> <span class="o">=</span> <span class="n">vmull_n_u16</span><span class="p">(</span><span class="n">vget_low_u16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="mh">0x8080</span><span class="p">);</span></code>
 <code>    <span class="c1">// Extract the 16 high bits of all 32-bit products (division by 0x10000)</span></code>
