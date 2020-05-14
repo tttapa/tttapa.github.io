@@ -10,8 +10,8 @@ prefix="$HOME/.local"
 
 cd /tmp
 # Download
-git --single-branch --depth=1 --branch $version \
-    clone https://github.com/google/googletest.git
+git clone --single-branch --depth=1 --branch $version \
+    https://github.com/google/googletest.git
 mkdir googletest/build && cd $_
 # Configure
 cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local -DCMAKE_BUILD_TYPE=Release
