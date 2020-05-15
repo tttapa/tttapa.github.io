@@ -17,7 +17,7 @@
     <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="theme-color" content="#ccc"/>
-    <meta name="keywords" content="GoogleTest,GTest,C++,build,source,Ubuntu,Installation"/>
+    <meta name="keywords" content="GoogleTest,GTest,C++,build,source,Ubuntu,Installation,cmake"/>
     <meta name="description" content="Installation instructions for GoogleTest on Ubuntu."/>
     <title>GoogleTest</title>
 </head>
@@ -155,6 +155,7 @@
             <li><span class="ftriangle"></span><a href="BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
             <li><span class="ftriangle"></span><a href="Doxygen.html">Doxygen</a></li>
             <li><span class="ftriangle"></span><a href="Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="Eigen3.html">Eigen</a></li>
             <li><span class="ftriangle"></span><a class="openEntry" href="GoogleTest.html">GoogleTest</a></li>
             <li><span class="ftriangle"></span><a href="Java.html">Java</a></li>
             <li><span class="ftriangle"></span><a href="Python.html">Python</a></li>
@@ -190,11 +191,11 @@
 <h3><a name="install-dependencies-and-tools" href="#install-dependencies-and-tools">Install dependencies and tools</a></h3>
 
 <p>
-    First, install GCC, GNU Make and Git if you haven't already.
+    First, install GCC, CMake, GNU Make and Git if you haven't already.
 </p>
 <pre class=console>
 <code>sudo apt update</code>
-<code>sudo apt install gcc g++ make git</code></pre>
+<code>sudo apt install gcc g++ cmake make git</code></pre>
 
 <h3><a name="download-build-and-install" href="#download-build-and-install">Download, build and install</a></h3>
 
@@ -276,16 +277,15 @@
 <code><span class="nb">set</span> -ex</code>
 <code></code>
 <code><span class="nv">version</span><span class="o">=</span><span class="s2">&quot;release-1.10.0&quot;</span> <span class="c1"># Release tag on GitHub</span></code>
-<code><span class="nv">builddir</span><span class="o">=</span><span class="s2">&quot;/tmp&quot;</span></code>
 <code><span class="nv">prefix</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local&quot;</span></code>
 <code></code>
 <code><span class="nb">cd</span> /tmp</code>
 <code><span class="c1"># Download</span></code>
-<code>git clone --single-branch --depth<span class="o">=</span><span class="m">1</span> --branch <span class="nv">$version</span> <span class="se">\</span></code>
+<code>git clone --single-branch --depth<span class="o">=</span><span class="m">1</span> --branch <span class="s2">&quot;</span><span class="nv">$version</span><span class="s2">&quot;</span> <span class="se">\</span></code>
 <code>    https://github.com/google/googletest.git</code>
 <code>mkdir googletest/build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="nv">$_</span></code>
 <code><span class="c1"># Configure</span></code>
-<code>cmake .. -DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$HOME</span>/.local -DCMAKE_BUILD_TYPE<span class="o">=</span>Release</code>
+<code>cmake .. -DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$prefix</span><span class="s2">&quot;</span> -DCMAKE_BUILD_TYPE<span class="o">=</span>Release</code>
 <code><span class="c1"># Build</span></code>
 <code>make -j<span class="k">$(</span>nproc<span class="k">)</span></code>
 <code><span class="c1"># Install</span></code>
@@ -372,8 +372,8 @@
 <code><span class="nb">find_package</span><span class="p">(</span><span class="s">GTest</span> <span class="s">REQUIRED</span><span class="p">)</span></code>
 <code><span class="nb">include</span><span class="p">(</span><span class="s">GoogleTest</span><span class="p">)</span></code>
 <code></code>
-<code><span class="nb">add_executable</span><span class="p">(</span><span class="s">test-exe</span> <span class="s">test.cpp</span><span class="p">)</span></code>
-<code><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">test-exe</span> <span class="s">PUBLIC</span> <span class="s">GTest::gtest_main</span><span class="p">)</span></code>
+<code><span class="nb">add_executable</span><span class="p">(</span><span class="s">test-exe</span> <span class="s">test.cpp</span><span class="p">)</span> <span class="c"># test.cpp contains TEST(...) cases</span></code>
+<code><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">test-exe</span> <span class="s">PRIVATE</span> <span class="s">GTest::gtest_main</span><span class="p">)</span></code>
 <code></code>
 <code><span class="nb">if</span><span class="p">(</span><span class="s">NOT</span> <span class="s">CMAKE_CROSSCOMPILING</span><span class="p">)</span></code>
 <code>    <span class="nb">gtest_discover_tests</span><span class="p">(</span><span class="s">test-exe</span><span class="p">)</span></code>
@@ -394,7 +394,7 @@
         <hr id="end-of-article">
         <div class="nextupprev"></div>
     </article>
-    <footer>Last edited: Monday, 27 April 2020 22:21 UTC</footer>
+    <footer>Last edited: Thursday, 14 May 2020 22:16 UTC</footer>
 </body>
 
 </html>

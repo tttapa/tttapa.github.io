@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
+    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
+            disabled: true
+            }
+        });
+    </script>
+    <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="Eigen,Eigen3,installation,ubuntu,linux,libeigen,linear algebra,cmake"/>
+    <meta name="description" content="Installation instructions for the Eigen linear algebra library."/>
+    <title>Eigen</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/">Home</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/C++-Development/index.html">C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/index.html">Mathematics</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Ubuntu</a>
+    <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a href="Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a href="Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a href="BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a href="Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="openEntry" href="Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a href="GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a href="Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a href="Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a href="VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Eigen3.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article">print</a>
+            </i>
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Eigen</h1>
+        <i class="author">Pieter P</i>
+        <div>
+<p>
+    This page explains how to install the Eigen linear algebra library on Ubuntu.
+</p>
+
+<h3><a name="install-dependencies-and-tools" href="#install-dependencies-and-tools">Install dependencies and tools</a></h3>
+
+<p>
+    First, install GCC, CMake, GNU Make and Git if you haven't already.
+</p>
+<pre class=console>
+<code>sudo apt update</code>
+<code>sudo apt install gcc g++ cmake make git</code></pre>
+
+<h3><a name="download-and-install" href="#download-and-install">Download and install</a></h3>
+
+<div class="codesnippet"><style>.pygments24 .hll { background-color: #ffffcc }
+.pygments24  { background: #f8f8f8; }
+.pygments24 .c { color: #408080; font-style: italic } /* Comment */
+.pygments24 .err { border: 1px solid #FF0000 } /* Error */
+.pygments24 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments24 .o { color: #666666 } /* Operator */
+.pygments24 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments24 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments24 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments24 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments24 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments24 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments24 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments24 .ge { font-style: italic } /* Generic.Emph */
+.pygments24 .gr { color: #FF0000 } /* Generic.Error */
+.pygments24 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments24 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments24 .go { color: #888888 } /* Generic.Output */
+.pygments24 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments24 .gs { font-weight: bold } /* Generic.Strong */
+.pygments24 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments24 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments24 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments24 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments24 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments24 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments24 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments24 .kt { color: #B00040 } /* Keyword.Type */
+.pygments24 .m { color: #666666 } /* Literal.Number */
+.pygments24 .s { color: #BA2121 } /* Literal.String */
+.pygments24 .na { color: #7D9029 } /* Name.Attribute */
+.pygments24 .nb { color: #008000 } /* Name.Builtin */
+.pygments24 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments24 .no { color: #880000 } /* Name.Constant */
+.pygments24 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments24 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments24 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments24 .nf { color: #0000FF } /* Name.Function */
+.pygments24 .nl { color: #A0A000 } /* Name.Label */
+.pygments24 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments24 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments24 .nv { color: #19177C } /* Name.Variable */
+.pygments24 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments24 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments24 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments24 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments24 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments24 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments24 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments24 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments24 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments24 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments24 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments24 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments24 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments24 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments24 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments24 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments24 .sx { color: #008000 } /* Literal.String.Other */
+.pygments24 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments24 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments24 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments24 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments24 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments24 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments24 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments24 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments24 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments24 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments24 pre.snippet24 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Ubuntu/Software-Installation/resources/eigen3.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments24"><pre class="lineNumbers snippet24"><code><span></span><span class="ch">#!/usr/bin/env bash</span></code>
+<code></code>
+<code><span class="c1"># Script to download and install Eigen3</span></code>
+<code></code>
+<code><span class="nb">set</span> -ex</code>
+<code></code>
+<code><span class="nv">version</span><span class="o">=</span><span class="s2">&quot;3.3.7&quot;</span> <span class="c1"># Release tag on GitLab</span></code>
+<code><span class="nv">prefix</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.local&quot;</span></code>
+<code></code>
+<code><span class="nb">cd</span> /tmp</code>
+<code><span class="c1"># Download</span></code>
+<code>git clone --single-branch --depth<span class="o">=</span><span class="m">1</span> --branch <span class="s2">&quot;</span><span class="nv">$version</span><span class="s2">&quot;</span> <span class="se">\</span></code>
+<code>    https://gitlab.com/libeigen/eigen.git</code>
+<code>mkdir eigen/build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> <span class="nv">$_</span></code>
+<code><span class="c1"># Configure</span></code>
+<code>cmake .. <span class="se">\</span></code>
+<code>    -DCMAKE_BUILD_TYPE<span class="o">=</span>Release <span class="se">\</span></code>
+<code>    -DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$prefix</span><span class="s2">&quot;</span></code>
+<code><span class="c1"># Install</span></code>
+<code>make install</code></pre></div>
+</div>
+
+You don't have to build anything, because Eigen is a header-only library.
+
+<h3><a name="usage" href="#usage">Usage</a></h3>
+
+<p>
+    To use Eigen in your project, you can use the following CMake snippet:
+</p>
+<div class="codesnippet"><style>.pygments35 .hll { background-color: #ffffcc }
+.pygments35  { background: #f8f8f8; }
+.pygments35 .c { color: #408080; font-style: italic } /* Comment */
+.pygments35 .err { border: 1px solid #FF0000 } /* Error */
+.pygments35 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments35 .o { color: #666666 } /* Operator */
+.pygments35 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments35 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments35 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments35 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments35 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments35 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments35 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments35 .ge { font-style: italic } /* Generic.Emph */
+.pygments35 .gr { color: #FF0000 } /* Generic.Error */
+.pygments35 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments35 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments35 .go { color: #888888 } /* Generic.Output */
+.pygments35 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments35 .gs { font-weight: bold } /* Generic.Strong */
+.pygments35 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments35 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments35 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments35 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments35 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments35 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments35 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments35 .kt { color: #B00040 } /* Keyword.Type */
+.pygments35 .m { color: #666666 } /* Literal.Number */
+.pygments35 .s { color: #BA2121 } /* Literal.String */
+.pygments35 .na { color: #7D9029 } /* Name.Attribute */
+.pygments35 .nb { color: #008000 } /* Name.Builtin */
+.pygments35 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments35 .no { color: #880000 } /* Name.Constant */
+.pygments35 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments35 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments35 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments35 .nf { color: #0000FF } /* Name.Function */
+.pygments35 .nl { color: #A0A000 } /* Name.Label */
+.pygments35 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments35 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments35 .nv { color: #19177C } /* Name.Variable */
+.pygments35 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments35 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments35 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments35 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments35 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments35 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments35 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments35 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments35 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments35 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments35 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments35 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments35 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments35 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments35 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments35 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments35 .sx { color: #008000 } /* Literal.String.Other */
+.pygments35 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments35 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments35 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments35 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments35 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments35 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments35 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments35 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments35 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments35 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments35 pre.snippet35 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Ubuntu/Software-Installation/resources/eigen3.cmake" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments35"><pre class="lineNumbers snippet35"><code><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">Eigen3</span> <span class="s">REQUIRED</span><span class="p">)</span></code>
+<code></code>
+<code><span class="nb">add_executable</span><span class="p">(</span><span class="s">eigen-demo</span> <span class="s">main.cpp</span><span class="p">)</span></code>
+<code><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">eigen-demo</span> <span class="s">PRIVATE</span> <span class="s">Eigen3::Eigen</span><span class="p">)</span></code></pre></div>
+</div>
+<p>
+    CMake has to find Eigen, so you need to make sure that <code>$HOME/.local</code>
+    is in its search paths. See <a href="Installing-Locally.html">Installing Locally</a>.
+</p>
+
+<h3><a name="tested-on" href="#tested-on">Tested on</a></h3>
+
+<ul>
+    <li>Ubuntu 20.04 - Eigen 3.3.7</li>
+</ul>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"></div>
+    </article>
+    <footer>Last edited: Thursday, 14 May 2020 22:19 UTC</footer>
+</body>
+
+</html>

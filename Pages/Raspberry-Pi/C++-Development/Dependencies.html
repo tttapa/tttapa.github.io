@@ -155,6 +155,7 @@
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Java.html">Java</a></li>
             <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Python.html">Python</a></li>
@@ -545,7 +546,8 @@
 <code><span class="nb">export</span> <span class="nv">HOST_ARCH</span><span class="o">=</span><span class="s2">&quot;aarch64&quot;</span></code>
 <code><span class="nb">export</span> <span class="nv">HOST_TRIPLE</span><span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu&quot;</span></code>
 <code><span class="nb">export</span> <span class="nv">HOST_TRIPLE_NO_VENDOR</span><span class="o">=</span><span class="s2">&quot;aarch64-linux-gnu&quot;</span></code>
-<code><span class="nb">export</span> <span class="nv">HOST_TRIPLE_LIB_DIR</span><span class="o">=</span><span class="s2">&quot;aarch64-linux-gnu&quot;</span></code></pre></div>
+<code><span class="nb">export</span> <span class="nv">HOST_TRIPLE_LIB_DIR</span><span class="o">=</span><span class="s2">&quot;aarch64-linux-gnu&quot;</span></code>
+<code><span class="nb">export</span> <span class="nv">HOST_BITNESS</span><span class="o">=</span><span class="m">64</span></code></pre></div>
 </div>
 
 <h4><a name="compiling-a-library-for-the-docker-container" href="#compiling-a-library-for-the-docker-container">Compiling a library for the Docker container</a></h4>
@@ -650,14 +652,15 @@
 <code><span class="nb">set</span> -ex</code>
 <code></code>
 <code><span class="c1"># Download</span></code>
-<code><span class="nv">URL</span><span class="o">=</span><span class="s2">&quot;https://codeload.github.com/libffi/libffi/tar.gz/v3.2.1&quot;</span></code>
+<code><span class="nv">version</span><span class="o">=</span><span class="m">3</span>.3</code>
+<code><span class="nv">URL</span><span class="o">=</span><span class="s2">&quot;https://codeload.github.com/libffi/libffi/tar.gz/v</span><span class="nv">$version</span><span class="s2">&quot;</span></code>
 <code><span class="nb">pushd</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DOWNLOADS</span><span class="si">}</span><span class="s2">&quot;</span></code>
-<code>wget -N <span class="s2">&quot;</span><span class="nv">$URL</span><span class="s2">&quot;</span> -O libffi-3.2.1.tar.gz</code>
+<code>wget -N <span class="s2">&quot;</span><span class="nv">$URL</span><span class="s2">&quot;</span> -O libffi-<span class="nv">$version</span>.tar.gz</code>
 <code><span class="nb">popd</span></code>
 <code></code>
 <code><span class="c1"># Extract</span></code>
-<code>tar xzf <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DOWNLOADS</span><span class="si">}</span><span class="s2">/libffi-3.2.1.tar.gz&quot;</span></code>
-<code><span class="nb">pushd</span> libffi-3.2.1</code>
+<code>tar xzf <span class="s2">&quot;</span><span class="si">${</span><span class="nv">DOWNLOADS</span><span class="si">}</span><span class="s2">/libffi-</span><span class="nv">$version</span><span class="s2">.tar.gz&quot;</span></code>
+<code><span class="nb">pushd</span> libffi-<span class="nv">$version</span></code>
 <code></code>
 <code><span class="c1"># Configure</span></code>
 <code>. cross-pkg-config</code>
@@ -665,7 +668,8 @@
 <code>./configure <span class="se">\</span></code>
 <code>    --host<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span><span class="s2">&quot;</span> <span class="se">\</span></code>
 <code>    --prefix<span class="o">=</span><span class="s2">&quot;/usr/local&quot;</span> <span class="se">\</span></code>
-<code>    <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-O2&quot;</span> <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;-O2&quot;</span> <span class="se">\</span></code>
+<code>    <span class="nv">CFLAGS</span><span class="o">=</span><span class="s2">&quot;-O3&quot;</span> <span class="se">\</span></code>
+<code>    <span class="nv">CXXFLAGS</span><span class="o">=</span><span class="s2">&quot;-O3&quot;</span> <span class="se">\</span></code>
 <code>    --with-sysroot<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">RPI_SYSROOT</span><span class="si">}</span><span class="s2">&quot;</span></code>
 <code></code>
 <code><span class="c1"># Build</span></code>
@@ -677,7 +681,7 @@
 <code></code>
 <code><span class="c1"># Cleanup</span></code>
 <code><span class="nb">popd</span></code>
-<code>rm -rf libffi-3.2.1</code></pre></div>
+<code>rm -rf libffi-<span class="nv">$version</span></code></pre></div>
 </div>
 
 <h5><a name="downloading-and-extracting" href="#downloading-and-extracting">Downloading and extracting</a></h5>
