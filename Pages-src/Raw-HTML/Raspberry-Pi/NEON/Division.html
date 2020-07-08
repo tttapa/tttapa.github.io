@@ -97,11 +97,14 @@
 }
 <p>
     There is no actual AND instruction, the BIC (bit clear) instruction is used instead. There's no intrinsic for it, so
-    we had to add a line of inline assembly.
+    we have to add a line of inline assembly. A compiler extension is used, because parameter <code>b</code> should be 
+    a compile-time constant, it is used to compute the immediate field of the instruction, so it cannot change at 
+    run-time.
 </p>
 <p>
     This trick will only work for divisors less than or equal to 256, since the immediate field of the BIC instruction
-    is only 8 bits wide. For divisors 512 and larger, the correction term will be 9 bits or more.
+    is only 8 bits wide. For divisors 512 and larger, the correction term will be 9 bits or more, so it doesn't fit 
+    anymore.
 </p>
 
 <h4>Rounding</h4>
