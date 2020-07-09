@@ -104,8 +104,14 @@
 <p>
     This trick will only work for divisors less than or equal to 256, since the immediate field of the BIC instruction
     is only 8 bits wide. For divisors 512 and larger, the correction term will be 9 bits or more, so it doesn't fit 
-    anymore.
+    anymore. Luckily, in that case, the low byte of the correction term will always be \(\texttt{0xFF}\), which means 
+    that we can use the second variant of the immediate AND, where the immediate is \(\texttt{0xXYFF}\). In practice,
+    this is done by setting the LSL (logical shift left) amount of the BIC instruction to 8, so we can set the high 
+    byte of the immediate.
 </p>
+@codesnippet{
+"file": "resources/div_by_512_signed_vector_immediate.cpp"
+}
 
 <h4>Rounding</h4>
 
