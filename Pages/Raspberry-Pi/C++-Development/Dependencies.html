@@ -28,7 +28,7 @@
                 <path d="M0 0h48v48h-48z" fill="none"/>
                 <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
             </svg>
-            <h2><a href="/">Home</a></h2>
+            <h2><a href="/Pages">Pages</a></h2>
 <ul>
     <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Raspberry Pi</a>
     <ul>
@@ -47,6 +47,7 @@
             <li><span class="ftriangle"></span><a href="Installation.html">Installation and setup</a></li>
             <li><span class="ftriangle"></span><a href="Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
             <li><span class="ftriangle"></span><a class="openEntry" href="Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a href="Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
             <li><span class="ftriangle"></span><a href="Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
             <li><span class="ftriangle"></span><a href="Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
             <li><span class="ftriangle"></span><a href="Speedrun.html">Speedrun</a></li>
@@ -263,65 +264,65 @@
 
 <p>
     Where <code>&lt;board&gt;</code> is one of the following:
-    <ul>
-        <li><code>rpi</code>: Raspberry Pi 1 or Zero, dependencies only</li>
-        <li><code>rpi-dev</code>: Raspberry Pi 1 or Zero, dependencies and development tools</li>
-        <li><code>rpi3-armv8</code>: Raspberry Pi 3, 32-bit, dependencies only</li>
-        <li><code>rpi3-armv8-dev</code>: Raspberry Pi 3, 32-bit, dependencies and development tools</li>
-        <li><code>rpi3-aarch64</code>: Raspberry Pi 3, 64-bit, dependencies only</li>
-        <li><code>rpi3-aarch64-dev</code>: Raspberry Pi 3, 64-bit, dependencies and development tools</li>
-    </ul>
+<ul>
+    <li><code>rpi</code>: Raspberry Pi 1 or Zero, dependencies only</li>
+    <li><code>rpi-dev</code>: Raspberry Pi 1 or Zero, dependencies and development tools</li>
+    <li><code>rpi3-armv8</code>: Raspberry Pi 3, 32-bit, dependencies only</li>
+    <li><code>rpi3-armv8-dev</code>: Raspberry Pi 3, 32-bit, dependencies and development tools</li>
+    <li><code>rpi3-aarch64</code>: Raspberry Pi 3, 64-bit, dependencies only</li>
+    <li><code>rpi3-aarch64-dev</code>: Raspberry Pi 3, 64-bit, dependencies and development tools</li>
+</ul>
 </p>
 <p>
     The dependencies that are cross-compiled are:
-    <ul>
-        <li><strong>Zlib</strong>: compression library (OpenSSL and Python dependency)</li>
-        <li><strong>OpenSSL</strong>: cryptography library (Python dependency)</li>
-        <li><strong>FFI</strong>: foreign function interface (Python dependency, used to call C functions using ctypes)
-        </li>
-        <li><strong>Bzip2</strong>: compression library (Python dependency)</li>
-        <li><strong>GNU ncurses</strong>: library for text-based user interfaces (Python dependency, used for the
-            console)</li>
-        <li><strong>GNU readline</strong>: library for line-editing and history (Python dependency, used for the
-            console)</li>
-        <li><strong>GNU dbm</strong>: library for key-value data (Python dependency)</li>
-        <li><strong>SQLite</strong>: library for embedded databases (Python dependency)</li>
-        <li><strong>UUID</strong>: library for unique identifiers (Python dependency)</li>
-        <li><strong>libX11</strong>: X11 protocol client library (Tk dependency)</li>
-        <li><strong>Tcl/Tk</strong>: graphical user interface toolkit (Python/Tkinter dependency)</li>
-        <li><strong>Python 3.8.2</strong>: Python interpreter and libraries</li>
-        <li><strong>ZBar</strong>: Bar and QR code decoding library</li>
-        <li><strong>Raspberry Pi Userland</strong>: VideoCore GPU drivers</li>
-        <li><strong>VPX</strong>: VP8/VP9 codec SDK</li>
-        <li><strong>x264</strong>: H.264/MPEG-4 AVC encoder</li>
-        <li><strong>Xvid</strong>: MPEG-4 video codec</li>
-        <li><strong>FFmpeg</strong>: library to record, convert and stream audio and video</li>
-        <li><strong>OpenBLAS</strong>: linear algebra library (NumPy dependency)</li>
-        <li><strong>NumPy</strong>: multi-dimensional array container for Python (OpenCV dependency)</li>
-        <li><strong>SciPy</strong>: Python module for mathematics, science, and engineering</li>
-        <li><strong>OpenCV 4.2.0</strong>: computer vision library and Python module</li>
-    </ul>
+<ul>
+    <li><strong>Zlib</strong>: compression library (OpenSSL and Python dependency)</li>
+    <li><strong>OpenSSL</strong>: cryptography library (Python dependency)</li>
+    <li><strong>FFI</strong>: foreign function interface (Python dependency, used to call C functions using ctypes)
+    </li>
+    <li><strong>Bzip2</strong>: compression library (Python dependency)</li>
+    <li><strong>GNU ncurses</strong>: library for text-based user interfaces (Python dependency, used for the
+        console)</li>
+    <li><strong>GNU readline</strong>: library for line-editing and history (Python dependency, used for the
+        console)</li>
+    <li><strong>GNU dbm</strong>: library for key-value data (Python dependency)</li>
+    <li><strong>SQLite</strong>: library for embedded databases (Python dependency)</li>
+    <li><strong>UUID</strong>: library for unique identifiers (Python dependency)</li>
+    <li><strong>libX11</strong>: X11 protocol client library (Tk dependency)</li>
+    <li><strong>Tcl/Tk</strong>: graphical user interface toolkit (Python/Tkinter dependency)</li>
+    <li><strong>Python 3.8.3</strong>: Python interpreter and libraries</li>
+    <li><strong>ZBar</strong>: Bar and QR code decoding library</li>
+    <li><strong>Raspberry Pi Userland</strong>: VideoCore GPU drivers</li>
+    <li><strong>VPX</strong>: VP8/VP9 codec SDK</li>
+    <li><strong>x264</strong>: H.264/MPEG-4 AVC encoder</li>
+    <li><strong>Xvid</strong>: MPEG-4 video codec</li>
+    <li><strong>FFmpeg</strong>: library to record, convert and stream audio and video</li>
+    <li><strong>OpenBLAS</strong>: linear algebra library (NumPy dependency)</li>
+    <li><strong>NumPy</strong>: multi-dimensional array container for Python (OpenCV dependency)</li>
+    <li><strong>SciPy</strong>: Python module for mathematics, science, and engineering</li>
+    <li><strong>OpenCV 4.3.0</strong>: computer vision library and Python module</li>
+</ul>
 </p>
 <p>
     The development tools that are cross-compiled are:
-    <ul>
-        <li><strong>GCC 9.2.0</strong>: C, C++ and Fortran compilers (see native toolchain on the previous page)</li>
-        <li><strong>GNU Make</strong>: build automation tool</li>
-        <li><strong>Ninja</strong>: faster, more light-weight build tool</li>
-        <li><strong>CMake</strong>: build system</li>
-        <li><strong>Distcc</strong>: distributed compiler wrapper (uses your computer to speed up compilation on the
-            RPi)</li>
-        <li><strong>CCache</strong>: compiler cache</li>
-        <li><strong>cURL</strong>: tool and library for transferring data over the network (Git dependency)</li>
-        <li><strong>Git</strong>: version control system</li>
-    </ul>
+<ul>
+    <li><strong>GCC 9.2.0</strong>: C, C++ and Fortran compilers (see native toolchain on the previous page)</li>
+    <li><strong>GNU Make</strong>: build automation tool</li>
+    <li><strong>Ninja</strong>: faster, more light-weight build tool</li>
+    <li><strong>CMake</strong>: build system</li>
+    <li><strong>Distcc</strong>: distributed compiler wrapper (uses your computer to speed up compilation on the
+        RPi)</li>
+    <li><strong>CCache</strong>: compiler cache</li>
+    <li><strong>cURL</strong>: tool and library for transferring data over the network (Git dependency)</li>
+    <li><strong>Git</strong>: version control system</li>
+</ul>
 </p>
 
 <h3><a name="pulling-the-cross-compiled-dependencies-from-docker-hub" href="#pulling-the-cross-compiled-dependencies-from-docker-hub">Pulling the cross-compiled dependencies from Docker Hub</a></h3>
 
 <p>
-    If you don't want to change anything to the build process, or if you have a 
-    slow computer, you can just pull the Docker images that I compiled from 
+    If you don't want to change anything to the build process, or if you have a
+    slow computer, you can just pull the Docker images that I compiled from
     Docker Hub:
 </p>
 
@@ -331,6 +332,12 @@
 
 <h2><a name="detailed-information-about-cross-compilation-of-libraries" href="#detailed-information-about-cross-compilation-of-libraries">Detailed information about cross-compilation of libraries</a></h2>
 
+<p>
+    You don't need to read or understand the sections below if you just want to use the provided libraries.<br>
+    On the other hand, if you're interested in how cross-compilation works, or if you want to cross-compile additional
+    libraries, you'll find the necessary details below.
+</p>
+
 <h3><a name="base-image" href="#base-image">Base Image</a></h3>
 
 <p>
@@ -339,78 +346,78 @@
 </p>
 
 <h4 class="snippet-name"><a name="dockerfile" href="#dockerfile">Dockerfile</a></h4>
-<div class="codesnippet"><style>.pygments134 .hll { background-color: #ffffcc }
-.pygments134  { background: #f8f8f8; }
-.pygments134 .c { color: #408080; font-style: italic } /* Comment */
-.pygments134 .err { border: 1px solid #FF0000 } /* Error */
-.pygments134 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments134 .o { color: #666666 } /* Operator */
-.pygments134 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments134 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments134 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments134 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments134 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments134 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments134 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments134 .ge { font-style: italic } /* Generic.Emph */
-.pygments134 .gr { color: #FF0000 } /* Generic.Error */
-.pygments134 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments134 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments134 .go { color: #888888 } /* Generic.Output */
-.pygments134 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments134 .gs { font-weight: bold } /* Generic.Strong */
-.pygments134 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments134 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments134 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments134 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments134 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments134 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments134 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments134 .kt { color: #B00040 } /* Keyword.Type */
-.pygments134 .m { color: #666666 } /* Literal.Number */
-.pygments134 .s { color: #BA2121 } /* Literal.String */
-.pygments134 .na { color: #7D9029 } /* Name.Attribute */
-.pygments134 .nb { color: #008000 } /* Name.Builtin */
-.pygments134 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments134 .no { color: #880000 } /* Name.Constant */
-.pygments134 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments134 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments134 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments134 .nf { color: #0000FF } /* Name.Function */
-.pygments134 .nl { color: #A0A000 } /* Name.Label */
-.pygments134 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments134 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments134 .nv { color: #19177C } /* Name.Variable */
-.pygments134 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments134 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments134 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments134 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments134 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments134 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments134 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments134 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments134 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments134 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments134 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments134 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments134 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments134 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments134 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments134 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments134 .sx { color: #008000 } /* Literal.String.Other */
-.pygments134 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments134 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments134 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments134 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments134 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments134 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments134 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments134 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments134 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments134 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments134 pre.snippet134 { counter-reset: line 0; }</style>
+<div class="codesnippet"><style>.pygments140 .hll { background-color: #ffffcc }
+.pygments140  { background: #f8f8f8; }
+.pygments140 .c { color: #408080; font-style: italic } /* Comment */
+.pygments140 .err { border: 1px solid #FF0000 } /* Error */
+.pygments140 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments140 .o { color: #666666 } /* Operator */
+.pygments140 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments140 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments140 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments140 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments140 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments140 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments140 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments140 .ge { font-style: italic } /* Generic.Emph */
+.pygments140 .gr { color: #FF0000 } /* Generic.Error */
+.pygments140 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments140 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments140 .go { color: #888888 } /* Generic.Output */
+.pygments140 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments140 .gs { font-weight: bold } /* Generic.Strong */
+.pygments140 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments140 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments140 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments140 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments140 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments140 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments140 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments140 .kt { color: #B00040 } /* Keyword.Type */
+.pygments140 .m { color: #666666 } /* Literal.Number */
+.pygments140 .s { color: #BA2121 } /* Literal.String */
+.pygments140 .na { color: #7D9029 } /* Name.Attribute */
+.pygments140 .nb { color: #008000 } /* Name.Builtin */
+.pygments140 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments140 .no { color: #880000 } /* Name.Constant */
+.pygments140 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments140 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments140 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments140 .nf { color: #0000FF } /* Name.Function */
+.pygments140 .nl { color: #A0A000 } /* Name.Label */
+.pygments140 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments140 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments140 .nv { color: #19177C } /* Name.Variable */
+.pygments140 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments140 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments140 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments140 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments140 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments140 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments140 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments140 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments140 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments140 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments140 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments140 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments140 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments140 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments140 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments140 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments140 .sx { color: #008000 } /* Literal.String.Other */
+.pygments140 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments140 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments140 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments140 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments140 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments140 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments140 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments140 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments140 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments140 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments140 pre.snippet140 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/d90ed701e38ece5e44cc038e0f7f0c6dd8a2c849/toolchain/docker/base-ubuntu/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments134"><pre class="lineNumbers snippet134"><code><span></span><span class="k">FROM</span> <span class="s">ubuntu:latest</span> <span class="k">as</span> <span class="s">rpi-cpp-toolchain-base-ubuntu</span></code>
+<div class="pygments140"><pre class="lineNumbers snippet140"><code><span></span><span class="k">FROM</span> <span class="s">ubuntu:latest</span> <span class="k">as</span> <span class="s">rpi-cpp-toolchain-base-ubuntu</span></code>
 <code></code>
 <code><span class="c"># Install some tools and compilers + clean up</span></code>
 <code><span class="k">RUN</span> apt-get update <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
@@ -453,14 +460,14 @@
 </p>
 <p>
     For most packages, the build procedure is very simple:
-    <ol>
-        <li>Download</li>
-        <li>Extract</li>
-        <li>Run the <code>configure</code> script with the right options</li>
-        <li><code>make</code></li>
-        <li><code>make install</code></li>
-    </ol>
-    An example is given below.
+<ol>
+    <li>Download</li>
+    <li>Extract</li>
+    <li>Run the <code>configure</code> script with the right options</li>
+    <li><code>make</code></li>
+    <li><code>make install</code></li>
+</ol>
+An example is given below.
 </p>
 
 <h4><a name="board-specific-configuration" href="#board-specific-configuration">Board-specific configuration</a></h4>
@@ -471,78 +478,78 @@
 </p>
 
 <h4 class="snippet-name"><a name="aarch64-rpi3-linux-gnu-env" href="#aarch64-rpi3-linux-gnu-env">aarch64-rpi3-linux-gnu.env</a></h4>
-<div class="codesnippet"><style>.pygments176 .hll { background-color: #ffffcc }
-.pygments176  { background: #f8f8f8; }
-.pygments176 .c { color: #408080; font-style: italic } /* Comment */
-.pygments176 .err { border: 1px solid #FF0000 } /* Error */
-.pygments176 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments176 .o { color: #666666 } /* Operator */
-.pygments176 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments176 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments176 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments176 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments176 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments176 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments176 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments176 .ge { font-style: italic } /* Generic.Emph */
-.pygments176 .gr { color: #FF0000 } /* Generic.Error */
-.pygments176 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments176 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments176 .go { color: #888888 } /* Generic.Output */
-.pygments176 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments176 .gs { font-weight: bold } /* Generic.Strong */
-.pygments176 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments176 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments176 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments176 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments176 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments176 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments176 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments176 .kt { color: #B00040 } /* Keyword.Type */
-.pygments176 .m { color: #666666 } /* Literal.Number */
-.pygments176 .s { color: #BA2121 } /* Literal.String */
-.pygments176 .na { color: #7D9029 } /* Name.Attribute */
-.pygments176 .nb { color: #008000 } /* Name.Builtin */
-.pygments176 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments176 .no { color: #880000 } /* Name.Constant */
-.pygments176 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments176 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments176 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments176 .nf { color: #0000FF } /* Name.Function */
-.pygments176 .nl { color: #A0A000 } /* Name.Label */
-.pygments176 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments176 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments176 .nv { color: #19177C } /* Name.Variable */
-.pygments176 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments176 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments176 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments176 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments176 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments176 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments176 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments176 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments176 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments176 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments176 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments176 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments176 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments176 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments176 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments176 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments176 .sx { color: #008000 } /* Literal.String.Other */
-.pygments176 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments176 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments176 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments176 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments176 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments176 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments176 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments176 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments176 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments176 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments176 pre.snippet176 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/e524ecccc0eacf459b009bcf23cb1e09c65b054d/toolchain/docker/merged/env/aarch64-rpi3-linux-gnu.env" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments176"><pre class="lineNumbers snippet176"><code><span></span><span class="nb">export</span> <span class="nv">CROSS_TOOLCHAIN_IMAGE</span><span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu&quot;</span></code>
+<div class="codesnippet"><style>.pygments182 .hll { background-color: #ffffcc }
+.pygments182  { background: #f8f8f8; }
+.pygments182 .c { color: #408080; font-style: italic } /* Comment */
+.pygments182 .err { border: 1px solid #FF0000 } /* Error */
+.pygments182 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments182 .o { color: #666666 } /* Operator */
+.pygments182 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments182 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments182 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments182 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments182 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments182 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments182 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments182 .ge { font-style: italic } /* Generic.Emph */
+.pygments182 .gr { color: #FF0000 } /* Generic.Error */
+.pygments182 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments182 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments182 .go { color: #888888 } /* Generic.Output */
+.pygments182 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments182 .gs { font-weight: bold } /* Generic.Strong */
+.pygments182 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments182 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments182 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments182 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments182 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments182 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments182 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments182 .kt { color: #B00040 } /* Keyword.Type */
+.pygments182 .m { color: #666666 } /* Literal.Number */
+.pygments182 .s { color: #BA2121 } /* Literal.String */
+.pygments182 .na { color: #7D9029 } /* Name.Attribute */
+.pygments182 .nb { color: #008000 } /* Name.Builtin */
+.pygments182 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments182 .no { color: #880000 } /* Name.Constant */
+.pygments182 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments182 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments182 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments182 .nf { color: #0000FF } /* Name.Function */
+.pygments182 .nl { color: #A0A000 } /* Name.Label */
+.pygments182 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments182 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments182 .nv { color: #19177C } /* Name.Variable */
+.pygments182 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments182 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments182 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments182 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments182 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments182 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments182 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments182 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments182 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments182 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments182 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments182 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments182 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments182 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments182 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments182 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments182 .sx { color: #008000 } /* Literal.String.Other */
+.pygments182 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments182 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments182 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments182 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments182 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments182 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments182 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments182 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments182 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments182 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments182 pre.snippet182 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/5442982a2e2af374066e43f1b2d04c839369d447/toolchain/docker/merged/env/aarch64-rpi3-linux-gnu.env" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments182"><pre class="lineNumbers snippet182"><code><span></span><span class="nb">export</span> <span class="nv">CROSS_TOOLCHAIN_IMAGE</span><span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu&quot;</span></code>
 <code><span class="nb">export</span> <span class="nv">HOST_ARCH</span><span class="o">=</span><span class="s2">&quot;aarch64&quot;</span></code>
 <code><span class="nb">export</span> <span class="nv">HOST_TRIPLE</span><span class="o">=</span><span class="s2">&quot;aarch64-rpi3-linux-gnu&quot;</span></code>
 <code><span class="nb">export</span> <span class="nv">HOST_TRIPLE_NO_VENDOR</span><span class="o">=</span><span class="s2">&quot;aarch64-linux-gnu&quot;</span></code>
@@ -576,78 +583,78 @@
 </p>
 
 <h4 class="snippet-name"><a name="libffi-sh" href="#libffi-sh">libffi.sh</a></h4>
-<div class="codesnippet"><style>.pygments207 .hll { background-color: #ffffcc }
-.pygments207  { background: #f8f8f8; }
-.pygments207 .c { color: #408080; font-style: italic } /* Comment */
-.pygments207 .err { border: 1px solid #FF0000 } /* Error */
-.pygments207 .k { color: #008000; font-weight: bold } /* Keyword */
-.pygments207 .o { color: #666666 } /* Operator */
-.pygments207 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-.pygments207 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-.pygments207 .cp { color: #BC7A00 } /* Comment.Preproc */
-.pygments207 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-.pygments207 .c1 { color: #408080; font-style: italic } /* Comment.Single */
-.pygments207 .cs { color: #408080; font-style: italic } /* Comment.Special */
-.pygments207 .gd { color: #A00000 } /* Generic.Deleted */
-.pygments207 .ge { font-style: italic } /* Generic.Emph */
-.pygments207 .gr { color: #FF0000 } /* Generic.Error */
-.pygments207 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-.pygments207 .gi { color: #00A000 } /* Generic.Inserted */
-.pygments207 .go { color: #888888 } /* Generic.Output */
-.pygments207 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-.pygments207 .gs { font-weight: bold } /* Generic.Strong */
-.pygments207 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-.pygments207 .gt { color: #0044DD } /* Generic.Traceback */
-.pygments207 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-.pygments207 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-.pygments207 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-.pygments207 .kp { color: #008000 } /* Keyword.Pseudo */
-.pygments207 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-.pygments207 .kt { color: #B00040 } /* Keyword.Type */
-.pygments207 .m { color: #666666 } /* Literal.Number */
-.pygments207 .s { color: #BA2121 } /* Literal.String */
-.pygments207 .na { color: #7D9029 } /* Name.Attribute */
-.pygments207 .nb { color: #008000 } /* Name.Builtin */
-.pygments207 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-.pygments207 .no { color: #880000 } /* Name.Constant */
-.pygments207 .nd { color: #AA22FF } /* Name.Decorator */
-.pygments207 .ni { color: #999999; font-weight: bold } /* Name.Entity */
-.pygments207 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-.pygments207 .nf { color: #0000FF } /* Name.Function */
-.pygments207 .nl { color: #A0A000 } /* Name.Label */
-.pygments207 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-.pygments207 .nt { color: #008000; font-weight: bold } /* Name.Tag */
-.pygments207 .nv { color: #19177C } /* Name.Variable */
-.pygments207 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-.pygments207 .w { color: #bbbbbb } /* Text.Whitespace */
-.pygments207 .mb { color: #666666 } /* Literal.Number.Bin */
-.pygments207 .mf { color: #666666 } /* Literal.Number.Float */
-.pygments207 .mh { color: #666666 } /* Literal.Number.Hex */
-.pygments207 .mi { color: #666666 } /* Literal.Number.Integer */
-.pygments207 .mo { color: #666666 } /* Literal.Number.Oct */
-.pygments207 .sa { color: #BA2121 } /* Literal.String.Affix */
-.pygments207 .sb { color: #BA2121 } /* Literal.String.Backtick */
-.pygments207 .sc { color: #BA2121 } /* Literal.String.Char */
-.pygments207 .dl { color: #BA2121 } /* Literal.String.Delimiter */
-.pygments207 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-.pygments207 .s2 { color: #BA2121 } /* Literal.String.Double */
-.pygments207 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-.pygments207 .sh { color: #BA2121 } /* Literal.String.Heredoc */
-.pygments207 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-.pygments207 .sx { color: #008000 } /* Literal.String.Other */
-.pygments207 .sr { color: #BB6688 } /* Literal.String.Regex */
-.pygments207 .s1 { color: #BA2121 } /* Literal.String.Single */
-.pygments207 .ss { color: #19177C } /* Literal.String.Symbol */
-.pygments207 .bp { color: #008000 } /* Name.Builtin.Pseudo */
-.pygments207 .fm { color: #0000FF } /* Name.Function.Magic */
-.pygments207 .vc { color: #19177C } /* Name.Variable.Class */
-.pygments207 .vg { color: #19177C } /* Name.Variable.Global */
-.pygments207 .vi { color: #19177C } /* Name.Variable.Instance */
-.pygments207 .vm { color: #19177C } /* Name.Variable.Magic */
-.pygments207 .il { color: #666666 } /* Literal.Number.Integer.Long */
-.pygments207 pre.snippet207 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/683cba1bbe9279b5b5934c7a23e67395d2264901/toolchain/docker/merged/cross-build/install-scripts/libffi.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments207"><pre class="lineNumbers snippet207"><code><span></span><span class="ch">#!/usr/bin/env bash</span></code>
+<div class="codesnippet"><style>.pygments213 .hll { background-color: #ffffcc }
+.pygments213  { background: #f8f8f8; }
+.pygments213 .c { color: #408080; font-style: italic } /* Comment */
+.pygments213 .err { border: 1px solid #FF0000 } /* Error */
+.pygments213 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments213 .o { color: #666666 } /* Operator */
+.pygments213 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments213 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments213 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments213 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments213 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments213 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments213 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments213 .ge { font-style: italic } /* Generic.Emph */
+.pygments213 .gr { color: #FF0000 } /* Generic.Error */
+.pygments213 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments213 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments213 .go { color: #888888 } /* Generic.Output */
+.pygments213 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments213 .gs { font-weight: bold } /* Generic.Strong */
+.pygments213 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments213 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments213 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments213 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments213 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments213 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments213 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments213 .kt { color: #B00040 } /* Keyword.Type */
+.pygments213 .m { color: #666666 } /* Literal.Number */
+.pygments213 .s { color: #BA2121 } /* Literal.String */
+.pygments213 .na { color: #7D9029 } /* Name.Attribute */
+.pygments213 .nb { color: #008000 } /* Name.Builtin */
+.pygments213 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments213 .no { color: #880000 } /* Name.Constant */
+.pygments213 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments213 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments213 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments213 .nf { color: #0000FF } /* Name.Function */
+.pygments213 .nl { color: #A0A000 } /* Name.Label */
+.pygments213 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments213 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments213 .nv { color: #19177C } /* Name.Variable */
+.pygments213 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments213 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments213 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments213 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments213 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments213 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments213 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments213 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments213 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments213 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments213 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments213 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments213 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments213 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments213 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments213 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments213 .sx { color: #008000 } /* Literal.String.Other */
+.pygments213 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments213 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments213 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments213 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments213 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments213 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments213 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments213 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments213 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments213 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments213 pre.snippet213 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/5442982a2e2af374066e43f1b2d04c839369d447/toolchain/docker/merged/cross-build/install-scripts/libffi.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments213"><pre class="lineNumbers snippet213"><code><span></span><span class="ch">#!/usr/bin/env bash</span></code>
 <code></code>
 <code><span class="nb">set</span> -ex</code>
 <code></code>
@@ -752,9 +759,9 @@
 
 </div>
         <hr id="end-of-article">
-        <div class="nextupprev"><div class="prevpage"><a href="Building-The-Toolchain.html" title="Building the Cross-Compilation Toolchain"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="C++ Development">Index</a></div><div class="nextpage"><a href="Editor-Setup.html" title="Setting up Visual Studio Code for C++ Development">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+        <div class="nextupprev"><div class="prevpage"><a href="Building-The-Toolchain.html" title="Building the Cross-Compilation Toolchain"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="C++ Development">Index</a></div><div class="nextpage"><a href="Installing-Dependencies.html" title="Installing the dependencies on the Pi">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Thursday, 16 April 2020 12:35 UTC</footer>
+    <footer>Last edited: Tuesday, 14 July 2020 11:53 UTC</footer>
 </body>
 
 </html>

@@ -1,0 +1,407 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
+    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            TeX: { equationNumbers: { autoNumber: "AMS" } },
+            "fast-preview": {
+            disabled: true
+            }
+        });
+    </script>
+    <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="linux,toolchain,raspberry,pi,cross-compilation,cross"/>
+    <meta name="description" content="Installing the cross-compiled libraries from the previous step on the Raspberry Pi."/>
+    <title>Installing the dependencies on the Pi</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a href="../Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a href="Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a href="Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="openEntry" href="Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a href="Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
+            <li><span class="ftriangle"></span><a href="Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a href="Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/index.html">Mathematics</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Installing-Dependencies.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article">print</a>
+            </i>
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Installing the dependencies on the Pi</h1>
+        <i class="author">Pieter P</i>
+        <div>
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+            <li><a href="#os-installation-and-network-configuration">OS installation and network configuration</a></li>
+            <li><a href="#installation-of-the-staging-area">Installation of the staging area</a></li>
+            </ul>
+        </ul>
+  </ul></div>
+
+<h3><a name="os-installation-and-network-configuration" href="#os-installation-and-network-configuration">OS installation and network configuration</a></h3>
+<p>
+    If you haven't set up your Pi yet, follow the instructions on how to do so
+    for <a href="../Installation+Setup/Setting-up-Ubuntu.html">Ubuntu</a> or for
+    <a href="https://www.raspberrypi.org/documentation/installation/installing-images/README.md">Raspbian</a>.
+</p>
+<p>
+    Make sure that you have the following set up correctly:
+<ol>
+    <li>A working network connection to the same local network as your computer.</li>
+    <li>The hostname and DNS or mDNS configured correctly so you can find the Pi on the network as
+        <code>rpi3.local</code>, even if its IP address changes.</li>
+    <li>An SSH configuration on your computer so you can SSH into the Pi using <code>ssh RPi3</code>.</li>
+    <li>An SSH key from your computer installed in the <code>authorized_keys</code> of the Pi so you can SSH into it
+        without having to enter your password each time.</li>
+</ol>
+</p>
+
+<h3><a name="installation-of-the-staging-area" href="#installation-of-the-staging-area">Installation of the staging area</a></h3>
+
+<p>
+    We now have to install all libraries and tools that were cross-compiled in the previous steps to the Pi.
+    This is as easy as just copying over the archive containing the staging area, and then extracting it to
+    the root directory.
+    All files in the staging area are either in <code>/usr/local</code> or in <code>/opt</code>,
+    so it won't interfere with software you installed through the package manager.
+</p>
+<div class="codesnippet"><style>.pygments39 .hll { background-color: #ffffcc }
+.pygments39  { background: #f8f8f8; }
+.pygments39 .c { color: #408080; font-style: italic } /* Comment */
+.pygments39 .err { border: 1px solid #FF0000 } /* Error */
+.pygments39 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments39 .o { color: #666666 } /* Operator */
+.pygments39 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments39 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments39 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments39 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments39 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments39 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments39 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments39 .ge { font-style: italic } /* Generic.Emph */
+.pygments39 .gr { color: #FF0000 } /* Generic.Error */
+.pygments39 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments39 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments39 .go { color: #888888 } /* Generic.Output */
+.pygments39 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments39 .gs { font-weight: bold } /* Generic.Strong */
+.pygments39 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments39 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments39 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments39 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments39 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments39 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments39 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments39 .kt { color: #B00040 } /* Keyword.Type */
+.pygments39 .m { color: #666666 } /* Literal.Number */
+.pygments39 .s { color: #BA2121 } /* Literal.String */
+.pygments39 .na { color: #7D9029 } /* Name.Attribute */
+.pygments39 .nb { color: #008000 } /* Name.Builtin */
+.pygments39 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments39 .no { color: #880000 } /* Name.Constant */
+.pygments39 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments39 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments39 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments39 .nf { color: #0000FF } /* Name.Function */
+.pygments39 .nl { color: #A0A000 } /* Name.Label */
+.pygments39 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments39 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments39 .nv { color: #19177C } /* Name.Variable */
+.pygments39 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments39 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments39 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments39 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments39 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments39 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments39 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments39 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments39 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments39 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments39 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments39 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments39 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments39 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments39 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments39 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments39 .sx { color: #008000 } /* Literal.String.Other */
+.pygments39 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments39 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments39 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments39 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments39 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments39 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments39 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments39 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments39 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments39 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments39 pre.snippet39 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-install-staging.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments39"><pre class="lineNumbers snippet39"><code><span></span><span class="c1"># Copy the staging area archive to the Pi</span></code>
+<code><span class="c1"># This command may take a while, depending on the speed of your SD card</span></code>
+<code>scp ./toolchain/staging-aarch64-rpi3-linux-gnu.tar RPi3:/tmp</code>
+<code><span class="c1"># Install everything to the root of the filesystem</span></code>
+<code><span class="c1"># (will only install to /usr/local and /opt)</span></code>
+<code><span class="c1"># Enter the sudo password of the Pi if necessary</span></code>
+<code><span class="c1"># This command may take a while, depending on the speed of your SD card</span></code>
+<code>ssh -t RPi3 <span class="s2">&quot;sudo tar xf /tmp/staging-aarch64-rpi3-linux-gnu.tar \</span></code>
+<code><span class="s2">    -C / --strip-components=1 --keep-directory-symlink \</span></code>
+<code><span class="s2">    --no-same-owner --no-same-permissions --no-overwrite-dir&quot;</span></code>
+<code><span class="c1"># Configure dynamic linker run-time bindings so newly installed libraries</span></code>
+<code><span class="c1"># are found by the linker</span></code>
+<code><span class="c1"># Enter the sudo password of the Pi if necessary</span></code>
+<code>ssh -t RPi3 <span class="s2">&quot;sudo ldconfig&quot;</span></code></pre></div>
+</div>
+<p>
+    For the options used with the <code>tar</code> command, you can consult the manpage, they're not that important.
+    The important thing is that files in the archive are extracted to the root of the filesystem,
+    e.g. if the archive contains a file
+    <code>staging-aarch64-rpi3-linux-gnu.tar:RPi-Staging/usr/local/bin/python3.8</code>,
+    it will be extracted to <code>/usr/local/bin/python3.8</code>.
+</p>
+<p>
+    To verify that the installation was successful, you can try running the newly installed Python interpreter:
+</p>
+<div class="codesnippet"><style>.pygments52 .hll { background-color: #ffffcc }
+.pygments52  { background: #f8f8f8; }
+.pygments52 .c { color: #408080; font-style: italic } /* Comment */
+.pygments52 .err { border: 1px solid #FF0000 } /* Error */
+.pygments52 .k { color: #008000; font-weight: bold } /* Keyword */
+.pygments52 .o { color: #666666 } /* Operator */
+.pygments52 .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.pygments52 .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.pygments52 .cp { color: #BC7A00 } /* Comment.Preproc */
+.pygments52 .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.pygments52 .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.pygments52 .cs { color: #408080; font-style: italic } /* Comment.Special */
+.pygments52 .gd { color: #A00000 } /* Generic.Deleted */
+.pygments52 .ge { font-style: italic } /* Generic.Emph */
+.pygments52 .gr { color: #FF0000 } /* Generic.Error */
+.pygments52 .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.pygments52 .gi { color: #00A000 } /* Generic.Inserted */
+.pygments52 .go { color: #888888 } /* Generic.Output */
+.pygments52 .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.pygments52 .gs { font-weight: bold } /* Generic.Strong */
+.pygments52 .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.pygments52 .gt { color: #0044DD } /* Generic.Traceback */
+.pygments52 .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.pygments52 .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.pygments52 .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.pygments52 .kp { color: #008000 } /* Keyword.Pseudo */
+.pygments52 .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.pygments52 .kt { color: #B00040 } /* Keyword.Type */
+.pygments52 .m { color: #666666 } /* Literal.Number */
+.pygments52 .s { color: #BA2121 } /* Literal.String */
+.pygments52 .na { color: #7D9029 } /* Name.Attribute */
+.pygments52 .nb { color: #008000 } /* Name.Builtin */
+.pygments52 .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.pygments52 .no { color: #880000 } /* Name.Constant */
+.pygments52 .nd { color: #AA22FF } /* Name.Decorator */
+.pygments52 .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.pygments52 .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.pygments52 .nf { color: #0000FF } /* Name.Function */
+.pygments52 .nl { color: #A0A000 } /* Name.Label */
+.pygments52 .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.pygments52 .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.pygments52 .nv { color: #19177C } /* Name.Variable */
+.pygments52 .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.pygments52 .w { color: #bbbbbb } /* Text.Whitespace */
+.pygments52 .mb { color: #666666 } /* Literal.Number.Bin */
+.pygments52 .mf { color: #666666 } /* Literal.Number.Float */
+.pygments52 .mh { color: #666666 } /* Literal.Number.Hex */
+.pygments52 .mi { color: #666666 } /* Literal.Number.Integer */
+.pygments52 .mo { color: #666666 } /* Literal.Number.Oct */
+.pygments52 .sa { color: #BA2121 } /* Literal.String.Affix */
+.pygments52 .sb { color: #BA2121 } /* Literal.String.Backtick */
+.pygments52 .sc { color: #BA2121 } /* Literal.String.Char */
+.pygments52 .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.pygments52 .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.pygments52 .s2 { color: #BA2121 } /* Literal.String.Double */
+.pygments52 .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.pygments52 .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.pygments52 .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.pygments52 .sx { color: #008000 } /* Literal.String.Other */
+.pygments52 .sr { color: #BB6688 } /* Literal.String.Regex */
+.pygments52 .s1 { color: #BA2121 } /* Literal.String.Single */
+.pygments52 .ss { color: #19177C } /* Literal.String.Symbol */
+.pygments52 .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.pygments52 .fm { color: #0000FF } /* Name.Function.Magic */
+.pygments52 .vc { color: #19177C } /* Name.Variable.Class */
+.pygments52 .vg { color: #19177C } /* Name.Variable.Global */
+.pygments52 .vi { color: #19177C } /* Name.Variable.Instance */
+.pygments52 .vm { color: #19177C } /* Name.Variable.Magic */
+.pygments52 .il { color: #666666 } /* Literal.Number.Integer.Long */
+.pygments52 pre.snippet52 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-install-check.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments52"><pre class="lineNumbers snippet52"><code><span></span><span class="c1"># Check that Python 3.8 and OpenCV were installed correctly</span></code>
+<code>ssh -t RPi3 <span class="s2">&quot;python3.8 -c &#39;import cv2; print(cv2.__version__)&#39;&quot;</span></code></pre></div>
+</div>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"><a href="Dependencies.html" title="Cross-Compiling the Dependencies"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="C++ Development">Index</a></div><div class="nextpage"><a href="Editor-Setup.html" title="Setting up Visual Studio Code for C++ Development">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+    </article>
+    <footer>Last edited: Tuesday, 14 July 2020 13:14 UTC</footer>
+</body>
+
+</html>
