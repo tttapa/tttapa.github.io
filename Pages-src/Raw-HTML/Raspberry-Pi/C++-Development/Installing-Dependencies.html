@@ -1,41 +1,19 @@
 <!--
-@title: Speedrun
-@sequence: 9999
+@title: Installing the dependencies on the Pi
+@sequence: 20
 @shownextupprevpage: true
 @tableofcontents: true
 @author: Pieter P
-@keywords:
-@description: Installing, building and setting everything up as fast as
-              possible, in just a few commands.
+@keywords: linux,toolchain,raspberry,pi,cross-compilation,cross
+@description: Installing the cross-compiled libraries from the previous step on
+              the Raspberry Pi.
 -->
 <html>
-
-<h3>Setup of the necessary software on your computer</h3>
-
-<h4>Install Docker</h4>
-@codesnippet{
-"file": "resources/speedrun-docker.sh"
-}
-<h4>Install some other tools</h4>
-@codesnippet{
-"file": "resources/speedrun-tools.sh"
-}
-<h4>Clone the RPi-Cpp-Toolchain repository</h4>
-@codesnippet{
-"file": "resources/speedrun-clone.sh"
-}
-<h4>Pull the toolchain and the cross-compiled libraries from Docker Hub</h4>
-@codesnippet{
-"file": "resources/speedrun-pull-docker.sh"
-}
-
-<h3>Setup of the necessary software on the Raspberry Pi</h3>
-
-<h4>OS installation and network configuration</h4>
+<h3>OS installation and network configuration</h3>
 <p>
     If you haven't set up your Pi yet, follow the instructions on how to do so
     for <a href="../Installation+Setup/Setting-up-Ubuntu.html">Ubuntu</a> or for
-    <a href="#TODO">Raspbian (TODO)</a>.
+    <a href="https://www.raspberrypi.org/documentation/installation/installing-images/README.md">Raspbian</a>.
 </p>
 <p>
     Make sure that you have the following set up correctly:
@@ -49,7 +27,7 @@
 </ol>
 </p>
 
-<h4>Installation of the staging area</h4>
+<h3>Installation of the staging area</h3>
 
 <p>
     We now have to install all libraries and tools that were cross-compiled in the previous steps to the Pi.
@@ -62,25 +40,17 @@
 "file": "resources/speedrun-install-staging.sh"
 }
 <p>
+    For the options used with the <code>tar</code> command, you can consult the manpage, they're not that important.
+    The important thing is that files in the archive are extracted to the root of the filesystem,
+    e.g. if the archive contains a file
+    <code>staging-aarch64-rpi3-linux-gnu.tar:RPi-Staging/usr/local/bin/python3.8</code>,
+    it will be extracted to <code>/usr/local/bin/python3.8</code>.
+</p>
+<p>
     To verify that the installation was successful, you can try running the newly installed Python interpreter:
 </p>
 @codesnippet{
 "file": "resources/speedrun-install-check.sh"
-}
-
-<h3>Try out the C++ example project</h3>
-
-<h4>Configure and build the example project</h4>
-@codesnippet{
-"file": "resources/speedrun-cmake-build.sh"
-}
-<h4>Copy the tests and the Hello World program to the Pi</h4>
-@codesnippet{
-"file": "resources/speedrun-copy-cpp-proj.sh"
-}
-<h4>Run the tests and the Hello World program on the Pi</h4>
-@codesnippet{
-"file": "resources/speedrun-run.sh"
 }
 
 </html>
