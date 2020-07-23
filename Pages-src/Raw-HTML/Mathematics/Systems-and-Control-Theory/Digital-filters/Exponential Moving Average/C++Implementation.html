@@ -10,18 +10,18 @@
 
 <h3>Dividing by Powers of 2</h3>
 <p>
-    The factor \(\alpha\) in the difference equation of the Exponential Moving 
-    Average filter is a number between zero and one. There are two main ways to 
-    implement this multiplication by \(\alpha\): Either we use floating point 
-    numbers and calculate the multiplication directly, or we use integers, and 
+    The factor \(\alpha\) in the difference equation of the Exponential Moving
+    Average filter is a number between zero and one. There are two main ways to
+    implement this multiplication by \(\alpha\): Either we use floating point
+    numbers and calculate the multiplication directly, or we use integers, and
     express the multiplication as a division by \(1/\alpha \gt 1\).<br>
-    Both floating point multiplication and integer division are relatively 
+    Both floating point multiplication and integer division are relatively
     expensive operations, especially on embedded devices or microcontrollers.
 </p>
 <p>
-    We can, however, choose the value for \(\alpha\) in such a way that 
+    We can, however, choose the value for \(\alpha\) in such a way that
     \(1/\alpha = 2^k, k \in \mathbb{N}\).<br>
-    This is useful, because a division by a power of two can be replaced by a 
+    This is useful, because a division by a power of two can be replaced by a
     very fast right bitshift:
     $$ \alpha \cdot x = \frac{x}{2^k} = x \gg k $$
 </p>
@@ -29,65 +29,65 @@
     We can now rewrite the difference equation of the EMA with this optimization
     in mind:
     $$ \begin{split}
-       y[n] &amp;= \alpha x[n] + (1 - \alpha) y[n-1] \\
-            &amp;= y[n-1] + \alpha \left(x[n] - y[n-1]\right) \\
-            &amp;= y[n-1] + \frac{x[n] - y[n-1]}{2^k} \\
-            &amp;= y[n-1] + \left(x[n] - y[n-1]\right) \gg k 
-       \end{split} $$
+    y[n] &amp;= \alpha x[n] + (1 - \alpha) y[n-1] \\
+    &amp;= y[n-1] + \alpha \left(x[n] - y[n-1]\right) \\
+    &amp;= y[n-1] + \frac{x[n] - y[n-1]}{2^k} \\
+    &amp;= y[n-1] + \left(x[n] - y[n-1]\right) \gg k
+    \end{split} $$
 </p>
 <h4>Negative Numbers</h4>
 <p>
-    There's one caveat though: this doesn't work for negative numbers. 
-    For example, if we try to calculate the integer division \(-15 / 4\) using 
+    There's one caveat though: this doesn't work for negative numbers.
+    For example, if we try to calculate the integer division \(-15 / 4\) using
     this method, we get the following answer:
     $$ \begin{split}
-       -15 / 4   &amp;= -15 \cdot 2^{-2} \\
-       -15 \gg 2 &amp;= 0b11110001 \gg 2 \\
-                 &amp;= 0b11111100 \\
-                 &amp;= -4
-       \end{split} $$
+    -15 / 4 &amp;= -15 \cdot 2^{-2} \\
+    -15 \gg 2 &amp;= 0b11110001 \gg 2 \\
+    &amp;= 0b11111100 \\
+    &amp;= -4
+    \end{split} $$
     This is not what we expected! Integer division in programming languages such
-    as C++ returns the quotient truncated towards zero, so we would expect a 
+    as C++ returns the quotient truncated towards zero, so we would expect a
     value of \(-3\). The result is close, but incorrect nonetheless.
 </p>
 <p>
     This means we'll have to be careful not to use this trick on any negative
     numbers. In our difference equation, both the input \(x[n]\) and the output
     \(y[n]\) will generally be positive numbers, so no problem there, but their
-    difference can be negative. 
+    difference can be negative.
     This is a problem. We'll have to come up with a different representation of
-    the difference equation that doesn't require us to divide any negative 
+    the difference equation that doesn't require us to divide any negative
     numbers:
     $$ \begin{split}
-       y[n] &amp;= y[n-1] + \alpha \left(x[n] - y[n-1]\right) \\
-       y[n] &amp;= y[n-1] + \frac{x[n] - y[n-1]}{2^k} \\
-       2^k y[n] &amp;= 2^k y[n-1] + x[n] - y[n-1] \\[8pt]
-       &amp;\ z[n] \triangleq 2^k y[n] \Leftrightarrow y[n] = 2^{-k} z[n]\\[8pt]
-       z[n] &amp;= z[n-1] + x[n] - 2^{-k} z[n-1]
-       \end{split} $$
-    We now have to prove that \(z[n-1]\) is greater than or equal to zero. 
+    y[n] &amp;= y[n-1] + \alpha \left(x[n] - y[n-1]\right) \\
+    y[n] &amp;= y[n-1] + \frac{x[n] - y[n-1]}{2^k} \\
+    2^k y[n] &amp;= 2^k y[n-1] + x[n] - y[n-1] \\[8pt]
+    &amp;\ z[n] \triangleq 2^k y[n] \Leftrightarrow y[n] = 2^{-k} z[n]\\[8pt]
+    z[n] &amp;= z[n-1] + x[n] - 2^{-k} z[n-1]
+    \end{split} $$
+    We now have to prove that \(z[n-1]\) is greater than or equal to zero.
     We'll prove this using induction:
-    <div style="padding-left: 2em">
-        <u>Base case</u>: \(\quad n-1 = -1\)
-        <div style="padding: 0.75em">
-            The value of \(z[-1]\) is the initial state of the system. We can 
-            just choose any value, so we'll pick a value that's greater than or 
-            equal to zero: \(z[-1] \ge 0\).
-        </div>
-        <u>Induction step</u>: \(\quad n\)
-        <div style="padding: 0.75em">
-            Given that \(z[n-1] \ge 0\), we can now use the difference equation 
-            to prove that \(z[n]\) is also greater than zero:<br>
-            $$ z[n] = z[n-1] + x[n] - 2^{-k} z[n-1] $$
-            We know that the input \(x[n]\) is always zero or positive. <br>
-            Since \(k \gt 1 \Rightarrow 2^{-k} \lt 1\), and since \(z[n-1]\) is 
-            zero or positive as well, we know that \(z[n-1] \ge 2^{-k} z[n-1] 
-            \Rightarrow z[n-1] - 2^{-k} z[n-1] \ge 0\).<br>
-            Therefore, the entire right-hand side is always positive or zero, 
-            because it is a sum of two numbers that are themselves greater than
-            or equal to zero. \(\quad\Box\)
-        </div>
+<div style="padding-left: 2em">
+    <u>Base case</u>: \(\quad n-1 = -1\)
+    <div style="padding: 0.75em">
+        The value of \(z[-1]\) is the initial state of the system. We can
+        just choose any value, so we'll pick a value that's greater than or
+        equal to zero: \(z[-1] \ge 0\).
     </div>
+    <u>Induction step</u>: \(\quad n\)
+    <div style="padding: 0.75em">
+        Given that \(z[n-1] \ge 0\), we can now use the difference equation
+        to prove that \(z[n]\) is also greater than zero:<br>
+        $$ z[n] = z[n-1] + x[n] - 2^{-k} z[n-1] $$
+        We know that the input \(x[n]\) is always zero or positive. <br>
+        Since \(k \gt 1 \Rightarrow 2^{-k} \lt 1\), and since \(z[n-1]\) is
+        zero or positive as well, we know that \(z[n-1] \ge 2^{-k} z[n-1]
+        \Rightarrow z[n-1] - 2^{-k} z[n-1] \ge 0\).<br>
+        Therefore, the entire right-hand side is always positive or zero,
+        because it is a sum of two numbers that are themselves greater than
+        or equal to zero. \(\quad\Box\)
+    </div>
+</div>
 </p>
 <h4>Rounding</h4>
 <p>
@@ -95,54 +95,62 @@
     result to the nearest integer, instead of truncating it towards zero.<br>
     Consider the rounded result of the division \(a/b\). We can then express it
     as a flooring of the result plus one half:
-    $$ \begin{split} 
-       \left\lfloor \frac{a}{b} \right\rceil &amp;= 
-           \left\lfloor \frac{a}{b} + \frac{1}{2} \right\rfloor \\
-        &amp;= \left\lfloor \frac{a + \frac{b}{2}}{b} \right\rfloor \\
-       \end{split} $$
+    $$ \begin{split}
+    \left\lfloor \frac{a}{b} \right\rceil &amp;=
+    \left\lfloor \frac{a}{b} + \frac{1}{2} \right\rfloor \\
+    &amp;= \left\lfloor \frac{a + \frac{b}{2}}{b} \right\rfloor \\
+    \end{split} $$
     When \(b\) is a power of two, this is equivalent to:
-    $$ \begin{split} 
-    \left\lfloor \frac{a}{2^k} \right\rceil &amp;= 
-        \left\lfloor \frac{a}{2^k} + \frac{1}{2} \right\rfloor \\
-     &amp;= \left\lfloor \frac{a + \frac{2^k}{2}}{2^k} \right\rfloor \\
-     &amp;= \left\lfloor \frac{a + 2^{k-1}}{2^k} \right\rfloor \\
-     &amp;= \left(a + 1 \ll \left(k-1\right)\right) \gg k \\
+    $$ \begin{split}
+    \left\lfloor \frac{a}{2^k} \right\rceil &amp;=
+    \left\lfloor \frac{a}{2^k} + \frac{1}{2} \right\rfloor \\
+    &amp;= \left\lfloor \frac{a + \frac{2^k}{2}}{2^k} \right\rfloor \\
+    &amp;= \left\lfloor \frac{a + 2^{k-1}}{2^k} \right\rfloor \\
+    &amp;= \left(a + 1 \ll \left(k-1\right)\right) \gg k \\
     \end{split} $$
 </p>
+
 <h3>Implementation in C++</h3>
+
 <p>
-    We now have everything in place to write an implementation of the EMA in 
-    C++:
+    We now have everything in place to write a basic implementation of the EMA in C++:
 </p>
 
 @codesnippet{
-"name": "EMA.cpp",
-"file": "resources/EMA.cpp"
+"file": "resources/EMA-basic.cpp"
 }
 
 <p>
-    Note how we save \(z[n] - 2^{-k} z[n]\) instead of just \(z[n]\). Otherwise,
-    we would have to calculate \(2^{-k} z[n]\) twice (once to calculate 
-    \(y[n]\), and once on the next iteration to calculate \(2^{-k} z[n-1]\)),
-    and that would be unnecessary.
+    Note how we save \(z[n] - 2^{-k} z[n]\) as the state, instead of just 
+    \(z[n]\). 
+    Otherwise, we would have to calculate \(2^{-k} z[n]\) twice (once to 
+    calculate \(y[n]\), and once on the next iteration to calculate
+    \(2^{-k} z[n-1]\)), and that would be unnecessary.
 </p>
 
 <h3>Signed Rounding Division</h3>
 
 <p>
-    It's possible to implement a signed division using bit shifts as well. The 
-    only difference is that we have to subtract 1 from the dividend if it's 
+    It's possible to implement a signed division using bit shifts as well. The
+    only difference is that we have to subtract 1 from the dividend if it's
     negative.
 </p>
 <p>
-    On ARM and x86 platforms, the performance difference between the signed and 
-    unsigned version is small.<br>
-    On some other architectures, like the AVR architecture used by some Arduino 
-    microcontrollers, the signed version is significantly slower.
+    On ARM and x86 platforms, the absolute performance difference between the
+    signed and unsigned version is not too big, it requires just a few more 
+    instructions. 
+    However, on some other architectures, like the AVR architecture used by some
+    Arduino microcontrollers, the division is by far the most expensive step of 
+    the EMA algorithm, so a slower signed division might have a significant
+    impact on the overall performance. In theory, it should only take a couple 
+    instructions to conditionally subtract 1, based on the sign of the dividend,
+    but this sometimes causes the compiler to refactor the entire division, 
+    resulting in a much slower algorithm.
 </p>
 <p>
     I provided two implementations of the signed division. Notice how on x86 and
-    ARM the second one is faster, while on AVR, the first one is faster.
+    ARM the second one is faster, while on AVR, the first one is faster. 
+    The unsigned division is included for reference.
 </p>
 <p>
     The code was compiled using the <code>-O2</code> optimization level.
@@ -150,33 +158,95 @@
 
 <h4>Implementation of Signed and Unsigned Division by a Multiple of Two</h4>
 @codesnippet{
-    "file": "resources/Rounding-Division.cpp"
+"file": "resources/Rounding-Division.cpp"
 }
 <h4>Assembly Generated on x86_64 (GCC 9.2)</h4>
 @codesnippet{
-    "file": "resources/Rounding-Division-x86_64.S"
+"file": "resources/Rounding-Division-x86_64.S"
 }
 <h4>Assembly Generated on ARM 64 (GCC 8.2)</h4>
 @codesnippet{
-    "file": "resources/Rounding-Division-ARM.S"
+"file": "resources/Rounding-Division-ARM.S"
 }
 <h4>Assembly Generated on AVR (GCC 5.3)</h4>
 @codesnippet{
-    "file": "resources/Rounding-Division-AVR.S"
+"file": "resources/Rounding-Division-AVR.S"
 }
 <p>
-    Keep in mind that an <code>int</code> on AVR is only 16 bits wide, whereas an <code>int</code> on ARM or x86 is
-    32 bits wide.<br>
+    Keep in mind that an <code>int</code> on AVR is only 16 bits wide, whereas
+    an <code>int</code> on ARM or x86 is 32 bits wide.<br>
     If you use 32-bit integers on AVR, the result is even more atrocious.
 </p>
 <p>
-    You can try it for yourself on the <a href="https://godbolt.org/z/cmQJ7W">Compiler Explorer</a>.
+    You can experiment with the different implementations yourself on the
+    <a href="https://godbolt.org/z/cmQJ7W">Compiler Explorer</a>.
 </p>
+<p>
+    The main takeaway from this section is that signed (rounding) division is more expensive than unsigned division.
+</p>
+
+<h4>A better alternative for signed division</h4>
+
+<p>
+    Since the EMA is a linear filter, adding a constant offset to the input results in the same output, but with the
+    same offset added to it. This means that we don't have to worry about negative numbers, we can just add a constant
+    offset to the negative inputs, resulting in only positive numbers. At the output of the filter, the offset is simply
+    removed again.
+</p>
+<p>
+    This approach turns out to be significantly more efficient than the signed divisions discussed above. It allows us
+    to use only unsigned rounding divisions, which are very cheap, and just a single extra subtraction to handle signed
+    types. (Yes, just one, it turns out that adding the offset to the input and subtracting it again from the output
+    can be combined.)
+</p>
+
+<p>
+    <small>
+        The assumption that the EMA is a linear filter is not really valid anymore, because of the rounding and
+        truncation errors introduced by the use of integers in the algorithm. Luckily, the output of the filter
+        turns out to be exactly the same, it doesn't matter if you use true signed rounding division or an
+        unsigned rounding division with offset.
+    </small>
+</p>
+
+<h3>Improved C++ implementation</h3>
+
+<p>
+    The following snippet is an improved version of the previous implementation: it supports both signed and unsigned
+    inputs, allows initialization to a specific value, and has a check to prevent overflow.
+</p>
+
+@codesnippet{
+"file": "resources/EMA.cpp"
+}
+
+<p>
+    When the type is signed, an offset of \(2^{B-1}\) is added, where \(B\) is the number of bits used to represent
+    the state variable. This essentially shifts the value "zero" up to the middle of the range of the state.
+</p>
+
+<p>
+    To check the range of the input for specific template parameters, you can use the <code>supports_range</code>
+    method:
+</p>
+
+@codesnippet{
+"file": "resources/EMA-check.cpp"
+}
 
 <h3>Arduino Example</h3>
 
 @codesnippet{
-    "file": "resources/EMA-Arduino.ino"
-} 
+"file": "resources/EMA-Arduino.ino"
+}
+
+<h3>Additional resources</h3>
+
+<p>
+    The idea to use a constant offset to deal with negative inputs originated in
+    <a href="https://forum.pjrc.com/threads/61941-Exponential-Moving-Average-How-does-it-work">this PJRC forum
+        thread</a>. It also includes a discussion about how the filter works, simulations comparing integer EMA
+    implementations with and without rounding, a pure C implementation, etc.
+</p>
 
 </html>

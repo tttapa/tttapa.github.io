@@ -1,6 +1,5 @@
-__zero_reg__ = 1
 div_s1(int):
-        sbrc r25,7  # Skip if Bit in Register is Cleared: val < 0
+        sbrc r25,7  # Skip if Bit in Register is Cleared: val >= 0
         rjmp .L2
                     # val >= 0
         adiw r24,4  # Add Immediate to Word: val + (1 << (K - 1)) = val + 4
@@ -28,8 +27,8 @@ div_s2(int):
         sbci r19,-1   # Subtract Immediate with Carry: (low byte)
         mov r24,r25
         rol r24       # Rotate Left through Carry: C flag is now sign bit
-        clr r24       # Clear Register: set 24 to 0
-        rol r24       # Rotate Left through Carry: lsb is now sign bit
+        clr r24       # Clear Register
+        rol r24       # Rotate Left through Carry: original sign bit is now lsb
         movw r20,r18
         sub r20,r24   # Subtract without Carry: val + 4 - neg
         sbc r21,__zero_reg__  # Subtract with Carry: (low byte)
