@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdint>     // uint8_t, uint16_t
 #include <type_traits> // std::is_unsigned
 

@@ -1,3 +1,4 @@
+#pragma once
 #include <type_traits> // std::make_unsigned_t, make_signed_t, is_unsigned
 #include <limits>      // std::numeric_limits
 #include <cstdint>     // uint_fast16_t

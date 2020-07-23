@@ -2,7 +2,10 @@
 @title: C++ Implementation
 @author: Pieter P
 @sequence: 30
-@keywords: EMA, Exponential Moving Average, IIR filter, filters, DSP, C++, implementation, algorithm
+@shownextupprevpage: true
+@tableofcontents: true
+@keywords: EMA, Exponential Moving Average, IIR filter, filters, DSP, C++, 
+           implementation, algorithm
 @description: A very fast and efficient Exponential Moving Average implementation
               in C++.
 -->
@@ -117,13 +120,13 @@
 </p>
 
 @codesnippet{
-"file": "resources/EMA-basic.cpp"
+"file": "resources/EMA-basic.hpp"
 }
 
 <p>
-    Note how we save \(z[n] - 2^{-k} z[n]\) as the state, instead of just 
-    \(z[n]\). 
-    Otherwise, we would have to calculate \(2^{-k} z[n]\) twice (once to 
+    Note how we save \(z[n] - 2^{-k} z[n]\) as the state, instead of just
+    \(z[n]\).
+    Otherwise, we would have to calculate \(2^{-k} z[n]\) twice (once to
     calculate \(y[n]\), and once on the next iteration to calculate
     \(2^{-k} z[n-1]\)), and that would be unnecessary.
 </p>
@@ -137,19 +140,19 @@
 </p>
 <p>
     On ARM and x86 platforms, the absolute performance difference between the
-    signed and unsigned version is not too big, it requires just a few more 
-    instructions. 
+    signed and unsigned version is not too big, it requires just a few more
+    instructions.
     However, on some other architectures, like the AVR architecture used by some
-    Arduino microcontrollers, the division is by far the most expensive step of 
+    Arduino microcontrollers, the division is by far the most expensive step of
     the EMA algorithm, so a slower signed division might have a significant
-    impact on the overall performance. In theory, it should only take a couple 
+    impact on the overall performance. In theory, it should only take a couple
     instructions to conditionally subtract 1, based on the sign of the dividend,
-    but this sometimes causes the compiler to refactor the entire division, 
+    but this sometimes causes the compiler to refactor the entire division,
     resulting in a much slower algorithm.
 </p>
 <p>
     I provided two implementations of the signed division. Notice how on x86 and
-    ARM the second one is faster, while on AVR, the first one is faster. 
+    ARM the second one is faster, while on AVR, the first one is faster.
     The unsigned division is included for reference.
 </p>
 <p>
@@ -160,16 +163,16 @@
 @codesnippet{
 "file": "resources/Rounding-Division.cpp"
 }
-<h4>Assembly Generated on x86_64 (GCC 9.2)</h4>
 @codesnippet{
+"name": "Assembly Generated on x86_64 (GCC 9.2)",
 "file": "resources/Rounding-Division-x86_64.S"
 }
-<h4>Assembly Generated on ARM 64 (GCC 8.2)</h4>
 @codesnippet{
+"name": "Assembly Generated on ARM 64 (GCC 8.2)",
 "file": "resources/Rounding-Division-ARM.S"
 }
-<h4>Assembly Generated on AVR (GCC 5.3)</h4>
 @codesnippet{
+"name": "Assembly Generated on AVR (GCC 5.3)",
 "file": "resources/Rounding-Division-AVR.S"
 }
 <p>
@@ -217,7 +220,7 @@
 </p>
 
 @codesnippet{
-"file": "resources/EMA.cpp"
+"file": "resources/EMA.hpp"
 }
 
 <p>
