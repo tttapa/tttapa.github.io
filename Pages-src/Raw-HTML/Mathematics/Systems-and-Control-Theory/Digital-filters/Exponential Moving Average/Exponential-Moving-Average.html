@@ -13,12 +13,12 @@
 <h3>Difference equation</h3>
 
 <p>
-    The Difference equation of an exponential moving average filter is very simple:
+    The difference equation of an exponential moving average filter is very simple:
     $$ y[n] = \alpha x[n] + (1-\alpha) y[n-1] $$
     In this equation, \(y[n]\) is the current output, \(y[n-1]\) is the previous output, and \(x[n]\) is the current
     input;
     \(\alpha\) is a number between 0 and 1. If \(\alpha = 1\), the output is just equal to the input, and no filtering
-    takes place
+    takes place.
 </p>
 <p>
     The filter is called 'exponential', because the weighting factor of previous inputs decreases exponentially.
@@ -32,48 +32,80 @@
     &amp;= \alpha \sum_{k=0}^{n} \left(1-\alpha\right)^{k} x[n-k]
     \end{split} $$
 </p>
+
 <h3>Impulse and step response</h3>
+
 <p>
     From the previous equation, we can now easily calculate the impulse and step response.
 </p>
 <p>
-    The impulse response is the output of the filter when a Kronecker delta function is applied to the input.
+    The impulse response is the output of the filter when a Kronecker delta function is applied to the input.<br>
+    Recall the definition of the Kronecker delta:
     $$ \delta[n] = \begin{cases}
     1 &amp; n = 0 \\
-    0 &amp; n\ne0
+    0 &amp; n\ne0.
     \end{cases} $$
-    $$ y_{impulse}[n] = h[n] = \alpha \sum_{k=0}^{n} \left(1-\alpha\right)^{k} \delta[n-k] = \alpha (1-\alpha)^n $$
+    The impulse response of the EMA is
+    $$ \begin{split}
+    y_{impulse}[n] &amp;= h[n] \\
+    &amp;= \alpha \sum_{k=0}^{n} \left(1-\alpha\right)^{k} \delta[n-k] \\
+    &amp;= \alpha (1-\alpha)^n.
+    \end{split} $$
     For example, if \(\alpha = 0.25\), the impulse response is as follows:
     <img src="images/impulse-response.png" />
 </p>
 <p>
-    The step response is the output of the filter when a Heaviside step function is applied to the input.
+    The step response is the output of the filter when a Heaviside step function is applied to the input.<br>
+    The Heaviside is defined as
     $$ H[n] = \begin{cases}
     0 &amp; n \lt 0 \\
-    1 &amp; n \ge 0
+    1 &amp; n \ge 0.
     \end{cases} $$
-    $$ y_{step}[n] = \alpha \sum_{k=0}^{n} \left(1-\alpha\right)^{k} H[n-k] = \alpha \sum_{k=0}^{n}
-    \left(1-\alpha\right)^{k} $$
+    The step response of the EMA is
+    $$ \begin{split}
+    y_{step}[n] &amp;= \alpha \sum_{k=0}^{n} \left(1-\alpha\right)^{k} H[n-k] \\
+    &amp;= \alpha \sum_{k=0}^{n} \left(1-\alpha\right)^{k} \\
+    &amp;= 1 - \left(1-\alpha\right)^{n+1}.
+    \end{split} $$
     For example, if \(\alpha = 0.25\), the step response is as follows:
     <img src="images/step-response.png" />
 </p>
+
 <h3>Transfer function</h3>
+
 <p>
-    You can express the output of discrete-time linear time-invariant systems, of which the EMA is an example,
-    as the convolution of the input with the impulse response.<br>
-    $$ x[k] = \sum_{n=0}^{+\infty} x[n] \delta[k-n] $$
-    You can easily see that all terms where \(n \ne k\) are zero, because the Kronecker delta is zero in that case.
-    Only the term for \(n = k\) is non-zero, in which case the Kronecker delta is one, so the result is just \(x[k]\).<br/>
-    If \(T\) is the transformation performed by the DTLTI system,
-    and by using the fact that \(T\) is a linear transformation and that it is time-invariant:
+    The output of discrete-time linear time-invariant (DTLTI) systems, of which the EMA is an example,
+    can be expressed as the convolution of the input with the impulse response. In other words,
+    the impulse response describes the behavior of the system, for all possible inputs.
+</p>
+<p>
+    To prove the previous statement, we'll start with the following trivial property:
+    any signal \(x[n]\) can be expressed as a convolution of the Kronecker delta function with itself, that is
+    $$ x[n] = x[n] * \delta[n] = \sum_{k=0}^{+\infty} x[k]\ \delta[n-k]. $$
+    You can easily see that all terms where \(k \ne n\) are zero, because the Kronecker delta is zero in that case.
+    Only the term for \(k = n\) is non-zero, in which case the Kronecker delta is one, so the result is just
+    \(x[n]\).<br>
+    You can also interpret this as the signal being made up of a sum of infinitely many scaled and shifted Kronecker
+    delta functions.
+</p>
+<p>
+    Let \(T\) be the transformation performed by the DTLTI system, then \(y[n]\)
+    is the output after applying \(T\) to the input signal \(x[n]\).
+    The following derivation makes use of the fact that \(T\) is a linear
+    transformation and that it is time-invariant:
     $$ \begin{split}
     y[n] &amp;= T\left(x[n]\right) \\
-    &amp;= T\left(\sum_{k=0}^{\infty} x[k] \delta[k-n]\right) \\
-    &amp;= \sum_{k=0}^{\infty} T\left(x[k] \delta[k-n]\right) \\
-    &amp;= \sum_{k=0}^{\infty} x[k] T\left(\delta[k-n]\right) \\
-    &amp;= \sum_{k=0}^{\infty} x[k] h[k-n] \\
+    &amp;= T\left(\sum_{k=0}^{\infty} x[k]\ \delta[k-n]\right) \\
+    &amp;= \sum_{k=0}^{\infty} T\left(x[k]\ \delta[k-n]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k]\ T\left(\delta[k-n]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k]\ h[k-n] \\
     &amp;= x[n] * h[n]
     \end{split} $$
+    Since the factor \(x[k]\) is independent of time \(n\), it can be moved outside
+    of the \(T\) operator. \(T\) applied to the Kronecker delta is (by definition) the impulse response of \(T\),
+    \(h[n]\), but shifted by \(k\) time steps.
+</p>
+<p>
     Analysis of such systems is usually easier in the Z-domain, in which the convolution is reduced to a simple
     product. <br>
     The (unilateral) Z-transform is defined as:
@@ -83,9 +115,9 @@
     $$ \begin{split}
     {\cal Z}\{y[n]\} &amp;= {\cal Z}\{x[n] * h[n]\} \\
     Y(z) &amp;= \sum_{n=0}^\infty x[n] * h[n] z^{-n}\\
-    Y(z) &amp;= \sum_{n=0}^\infty \sum_{i=0}^\infty x[i] h[n-i] z^{-n} \\
-    Y(z) &amp;= \sum_{i=0}^\infty \sum_{n=0}^\infty x[i] h[n-i] z^{-n + i - i} \\
-    Y(z) &amp;= \sum_{i=0}^\infty x[i] z^{-i} \sum_{n=0}^\infty h[n-i] z^{-(n - i)} \\
+    &amp;= \sum_{n=0}^\infty \sum_{k=0}^\infty x[k] h[n-k] z^{-n} \\
+    &amp;= \sum_{k=0}^\infty \sum_{n=0}^\infty x[k] h[n-k] z^{-n + k - k} \\
+    &amp;= \sum_{k=0}^\infty x[k] z^{-k} \sum_{n=0}^\infty h[n-k] z^{-(n - k)} \\
     Y(z) &amp;= X(z) H(z) \\
     H(z) &amp;= \frac{Y(z)}{X(z)}
     \end{split} $$
@@ -96,9 +128,14 @@
     We can use one of two approaches: use the difference equation and use some of
     the properties of the Z-transform to calculate \(\frac{Y(z)}{X(z)}\), or apply
     the definition of the Z-transform to the impulse response \(h[n]\) directly.
-    <h4>Using the difference equation</h4>
+</p>
+
+<h4>Using the difference equation</h4>
+
+<p>
     All you have to do is apply the time shifting property of the Z transform:
-    $$ {\cal Z}\{y[n-n_0]\} = z^{-n_0}{\cal Z}\{y[n]\} $$
+    $$ \forall n_0 \in \mathbb{N}:
+    {\cal Z}\{y[n-n_0]\} = z^{-n_0}{\cal Z}\{y[n]\} $$
     Then just rearrange the terms.
     $$ \begin{split}
     y[n] &amp;= \alpha x[n] + (1-\alpha) y[n-1] \\
@@ -110,7 +147,11 @@
     \frac{Y(z)}{X(z)} &amp;= \frac{\alpha}{1 - (1-\alpha) z^{-1}} \\
     H(z) &amp;= \frac{\alpha}{1 - (1-\alpha) z^{-1}}
     \end{split} $$
-    <h4>Using the impulse response</h4>
+</p>
+
+<h4>Using the impulse response</h4>
+
+<p>
     $$ \begin{split}
     H(z) &amp;= {\cal Z}\{h[n]\} \\
     &amp;= \sum_{n=0}^{\infty} h[n] z^{-n} \\
@@ -122,9 +163,13 @@
     this is the case for \(\lvert\frac{1-\alpha}{z}\rvert\ \lt 1\).
     (See <a href="https://en.wikipedia.org/wiki/Geometric_series#Formula">Infinite Geometric Series</a>)
 </p>
+
+<h4>Poles and zeros</h4>
+
 <p>
     In these expressions, \(z\) is a complex variable, and \(H(z)\) is a complex function. <br>
-    There are a couple of interesting values for \(z\): values that result in the numerator becoming zero, called <em>zeros</em>,
+    There are a couple of interesting values for \(z\): values that result in the numerator becoming zero, called
+    <em>zeros</em>,
     and values that result in the denominator becoming zero, called <em>poles</em>.
     $$ \begin{split}
     H(z) &amp;= \frac{\alpha}{1 - \frac{1-\alpha}{z}} \\
@@ -141,8 +186,9 @@
 </p>
 <h3>Frequency response</h3>
 <p>
-    An important property of discrete-time linear time-invariant systems is that it preserves the pulsatance (frequency)
-    of sinusoidal signals, only the phase shift and the amplitude are altered.<br>
+    An important property of discrete-time linear time-invariant systems is that it preserves the pulsatance (angular
+    frequency) of sinusoidal signals, only the phase shift and the amplitude are altered.
+    In other words, sines and cosines are eigenfunctions of DTLTI systems.<br>
     This makes it relatively easy to express the frequency response (sometimes called magnitude response) of a filter.
 </p>
 <p>
@@ -153,7 +199,7 @@
 </p>
 <p>
     The frequency response of the filter describes how the spectrum of a signal is altered when it passes
-    through the filter. It relates the spectrum of the output signal \(Y(\omega)\) to the spectrum 
+    through the filter. It relates the spectrum of the output signal \(Y(\omega)\) to the spectrum
     of the input signal \(X(\omega)\). We already had an expression for the spectrum of the output divided
     by the spectrum of the input, we called it the transfer function \(H(z) = Y(z) / X(z)\).
     To get the frequency response of the filter, we can just evaluate the transfer function for \(z = e^{i\omega}\).
@@ -208,7 +254,9 @@
     because it doesn't alter the image of the unit circle, since
     \(\lvert e^{i\omega} \rvert = 1\) or \(\log(\lvert e^{i\omega}\lvert) = 0\).
 </p>
+
 <h4>Cutoff frequency</h4>
+
 <p>
     The cutoff frequency is defined as the frequency of the half-power point, where the power gain is a half. It's
     often called the \(-3\ dB\)-point,
@@ -217,7 +265,7 @@
     $$ \lvert H\left(e^{i\omega_c}\right) \rvert^2 = \frac{1}{2} $$
     $$ \begin{split}
     \frac{\alpha^2}{1 - 2 (1-\alpha) \cos(\omega_c) + (1-\alpha)^2} &amp;= \frac{1}{2} \\
-    \omega_c = \arccos\left(\frac{\alpha^2+2\alpha-2}{2\alpha-  2}\right)
+    \omega_c = \arccos\left(\frac{\alpha^2+2\alpha-2}{2\alpha- 2}\right)
     \end{split} $$
 </p>
 <p>
@@ -228,11 +276,13 @@
     For example, if the sample frequency is \(f_s = 1000\ \frac{samples}{s}\), then \(f =
     \arccos\left(\frac{23}{24}\right)\frac{f_s}{2\pi} \approx 46.12\ Hz\).
 </p>
+
 <h4>Plotting the frequency response in Python</h4>
+
 <p>
     We can use the SciPy and Matplotlib modules to plot the frequency response in Python.
-
-    <pre class="lineNumbers" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> freqz </span></code>
+</p>
+<pre class="lineNumbers" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> freqz </span></code>
 <code><span style="color: #af00db;">import</span><span style="color: #000000;"> matplotlib.pyplot </span><span style="color: #af00db;">as</span><span style="color: #000000;"> plt</span></code>
 <code><span style="color: #af00db;">from</span><span style="color: #000000;"> math </span><span style="color: #af00db;">import</span><span style="color: #000000;"> pi, acos</span></code>
 <code><span style="color: #af00db;">import</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">as</span><span style="color: #000000;"> np</span></code>
@@ -270,6 +320,5 @@
 <code><span style="color: #000000;">plt.show()</span></code></pre>
 
 <img src="images/Bode-EMA-0.25.svg">
-</p>
 
 </html>

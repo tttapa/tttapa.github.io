@@ -12,104 +12,122 @@
 
 <p>
     The difference equation of the Simple Moving Average filter is derived from
-    the mathematical definition of the average of \(N\) values: the sum of the 
+    the mathematical definition of the average of \(N\) values: the sum of the
     values divided by the number of values.
     $$ y[n] = \frac{1}{N} \sum_{i=0}^{N-1}x[n-i] $$
     In this equation, \(y[n]\) is the current output, \(x[n]\) is the current
     input, \(x[n-1]\) is the previous input, etc.<br>
-    \(N\) is the length of the average.    
+    \(N\) is the length of the average.
 </p>
+
 <h3>Impulse and step response</h3>
+
 <p>
-    From the difference equation, we can now easily derive the impulse and step response.
+    From the previous equation, we can now easily calculate the impulse and step response.
 </p>
 <p>
-    The impulse response is the output of the filter when a Kronecker delta function is applied to the input.
-    $$ \delta[n] \triangleq \begin{cases}
+    The impulse response is the output of the filter when a Kronecker delta function is applied to the input.<br>
+    Recall the definition of the Kronecker delta:
+    $$ \delta[n] = \begin{cases}
     1 &amp; n = 0 \\
-    0 &amp; n\ne0
+    0 &amp; n\ne0.
     \end{cases} $$
-    $$ y_{impulse}[n] = h[n] = \frac{1}{N} \sum_{i=0}^{N-1}\delta[n-i] = 
-    \begin{cases}
+    The impulse response of the SMA is
+    $$ \begin{split}
+    y_{impulse}[n] &amp;= h[n] \\
+    &amp;=\frac{1}{N} \sum_{i=0}^{N-1}\delta[n-i] \\
+    &amp;= \begin{cases}
     1/N &amp; 0 \le n \lt N \\
-    0 &amp; \text{otherwise}
-    \end{cases} $$
+    0 &amp; \text{otherwise}.
+    \end{cases}
+    \end{split} $$
     For example, if \(N = 15\), the impulse response is as follows:
     <img src="images/Impulse-SMA.svg" />
 </p>
 <p>
-    The step response is the output of the filter when a Heaviside step function is applied to the input.
-    $$ H[n] \triangleq \begin{cases}
+    The step response is the output of the filter when a Heaviside step function is applied to the input.<br>
+    The Heaviside is defined as
+    $$ H[n] = \begin{cases}
     0 &amp; n \lt 0 \\
-    1 &amp; n \ge 0
+    1 &amp; n \ge 0.
     \end{cases} $$
-    $$ y_{step}[n] = \begin{cases}
+    The step response of the SMA is
+    $$ \begin{split}
+    y_{step}[n] &amp;= \begin{cases}
     0 &amp; n \lt 0 \\
     (n+1)/N &amp; 0 \le n \lt N \\
-    1 &amp; n \ge N \\
-    \end{cases} $$
+    1 &amp; n \ge N. \\
+    \end{cases}
+    \end{split} $$
     For example, if \(N = 15\), the step response is as follows:
     <img src="images/Step-SMA.svg" />
 </p>
+
 <h3>Transfer function</h3>
+
 <p>
-    Any discrete signal can be written as an infinite sum of scaled Kronecker deltas.
-    $$ x[n] = \sum_{k=0}^{+\infty} x[k] \delta[n-k] $$
-    You can easily see that all terms where \(n \ne k\) are zero, because the Kronecker delta is zero in that case.
-    Only the term for \(n = k\) is non-zero, in which case the Kronecker delta is one, so the result is just \(x[k]\).<br>
-    We'll use this property in the following proof.
+    The output of discrete-time linear time-invariant (DTLTI) systems, of which the SMA is an example,
+    can be expressed as the convolution of the input with the impulse response. In other words,
+    the impulse response describes the behavior of the system, for all possible inputs.
 </p>
 <p>
-    You can express the output of discrete-time linear time-invariant systems, of which the SMA is an example,
-    as the convolution of the input with the impulse response.<br>
+    To prove the previous statement, we'll start with the following trivial property:
+    any signal \(x[n]\) can be expressed as a convolution of the Kronecker delta function with itself, that is
+    $$ x[n] = x[n] * \delta[n] = \sum_{k=0}^{+\infty} x[k]\ \delta[n-k]. $$
+    You can easily see that all terms where \(k \ne n\) are zero, because the Kronecker delta is zero in that case.
+    Only the term for \(k = n\) is non-zero, in which case the Kronecker delta is one, so the result is just
+    \(x[n]\).<br>
+    You can also interpret this as the signal being made up of a sum of infinitely many scaled and shifted Kronecker
+    delta functions.
 </p>
-<h4>Proof</h4>
 <p>
-    If \(T\) is the transformation performed by the DTLTI system,
-    and by using the fact that \(T\) is a linear transformation and that it is time-invariant:
+    Let \(T\) be the transformation performed by the DTLTI system, then \(y[n]\)
+    is the output after applying \(T\) to the input signal \(x[n]\).
+    The following derivation makes use of the fact that \(T\) is a linear
+    transformation and that it is time-invariant:
     $$ \begin{split}
     y[n] &amp;= T\left(x[n]\right) \\
-    &amp;= T\left(\sum_{k=0}^{\infty} x[k] \delta[n-k]\right) \\
-    &amp;= \sum_{k=0}^{\infty} T\left(x[k] \delta[n-k]\right) \\
-    &amp;= \sum_{k=0}^{\infty} x[k] T\left(\delta[n-k]\right) \\
-    &amp;= \sum_{k=0}^{\infty} x[k] h[n-k] \\
-    &amp;\triangleq x[n] * h[n]
+    &amp;= T\left(\sum_{k=0}^{\infty} x[k]\ \delta[k-n]\right) \\
+    &amp;= \sum_{k=0}^{\infty} T\left(x[k]\ \delta[k-n]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k]\ T\left(\delta[k-n]\right) \\
+    &amp;= \sum_{k=0}^{\infty} x[k]\ h[k-n] \\
+    &amp;= x[n] * h[n]
     \end{split} $$
-    The \(*\) symbol in the last step is called the convolution operator, and it
-    is defined as the sum in the step before it. \(\quad\Box\)
+    Since the factor \(x[k]\) is independent of time \(n\), it can be moved outside
+    of the \(T\) operator. \(T\) applied to the Kronecker delta is (by definition) the impulse response of \(T\),
+    \(h[n]\), but shifted by \(k\) time steps.
 </p>
 <p>
     Analysis of such systems is usually easier in the Z-domain, in which the convolution is reduced to a simple
     product. <br>
     The (unilateral) Z-transform is defined as:
-    $$ {\cal Z}\{x[n]\} \triangleq \sum_{n=0}^{\infty} x[n] z^{-n} $$
-    If \(X(z) \triangleq {\cal Z}\{x[n]\}\), \(Y(z) \triangleq {\cal Z}\{y[n]\}\) and \(H(z) \triangleq {\cal Z}\{h[n]\}\)
+    $$ {\cal Z}\{x[n]\} = \sum_{n=0}^{\infty} x[n] z^{-n} $$
+    If \(X(z) = {\cal Z}\{x[n]\}\), \(Y(z) = {\cal Z}\{y[n]\}\) and \(H(z) = {\cal Z}\{h[n]\}\)
     are the Z-transforms of the input, output and impulse response respectively, then:
     $$ \begin{split}
     {\cal Z}\{y[n]\} &amp;= {\cal Z}\{x[n] * h[n]\} \\
-    = Y(z) &amp;= \sum_{n=0}^\infty x[n] * h[n] z^{-n}\\
+    Y(z) &amp;= \sum_{n=0}^\infty x[n] * h[n] z^{-n}\\
     &amp;= \sum_{n=0}^\infty \sum_{k=0}^\infty x[k] h[n-k] z^{-n} \\
     &amp;= \sum_{k=0}^\infty \sum_{n=0}^\infty x[k] h[n-k] z^{-n + k - k} \\
     &amp;= \sum_{k=0}^\infty x[k] z^{-k} \sum_{n=0}^\infty h[n-k] z^{-(n - k)} \\
-    &amp;\quad l \triangleq n - k \\
-    &amp;= \sum_{k=0}^\infty x[k] z^{-k} \sum_{l=-k}^\infty h[l] z^{-l} \\
-    &amp;= \sum_{k=0}^\infty x[k] z^{-k} \sum_{l=0}^\infty h[l] z^{-l} \\
-    &amp;= X(z) H(z) \\
+    Y(z) &amp;= X(z) H(z) \\
     H(z) &amp;= \frac{Y(z)}{X(z)}
     \end{split} $$
-    \(H(z)\) is called the transfer function of the system.<br>
-    Changing the boundaries of the second summation is valid, because if \(l\ \lt 0\), then \(h[l]\)
-    is zero by definition of unilateral signals.
+    \(H(z)\) is called the transfer function of the system.
 </p>
 <p>
     Let's calculate the transfer function of the SMA.<br>
     We can use one of two approaches: use the difference equation and use some of
     the properties of the Z-transform to calculate \(\frac{Y(z)}{X(z)}\), or apply
     the definition of the Z-transform to the impulse response \(h[n]\) directly.
-    <h4>Using the difference equation</h4>
+</p>
+
+<h4>Using the difference equation</h4>
+
+<p>
     All you have to do is apply the time shifting property of the Z transform:
     $$ \forall n_0 \in \mathbb{N}:
-       {\cal Z}\{y[n-n_0]\} = z^{-n_0}{\cal Z}\{y[n]\} $$
+    {\cal Z}\{y[n-n_0]\} = z^{-n_0}{\cal Z}\{y[n]\} $$
     Then just use the fact that the Z-transform is linear, and the derivation is
     trivial:
     $$ \begin{split}
@@ -122,14 +140,19 @@
     &amp;= \frac{1}{N} \sum_{i=0}^{N-1}z^{-i} \\
     &amp;= \frac{1}{N} \sum_{i=0}^{N-1}z^{-i+(N-1)-(N-1)} \\
     &amp;= \frac{1}{N} z^{-(N-1)} \sum_{i=0}^{N-1}z^{(N-1)-i} \\
-    &amp;j \triangleq N-1-i \\
+    &amp;\quad\quad j \triangleq N-1-i \\
     &amp;= \frac{1}{N} \frac{\sum_{j=0}^{N-1}z^{j}}{z^{N-1}} \\
+    &amp;= \frac{1}{N} \frac{z^{N-1}+z^{N-2}+\cdots+z^2+z+1}{z^{N-1}} \\
     \end{split} $$
-    In the last steps, we just rearrange some stuff to get only positive powers
+    In the last steps, we just rearrange some terms and keep only positive powers
     of \(z\) in both the numerator and the denominator.
-    <h4>Using the impulse response</h4>
+</p>
+
+<h4>Using the impulse response</h4>
+
+<p>
     For this derivation, we can use the fact that the impulse response \(h[n]\)
-    is only non-zero for the first N terms.
+    is only non-zero for the first \(N\) terms.
     $$ \begin{split}
     H(z) &amp;= {\cal Z}\{h[n]\} \\
     &amp;= \sum_{n=0}^{\infty} h[n] z^{-n} \\
@@ -138,60 +161,65 @@
     It is clear that this expression is identical to the previous one.
 </p>
 <p>
-    We can solve the summation in a different way using the formula for the sum 
+    We can solve the summation in a different way using the formula for the sum
     of a <a href="https://en.wikipedia.org/wiki/Geometric_series#Formula">
         geometric series</a>:
     $$ \sum_{n=0}^{N-1} r^n = \frac{1-r^N}{1-r} $$
     The transfer function then becomes:
-    $$ \begin{split} 
+    $$ \begin{split}
     H(z) &amp;= \frac{1}{N} \sum_{n=0}^{N-1} z^{-n} \\
     &amp;= \frac{1}{N} \sum_{n=0}^{N-1} \left(\frac{1}{z}\right)^n \\
     &amp;= \frac{1}{N} \frac{1-z^{-N}}{1-z^{-1}} \\
+    &amp;= \frac{1}{N} \frac{z^{N} - 1}{z^{N-1}\left(z-1\right)} \\
     \end{split} $$
 </p>
 <p>
     In these expressions, \(z\) is a complex variable, and \(H(z)\) is a complex
     function. <br>
-    There are a couple of interesting values for \(z\): values that result in 
+    There are a couple of interesting values for \(z\): values that result in
     the transfer function becoming zero, called <em>zeros</em>,
-    and values that result in the transfer function becoming undefined, 
+    and values that result in the transfer function becoming undefined,
     called <em>poles</em>.<br>
-    They can be found as the roots of the numerator and the denominator 
+    They can be found as the roots of the numerator and the denominator
     respectively, after eliminating any common factors.
 </p>
 <p>
-    The roots of the numerator are the solutions of \(1-z^{-N} = 0\) or 
-    \(z^N = 1\). Note that this equation has \(N\) solutions, namely all 
-    \(N\)-th roots of unity. 
-    One of the solutions is \(z=1\), but there are \(N-1\) complex solutions as 
-    well, evenly spaced along the unit circle: 
+    The roots of the numerator are the solutions of \(z^{N} - 1 = 0\) or
+    \(z^N = 1\). Note that this equation has \(N\) solutions, namely all
+    \(N\)-th roots of unity.
+    One of the solutions is \(z=1\), but there are \(N-1\) complex solutions as
+    well, evenly spaced along the unit circle:
     \(e^{2\pi jn/N}\ |\ n \in [0, N-1]\).
 </p>
 <p>
-    The roots of the denominator are the solutions of \(1-z=0\). This has just 
-    one solution, \(z=1\).<br>
-    Since both the numerator and the denominator have this root in common, we 
-    have to factor out this common factor.
+    The roots of the denominator are the solutions of \(z^{N-1}\left(z-1\right)=0\).
+    This has just two distinct solutions: \(z=0\) with a multiplicity of \(N-1\)
+    and \(z=1\) with a multiplicity of one.<br>
+    Since both the numerator and the denominator have the root \(z=1\) in
+    common, we have to factor out the common factor \(\left(z-1\right)\).<br>
+    This leaves us with the following \(N-1\) poles and zeros:
     $$ \begin{split}
     \text{zeros} &amp;= \left\{e^{2\pi jn/N}\ |\ n \in [1, N-1]\right\} \\
-    \text{poles} &amp;= \phi \\
+    \text{poles} &amp;= \left\{0\right\}. \\
     \end{split} $$
 </p>
 <p>
+    <!--
     The poles and zeros determine the overall effect of the transfer function,
     so pole-zero plots are a very useful tool when describing filters.<br>
-    This is the pole-zero plot of the same example SMA as before, with 
+    This is the pole-zero plot of the same example SMA as before, with
     \(N = 15\).
     <img src="images/pole-zero.svg" />
-    The zeros are indicated by an <b>O</b>, and the poles by an <b>X</b> 
-    (as discussed before, the SMA doesn't have any poles).
+    The zeros are indicated by an <b>O</b>, and the poles by an <b>X</b>.
+    -->
 </p>
 
 <h3>Frequency response</h3>
 
 <p>
-    An important property of discrete-time linear time-invariant systems is that it preserves the frequency
-    of sinusoidal signals, only the phase shift and the amplitude are altered.<br>
+    An important property of discrete-time linear time-invariant systems is that it preserves the pulsatance (angular
+    frequency) of sinusoidal signals, only the phase shift and the amplitude are altered.
+    In other words, sines and cosines are eigenfunctions of DTLTI systems.<br>
     This makes it relatively easy to express the frequency response (sometimes called magnitude response) of a filter.
 </p>
 <p>
@@ -202,7 +230,7 @@
 </p>
 <p>
     The frequency response of the filter describes how the spectrum of a signal is altered when it passes
-    through the filter. It relates the spectrum of the output signal \(Y(\omega)\) to the spectrum 
+    through the filter. It relates the spectrum of the output signal \(Y(\omega)\) to the spectrum
     of the input signal \(X(\omega)\). We already had an expression for the spectrum of the output divided
     by the spectrum of the input, we called it the transfer function \(H(z) = Y(z) / X(z)\).
     To get the frequency response of the filter, we can just evaluate the transfer function for \(z = e^{i\omega}\).
@@ -212,9 +240,9 @@
     {\cal F}_{DTFT}\{h[k]\} &amp;= \sum_{n=-\infty}^{\infty} h[n] e^{-i\omega n} \\
     &amp;= H(e^{i\omega}) \\
     &amp;= \frac{1}{N} \frac{1-e^{-j\omega N}}{1-e^{-j\omega}} \\
-    &amp;= \frac{1}{N} \frac{e^{-j\omega N/2}}{e^{-j\omega/2}} 
+    &amp;= \frac{1}{N} \frac{e^{-j\omega N/2}}{e^{-j\omega/2}}
     \frac{e^{j\omega N/2}-e^{-j\omega N/2}}{e^{j\omega/2}-e^{-j\omega/2}} \\
-    &amp;= \frac{1}{N} \frac{e^{-j\omega N/2}}{e^{-j\omega/2}} 
+    &amp;= \frac{1}{N} \frac{e^{-j\omega N/2}}{e^{-j\omega/2}}
     \frac{2j \sin\left(\frac{\omega N}{2}\right)}
     {2j \sin\left(\frac{\omega}{2}\right)} \\
     &amp;= \frac{e^{-\frac{j\omega}{2}\left(N-1\right)}}{N}
@@ -224,7 +252,7 @@
     We can now calculate the amplitude of each frequency component in the output by taking the modulus
     of \(H(e^{i\omega})\). For reasons that will become apparent in a minute, we'll calculate the modulus squared.
     $$ \begin{split}
-    \left| H(e^{i\omega}) \right|^2 
+    \left| H(e^{i\omega}) \right|^2
     &amp;= \left| \frac{e^{-\frac{j\omega}{2}\left(N-1\right)}}{N}
     \frac{\sin\left(\frac{\omega N}{2}\right)}
     {\sin\left(\frac{\omega}{2}\right)} \right|^2 \\
@@ -232,8 +260,8 @@
     {\sin^2\left(\frac{\omega}{2}\right)} \\
     \end{split} $$
 
-    \(\omega\) is the normalized pulsatance (angular frequency) in radians per 
-    sample. You can substitute it with \(\omega = \frac{2\pi f}{f_s}\) where 
+    \(\omega\) is the normalized pulsatance (angular frequency) in radians per
+    sample. You can substitute it with \(\omega = \frac{2\pi f}{f_s}\) where
     \(f\) is the frequency in Hertz, and \(f_s\) is the sample frequency of the
     system in Hertz.
 </p>
@@ -250,37 +278,41 @@
     $$ \phi(\omega) = \angle H(e^{j\omega}) $$
 </p>
 <p>
-    The image below shows the bode plot of an SMA with a length of \(N = 9\), 
-    and a sample frequency of \(f_s = 360 \text{Hz}\). The frequency axis is 
-    limited between \(0\ Hz\) and the Nyquist frequency \(f_s/2\). This 
+    The image below shows the bode plot of an SMA with a length of \(N = 9\),
+    and a sample frequency of \(f_s = 360 \text{Hz}\). The frequency axis is
+    limited between \(0\ Hz\) and the Nyquist frequency \(f_s/2\). This
     corresponds to a normalized pulsatance of \(\omega \in [0, \pi)\).
     <img src="images/Bode-SMA.svg" />
     You can clearly see the low-pass behavior of the SMA: low frequencies have a
     near-unit gain, and high frequencies are attenuated.<br>
-    Also note the zeros, where the magnitude plot goes to \(-\infty\ dB\). 
-    In a zero, the transfer function changes sign, so the phase jumps \(180°\) 
+    Also note the zeros, where the magnitude plot goes to \(-\infty\ dB\).
+    In a zero, the transfer function changes sign, so the phase jumps \(180°\)
     as well.
 </p>
 <p>
-    To get a better understanding of where this curve comes from, we can plot 
+    To get a better understanding of where this curve comes from, we can plot
     the entire \(\left| H(z)\right|\) surface in the Z-domain.
-    As mentioned above, the DTFT is just a special case of the Z-transform, 
+    As mentioned above, the DTFT is just a special case of the Z-transform,
     where \(z = e^{i\omega}\), i.e. the unit circle in the complex plane.
-    Remember that the point \(z = e^{i\omega}\) is a point with a distance 
+    Remember that the point \(z = e^{i\omega}\) is a point with a distance
     of \(1\) to the origin, and with an angle of \(\omega\ \mathrm{rad}\)
     between its position vector and the positive x axis.
-@image{
+    @image{
     "file": "images/SMA-H-surf-N9.png"
-} <!-- TODO: add image code link to the HTML image formatter -->
+    }
+    <!-- TODO: add image code link to the HTML image formatter -->
     <small class="image-code-link"><a href="resources/SMA-H-surf-Mayavi.py">Image source code</a></small>
 </p>
 <p>
     The image of the unit circle is shown in red. Notice that this is the same curve as the blue curve in the
     magnitude response graph above:
     close to 0 when \(\omega → 0\) (the right half of the circle) and negative when \(\omega → \pi\) (the left half of
-    the circle). The positive x axis points to the right-hand side, the y axis points away from you, and the z axis points up).<br>
+    the circle). The positive x axis points to the right-hand side, the y axis points away from you, and the z axis
+    points up).<br>
 </p>
+
 <h4>Cutoff frequency</h4>
+
 <p>
     The cutoff frequency is defined as the frequency of the half-power point, where the power gain is a half. It's
     often called the \(-3\ dB\)-point,
@@ -295,16 +327,16 @@
     \sin^2\left(\frac{\omega_c N}{2}\right) - \frac{N^2}{2}
     \sin^2\left(\frac{\omega_c}{2}\right) &amp;= 0 \\
     \end{split} $$
-    This equation doesn't have a general analytical solution, but we can use 
+    This equation doesn't have a general analytical solution, but we can use
     numerical methods to determine the cut-off frequency.
     <img src="images/SMA-cutoff-sin-intersection.svg">
-    Note that the intersections at zero and \(2\pi\) are not valid solutions. 
+    Note that the intersections at zero and \(2\pi\) are not valid solutions.
     In these points the transfer function is undefined, because it evaluates to
-    \(0/0\). We only care about the first solution for 
+    \(0/0\). We only care about the first solution for
     \(\omega_c \in (0, \pi)\).<br>
-    A possible approach to find the intersection is to use the 
-    <a href="https://en.wikipedia.org/wiki/Newton%27s_method">Newton-Raphson 
-    method</a>.<br>
+    A possible approach to find the intersection is to use the
+    <a href="https://en.wikipedia.org/wiki/Newton%27s_method">Newton-Raphson
+        method</a>.<br>
     A good starting point seems to be at half the period of the high-frequency
     sine wave.<br>
     We don't have to keep the squares, because both sines will be positive in
@@ -316,16 +348,17 @@
     \cos\left(\frac{\omega_c}{2}\right) \\
     \omega_c^{(0)} &amp;= \pi / N \\
     \end{split} $$
-    A Python implementation can be found in the <code>get_sma_cutoff</code> 
+    A Python implementation can be found in the <code>get_sma_cutoff</code>
     function in the snippet below.
 </p>
 
 <h3>Plotting the frequency response, impulse response and step response in Python</h3>
+
 <p>
     We can use the SciPy and Matplotlib modules to plot the frequency response in Python.<br>
     This is the script that was used to generate the plots in the previous paragraphs.
-
-    <pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.optimize </span><span style="color: #af00db;">import</span><span style="color: #000000;"> newton</span></code>
+</p>
+<pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.optimize </span><span style="color: #af00db;">import</span><span style="color: #000000;"> newton</span></code>
 <code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> freqz, dimpulse, dstep</span></code>
 <code><span style="color: #af00db;">from</span><span style="color: #000000;"> math </span><span style="color: #af00db;">import</span><span style="color: #000000;"> sin, cos, sqrt, pi</span></code>
 <code><span style="color: #af00db;">import</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">as</span><span style="color: #000000;"> np</span></code>
@@ -404,7 +437,8 @@
 
 <h3>Comparing the Simple Moving Average filter to the Exponential Moving Average filter</h3>
 Using the same Python functions as before, we can plot the responses of the EMA and the SMA on top of each other. <br>
-First, the length \(N\) of the SMA is chosen, then its \(3\ dB\) cut-off frequency is calculated, and this frequency is then used to design the EMA. Do note that this is a fairly arbitrary decision.
+First, the length \(N\) of the SMA is chosen, then its \(3\ dB\) cut-off frequency is calculated, and this frequency is
+then used to design the EMA. Do note that this is a fairly arbitrary decision.
 <img src="images/Bode-SMA-EMA.svg">
 <img src="images/Impulse-SMA-EMA.svg">
 <img src="images/Step-SMA-EMA.svg">
@@ -501,7 +535,5 @@ First, the length \(N\) of the SMA is chosen, then its \(3\ dB\) cut-off frequen
 <code><span style="color: #000000;">plt.xlim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">1</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s, </span><span style="color: #09885a;">2</span><span style="color: #000000;">*</span><span style="color: #000000;">N</span><span style="color: #000000;">/</span><span style="color: #000000;">f_s)</span></code>
 <code><span style="color: #000000;">plt.legend()</span></code>
 <code><span style="color: #000000;">plt.show()</span></code></pre>
-
-</p>
 
 </html>
