@@ -83,7 +83,8 @@ def addAnchors(html: str, metadata: dict) -> str:
     toc += '<i class="material-icons">list</i>'
     toc += '</h4>\n'
     toc += '  <ul>\n'
-    current_level = min(map(lambda x: x[1], anchors.values()))
+    initial_level = min(map(lambda x: x[1], anchors.values()))
+    current_level = initial_level
     for name, v in anchors.items():
         title, level, code_snippet = v
         if code_snippet:
@@ -100,7 +101,7 @@ def addAnchors(html: str, metadata: dict) -> str:
         toc += '<li>'
         toc += f'<a href="#{name}">{title}</a>'
         toc += '</li>\n'
-    while current_level > 1:
+    while current_level > initial_level:
         current_level -= 1
         toc += '    ' * (current_level + 1) + '</ul>\n'
         # toc += '    ' * current_level + '</li>\n'
