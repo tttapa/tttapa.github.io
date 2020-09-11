@@ -21,8 +21,11 @@ pages_dir = normpath(join(script_dir, "../../Pages"))
 src_dir = normpath(join(script_dir, "../Raw-HTML"))
 
 def touch(fname, times=None):
-    with open(fname, 'a'):
-        os.utime(fname, times)
+    try:
+        with open(fname, 'a'):
+            os.utime(fname, times)
+    except FileNotFoundError as e:
+        print(e)
 
 for root, dirs, files in os.walk(pages_dir):
     for f in files:

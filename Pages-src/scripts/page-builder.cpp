@@ -168,6 +168,12 @@ class PagesParser {
     }
 
     void handle_finished_mjpage(const Page &page) {
+        std::ifstream f(output_dir / page.rel_path);
+        string line;
+        if (std::getline(f, line) && line != "<!DOCTYPE HTML>")
+            throw std::runtime_error("MathJax compilation failed for " +
+                                     page.getTitle() + " (" +
+                                     page.abs_source_path.string() + ")");
         Green(cout) << "Page `" << page.getTitle() << "` finished" << endl;
     }
 
@@ -179,11 +185,8 @@ class PagesParser {
         outfile << out;
         outfile.close();
         path scripts_dir = source_dir.parent_path() / "scripts";
-        path node_modules = scripts_dir / "node_modules";
-        string command = node_modules / "mathjax-node-page" / "bin" / "mjpage";
-        command += " --output=CommonHTML --eqno=AMS "
-                   "--fontURL=/MathJax/fonts/HTML-CSS";
-        command += " < \"";
+        string command = scripts_dir / "mathjax-compile.js";
+        command += " \"";
         command += tmp_dir / page.rel_path;
         command += "\" > \"";
         command += output_dir / page.rel_path;
@@ -234,17 +237,14 @@ class PagesParser {
         }
     }
 
-    /**
-     * @brief   Export a regular page.
-     */
-    void exportPage(const Page &page) {
-        string out = createPage(page, page_template);
+    void exportPage(const Page &page, const string &template_content) {
+        bool exportLaTeX = task == ServerSideLaTeX || //
+                           task == ServerSideLaTeXPDF;
+        string out = createPage(page, template_content, exportLaTeX);
         bool hasLaTeX = false;
         hasLaTeX = hasLaTeX || out.find("\\(") != string::npos;
         hasLaTeX = hasLaTeX || out.find("$$") != string::npos;
         hasLaTeX = hasLaTeX || out.find("\\[") != string::npos;
-        bool exportLaTeX =
-            task == ServerSideLaTeX || task == ServerSideLaTeXPDF;
         if (exportLaTeX && hasLaTeX) {
             export_mjpage(page, out);
         } else {
@@ -255,17 +255,23 @@ class PagesParser {
     }
 
     /**
+     * @brief   Export a regular page.
+     */
+    void exportPage(const Page &page) { exportPage(page, page_template); }
+
+    /**
      * @brief   Export the index page of a directory.
      */
     void exportPage(const PageDirectory &page) {
-        string out = createPage(page, index_template);
+        string out = index_template;
         replace(out, ":index:", generateIndex(page));
-        std::ofstream outfile(output_dir / page.rel_path);
-        outfile << out;
+        exportPage(page, out);
     }
 
-    string createPage(const Page &page, string pageTemplate) {
+    string createPage(const Page &page, string pageTemplate, bool mathjax) {
         string out = pageTemplate;
+        replace(out, ":mathjax:",
+                mathjax ? "<!-- No MathJax -->" : mathjax_template);
         replace(out, ":title:", page.getTitle());
         replace(out, ":nav:", generateNavigation(page));
         replace(out, ":filenamepdf:", page.rel_path.stem().string() + ".pdf");
@@ -536,6 +542,7 @@ class PagesParser {
 
     void init() {
         load_template();
+        mathjax_template = read_file(template_dir / "mathjax_template.html");
         page_template = read_file(template_dir / "template.html");
         index_template = read_file(template_dir / "template_index.html");
         index_item_template =
@@ -738,6 +745,7 @@ class PagesParser {
     path template_dir;
     string metadata_template;
     vector<string> metadata_keys;
+    string mathjax_template;
     string page_template;
     string index_template;
     string index_item_template;

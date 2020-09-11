@@ -1,0 +1,249 @@
+<!--
+@title: Model of a moving-coil galvanometer
+@sequence: 10
+@shownextupprevpage: true
+@tableofcontents: true
+@author: Pieter P
+@keywords: galvanometer,model,differential equation,vu meter,moving-coil,
+           current,magnetism,eddy currents,faraday,lenz
+@description: Derivation of the mechanical model of a moving-coil galvanometer.
+-->
+<html>
+
+<h2>Construction</h2>
+
+<p>
+    An analog VU meter is just a moving-coil galvanometer. The figure below shows a schematic representation:
+</p>
+@image{
+"file": "images/moving-coil-instrument.svg",
+"caption": "Schematic representation of a moving-coil instrument."
+}
+<p>
+    The needle moves on a pivot and is kept in place using a spiral-shaped torsion spring.
+    A rectangular coil is fixed to the needle. The coil moves in an air gap between the fixed permanent magnet and a
+    cylindrical iron core.
+    This configuration results in a strong, close to radial magnetic field in the air gap.
+</p>
+
+<h2>Law's of motion</h2>
+
+<h3>Force on the coil</h3>
+
+<h4>External current</h4>
+
+<p>
+    When current flows through the coil, the force on one half of the coil is given by Lorentz's Force Law:
+    $$ \vec{F}_L = Ni\vec{l} \times \vec{B}, $$
+    where \(N\) is the number of windings, \(i\) is the current, \(\vec{l}\) is a vector that points along the vertical
+    part of the wires of the coil, in the direction of the current, and with the same length as the height of the coil,
+    and \(\vec{B}\) is the magnetic field vector.<br>
+    In the figure above, \(\vec{B}\) is shown using black arrows, the vector \(Ni\vec{l}\) is shown in red. The one on
+    the left points out of the page, and the one on the right points into the page. The resulting force vectors are
+    shown in green. You can verify their direction using the right-hand rule (middle finger is the magnetic
+    field vector \(\vec{B}\), index finger is the current vector \(Ni\vec{l}\), thumb is the force vector
+    \(\vec{F}_L\)).
+</p>
+<p>
+    The magnitude of the Lorentz force is then
+    $$ F_L = \lVert \vec{F}_L \rVert = NilB \sin(\varphi), $$
+    where \(\varphi\) is the angle between the magnetic field vector and the direction of the current. Because the
+    magnetic field in the air gap is radial, this angle is always \(90°\), so this simplifies to
+    $$ F_L = NilB. $$
+</p>
+<p>
+    The horizontal part of the coil (parallel to the page) experiences no net force, since the current at the bottom
+    and at the top of the coil flows in opposite directions and the magnetic field is symmetric.
+</p>
+
+<h4>Eddy currents</h4>
+
+<p>
+    The coil is wound around a rectangular piece of metal. When the needle moves, the armature (coil and the
+    rectangular piece of metal) rotates in the magnetic field. This rotation causes the magnetic flux through the
+    armature to change, which according to Faraday's Law of Induction induces a current in the metal, resulting
+    in a magnetic field that opposes the rotation (this is Lenz's Law). These induced currents are called Eddy
+    currents or Foucault's currents, and the same principle is used for
+    <a href="https://en.wikipedia.org/wiki/Eddy_current_brake">induction brakes</a> in high-speed trains,
+    for example.<br>
+    The magnitude of this opposing force is proportional to the rate of change of the magnetic flux in the armature,
+    \(\frac{\partial\Phi_B}{\partial t}\). In a first order approximation, this is simply proportional to the angular
+    velocity of the armature, \(\dot{\theta} = \frac{\partial\theta}{\partial t}\):
+    $$ F_d = -c\,\dot{\theta}, $$
+    where \(c\) is a proportionality constant that takes into account the area of the armature, the resistance of
+    the metal it's made of, the strength of the magnetic field, etc.
+</p>
+
+<h3>Torque on the coil</h3>
+
+<p>
+    The torque on the coil caused by the current is
+    $$ \tau_L = 2 r F_L = 2rNilB = fi, $$
+    where \(r\) is the radius of the coil. The factor two accounts for the two halves of the coil (there are two
+    green force vectors that have to be summed together). Since the number of windings, the dimensions of the coil,
+    and the strength of the magnet are all constant, we introduce a constant \(f = 2rNlB\).
+</p>
+<p>
+    The damping force \(F_d\) caused by induction in the armature causes an opposing torque, proportional to the
+    velocity of the needle:
+    $$ \tau_d = - rc\,\dot{\theta} = -d\dot{\theta}. $$
+    Again, a constant \(d = rc\) is introduced to make future calculations easier.
+</p>
+<p>
+    When the needle moves away from its center position, there is a third torque, caused by the torsion spring. This
+    torque can be approximated using Hooke's law:
+    $$ \tau_H = -k \theta, $$
+    where \(k\) is the torsion coefficient (spring constant), and \(\theta\) is the angle of the needle.
+</p>
+<h3>Rotational version of Newton's Second Law</h3>
+<p>
+    Newton's Second Law (\(F = ma\)) has a rotational equivalent that relates the net torque to the angular
+    acceleration of an object:
+    $$ \tau = I \alpha, $$
+    where \(\tau\) is the net torque, \(I\) is the moment of inertia, and \(\alpha = \ddot{\theta}\) is the
+    angular acceleration.
+</p>
+<p>
+    Applying this law to the three torques derived above:
+    $$ \begin{align*}
+    \tau_L + \tau_d + \tau_H &amp;= I \alpha \\
+    fi - d\dot{\theta} - k\theta &amp;= I \ddot{\theta} \\
+    I \ddot{\theta} + d\dot{\theta} + k\theta &amp; = fi.
+    \end{align*} $$
+</p>
+<p>
+    Both the angle \(\theta\) and the current \(i\) vary over time. This results in the differential equation
+    $$ \begin{equation} I \ddot{\theta}(t) + d\dot{\theta}(t) + k\theta(t) = fi(t). \label{ode-galvo} \end{equation} $$
+</p>
+<p>
+    Recall that \(I\), \(d\), \(k\) and \(f\) are physical constants, \(\theta(t)\) is the angle of the needle, and
+    \(i(t)\) is the current applied to the coil. Overdots indicate derivatives with respect to time.
+</p>
+
+<h2>The damped harmonic oscillator</h2>
+
+<p>
+    You might recognize the previous equation \(\eqref{ode-galvo}\) as the equation for the damped harmonic oscillator
+    $$ \begin{equation} m \ddot{x}(t) + d\dot{x}(t) + kx(t) = f(t). \label{damp-harm-osc} \end{equation} $$
+    In this equation, \(x(t)\) is the displacement,
+    \(m\) is the mass (cfr. moment of inertia \(I\)), \(d\) is the damping factor, \(k\) is the
+    spring constant, and \(f(t)\) is an external driving force.
+</p>
+<p>
+    The damped harmonic oscillator is a well-known problem, so in the remainder of this document, we'll use the
+    formulation in equation \(\eqref{damp-harm-osc}\), because it uses the symbol names you'll usually find in
+    the literature. Apart from naming conventions, equations \(\eqref{ode-galvo}\) and \(\eqref{damp-harm-osc}\) are
+    completely equivalent.
+</p>
+<p>
+    To make solving the equation easier, we'll define two more constants:
+    $$ \begin{equation} \begin{aligned}
+    \omega_n \triangleq&amp; \sqrt{\frac{k}{m}} \\
+    \zeta \triangleq&amp; \frac{d}{2\sqrt{km}}
+    \end{aligned}
+    \label{omega_n-zeta}
+    \end{equation} $$
+    Equation \(\eqref{damp-harm-osc}\) then becomes:
+    $$ \begin{equation}
+    \ddot{x}(t) + 2\zeta\omega_n \dot{x}(t) + \omega_n^2 x(t) = \frac{1}{m} f(t)
+    \label{damp-harm-osc2} \end{equation} $$
+</p>
+
+<h3>Solution of the damped harmonic oscillator</h3>
+
+<p>
+    Equation \(\eqref{damp-harm-osc2}\) is a linear ordinary differential equation with constant coefficients, so the
+    general solution is the sum of the homogeneous solution and a particular solution:
+    $$ x(t) = x_h(t) + x_p(t) $$
+</p>
+<p>
+    In this section, we'll derive the solution of the step response, that is, the solution for \(x(t)\) if 
+    \(f(t) = u(t)\), the Heaviside step function:
+    $$ u(t) \triangleq \begin{cases} 
+        0 &amp; t &lt; 0 \\
+        1/2 &amp; t = 0 \\
+        1 &amp; t &gt; 0 \end{cases} $$
+</p>
+
+<h4>Homogeneous solution</h4>
+
+<p>
+    The homogeneous solution \(x_h(t)\) is the solution to
+    $$ \begin{equation}
+    \ddot{x}_h(t) + 2\zeta\omega_n \dot{x}_h(t) + \omega_n^2 x_h(t) = 0. 
+    \label{eq-homog-sol}
+    \end{equation} $$
+    The characteristic equation is
+    $$ \lambda^2 + 2\zeta\omega_n \lambda + \omega_n^2 = 0, $$
+    with the solutions
+    $$ \lambda_{1,2} = -\zeta\omega_n \pm \omega_n \sqrt{\zeta^2 - 1}. $$
+    The homogeneous solution is then 
+    $$ \begin{equation}
+    x_h(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t}, \label{homog-sol}
+    \end{equation} $$
+    where \(c_1\) and \(c_2\) are two arbitrary real constants of integration.
+</p>
+
+<h4>Particular solution for the step response</h4>
+
+<p>
+    The particular solution \(x_p(t)\) is a (preferably simple) solution to 
+    $$ \begin{equation} 
+    \ddot{x}_p(t) + 2\zeta\omega_n \dot{x}_p(t) + \omega_n^2 x_p(t) = \frac{1}{m} u(t).
+    \label{eq-part-sol} 
+    \end{equation} $$
+</p>
+<p>
+    The Heaviside step function \(u(t)\) is flat everywhere, so its derivatives are zero, except in \(t=0\), 
+    where they are undefined:
+    $$ \begin{aligned} 
+    \forall t \ne 0: &amp; \\
+    \dot{u}(t) &amp;\equiv 0 \\
+    \ddot{u}(t) &amp;\equiv 0 
+    \end{aligned} $$
+</p>
+<p>
+    A guess for the particular solution could be \(x_p(t) = c_3 u(t)\). You can substitute this into 
+    equation \(\eqref{eq-part-sol}\) to verify that this is indeed a solution, if \(c_3 = \frac{1}{m\omega_n^2} = \frac{1}{k}\):
+    $$ \begin{aligned} 
+    \cancel{c_3 \ddot{u}(t)} + \cancel{2 c_3 \zeta \omega_n \dot{u}(t)} + c_3 \omega_n^2 u(t) &amp;= \frac{1}{m} u(t)
+    \end{aligned} $$
+</p>
+
+<h4>General solution for the step response</h4>
+
+<p>
+    The general solution is the sum of the homogeneous and the particular solution:
+    $$ \begin{equation} 
+    x(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t} + \frac{1}{k} u(t) 
+    \end{equation} $$
+</p>
+<h4>Determining the constants of integration</h4>
+<p>
+    To find \(c_1\) and \(c_2\), we use the following initial conditions:
+    $$ \begin{cases}
+    x(0^+) = 0 \\[0.3em]
+    \dot{x}(0^+) = 0 \end{cases} $$
+    They are specified at \(t=0^+\), which should be understood as a limit for \(t\) approaching zero from the right, because 
+    the derivatives are undefined at \(t=0\).
+    $$ \dot{x}(0^+) = 0 \quad\Leftrightarrow\quad \lim_{t\rightarrow 0^+} \dot{x}(t) = 0 $$
+    For the practical computation \(c_1\) and \(c_2\), this doesn't matter, but the discontinuity of the \(\dot{x}\) does 
+    imply that we cannot extend the solution for \(t &lt; 0\).
+</p>
+<p>
+    In order to be able to evaluate the second boundary condition, we need an expression for \(\dot{x}(t)\). Luckily, \(x(t)\)
+    consists of just exponentials and a flat Heaviside step (recall that \(\dot{u}(t) \equiv 0\)).
+    $$ \dot{x}(t) = c_1 \lambda_1 e^{\lambda_1t} + c_2 \lambda_2 e^{\lambda_2t} $$ 
+    Evaluating for \(\lim_{t\rightarrow 0^+}\):
+    $$ \begin{cases} 
+    x(0^+) = c_1 + c_2 + \dfrac{1}{k} &amp;= 0\\[0.3em]
+    \dot{x}(0^+) = c_1 \lambda_1 + c_2 \lambda_2 &amp;= 0
+    \end{cases} $$ 
+    This is simply a system of two equations and two unknowns, \(c_1\) and \(c_2\). The solutions are:
+    $$ \begin{cases}
+    c_1 = \dfrac{1}{k\left(\lambda_1/\lambda_2 - 1\right)} \\[0.3em]
+    c_2 = \dfrac{1}{k\left(\lambda_2/\lambda_1 - 1\right)}
+    \end{cases} $$
+</p>
+
+</html>

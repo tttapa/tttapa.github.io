@@ -1,152 +1,688 @@
-<!DOCTYPE html><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
     <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
     <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
-    <script type="text/x-mathjax-config">
-        MathJax.Hub.Config({
-            TeX: { equationNumbers: { autoNumber: "AMS" } },
-            "fast-preview": {
-            disabled: true
-            }
-        });
-    </script>
-    <script type="text/javascript" src="/MathJax/MathJax.js?config=TeX-AMS_SVG"></script>
+    <!-- No MathJax -->
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
     <meta name="theme-color" content="#ccc">
     <meta name="keywords" content="Division,NEON,integer,power of two,signed,unsigned,255,shift">
     <meta name="description" content="Snippets for dividing integers using NEON.">
     <title>Division</title>
-<style type="text/css">.mjx-chtml {display: inline-block; line-height: 0; text-indent: 0; text-align: left; text-transform: none; font-style: normal; font-weight: normal; font-size: 100%; font-size-adjust: none; letter-spacing: normal; word-wrap: normal; word-spacing: normal; white-space: nowrap; float: none; direction: ltr; max-width: none; max-height: none; min-width: 0; min-height: 0; border: 0; margin: 0; padding: 1px 0}
-.MJXc-display {display: block; text-align: center; margin: 1em 0; padding: 0}
-.mjx-chtml[tabindex]:focus, body :focus .mjx-chtml[tabindex] {display: inline-table}
-.mjx-full-width {text-align: center; display: table-cell!important; width: 10000em}
-.mjx-math {display: inline-block; border-collapse: separate; border-spacing: 0}
-.mjx-math * {display: inline-block; -webkit-box-sizing: content-box!important; -moz-box-sizing: content-box!important; box-sizing: content-box!important; text-align: left}
-.mjx-numerator {display: block; text-align: center}
-.mjx-denominator {display: block; text-align: center}
-.MJXc-stacked {height: 0; position: relative}
-.MJXc-stacked > * {position: absolute}
-.MJXc-bevelled > * {display: inline-block}
-.mjx-stack {display: inline-block}
-.mjx-op {display: block}
-.mjx-under {display: table-cell}
-.mjx-over {display: block}
-.mjx-over > * {padding-left: 0px!important; padding-right: 0px!important}
-.mjx-under > * {padding-left: 0px!important; padding-right: 0px!important}
-.mjx-stack > .mjx-sup {display: block}
-.mjx-stack > .mjx-sub {display: block}
-.mjx-prestack > .mjx-presup {display: block}
-.mjx-prestack > .mjx-presub {display: block}
-.mjx-delim-h > .mjx-char {display: inline-block}
-.mjx-surd {vertical-align: top}
-.mjx-surd + .mjx-box {display: inline-flex}
-.mjx-mphantom * {visibility: hidden}
-.mjx-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 2px 3px; font-style: normal; font-size: 90%}
-.mjx-annotation-xml {line-height: normal}
-.mjx-menclose > svg {fill: none; stroke: currentColor; overflow: visible}
-.mjx-mtr {display: table-row}
-.mjx-mlabeledtr {display: table-row}
-.mjx-mtd {display: table-cell; text-align: center}
-.mjx-label {display: table-row}
-.mjx-box {display: inline-block}
-.mjx-block {display: block}
-.mjx-span {display: inline}
-.mjx-char {display: block; white-space: pre}
-.mjx-itable {display: inline-table; width: auto}
-.mjx-row {display: table-row}
-.mjx-cell {display: table-cell}
-.mjx-table {display: table; width: 100%}
-.mjx-line {display: block; height: 0}
-.mjx-strut {width: 0; padding-top: 1em}
-.mjx-vsize {width: 0}
-.MJXc-space1 {margin-left: .167em}
-.MJXc-space2 {margin-left: .222em}
-.MJXc-space3 {margin-left: .278em}
-.mjx-test.mjx-test-display {display: table!important}
-.mjx-test.mjx-test-inline {display: inline!important; margin-right: -1px}
-.mjx-test.mjx-test-default {display: block!important; clear: both}
-.mjx-ex-box {display: inline-block!important; position: absolute; overflow: hidden; min-height: 0; max-height: none; padding: 0; border: 0; margin: 0; width: 1px; height: 60ex}
-.mjx-test-inline .mjx-left-box {display: inline-block; width: 0; float: left}
-.mjx-test-inline .mjx-right-box {display: inline-block; width: 0; float: right}
-.mjx-test-display .mjx-right-box {display: table-cell!important; width: 10000em!important; min-width: 0; max-width: none; padding: 0; border: 0; margin: 0}
-.MJXc-TeX-unknown-R {font-family: monospace; font-style: normal; font-weight: normal}
-.MJXc-TeX-unknown-I {font-family: monospace; font-style: italic; font-weight: normal}
-.MJXc-TeX-unknown-B {font-family: monospace; font-style: normal; font-weight: bold}
-.MJXc-TeX-unknown-BI {font-family: monospace; font-style: italic; font-weight: bold}
-.MJXc-TeX-ams-R {font-family: MJXc-TeX-ams-R,MJXc-TeX-ams-Rw}
-.MJXc-TeX-cal-B {font-family: MJXc-TeX-cal-B,MJXc-TeX-cal-Bx,MJXc-TeX-cal-Bw}
-.MJXc-TeX-frak-R {font-family: MJXc-TeX-frak-R,MJXc-TeX-frak-Rw}
-.MJXc-TeX-frak-B {font-family: MJXc-TeX-frak-B,MJXc-TeX-frak-Bx,MJXc-TeX-frak-Bw}
-.MJXc-TeX-math-BI {font-family: MJXc-TeX-math-BI,MJXc-TeX-math-BIx,MJXc-TeX-math-BIw}
-.MJXc-TeX-sans-R {font-family: MJXc-TeX-sans-R,MJXc-TeX-sans-Rw}
-.MJXc-TeX-sans-B {font-family: MJXc-TeX-sans-B,MJXc-TeX-sans-Bx,MJXc-TeX-sans-Bw}
-.MJXc-TeX-sans-I {font-family: MJXc-TeX-sans-I,MJXc-TeX-sans-Ix,MJXc-TeX-sans-Iw}
-.MJXc-TeX-script-R {font-family: MJXc-TeX-script-R,MJXc-TeX-script-Rw}
-.MJXc-TeX-type-R {font-family: MJXc-TeX-type-R,MJXc-TeX-type-Rw}
-.MJXc-TeX-cal-R {font-family: MJXc-TeX-cal-R,MJXc-TeX-cal-Rw}
-.MJXc-TeX-main-B {font-family: MJXc-TeX-main-B,MJXc-TeX-main-Bx,MJXc-TeX-main-Bw}
-.MJXc-TeX-main-I {font-family: MJXc-TeX-main-I,MJXc-TeX-main-Ix,MJXc-TeX-main-Iw}
-.MJXc-TeX-main-R {font-family: MJXc-TeX-main-R,MJXc-TeX-main-Rw}
-.MJXc-TeX-math-I {font-family: MJXc-TeX-math-I,MJXc-TeX-math-Ix,MJXc-TeX-math-Iw}
-.MJXc-TeX-size1-R {font-family: MJXc-TeX-size1-R,MJXc-TeX-size1-Rw}
-.MJXc-TeX-size2-R {font-family: MJXc-TeX-size2-R,MJXc-TeX-size2-Rw}
-.MJXc-TeX-size3-R {font-family: MJXc-TeX-size3-R,MJXc-TeX-size3-Rw}
-.MJXc-TeX-size4-R {font-family: MJXc-TeX-size4-R,MJXc-TeX-size4-Rw}
-.MJXc-TeX-vec-R {font-family: MJXc-TeX-vec-R,MJXc-TeX-vec-Rw}
-.MJXc-TeX-vec-B {font-family: MJXc-TeX-vec-B,MJXc-TeX-vec-Bx,MJXc-TeX-vec-Bw}
-@font-face {font-family: MJXc-TeX-ams-R; src: local('MathJax_AMS'), local('MathJax_AMS-Regular')}
-@font-face {font-family: MJXc-TeX-ams-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_AMS-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_AMS-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_AMS-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-cal-B; src: local('MathJax_Caligraphic Bold'), local('MathJax_Caligraphic-Bold')}
-@font-face {font-family: MJXc-TeX-cal-Bx; src: local('MathJax_Caligraphic'); font-weight: bold}
-@font-face {font-family: MJXc-TeX-cal-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Caligraphic-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Bold.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-frak-R; src: local('MathJax_Fraktur'), local('MathJax_Fraktur-Regular')}
-@font-face {font-family: MJXc-TeX-frak-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Fraktur-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-frak-B; src: local('MathJax_Fraktur Bold'), local('MathJax_Fraktur-Bold')}
-@font-face {font-family: MJXc-TeX-frak-Bx; src: local('MathJax_Fraktur'); font-weight: bold}
-@font-face {font-family: MJXc-TeX-frak-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Fraktur-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Fraktur-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Fraktur-Bold.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-math-BI; src: local('MathJax_Math BoldItalic'), local('MathJax_Math-BoldItalic')}
-@font-face {font-family: MJXc-TeX-math-BIx; src: local('MathJax_Math'); font-weight: bold; font-style: italic}
-@font-face {font-family: MJXc-TeX-math-BIw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Math-BoldItalic.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Math-BoldItalic.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Math-BoldItalic.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-sans-R; src: local('MathJax_SansSerif'), local('MathJax_SansSerif-Regular')}
-@font-face {font-family: MJXc-TeX-sans-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-sans-B; src: local('MathJax_SansSerif Bold'), local('MathJax_SansSerif-Bold')}
-@font-face {font-family: MJXc-TeX-sans-Bx; src: local('MathJax_SansSerif'); font-weight: bold}
-@font-face {font-family: MJXc-TeX-sans-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Bold.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-sans-I; src: local('MathJax_SansSerif Italic'), local('MathJax_SansSerif-Italic')}
-@font-face {font-family: MJXc-TeX-sans-Ix; src: local('MathJax_SansSerif'); font-style: italic}
-@font-face {font-family: MJXc-TeX-sans-Iw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_SansSerif-Italic.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_SansSerif-Italic.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_SansSerif-Italic.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-script-R; src: local('MathJax_Script'), local('MathJax_Script-Regular')}
-@font-face {font-family: MJXc-TeX-script-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Script-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Script-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Script-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-type-R; src: local('MathJax_Typewriter'), local('MathJax_Typewriter-Regular')}
-@font-face {font-family: MJXc-TeX-type-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Typewriter-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Typewriter-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Typewriter-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-cal-R; src: local('MathJax_Caligraphic'), local('MathJax_Caligraphic-Regular')}
-@font-face {font-family: MJXc-TeX-cal-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Caligraphic-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Caligraphic-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Caligraphic-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-main-B; src: local('MathJax_Main Bold'), local('MathJax_Main-Bold')}
-@font-face {font-family: MJXc-TeX-main-Bx; src: local('MathJax_Main'); font-weight: bold}
-@font-face {font-family: MJXc-TeX-main-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Main-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Bold.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-main-I; src: local('MathJax_Main Italic'), local('MathJax_Main-Italic')}
-@font-face {font-family: MJXc-TeX-main-Ix; src: local('MathJax_Main'); font-style: italic}
-@font-face {font-family: MJXc-TeX-main-Iw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Main-Italic.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Italic.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Italic.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-main-R; src: local('MathJax_Main'), local('MathJax_Main-Regular')}
-@font-face {font-family: MJXc-TeX-main-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Main-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Main-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Main-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-math-I; src: local('MathJax_Math Italic'), local('MathJax_Math-Italic')}
-@font-face {font-family: MJXc-TeX-math-Ix; src: local('MathJax_Math'); font-style: italic}
-@font-face {font-family: MJXc-TeX-math-Iw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Math-Italic.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Math-Italic.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Math-Italic.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-size1-R; src: local('MathJax_Size1'), local('MathJax_Size1-Regular')}
-@font-face {font-family: MJXc-TeX-size1-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Size1-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size1-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size1-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-size2-R; src: local('MathJax_Size2'), local('MathJax_Size2-Regular')}
-@font-face {font-family: MJXc-TeX-size2-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Size2-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size2-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size2-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-size3-R; src: local('MathJax_Size3'), local('MathJax_Size3-Regular')}
-@font-face {font-family: MJXc-TeX-size3-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Size3-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size3-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size3-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-size4-R; src: local('MathJax_Size4'), local('MathJax_Size4-Regular')}
-@font-face {font-family: MJXc-TeX-size4-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Size4-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Size4-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Size4-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-vec-R; src: local('MathJax_Vector'), local('MathJax_Vector-Regular')}
-@font-face {font-family: MJXc-TeX-vec-Rw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Vector-Regular.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Vector-Regular.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Vector-Regular.otf') format('opentype')}
-@font-face {font-family: MJXc-TeX-vec-B; src: local('MathJax_Vector Bold'), local('MathJax_Vector-Bold')}
-@font-face {font-family: MJXc-TeX-vec-Bx; src: local('MathJax_Vector'); font-weight: bold}
-@font-face {font-family: MJXc-TeX-vec-Bw; src /*1*/: url('/MathJax/fonts/HTML-CSS/TeX/eot/MathJax_Vector-Bold.eot'); src /*2*/: url('/MathJax/fonts/HTML-CSS/TeX/woff/MathJax_Vector-Bold.woff') format('woff'), url('/MathJax/fonts/HTML-CSS/TeX/otf/MathJax_Vector-Bold.otf') format('opentype')}
+<style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mi {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mo {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-stretchy-h {
+  display: inline-table;
+  width: 100%;
+}
+
+mjx-stretchy-h > * {
+  display: table-cell;
+  width: 0;
+}
+
+mjx-stretchy-h > * > mjx-c {
+  display: inline-block;
+  transform: scalex(1.0000001);
+}
+
+mjx-stretchy-h > * > mjx-c::before {
+  display: inline-block;
+  padding: .001em 0;
+  width: initial;
+}
+
+mjx-stretchy-h > mjx-ext {
+  overflow: hidden;
+  width: 100%;
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c::before {
+  transform: scalex(500);
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c {
+  width: 0;
+}
+
+mjx-stretchy-h > mjx-beg > mjx-c {
+  margin-right: -.1em;
+}
+
+mjx-stretchy-h > mjx-end > mjx-c {
+  margin-left: -.1em;
+}
+
+mjx-stretchy-v {
+  display: inline-block;
+}
+
+mjx-stretchy-v > * {
+  display: block;
+}
+
+mjx-stretchy-v > mjx-beg {
+  height: 0;
+}
+
+mjx-stretchy-v > mjx-end > mjx-c {
+  display: block;
+}
+
+mjx-stretchy-v > * > mjx-c {
+  transform: scaley(1.0000001);
+  transform-origin: left center;
+  overflow: hidden;
+}
+
+mjx-stretchy-v > mjx-ext {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  border: 0px solid transparent;
+  overflow: hidden;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c::before {
+  width: initial;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c {
+  transform: scaleY(500) translateY(.1em);
+  overflow: visible;
+}
+
+mjx-mark {
+  display: inline-block;
+  height: 0px;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-msup {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mover {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mover:not([limits="false"]) {
+  padding-top: .1em;
+}
+
+mjx-mover:not([limits="false"]) > * {
+  display: block;
+  text-align: left;
+}
+
+mjx-TeXAtom {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c25::before {
+  padding: 0.75em 0.833em 0.056em 0;
+  content: "%";
+}
+
+mjx-c.mjx-c2C::before {
+  padding: 0.121em 0.278em 0.194em 0;
+  content: ",";
+}
+
+mjx-c.mjx-c2E::before {
+  padding: 0.12em 0.278em 0 0;
+  content: ".";
+}
+
+mjx-c.mjx-c2F::before {
+  padding: 0.75em 0.5em 0.25em 0;
+  content: "/";
+}
+
+mjx-c.mjx-c30::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "0";
+}
+
+mjx-c.mjx-c31::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "1";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+
+mjx-c.mjx-c33::before {
+  padding: 0.665em 0.5em 0.022em 0;
+  content: "3";
+}
+
+mjx-c.mjx-c34::before {
+  padding: 0.677em 0.5em 0 0;
+  content: "4";
+}
+
+mjx-c.mjx-c35::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "5";
+}
+
+mjx-c.mjx-c36::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "6";
+}
+
+mjx-c.mjx-c37::before {
+  padding: 0.676em 0.5em 0.022em 0;
+  content: "7";
+}
+
+mjx-c.mjx-c38::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "8";
+}
+
+mjx-c.mjx-c39::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "9";
+}
+
+mjx-c.mjx-c3D::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "=";
+}
+
+mjx-c.mjx-c3E::before {
+  padding: 0.54em 0.778em 0.04em 0;
+  content: ">";
+}
+
+mjx-c.mjx-c21A6::before {
+  padding: 0.511em 1em 0.011em 0;
+  content: "\21A6";
+}
+
+mjx-c.mjx-c2212::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "\2212";
+}
+
+mjx-c.mjx-c2248::before {
+  padding: 0.483em 0.778em 0 0;
+  content: "\2248";
+}
+
+mjx-c.mjx-c2260::before {
+  padding: 0.716em 0.778em 0.215em 0;
+  content: "\2260";
+}
+
+mjx-c.mjx-c226B::before {
+  padding: 0.567em 1em 0.067em 0;
+  content: "\226B";
+}
+
+mjx-c.mjx-c22C5::before {
+  padding: 0.31em 0.278em 0 0;
+  content: "\22C5";
+}
+
+mjx-c.mjx-c1D458.TEX-I::before {
+  padding: 0.694em 0.521em 0.011em 0;
+  content: "k";
+}
+
+mjx-c.mjx-c1D675.TEX-T::before {
+  padding: 0.611em 0.525em 0 0;
+  content: "F";
+}
+
+mjx-c.mjx-c1D687.TEX-T::before {
+  padding: 0.611em 0.525em 0 0;
+  content: "X";
+}
+
+mjx-c.mjx-c1D688.TEX-T::before {
+  padding: 0.611em 0.525em 0 0;
+  content: "Y";
+}
+
+mjx-c.mjx-c1D6A1.TEX-T::before {
+  padding: 0.431em 0.525em 0 0;
+  content: "x";
+}
+
+mjx-c.mjx-c1D7F6.TEX-T::before {
+  padding: 0.621em 0.525em 0.01em 0;
+  content: "0";
+}
+
+mjx-c.mjx-c1D7F7.TEX-T::before {
+  padding: 0.622em 0.525em 0 0;
+  content: "1";
+}
+
+mjx-c.mjx-c1D7FE.TEX-T::before {
+  padding: 0.621em 0.525em 0.01em 0;
+  content: "8";
+}
 </style></head>
 <body>
     <nav>
@@ -193,6 +729,7 @@
         <ul>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
             <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
             </ul>
             </li>
         </ul>
@@ -225,7 +762,7 @@
         </li>
     </ul>
     </li>
-    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/index.html">Mathematics</a>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/index.html">Mathematics &amp; Engineering</a>
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
         <ul>
@@ -342,8 +879,7 @@
                 <li><a href="#rounding2">Rounding</a></li>
                 </ul>
             </ul>
-        </ul>
-  </div>
+  </ul></div>
 
 
 <p>
@@ -358,7 +894,7 @@
 <h4><a name="flooring" href="#flooring">Flooring</a></h4>
 
 <p>
-    To divide an unsigned integer by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="2^k"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span class="mjx-mi" style=""><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span></span></span></span></span>, you can just use a bit shift by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="k"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mi"><span class="mjx-char MJXc-TeX-math-I" style="padding-top: 0.446em; padding-bottom: 0.298em;">k</span></span></span></span></span></span> bits to the right.
+    To divide an unsigned integer by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msup><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-script style="vertical-align: 0.363em"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msup></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mi>k</mi></msup></math></mjx-assistive-mml></mjx-container>, you can just use a bit shift by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D458 TEX-I"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi></math></mjx-assistive-mml></mjx-container> bits to the right.
 </p>
 
 <div class="codesnippet"><style>.pygments27 .hll { background-color: #ffffcc }
@@ -443,7 +979,7 @@
 
 <p>
     Of course, any half-decent compiler will produce the same instructions for both of the functions above, so it's much
-    better to write <code>x&nbsp;/&nbsp;16</code>, because it clearly shows your intent.
+    better to write <code>x / 16</code>, because it clearly shows your intent.
 </p>
 
 <p>
@@ -626,8 +1162,8 @@
 <p>
     Dividing signed integers by a power of two is a little bit trickier than dividing unsigned integers, because you
     cannot simply use a bit shift.
-    Consider <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-7 / 16"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">7</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span></span></span></span></span> as an example: you would expect the result to be <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="0"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">0</span></span></span></span></span></span>. However, <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-7 \gg 4"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">7</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">≫</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">4</span></span></span></span></span></span> turns out to be
-    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-1"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span></span></span></span></span>.
+    Consider <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c37"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-TeXAtom><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>7</mn><mrow><mo>/</mo></mrow><mn>16</mn></math></mjx-assistive-mml></mjx-container> as an example: you would expect the result to be <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c30"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>0</mn></math></mjx-assistive-mml></mjx-container>. However, <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c37"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c226B"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c34"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>7</mn><mo>≫</mo><mn>4</mn></math></mjx-assistive-mml></mjx-container> turns out to be
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>1</mn></math></mjx-assistive-mml></mjx-container>.
 </p>
 <p>
     To get around this problem, you have to add the divisor minus one if the dividend is negative:
@@ -717,7 +1253,7 @@
 <p>
     NEON doesn't have any conditional instructions, but it does have compare instructions that can be used to generate
     a mask.
-    The compare instructions return either all zeros (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x0000}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x0000</span></span></span></span></span></span></span></span>) or all ones (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xFFFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFFFF</span></span></span></span></span></span></span></span>), so by
+    The compare instructions return either all zeros (<mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x0000</mtext></mrow></math></mjx-assistive-mml></mjx-container>) or all ones (<mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0xFFFF</mtext></mrow></math></mjx-assistive-mml></mjx-container>), so by
     using a bitwise AND, they can be used to conditionally enable or disable the correction term.
 </p>
 <div class="codesnippet"><style>.pygments82 .hll { background-color: #ffffcc }
@@ -801,11 +1337,11 @@
 </div>
 <p>
     In this snippet, <code>vdupq_n_s16</code> is used to duplicate a single value across all lanes of a vector register.
-    Sadly, we cannot use the correction (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="16-1"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span></span></span></span></span>) as an immediate argument to the AND instruction, because you can only
-    set one of the bytes of the immediate value at a time. The other byte is always implicitly <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFF</span></span></span></span></span></span></span></span>. In
-    other words, the only possible immediate operands to AND for 16-bit numbers are <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xFFXY}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFFXY</span></span></span></span></span></span></span></span> and
-    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xXYFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xXYFF</span></span></span></span></span></span></span></span>. <br>
-    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="16-1 = \texttt{0x000F}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-texatom MJXc-space3"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x000F</span></span></span></span></span></span></span></span> doesn't fit this pattern. However, <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="1-16 = \texttt{0xFFF1}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-texatom MJXc-space3"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFFF1</span></span></span></span></span></span></span></span> does. By replacing the
+    Sadly, we cannot use the correction (<mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>16</mn><mo>−</mo><mn>1</mn></math></mjx-assistive-mml></mjx-container>) as an immediate argument to the AND instruction, because you can only
+    set one of the bytes of the immediate value at a time. The other byte is always implicitly <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0xFF</mtext></mrow></math></mjx-assistive-mml></mjx-container>. In
+    other words, the only possible immediate operands to AND for 16-bit numbers are <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D687 TEX-T"></mjx-c><mjx-c class="mjx-c1D688 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0xFFXY</mtext></mrow></math></mjx-assistive-mml></mjx-container> and
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D687 TEX-T"></mjx-c><mjx-c class="mjx-c1D688 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0xXYFF</mtext></mrow></math></mjx-assistive-mml></mjx-container>. <br>
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-TeXAtom space="4" texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>16</mn><mo>−</mo><mn>1</mn><mo>=</mo><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x000F</mtext></mrow></math></mjx-assistive-mml></mjx-container> doesn't fit this pattern. However, <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-TeXAtom space="4" texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F7 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1</mn><mo>−</mo><mn>16</mn><mo>=</mo><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0xFFF1</mtext></mrow></math></mjx-assistive-mml></mjx-container> does. By replacing the
     addition of 15 by a subtraction of -15, we can save one move instruction (<code>vdupq_n_s16</code>), and use an
     immediate AND instruction instead.
 </p>
@@ -904,8 +1440,8 @@
 <p>
     This trick will only work for divisors less than or equal to 256, since the immediate field of the BIC instruction
     is only 8 bits wide. For divisors 512 and larger, the correction term will be 9 bits or more, so it doesn't fit 
-    anymore. Luckily, in that case, the low byte of the correction term will always be <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFF</span></span></span></span></span></span></span></span>, which means 
-    that we can use the second variant of the immediate AND, where the immediate is <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xXYFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xXYFF</span></span></span></span></span></span></span></span>. In practice,
+    anymore. Luckily, in that case, the low byte of the correction term will always be <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0xFF</mtext></mrow></math></mjx-assistive-mml></mjx-container>, which means 
+    that we can use the second variant of the immediate AND, where the immediate is <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D687 TEX-T"></mjx-c><mjx-c class="mjx-c1D688 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0xXYFF</mtext></mrow></math></mjx-assistive-mml></mjx-container>. In practice,
     this is done by setting the LSL (logical shift left) amount of the BIC instruction to 8, so we can set the high 
     byte of the immediate.
 </p>
@@ -1080,15 +1616,15 @@
 <code><span class="p">}</span></code></pre></div>
 </div>
 <p>
-    Subtracting one from a negative number has an annoying edge case: if the dividend is <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-65536,"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65536</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.144em; padding-bottom: 0.519em;">,</span></span></span></span></span></span> subtracting one
-    will wrap around to <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="65535,"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65535</span></span><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="margin-top: -0.144em; padding-bottom: 0.519em;">,</span></span></span></span></span></span> which is not what we want.<br>
-    The solution is to use a saturating subtraction, such that <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="-65536 - 1 \mapsto -65536"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65536</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">1</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.372em;">↦</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65536</span></span></span></span></span></span>. Saturating intrinsics have
+    Subtracting one from a negative number has an annoying edge case: if the dividend is <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>65536</mn><mo>,</mo></math></mjx-assistive-mml></mjx-container> subtracting one
+    will wrap around to <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>65535</mn><mo>,</mo></math></mjx-assistive-mml></mjx-container> which is not what we want.<br>
+    The solution is to use a saturating subtraction, such that <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c21A6"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>65536</mn><mo>−</mo><mn>1</mn><mo stretchy="false">↦</mo><mo>−</mo><mn>65536</mn></math></mjx-assistive-mml></mjx-container>. Saturating intrinsics have
     a <code>q</code> prefix.
 </p>
 <p>
     To determine the sign of the dividend, we just extract the sign bit by shifting it 15 bits to the right. It's
     important to use an unsigned bit shift, because a signed shift would sign extend the number after shifting,
-    resulting in <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0xFFFF}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0xFFFF</span></span></span></span></span></span></span></span> instead of <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x0001}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x0001</span></span></span></span></span></span></span></span>.<br>
+    resulting in <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c><mjx-c class="mjx-c1D675 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0xFFFF</mtext></mrow></math></mjx-assistive-mml></mjx-container> instead of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F7 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x0001</mtext></mrow></math></mjx-assistive-mml></mjx-container>.<br>
     The sign bit is one if the number is negative, zero if it's positive or zero.
 </p>
 
@@ -1187,7 +1723,7 @@
 <p>
     The main problem with this approach is that it will produce a result that's one unit too low, about 50% of the
     time. For example, blending white with white will result in really light gray, but not quite white
-    (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255\cdot 255/256 \approx 254.00 \not= 255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.004em; padding-bottom: 0.298em;">⋅</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">256</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.298em;">≈</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">254.00</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">≠</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span>). In this case, rounding won't help either.<br>
+    (<mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c22C5"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-TeXAtom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c2248"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c2E"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c2260"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>255</mn><mo>⋅</mo><mn>255</mn><mrow><mo>/</mo></mrow><mn>256</mn><mo>≈</mo><mn>254.00</mn><mo>≠</mo><mn>255</mn></math></mjx-assistive-mml></mjx-container>). In this case, rounding won't help either.<br>
     For most real-time applications, this is not an issue, and speed might be more important than perfect
     accuracy.
 </p>
@@ -1197,10 +1733,10 @@
 <h4><a name="flooring2" href="#flooring2">Flooring</a></h4>
 
 <p>
-    The divisor of <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span> can be approximated by the fraction
-    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x800000}/\texttt{0x8081} = 2^{23}/\texttt{0x8081} \approx 254.996"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x800000</span></span></span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8081</span></span></span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-msubsup MJXc-space3"><span class="mjx-base"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span class="mjx-texatom" style=""><span class="mjx-mrow"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">23</span></span></span></span></span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8081</span></span></span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.298em;">≈</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">254.996</span></span></span></span></span></span>.
-    This means that you can replace the division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span> by a multiplication by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x8081}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8081</span></span></span></span></span></span></span></span>, followed by a
-    right bit shift by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="23"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">23</span></span></span></span></span></span> bits.
+    The divisor of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>255</mn></math></mjx-assistive-mml></mjx-container> can be approximated by the fraction
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom><mjx-TeXAtom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-TeXAtom><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F7 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-msup space="4"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-script style="vertical-align: 0.363em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c33"></mjx-c></mjx-mn></mjx-TeXAtom></mjx-script></mjx-msup><mjx-TeXAtom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-TeXAtom><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F7 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c2248"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c2E"></mjx-c><mjx-c class="mjx-c39"></mjx-c><mjx-c class="mjx-c39"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x800000</mtext></mrow><mrow><mo>/</mo></mrow><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x8081</mtext></mrow><mo>=</mo><msup><mn>2</mn><mrow><mn>23</mn></mrow></msup><mrow><mo>/</mo></mrow><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x8081</mtext></mrow><mo>≈</mo><mn>254.996</mn></math></mjx-assistive-mml></mjx-container>.
+    This means that you can replace the division by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>255</mn></math></mjx-assistive-mml></mjx-container> by a multiplication by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F7 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x8081</mtext></mrow></math></mjx-assistive-mml></mjx-container>, followed by a
+    right bit shift by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c33"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>23</mn></math></mjx-assistive-mml></mjx-container> bits.
 </p>
 <p>
     The downside of this approach is that a 32-bit multiplication is required. NEON doesn't have any multiplication
@@ -1331,40 +1867,40 @@
 </style>
 <div class="flex_container">
     <table class="border half">
-        <tbody><tr>
+        <tr>
             <td>H<sub>7</sub></td>
             <td>L<sub>7</sub></td>
             <td>H<sub>6</sub>
-            </td><td>L<sub>6</sub></td>
+            <td>L<sub>6</sub></td>
             <td>H<sub>5</sub></td>
             <td>L<sub>5</sub></td>
             <td>H<sub>4</sub>
-            </td><td>L<sub>4</sub></td>
-        </tr>
+            <td>L<sub>4</sub></td>
+        </td></td></tr>
         <tr>
             <td>H<sub>3</sub></td>
             <td>L<sub>3</sub></td>
             <td>H<sub>2</sub>
-            </td><td>L<sub>3</sub></td>
+            <td>L<sub>3</sub></td>
             <td>H<sub>1</sub></td>
             <td>L<sub>1</sub></td>
             <td>H<sub>0</sub>
-            </td><td>L<sub>0</sub></td>
-        </tr>
-    </tbody></table>
+            <td>L<sub>0</sub></td>
+        </td></td></tr>
+    </table>
     <div style="text-align: center; padding: 1em;">UZP2<br>→</div>
     <table class="border">
-        <tbody><tr>
+        <tr>
             <td>H<sub>7</sub></td>
             <td>H<sub>6</sub>
-            </td><td>H<sub>5</sub></td>
+            <td>H<sub>5</sub></td>
             <td>H<sub>4</sub>
-            </td><td>H<sub>3</sub></td>
+            <td>H<sub>3</sub></td>
             <td>H<sub>2</sub>
-            </td><td>H<sub>1</sub></td>
+            <td>H<sub>1</sub></td>
             <td>H<sub>0</sub>
-        </td></tr>
-    </tbody></table>
+        </td></td></td></td></tr>
+    </table>
 </div>
 <p>
     <code><span style="border: 1px solid black; padding: 2px;">H<sub>7</sub> L<sub>7</sub></span> = x[7] * 0x8081</code>,
@@ -1372,7 +1908,7 @@
     factor and is also 16 bits wide.
     Their product will be 32 bits wide, it consists of a high half-word (<code>H<sub>7</sub></code>) and a low
     half-word (<code>L<sub>7</sub></code>). The low half-words will be discarded by the unzip operation, effectively
-    dividing each product by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x10000}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x10000</span></span></span></span></span></span></span></span>.
+    dividing each product by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F7 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x10000</mtext></mrow></math></mjx-assistive-mml></mjx-container>.
 </p>
 <p>
     For this unzip operation to work, the vector registers have to be interpreted as 8×16-bit values (even though they
@@ -1380,7 +1916,7 @@
 </p>
 <p>
     Finally, the 16-bit high half-words of the products are narrowed to 8-bit bytes, while shifting them another 7 bits
-    to the right for the final division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x80}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x80</span></span></span></span></span></span></span></span>.
+    to the right for the final division by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x80</mtext></mrow></math></mjx-assistive-mml></mjx-container>.
 </p>
 <p>
     The result is exact for all possible values of <code>x</code>.
@@ -1390,17 +1926,17 @@
 
 <p>
     It is tempting to just replace the final shift (<code>vshrn_n_u16</code>) with a rounding shift
-    (<code>vrshrn_n_u16</code>), in an attempt to implement a rounding division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span>.
-    Unfortunately, this doesn't work, because rounding the final division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="128"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">128</span></span></span></span></span></span> is not the same as rounding the
-    original division by <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span>. For some inputs, the output will be one unit too low.
+    (<code>vrshrn_n_u16</code>), in an attempt to implement a rounding division by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>255</mn></math></mjx-assistive-mml></mjx-container>.
+    Unfortunately, this doesn't work, because rounding the final division by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c38"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>128</mn></math></mjx-assistive-mml></mjx-container> is not the same as rounding the
+    original division by <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>255</mn></math></mjx-assistive-mml></mjx-container>. For some inputs, the output will be one unit too low.
     It is a pretty good approximation though, producing an incorrect result for only 127 out of all 65536 possible input
-    values (it is correct in <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="99.806\%"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">99.806</span></span><span class="mjx-mi"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.372em;">%</span></span></span></span></span></span> of the cases, with an error of either 0 or -1).
+    values (it is correct in <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c39"></mjx-c><mjx-c class="mjx-c39"></mjx-c><mjx-c class="mjx-c2E"></mjx-c><mjx-c class="mjx-c38"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-mi class="mjx-n"><mjx-c class="mjx-c25"></mjx-c></mjx-mi></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>99.806</mn><mi mathvariant="normal">%</mi></math></mjx-assistive-mml></mjx-container> of the cases, with an error of either 0 or -1).
 </p>
 <p>
     The correct solution is to add the rounding constant <i>before</i> the multiplication. However, we're adding a
-    rounding constant of <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="128 = 256/2"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">128</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">256</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span></span></span></span>, while in theory, we should be using <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="127.5 = 255/2"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">127.5</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span></span></span></span>. It turns out that this
-    error of <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="0.5"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">0.5</span></span></span></span></span></span> can be compensated by changing the factor in the next step from <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x8081}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8081</span></span></span></span></span></span></span></span> to
-    <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="\texttt{0x8080}"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mtext"><span class="mjx-char MJXc-TeX-type-R" style="padding-top: 0.446em; padding-bottom: 0.298em;">0x8080</span></span></span></span></span></span></span></span>.
+    rounding constant of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c38"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-TeXAtom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>128</mn><mo>=</mo><mn>256</mn><mrow><mo>/</mo></mrow><mn>2</mn></math></mjx-assistive-mml></mjx-container>, while in theory, we should be using <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c37"></mjx-c><mjx-c class="mjx-c2E"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-TeXAtom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>127.5</mn><mo>=</mo><mn>255</mn><mrow><mo>/</mo></mrow><mn>2</mn></math></mjx-assistive-mml></mjx-container>. It turns out that this
+    error of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c2E"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>0.5</mn></math></mjx-assistive-mml></mjx-container> can be compensated by changing the factor in the next step from <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F7 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x8081</mtext></mrow></math></mjx-assistive-mml></mjx-container> to
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-TeXAtom texclass="ORD"><mjx-mtext class="mjx-ty"><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D6A1 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c><mjx-c class="mjx-c1D7FE TEX-T"></mjx-c><mjx-c class="mjx-c1D7F6 TEX-T"></mjx-c></mjx-mtext></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mrow data-mjx-texclass="ORD"><mtext mathvariant="monospace">0x8080</mtext></mrow></math></mjx-assistive-mml></mjx-container>.
 </p>
 <div class="codesnippet"><style>.pygments297 .hll { background-color: #ffffcc }
 .pygments297  { background: #f8f8f8; }
@@ -1487,9 +2023,8 @@
 </div>
 <p>
     The result of this function is correct as long as the addition of the rounding constant doesn't cause overflow. This
-    condition is satisfied if the input is less than <span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="2^{16} - 128 = 65408"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-msubsup"><span class="mjx-base"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">2</span></span></span><span class="mjx-sup" style="font-size: 70.7%; vertical-align: 0.591em; padding-left: 0px; padding-right: 0.071em;"><span class="mjx-texatom" style=""><span class="mjx-mrow"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">16</span></span></span></span></span></span><span class="mjx-mo MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.298em; padding-bottom: 0.446em;">−</span></span><span class="mjx-mn MJXc-space2"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">128</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.077em; padding-bottom: 0.298em;">=</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65408</span></span></span></span></span></span>. Luckily, in this case, the result would
-    be meaningless anyway, because the quotient would be too large to fit an 8-bit byte (<span class="mjpage"><span class="mjx-chtml"><span class="mjx-math" aria-label="65408/255 \approx 256.5 >
-    255"><span class="mjx-mrow" aria-hidden="true"><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">65408</span></span><span class="mjx-texatom"><span class="mjx-mrow"><span class="mjx-mo"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.446em; padding-bottom: 0.593em;">/</span></span></span></span><span class="mjx-mn"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.298em;">≈</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">256.5</span></span><span class="mjx-mo MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.225em; padding-bottom: 0.372em;">&gt;</span></span><span class="mjx-mn MJXc-space3"><span class="mjx-char MJXc-TeX-main-R" style="padding-top: 0.372em; padding-bottom: 0.372em;">255</span></span></span></span></span></span>).
+    condition is satisfied if the input is less than <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msup><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-script style="vertical-align: 0.363em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn></mjx-TeXAtom></mjx-script></mjx-msup><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="3"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c38"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c38"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msup><mn>2</mn><mrow><mn>16</mn></mrow></msup><mo>−</mo><mn>128</mn><mo>=</mo><mn>65408</mn></math></mjx-assistive-mml></mjx-container>. Luckily, in this case, the result would
+    be meaningless anyway, because the quotient would be too large to fit an 8-bit byte (<mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c38"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-TeXAtom><mjx-mn class="mjx-n"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c2248"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c2E"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3E"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>65408</mn><mrow><mo>/</mo></mrow><mn>255</mn><mo>≈</mo><mn>256.5</mn><mo>&gt;</mo><mn>255</mn></math></mjx-assistive-mml></mjx-container>).
 </p>
 
 </div>
@@ -1497,6 +2032,6 @@
         <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="NEON">Index</a></div><div class="nextpage"></div></div>
     </article>
     <footer>Last edited: Thursday, 09 July 2020 10:41 UTC</footer>
+</body>
 
-
-</body></html>
+</html>
