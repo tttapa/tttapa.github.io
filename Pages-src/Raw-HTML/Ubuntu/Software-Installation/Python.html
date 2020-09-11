@@ -15,18 +15,18 @@
 <p>
     First, install GCC, GNU Make and GNU Wget if you haven't already.
 </p>
-<pre class=console>
+<pre class="console">
 <code>sudo apt update</code>
 <code>sudo apt install gcc g++ make wget</code></pre>
 <p>
     Also install the dependencies to build Python and its modules.
 </p>
 <pre
-    class=console><code>sudo apt install zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev libgdbm-dev liblzma-dev</code></pre>
+    class="console"><code>sudo apt install zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev libgdbm-dev liblzma-dev</code></pre>
 <p>
     On Ubuntu 18.04 and later, you'll need compatibility development files for GNU dbm.
 </p>
-<pre class=console><code>sudo apt install libgdbm-compat-dev</code></pre>
+<pre class="console"><code>sudo apt install libgdbm-compat-dev</code></pre>
 <p>
     You can try to build Python without these dependencies, but then some of the
     optional modules will not be built.
@@ -37,7 +37,7 @@
 <p>
     Next, download and extract the Python source code.
 </p>
-<pre class=console><code>version="3.8.2"</code>
+<pre class="console"><code>version="3.8.2"</code>
 <code>python="Python-$version"</code>
 <code>cd /tmp</code>
 <code>wget "https://www.python.org/ftp/python/$version/$python.tgz"  # Download</code>
@@ -59,7 +59,7 @@
     linker's search path. Therefore, we need to specify the <code>rpath</code>
     during the linking stage.
 </p>
-<pre class=console><code>cd "$python"</code>
+<pre class="console"><code>cd "$python"</code>
 <code>./configure --prefix="$HOME/.local" \
         --enable-ipv6 \
         --enable-shared \
@@ -68,7 +68,7 @@
 <p>
     To see all options, run the following command.
 </p>
-<pre class=console><code>./configure --help</code></pre>
+<pre class="console"><code>./configure --help</code></pre>
 
 <h3>Build Python</h3>
 
@@ -78,7 +78,7 @@
     The <code>-j</code> option tells make to compile multiple files in parallel,
     <code>nproc</code> gives the number of CPU cores of the system.
 </p>
-<pre class=console><code>make -j$(nproc)</code></pre>
+<pre class="console"><code>make -j$(nproc)</code></pre>
 
 <h3>Install Python</h3>
 
@@ -96,20 +96,20 @@
     default Python 3 version will be preserved, and the new version will be
     installed as <code>python3.8</code>.
 </p>
-<pre class=console><code>make install  # Replace default version</code></pre>
-<pre class=console><code>make altinstall  # Install alongside existing version, preserve default</code></pre>
+<pre class="console"><code>make install  # Replace default version</code></pre>
+<pre class="console"><code>make altinstall  # Install alongside existing version, preserve default</code></pre>
 
 <h4>Adding Python to the <code>PATH</code></h4>
 <p>
     If the installation location <code>~/.local/bin</code> is not in your <code>PATH</code>, you'll have
     to add it yourself.
 </p>
-<pre class=console><code>export PATH="$HOME/.local/bin:$PATH"</code></pre>
+<pre class="console"><code>export PATH="$HOME/.local/bin:$PATH"</code></pre>
 <p>
     To make it permanent, add it to your <code>~/.profile</code> file, so it is
     added to your <code>PATH</code> every time you log in.
 </p>
-<pre class=console><code>echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.profile</code></pre>
+<pre class="console"><code>echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.profile</code></pre>
 
 <h4>Finding the shared libraries</h4>
 <p>
@@ -119,12 +119,12 @@
     <code>~/.local/lib</code> to your <code>LD_LIBRARY_PATH</code> environment
     variable.
 </p>
-<pre class=console><code>export LD_LIBRARY_PATH="$HOME/.local/lib"</code></pre>
+<pre class="console"><code>export LD_LIBRARY_PATH="$HOME/.local/lib"</code></pre>
 <p>
     Setting <code>LD_LIBRARY_PATH</code> is not the most elegant solution, so if you have root privileges, you can add
     the <code>~/.local/lib</code> folder to the <code>ld</code> configuration folder:
 </p>
-<pre class=console>
+<pre class="console">
 <code>echo "$HOME/.local/lib" | sudo tee -a /etc/ld.so.conf.d/home.local.conf</code>
 <code>sudo ldconfig</code>
 </pre>

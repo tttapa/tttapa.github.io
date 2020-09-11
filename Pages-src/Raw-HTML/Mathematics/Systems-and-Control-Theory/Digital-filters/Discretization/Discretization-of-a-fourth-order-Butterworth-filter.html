@@ -171,8 +171,8 @@ If we don't the cut-off frequency will shift to an incorrect frequency when we d
 <p>
     If you have to design many different filters, you don't want to calculate them all by hand. 
     Luckily, MATLAB and GNU Octave come with a command to calculate the coefficients of Butterworth filters.
-
-    <pre class="lineNumbers" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"><code><span style="color: #000000;">f_s = </span><span style="color: #09885a;">360</span><span style="color: #000000;">;    </span><span style="color: #008000;">% Sample frequency in Hz</span></code>
+</p>
+<pre class="lineNumbers" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"><code><span style="color: #000000;">f_s = </span><span style="color: #09885a;">360</span><span style="color: #000000;">;    </span><span style="color: #008000;">% Sample frequency in Hz</span></code>
 <code><span style="color: #000000;">f_c = </span><span style="color: #09885a;">45</span><span style="color: #000000;">;     </span><span style="color: #008000;">% Cut-off frequency in Hz</span></code>
 <code><span style="color: #795e26;">order</span><span style="color: #000000;"> = </span><span style="color: #09885a;">4</span><span style="color: #000000;">;    </span><span style="color: #008000;">% Order of the butterworth filter</span></code>
 <code></code>
@@ -184,8 +184,9 @@ If we don't the cut-off frequency will shift to an incorrect frequency when we d
 <code><span style="color: #0000ff;">disp</span><span style="color: #000000;">(</span><span style="color: #a31515;">'b = '</span><span style="color: #000000;">); </span><span style="color: #0000ff;">disp</span><span style="color: #000000;">(b);</span></code>
 <code><span style="color: #000000;">H = </span><span style="color: #795e26;">tf</span><span style="color: #000000;">(b, a, </span><span style="color: #09885a;">1</span><span style="color: #000000;"> </span><span style="color: #000000;">/</span><span style="color: #000000;"> f_s);                     </span><span style="color: #008000;">% Create a transfer function</span></code>
 <code><span style="color: #795e26;">bode</span><span style="color: #000000;">(H);                                   </span><span style="color: #008000;">% Show the Bode plot</span></code></pre>
-Note that MATLAB expects the normalized frequency as a number from 0 to 1, so we have to divide by \(\pi\) 
-before passing it to the <code>butter</code> function.
+<p>
+    Note that MATLAB expects the normalized frequency as a number from 0 to 1, so we have to divide by \(\pi\) 
+    before passing it to the <code>butter</code> function.
 </p>
 
 <h3>Python</h3>
@@ -242,13 +243,13 @@ A similar function is available in the SciPy signal package:
 <code><span style="color: #000000;">plt.show()</span></code></pre>
 
 <img src="images/Bode-Digital-Butterworth-Python-3.svg">
-</p>
 
 <h3>Comparison Between the Analog and Digital Filter</h3>
 
 <p>
     We can easily plot the Bode plots of the two filters on top of each other, in order to compare their properties.
-    <pre class="lineNumbers" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> butter, freqz, freqs</span></code>
+</p>
+<pre class="lineNumbers" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> butter, freqz, freqs</span></code>
 <code><span style="color: #af00db;">import</span><span style="color: #000000;"> matplotlib.pyplot </span><span style="color: #af00db;">as</span><span style="color: #000000;"> plt</span></code>
 <code><span style="color: #af00db;">from</span><span style="color: #000000;"> math </span><span style="color: #af00db;">import</span><span style="color: #000000;"> pi</span></code>
 <code><span style="color: #af00db;">import</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">as</span><span style="color: #000000;"> np</span></code>
@@ -308,7 +309,6 @@ A similar function is available in the SciPy signal package:
 <code></code>
 <code><span style="color: #000000;">plt.show()</span></code></pre>
 <img src="images/Bode-Butter-4-Compare-Digital-Analog.svg">
-</p>
 
 <h2>Discretization using Second Order Sections (SOS)</h2>
 
