@@ -185,7 +185,7 @@ class PagesParser {
         outfile << out;
         outfile.close();
         path scripts_dir = source_dir.parent_path() / "scripts";
-        string command = scripts_dir / "mathjax-compile.js";
+        string command = scripts_dir / "mathjax-compile-svg.js";
         command += " \"";
         command += tmp_dir / page.rel_path;
         command += "\" > \"";

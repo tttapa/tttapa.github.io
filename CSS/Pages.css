@@ -156,9 +156,10 @@ div.toc {
     font-size: 0.85em;
     padding: 0.6em 1em;
     margin-top: 0;
-    margin-bottom: 1em;
+    margin-bottom: 0.4em;
     margin-left: 1em;
     float: right;
+    top: -0.6em;
     /* margin-right: 1em; */
     /* float: left; */
     width: 25%;
@@ -174,6 +175,7 @@ div.toc {
 
 div.toc.expanded {
     transition: max-height 0.35s ease-in-out;
+    margin-bottom: 1em;
 }
 
 /* div.toc>span {
@@ -623,14 +625,24 @@ body {
 }
 
 /* MathJax horizontal scroll */
-mjx-container.MathJax[jax="CHTML"] {
+mjx-container.MathJax[jax="CHTML"],
+mjx-container.MathJax[jax="SVG"] {
     min-width: unset !important;
     overflow-x: auto;
     overflow-y: visible;
+    page-break-inside: avoid;
+    page-break-before: avoid;
 }
-mjx-container.MathJax[jax="CHTML"][display="true"] {
+mjx-container.MathJax[jax="CHTML"][display="true"],
+mjx-container.MathJax[jax="SVG"][display="true"] {
     margin: 0.7em 0 !important;
     padding: 0.3em !important;
+}
+/* MathJax link color */
+mjx-container[jax="CHTML"] > svg a,
+mjx-container[jax="SVG"] > svg a {
+    fill: inherit !important;
+    stroke: inherit !important;
 }
 
 /* --------MOBILE DEVICES-------- */
@@ -745,7 +757,7 @@ mjx-container.MathJax[jax="CHTML"][display="true"] {
     img {
         max-width: 100%;
         display: block;
-        margin: 0.5em 0;
+        /* margin: 0.5em 0; */
     }
     img.github-mark,
     img.gitlab-mark {
@@ -787,7 +799,7 @@ mjx-container.MathJax[jax="CHTML"][display="true"] {
     p, div {
         page-break-before: avoid;
     }
-    div.pagebreak {
+    .pagebreak {
         page-break-after: always;
     }
 }
