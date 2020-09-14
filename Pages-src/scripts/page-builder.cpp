@@ -145,6 +145,7 @@ class PagesParser {
   private:
     const int dev_port = 9222;
     const int http_port = 5741;
+    std::string dev_ws;
 
     const path tmp_dir = "/tmp/Pages";
 
@@ -155,16 +156,47 @@ class PagesParser {
                    "\" && python3 -m http.server " + std::to_string(http_port) +
                    " --bind 127.0.0.1 &";
         cout << c << endl;
-        if (system(c.c_str()) != 0) {
+        if (system(c.c_str()) != 0)
             throw std::runtime_error("Command '" + c + "' failed.");
-        } // TODO
-        c = "google-chrome --headless --disable-gpu "
+
+        c = "{ google-chrome --headless --disable-gpu "
             "--run-all-compositor-stages-before-draw --remote-debugging-port=" +
-            std::to_string(dev_port) + " &";
+            std::to_string(dev_port) + " 2>&1; } &";
         cout << c << endl;
-        if (system(c.c_str()) != 0) {
-            throw std::runtime_error("Command '" + c + "' failed.");
-        } // TODO
+
+        FILE *pipe = popen(c.c_str(), "r");
+        if (!pipe)
+            throw std::runtime_error("Call to 'popen' failed.");
+
+        // Skip whitespace
+        int ch;
+        do {
+            ch = fgetc(pipe);
+            usleep(1000);
+        } while (isspace(ch));
+        if (feof(pipe))
+            throw std::runtime_error("Cannot read output of '" + c + "'.");
+        ungetc(ch, pipe);
+
+        // Read the actual output
+        char output[128] = "";
+        while (!*output) {
+            usleep(1000);
+            if (!fgets(output, sizeof(output), pipe))
+                throw std::runtime_error("Cannot read output of '" + c + "'.");
+        }
+
+        dev_ws = string(output, strlen(output));
+        auto found = dev_ws.find("ws://");
+        if (found == string::npos)
+            throw std::runtime_error("Cannot determine Chrome DevTools url.");
+        dev_ws = dev_ws.substr(found, dev_ws.size() - found - 1);
+
+        BlueB(cout) << "Chrome: ‘" << dev_ws << "’" << endl;
+        int exitcode = WEXITSTATUS(pclose(pipe));
+        if (exitcode != 0)
+            throw std::runtime_error("Command '" + c + "' failed with status " +
+                                     std::to_string(exitcode) + ".");
     }
 
     void handle_finished_mjpage(const Page &page) {
@@ -185,7 +217,7 @@ class PagesParser {
         outfile << out;
         outfile.close();
         path scripts_dir = source_dir.parent_path() / "scripts";
-        string command = scripts_dir / "mathjax-compile-svg.js";
+        string command = scripts_dir / "mathjax-compile-chtml.js";
         command += " \"";
         command += tmp_dir / page.rel_path;
         command += "\" > \"";
@@ -320,9 +352,9 @@ class PagesParser {
         string command = "cd \"";
         command += folder;
         command += "\" && ";
-        command += "./print-to-pdf.js ";
-        command += std::to_string(dev_port);
-        command += " \"";
+        command += "./print-to-pdf-puppeteer.js \"";
+        command += dev_ws;
+        command += "\" \"";
         command += "http://localhost:";
         command += std::to_string(http_port);
         command += "/";
