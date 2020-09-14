@@ -1,0 +1,440 @@
+<!--
+@title:                 The Damped Harmonic Oscillator
+@sequence:              20
+@shownextupprevpage:    true
+@tableofcontents:       true
+@author:                Pieter P
+@keywords:      oscillator,harmonic oscillator,damped harmonic oscillator,
+                driven harmonic oscillator,differential equation,step response,
+                solution,peak time,overshoot,rise time,settling time,
+                percent overshoot,damping factor,natural frequency
+@description:   Discussion of the damped harmonic oscillator: Solving the 
+                differential equation, determining the step response, overshoot,
+                rise time, etc.
+-->
+<html>
+
+<p>
+    On the previous page, we derived the model of the moving-coil galvanometer, and we concluded that it's 
+    identical to the damped harmonic oscillator with an external driving force:
+    $$ \begin{equation} m \ddot{x}(t) + c\dot{x}(t) + kx(t) = f(t), \label{damp-harm-osc} \end{equation} $$
+    where \(x(t)\) is the displacement,
+    \(m\) is the mass (cfr. moment of inertia \(I\)), \(c\) is the damping factor, \(k\) is the
+    spring constant, and \(f(t)\) is an external driving force.
+</p>
+<p>
+    On this page, we'll solve the equation of the damped harmonic oscillator analytically, discussing the 
+    different solution regimes, and calculating the key features of the step response, such as overshoot 
+    and rise time.
+</p>
+
+<h2>Solution of the step response of the damped harmonic oscillator</h2>
+
+<p>
+    To make solving the equation easier, we'll define two constants:
+    $$ \begin{equation} \begin{aligned}
+    \omega_n \triangleq&amp; \sqrt{\frac{k}{m}} \\[0.3em]
+    \zeta \triangleq&amp; \frac{c}{2\sqrt{km}}
+    \end{aligned}
+    \label{omega_n-zeta}
+    \end{equation} $$
+    \(\omega_n\) is called the natural frequency, and \(\zeta\) the damping factor. The origin of these names 
+    will become clear in the next section.
+</p>
+<p>
+    Equation \(\eqref{damp-harm-osc}\) then becomes:
+    $$ \begin{equation}
+    \ddot{x}(t) + 2\zeta\omega_n \dot{x}(t) + \omega_n^2 x(t) = \frac{1}{m} f(t)
+    \label{damp-harm-osc2} \end{equation} $$
+</p>
+<p>
+    Equation \(\eqref{damp-harm-osc2}\) is a linear ordinary differential equation with constant coefficients, so the
+    general solution is the sum of the homogeneous solution and a particular solution:
+    $$ x(t) = x_h(t) + x_p(t) $$
+</p>
+<p>
+    In this section, we'll derive the solution of the step response, that is, the solution for \(x(t)\) if
+    \(f(t) = u(t)\), the Heaviside step function:
+    $$ u(t) \triangleq \begin{cases}
+    0 &amp; t &lt; 0 \\
+    1/2 &amp; t = 0 \\
+    1 &amp; t &gt; 0 \end{cases} $$
+</p>
+
+<h3>Homogeneous solution</h3>
+
+<p>
+    The homogeneous solution \(x_h(t)\) is the solution to
+    $$ \begin{equation}
+    \ddot{x}_h(t) + 2\zeta\omega_n \dot{x}_h(t) + \omega_n^2 x_h(t) = 0.
+    \label{eq-homog-sol}
+    \end{equation} $$
+    The <a href="https://en.wikipedia.org/wiki/Characteristic_equation_(calculus)">characteristic equation</a> is
+    $$ \begin{equation}
+    \lambda^2 + 2\zeta\omega_n \lambda + \omega_n^2 = 0,
+    \label{characteristic-equation-lambda}
+    \end{equation} $$
+    with the solutions
+    $$ \begin{equation}
+    \lambda_{1,2} = -\zeta\omega_n \pm \omega_n \sqrt{\zeta^2 - 1}.
+    \label{lambdas}
+    \end{equation} $$
+    If \(\lambda_1 \ne \lambda_2\), the homogeneous solution is
+    $$ \begin{equation}
+    x_h(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t}, \label{homog-sol}
+    \end{equation} $$
+    where \(c_1\) and \(c_2\) are two arbitrary real constants of integration.
+</p>
+<p><br></p>
+<p>
+    If \(\lambda_1 = \lambda_2 = \lambda\), the terms \(c_1 e^{\lambda t}\) and \(c_2 e^{\lambda t}\) are linearly
+    dependent, so they no longer form a basis for the homogeneous solution space. One can form a valid basis by
+    multiplying the second term by \(t\):
+    $$ \begin{equation}
+    x_h(t) = c_1 e^{\lambda t} + c_2 t e^{\lambda t} \label{homog-sol-2}
+    \end{equation} $$
+    Compute the first two derivatives of equation \(\eqref{homog-sol-2}\) and substitute them into equation
+    \(\eqref{eq-homog-sol}\) to convince yourself that these are indeed solutions.
+</p>
+
+<h3>Particular solution for the step response</h3>
+
+<p>
+    The particular solution \(x_p(t)\) is a (preferably simple) solution to
+    $$ \begin{equation}
+    \ddot{x}_p(t) + 2\zeta\omega_n \dot{x}_p(t) + \omega_n^2 x_p(t) = \frac{1}{m} u(t).
+    \label{eq-part-sol}
+    \end{equation} $$
+</p>
+<p>
+    The Heaviside step function \(u(t)\) is flat everywhere, so its derivatives are zero, except in \(t=0\),
+    where they are undefined:
+    $$ \begin{aligned}
+    \forall t \ne 0: &amp; \\
+    \dot{u}(t) &amp;\equiv 0 \\
+    \ddot{u}(t) &amp;\equiv 0
+    \end{aligned} $$
+</p>
+<p>
+    A guess for the particular solution could be
+    $$ \begin{equation} x_p(t) = c_3 u(t). \end{equation} $$
+    You can substitute this into equation \(\eqref{eq-part-sol}\) to verify that this is indeed a solution, if
+    \(c_3 = \frac{1}{m\omega_n^2} = \frac{1}{k}\):
+    $$ \cancel{c_3 \ddot{u}(t)} + \cancel{2 c_3 \zeta \omega_n \dot{u}(t)} + c_3 \omega_n^2 u(t) = \frac{1}{m} u(t) $$
+</p>
+
+<h3>General solution for the step response</h3>
+
+<p>
+    The general solution is the sum of the homogeneous and the particular solution:
+    $$ \begin{equation}
+    x(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t} + \frac{1}{k} u(t)
+    \label{general-solution}
+    \end{equation} $$
+    In the case where \(\lambda_1 = \lambda_2 = \lambda\), this becomes:
+    $$ \begin{equation}
+    x(t) = c_1 e^{\lambda t} + c_2 t e^{\lambda t} + \frac{1}{k} u(t)
+    \label{general-solution-2}
+    \end{equation} $$
+</p>
+<h3>Determining the constants of integration</h3>
+<p>
+    To find \(c_1\) and \(c_2\), we use the following initial conditions:
+    $$ \begin{cases}
+    x(0^+) = 0 \\[0.3em]
+    \dot{x}(0^+) = 0 \end{cases} $$
+    They are specified at \(t=0^+\), which should be understood as a limit for \(t\) approaching zero from the right,
+    because the derivatives are undefined at \(t=0\).
+    $$ \dot{x}(0^+) = 0 \quad\Leftrightarrow\quad \lim_{t\rightarrow 0^+} \dot{x}(t) = 0 $$
+    For the practical computation of \(c_1\) and \(c_2\), this doesn't matter, but the discontinuity of \(\dot{x}\)
+    does imply that we cannot extend the solution for \(t &lt; 0\).
+</p>
+<h4>Case 1:&nbsp;&nbsp;&nbsp;\(\lambda_1 \ne \lambda_2\)</h4>
+<p>
+    In order to be able to evaluate the second boundary condition, we need an expression for \(\dot{x}(t)\). Luckily,
+    \(x(t)\)
+    consists of just exponentials and a flat Heaviside step (recall that \(\dot{u}(t) \equiv 0\)).
+    $$ \dot{x}(t) = c_1 \lambda_1 e^{\lambda_1t} + c_2 \lambda_2 e^{\lambda_2t} $$
+    Evaluating for \(t\rightarrow 0^+\):
+    $$ \begin{cases}
+    x(0^+) = c_1 + c_2 + \dfrac{1}{k} &amp;= 0\\[0.3em]
+    \dot{x}(0^+) = c_1 \lambda_1 + c_2 \lambda_2 &amp;= 0
+    \end{cases} $$
+    This is simply a system of two equations and two unknowns, \(c_1\) and \(c_2\). The solutions are:
+    $$ \begin{cases}
+    c_1 = \dfrac{1}{k\left(\lambda_1/\lambda_2 - 1\right)} \\[0.3em]
+    c_2 = \dfrac{1}{k\left(\lambda_2/\lambda_1 - 1\right)}
+    \end{cases} $$
+</p>
+<h4>Case 2:&nbsp;&nbsp;&nbsp;\(\lambda_1 = \lambda_2 = \lambda\)</h4>
+<p>
+    In this case, the derivative is a bit more complicated:
+    $$ \dot{x}(t) = c_1 \lambda e^{\lambda t} + c_2 e^{\lambda t} + c_2 \lambda t e^{\lambda t} $$
+    Evaluating for \(t\rightarrow 0^+\):
+    $$ \begin{cases}
+    x(0^+) = c_1 + 0 + \dfrac{1}{k} &amp;= 0\\[0.3em]
+    \dot{x}(0^+) = c_1 \lambda + c_2 &amp;= 0
+    \end{cases} $$
+    The solutions to this system of equations are:
+    $$ \begin{cases}
+    c_1 = -\dfrac{1}{k} \\[0.3em]
+    c_2 = \phantom{-}\dfrac{\lambda}{k}
+    \end{cases} $$
+</p>
+
+<h2>Solution regimes of the damped harmonic oscillator</h2>
+
+<p>
+    Depending on the parameters \(k\), \(m\) and \(d\), the solution \(x(t)\) can look qualitatively very different.
+    If the discriminant of equation \(\eqref{characteristic-equation-lambda}\) is positive, its roots \(\lambda_{1,2}\)
+    will be real. If the discriminant is negative, \(\lambda_{1,2}\) will be complex. If the roots are real, we say
+    that the oscillator is in the <b>overdamped regime</b>, and if the roots have a nonzero imaginary part, we say
+    that the oscillator is in the <b>underdamped regime</b>. On the boundary between these two regimes, the
+    discriminant of \(\eqref{characteristic-equation-lambda}\) is exactly zero, and \(\lambda_1 = \lambda_2\). This
+    is called the <b>critically damped regime</b>.
+</p>
+<p>
+    Looking at equation \(\eqref{lambdas}\), you can see that the roots will be real if \(\zeta^2 &gt; 1\), and complex
+    if \(\zeta^2\ &lt; 1\). In conclusion:
+</p>
+<style>
+    table#regimes {
+        margin: 0.2em auto;
+    }
+
+    table#regimes>tbody>tr>td:nth-child(n+2) {
+        text-align: center;
+    }
+</style>
+<table id="regimes">
+    <tbody>
+        <tr>
+            <th>Regime</th>
+            <th>Damping factor</th>
+            <th>Physical constants</th>
+        </tr>
+        <tr>
+            <td>Underdamped</td>
+            <td>\(\zeta &lt; 1\)</td>
+            <td>\(d &lt; 2\sqrt{km}\)</td>
+        </tr>
+        <tr>
+            <td>Critically damped</td>
+            <td>\(\zeta = 1\)</td>
+            <td>\(d = 2\sqrt{km}\)</td>
+        </tr>
+        <tr>
+            <td>Overdamped</td>
+            <td>\(\zeta &gt; 1\)</td>
+            <td>\(d &gt; 2\sqrt{km}\)</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>
+    The figure below shows the qualitative differences between the different regimes.
+</p>
+@image{
+"file": "images/regimes.svg"
+}
+<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/regimes.py">Image source code</a></small>
+
+<h3>Underdamped regime</h3>
+
+<p>
+    We know that in this case, \(\zeta^2 - 1 &lt; 0\), so we can revise the formula for \(\lambda_{1,2}\):
+    $$ \begin{equation} \begin{aligned}
+    \lambda_{1,2} &amp;= -\zeta\omega_n \pm \omega_n \sqrt{\zeta^2 - 1} \\
+    &amp;= -\zeta\omega_n \pm j \omega_n \sqrt{1 - \zeta^2} \\
+    &amp;= -\alpha \pm j \beta,
+    \end{aligned}
+    \label{lambdas-underdamped}
+    \end{equation} $$
+    where \(j\) is the imaginary unit \((j^2=-1)\), \(\alpha\) and \(\beta\) are real, positive constants defined as 
+    $$ \begin{equation} 
+    \begin{aligned} 
+    \alpha &amp;\triangleq \zeta \omega_n \\
+    \beta &amp;\triangleq \omega_n \sqrt{1 - \zeta^2}.
+    \end{aligned}
+    \label{alpha-beta-underdamped} 
+    \end{equation} $$
+</p>
+<p>
+    Substituting this into the solution (equation \(\eqref{general-solution}\)), and using Euler's formula
+    \((e^{j\theta} = \cos \theta + j \sin \theta)\):
+    $$ \begin{equation}
+    \begin{aligned}
+    x(t) &amp;= c_1 e^{\left(-\alpha + j\beta\right)t} + c_2 e^{\left(-\alpha - j\beta\right)t} + \frac{1}{k} u(t) \\
+    &amp;= e^{-\alpha t} \left(c_1 e^{j\beta t} + c_2 e^{-j\beta t}\right) + \frac{1}{k} u(t) \\
+    &amp;= e^{-\alpha t} \left(c_1 \left(\cos \beta t + j \sin \beta t\right) 
+                             + c_2 \left(\cos \beta t - j \sin \beta t\right)\right) + \frac{1}{k} u(t) \\
+    &amp;= e^{-\alpha t} \left(\left(c_1 + c_2\right) \cos \beta t 
+                     + j \left(c_1 - c_2\right) \sin \beta t\right) + \frac{1}{k} u(t) \\
+    &amp;= e^{-\alpha t} \left(\tilde{c}_1 \cos \beta t 
+                             + \tilde{c}_2 \sin \beta t\right) + \frac{1}{k} u(t)
+    \end{aligned}
+    \label{step-response-underdamped}
+    \end{equation} $$
+    You could compute the new constants \(\tilde{c}_1\) and \(\tilde{c}_2\) using their definitions
+    $$ \begin{equation}
+    \begin{cases}
+    \tilde{c}_1 = c_1 + c_2 \\[0.3em]
+    \tilde{c}_2 = j \left(c_1 - c_2\right)
+    \end{cases}
+    \end{equation} $$
+    but it's probably easiest to just solve the system of initial conditions again:
+    $$ \begin{equation} \begin{aligned}
+    \dot{x}(t) = &amp;-\alpha e^{-\alpha t} \left(\tilde{c}_1 \cos \beta t 
+    + \tilde{c}_2 \sin \beta t\right) \\
+    &amp;+ e^{-\alpha t} \left(-\tilde{c}_1 \beta \sin \beta t + \tilde{c}_2 \beta \cos \beta t \right)\\
+    = &amp;-e^{-\alpha t} \left(\left(\tilde{c}_1 \alpha - \tilde{c}_2 \beta\right) \cos \beta t 
+    + \left(\tilde{c}_1 \beta + \tilde{c}_2 \alpha\right) \sin \beta t\right)
+    \end{aligned} 
+    \label{derivative-underdamped} 
+    \end{equation} $$
+    $$ \begin{cases}
+    x(0^+) = \tilde{c}_1 + 0 + \dfrac{1}{k} &amp;= 0 \\[0.3em]
+    \dot{x}(0^+) = -\tilde{c}_1 \alpha + \tilde{c}_2 \beta &amp;= 0
+    \end{cases} $$
+    $$ \begin{equation}
+    \begin{cases}
+    \tilde{c}_1 = -\dfrac{1}{k} \\[0.3em]
+    \tilde{c}_2 = -\dfrac{\alpha}{\beta k}
+    \end{cases}
+    \label{constants-underdamped}
+    \end{equation} $$
+</p>
+<h4>Peak time</h4>
+<p>
+    Now that we have a nice sinusoidal expression for the solution, we can determine the position 
+    of the first peak, the global maximum of the step response (see the previous figure).
+</p>
+<p>
+    The factor \(e^{-\alpha t}\) in equation \(\eqref{step-response-underdamped}\) is monotonically 
+    decreasing, and the other factor is sinusoidal with a constant amplitude, so the global maximum
+    of \(x(t)\) occurs at the same time as the first local maximum of \(\tilde{c}_1 \cos \beta t 
+    + \tilde{c}_2 \sin \beta t\). To find the value for \(t\) at this maximum, \(t_p\), 
+    we look at the roots of the derivative \(\dot{x}\) (equation \(\eqref{derivative-underdamped}\)):
+    $$ \begin{equation} \begin{aligned} 
+    &amp;&amp; \dot{x}(t_p) &= 0 \\
+    \Leftrightarrow&amp;&amp; -e^{-\alpha t_p} \left(\left(\tilde{c}_1 \alpha - \tilde{c}_2 \beta\right) \cos \beta t_p
+    + \left(\tilde{c}_1 \beta + \tilde{c}_2 \alpha\right) \sin \beta t_p\right) &= 0 \\
+    \Leftrightarrow&amp;&amp;\cancel{\left(\tilde{c}_1 \alpha - \tilde{c}_2 \beta\right)} \cos \beta t_p
+    + \left(\tilde{c}_1 \beta + \tilde{c}_2 \alpha\right) \sin \beta t_p &= 0 \\
+    \Leftrightarrow&amp;&amp; \sin \beta t_p &= 0
+    \end{aligned}
+    \label{underdamped-local-extrema}
+    \end{equation} $$
+    The peak time is the first solution of \(\sin \beta t_p = 0\) for \(t &gt; 0\):
+    $$ \begin{equation}
+    t_p = \frac{\pi}{\beta}
+    \label{peak-time}
+    \end{equation} $$
+</p>
+<h4>Overshoot</h4>
+<p>
+    By plugging in this value \(t_p\) into the expression for \(x(t)\), we can determine the amplitude of peak, and 
+    by how much it overshoots the limit \(x(\infty) = \lim_{t\rightarrow \infty} x(t) = 1/k\).
+    $$ \begin{aligned} x(t_p) &amp;= e^{-\alpha \pi / \beta} \left(\tilde{c}_1 \cos \frac{\beta \pi}{\beta} 
+    + \tilde{c}_2 \sin \frac{\beta \pi}{\beta}\right) + \frac{1}{k} \\
+    &amp;= -e^{-\alpha \pi / \beta}\ \tilde{c}_1 + \frac{1}{k} \\
+    &amp;= e^{-\alpha \pi / \beta}\ \frac{1}{k} + \frac{1}{k}
+    \end{aligned} $$
+    Expressed as a percentage, the overshoot is 
+    $$ \begin{equation} 
+    \begin{aligned}
+    \text{P.O.} &amp;= 100 \cdot \frac{x(t_p) - x(\infty)}{x(\infty)} \% \\
+    &amp;= 100 \cdot \exp\left(-\frac{\alpha \pi}{\beta}\right) \%  \\
+    &amp;= 100 \cdot \exp\left(-\frac{\zeta \pi}{\sqrt{1-\zeta^2}}\right) \%.
+    \end{aligned}
+    \label{percent-overshoot}
+    \end{equation} $$
+</p>
+@image{
+"file": "images/overshoot.svg"
+}
+<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/overshoot.py">Image source code</a></small>
+
+<h4>Rise time</h4>
+<p>
+    The rise time \(t_r\) is the time it takes for the step response to reach \(x(\infty)\) for the first time.
+    $$ \DeclareMathOperator{\atan}{atan}
+    \begin{aligned} 
+    &amp;&amp; x(t_r) &amp;= x(\infty) \\
+    \Leftrightarrow&amp;&amp; e^{-\alpha t_r} \left(\tilde{c}_1 \cos \beta t_r 
+    + \tilde{c}_2 \sin \beta t_r\right) + \frac{1}{k} &amp;= \frac{1}{k} \\
+    \Leftrightarrow&amp;&amp; \tilde{c}_1 \cos \beta t_r 
+    + \tilde{c}_2 \sin \beta t_r &amp;= 0 \\
+    \Leftrightarrow&amp;&amp; \tan \beta t_r &amp;= -\frac{\tilde{c}_1}{\tilde{c}_2} \\
+    \Leftrightarrow&amp;&amp; \tan \beta t_r &amp;= -\frac{\beta}{\alpha}
+    \end{aligned} $$ 
+    The first solution gives a negative value for \(t_r\), so \(\pi\) is added to find the second solution, which is 
+    the first solution for \(t_r &gt; 0\).
+    $$ \begin{equation}
+    \begin{aligned}
+    t_r &amp;= \frac{1}{\beta} \left( \pi - \atan \frac{\beta}{\alpha} \right) \\
+    &amp;= \frac{1}{\omega_n \sqrt{1 - \zeta^2}} \left( \pi -\atan \frac{\sqrt{1 - \zeta^2}}{\zeta} \right)
+    \end{aligned}
+    \label{rise-time}
+    \end{equation} $$
+</p>
+@image{
+"file": "images/risetime.svg"
+}
+<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/risetime.py">Image source code</a></small>
+<p>
+    The lower the damping ratio, the faster the output rises, so the smaller the rise time. As the damping ration 
+    increases, the system reacts more slowly, and the rise time increases. For \(\zeta = 1\), the system becomes 
+    critically damped, and the output will get asymptotically closer to \(x(\infty)\), but never reach it, so the 
+    rise time is infinite.
+</p>
+
+<h4>Settling time</h4>
+<p>
+    The settling time \(t_s\) is the time after which the step response settles in a small error band around 
+    \(x(\infty)\), never to leave it again.
+    Usually, the width of the error band is chosen to be \(2\%\) of \(x(\infty)\):
+    $$ \frac{\big\lvert x(t_s) - x(\infty) \big\rvert}{x(\infty)} &lt; 1\% $$
+</p>
+<p>
+    In equation \(\eqref{underdamped-local-extrema}\), we derived that the extrema of the step response occur when 
+    \(\sin \beta t = 0\), or \(t_{x,n} = n \pi / \beta\).
+    Combining this with equations \(\eqref{step-response-underdamped}\) and \(\eqref{constants-underdamped}\),
+    we find that the value of \(x(t)\) at these extrema is:
+    $$ \begin{equation} 
+    \begin{aligned}
+    x(t_{x,n}) &amp;= e^{-\alpha t_{x,n}}\ \tilde{c}_1 (-1)^{n} + \frac{1}{k} \\
+    &amp;= \frac{1}{k} \Big( 1 - (-1)^{n}\ e^{-\alpha t_{x,n}} \Big) \\
+    &amp;= x(\infty) \Big( 1 - (-1)^{n}\ e^{-\alpha t_{x,n}} \Big)
+    \end{aligned} 
+    \label{underdamped-local-extrema-values}
+    \end{equation} $$
+</p>
+<p>
+    The amplitude of these extrema can be used to approximate the settling time: 
+    $$ \begin{equation}
+    \begin{aligned}
+    e^{-\alpha t_s} &amp;\approx 1\% \\
+    t_s &amp;\approx -\frac{\log(0.01)}{\alpha} \\
+    &amp;\approx -\frac{4.61}{\alpha} \\
+    &amp;= -\frac{4.61}{\zeta\omega_n}
+    \end{aligned}
+    \label{settling-time}
+    \end{equation} $$
+</p>
+<p>
+    The following image visualizes the exponential decay of the extrema, as derived in equation 
+    \(\eqref{underdamped-local-extrema-values}\).
+</p>
+@image{
+"file": "images/underdamped.svg"
+}
+<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/underdamped.py">Image source code</a></small>
+
+<h3>Overdamped regime</h3>
+
+<p>
+    In this case, \(\lambda_1\) and \(\lambda_2\) will be real, and the solution \(\eqref <!-- TODO -->\)
+</p>
+
+</html>

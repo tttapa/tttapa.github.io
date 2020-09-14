@@ -20,10 +20,14 @@ def step_response_x(m, ζ, ωₙ, t_end=10):
         c_2 = c_3 / (lambda_2 / lambda_1 - 1)
 
         alpha = ζ * ωₙ
-        beta = np.sqrt(-discriminant + 0j)
+        beta =  ωₙ * np.sqrt(-discriminant + 0j)
 
         ct_1 = -c_3
         ct_2 = -c_3 * alpha / beta
+
+        if np.imag(beta) == 0:
+            t_r = -1/beta * (np.pi - np.arctan2(np.real(beta), alpha))
+            print(f'{t_r=}')
 
         print(c_1 + c_2)
         print(ct_1)

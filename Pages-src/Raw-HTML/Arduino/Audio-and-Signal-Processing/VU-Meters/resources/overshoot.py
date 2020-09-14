@@ -10,7 +10,7 @@ rc('text', usetex=True)
 po = 100 * np.exp(-np.pi * ζ / np.sqrt(1 - ζ**2))
 
 plt.figure(figsize=(8.5, 8.5*9/16))
-plt.title(r'Percent overshoot in function of the damping ration $\zeta$')
+plt.title(r'Percent overshoot in function of the damping ratio $\zeta$')
 plt.plot(ζ, po)
 plt.xlim([0, 1])
 plt.ylim([0, 100])

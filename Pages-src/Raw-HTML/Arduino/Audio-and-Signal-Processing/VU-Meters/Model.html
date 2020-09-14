@@ -67,10 +67,10 @@
     <a href="https://en.wikipedia.org/wiki/Eddy_current_brake">induction brakes</a> in high-speed trains,
     for example.<br>
     The magnitude of this opposing force is proportional to the rate of change of the magnetic flux in the armature,
-    \(\frac{\partial\Phi_B}{\partial t}\). In a first order approximation, this is simply proportional to the angular
-    velocity of the armature, \(\dot{\theta} = \frac{\partial\theta}{\partial t}\), therefore
-    $$ F_d = -c\,\dot{\theta}, $$
-    where \(c\) is a proportionality constant that takes into account the area of the armature, the resistance of
+    \(\dfrac{\partial\Phi_B}{\partial t}\). In a first order approximation, this is simply proportional to the angular
+    velocity of the armature, \(\dot{\theta} = \dfrac{d\theta}{d t}\), therefore
+    $$ F_d = -\mu\,\dot{\theta}, $$
+    where \(\mu\) is a proportionality constant that takes into account the area of the armature, the resistance of
     the metal it's made of, the strength of the magnetic field, etc.
 </p>
 
@@ -95,8 +95,8 @@
 <p>
     The damping force \(F_d\) caused by induction in the armature causes an opposing torque, proportional to the
     velocity of the needle:
-    $$ \tau_d = - rc\,\dot{\theta} = -d\dot{\theta}. $$
-    Again, a constant \(d \triangleq rc\) is introduced to make future calculations easier.
+    $$ \tau_d = - r\mu\,\dot{\theta} = -c\dot{\theta}. $$
+    Again, a constant \(c \triangleq r\mu\) is introduced to make future calculations easier.
 </p>
 <p>
     When the needle moves away from its center position, there is a third torque, caused by the torsion spring. This
@@ -109,15 +109,16 @@
     Newton's Second Law (\(F = ma\)) has a rotational equivalent that relates the net torque to the angular
     acceleration of an object:
     $$ \tau = I \alpha, $$
-    where \(\tau\) is the net torque, \(I\) is the moment of inertia, and \(\alpha = \ddot{\theta}\) is the
+    where \(\tau\) is the net torque, \(I\) is the moment of inertia, and 
+    \(\alpha = \ddot{\theta} = \dfrac{d^2\theta}{dt^2}\) is the
     angular acceleration.
 </p>
 <p>
     Applying this law to the three torques derived above:
     $$ \begin{align*}
     \tau_L + \tau_d + \tau_H &amp;= I \alpha \\
-    fi - d\dot{\theta} - k\theta &amp;= I \ddot{\theta} \\
-    I \ddot{\theta} + d\dot{\theta} + k\theta &amp; = fi.
+    fi - c\dot{\theta} - k\theta &amp;= I \ddot{\theta} \\
+    I \ddot{\theta} + c\dot{\theta} + k\theta &amp; = fi.
     \end{align*} $$
 </p>
 <p>
@@ -125,343 +126,8 @@
     $$ \begin{equation} I \ddot{\theta}(t) + d\dot{\theta}(t) + k\theta(t) = fi(t). \label{ode-galvo} \end{equation} $$
 </p>
 <p>
-    Recall that \(I\), \(d\), \(k\) and \(f\) are physical constants, \(\theta(t)\) is the angle of the needle, and
+    Recall that \(I\), \(c\), \(k\) and \(f\) are physical constants, \(\theta(t)\) is the angle of the needle, and
     \(i(t)\) is the current applied to the coil. Overdots indicate derivatives with respect to time.
 </p>
-
-<hr class="pagebreak">
-
-<h2>The damped harmonic oscillator</h2>
-
-<p>
-    You might recognize the previous equation \(\eqref{ode-galvo}\) as the equation for the damped harmonic oscillator
-    $$ \begin{equation} m \ddot{x}(t) + d\dot{x}(t) + kx(t) = f(t). \label{damp-harm-osc} \end{equation} $$
-    In this equation, \(x(t)\) is the displacement,
-    \(m\) is the mass (cfr. moment of inertia \(I\)), \(d\) is the damping factor, \(k\) is the
-    spring constant, and \(f(t)\) is an external driving force.
-</p>
-<p>
-    The damped harmonic oscillator is a well-known problem, so in the remainder of this document, we'll use the
-    formulation in equation \(\eqref{damp-harm-osc}\), because it uses the symbol names you'll usually find in
-    the literature. Apart from naming conventions, equations \(\eqref{ode-galvo}\) and \(\eqref{damp-harm-osc}\) are
-    completely equivalent.
-</p>
-<p>
-    To make solving the equation easier, we'll define two more constants:
-    $$ \begin{equation} \begin{aligned}
-    \omega_n \triangleq&amp; \sqrt{\frac{k}{m}} \\
-    \zeta \triangleq&amp; \frac{d}{2\sqrt{km}}
-    \end{aligned}
-    \label{omega_n-zeta}
-    \end{equation} $$
-    Equation \(\eqref{damp-harm-osc}\) then becomes:
-    $$ \begin{equation}
-    \ddot{x}(t) + 2\zeta\omega_n \dot{x}(t) + \omega_n^2 x(t) = \frac{1}{m} f(t)
-    \label{damp-harm-osc2} \end{equation} $$
-</p>
-
-<h3>Solution of the damped harmonic oscillator</h3>
-
-<p>
-    Equation \(\eqref{damp-harm-osc2}\) is a linear ordinary differential equation with constant coefficients, so the
-    general solution is the sum of the homogeneous solution and a particular solution:
-    $$ x(t) = x_h(t) + x_p(t) $$
-</p>
-<p>
-    In this section, we'll derive the solution of the step response, that is, the solution for \(x(t)\) if
-    \(f(t) = u(t)\), the Heaviside step function:
-    $$ u(t) \triangleq \begin{cases}
-    0 &amp; t &lt; 0 \\
-    1/2 &amp; t = 0 \\
-    1 &amp; t &gt; 0 \end{cases} $$
-</p>
-
-<h4>Homogeneous solution</h4>
-
-<p>
-    The homogeneous solution \(x_h(t)\) is the solution to
-    $$ \begin{equation}
-    \ddot{x}_h(t) + 2\zeta\omega_n \dot{x}_h(t) + \omega_n^2 x_h(t) = 0.
-    \label{eq-homog-sol}
-    \end{equation} $$
-    The characteristic equation is
-    $$ \begin{equation}
-    \lambda^2 + 2\zeta\omega_n \lambda + \omega_n^2 = 0,
-    \label{characteristic-equation-lambda}
-    \end{equation} $$
-    with the solutions
-    $$ \begin{equation}
-    \lambda_{1,2} = -\zeta\omega_n \pm \omega_n \sqrt{\zeta^2 - 1}.
-    \label{lambdas}
-    \end{equation} $$
-    If \(\lambda_1 \ne \lambda_2\), the homogeneous solution is
-    $$ \begin{equation}
-    x_h(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t}, \label{homog-sol}
-    \end{equation} $$
-    where \(c_1\) and \(c_2\) are two arbitrary real constants of integration.
-</p>
-<p><br></p>
-<p>
-    If \(\lambda_1 = \lambda_2 = \lambda\), the terms \(c_1 e^{\lambda t}\) and \(c_2 e^{\lambda t}\) are linearly
-    dependent, and no longer form a basis for the homogeneous solution space. One can form a valid basis by
-    multiplying the second term by \(t\):
-    $$ \begin{equation}
-    x_h(t) = c_1 e^{\lambda t} + c_2 t e^{\lambda t} \label{homog-sol-2}
-    \end{equation} $$
-    Compute the first two derivatives of equation \(\eqref{homog-sol-2}\) and substitute them into equation
-    \(\eqref{eq-homog-sol}\) to convince yourself that these are indeed solutions.
-</p>
-
-<h4>Particular solution for the step response</h4>
-
-<p>
-    The particular solution \(x_p(t)\) is a (preferably simple) solution to
-    $$ \begin{equation}
-    \ddot{x}_p(t) + 2\zeta\omega_n \dot{x}_p(t) + \omega_n^2 x_p(t) = \frac{1}{m} u(t).
-    \label{eq-part-sol}
-    \end{equation} $$
-</p>
-<p>
-    The Heaviside step function \(u(t)\) is flat everywhere, so its derivatives are zero, except in \(t=0\),
-    where they are undefined:
-    $$ \begin{aligned}
-    \forall t \ne 0: &amp; \\
-    \dot{u}(t) &amp;\equiv 0 \\
-    \ddot{u}(t) &amp;\equiv 0
-    \end{aligned} $$
-</p>
-<p>
-    A guess for the particular solution could be
-    $$ \begin{equation} x_p(t) = c_3 u(t). \end{equation} $$
-    You can substitute this into equation \(\eqref{eq-part-sol}\) to verify that this is indeed a solution, if
-    \(c_3 = \frac{1}{m\omega_n^2} = \frac{1}{k}\):
-    $$ \cancel{c_3 \ddot{u}(t)} + \cancel{2 c_3 \zeta \omega_n \dot{u}(t)} + c_3 \omega_n^2 u(t) = \frac{1}{m} u(t) $$
-</p>
-
-<h4>General solution for the step response</h4>
-
-<p>
-    The general solution is the sum of the homogeneous and the particular solution:
-    $$ \begin{equation}
-    x(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t} + \frac{1}{k} u(t)
-    \label{general-solution}
-    \end{equation} $$
-    In the case where \(\lambda_1 = \lambda_2 = \lambda\), this becomes:
-    $$ \begin{equation}
-    x(t) = c_1 e^{\lambda t} + c_2 t e^{\lambda t} + \frac{1}{k} u(t)
-    \label{general-solution-2}
-    \end{equation} $$
-</p>
-<h4>Determining the constants of integration</h4>
-<p>
-    To find \(c_1\) and \(c_2\), we use the following initial conditions:
-    $$ \begin{cases}
-    x(0^+) = 0 \\[0.3em]
-    \dot{x}(0^+) = 0 \end{cases} $$
-    They are specified at \(t=0^+\), which should be understood as a limit for \(t\) approaching zero from the right,
-    because the derivatives are undefined at \(t=0\).
-    $$ \dot{x}(0^+) = 0 \quad\Leftrightarrow\quad \lim_{t\rightarrow 0^+} \dot{x}(t) = 0 $$
-    For the practical computation of \(c_1\) and \(c_2\), this doesn't matter, but the discontinuity of \(\dot{x}\)
-    does imply that we cannot extend the solution for \(t &lt; 0\).
-</p>
-<h5>Case 1:&nbsp;&nbsp;&nbsp;\(\lambda_1 \ne \lambda_2\)</h5>
-<p>
-    In order to be able to evaluate the second boundary condition, we need an expression for \(\dot{x}(t)\). Luckily,
-    \(x(t)\)
-    consists of just exponentials and a flat Heaviside step (recall that \(\dot{u}(t) \equiv 0\)).
-    $$ \dot{x}(t) = c_1 \lambda_1 e^{\lambda_1t} + c_2 \lambda_2 e^{\lambda_2t} $$
-    Evaluating for \(t\rightarrow 0^+\):
-    $$ \begin{cases}
-    x(0^+) = c_1 + c_2 + \dfrac{1}{k} &amp;= 0\\[0.3em]
-    \dot{x}(0^+) = c_1 \lambda_1 + c_2 \lambda_2 &amp;= 0
-    \end{cases} $$
-    This is simply a system of two equations and two unknowns, \(c_1\) and \(c_2\). The solutions are:
-    $$ \begin{cases}
-    c_1 = \dfrac{1}{k\left(\lambda_1/\lambda_2 - 1\right)} \\[0.3em]
-    c_2 = \dfrac{1}{k\left(\lambda_2/\lambda_1 - 1\right)}
-    \end{cases} $$
-</p>
-<h5>Case 2:&nbsp;&nbsp;&nbsp;\(\lambda_1 = \lambda_2 = \lambda\)</h5>
-<p>
-    In this case, the derivative is a bit more complicated:
-    $$ \dot{x}(t) = c_1 \lambda e^{\lambda t} + c_2 e^{\lambda t} + c_2 \lambda t e^{\lambda t} $$
-    Evaluating for \(t\rightarrow 0^+\):
-    $$ \begin{cases}
-    x(0^+) = c_1 + 0 + \dfrac{1}{k} &amp;= 0\\[0.3em]
-    \dot{x}(0^+) = c_1 \lambda + c_2 &amp;= 0
-    \end{cases} $$
-    The solutions to this system of equations are:
-    $$ \begin{cases}
-    c_1 = -\dfrac{1}{k} \\[0.3em]
-    c_2 = \phantom{-}\dfrac{\lambda}{k}
-    \end{cases} $$
-</p>
-
-<h3>Solution regimes of the damped harmonic oscillator</h3>
-
-<p>
-    Depending on the parameters \(k\), \(m\) and \(d\), the solution \(x(t)\) can look qualitatively very different.
-    If the discriminant of equation \(\eqref{characteristic-equation-lambda}\) is positive, its roots \(\lambda_{1,2}\)
-    will be real. If the discriminant is negative, \(\lambda_{1,2}\) will be complex. If the roots are real, we say
-    that the oscillator is in the <b>overdamped regime</b>, and if the roots have a nonzero imaginary part, we say
-    that the oscillator is in the <b>underdamped regime</b>. On the boundary between these two regimes, the
-    discriminant of \(\eqref{characteristic-equation-lambda}\) is exactly zero, and \(\lambda_1 = \lambda_2\). This
-    is called the <b>critically damped regime</b>.
-</p>
-<p>
-    Looking at equation \(\eqref{lambdas}\), you can see that the roots will be real if \(\zeta^2 &gt; 1\), and complex
-    if \(\zeta^2\ &lt; 1\). In conclusion:
-</p>
-<style>
-    table#regimes {
-        margin: 0.2em auto;
-    }
-
-    table#regimes>tbody>tr>td:nth-child(n+2) {
-        text-align: center;
-    }
-</style>
-<table id="regimes">
-    <tbody>
-        <tr>
-            <th>Regime</th>
-            <th>Damping factor</th>
-            <th>Physical constants</th>
-        </tr>
-        <tr>
-            <td>Underdamped</td>
-            <td>\(\zeta &lt; 1\)</td>
-            <td>\(d &lt; 2\sqrt{km}\)</td>
-        </tr>
-        <tr>
-            <td>Critically damped</td>
-            <td>\(\zeta = 1\)</td>
-            <td>\(d = 2\sqrt{km}\)</td>
-        </tr>
-        <tr>
-            <td>Overdamped</td>
-            <td>\(\zeta &gt; 1\)</td>
-            <td>\(d &gt; 2\sqrt{km}\)</td>
-        </tr>
-    </tbody>
-</table>
-
-<p>
-    The figure below shows the qualitative differences between the different regimes.
-</p>
-@image{
-"file": "images/regimes.svg"
-}
-<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/regimes.py">Image source code</a></small>
-
-<h4>Underdamped regime</h4>
-
-<p>
-    We know that in this case, \(\zeta^2 - 1 &lt; 0\), so we can revisit the formula for \(\lambda_{1,2}\):
-    $$ \begin{equation} \begin{aligned}
-    \lambda_{1,2} &amp;= -\zeta\omega_n \pm \omega_n \sqrt{\zeta^2 - 1} \\
-    &amp;= -\zeta\omega_n \pm j \omega_n \sqrt{1 - \zeta^2} \\
-    &amp;= -\alpha \pm j \beta,
-    \end{aligned}
-    \label{lambdas-underdamped}
-    \end{equation} $$
-    where \(j\) is the imaginary unit \((j^2=-1)\), \(\alpha\) and \(\beta\) are real, positive constants defined as 
-    $$ \begin{equation} 
-    \begin{aligned} 
-    \alpha &amp;\triangleq \zeta \omega_n \\
-    \beta &amp;\triangleq \omega_n \sqrt{1 - \zeta^2}.
-    \end{aligned}
-    \label{alpha-beta-underdamped} 
-    \end{equation} $$
-</p>
-<p>
-    Substituting this into the solution (equation \(\eqref{general-solution}\)), and using Euler's formula
-    \((e^{j\theta} = \cos \theta + j \sin \theta)\):
-    $$ \begin{equation}
-    \begin{aligned}
-    x(t) &amp;= c_1 e^{\left(-\alpha + j\beta\right)t} + c_2 e^{\left(-\alpha - j\beta\right)t} + \frac{1}{k} u(t) \\
-    &amp;= e^{-\alpha t} \left(c_1 e^{j\beta t} + c_2 e^{-j\beta t}\right) + \frac{1}{k} u(t) \\
-    &amp;= e^{-\alpha t} \left(c_1 \left(\cos \beta t + j \sin \beta t\right) 
-                             + c_2 \left(\cos \beta t - j \sin \beta t\right)\right) + \frac{1}{k} u(t) \\
-    &amp;= e^{-\alpha t} \left(\left(c_1 + c_2\right) \cos \beta t 
-                     + j \left(c_1 - c_2\right) \sin \beta t\right) + \frac{1}{k} u(t) \\
-    &amp;= e^{-\alpha t} \left(\tilde{c}_1 \cos \beta t 
-                             + \tilde{c}_2 \sin \beta t\right) + \frac{1}{k} u(t)
-    \end{aligned}
-    \label{step-response-underdamped}
-    \end{equation} $$
-    You could compute the new constants \(\tilde{c}_1\) and \(\tilde{c}_2\) using their definitions
-    $$ \begin{equation}
-    \begin{cases}
-    \tilde{c}_1 = c_1 + c_2 \\[0.3em]
-    \tilde{c}_2 = j \left(c_1 - c_2\right)
-    \end{cases}
-    \end{equation} $$
-    but it's probably easiest to just solve the system of initial conditions again:
-    $$ \begin{equation} \begin{aligned}
-    \dot{x}(t) = &amp;-\alpha e^{-\alpha t} \left(\tilde{c}_1 \cos \beta t 
-    + \tilde{c}_2 \sin \beta t\right) \\
-    &amp;+ e^{-\alpha t} \left(-\tilde{c}_1 \beta \sin \beta t + \tilde{c}_2 \beta \cos \beta t \right)\\
-    = &amp;-e^{-\alpha t} \left(\left(\tilde{c}_1 \alpha - \tilde{c}_2 \beta\right) \cos \beta t 
-    + \left(\tilde{c}_1 \beta + \tilde{c}_2 \alpha\right) \sin \beta t\right)
-    \end{aligned} 
-    \label{derivative-underdamped} 
-    \end{equation} $$
-    $$ \begin{cases}
-    x(0^+) = \tilde{c}_1 + 0 + \dfrac{1}{k} &amp;= 0 \\[0.3em]
-    \dot{x}(0^+) = -\tilde{c}_1 \alpha + \tilde{c}_2 \beta &amp;= 0
-    \end{cases} $$
-    $$ \begin{equation}
-    \begin{cases}
-    \tilde{c}_1 = -\dfrac{1}{k} \\[0.3em]
-    \tilde{c}_2 = -\dfrac{\alpha}{\beta k}
-    \end{cases}
-    \label{constants-underdamped}
-    \end{equation} $$
-</p>
-<h5>Peak time</h5>
-<p>
-    Now that we have a nice sinusoidal expression for the solution, we can determine the position 
-    of the peak, as shown in the figure above.
-</p>
-<p>
-    The factor \(e^{-\alpha t}\) in equation \(\eqref{step-response-underdamped}\) is monotonically 
-    decreasing, and the other factor is sinusoidal with a constant amplitude, so the global maximum
-    of \(x(t)\) occurs at the same time as the first local maximum of \(\tilde{c}_1 \cos \beta t 
-    + \tilde{c}_2 \sin \beta t\). To find the value for \(t\) at this maximum, \(t_p\), 
-    we look at the roots of the derivative \(\dot{x}\) (equation \(\eqref{derivative-underdamped}\)):
-    $$ \begin{aligned} 
-    0 &amp;= \dot{x}(t_p) \\
-    &amp;= -e^{-\alpha t_p} \left(\left(\tilde{c}_1 \alpha - \tilde{c}_2 \beta\right) \cos \beta t_p
-    + \left(\tilde{c}_1 \beta + \tilde{c}_2 \alpha\right) \sin \beta t_p\right) \\
-    &amp;=\cancel{\left(\tilde{c}_1 \alpha - \tilde{c}_2 \beta\right)} \cos \beta t_p
-    + \left(\tilde{c}_1 \beta + \tilde{c}_2 \alpha\right) \sin \beta t_p \\
-    &amp;=\sin \beta t_p \\
-    t_p &amp;= \frac{\pi}{\beta}
-    \end{aligned} $$
-</p>
-<h5>Overshoot</h5>
-<p>
-    By plugging in this value \(t_p\) into the expression for \(x(t)\), we can determine the amplitude of peak, and 
-    by how much it overshoots the limit \(x(\infty) = \lim_{t\rightarrow \infty} x(t) = 1/k\).
-    $$ \begin{aligned} x(t_p) &amp;= e^{-\alpha \pi / \beta} \left(\tilde{c}_1 \cos \frac{\beta \pi}{\beta} 
-    + \tilde{c}_2 \sin \frac{\beta \pi}{\beta}\right) + \frac{1}{k} \\
-    &amp;= -e^{-\alpha \pi / \beta}\ \tilde{c}_1 + \frac{1}{k} \\
-    &amp;= e^{-\alpha \pi / \beta}\ \frac{1}{k} + \frac{1}{k}
-    \end{aligned} $$
-    Expressed as a percentage, the overshoot is 
-    $$ \begin{equation} 
-    \begin{aligned}
-    \text{P.O.} &amp;= 100 \cdot \frac{x(t_p) - x(\infty)}{x(\infty)} \% \\
-    &amp;= 100 \cdot \exp\left(-\frac{\alpha \pi}{\beta}\right) \%  \\
-    &amp;= 100 \cdot \exp\left(-\frac{\zeta \pi}{\sqrt{1-\zeta^2}}\right) \%.
-    \end{aligned}
-    \label{percent-overshoot}
-    \end{equation} $$
-</p>
-@image{
-"file": "images/overshoot.svg"
-}
-<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/overshoot.py">Image source code</a></small>
 
 </html>
