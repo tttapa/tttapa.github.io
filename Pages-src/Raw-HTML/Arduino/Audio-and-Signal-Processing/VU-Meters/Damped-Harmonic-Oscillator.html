@@ -15,7 +15,7 @@
 <html>
 
 <p>
-    On the previous page, we derived the model of the moving-coil galvanometer, and we concluded that it's 
+    On the previous page, we derived the model of the moving-coil galvanometer, and we concluded that it's
     identical to the damped harmonic oscillator with an external driving force:
     $$ \begin{equation} m \ddot{x}(t) + c\dot{x}(t) + kx(t) = f(t), \label{damp-harm-osc} \end{equation} $$
     where \(x(t)\) is the displacement,
@@ -23,8 +23,8 @@
     spring constant, and \(f(t)\) is an external driving force.
 </p>
 <p>
-    On this page, we'll solve the equation of the damped harmonic oscillator analytically, discussing the 
-    different solution regimes, and calculating the key features of the step response, such as overshoot 
+    On this page, we'll solve the equation of the damped harmonic oscillator analytically, discussing the
+    different solution regimes, and calculating the key features of the step response, such as overshoot
     and rise time.
 </p>
 
@@ -38,7 +38,7 @@
     \end{aligned}
     \label{omega_n-zeta}
     \end{equation} $$
-    \(\omega_n\) is called the natural frequency, and \(\zeta\) the damping factor. The origin of these names 
+    \(\omega_n\) is called the natural frequency, and \(\zeta\) the damping factor. The origin of these names
     will become clear in the next section.
 </p>
 <p>
@@ -216,17 +216,17 @@
         <tr>
             <td>Underdamped</td>
             <td>\(\zeta &lt; 1\)</td>
-            <td>\(d &lt; 2\sqrt{km}\)</td>
+            <td>\(c &lt; 2\sqrt{km}\)</td>
         </tr>
         <tr>
             <td>Critically damped</td>
             <td>\(\zeta = 1\)</td>
-            <td>\(d = 2\sqrt{km}\)</td>
+            <td>\(c = 2\sqrt{km}\)</td>
         </tr>
         <tr>
             <td>Overdamped</td>
             <td>\(\zeta &gt; 1\)</td>
-            <td>\(d &gt; 2\sqrt{km}\)</td>
+            <td>\(c &gt; 2\sqrt{km}\)</td>
         </tr>
     </tbody>
 </table>
@@ -235,9 +235,10 @@
     The figure below shows the qualitative differences between the different regimes.
 </p>
 @image{
-"file": "images/regimes.svg"
+"file": "images/regimes.svg",
+"alt": "Different damped harmonic oscillator regimes",
+"source": "resources/regimes.py"
 }
-<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/regimes.py">Image source code</a></small>
 
 <h3>Underdamped regime</h3>
 
@@ -250,13 +251,13 @@
     \end{aligned}
     \label{lambdas-underdamped}
     \end{equation} $$
-    where \(j\) is the imaginary unit \((j^2=-1)\), \(\alpha\) and \(\beta\) are real, positive constants defined as 
-    $$ \begin{equation} 
-    \begin{aligned} 
+    where \(j\) is the imaginary unit \((j^2=-1)\), \(\alpha\) and \(\beta\) are real, positive constants defined as
+    $$ \begin{equation}
+    \begin{aligned}
     \alpha &amp;\triangleq \zeta \omega_n \\
     \beta &amp;\triangleq \omega_n \sqrt{1 - \zeta^2}.
     \end{aligned}
-    \label{alpha-beta-underdamped} 
+    \label{alpha-beta-underdamped}
     \end{equation} $$
 </p>
 <p>
@@ -266,12 +267,12 @@
     \begin{aligned}
     x(t) &amp;= c_1 e^{\left(-\alpha + j\beta\right)t} + c_2 e^{\left(-\alpha - j\beta\right)t} + \frac{1}{k} u(t) \\
     &amp;= e^{-\alpha t} \left(c_1 e^{j\beta t} + c_2 e^{-j\beta t}\right) + \frac{1}{k} u(t) \\
-    &amp;= e^{-\alpha t} \left(c_1 \left(\cos \beta t + j \sin \beta t\right) 
-                             + c_2 \left(\cos \beta t - j \sin \beta t\right)\right) + \frac{1}{k} u(t) \\
-    &amp;= e^{-\alpha t} \left(\left(c_1 + c_2\right) \cos \beta t 
-                     + j \left(c_1 - c_2\right) \sin \beta t\right) + \frac{1}{k} u(t) \\
-    &amp;= e^{-\alpha t} \left(\tilde{c}_1 \cos \beta t 
-                             + \tilde{c}_2 \sin \beta t\right) + \frac{1}{k} u(t)
+    &amp;= e^{-\alpha t} \left(c_1 \left(\cos \beta t + j \sin \beta t\right)
+    + c_2 \left(\cos \beta t - j \sin \beta t\right)\right) + \frac{1}{k} u(t) \\
+    &amp;= e^{-\alpha t} \left(\left(c_1 + c_2\right) \cos \beta t
+    + j \left(c_1 - c_2\right) \sin \beta t\right) + \frac{1}{k} u(t) \\
+    &amp;= e^{-\alpha t} \left(\tilde{c}_1 \cos \beta t
+    + \tilde{c}_2 \sin \beta t\right) + \frac{1}{k} u(t)
     \end{aligned}
     \label{step-response-underdamped}
     \end{equation} $$
@@ -284,13 +285,13 @@
     \end{equation} $$
     but it's probably easiest to just solve the system of initial conditions again:
     $$ \begin{equation} \begin{aligned}
-    \dot{x}(t) = &amp;-\alpha e^{-\alpha t} \left(\tilde{c}_1 \cos \beta t 
+    \dot{x}(t) = &amp;-\alpha e^{-\alpha t} \left(\tilde{c}_1 \cos \beta t
     + \tilde{c}_2 \sin \beta t\right) \\
     &amp;+ e^{-\alpha t} \left(-\tilde{c}_1 \beta \sin \beta t + \tilde{c}_2 \beta \cos \beta t \right)\\
-    = &amp;-e^{-\alpha t} \left(\left(\tilde{c}_1 \alpha - \tilde{c}_2 \beta\right) \cos \beta t 
+    = &amp;-e^{-\alpha t} \left(\left(\tilde{c}_1 \alpha - \tilde{c}_2 \beta\right) \cos \beta t
     + \left(\tilde{c}_1 \beta + \tilde{c}_2 \alpha\right) \sin \beta t\right)
-    \end{aligned} 
-    \label{derivative-underdamped} 
+    \end{aligned}
+    \label{derivative-underdamped}
     \end{equation} $$
     $$ \begin{cases}
     x(0^+) = \tilde{c}_1 + 0 + \dfrac{1}{k} &amp;= 0 \\[0.3em]
@@ -306,16 +307,16 @@
 </p>
 <h4>Peak time</h4>
 <p>
-    Now that we have a nice sinusoidal expression for the solution, we can determine the position 
+    Now that we have a nice sinusoidal expression for the solution, we can determine the position
     of the first peak, the global maximum of the step response (see the previous figure).
 </p>
 <p>
-    The factor \(e^{-\alpha t}\) in equation \(\eqref{step-response-underdamped}\) is monotonically 
+    The factor \(e^{-\alpha t}\) in equation \(\eqref{step-response-underdamped}\) is monotonically
     decreasing, and the other factor is sinusoidal with a constant amplitude, so the global maximum
-    of \(x(t)\) occurs at the same time as the first local maximum of \(\tilde{c}_1 \cos \beta t 
-    + \tilde{c}_2 \sin \beta t\). To find the value for \(t\) at this maximum, \(t_p\), 
+    of \(x(t)\) occurs at the same time as the first local maximum of \(\tilde{c}_1 \cos \beta t
+    + \tilde{c}_2 \sin \beta t\). To find the value for \(t\) at this maximum, \(t_p\),
     we look at the roots of the derivative \(\dot{x}\) (equation \(\eqref{derivative-underdamped}\)):
-    $$ \begin{equation} \begin{aligned} 
+    $$ \begin{equation} \begin{aligned}
     &amp;&amp; \dot{x}(t_p) &= 0 \\
     \Leftrightarrow&amp;&amp; -e^{-\alpha t_p} \left(\left(\tilde{c}_1 \alpha - \tilde{c}_2 \beta\right) \cos \beta t_p
     + \left(\tilde{c}_1 \beta + \tilde{c}_2 \alpha\right) \sin \beta t_p\right) &= 0 \\
@@ -333,42 +334,42 @@
 </p>
 <h4>Overshoot</h4>
 <p>
-    By plugging in this value \(t_p\) into the expression for \(x(t)\), we can determine the amplitude of peak, and 
+    By plugging in this value \(t_p\) into the expression for \(x(t)\), we can determine the amplitude of peak, and
     by how much it overshoots the limit \(x(\infty) = \lim_{t\rightarrow \infty} x(t) = 1/k\).
-    $$ \begin{aligned} x(t_p) &amp;= e^{-\alpha \pi / \beta} \left(\tilde{c}_1 \cos \frac{\beta \pi}{\beta} 
+    $$ \begin{aligned} x(t_p) &amp;= e^{-\alpha \pi / \beta} \left(\tilde{c}_1 \cos \frac{\beta \pi}{\beta}
     + \tilde{c}_2 \sin \frac{\beta \pi}{\beta}\right) + \frac{1}{k} \\
     &amp;= -e^{-\alpha \pi / \beta}\ \tilde{c}_1 + \frac{1}{k} \\
     &amp;= e^{-\alpha \pi / \beta}\ \frac{1}{k} + \frac{1}{k}
     \end{aligned} $$
-    Expressed as a percentage, the overshoot is 
-    $$ \begin{equation} 
+    Expressed as a percentage, the overshoot is
+    $$ \begin{equation}
     \begin{aligned}
     \text{P.O.} &amp;= 100 \cdot \frac{x(t_p) - x(\infty)}{x(\infty)} \% \\
-    &amp;= 100 \cdot \exp\left(-\frac{\alpha \pi}{\beta}\right) \%  \\
+    &amp;= 100 \cdot \exp\left(-\frac{\alpha \pi}{\beta}\right) \% \\
     &amp;= 100 \cdot \exp\left(-\frac{\zeta \pi}{\sqrt{1-\zeta^2}}\right) \%.
     \end{aligned}
     \label{percent-overshoot}
     \end{equation} $$
 </p>
 @image{
-"file": "images/overshoot.svg"
+"file": "images/overshoot.svg",
+"source": "resources/overshoot.py"
 }
-<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/overshoot.py">Image source code</a></small>
 
 <h4>Rise time</h4>
 <p>
     The rise time \(t_r\) is the time it takes for the step response to reach \(x(\infty)\) for the first time.
     $$ \DeclareMathOperator{\atan}{atan}
-    \begin{aligned} 
+    \begin{aligned}
     &amp;&amp; x(t_r) &amp;= x(\infty) \\
-    \Leftrightarrow&amp;&amp; e^{-\alpha t_r} \left(\tilde{c}_1 \cos \beta t_r 
+    \Leftrightarrow&amp;&amp; e^{-\alpha t_r} \left(\tilde{c}_1 \cos \beta t_r
     + \tilde{c}_2 \sin \beta t_r\right) + \frac{1}{k} &amp;= \frac{1}{k} \\
-    \Leftrightarrow&amp;&amp; \tilde{c}_1 \cos \beta t_r 
+    \Leftrightarrow&amp;&amp; \tilde{c}_1 \cos \beta t_r
     + \tilde{c}_2 \sin \beta t_r &amp;= 0 \\
     \Leftrightarrow&amp;&amp; \tan \beta t_r &amp;= -\frac{\tilde{c}_1}{\tilde{c}_2} \\
     \Leftrightarrow&amp;&amp; \tan \beta t_r &amp;= -\frac{\beta}{\alpha}
-    \end{aligned} $$ 
-    The first solution gives a negative value for \(t_r\), so \(\pi\) is added to find the second solution, which is 
+    \end{aligned} $$
+    The first solution gives a negative value for \(t_r\), so \(\pi\) is added to find the second solution, which is
     the first solution for \(t_r &gt; 0\).
     $$ \begin{equation}
     \begin{aligned}
@@ -378,63 +379,364 @@
     \label{rise-time}
     \end{equation} $$
 </p>
-@image{
-"file": "images/risetime.svg"
-}
-<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/risetime.py">Image source code</a></small>
 <p>
-    The lower the damping ratio, the faster the output rises, so the smaller the rise time. As the damping ration 
-    increases, the system reacts more slowly, and the rise time increases. For \(\zeta = 1\), the system becomes 
-    critically damped, and the output will get asymptotically closer to \(x(\infty)\), but never reach it, so the 
+    Since the rise time is inversely proportional to the natural frequency of the system, it's common to eliminate it from 
+    the equation:
+    $$ \begin{equation}
+    t_r \omega_n = \frac{1}{ \sqrt{1 - \zeta^2}} \left( \pi -\atan \frac{\sqrt{1 - \zeta^2}}{\zeta} \right)
+    \label{rise-time-omega_n}
+    \end{equation} $$
+</p>
+@image{
+"file": "images/risetime.svg",
+"source": "resources/risetime.py"
+}
+<p>
+    The lower the damping ratio, the faster the output rises, so the smaller the rise time. As the damping ration
+    increases, the system reacts more slowly, and the rise time increases. For \(\zeta = 1\), the system becomes
+    critically damped, and the output will get asymptotically closer to \(x(\infty)\), but never reach it, so the
     rise time is infinite.
 </p>
 
 <h4>Settling time</h4>
 <p>
-    The settling time \(t_s\) is the time after which the step response settles in a small error band around 
+    The settling time \(t_s\) is the time after which the step response settles in a small error band around
     \(x(\infty)\), never to leave it again.
     Usually, the width of the error band is chosen to be \(2\%\) of \(x(\infty)\):
     $$ \frac{\big\lvert x(t_s) - x(\infty) \big\rvert}{x(\infty)} &lt; 1\% $$
 </p>
 <p>
-    In equation \(\eqref{underdamped-local-extrema}\), we derived that the extrema of the step response occur when 
+    In equation \(\eqref{underdamped-local-extrema}\), we derived that the extrema of the step response occur when
     \(\sin \beta t = 0\), or \(t_{x,n} = n \pi / \beta\).
     Combining this with equations \(\eqref{step-response-underdamped}\) and \(\eqref{constants-underdamped}\),
     we find that the value of \(x(t)\) at these extrema is:
-    $$ \begin{equation} 
+    $$ \begin{equation}
     \begin{aligned}
     x(t_{x,n}) &amp;= e^{-\alpha t_{x,n}}\ \tilde{c}_1 (-1)^{n} + \frac{1}{k} \\
     &amp;= \frac{1}{k} \Big( 1 - (-1)^{n}\ e^{-\alpha t_{x,n}} \Big) \\
     &amp;= x(\infty) \Big( 1 - (-1)^{n}\ e^{-\alpha t_{x,n}} \Big)
-    \end{aligned} 
+    \end{aligned}
     \label{underdamped-local-extrema-values}
     \end{equation} $$
 </p>
 <p>
-    The amplitude of these extrema can be used to approximate the settling time: 
+    The amplitude of these extrema can be used to approximate the settling time:
     $$ \begin{equation}
     \begin{aligned}
     e^{-\alpha t_s} &amp;\approx 1\% \\
     t_s &amp;\approx -\frac{\log(0.01)}{\alpha} \\
-    &amp;\approx -\frac{4.61}{\alpha} \\
-    &amp;= -\frac{4.61}{\zeta\omega_n}
+    &amp;\approx \frac{4.61}{\alpha} \\
+    &amp;= \frac{4.61}{\zeta\omega_n}
     \end{aligned}
     \label{settling-time}
     \end{equation} $$
 </p>
 <p>
-    The following image visualizes the exponential decay of the extrema, as derived in equation 
+    The following image visualizes the exponential decay of the extrema, as derived in equation
     \(\eqref{underdamped-local-extrema-values}\).
 </p>
 @image{
-"file": "images/underdamped.svg"
+"file": "images/underdamped.svg",
+"source": "resources/underdamped.py"
 }
-<small class="image-code-link" style="margin-top: -2.5em;"><a href="resources/underdamped.py">Image source code</a></small>
+
+<h4>Damped frequency</h4>
+<p>
+    The period of the sinusoidal factor of the step response (equation \(\eqref{step-response-underdamped}\)) is
+    $$ T_d = \frac{2\pi}{\beta}. $$
+    From equation \(\eqref{underdamped-local-extrema}\), we also know that this is equal to distance between two
+    successive maxima or minima of the step response.
+</p>
+<p>
+    The corresponding frequency \(T_d^{-1}\) is therefore called the damped frequency of the oscillator.
+    <!-- $$ f_d = \frac{1}{T_d} = \frac{\beta}{2\pi} $$ -->
+    It's the frequency of the oscillations of the step response of the damped harmonic oscillator.
+    Usually, the damped frequency is expressed as an angular frequency:
+    $$ \begin{equation}
+    \begin{aligned}
+    \omega_d &amp;= \frac{2\pi}{T_d} \\
+    &amp;= \beta \\
+    &amp;= \omega_n \sqrt{1 - \zeta^2}
+    \end{aligned}
+    \label{damped-frequency}
+    \end{equation} $$
+</p>
+@image{
+"file": "images/damped-frequency.svg",
+"source": "resources/damped-frequency.py",
+"alt": "The damped frequency ω_d in function of the damping factor ζ"
+}
+
+<h4>Natural frequency</h4>
+<p>
+    Looking at equation \(\eqref{damped-frequency}\) and the previous figure, you can see that as the damping ratio
+    decreases to zero (no damping), the frequency of the oscillations becomes equal to \(\omega_n\). This explains the
+    choice of parameters at the beginning of this page: the natural frequency \(\omega_n\) is the frequency at which
+    the oscillator would oscillate if all damping were removed.
+</p>
 
 <h3>Overdamped regime</h3>
 
 <p>
-    In this case, \(\lambda_1\) and \(\lambda_2\) will be real, and the solution \(\eqref <!-- TODO -->\)
+    In this case, \(\lambda_1\) and \(\lambda_2\) will be real, and the step response
+    (equation \(\eqref{general-solution}\)) is made up of two exponential terms and the step function:
+    $$ x(t) = c_1 e^{\lambda_1 t} + c_2 e^{\lambda_2 t} + \frac{1}{k} u(t) $$
+    The following image clearly shows the interaction between the two exponential terms. The step response is the blue
+    curve, it is the sum of the orange and green curves.
+</p>
+@image{
+"file": "images/overdamped.svg",
+"source": "resources/overdamped.py"
+}
+
+<p>
+    At \(t = 0^+\), the two terms cancel out (this was imposed by
+    the initial condition \(x(0^+) = 0\)). The green curve decays to zero relatively quickly, so the actual step 
+    response is pretty close to the orange curve, which approaches the final value more slowly. 
+    The green curve does have an important contribution at the beginning:
+    it ensures that the slope of the step response gradually
+    increases. This was the second initial condition: \(\dot{x}(0^+) = 0\).
+</p>
+
+<h4>Rise time</h4>
+<p>
+    Unlike in the underdamped case, the step response of an overdamped oscillator never reaches its final value
+    \(x(\infty)\), it approaches it asymptotically. When using the same definition of rise time as in 
+    the underdamped case, you could only conclude that \(t_r = \infty\) for any overdamped oscillator, which is of
+    course meaningless. As a solution, we define the rise time of an overdamped system as the time it takes to 
+    go from \(10\%\) of \(x(\infty)\) to \(90\%\) of \(x(\infty)\).
+</p>
+<p>
+    To compute the rise time, we need to find \(t_1\) and \(t_2\) such that:
+    $$ \begin{equation} 
+    \begin{aligned} 
+    x(t_1) &amp;= 0.1\ x(\infty) \\
+    x(t_2) &amp;= 0.9\ x(\infty) \\
+    t_r &amp;= t_2 - t_1
+    \end{aligned} 
+    \label{overdamped-rise-times-t1-t2-def}
+    \end{equation} $$
+    This results in equations of the form 
+    $$ \begin{equation} 
+    \frac{1}{\lambda_1/\lambda_2 - 1} e^{\lambda_1 t} 
+    +\frac{1}{\lambda_2/\lambda_1 - 1} e^{\lambda_2 t} = \gamma - 1,
+    \label{overdamped-rise-time-t1-t2}
+    \end{equation} $$
+    where \(\gamma\) is either \(0.1\) or \(0.9\). <br>
+    Note that the coefficients \(\frac{1}{\lambda_1/\lambda_2 - 1}\) and 
+    \(\frac{1}{\lambda_2/\lambda_1 - 1}\) do not depend on \(\omega_n\), only on the damping factor \(\zeta\).
+</p>
+<p>
+    Unfortunately, this type of equation doesn't have a general analytical solution, so we'll have to 
+    settle for an approximated or numerical solution.
+</p>
+<p>
+    A first observation is that as the damping factor \(\zeta\) increases, \(\lambda_1\)
+    decreases in magnitude, while \(\lambda_2\) increases. 
+    The inverses of \(\lambda_{1,2}\) are the time constants \(\tau_{1,2}\) of the exponential terms in 
+    \(x(t)\). As \(\lambda_2\) increases, the corresponding time constant \(\tau_2 = 1/\lambda_2\) 
+    becomes very small. This means that the second term \(c_2 e^{\lambda_2 t}\) decays very quickly compared to the 
+    first term. This can be seen in the previous image, where the green curve decays much faster than the orange one.
+</p>
+<p>
+    As a consequence of \(\lambda_1\) decreasing and \(\lambda_2\) increasing,
+    \(c_1\) approaches \(-1\), and \(c_2\) goes to zero, as shown in the following figure.
+</p>
+@image{
+"file": "images/lambdas-overdamped.svg",
+"source": "resources/lambdas-overdamped.py"
+}
+<p>
+    This means that if \(\zeta\) is large enough, the second term of \(x(t)\) can be ignored:
+    $$ x(t) \approx c_1 e^{\lambda_1 t} + c_3 $$
+    An approximation of \(t_1\) and \(t_2\) would therefore be the solution of 
+    $$ \frac{1}{\lambda_1/\lambda_2 - 1} e^{\lambda_1 \tilde{t}} = \gamma - 1.$$
+    Moving the denominator to the right-hand side and taking the logarithm from both sides:
+    $$ \begin{equation} \begin{aligned} 
+    \tilde{t}_{1,2} &amp;= \frac{\log \Big( \left( \gamma - 1 \right) \left(\frac{\lambda_1}{\lambda_2} - 1\right) \Big)}{\lambda_1} \\
+    &amp;= \frac{\log \Big( \left( \gamma - 1 \right) \left(\frac{\lambda_1}{\lambda_2} - 1\right) \Big)}{-\zeta\omega_n + \omega_n \sqrt{\zeta^2 - 1}} \\
+    &amp;= \frac{1}{\omega_n} \frac{\log \Big( \left( \gamma - 1 \right) \left(\frac{\lambda_1}{\lambda_2} - 1\right) \Big)}{-\zeta + \sqrt{\zeta^2 - 1}}.
+    \end{aligned} 
+    \label{approx-rise-time-step1}
+    \end{equation} $$
+    The corresponding rise time is then 
+    $$ \begin{equation} 
+    \begin{aligned}
+    \tilde{t}_r &amp;= \tilde{t}_2 - \tilde{t}_1 \\
+    &amp;= \frac{1}{\omega_n} \frac{\log \Big( \left( 0.9 - 1 \right) \left(\frac{\lambda_1}{\lambda_2} - 1\right) \Big)}{-\zeta + \sqrt{\zeta^2 - 1}}
+    - \frac{1}{\omega_n} \frac{\log \Big( \left( 0.1 - 1 \right) \left(\frac{\lambda_1}{\lambda_2} - 1\right) \Big)}{-\zeta + \sqrt{\zeta^2 - 1}} \\
+    &amp;= \frac{1}{\omega_n} \frac{\log \left(\frac{1 - 0.9}{1 - 0.1}\right)}{-\zeta + \sqrt{\zeta^2 - 1}} \\
+    &amp;= \frac{1}{\omega_n} \frac{\log \left(9\right)}{\zeta - \sqrt{\zeta^2 - 1}}.
+    \end{aligned} 
+    \label{approx-rise-time-step2}
+    \end{equation} $$
+</p>
+<p>
+    <!-- For large \(\zeta\), the fraction \(\lambda_1/\lambda_2\) becomes
+    $$ \begin{aligned}
+    \lim_{\zeta \rightarrow \infty} \frac{\lambda_1}{\lambda_2} &amp;= 
+    \lim_{\zeta \rightarrow \infty} \frac{-\zeta \omega_n + \omega_n \sqrt{\zeta^2 - 1}}
+                                         {-\zeta \omega_n - \omega_n \sqrt{\zeta^2 - 1}} \\
+    &amp;= \lim_{\zeta \rightarrow \infty} \frac{\zeta - \sqrt{\zeta^2 - 1}}
+                                                {\zeta + \sqrt{\zeta^2 - 1}} \\
+    &amp;= \lim_{\zeta \rightarrow \infty} \frac{\zeta - \sqrt{\zeta^2}}{\zeta + \sqrt{\zeta^2}} \\
+    &amp;= 0
+    \end{aligned} $$ -->
+    We can simplify the denominator of equation \(\eqref{approx-rise-time-step2}\):
+    $$ \begin{aligned} 
+    \frac{1}{\zeta - \sqrt{\zeta^2 - 1}} &amp;=
+    \frac{\zeta + \sqrt{\zeta^2 - 1}}
+         {\left(\zeta - \sqrt{\zeta^2 - 1}\right)\left({\zeta + \sqrt{\zeta^2 - 1}}\right)} \\
+    &amp;= \frac{\zeta + \sqrt{\zeta^2 - 1}}
+                {\zeta^2 - \zeta\sqrt{\zeta^2 - 1} + \zeta\sqrt{\zeta^2 - 1} - \zeta^2 + 1} \\
+    &amp;=\zeta + \sqrt{\zeta^2 - 1} \\
+    &amp;\approx 2 \zeta &amp; (\zeta \gg 1)
+    \end{aligned} $$
+    <!-- In conclusion, equation \(\eqref{approx-rise-time-step1}\) is approximated by
+    $$ \begin{equation} 
+    t \omega_n \approx -2 \zeta \log \left( 1 - \gamma \right).
+    \label{approx-rise-time}
+    \end{equation} $$ -->
+    In conclusion, the approximation of rise time by ignoring the second exponential is
+    $$ \begin{equation} 
+    \tilde{t}_r = \frac{1}{\omega_n} \log \left(9\right) \left(\zeta + \sqrt{\zeta^2-1}\right).
+    \label{approx-rise-time}
+    \end{equation} $$
+    When \(\zeta\) is large, this simplifies to 
+    $$ \begin{equation} 
+    \begin{aligned}
+    \tilde{t}_r &amp;\approx \frac{2 \log \left(9\right)}{\omega_n} \zeta &amp; (\zeta \gg 1) \\
+    &amp;\approx \frac{4.39}{\omega_n } \zeta.
+    \end{aligned}
+    \label{approx-rise-time-large-zeta}
+    \end{equation} $$
+</p>
+<p>
+    To solve equation \(\eqref{overdamped-rise-time-t1-t2}\), you could use Newton's or Halley's method, since you 
+    can easily write out \(\dot{x}(t)\) and \(\ddot{x}(t)\). However, it's faster to use fixed-point iteration to 
+    solve:
+    $$ t = \frac{1}{\lambda_1} \log \left(\frac{\gamma - 1 - \frac{1}{\lambda_2/\lambda_1-1} e^{\lambda_2 t}}{\lambda_1/\lambda_2 - 1} \right) $$
+</p>
+<p>
+    The following image shows the numerical solutions for the true rise time, the approximation by ignoring the second
+    exponential, and the linear approximation, i.e. the asymptote for \(\zeta \rightarrow \infty\). 
+</p>
+@image{
+"file": "images/risetime-overdamped.svg",
+"source": "resources/risetime-overdamped-fixed-point.py"
+}
+<p>
+    As expected, the approximation that ignores the second exponential gives poor results for \(\zeta\) close to \(1\),
+    but matches the true solution very nicely for large \(\zeta\). Eventually, both curves approach the asymptote.
+</p>
+<p>
+    To get a better look at the differences between the true solution and the approximation, we subtract both of them
+    from their asymptote. That results in the following figure.
+</p>
+@image{
+"file": "images/risetime-overdamped-error.svg",
+"source": "resources/risetime-overdamped-fixed-point.py"
+}
+<p>
+    Both curves have a similar shape. A possible approach to refine our approximation for the rise time could be to
+    start from \(\tilde{t}_r\) (equation \(\eqref{approx-rise-time}\)), and vary some of the parameters, minimizing 
+    the error between this approximation and the numerical solution. As an additional constraint, their behavior for 
+    \(\zeta \rightarrow \infty\) should be the same, so they both have an asymptote \(2\log(9) \zeta\).
+    $$ \begin{equation}
+    \begin{aligned}
+    & \underset{\delta, c, p, h}{\text{minimize}}
+    & & f(\delta, c, p, h) = \left\Vert \hat{t}_r(\zeta; \delta, c, p, h) - t_r(\zeta) \right\Vert_2 = \left\Vert \log(9) \left( \zeta + \sqrt[p]{\left(\zeta + \delta\right)^p - c} \right) + h - t_r(\zeta) \right\Vert_2 \\
+    & \text{s.t.} & & \lim_{\zeta \rightarrow \infty} \hat{t}_r(\zeta) - 2\log(9) \zeta = 0.
+    \end{aligned}
+    \end{equation} $$
+    The previous approximation \(\tilde{t}_r\) is a special case of \(\hat{t}_r(\zeta; \delta, c, p, h)\), with 
+    \(\delta = 0, c = 1, p = 2, h = 0\). <br>
+    The constraint completely determines the value of \(h\), so only three parameters remain. 
+</p>
+<p>
+    For example, using \(\tilde{t}_r\) as an initial guess, optimizing over the interval 
+    \(\zeta \in \left(1, 10\right]\) yields an optimizer \(\delta = 0.764, c = 1.732, p = 2.178, h = -1.678\).
+    The result is shown in the following figure.
+    $$ \begin{equation} 
+    \begin{aligned}
+    t_r &amp;\approx \log(9) \left( \zeta + \sqrt[2.178]{\left(\zeta + 0.764\right)^{2.178} - 1.732} \right) - 1.678
+    \end{aligned}
+    \label{overdamped-rise-time-approx}
+    \end{equation} $$
+</p>
+@image{
+"file": "images/risetime-overdamped-optimize.svg",
+"source": "resources/risetime-overdamped-optimize.py"
+}
+
+<h4>Settling time</h4>
+<p>
+    In the overdamped case, the rise time and the settling time are tightly coupled. 
+    The settling time gives requires solving the same kind of transcendental equation of the same form as \(t_{1,2}\)
+    (equation \ref{overdamped-rise-time-t1-t2}). To get the \(1\%\) settling time, \(\gamma = 0.99\).
+</p>
+<p>
+    The same kind of approximation is used as well, by ignoring the second exponential term. 
+    $$ \begin{equation} 
+    \begin{aligned}
+    \tilde{t}_s &amp;= \frac{1}{\omega_n} \log \left(\frac{100}{1-\lambda_1/\lambda_2}\right) \left(\zeta + \sqrt{\zeta^2 - 1}\right) \\
+    &amp;\approx \frac{2 \log(100)}{\omega_n} \zeta &amp; (\zeta \gg 1) \\
+    &amp;\approx \frac{9.21}{\omega_n} \zeta
+    \end{aligned} 
+    \label{approx-settling-time}
+    \end{equation} $$
+</p>
+@image{
+"file": "images/settling-time-overdamped.svg",
+"source": "resources/settling-time-overdamped-fixed-point.py"
+}
+@image{
+"file": "images/settling-time-overdamped-error.svg",
+"source": "resources/settling-time-overdamped-fixed-point.py"
+}
+<p>
+    As expected, the approximation is more accurate for the settling time than for the rise time, because the second 
+    exponential has more time to decay.
+</p>
+
+<h3>Critically damped regime</h3>
+
+<p>
+    The critically damped regime is the regime with the fastest rise time while not having any overshoot or oscillations.
+</p>
+@image{
+"file": "images/critically-damped.svg",
+"source": "resources/critically-damped.py"
+}
+
+<h4>Rise time</h4>
+<p>
+    Like the overdamped regime, the \(100\%\) rise time of the critically damped regime is undefined, because the step 
+    response approaches its final value asymptotically, it never reaches or crosses it. The \(10\%-90\%\) rise time is 
+    defined in the same way as for the overdamped case (equation \(\eqref{overdamped-rise-times-t1-t2-def}\)), and leads to similar 
+    transcendental equations:
+    $$ \begin{equation} 
+    - e^{\lambda t} + \lambda t e^{\lambda t} = \gamma - 1 
+    \label{critically-damped-rise-time-eq}
+    \end{equation} $$
+    Rearranging this equation for fixed-point iteration:
+    $$ \begin{equation} 
+    t = \frac{1}{\lambda} \log \left(\frac{\gamma - 1}{\lambda t - 1}\right)
+    \end{equation} $$
+    Solving this equation numerically yields 
+    $$ \begin{equation} 
+    t_r \approx \frac{3.35790856147781}{\omega_n}.
+    \label{critically-damped-rise-time} 
+    \end{equation} $$
+</p>
+<h4>Settling time</h4>
+<p>
+    The formulation of the settling time is of same the form of equation \(\eqref{critically-damped-rise-time-eq}\). 
+    The numerical result for the \(1\%\) settling time (\(\gamma = 0.99\)) is 
+    $$ \begin{equation} 
+    t_s \approx \frac{6.638352067993811}{\omega_n}.
+    \label{critically-damped-settling-time} 
+    \end{equation} $$
 </p>
 
 </html>
