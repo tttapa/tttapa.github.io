@@ -247,31 +247,36 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
 def formatImage(data, html, filepath, lineno):
     file = data['file']
     # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
-    if file[0] != '/':
-        fullfile = path.dirname(filepath) + '/' + file
-    else:
-        raise Exception('Image file "' + file + '" cannot be an absolute path')
+    if path.isabs(file):
+        raise Exception(f'Image file "{file}" cannot be an absolute path')
+    fullfile = path.join(path.dirname(filepath), file)
     if not exists(fullfile):
-        raise Exception('Image file "' + fullfile + '" does not exist')
+        raise Exception(f'Image file "{fullfile}" does not exist')
 
-    displayfile = data.get('display-file', file)
-    # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
-    if displayfile[0] != '/':
-        fulldisplayfile = path.dirname(filepath) + '/' + displayfile
-    else:
-        raise Exception('Image file "' + displayfile +
-                        '" cannot be an absolute path')
-    if not exists(fulldisplayfile):
-        raise Exception('Image file "' + fulldisplayfile + '" does not exist')
+    dispfile = data.get('display-file', file)
+    if path.isabs(dispfile):
+        raise Exception(f'Image file "{dispfile}" cannot be an absolute path')
+    fulldispfile = path.join(path.dirname(filepath), dispfile)
+    if not exists(fulldispfile):
+        raise Exception(f'Image file "{fulldispfile}" does not exist')
 
     alt = data.get('alt', data.get('caption', file))
 
-    htmlstr = '<a href="{src}"><img src="{dispsrc}" alt="{alt}"/></a>' \
-        .format(src=file, dispsrc=displayfile, alt=alt)
+    htmlstr = f'<a href="{file}"><img src="{dispfile}" alt="{alt}"/></a>'
 
     cap = data.get('caption')
     if cap:
-        htmlstr += '<figcaption>' + cap + '</figcaption>'
+        htmlstr += f'<figcaption>{cap}</figcaption>'
+
+    src = data.get('source')
+    if src:
+        if path.isabs(src):
+            raise Exception(f'Image source "{src}" cannot be an absolute path')
+        fullsrc = path.join(path.dirname(filepath), src)
+        if not exists(fullsrc):
+            raise Exception(f'Image source "{fullsrc}" does not exist')
+        htmlstr += '<small class="image-code-link" style="margin-top: -2em;">'
+        htmlstr += f'<a href="{src}">Image source code</a></small>'
 
     return htmlstr, fullfile
 
