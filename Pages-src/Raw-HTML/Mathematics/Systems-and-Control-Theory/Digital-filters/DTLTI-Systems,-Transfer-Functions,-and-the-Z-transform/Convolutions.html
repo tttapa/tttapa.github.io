@@ -1,0 +1,123 @@
+<!--
+@title: Convolutions
+@author: Pieter P
+@sequence: 30
+@shownextupprevpage:    true
+@tableofcontents:       true
+@keywords: convolution, DSP, LTI, DTLTI, impulse response, impulse,
+           delta function, systems, signals
+@description: The definition of the convolution operator, some of its 
+              properties, and DTLTI transformations as a convolution with the
+              impulse response.
+-->
+<html>
+
+<h2>Convolutions</h2>
+
+<p>
+    The convolution of two signals \(f\) and \(g\) is defined as:
+    $$ \begin{equation}
+    \begin{aligned}
+    *:\ &amp;\left(\mathbb{Z} \rightarrow \mathbb{R}\right)\times
+    \left(\mathbb{Z} \rightarrow \mathbb{R}\right)
+    \rightarrow \left(\mathbb{Z} \rightarrow \mathbb{R}\right): \\
+    &amp;f[n], g[n] \mapsto \left(f * g\right)[n] \triangleq
+    \sum_{k=-\infty}^{+\infty} f[k]\ g[n-k]
+    \end{aligned}
+    \label{def-convolution}
+    \end{equation} $$
+    If no ambiguity exists, a shorthand can be used:
+    $$ f * g \triangleq \sum_{k=-\infty}^{+\infty} f[k]\ g[n-k] $$
+</p>
+
+<h4>Properties</h4>
+
+<p>
+    The convolution operator can be seen as a product of discrete functions,
+    and it has many properties usually associated with multiplication.
+</p>
+<p>
+    Commutativity: \(\quad f * g = g * f \)
+</p>
+<p>
+    Associativity: \(\quad (f * g) * h = f * (g * h) \)
+</p>
+<p>
+    Distributivity: \(\quad (f + g) * h = f * h + g * h \)
+</p>
+
+<h4>Identity</h4>
+<p>
+    Convolution with the Kronecker delta function results in the original signal,
+    thanks to the sifting property of the delta function:
+    $$ f * \delta = f = \delta * f $$
+</p>
+
+<h4>Unilateral signals</h4>
+<p>
+    If the first signal is unilateral (i.e. \(\forall n &lt; 0: f[n] = 0\)), the
+    lower bound of the summation becomes zero instead of minus infinity:
+    $$ f * g = \sum_{k=0}^{+\infty} f[k]\ g[n-k] $$
+</p>
+
+<h2>Signals as a sum of delta functions</h2>
+
+<p>
+    Any discrete signal can be written as an infinite sum of scaled 
+    and shifted Kronecker delta functions.
+    $$ x[n] = \sum_{k=-\infty}^{+\infty} x[k]\ \delta[n-k] $$
+    You can easily see that all terms where \(n \ne k\) are zero, because the
+    Kronecker delta is zero in that case.
+    Only the term for \(n = k\) is non-zero, in which case the Kronecker delta
+    is one, so the result is just \(x[k]\).
+    This is an application the sifting property of the delta function,
+    covered in the <a href="Impulse-and-Step-Response.html">previous page</a>.
+</p>
+<p>
+    This once again shows that the Kronecker delta is the identity signal with
+    respect to convolution operator, \(x[n] = (x * \delta)[n]\).
+</p>
+
+<h2>DTLTI systems as convolutions with the impulse response</h2>
+<p>
+    You can express the output of any discrete-time linear time-invariant system
+    \(T\) with any input \(x[n]\) as the convolution of the input with the
+    impulse response of the system, \(h[n] \triangleq T(\delta[n])\):
+    $$ \begin{equation}
+    T\left(x[n]\right) = (x * h)[n]
+    \label{convolution-impulse-response}
+    \end{equation} $$
+</p>
+
+
+<h4>Proof</h4>
+<p style="padding-left: 2em;">
+    The proof itself is very simple: We just decompose the input as a sum of
+    delta functions, as described in a previous section, and then we use the
+    linearity and time-invariance to bring the \(T\) operator inside of the
+    summation.
+    $$ \begin{split}
+    y[n] &amp;= T\left(x[n]\right) \\
+    &amp;= T\left(\sum_{k=0}^{\infty} x[k]\ \delta[n-k]\right) \\
+    &amp;= \sum_{k=0}^{\infty} T\Big(x[k]\ \delta[n-k]\Big) \\
+    &amp;= \sum_{k=0}^{\infty} x[k]\ T\Big(\delta[n-k]\Big) \\
+    &amp;= \sum_{k=0}^{\infty} x[k]\ h[n-k] \\
+    &amp;\triangleq (x * h)[n]
+    \end{split} $$
+    Because of the linearity of the system, \(T\) can be brought inside of the
+    summation, and since \(x[k]\) is a constant factor independent of the time
+    step \(n\), it can be moved outside of the \(T\) operator.
+    \(T\) applied to the Kronecker delta is (by definition) the impulse response
+    of \(T\), \(h[n]\). In this case, it is shifted by \(k\) time steps, which
+    is allowed because of the time-invariance of \(T\).
+    \(\Box\)
+</p>
+
+<p>
+    An important consequence is that every DTLTI transformation can be uniquely 
+    represented by its impulse response, in other words, there is a one-to-one
+    correspondence between the definition of transformation \(T\) and its
+    impulse response \(h[n]\).
+</p>
+
+</html>

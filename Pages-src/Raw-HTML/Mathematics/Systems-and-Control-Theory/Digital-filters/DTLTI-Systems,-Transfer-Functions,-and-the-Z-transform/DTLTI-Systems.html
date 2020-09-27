@@ -2,86 +2,146 @@
 @title: DTLTI Systems
 @author: Pieter P
 @sequence: 10
+@shownextupprevpage:    true
+@tableofcontents:       true
 @keywords: DTLTI, discrete time linear time-invariant systems, systems, dsp
 @description: Explanation of Discrete-Time Linear Time-Invariant Systems.
 -->
 
 <html>
 
-<h3>Definition</h3>
+<h2>Signals</h2>
 
 <p>
-    As the name implies, Discrete-Time Linear Time-Invariant Systems, or DTLTI 
-    systems for short, are systems that perform a linear transformation on 
-    discrete functions. The fact that they are time-invariant means that the 
-    transformation doesn't change over time: it doesn't matter if you apply it
-    to a certain signal now or in ten minutes, the resulting signals are the 
-    same.<br>
-    We'll define these properties of DTLTI systems mathematically:
-</p>
-<p style="padding-left: 2em">
-    \(T\) is the transformation performed by a Discrete-Time Linear 
-    Time-Invariant (DTLTI) system if and only if
-    <ol>
-        <li>The transformation is linear: <br>
-            \(T\left(a\cdot h[n]+b\cdot g[n]\right) 
-              = a\cdot T\left(h[n]\right) + b\cdot T\left(g[n]\right)\)</li>
-        <li>The transformation is time-invariant: <br>
-            \(y[n] \triangleq T\left(h[n]\right) \Rightarrow 
-              \forall k \in \mathbb{N}: T\left(h[n-k]\right) = y[n-k]\)
-        </li>
-    </ol>
-</p>
-
-<h3>Signals</h3>
-
-<p>
-    We use square brackets to indicate that signals are discrete functions:
-    $$ x: \mathbb{Z} \rightarrow \mathbb{R}: n \mapsto x[n] $$
-    $$ \vec{x}: \mathbb{Z} \rightarrow \mathbb{R}^m: n \mapsto \vec{x}[n] $$
-    In the simplest case, \(x\) will just map to a scalar \((\mathbb{R})\), 
-    but in general, it can also map to an \(m\)-dimensional vector 
+    A signal is a discrete function that maps an integer 
+    (the time step or point in time) to a real value or a vector of real values.
+    $$ \begin{equation}
+    \begin{aligned}
+    x&amp;: \mathbb{Z} \rightarrow \mathbb{R}: &amp;n \mapsto x[n] \\
+    \vec{x}&amp;: \mathbb{Z} \rightarrow \mathbb{R}^m: &n \mapsto \vec{x}[n]
+    \end{aligned}
+    \end{equation} $$
+    In the simplest case, \(x\) will just map to a scalar \((\mathbb{R})\),
+    but in general, it can also map to an \(m\)-dimensional vector
     \((\mathbb{R}^m)\). This will be useful later, when we'll introduce systems
     with multiple inputs and outputs, or systems with multiple internal states.
 </p>
+<p>
+    A signal that is zero for all \(n &lt; 0\) is called a unilateral or 
+    one-sided signal.
+</p>
 
-<h3>Example</h3>
+<h2>Discrete-Time Linear Time-Invariant Systems</h2>
 
+<p>
+    Discrete-Time Linear Time-Invariant Systems, or DTLTI
+    systems for short, are systems that perform a linear transformation on
+    signals. Time-invariance means that the
+    transformation doesn't change over time, it is independent of the time step
+    \(n\), so it doesn't matter if you apply it to a certain signal now or in
+    ten minutes, the resulting output signals will be the same.
+</p>
+<p>
+    A DTLTI system maps one signal to another:
+    $$ T: \left(\mathbb{Z} \rightarrow \mathbb{R}^m\right) \rightarrow
+    \left(\mathbb{Z} \rightarrow \mathbb{R}^m\right):
+    \vec{x}[n] \mapsto \vec{y}[n] \triangleq T(\vec{x}[n]) $$
+</p>
+<p>
+    We'll define the properties of DTLTI systems mathematically:
+</p>
+<div style="padding-left: 2em">
+    <div style="padding-left: 1.4em">\(T\) is the transformation performed by a
+        Discrete-Time Linear Time-Invariant (DTLTI) system if and only if</div>
+    <ol>
+        <li>The transformation is linear:
+            <div style="padding: 0.5em">
+                \(T\left(a\cdot h[n]+b\cdot g[n]\right)
+                = a\cdot T\left(h[n]\right) + b\cdot T\left(g[n]\right)\)
+            </div>
+        </li>
+        <li>The transformation is time-invariant:
+            <div style="padding: 0.5em">
+                If \(y[n] \triangleq T\left(h[n]\right)\),
+                then \(\forall k \in \mathbb{N}: T\left(h[n-k]\right) = y[n-k]\)
+            </div>
+        </li>
+    </ol>
+</div>
+
+<h3>Nonlinear systems</h3>
+<p>
+    As an example of a system that is not linear, consider the system 
+    \(T: x[n] \mapsto \sqrt{x[n]}\). It is not linear, because 
+    \(T(2\cdot2) = \sqrt{4} = 2 \ne 2\cdot T(2) = 2\sqrt{2}\).<br>
+    Nonlinear systems are many times more complicated than linear systems, so 
+    they will not be covered in this series of articles.
+</p>
+
+<h3>Time-varying systems</h3>
+<p>
+    The system \(T: x[n] \mapsto n \cdot x[n]\) is not time-invariant, because 
+    the mapping explicitly depends on the time step \(n\).
+    <br>
+    All systems in the following discussions will be time-invariant.
+</p>
+
+<h2>Example</h2>
+
+<h3>Mathematical description</h3>
 <p>
     We'll define and plot a simple example signal, and then we'll apply a simple
     transformation to it.
-    $$ x: \mathbb{Z} \rightarrow \mathbb{R}: 
-       n \mapsto \cos\left(\pi n\right) + 2 $$
-    This is just a signal that oscillates between 3 and 1.
-    $$ T: x[n] \mapsto \frac{x[n] + x[n-1]}{2} $$
+    The input signal \(x[n]\) is just a signal that oscillates between 3 and 1:
+    $$ x: \mathbb{Z} \rightarrow \mathbb{R}:
+    n \mapsto \cos\left(\pi n\right) + 2 $$
+
+    The transformation maps each point of the signal to the average of the
+    current value and the previous value:
+    $$ T: \left(\mathbb{Z} \rightarrow \mathbb{R}\right) \rightarrow
+    \left(\mathbb{Z} \rightarrow \mathbb{R}\right):
+    x[n] \mapsto \frac{x[n] + x[n-1]}{2} $$
+    The output signal \(y[n]\) is defined as:
     $$ y[n] \triangleq T\left(x[n]\right) $$
-    This transformation has a very simple interpretation: it maps each point of
-    the signal to the average of the current value and the previous value.
 </p>
 <p>
     The input signal \(x[n]\) and the output signal of the system \(y[n]\) are
     plotted in the figure below.
-    <img src="images/example-dtlti.svg">
 </p>
+@image{
+"file": "images/example-dtlti.svg",
+"alt": "Input and output response of the example system",
+"source": "resources/example-dtlti.py"
+}
+
+<h3>Block diagram</h3>
 <p>
-    The system can be easily implemented as follows.
-    <img src="images/example-dtlti-system.svg", width="66%">
+    The system could be implemented as follows.
+</p>
+@image{
+"file": "images/example-dtlti-system.svg",
+"source": "images/example-dtlti-system.tex"
+}
+<p>
     The arrows indicate the direction of the data flow. The rectangular \(D\)
-    block is called a delay or memory element, and it just delays the incoming 
-    signal with one time step. Sometimes, the Greek capital delta (\(\Delta\)) 
-    is used instead, or in some contexts, it is indicated using \(z^{-1}\), for 
+    block is called a delay or memory element, and it just delays the incoming
+    signal by one time step. Sometimes, the Greek capital delta (\(\Delta\))
+    is used instead, or in some contexts, it is indicated using \(z^{-1}\), for
     reasons that will become apparent in the page on the Z-transform.
     The circle with the \(+\) is a summator, it just adds all
-    incoming signals together. Finally, the triangle containing a number is a 
+    incoming signals together. Finally, the triangle containing a number is a
     scalar, and it just multiplies the signal with a constant factor.
 </p>
+
+<h3>Python implementation</h3>
 <p>
     A possible implementation of this system in Python is given in the code
     snippet below.<br>
-    We just have to save the input to the delay element on each time step, 
+    We just have to save the input to the delay element on each time step,
     because we need it to calculate the next output.
+</p>
 
-    <pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">import</span><span style="color: #000000;"> array, linspace, cos, pi</span></code>
+<!--    <pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">import</span><span style="color: #000000;"> array, linspace, cos, pi</span></code>
 <code></code>
 <code><span style="color: #0000ff;">class</span><span style="color: #000000;"> </span><span style="color: #267f99;">ExampleDTLTISystem</span><span style="color: #000000;">:</span></code>
 <code><span style="color: #000000;">    </span><span style="color: #0000ff;">def</span><span style="color: #000000;"> </span><span style="color: #795e26;">__init__</span><span style="color: #000000;">(</span><span style="color: #001080;">self</span><span style="color: #000000;">, </span><span style="color: #001080;">initial_state</span><span style="color: #000000;">: </span><span style="color: #267f99;">float</span><span style="color: #000000;"> </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #09885a;">0.0</span><span style="color: #000000;">):</span></code>
@@ -99,13 +159,16 @@
 <code><span style="color: #000000;">x </span><span style="color: #000000;">=</span><span style="color: #000000;"> cos(pi </span><span style="color: #000000;">*</span><span style="color: #000000;"> n) </span><span style="color: #000000;">+</span><span style="color: #000000;"> </span><span style="color: #09885a;">2</span><span style="color: #000000;">          </span><span style="color: #008000;"># Generate the input signal x[n]</span></code>
 <code></code>
 <code><span style="color: #000000;">T </span><span style="color: #000000;">=</span><span style="color: #000000;"> ExampleDTLTISystem(</span><span style="color: #09885a;">1.0</span><span style="color: #000000;">)  </span><span style="color: #008000;"># Instantiate the system</span></code>
-<code><span style="color: #000000;">y </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #795e26;">map</span><span style="color: #000000;">(</span><span style="color: #0000ff;">lambda</span><span style="color: #000000;"> </span><span style="color: #001080;">x</span><span style="color: #000000;">: T(x), x)   </span><span style="color: #008000;"># Apply the transformation y[n] = T(x[n])</span></code></pre>
+<code><span style="color: #000000;">y </span><span style="color: #000000;">=</span><span style="color: #000000;"> </span><span style="color: #795e26;">map</span><span style="color: #000000;">(</span><span style="color: #000000;">T, x)                </span><span style="color: #008000;"># Apply the transformation y[n] = T(x[n])</span></code></pre>
 If you're unfamiliar with the <code>map</code> function, it is roughly 
 equivalent to the following snippet.
 <pre class="lineNumbers" style="color: rgb(0, 0, 0);"><code><span style="color: #000000;">y </span><span style="color: #000000;">=</span><span style="color: #000000;"> zeros(x.shape)</span></code>
 <code><span style="color: #af00db;">for</span><span style="color: #000000;"> n </span><span style="color: #0000ff;">in</span><span style="color: #000000;"> </span><span style="color: #795e26;">range</span><span style="color: #000000;">(</span><span style="color: #795e26;">len</span><span style="color: #000000;">(x)):</span></code>
-<code><span style="color: #000000;">    y[n] </span><span style="color: #000000;">=</span><span style="color: #000000;"> T(x[n])</span></code></pre>
-</p>
+<code><span style="color: #000000;">    y[n] </span><span style="color: #000000;">=</span><span style="color: #000000;"> T(x[n])</span></code></pre> -->
+@codesnippet{
+"file": "resources/example-dtlti.py",
+"endline": 19
+}
 <p>
     It is a good exercise to try to understand how these three representations
     of the same system are related (the mathematical definition of \(T\), the

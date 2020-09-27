@@ -2,52 +2,62 @@
 @title: Impulse and Step Response
 @author: Pieter P
 @sequence: 20
+@shownextupprevpage:    true
+@tableofcontents:       true
 @keywords: Impulse response, step response, impulse, step, filter, system, kronecker, delta, heaviside, step, DSP, LTI, DTLTI
 @description: Impulse and Step Response, the Kronecker delta function, the Heaviside step function, and their properties.
 -->
 <html>
 
 <p>
-    Here, we'll discuss two important signals that are often used in signal
+    This page discusses two important signals that are often used in signal
     processing, the delta function or unit impulse, and the unit step function.
 </p>
 
-<h3>The Kronecker Delta Function</h3>
+<h2>The Kronecker Delta Function</h2>
 
 <p>
     The Kronecker delta function or unit impulse \(\delta[n]\) is defined as a
     discrete function that is one when \(n\) is zero, and zero everywhere else:
 
-    $$ \delta: \mathbb{Z} \rightarrow \mathbb{R}:
+    $$ \begin{equation} 
+    \delta: \mathbb{Z} \rightarrow \mathbb{R}:
     n \mapsto \delta[n] \triangleq
     \begin{cases}
     1 &amp; n = 0 \\
     0 &amp; n\ne0
-    \end{cases} $$
+    \end{cases} 
+    \label{kronecker-delta-function}
+    \end{equation} $$
 
-    An alternative notation is \(\delta_{n,k}\). This value is one if \(n = k\)
-    and zero if \(n \ne k\):
+    An alternative notation is \(\delta_{n,k}\). This function is one if 
+    \(n = k\) and zero if \(n \ne k\):
     $$ \delta_{n,k} \triangleq \delta[n-k] $$
-
-    <img src="images/kronecker.svg" />
 </p>
-<h4>Impulse response</h4>
+@image{
+"file": "images/kronecker.svg",
+"alt": "Kronecker delta function",
+"source": "resources/kronecker-heaviside.py"
+}
+
+<h3>Impulse response</h3>
 <p>
     The impulse response \(h[n]\) of a DTLTI system \(T\) is defined as the
     output of the system when a Kronecker delta function is applied to its
     input:
     $$ h[n] \triangleq T\left(\delta[n]\right) $$
     The letter \(h\) will be used to refer to the impulse response of a system.
-    As we'll see later, the impulse response can be used to define the system.
+    As we'll see later, the impulse response can be used to fully define the
+    system, it captures all of its properties.
 </p>
-<h4>Properties of the Kronecker Delta Function</h4>
+<h3>Properties of the Kronecker Delta Function</h3>
 <p>
     The most important property of the Kronecker delta is its ability to select
     a single term from an (infinite) sum:
 
     $$ \begin{split}
-    &amp;\sum_{n=0}^\infty x[n]\cdot\delta[n-k]\\
-    =\;&amp; x[0]\cdot\delta[0-k] + x[1]\cdot\delta[1-k]
+    &amp;\sum_{n=0}^\infty x[n]\cdot\delta[k-n]\\
+    =\;&amp; x[0]\cdot\delta[k-0] + x[1]\cdot\delta[k-1]
     + \ldots + x[k]\cdot\delta[k-k] + \ldots \\
     =\;&amp; x[k]
     \end{split} $$
@@ -63,40 +73,48 @@
        \frac{1}{N} \sum_{k=0}^{N-1} e^{2\pi j k \frac{n}{N}} = \delta[n]$$
 </p>-->
 
-<h3>The Heaviside Step Function</h3>
+<h2>The Heaviside Step Function</h2>
 
 <p>
-    The (discrete) Heaviside step function \(H[n]\) is defined as a discrete
-    function that is zero when \(n\) is negative, and one if \(n\) is zero or
-    positive:
+    The (discrete) Heaviside step function or unit step function \(u[n]\)
+    (sometimes \(H[n]\))
+    is defined as a discrete function that is zero when \(n\) is negative, 
+    and one if \(n\) is zero or positive:
 
-    $$ U: \mathbb{Z} \rightarrow \mathbb{R}:
-    n \mapsto U[n] \triangleq
+    $$ \begin{equation}
+    u: \mathbb{Z} \rightarrow \mathbb{R}:
+    n \mapsto u[n] \triangleq
     \begin{cases}
     0 &amp; n \lt 0 \\
     1 &amp; n \ge 0
-    \end{cases} $$
-
-    <img src="images/heaviside.svg" />
+    \end{cases} 
+    \label{heaviside-step-function} 
+    \end{equation} $$
 </p>
-<h4>Step Response</h4>
+@image{
+"file": "images/heaviside.svg",
+"alt": "Heaviside step function",
+"source": "resources/kronecker-heaviside.py"
+}
+
+<h3>Step Response</h3>
 <p>
-    Just like the impulse response, we can define the step response as the
+    Similar the impulse response, the step response is defined as the
     output of the system when the Heaviside step function is applied to the
     input:
-    $$ y_\text{step}[n] \triangleq T\left(U[n]\right) $$
+    $$ y_\text{step}[n] \triangleq T\left(u[n]\right) $$
     The step response is an important tool when investigating how a system
     responds to transients.
 </p>
 <p>
-    Unlike the impulse response, there is no specific symbol or letter for the
+    Unlike the impulse response, there is no universal symbol or letter for the
     step response.
 </p>
-<h4>Properties of the Heaviside Step Function</h4>
+<h3>Properties of the Heaviside Step Function</h3>
 <p>
     The step function can also be written as the cumulative sum of the delta
     function:
-    $$ U[n] = \sum_{k=-\infty}^{n} \delta[k] $$
+    $$ u[n] = \sum_{k=-\infty}^{n} \delta[k] $$
 </p>
 
 </html>
