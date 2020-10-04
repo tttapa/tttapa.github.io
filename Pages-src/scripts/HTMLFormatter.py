@@ -11,6 +11,8 @@ import sys
 
 from git import get_git_remote_link
 
+from Style import VSCodeStyle
+
 # region Header anchors
 
 
@@ -206,7 +208,7 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
     if lexer.name == "Arduino" and not "style" in data:
         formatter = HtmlFormatter(cssclass=cssclass, style='arduino')
     else:
-        style = data.get('style', 'default')
+        style = data.get('style', VSCodeStyle)
         formatter = HtmlFormatter(cssclass=cssclass, style=style)
 
     # Extract the CSS from the formatter, and set the line number offset
