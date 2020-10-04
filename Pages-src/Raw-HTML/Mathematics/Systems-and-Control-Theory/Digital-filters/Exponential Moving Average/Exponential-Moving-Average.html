@@ -282,7 +282,18 @@
 <p>
     We can use the SciPy and Matplotlib modules to plot the frequency response in Python.
 </p>
-<pre class="lineNumbers" style="color: rgb(0, 0, 0); /* background-color: rgb(255, 255, 255); */"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> freqz </span></code>
+<p>
+    The SciPy <code>freqz</code> function expects the transfer function coefficients in the form
+    $$ H(z) = \frac{b_0 + b_1 z^{-1} + b_2 z^{-2} + \dots + b_p z^{-p}}
+                   {a_0 + a_1 z^{-1} + a_2 z^{-2} + \dots + a_q z^{-q}}. $$
+    This is the reverse of the usual ordering of polynomial coefficients.
+</p>
+<p>
+    In the case of the exponential moving average filter, the transfer function is 
+    $$ H(z) = \frac{\alpha}{1 + (\alpha - 1) z^{-1},} $$
+    so \(b_0 = \alpha\), \(a_0 = 1\) and \(a_1 = \alpha - 1\).
+</p>
+<!-- <pre class="lineNumbers" style="color: rgb(0, 0, 0); /* background-color: rgb(255, 255, 255); */"><code><span style="color: #af00db;">from</span><span style="color: #000000;"> scipy.signal </span><span style="color: #af00db;">import</span><span style="color: #000000;"> freqz </span></code>
 <code><span style="color: #af00db;">import</span><span style="color: #000000;"> matplotlib.pyplot </span><span style="color: #af00db;">as</span><span style="color: #000000;"> plt</span></code>
 <code><span style="color: #af00db;">from</span><span style="color: #000000;"> math </span><span style="color: #af00db;">import</span><span style="color: #000000;"> pi, acos</span></code>
 <code><span style="color: #af00db;">import</span><span style="color: #000000;"> numpy </span><span style="color: #af00db;">as</span><span style="color: #000000;"> np</span></code>
@@ -317,7 +328,11 @@
 <code><span style="color: #000000;">plt.ylim(</span><span style="color: #000000;">-</span><span style="color: #09885a;">90</span><span style="color: #000000;">, </span><span style="color: #09885a;">90</span><span style="color: #000000;">)</span></code>
 <code><span style="color: #000000;">plt.yticks([</span><span style="color: #000000;">-</span><span style="color: #09885a;">90</span><span style="color: #000000;">, </span><span style="color: #000000;">-</span><span style="color: #09885a;">45</span><span style="color: #000000;">, </span><span style="color: #09885a;">0</span><span style="color: #000000;">, </span><span style="color: #09885a;">45</span><span style="color: #000000;">, </span><span style="color: #09885a;">90</span><span style="color: #000000;">])</span></code>
 <code><span style="color: #000000;">plt.axvline(w_c, </span><span style="color: #001080;">color</span><span style="color: #000000;">=</span><span style="color: #a31515;">'red'</span><span style="color: #000000;">)</span></code>
-<code><span style="color: #000000;">plt.show()</span></code></pre>
+<code><span style="color: #000000;">plt.show()</span></code></pre> -->
+
+@codesnippet{
+    "file": "resources/EMA-freq-response.py"
+}
 
 <img src="images/Bode-EMA-0.25.svg">
 
