@@ -51,7 +51,7 @@ class EMA {
   public:
     /// Constructor: initialize filter to zero or optional given value.
     EMA(input_t initial = input_t(0))
-      : state(zero + (initial << K) - initial) {}
+      : state(zero + (state_t(initial) << K) - initial) {}
 
     /// Update the filter with the given input and return the filtered output.
     input_t operator()(input_t input) {
