@@ -665,7 +665,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments19 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments19 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments19 pre.snippet19 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/MotorFader/blob/46e8ec2b3327c4397a3ec36d8acf4c6eaa97de1a/Arduino/ATmega328P/motorfader3/main.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/main.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments19"><pre class="lineNumbers snippet19"><code><span></span><span class="c1">// Configuration and initialization of the analog-to-digital converter:</span></code>
 <code><span class="cp">#include</span> <span class="cpf">"ADC.hpp"</span><span class="cp"></span></code>
 <code><span class="c1">// Capacitive touch sensing:</span></code>
@@ -769,6 +769,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="c1">// Follow the test reference trajectory (true) or receive the target</span></code>
 <code>    <span class="c1">// position over I²C or Serial (false):</span></code>
 <code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">bool</span> <span class="n">test_reference</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span></code>
+<code>    <span class="c1">// Increase this divisor to slow down the test reference:</span></code>
+<code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">test_reference_speed_div</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span></code>
 <code>    <span class="c1">// Allow control for tuning and starting experiments over Serial:</span></code>
 <code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">bool</span> <span class="n">serial_control</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span></code>
 <code>    <span class="c1">// I²C slave address (zero to disable I²C):</span></code>
@@ -841,7 +843,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>                  <span class="s">"and analog input at the same time"</span><span class="p">);</span></code>
 <code><span class="p">};</span></code>
 <code><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">Config</span><span class="o">::</span><span class="n">touch_masks</span><span class="p">[];</span></code>
-<code></code>
 <code><span class="k">constexpr</span> <span class="kt">float</span> <span class="n">Ts</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">Ts</span><span class="p">;</span></code>
 <code></code>
 <code><span class="c1">// ----------------- ADC, Capacitive Touch State and Motors ----------------- //</span></code>
@@ -852,10 +853,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code></code>
 <code><span class="c1">// ------------------------ Setpoints and References ------------------------ //</span></code>
 <code></code>
-<code><span class="c1">// Reference speed for tuning experiments:</span></code>
-<code><span class="kt">float</span> <span class="n">serial_experiment_speed</span><span class="p">[</span><span class="n">Config</span><span class="o">::</span><span class="n">num_faders</span><span class="p">];</span></code>
-<code><span class="c1">// Setpoints (target positions) for all faders (updated in I²C interrupt):</span></code>
-<code><span class="k">volatile</span> <span class="kt">int16_t</span> <span class="n">setpoints</span><span class="p">[</span><span class="n">Config</span><span class="o">::</span><span class="n">num_faders</span><span class="p">];</span></code>
+<code><span class="c1">// Setpoints (target positions) for all faders:</span></code>
+<code><span class="n">Reference</span><span class="o">&lt;</span><span class="n">Config</span><span class="o">&gt;</span> <span class="n">references</span><span class="p">[</span><span class="n">Config</span><span class="o">::</span><span class="n">num_faders</span><span class="p">];</span></code>
 <code></code>
 <code><span class="c1">// ------------------------------ Controllers ------------------------------- //</span></code>
 <code></code>
@@ -864,11 +863,11 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code><span class="n">PID</span> <span class="n">controllers</span><span class="p">[]</span> <span class="p">{</span></code>
 <code>    <span class="c1">// This is an example of a controller with very little overshoot</span></code>
 <code>    <span class="p">{</span></code>
-<code>        <span class="mi">5</span><span class="p">,</span>     <span class="c1">// Kp: proportional gain</span></code>
+<code>        <span class="mi">6</span><span class="p">,</span>     <span class="c1">// Kp: proportional gain</span></code>
 <code>        <span class="mi">2</span><span class="p">,</span>     <span class="c1">// Ki: integral gain</span></code>
-<code>        <span class="mf">0.028</span><span class="p">,</span> <span class="c1">// Kd: derivative gain</span></code>
+<code>        <span class="mf">0.035</span><span class="p">,</span> <span class="c1">// Kd: derivative gain</span></code>
 <code>        <span class="n">Ts</span><span class="p">,</span>    <span class="c1">// Ts: sampling time</span></code>
-<code>        <span class="mi">40</span><span class="p">,</span> <span class="c1">// fc: cutoff frequency of derivative filter (Hz), zero to disable</span></code>
+<code>        <span class="mi">60</span><span class="p">,</span> <span class="c1">// fc: cutoff frequency of derivative filter (Hz), zero to disable</span></code>
 <code>    <span class="p">},</span></code>
 <code>    <span class="c1">// This one has more overshoot, but less ramp tracking error</span></code>
 <code>    <span class="p">{</span></code>
@@ -888,18 +887,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="p">},</span></code>
 <code>    <span class="c1">// Fourth controller</span></code>
 <code>    <span class="p">{</span></code>
-<code>        <span class="mi">4</span><span class="p">,</span>     <span class="c1">// Kp: proportional gain</span></code>
-<code>        <span class="mi">11</span><span class="p">,</span>    <span class="c1">// Ki: integral gain</span></code>
-<code>        <span class="mf">0.028</span><span class="p">,</span> <span class="c1">// Kd: derivative gain</span></code>
+<code>        <span class="mi">6</span><span class="p">,</span>     <span class="c1">// Kp: proportional gain</span></code>
+<code>        <span class="mi">2</span><span class="p">,</span>     <span class="c1">// Ki: integral gain</span></code>
+<code>        <span class="mf">0.035</span><span class="p">,</span> <span class="c1">// Kd: derivative gain</span></code>
 <code>        <span class="n">Ts</span><span class="p">,</span>    <span class="c1">// Ts: sampling time</span></code>
-<code>        <span class="mi">40</span><span class="p">,</span> <span class="c1">// fc: cutoff frequency of derivative filter (Hz), zero to disable</span></code>
+<code>        <span class="mi">60</span><span class="p">,</span> <span class="c1">// fc: cutoff frequency of derivative filter (Hz), zero to disable</span></code>
 <code>    <span class="p">},</span></code>
 <code><span class="p">};</span></code>
 <code></code>
 <code><span class="k">template</span> <span class="o">&lt;</span><span class="kt">uint8_t</span> <span class="n">Idx</span><span class="o">&gt;</span></code>
 <code><span class="kt">void</span> <span class="n">printControllerSignals</span><span class="p">(</span><span class="kt">int16_t</span> <span class="n">setpoint</span><span class="p">,</span> <span class="kt">int16_t</span> <span class="n">adcval</span><span class="p">,</span> <span class="kt">int16_t</span> <span class="n">control</span><span class="p">)</span> <span class="p">{</span></code>
 <code>    <span class="c1">// Send (binary) controller signals over Serial to plot in Python</span></code>
-<code>    <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">serial_control</span> <span class="o">&amp;&amp;</span> <span class="n">serial_experiment_speed</span><span class="p">[</span><span class="n">Idx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">serial_control</span> <span class="o">&amp;&amp;</span> <span class="n">references</span><span class="p">[</span><span class="n">Idx</span><span class="p">].</span><span class="n">experimentInProgress</span><span class="p">())</span> <span class="p">{</span></code>
 <code>        <span class="k">const</span> <span class="kt">int16_t</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="p">{</span><span class="n">setpoint</span><span class="p">,</span> <span class="n">adcval</span><span class="p">,</span> <span class="n">control</span><span class="p">};</span></code>
 <code>        <span class="n">SLIPSender</span><span class="p">(</span><span class="n">Serial</span><span class="p">).</span><span class="n">writePacket</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">uint8_t</span> <span class="o">*&gt;</span><span class="p">(</span><span class="n">data</span><span class="p">),</span></code>
 <code>                                       <span class="k">sizeof</span><span class="p">(</span><span class="n">data</span><span class="p">));</span></code>
@@ -955,18 +954,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>        <span class="c1">// Check if the fader knob is touched</span></code>
 <code>        <span class="kt">bool</span> <span class="n">touched</span> <span class="o">=</span> <span class="n">touch</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="n">Idx</span><span class="p">);</span></code>
 <code>        <span class="c1">// Read the target position</span></code>
-<code>        <span class="kt">uint16_t</span> <span class="n">setpoint</span><span class="p">;</span></code>
-<code></code>
-<code>        <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">serial_control</span> <span class="o">&amp;&amp;</span> <span class="n">serial_experiment_speed</span><span class="p">[</span><span class="n">Idx</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></code>
-<code>            <span class="c1">// from the tuning experiment reference</span></code>
-<code>            <span class="n">setpoint</span> <span class="o">=</span></code>
-<code>                <span class="n">getNextExperimentSetpoint</span><span class="o">&lt;</span><span class="n">Idx</span><span class="o">&gt;</span><span class="p">(</span><span class="n">serial_experiment_speed</span><span class="p">[</span><span class="n">Idx</span><span class="p">]);</span></code>
-<code>        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">test_reference</span><span class="p">)</span></code>
-<code>            <span class="c1">// from the test reference</span></code>
-<code>            <span class="n">setpoint</span> <span class="o">=</span> <span class="n">getNextSetpoint</span><span class="o">&lt;</span><span class="n">Idx</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span></code>
-<code>        <span class="k">else</span></code>
-<code>            <span class="c1">// from the I²C master</span></code>
-<code>            <span class="n">ATOMIC_BLOCK</span><span class="p">(</span><span class="n">ATOMIC_FORCEON</span><span class="p">)</span> <span class="p">{</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="o">::</span><span class="n">setpoints</span><span class="p">[</span><span class="n">Idx</span><span class="p">];</span> <span class="p">}</span></code>
+<code>        <span class="kt">uint16_t</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="n">references</span><span class="p">[</span><span class="n">Idx</span><span class="p">].</span><span class="n">getNextSetpoint</span><span class="p">();</span></code>
+<code>        <span class="c1">// Run the control loop</span></code>
 <code>        <span class="n">updateController</span><span class="o">&lt;</span><span class="n">Idx</span><span class="o">&gt;</span><span class="p">(</span><span class="n">setpoint</span><span class="p">,</span> <span class="n">adcval</span><span class="p">,</span> <span class="n">touched</span><span class="p">);</span></code>
 <code>        <span class="c1">// Write -1 so the controller doesn't run again until the next value is</span></code>
 <code>        <span class="c1">// available:</span></code>
@@ -1085,7 +1074,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="n">data</span> <span class="o">|=</span> <span class="kt">uint16_t</span><span class="p">(</span><span class="n">Wire</span><span class="p">.</span><span class="n">read</span><span class="p">())</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">;</span></code>
 <code>    <span class="kt">uint8_t</span> <span class="n">idx</span> <span class="o">=</span> <span class="n">data</span> <span class="o">&gt;&gt;</span> <span class="mi">12</span><span class="p">;</span></code>
 <code>    <span class="n">data</span> <span class="o">&amp;=</span> <span class="mh">0x03FF</span><span class="p">;</span></code>
-<code>    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">Config</span><span class="o">::</span><span class="n">num_faders</span><span class="p">)</span> <span class="n">setpoints</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">;</span></code>
+<code>    <span class="k">if</span> <span class="p">(</span><span class="n">idx</span> <span class="o">&lt;</span> <span class="n">Config</span><span class="o">::</span><span class="n">num_faders</span><span class="p">)</span> <span class="n">references</span><span class="p">[</span><span class="n">idx</span><span class="p">].</span><span class="n">setMasterSetpoint</span><span class="p">(</span><span class="n">data</span><span class="p">);</span></code>
 <code><span class="p">}</span></code>
 <code></code>
 <code><span class="c1">// ---------------------------------- Serial -------------------------------- //</span></code>
@@ -1144,7 +1133,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>                <span class="k">case</span> <span class="sc">'c'</span><span class="o">:</span> <span class="n">controllers</span><span class="p">[</span><span class="n">fader_idx</span><span class="p">].</span><span class="n">setEMACutoff</span><span class="p">(</span><span class="n">as_f32</span><span class="p">());</span> <span class="k">break</span><span class="p">;</span></code>
 <code>                <span class="k">case</span> <span class="sc">'m'</span><span class="o">:</span> <span class="n">controllers</span><span class="p">[</span><span class="n">fader_idx</span><span class="p">].</span><span class="n">setMaxOutput</span><span class="p">(</span><span class="n">as_f32</span><span class="p">());</span> <span class="k">break</span><span class="p">;</span></code>
 <code>                <span class="k">case</span> <span class="sc">'s'</span><span class="o">:</span></code>
-<code>                    <span class="n">serial_experiment_speed</span><span class="p">[</span><span class="n">fader_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">as_f32</span><span class="p">();</span></code>
+<code>                    <span class="n">references</span><span class="p">[</span><span class="n">fader_idx</span><span class="p">].</span><span class="n">startExperiment</span><span class="p">(</span><span class="n">as_f32</span><span class="p">());</span></code>
 <code>                    <span class="n">controllers</span><span class="p">[</span><span class="n">fader_idx</span><span class="p">].</span><span class="n">resetIntegral</span><span class="p">();</span></code>
 <code>                    <span class="k">break</span><span class="p">;</span></code>
 <code>                <span class="k">default</span><span class="o">:</span> <span class="k">break</span><span class="p">;</span></code>
@@ -1221,7 +1210,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments23 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments23 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments23 pre.snippet23 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/MotorFader/blob/46e8ec2b3327c4397a3ec36d8acf4c6eaa97de1a/Arduino/ATmega328P/motorfader3/ADC.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/ADC.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments23"><pre class="lineNumbers snippet23"><code><span></span><span class="cp">#pragma once</span></code>
 <code><span class="cp">#include</span> <span class="cpf">"Registers.hpp"</span><span class="cp"></span></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;avr/interrupt.h&gt;</span><span class="cp"></span></code>
@@ -1441,7 +1430,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments27 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments27 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments27 pre.snippet27 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/MotorFader/blob/dbc9343ea94a228376983fbab2ffaf411e841425/Arduino/ATmega328P/motorfader3/Touch.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/Touch.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments27"><pre class="lineNumbers snippet27"><code><span></span><span class="cp">#pragma once</span></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;avr/interrupt.h&gt;</span><span class="cp"></span></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;avr/io.h&gt;</span><span class="cp"></span></code>
@@ -1610,7 +1599,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments31 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments31 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments31 pre.snippet31 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/MotorFader/blob/8fb360b07f9f72e888713a1a62998c7bbf13756f/Arduino/ATmega328P/motorfader3/Controller.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/Controller.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments31"><pre class="lineNumbers snippet31"><code><span></span><span class="cp">#pragma once</span></code>
 <code></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span></code>
@@ -1846,7 +1835,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments35 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments35 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments35 pre.snippet35 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/MotorFader/blob/dbc9343ea94a228376983fbab2ffaf411e841425/Arduino/ATmega328P/motorfader3/Motor.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/Motor.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments35"><pre class="lineNumbers snippet35"><code><span></span><span class="cp">#pragma once</span></code>
 <code><span class="cp">#include</span> <span class="cpf">"Registers.hpp"</span><span class="cp"></span></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;avr/interrupt.h&gt;</span><span class="cp"></span></code>
@@ -1890,6 +1879,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>        <span class="n">setupMotorTimer0</span><span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">phase_correct_pwm</span><span class="p">,</span> <span class="n">prescaler0</span><span class="p">);</span></code>
 <code><span class="p">}</span></code>
 <code></code>
+<code><span class="c1">/// Class for driving up to 4 DC motors using PWM.</span></code>
 <code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Config</span><span class="o">&gt;</span></code>
 <code><span class="k">struct</span> <span class="nc">Motors</span> <span class="p">{</span></code>
 <code>    <span class="kt">void</span> <span class="nf">begin</span><span class="p">();</span></code>
@@ -2084,12 +2074,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments39 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments39 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments39 pre.snippet39 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/MotorFader/blob/b94b8aa235687b497615c10a8c638c51db379e78/Arduino/ATmega328P/motorfader3/Reference.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/Reference.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments39"><pre class="lineNumbers snippet39"><code><span></span><span class="cp">#include</span> <span class="cpf">&lt;avr/pgmspace.h&gt;</span><span class="cp"></span></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span> <span class="cpf">&lt;util/atomic.h&gt;</span><span class="cp"></span></code>
 <code></code>
-<code><span class="cp">#if 1</span></code>
+<code><span class="c1">/// Reference signal for testing the controller.</span></code>
 <code><span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">reference_signal</span><span class="p">[]</span> <span class="n">PROGMEM</span> <span class="o">=</span> <span class="p">{</span></code>
 <code>    <span class="c1">// Ramp up</span></code>
 <code>    <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span></code>
@@ -2153,71 +2144,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span></code>
 <code>    <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span></code>
 <code>    <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span> <span class="mi">127</span><span class="p">,</span></code>
-<code><span class="cp">#if 0</span><span class="c"></span></code>
-<code><span class="c">    // Jump low</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    // Jump middle</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127,</span></code>
-<code><span class="c">    // Jump low</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    // Jump middle</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127,</span></code>
-<code><span class="c">    // Jump low</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    // Jump middle</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127,</span></code>
-<code><span class="c">    // Jump low</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    // Jump middle</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127,</span></code>
-<code><span class="c">    // Jump low</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    // Jump middle</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127,</span></code>
-<code><span class="c">    // Jump low</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,</span></code>
-<code><span class="c">    // Jump middle</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="c">    127, 127, 127, 127, 127, 127, 127,</span></code>
-<code><span class="cp">#endif</span></code>
+<code></code>
 <code>    <span class="c1">// Ramp down</span></code>
 <code>    <span class="mi">127</span><span class="p">,</span> <span class="mi">126</span><span class="p">,</span> <span class="mi">125</span><span class="p">,</span> <span class="mi">124</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">122</span><span class="p">,</span> <span class="mi">121</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">119</span><span class="p">,</span> <span class="mi">118</span><span class="p">,</span> <span class="mi">117</span><span class="p">,</span> <span class="mi">116</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">114</span><span class="p">,</span> <span class="mi">113</span><span class="p">,</span></code>
 <code>    <span class="mi">112</span><span class="p">,</span> <span class="mi">111</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">109</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">107</span><span class="p">,</span> <span class="mi">106</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">104</span><span class="p">,</span> <span class="mi">103</span><span class="p">,</span> <span class="mi">102</span><span class="p">,</span> <span class="mi">101</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">97</span><span class="p">,</span></code>
@@ -2237,117 +2164,107 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span></code>
 <code>    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span></code>
 <code>    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span></code>
-<code>    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span></code>
-<code><span class="cp">#if 0</span><span class="c"></span></code>
-<code><span class="c">,</span></code>
-<code><span class="c">    // Low</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    // Low</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    // Low</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span></code>
-<code><span class="c">    0, 0, 0, 0, 0, 0</span></code>
-<code><span class="cp">#endif</span></code>
-<code><span class="p">};</span></code>
-<code><span class="cp">#else</span></code>
-<code><span class="k">const</span> <span class="kt">uint8_t</span> <span class="n">reference_signal</span><span class="p">[]</span> <span class="n">PROGMEM</span> <span class="o">=</span> <span class="p">{</span></code>
-<code>    <span class="mi">127</span><span class="p">,</span></code>
-<code><span class="p">};</span></code>
-<code><span class="cp">#endif</span></code>
+<code>    <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span></code>
 <code></code>
+<code><span class="c1">/// Get the number of elements in the given array.</span></code>
 <code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="o">&gt;</span></code>
 <code><span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">len</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span> <span class="p">(</span><span class="o">&amp;</span><span class="p">)[</span><span class="n">N</span><span class="p">])</span> <span class="p">{</span></code>
 <code>    <span class="k">return</span> <span class="n">N</span><span class="p">;</span></code>
 <code><span class="p">}</span></code>
-<code><span class="k">const</span> <span class="kt">size_t</span> <span class="n">reference_len</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="n">reference_signal</span><span class="p">);</span></code>
 <code></code>
-<code><span class="k">template</span> <span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span></code>
-<code><span class="kr">inline</span> <span class="kt">uint16_t</span> <span class="n">getNextSetpoint</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">speed_fac</span><span class="p">)</span> <span class="p">{</span></code>
-<code>    <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
-<code>    <span class="k">static</span> <span class="kt">size_t</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
-<code></code>
-<code>    <span class="kt">uint16_t</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="n">pgm_read_byte</span><span class="p">(</span><span class="n">reference_signal</span> <span class="o">+</span> <span class="n">index</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span></code>
-<code>    <span class="o">++</span><span class="n">counter</span><span class="p">;</span></code>
-<code>    <span class="k">if</span> <span class="p">(</span><span class="n">counter</span> <span class="o">&gt;=</span> <span class="n">speed_fac</span><span class="p">)</span> <span class="p">{</span></code>
-<code>        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
-<code>        <span class="o">++</span><span class="n">index</span><span class="p">;</span></code>
-<code>        <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">reference_len</span><span class="p">)</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code><span class="c1">/// Class that handles the three main references/setpoints:</span></code>
+<code><span class="c1">///   1. Sequence programmed in PROGMEM</span></code>
+<code><span class="c1">///   2. Test sequence for tuning experiments (activated over Serial)</span></code>
+<code><span class="c1">///   3. Setpoint set by the I²C master (for real-world use)</span></code>
+<code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Config</span><span class="o">&gt;</span></code>
+<code><span class="k">class</span> <span class="nc">Reference</span> <span class="p">{</span></code>
+<code>  <span class="k">public</span><span class="o">:</span></code>
+<code>    <span class="c1">/// Called from ISR</span></code>
+<code>    <span class="kt">void</span> <span class="n">setMasterSetpoint</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">setpoint</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">master_setpoint</span> <span class="o">=</span> <span class="n">setpoint</span><span class="p">;</span></code>
 <code>    <span class="p">}</span></code>
-<code>    <span class="k">return</span> <span class="n">setpoint</span><span class="p">;</span></code>
-<code><span class="p">}</span></code>
 <code></code>
-<code><span class="k">template</span> <span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span></code>
-<code><span class="kr">inline</span> <span class="kt">uint16_t</span> <span class="n">getNextExperimentSetpoint</span><span class="p">(</span><span class="kt">float</span> <span class="o">&amp;</span><span class="n">speed</span><span class="p">)</span> <span class="p">{</span></code>
-<code>    <span class="k">static</span> <span class="kt">uint32_t</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="kt">void</span> <span class="n">startExperiment</span><span class="p">(</span><span class="kt">float</span> <span class="n">speed_div</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">experiment_speed_div</span> <span class="o">=</span> <span class="n">speed_div</span><span class="p">;</span></code>
+<code>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">seq_idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="p">}</span></code>
 <code></code>
-<code>    <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">rampup</span> <span class="o">=</span> <span class="mh">0xFFFF</span><span class="p">;</span></code>
-<code>    <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">rampdown</span> <span class="o">=</span> <span class="mh">0xFFFE</span><span class="p">;</span></code>
-<code>    <span class="k">struct</span> <span class="nc">TestSeq</span> <span class="p">{</span></code>
-<code>        <span class="kt">uint16_t</span> <span class="n">setpoint</span><span class="p">;</span></code>
-<code>        <span class="kt">uint32_t</span> <span class="n">duration</span><span class="p">;</span></code>
-<code>    <span class="p">};</span></code>
-<code>    <span class="k">constexpr</span> <span class="n">TestSeq</span> <span class="n">seqs</span><span class="p">[]</span> <span class="p">{</span></code>
-<code>        <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">},</span>  <span class="p">{</span><span class="n">rampup</span><span class="p">,</span> <span class="mi">128</span><span class="p">},</span> <span class="p">{</span><span class="mi">1023</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">},</span>    <span class="p">{</span><span class="mi">333</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span></code>
-<code>        <span class="p">{</span><span class="mi">666</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span> <span class="p">{</span><span class="mi">333</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span>     <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span>    <span class="p">{</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">},</span></code>
-<code>    <span class="p">};</span></code>
+<code>    <span class="kt">bool</span> <span class="n">experimentInProgress</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">experiment_speed_div</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span></code>
 <code></code>
-<code>    <span class="kt">uint16_t</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="mh">0xFFFF</span><span class="p">;</span></code>
-<code>    <span class="kt">uint32_t</span> <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
-<code>    <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">(</span><span class="n">seqs</span><span class="p">);</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span></code>
-<code>        <span class="kt">uint32_t</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">seqs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">duration</span> <span class="o">*</span> <span class="n">speed</span><span class="p">;</span></code>
-<code>        <span class="kt">uint16_t</span> <span class="n">setpoint_i</span> <span class="o">=</span> <span class="n">seqs</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">setpoint</span><span class="p">;</span></code>
-<code>        <span class="kt">uint32_t</span> <span class="n">end</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">duration</span><span class="p">;</span></code>
-<code>        <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">end</span><span class="p">)</span> <span class="p">{</span></code>
-<code>            <span class="k">if</span> <span class="p">(</span><span class="n">setpoint_i</span> <span class="o">==</span> <span class="n">rampup</span><span class="p">)</span> <span class="p">{</span></code>
-<code>                <span class="n">setpoint</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">duration</span><span class="p">;</span></code>
-<code>            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">setpoint_i</span> <span class="o">==</span> <span class="n">rampdown</span><span class="p">)</span> <span class="p">{</span></code>
-<code>                <span class="n">setpoint</span> <span class="o">=</span> <span class="mi">1023</span> <span class="o">-</span> <span class="mi">1024</span> <span class="o">*</span> <span class="p">(</span><span class="n">index</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">duration</span><span class="p">;</span></code>
-<code>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></code>
-<code>                <span class="n">setpoint</span> <span class="o">=</span> <span class="n">setpoint_i</span><span class="p">;</span></code>
-<code>            <span class="p">}</span></code>
-<code>            <span class="k">break</span><span class="p">;</span></code>
+<code>    <span class="kt">uint16_t</span> <span class="n">getNextProgmemSetpoint</span><span class="p">()</span> <span class="p">{</span></code>
+<code>        <span class="kt">uint16_t</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="n">pgm_read_byte</span><span class="p">(</span><span class="n">reference_signal</span> <span class="o">+</span> <span class="n">index</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span><span class="p">;</span></code>
+<code>        <span class="o">++</span><span class="n">seq_idx</span><span class="p">;</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="n">seq_idx</span> <span class="o">&gt;=</span> <span class="n">Config</span><span class="o">::</span><span class="n">test_reference_speed_div</span><span class="p">)</span> <span class="p">{</span></code>
+<code>            <span class="n">seq_idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>            <span class="o">++</span><span class="n">index</span><span class="p">;</span></code>
+<code>            <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">len</span><span class="p">(</span><span class="n">reference_signal</span><span class="p">))</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
 <code>        <span class="p">}</span></code>
-<code>        <span class="n">start</span> <span class="o">=</span> <span class="n">end</span><span class="p">;</span></code>
+<code>        <span class="k">return</span> <span class="n">setpoint</span><span class="p">;</span></code>
 <code>    <span class="p">}</span></code>
 <code></code>
-<code>    <span class="k">if</span> <span class="p">(</span><span class="n">setpoint</span> <span class="o">==</span> <span class="mh">0xFFFF</span><span class="p">)</span> <span class="p">{</span></code>
-<code>        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
-<code>        <span class="n">speed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
-<code>        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="kt">uint16_t</span> <span class="n">getNextExperimentSetpoint</span><span class="p">()</span> <span class="p">{</span></code>
+<code>        <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">RAMPUP</span> <span class="o">=</span> <span class="mh">0xFFFF</span><span class="p">;</span></code>
+<code>        <span class="k">auto</span> <span class="n">rampup</span> <span class="o">=</span> <span class="p">[](</span><span class="kt">uint16_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">duration</span><span class="p">)</span> <span class="p">{</span></code>
+<code>            <span class="k">return</span> <span class="nf">uint32_t</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span> <span class="o">*</span> <span class="n">idx</span> <span class="o">/</span> <span class="n">duration</span><span class="p">;</span></code>
+<code>        <span class="p">};</span></code>
+<code>        <span class="k">constexpr</span> <span class="kt">uint16_t</span> <span class="n">RAMPDOWN</span> <span class="o">=</span> <span class="mh">0xFFFE</span><span class="p">;</span></code>
+<code>        <span class="k">auto</span> <span class="n">rampdown</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">uint16_t</span> <span class="n">idx</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">duration</span><span class="p">)</span> <span class="p">{</span></code>
+<code>            <span class="k">return</span> <span class="mi">1023</span> <span class="o">-</span> <span class="n">rampup</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span></code>
+<code>        <span class="p">};</span></code>
+<code>        <span class="k">struct</span> <span class="nc">TestSeq</span> <span class="p">{</span></code>
+<code>            <span class="kt">uint16_t</span> <span class="n">setpoint</span><span class="p">;</span></code>
+<code>            <span class="kt">uint16_t</span> <span class="n">duration</span><span class="p">;</span></code>
+<code>        <span class="p">};</span></code>
+<code>        <span class="c1">// This array defines the test sequence</span></code>
+<code>        <span class="k">constexpr</span> <span class="k">static</span> <span class="n">TestSeq</span> <span class="n">seqs</span><span class="p">[]</span> <span class="p">{</span></code>
+<code>            <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">},</span>  <span class="p">{</span><span class="n">RAMPUP</span><span class="p">,</span> <span class="mi">128</span><span class="p">},</span> <span class="p">{</span><span class="mi">1023</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">64</span><span class="p">},</span>    <span class="p">{</span><span class="mi">333</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span></code>
+<code>            <span class="p">{</span><span class="mi">666</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span> <span class="p">{</span><span class="mi">333</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span>     <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">32</span><span class="p">},</span>    <span class="p">{</span><span class="mi">512</span><span class="p">,</span> <span class="mi">256</span><span class="p">},</span></code>
+<code>        <span class="p">};</span></code>
+<code></code>
+<code>        <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">seq_index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>        <span class="k">static</span> <span class="kt">uint16_t</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>        <span class="kt">uint16_t</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">seqs</span><span class="p">[</span><span class="n">seq_index</span><span class="p">].</span><span class="n">duration</span> <span class="o">*</span> <span class="n">experiment_speed_div</span><span class="p">;</span></code>
+<code>        <span class="kt">uint16_t</span> <span class="n">seq_setpoint</span> <span class="o">=</span> <span class="n">seqs</span><span class="p">[</span><span class="n">seq_index</span><span class="p">].</span><span class="n">setpoint</span><span class="p">;</span></code>
+<code>        <span class="kt">uint16_t</span> <span class="n">setpoint</span><span class="p">;</span></code>
+<code>        <span class="k">switch</span> <span class="p">(</span><span class="n">seq_setpoint</span><span class="p">)</span> <span class="p">{</span></code>
+<code>            <span class="k">case</span> <span class="nl">RAMPUP</span><span class="p">:</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="n">rampup</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span></code>
+<code>            <span class="k">case</span> <span class="nl">RAMPDOWN</span><span class="p">:</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="n">rampdown</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">duration</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span></code>
+<code>            <span class="k">default</span><span class="o">:</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="n">seq_setpoint</span><span class="p">;</span></code>
+<code>        <span class="p">}</span></code>
+<code>        <span class="o">++</span><span class="n">index</span><span class="p">;</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">==</span> <span class="n">duration</span><span class="p">)</span> <span class="p">{</span></code>
+<code>            <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>            <span class="o">++</span><span class="n">seq_index</span><span class="p">;</span></code>
+<code>            <span class="k">if</span> <span class="p">(</span><span class="n">seq_index</span> <span class="o">==</span> <span class="n">len</span><span class="p">(</span><span class="n">seqs</span><span class="p">))</span> <span class="p">{</span></code>
+<code>                <span class="n">seq_index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>                <span class="n">experiment_speed_div</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>            <span class="p">}</span></code>
+<code>        <span class="p">}</span></code>
+<code>        <span class="k">return</span> <span class="n">setpoint</span><span class="p">;</span></code>
 <code>    <span class="p">}</span></code>
 <code></code>
-<code>    <span class="o">++</span><span class="n">index</span><span class="p">;</span></code>
-<code>    <span class="k">return</span> <span class="n">setpoint</span><span class="p">;</span></code>
-<code><span class="p">}</span></code></pre></div>
+<code>    <span class="c1">/// Called from main program with interrupts enabled</span></code>
+<code>    <span class="kt">uint16_t</span> <span class="n">getNextSetpoint</span><span class="p">()</span> <span class="p">{</span></code>
+<code>        <span class="kt">uint16_t</span> <span class="n">setpoint</span><span class="p">;</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">serial_control</span> <span class="o">&amp;&amp;</span> <span class="n">experiment_speed_div</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span></code>
+<code>            <span class="c1">// from the tuning experiment reference</span></code>
+<code>            <span class="n">setpoint</span> <span class="o">=</span> <span class="n">getNextExperimentSetpoint</span><span class="p">();</span></code>
+<code>        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">Config</span><span class="o">::</span><span class="n">test_reference</span><span class="p">)</span></code>
+<code>            <span class="c1">// from the test reference</span></code>
+<code>            <span class="n">setpoint</span> <span class="o">=</span> <span class="n">getNextProgmemSetpoint</span><span class="p">();</span></code>
+<code>        <span class="k">else</span></code>
+<code>            <span class="c1">// from the I²C master</span></code>
+<code>            <span class="n">ATOMIC_BLOCK</span><span class="p">(</span><span class="n">ATOMIC_FORCEON</span><span class="p">)</span> <span class="p">{</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="n">master_setpoint</span><span class="p">;</span> <span class="p">}</span></code>
+<code>        <span class="k">return</span> <span class="n">setpoint</span><span class="p">;</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>  <span class="k">private</span><span class="o">:</span></code>
+<code>    <span class="kt">uint16_t</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="kt">uint8_t</span> <span class="n">seq_idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="kt">float</span> <span class="n">experiment_speed_div</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="k">volatile</span> <span class="kt">uint16_t</span> <span class="n">master_setpoint</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code><span class="p">};</span></code></pre></div>
 </div>
 <h4 class="snippet-name"><a name="registers-hpp" href="#registers-hpp">Registers.hpp</a></h4>
 <div class="codesnippet"><style>pre { line-height: 125%; margin: 0; }
@@ -2417,7 +2334,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments43 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments43 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments43 pre.snippet43 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/MotorFader/blob/d2739eed174b276133a77776d8187734cd9ee9b3/Arduino/ATmega328P/motorfader3/Registers.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/Registers.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments43"><pre class="lineNumbers snippet43"><code><span></span><span class="cp">#pragma once</span></code>
 <code></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;avr/io.h&gt;</span><span class="cp"></span></code>
@@ -2664,7 +2581,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments47 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments47 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments47 pre.snippet47 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/MotorFader/blob/b94b8aa235687b497615c10a8c638c51db379e78/Arduino/ATmega328P/motorfader3/SerialSLIP.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/SerialSLIP.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments47"><pre class="lineNumbers snippet47"><code><span></span><span class="cp">#include</span> <span class="cpf">&lt;Arduino.h&gt;</span><span class="cp"></span></code>
 <code></code>
 <code><span class="k">namespace</span> <span class="n">SLIP_Constants</span> <span class="p">{</span></code>
@@ -2674,6 +2591,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code><span class="k">const</span> <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">ESC_ESC</span> <span class="o">=</span> <span class="mo">0335</span><span class="p">;</span></code>
 <code><span class="p">}</span> <span class="c1">// namespace SLIP_Constants</span></code>
 <code></code>
+<code><span class="c1">/// Parses SLIP packets: https://datatracker.ietf.org/doc/html/rfc1055</span></code>
 <code><span class="k">class</span> <span class="nc">SLIPParser</span> <span class="p">{</span></code>
 <code>  <span class="k">public</span><span class="o">:</span></code>
 <code>    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Callback</span><span class="o">&gt;</span></code>
@@ -2691,7 +2609,6 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code></code>
 <code><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">Callback</span><span class="o">&gt;</span></code>
 <code><span class="kt">size_t</span> <span class="n">SLIPParser</span><span class="o">::</span><span class="n">parse</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">c</span><span class="p">,</span> <span class="n">Callback</span> <span class="n">callback</span><span class="p">)</span> <span class="p">{</span></code>
-<code>    <span class="c1">// https://datatracker.ietf.org/doc/html/rfc1055</span></code>
 <code>    <span class="k">using</span> <span class="k">namespace</span> <span class="n">SLIP_Constants</span><span class="p">;</span></code>
 <code>    <span class="cm">/*</span></code>
 <code><span class="cm">     * handle bytestuffing if necessary</span></code>
@@ -2750,6 +2667,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span></code>
 <code><span class="p">}</span></code>
 <code></code>
+<code><span class="c1">/// Sends SLIP packets: https://datatracker.ietf.org/doc/html/rfc1055</span></code>
 <code><span class="k">class</span> <span class="nc">SLIPSender</span> <span class="p">{</span></code>
 <code>  <span class="k">public</span><span class="o">:</span></code>
 <code>    <span class="n">SLIPSender</span><span class="p">(</span><span class="n">Stream</span> <span class="o">&amp;</span><span class="n">stream</span><span class="p">)</span> <span class="o">:</span> <span class="n">stream</span><span class="p">(</span><span class="n">stream</span><span class="p">)</span> <span class="p">{}</span></code>
@@ -2878,7 +2796,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments51 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments51 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments51 pre.snippet51 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/MotorFader/blob/240f70c7c9ad02e38c77a4c5ae94f35e22f85662/Arduino/ATmega328P/motorfader3/SMA.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/SMA.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments51"><pre class="lineNumbers snippet51"><code><span></span><span class="cp">#pragma once</span></code>
 <code></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;Arduino_Helpers.h&gt;</span><span class="cp"></span></code>
@@ -2948,7 +2866,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="PID-Tuning.html" title="PID Tuning"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"></div></div>
     </article>
-    <footer>Last edited: Friday, 16 July 2021 01:42 UTC</footer>
+    <footer>Last edited: Friday, 16 July 2021 16:55 UTC</footer>
 </body>
 
 </html>
