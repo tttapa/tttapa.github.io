@@ -6,7 +6,8 @@ from json import JSONDecoder
 from pprint import pformat
 from os import getenv
 from os import path
-from os.path import exists, splitext, dirname, relpath
+from os.path import exists, splitext, dirname, relpath, basename, join
+import subprocess
 import sys
 
 from git import get_git_remote_link
@@ -150,6 +151,41 @@ def formatCode(html, metadata):
 
 # endregion
 
+# region Make file
+
+def checkPath(filepath, file, msg):
+    # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
+    if path.isabs(file):
+        raise Exception(f'{msg} "{file}" cannot be an absolute path')
+    fullfile = path.join(path.dirname(filepath), file)
+    if not exists(fullfile):
+        raise Exception(f'{msg} "{fullfile}" does not exist')
+    return fullfile
+
+
+def handleMake(data, html, filepath, taglineno, refs):
+    if not 'make' in data:
+        return
+    makefile = data['make'].get('makefile')
+    filedir = dirname(data['file']) if 'file' in data else filepath
+    cwd = data['make'].get('cwd', filedir)
+
+    cmd = ['make']
+    if makefile:
+        cmd += ['-f', checkPath(filepath, makefile, "Makefile")]
+    if cwd:
+        cmd += ['-C', checkPath(filepath, cwd, "CWD")]
+
+    res = subprocess.run(cmd, capture_output=True)
+    if res.returncode != 0:
+        sys.stdout.buffer.write(res.stdout)
+        sys.stdout.flush()
+        sys.stderr.buffer.write(res.stderr)
+        sys.stderr.flush()
+        raise RuntimeError(f'Error executing {res.args}')
+
+# endregion
+
 # region Code syntax highlighting
 
 
@@ -182,7 +218,8 @@ def clip_file_contents(file, startline, endline):
     return filecontents, ctrstart
 
 
-def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
+def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno, refs):
+    handleMake(data, html, filepath, lineno, refs)
     startline = data.get('startline', None)
     endline = data.get('endline', None)
     name = data.get('name', None)
@@ -238,7 +275,7 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
         datastr += '<img class="gitlab-mark" src="/Images/GitLab-Mark.svg"/>'
         datastr += '</a>\n'
     datastr += htmlc + '</div>'
-    return datastr, file
+    return datastr, [file]
 
 
 # endregion
@@ -246,7 +283,8 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno):
 # region Image linking
 
 
-def formatImage(data, html, filepath, lineno):
+def formatImage(data, html, filepath, lineno, refs: dict):
+    handleMake(data, html, filepath, lineno, refs)
     file = data['file']
     # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
     if path.isabs(file):
@@ -264,11 +302,33 @@ def formatImage(data, html, filepath, lineno):
 
     alt = data.get('alt', data.get('caption', file))
 
-    htmlstr = f'<a href="{file}"><img src="{dispfile}" alt="{alt}"/></a>'
+    def handle_attr(jsonkey, htmlstr):
+        if jsonkey in data:
+            for attr, value in data[jsonkey].items():
+                escvalue = value.replace('"','\\"')
+                htmlstr += f' {attr}="{escvalue}"'
+        return htmlstr
 
-    cap = data.get('caption')
-    if cap:
-        htmlstr += f'<figcaption>{cap}</figcaption>'
+    anchor = None
+    if 'label' in data:
+        count = len(refs['Figure']) + 1 if 'Figure' in refs else 1
+        anchor = f'fig-{count}'
+        figs = refs.setdefault('Figure', dict())
+        label = data['label']
+        if label in figs:
+            raise Exception(f'Duplicate label "{label}"')
+        figs[label] = (anchor, count)
+        if 'caption' in data:
+            data['caption'] = f'Figure {count}: ' + data['caption']
+        else:
+            data['caption'] = f'Figure {count}'
+
+    htmlstr = f'<div class="img-wrapper"><a href="{file}"'
+    htmlstr = handle_attr('a-attr', htmlstr)
+    htmlstr += f' id="{anchor}"'
+    htmlstr += f'><img src="{dispfile}" alt="{alt}"'
+    htmlstr = handle_attr('img-attr', htmlstr)
+    htmlstr += '/></a>'
 
     src = data.get('source')
     if src:
@@ -277,13 +337,73 @@ def formatImage(data, html, filepath, lineno):
         fullsrc = path.join(path.dirname(filepath), src)
         if not exists(fullsrc):
             raise Exception(f'Image source "{fullsrc}" does not exist')
-        htmlstr += '<small class="image-code-link" style="margin-top: -2em;">'
+        htmlstr += '<small class="image-code-link">'
         htmlstr += f'<a href="{src}">Image source code</a></small>'
 
-    return htmlstr, fullfile
+    
+    cap = data.get('caption')
+    if cap:
+        htmlstr += f'<figcaption'
+        htmlstr = handle_attr('figcaption-attr', htmlstr)
+        htmlstr += f'>{cap}</figcaption>'
+
+    htmlstr += '</div>'
+
+    return htmlstr, [fullfile, fulldispfile]
 
 
 # endregion
+
+latexmakefiletemplate = """
+.PHONY: all
+all: {name}.svg
+
+{name}.pdf: {name}.tex
+	pdflatex --interaction=batchmode {name}.tex
+
+build/{name}-fonts.pdf: {name}.pdf
+	mkdir -p build
+	gs -dNoOutputFonts -sDEVICE=pdfwrite -o build/{name}-fonts.pdf {name}.pdf
+
+{name}.svg: build/{name}-fonts.pdf 
+	inkscape build/{name}-fonts.pdf -l {name}.svg
+"""
+
+def handleLaTeX(data: dict, html, filepath, lineno, refs):
+    file = data['file']
+    fullfile = checkPath(filepath, file, "LaTeX file")
+    fullfiledir = dirname(fullfile)
+    filedir = dirname(file)
+    filename = basename(file)
+    name, ext = splitext(filename)
+    if ext != '.tex': 
+        raise Exception(f'Invalid LaTeX extension "{ext}"')
+    if (not 'make' in data) or (not 'makefile' in data['make']):
+        makefile = join(filedir, 'Makefile')
+        if not 'make' in data: data['make'] = dict()
+        data['make']['makefile'] = makefile
+        fullmakefile = join(fullfiledir, 'Makefile')
+        if not path.exists(makefile):
+            makefilecontents = latexmakefiletemplate.format(name=name)
+            with open(fullmakefile, 'w') as f: f.write(makefilecontents)
+    data.setdefault('source', file)
+    data['file'] = join(filedir, name + '.pdf')
+    data.setdefault('display-file', join(filedir, name + '.svg'))
+    return formatImage(data, html, filepath, lineno, refs)
+
+def handleReference(data, html, filepath, lineno, refs):
+    label = data['ref']
+    reftype = None
+    ref = None
+    for k, v in refs.items(): 
+        if label in v:
+            ref = v[label]
+            reftype = k
+    if ref is None:
+        raise Exception(f'Invalid reference "{label}"')
+    reflabel, refidx = ref
+    htmlstr = f'<a class="pages-xref" href="#{reflabel}">{reftype}&nbsp;{refidx}</a>'
+    return htmlstr, []
 
 # region Replace @ JSON tags
 
@@ -308,38 +428,47 @@ def getKeyWord(keywords: dict, html, index):
 
 
 def replaceTags(html, filepath, lineno, outpath, metadata):
-    keywordhandlers = {
-        'codesnippet': formatPygmentsCodeSnippet,
-        'image': formatImage,
-    }
+    keywordhandlers = [
+        {
+            'codesnippet': formatPygmentsCodeSnippet,
+            'image': formatImage,
+            'latex': handleLaTeX,
+        },
+        {
+            'ref': handleReference,
+        }
+    ]
 
+    refs = dict()
     deps = []
-    index = html.find('@')
-    while index >= 0:
-        keyword = getKeyWord(keywordhandlers, html, index + 1)
-        if not keyword:
-            index = html.find('@', index + 1)
-            continue
-        try:
-            jsonstartindex = index + len(keyword) + 1
-            data, endindex = JSONDecoder().raw_decode(html, jsonstartindex)
-            handler = keywordhandlers[keyword]
-            taglineno = lineno + getlinenumber(html, index)
-            newdata, dep = handler(data, html, filepath, taglineno)
-            if dep: deps.append(dep)
-            lineno += getlinesbetween(html, index, endindex)
-            lineno -= getlines(newdata)
-            html = html[:index] + newdata + html[endindex:]
-            index = html.find('@', index + len(newdata))
-        except Exception as e:
-            fileline = filepath + ':' + str(lineno +
-                                            getlinenumber(html, index))
-            print('\nError adding code snippet:', file=sys.stderr)
-            print(fileline, file=sys.stderr)
-            print(type(e).__name__, file=sys.stderr)
-            print(e, file=sys.stderr)
-            print(file=sys.stderr)
-            raise e
+    for pass_ in range(2):
+        handlers = keywordhandlers[pass_]
+        index = html.find('@')
+        while index >= 0:
+            keyword = getKeyWord(handlers, html, index + 1)
+            if not keyword:
+                index = html.find('@', index + 1)
+                continue
+            try:
+                jsonstartindex = index + len(keyword) + 1
+                data, endindex = JSONDecoder().raw_decode(html, jsonstartindex)
+                handler = handlers[keyword]
+                taglineno = lineno + getlinenumber(html, index)
+                newdata, dep = handler(data, html, filepath, taglineno, refs)
+                if dep: deps += dep
+                lineno += getlinesbetween(html, index, endindex)
+                lineno -= getlines(newdata)
+                html = html[:index] + newdata + html[endindex:]
+                index = html.find('@', index + len(newdata))
+            except Exception as e:
+                fileline = filepath + ':' + str(lineno +
+                                                getlinenumber(html, index))
+                print('\nError adding code snippet:', file=sys.stderr)
+                print(fileline, file=sys.stderr)
+                print(type(e).__name__, file=sys.stderr)
+                print(e, file=sys.stderr)
+                print(file=sys.stderr)
+                raise e
     if deps:
         depfname = path.splitext(outpath)[0] + '.dep'
         with open(depfname, 'w') as f:
