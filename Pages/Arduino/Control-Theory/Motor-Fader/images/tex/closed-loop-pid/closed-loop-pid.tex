@@ -1,0 +1,45 @@
+\documentclass[border=5mm]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{shapes,arrows,positioning}
+
+\begin{document}
+
+\tikzstyle{block} = [draw, fill=gray!20, rectangle, inner sep=0.6em, node distance=5em, minimum height=2.5em, minimum width=2.5em]
+\tikzstyle{pidblock} = [block, minimum width=2.5em, minimum height=2.5em, inner sep=0]
+\tikzstyle{sum} = [draw, fill=gray!20, circle, node distance=5em, text centered]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{branch} = [circle,inner sep=0pt,minimum size=0.75mm,fill=black,draw=black]
+
+\resizebox{1.6\width}{!}{
+\begin{tikzpicture}[auto, node distance=2.5em,>=latex',scale=2]
+    \node [input] (reference) {};
+    \node [sum, right=4em of reference] (sumerr) {$+$};
+    \node [pidblock, right=4em of sumerr] (intctrl) {$K_i \dfrac{1}{s}$};
+    \node [pidblock, above=1em of intctrl] (propctrl) {$K_p\phantom{\,s}$};
+    \node [pidblock, below=1em of intctrl] (drvctrl) {$K_d\,s$};
+    \node [sum, right=1.5em of intctrl] (sumctrl) {$+$};
+    \node [block, right=3em of sumctrl, minimum width=4em] (plant) {Plant};
+    \node [output, right=4.5em of plant] (position) {};
+    
+    \draw [->] (reference)   -- node [above, near start] {$R(s)$} (sumerr);
+    \draw [->] (sumerr)      -- node [above, pos=0.3] {$E(s)$}  (intctrl);
+    \draw [->] (sumctrl.east) -- node [above] {$U(s)$} (plant.west);
+    \draw [->] (plant.east) -- node [above, near end] {$Y(s)$} (position);
+
+    \coordinate [right=1.5em of plant] (feedbackoutput);
+    \coordinate [below=4.5em of intctrl] (feedback);
+    \node [branch] (bfeedbackoutput) at (feedbackoutput) {};
+    \draw [->] (bfeedbackoutput) |- (feedback) -| node [pos=0.95, left] {$-$} (sumerr);
+    \coordinate [left=1.5em of intctrl] (errpt);
+    \node [branch] (berr) at (errpt) {};
+    \draw [->] (errpt) |- (propctrl);
+    \draw [->] (errpt) |- (drvctrl);
+    \draw [->] (propctrl.east) -\ (sumctrl);
+    \draw [->] (intctrl) -- (sumctrl);
+    \draw [->] (drvctrl.east) -/ (sumctrl);
+\end{tikzpicture}
+}
+
+\end{document}

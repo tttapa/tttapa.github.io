@@ -1,0 +1,1160 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
+    <!-- No MathJax -->
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="theme-color" content="#ccc">
+    <meta name="keywords" content="arduino,motorized fader,flying fader,pid,controller,midi,control surface">
+    <meta name="description" content="PID controller implementation in C++.">
+    <title>C++ Implementation</title>
+<style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mi {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-msub {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-munder {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-over {
+  text-align: left;
+}
+
+mjx-munder:not([limits="false"]) {
+  display: inline-table;
+}
+
+mjx-munder > mjx-row {
+  text-align: left;
+}
+
+mjx-under {
+  padding-bottom: .1em;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c1D43E.TEX-I::before {
+  padding: 0.683em 0.889em 0 0;
+  content: "K";
+}
+
+[noIC] mjx-c.mjx-c1D43E.TEX-I:last-child::before {
+  padding-right: 0.849em;
+}
+
+mjx-c.mjx-c1D447.TEX-I::before {
+  padding: 0.677em 0.704em 0 0;
+  content: "T";
+}
+
+[noIC] mjx-c.mjx-c1D447.TEX-I:last-child::before {
+  padding-right: 0.584em;
+}
+
+mjx-c.mjx-c1D451.TEX-I::before {
+  padding: 0.694em 0.52em 0.01em 0;
+  content: "d";
+}
+
+mjx-c.mjx-c1D456.TEX-I::before {
+  padding: 0.661em 0.345em 0.011em 0;
+  content: "i";
+}
+
+mjx-c.mjx-c1D460.TEX-I::before {
+  padding: 0.442em 0.469em 0.01em 0;
+  content: "s";
+}
+</style></head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/C++-Development/index.html">C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a href="../../Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Control Theory</a>
+        <ul>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry" href="PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a href="PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a href="ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Programming/index.html">Programming</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Programming/Cpp/index.html">C++</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="PID-Cpp-Implementation.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">C++ Implementation</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+        <li><a href="#simple-implementation">Simple implementation</a></li>
+          <ul>
+            <li><a href="#output-clamping-and-anti-windup">Output clamping and anti-windup</a></li>
+          </ul>
+        <li><a href="#real-world-implementation">Real-world implementation</a></li>
+  </ul></div>
+
+
+<div style="display: none;">
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" display="true" role="presentation"><mjx-math display="true" style="margin-left: 0; margin-right: 0" class=" MJX-TEX" aria-hidden="true"></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"></math></mjx-assistive-mml></mjx-container>
+</div>
+
+<p>
+    This page first presents a simple PID implementation in C++, then it adds 
+    output clamping and integral anti-windup. Finally, it lists the real-world 
+    implementation used in the actual microcontroller code.
+</p>
+
+<h2><a name="simple-implementation" href="#simple-implementation">Simple implementation</a></h2>
+
+<p>
+    The following listing gives a very basic implementation of a PID controller 
+    in C++. It uses the formulas derived on the previous page.
+</p>
+
+<div class="codesnippet"><style>pre { line-height: 125%; margin: 0; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+.pygments29 .hll { background-color: #ffffcc }
+.pygments29 { background: #ffffff; }
+.pygments29 .c { color: #008000 } /* Comment */
+.pygments29 .err { border: 1px solid #FF0000 } /* Error */
+.pygments29 .k { color: #0000ff } /* Keyword */
+.pygments29 .l { color: #0000FF } /* Literal */
+.pygments29 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments29 .cm { color: #008000 } /* Comment.Multiline */
+.pygments29 .cp { color: #af00db } /* Comment.Preproc */
+.pygments29 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments29 .c1 { color: #008000 } /* Comment.Single */
+.pygments29 .cs { color: #008000 } /* Comment.Special */
+.pygments29 .ge { font-style: italic } /* Generic.Emph */
+.pygments29 .gh { font-weight: bold } /* Generic.Heading */
+.pygments29 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments29 .gs { font-weight: bold } /* Generic.Strong */
+.pygments29 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments29 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments29 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments29 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments29 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments29 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments29 .kt { color: #2b91af } /* Keyword.Type */
+.pygments29 .ld { color: #0000FF } /* Literal.Date */
+.pygments29 .m { color: #0000FF } /* Literal.Number */
+.pygments29 .s { color: #a31515 } /* Literal.String */
+.pygments29 .na { color: #001080 } /* Name.Attribute */
+.pygments29 .nb { color: #795e26 } /* Name.Builtin */
+.pygments29 .nc { color: #2b91af } /* Name.Class */
+.pygments29 .no { color: #0000FF } /* Name.Constant */
+.pygments29 .nf { color: #795e26 } /* Name.Function */
+.pygments29 .nl { color: #AF00DB } /* Name.Label */
+.pygments29 .nn { color: #000000 } /* Name.Namespace */
+.pygments29 .nt { color: #800000 } /* Name.Tag */
+.pygments29 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments29 .ow { color: #0000ff } /* Operator.Word */
+.pygments29 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments29 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments29 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments29 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments29 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments29 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments29 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments29 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments29 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments29 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments29 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments29 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments29 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments29 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments29 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments29 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments29 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments29 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments29 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments29 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments29 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments29 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments29 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments29 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments29 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments29 pre.snippet29 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Arduino/Control-Theory/Motor-Fader/resources/basic-pid.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments29"><pre class="lineNumbers snippet29"><code><span></span><span class="cp">#include</span> <span class="cpf">&lt;cmath&gt;</span><span class="cp"></span></code>
+<code></code>
+<code><span class="c1">/// Very basic, mostly educational PID controller with derivative filter.</span></code>
+<code><span class="k">class</span> <span class="nc">PID</span> <span class="p">{</span></code>
+<code>  <span class="k">public</span><span class="o">:</span></code>
+<code>    <span class="c1">/// @param  kp  Proportional gain   @f$ K_p @f$</span></code>
+<code>    <span class="c1">/// @param  ki  Integral gain       @f$ K_i @f$</span></code>
+<code>    <span class="c1">/// @param  kd  Derivative gain     @f$ K_d @f$</span></code>
+<code>    <span class="c1">/// @param  fc  Cutoff frequency    @f$ f_c @f$ of derivative filter in Hz</span></code>
+<code>    <span class="c1">/// @param  Ts  Controller sampling time    @f$ T_s @f$ in seconds</span></code>
+<code>    <span class="c1">/// The derivative filter can be disabled by setting `fc` to zero.</span></code>
+<code>    <span class="n">PID</span><span class="p">(</span><span class="kt">float</span> <span class="n">kp</span><span class="p">,</span> <span class="kt">float</span> <span class="n">ki</span><span class="p">,</span> <span class="kt">float</span> <span class="n">kd</span><span class="p">,</span> <span class="kt">float</span> <span class="n">fc</span><span class="p">,</span> <span class="kt">float</span> <span class="n">Ts</span><span class="p">)</span></code>
+<code>        <span class="o">:</span> <span class="n">kp</span><span class="p">(</span><span class="n">kp</span><span class="p">),</span> <span class="n">ki</span><span class="p">(</span><span class="n">ki</span><span class="p">),</span> <span class="n">kd</span><span class="p">(</span><span class="n">kd</span><span class="p">),</span> <span class="n">alpha</span><span class="p">(</span><span class="n">calcAlphaEMA</span><span class="p">(</span><span class="n">fc</span> <span class="o">*</span> <span class="n">Ts</span><span class="p">)),</span> <span class="n">Ts</span><span class="p">(</span><span class="n">Ts</span><span class="p">)</span> <span class="p">{}</span></code>
+<code></code>
+<code>    <span class="c1">/// Compute the weight factor α for an exponential moving average filter</span></code>
+<code>    <span class="c1">/// with a given normalized cutoff frequency `fn`.</span></code>
+<code>    <span class="k">static</span> <span class="kt">float</span> <span class="n">calcAlphaEMA</span><span class="p">(</span><span class="kt">float</span> <span class="n">fn</span><span class="p">);</span></code>
+<code></code>
+<code>    <span class="c1">/// Update the controller with the given position measurement `meas_y` and </span></code>
+<code>    <span class="c1">/// return the new control signal.</span></code>
+<code>    <span class="kt">float</span> <span class="nf">update</span><span class="p">(</span><span class="kt">float</span> <span class="n">reference</span><span class="p">,</span> <span class="kt">float</span> <span class="n">meas_y</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="c1">// e[k] = r[k] - y[k], error between setpoint and true position</span></code>
+<code>        <span class="kt">float</span> <span class="n">error</span> <span class="o">=</span> <span class="n">reference</span> <span class="o">-</span> <span class="n">meas_y</span><span class="p">;</span></code>
+<code>        <span class="c1">// e_f[k] = α e[k] + (1-α) e_f[k-1], filtered error</span></code>
+<code>        <span class="kt">float</span> <span class="n">ef</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">error</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">old_ef</span><span class="p">;</span></code>
+<code>        <span class="c1">// e_d[k] = (e_f[k] - e_f[k-1]) / Tₛ, filtered derivative</span></code>
+<code>        <span class="kt">float</span> <span class="n">derivative</span> <span class="o">=</span> <span class="p">(</span><span class="n">ef</span> <span class="o">-</span> <span class="n">old_ef</span><span class="p">)</span> <span class="o">/</span> <span class="n">Ts</span><span class="p">;</span></code>
+<code>        <span class="c1">// e_i[k+1] = e_i[k] + Tₛ e[k], integral</span></code>
+<code>        <span class="kt">float</span> <span class="n">new_integral</span> <span class="o">=</span> <span class="n">integral</span> <span class="o">+</span> <span class="n">error</span> <span class="o">*</span> <span class="n">Ts</span><span class="p">;</span></code>
+<code></code>
+<code>        <span class="c1">// PID formula:</span></code>
+<code>        <span class="c1">// u[k] = Kp e[k] + Ki e_i[k] + Kd e_d[k], control signal</span></code>
+<code>        <span class="kt">float</span> <span class="n">control_u</span> <span class="o">=</span> <span class="n">kp</span> <span class="o">*</span> <span class="n">error</span> <span class="o">+</span> <span class="n">ki</span> <span class="o">*</span> <span class="n">integral</span> <span class="o">+</span> <span class="n">kd</span> <span class="o">*</span> <span class="n">derivative</span><span class="p">;</span></code>
+<code></code>
+<code>        <span class="c1">// store the state for the next iteration</span></code>
+<code>        <span class="n">integral</span> <span class="o">=</span> <span class="n">new_integral</span><span class="p">;</span></code>
+<code>        <span class="n">old_ef</span> <span class="o">=</span> <span class="n">ef</span><span class="p">;</span></code>
+<code>        <span class="c1">// return the control signal</span></code>
+<code>        <span class="k">return</span> <span class="n">control_u</span><span class="p">;</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>  <span class="k">private</span><span class="o">:</span></code>
+<code>    <span class="kt">float</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">Ts</span><span class="p">;</span></code>
+<code>    <span class="kt">float</span> <span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="kt">float</span> <span class="n">old_ef</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code><span class="p">};</span></code>
+<code></code>
+<code><span class="kt">float</span> <span class="n">PID</span><span class="o">::</span><span class="n">calcAlphaEMA</span><span class="p">(</span><span class="kt">float</span> <span class="n">fn</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">if</span> <span class="p">(</span><span class="n">fn</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span></code>
+<code>        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span></code>
+<code>    <span class="c1">// α(fₙ) = cos(2πfₙ) - 1 + √( cos(2πfₙ)² - 4 cos(2πfₙ) + 3 )</span></code>
+<code>    <span class="k">const</span> <span class="kt">float</span> <span class="n">c</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="kt">float</span><span class="p">(</span><span class="n">M_PI</span><span class="p">)</span> <span class="o">*</span> <span class="n">fn</span><span class="p">);</span></code>
+<code>    <span class="k">return</span> <span class="n">c</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">std</span><span class="o">::</span><span class="n">sqrt</span><span class="p">(</span><span class="n">c</span> <span class="o">*</span> <span class="n">c</span> <span class="o">-</span> <span class="mi">4</span> <span class="o">*</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">3</span><span class="p">);</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+
+<h3><a name="output-clamping-and-anti-windup" href="#output-clamping-and-anti-windup">Output clamping and anti-windup</a></h3>
+
+<p>
+    We can easily modify the code from the previous section to clamp the output 
+    of the controller, and to stop the integral from winding up if the output 
+    is already saturated:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; margin: 0; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+.pygments40 .hll { background-color: #ffffcc }
+.pygments40 { background: #ffffff; }
+.pygments40 .c { color: #008000 } /* Comment */
+.pygments40 .err { border: 1px solid #FF0000 } /* Error */
+.pygments40 .k { color: #0000ff } /* Keyword */
+.pygments40 .l { color: #0000FF } /* Literal */
+.pygments40 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments40 .cm { color: #008000 } /* Comment.Multiline */
+.pygments40 .cp { color: #af00db } /* Comment.Preproc */
+.pygments40 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments40 .c1 { color: #008000 } /* Comment.Single */
+.pygments40 .cs { color: #008000 } /* Comment.Special */
+.pygments40 .ge { font-style: italic } /* Generic.Emph */
+.pygments40 .gh { font-weight: bold } /* Generic.Heading */
+.pygments40 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments40 .gs { font-weight: bold } /* Generic.Strong */
+.pygments40 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments40 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments40 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments40 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments40 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments40 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments40 .kt { color: #2b91af } /* Keyword.Type */
+.pygments40 .ld { color: #0000FF } /* Literal.Date */
+.pygments40 .m { color: #0000FF } /* Literal.Number */
+.pygments40 .s { color: #a31515 } /* Literal.String */
+.pygments40 .na { color: #001080 } /* Name.Attribute */
+.pygments40 .nb { color: #795e26 } /* Name.Builtin */
+.pygments40 .nc { color: #2b91af } /* Name.Class */
+.pygments40 .no { color: #0000FF } /* Name.Constant */
+.pygments40 .nf { color: #795e26 } /* Name.Function */
+.pygments40 .nl { color: #AF00DB } /* Name.Label */
+.pygments40 .nn { color: #000000 } /* Name.Namespace */
+.pygments40 .nt { color: #800000 } /* Name.Tag */
+.pygments40 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments40 .ow { color: #0000ff } /* Operator.Word */
+.pygments40 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments40 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments40 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments40 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments40 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments40 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments40 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments40 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments40 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments40 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments40 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments40 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments40 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments40 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments40 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments40 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments40 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments40 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments40 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments40 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments40 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments40 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments40 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments40 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments40 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments40 pre.snippet40 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Arduino/Control-Theory/Motor-Fader/resources/basic-pid-2.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments40"><pre class="lineNumbers snippet40"><code><span></span><span class="c1">/// Very basic, mostly educational PID controller with derivative filter, output</span></code>
+<code><span class="c1">/// clamping and integral anti-windup.</span></code>
+<code><span class="k">class</span> <span class="nc">PID</span> <span class="p">{</span></code>
+<code>  <span class="k">public</span><span class="o">:</span></code>
+<code>    <span class="cm">/* ... */</span></code>
+<code></code>
+<code>    <span class="c1">/// Update the controller with the given position measurement `meas_y` and</span></code>
+<code>    <span class="c1">/// return the new control signal.</span></code>
+<code>    <span class="kt">float</span> <span class="n">update</span><span class="p">(</span><span class="kt">float</span> <span class="n">reference</span><span class="p">,</span> <span class="kt">float</span> <span class="n">meas_y</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="c1">// e[k] = r[k] - y[k], error between setpoint and true position</span></code>
+<code>        <span class="kt">float</span> <span class="n">error</span> <span class="o">=</span> <span class="n">reference</span> <span class="o">-</span> <span class="n">meas_y</span><span class="p">;</span></code>
+<code>        <span class="c1">// e_f[k] = α e[k] + (1-α) e_f[k-1], filtered error</span></code>
+<code>        <span class="kt">float</span> <span class="n">ef</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">error</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">old_ef</span><span class="p">;</span></code>
+<code>        <span class="c1">// e_d[k] = (e_f[k] - e_f[k-1]) / Tₛ, filtered derivative</span></code>
+<code>        <span class="kt">float</span> <span class="n">derivative</span> <span class="o">=</span> <span class="p">(</span><span class="n">ef</span> <span class="o">-</span> <span class="n">old_ef</span><span class="p">)</span> <span class="o">/</span> <span class="n">Ts</span><span class="p">;</span></code>
+<code>        <span class="c1">// e_i[k+1] = e_i[k] + Tₛ e[k], integral</span></code>
+<code>        <span class="kt">float</span> <span class="n">new_integral</span> <span class="o">=</span> <span class="n">integral</span> <span class="o">+</span> <span class="n">error</span> <span class="o">*</span> <span class="n">Ts</span><span class="p">;</span></code>
+<code></code>
+<code>        <span class="c1">// PID formula:</span></code>
+<code>        <span class="c1">// u[k] = Kp e[k] + Ki e_i[k] + Kd e_d[k], control signal</span></code>
+<code>        <span class="kt">float</span> <span class="n">control_u</span> <span class="o">=</span> <span class="n">kp</span> <span class="o">*</span> <span class="n">error</span> <span class="o">+</span> <span class="n">ki</span> <span class="o">*</span> <span class="n">integral</span> <span class="o">+</span> <span class="n">kd</span> <span class="o">*</span> <span class="n">derivative</span><span class="p">;</span></code>
+<code></code>
+<code>        <span class="c1">// Clamp the output</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="n">control_u</span> <span class="o">&gt;</span> <span class="n">max_output</span><span class="p">)</span></code>
+<code>            <span class="n">control_u</span> <span class="o">=</span> <span class="n">max_output</span><span class="p">;</span></code>
+<code>        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">control_u</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">max_output</span><span class="p">)</span></code>
+<code>            <span class="n">control_u</span> <span class="o">=</span> <span class="o">-</span><span class="n">max_output</span><span class="p">;</span></code>
+<code>        <span class="k">else</span> <span class="c1">// Anti-windup</span></code>
+<code>            <span class="n">integral</span> <span class="o">=</span> <span class="n">new_integral</span><span class="p">;</span></code>
+<code>        <span class="c1">// store the state for the next iteration</span></code>
+<code>        <span class="n">old_ef</span> <span class="o">=</span> <span class="n">ef</span><span class="p">;</span></code>
+<code>        <span class="c1">// return the control signal</span></code>
+<code>        <span class="k">return</span> <span class="n">control_u</span><span class="p">;</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>  <span class="k">private</span><span class="o">:</span></code>
+<code>    <span class="kt">float</span> <span class="n">kp</span><span class="p">,</span> <span class="n">ki</span><span class="p">,</span> <span class="n">kd</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">Ts</span><span class="p">;</span></code>
+<code>    <span class="kt">float</span> <span class="n">max_output</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span></code>
+<code>    <span class="kt">float</span> <span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="kt">float</span> <span class="n">old_ef</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code><span class="p">};</span></code></pre></div>
+</div>
+
+<h2><a name="real-world-implementation" href="#real-world-implementation">Real-world implementation</a></h2>
+
+<p>
+    In the actual microcontroller code for the motorized fader driver, we make 
+    a few changes to the algorithm introduced above:
+    <ul>
+        <li>We use integer types for the input, setpoint, error and integral.</li>
+        <li>For efficiency, the constants <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>K</mi><mi>i</mi></msub></math></mjx-assistive-mml></mjx-container> and <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D451 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>K</mi><mi>d</mi></msub></math></mjx-assistive-mml></mjx-container> are premultiplied/divided by the factor <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D460 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>T</mi><mi>s</mi></msub></math></mjx-assistive-mml></mjx-container>.</li>
+        <li>The output is turned off completely after a given number of cycles of inactivity (no setpoint changes or human interaction), if the error is small enough.</li>
+    </ul>
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; margin: 0; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+.pygments55 .hll { background-color: #ffffcc }
+.pygments55 { background: #ffffff; }
+.pygments55 .c { color: #008000 } /* Comment */
+.pygments55 .err { border: 1px solid #FF0000 } /* Error */
+.pygments55 .k { color: #0000ff } /* Keyword */
+.pygments55 .l { color: #0000FF } /* Literal */
+.pygments55 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments55 .cm { color: #008000 } /* Comment.Multiline */
+.pygments55 .cp { color: #af00db } /* Comment.Preproc */
+.pygments55 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments55 .c1 { color: #008000 } /* Comment.Single */
+.pygments55 .cs { color: #008000 } /* Comment.Special */
+.pygments55 .ge { font-style: italic } /* Generic.Emph */
+.pygments55 .gh { font-weight: bold } /* Generic.Heading */
+.pygments55 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments55 .gs { font-weight: bold } /* Generic.Strong */
+.pygments55 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments55 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments55 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments55 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments55 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments55 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments55 .kt { color: #2b91af } /* Keyword.Type */
+.pygments55 .ld { color: #0000FF } /* Literal.Date */
+.pygments55 .m { color: #0000FF } /* Literal.Number */
+.pygments55 .s { color: #a31515 } /* Literal.String */
+.pygments55 .na { color: #001080 } /* Name.Attribute */
+.pygments55 .nb { color: #795e26 } /* Name.Builtin */
+.pygments55 .nc { color: #2b91af } /* Name.Class */
+.pygments55 .no { color: #0000FF } /* Name.Constant */
+.pygments55 .nf { color: #795e26 } /* Name.Function */
+.pygments55 .nl { color: #AF00DB } /* Name.Label */
+.pygments55 .nn { color: #000000 } /* Name.Namespace */
+.pygments55 .nt { color: #800000 } /* Name.Tag */
+.pygments55 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments55 .ow { color: #0000ff } /* Operator.Word */
+.pygments55 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments55 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments55 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments55 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments55 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments55 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments55 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments55 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments55 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments55 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments55 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments55 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments55 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments55 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments55 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments55 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments55 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments55 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments55 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments55 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments55 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments55 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments55 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments55 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments55 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments55 pre.snippet55 { counter-reset: line 37; }</style>
+<a href="https://github.com/tttapa/MotorFader/blob/8fb360b07f9f72e888713a1a62998c7bbf13756f/Arduino/ATmega328P/motorfader3/Controller.hpp#L38" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments55"><pre class="lineNumbers snippet55"><code><span></span><span class="c1">/// Standard PID (proportional, integral, derivative) controller. Derivative</span></code>
+<code><span class="c1">/// component is filtered using an exponential moving average filter.</span></code>
+<code><span class="k">class</span> <span class="nc">PID</span> <span class="p">{</span></code>
+<code>  <span class="k">public</span><span class="o">:</span></code>
+<code>    <span class="n">PID</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span></code>
+<code>    <span class="c1">/// @param  kp</span></code>
+<code>    <span class="c1">///         Proportional gain</span></code>
+<code>    <span class="c1">/// @param  ki</span></code>
+<code>    <span class="c1">///         Integral gain</span></code>
+<code>    <span class="c1">/// @param  kd</span></code>
+<code>    <span class="c1">///         Derivative gain</span></code>
+<code>    <span class="c1">/// @param  Ts</span></code>
+<code>    <span class="c1">///         Sampling time (seconds)</span></code>
+<code>    <span class="c1">/// @param  fc</span></code>
+<code>    <span class="c1">///         Cutoff frequency of derivative EMA filter (Hertz),</span></code>
+<code>    <span class="c1">///         zero to disable the filter entirely</span></code>
+<code>    <span class="n">PID</span><span class="p">(</span><span class="kt">float</span> <span class="n">kp</span><span class="p">,</span> <span class="kt">float</span> <span class="n">ki</span><span class="p">,</span> <span class="kt">float</span> <span class="n">kd</span><span class="p">,</span> <span class="kt">float</span> <span class="n">Ts</span><span class="p">,</span> <span class="kt">float</span> <span class="n">f_c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span></code>
+<code>        <span class="kt">float</span> <span class="n">maxOutput</span> <span class="o">=</span> <span class="mi">255</span><span class="p">)</span></code>
+<code>        <span class="o">:</span> <span class="n">Ts</span><span class="p">(</span><span class="n">Ts</span><span class="p">),</span> <span class="n">maxOutput</span><span class="p">(</span><span class="n">maxOutput</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="n">setKp</span><span class="p">(</span><span class="n">kp</span><span class="p">);</span></code>
+<code>        <span class="n">setKi</span><span class="p">(</span><span class="n">ki</span><span class="p">);</span></code>
+<code>        <span class="n">setKd</span><span class="p">(</span><span class="n">kd</span><span class="p">);</span></code>
+<code>        <span class="n">setEMACutoff</span><span class="p">(</span><span class="n">f_c</span><span class="p">);</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>    <span class="c1">/// Update the controller: given the current position, compute the control</span></code>
+<code>    <span class="c1">/// action.</span></code>
+<code>    <span class="kt">float</span> <span class="n">update</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">input</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="c1">// The error is the difference between the reference (setpoint) and the</span></code>
+<code>        <span class="c1">// actual position (input)</span></code>
+<code>        <span class="kt">int16_t</span> <span class="n">error</span> <span class="o">=</span> <span class="n">setpoint</span> <span class="o">-</span> <span class="n">input</span><span class="p">;</span></code>
+<code>        <span class="c1">// The integral or sum of current and previous errors</span></code>
+<code>        <span class="kt">int32_t</span> <span class="n">newIntegral</span> <span class="o">=</span> <span class="n">integral</span> <span class="o">+</span> <span class="n">error</span><span class="p">;</span></code>
+<code>        <span class="c1">// Compute the difference between the current and the previous input,</span></code>
+<code>        <span class="c1">// but compute a weighted average using a factor α ∊ (0,1]</span></code>
+<code>        <span class="kt">float</span> <span class="n">diff</span> <span class="o">=</span> <span class="n">emaAlpha</span> <span class="o">*</span> <span class="p">(</span><span class="n">prevInput</span> <span class="o">-</span> <span class="n">input</span><span class="p">);</span></code>
+<code>        <span class="c1">// Update the average</span></code>
+<code>        <span class="n">prevInput</span> <span class="o">-=</span> <span class="n">diff</span><span class="p">;</span></code>
+<code></code>
+<code>        <span class="c1">// Check if we can turn off the motor</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="n">activityCount</span> <span class="o">&gt;=</span> <span class="n">activityThres</span> <span class="o">&amp;&amp;</span> <span class="n">activityThres</span><span class="p">)</span> <span class="p">{</span></code>
+<code>            <span class="kt">float</span> <span class="n">filtError</span> <span class="o">=</span> <span class="n">setpoint</span> <span class="o">-</span> <span class="n">prevInput</span><span class="p">;</span></code>
+<code>            <span class="k">if</span> <span class="p">(</span><span class="n">filtError</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="n">errThres</span> <span class="o">&amp;&amp;</span> <span class="n">filtError</span> <span class="o">&lt;=</span> <span class="n">errThres</span><span class="p">)</span> <span class="p">{</span></code>
+<code>                <span class="n">errThres</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// hysteresis</span></code>
+<code>                <span class="n">integral</span> <span class="o">=</span> <span class="n">newIntegral</span><span class="p">;</span></code>
+<code>                <span class="k">return</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></code>
+<code>                <span class="n">errThres</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span></code>
+<code>            <span class="p">}</span></code>
+<code>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></code>
+<code>            <span class="o">++</span><span class="n">activityCount</span><span class="p">;</span></code>
+<code>            <span class="n">errThres</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span></code>
+<code>        <span class="p">}</span></code>
+<code></code>
+<code>        <span class="kt">bool</span> <span class="n">backward</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span></code>
+<code>        <span class="kt">int32_t</span> <span class="n">calcIntegral</span> <span class="o">=</span> <span class="n">backward</span> <span class="o">?</span> <span class="nl">newIntegral</span> <span class="p">:</span> <span class="n">integral</span><span class="p">;</span></code>
+<code></code>
+<code>        <span class="c1">// Standard PID rule</span></code>
+<code>        <span class="kt">float</span> <span class="n">output</span> <span class="o">=</span> <span class="n">kp</span> <span class="o">*</span> <span class="n">error</span> <span class="o">+</span> <span class="n">ki_Ts</span> <span class="o">*</span> <span class="n">calcIntegral</span> <span class="o">+</span> <span class="n">kd_Ts</span> <span class="o">*</span> <span class="n">diff</span><span class="p">;</span></code>
+<code></code>
+<code>        <span class="c1">// Clamp and anti-windup</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="n">output</span> <span class="o">&gt;</span> <span class="n">maxOutput</span><span class="p">)</span></code>
+<code>            <span class="n">output</span> <span class="o">=</span> <span class="n">maxOutput</span><span class="p">;</span></code>
+<code>        <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">output</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">maxOutput</span><span class="p">)</span></code>
+<code>            <span class="n">output</span> <span class="o">=</span> <span class="o">-</span><span class="n">maxOutput</span><span class="p">;</span></code>
+<code>        <span class="k">else</span></code>
+<code>            <span class="n">integral</span> <span class="o">=</span> <span class="n">newIntegral</span><span class="p">;</span></code>
+<code></code>
+<code>        <span class="k">return</span> <span class="n">output</span><span class="p">;</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>    <span class="kt">void</span> <span class="n">setKp</span><span class="p">(</span><span class="kt">float</span> <span class="n">kp</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">kp</span> <span class="o">=</span> <span class="n">kp</span><span class="p">;</span> <span class="p">}</span>               <span class="c1">///&lt; Proportional gain</span></code>
+<code>    <span class="kt">void</span> <span class="n">setKi</span><span class="p">(</span><span class="kt">float</span> <span class="n">ki</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">ki_Ts</span> <span class="o">=</span> <span class="n">ki</span> <span class="o">*</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">Ts</span><span class="p">;</span> <span class="p">}</span> <span class="c1">///&lt; Integral gain</span></code>
+<code>    <span class="kt">void</span> <span class="n">setKd</span><span class="p">(</span><span class="kt">float</span> <span class="n">kd</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">kd_Ts</span> <span class="o">=</span> <span class="n">kd</span> <span class="o">/</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">Ts</span><span class="p">;</span> <span class="p">}</span> <span class="c1">///&lt; Derivative gain</span></code>
+<code></code>
+<code>    <span class="kt">float</span> <span class="n">getKp</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">kp</span><span class="p">;</span> <span class="p">}</span>         <span class="c1">///&lt; Proportional gain</span></code>
+<code>    <span class="kt">float</span> <span class="n">getKi</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">ki_Ts</span> <span class="o">/</span> <span class="n">Ts</span><span class="p">;</span> <span class="p">}</span> <span class="c1">///&lt; Integral gain</span></code>
+<code>    <span class="kt">float</span> <span class="n">getKd</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">kd_Ts</span> <span class="o">*</span> <span class="n">Ts</span><span class="p">;</span> <span class="p">}</span> <span class="c1">///&lt; Derivative gain</span></code>
+<code></code>
+<code>    <span class="c1">/// Set the cutoff frequency (-3 dB point) of the exponential moving average</span></code>
+<code>    <span class="c1">/// filter that is applied to the input before taking the difference for</span></code>
+<code>    <span class="c1">/// computing the derivative term.</span></code>
+<code>    <span class="kt">void</span> <span class="n">setEMACutoff</span><span class="p">(</span><span class="kt">float</span> <span class="n">f_c</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="kt">float</span> <span class="n">f_n</span> <span class="o">=</span> <span class="n">f_c</span> <span class="o">*</span> <span class="n">Ts</span><span class="p">;</span> <span class="c1">// normalized sampling frequency</span></code>
+<code>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">emaAlpha</span> <span class="o">=</span> <span class="n">f_c</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">calcAlphaEMA</span><span class="p">(</span><span class="n">f_n</span><span class="p">);</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>    <span class="c1">/// Set the reference/target/setpoint of the controller.</span></code>
+<code>    <span class="kt">void</span> <span class="n">setSetpoint</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">setpoint</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">setpoint</span> <span class="o">!=</span> <span class="n">setpoint</span><span class="p">)</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">activityCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>        <span class="k">this</span><span class="o">-&gt;</span><span class="n">setpoint</span> <span class="o">=</span> <span class="n">setpoint</span><span class="p">;</span></code>
+<code>    <span class="p">}</span></code>
+<code>    <span class="c1">/// @see @ref setSetpoint(int16_t)</span></code>
+<code>    <span class="kt">uint16_t</span> <span class="n">getSetpoint</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">setpoint</span><span class="p">;</span> <span class="p">}</span></code>
+<code></code>
+<code>    <span class="c1">/// Set the maximum control output magnitude. Default is 255, which clamps</span></code>
+<code>    <span class="c1">/// the control output in [-255, +255].</span></code>
+<code>    <span class="kt">void</span> <span class="n">setMaxOutput</span><span class="p">(</span><span class="kt">float</span> <span class="n">maxOutput</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">maxOutput</span> <span class="o">=</span> <span class="n">maxOutput</span><span class="p">;</span> <span class="p">}</span></code>
+<code>    <span class="c1">/// @see @ref setMaxOutput(float)</span></code>
+<code>    <span class="kt">float</span> <span class="n">getMaxOutput</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">maxOutput</span><span class="p">;</span> <span class="p">}</span></code>
+<code></code>
+<code>    <span class="c1">/// Reset the activity counter to prevent the motor from turning off.</span></code>
+<code>    <span class="kt">void</span> <span class="n">resetActivityCounter</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="o">-&gt;</span><span class="n">activityCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span></code>
+<code>    <span class="c1">/// Set the number of seconds after which the motor is turned off, zero to</span></code>
+<code>    <span class="c1">/// keep it on indefinitely.</span></code>
+<code>    <span class="kt">void</span> <span class="n">setActivityTimeout</span><span class="p">(</span><span class="kt">float</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="n">s</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span></code>
+<code>            <span class="n">activityThres</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>        <span class="k">else</span></code>
+<code>            <span class="n">activityThres</span> <span class="o">=</span> <span class="kt">uint16_t</span><span class="p">(</span><span class="n">s</span> <span class="o">/</span> <span class="n">Ts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">?</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">s</span> <span class="o">/</span> <span class="n">Ts</span><span class="p">;</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>    <span class="c1">/// Reset the sum of the previous errors to zero.</span></code>
+<code>    <span class="kt">void</span> <span class="n">resetIntegral</span><span class="p">()</span> <span class="p">{</span> <span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span></code>
+<code></code>
+<code>  <span class="k">private</span><span class="o">:</span></code>
+<code>    <span class="kt">float</span> <span class="n">Ts</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>               <span class="c1">///&lt; Sampling time (seconds)</span></code>
+<code>    <span class="kt">float</span> <span class="n">maxOutput</span> <span class="o">=</span> <span class="mi">255</span><span class="p">;</span>      <span class="c1">///&lt; Maximum control output magnitude</span></code>
+<code>    <span class="kt">float</span> <span class="n">kp</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>               <span class="c1">///&lt; Proportional gain</span></code>
+<code>    <span class="kt">float</span> <span class="n">ki_Ts</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>            <span class="c1">///&lt; Integral gain times Ts</span></code>
+<code>    <span class="kt">float</span> <span class="n">kd_Ts</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>            <span class="c1">///&lt; Derivative gain divided by Ts</span></code>
+<code>    <span class="kt">float</span> <span class="n">emaAlpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>         <span class="c1">///&lt; Weight factor of derivative EMA filter.</span></code>
+<code>    <span class="kt">float</span> <span class="n">prevInput</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>        <span class="c1">///&lt; (Filtered) previous input for derivative.</span></code>
+<code>    <span class="kt">uint16_t</span> <span class="n">activityCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">///&lt; How many ticks since last setpoint change.</span></code>
+<code>    <span class="kt">uint16_t</span> <span class="n">activityThres</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">///&lt; Threshold for turning off the output.</span></code>
+<code>    <span class="kt">uint8_t</span> <span class="n">errThres</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>       <span class="c1">///&lt; Threshold with hysteresis.</span></code>
+<code>    <span class="kt">int32_t</span> <span class="n">integral</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>       <span class="c1">///&lt; Sum of previous errors for integral.</span></code>
+<code>    <span class="kt">uint16_t</span> <span class="n">setpoint</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">///&lt; Position reference.</span></code>
+<code><span class="p">};</span></code></pre></div>
+</div>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"><a href="PID-Controllers.html" title="PID Controllers"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"><a href="PID-Tuning.html" title="PID Tuning">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+    </article>
+    <footer>Last edited: Friday, 16 July 2021 01:19 UTC</footer>
+</body>
+
+</html>

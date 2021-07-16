@@ -1,0 +1,34 @@
+\documentclass[border=5mm]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usetikzlibrary{shapes,arrows,positioning}
+
+\begin{document}
+
+\tikzstyle{block} = [draw, fill=gray!20, rectangle, inner sep=0.6em, node distance=5em, minimum height=2.5em, minimum width=4em]
+\tikzstyle{sum} = [draw, fill=gray!20, circle, node distance=5em, text centered]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{branch} = [circle,inner sep=0pt,minimum size=0.75mm,fill=black,draw=black]
+
+\resizebox{1.6\width}{!}{
+\begin{tikzpicture}[auto, node distance=2.5em,>=latex']
+    \node [input] (reference) {};
+    \node [sum, right=4em of reference] (sumerr) {$+$};
+    \node [block, right=3.5em of sumerr] (controller) {Controller};
+    \node [block, right=4em of controller] (plant) {Plant};
+    \node [output, right=4.5em of plant] (position) {};
+    
+    \draw [->] (reference)   -- node [above, near start] {$r(t)$} (sumerr);
+    \draw [->] (sumerr)      -- node [above] {$e(t)$}  (controller);
+    \draw [->] (controller.east) -- node [above] {$u(t)$} (plant.west);
+    \draw [->] (plant.east) -- node [above, near end] {$y(t)$} (position);
+
+    \coordinate [right=1.5em of plant] (feedbackoutput);
+    \coordinate [below=2em of controller] (feedback);
+    \node [branch] (bfeedbackoutput) at (feedbackoutput) {};
+    \draw [->] (bfeedbackoutput) |- (feedback) -| node [pos=0.90, left] {$-$} (sumerr);
+\end{tikzpicture}
+}
+
+\end{document}
