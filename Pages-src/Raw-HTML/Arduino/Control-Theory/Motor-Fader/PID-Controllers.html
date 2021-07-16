@@ -1,0 +1,355 @@
+<!--
+@title: PID Controllers
+@sequence: 20
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: arduino,motorized fader,flying fader,pid,controller,midi,control surface
+@description: Theory and discretization of a PID controller.
+-->
+<html>
+
+<div style="display: none;">
+    $$ \require{physics} $$
+</div>
+
+<h2>Continuous-time</h2>
+
+In this first section, we'll assume that all signals are functions of a continuous time variable \(t\). 
+Later, we'll discretize the continuous-time controllers into a discrete-time approximation that
+can easily be manipulated by computers and microcontrollers.
+
+<h3>Closed-loop controllers</h3>
+<p>
+    @ref{"ref": "fig:closed-loop"} shows the block diagram of a general closed-loop or feedback control system. 
+    The output of the system \(y(t)\) is subtracted from the reference \(r(t)\), and this error \(e(t)\)
+    is fed to the <i>controller</i>, which produces the control signal \(u(t)\) that is sent to the <i>plant</i>
+    (the system being controlled) in an attempt to drive the error to zero.
+</p>
+@latex{
+"file": "images/tex/closed-loop/closed-loop.tex",
+"caption": "Block diagram of a closed-loop controller",
+"label": "fig:closed-loop"
+}
+<h3>The PID controller</h3>
+<p>
+    In a PID controller, the control signal is calculated as the sum of three components: a proportional component,
+    an integral component, and a derivative component. The proportional component simply multiplies the error 
+    by a constant \(K_p\),
+    the integral component multiplies the time integral of the error by a constant \(K_i\), and the 
+    derivative component multiplies the time derivative of the error by a constant \(K_d\). 
+    Mathematically, the control law is given by
+    $$
+    u(t) = K_p\, e(t) + K_i \int_0^t e(\tau) \dd\tau + K_d\, \frac{\dd}{\dd t} e(t).
+    $$
+    The constants \(K_p\), \(K_i\) and \(K_d\) are referred to as the proportional gain, 
+    the integral gain, and
+    the derivative gain respectively. <br>
+    The block diagram of this type of controller is shown in @ref{"ref": "fig:pid"}.
+</p>
+@latex{
+"file": "images/tex/closed-loop-pid-time/closed-loop-pid-time.tex",
+"caption": "Block diagram of a PID controller",
+"label": "fig:pid"
+}
+<p>
+    You can find intuitive explanations of the purpose of each of the three components
+    all over the internet, but in short: the proportional component makes the controller act 
+    on the instantaneous error, the integral component accumulates past errors in order to 
+    minimize the steady-state and tracking error, and the derivative component penalizes the
+    velocity at which the output changes, which can help to reduce overshoot.
+</p>
+<h3>Frequency domain</h3>
+<!-- <p>
+    In the time domain, the PID control law is given by
+    $$
+    u(t) = K_p\, e(t) + K_i \int_0^t e(\tau) \dd\tau + K_d\, \frac{\dd}{\dd t} e_f(t),
+    $$
+    where \(u(t)\) is the control signal, 
+    \(e(t) = r(t) - y(t)\) is the error
+    (the difference between the reference position \(r(t)\) and the actual position
+    \(y(t)\)), and \(e_f(t)\) is the low-pass filtered error.
+
+    \(K_p\) is the proportional gain, \(K_i\) is the integral gain, and \(K_d\) is
+    the derivative gain.
+</p> -->
+<p>
+    In the frequency or \(s\)-domain, the PID control law can be written as
+    $$
+    U(s) = \left( K_p + K_i\,\frac{1}{s} + K_d\,s \right) E(s),
+    $$
+    where \(U(s)\) and \(E(s)\) are the <a href="https://en.wikipedia.org/wiki/Laplace_transform">Laplace transforms</a> of
+    the respective time-domain signals \(u(t)\) and \(e(t)\).
+    This formulation is represented by @ref{"ref": "fig:pid-laplace"}.
+</p>
+@latex{
+"file": "images/tex/closed-loop-pid/closed-loop-pid.tex",
+"caption": "Block diagram of a PID controller using Laplace notation",
+"label": "fig:pid-laplace"
+}
+<h3>Derivative filtering</h3>
+<p>
+    The derivative of the error can be rather noisy, so practical PID controllers 
+    often include a low-pass filter. Let \(e_f(t)\) be the low-pass filtered error,
+    then the control law can be modified into
+    $$
+    u(t) = K_p\, e(t) + K_i \int_0^t e(\tau) \dd\tau + K_d\, \frac{\dd}{\dd t} e_f(t).
+    $$
+    Or, in the frequency domain,
+    $$
+    U(s) = \left( K_p + K_i\,\frac{1}{s} + K_d\,sH(s) \right) E(s).
+    $$
+    Here, \(H(s)\) is the transfer function of the low-pass filter for the
+    derivative component. 
+</p>
+<p>
+    For the sake of simplicity, we'll use a single-pole low-pass filter to
+    filter the error before taking the derivative. The transfer function of this
+    filter is
+    $$
+    H(s) = \frac{1}{1+s\,T_f},
+    $$
+    where \(T_f\) is the filter's time constant, a parameter we can tune later.
+</p>
+
+<h2>Discrete-time</h2>
+
+<p>
+    Since computers and microcontrollers cannot deal with continuous time, the
+    control law has to be discretized. We'll use \(T_s\) to note the time step or
+    sampling interval.
+</p>
+
+<h3>Discrete-time signals</h3>
+
+<p>
+    Given the continuous-time error signal \(e : \mathbb{R} \rightarrow \mathbb{R} : t \mapsto e(t)\),
+    define the discrete-time error signal \(e[k]\) as \(e(t)\) sampled at \(t = k\,T_s\)
+    (with sampling interval \(T_s\)),
+    $$
+    e[\cdot] : \mathbb{Z} \rightarrow \mathbb{R} : k \mapsto e[k] \triangleq e(kT_s).
+    $$
+</p>
+<p>
+    We will use the same letters for continuous-time and discrete-time transfer functions and
+    signals in the \(s\)- and \(z\)-domain, it should be clear from the context and the variables used
+    (\(s\) or \(z\)) whether it's a continuous-time or discrete-time signal. For example, \(H(s)\) is
+    a continuous-time transfer function, and \(H(z)\) is a discrete-time transfer function,
+    defined by different rational functions.
+</p>
+
+<h3>Forward Euler</h3>
+
+The first discretization method we'll have a look at is the
+<a href="https://en.wikipedia.org/wiki/Euler_method">forward Euler method</a>,
+it is one of simplest methods available to approximate a continuous-time
+ordinary differential equation by a discrete-time difference equation
+or recurrence relation.
+
+<h4>Integral</h4>
+
+<p>
+    When the time step \(T_s\) is sufficiently small, the integral term of the
+    PID control law at
+    time \(t = kT_s\) can be approximated by a
+    <a href="https://en.wikipedia.org/wiki/Riemann_sum">Riemann sum</a>:
+    $$
+    e_i(t) \triangleq \int_0^t e(\tau) \dd\tau \approx \sum_{n=0}^{k-1} e[n]\, T_s \triangleq e_i[k]
+    $$
+    Note that this is an approximation, \(e_i(kT_s) \approx e_i[k]\), they are not exactly equal.
+</p>
+<p>
+    This signal \(e_i[k]\) can also be defined by the following recurrence relation
+    $$
+    \begin{cases}
+    e_i[k] = e_i[k-1] + e[k-1]\, T_s \\[0.6em]
+    e_i[0] = 0.
+    \end{cases}
+    $$
+</p>
+<p>
+    In the \(z\)-domain, the forward Euler discretization we carried out in the
+    previous paragraph can be expressed as
+    $$ \begin{aligned}
+    E_i(z) &= z^{-1}\,E_i(z) + T_s\,z^{-1}\, E(z)\\[0.6em]
+    \Leftrightarrow \quad E_i(z) &= \frac{T_s}{z - 1}\, E(z).
+    \end{aligned} $$
+    Recall that in the \(s\)-domain, the relation between
+    \(E_i(s)\) and \(E(s)\) was given by
+    \(
+    E_i(s) = \frac{1}{s} E(s)
+    \),
+    so in general, we could define forward Euler discretization as the mapping
+    from the \(s\)-domain to the \(z\)-domain where
+    \(s \mapsto \tfrac{z - 1}{T_s}\).
+</p>
+
+<h3>Backward Euler</h3>
+
+<p>
+    The <a href="https://en.wikipedia.org/wiki/Backward_Euler_method">backward Euler method</a>
+    is very similar to forward Euler, but
+    it has a different time delay:<br>
+    When applied to the derivative \(y(t) = \frac{\dd}{\dd t}x(t)\),
+    the forward Euler method results
+    in the discrete-time recurrence relation \(y[k] = \frac{x[k+1] - x[k]}{T_s}\),
+    which is non-causal (the output \(y[k]\) depends on the future input \(x[k+1]\)).
+    The following section introduces the backward Euler method, which will discretize
+    this derivative as the causal recurrence
+    \(y[k] = \frac{x[k] - x[k-1]}{T_s}\).
+</p>
+
+<h4>Derivative</h4>
+
+<p>
+    We can approximate the derivative term in the control law using
+    <a href="https://en.wikipedia.org/wiki/Finite_difference#Relation_with_derivatives">finite differences</a>:
+    $$
+    e_d(t) \triangleq \frac{\dd}{\dd t} e_f(t) \approx \frac{e_f(t) - e_f(t - T_s)}{T_s} \triangleq e_d[k]
+    $$
+</p>
+<p>
+    In the \(z\)-domain, this is equivalent to
+    $$ \begin{aligned}
+    E_d(z) &= \frac{1 - z^{-1}}{T_s}\, E_f(z) \\[0.6em]
+    \Leftrightarrow \quad E_d(z) &= \frac{z - 1}{z\,T_s}\, E_f(z).
+    \end{aligned} $$
+</p>
+<p>
+    In the \(s\)-domain, we have \(E_d(s) = s\,E_f(s)\), so backward Euler discretization
+    is the mapping \(s \mapsto \tfrac{z-1}{z\,T_s}\).
+</p>
+<!-- <p>
+    We can also apply this mapping to the low-pass filter \(H(s) = \frac{1}{1+T_fs}\),
+    $$
+    H(z) \triangleq \frac{1}{1+T_f\,\frac{z-1}{z\,T_s}} =
+    \frac{T_s}{T_s+T_f-z^{-1}}.
+    $$
+    Converting from the \(z\)-domain back to the discrete time domain yields:
+    $$ \begin{aligned}
+    E_f(z) &\triangleq H(z) E(z) \\
+    (T_s+T_f)\,e_f[k] - e_f[k-1] &= T_s\,e[k] \\
+    e_f[k] &= \frac{e[k] + \frac{1}{T_s}\,e_f[k-1]}{1+T_f} \\
+    \end{aligned} $$
+</p> -->
+<h4>Low-pass filter</h4>
+
+<p>
+    Applying this mapping to the transfer function of the low-pass filter for
+    the derivative results in the following,
+    $$ \begin{aligned}
+    E_f(s) &= \frac{1}{1 + s\,T_f}\, E(s) \\
+    E_f(z) &= \frac{1}{1+\frac{z-1}{z\,T_s}T_f}\, E(z) \\
+    &= \frac{z\,T_s}{z\,(T_s + T_f) - T_f}\, E(z) \\
+    &= \frac{z\,\beta}{z - (1-\beta)}\, E(z),
+    \end{aligned} $$
+    where \(\beta \triangleq \frac{T_s}{T_s + T_f}\). You might recognize this
+    expression as the transfer function of the <a
+        href="/Pages/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential%20Moving%20Average/Exponential-Moving-Average.html">exponential
+        moving average filter</a>, usually defined by the recurrence relation
+    \(
+    e_f[k] = \beta\, e[k] + (1-\beta)\, e_f[k-1]
+    \).
+</p>
+
+<p>
+    In practice, one often treats the derivative term as a whole,
+    discretizing the derivative and the low-pass filter in one go by combining
+    their transfer functions and then applying forward Euler:
+    $$ \begin{aligned}
+    E_d(s) &= sH(s)E(s) \\
+    &= \frac{s}{1 + s\,T_f}\, E(s) \\
+    &= \frac{1}{\frac{1}{s} + T_f}\, E(s) \\[0.6em]
+    E_d(z) &= \frac{1}{\frac{T_s}{z-1} + T_f}\, E(z) \\
+    &= \frac{z-1}{T_s - T_f + z\,T_f}\, E(z)
+    \end{aligned} $$
+    In the time domain, this becomes
+    $$ \begin{aligned}
+    (T_s - T_f)\,e_d[k-1] + T_f\,e_d[k] = e[k] - e[k-1] \\
+    e_d[k] = \alpha\,\frac{e[k] - e[k-1]}{T_s} + (1 - \alpha)\, e_d[k-1],
+    \end{aligned} $$
+    where \(\alpha \triangleq \frac{T_s}{T_f}\). This can be written as
+    $$ \begin{aligned}
+    e_d[k] &= \frac{e_f[k] - e_f[k-1]}{T_s}\\[0.6em]
+    e_f[k] &\triangleq \alpha\, e[k] + (1-\alpha)\, e_f[k-1].
+    \end{aligned} $$
+    The first equation is the finite differences approximation of a derivative,
+    and the second is again an exponential moving average filter, but with a
+    different weight factor compared to the result we got earlier using backward
+    Euler.
+</p>
+<h3>Other discretization methods</h3>
+
+<p>
+    An alternative method is the <a
+        href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">bilinear
+        transform</a> (also known as the trapezoidal rule or Tustin's rule),
+    it is of a higher order than forward and backward Euler,
+    and has some nice properties such as the fact that stable poles in one
+    domain map to stable poles in the other. Other techniques include pole-zero
+    matching, matched step response, frequency response approximations,
+    but these are outside of the scope of this article as they are not usually
+    applied to PID controllers.
+</p>
+
+<h3>Overview</h3>
+<p>
+    The following table gives an overview of all signals that make up the PID control
+    law, as well as their discretizations. The third column is the most important
+    one, because the discrete-time recurrence relations can easily be implemented in
+    software.
+</p>
+<table>
+    <tr>
+        <th>Continuous-time</th>
+        <th>\(s\)-domain</th>
+        <th>Discrete-time</th>
+        <th>\(z\)-domain</th>
+    </tr>
+    <tr>
+        <td>\(e(t)\)</td>
+        <td>\(E(s)\)</td>
+        <td>\(e[k]\)</td>
+        <td>\(E(z)\)</td>
+    </tr>
+    <tr>
+        <td>\(e_i(t) = \int_0^t e(\tau)\dd\tau\)</td>
+        <td>\(E_i(s) = \frac{1}{s} E(s)\)</td>
+        <td>\(e_i[k] = e_i[k-1] + T_s\,e[k-1]\)</td>
+        <td>\(E_i(z) = \frac{T_s}{z-1}\,E(z)\)</td>
+    </tr>
+    <tr>
+        <td>\(e_d(t) = \frac{\dd}{\dd t}e_f(t)\)</td>
+        <td>\(E_d(s) = sE_f(s)\)</td>
+        <td>\(e_d[k] = \frac{e_f[k] - e_f[k-1]}{T_s}\)</td>
+        <td>\(E_d(z) = \frac{z-1}{z\,T_s}\,E_f(z)\)</td>
+    </tr>
+    <tr>
+        <td>\(e_f(t) = e(t) - T_f \frac{\dd}{\dd t}\!e_f(t)\)</td>
+        <td>\(E_f(s) = \frac{1}{1+s\,T_f}E(s)\)</td>
+        <td>\(e_f[k] = \alpha\, e[k] + (1-\alpha)\, e_f[k-1]\)</td>
+        <td>\(E_f(z) = \frac{\alpha\, z}{z - (1-\alpha)}E(z)\)</td>
+    </tr>
+</table>
+
+<h2>Derivative on measurement</h2>
+<p>
+    One disadvantage of the PID topology discussed above is that the derivative 
+    component will become very large if the reference \(r(t)\) suddenly changes.
+    This effect is known as “derivative kick”. <br>
+    The solution is really simple: instead of the derivative of the error,
+    the derivative of the measurement is used. The former is known as 
+    “derivative on error”, the latter as “derivative on measurement”. 
+    Both topologies are equivalent if the reference is constant, because 
+    if \(\dv{t} r(t) = 0\), then \(\dv{t} e(t) = -\dv{t} y(t)\).
+</p>
+<p>
+    @ref{"ref": "fig:pid-DonM"} shows a block diagram of this new derivative on 
+    measurement topology, including the low-pass filter on the derivative.
+</p>
+@latex{
+"file": "images/tex/closed-loop-pid-deriv-on-meas/closed-loop-pid-deriv-on-meas.tex",
+"caption": "Block diagram of a PID controller with “derivative on measurement”",
+"label": "fig:pid-DonM"
+}
+</html>

@@ -1,0 +1,53 @@
+\documentclass[border=5mm]{standalone}
+\usepackage{tikz}
+\usepackage{amsmath,physics}
+\usetikzlibrary{shapes,arrows,positioning}
+
+\begin{document}
+
+\tikzstyle{block} = [draw, fill=gray!20, rectangle, inner sep=0.6em, node distance=5em, minimum height=2.5em, minimum width=2.5em]
+\tikzstyle{pidblock} = [block, minimum width=2.5em, minimum height=2.5em, inner sep=0]
+\tikzstyle{sum} = [draw, fill=gray!20, circle, node distance=5em, text centered]
+\tikzstyle{scalar} = [draw, fill=gray!20, isosceles triangle, inner sep=0.1em, node distance=5em, minimum height=3.2em, minimum width=2em, scale=0.8]
+\tikzstyle{input} = [coordinate]
+\tikzstyle{output} = [coordinate]
+\tikzstyle{branch} = [circle,inner sep=0pt,minimum size=0.75mm,fill=black,draw=black]
+
+\resizebox{1.6\width}{!}{
+\begin{tikzpicture}[auto, node distance=2.5em,>=latex',scale=2]
+    \node [input] (reference) {};
+    \node [sum, right=4em of reference] (sumerr) {$+$};
+    \node [scalar, right=4em of sumerr] (intgain) {$K_i$};
+    \node [pidblock, right=1em of intgain] (intctrl) {$\displaystyle \int$};
+    \node [pidblock, below=1em of intctrl] (drvctrl) {$\dfrac{\dd}{\dd t}$};
+    \node [scalar, left=1em of drvctrl] (drvgain) {$K_d$};
+    \node [sum, right=1.5em of intctrl] (sumctrl) {$+$};
+    \coordinate [above=2.5em of intctrl] (propctrl) {};
+    \coordinate [right=1.25em of propctrl] (propctrleast) {};
+    \node [scalar, left=2.25em of propctrl] (propgain) {$K_p$};
+    \node [block, right=3em of sumctrl, minimum width=4em] (plant) {Plant};
+    \node [output, right=4.5em of plant] (position) {};
+    
+    \draw [->] (reference)   -- node [above, near start] {$r(t)$} (sumerr);
+    \draw [->] (sumerr)      -- node [above, pos=0.3] {$e(t)$}  (intgain);
+    \draw [->] (sumctrl.east) -- node [above] {$u(t)$} (plant.west);
+    \draw [->] (plant.east) -- node [above, near end] {$y(t)$} (position);
+
+    \coordinate [right=1.5em of plant] (feedbackoutput);
+    \coordinate [below=4.5em of intctrl] (feedback);
+    \node [branch] (bfeedbackoutput) at (feedbackoutput) {};
+    \draw [->] (bfeedbackoutput) |- (feedback) -| node [pos=0.95, left] {$-$} (sumerr);
+    \coordinate [left=1.5em of intgain] (errpt);
+    \node [branch] (berr) at (errpt) {};
+    \draw [->] (errpt) |- (propgain);
+    \draw [->] (errpt) |- (drvgain);
+    \draw [->] (propgain.east) ++(-0.02em, 0) -- (propctrleast) -\ (sumctrl);
+    \draw [->] (propgain.east) ++(-0.02em, 0) -- (propctrleast) -\ (sumctrl);
+    \draw [->] (intgain.east) ++(-0.02em, 0) -- (intctrl);
+    \draw [->] (drvgain.east) ++(-0.02em, 0) -- (drvctrl);
+    \draw [->] (intctrl) -- (sumctrl);
+    \draw [->] (drvctrl.east) -/ (sumctrl);
+\end{tikzpicture}
+}
+
+\end{document}

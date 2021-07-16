@@ -1,0 +1,60 @@
+<!--
+@title: C++ Implementation
+@sequence: 25
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: arduino,motorized fader,flying fader,pid,controller,midi,control surface
+@description: PID controller implementation in C++.
+-->
+<html>
+
+<div style="display: none;">
+    $$ \require{physics} $$
+</div>
+
+<p>
+    This page first presents a simple PID implementation in C++, then it adds 
+    output clamping and integral anti-windup. Finally, it lists the real-world 
+    implementation used in the actual microcontroller code.
+</p>
+
+<h2>Simple implementation</h2>
+
+<p>
+    The following listing gives a very basic implementation of a PID controller 
+    in C++. It uses the formulas derived on the previous page.
+</p>
+
+@codesnippet{
+"file": "resources/basic-pid.cpp"
+}
+
+<h3>Output clamping and anti-windup</h3>
+
+<p>
+    We can easily modify the code from the previous section to clamp the output 
+    of the controller, and to stop the integral from winding up if the output 
+    is already saturated:
+</p>
+@codesnippet{
+"file": "resources/basic-pid-2.cpp"
+}
+
+<h2>Real-world implementation</h2>
+
+<p>
+    In the actual microcontroller code for the motorized fader driver, we make 
+    a few changes to the algorithm introduced above:
+    <ul>
+        <li>We use integer types for the input, setpoint, error and integral.</li>
+        <li>For efficiency, the constants \(K_i\) and \(K_d\) are premultiplied/divided by the factor \(T_s\).</li>
+        <li>The output is turned off completely after a given number of cycles of inactivity (no setpoint changes or human interaction), if the error is small enough.</li>
+    </ul>
+</p>
+@codesnippet{
+"file": "$HOME/GitHub/MotorFader/Arduino/ATmega328P/motorfader3/Controller.hpp",
+"startline": 38
+}
+
+</html>
