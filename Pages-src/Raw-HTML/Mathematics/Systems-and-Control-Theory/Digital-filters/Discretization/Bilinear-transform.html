@@ -1,6 +1,7 @@
 <!--
 @title: Bilinear Transform
 @author: Pieter P
+@tableofcontents: true
 @sequence: 10
 @keywords: Discretization, bilinear transform, tustin method, digital filters, continuous-time, discrete-time
 @description: Discretizing a continuous-time system using the bilinear transform (Tustin rule).
@@ -25,7 +26,7 @@
     $$ Y(s) \triangleq \mathcal{L}\left\{y(t)\right\} = \mathcal{L}\left\{\int_0^tu(\tau)d\tau\right\} = \frac{1}{s}
     U(s) $$
     Therefore, the transfer function of an integrator is:
-    $$ \begin{equation}
+    $$ \begin{equation} \label{eq:transfer-function-s}
     H_a(s) \triangleq \frac{Y(s)}{U(s)} = \frac{1}{s} \frac{U(s)}{U(s)} = \frac{1}{s}
     \end{equation} $$
 </p>
@@ -35,52 +36,55 @@
     By splitting up the integral:
     $$ y[k] = \int_0^{(k-1)T_s}u(\tau)d\tau + \int_{(k-1)T_s}^{kT_s}u(\tau)d\tau $$
     This results in a recursive formula for \(y[k]\):
-    $$ \begin{equation}
+    $$ \begin{equation} \label{eq:exact-recursion}
     y[k] = y[k-1] + \int_{(k-1)T_s}^{kT_s}u(\tau)d\tau
     \end{equation} $$
     The second term expresses the area under the curve of \(u(t)\) between \(t=(k-1)T_s\) and \(t=kT_s\). It can be
     approximated in several different ways, using numerical integration techniques. In the case of the bilinear
     transform, the trapezoidal rule is used, with a step size (sample time) of \(T_s\). 
     This is demonstrated in the following figure.
-    <img src="images/Trapezoidal-rule.svg">
-    The light red area on the left is the first term in Equation \((2)\), and the darker red trapezoid on the right 
+@image{
+"file": "images/Trapezoidal-rule.svg"
+}
+    The light red area on the left is the first term in Equation \(\eqref{eq:exact-recursion}\), and the darker red trapezoid on the right 
     approximates the second term of the equation.<br>
     The area of this trapezoid is given by:
     $$ A = T_s \frac{u((k-1)T_s) + u(kT_s)}{2} = \frac{T_s}{2} \left(u[k-1]+u[k]\right) $$
     $$ u[k] \triangleq u(kT_s) $$
-    Therefore, we can approximate Equation \((2)\):
-    $$ \begin{equation}
+    Therefore, we can approximate Equation \(\eqref{eq:exact-recursion}\):
+    $$ \begin{equation} \label{eq:approx-recursion}
     y[k] \approx y[k-1] + \frac{T_s}{2}\left(u[k-1]+u[k]\right)
     \end{equation} $$
     We now have an approximation of the recurrence relation for the integrator.</p>
 <p>
-    In Equation \((1)\), we found that the transfer function of an integrator in the Laplace domain was \(H_a(s) =
-    \frac{1}{s}\). We can now apply the Z-transform to the recurrence relation in Equation \((3)\) to relate the
+    In Equation \(\eqref{eq:transfer-function-s}\), we found that the transfer function of an integrator in the Laplace domain was \(H_a(s) =
+    \frac{1}{s}\). We can now apply the Z-transform to the recurrence relation in Equation \(\eqref{eq:approx-recursion}\) to relate the
     Laplace domain to the Z-domain.
     $$ \begin{split}
     &amp;\mathcal{Z}\left\{y[k] \approx y[k-1] + \frac{T_s}{2}\left(u[k-1]+u[k]\right)\right\} \\
     \Leftrightarrow \quad &amp; Y(z) \approx z^{-1} Y(z) + \frac{T_s}{2}\left( z^{-1} U(z) + U(z) \right) \\
     \Leftrightarrow \quad &amp; \left(1 - z^{-1}\right) Y(z) \approx \frac{T_s}{2} \left(1+z^{-1}\right) U(z) \\
     \end{split} $$
-    $$ \begin{equation}
+    $$ \begin{equation} \label{eq:transfer-function-z}
     H_d(z) \triangleq \frac{Y(z)}{U(z)} \approx \frac{T_s}{2} \frac{z+1}{z-1}
     \end{equation} $$
-    If we compare the continuous-time transfer function \(H_a(s)\) from Equation \((1)\) to the approximated
+    If we compare the continuous-time transfer function \(H_a(s)\) from Equation \(\eqref{eq:transfer-function-s}\) to the approximated
     discrete-time transfer function
-    \(H_d(z)\) from Equation \((4)\), we find an approximation of \(s\) in function of \(z\), that can be used to
+    \(H_d(z)\) from Equation \(\eqref{eq:transfer-function-z}\), we find an approximation of \(s\) in function of \(z\), that can be used to
     discretize a continuous-time transfer function:
     $$ s \leftrightarrow \frac{2}{T_s} \frac{z-1}{z+1} $$
     We can also express \(z\) in function of \(s\):
-    $$ s \leftrightarrow \frac{2}{T_s} \frac{z-1}{z+1} \\
+    $$ \begin{aligned} 
+    s \leftrightarrow \frac{2}{T_s} \frac{z-1}{z+1} \\
     sz + s \leftrightarrow \frac{2}{T_s} z - \frac{2}{T_s} \\
     z\left(s-\frac{2}{T_s}\right) \leftrightarrow -s - \frac{2}{T_s} \\
     z \leftrightarrow \frac{-s-\frac{2}{T_s}}{s-\frac{2}{T_s}} \\
     z \leftrightarrow \frac{1 + \frac{T_s}{2}s}{1 - \frac{T_s}{2}s}
-    $$
+    \end{aligned} $$
 </p>
-<p style="color: red">
-    Why can this be generalized for all transfer functions? We only proved this for \(H_a(s) = 1/s\).
-</p>
+<!-- <p style="color: red">
+    TODO: explain why can this be generalized for all transfer functions? We only proved this for \(H_a(s) = 1/s\).
+</p> -->
 
 <p>
     Alternatively, the identity \(z = e^{sT_s}\) can be used, together with the Taylor expansion of 
@@ -91,9 +95,9 @@
     &amp; \;\approx\; \frac{1 + \frac{T_s}{2}s}{1 - \frac{T_s}{2}s}
     \end{split} $$
 </p>
-<p style="color: red">
-    Where does the identity \(z = e^{sT_s}\) come from?
-</p>
+<!-- <p style="color: red">
+    TODO: explain where the identity \(z = e^{sT_s}\) comes from.
+</p> -->
 
 <h3>Stability</h3>
 
@@ -111,7 +115,7 @@
     \left(\frac{T_s}{2}\omega\right)^2} \\
     \end{split} $$
     $$
-    \begin{equation}
+    \begin{equation} \label{eq:z-if-omega}
     z \;=\; \frac{1 - \left(\frac{T_s}{2}\omega\right)^2}{1 + \left(\frac{T_s}{2}\omega\right)^2} + j\frac{2
     \frac{T_s}{2}\omega}{1 + \left(\frac{T_s}{2}\omega\right)^2}
     \end{equation} $$
@@ -165,18 +169,18 @@
     However, we'll find that there is no linear mapping from the frequency response of the continuous-time system
     to the frequency response of the discrete-time system.
 </p>
-<p style="color: red">
+<!-- <p style="color: red">
     How can I explain this more accurately?
-</p>
+</p> -->
 <p>
     In the previous section, we already found that the imaginary axis of the s-plane maps to the unit circle of the
     z-plane. <br>
-    The phase of any \(z\) on the unit circle in the Z-domain is the frequency \(\omega_d
-    \left(\left[rad/sample\right]\right)\) of a specific point in the frequency response of the discrete-time system.<br>
-    The imaginary part of any \(s\) on the imaginary axis in the Laplace domain is the frequency \(\omega_a
-    \left(\left[rad/s\right]\right)\) of a specific point in the frequency response of the continuous-time system.<br>
+    The phase of any \(z\) on the unit circle in the Z-domain is the frequency \(\omega_d\) 
+    \(\left(\left[\text{rad}/\text{sample}\right]\right)\) of a specific point in the frequency response of the discrete-time system.<br>
+    The imaginary part of any \(s\) on the imaginary axis in the Laplace domain is the frequency \(\omega_a\)
+    \(\left(\left[\text{rad}/s\right]\right)\) of a specific point in the frequency response of the continuous-time system.<br>
     $$ \omega_d \triangleq \angle z = \arctan\left(\frac{\Im(z)}{\Re(z)}\right) $$
-    We'll be using Equation \((5)\), substituting \(\alpha \triangleq \frac{T_s}{2}\) to make it easier to read.
+    We'll be using Equation \(\eqref{eq:z-if-omega}\), substituting \(\alpha \triangleq \frac{T_s}{2}\) to make it easier to read.
     $$ \begin{split}
     &amp; \quad \omega_d = \arctan\left(\frac{2\alpha\omega_a}{1-\alpha^2\omega_a^2}\right) \\
     \Leftrightarrow &amp; \quad \tan\left(\omega_d\right) = \frac{2\alpha\omega_a}{1-\alpha^2\omega_a^2} \\
@@ -187,8 +191,8 @@
     We can solve this quadratic polynomial in \(\omega_a\) using the discriminant method:
     $$ \begin{split}
     \Delta &amp; \;=\; 4\alpha^2 + 4\alpha^2\tan^2\omega_d \\
-    &amp; \;=\; 4\alpha^2\left(1 + tan^2\omega_d\right) \\
-    &amp; \;=\; 4\alpha^2 sec^2\omega_d
+    &amp; \;=\; 4\alpha^2\left(1 + \tan^2\omega_d\right) \\
+    &amp; \;=\; 4\alpha^2 \sec^2\omega_d
     \end{split} $$
     $$ \begin{split}
     \omega_a &amp; \;=\; \frac{-2\alpha \pm \sqrt{\Delta}}{2\alpha^2\tan\omega_d} \\
@@ -218,8 +222,8 @@
 </p>
 <p>
     We get two possible solutions for \(\omega_a\), however, only one is correct.<br>
-    First, let's look at the case where \(\omega_a\geq 0\): in that case, \(\Im(z)\) is always positive (see Equation
-    \((5)\)),
+    First, let's look at the case where \(\omega_a\geq 0\): in that case, \(\Im(z)\) is always positive (see 
+    Equation \(\eqref{eq:z-if-omega}\)),
     so \(\omega_d \triangleq \angle z \in [0, \pi]\).<br>
     The first solution \(\omega_{a,1} = \frac{2}{T_s} \tan\frac{\omega_d}{2}\) is positive, because the tangent
     function is positive for the argument \(\frac{\omega_d}{2} \in [0, \pi/2]\).<br>
@@ -243,8 +247,8 @@
     Where \(\omega_d\) is the normalized angular frequency in radians per sample. The actual frequency \(f_d\) is given
     by:
     $$ f_d = \frac{\omega_d}{2\pi T_s} $$
-    Note the units of the quantities involved: \(\omega_d\) is given in \(rad/sample\), dividing by \(2\pi\) cancels
-    out the radians. The unit of \(T_s\) is \(s/sample\), the samples cancel out, and the result \(f_d\) is given in
+    Note the units of the quantities involved: \(\omega_d\) is given in \(\text{rad}/\text{sample}\), dividing by \(2\pi\) cancels
+    out the radians. The unit of \(T_s\) is \(s/\text{sample}\), the samples cancel out, and the result \(f_d\) is given in
     \(Hz\) or
     \(s^{-1}\).
 </p>

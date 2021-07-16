@@ -389,7 +389,8 @@
 </p>
 @image{
 "file": "images/risetime.svg",
-"source": "resources/risetime.py"
+"source": "resources/risetime.py",
+"alt": "Rise time of an underdamped second-order system: Rise time in function of the damping ration ζ"
 }
 <p>
     The lower the damping ratio, the faster the output rises, so the smaller the rise time. As the damping ration
@@ -613,7 +614,7 @@
 </p>
 <p>
     To solve equation \(\eqref{overdamped-rise-time-t1-t2}\), you could use Newton's or Halley's method, since you 
-    can easily write out \(\dot{x}(t)\) and \(\ddot{x}(t)\). However, it's faster to use fixed-point iteration to 
+    can easily write out \(\dot{x}(t)\) and \(\ddot{x}(t)\). However, it's even easier to use fixed-point iteration to 
     solve:
     $$ t = \frac{1}{\lambda_1} \log \left(\frac{\gamma - 1 - \frac{1}{\lambda_2/\lambda_1-1} e^{\lambda_2 t}}{\lambda_1/\lambda_2 - 1} \right) $$
 </p>
@@ -629,6 +630,7 @@
     As expected, the approximation that ignores the second exponential gives poor results for \(\zeta\) close to \(1\),
     but matches the true solution very nicely for large \(\zeta\). Eventually, both curves approach the asymptote.
 </p>
+<!--
 <p>
     To get a better look at the differences between the true solution and the approximation, we subtract both of them
     from their asymptote. That results in the following figure.
@@ -668,6 +670,7 @@
 "file": "images/risetime-overdamped-optimize.svg",
 "source": "resources/risetime-overdamped-optimize.py"
 }
+-->
 
 <h4>Settling time</h4>
 <p>
@@ -687,13 +690,15 @@
     \end{equation} $$
 </p>
 @image{
-"file": "images/settling-time-overdamped.svg",
-"source": "resources/settling-time-overdamped-fixed-point.py"
+    "file": "images/settling-time-overdamped.svg",
+    "source": "resources/settling-time-overdamped-fixed-point.py"
 }
+<!--
 @image{
 "file": "images/settling-time-overdamped-error.svg",
 "source": "resources/settling-time-overdamped-fixed-point.py"
 }
+-->
 <p>
     As expected, the approximation is more accurate for the settling time than for the rise time, because the second 
     exponential has more time to decay.
