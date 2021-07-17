@@ -325,7 +325,8 @@ def formatImage(data, html, filepath, lineno, refs: dict):
 
     htmlstr = f'<div class="img-wrapper"><a href="{file}"'
     htmlstr = handle_attr('a-attr', htmlstr)
-    htmlstr += f' id="{anchor}"'
+    if anchor is not None:
+        htmlstr += f' id="{anchor}"'
     htmlstr += f'><img src="{dispfile}" alt="{alt}"'
     htmlstr = handle_attr('img-attr', htmlstr)
     htmlstr += '/></a>'
