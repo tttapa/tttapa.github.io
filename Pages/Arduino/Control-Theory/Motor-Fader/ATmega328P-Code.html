@@ -469,6 +469,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
             <ul>
                 <li><span class="ftriangle"></span><a href="PID-Controllers.html">PID Controllers</a></li>
                 <li><span class="ftriangle"></span><a href="PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a href="Architecture.html">Architecture and Design Decisions</a></li>
                 <li><span class="ftriangle"></span><a href="PID-Tuning.html">PID Tuning</a></li>
                 <li><span class="ftriangle"></span><a class="openEntry" href="ATmega328P-Code.html">ATmega328P Code</a></li>
             </ul>
@@ -665,7 +666,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments19 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments19 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments19 pre.snippet19 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/main.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/47d8cb6cdc2978d500383387a72d646e62568a16/Motor-Controller/main.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments19"><pre class="lineNumbers snippet19"><code><span></span><span class="c1">// Configuration and initialization of the analog-to-digital converter:</span></code>
 <code><span class="cp">#include</span> <span class="cpf">"ADC.hpp"</span><span class="cp"></span></code>
 <code><span class="c1">// Capacitive touch sensing:</span></code>
@@ -763,7 +764,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="c1">// Print the setpoint, actual position and control signal to Serial.</span></code>
 <code>    <span class="c1">// Note that this slows down the control loop significantly, it probably</span></code>
 <code>    <span class="c1">// won't work if you are using more than one fader without increasing</span></code>
-<code>    <span class="c1">// `interrupt_counter`:</span></code>
+<code>    <span class="c1">// `interrupt_divisor`:</span></code>
 <code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">bool</span> <span class="n">print_controller_signals</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span></code>
 <code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">controller_to_print</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
 <code>    <span class="c1">// Follow the test reference trajectory (true) or receive the target</span></code>
@@ -801,14 +802,14 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="c1">// in a PWM and interrupt frequency of 31.250 kHz</span></code>
 <code>    <span class="c1">// (fast PWM is twice as fast):</span></code>
 <code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">bool</span> <span class="n">phase_correct_pwm</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span></code>
-<code>    <span class="c1">// The fader position will be sampled once per `interrupt_counter` timer</span></code>
+<code>    <span class="c1">// The fader position will be sampled once per `interrupt_divisor` timer</span></code>
 <code>    <span class="c1">// interrupts, this determines the sampling frequency of the control loop.</span></code>
 <code>    <span class="c1">// Some examples include 20 → 320 µs, 30 → 480 µs, 60 → 960 µs,</span></code>
 <code>    <span class="c1">// 90 → 1,440 µs, 124 → 2,016 µs, 188 → 3,008 µs, 250 → 4,000 µs.</span></code>
 <code>    <span class="c1">// 60 is the default, because it works with four faders. If you only use</span></code>
 <code>    <span class="c1">// a single fader, you can go as low as 20 because you only need a quarter</span></code>
 <code>    <span class="c1">// of the computations and ADC time:</span></code>
-<code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">interrupt_counter</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">phase_correct_pwm</span><span class="p">);</span></code>
+<code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">interrupt_divisor</span> <span class="o">=</span> <span class="mi">60</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">phase_correct_pwm</span><span class="p">);</span></code>
 <code>    <span class="c1">// The prescaler for the timer, affects PWM and control loop frequencies:</span></code>
 <code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">unsigned</span> <span class="n">prescaler_fac</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span></code>
 <code>    <span class="c1">// The prescaler for the ADC, affects speed of analog readings:</span></code>
@@ -827,7 +828,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="c1">// ------------------------ Computed Quantities ------------------------- //</span></code>
 <code></code>
 <code>    <span class="c1">// Sampling time of control loop:</span></code>
-<code>    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">float</span> <span class="n">Ts</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">prescaler_fac</span> <span class="o">*</span> <span class="n">interrupt_counter</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">*</span></code>
+<code>    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">float</span> <span class="n">Ts</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">*</span> <span class="n">prescaler_fac</span> <span class="o">*</span> <span class="n">interrupt_divisor</span> <span class="o">*</span> <span class="mi">256</span> <span class="o">*</span></code>
 <code>                                <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">phase_correct_pwm</span><span class="p">)</span> <span class="o">/</span> <span class="n">F_CPU</span><span class="p">;</span></code>
 <code>    <span class="c1">// Frequency at which the interrupt fires:</span></code>
 <code>    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">float</span> <span class="n">interrupt_freq</span> <span class="o">=</span></code>
@@ -1044,7 +1045,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="n">touch</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">counter</span><span class="p">);</span></code>
 <code></code>
 <code>    <span class="o">++</span><span class="n">counter</span><span class="p">;</span></code>
-<code>    <span class="k">if</span> <span class="p">(</span><span class="n">counter</span> <span class="o">==</span> <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_counter</span><span class="p">)</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code>    <span class="k">if</span> <span class="p">(</span><span class="n">counter</span> <span class="o">==</span> <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_divisor</span><span class="p">)</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
 <code><span class="p">}</span></code>
 <code></code>
 <code><span class="c1">// Fires when the ADC measurement is complete. Stores the reading, both before</span></code>
@@ -1210,7 +1211,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments23 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments23 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments23 pre.snippet23 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/ADC.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/47d8cb6cdc2978d500383387a72d646e62568a16/Motor-Controller/ADC.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments23"><pre class="lineNumbers snippet23"><code><span></span><span class="cp">#pragma once</span></code>
 <code><span class="cp">#include</span> <span class="cpf">"Registers.hpp"</span><span class="cp"></span></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;avr/interrupt.h&gt;</span><span class="cp"></span></code>
@@ -1224,7 +1225,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code><span class="k">struct</span> <span class="nc">ADCManager</span> <span class="p">{</span></code>
 <code>    <span class="c1">/// Evenly distribute the analog readings in the control loop period.</span></code>
 <code>    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">adc_start_count</span> <span class="o">=</span></code>
-<code>        <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_counter</span> <span class="o">/</span> <span class="n">Config</span><span class="o">::</span><span class="n">num_faders</span><span class="p">;</span></code>
+<code>        <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_divisor</span> <span class="o">/</span> <span class="n">Config</span><span class="o">::</span><span class="n">num_faders</span><span class="p">;</span></code>
 <code>    <span class="c1">/// The rate at which we're sampling using the ADC.</span></code>
 <code>    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">float</span> <span class="n">adc_rate</span> <span class="o">=</span> <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_freq</span> <span class="o">/</span> <span class="n">adc_start_count</span><span class="p">;</span></code>
 <code>    <span class="c1">// Check that this doesn't take more time than the 13 ADC clock cycles it</span></code>
@@ -1243,7 +1244,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="c1">/// Start an ADC conversion at the right intervals.</span></code>
 <code>    <span class="c1">/// @param  counter</span></code>
 <code>    <span class="c1">///         Counter that keeps track of how many times the timer interrupt</span></code>
-<code>    <span class="c1">///         fired, between 0 and Config::interrupt_counter - 1.</span></code>
+<code>    <span class="c1">///         fired, between 0 and Config::interrupt_divisor - 1.</span></code>
 <code>    <span class="c1">/// Called inside an ISR.</span></code>
 <code>    <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">counter</span><span class="p">);</span></code>
 <code></code>
@@ -1430,7 +1431,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 .pygments27 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments27 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments27 pre.snippet27 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/Touch.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/47d8cb6cdc2978d500383387a72d646e62568a16/Motor-Controller/Touch.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments27"><pre class="lineNumbers snippet27"><code><span></span><span class="cp">#pragma once</span></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;avr/interrupt.h&gt;</span><span class="cp"></span></code>
 <code><span class="cp">#include</span> <span class="cpf">&lt;avr/io.h&gt;</span><span class="cp"></span></code>
@@ -1447,9 +1448,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">float</span> <span class="n">period_50Hz</span> <span class="o">=</span> <span class="mf">1.</span> <span class="o">/</span> <span class="mi">50</span><span class="p">;</span></code>
 <code>    <span class="c1">/// Keep the “touched” status active for this many periods (see below):</span></code>
 <code>    <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">touch_sense_stickiness</span> <span class="o">=</span></code>
-<code>        <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_freq</span> <span class="o">*</span> <span class="n">period_50Hz</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_counter</span><span class="p">;</span></code>
+<code>        <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_freq</span> <span class="o">*</span> <span class="n">period_50Hz</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_divisor</span><span class="p">;</span></code>
 <code>    <span class="c1">/// Check that the threshold is smaller than the control loop period:</span></code>
-<code>    <span class="k">static_assert</span><span class="p">(</span><span class="n">touch_sense_thres</span> <span class="o">&lt;</span> <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_counter</span><span class="p">,</span></code>
+<code>    <span class="k">static_assert</span><span class="p">(</span><span class="n">touch_sense_thres</span> <span class="o">&lt;</span> <span class="n">Config</span><span class="o">::</span><span class="n">interrupt_divisor</span><span class="p">,</span></code>
 <code>                  <span class="s">"Touch sense threshold too high"</span><span class="p">);</span></code>
 <code></code>
 <code>    <span class="c1">/// The combined bit mask for all touch GPIO pins.</span></code>
@@ -1466,7 +1467,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>    <span class="c1">/// Check which touch sensing knobs are being touched.</span></code>
 <code>    <span class="c1">/// @param  counter</span></code>
 <code>    <span class="c1">///         Counter that keeps track of how many times the timer interrupt</span></code>
-<code>    <span class="c1">///         fired, between 0 and Config::interrupt_counter - 1.</span></code>
+<code>    <span class="c1">///         fired, between 0 and Config::interrupt_divisor - 1.</span></code>
 <code>    <span class="c1">/// Called inside an ISR.</span></code>
 <code>    <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">counter</span><span class="p">);</span></code>
 <code></code>

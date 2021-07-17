@@ -1,0 +1,1980 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="/CSS/roboto.css" rel="stylesheet" type="text/css">
+    <link href="/CSS/icon.css" rel="stylesheet" type="text/css">
+    <!-- No MathJax -->
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta name="theme-color" content="#ccc">
+    <meta name="keywords" content="arduino,motorized fader,flying fader,pid,controller,midi,control surface">
+    <meta name="description" content="Overview of how the code is structured.">
+    <title>Architecture and Design Decisions</title>
+<style id="MJX-CHTML-styles">
+mjx-container[jax="CHTML"] {
+  line-height: 0;
+}
+
+mjx-container [space="1"] {
+  margin-left: .111em;
+}
+
+mjx-container [space="2"] {
+  margin-left: .167em;
+}
+
+mjx-container [space="3"] {
+  margin-left: .222em;
+}
+
+mjx-container [space="4"] {
+  margin-left: .278em;
+}
+
+mjx-container [space="5"] {
+  margin-left: .333em;
+}
+
+mjx-container [rspace="1"] {
+  margin-right: .111em;
+}
+
+mjx-container [rspace="2"] {
+  margin-right: .167em;
+}
+
+mjx-container [rspace="3"] {
+  margin-right: .222em;
+}
+
+mjx-container [rspace="4"] {
+  margin-right: .278em;
+}
+
+mjx-container [rspace="5"] {
+  margin-right: .333em;
+}
+
+mjx-container [size="s"] {
+  font-size: 70.7%;
+}
+
+mjx-container [size="ss"] {
+  font-size: 50%;
+}
+
+mjx-container [size="Tn"] {
+  font-size: 60%;
+}
+
+mjx-container [size="sm"] {
+  font-size: 85%;
+}
+
+mjx-container [size="lg"] {
+  font-size: 120%;
+}
+
+mjx-container [size="Lg"] {
+  font-size: 144%;
+}
+
+mjx-container [size="LG"] {
+  font-size: 173%;
+}
+
+mjx-container [size="hg"] {
+  font-size: 207%;
+}
+
+mjx-container [size="HG"] {
+  font-size: 249%;
+}
+
+mjx-container [width="full"] {
+  width: 100%;
+}
+
+mjx-box {
+  display: inline-block;
+}
+
+mjx-block {
+  display: block;
+}
+
+mjx-itable {
+  display: inline-table;
+}
+
+mjx-row {
+  display: table-row;
+}
+
+mjx-row > * {
+  display: table-cell;
+}
+
+mjx-mtext {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mstyle {
+  display: inline-block;
+}
+
+mjx-merror {
+  display: inline-block;
+  color: red;
+  background-color: yellow;
+}
+
+mjx-mphantom {
+  visibility: hidden;
+}
+
+mjx-assistive-mml {
+  position: absolute !important;
+  top: 0px;
+  left: 0px;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 1px 0px 0px 0px !important;
+  border: 0px !important;
+  display: block !important;
+  width: auto !important;
+  overflow: hidden !important;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+mjx-assistive-mml[display="block"] {
+  width: 100% !important;
+}
+
+mjx-math {
+  display: inline-block;
+  text-align: left;
+  line-height: 0;
+  text-indent: 0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100%;
+  font-size-adjust: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  word-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  padding: 1px 0;
+}
+
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="CHTML"][display="true"][width="full"] {
+  display: flex;
+}
+
+mjx-container[jax="CHTML"][display="true"] mjx-math {
+  padding: 0;
+}
+
+mjx-container[jax="CHTML"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="CHTML"][justify="right"] {
+  text-align: right;
+}
+
+mjx-mrow {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-inferredMrow {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mi {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mo {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-stretchy-h {
+  display: inline-table;
+  width: 100%;
+}
+
+mjx-stretchy-h > * {
+  display: table-cell;
+  width: 0;
+}
+
+mjx-stretchy-h > * > mjx-c {
+  display: inline-block;
+  transform: scalex(1.0000001);
+}
+
+mjx-stretchy-h > * > mjx-c::before {
+  display: inline-block;
+  padding: .001em 0;
+  width: initial;
+}
+
+mjx-stretchy-h > mjx-ext {
+  overflow: hidden;
+  width: 100%;
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c::before {
+  transform: scalex(500);
+}
+
+mjx-stretchy-h > mjx-ext > mjx-c {
+  width: 0;
+}
+
+mjx-stretchy-h > mjx-beg > mjx-c {
+  margin-right: -.1em;
+}
+
+mjx-stretchy-h > mjx-end > mjx-c {
+  margin-left: -.1em;
+}
+
+mjx-stretchy-v {
+  display: inline-block;
+}
+
+mjx-stretchy-v > * {
+  display: block;
+}
+
+mjx-stretchy-v > mjx-beg {
+  height: 0;
+}
+
+mjx-stretchy-v > mjx-end > mjx-c {
+  display: block;
+}
+
+mjx-stretchy-v > * > mjx-c {
+  transform: scaley(1.0000001);
+  transform-origin: left center;
+  overflow: hidden;
+}
+
+mjx-stretchy-v > mjx-ext {
+  display: block;
+  height: 100%;
+  box-sizing: border-box;
+  border: 0px solid transparent;
+  overflow: hidden;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c::before {
+  width: initial;
+}
+
+mjx-stretchy-v > mjx-ext > mjx-c {
+  transform: scaleY(500) translateY(.1em);
+  overflow: visible;
+}
+
+mjx-mark {
+  display: inline-block;
+  height: 0px;
+}
+
+mjx-mn {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-ms {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mspace {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mpadded {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-rbox {
+  display: inline-block;
+  position: relative;
+}
+
+mjx-menclose {
+  display: inline-block;
+  text-align: left;
+  position: relative;
+}
+
+mjx-menclose > mjx-dstrike {
+  display: inline-block;
+  left: 0;
+  top: 0;
+  position: absolute;
+  border-top: 0.067em solid;
+  transform-origin: top left;
+}
+
+mjx-menclose > mjx-ustrike {
+  display: inline-block;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  border-top: 0.067em solid;
+  transform-origin: bottom left;
+}
+
+mjx-menclose > mjx-hstrike {
+  border-top: 0.067em solid;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 50%;
+  transform: translateY(0.034em);
+}
+
+mjx-menclose > mjx-vstrike {
+  border-left: 0.067em solid;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 50%;
+  transform: translateX(0.034em);
+}
+
+mjx-menclose > mjx-rbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border: 0.067em solid;
+  border-radius: 0.267em;
+}
+
+mjx-menclose > mjx-cbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  border: 0.067em solid;
+  border-radius: 50%;
+}
+
+mjx-menclose > mjx-arrow {
+  position: absolute;
+  left: 0;
+  bottom: 50%;
+  height: 0;
+  width: 0;
+}
+
+mjx-menclose > mjx-arrow > * {
+  display: block;
+  position: absolute;
+  transform-origin: bottom;
+  border-left: 0.268em solid;
+  border-right: 0;
+  box-sizing: border-box;
+}
+
+mjx-menclose > mjx-arrow > mjx-aline {
+  left: 0;
+  top: -0.034em;
+  right: 0.201em;
+  height: 0;
+  border-top: 0.067em solid;
+  border-left: 0;
+}
+
+mjx-menclose > mjx-arrow[double] > mjx-aline {
+  left: 0.201em;
+  height: 0;
+}
+
+mjx-menclose > mjx-arrow > mjx-rthead {
+  transform: skewX(0.464rad);
+  right: 0;
+  bottom: -1px;
+  border-bottom: 1px solid transparent;
+  border-top: 0.134em solid transparent;
+}
+
+mjx-menclose > mjx-arrow > mjx-rbhead {
+  transform: skewX(-0.464rad);
+  transform-origin: top;
+  right: 0;
+  top: -1px;
+  border-top: 1px solid transparent;
+  border-bottom: 0.134em solid transparent;
+}
+
+mjx-menclose > mjx-arrow > mjx-lthead {
+  transform: skewX(-0.464rad);
+  left: 0;
+  bottom: -1px;
+  border-left: 0;
+  border-right: 0.268em solid;
+  border-bottom: 1px solid transparent;
+  border-top: 0.134em solid transparent;
+}
+
+mjx-menclose > mjx-arrow > mjx-lbhead {
+  transform: skewX(0.464rad);
+  transform-origin: top;
+  left: 0;
+  top: -1px;
+  border-left: 0;
+  border-right: 0.268em solid;
+  border-top: 1px solid transparent;
+  border-bottom: 0.134em solid transparent;
+}
+
+mjx-menclose > dbox {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -0.3em;
+  width: 0.6em;
+  border: 0.067em solid;
+  border-radius: 50%;
+  clip-path: inset(0 0 0 0.3em);
+  box-sizing: border-box;
+}
+
+mjx-mfrac {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-frac {
+  display: inline-block;
+  vertical-align: 0.17em;
+  padding: 0 .22em;
+}
+
+mjx-frac[type="d"] {
+  vertical-align: .04em;
+}
+
+mjx-frac[delims] {
+  padding: 0 .1em;
+}
+
+mjx-frac[atop] {
+  padding: 0 .12em;
+}
+
+mjx-frac[atop][delims] {
+  padding: 0;
+}
+
+mjx-dtable {
+  display: inline-table;
+  width: 100%;
+}
+
+mjx-dtable > * {
+  font-size: 2000%;
+}
+
+mjx-dbox {
+  display: block;
+  font-size: 5%;
+}
+
+mjx-num {
+  display: block;
+  text-align: center;
+}
+
+mjx-den {
+  display: block;
+  text-align: center;
+}
+
+mjx-mfrac[bevelled] > mjx-num {
+  display: inline-block;
+}
+
+mjx-mfrac[bevelled] > mjx-den {
+  display: inline-block;
+}
+
+mjx-den[align="right"], mjx-num[align="right"] {
+  text-align: right;
+}
+
+mjx-den[align="left"], mjx-num[align="left"] {
+  text-align: left;
+}
+
+mjx-nstrut {
+  display: inline-block;
+  height: .054em;
+  width: 0;
+  vertical-align: -.054em;
+}
+
+mjx-nstrut[type="d"] {
+  height: .217em;
+  vertical-align: -.217em;
+}
+
+mjx-dstrut {
+  display: inline-block;
+  height: .505em;
+  width: 0;
+}
+
+mjx-dstrut[type="d"] {
+  height: .726em;
+}
+
+mjx-line {
+  display: block;
+  box-sizing: border-box;
+  min-height: 1px;
+  height: .06em;
+  border-top: .06em solid;
+  margin: .06em -.1em;
+  overflow: hidden;
+}
+
+mjx-line[type="d"] {
+  margin: .18em -.1em;
+}
+
+mjx-msqrt {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-root {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+mjx-surd {
+  display: inline-block;
+  vertical-align: top;
+}
+
+mjx-sqrt {
+  display: inline-block;
+  padding-top: .07em;
+}
+
+mjx-sqrt > mjx-box {
+  border-top: .07em solid;
+}
+
+mjx-sqrt.mjx-tall > mjx-box {
+  padding-left: .3em;
+  margin-left: -.3em;
+}
+
+mjx-mroot {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-msub {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-msup {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-msubsup {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-script {
+  display: inline-block;
+  padding-right: .05em;
+}
+
+mjx-script > * {
+  display: block;
+}
+
+mjx-munder {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-over {
+  text-align: left;
+}
+
+mjx-munder:not([limits="false"]) {
+  display: inline-table;
+}
+
+mjx-munder > mjx-row {
+  text-align: left;
+}
+
+mjx-under {
+  padding-bottom: .1em;
+}
+
+mjx-mover {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mover:not([limits="false"]) {
+  padding-top: .1em;
+}
+
+mjx-mover:not([limits="false"]) > * {
+  display: block;
+  text-align: left;
+}
+
+mjx-munderover {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-munderover:not([limits="false"]) {
+  padding-top: .1em;
+}
+
+mjx-munderover:not([limits="false"]) > * {
+  display: block;
+}
+
+mjx-mmultiscripts {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-prescripts {
+  display: inline-table;
+  padding-left: .05em;
+}
+
+mjx-scripts {
+  display: inline-table;
+  padding-right: .05em;
+}
+
+mjx-prescripts > mjx-row > mjx-cell {
+  text-align: right;
+}
+
+mjx-mfenced {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mtable {
+  display: inline-block;
+  text-align: center;
+  vertical-align: .25em;
+  position: relative;
+  box-sizing: border-box;
+}
+
+mjx-labels {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+mjx-table {
+  display: inline-block;
+  vertical-align: -.5ex;
+}
+
+mjx-table > mjx-itable {
+  vertical-align: middle;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+mjx-labels > mjx-itable {
+  position: absolute;
+  top: 0;
+}
+
+mjx-mtable[justify="left"] {
+  text-align: left;
+}
+
+mjx-mtable[justify="right"] {
+  text-align: right;
+}
+
+mjx-mtable[justify="left"][side="left"] {
+  padding-right: 0 ! important;
+}
+
+mjx-mtable[justify="left"][side="right"] {
+  padding-left: 0 ! important;
+}
+
+mjx-mtable[justify="right"][side="left"] {
+  padding-right: 0 ! important;
+}
+
+mjx-mtable[justify="right"][side="right"] {
+  padding-left: 0 ! important;
+}
+
+mjx-mtable[align] {
+  vertical-align: baseline;
+}
+
+mjx-mtable[align="top"] > mjx-table {
+  vertical-align: top;
+}
+
+mjx-mtable[align="bottom"] > mjx-table {
+  vertical-align: bottom;
+}
+
+mjx-mtable[side="right"] mjx-labels {
+  min-width: 100%;
+}
+
+mjx-mtr {
+  display: table-row;
+  text-align: left;
+}
+
+mjx-mtr[rowalign="top"] > mjx-mtd {
+  vertical-align: top;
+}
+
+mjx-mtr[rowalign="center"] > mjx-mtd {
+  vertical-align: middle;
+}
+
+mjx-mtr[rowalign="bottom"] > mjx-mtd {
+  vertical-align: bottom;
+}
+
+mjx-mtr[rowalign="baseline"] > mjx-mtd {
+  vertical-align: baseline;
+}
+
+mjx-mtr[rowalign="axis"] > mjx-mtd {
+  vertical-align: .25em;
+}
+
+mjx-mlabeledtr {
+  display: table-row;
+  text-align: left;
+}
+
+mjx-mlabeledtr[rowalign="top"] > mjx-mtd {
+  vertical-align: top;
+}
+
+mjx-mlabeledtr[rowalign="center"] > mjx-mtd {
+  vertical-align: middle;
+}
+
+mjx-mlabeledtr[rowalign="bottom"] > mjx-mtd {
+  vertical-align: bottom;
+}
+
+mjx-mlabeledtr[rowalign="baseline"] > mjx-mtd {
+  vertical-align: baseline;
+}
+
+mjx-mlabeledtr[rowalign="axis"] > mjx-mtd {
+  vertical-align: .25em;
+}
+
+mjx-mtd {
+  display: table-cell;
+  text-align: center;
+  padding: .215em .4em;
+}
+
+mjx-mtd:first-child {
+  padding-left: 0;
+}
+
+mjx-mtd:last-child {
+  padding-right: 0;
+}
+
+mjx-mtable > * > mjx-itable > *:first-child > mjx-mtd {
+  padding-top: 0;
+}
+
+mjx-mtable > * > mjx-itable > *:last-child > mjx-mtd {
+  padding-bottom: 0;
+}
+
+mjx-tstrut {
+  display: inline-block;
+  height: 1em;
+  vertical-align: -.25em;
+}
+
+mjx-labels[align="left"] > mjx-mtr > mjx-mtd {
+  text-align: left;
+}
+
+mjx-labels[align="right"] > mjx-mtr > mjx-mtd {
+  text-align: right;
+}
+
+mjx-mtr mjx-mtd[rowalign="top"], mjx-mlabeledtr mjx-mtd[rowalign="top"] {
+  vertical-align: top;
+}
+
+mjx-mtr mjx-mtd[rowalign="center"], mjx-mlabeledtr mjx-mtd[rowalign="center"] {
+  vertical-align: middle;
+}
+
+mjx-mtr mjx-mtd[rowalign="bottom"], mjx-mlabeledtr mjx-mtd[rowalign="bottom"] {
+  vertical-align: bottom;
+}
+
+mjx-mtr mjx-mtd[rowalign="baseline"], mjx-mlabeledtr mjx-mtd[rowalign="baseline"] {
+  vertical-align: baseline;
+}
+
+mjx-mtr mjx-mtd[rowalign="axis"], mjx-mlabeledtr mjx-mtd[rowalign="axis"] {
+  vertical-align: .25em;
+}
+
+mjx-maction {
+  display: inline-block;
+  text-align: left;
+  position: relative;
+}
+
+mjx-maction > mjx-tool {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  z-index: 500;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+mjx-maction[toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+mjx-mglyph {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-mglyph > img {
+  display: inline-block;
+  border: 0;
+  padding: 0;
+}
+
+mjx-semantics {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-annotation {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-annotation-xml {
+  display: inline-block;
+  text-align: left;
+  font-family: initial;
+  line-height: normal;
+}
+
+mjx-TeXAtom {
+  display: inline-block;
+  text-align: left;
+}
+
+mjx-c {
+  display: inline-block;
+}
+
+mjx-utext {
+  display: inline-block;
+  padding: .75em 0 .2em 0;
+}
+
+mjx-c::before {
+  display: block;
+  width: 0;
+}
+
+.MJX-TEX {
+  font-family: MJXZERO, MJXTEX;
+}
+
+.TEX-B {
+  font-family: MJXZERO, MJXTEX-B;
+}
+
+.TEX-I {
+  font-family: MJXZERO, MJXTEX-I;
+}
+
+.TEX-MI {
+  font-family: MJXZERO, MJXTEX-MI;
+}
+
+.TEX-BI {
+  font-family: MJXZERO, MJXTEX-BI;
+}
+
+.TEX-S1 {
+  font-family: MJXZERO, MJXTEX-S1;
+}
+
+.TEX-S2 {
+  font-family: MJXZERO, MJXTEX-S2;
+}
+
+.TEX-S3 {
+  font-family: MJXZERO, MJXTEX-S3;
+}
+
+.TEX-S4 {
+  font-family: MJXZERO, MJXTEX-S4;
+}
+
+.TEX-A {
+  font-family: MJXZERO, MJXTEX-A;
+}
+
+.TEX-C {
+  font-family: MJXZERO, MJXTEX-C;
+}
+
+.TEX-CB {
+  font-family: MJXZERO, MJXTEX-CB;
+}
+
+.TEX-FR {
+  font-family: MJXZERO, MJXTEX-FR;
+}
+
+.TEX-FRB {
+  font-family: MJXZERO, MJXTEX-FRB;
+}
+
+.TEX-SS {
+  font-family: MJXZERO, MJXTEX-SS;
+}
+
+.TEX-SSB {
+  font-family: MJXZERO, MJXTEX-SSB;
+}
+
+.TEX-SSI {
+  font-family: MJXZERO, MJXTEX-SSI;
+}
+
+.TEX-SC {
+  font-family: MJXZERO, MJXTEX-SC;
+}
+
+.TEX-T {
+  font-family: MJXZERO, MJXTEX-T;
+}
+
+.TEX-V {
+  font-family: MJXZERO, MJXTEX-V;
+}
+
+.TEX-VB {
+  font-family: MJXZERO, MJXTEX-VB;
+}
+
+mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
+  font-family: MJXZERO, MJXTEX-S1, MJXTEX-S4, MJXTEX, MJXTEX-A ! important;
+}
+
+@font-face /* 0 */ {
+  font-family: MJXZERO;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Zero.woff") format("woff");
+}
+
+@font-face /* 1 */ {
+  font-family: MJXTEX;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Regular.woff") format("woff");
+}
+
+@font-face /* 2 */ {
+  font-family: MJXTEX-B;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Bold.woff") format("woff");
+}
+
+@font-face /* 3 */ {
+  font-family: MJXTEX-I;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-Italic.woff") format("woff");
+}
+
+@font-face /* 4 */ {
+  font-family: MJXTEX-MI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Main-Italic.woff") format("woff");
+}
+
+@font-face /* 5 */ {
+  font-family: MJXTEX-BI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Math-BoldItalic.woff") format("woff");
+}
+
+@font-face /* 6 */ {
+  font-family: MJXTEX-S1;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size1-Regular.woff") format("woff");
+}
+
+@font-face /* 7 */ {
+  font-family: MJXTEX-S2;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size2-Regular.woff") format("woff");
+}
+
+@font-face /* 8 */ {
+  font-family: MJXTEX-S3;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size3-Regular.woff") format("woff");
+}
+
+@font-face /* 9 */ {
+  font-family: MJXTEX-S4;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Size4-Regular.woff") format("woff");
+}
+
+@font-face /* 10 */ {
+  font-family: MJXTEX-A;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_AMS-Regular.woff") format("woff");
+}
+
+@font-face /* 11 */ {
+  font-family: MJXTEX-C;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Regular.woff") format("woff");
+}
+
+@font-face /* 12 */ {
+  font-family: MJXTEX-CB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Calligraphic-Bold.woff") format("woff");
+}
+
+@font-face /* 13 */ {
+  font-family: MJXTEX-FR;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Regular.woff") format("woff");
+}
+
+@font-face /* 14 */ {
+  font-family: MJXTEX-FRB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Fraktur-Bold.woff") format("woff");
+}
+
+@font-face /* 15 */ {
+  font-family: MJXTEX-SS;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Regular.woff") format("woff");
+}
+
+@font-face /* 16 */ {
+  font-family: MJXTEX-SSB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Bold.woff") format("woff");
+}
+
+@font-face /* 17 */ {
+  font-family: MJXTEX-SSI;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_SansSerif-Italic.woff") format("woff");
+}
+
+@font-face /* 18 */ {
+  font-family: MJXTEX-SC;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Script-Regular.woff") format("woff");
+}
+
+@font-face /* 19 */ {
+  font-family: MJXTEX-T;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Typewriter-Regular.woff") format("woff");
+}
+
+@font-face /* 20 */ {
+  font-family: MJXTEX-V;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Regular.woff") format("woff");
+}
+
+@font-face /* 21 */ {
+  font-family: MJXTEX-VB;
+  src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
+}
+
+mjx-c.mjx-c28::before {
+  padding: 0.75em 0.389em 0.25em 0;
+  content: "(";
+}
+
+mjx-c.mjx-c29::before {
+  padding: 0.75em 0.389em 0.25em 0;
+  content: ")";
+}
+
+mjx-c.mjx-c2C::before {
+  padding: 0.121em 0.278em 0.194em 0;
+  content: ",";
+}
+
+mjx-c.mjx-c2E::before {
+  padding: 0.12em 0.278em 0 0;
+  content: ".";
+}
+
+mjx-c.mjx-c2F::before {
+  padding: 0.75em 0.5em 0.25em 0;
+  content: "/";
+}
+
+mjx-c.mjx-c30::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "0";
+}
+
+mjx-c.mjx-c31::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "1";
+}
+
+mjx-c.mjx-c32::before {
+  padding: 0.666em 0.5em 0 0;
+  content: "2";
+}
+
+mjx-c.mjx-c33::before {
+  padding: 0.665em 0.5em 0.022em 0;
+  content: "3";
+}
+
+mjx-c.mjx-c34::before {
+  padding: 0.677em 0.5em 0 0;
+  content: "4";
+}
+
+mjx-c.mjx-c35::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "5";
+}
+
+mjx-c.mjx-c36::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "6";
+}
+
+mjx-c.mjx-c39::before {
+  padding: 0.666em 0.5em 0.022em 0;
+  content: "9";
+}
+
+mjx-c.mjx-c46::before {
+  padding: 0.68em 0.653em 0 0;
+  content: "F";
+}
+
+mjx-c.mjx-c48::before {
+  padding: 0.683em 0.75em 0 0;
+  content: "H";
+}
+
+mjx-c.mjx-c49::before {
+  padding: 0.683em 0.361em 0 0;
+  content: "I";
+}
+
+mjx-c.mjx-c63::before {
+  padding: 0.448em 0.444em 0.011em 0;
+  content: "c";
+}
+
+mjx-c.mjx-c6B::before {
+  padding: 0.694em 0.528em 0 0;
+  content: "k";
+}
+
+mjx-c.mjx-c6E::before {
+  padding: 0.442em 0.556em 0 0;
+  content: "n";
+}
+
+mjx-c.mjx-c73::before {
+  padding: 0.448em 0.394em 0.011em 0;
+  content: "s";
+}
+
+mjx-c.mjx-c7A::before {
+  padding: 0.431em 0.444em 0 0;
+  content: "z";
+}
+
+mjx-c.mjx-c3A9::before {
+  padding: 0.704em 0.722em 0 0;
+  content: "\3A9";
+}
+
+mjx-c.mjx-c2212::before {
+  padding: 0.583em 0.778em 0.082em 0;
+  content: "\2212";
+}
+
+mjx-c.mjx-c2248::before {
+  padding: 0.483em 0.778em 0 0;
+  content: "\2248";
+}
+
+mjx-c.mjx-c1D449.TEX-I::before {
+  padding: 0.683em 0.769em 0.022em 0;
+  content: "V";
+}
+
+[noIC] mjx-c.mjx-c1D449.TEX-I:last-child::before {
+  padding-right: 0.583em;
+}
+
+mjx-c.mjx-c1D452.TEX-I::before {
+  padding: 0.442em 0.466em 0.011em 0;
+  content: "e";
+}
+
+mjx-c.mjx-c1D707.TEX-I::before {
+  padding: 0.442em 0.603em 0.216em 0;
+  content: "\3BC";
+}
+</style></head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"></path>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"></path>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/C++-Development/index.html">C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a href="../../Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a href="../../Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Control Theory</a>
+        <ul>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a href="PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry" href="Architecture.html">Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a href="PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a href="ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Programming/index.html">Programming</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Programming/Cpp/index.html">C++</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a href="../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Architecture.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Architecture and Design Decisions</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+            <li><a href="#pwm">PWM</a></li>
+            <li><a href="#adc">ADC</a></li>
+            <li><a href="#control-loops">Control loops</a></li>
+            <li><a href="#capacitive-touch-sensing">Capacitive touch sensing</a></li>
+            <li><a href="#communication">Communication</a></li>
+              <ul>
+                <li><a href="#i-c-wire">I²C (Wire)</a></li>
+                <li><a href="#uart-serial">UART (Serial)</a></li>
+                </ul>
+  </ul></div>
+
+
+<div style="display: none;">
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" display="true" role="presentation"><mjx-math display="true" style="margin-left: 0; margin-right: 0" class=" MJX-TEX" aria-hidden="true"></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"></math></mjx-assistive-mml></mjx-container>
+</div>
+
+This page gives a high-level overview of the architecture of the motor
+controller code and how the different parts interact.
+
+<h3><a name="pwm" href="#pwm">PWM</a></h3>
+<p>
+    Timer2 and Timer0 are used to generate up to four PWM channels at a rate of
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c2C"></mjx-c><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-mstyle><mjx-mspace style="width: 0.167em"></mjx-mspace></mjx-mstyle><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c48"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c7A"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>31,250</mn><mstyle scriptlevel="0"><mspace width="thinmathspace"></mspace></mstyle><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">z</mi></mrow></math></mjx-assistive-mml></mjx-container>. This is a convenient rate, because it is outside of the
+    audible spectrum. Lower frequencies cause the motor to emit annoying noises.
+</p>
+<p>
+    One pin of the H-bridge motor driver is connected to a normal GPIO pin, the
+    other to one of the four PWM outputs of the timers.
+    In order to minimize the number of required IO pins, the motor driver's
+    enable pins are permanently wired to Vcc. The motor is turned off by setting
+    both outputs to the same level.
+</p>
+<p>
+    The direction of the motor is reversed by inverting the GPIO output and
+    inverting the PWM output by changing bit <code>COM2B0</code> in the
+    <code>TCCR2A</code> register.
+</p>
+
+<h3><a name="adc" href="#adc">ADC</a></h3>
+<p>
+    It is important that the control loop runs at a regular interval. To do this,
+    ADC conversions to measure the position of the faders are started in a timer
+    interrupt.
+</p>
+<p>
+    The timer interrupts fire at a high rate, and we have to change the
+    multiplexer channel before starting the next measurement (because we're
+    reading the position of multiple faders), so we just set the
+    “start conversion” bit in the timer interrupt service routine, without
+    using the auto-triggering or free-running mode of the ADC.
+</p>
+<p>
+    Because the interrupt frequency is high (<mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c2C"></mjx-c><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-mstyle><mjx-mspace style="width: 0.167em"></mjx-mspace></mjx-mstyle><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c48"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c7A"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>31,250</mn><mstyle scriptlevel="0"><mspace width="thinmathspace"></mspace></mstyle><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">z</mi></mrow></math></mjx-assistive-mml></mjx-container>), we divide this
+    rate further in software, by default, the frequency is reduced by a factor
+    of 30. The ADC measurements are distributed evenly over those 30 interrupts.
+    This is done using a simple counter:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; margin: 0; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+.pygments61 .hll { background-color: #ffffcc }
+.pygments61 { background: #ffffff; }
+.pygments61 .c { color: #008000 } /* Comment */
+.pygments61 .err { border: 1px solid #FF0000 } /* Error */
+.pygments61 .k { color: #0000ff } /* Keyword */
+.pygments61 .l { color: #0000FF } /* Literal */
+.pygments61 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments61 .cm { color: #008000 } /* Comment.Multiline */
+.pygments61 .cp { color: #af00db } /* Comment.Preproc */
+.pygments61 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments61 .c1 { color: #008000 } /* Comment.Single */
+.pygments61 .cs { color: #008000 } /* Comment.Special */
+.pygments61 .ge { font-style: italic } /* Generic.Emph */
+.pygments61 .gh { font-weight: bold } /* Generic.Heading */
+.pygments61 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments61 .gs { font-weight: bold } /* Generic.Strong */
+.pygments61 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments61 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments61 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments61 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments61 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments61 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments61 .kt { color: #2b91af } /* Keyword.Type */
+.pygments61 .ld { color: #0000FF } /* Literal.Date */
+.pygments61 .m { color: #0000FF } /* Literal.Number */
+.pygments61 .s { color: #a31515 } /* Literal.String */
+.pygments61 .na { color: #001080 } /* Name.Attribute */
+.pygments61 .nb { color: #795e26 } /* Name.Builtin */
+.pygments61 .nc { color: #2b91af } /* Name.Class */
+.pygments61 .no { color: #0000FF } /* Name.Constant */
+.pygments61 .nf { color: #795e26 } /* Name.Function */
+.pygments61 .nl { color: #AF00DB } /* Name.Label */
+.pygments61 .nn { color: #000000 } /* Name.Namespace */
+.pygments61 .nt { color: #800000 } /* Name.Tag */
+.pygments61 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments61 .ow { color: #0000ff } /* Operator.Word */
+.pygments61 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments61 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments61 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments61 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments61 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments61 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments61 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments61 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments61 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments61 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments61 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments61 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments61 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments61 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments61 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments61 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments61 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments61 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments61 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments61 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments61 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments61 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments61 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments61 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments61 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments61 pre.snippet61 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Arduino/Control-Theory/Motor-Fader/resources/isr-counter.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments61"><pre class="lineNumbers snippet61"><code><span></span><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">num_faders</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span></code>
+<code><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">interrupt_divisor</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span></code>
+<code><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">adc_start_count</span> <span class="o">=</span> <span class="n">interrupt_divisor</span> <span class="o">/</span> <span class="n">num_faders</span><span class="p">;</span></code>
+<code></code>
+<code><span class="c1">// Fires at a constant rate of 31,250 Hz:</span></code>
+<code><span class="n">ISR</span><span class="p">(</span><span class="n">TIMER2_OVF_vect</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code></code>
+<code>    <span class="k">for</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="n">fader</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">fader</span> <span class="o">&lt;</span> <span class="n">num_faders</span><span class="p">;</span> <span class="o">++</span><span class="n">fader</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="k">if</span> <span class="p">(</span><span class="n">counter</span> <span class="o">==</span> <span class="n">fader</span> <span class="o">*</span> <span class="n">adc_start_count</span><span class="p">)</span> <span class="p">{</span></code>
+<code>            <span class="n">startADCConversion</span><span class="p">(</span><span class="n">fader</span><span class="p">);</span></code>
+<code>            <span class="k">break</span><span class="p">;</span></code>
+<code>        <span class="p">}</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>    <span class="o">++</span><span class="n">counter</span><span class="p">;</span></code>
+<code>    <span class="k">if</span> <span class="p">(</span><span class="n">counter</span> <span class="o">==</span> <span class="n">interrupt_divisor</span><span class="p">)</span></code>
+<code>        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<p>
+    In this example, the Timer2 frequency is divided by 30, so the sampling
+    rate of each of the three ADC channels
+    is <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c2C"></mjx-c><mjx-c class="mjx-c32"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-mstyle><mjx-mspace style="width: 0.167em"></mjx-mspace></mjx-mstyle><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c48"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c7A"></mjx-c></mjx-mi></mjx-TeXAtom><mjx-TeXAtom texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2F"></mjx-c></mjx-mo></mjx-TeXAtom><mjx-mn class="mjx-n"><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c2248"></mjx-c></mjx-mo><mjx-mn class="mjx-n" space="4"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c2C"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c34"></mjx-c><mjx-c class="mjx-c32"></mjx-c></mjx-mn><mjx-mstyle><mjx-mspace style="width: 0.167em"></mjx-mspace></mjx-mstyle><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c48"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c7A"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>31,250</mn><mstyle scriptlevel="0"><mspace width="thinmathspace"></mspace></mstyle><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">z</mi></mrow><mrow><mo>/</mo></mrow><mn>30</mn><mo>≈</mo><mn>1,042</mn><mstyle scriptlevel="0"><mspace width="thinmathspace"></mspace></mstyle><mrow><mi mathvariant="normal">H</mi><mi mathvariant="normal">z</mi></mrow></math></mjx-assistive-mml></mjx-container> or <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c39"></mjx-c><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c73"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>960</mn><mrow><mi>μ</mi><mi mathvariant="normal">s</mi></mrow></math></mjx-assistive-mml></mjx-container>. The first ADC
+    conversion (measurement) is started when <code>counter == 0</code>,
+    the second when <code>counter == 10</code>, and the third when
+    <code>counter == 20</code>. If the number of faders doesn't divide the
+    interrupt counter divisor evenly, the result of <code>adc_start_count</code>
+    is floored. For example, if <code>num_faders == 4</code>, the conversions
+    are started when <code>counter == 0, 7, 14, 21</code>. This doesn't affect
+    the sampling rates.
+</p>
+<p>
+    The result of the ADC conversion is written to a variable in the ADC
+    conversion ready interrupt.
+</p>
+
+<h3><a name="control-loops" href="#control-loops">Control loops</a></h3>
+<p>
+    The PID controllers are updated in the main loop. They run whenever a new
+    ADC measurement is available. This means that they are indirectly controlled
+    by the rate of Timer2 as well:
+</p>
+<p style="padding-left: 2em;">
+    Timer2 ISR starts ADC conversion → ADC conversion writes measurement to
+    variable → main loop reads ADC measurement → PID controller runs → PWM
+    duty cycle is updated
+</p>
+
+<h3><a name="capacitive-touch-sensing" href="#capacitive-touch-sensing">Capacitive touch sensing</a></h3>
+
+<p>
+    The conductive knob of the fader can be seen as a small capacitive load
+    connected to the Arduino pin. When the knob is touched, the capacitance is
+    higher than when it is not being touched. The capacitance is not measured
+    directly, instead, a large resistor is added between <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D449 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>V</mi><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">c</mi></mrow></msub></math></mjx-assistive-mml></mjx-container> and 
+    the knob, and then the RC-time is measured, i.e. the time it takes for the
+    capacitive knob to charge to a voltage of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D452 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-TeXAtom></mjx-script></mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mstyle><mjx-mspace style="width: 0.167em"></mjx-mspace></mjx-mstyle><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D449 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo><mstyle scriptlevel="0"><mspace width="thinmathspace"></mspace></mstyle><msub><mi>V</mi><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">c</mi></mrow></msub></math></mjx-assistive-mml></mjx-container>
+    through the resistor. In practice, we're measuring the time it takes for the
+    voltage to rise to the Arduino's input pin high-voltage, <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D449 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c49"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c48"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>V</mi><mrow><mi mathvariant="normal">I</mi><mi mathvariant="normal">H</mi></mrow></msub></math></mjx-assistive-mml></mjx-container>,
+    which is not exactly the RC-time, but the principle is exactly the same.
+</p>
+<p>
+    Let's say that we're using a resistor of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c6B"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c3A9"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>500</mn><mrow><mi mathvariant="normal">k</mi><mi mathvariant="normal">Ω</mi></mrow></math></mjx-assistive-mml></mjx-container> and that
+    the capacitance of the untouched fader knob is around <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c2E"></mjx-c><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c46"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>0.1</mn><mrow><mi mathvariant="normal">n</mi><mi mathvariant="normal">F</mi></mrow></math></mjx-assistive-mml></mjx-container>.
+    The RC-time of this circuit is <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c73"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>50</mn><mrow><mi>μ</mi><mi mathvariant="normal">s</mi></mrow></math></mjx-assistive-mml></mjx-container>. We could then define a
+    threshold of, say, <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c73"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>160</mn><mrow><mi>μ</mi><mi mathvariant="normal">s</mi></mrow></math></mjx-assistive-mml></mjx-container>. If the measured RC-time is higher than
+    the threshold, we consider the knob touched. This threshold time 
+    corresponds to <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>5</mn></math></mjx-assistive-mml></mjx-container> periods of the Timer2 interrupt. The following figure 
+    shows the pin voltage in function of time for two scenarios: the knob being 
+    released and the knob being touched. The threshold time and the threshold 
+    voltage of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D452 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-TeXAtom></mjx-script></mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mstyle><mjx-mspace style="width: 0.167em"></mjx-mspace></mjx-mstyle><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D449 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo><mstyle scriptlevel="0"><mspace width="thinmathspace"></mspace></mstyle><msub><mi>V</mi><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">c</mi></mrow></msub></math></mjx-assistive-mml></mjx-container> are shown as well.
+</p>
+<div class="img-wrapper"><a href="images/touch-sense/rc.svg"><img src="images/touch-sense/rc.svg" alt="images/touch-sense/rc.svg"></a><small class="image-code-link"><a href="images/touch-sense/rc.py">Image source code</a></small></div>
+<p>
+    To determine whether the knob is being touched, we can just look at the 
+    state of the pin after the threshold time: if it's high, the RC-time is less
+    than the threshold time, and the knob is not touched, if it's low, the 
+    RC-time is higher than the threshold time, and the knob is touched.
+</p>
+<p>
+    In practice, we just continuously charge and discharge the pin in the 
+    Timer2 interrupt. We simply start charging every 30 interrupts, then we 
+    count the number of interrupts to the threshold time (5 in this case), and
+    we read the digital state of the pins. Then we switch the pin to output mode 
+    to discharge it for a couple of cycles, and then we start charging again.
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; margin: 0; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+.pygments136 .hll { background-color: #ffffcc }
+.pygments136 { background: #ffffff; }
+.pygments136 .c { color: #008000 } /* Comment */
+.pygments136 .err { border: 1px solid #FF0000 } /* Error */
+.pygments136 .k { color: #0000ff } /* Keyword */
+.pygments136 .l { color: #0000FF } /* Literal */
+.pygments136 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments136 .cm { color: #008000 } /* Comment.Multiline */
+.pygments136 .cp { color: #af00db } /* Comment.Preproc */
+.pygments136 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments136 .c1 { color: #008000 } /* Comment.Single */
+.pygments136 .cs { color: #008000 } /* Comment.Special */
+.pygments136 .ge { font-style: italic } /* Generic.Emph */
+.pygments136 .gh { font-weight: bold } /* Generic.Heading */
+.pygments136 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments136 .gs { font-weight: bold } /* Generic.Strong */
+.pygments136 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments136 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments136 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments136 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments136 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments136 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments136 .kt { color: #2b91af } /* Keyword.Type */
+.pygments136 .ld { color: #0000FF } /* Literal.Date */
+.pygments136 .m { color: #0000FF } /* Literal.Number */
+.pygments136 .s { color: #a31515 } /* Literal.String */
+.pygments136 .na { color: #001080 } /* Name.Attribute */
+.pygments136 .nb { color: #795e26 } /* Name.Builtin */
+.pygments136 .nc { color: #2b91af } /* Name.Class */
+.pygments136 .no { color: #0000FF } /* Name.Constant */
+.pygments136 .nf { color: #795e26 } /* Name.Function */
+.pygments136 .nl { color: #AF00DB } /* Name.Label */
+.pygments136 .nn { color: #000000 } /* Name.Namespace */
+.pygments136 .nt { color: #800000 } /* Name.Tag */
+.pygments136 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments136 .ow { color: #0000ff } /* Operator.Word */
+.pygments136 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments136 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments136 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments136 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments136 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments136 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments136 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments136 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments136 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments136 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments136 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments136 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments136 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments136 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments136 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments136 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments136 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments136 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments136 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments136 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments136 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments136 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments136 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments136 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments136 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments136 pre.snippet136 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Arduino/Control-Theory/Motor-Fader/resources/touch-sense.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments136"><pre class="lineNumbers snippet136"><code><span></span><span class="c1">// GPIO pin with the fader knob and pull-up resistor:</span></code>
+<code><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">touch_pin</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span></code>
+<code><span class="c1">// Frequency at which the Timer2 interrupt fires:</span></code>
+<code><span class="k">constexpr</span> <span class="kt">float</span> <span class="n">interrupt_freq</span> <span class="o">=</span> <span class="mi">31'250</span><span class="p">;</span></code>
+<code><span class="c1">// Interrupts per control loop period:</span></code>
+<code><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">interrupt_divisor</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span></code>
+<code><span class="c1">// Minimum RC-time to consider fader knob touched:</span></code>
+<code><span class="k">constexpr</span> <span class="kt">float</span> <span class="n">touch_rc_time_threshold</span> <span class="o">=</span> <span class="mf">160e-6</span><span class="p">;</span> <span class="c1">// seconds</span></code>
+<code><span class="c1">// Same threshold, but as a number of interrupts rather than seconds:</span></code>
+<code><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">touch_sense_thres</span> <span class="o">=</span> <span class="n">interrupt_freq</span> <span class="o">*</span> <span class="n">touch_rc_time_threshold</span><span class="p">;</span></code>
+<code><span class="k">static_assert</span><span class="p">(</span><span class="n">touch_sense_thres</span> <span class="o">&lt;</span> <span class="n">interrupt_divisor</span><span class="p">,</span> <span class="s">"RC-time too long"</span><span class="p">);</span></code>
+<code></code>
+<code><span class="k">volatile</span> <span class="kt">bool</span> <span class="n">touched</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// Whether the knob is touched or not</span></code>
+<code></code>
+<code><span class="c1">// Fires at a constant rate of 31,250 Hz:</span></code>
+<code><span class="n">ISR</span><span class="p">(</span><span class="n">TIMER2_OVF_vect</span><span class="p">)</span> <span class="p">{</span></code>
+<code>    <span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code></code>
+<code>    <span class="k">if</span> <span class="p">(</span><span class="n">counter</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="n">pinMode</span><span class="p">(</span><span class="n">touch_pin</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span> <span class="c1">// start charging</span></code>
+<code>    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">counter</span> <span class="o">==</span> <span class="n">touch_sense_thres</span><span class="p">)</span> <span class="p">{</span></code>
+<code>        <span class="n">touched</span> <span class="o">=</span> <span class="n">digitalRead</span><span class="p">(</span><span class="n">touch_pin</span><span class="p">)</span> <span class="o">==</span> <span class="n">LOW</span><span class="p">;</span></code>
+<code>        <span class="n">pinMode</span><span class="p">(</span><span class="n">touch_pin</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span> <span class="c1">// start discharging</span></code>
+<code>    <span class="p">}</span></code>
+<code></code>
+<code>    <span class="o">++</span><span class="n">counter</span><span class="p">;</span></code>
+<code>    <span class="k">if</span> <span class="p">(</span><span class="n">counter</span> <span class="o">==</span> <span class="n">interrupt_divisor</span><span class="p">)</span></code>
+<code>        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+<p>
+    The only reason to wait 30 interrupt cycles before charging again is to 
+    synchronize with the ADC and the control loops. This is just for
+    convenience, because in the actual
+    implementation, both touch sensing and starting ADC conversions are handled
+    in the same interrupt service routine. 
+    To minimize the overhead, all touch pins are 
+    on the same GPIO port, so touch sensing can be done very efficiently using 
+    direct port manipulation.
+</p>
+
+<h3><a name="communication" href="#communication">Communication</a></h3>
+<h4><a name="i-c-wire" href="#i-c-wire">I²C (Wire)</a></h4>
+<p>
+    The motor controller acts as an I²C slave. The master can read the fader 
+    positions and whether they are being touched or not, and the master can 
+    write the position setpoints.
+</p>
+<p>
+    The response contains the fader positions and touch status as follows 
+    (represented in binary):
+</p>
+<pre class="lineNumbers"><code>0000 tttt</code>
+<code>aaaa aaaa   00aa aaaa</code>
+<code>bbbb bbbb   00bb bbbb</code>
+<code>cccc cccc   00cc cccc</code>
+<code>dddd dddd   00dd dddd</code></pre>
+<p>
+    <code>tttt</code> contains the touch status of up to four faders, the least 
+    significant of the four bits is the first fader.<br>
+    The length of the message depends on the 
+    <code>Config::num_faders</code> constant.
+    <code>aaaa aaaa 00aa aaaa</code> encodes the 
+    position of the first fader as a 16-bit Little-Endian integer, 
+    <code>bbbb bbbb 00bb bbbb</code> for the second 
+    fader, and so on. By default,
+    these positions are 14-bit numbers (obtained by oversampling and averaging
+    the 10-bit ADC readings). The number of bits of the position values is 
+    <code>16 - Config::adc_ema_K</code>, so if the 
+    <code>Config::adc_ema_K</code> constant changes, 
+    the scale of the values changes as well.
+</p>
+<p>
+    To set the reference position, the master sends a message in the following
+    format:
+</p>
+<pre class="lineNumbers"><code>rrrr rrrr   00ff 00rr</code></pre>
+<p>
+    <code>rrrr rrrr 0000 00rr</code> is the 10-bit reference 
+    position, encoded as a Little-Endian integer, and <code>ff</code> is the
+    index of the fader to address (0 to 3).
+</p>
+<h4><a name="uart-serial" href="#uart-serial">UART (Serial)</a></h4>
+<p>
+    Tuning parameters can be updated at runtime by sending them over the serial
+    port, and it is possible to start experiments, logging the 
+    reference, actual position, and control signal.
+    The SLIP protocol
+    (<a href="https://datatracker.ietf.org/doc/html/rfc1055">RFC 1055</a>) 
+    is used to handle packet framing.
+</p>
+<p>
+    The input format is explained here:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; margin: 0; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
+.pygments205 .hll { background-color: #ffffcc }
+.pygments205 { background: #ffffff; }
+.pygments205 .c { color: #008000 } /* Comment */
+.pygments205 .err { border: 1px solid #FF0000 } /* Error */
+.pygments205 .k { color: #0000ff } /* Keyword */
+.pygments205 .l { color: #0000FF } /* Literal */
+.pygments205 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments205 .cm { color: #008000 } /* Comment.Multiline */
+.pygments205 .cp { color: #af00db } /* Comment.Preproc */
+.pygments205 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments205 .c1 { color: #008000 } /* Comment.Single */
+.pygments205 .cs { color: #008000 } /* Comment.Special */
+.pygments205 .ge { font-style: italic } /* Generic.Emph */
+.pygments205 .gh { font-weight: bold } /* Generic.Heading */
+.pygments205 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments205 .gs { font-weight: bold } /* Generic.Strong */
+.pygments205 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments205 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments205 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments205 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments205 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments205 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments205 .kt { color: #2b91af } /* Keyword.Type */
+.pygments205 .ld { color: #0000FF } /* Literal.Date */
+.pygments205 .m { color: #0000FF } /* Literal.Number */
+.pygments205 .s { color: #a31515 } /* Literal.String */
+.pygments205 .na { color: #001080 } /* Name.Attribute */
+.pygments205 .nb { color: #795e26 } /* Name.Builtin */
+.pygments205 .nc { color: #2b91af } /* Name.Class */
+.pygments205 .no { color: #0000FF } /* Name.Constant */
+.pygments205 .nf { color: #795e26 } /* Name.Function */
+.pygments205 .nl { color: #AF00DB } /* Name.Label */
+.pygments205 .nn { color: #000000 } /* Name.Namespace */
+.pygments205 .nt { color: #800000 } /* Name.Tag */
+.pygments205 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments205 .ow { color: #0000ff } /* Operator.Word */
+.pygments205 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments205 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments205 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments205 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments205 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments205 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments205 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments205 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments205 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments205 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments205 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments205 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments205 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments205 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments205 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments205 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments205 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments205 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments205 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments205 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments205 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments205 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments205 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments205 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments205 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments205 pre.snippet205 { counter-reset: line 416; }</style>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/47d8cb6cdc2978d500383387a72d646e62568a16/Motor-Controller/main.cpp#L417-L429" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments205"><pre class="lineNumbers snippet205"><code><span></span><span class="c1">// Message format: &lt;command&gt; &lt;fader&gt; &lt;value&gt;</span></code>
+<code><span class="c1">// Commands:</span></code>
+<code><span class="c1">//   - p: proportional gain Kp</span></code>
+<code><span class="c1">//   - i: integral gain Ki</span></code>
+<code><span class="c1">//   - d: derivative gain Kd</span></code>
+<code><span class="c1">//   - c: derivative filter cutoff frequency f_c (Hz)</span></code>
+<code><span class="c1">//   - m: maximum absolute control output</span></code>
+<code><span class="c1">//   - s: start an experiment, using getNextExperimentSetpoint</span></code>
+<code><span class="c1">// Fader index: up to four faders are addressed using the characters '0' - '3'.</span></code>
+<code><span class="c1">// Values: values are sent as 32-bit little Endian floating point numbers.</span></code>
+<code><span class="c1">//</span></code>
+<code><span class="c1">// For example the message 'c0\x00\x00\x20\x42' sets the derivative filter</span></code>
+<code><span class="c1">// cutoff frequency of the first fader to 40.</span></code></pre></div>
+</div>
+<p>
+    The outgoing messages are just SLIP packets containing the reference, the 
+    measured position and the control signal as three signed 16-bit
+    Little-Endian integers.
+</p>
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"><a href="PID-Cpp-Implementation.html" title="C++ Implementation"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"><a href="PID-Tuning.html" title="PID Tuning">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+    </article>
+    <footer>Last edited: Saturday, 17 July 2021 23:17 UTC</footer>
+</body>
+
+</html>
