@@ -1,0 +1,76 @@
+<!--
+@title: Hardware
+@sequence: 36
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: arduino,motorized fader,flying fader,pid,controller,midi,control surface
+@description: Components and hardware.
+-->
+
+<html>
+
+<div style="display: none;">
+    $$
+    \require{physics}
+    \newcommand{\Hz}{\,\mathrm{Hz}}
+    $$
+</div>
+
+<h3>Motorized fader</h3>
+<p>
+    I used an ALPS Alpine 100mm, 10kΩ motorized fader, part number
+    <a
+        href="https://tech.alpsalpine.com/prod/e/html/potentiometer/slidepotentiometers/rsn1m/rsa0n11m9a0k.html">RSA0N11M9A0K</a>.
+    These are not cheap, I paid around €30 for it.
+    The knob I used is a chromed FK13x25 by
+    <a href="https://www.albs.de/index.html">albs</a>. Although I cannot seem find the exact
+    part number on <a href="https://www.albs.de/schieb1.htm"> https://www.albs.de/schieb1.htm</a>,
+    I think <a
+        href="https://www.conrad.com/p/alps-76659-slide-potentiometer-fader-knob-l-x-w-13-mm-x-25-mm-velour-chrome-442043">this</a>
+    is the part I ordered.
+    It is important to use a knob with a metal finish, it needs to be conductive for the touch sensitivity to work.
+</p>
+<p>
+    I used a 100nF capacitor to filter some of the noise on the potentiometer.
+</p>
+
+<h3>Motor driver</h3>
+<p>
+    I used an L293D double H-bridge. It is an absolutely terrible motor driver
+    by today's standards, with bipolar output transistors and a
+    voltage drop of up to 3.6V. While there are much better drivers available,
+    this one is cheap, popular, easy to use, and good enough to drive the small
+    motor of the fader. It includes flyback diodes on the outputs, so you don't
+    have to provide those externally. 
+</p>
+<p>
+    If you want something a bit more modern, you could look at the TB6612FNG,
+    for example.
+</p>
+
+<h3>Power supply</h3>
+<p>
+    The motor I used is rated for 10V. I used a 10V supply rated for 1A,
+    which results in about 8V across the motor (taking into account the voltage drop of the L293).
+    In my experiments, the motor used around 100mA during normal tracking,
+    and up to 350mA when stalling the motor on purpose. According to the 
+    spec sheet, they can draw up to 800mA each at 10V, so you have to take this 
+    into account when selecting a power supply.
+</p>
+
+<h3>Capacitive touch sensing</h3>
+<p>
+    You just need an external pull-up resistor of around 500kΩ to 1MΩ.
+    The exact value isn't critical, but it should be high enough to be able to 
+    measure the small capacitance of the touch sensitive knob.
+</p>
+
+<h3>Connections</h3>
+@codesnippet{
+"file": "${HOME}/GitHub/Control-Surface-Motor-Fader/Motor-Controller/main.cpp",
+"startline": 43,
+"endline": 88
+}
+
+</html>
