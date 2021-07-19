@@ -2,6 +2,8 @@
 @sequence: 10
 @title: Installation
 @author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
 @keywords: Control Surface,Arduino,Installation,Developers
 @description: Control Surface installation instructions for developers.
 -->
@@ -11,7 +13,8 @@
 <p>
     <b>Important:</b>These are the installation instructions for developers,
     if you just want to use the library,
-    please see these <a href="#todo">installation instructions for users.</a>
+    please see these <a href="/Control-Surface-doc/Doxygen/d8/da8/md_pages_Installation.html">installation instructions
+        for users.</a>
 </p>
 
 <p>
@@ -24,31 +27,22 @@
 <h3>Installing the compiler, GNU Make, CMake and Git</h3>
 
 <p>
-    For development, I use GCC 9, because it's the latest version, and its error
+    For development, I use GCC 11, because it's the latest version, and its error
     messages and warnings are better than previous versions.
 </p>
 <p>
-    On Ubuntu, GCC 9 can be installed through the
+    On Ubuntu, GCC 11 can be installed through the
     <code>ppa:ubuntu-toolchain-r/test</code> repository:
 </p>
 <pre class="console"><code>sudo add-apt-repository ppa:ubuntu-toolchain-r/test</code>
 <code>sudo apt update</code>
-<code>sudo apt install gcc-9 g++-9</code></pre>
+<code>sudo apt install gcc-11 g++-11</code></pre>
 <p>
     You'll also need GNU Make and CMake as a build system, and Git for version
     control. Now is also a good time to install GNU Wget, if you haven't
     already, it comes in handy later.
 </p>
 <pre class="console"><code>sudo apt install make cmake git wget</code></pre>
-
-<h3>Installing Python 2</h3>
-
-<p>
-    The ESP32 Core Toolchain requires Python 2. On newer versions of Ubuntu,
-    this is no longer installed by default.<br>
-    You can install it from the repositories:
-</p>
-<pre class="console"><code>sudo apt install python</code></pre>
 
 <h3>Installing the Arduino IDE, Teensy Core and ESP32 Core</h3>
 
@@ -73,9 +67,9 @@
 </p>
 <h4>ESP32 Arduino Core</h4>
 <p>
-    On GitHub, you can find the installation instructions for the ESP32 Core:
+    You can find the installation instructions for the ESP32 Core here:
     <a
-        href="https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards_manager.md">https://github.com/espressif/arduino-esp32/blob/master/docs/arduino-ide/boards_manager.md</a>
+        href="https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html#installing-using-boards-manager">https://docs.espressif.com/projects/arduino-esp32/en/latest/installing.html#installing-using-boards-manager</a>
 </p>
 
 <h3>Installing the Control Surface library</h3>
@@ -85,28 +79,26 @@
     Git to clone it into your <code>~/Arduino/libraries</code> folder. If you
     have write access to the repository, use SSH, otherwise, use HTTPS.
 </p>
-<p>
-    The <code>--recursive</code> option clones the Google Test submodule as
-    well.
-</p>
+
 <pre class="console"><code>mkdir -p ~/Arduino/libraries && cd ~/Arduino/libraries</code>
-<code>git clone --recursive git@github.com:tttapa/Control-Surface.git      # SSH</code>
-<code>git clone --recursive https://github.com/tttapa/Control-Surface.git  # HTTPS</code></pre>
+<code>git clone git@github.com:tttapa/Control-Surface.git      # SSH</code>
+<code>git clone https://github.com/tttapa/Control-Surface.git  # HTTPS</code></pre>
 
 <h3>Installing the Arduino library dependencies</h3>
 
 <p>
-    Some of the examples use the <code>Adafruit_SSD1306</code> and
-    <code>Adafruit_GFX</code> libraries.
-    You also need the Encoder and MIDIUSB libraries.
+    Some of the examples use third-party libraries.
     You can download them using the library manager in the Arduino IDE, or:
 </p>
 <pre class="console"><code>cd ~/Arduino/libraries</code>
 <code>git clone https://github.com/adafruit/Adafruit-GFX-Library.git</code>
 <code>git clone https://github.com/adafruit/Adafruit_SSD1306.git</code>
-<code>git clone https://github.com/PaulStoffregen/Encoder.git</code>
-<code>git clone https://github.com/arduino-libraries/MIDIUSB.git</code></pre>
-    
+<code>git clone https://github.com/adafruit/Adafruit_BusIO.git</code>
+<code>git clone https://github.com/FastLED/FastLED.git</code>
+<code>git clone https://github.com/arduino-libraries/MIDIUSB.git</code>
+<code>git clone https://github.com/lathoub/Arduino-AppleMIDI-Library.git</code>
+<code>git clone https://github.com/FortySevenEffects/arduino_midi_library.git</code></pre>
+
 <h3>Installing Visual Studio Code</h3>
 
 <p>
@@ -131,11 +123,10 @@
     Open the extensions menu using <code>CTRL+SHIFT+X</code>.
 </p>
 <ul>
-    <li><b>C/C++</b> - Microsoft</li>
+    <li><b>Clangd</b> - LLVM Extensions</li>
+    <li><b>CMake Tools</b> - Microsoft</li>
     <li><b>CMake</b> - twxs</li>
     <li><b>Code Spell Checker</b> - Street Side Software</li>
-    <li><b>GitLens</b> - Eric Amodio</li>
-    <li><b>Doxygen Documentation Generator</b> - Christoph Schlosser</li>
 </ul>
 
 <h3>Installing Doxygen</h3>
@@ -145,20 +136,9 @@
     easiest to clone it from GitHub, and build it from source. The version in
     the Ubuntu repositories is pretty old.
 </p>
-<pre class="console"><code>sudo apt install flex bison</code>
-<code>cd /tmp</code>
-<code>git clone https://github.com/doxygen/doxygen.git</code>
-<code>mkdir -p doxygen/build && cd doxygen/build</code>
-<code>cmake \
-    -G "Unix Makefiles" \
-    -D "CMAKE_INSTALL_PREFIX=$HOME/.local" \
-    -D "CMAKE_CXX_FLAGS=-O3 -march=native" \
-    -D "CMAKE_C_FLAGS=-O3 -march=native" \
-    -D "CMAKE_CXX_LINK_FLAGS=-flto" \
-    -D "CMAKE_C_COMPILER=gcc-9" \
-    -D "CMAKE_CXX_COMPILER=g++-9" ..</code>
-<code>make -j$[$(nproc) * 2]</code>
-<code>make install</code></pre>
+<p>
+    <a href="/Pages/Ubuntu/Software-Installation/Doxygen.html">Build and installation instructions</a>
+</p>
 <h4>Dot</h4>
 <p>
     Doxygen uses Dot to generate diagrams. Install the Graphviz package that

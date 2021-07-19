@@ -2,6 +2,8 @@
 @sequence: 30
 @title: Tests
 @author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
 @keywords: Control Surface,Arduino,Tests,Developers
 @description: Building and running the tests, and compiling the examples of the 
               Control Surface library.
@@ -18,68 +20,69 @@
 
 <h4>Running CMake</h4>
 <p>
-    The first step to compiling is running CMake. CMake will generate the
-    Makefiles that are used to build the project. <br>
-    Usually, you only have to do this once, the very first time, and afterwards
-    every time you add a new implementation (<code>.cpp</code>) file.
+    Use the CMake Tools extension to configure the project using CMake.
+    (<code>CTRL+SHIFT+P</code>, “CMake: Configure”)
 </p>
 <p>
-    It's easiest to run this in the command line. In Visual Studio Code, go to
-    the "Terminal" menu, and select "New Terminal". <br>
-    The working directory of the terminal should be
-    <code>Control-Surface/build</code>.
+    To be able to generate the coverage report, use the
+    <code>Clear Build Directory and Run CMake</code> task.
+    (<code>CTRL+P</code>, “task Clear Build Directory and Run CMake”)
 </p>
-<pre class="console"><code>cmake ..</code></pre>
 
-<h4>Compiling in Visual Studio Code</h4>
+<h4>Compiling</h4>
 <p>
     To compile the Control Surface library and its unit tests, you can use the
     <code>CTRL+SHIFT+B</code> shortcut (build).<br>
     Alternatively, you can press <code>CTRL+P</code>, type "task", space, and
-    then "Make All".
+    then "Build All".
+</p>
+
+<h4>Running the tests</h4>
+<p>
+    To run the tests, press <code>CTRL+Shift+P</code>, type "Tasks: Run Test
+    Task". There should be three options.
+</p>
+<ul>
+    <li>Run Tests (gtest): builds any files that were modified, runs the tests, and
+        prints the output to the console.</li>
+    <li>Run Tests: equivalent to Run Tests (gtest), but it only prints the test results
+        to the console, not the output (print statements) of the tests. It is slower because it runs each test in
+        isolation</li>
+    <li>Build & Test & Build examples: the same as Run Tests (gtest), and after running
+        the tests, it also compiles all Arduino examples for one specific platform, specified in
+        <code>.vscode/tasks.json</code>. This can take a
+        significant amount of time.</li>
+</ul>
+<p>
+    Before committing, Build & Test & Build examples has to pass.
 </p>
 
 <h4>Compiling using a terminal</h4>
 <p>
     If you're not using VSCode, you can compile everything from a terminal. <br>
     Simply navigate to the <code>Control-Surface/build</code> directory, and
-    invoke GNU Make. <br>
+    invoke CMake. <br>
     You can speed up the compilation by compiling multiple files in parallel
     using the <code>-j</code> option. <code>nproc</code> returns the number of
     CPUs available on your machine.
 </p>
-<pre class="console"><code>make -j`nproc`</code></pre>
-
-<h4>Running the tests in Visual Studio Code</h4>
-<p>
-    To run the tests, press <code>CTRL+Shift+P</code>, type "Tasks: Run Test
-    Task". There should be three options.
-</p>
-<ul>
-    <li>Make Check: builds any files that were modified, runs the tests, and
-        prints the output to the console.</li>
-    <li>Make Test: equivalent to Make Check, but it only prints the test results
-        to the console, not the output (print statements) of the tests.</li>
-    <li>Make & Test & Build examples: the same as Make Test, and after running
-        the tests, it also compiles all Arduino examples. This can take a
-        significant amount of time.</li>
-</ul>
-<p>
-    Before committing, Make & Test & Build examples has to pass.
-</p>
+<pre class="console"><code>cmake ..</code>
+<code>cmake --build . -j$(nproc)</code></pre>
 
 <h4>Running the tests using a terminal</h4>
 <p>
-    Open a terminal in the <code>Control-Surface/build</code> directory, build
-    the library and tests, and run them:
+    Open a terminal in the <code>Control-Surface/build</code> directory,
+    compile everything (see previous paragraph) and then run the tests:
 </p>
-<pre class="console"><code>make -j`nproc`</code>
-<code>make test</code>
-<code>make check</code></pre>
+<pre class="console"><code>ctest</code></pre>
 <p>
-    To compile all arduino examples, open a terminal in the
-    <code>Control-Surface/scripts</code> directory, and run:
+    To compile the Arduino examples, open a terminal in the
+    <code>Control-Surface/tools</code> directory, and run:
 </p>
-<pre class="console"><code>./build-arduino.sh `nproc`</code></pre>
+<pre class="console"><code>python3 arduino-example-builder.py 'AVR USB'</code></pre>
+<p>
+    You can replace <code>'AVR USB'</code> with any platform specified in 
+    <code>test/examples-board-fqbns.yaml</code>.
+</p>
 
 </html>
