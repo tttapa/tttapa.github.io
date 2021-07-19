@@ -20,6 +20,37 @@
 This page gives a high-level overview of the architecture of the motor
 controller code and how the different parts interact.
 
+<h3>General</h3>
+<p>
+    The control loop of the motorized faders requires pretty tight timing, so
+    running it in the main loop is not really feasible if there are other slow
+    operations going on, such as updating displays or reading many potentiometers
+    through multiplexers. When moving the control loop
+    to an interrupt handler, this implies that the ADC has to be interrupt-driven
+    as well, which is incompatible with the main code using <code>analogRead()</code>.
+    These factors make it hard to integrate motorized faders with the usual
+    <code>Control_Surface.loop()</code> approach.
+</p>
+<p>
+    To circumvent these issues, and to avoid having to port the
+    architecture-specific interrupt and ADC code required for the control loops to all
+    platforms supported by the Control Surface, I decided to implement
+    the motorized fader code for the ATmega328P only. These chips are very
+    popular, and Arduino Nano or Arduino Pro Mini clones can be found for under
+    $5.
+</p>
+<p>
+    The ATmega328P motor controllers communicate with the main microcontroller over
+    I²C. This allows multiple ATmega328P controllers to be used
+    (with up to four faders each), using only two pins (SDA, SCL).
+    The main microcontroller can write the setpoint for each fader, and can
+    request the fader positions and touch status. Usually, the setpoint is
+    updated based on the target sent over MIDI by the DAW, and the position and
+    touch status is sent back to the DAW over MIDI. An example is included in
+    <a
+        href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/master/MIDI-Controller/MIDI-Controller.ino">MIDI-Controller.ino</a>
+</p>
+
 <h3>PWM</h3>
 <p>
     Timer2 and Timer0 are used to generate up to four PWM channels at a rate of
@@ -96,7 +127,7 @@ controller code and how the different parts interact.
     The conductive knob of the fader can be seen as a small capacitive load
     connected to the Arduino pin. When the knob is touched, the capacitance is
     higher than when it is not being touched. The capacitance is not measured
-    directly, instead, a large resistor is added between \(V_\mathrm{cc}\) and 
+    directly, instead, a large resistor is added between \(V_\mathrm{cc}\) and
     the knob, and then the RC-time is measured, i.e. the time it takes for the
     capacitive knob to charge to a voltage of \((1 - e^{-1})\, V_\mathrm{cc}\)
     through the resistor. In practice, we're measuring the time it takes for the
@@ -108,54 +139,54 @@ controller code and how the different parts interact.
     the capacitance of the untouched fader knob is around \(0.1 \mathrm{nF}\).
     The RC-time of this circuit is \(50 \mathrm{\mu s}\). We could then define a
     threshold of, say, \(160 \mathrm{\mu s}\). If the measured RC-time is higher than
-    the threshold, we consider the knob touched. This threshold time 
-    corresponds to \(5\) periods of the Timer2 interrupt. The following figure 
-    shows the pin voltage in function of time for two scenarios: the knob being 
-    released and the knob being touched. The threshold time and the threshold 
+    the threshold, we consider the knob touched. This threshold time
+    corresponds to \(5\) periods of the Timer2 interrupt. The following figure
+    shows the pin voltage in function of time for two scenarios: the knob being
+    released and the knob being touched. The threshold time and the threshold
     voltage of \((1 - e^{-1})\, V_\mathrm{cc}\) are shown as well.
 </p>
 @image{
 "file": "images/touch-sense/rc.svg",
 "make": {"makefile": "images/touch-sense/rc.Makefile",
-         "cwd": "images/touch-sense"},
+"cwd": "images/touch-sense"},
 "source": "images/touch-sense/rc.py"
 }
 <p>
-    To determine whether the knob is being touched, we can just look at the 
+    To determine whether the knob is being touched, we can just look at the
     state of the pin after the threshold time: if it's high, the RC-time is less
-    than the threshold time, and the knob is not touched, if it's low, the 
+    than the threshold time, and the knob is not touched, if it's low, the
     RC-time is higher than the threshold time, and the knob is touched.
 </p>
 <p>
-    In practice, we just continuously charge and discharge the pin in the 
-    Timer2 interrupt. We simply start charging every 30 interrupts, then we 
+    In practice, we just continuously charge and discharge the pin in the
+    Timer2 interrupt. We simply start charging every 30 interrupts, then we
     count the number of interrupts to the threshold time (5 in this case), and
-    we read the digital state of the pins. Then we switch the pin to output mode 
+    we read the digital state of the pins. Then we switch the pin to output mode
     to discharge it for a couple of cycles, and then we start charging again.
 </p>
 @codesnippet{
 "file": "resources/touch-sense.cpp"
 }
 <p>
-    The only reason to wait 30 interrupt cycles before charging again is to 
+    The only reason to wait 30 interrupt cycles before charging again is to
     synchronize with the ADC and the control loops. This is just for
     convenience, because in the actual
     implementation, both touch sensing and starting ADC conversions are handled
-    in the same interrupt service routine. 
-    To minimize the overhead, all touch pins are 
-    on the same GPIO port, so touch sensing can be done very efficiently using 
+    in the same interrupt service routine.
+    To minimize the overhead, all touch pins are
+    on the same GPIO port, so touch sensing can be done very efficiently using
     direct port manipulation.
 </p>
 
 <h3>Communication</h3>
 <h4>I²C (Wire)</h4>
 <p>
-    The motor controller acts as an I²C slave. The master can read the fader 
-    positions and whether they are being touched or not, and the master can 
+    The motor controller acts as an I²C slave. The master can read the fader
+    positions and whether they are being touched or not, and the master can
     write the position setpoints.
 </p>
 <p>
-    The response contains the fader positions and touch status as follows 
+    The response contains the fader positions and touch status as follows
     (represented in binary):
 </p>
 <pre class="lineNumbers">
@@ -165,18 +196,18 @@ bbbb bbbb   00bb bbbb
 cccc cccc   00cc cccc
 dddd dddd   00dd dddd</pre>
 <p>
-    <code>tttt</code> contains the touch status of up to four faders, the least 
+    <code>tttt</code> contains the touch status of up to four faders, the least
     significant of the four bits is the first fader.<br>
-    The length of the message depends on the 
+    The length of the message depends on the
     <code>Config::num_faders</code> constant.
-    <code>aaaa&nbsp;aaaa&nbsp;00aa&nbsp;aaaa</code> encodes the 
-    position of the first fader as a 16-bit Little-Endian integer, 
-    <code>bbbb&nbsp;bbbb&nbsp;00bb&nbsp;bbbb</code> for the second 
+    <code>aaaa&nbsp;aaaa&nbsp;00aa&nbsp;aaaa</code> encodes the
+    position of the first fader as a 16-bit Little-Endian integer,
+    <code>bbbb&nbsp;bbbb&nbsp;00bb&nbsp;bbbb</code> for the second
     fader, and so on. By default,
     these positions are 14-bit numbers (obtained by oversampling and averaging
-    the 10-bit ADC readings). The number of bits of the position values is 
-    <code>16&nbsp;-&nbsp;Config::adc_ema_K</code>, so if the 
-    <code>Config::adc_ema_K</code> constant changes, 
+    the 10-bit ADC readings). The number of bits of the position values is
+    <code>16&nbsp;-&nbsp;Config::adc_ema_K</code>, so if the
+    <code>Config::adc_ema_K</code> constant changes,
     the scale of the values changes as well.
 </p>
 <p>
@@ -186,17 +217,17 @@ dddd dddd   00dd dddd</pre>
 <pre class="lineNumbers">
 rrrr rrrr   00ff 00rr</pre>
 <p>
-    <code>rrrr&nbsp;rrrr&nbsp;0000&nbsp;00rr</code> is the 10-bit reference 
+    <code>rrrr&nbsp;rrrr&nbsp;0000&nbsp;00rr</code> is the 10-bit reference
     position, encoded as a Little-Endian integer, and <code>ff</code> is the
     index of the fader to address (0 to 3).
 </p>
 <h4>UART (Serial)</h4>
 <p>
     Tuning parameters can be updated at runtime by sending them over the serial
-    port, and it is possible to start experiments, logging the 
+    port, and it is possible to start experiments, logging the
     reference, actual position, and control signal.
     The SLIP protocol
-    (<a href="https://datatracker.ietf.org/doc/html/rfc1055">RFC&nbsp;1055</a>) 
+    (<a href="https://datatracker.ietf.org/doc/html/rfc1055">RFC&nbsp;1055</a>)
     is used to handle packet framing.
 </p>
 <p>
@@ -208,8 +239,9 @@ rrrr rrrr   00ff 00rr</pre>
 "endline": 429
 }
 <p>
-    The outgoing messages are just SLIP packets containing the reference, the 
+    The outgoing messages are just SLIP packets containing the reference, the
     measured position and the control signal as three signed 16-bit
     Little-Endian integers.
 </p>
+
 </html>
