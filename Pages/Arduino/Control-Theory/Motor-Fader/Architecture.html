@@ -1509,6 +1509,7 @@ mjx-c.mjx-c1D707.TEX-I::before {
   }
   </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
   <ul>
+            <li><a href="#general">General</a></li>
             <li><a href="#pwm">PWM</a></li>
             <li><a href="#adc">ADC</a></li>
             <li><a href="#control-loops">Control loops</a></li>
@@ -1527,6 +1528,36 @@ mjx-c.mjx-c1D707.TEX-I::before {
 
 This page gives a high-level overview of the architecture of the motor
 controller code and how the different parts interact.
+
+<h3><a name="general" href="#general">General</a></h3>
+<p>
+    The control loop of the motorized faders requires pretty tight timing, so
+    running it in the main loop is not really feasible if there are other slow
+    operations going on, such as updating displays or reading many potentiometers
+    through multiplexers. When moving the control loop
+    to an interrupt handler, this implies that the ADC has to be interrupt-driven
+    as well, which is incompatible with the main code using <code>analogRead()</code>.
+    These factors make it hard to integrate motorized faders with the usual
+    <code>Control_Surface.loop()</code> approach.
+</p>
+<p>
+    To circumvent these issues, and to avoid having to port the
+    architecture-specific interrupt and ADC code required for the control loops to all
+    platforms supported by the Control Surface, I decided to implement
+    the motorized fader code for the ATmega328P only. These chips are very
+    popular, and Arduino Nano or Arduino Pro Mini clones can be found for under
+    $5.
+</p>
+<p>
+    The ATmega328P motor controllers communicate with the main microcontroller over
+    I²C. This allows multiple ATmega328P controllers to be used
+    (with up to four faders each), using only two pins (SDA, SCL).
+    The main microcontroller can write the setpoint for each fader, and can
+    request the fader positions and touch status. Usually, the setpoint is
+    updated based on the target sent over MIDI by the DAW, and the position and
+    touch status is sent back to the DAW over MIDI. An example is included in
+    <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/master/MIDI-Controller/MIDI-Controller.ino">MIDI-Controller.ino</a>
+</p>
 
 <h3><a name="pwm" href="#pwm">PWM</a></h3>
 <p>
@@ -1571,70 +1602,70 @@ td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px
 span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
 td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
-.pygments61 .hll { background-color: #ffffcc }
-.pygments61 { background: #ffffff; }
-.pygments61 .c { color: #008000 } /* Comment */
-.pygments61 .err { border: 1px solid #FF0000 } /* Error */
-.pygments61 .k { color: #0000ff } /* Keyword */
-.pygments61 .l { color: #0000FF } /* Literal */
-.pygments61 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments61 .cm { color: #008000 } /* Comment.Multiline */
-.pygments61 .cp { color: #af00db } /* Comment.Preproc */
-.pygments61 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments61 .c1 { color: #008000 } /* Comment.Single */
-.pygments61 .cs { color: #008000 } /* Comment.Special */
-.pygments61 .ge { font-style: italic } /* Generic.Emph */
-.pygments61 .gh { font-weight: bold } /* Generic.Heading */
-.pygments61 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments61 .gs { font-weight: bold } /* Generic.Strong */
-.pygments61 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments61 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments61 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments61 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments61 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments61 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments61 .kt { color: #2b91af } /* Keyword.Type */
-.pygments61 .ld { color: #0000FF } /* Literal.Date */
-.pygments61 .m { color: #0000FF } /* Literal.Number */
-.pygments61 .s { color: #a31515 } /* Literal.String */
-.pygments61 .na { color: #001080 } /* Name.Attribute */
-.pygments61 .nb { color: #795e26 } /* Name.Builtin */
-.pygments61 .nc { color: #2b91af } /* Name.Class */
-.pygments61 .no { color: #0000FF } /* Name.Constant */
-.pygments61 .nf { color: #795e26 } /* Name.Function */
-.pygments61 .nl { color: #AF00DB } /* Name.Label */
-.pygments61 .nn { color: #000000 } /* Name.Namespace */
-.pygments61 .nt { color: #800000 } /* Name.Tag */
-.pygments61 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments61 .ow { color: #0000ff } /* Operator.Word */
-.pygments61 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments61 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments61 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments61 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments61 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments61 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments61 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments61 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments61 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments61 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments61 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments61 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments61 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments61 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments61 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments61 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments61 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments61 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments61 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments61 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments61 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments61 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments61 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments61 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments61 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments61 pre.snippet61 { counter-reset: line 0; }</style>
+.pygments92 .hll { background-color: #ffffcc }
+.pygments92 { background: #ffffff; }
+.pygments92 .c { color: #008000 } /* Comment */
+.pygments92 .err { border: 1px solid #FF0000 } /* Error */
+.pygments92 .k { color: #0000ff } /* Keyword */
+.pygments92 .l { color: #0000FF } /* Literal */
+.pygments92 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments92 .cm { color: #008000 } /* Comment.Multiline */
+.pygments92 .cp { color: #af00db } /* Comment.Preproc */
+.pygments92 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments92 .c1 { color: #008000 } /* Comment.Single */
+.pygments92 .cs { color: #008000 } /* Comment.Special */
+.pygments92 .ge { font-style: italic } /* Generic.Emph */
+.pygments92 .gh { font-weight: bold } /* Generic.Heading */
+.pygments92 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments92 .gs { font-weight: bold } /* Generic.Strong */
+.pygments92 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments92 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments92 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments92 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments92 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments92 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments92 .kt { color: #2b91af } /* Keyword.Type */
+.pygments92 .ld { color: #0000FF } /* Literal.Date */
+.pygments92 .m { color: #0000FF } /* Literal.Number */
+.pygments92 .s { color: #a31515 } /* Literal.String */
+.pygments92 .na { color: #001080 } /* Name.Attribute */
+.pygments92 .nb { color: #795e26 } /* Name.Builtin */
+.pygments92 .nc { color: #2b91af } /* Name.Class */
+.pygments92 .no { color: #0000FF } /* Name.Constant */
+.pygments92 .nf { color: #795e26 } /* Name.Function */
+.pygments92 .nl { color: #AF00DB } /* Name.Label */
+.pygments92 .nn { color: #000000 } /* Name.Namespace */
+.pygments92 .nt { color: #800000 } /* Name.Tag */
+.pygments92 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments92 .ow { color: #0000ff } /* Operator.Word */
+.pygments92 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments92 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments92 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments92 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments92 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments92 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments92 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments92 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments92 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments92 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments92 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments92 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments92 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments92 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments92 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments92 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments92 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments92 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments92 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments92 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments92 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments92 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments92 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments92 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments92 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments92 pre.snippet92 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Arduino/Control-Theory/Motor-Fader/resources/isr-counter.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments61"><pre class="lineNumbers snippet61"><code><span></span><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">num_faders</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span></code>
+<div class="pygments92"><pre class="lineNumbers snippet92"><code><span></span><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">num_faders</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span></code>
 <code><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">interrupt_divisor</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span></code>
 <code><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">adc_start_count</span> <span class="o">=</span> <span class="n">interrupt_divisor</span> <span class="o">/</span> <span class="n">num_faders</span><span class="p">;</span></code>
 <code></code>
@@ -1689,7 +1720,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
     The conductive knob of the fader can be seen as a small capacitive load
     connected to the Arduino pin. When the knob is touched, the capacitance is
     higher than when it is not being touched. The capacitance is not measured
-    directly, instead, a large resistor is added between <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D449 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>V</mi><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">c</mi></mrow></msub></math></mjx-assistive-mml></mjx-container> and 
+    directly, instead, a large resistor is added between <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D449 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>V</mi><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">c</mi></mrow></msub></math></mjx-assistive-mml></mjx-container> and
     the knob, and then the RC-time is measured, i.e. the time it takes for the
     capacitive knob to charge to a voltage of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D452 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-TeXAtom></mjx-script></mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mstyle><mjx-mspace style="width: 0.167em"></mjx-mspace></mjx-mstyle><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D449 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo><mstyle scriptlevel="0"><mspace width="thinmathspace"></mspace></mstyle><msub><mi>V</mi><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">c</mi></mrow></msub></math></mjx-assistive-mml></mjx-container>
     through the resistor. In practice, we're measuring the time it takes for the
@@ -1701,24 +1732,24 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
     the capacitance of the untouched fader knob is around <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c30"></mjx-c><mjx-c class="mjx-c2E"></mjx-c><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c6E"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c46"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>0.1</mn><mrow><mi mathvariant="normal">n</mi><mi mathvariant="normal">F</mi></mrow></math></mjx-assistive-mml></mjx-container>.
     The RC-time of this circuit is <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c73"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>50</mn><mrow><mi>μ</mi><mi mathvariant="normal">s</mi></mrow></math></mjx-assistive-mml></mjx-container>. We could then define a
     threshold of, say, <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c30"></mjx-c></mjx-mn><mjx-TeXAtom texclass="ORD"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D707 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c73"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>160</mn><mrow><mi>μ</mi><mi mathvariant="normal">s</mi></mrow></math></mjx-assistive-mml></mjx-container>. If the measured RC-time is higher than
-    the threshold, we consider the knob touched. This threshold time 
-    corresponds to <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>5</mn></math></mjx-assistive-mml></mjx-container> periods of the Timer2 interrupt. The following figure 
-    shows the pin voltage in function of time for two scenarios: the knob being 
-    released and the knob being touched. The threshold time and the threshold 
+    the threshold, we consider the knob touched. This threshold time
+    corresponds to <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mn class="mjx-n"><mjx-c class="mjx-c35"></mjx-c></mjx-mn></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>5</mn></math></mjx-assistive-mml></mjx-container> periods of the Timer2 interrupt. The following figure
+    shows the pin voltage in function of time for two scenarios: the knob being
+    released and the knob being touched. The threshold time and the threshold
     voltage of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" role="presentation"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D452 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-TeXAtom></mjx-script></mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mstyle><mjx-mspace style="width: 0.167em"></mjx-mspace></mjx-mstyle><mjx-msub><mjx-mi class="mjx-i" noIC="true"><mjx-c class="mjx-c1D449 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml role="presentation" unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo><mstyle scriptlevel="0"><mspace width="thinmathspace"></mspace></mstyle><msub><mi>V</mi><mrow><mi mathvariant="normal">c</mi><mi mathvariant="normal">c</mi></mrow></msub></math></mjx-assistive-mml></mjx-container> are shown as well.
 </p>
 <div class="img-wrapper"><a href="images/touch-sense/rc.svg"><img src="images/touch-sense/rc.svg" alt="images/touch-sense/rc.svg"></a><small class="image-code-link"><a href="images/touch-sense/rc.py">Image source code</a></small></div>
 <p>
-    To determine whether the knob is being touched, we can just look at the 
+    To determine whether the knob is being touched, we can just look at the
     state of the pin after the threshold time: if it's high, the RC-time is less
-    than the threshold time, and the knob is not touched, if it's low, the 
+    than the threshold time, and the knob is not touched, if it's low, the
     RC-time is higher than the threshold time, and the knob is touched.
 </p>
 <p>
-    In practice, we just continuously charge and discharge the pin in the 
-    Timer2 interrupt. We simply start charging every 30 interrupts, then we 
+    In practice, we just continuously charge and discharge the pin in the
+    Timer2 interrupt. We simply start charging every 30 interrupts, then we
     count the number of interrupts to the threshold time (5 in this case), and
-    we read the digital state of the pins. Then we switch the pin to output mode 
+    we read the digital state of the pins. Then we switch the pin to output mode
     to discharge it for a couple of cycles, and then we start charging again.
 </p>
 <div class="codesnippet"><style>pre { line-height: 125%; margin: 0; }
@@ -1726,70 +1757,70 @@ td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px
 span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
 td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
-.pygments136 .hll { background-color: #ffffcc }
-.pygments136 { background: #ffffff; }
-.pygments136 .c { color: #008000 } /* Comment */
-.pygments136 .err { border: 1px solid #FF0000 } /* Error */
-.pygments136 .k { color: #0000ff } /* Keyword */
-.pygments136 .l { color: #0000FF } /* Literal */
-.pygments136 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments136 .cm { color: #008000 } /* Comment.Multiline */
-.pygments136 .cp { color: #af00db } /* Comment.Preproc */
-.pygments136 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments136 .c1 { color: #008000 } /* Comment.Single */
-.pygments136 .cs { color: #008000 } /* Comment.Special */
-.pygments136 .ge { font-style: italic } /* Generic.Emph */
-.pygments136 .gh { font-weight: bold } /* Generic.Heading */
-.pygments136 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments136 .gs { font-weight: bold } /* Generic.Strong */
-.pygments136 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments136 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments136 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments136 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments136 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments136 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments136 .kt { color: #2b91af } /* Keyword.Type */
-.pygments136 .ld { color: #0000FF } /* Literal.Date */
-.pygments136 .m { color: #0000FF } /* Literal.Number */
-.pygments136 .s { color: #a31515 } /* Literal.String */
-.pygments136 .na { color: #001080 } /* Name.Attribute */
-.pygments136 .nb { color: #795e26 } /* Name.Builtin */
-.pygments136 .nc { color: #2b91af } /* Name.Class */
-.pygments136 .no { color: #0000FF } /* Name.Constant */
-.pygments136 .nf { color: #795e26 } /* Name.Function */
-.pygments136 .nl { color: #AF00DB } /* Name.Label */
-.pygments136 .nn { color: #000000 } /* Name.Namespace */
-.pygments136 .nt { color: #800000 } /* Name.Tag */
-.pygments136 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments136 .ow { color: #0000ff } /* Operator.Word */
-.pygments136 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments136 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments136 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments136 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments136 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments136 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments136 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments136 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments136 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments136 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments136 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments136 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments136 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments136 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments136 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments136 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments136 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments136 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments136 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments136 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments136 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments136 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments136 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments136 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments136 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments136 pre.snippet136 { counter-reset: line 0; }</style>
+.pygments167 .hll { background-color: #ffffcc }
+.pygments167 { background: #ffffff; }
+.pygments167 .c { color: #008000 } /* Comment */
+.pygments167 .err { border: 1px solid #FF0000 } /* Error */
+.pygments167 .k { color: #0000ff } /* Keyword */
+.pygments167 .l { color: #0000FF } /* Literal */
+.pygments167 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments167 .cm { color: #008000 } /* Comment.Multiline */
+.pygments167 .cp { color: #af00db } /* Comment.Preproc */
+.pygments167 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments167 .c1 { color: #008000 } /* Comment.Single */
+.pygments167 .cs { color: #008000 } /* Comment.Special */
+.pygments167 .ge { font-style: italic } /* Generic.Emph */
+.pygments167 .gh { font-weight: bold } /* Generic.Heading */
+.pygments167 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments167 .gs { font-weight: bold } /* Generic.Strong */
+.pygments167 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments167 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments167 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments167 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments167 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments167 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments167 .kt { color: #2b91af } /* Keyword.Type */
+.pygments167 .ld { color: #0000FF } /* Literal.Date */
+.pygments167 .m { color: #0000FF } /* Literal.Number */
+.pygments167 .s { color: #a31515 } /* Literal.String */
+.pygments167 .na { color: #001080 } /* Name.Attribute */
+.pygments167 .nb { color: #795e26 } /* Name.Builtin */
+.pygments167 .nc { color: #2b91af } /* Name.Class */
+.pygments167 .no { color: #0000FF } /* Name.Constant */
+.pygments167 .nf { color: #795e26 } /* Name.Function */
+.pygments167 .nl { color: #AF00DB } /* Name.Label */
+.pygments167 .nn { color: #000000 } /* Name.Namespace */
+.pygments167 .nt { color: #800000 } /* Name.Tag */
+.pygments167 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments167 .ow { color: #0000ff } /* Operator.Word */
+.pygments167 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments167 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments167 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments167 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments167 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments167 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments167 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments167 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments167 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments167 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments167 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments167 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments167 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments167 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments167 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments167 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments167 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments167 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments167 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments167 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments167 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments167 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments167 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments167 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments167 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments167 pre.snippet167 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Arduino/Control-Theory/Motor-Fader/resources/touch-sense.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments136"><pre class="lineNumbers snippet136"><code><span></span><span class="c1">// GPIO pin with the fader knob and pull-up resistor:</span></code>
+<div class="pygments167"><pre class="lineNumbers snippet167"><code><span></span><span class="c1">// GPIO pin with the fader knob and pull-up resistor:</span></code>
 <code><span class="k">constexpr</span> <span class="kt">uint8_t</span> <span class="n">touch_pin</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span></code>
 <code><span class="c1">// Frequency at which the Timer2 interrupt fires:</span></code>
 <code><span class="k">constexpr</span> <span class="kt">float</span> <span class="n">interrupt_freq</span> <span class="o">=</span> <span class="mi">31'250</span><span class="p">;</span></code>
@@ -1820,25 +1851,25 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code><span class="p">}</span></code></pre></div>
 </div>
 <p>
-    The only reason to wait 30 interrupt cycles before charging again is to 
+    The only reason to wait 30 interrupt cycles before charging again is to
     synchronize with the ADC and the control loops. This is just for
     convenience, because in the actual
     implementation, both touch sensing and starting ADC conversions are handled
-    in the same interrupt service routine. 
-    To minimize the overhead, all touch pins are 
-    on the same GPIO port, so touch sensing can be done very efficiently using 
+    in the same interrupt service routine.
+    To minimize the overhead, all touch pins are
+    on the same GPIO port, so touch sensing can be done very efficiently using
     direct port manipulation.
 </p>
 
 <h3><a name="communication" href="#communication">Communication</a></h3>
 <h4><a name="i-c-wire" href="#i-c-wire">I²C (Wire)</a></h4>
 <p>
-    The motor controller acts as an I²C slave. The master can read the fader 
-    positions and whether they are being touched or not, and the master can 
+    The motor controller acts as an I²C slave. The master can read the fader
+    positions and whether they are being touched or not, and the master can
     write the position setpoints.
 </p>
 <p>
-    The response contains the fader positions and touch status as follows 
+    The response contains the fader positions and touch status as follows
     (represented in binary):
 </p>
 <pre class="lineNumbers"><code>0000 tttt</code>
@@ -1847,18 +1878,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code>cccc cccc   00cc cccc</code>
 <code>dddd dddd   00dd dddd</code></pre>
 <p>
-    <code>tttt</code> contains the touch status of up to four faders, the least 
+    <code>tttt</code> contains the touch status of up to four faders, the least
     significant of the four bits is the first fader.<br>
-    The length of the message depends on the 
+    The length of the message depends on the
     <code>Config::num_faders</code> constant.
-    <code>aaaa aaaa 00aa aaaa</code> encodes the 
-    position of the first fader as a 16-bit Little-Endian integer, 
-    <code>bbbb bbbb 00bb bbbb</code> for the second 
+    <code>aaaa aaaa 00aa aaaa</code> encodes the
+    position of the first fader as a 16-bit Little-Endian integer,
+    <code>bbbb bbbb 00bb bbbb</code> for the second
     fader, and so on. By default,
     these positions are 14-bit numbers (obtained by oversampling and averaging
-    the 10-bit ADC readings). The number of bits of the position values is 
-    <code>16 - Config::adc_ema_K</code>, so if the 
-    <code>Config::adc_ema_K</code> constant changes, 
+    the 10-bit ADC readings). The number of bits of the position values is
+    <code>16 - Config::adc_ema_K</code>, so if the
+    <code>Config::adc_ema_K</code> constant changes,
     the scale of the values changes as well.
 </p>
 <p>
@@ -1867,17 +1898,17 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 </p>
 <pre class="lineNumbers"><code>rrrr rrrr   00ff 00rr</code></pre>
 <p>
-    <code>rrrr rrrr 0000 00rr</code> is the 10-bit reference 
+    <code>rrrr rrrr 0000 00rr</code> is the 10-bit reference
     position, encoded as a Little-Endian integer, and <code>ff</code> is the
     index of the fader to address (0 to 3).
 </p>
 <h4><a name="uart-serial" href="#uart-serial">UART (Serial)</a></h4>
 <p>
     Tuning parameters can be updated at runtime by sending them over the serial
-    port, and it is possible to start experiments, logging the 
+    port, and it is possible to start experiments, logging the
     reference, actual position, and control signal.
     The SLIP protocol
-    (<a href="https://datatracker.ietf.org/doc/html/rfc1055">RFC 1055</a>) 
+    (<a href="https://datatracker.ietf.org/doc/html/rfc1055">RFC 1055</a>)
     is used to handle packet framing.
 </p>
 <p>
@@ -1888,70 +1919,70 @@ td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px
 span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
 td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
-.pygments205 .hll { background-color: #ffffcc }
-.pygments205 { background: #ffffff; }
-.pygments205 .c { color: #008000 } /* Comment */
-.pygments205 .err { border: 1px solid #FF0000 } /* Error */
-.pygments205 .k { color: #0000ff } /* Keyword */
-.pygments205 .l { color: #0000FF } /* Literal */
-.pygments205 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments205 .cm { color: #008000 } /* Comment.Multiline */
-.pygments205 .cp { color: #af00db } /* Comment.Preproc */
-.pygments205 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments205 .c1 { color: #008000 } /* Comment.Single */
-.pygments205 .cs { color: #008000 } /* Comment.Special */
-.pygments205 .ge { font-style: italic } /* Generic.Emph */
-.pygments205 .gh { font-weight: bold } /* Generic.Heading */
-.pygments205 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments205 .gs { font-weight: bold } /* Generic.Strong */
-.pygments205 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments205 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments205 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments205 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments205 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments205 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments205 .kt { color: #2b91af } /* Keyword.Type */
-.pygments205 .ld { color: #0000FF } /* Literal.Date */
-.pygments205 .m { color: #0000FF } /* Literal.Number */
-.pygments205 .s { color: #a31515 } /* Literal.String */
-.pygments205 .na { color: #001080 } /* Name.Attribute */
-.pygments205 .nb { color: #795e26 } /* Name.Builtin */
-.pygments205 .nc { color: #2b91af } /* Name.Class */
-.pygments205 .no { color: #0000FF } /* Name.Constant */
-.pygments205 .nf { color: #795e26 } /* Name.Function */
-.pygments205 .nl { color: #AF00DB } /* Name.Label */
-.pygments205 .nn { color: #000000 } /* Name.Namespace */
-.pygments205 .nt { color: #800000 } /* Name.Tag */
-.pygments205 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments205 .ow { color: #0000ff } /* Operator.Word */
-.pygments205 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments205 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments205 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments205 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments205 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments205 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments205 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments205 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments205 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments205 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments205 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments205 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments205 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments205 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments205 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments205 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments205 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments205 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments205 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments205 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments205 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments205 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments205 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments205 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments205 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments205 pre.snippet205 { counter-reset: line 416; }</style>
+.pygments236 .hll { background-color: #ffffcc }
+.pygments236 { background: #ffffff; }
+.pygments236 .c { color: #008000 } /* Comment */
+.pygments236 .err { border: 1px solid #FF0000 } /* Error */
+.pygments236 .k { color: #0000ff } /* Keyword */
+.pygments236 .l { color: #0000FF } /* Literal */
+.pygments236 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments236 .cm { color: #008000 } /* Comment.Multiline */
+.pygments236 .cp { color: #af00db } /* Comment.Preproc */
+.pygments236 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments236 .c1 { color: #008000 } /* Comment.Single */
+.pygments236 .cs { color: #008000 } /* Comment.Special */
+.pygments236 .ge { font-style: italic } /* Generic.Emph */
+.pygments236 .gh { font-weight: bold } /* Generic.Heading */
+.pygments236 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments236 .gs { font-weight: bold } /* Generic.Strong */
+.pygments236 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments236 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments236 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments236 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments236 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments236 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments236 .kt { color: #2b91af } /* Keyword.Type */
+.pygments236 .ld { color: #0000FF } /* Literal.Date */
+.pygments236 .m { color: #0000FF } /* Literal.Number */
+.pygments236 .s { color: #a31515 } /* Literal.String */
+.pygments236 .na { color: #001080 } /* Name.Attribute */
+.pygments236 .nb { color: #795e26 } /* Name.Builtin */
+.pygments236 .nc { color: #2b91af } /* Name.Class */
+.pygments236 .no { color: #0000FF } /* Name.Constant */
+.pygments236 .nf { color: #795e26 } /* Name.Function */
+.pygments236 .nl { color: #AF00DB } /* Name.Label */
+.pygments236 .nn { color: #000000 } /* Name.Namespace */
+.pygments236 .nt { color: #800000 } /* Name.Tag */
+.pygments236 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments236 .ow { color: #0000ff } /* Operator.Word */
+.pygments236 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments236 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments236 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments236 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments236 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments236 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments236 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments236 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments236 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments236 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments236 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments236 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments236 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments236 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments236 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments236 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments236 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments236 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments236 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments236 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments236 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments236 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments236 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments236 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments236 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments236 pre.snippet236 { counter-reset: line 416; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/47d8cb6cdc2978d500383387a72d646e62568a16/Motor-Controller/main.cpp#L417-L429" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments205"><pre class="lineNumbers snippet205"><code><span></span><span class="c1">// Message format: &lt;command&gt; &lt;fader&gt; &lt;value&gt;</span></code>
+<div class="pygments236"><pre class="lineNumbers snippet236"><code><span></span><span class="c1">// Message format: &lt;command&gt; &lt;fader&gt; &lt;value&gt;</span></code>
 <code><span class="c1">// Commands:</span></code>
 <code><span class="c1">//   - p: proportional gain Kp</span></code>
 <code><span class="c1">//   - i: integral gain Ki</span></code>
@@ -1966,15 +1997,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px
 <code><span class="c1">// cutoff frequency of the first fader to 40.</span></code></pre></div>
 </div>
 <p>
-    The outgoing messages are just SLIP packets containing the reference, the 
+    The outgoing messages are just SLIP packets containing the reference, the
     measured position and the control signal as three signed 16-bit
     Little-Endian integers.
 </p>
+
 </div>
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="PID-Tuning.html" title="PID Tuning"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"><a href="ATmega328P-Code.html" title="ATmega328P Code">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Saturday, 17 July 2021 23:21 UTC</footer>
+    <footer>Last edited: Monday, 19 July 2021 20:15 UTC</footer>
 </body>
 
 </html>

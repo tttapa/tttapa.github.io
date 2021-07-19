@@ -207,6 +207,26 @@
         <h1 class="title">Generating Documentation</h1>
         <i class="author">Pieter P</i>
         <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+            <li><a href="#generating-the-documentation-using-doxygen">Generating the documentation using Doxygen</a></li>
+              <ul>
+                <li><a href="#generating-the-documentation-in-visual-studio-code">Generating the documentation in Visual Studio Code</a></li>
+                <li><a href="#generating-the-documentation-from-the-terminal">Generating the documentation from the terminal</a></li>
+              </ul>
+            <li><a href="#generating-the-coverage-information-using-lcov">Generating the coverage information using LCOV</a></li>
+              <ul>
+                <li><a href="#generating-the-coverage-information-in-visual-studio-code">Generating the coverage information in Visual Studio Code</a></li>
+                <li><a href="#generating-the-coverage-information-from-the-terminal">Generating the coverage information from the terminal</a></li>
+                </ul>
+  </ul></div>
+
 
 <h3><a name="generating-the-documentation-using-doxygen" href="#generating-the-documentation-using-doxygen">Generating the documentation using Doxygen</a></h3>
 
@@ -228,7 +248,7 @@
 <p>
     Navigate to the <code>Control-Surface/build</code> directory, and run:
 </p>
-<pre class="console"><code>make documentation</code></pre>
+<pre class="console"><code>cmake --build . --target documentation</code></pre>
 
 <h3><a name="generating-the-coverage-information-using-lcov" href="#generating-the-coverage-information-using-lcov">Generating the coverage information using LCOV</a></h3>
 
@@ -247,15 +267,15 @@
 
 <h4><a name="generating-the-coverage-information-from-the-terminal" href="#generating-the-coverage-information-from-the-terminal">Generating the coverage information from the terminal</a></h4>
 <p>
-    Navigate to the <code>Control-Surface/build</code> directory, and run:
+    Navigate to the <code>Control-Surface/build/coverage</code> directory, and run:
 </p>
-<pre class="console"><code>make coverage</code></pre>
+<pre class="console"><code>cmake --build . --target coverage</code></pre>
 
 </div>
         <hr id="end-of-article">
-        <div class="nextupprev"></div>
+        <div class="nextupprev"><div class="prevpage"><a href="Tests.html" title="Tests"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Developers">Index</a></div><div class="nextpage"></div></div>
     </article>
-    <footer>Last edited: Monday, 05 August 2019 21:31 UTC</footer>
+    <footer>Last edited: Monday, 19 July 2021 19:54 UTC</footer>
 </body>
 
 </html>

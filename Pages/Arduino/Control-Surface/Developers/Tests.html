@@ -207,6 +207,24 @@
         <h1 class="title">Tests</h1>
         <i class="author">Pieter P</i>
         <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+            <li><a href="#compiling-the-library-and-the-unit-tests">Compiling the library and the unit tests</a></li>
+              <ul>
+                <li><a href="#running-cmake">Running CMake</a></li>
+                <li><a href="#compiling">Compiling</a></li>
+                <li><a href="#running-the-tests">Running the tests</a></li>
+                <li><a href="#compiling-using-a-terminal">Compiling using a terminal</a></li>
+                <li><a href="#running-the-tests-using-a-terminal">Running the tests using a terminal</a></li>
+                </ul>
+  </ul></div>
+
 
 <h3><a name="compiling-the-library-and-the-unit-tests" href="#compiling-the-library-and-the-unit-tests">Compiling the library and the unit tests</a></h3>
 
@@ -217,75 +235,76 @@
 
 <h4><a name="running-cmake" href="#running-cmake">Running CMake</a></h4>
 <p>
-    The first step to compiling is running CMake. CMake will generate the
-    Makefiles that are used to build the project. <br>
-    Usually, you only have to do this once, the very first time, and afterwards
-    every time you add a new implementation (<code>.cpp</code>) file.
+    Use the CMake Tools extension to configure the project using CMake.
+    (<code>CTRL+SHIFT+P</code>, “CMake: Configure”)
 </p>
 <p>
-    It's easiest to run this in the command line. In Visual Studio Code, go to
-    the "Terminal" menu, and select "New Terminal". <br>
-    The working directory of the terminal should be
-    <code>Control-Surface/build</code>.
+    To be able to generate the coverage report, use the
+    <code>Clear Build Directory and Run CMake</code> task.
+    (<code>CTRL+P</code>, “task Clear Build Directory and Run CMake”)
 </p>
-<pre class="console"><code>cmake ..</code></pre>
 
-<h4><a name="compiling-in-visual-studio-code" href="#compiling-in-visual-studio-code">Compiling in Visual Studio Code</a></h4>
+<h4><a name="compiling" href="#compiling">Compiling</a></h4>
 <p>
     To compile the Control Surface library and its unit tests, you can use the
     <code>CTRL+SHIFT+B</code> shortcut (build).<br>
     Alternatively, you can press <code>CTRL+P</code>, type "task", space, and
-    then "Make All".
+    then "Build All".
+</p>
+
+<h4><a name="running-the-tests" href="#running-the-tests">Running the tests</a></h4>
+<p>
+    To run the tests, press <code>CTRL+Shift+P</code>, type "Tasks: Run Test
+    Task". There should be three options.
+</p>
+<ul>
+    <li>Run Tests (gtest): builds any files that were modified, runs the tests, and
+        prints the output to the console.</li>
+    <li>Run Tests: equivalent to Run Tests (gtest), but it only prints the test results
+        to the console, not the output (print statements) of the tests. It is slower because it runs each test in
+        isolation</li>
+    <li>Build & Test & Build examples: the same as Run Tests (gtest), and after running
+        the tests, it also compiles all Arduino examples for one specific platform, specified in
+        <code>.vscode/tasks.json</code>. This can take a
+        significant amount of time.</li>
+</ul>
+<p>
+    Before committing, Build & Test & Build examples has to pass.
 </p>
 
 <h4><a name="compiling-using-a-terminal" href="#compiling-using-a-terminal">Compiling using a terminal</a></h4>
 <p>
     If you're not using VSCode, you can compile everything from a terminal. <br>
     Simply navigate to the <code>Control-Surface/build</code> directory, and
-    invoke GNU Make. <br>
+    invoke CMake. <br>
     You can speed up the compilation by compiling multiple files in parallel
     using the <code>-j</code> option. <code>nproc</code> returns the number of
     CPUs available on your machine.
 </p>
-<pre class="console"><code>make -j`nproc`</code></pre>
-
-<h4><a name="running-the-tests-in-visual-studio-code" href="#running-the-tests-in-visual-studio-code">Running the tests in Visual Studio Code</a></h4>
-<p>
-    To run the tests, press <code>CTRL+Shift+P</code>, type "Tasks: Run Test
-    Task". There should be three options.
-</p>
-<ul>
-    <li>Make Check: builds any files that were modified, runs the tests, and
-        prints the output to the console.</li>
-    <li>Make Test: equivalent to Make Check, but it only prints the test results
-        to the console, not the output (print statements) of the tests.</li>
-    <li>Make & Test & Build examples: the same as Make Test, and after running
-        the tests, it also compiles all Arduino examples. This can take a
-        significant amount of time.</li>
-</ul>
-<p>
-    Before committing, Make & Test & Build examples has to pass.
-</p>
+<pre class="console"><code>cmake ..</code>
+<code>cmake --build . -j$(nproc)</code></pre>
 
 <h4><a name="running-the-tests-using-a-terminal" href="#running-the-tests-using-a-terminal">Running the tests using a terminal</a></h4>
 <p>
-    Open a terminal in the <code>Control-Surface/build</code> directory, build
-    the library and tests, and run them:
+    Open a terminal in the <code>Control-Surface/build</code> directory,
+    compile everything (see previous paragraph) and then run the tests:
 </p>
-<pre class="console"><code>make -j`nproc`</code>
-<code>make test</code>
-<code>make check</code></pre>
+<pre class="console"><code>ctest</code></pre>
 <p>
-    To compile all arduino examples, open a terminal in the
-    <code>Control-Surface/scripts</code> directory, and run:
+    To compile the Arduino examples, open a terminal in the
+    <code>Control-Surface/tools</code> directory, and run:
 </p>
-<pre class="console"><code>./build-arduino.sh `nproc`</code></pre>
+<pre class="console"><code>python3 arduino-example-builder.py 'AVR USB'</code></pre>
+<p>
+    You can replace <code>'AVR USB'</code> with any platform specified in 
+    <code>test/examples-board-fqbns.yaml</code>.
+</p>
 
 </div>
         <hr id="end-of-article">
-        <div class="nextupprev"></div>
+        <div class="nextupprev"><div class="prevpage"><a href="Style.html" title="Style"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Developers">Index</a></div><div class="nextpage"><a href="Generating-Documentation.html" title="Generating Documentation">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Monday, 05 August 2019 21:21 UTC</footer>
+    <footer>Last edited: Monday, 19 July 2021 19:54 UTC</footer>
 </body>
 
 </html>
