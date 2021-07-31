@@ -1,0 +1,109 @@
+<!--
+@title: Remote debugging
+@sequence: 40
+@tableofcontents: true
+@shownextupprevpage: true
+@author: Pieter P
+@keywords: debug,gdb,gdbserver,remote,debug,
+           cross-compile,raspberry,raspberry pi,installation,raspbian,
+           raspberry pi os
+@description: Debugging your C++ program from your computer while it is running 
+              on the Raspberry Pi.
+-->
+<html>
+
+<style>
+    pre.console.gdb>code::before {
+        text-align: right;
+        content: "(gdb)";
+        width: 3.5em;
+        margin-left: -4.5em;
+        font-weight: bold;
+        color: #9999A2;
+    }
+
+    pre.console.gdb {
+        padding-left: 4.5em;
+    }
+
+    div.img-wrapper img {
+        box-shadow: #666 1px 1px 4px;
+        border-radius: 3px;
+    }
+</style>
+
+<h3>Installing gdbserver to the Raspberry Pi</h3>
+<p>
+    The toolchain includes a tool called <code>gdbserver</code>. This program
+    will run on the Raspberry Pi, and we'll connect to it using <code>gdb</code>
+    on our computer. First install <code>gdbserver</code> to the Pi:
+</p>
+<pre class="console"><code>scp ~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/debug-root/usr/bin/gdbserver RPi0:~</code>
+<code>ssh RPi0 sudo mv gdbserver /usr/local/bin</code>
+<code>ssh RPi0 gdbserver --version
+GNU gdbserver (crosstool-NG UNKNOWN) 9.2
+Copyright (C) 2020 Free Software Foundation, Inc.
+gdbserver is free software, covered by the GNU General Public License.
+This gdbserver was configured as "armv6-rpi-linux-gnueabihf"</code></pre>
+
+<h3>Installing extra libraries to the sysroot</h3>
+<p>
+    By default, Raspberry Pi OS preloads a custom <code>memcpy</code> implementation.
+    When debugging, GDB needs that library in the sysroot as well. Install it
+    using:
+</p>
+<pre class="console"><code>echo "deb http://archive.raspberrypi.org/debian/ buster main" | sudo tee /var/lib/schroot/chroots/rpizero-buster-armhf/etc/apt/sources.list.d/raspi.list</code>
+<code>wget -qO - https://archive.raspberrypi.org/debian/raspberrypi.gpg.key | sudo schroot -c source:rpizero-buster-armhf -u root -d / -- apt-key add -</code>
+<code>sudo sbuild-apt rpizero-buster-armhf apt-get update</code>
+<code>sudo sbuild-apt rpizero-buster-armhf apt-get install raspi-copies-and-fills</code></pre>
+
+<h3>Installing GDB on your computer</h3>
+
+<p>
+    To debug ARM devices, you need an ARM version of GDB. You can install one
+    using:
+</p>
+<pre class="console"><code>sudo apt install gdb-multiarch</code></pre>
+
+<p>
+    The toolchain includes <code>armv6-rpi-linux-gnueabihf-gdb</code>, but for
+    some reason, this version of GDB doesn't play well with VSCode.
+</p>
+
+<h3>Running GDB manually from the command line</h3>
+
+<p>
+    To make sure everything works correctly, let's start GDB from a command line
+    and debug the program we compiled and copied to the Pi on the previous page:
+</p>
+<pre class="console"><code>armv6-rpi-linux-gnueabihf-gdb ./build/hello</code></pre>
+<p>
+    Set the sysroot and start gdbserver over SSH. Then type <code>c</code> or <code>continue</code> to run the program:
+</p>
+<pre class="console gdb"><code>set sysroot /var/lib/schroot/chroots/rpizero-buster-armhf</code>
+<code>target remote | ssh RPi0 gdbserver - '~/hello' --name Pieter</code>
+<code>continue</code></pre>
+<p>
+    Use <code>q</code> or <kbd>Ctrl+D</kbd> to quit GDB.
+</p>
+@image{
+"file": "images/gdb-cmd.png"
+}
+<h3>Debugging using VSCode</h3>
+
+<p>
+    The example project includes <code>task.json</code> and <code>launch.json</code>
+    files that automatically copy the binary to the Raspberry Pi and start gdbserver
+    when you hit <kbd>F5</kbd>. This allows you to set breakpoints, inspect the
+    call stack and variables, and so on, like you would during a normal native debug session.<br>
+    The “C/C++” extension by Microsoft is required for debugging support.
+</p>
+@image{
+"file": "images/gdb-vscode.png"
+}
+<p>
+    For some reason, the standard output of the program is not visible in VSCode.
+    I'll probably open an issue to try and figure this out.
+</p>
+
+</html>

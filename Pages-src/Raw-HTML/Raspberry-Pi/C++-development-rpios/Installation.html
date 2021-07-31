@@ -1,0 +1,140 @@
+<!--
+@title: Installation and Setup
+@sequence: 10
+@tableofcontents: true
+@shownextupprevpage: true
+@author: Pieter P
+@keywords: cross-compile,raspberry,raspberry pi,installation,raspbian,
+           raspberry pi os
+@description: Installing Raspberry Pi OS and setting up SSH to prepare for 
+              remote development.
+-->
+<html>
+
+<style>
+    pre.console.pi-raspberrypi>code::before {
+        content: "pi@raspberrypi $";
+        width: 9.8em;
+        font-weight: bold;
+        color: #9999A2;
+    }
+
+    pre.console.pi>code::before {
+        content: "pi@rpi0 $";
+        width: 6.6em;
+        font-weight: bold;
+        color: #9999A2;
+    }
+
+    div.img-wrapper img {
+        box-shadow: #666 1px 1px 4px;
+        border-radius: 3px;
+    }
+</style>
+
+<h3>Download</h3>
+<p>
+    Start by downloading a Raspberry Pi OS image from <a
+        href="https://www.raspberrypi.org/software/operating-systems/">https://www.raspberrypi.org/software/operating-systems</a>.
+    <!-- I went with the Lite version because I'm only planning to run it in headless mode, without any displays. -->
+</p>
+
+<h3>Install the operating system</h3>
+<p>
+    You can install the operating system to an SD card using the following command:
+</p>
+<pre
+    class="console"><code>unzip -p ~/Downloads/2021-05-07-raspios-buster-armhf-lite.zip | sudo dd of=/dev/mmcblk0 bs=4M conv=fsync</code></pre>
+<p>
+    Before you run this command, make sure that you're writing to the correct device. In my case, my SD card appeared as
+    <code>/dev/mmcblk0</code>, but
+    it might differ on your system. When in doubt, you can use the <code>lsblk</code> command to list the storage
+    devices.
+</p>
+<p>
+    For more information, see <a
+        href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">https://www.raspberrypi.org/documentation/installation/installing-images/linux.md</a>.
+</p>
+
+<h3>Enable SSH</h3>
+<p>
+    Mount the SD card and create an empty file with the name <code>ssh</code> in the <code>boot</code> partition.
+</p>
+<h3>Enable Ethernet over USB (RPi Zero only)</h3>
+<p>
+    Open the <code>config.txt</code> file in the <code>boot</code> partition, and append the following line to it:
+</p>
+<pre class="code"><code>dtoverlay=dwc2</code></pre>
+<p>
+    In the file <code>cmdline.txt</code>, add the following option after the <code>rootwait</code> option (leave a
+    space):
+</p>
+<pre class="code"><code>modules-load=dwc2,g_ether</code></pre>
+
+<h3>Boot the Pi</h3>
+<p>
+    Ensure that you saved the files from the previous sections, safely remove the SD card, insert it into the Raspberry
+    Pi and turn it on.
+    Connect it to your network over Ethernet or WiFi.
+</p>
+<h3>Connect over USB (RPi Zero only)</h3>
+<p>
+    If you're using a Pi Zero without WiFi, you can connect it to your computer over USB and have it show up as a
+    network interface.
+    Use the correct USB port (the one labeled “USB”, not “PWR IN”).
+</p>
+<p>
+    Give the Pi some time to boot, and then open the network settings on you computer. The Pi should show up as a wired
+    network connection.
+    In the IPv4 and IPv6 settings, select “Shared to other computers” to share you internet connection with the Pi.
+</p>
+@image{
+"file": "images/shared-to-other-computers.png"
+}
+
+<h3>Log in to the Pi over SSH</h3>
+<p>
+    Assuming that you have only one Raspberry Pi on the network, connect to it using
+</p>
+<pre class="console"><code>ssh pi@raspberrypi.local</code></pre>
+<p>
+    The default password is <code>raspberry</code>, change it by running:
+</p>
+<pre class="console pi-raspberrypi"><code>passwd</code></pre>
+
+<h3>Set up the hostname and SSH keys</h3>
+
+<p>
+    Change the hostname and restart the mDNS service, then log out.
+    Feel free to use a more appropriate hostname for your specific setup, but remember to change it in the following
+    commands.
+</p>
+<pre class="console pi-raspberrypi"><code>sudo hostnamectl set-hostname rpi0</code>
+<code>sudo service avahi-daemon restart</code>
+<code>exit</code></pre>
+<p>
+    You're now at your computer's shell again. Create an SSH configuration for the Pi:
+</p>
+<pre class="console"><code>cat >> ~/.ssh/config &lt;&lt; 'EOF'
+Host RPi0
+    HostName rpi0.local
+    User pi
+EOF</code></pre>
+<p>
+    Add your public key to the Pi's <code>authorized_keys</code>, so you can connect to it without entering the
+    password each time:
+</p>
+<pre class="console"><code>ssh-copy-id -i ~/.ssh/id_rsa.pub RPi0</code></pre>
+<p>
+    If you don't have an SSH key pair yet, you can follow these instructions on how
+    to create one:
+    <a href="https://www.digitalocean.com/community/tutorial_collections/7">DigitalOcean - How to Set Up SSH
+        Keys</a>.
+</p>
+<p>
+    You can now try to connect to it without having to specify the hostname
+    or username, and without having to enter your password:
+</p>
+<pre class="console"><code>ssh RPi0</code></pre>
+
+</html>

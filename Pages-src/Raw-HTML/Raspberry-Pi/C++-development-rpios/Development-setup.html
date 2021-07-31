@@ -1,0 +1,180 @@
+<!--
+@title: Development setup
+@sequence: 20
+@tableofcontents: true
+@shownextupprevpage: true
+@author: Pieter P
+@keywords: cross-compile,raspberry,raspberry pi,installation,raspbian,
+           raspberry pi os
+@description: Installing the necessary tools and setting everything up for 
+              cross-compilation.
+-->
+<html>
+
+<style>
+    div.img-wrapper img {
+        box-shadow: #666 1px 1px 4px;
+        border-radius: 3px;
+    }
+</style>
+
+<h2>Prepare for cross-compilation</h2>
+
+<h3>Install developer tools</h3>
+
+<pre class="console"><code>sudo apt install ubuntu-dev-tools</code></pre>
+
+<p>
+    We're only using these tools to easily manage chroot environments and to run
+    <code>apt</code> to manage cross-compilation dependencies. If you're
+    interested, you can find more information on the Ubuntu and Debian Wiki,
+    but most of it is far beyond the scope of this guide:
+    <a href="https://wiki.ubuntu.com/SimpleSbuild">https://wiki.ubuntu.com/SimpleSbuild</a>,
+    <a href="https://wiki.debian.org/sbuild">https://wiki.debian.org/sbuild</a>.
+</p>
+
+<h3>Install Docker</h3>
+<p>
+    You need Docker to pull or build the toolchain.
+    You can find detailed installation instructions here:
+    <a href="https://www.digitalocean.com/community/tutorial_collections/39">
+        DigitalOcean - How to Install and Use Docker</a><br>
+    Also follow the step to add your user to the <code>docker</code> group so you
+    can run it without <code>sudo</code>.
+</p>
+
+<h3>Create a Raspberry Pi OS root filesystem</h3>
+
+<p>
+    We'll use <code>debootstrap</code> to create a minimal Raspberry Pi OS root filesystem in
+    a folder on our computer. It has all the system libraries of the Raspberry
+    Pi installed and you can install third-party libraries as well, these are
+    necessary to link your executables when cross-compiling. <br>
+    This root filesystem folder is often
+    referred to as the <i>sysroot</i>, and it will later be passed as an option to
+    CMake, the compiler, the linker, GDB, etc. so they can find the necessary files
+    (we cannot use the actual root file system of our computer, because the
+    libraries there have the wrong architecture, most likely x86_64, but we need
+    armv6 libraries).
+</p>
+
+<pre
+    class="console"><code>wget -qO - https://archive.raspbian.org/raspbian.public.key | gpg --import -</code>
+<code>mk-sbuild --arch=armhf buster --debootstrap-mirror=http://raspbian.raspberrypi.org/raspbian --name=rpizero-buster --debootstrap-keyring "$HOME/.gnupg/pubring.kbx --merged-usr" --skip-proposed --skip-updates --skip-security</code></pre>
+
+<p>
+    If this is the first time you use <code>mk-sbuild</code>, you'll be asked to
+    edit your <code>~/.sbuildrc</code> file.
+    <!-- Since we're not going to be
+    publishing any Debian packages, comment out the line <code>$mailto = ...</code>
+    as it seems to cause issues later.<br> -->
+    After this first run, reboot your computer, and run the second command again:
+</p>
+<pre
+    class="console"><code>mk-sbuild --arch=armhf buster --debootstrap-mirror=http://raspbian.raspberrypi.org/raspbian --name=rpizero-buster --debootstrap-keyring "$HOME/.gnupg/pubring.kbx --merged-usr" --skip-proposed --skip-updates --skip-security</code></pre>
+
+<p>
+    This will install a minimal version of Raspberry Pi OS in a folder on your
+    computer. The Ubuntu development tools allow you to install libraries into
+    this folder using <code>apt install</code>, which makes it very easy to
+    manage the cross-compilation dependencies.
+</p>
+<p>
+    The <code>--merged-usr</code> option is included in the <code>--debootstrap-keyring</code> option so that it
+    is passed on to <code>debootstrap</code>, the <code>mk-sbuild</code> script currently lacks this option.
+</p>
+<p>
+    If something went wrong or if you no longer need it, you can use
+    <code>sudo sbuild-destroychroot rpizero-buster-armhf</code>, it will give instructions how to remove the root
+    filesystem and the schroot configuration.
+</p>
+
+<h3>Install the toolchain</h3>
+
+<p>
+    The cross-compilation toolchains in the Ubuntu repositories are not
+    compatible with Raspberry Pi OS, so you'll have to build or install your own.
+    It's easiest to just download the crosstool-NG toolchain from
+    <a href="https://github.com/tttapa/RPi-Cpp-Toolchain">https://github.com/tttapa/RPi-Cpp-Toolchain</a>.
+</p>
+<pre class="console"><code>mkdir -p ~/GitHub</code>
+<code>cd ~/GitHub</code>
+<code>git clone https://github.com/tttapa/RPi-Cpp-Toolchain</code>
+<code>cd RPi-Cpp-Toolchain</code>
+<code>./toolchain/toolchain.sh rpi --export-toolchain</code></pre>
+<p>
+    This exports the toolchain to <code>~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf</code>.
+    You can add it to your path using:
+</p>
+<pre
+    class="console"><code>echo 'export PATH="$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/bin:$PATH"' >> ~/.profile</code></pre>
+<p>
+    This will only take effect after you log out and back in again, so you might want to do that now,
+    or execute the following command to add it to your path in the current terminal:
+</p>
+<pre
+    class="console"><code>export PATH="$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/bin:$PATH"</code></pre>
+
+<p>
+    Verify that the toolchain is installed correctly by running:
+</p>
+<pre class="console"><code>armv6-rpi-linux-gnueabihf-g++ --version
+armv6-rpi-linux-gnueabihf-g++ (crosstool-NG UNKNOWN) 11.1.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</code></pre>
+
+<p>
+    You can find more information about this toolchain and instructions on how
+    to customize it <a href="../C++-Development/Building-The-Toolchain.html">here</a>.
+</p>
+
+<h3>Install the C++ standard library to the Pi</h3>
+<p>
+    Raspberry Pi OS uses an older compiler and has an older version of the C++ standard
+    library installed. Since we're going to use a new toolchain, we need to
+    install a newer version of <code>libstdc++</code> to the Pi to be able to run
+    our programs:
+</p>
+<pre class="console"><code>scp ~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/sysroot/lib/libstdc++.so.6.0.29 RPi0:~</code>
+<code>ssh RPi0 bash &lt;&lt; 'EOF'
+    sudo mkdir -p /usr/local/lib/arm-linux-gnueabihf
+    sudo mv libstdc++.so.6.0.29 $_
+    sudo ldconfig
+EOF</code></pre>
+<p>
+    The library is installed in <code>/usr/local/lib</code> so it doesn't
+    interfere with the libraries managed by the system in <code>/usr/lib</code>.
+</p>
+<p>
+    Also do the same for the root filesystem on your computer, this comes in handy when debugging later:
+</p>
+<pre class="console"><code>sudo mkdir -p /var/lib/schroot/chroots/rpizero-buster-armhf/usr/local/lib/arm-linux-gnueabihf</code>
+<code>sudo cp ~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/sysroot/lib/libstdc++.so.6.0.29 $_</code>
+<code>sudo schroot -c source:rpizero-buster-armhf -u root -d / ldconfig</code></pre>
+
+<h2>Install and configure the IDE</h2>
+
+<h3>Install Visual Studio Code</h3>
+
+<p>
+    You can download and install VSCode from <a
+        href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a>.
+</p>
+<p>
+    You'll need the following extensions:
+</p>
+<ul>
+    <li>“clangd” by LLVM Extensions</li>
+    <li>“CMake Tools” by Microsoft</li>
+</ul>
+
+@image{
+"file": "images/clangd.png"
+}
+
+@image{
+"file": "images/cmake-tools.png"
+}
+
+</html>

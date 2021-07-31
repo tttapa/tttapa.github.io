@@ -1,0 +1,213 @@
+<!--
+@title: Building the C++ example project
+@sequence: 30
+@tableofcontents: true
+@shownextupprevpage: true
+@author: Pieter P
+@keywords: cross-compile,raspberry,raspberry pi,installation,raspbian,
+           raspberry pi os
+@description: Cross-compiling a C++ project using CMake and with a 
+              dependency on the Boost libraries, as an example of how 
+              to build any C++ project with nontrivial dependencies.
+-->
+<html>
+
+<style>
+    div.img-wrapper img {
+        box-shadow: #666 1px 1px 4px;
+        border-radius: 3px;
+    }
+</style>
+
+<h3>Downloading the example project</h3>
+
+<p>
+    The example is just a command line program that asks the user for his/her
+    name using <a href="https://www.boost.org/doc/libs/1_76_0/doc/html/program_options.html">Boost.program_options</a>
+    and prints a <i>hello world</i> message.<br>
+    Download it from GitHub:
+</p>
+<pre class="console"><code>cd ~/GitHub</code>
+<code>git clone https://github.com/tttapa/RPi-Cross-Cpp-Development.git</code></pre>
+
+<h3>Installing the dependencies</h3>
+
+<p>
+    Thanks to the <code>sbuild</code> development tools, managing dependencies is
+    really easy, you can just install them to the Raspberry Pi OS root filesystem
+    using the familiar <code>apt-get install</code> command.
+    We use the <code>sbuild-apt</code> tool,
+    and specify the name of the root filesystem we created on the previous page.
+</p>
+<pre class="console"><code>sudo sbuild-apt rpizero-buster-armhf apt-get install libboost-all-dev</code></pre>
+<p>
+    Now Boost is installed on our build computer, but not yet on the Raspberry Pi itself.
+    Let's do that now, using the standard <code>apt install</code> command over SSH:
+</p>
+<pre class="console"><code>ssh RPi0 sudo apt install -y libboost-all-dev</code></pre>
+<p>
+    Strictly speaking, we don't need all development libraries on the Pi, so to save some
+    time and space, you could install just the libraries you need, e.g.
+</p>
+<pre class="console"><code>ssh RPi0 sudo apt install -y libboost-program-options1.67.0</code></pre>
+
+<h3>Configuring and building the project</h3>
+
+<p>
+    Open the <code>~/GitHub/RPi-Cross-Cpp-Development</code> folder in Visual Studio Code
+    (using the <kbd>Ctrl+K+O</kbd> shortcut or “Open Folder”).
+<p>
+<div>
+    The CMake Tools extension will now ask you to configure the project. Click “Yes”.
+</div>
+@image{
+"file": "images/would-you-like-to-configure.png"
+}
+<div>
+    Then select the correct toolchain, in this case, we want the “Raspberry Pi (armv6)” toolchain.
+</div>
+@image{
+"file": "images/select-toolchain.png"
+}
+<div>
+    CMake will now configure the project. If you followed the instructions on the
+    previous pages correctly, it finds the <code>armv6-rpi-linux-gnueabihf</code> toolchain
+    we installed, as well as the Boost libraries in the Raspberry Pi OS root filesystem.
+</div>
+@image{
+"file": "images/configured.png"
+}
+<div>
+    Finally, click the <img src="images/build-icon.png"
+        style="border-radius: 2px; height: 1em; display: inline; margin: 0 0 0.1em 0; vertical-align: middle;">
+    icon to actually compile the <i>hello world</i> program.
+</div>
+@image{
+"file": "images/built.png"
+}
+
+<p>
+    You can verify that everything worked correctly using the <code>file</code>
+    command:
+</p>
+<pre
+    class="console"><code>file build/hello
+build/hello: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-armhf.so.3, for GNU/Linux 3.2.0, with debug_info, not stripped</code></pre>
+<p>
+    As you can see, <code>hello</code> is a 32-bit ARM executable, so the cross-compilation was successful.
+</p>
+
+<h3>Running the example program on the Raspberry Pi</h3>
+
+<p>
+    All we have to do now is copy the <code>hello</code> file to the Raspberry Pi and run it.
+    We'll copy it over SSH using the <code>scp</code> command, and then run it over SSH as well:
+</p>
+<pre class="console"><code>scp build/hello RPi0:~</code>
+<code>ssh RPi0 '~/hello' --help</code></pre>
+@image{
+"file": "images/copy-run.png"
+}
+<p>
+    That's it, you have successfully executed your cross-compiled C++ program on the Raspberry Pi!
+</p>
+
+<hr>
+
+<h3>A closer look at the build process</h3>
+<p>
+    There's only one source file, <code>main.cpp</code>, we won't go into detail here.
+    The main <code>CMakeLists.txt</code> file is really basic:
+    it just defines the project, looks for the Boost.program_options library,
+    compiles <code>main.cpp</code> into an executable with the name <code>hello</code>,
+    and then links this executable with the Boost library.
+</p>
+@codesnippet{
+"file": "${HOME}/GitHub/RPi-Cross-Cpp-Development/CMakeLists.txt",
+"name": "CMakeLists.txt"
+}
+<p>
+    The way we tell CMake to cross-compile this project for the Raspberry Pi is
+    using a so-called toolchain file. You can find more information on
+    <a
+        href="https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling">https://cmake.org/cmake/help/latest/manual/cmake-toolchains.7.html#cross-compiling</a>.
+</p>
+@codesnippet{
+"file": "${HOME}/GitHub/RPi-Cross-Cpp-Development/cmake/armv6-rpi-linux-gnueabihf.cmake",
+"name": "cmake/armv6-rpi-linux-gnueabihf.cmake"
+}
+<p>
+    First we set the system name and architecture, then we set some paths to 
+    the sysroot, so that CMake will be able to find the Boost library.
+    If you gave your chroot a different name, you might want to change these 
+    paths.
+    The <code>CMAKE_STAGING_PREFIX</code> variable is useful for installing your
+    project to a “staging” directory for deploying to the Pi. It is not used 
+    in this simple project. The <code>CMAKE_LIBRARY_ARCHITECTURE</code> variable
+    helps CMake find libraries in Debian's multiarch directory structure, 
+    e.g. in <code>/usr/lib/arm-linux-gnueabihf/</code>.
+</p>
+<p>
+    Next, we tell CMake to use the <code>armv6-rpi-linux-gnueabihf</code>
+    cross-compilers, and we set some compiler flags. The <code>-mcpu</code> flag
+    is a bit redundant here, since the toolchain is already configured to 
+    generate code for that specific CPU, but it serves as an example, you might 
+    want to add more specific flags.
+</p>
+<p>
+    Finally, we tell CMake never to run any programs it finds in the sysroot
+    (because they are ARM binaries, you cannot run them on your computer 
+    without extra steps), and it should only look for libraries, headers and 
+    packages in the sysroot. We don't want CMake to find and use packages 
+    installed on our computer, because these are x86_64 libraries, not ARM.
+</p>
+<p>
+    The CMake Tools VSCode extension picks up these toolchain files using the 
+    following configuration file:
+</p>
+@codesnippet{
+"file": "${HOME}/GitHub/RPi-Cross-Cpp-Development/.vscode/cmake-kits.json",
+"name": ".vscode/cmake-kits.json"
+}
+<p>
+    You can see that there's a second toolchain file for newer 64-bit boards.
+    If you need different configurations for different Pi models, you can add 
+    them here and easily switch between them by clicking the CMake Kit button
+    in VSCode.
+</p>
+
+<h3>Manual build</h3>
+<p>
+    If you don't want to use VSCode as your editor, you can also build the 
+    project from the command line:
+</p>
+<pre class="console"><code>cd ~/GitHub/RPi-Cross-Cpp-Development</code>
+<code>rm -rf build</code>
+<code>cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/armv6-rpi-linux-gnueabihf.cmake</code>
+<code>cmake --build build -j</code></pre>
+
+<h3>Installing clangd</h3>
+<p>
+    If this is the first time you're using the clangd extension, you'll have to
+    install the language server. When you open a C++ file for the first time,
+    the extension will automatically
+    give you a prompt:
+</p>
+@image{
+"file": "images/install-clangd-crop.png",
+"img-attr": {"style": "width: 30em; border-radius: 0;"}
+}
+@image{
+"file": "images/clangd-installed-crop.png",
+"img-attr": {"style": "width: 30em; border-radius: 0;"}
+}
+<p>
+    Once the language server is installed, you get all features you'd expect from
+    an IDE, such as semantic syntax highlighting, go-to-definition, autocomplete,
+    documentation, refactoring options, etc.
+</p>
+@image{
+"file": "images/clangd-working.png"
+}
+
+</html>
