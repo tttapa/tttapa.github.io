@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
+    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="cross-compile,raspberry,raspberry pi,installation,raspbian, raspberry pi os"/>
+    <meta name="description" content="Installing the necessary tools and setting everything up for cross-compilation."/>
+    <title>Development setup</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a href="../Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="openEntry" href="Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a href="Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a href="Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../C++-development-ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a href="../C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Theory/index.html">Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Control-Theory/Motor-Fader/index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Theory/Motor-Fader/PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Theory/Motor-Fader/PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a href="../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a href="../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a href="../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Programming/index.html">Programming</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Programming/Cpp/index.html">C++</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a href="../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Development-setup.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Development setup</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+        <li><a href="#prepare-for-cross-compilation">Prepare for cross-compilation</a></li>
+          <ul>
+            <li><a href="#install-developer-tools">Install developer tools</a></li>
+            <li><a href="#install-docker">Install Docker</a></li>
+            <li><a href="#create-a-raspberry-pi-os-root-filesystem">Create a Raspberry Pi OS root filesystem</a></li>
+            <li><a href="#install-the-toolchain">Install the toolchain</a></li>
+            <li><a href="#install-the-c-standard-library-to-the-pi">Install the C++ standard library to the Pi</a></li>
+          </ul>
+        <li><a href="#install-and-configure-the-ide">Install and configure the IDE</a></li>
+          <ul>
+            <li><a href="#install-visual-studio-code">Install Visual Studio Code</a></li>
+            </ul>
+  </ul></div>
+
+
+<style>
+    div.img-wrapper img {
+        box-shadow: #666 1px 1px 4px;
+        border-radius: 3px;
+    }
+</style>
+
+<h2><a name="prepare-for-cross-compilation" href="#prepare-for-cross-compilation">Prepare for cross-compilation</a></h2>
+
+<h3><a name="install-developer-tools" href="#install-developer-tools">Install developer tools</a></h3>
+
+<pre class="console"><code>sudo apt install ubuntu-dev-tools</code></pre>
+
+<p>
+    We're only using these tools to easily manage chroot environments and to run
+    <code>apt</code> to manage cross-compilation dependencies. If you're
+    interested, you can find more information on the Ubuntu and Debian Wiki,
+    but most of it is far beyond the scope of this guide:
+    <a href="https://wiki.ubuntu.com/SimpleSbuild">https://wiki.ubuntu.com/SimpleSbuild</a>,
+    <a href="https://wiki.debian.org/sbuild">https://wiki.debian.org/sbuild</a>.
+</p>
+
+<h3><a name="install-docker" href="#install-docker">Install Docker</a></h3>
+<p>
+    You need Docker to pull or build the toolchain.
+    You can find detailed installation instructions here:
+    <a href="https://www.digitalocean.com/community/tutorial_collections/39">
+        DigitalOcean - How to Install and Use Docker</a><br>
+    Also follow the step to add your user to the <code>docker</code> group so you
+    can run it without <code>sudo</code>.
+</p>
+
+<h3><a name="create-a-raspberry-pi-os-root-filesystem" href="#create-a-raspberry-pi-os-root-filesystem">Create a Raspberry Pi OS root filesystem</a></h3>
+
+<p>
+    We'll use <code>debootstrap</code> to create a minimal Raspberry Pi OS root filesystem in
+    a folder on our computer. It has all the system libraries of the Raspberry
+    Pi installed and you can install third-party libraries as well, these are
+    necessary to link your executables when cross-compiling. <br>
+    This root filesystem folder is often
+    referred to as the <i>sysroot</i>, and it will later be passed as an option to
+    CMake, the compiler, the linker, GDB, etc. so they can find the necessary files
+    (we cannot use the actual root file system of our computer, because the
+    libraries there have the wrong architecture, most likely x86_64, but we need
+    armv6 libraries).
+</p>
+
+<pre
+    class="console"><code>wget -qO - https://archive.raspbian.org/raspbian.public.key | gpg --import -</code>
+<code>mk-sbuild --arch=armhf buster --debootstrap-mirror=http://raspbian.raspberrypi.org/raspbian --name=rpizero-buster --debootstrap-keyring "$HOME/.gnupg/pubring.kbx --merged-usr" --skip-proposed --skip-updates --skip-security</code></pre>
+
+<p>
+    If this is the first time you use <code>mk-sbuild</code>, you'll be asked to
+    edit your <code>~/.sbuildrc</code> file.
+    <!-- Since we're not going to be
+    publishing any Debian packages, comment out the line <code>$mailto = ...</code>
+    as it seems to cause issues later.<br> -->
+    After this first run, reboot your computer, and run the second command again:
+</p>
+<pre
+    class="console"><code>mk-sbuild --arch=armhf buster --debootstrap-mirror=http://raspbian.raspberrypi.org/raspbian --name=rpizero-buster --debootstrap-keyring "$HOME/.gnupg/pubring.kbx --merged-usr" --skip-proposed --skip-updates --skip-security</code></pre>
+
+<p>
+    This will install a minimal version of Raspberry Pi OS in a folder on your
+    computer. The Ubuntu development tools allow you to install libraries into
+    this folder using <code>apt install</code>, which makes it very easy to
+    manage the cross-compilation dependencies.
+</p>
+<p>
+    The <code>--merged-usr</code> option is included in the <code>--debootstrap-keyring</code> option so that it
+    is passed on to <code>debootstrap</code>, the <code>mk-sbuild</code> script currently lacks this option.
+</p>
+<p>
+    If something went wrong or if you no longer need it, you can use
+    <code>sudo sbuild-destroychroot rpizero-buster-armhf</code>, it will give instructions how to remove the root
+    filesystem and the schroot configuration.
+</p>
+
+<h3><a name="install-the-toolchain" href="#install-the-toolchain">Install the toolchain</a></h3>
+
+<p>
+    The cross-compilation toolchains in the Ubuntu repositories are not
+    compatible with Raspberry Pi OS, so you'll have to build or install your own.
+    It's easiest to just download the crosstool-NG toolchain from
+    <a href="https://github.com/tttapa/RPi-Cpp-Toolchain">https://github.com/tttapa/RPi-Cpp-Toolchain</a>.
+</p>
+<pre class="console"><code>mkdir -p ~/GitHub</code>
+<code>cd ~/GitHub</code>
+<code>git clone https://github.com/tttapa/RPi-Cpp-Toolchain</code>
+<code>cd RPi-Cpp-Toolchain</code>
+<code>./toolchain/toolchain.sh rpi --export-toolchain</code></pre>
+<p>
+    This exports the toolchain to <code>~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf</code>.
+    You can add it to your path using:
+</p>
+<pre
+    class="console"><code>echo 'export PATH="$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/bin:$PATH"' >> ~/.profile</code></pre>
+<p>
+    This will only take effect after you log out and back in again, so you might want to do that now,
+    or execute the following command to add it to your path in the current terminal:
+</p>
+<pre
+    class="console"><code>export PATH="$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/bin:$PATH"</code></pre>
+
+<p>
+    Verify that the toolchain is installed correctly by running:
+</p>
+<pre class="console"><code>armv6-rpi-linux-gnueabihf-g++ --version
+armv6-rpi-linux-gnueabihf-g++ (crosstool-NG UNKNOWN) 11.1.0
+Copyright (C) 2021 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</code></pre>
+
+<p>
+    You can find more information about this toolchain and instructions on how
+    to customize it <a href="../C++-Development/Building-The-Toolchain.html">here</a>.
+</p>
+
+<h3><a name="install-the-c-standard-library-to-the-pi" href="#install-the-c-standard-library-to-the-pi">Install the C++ standard library to the Pi</a></h3>
+<p>
+    Raspberry Pi OS uses an older compiler and has an older version of the C++ standard
+    library installed. Since we're going to use a new toolchain, we need to
+    install a newer version of <code>libstdc++</code> to the Pi to be able to run
+    our programs:
+</p>
+<pre class="console"><code>scp ~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/sysroot/lib/libstdc++.so.6.0.29 RPi0:~</code>
+<code>ssh RPi0 bash &lt;&lt; 'EOF'
+    sudo mkdir -p /usr/local/lib/arm-linux-gnueabihf
+    sudo mv libstdc++.so.6.0.29 $_
+    sudo ldconfig
+EOF</code></pre>
+<p>
+    The library is installed in <code>/usr/local/lib</code> so it doesn't
+    interfere with the libraries managed by the system in <code>/usr/lib</code>.
+</p>
+<p>
+    Also do the same for the root filesystem on your computer, this comes in handy when debugging later:
+</p>
+<pre class="console"><code>sudo mkdir -p /var/lib/schroot/chroots/rpizero-buster-armhf/usr/local/lib/arm-linux-gnueabihf</code>
+<code>sudo cp ~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/sysroot/lib/libstdc++.so.6.0.29 $_</code>
+<code>sudo schroot -c source:rpizero-buster-armhf -u root -d / ldconfig</code></pre>
+
+<h2><a name="install-and-configure-the-ide" href="#install-and-configure-the-ide">Install and configure the IDE</a></h2>
+
+<h3><a name="install-visual-studio-code" href="#install-visual-studio-code">Install Visual Studio Code</a></h3>
+
+<p>
+    You can download and install VSCode from <a
+        href="https://code.visualstudio.com/Download">https://code.visualstudio.com/Download</a>.
+</p>
+<p>
+    You'll need the following extensions:
+</p>
+<ul>
+    <li>“clangd” by LLVM Extensions</li>
+    <li>“CMake Tools” by Microsoft</li>
+</ul>
+
+<div class="img-wrapper"><a href="images/clangd.png"><img src="images/clangd.png" alt="images/clangd.png"/></a></div>
+
+<div class="img-wrapper"><a href="images/cmake-tools.png"><img src="images/cmake-tools.png" alt="images/cmake-tools.png"/></a></div>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"><a href="Installation.html" title="Installation and Setup"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Ubuntu to Raspberry Pi OS Cross C++ Development">Index</a></div><div class="nextpage"><a href="Building-example-project.html" title="Building the C++ example project">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+    </article>
+    <footer>Last edited: Saturday, 31 July 2021 22:00 UTC</footer>
+</body>
+
+</html>
