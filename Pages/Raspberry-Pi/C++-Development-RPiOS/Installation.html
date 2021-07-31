@@ -1,27 +1,25 @@
 <!DOCTYPE HTML>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Pieter P">
-    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'/>
-    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'>
+    <link href='/CSS/icon.css' rel='stylesheet' type='text/css'/>
     <!-- No MathJax -->
-    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
-    <meta name="theme-color" content="#ccc">
-    <meta name="keywords" content="c++,cpp,c,fortran,cmake,make,vscode,raspbery pi,cross-compilation, cross,compilation,toolchain,gcc,ubuntu,raspbian,raspberry pi os">
-    <meta name="description" content="Raspberry Pi C++ development and cross-compilation on an Ubuntu machine, targeting a Raspberry Pi running Raspberry Pi OS.">
-    <title>Ubuntu to Raspberry Pi OS Cross C++ Development</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="cross-compile,raspberry,raspberry pi,installation,raspbian, raspberry pi os"/>
+    <meta name="description" content="Installing Raspberry Pi OS and setting up SSH to prepare for remote development."/>
+    <title>Installation and Setup</title>
 </head>
-
 <body>
     <nav>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                <path d="M0 0h48v48h-48z" fill="none" />
-                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z" />
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
             </svg>
             <h2><a href="/Pages">Pages</a></h2>
 <ul>
@@ -37,15 +35,15 @@
         <ul>
         </ul>
         </li>
-        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry" href="index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
         <ul>
-            <li><span class="ftriangle"></span><a href="Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="openEntry" href="Installation.html">Installation and Setup</a></li>
             <li><span class="ftriangle"></span><a href="Development-setup.html">Development setup</a></li>
             <li><span class="ftriangle"></span><a href="Building-example-project.html">Building the C++ example project</a></li>
             <li><span class="ftriangle"></span><a href="Debugging.html">Remote debugging</a></li>
         </ul>
         </li>
-        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../C++-development-ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a href="../C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
         <ul>
         </ul>
         </li>
@@ -208,7 +206,7 @@
                 <a href="/" title="Home">home</a>
             </i>
             <i class="material-icons">
-                <a href="index.pdf" title="Download as PDF">get_app</a>
+                <a href="Installation.pdf" title="Download as PDF">get_app</a>
             </i>
             <!-- <i class="material-icons">
                 <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
@@ -219,45 +217,152 @@
         </div>
     </nav>
     <article>
-        <h1 class="indexTitle">Ubuntu to Raspberry Pi OS Cross C++ Development</h1>
+        <h1 class="title">Installation and Setup</h1>
         <i class="author">Pieter P</i>
         <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#install-the-operating-system">Install the operating system</a></li>
+            <li><a href="#enable-ssh">Enable SSH</a></li>
+            <li><a href="#enable-ethernet-over-usb-rpi-zero-only">Enable Ethernet over USB (RPi Zero only)</a></li>
+            <li><a href="#boot-the-pi">Boot the Pi</a></li>
+            <li><a href="#connect-over-usb-rpi-zero-only">Connect over USB (RPi Zero only)</a></li>
+            <li><a href="#log-in-to-the-pi-over-ssh">Log in to the Pi over SSH</a></li>
+            <li><a href="#set-up-the-hostname-and-ssh-keys">Set up the hostname and SSH keys</a></li>
+  </ul></div>
+
+
+<style>
+    pre.console.pi-raspberrypi>code::before {
+        content: "pi@raspberrypi $";
+        width: 9.8em;
+        font-weight: bold;
+        color: #9999A2;
+    }
+
+    pre.console.pi>code::before {
+        content: "pi@rpi0 $";
+        width: 6.6em;
+        font-weight: bold;
+        color: #9999A2;
+    }
+</style>
+
+<h3><a name="download" href="#download">Download</a></h3>
+<p>
+    Start by downloading a Raspberry Pi OS image from <a
+        href="https://www.raspberrypi.org/software/operating-systems/">https://www.raspberrypi.org/software/operating-systems</a>.
+    <!-- I went with the Lite version because I'm only planning to run it in headless mode, without any displays. -->
+</p>
+
+<h3><a name="install-the-operating-system" href="#install-the-operating-system">Install the operating system</a></h3>
+<p>
+    You can install the operating system to an SD card using the following command:
+</p>
+<pre
+    class="console"><code>unzip -p ~/Downloads/2021-05-07-raspios-buster-armhf-lite.zip | sudo dd of=/dev/mmcblk0 bs=4M conv=fsync</code></pre>
+<p>
+    Before you run this command, make sure that you're writing to the correct device. In my case, my SD card appeared as
+    <code>/dev/mmcblk0</code>, but
+    it might differ on your system. When in doubt, you can use the <code>lsblk</code> command to list the storage
+    devices.
+</p>
+<p>
+    For more information, see <a
+        href="https://www.raspberrypi.org/documentation/installation/installing-images/linux.md">https://www.raspberrypi.org/documentation/installation/installing-images/linux.md</a>.
+</p>
+
+<h3><a name="enable-ssh" href="#enable-ssh">Enable SSH</a></h3>
+<p>
+    Mount the SD card and create an empty file with the name <code>ssh</code> in the <code>boot</code> partition.
+</p>
+<h3><a name="enable-ethernet-over-usb-rpi-zero-only" href="#enable-ethernet-over-usb-rpi-zero-only">Enable Ethernet over USB (RPi Zero only)</a></h3>
+<p>
+    Open the <code>config.txt</code> file in the <code>boot</code> partition, and append the following line to it:
+</p>
+<pre class="code"><code>dtoverlay=dwc2</code></pre>
+<p>
+    In the file <code>cmdline.txt</code>, add the following option after the <code>rootwait</code> option (leave a
+    space before and after):
+</p>
+<pre class="code"><code>modules-load=dwc2,g_ether</code></pre>
+
+<h3><a name="boot-the-pi" href="#boot-the-pi">Boot the Pi</a></h3>
+<p>
+    Ensure that you saved the files from the previous sections, safely remove the SD card, insert it into the Raspberry
+    Pi and turn it on.
+    Connect it to your network over Ethernet or WiFi.
+</p>
+<h3><a name="connect-over-usb-rpi-zero-only" href="#connect-over-usb-rpi-zero-only">Connect over USB (RPi Zero only)</a></h3>
+<p>
+    If you're using a Pi Zero without WiFi, you can connect it to your computer over USB and have it show up as a
+    network interface.
+    Use the correct USB port (the one labeled “USB”, not “PWR IN”).
+</p>
+<p>
+    Give the Pi some time to boot, and then open the network settings on you computer. The Pi should show up as a wired
+    network connection.
+    In the IPv4 and IPv6 settings, select “Shared to other computers” to share your internet connection with the Pi.
+</p>
+<div class="img-wrapper"><a href="images/shared-to-other-computers.png"><img src="images/shared-to-other-computers.png" alt="images/shared-to-other-computers.png"/></a></div>
+
+<h3><a name="log-in-to-the-pi-over-ssh" href="#log-in-to-the-pi-over-ssh">Log in to the Pi over SSH</a></h3>
+<p>
+    Assuming that you have only one Raspberry Pi on the network, connect to it using
+</p>
+<pre class="console"><code>ssh pi@raspberrypi.local</code></pre>
+<p>
+    The default password is <code>raspberry</code>, change it by running:
+</p>
+<pre class="console pi-raspberrypi"><code>passwd</code></pre>
+
+<h3><a name="set-up-the-hostname-and-ssh-keys" href="#set-up-the-hostname-and-ssh-keys">Set up the hostname and SSH keys</a></h3>
 
 <p>
-    This guide explains how to set up a <b>cross-compilation development 
-    environment for the Raspberry Pi</b>. We'll be using the familiar APT package manager
-    for <b>installing cross-compilation dependencies</b>, so you can just
-    <code>apt-get install</code> any library from the Debian or Raspberry Pi OS
-    repositories.
+    Change the hostname and restart the mDNS service, then log out.
+    Feel free to use a more appropriate hostname for your specific setup, but remember to change it in the following
+    commands.
+</p>
+<pre class="console pi-raspberrypi"><code>sudo hostnamectl set-hostname rpi0</code>
+<code>sudo service avahi-daemon restart</code>
+<code>exit</code></pre>
+<p>
+    You're now at your computer's shell again. Create an SSH configuration for the Pi:
+</p>
+<pre class="console"><code>cat >> ~/.ssh/config &lt;&lt; 'EOF'
+Host RPi0
+    HostName rpi0.local
+    User pi
+EOF</code></pre>
+<p>
+    Add your public key to the Pi's <code>authorized_keys</code>, so you can connect to it without entering the
+    password each time:
+</p>
+<pre class="console"><code>ssh-copy-id -i ~/.ssh/id_rsa.pub RPi0</code></pre>
+<p>
+    If you don't have an SSH key pair yet, you can follow these instructions on how
+    to create one:
+    <a href="https://www.digitalocean.com/community/tutorial_collections/7">DigitalOcean - How to Set Up SSH
+        Keys</a>.
 </p>
 <p>
-    We use a modern GCC 11 toolchain for C, C++ and Fortran. Configuration
-    files for <b>easy on-target debugging</b> in Visual Studio Code are provided.
-    A <i>hello world</i> CMake project is included as an example.
+    You can now try to connect to it without having to specify the hostname
+    or username, and without having to enter your password:
 </p>
-<p>
-    Everything was tested on Ubuntu 20.04 LTS on the build machine and Raspberry
-    Pi OS Buster on a Raspberry Pi Zero. A similar guide for a Raspberry Pi
-    running Ubuntu 20.04 is being worked on as well.
-</p>
+<pre class="console"><code>ssh RPi0</code></pre>
 
 </div>
-        <hr>
-        <div class="indexContainer"><a href="Installation.html">
-    <h2>Installation and Setup</h2>
-    <p>Installing Raspberry Pi OS and setting up SSH to prepare for remote development.</p>
-</a><a href="Development-setup.html">
-    <h2>Development setup</h2>
-    <p>Installing the necessary tools and setting everything up for cross-compilation.</p>
-</a><a href="Building-example-project.html">
-    <h2>Building the C++ example project</h2>
-    <p>Cross-compiling a C++ project using CMake and with a dependency on the Boost libraries, as an example of how to build any C++ project with nontrivial dependencies.</p>
-</a><a href="Debugging.html">
-    <h2>Remote debugging</h2>
-    <p>Debugging your C++ program from your computer while it is running on the Raspberry Pi.</p>
-</a></div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="Ubuntu to Raspberry Pi OS Cross C++ Development">Index</a></div><div class="nextpage"><a href="Development-setup.html" title="Development setup">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Saturday, 31 July 2021 22:03 UTC</footer>
+    <footer>Last edited: Saturday, 31 July 2021 22:13 UTC</footer>
 </body>
 
 </html>
