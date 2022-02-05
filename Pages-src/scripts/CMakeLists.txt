@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.12)
 
 project(Pages CXX)
 
@@ -18,8 +18,8 @@ endif()
 # COMPILER OPTIONS
 # ------------------------------------------------------------------------------
 
-# Use C++ 17
-set(CMAKE_CXX_STANDARD 17)
+# Use C++ 20
+set(CMAKE_CXX_STANDARD 20)
 
 # Optimize during linking stage
 set(CMAKE_INTERPROCEDURAL_OPTIMIZATION TRUE) # LTO
@@ -45,8 +45,16 @@ endif()
 # EXECUTABLE
 # ------------------------------------------------------------------------------
 
-find_package(pybind11 REQUIRED)
+find_program(pybind11_config pybind11-config)
+if (pybind11_config)
+    execute_process(COMMAND ${pybind11_config} --cmakedir
+                    OUTPUT_VARIABLE pybind11_ROOT_OUTPUT
+                    OUTPUT_STRIP_TRAILING_WHITESPACE)
+    message(STATUS "Found pybind11: ${pybind11_ROOT_OUTPUT}")
+    set(pybind11_DIR ${pybind11_ROOT_OUTPUT} CACHE PATH "pybind11 path" FORCE)
+endif()
 
+find_package(pybind11 REQUIRED)
 find_package(Threads REQUIRED)
 
 add_executable(page-builder page-builder.cpp parse-metadata.cpp)

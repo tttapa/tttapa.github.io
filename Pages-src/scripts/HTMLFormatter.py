@@ -62,10 +62,13 @@ def addAnchors(html: str, metadata: dict) -> str:
     if len(anchors) == 0:
         return html
 
-    toc = metadata.get('tableofcontents', 'false').lower()
-    if not toc in ['true', '1', 't', 'y', 'yes']:
+    toc = metadata.get('tableofcontents', '0').lower()
+    if toc in ["0", "false", "no", "n", "f"]:
         return html
-
+    if not toc in ["1", "true", "yes", "y", "t"]:
+        raise Exception("String should have truth value (e.g. "
+                        "\"true\" or \"false\"), got \"" +
+                        toc + "\" instead.")
     toc = '\n<div class="toc" id="toc">\n'
     toc += '  <script>\n'
     toc += '  function updateTocSize() {\n'
@@ -165,16 +168,19 @@ def checkPath(filepath, file, msg):
 
 def handleMake(data, html, filepath, taglineno, refs):
     if not 'make' in data:
-        return
+        return []
     makefile = data['make'].get('makefile')
+    fullmakefile = checkPath(filepath, makefile, "Makefile") if makefile else makefile
     filedir = dirname(data['file']) if 'file' in data else filepath
     cwd = data['make'].get('cwd', filedir)
 
     cmd = ['make']
-    if makefile:
-        cmd += ['-f', checkPath(filepath, makefile, "Makefile")]
+    if fullmakefile:
+        cmd += ['-f', fullmakefile]
     if cwd:
         cmd += ['-C', checkPath(filepath, cwd, "CWD")]
+    if target := data['make'].get('target'):
+        cmd += [target]
 
     res = subprocess.run(cmd, capture_output=True)
     if res.returncode != 0:
@@ -183,6 +189,7 @@ def handleMake(data, html, filepath, taglineno, refs):
         sys.stderr.buffer.write(res.stderr)
         sys.stderr.flush()
         raise RuntimeError(f'Error executing {res.args}')
+    return [fullmakefile if fullmakefile else "Makefile"]
 
 # endregion
 
@@ -219,7 +226,7 @@ def clip_file_contents(file, startline, endline):
 
 
 def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno, refs):
-    handleMake(data, html, filepath, lineno, refs)
+    makedeps = handleMake(data, html, filepath, lineno, refs)
     startline = data.get('startline', None)
     endline = data.get('endline', None)
     name = data.get('name', None)
@@ -275,7 +282,7 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno, refs):
         datastr += '<img class="gitlab-mark" src="/Images/GitLab-Mark.svg"/>'
         datastr += '</a>\n'
     datastr += htmlc + '</div>'
-    return datastr, [file]
+    return datastr, makedeps + [file]
 
 
 # endregion
@@ -284,7 +291,7 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno, refs):
 
 
 def formatImage(data, html, filepath, lineno, refs: dict):
-    handleMake(data, html, filepath, lineno, refs)
+    makedeps = handleMake(data, html, filepath, lineno, refs)
     file = data['file']
     # file = re.sub(r'\$(\w+)', lambda m: getenv(m.group(1)), file)
     if path.isabs(file):
@@ -350,7 +357,7 @@ def formatImage(data, html, filepath, lineno, refs: dict):
 
     htmlstr += '</div>'
 
-    return htmlstr, [fullfile, fulldispfile]
+    return htmlstr, makedeps + [fullfile, fulldispfile]
 
 
 # endregion
@@ -391,6 +398,14 @@ def handleLaTeX(data: dict, html, filepath, lineno, refs):
     data['file'] = join(filedir, name + '.pdf')
     data.setdefault('display-file', join(filedir, name + '.svg'))
     return formatImage(data, html, filepath, lineno, refs)
+
+def handleInclude(data: dict, html, filepath, lineno, refs):
+    file = data['file']
+    fullfile = checkPath(filepath, file, "Included file")
+    makedeps = handleMake(data, html, filepath, lineno, refs)
+    with open(fullfile, 'r') as f:
+        contents = f.read()
+    return contents, makedeps + [fullfile]
 
 def handleReference(data, html, filepath, lineno, refs):
     label = data['ref']
@@ -434,6 +449,7 @@ def replaceTags(html, filepath, lineno, outpath, metadata):
             'codesnippet': formatPygmentsCodeSnippet,
             'image': formatImage,
             'latex': handleLaTeX,
+            'include': handleInclude,
         },
         {
             'ref': handleReference,
@@ -441,9 +457,8 @@ def replaceTags(html, filepath, lineno, outpath, metadata):
     ]
 
     refs = dict()
-    deps = []
-    for pass_ in range(2):
-        handlers = keywordhandlers[pass_]
+    deps = set()
+    for pass_, handlers in enumerate(keywordhandlers):
         index = html.find('@')
         while index >= 0:
             keyword = getKeyWord(handlers, html, index + 1)
@@ -456,7 +471,7 @@ def replaceTags(html, filepath, lineno, outpath, metadata):
                 handler = handlers[keyword]
                 taglineno = lineno + getlinenumber(html, index)
                 newdata, dep = handler(data, html, filepath, taglineno, refs)
-                if dep: deps += dep
+                if dep: deps.update(dep)
                 lineno += getlinesbetween(html, index, endindex)
                 lineno -= getlines(newdata)
                 html = html[:index] + newdata + html[endindex:]
@@ -464,7 +479,7 @@ def replaceTags(html, filepath, lineno, outpath, metadata):
             except Exception as e:
                 fileline = filepath + ':' + str(lineno +
                                                 getlinenumber(html, index))
-                print('\nError adding code snippet:', file=sys.stderr)
+                print('\nError processing tag:', file=sys.stderr)
                 print(fileline, file=sys.stderr)
                 print(type(e).__name__, file=sys.stderr)
                 print(e, file=sys.stderr)
@@ -473,7 +488,7 @@ def replaceTags(html, filepath, lineno, outpath, metadata):
     if deps:
         depfname = path.splitext(outpath)[0] + '.dep'
         with open(depfname, 'w') as f:
-            f.write('\n'.join(deps))
+            f.write('\n'.join(sorted(deps)))
     return html
 
 

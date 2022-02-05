@@ -1,4 +1,7 @@
+#include <algorithm>
+#include <array>
 #include <cassert>
+#include <cctype>
 #include <chrono>
 #include <cstdio>
 #include <filesystem>
@@ -279,8 +282,9 @@ class PagesParser {
         replace(out, ":html:",
                 formatHTML(page.html, page.abs_source_path, page.lineno,
                            output_dir / page.rel_path, page.metadata));
-        bool showNextUpPrev = page.metadata.count("shownextupprevpage") > 0 &&
-                              page.metadata.at("shownextupprevpage") == "true";
+        auto shownextupprevpage_it = page.metadata.find("shownextupprevpage");
+        bool showNextUpPrev = shownextupprevpage_it != page.metadata.end() &&
+                              isTruthyString(shownextupprevpage_it->second);
         replace(out, ":nextupprev:",
                 showNextUpPrev ? generateNextUpPrevNav(page) : "");
         replace(out, ":mdate:", formatFileTime(page.modified));
@@ -291,21 +295,28 @@ class PagesParser {
     }
 
     void exportDirectory(const PageDirectory &dir) {
-        // Create the folder structure in the output directory
-        fs::create_directories(output_dir / dir.rel_path.parent_path());
-        // Export the index page of the current directory
-        exportPage(dir);
-        // Export all subdirectories
-        for (auto &subdir : dir.subdirectories)
-            exportDirectory(subdir);
-        // Export all other pages in this directory
-        for (auto &page : dir.pages)
-            exportPage(page);
-        // Copy all resource folders
-        for (auto &dir : dir.resources)
-            fs::copy(source_dir / dir, output_dir / dir,
-                     fs::copy_options::overwrite_existing |
-                         fs::copy_options::recursive);
+        try {
+            // Create the folder structure in the output directory
+            fs::create_directories(output_dir / dir.rel_path.parent_path());
+            // Export the index page of the current directory
+            exportPage(dir);
+            // Export all subdirectories
+            for (auto &subdir : dir.subdirectories)
+                exportDirectory(subdir);
+            // Export all other pages in this directory
+            for (auto &page : dir.pages)
+                exportPage(page);
+            // Copy all resource folders
+            for (auto &dir : dir.resources)
+                fs::copy(source_dir / dir, output_dir / dir,
+                         fs::copy_options::overwrite_existing |
+                             fs::copy_options::recursive);
+        } catch (std::exception &e) {
+            Red(cerr) << "Error exporting directory "
+                      << dir.abs_source_path.parent_path() << ": " << e.what()
+                      << endl;
+            throw;
+        }
     }
 
     void exportPDFPage(const Page &page) {
@@ -349,14 +360,48 @@ class PagesParser {
             exportPDFPage(page);
     }
 
+    static bool isTruthyString(string str) {
+        const static string true_str[]{"1", "true", "yes", "y", "t"};
+        const static string false_str[]{"0", "false", "no", "n", "f"};
+        auto to_lower = [](char c) -> char { return std::tolower(c); };
+        std::ranges::transform(str, str.begin(), to_lower);
+        if (std::ranges::find(true_str, str) != std::end(true_str))
+            return true;
+        else if (std::ranges::find(false_str, str) != std::end(false_str))
+            return false;
+        else
+            throw std::runtime_error("String should have truth value (e.g. "
+                                     "\"true\" or \"false\"), got \"" +
+                                     str + "\" instead.");
+    }
+
     static bool isPageToList(const Page &page) {
         string filename = page.rel_path.filename();
-        return filename[0] != '.';
+        if (filename[0] == '.')
+            return false;
+        else if (auto hidden_str_it = page.metadata.find("hidden");
+                 hidden_str_it != page.metadata.end())
+            return !isTruthyString(hidden_str_it->second);
+        else
+            return true;
     }
 
     static bool isDirectoryToList(const PageDirectory &dir) {
         string dirname = dir.rel_path.parent_path().filename();
-        return dirname[0] != '.';
+        if (dirname[0] == '.')
+            return false;
+        else if (auto hidden_str_it = dir.metadata.find("hidden");
+                 hidden_str_it != dir.metadata.end())
+            return !isTruthyString(hidden_str_it->second);
+        else
+            return true;
+    }
+
+    static bool isParentOf(const Page &entry, const Page &parent) {
+        for (auto e = &entry; e != nullptr; e = e->parent)
+            if (e == &parent)
+                return true;
+        return false;
     }
 
     string generateNavigation(const Page &page) {
@@ -371,12 +416,13 @@ class PagesParser {
         string result = indentation_ul;
         result += "<ul>\n";
         for (const auto &entry : root.subdirectories) {
-            if (!isDirectoryToList(entry))
-                continue;
             bool open_entry = page.rel_path == entry.rel_path;
             string rel =
                 fs::relative(page.rel_path, entry.rel_path.parent_path());
             bool expanded = rel.substr(0, 2) != "..";
+            bool hidden = !isDirectoryToList(entry);
+            if (hidden && !(open_entry || expanded))
+                continue;
             result += indentation_li;
             result += "<li";
             if (expanded)
@@ -386,10 +432,12 @@ class PagesParser {
                       "onclick=\"this.parentElement.classList.toggle('"
                       "expanded');\">"
                       "</span>";
-            result += "<a";
+            result += "<a class=\"";
+            if (hidden)
+                result += "hiddenEntry ";
             if (open_entry)
-                result += " class=\"openEntry\"";
-            result += " href=\"";
+                result += "openEntry ";
+            result += "\" href=\"";
             result += fs::relative(entry.rel_path, page.rel_path.parent_path());
             result += "\">";
             result += entry.getTitle();
@@ -399,16 +447,19 @@ class PagesParser {
             result += "</li>\n";
         }
         for (const auto &entry : root.pages) {
-            if (!isPageToList(entry))
-                continue;
             string rel = fs::relative(page.rel_path, entry.rel_path);
             bool open_entry = rel == ".";
+            bool hidden = !isPageToList(entry);
+            if (hidden && !open_entry)
+                continue;
             result += indentation_li;
             result += "<li><span class=\"ftriangle\"></span>";
-            result += "<a";
+            result += "<a class=\"";
+            if (hidden)
+                result += "hiddenEntry ";
             if (open_entry)
-                result += " class=\"openEntry\"";
-            result += " href=\"";
+                result += "openEntry ";
+            result += "\" href=\"";
             result += fs::relative(entry.rel_path, page.rel_path.parent_path());
             result += "\">";
             result += entry.getTitle();
