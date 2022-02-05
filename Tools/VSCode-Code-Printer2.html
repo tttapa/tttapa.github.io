@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Arduino-Forum-Code-Formatter.css">
-    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="theme-color" content="#ccc">
     <title>Code Printer</title>
@@ -13,16 +14,16 @@
 
 <body>
     <article>
-        <h1>Arduino Code Printer</h1>
+        <h1>Visual Studio Code Printer</h1>
         <i style="font-size:0.9em;color:#888;margin-bottom:1em;display:block">Pieter P</i>
         <div>
-            This is a simple tool for printing Arduino code with line numbers and syntax highlighting.
+            This is a simple tool for printing code with line numbers and syntax highlighting.
             <ol>
-                <li>Select the code in the Arduino IDE</li>
-                <li>Right click the selection, and choose "Copy as HTML"</li>
-                <li>Paste the code here</li>
-                <li>Emphasize some lines if you want to (see below)</li>
-                <li>Click "Print", or copy the generated HTML</li>
+                <li>Select and copy the code in VSCode</li>
+                <li>Paste the code in the “Raw HTML code” field</li>
+                <li>Emphasize some lines or add line breaks if you want to (see below)</li>
+                <li>Add a title and author to be included with the generated HTML</li>
+                <li>Click “Print” to print the code, or copy the generated HTML</li>
             </ol>
             <h4>Emphasize code</h4>
             You can use this tool to emphasize certain lines. Other lines will be grayed out.
@@ -106,7 +107,7 @@
     }
 
     .lineNumbers>code {
-        display: inline-block;
+        display: block;
     }
 
     .lineNumbers>code:before {
@@ -134,7 +135,7 @@
     }
 
     .lineNumbersEmphasis>code {
-        display: inline-block;
+        display: block;
     }
 
     .lineNumbersEmphasis>code {
@@ -228,9 +229,7 @@
         }
 
         function formatContent(content) {
-            let VSCode = content.match(/^<meta/);
-            console.log(VSCode);
-            content = VSCode ? formatVSCode(content) : formatNormalContent(content);
+            content = formatVSCode(content);
             content = formatSpecialContent(content);
             return content;
         }
@@ -292,20 +291,22 @@
             let tmp = document.createElement("div");
             tmp.innerHTML = content;
             let container = tmp.getElementsByTagName("div")[0];
+            if (container == undefined)
+                return formatNormalContent(content);
 
             let result = document.createElement("pre");
             result.style.color = container.style.color;
-            // result.style.backgroundColor = container.style.backgroundColor;
+            result.style.backgroundColor = container.style.backgroundColor;
+            result.style.paddingBottom = "1em";
+            result.style.paddingTop = "1em";
+            result.style.borderRadius = "4px";
             result.classList.add(emphasize ? "lineNumbersEmphasis" : "lineNumbers");
 
             Array.prototype.forEach.call(container.querySelectorAll("div,br"), el => {
                 let code = document.createElement("code");
                 code.innerHTML = el.innerHTML;
                 result.appendChild(code);
-                let enter = document.createTextNode("\n");
-                result.appendChild(enter);
             });
-            result.removeChild(result.lastChild);
             return result.outerHTML;
         }
 
@@ -395,15 +396,17 @@
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <meta name="theme-color" content="#ccc">
+    <link rel="stylesheet" type="text/css" href="/CSS/Arduino-Forum-Code-Formatter.css">
+    <link href='/CSS/roboto.css' rel='stylesheet' type='text/css'>
     <title>${title}</title>
 </head>
-<body>\r\n`
+<body style="background-color: white;">\r\n`
 
             printWindow = window.open("", "print", "");
             printWindow.document.open();
             printWindow.document.write(htmlHead + output.value);
             printWindow.document.close();
-            printWindow.print();
+            setTimeout(() => { printWindow.print() }, 500);
         }
 
         window.onbeforeunload = function () {
