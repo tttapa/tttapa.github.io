@@ -38,11 +38,11 @@
     will run on the Raspberry Pi, and we'll connect to it using <code>gdb</code>
     on our computer. First install <code>gdbserver</code> to the Pi:
 </p>
-<pre class="console"><code>scp ~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/debug-root/usr/bin/gdbserver RPi0:~</code>
+<pre class="console"><code>scp ~/opt/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/debug-root/usr/bin/gdbserver RPi0:~</code>
 <code>ssh RPi0 sudo mv gdbserver /usr/local/bin</code>
 <code>ssh RPi0 gdbserver --version
-GNU gdbserver (crosstool-NG UNKNOWN) 9.2
-Copyright (C) 2020 Free Software Foundation, Inc.
+GNU gdbserver (crosstool-NG UNKNOWN) 10.2
+Copyright (C) 2021 Free Software Foundation, Inc.
 gdbserver is free software, covered by the GNU General Public License.
 This gdbserver was configured as "armv6-rpi-linux-gnueabihf"</code></pre>
 
@@ -53,22 +53,25 @@ This gdbserver was configured as "armv6-rpi-linux-gnueabihf"</code></pre>
     using:
 </p>
 <pre class="console"><code>echo "deb http://archive.raspberrypi.org/debian/ buster main" | sudo tee /var/lib/schroot/chroots/rpizero-buster-armhf/etc/apt/sources.list.d/raspi.list</code>
-<code>wget -qO - https://archive.raspberrypi.org/debian/raspberrypi.gpg.key | sudo schroot -c source:rpizero-buster-armhf -u root -d / -- apt-key add -</code>
+<code>wget -qO- https://archive.raspberrypi.org/debian/raspberrypi.gpg.key | sudo schroot -c source:rpizero-buster-armhf -u root -d / -- apt-key add -</code>
 <code>sudo sbuild-apt rpizero-buster-armhf apt-get update</code>
 <code>sudo sbuild-apt rpizero-buster-armhf apt-get install raspi-copies-and-fills</code></pre>
+<p>
+    This is not necessary when your Raspberry Pi runs Ubuntu, for example.
+</p>
 
 <h3>Installing GDB on your computer</h3>
 
 <p>
-    To debug ARM devices, you need an ARM version of GDB. You can install one
+    To debug ARM devices, you need an ARM version of GDB.
+    The toolchain includes <code>armv6-rpi-linux-gnueabihf-gdb</code> that you
+    can use.
+</p>
+<p>
+    Alternatively, you can install the <code>gdb-multiarch</code> package
     using:
 </p>
 <pre class="console"><code>sudo apt install gdb-multiarch</code></pre>
-
-<p>
-    The toolchain includes <code>armv6-rpi-linux-gnueabihf-gdb</code>, but for
-    some reason, this version of GDB doesn't play well with VSCode.
-</p>
 
 <h3>Running GDB manually from the command line</h3>
 
@@ -78,13 +81,13 @@ This gdbserver was configured as "armv6-rpi-linux-gnueabihf"</code></pre>
 </p>
 <pre class="console"><code>armv6-rpi-linux-gnueabihf-gdb ./build/hello</code></pre>
 <p>
-    Set the sysroot and start gdbserver over SSH. Then type <code>c</code> or <code>continue</code> to run the program:
+    Set the sysroot and start gdbserver over SSH. Then type <kbd>c</kbd> or <kbd>continue</kbd> to run the program:
 </p>
 <pre class="console gdb"><code>set sysroot /var/lib/schroot/chroots/rpizero-buster-armhf</code>
 <code>target remote | ssh RPi0 gdbserver - '~/hello' --name Pieter</code>
 <code>continue</code></pre>
 <p>
-    Use <code>q</code> or <kbd>Ctrl+D</kbd> to quit GDB.
+    Use <kbd>q</kbd> or <kbd>Ctrl+D</kbd> to quit GDB.
 </p>
 @image{
 "file": "images/gdb-cmd.png"
@@ -98,12 +101,16 @@ This gdbserver was configured as "armv6-rpi-linux-gnueabihf"</code></pre>
     call stack and variables, and so on, like you would during a normal native debug session.<br>
     The “C/C++” extension by Microsoft is required for debugging support.
 </p>
+<p>
+    Before you start debugging, edit <code>launch.json</code> and edit the paths to the sysroot 
+    as appropriate. You might want to edit the SSH configuration and destination path in 
+    <code>tasks.json</code> as well.
+</p>
 @image{
 "file": "images/gdb-vscode.png"
 }
 <p>
     For some reason, the standard output of the program is not visible in VSCode.
-    I'll probably open an issue to try and figure this out.
 </p>
 
 </html>
