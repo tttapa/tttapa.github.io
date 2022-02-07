@@ -27,8 +27,24 @@
     and prints a <i>hello world</i> message.<br>
     Download it from GitHub:
 </p>
-<pre class="console"><code>cd ~/GitHub</code>
-<code>git clone https://github.com/tttapa/RPi-Cross-Cpp-Development.git</code></pre>
+<pre class="console"><code>mkdir -p ~/GitHub</code>
+<code>cd ~/GitHub</code>
+<code>git clone https://github.com/tttapa/RPi-Cross-Cpp-Development.git</code>
+<code>cd RPi-Cross-Cpp-Development</code></pre>
+
+<h3>Customize the paths</h3>
+
+<p>
+    Edit the CMake toolchain file to point to the correct root filesystem path
+    (the value of the <code>CMAKE_SYSROOT</code> variable):
+</p>
+<pre class="console"><code>sed -i 's/schroot-name/rpizero-buster/' cmake/armv6-rpi-linux-gnueabihf.cmake</code></pre>
+<p>
+    You might want to change the toolchain prefix or the architecture-specific flags
+    as well. <br />
+    If you're using a 64-bit toolchain, edit the
+    <code>aarch64-rpi3-linux-gnu.cmake</code> file instead.
+</p>
 
 <h3>Installing the dependencies</h3>
 
@@ -74,6 +90,10 @@
     previous pages correctly, it finds the <code>armv6-rpi-linux-gnueabihf</code> toolchain
     we installed, as well as the Boost libraries in the Raspberry Pi OS root filesystem.
 </div>
+<p>
+    If CMake raises an error, see the <a href="#troubleshooting">Troubleshooting</a>
+    section below.
+</p>
 @image{
 "file": "images/configured.png"
 }
@@ -112,15 +132,40 @@ build/hello: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically
     That's it, you have successfully executed your cross-compiled C++ program on the Raspberry Pi!
 </p>
 
+<h3>Using a staging directory</h3>
+
+<p>
+    For larger projects, you usually don't want to have to dig around in the
+    <code>build</code> directory to gather all the files you need to copy to the
+    Raspberry Pi. Instead, you'll use <code>cmake --install</code> to let
+    CMake install all the necessary files into a so-called staging directory on
+    your computer, which you can then copy to the Pi.
+</p>
+<p>
+    After building the project as explained in the previous section, press
+    <kbd>Ctrl+Shift+P</kbd> in VSCode and execute the <code>CMake: Install</code>
+    command. You can then find the <code>hello</code> program in the <code>bin</code>
+    subdirectory of
+    <code>~/RPi-dev/staging-armv6-rpi</code>.
+</p>
+<p>
+    You'll usually compress the staging folder using <code>tar</code> and then
+    deploy it to the Pi by extracting it to the <code>~/.local</code> or
+    <code>/usr/local</code> folder.
+</p>
+
 <hr>
 
 <h3>A closer look at the build process</h3>
 <p>
-    There's only one source file, <code>main.cpp</code>, we won't go into detail here.
+    There's only one source file, <code>main.cpp</code>, and we'll focus on the
+    build process, so we won't go into the code in detail here.<br />
     The main <code>CMakeLists.txt</code> file is really basic:
     it just defines the project, looks for the Boost.program_options library,
     compiles <code>main.cpp</code> into an executable with the name <code>hello</code>,
-    and then links this executable with the Boost library.
+    and then links this executable with the Boost library. Finally, an install
+    rule is added to install the <code>hello</code> program to the <code>bin</code>
+    folder of the staging directory.
 </p>
 @codesnippet{
 "file": "${HOME}/GitHub/RPi-Cross-Cpp-Development/CMakeLists.txt",
@@ -137,32 +182,32 @@ build/hello: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically
 "name": "cmake/armv6-rpi-linux-gnueabihf.cmake"
 }
 <p>
-    First we set the system name and architecture, then we set some paths to 
+    First we set the system name and architecture, then we set some paths to
     the sysroot, so that CMake will be able to find the Boost library.
-    If you gave your chroot a different name, you might want to change these 
+    If you gave your chroot a different name, you have to change these
     paths.
     The <code>CMAKE_STAGING_PREFIX</code> variable is useful for installing your
-    project to a “staging” directory for deploying to the Pi. It is not used 
-    in this simple project. The <code>CMAKE_LIBRARY_ARCHITECTURE</code> variable
-    helps CMake find libraries in Debian's multiarch directory structure, 
+    project to a “staging” directory for deploying to the Pi.
+    The <code>CMAKE_LIBRARY_ARCHITECTURE</code> variable
+    helps CMake find libraries in Debian's Multiarch directory structure,
     e.g. in <code>/usr/lib/arm-linux-gnueabihf/</code>.
 </p>
 <p>
     Next, we tell CMake to use the <code>armv6-rpi-linux-gnueabihf</code>
     cross-compilers, and we set some compiler flags. The <code>-mcpu</code> flag
-    is a bit redundant here, since the toolchain is already configured to 
-    generate code for that specific CPU, but it serves as an example, you might 
+    is a bit redundant here, since the toolchain is already configured to
+    generate code for that specific CPU, but it serves as an example, you might
     want to add more specific flags.
 </p>
 <p>
     Finally, we tell CMake never to run any programs it finds in the sysroot
-    (because they are ARM binaries, you cannot run them on your computer 
-    without extra steps), and it should only look for libraries, headers and 
-    packages in the sysroot. We don't want CMake to find and use packages 
+    (because they are ARM binaries, you cannot run them on your computer
+    without extra steps), and it should only look for libraries, headers and
+    packages in the sysroot. We don't want CMake to find and use packages
     installed on our computer, because these are x86_64 libraries, not ARM.
 </p>
 <p>
-    The CMake Tools VSCode extension picks up these toolchain files using the 
+    The CMake Tools VSCode extension picks up these toolchain files using the
     following configuration file:
 </p>
 @codesnippet{
@@ -171,19 +216,98 @@ build/hello: ELF 32-bit LSB executable, ARM, EABI5 version 1 (SYSV), dynamically
 }
 <p>
     You can see that there's a second toolchain file for newer 64-bit boards.
-    If you need different configurations for different Pi models, you can add 
+    If you need different configurations for different Pi models, you can add
     them here and easily switch between them by clicking the CMake Kit button
     in VSCode.
 </p>
 
 <h3>Manual build</h3>
 <p>
-    If you don't want to use VSCode as your editor, you can also build the 
+    If you don't want to use VSCode as your editor, you can also build the
     project from the command line:
 </p>
 <pre class="console"><code>cd ~/GitHub/RPi-Cross-Cpp-Development</code>
 <code>rm -rf build</code>
 <code>cmake -S . -B build -DCMAKE_TOOLCHAIN_FILE=cmake/armv6-rpi-linux-gnueabihf.cmake</code>
-<code>cmake --build build -j</code></pre>
+<code>cmake --build build -j</code>
+<code>cmake --install build</code></pre>
+
+<hr>
+
+<h3>Troubleshooting</h3>
+
+<p>
+    This section covers some common problems that you might run into. After
+    fixing them, you can re-run CMake by pressing <kbd>Ctrl+Shift+P</kbd>
+    in VSCode and executing the <code>CMake: Delete Cache and Reconfigure</code>
+    command.
+</p>
+<h4>Compiler not found</h4>
+
+<pre class="lineNumbersEmphasis">***<code>   The CMAKE_C_COMPILER:</code>
+***<code> </code>
+***<code>     armv6-rpi-linux-gnueabihf-gcc</code>
+***<code> </code>
+***<code>   is not a full path and was not found in the PATH.</code></pre>
+<p>
+    This indicates that you either didn't download and install the toolchain
+    correctly, or that it has not been added to the PATH. See
+    <a href="Development-setup.html#install-the-toolchain">the previous page</a>
+    for more details.
+</p>
+<p>
+    Note that changing the
+    PATH in <code>~/.profile</code> only has effect after logging out and back
+    in again. <br />
+    If you used <code>export PATH="..."</code> in a terminal, this only affects
+    the current terminal, so unless you start VSCode from that terminal, it
+    won't see the updated PATH.
+</p>
+
+<h4>Compiler is not able to compile a simple test program</h4>
+
+<pre class="lineNumbersEmphasis"><code> -- Check for working C compiler: ~/opt/x-tools/armv6-rpi-linux-gnueabihf/bin/armv6-rpi-linux-gnueabihf-gcc - broken</code>
+<code> CMake Error at ~/.local/share/cmake-3.22/Modules/CMakeTestCCompiler.cmake:69 (message):</code>
+***<code>   The C compiler</code>
+***<code> </code>
+***<code>     "~/opt/x-tools/armv6-rpi-linux-gnueabihf/bin/armv6-rpi-linux-gnueabihf-gcc"</code>
+***<code> </code>
+***<code>   is not able to compile a simple test program.</code>
+<code> </code>
+<code>   It fails with the following output:</code>
+<code> </code>
+<code>     Change Dir: ~/GitHub/RPi-Cross-Cpp-Development/build/CMakeFiles/CMakeTmp</code>
+<code>     </code>
+<code>     Run Build Command(s):/usr/bin/ninja cmTC_f7b02 && [1/2] Building C object CMakeFiles/cmTC_f7b02.dir/testCCompiler.c.o</code>
+<code>     [2/2] Linking C executable cmTC_f7b02</code>
+<code>     FAILED: cmTC_f7b02 </code>
+<code>     : && ~/opt/x-tools/armv6-rpi-linux-gnueabihf/bin/armv6-rpi-linux-gnueabihf-gcc --sysroot=/var/lib/schroot/chroots/wrong-name-armhf -mcpu=arm1176jzf-s -mcpu=arm1176jzf-s  CMakeFiles/cmTC_f7b02.dir/testCCompiler.c.o -o cmTC_f7b02   && :</code>
+<code>     ~/opt/x-tools/armv6-rpi-linux-gnueabihf/bin/../lib/gcc/armv6-rpi-linux-gnueabihf/11.2.0/../../../../armv6-rpi-linux-gnueabihf/bin/ld.bfd: cannot find crt1.o: No such file or directory</code>
+<code>     ~/opt/x-tools/armv6-rpi-linux-gnueabihf/bin/../lib/gcc/armv6-rpi-linux-gnueabihf/11.2.0/../../../../armv6-rpi-linux-gnueabihf/bin/ld.bfd: cannot find crti.o: No such file or directory</code>
+<code>     collect2: error: ld returned 1 exit status</code></pre>
+
+<p>
+    This error indicates that the path to the root filesystem is not correct.
+    Make sure that the <code>CMAKE_SYSROOT</code> variable is set to the correct
+    schroot you created on the <a href="Development-setup.html#create-a-raspberry-pi-os-root-filesystem">previous
+        page</a>,
+    double check the name (with the architecture as suffix), and check that the
+    folder exists.
+</p>
+
+<h4>Boost not found</h4>
+
+<pre class="lineNumbersEmphasis"><code> CMake Error at ~/.local/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):</code>
+***<code>   Could NOT find Boost (missing: Boost_INCLUDE_DIR program_options)</code>
+<code> Call Stack (most recent call first):</code>
+<code>   ~/.local/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:594 (_FPHSA_FAILURE_MESSAGE)</code>
+<code>   ~/.local/share/cmake-3.22/Modules/FindBoost.cmake:2375 (find_package_handle_standard_args)</code>
+<code>   CMakeLists.txt:4 (find_package)</code></pre>
+
+<p>
+    This error occurs when the Boost development package is not installed in
+    your root filesystem. Follow the <a href="#installing-the-dependencies">Installing the dependencies</a>
+    section to install it.
+</p>
 
 </html>
