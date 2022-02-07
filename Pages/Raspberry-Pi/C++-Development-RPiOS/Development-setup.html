@@ -231,7 +231,6 @@
         <li><a href="#prepare-for-cross-compilation">Prepare for cross-compilation</a></li>
           <ul>
             <li><a href="#install-developer-tools">Install developer tools</a></li>
-            <li><a href="#install-docker">Install Docker</a></li>
             <li><a href="#create-a-raspberry-pi-os-root-filesystem">Create a Raspberry Pi OS root filesystem</a></li>
             <li><a href="#install-the-toolchain">Install the toolchain</a></li>
             <li><a href="#install-the-c-standard-library-to-the-pi">Install the C++ standard library to the Pi</a></li>
@@ -267,16 +266,6 @@
     <a href="https://wiki.debian.org/sbuild">https://wiki.debian.org/sbuild</a>.
 </p>
 
-<h3><a name="install-docker" href="#install-docker">Install Docker</a></h3>
-<p>
-    You need Docker to pull or build the toolchain.
-    You can find detailed installation instructions here:
-    <a href="https://www.digitalocean.com/community/tutorial_collections/39">
-        DigitalOcean - How to Install and Use Docker</a><br>
-    Also follow the step to add your user to the <code>docker</code> group so you
-    can run it without <code>sudo</code>.
-</p>
-
 <h3><a name="create-a-raspberry-pi-os-root-filesystem" href="#create-a-raspberry-pi-os-root-filesystem">Create a Raspberry Pi OS root filesystem</a></h3>
 
 <p>
@@ -293,7 +282,7 @@
 </p>
 
 <pre
-    class="console"><code>wget -qO - https://archive.raspbian.org/raspbian.public.key | gpg --import -</code>
+    class="console"><code>wget -qO- https://archive.raspbian.org/raspbian.public.key | gpg --import -</code>
 <code>mk-sbuild --arch=armhf buster --debootstrap-mirror=http://raspbian.raspberrypi.org/raspbian --name=rpizero-buster --debootstrap-keyring "$HOME/.gnupg/pubring.kbx --merged-usr" --skip-proposed --skip-updates --skip-security</code></pre>
 
 <p>
@@ -303,7 +292,9 @@
     <!-- Since we're not going to be
     publishing any Debian packages, comment out the line <code>$mailto = ...</code>
     as it seems to cause issues later.<br> -->
-    After this first run, reboot your computer, and run the second command again:
+    After this first run, reboot your computer (or log out and back in again, or
+    use <code>su - $USER</code>, to flush group memberships), and run the second
+    command again:
 </p>
 <pre
     class="console"><code>mk-sbuild --arch=armhf buster --debootstrap-mirror=http://raspbian.raspberrypi.org/raspbian --name=rpizero-buster --debootstrap-keyring "$HOME/.gnupg/pubring.kbx --merged-usr" --skip-proposed --skip-updates --skip-security</code></pre>
@@ -324,37 +315,47 @@
     filesystem and the schroot configuration.
 </p>
 
+<p>
+    If you used a different name for your build environment, remember to replace
+    it in the commands throughout the rest of the tutorial.
+</p>
+
 <h3><a name="install-the-toolchain" href="#install-the-toolchain">Install the toolchain</a></h3>
 
 <p>
     The cross-compilation toolchains in the Ubuntu repositories are not
     compatible with Raspberry Pi OS, so you'll have to build or install your own.
     It's easiest to just download the crosstool-NG toolchain from
-    <a href="https://github.com/tttapa/RPi-Cpp-Toolchain">https://github.com/tttapa/RPi-Cpp-Toolchain</a>.
+    <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain">https://github.com/tttapa/docker-arm-cross-toolchain</a>.
 </p>
-<pre class="console"><code>mkdir -p ~/GitHub</code>
-<code>cd ~/GitHub</code>
-<code>git clone https://github.com/tttapa/RPi-Cpp-Toolchain</code>
-<code>cd RPi-Cpp-Toolchain</code>
-<code>./toolchain/toolchain.sh rpi --export-toolchain</code></pre>
+<p>In this example, I'll be using the ARMv6 toolchain, because it is compatible
+    with all Raspberry Pi boards. If you only need to support newer boards, or
+    if you're using a 64-bit version of Raspberry Pi OS, you might want to use
+    the ARMv8 or AArch64 toolchain (see the README of <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain">tttapa/docker-arm-cross-toolchain</a>
+    for more details).
+</p>
+<pre
+    class="console"><code>mkdir -p ~/opt</code>
+<code>wget -qO- https://github.com/tttapa/docker-arm-cross-toolchain/releases/latest/download/x-tools-armv6-rpi-linux-gnueabihf.tar.bz2 | tar xJ -C ~/opt</code></pre>
 <p>
-    This exports the toolchain to <code>~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf</code>.
+    This installs the toolchain to <code>~/opt/x-tools/armv6-rpi-linux-gnueabihf</code>.
     You can add it to your path using:
 </p>
 <pre
-    class="console"><code>echo 'export PATH="$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/bin:$PATH"' >> ~/.profile</code></pre>
+    class="console"><code>echo 'export PATH="$HOME/opt/x-tools/armv6-rpi-linux-gnueabihf/bin:$PATH"' >> ~/.profile</code></pre>
 <p>
     This will only take effect after you log out and back in again, so you might want to do that now,
     or execute the following command to add it to your path in the current terminal:
 </p>
-<pre
-    class="console"><code>export PATH="$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/bin:$PATH"</code></pre>
+<pre class="console"><code>export PATH="$HOME/opt/x-tools/armv6-rpi-linux-gnueabihf/bin:$PATH"</code></pre>
 
 <p>
     Verify that the toolchain is installed correctly by running:
 </p>
 <pre class="console"><code>armv6-rpi-linux-gnueabihf-g++ --version
-armv6-rpi-linux-gnueabihf-g++ (crosstool-NG UNKNOWN) 11.1.0
+armv6-rpi-linux-gnueabihf-g++ (crosstool-NG UNKNOWN) 11.2.0
 Copyright (C) 2021 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
 warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</code></pre>
@@ -366,12 +367,12 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</cod
 
 <h3><a name="install-the-c-standard-library-to-the-pi" href="#install-the-c-standard-library-to-the-pi">Install the C++ standard library to the Pi</a></h3>
 <p>
-    Raspberry Pi OS uses an older compiler and has an older version of the C++ standard
-    library installed. Since we're going to use a new toolchain, we need to
-    install a newer version of <code>libstdc++</code> to the Pi to be able to run
-    our programs:
+    Out of the box, Raspberry Pi OS uses an older compiler and has an older
+    version of the C++ standard library installed. Since we're going to use a
+    new toolchain, we need to install a newer version of <code>libstdc++</code>
+    to the Pi to be able to run our programs:
 </p>
-<pre class="console"><code>scp ~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/sysroot/lib/libstdc++.so.6.0.29 RPi0:~</code>
+<pre class="console"><code>scp ~/opt/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/sysroot/lib/libstdc++.so.6.0.29 RPi0:~</code>
 <code>ssh RPi0 bash &lt;&lt; 'EOF'
     sudo mkdir -p /usr/local/lib/arm-linux-gnueabihf
     sudo mv libstdc++.so.6.0.29 $_
@@ -385,7 +386,7 @@ EOF</code></pre>
     Also do the same for the root filesystem on your computer, this comes in handy when debugging later:
 </p>
 <pre class="console"><code>sudo mkdir -p /var/lib/schroot/chroots/rpizero-buster-armhf/usr/local/lib/arm-linux-gnueabihf</code>
-<code>sudo cp ~/GitHub/RPi-Cpp-Toolchain/toolchain/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/sysroot/lib/libstdc++.so.6.0.29 $_</code>
+<code>sudo cp ~/opt/x-tools/armv6-rpi-linux-gnueabihf/armv6-rpi-linux-gnueabihf/sysroot/lib/libstdc++.so.6.0.29 $_</code>
 <code>sudo schroot -c source:rpizero-buster-armhf -u root -d / ldconfig</code></pre>
 
 <h2><a name="install-and-configure-the-ide" href="#install-and-configure-the-ide">Install and configure the IDE</a></h2>
@@ -429,7 +430,7 @@ EOF</code></pre>
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="Installation.html" title="Installation and Setup"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Ubuntu to Raspberry Pi OS Cross C++ Development">Index</a></div><div class="nextpage"><a href="Building-example-project.html" title="Building the C++ example project">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Saturday, 31 July 2021 22:23 UTC</footer>
+    <footer>Last edited: Saturday, 05 February 2022 15:15 UTC</footer>
 </body>
 
 </html>
