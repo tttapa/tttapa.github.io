@@ -9,12 +9,36 @@
 -->
 <html>
 
+<p>
+    Use the Python script
+    <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/master/Python/Tuning.py">Python/Tuning.py</a>
+    to tune the controllers. Configure the Arduino code as described in the
+    Python docstring, and make sure to select the correct serial port. To run the
+    script, you'll have to install the <code>numpy</code>, <code>matplotlib</code>
+    and <code>pyserial</code> packages:
+</p>
+
+<pre class="console"><code>python3 -m pip install numpy matplotlib pyserial</code></pre>
+
+<p>
+    After installing the dependencies, verifying the port name, and specifying 
+    the desired tunings in the <code>tunings</code> list, run the script using:
+</p>
+
+<pre class="console"><code>python3 Python/Tuning.py</code></pre>
+
+<p>
+    The script will then connect to the Arduino and perform an experiment with 
+    each of the tunings specified in the list. The results of these experiments
+    are stored in a file, and then plotted in a graph as shown below.
+</p>
+
 <h2>Manual tuning</h2>
 
 <p>
     In this first section, we'll develop an intuition of what each of the four
-    parameters of our PID controller does by tuning them manually. Later we'll 
-    use the heuristic Ziegler─Nichols method to get good starting values for the 
+    parameters of our PID controller does by tuning them manually. Later we'll
+    use the heuristic Ziegler─Nichols method to get good starting values for the
     tuning parameters.
 </p>
 <h3>Proportional control</h3>
@@ -34,9 +58,9 @@
 <p>
     The figure above shows the results of four experiments with different values for the
     proportional gain \(K_p\). <br>
-    The blue line is the reference or target position,
-    the orange line is the actual position of the fader, and the green line is
-    the control signal sent to the motor.
+    The <span style="color: #1F77B4;">blue</span> line is the reference or target position,
+    the <span style="color: #FF7F0E;">orange</span> line is the actual position of the fader, 
+    and the <span style="color: #2CA02C">green</span> line is the control signal sent to the motor.
 </p>
 <p>
     We can make two main observations based on these experiments:
@@ -143,34 +167,35 @@
 </p>
 <h3>Ultimate gain</h3>
 <p>
-    First, the integral and derivative gains are set to zero and the proportional gain is increased until 
-    the system starts oscillating with a constant amplitude, recording the value of \(K_p\) and the period of the 
-    oscillations when this happens. This gain is called the “ultimate gain” \(K_u\), and the period of the 
+    First, the integral and derivative gains are set to zero and the proportional gain is increased until
+    the system starts oscillating with a constant amplitude, recording the value of \(K_p\) and the period of the
+    oscillations when this happens. This gain is called the “ultimate gain” \(K_u\), and the period of the
     oscillation period is denoted by \(T_u\).
 </p>
 @image{
 "file": "images/ziegler-nichols.svg"
 }
 <p>
-    In this experiment, the ultimate gain was determined to be \(K_u \approx 19\), 
+    In this experiment, the ultimate gain was determined to be \(K_u \approx 19\),
     and the period of oscillation was around 29 cycles, or \(T_u \approx 29\, T_s\),
     with \(T_s = 960\mu s\).
 </p>
 <h3>PID gains</h3>
 <p>
-    These values of \(K_u\) and \(T_u\) are then plugged into the heuristic formula 
+    These values of \(K_u\) and \(T_u\) are then plugged into the heuristic formula
     $$
-    K_p = 0.6\,K_u,\quad\quad K_i = 1.2\,K_u / T_u,\quad\quad K_d = 0.075\,K_u T_u. 
+    K_p = 0.6\,K_u,\quad\quad K_i = 1.2\,K_u / T_u,\quad\quad K_d = 0.075\,K_u T_u.
     $$
-    The results for these parameters are shown in the second graph in the figure below. The top graph shows the best manually tuned controller.
+    The results for these parameters are shown in the second graph in the figure below. The top graph shows the best
+    manually tuned controller.
 </p>
 <p>
     The resulting controller was relatively aggressive and had quite a bit of overshoot,
     so \(K_i\) was halved (third graph) and \(K_d\) was increased slightly (fourth graph),
     $$
-    K_p = 0.6\,K_u,\quad\quad K_i = 0.6\,K_u / T_u,\quad\quad K_d = 0.09\,K_u T_u. 
+    K_p = 0.6\,K_u,\quad\quad K_i = 0.6\,K_u / T_u,\quad\quad K_d = 0.09\,K_u T_u.
     $$
-    The Wikipedia page linked to above also contains some alternative rules that promise less or no overshoot, 
+    The Wikipedia page linked to above also contains some alternative rules that promise less or no overshoot,
     it might be worth trying these out as well.
 </p>
 @image{
