@@ -10,7 +10,14 @@
 -->
 <html>
 
-<h3>The Greeter Library</h3>
+<p>
+    This page gives an overview of the included example project and has
+    instructions on how to cross-compile it.
+</p>
+
+<h2>Overview of the example project</h2>
+
+<h3>The Greeter library</h3>
 
 <p>
     For this example, we'll create a very simple library with a single function that just takes a name and an output
@@ -24,18 +31,18 @@
 <code>greeter</code>
 <code>   ├── CMakeLists.txt</code>
 <code>   ├── include</code>
-<code>   │   └── greeter</code>
-<code>   │       └── greeter.hpp</code>
+<code>   │   └── greeter</code>
+<code>   │       └── greeter.hpp</code>
 <code>   ├── src</code>
-<code>   │   └── greeter.cpp</code>
+<code>   │   └── greeter.cpp</code>
 <code>   └── test</code>
 <code>       ├── CMakeLists.txt</code>
 <code>       └── greeter.test.cpp</code>
 </pre>
 <p>
     This structure is very common for C++ libraries: the function prototypes/declarations will be in the header file
-    <code>greeter.hpp</code>. The implementations for these functions are in the implementation file
-    <code>greeter.cpp</code>.<br>
+    <code>greeter.hpp</code>. The implementations for these functions are in the corresponding
+    implementation file <code>greeter.cpp</code>.<br>
     The <code>CMakeLists.txt</code> file in the <code>greeter</code> directory specifies how the library should be
     compiled, and where to find the headers.<br>
     Additionally, there's a <code>test</code> folder with unit tests in <code>greeter.test.cpp</code>. The
@@ -62,7 +69,8 @@
     <a href="https://github.com/google/googletest">Google Test framework</a>.
 </p>
 <p>
-    The tests can only be run on the build computer if we're not cross-compiling.
+    The tests can only be run on the build computer if we're not cross-compiling,
+    that's why the call to <code>gtest_discover_test(...)</code> is conditional.
 </p>
 
 @codesnippet{
@@ -87,6 +95,64 @@
 @codesnippet{
 "name": "CMakeLists.txt",
 "file": "$HOME/GitHub/RPi-Cpp-Toolchain/applications/hello-world/CMakeLists.txt"
+}
+
+<h2>Compiling the example project</h2>
+
+<h3>Using Visual Studio Code</h3>
+
+<style>
+    img.inline-icon {
+        display: inline;
+        margin: 0 0 1px 0;
+        vertical-align: text-bottom;
+    }
+    ol>li {
+        margin-bottom: 0.6em;
+    }
+</style>
+
+<ol>
+    <li>Open this repository (<code>RPi-Cpp-Toolchain</code>) in Visual Studio Code
+        (e.g. using <kbd>Ctrl+K O</kbd>).</li>
+    <li>You will be prompted <i>“Would you like to configure project 'RPi-Cpp-Toolchain'?”</i>.
+        Click “Yes”.<br>
+        (If this prompt doesn't appear automatically, click the
+        <b>“<img class="inline-icon" src="images/icons/kit.svg">&nbsp;No Kit Selected”</b>
+        button at the bottom of the window.)
+    </li>
+    <li>Select the configuration that matches your specific board, e.g. <i>Raspberry Pi 3 (AArch64)</i>. CMake will now
+        configure the project for you.</li>
+    <li>Click the <b>“<img class="inline-icon" src="images/icons/configure.svg">&nbsp;Build”</b> button at the
+        bottom of the window to compile the library, tests and examples.</li>
+    <li>Package the project. @codesnippet{"file": "resources/speedrun-cmake-build.sh",
+        "startline": 10, "endline": 10, "lineno": false, "gitlink": false}</li>
+    <li>Copy the project to the Raspberry Pi. @codesnippet{"file": "resources/speedrun-cmake-build.sh",
+        "startline": 12, "endline": 12, "lineno": false, "gitlink": false}</li>
+    <li>Run the hello world program on the Pi. @codesnippet{"file": "resources/speedrun-cmake-build.sh",
+        "startline": 14, "endline": 14, "lineno": false, "gitlink": false}</li>
+</ol>
+
+@image{
+"file": "images/vscode-kits.png"
+}
+@image{
+"file": "images/vscode-rpi3-kit.png"
+}
+@image{
+"file": "images/vscode-configure.png"
+}
+@image{
+"file": "images/vscode-build.png"
+}
+@image{
+"file": "images/vscode-pkg-copy-run.png"
+}
+
+<h3>Using the command line</h3>
+
+@codesnippet{
+"file": "resources/speedrun-cmake-build.sh"
 }
 
 </html>

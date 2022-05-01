@@ -15,14 +15,19 @@
     This is a guide on how to set up a C++ cross-compilation toolchain and development environment.
     It serves as the documentation for the <b><a
             href="https://github.com/tttapa/RPi-Cpp-Toolchain">RPi-Cpp-Toolchain</a></b> repository.
+    In this guide, we'll cross-compile all package such as Python, OpenCV and their dependencies from scratch.
 </p>
-<p style="border-left: 0.2em solid #ccc; padding: 0.3em 0.3em 0.4em 0.6em; background-color: #f8f8f8;">
+<p class="gray-block-quote">
     <b>Note:</b> building all dependencies from source might not be ideal for
     most use cases. It is often easier to use a sysroot specific to the
     operating system you plan to use on the Raspberry Pi (e.g. Raspberry Pi OS
     or Ubuntu) and use the system package manager (e.g. APT) to install the
     dependencies. This is explained on the
-    <a href="../C++-Development-RPiOS/">Ubuntu to Raspberry Pi OS Cross C++ Development</a> page.
+    <a href="../C++-Development-RPiOS/">Ubuntu to Raspberry Pi OS Cross C++ Development</a> page.<br>
+</p>
+<p class="gray-block-quote">
+    If you do want to build packages from source, <a href="https://www.yoctoproject.org/">Yocto</a>
+    and <a href="https://buildroot.org/">Buildroot</a> are good solutions as well.
 </p>
 
 <h3>Overview</h3>
@@ -31,7 +36,7 @@
     The first page guides you through the installation of the necessary tools and editors.
 </p>
 <p>
-    The second and third page explain how to build a cross-compilation toolchain using Crosstool-NG, and how to use it
+    The second and third page explain how to build a cross-compilation toolchain using crosstool-NG, and how to use it
     to compile the following libraries:
 <ul>
     <li><strong>Zlib</strong>: compression library (OpenSSL and Python dependency)</li>
@@ -48,7 +53,7 @@
     <li><strong>UUID</strong>: library for unique identifiers (Python dependency)</li>
     <li><strong>libX11</strong>: X11 protocol client library (Tk dependency)</li>
     <li><strong>Tcl/Tk</strong>: graphical user interface toolkit (Python/Tkinter dependency)</li>
-    <li><strong>Python 3.8.3</strong>: Python interpreter and libraries</li>
+    <li><strong>Python 3.10.4</strong>: Python interpreter and libraries</li>
     <li><strong>ZBar</strong>: Bar and QR code decoding library</li>
     <li><strong>Raspberry Pi Userland</strong>: VideoCore GPU drivers</li>
     <li><strong>VPX</strong>: VP8/VP9 codec SDK</li>
@@ -58,9 +63,9 @@
     <li><strong>OpenBLAS</strong>: linear algebra library (NumPy dependency)</li>
     <li><strong>NumPy</strong>: multi-dimensional array container for Python (OpenCV dependency)</li>
     <li><strong>SciPy</strong>: Python module for mathematics, science, and engineering</li>
-    <li><strong>OpenCV 4.3.0</strong>: computer vision library and Python module</li>
+    <li><strong>OpenCV</strong>: computer vision library and Python module</li>
     <li><strong>GDB Server</strong>: on-target remote debugger</li>
-    <li><strong>GCC 9.2.0</strong>: C, C++ and Fortran compilers</li>
+    <!-- <li><strong>GCC 11.2.0</strong>: C, C++ and Fortran compilers</li> -->
     <li><strong>GNU Make</strong>: build automation tool</li>
     <li><strong>Ninja</strong>: faster, more light-weight build tool</li>
     <li><strong>CMake</strong>: build system</li>
@@ -75,17 +80,14 @@
     Next, page four explains how to install these libraries to the Raspberry Pi.
 </p>
 <p>
-    The fifth helps you set up Visual Studio Code for cross-compilation and remote debugging.
-</p>
-<p>
-    The sixth page presents a small "hello world" example project in C++ that uses CMake and Google Test.
+    The fifth page presents a small “hello world” example project in C++ that uses CMake and Google Test.
 </p>
 <p>
     Finally, there's a page on remote on-target debugging using GDB and Visual Studio Code.
 </p>
 <p>
     If you're in a hurry, or if you are already quite familiar with Linux, compilers, etc. you can skip straight to the
-    "Speedrun" page, it contains all the commands you need to get the entire project running in just a couple of
+    “Speedrun” page, it contains all the commands you need to get the entire project running in just a couple of
     minutes.
 </p>
 

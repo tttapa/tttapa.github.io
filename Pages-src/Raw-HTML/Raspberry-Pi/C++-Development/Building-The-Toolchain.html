@@ -4,7 +4,7 @@
 @shownextupprevpage: true
 @tableofcontents: true
 @author: Pieter P
-@keywords: Raspberry Pi, Toolchain, Compiler, Crosstool-NG, GCC, C, C++, Fortran
+@keywords: Raspberry Pi, Toolchain, Compiler, crosstool-NG, GCC, C, C++, Fortran
 @description: To compile software for the Raspberry Pi, you need a 
               cross-compilation toolchain. This page contains instructions for
               how to build one.
@@ -12,12 +12,46 @@
 <html>
 
 <p>
-    To compile software for the Raspberry Pi, you need a cross-compilation toolchain. It's a collection of files and
-    programs that you can run on your computer, and that produce a binary that can be executed on the Raspberry Pi.
+    To compile software for the Raspberry Pi, you need a cross-compilation toolchain.
+    A cross-compilation toolchain is a collection of development files and
+    programs that you can run on your computer or workstation, that produce binaries
+    that can be executed on a different
+    system with a possibly different architecture, such as a Raspberry Pi.
 </p>
-<p>
+<!-- <p>
     If you want to do development on the Pi itself, you'll need a native toolchain as well. This is a toolchain that
     runs on the Pi, and produces binaries for the Pi.
+</p> -->
+
+<h2>Downloading a pre-built toolchain</h2>
+
+<p>
+    The easiest way to install a toolchain is to just download and extract the
+    pre-built ones from GitHub. Pick the one for the Raspberry Pi you need:
+</p>
+<pre
+    class="console"><code>mkdir -p ~/opt</code>
+<code>wget -qO- https://github.com/tttapa/docker-arm-cross-toolchain/releases/latest/download/x-tools-armv6-rpi-linux-gnueabihf.tar.bz2 | tar xJ -C ~/opt</code></pre>
+<pre
+    class="console"><code>mkdir -p ~/opt</code>
+<code>wget -qO- https://github.com/tttapa/docker-arm-cross-toolchain/releases/latest/download/x-tools-armv8-rpi3-linux-gnueabihf.tar.bz2 | tar xJ -C ~/opt</code></pre>
+<pre
+    class="console"><code>mkdir -p ~/opt</code>
+<code>wget -qO- https://github.com/tttapa/docker-arm-cross-toolchain/releases/latest/download/x-tools-aarch64-rpi3-linux-gnu.tar.bz2 | tar xJ -C ~/opt</code></pre>
+<p>
+    For more details on how to select the correct one, and instructions for adding
+    it to your PATH, see <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain">tttapa/docker-arm-cross-toolchain</a>.
+</p>
+
+<h2>Building the toolchain yourself</h2>
+
+<p>
+    If you want full control over the toolchain, customizing the compiler, debugger and other tools, the
+    libc version, Linux version, etc., you can build the toolchain yourself, using <a
+        href="https://github.com/crosstool-ng/crosstool-ng">crosstool-NG</a>
+    and the config files provided by <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain">tttapa/docker-arm-cross-toolchain</a>.
 </p>
 
 <h3>Docker</h3>
@@ -25,15 +59,8 @@
 <p>
     As explained on the previous page, building the toolchain happens inside of a Docker container.
     This allows you to experiment in a sandbox-like environment. Starting from scratch is really easy, and
-    you don't have to worry about messing up your main Linux installation.
-</p>
-<p>
-    You can compare a Docker container with a virtual machine, but without the virtualization. Programs that run
-    inside of the container use the same kernel as your main Linux OS, and there's almost no performance overhead.
-</p>
-<p>
-    It's very easy to share Docker images, so you don't have to build everything from scratch yourself, you can just
-    pull it from Docker Hub.
+    you don't have to worry about messing up your main Linux installation. When you're done building, you
+    can just delete the Docker containers and images.
 </p>
 
 <h4>Dockerfiles</h4>
@@ -47,229 +74,143 @@
     while, since we'll be building many large projects.)
 </p>
 <p>
-    The actual Dockerfiles used for the build can be found <a
-        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain">on my GitHub</a>, I'll briefly go over
+    The actual Dockerfiles used for the build can be found on GitHub at
+    <a
+        href="https://github.com/tttapa/docker-crosstool-ng-multiarch/blob/master/Dockerfile">tttapa/docker-crosstool-ng-multiarch:Dockerfile</a>
+    and
+    <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain/tree/master/Dockerfile">tttapa/docker-arm-cross-toolchain:Dockerfile</a>,
+    I'll briefly go over
     them on this page.
 </p>
 
-<h3>Pulling the toolchain from Docker Hub</h3>
-
 <p>
-    If you just want to use the toolchain, without understanding how it works,
-    and without changing anything to the configuration, you can just pull the
-    toolchains I built from Docker Hub.
-</p>
-<p>
-    To pull and export the toolchain, you can use:
+    The following Dockerfile downloads, builds and installs crosstool-NG.
 </p>
 
-<pre class="console">
-<code>./toolchain/toolchain.sh &lt;board&gt; --export-toolchain</code>
-</pre>
-<p>
-    Where <code>&lt;board&gt;</code> is one of the following:
-<ul>
-    <li><code>rpi</code>: Raspberry Pi 1 or Zero, cross-compilation toolchain</li>
-    <li><code>rpi-dev</code>: Raspberry Pi 1 or Zero, cross-compilation toolchain and native toolchain</li>
-    <li><code>rpi3-armv8</code>: Raspberry Pi 3, 32-bit, cross-compilation toolchain</li>
-    <li><code>rpi3-armv8-dev</code>: Raspberry Pi 3, 32-bit, cross-compilation toolchain and native toolchain</li>
-    <li><code>rpi3-aarch64</code>: Raspberry Pi 3, 64-bit, cross-compilation toolchain</li>
-    <li><code>rpi3-aarch64-dev</code>: Raspberry Pi 3, 64-bit, cross-compilation toolchain and native toolchain</li>
-</ul>
-</p>
-<p>
-    Alternatively, you can download the toolchains from <a
-        href="https://github.com/tttapa/docker-arm-cross-toolchain">https://github.com/tttapa/docker-arm-cross-toolchain</a>.
-</p>
-
-<h3>Building the toolchain using the provided shell scripts</h3>
-
-<p>
-    Instead of pulling from Docker Hub, you can build the toolchain locally
-    instead. I would only recommend this if you made changes to the toolchain
-    configuration files, or if you have a really fast computer with a slow
-    internet connection.
-</p>
-<p>
-    Building one toolchain took around 25 minutes on a 2018 Dell XPS i7-8750H, and 40 minutes on a 2017 Dell XPS
-    i7-7700HQ.
-</p>
-<pre class="console">
-<code>./toolchain/toolchain.sh &lt;board&gt; --build-toolchain --export-toolchain</code>
-</pre>
-<p>
-    The cross-compilation toolchain will be located in
-    <code>toolchain/x-tools/&lt;arch&gt;-rpi*-linux-&lt;abi&gt;</code>,
-    and the native toolchain will be in
-    <code>toolchain/x-tools/HOST-&lt;arch&gt;-linux-&lt;abi&gt;/&lt;arch&gt;-rpi*-linux-&lt;abi&gt;</code>.
-</p>
-
-<h4>Deleting the toolchains</h4>
-
-<p>
-    The toolchains are read-only, to prevent you from accidentally breaking them during a build. If you try to delete
-    them using the usual methods, you'll
-    get <code>Permission denied</code>. The solution is to make them writable first, using <code>chmod</code>.
-</p>
-<p>
-    The <code>toolchain/clean.sh</code> script will do this for you, and deletes all toolchains in the
-    <code>toolchain</code> folder:
-</p>
-
-<pre class="console">
-<code>./toolchain/clean.sh</code>
-</pre>
-<p>
-    The toolchains will still be available in the Docker images used to build them. This means that next time you run
-    the <code>build-and-export-toolchain.sh</code> script, it will finish in just a couple of seconds, as it just has
-    to export the toolchain, it doesn't build it from scratch.
-</p>
-<p>
-    If you want to delete these Docker images as well (to save disk space, for instance), you can use
-    <code>docker image ls</code> to inspect all images on your system, and then you can delete them using
-    <code>docker image rm &lt;image&gt;</code>.
-</p>
-
-<h2>Detailed information about configuring and building toolchains</h2>
-
-<p>
-    As mentioned before, you don't need to read or understand the sections below if you just want to use the
-    toolchain.<br>
-    If you're interested in how the toolchains are actually configured and built, or if you want to customize the
-    configuration, you'll find the necessary information below.
-</p>
-
-<h3>Crosstool-NG</h3>
-
-<p>
-    The toolchain is built using <a href="https://github.com/crosstool-ng/crosstool-ng">Crosstool-NG</a>.
-</p>
-<!-- <p>
-    It is installed in a CentOS 7 Docker container, because CentOS 7 was the oldest OS that I had to run the toolchain
-    on. In this context, oldest refers to the Linux kernel version and the glibc version. They are backwards compatible,
-    so you can run software compiled for an old version on a computer with a newer version, but you can't run software
-    compiled for a new version on a computer with an older version.
-</p> -->
-<p>
-    The following Dockerfile downloads, builds and installs Crosstool-NG to the <code>~/.local</code> directory
-    of the container.
-</p>
 @codesnippet{
-"name": "Dockerfile",
-"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/crosstool-ng-master/Dockerfile"
+"file": "$HOME/GitHub/docker-crosstool-ng-multiarch/Dockerfile",
+"name": "tttapa/docker-crosstool-ng-multiarch:Dockerfile"
 }
-<p>
-    The list of dependencies can be found on Crosstool-NG's GitHub:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/ubuntu19.10/Dockerfile">
-        https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/ubuntu19.10/Dockerfile</a>
-</p>
-
-<h3>Cross-Compilation Toolchain</h3>
 
 <p>
-    The following Dockerfile builds the toolchain:
+    You'll notice that the Dockerfile downloads a patch for the binutils package.
+    This is done in order to support <a href="https://wiki.debian.org/Multiarch/HOWTO">Debian Multiarch</a>.
+    Raspberry Pi OS and Ubuntu are both configured for Multiarch by default, so the toolchains we build
+    must support this. To this end, we need to patch binutils. For more details, see
+    <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=280707&p=1700861#p1700861">this forum post</a>.
 </p>
+
+<p>
+    Next, we build another Docker image, which actually builds the toolchain, using the crosstool-NG
+    installation from the previous step.
+</p>
+
+
 @codesnippet{
-"name": "Dockerfile",
-"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/merged/cross-toolchain/Dockerfile"
+"file": "${HOME}/GitHub/docker-arm-cross-toolchain/Dockerfile",
+"name": "tttapa/docker-arm-cross-toolchain:Dockerfile"
 }
+
 <p>
-    The different configuration files have names that contain the full <a
+    Different variants of the Raspberry Pi use different configuration files. These files have names that contain the
+    full <a
         href="https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Specifying-Target-Triplets.html">target
-        triplet</a>. They can be found in <a
-        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker/merged/cross-toolchain">same
+        triplet</a>. They can be found on GitHub in <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain/tree/master/">same
         folder</a> as the Dockerfile.
 </p>
 
-<h4>Raspberry Pi 3, 64-bit (AArch64)</h4>
+<h3>Building the crosstool-NG base image</h3>
 
 <p>
-    This configuration is based on the <code>aarch64-rpi3-linux-gnu</code> sample that comes with Crosstool-NG:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu">
-        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu</a>
-</p>
-<p>
-    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
-    that the Ubuntu Server 18.04 image ships with.
-</p>
-
-<h4>Raspberry Pi 3, 32-bit (ARMv8)</h4>
-
-<p>
-    This configuration is based on the <code>armv8-rpi3-linux-gnueabihf</code> sample that comes with Crosstool-NG:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf">
-        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf</a>
-</p>
-<p>
-    Even though the CPU will be running in 32-bit mode, you can still use the ARMv8 NEON instructions, so I changed the
-    compiler's default FPU flag to <code>neon-fp-armv8</code>. I haven't tested if it actually makes any difference.
-</p>
-<p>
-    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
-    that the Ubuntu Server 18.04 image ships with. These are also supported on Raspbian Buster.
-</p>
-
-<h4>Raspberry Pi 1 &amp; Zero, 32-bit (ARMv6)</h4>
-
-<p>
-    This configuration is based on the <code>armv6-rpi-linux-gnueabihf</code> sample that comes with Crosstool-NG:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv6-rpi-linux-gnueabi">
-        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv6-rpi-linux-gnueabi</a>
-</p>
-
-<h3>Native toolchain</h3>
-
-<p>
-    Building the native toolchain for the Raspberry Pi is very similar.
-</p>
-@codesnippet{
-"name": "Dockerfile",
-"file": "$HOME/GitHub/RPi-Cpp-Toolchain/toolchain/docker/merged/cross-native-toolchain/Dockerfile"
-}
-
-<p>
-    The toolchain type is "Cross-Native", and is implemented as a special case
-    of the "Canadian Cross" toolchain.
-    It uses the cross-compilation toolchain that was built earlier.
-    More information can be found in the <a href="https://crosstool-ng.github.io/docs/toolchain-types/">Crosstool-NG
-        documentation</a>.
-</p>
-
-<h3>Customizing the toolchain</h3>
-
-<p>
-    You can customize all previously mentioned toolchains by running <code>ct-ng menuconfig</code> on the corresponding
-    configuration file.
-    The easiest way to do this is by running it inside of the <code>crosstool-ng-master</code> Docker container.
+    This step is optional. It can be useful to build it yourself if you
+    want the very latest version of crosstool-NG.
 </p>
 
 <pre class="console">
-<code>cd RPi-Cpp-Toolchain/</code>
-<code>./toolchain/docker/crosstool-ng-master/build.sh</code>
-<code>docker run -it --rm --volume "$PWD/toolchain/docker:/mnt" tttapa/crosstool-ng-master</code>
+<code>cd docker-crosstool-ng-multiarch</code>
+<code>docker build . -t ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</code>
 </pre>
-<pre class="console-docker">
-<code>cd /mnt/merged/cross-toolchain/</code>
-<code>cp aarch64-rpi3-linux-gnu.config .config  # Choose RPi model and architecture</code>
-<code>ct-ng menuconfig</code>
+
+<p>
+    If you skip this step, pull the image from <a
+        href="https://github.com/tttapa/docker-crosstool-ng-multiarch/pkgs/container/docker-crosstool-ng-multiarch">GitHub</a>:
+</p>
+<pre class="console">
+<code>docker pull ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</code>
+</pre>
+
+<h3>Upgrading and customizing the configurations</h3>
+
+<p>
+    Next, we'll use crosstool-NG to update the configuration files and
+    interactively customize the configuration. Here you can choose versions
+    of the compiler and other tools, Linux and libc versions, and so on.
+</p>
+<p>
+    First, start a shell in the crosstool-NG container you built or pulled in
+    the previous step. Mount the <code>docker-arm-cross-toolchain</code> folder
+    containing the config files, so you can access them inside of the container.
+</p>
+<pre class="console">
+<code>cd ../docker-arm-cross-toolchain</code>
+<code>docker run -it -v"$PWD:/mnt" ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</code>
 </pre>
 <p>
-    Now make your changes and save the result to <code>.config</code>.
+    Now copy the configuration you need to a file named <code>.config</code>,
+    update the configuration, make your changes, save the changes, and
+    then overwrite the previous configuration with the new one. Here I'll
+    use the <code>aarch64-rpi3-linux-gnu</code> configuration, but you should
+    use the correct one for your specific setup.
 </p>
 <pre class="console-docker">
 <code># Rename the old configuration</code>
-<code>mv aarch64-rpi3-linux-gnu.config aarch64-rpi3-linux-gnu.config.old</code>
-<code># Replace with new configuration</code>
-<code>mv .config aarch64-rpi3-linux-gnu.config</code>
+<code>cp /mnt/aarch64-rpi3-linux-gnu.config .config</code>
+<code># Upgrade the configuration</code>
+<code>ct-ng upgradeconfig</code>
+<code># Customize the configuration</code>
+<code>ct-ng menuconfig</code>
+<code># Overwrite the old configuration</code>
+<code>cp .config /mnt/aarch64-rpi3-linux-gnu.config</code>
 <code>exit</code>
 </pre>
 
+<h3>Building the toolchain</h3>
+
 <p>
-    Now you can build the toolchain again using the <code>./toolchain.sh</code> script, as explained
-    earlier:
+    Finally, build the toolchain with the new config.
+    Use the host triple that matches the configuration file name.
 </p>
 <pre class="console">
-<code>./toolchain/toolchain.sh &lt;board&gt; --build-toolchain --export-toolchain</code>
+<code>docker build . --build-arg=HOST_TRIPLE=aarch64-rpi3-linux-gnu -t ghcr.io/tttapa/docker-arm-cross-toolchain:aarch64-rpi3-linux-gnu</code>
 </pre>
+
+<h3>Packaging and extracting the toolchain</h3>
+
+<p>
+    Finally, create a tar archive of the toolchain, and copy it out of the Docker container so you can use it.
+</p>
+<pre class="console">
+<code>container=$(docker run -d ghcr.io/tttapa/docker-arm-cross-toolchain:aarch64-rpi3-linux-gnu bash -c "tar cJf x-tools.tar.bz2 x-tools")</code>
+<code>docker wait $container</code>
+<code>docker cp $container:/home/develop/x-tools.tar.bz2 x-tools-aarch64-rpi3-linux-gnu.tar.bz2</code>
+<code>docker rm $container</code>
+</pre>
+
+<h3>Installing the toolchain</h3>
+
+<p>
+    You can now simply extract the toolchain and install it somewhere on your system, e.g. in <code>~/opt</code>:
+</p>
+<pre class="console">
+<code>mkdir -p ~/opt</code>
+<code>tar xJf x-tools-aarch64-rpi3-linux-gnu.tar.bz2 -C ~/opt</code>
+</pre>
+<p>
+    For more details on how to select the correct one, and instructions for adding
+    it to your PATH, see <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain">tttapa/docker-arm-cross-toolchain</a>.
+</p>
 
 </html>

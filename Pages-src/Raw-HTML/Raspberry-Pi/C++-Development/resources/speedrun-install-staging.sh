@@ -1,6 +1,6 @@
 # Copy the staging area archive to the Pi
 # This command may take a while, depending on the speed of your SD card
-scp ./toolchain/staging-aarch64-rpi3-linux-gnu.tar RPi3:/tmp
+scp ./docker-arm-cross-build-scripts/staging-aarch64-rpi3-linux-gnu.tar RPi3:/tmp
 # Install everything to the root of the filesystem
 # (will only install to /usr/local and /opt)
 # Enter the sudo password of the Pi if necessary
