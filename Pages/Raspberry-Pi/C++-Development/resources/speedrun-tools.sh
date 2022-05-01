@@ -1,1 +1,1 @@
-sudo apt install -y --no-install-recommends cmake make git
+sudo apt install -y --no-install-recommends cmake make ninja-build git

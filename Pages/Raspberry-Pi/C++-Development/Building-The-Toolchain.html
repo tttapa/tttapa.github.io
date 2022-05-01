@@ -10,7 +10,7 @@
     <!-- No MathJax -->
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
     <meta name="theme-color" content="#ccc"/>
-    <meta name="keywords" content="Raspberry Pi, Toolchain, Compiler, Crosstool-NG, GCC, C, C++, Fortran"/>
+    <meta name="keywords" content="Raspberry Pi, Toolchain, Compiler, crosstool-NG, GCC, C, C++, Fortran"/>
     <meta name="description" content="To compile software for the Raspberry Pi, you need a cross-compilation toolchain. This page contains instructions for how to build one."/>
     <title>Building the Cross-Compilation Toolchain</title>
 </head>
@@ -53,8 +53,8 @@
             <li><span class="ftriangle"></span><a class="openEntry " href="Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
             <li><span class="ftriangle"></span><a class="" href="Dependencies.html">Cross-Compiling the Dependencies</a></li>
             <li><span class="ftriangle"></span><a class="" href="Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
-            <li><span class="ftriangle"></span><a class="" href="Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
             <li><span class="ftriangle"></span><a class="" href="Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="Debugging.html">Debugging</a></li>
             <li><span class="ftriangle"></span><a class="" href="Speedrun.html">Speedrun</a></li>
         </ul>
         </li>
@@ -228,39 +228,63 @@
   }
   </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
   <ul>
+        <li><a href="#downloading-a-pre-built-toolchain">Downloading a pre-built toolchain</a></li>
+        <li><a href="#building-the-toolchain-yourself">Building the toolchain yourself</a></li>
           <ul>
             <li><a href="#docker">Docker</a></li>
               <ul>
                 <li><a href="#dockerfiles">Dockerfiles</a></li>
               </ul>
-            <li><a href="#pulling-the-toolchain-from-docker-hub">Pulling the toolchain from Docker Hub</a></li>
-            <li><a href="#building-the-toolchain-using-the-provided-shell-scripts">Building the toolchain using the provided shell scripts</a></li>
-              <ul>
-                <li><a href="#deleting-the-toolchains">Deleting the toolchains</a></li>
-              </ul>
-          </ul>
-        <li><a href="#detailed-information-about-configuring-and-building-toolchains">Detailed information about configuring and building toolchains</a></li>
-          <ul>
-            <li><a href="#crosstool-ng">Crosstool-NG</a></li>
-            <li><a href="#cross-compilation-toolchain">Cross-Compilation Toolchain</a></li>
-              <ul>
-                <li><a href="#raspberry-pi-3-64-bit-aarch64">Raspberry Pi 3, 64-bit (AArch64)</a></li>
-                <li><a href="#raspberry-pi-3-32-bit-armv8">Raspberry Pi 3, 32-bit (ARMv8)</a></li>
-                <li><a href="#raspberry-pi-1-zero-32-bit-armv6">Raspberry Pi 1 &amp; Zero, 32-bit (ARMv6)</a></li>
-              </ul>
-            <li><a href="#native-toolchain">Native toolchain</a></li>
-            <li><a href="#customizing-the-toolchain">Customizing the toolchain</a></li>
+            <li><a href="#building-the-crosstool-ng-base-image">Building the crosstool-NG base image</a></li>
+            <li><a href="#upgrading-and-customizing-the-configurations">Upgrading and customizing the configurations</a></li>
+            <li><a href="#building-the-toolchain">Building the toolchain</a></li>
+            <li><a href="#packaging-and-extracting-the-toolchain">Packaging and extracting the toolchain</a></li>
+            <li><a href="#installing-the-toolchain">Installing the toolchain</a></li>
             </ul>
   </ul></div>
 
 
 <p>
-    To compile software for the Raspberry Pi, you need a cross-compilation toolchain. It's a collection of files and
-    programs that you can run on your computer, and that produce a binary that can be executed on the Raspberry Pi.
+    To compile software for the Raspberry Pi, you need a cross-compilation toolchain.
+    A cross-compilation toolchain is a collection of development files and
+    programs that you can run on your computer or workstation, that produce binaries
+    that can be executed on a different
+    system with a possibly different architecture, such as a Raspberry Pi.
 </p>
-<p>
+<!-- <p>
     If you want to do development on the Pi itself, you'll need a native toolchain as well. This is a toolchain that
     runs on the Pi, and produces binaries for the Pi.
+</p> -->
+
+<h2><a name="downloading-a-pre-built-toolchain" href="#downloading-a-pre-built-toolchain">Downloading a pre-built toolchain</a></h2>
+
+<p>
+    The easiest way to install a toolchain is to just download and extract the
+    pre-built ones from GitHub. Pick the one for the Raspberry Pi you need:
+</p>
+<pre
+    class="console"><code>mkdir -p ~/opt</code>
+<code>wget -qO- https://github.com/tttapa/docker-arm-cross-toolchain/releases/latest/download/x-tools-armv6-rpi-linux-gnueabihf.tar.bz2 | tar xJ -C ~/opt</code></pre>
+<pre
+    class="console"><code>mkdir -p ~/opt</code>
+<code>wget -qO- https://github.com/tttapa/docker-arm-cross-toolchain/releases/latest/download/x-tools-armv8-rpi3-linux-gnueabihf.tar.bz2 | tar xJ -C ~/opt</code></pre>
+<pre
+    class="console"><code>mkdir -p ~/opt</code>
+<code>wget -qO- https://github.com/tttapa/docker-arm-cross-toolchain/releases/latest/download/x-tools-aarch64-rpi3-linux-gnu.tar.bz2 | tar xJ -C ~/opt</code></pre>
+<p>
+    For more details on how to select the correct one, and instructions for adding
+    it to your PATH, see <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain">tttapa/docker-arm-cross-toolchain</a>.
+</p>
+
+<h2><a name="building-the-toolchain-yourself" href="#building-the-toolchain-yourself">Building the toolchain yourself</a></h2>
+
+<p>
+    If you want full control over the toolchain, customizing the compiler, debugger and other tools, the
+    libc version, Linux version, etc., you can build the toolchain yourself, using <a
+        href="https://github.com/crosstool-ng/crosstool-ng">crosstool-NG</a>
+    and the config files provided by <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain">tttapa/docker-arm-cross-toolchain</a>.
 </p>
 
 <h3><a name="docker" href="#docker">Docker</a></h3>
@@ -268,15 +292,8 @@
 <p>
     As explained on the previous page, building the toolchain happens inside of a Docker container.
     This allows you to experiment in a sandbox-like environment. Starting from scratch is really easy, and
-    you don't have to worry about messing up your main Linux installation.
-</p>
-<p>
-    You can compare a Docker container with a virtual machine, but without the virtualization. Programs that run
-    inside of the container use the same kernel as your main Linux OS, and there's almost no performance overhead.
-</p>
-<p>
-    It's very easy to share Docker images, so you don't have to build everything from scratch yourself, you can just
-    pull it from Docker Hub.
+    you don't have to worry about messing up your main Linux installation. When you're done building, you
+    can just delete the Docker containers and images.
 </p>
 
 <h4><a name="dockerfiles" href="#dockerfiles">Dockerfiles</a></h4>
@@ -290,183 +307,90 @@
     while, since we'll be building many large projects.)
 </p>
 <p>
-    The actual Dockerfiles used for the build can be found <a
-        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain">on my GitHub</a>, I'll briefly go over
+    The actual Dockerfiles used for the build can be found on GitHub at
+    <a
+        href="https://github.com/tttapa/docker-crosstool-ng-multiarch/blob/master/Dockerfile">tttapa/docker-crosstool-ng-multiarch:Dockerfile</a>
+    and
+    <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain/tree/master/Dockerfile">tttapa/docker-arm-cross-toolchain:Dockerfile</a>,
+    I'll briefly go over
     them on this page.
 </p>
 
-<h3><a name="pulling-the-toolchain-from-docker-hub" href="#pulling-the-toolchain-from-docker-hub">Pulling the toolchain from Docker Hub</a></h3>
-
 <p>
-    If you just want to use the toolchain, without understanding how it works,
-    and without changing anything to the configuration, you can just pull the
-    toolchains I built from Docker Hub.
-</p>
-<p>
-    To pull and export the toolchain, you can use:
+    The following Dockerfile downloads, builds and installs crosstool-NG.
 </p>
 
-<pre class="console">
-<code>./toolchain/toolchain.sh &lt;board&gt; --export-toolchain</code>
-</pre>
-<p>
-    Where <code>&lt;board&gt;</code> is one of the following:
-<ul>
-    <li><code>rpi</code>: Raspberry Pi 1 or Zero, cross-compilation toolchain</li>
-    <li><code>rpi-dev</code>: Raspberry Pi 1 or Zero, cross-compilation toolchain and native toolchain</li>
-    <li><code>rpi3-armv8</code>: Raspberry Pi 3, 32-bit, cross-compilation toolchain</li>
-    <li><code>rpi3-armv8-dev</code>: Raspberry Pi 3, 32-bit, cross-compilation toolchain and native toolchain</li>
-    <li><code>rpi3-aarch64</code>: Raspberry Pi 3, 64-bit, cross-compilation toolchain</li>
-    <li><code>rpi3-aarch64-dev</code>: Raspberry Pi 3, 64-bit, cross-compilation toolchain and native toolchain</li>
-</ul>
-</p>
-<p>
-    Alternatively, you can download the toolchains from <a
-        href="https://github.com/tttapa/docker-arm-cross-toolchain">https://github.com/tttapa/docker-arm-cross-toolchain</a>.
-</p>
-
-<h3><a name="building-the-toolchain-using-the-provided-shell-scripts" href="#building-the-toolchain-using-the-provided-shell-scripts">Building the toolchain using the provided shell scripts</a></h3>
-
-<p>
-    Instead of pulling from Docker Hub, you can build the toolchain locally
-    instead. I would only recommend this if you made changes to the toolchain
-    configuration files, or if you have a really fast computer with a slow
-    internet connection.
-</p>
-<p>
-    Building one toolchain took around 25 minutes on a 2018 Dell XPS i7-8750H, and 40 minutes on a 2017 Dell XPS
-    i7-7700HQ.
-</p>
-<pre class="console">
-<code>./toolchain/toolchain.sh &lt;board&gt; --build-toolchain --export-toolchain</code>
-</pre>
-<p>
-    The cross-compilation toolchain will be located in
-    <code>toolchain/x-tools/&lt;arch&gt;-rpi*-linux-&lt;abi&gt;</code>,
-    and the native toolchain will be in
-    <code>toolchain/x-tools/HOST-&lt;arch&gt;-linux-&lt;abi&gt;/&lt;arch&gt;-rpi*-linux-&lt;abi&gt;</code>.
-</p>
-
-<h4><a name="deleting-the-toolchains" href="#deleting-the-toolchains">Deleting the toolchains</a></h4>
-
-<p>
-    The toolchains are read-only, to prevent you from accidentally breaking them during a build. If you try to delete
-    them using the usual methods, you'll
-    get <code>Permission denied</code>. The solution is to make them writable first, using <code>chmod</code>.
-</p>
-<p>
-    The <code>toolchain/clean.sh</code> script will do this for you, and deletes all toolchains in the
-    <code>toolchain</code> folder:
-</p>
-
-<pre class="console">
-<code>./toolchain/clean.sh</code>
-</pre>
-<p>
-    The toolchains will still be available in the Docker images used to build them. This means that next time you run
-    the <code>build-and-export-toolchain.sh</code> script, it will finish in just a couple of seconds, as it just has
-    to export the toolchain, it doesn't build it from scratch.
-</p>
-<p>
-    If you want to delete these Docker images as well (to save disk space, for instance), you can use
-    <code>docker image ls</code> to inspect all images on your system, and then you can delete them using
-    <code>docker image rm &lt;image&gt;</code>.
-</p>
-
-<h2><a name="detailed-information-about-configuring-and-building-toolchains" href="#detailed-information-about-configuring-and-building-toolchains">Detailed information about configuring and building toolchains</a></h2>
-
-<p>
-    As mentioned before, you don't need to read or understand the sections below if you just want to use the
-    toolchain.<br>
-    If you're interested in how the toolchains are actually configured and built, or if you want to customize the
-    configuration, you'll find the necessary information below.
-</p>
-
-<h3><a name="crosstool-ng" href="#crosstool-ng">Crosstool-NG</a></h3>
-
-<p>
-    The toolchain is built using <a href="https://github.com/crosstool-ng/crosstool-ng">Crosstool-NG</a>.
-</p>
-<!-- <p>
-    It is installed in a CentOS 7 Docker container, because CentOS 7 was the oldest OS that I had to run the toolchain
-    on. In this context, oldest refers to the Linux kernel version and the glibc version. They are backwards compatible,
-    so you can run software compiled for an old version on a computer with a newer version, but you can't run software
-    compiled for a new version on a computer with an older version.
-</p> -->
-<p>
-    The following Dockerfile downloads, builds and installs Crosstool-NG to the <code>~/.local</code> directory
-    of the container.
-</p>
-<h4 class="snippet-name"><a name="dockerfile" href="#dockerfile">Dockerfile</a></h4>
+<h4 class="snippet-name"><a name="tttapa-docker-crosstool-ng-multiarch-dockerfile" href="#tttapa-docker-crosstool-ng-multiarch-dockerfile">tttapa/docker-crosstool-ng-multiarch:Dockerfile</a></h4>
 <div class="codesnippet"><style>pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.pygments157 .hll { background-color: #ffffcc }
-.pygments157 { background: #ffffff; }
-.pygments157 .c { color: #008000 } /* Comment */
-.pygments157 .err { border: 1px solid #FF0000 } /* Error */
-.pygments157 .k { color: #0000ff } /* Keyword */
-.pygments157 .l { color: #0000FF } /* Literal */
-.pygments157 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments157 .cm { color: #008000 } /* Comment.Multiline */
-.pygments157 .cp { color: #af00db } /* Comment.Preproc */
-.pygments157 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments157 .c1 { color: #008000 } /* Comment.Single */
-.pygments157 .cs { color: #008000 } /* Comment.Special */
-.pygments157 .ge { font-style: italic } /* Generic.Emph */
-.pygments157 .gh { font-weight: bold } /* Generic.Heading */
-.pygments157 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments157 .gs { font-weight: bold } /* Generic.Strong */
-.pygments157 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments157 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments157 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments157 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments157 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments157 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments157 .kt { color: #2b91af } /* Keyword.Type */
-.pygments157 .ld { color: #0000FF } /* Literal.Date */
-.pygments157 .m { color: #0000FF } /* Literal.Number */
-.pygments157 .s { color: #a31515 } /* Literal.String */
-.pygments157 .na { color: #001080 } /* Name.Attribute */
-.pygments157 .nb { color: #795e26 } /* Name.Builtin */
-.pygments157 .nc { color: #2b91af } /* Name.Class */
-.pygments157 .no { color: #0000FF } /* Name.Constant */
-.pygments157 .nf { color: #795e26 } /* Name.Function */
-.pygments157 .nl { color: #AF00DB } /* Name.Label */
-.pygments157 .nn { color: #000000 } /* Name.Namespace */
-.pygments157 .nt { color: #800000 } /* Name.Tag */
-.pygments157 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments157 .ow { color: #0000ff } /* Operator.Word */
-.pygments157 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments157 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments157 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments157 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments157 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments157 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments157 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments157 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments157 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments157 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments157 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments157 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments157 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments157 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments157 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments157 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments157 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments157 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments157 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments157 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments157 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments157 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments157 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments157 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments157 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments157 pre.snippet157 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/c91cd4a50c91e06b353a33ff13597a08c7d35fcd/toolchain/docker/crosstool-ng-master/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments157"><pre class="lineNumbers snippet157"><code><span></span><span class="k">FROM</span> <span class="s">ubuntu:focal</span> <span class="k">as</span> <span class="s">ct-ng</span></code>
+.pygments91 .hll { background-color: #ffffcc }
+.pygments91 { background: #ffffff; }
+.pygments91 .c { color: #008000 } /* Comment */
+.pygments91 .err { border: 1px solid #FF0000 } /* Error */
+.pygments91 .k { color: #0000ff } /* Keyword */
+.pygments91 .l { color: #0000FF } /* Literal */
+.pygments91 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments91 .cm { color: #008000 } /* Comment.Multiline */
+.pygments91 .cp { color: #af00db } /* Comment.Preproc */
+.pygments91 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments91 .c1 { color: #008000 } /* Comment.Single */
+.pygments91 .cs { color: #008000 } /* Comment.Special */
+.pygments91 .ge { font-style: italic } /* Generic.Emph */
+.pygments91 .gh { font-weight: bold } /* Generic.Heading */
+.pygments91 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments91 .gs { font-weight: bold } /* Generic.Strong */
+.pygments91 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments91 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments91 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments91 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments91 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments91 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments91 .kt { color: #2b91af } /* Keyword.Type */
+.pygments91 .ld { color: #0000FF } /* Literal.Date */
+.pygments91 .m { color: #0000FF } /* Literal.Number */
+.pygments91 .s { color: #a31515 } /* Literal.String */
+.pygments91 .na { color: #001080 } /* Name.Attribute */
+.pygments91 .nb { color: #795e26 } /* Name.Builtin */
+.pygments91 .nc { color: #2b91af } /* Name.Class */
+.pygments91 .no { color: #0000FF } /* Name.Constant */
+.pygments91 .nf { color: #795e26 } /* Name.Function */
+.pygments91 .nl { color: #AF00DB } /* Name.Label */
+.pygments91 .nn { color: #000000 } /* Name.Namespace */
+.pygments91 .nt { color: #800000 } /* Name.Tag */
+.pygments91 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments91 .ow { color: #0000ff } /* Operator.Word */
+.pygments91 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments91 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments91 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments91 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments91 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments91 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments91 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments91 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments91 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments91 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments91 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments91 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments91 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments91 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments91 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments91 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments91 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments91 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments91 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments91 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments91 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments91 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments91 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments91 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments91 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments91 pre.snippet91 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/docker-crosstool-ng-multiarch/blob/d12057eaead260a5ace1748cb3134e736d21d491/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments91"><pre class="lineNumbers snippet91"><code><span></span><span class="k">FROM</span> <span class="s">ubuntu:focal</span> <span class="k">as</span> <span class="s">ct-ng</span></code>
 <code></code>
 <code><span class="c"># Install dependencies to build toolchain</span></code>
 <code><span class="k">ENV</span> <span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive</code>
@@ -485,6 +409,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="k">USER</span><span class="s"> develop</span></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
 <code></code>
+<code><span class="c"># https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=280707&amp;p=1700861#p1700861</span></code>
 <code><span class="k">RUN</span> wget https://ftp.debian.org/debian/pool/main/b/binutils/binutils-source_2.31.1-16_all.deb <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    mkdir binutils <span class="o">&amp;&amp;</span> <span class="nb">cd</span> binutils <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    ar x ../binutils-source_2.31.1-16_all.deb <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
@@ -505,293 +430,218 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span>/home/develop/.local/bin:<span class="nv">$PATH</span></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop </span></code></pre></div>
 </div>
-<p>
-    The list of dependencies can be found on Crosstool-NG's GitHub:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/ubuntu19.10/Dockerfile">
-        https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/ubuntu19.10/Dockerfile</a>
-</p>
-
-<h3><a name="cross-compilation-toolchain" href="#cross-compilation-toolchain">Cross-Compilation Toolchain</a></h3>
 
 <p>
-    The following Dockerfile builds the toolchain:
+    You'll notice that the Dockerfile downloads a patch for the binutils package.
+    This is done in order to support <a href="https://wiki.debian.org/Multiarch/HOWTO">Debian Multiarch</a>.
+    Raspberry Pi OS and Ubuntu are both configured for Multiarch by default, so the toolchains we build
+    must support this. To this end, we need to patch binutils. For more details, see
+    <a href="https://www.raspberrypi.org/forums/viewtopic.php?f=91&t=280707&p=1700861#p1700861">this forum post</a>.
 </p>
-<h4 class="snippet-name"><a name="dockerfile1" href="#dockerfile1">Dockerfile</a></h4>
+
+<p>
+    Next, we build another Docker image, which actually builds the toolchain, using the crosstool-NG
+    installation from the previous step.
+</p>
+
+
+<h4 class="snippet-name"><a name="tttapa-docker-arm-cross-toolchain-dockerfile" href="#tttapa-docker-arm-cross-toolchain-dockerfile">tttapa/docker-arm-cross-toolchain:Dockerfile</a></h4>
 <div class="codesnippet"><style>pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.pygments172 .hll { background-color: #ffffcc }
-.pygments172 { background: #ffffff; }
-.pygments172 .c { color: #008000 } /* Comment */
-.pygments172 .err { border: 1px solid #FF0000 } /* Error */
-.pygments172 .k { color: #0000ff } /* Keyword */
-.pygments172 .l { color: #0000FF } /* Literal */
-.pygments172 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments172 .cm { color: #008000 } /* Comment.Multiline */
-.pygments172 .cp { color: #af00db } /* Comment.Preproc */
-.pygments172 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments172 .c1 { color: #008000 } /* Comment.Single */
-.pygments172 .cs { color: #008000 } /* Comment.Special */
-.pygments172 .ge { font-style: italic } /* Generic.Emph */
-.pygments172 .gh { font-weight: bold } /* Generic.Heading */
-.pygments172 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments172 .gs { font-weight: bold } /* Generic.Strong */
-.pygments172 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments172 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments172 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments172 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments172 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments172 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments172 .kt { color: #2b91af } /* Keyword.Type */
-.pygments172 .ld { color: #0000FF } /* Literal.Date */
-.pygments172 .m { color: #0000FF } /* Literal.Number */
-.pygments172 .s { color: #a31515 } /* Literal.String */
-.pygments172 .na { color: #001080 } /* Name.Attribute */
-.pygments172 .nb { color: #795e26 } /* Name.Builtin */
-.pygments172 .nc { color: #2b91af } /* Name.Class */
-.pygments172 .no { color: #0000FF } /* Name.Constant */
-.pygments172 .nf { color: #795e26 } /* Name.Function */
-.pygments172 .nl { color: #AF00DB } /* Name.Label */
-.pygments172 .nn { color: #000000 } /* Name.Namespace */
-.pygments172 .nt { color: #800000 } /* Name.Tag */
-.pygments172 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments172 .ow { color: #0000ff } /* Operator.Word */
-.pygments172 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments172 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments172 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments172 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments172 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments172 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments172 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments172 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments172 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments172 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments172 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments172 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments172 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments172 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments172 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments172 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments172 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments172 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments172 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments172 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments172 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments172 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments172 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments172 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments172 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments172 pre.snippet172 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/c91cd4a50c91e06b353a33ff13597a08c7d35fcd/toolchain/docker/merged/cross-toolchain/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments172"><pre class="lineNumbers snippet172"><code><span></span><span class="k">FROM</span> <span class="s">tttapa/crosstool-ng-master</span> <span class="k">as</span> <span class="s">cross-toolchain</span></code>
+.pygments110 .hll { background-color: #ffffcc }
+.pygments110 { background: #ffffff; }
+.pygments110 .c { color: #008000 } /* Comment */
+.pygments110 .err { border: 1px solid #FF0000 } /* Error */
+.pygments110 .k { color: #0000ff } /* Keyword */
+.pygments110 .l { color: #0000FF } /* Literal */
+.pygments110 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments110 .cm { color: #008000 } /* Comment.Multiline */
+.pygments110 .cp { color: #af00db } /* Comment.Preproc */
+.pygments110 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments110 .c1 { color: #008000 } /* Comment.Single */
+.pygments110 .cs { color: #008000 } /* Comment.Special */
+.pygments110 .ge { font-style: italic } /* Generic.Emph */
+.pygments110 .gh { font-weight: bold } /* Generic.Heading */
+.pygments110 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments110 .gs { font-weight: bold } /* Generic.Strong */
+.pygments110 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments110 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments110 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments110 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments110 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments110 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments110 .kt { color: #2b91af } /* Keyword.Type */
+.pygments110 .ld { color: #0000FF } /* Literal.Date */
+.pygments110 .m { color: #0000FF } /* Literal.Number */
+.pygments110 .s { color: #a31515 } /* Literal.String */
+.pygments110 .na { color: #001080 } /* Name.Attribute */
+.pygments110 .nb { color: #795e26 } /* Name.Builtin */
+.pygments110 .nc { color: #2b91af } /* Name.Class */
+.pygments110 .no { color: #0000FF } /* Name.Constant */
+.pygments110 .nf { color: #795e26 } /* Name.Function */
+.pygments110 .nl { color: #AF00DB } /* Name.Label */
+.pygments110 .nn { color: #000000 } /* Name.Namespace */
+.pygments110 .nt { color: #800000 } /* Name.Tag */
+.pygments110 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments110 .ow { color: #0000ff } /* Operator.Word */
+.pygments110 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments110 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments110 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments110 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments110 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments110 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments110 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments110 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments110 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments110 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments110 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments110 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments110 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments110 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments110 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments110 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments110 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments110 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments110 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments110 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments110 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments110 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments110 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments110 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments110 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments110 pre.snippet110 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/docker-arm-cross-toolchain/blob/6d2216bfafab5410c02014aa5b14c064e9678ca6/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments110"><pre class="lineNumbers snippet110"><code><span></span><span class="k">FROM</span> <span class="s">ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</span></code>
 <code></code>
 <code><span class="k">ARG</span> HOST_TRIPLE</code>
-<code><span class="k">ARG</span> HOST_TRIPLE_LIB_DIR</code>
 <code></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
-<code><span class="k">RUN</span> mkdir /home/develop/RPi <span class="o">&amp;&amp;</span> mkdir /home/develop/src</code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop/RPi</span></code>
+<code><span class="k">RUN</span> mkdir /home/develop/host-config <span class="o">&amp;&amp;</span> mkdir /home/develop/src</code>
+<code><span class="k">WORKDIR</span><span class="s"> /home/develop/host-config</span></code>
 <code><span class="k">COPY</span> <span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.config .config</code>
+<code><span class="k">COPY</span> <span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.env .env</code>
 <code><span class="k">RUN</span> mkdir -p patches/binutils/2.31.1 <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    cp /home/develop/129_multiarch_libpath.patch patches/binutils/2.31.1</code>
+<code><span class="k">RUN</span> ls -lah</code>
 <code></code>
 <code><span class="c"># https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=280707&amp;p=1700861#p1700861</span></code>
-<code><span class="k">ENV</span> <span class="nv">DEB_TARGET_MULTIARCH</span><span class="o">=</span><span class="si">${</span><span class="nv">HOST_TRIPLE_LIB_DIR</span><span class="si">}</span></code>
-<code><span class="k">RUN</span> ct-ng build <span class="o">||</span> <span class="o">{</span> cat build.log <span class="o">&amp;&amp;</span> false<span class="p">;</span> <span class="o">}</span> <span class="o">&amp;&amp;</span> rm -rf .build</code>
+<code><span class="k">RUN</span> . ./.env<span class="p">;</span> <span class="nb">export</span> <span class="nv">DEB_TARGET_MULTIARCH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_TRIPLE_LIB_DIR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="se">\</span></code>
+<code>    <span class="nv">V</span><span class="o">=</span><span class="m">1</span> ct-ng build <span class="o">||</span> <span class="o">{</span> cat build.log <span class="o">&amp;&amp;</span> false<span class="p">;</span> <span class="o">}</span> <span class="o">&amp;&amp;</span> rm -rf .build</code>
 <code></code>
 <code><span class="k">ENV</span> <span class="nv">TOOLCHAIN_PATH</span><span class="o">=</span>/home/develop/x-tools/<span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span></code>
 <code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">TOOLCHAIN_PATH</span><span class="si">}</span>/bin:<span class="nv">$PATH</span></code>
 <code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
 </div>
+
 <p>
-    The different configuration files have names that contain the full <a
+    Different variants of the Raspberry Pi use different configuration files. These files have names that contain the
+    full <a
         href="https://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Specifying-Target-Triplets.html">target
-        triplet</a>. They can be found in <a
-        href="https://github.com/tttapa/RPi-Cpp-Toolchain/tree/master/toolchain/docker/merged/cross-toolchain">same
+        triplet</a>. They can be found on GitHub in <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain/tree/master/">same
         folder</a> as the Dockerfile.
 </p>
 
-<h4><a name="raspberry-pi-3-64-bit-aarch64" href="#raspberry-pi-3-64-bit-aarch64">Raspberry Pi 3, 64-bit (AArch64)</a></h4>
+<h3><a name="building-the-crosstool-ng-base-image" href="#building-the-crosstool-ng-base-image">Building the crosstool-NG base image</a></h3>
 
 <p>
-    This configuration is based on the <code>aarch64-rpi3-linux-gnu</code> sample that comes with Crosstool-NG:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu">
-        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/aarch64-rpi3-linux-gnu</a>
-</p>
-<p>
-    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
-    that the Ubuntu Server 18.04 image ships with.
-</p>
-
-<h4><a name="raspberry-pi-3-32-bit-armv8" href="#raspberry-pi-3-32-bit-armv8">Raspberry Pi 3, 32-bit (ARMv8)</a></h4>
-
-<p>
-    This configuration is based on the <code>armv8-rpi3-linux-gnueabihf</code> sample that comes with Crosstool-NG:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf">
-        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv8-rpi3-linux-gnueabihf</a>
-</p>
-<p>
-    Even though the CPU will be running in 32-bit mode, you can still use the ARMv8 NEON instructions, so I changed the
-    compiler's default FPU flag to <code>neon-fp-armv8</code>. I haven't tested if it actually makes any difference.
-</p>
-<p>
-    I changed the GCC version to the latest stable one, and the Linux kernel and glibc versions to match the versions
-    that the Ubuntu Server 18.04 image ships with. These are also supported on Raspbian Buster.
-</p>
-
-<h4><a name="raspberry-pi-1-zero-32-bit-armv6" href="#raspberry-pi-1-zero-32-bit-armv6">Raspberry Pi 1 &amp; Zero, 32-bit (ARMv6)</a></h4>
-
-<p>
-    This configuration is based on the <code>armv6-rpi-linux-gnueabihf</code> sample that comes with Crosstool-NG:
-    <a href="https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv6-rpi-linux-gnueabi">
-        https://github.com/crosstool-ng/crosstool-ng/tree/master/samples/armv6-rpi-linux-gnueabi</a>
-</p>
-
-<h3><a name="native-toolchain" href="#native-toolchain">Native toolchain</a></h3>
-
-<p>
-    Building the native toolchain for the Raspberry Pi is very similar.
-</p>
-<h4 class="snippet-name"><a name="dockerfile2" href="#dockerfile2">Dockerfile</a></h4>
-<div class="codesnippet"><style>pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.pygments225 .hll { background-color: #ffffcc }
-.pygments225 { background: #ffffff; }
-.pygments225 .c { color: #008000 } /* Comment */
-.pygments225 .err { border: 1px solid #FF0000 } /* Error */
-.pygments225 .k { color: #0000ff } /* Keyword */
-.pygments225 .l { color: #0000FF } /* Literal */
-.pygments225 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments225 .cm { color: #008000 } /* Comment.Multiline */
-.pygments225 .cp { color: #af00db } /* Comment.Preproc */
-.pygments225 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments225 .c1 { color: #008000 } /* Comment.Single */
-.pygments225 .cs { color: #008000 } /* Comment.Special */
-.pygments225 .ge { font-style: italic } /* Generic.Emph */
-.pygments225 .gh { font-weight: bold } /* Generic.Heading */
-.pygments225 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments225 .gs { font-weight: bold } /* Generic.Strong */
-.pygments225 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments225 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments225 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments225 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments225 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments225 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments225 .kt { color: #2b91af } /* Keyword.Type */
-.pygments225 .ld { color: #0000FF } /* Literal.Date */
-.pygments225 .m { color: #0000FF } /* Literal.Number */
-.pygments225 .s { color: #a31515 } /* Literal.String */
-.pygments225 .na { color: #001080 } /* Name.Attribute */
-.pygments225 .nb { color: #795e26 } /* Name.Builtin */
-.pygments225 .nc { color: #2b91af } /* Name.Class */
-.pygments225 .no { color: #0000FF } /* Name.Constant */
-.pygments225 .nf { color: #795e26 } /* Name.Function */
-.pygments225 .nl { color: #AF00DB } /* Name.Label */
-.pygments225 .nn { color: #000000 } /* Name.Namespace */
-.pygments225 .nt { color: #800000 } /* Name.Tag */
-.pygments225 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments225 .ow { color: #0000ff } /* Operator.Word */
-.pygments225 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments225 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments225 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments225 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments225 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments225 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments225 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments225 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments225 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments225 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments225 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments225 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments225 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments225 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments225 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments225 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments225 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments225 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments225 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments225 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments225 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments225 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments225 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments225 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments225 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments225 pre.snippet225 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/1b0f6176d98a3d02a5f304b51ca37cbf6231ce6d/toolchain/docker/merged/cross-native-toolchain/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments225"><pre class="lineNumbers snippet225"><code><span></span><span class="k">FROM</span> <span class="s">tttapa/crosstool-ng-master</span> <span class="k">as</span> <span class="s">cross-native-toolchain</span></code>
-<code></code>
-<code><span class="k">ARG</span> HOST_TRIPLE</code>
-<code><span class="k">ARG</span> HOST_TRIPLE_LIB_DIR</code>
-<code></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
-<code><span class="k">RUN</span> mkdir /home/develop/RPi <span class="o">&amp;&amp;</span> mkdir /home/develop/src</code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop/RPi</span></code>
-<code><span class="k">COPY</span> <span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.config .config</code>
-<code><span class="k">RUN</span> mkdir -p patches/binutils/2.31.1 <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    cp /home/develop/129_multiarch_libpath.patch <span class="nv">$_</span></code>
-<code></code>
-<code><span class="c"># https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=280707&amp;p=1700861#p1700861</span></code>
-<code><span class="k">ENV</span> <span class="nv">DEB_TARGET_MULTIARCH</span><span class="o">=</span><span class="si">${</span><span class="nv">HOST_TRIPLE_LIB_DIR</span><span class="si">}</span></code>
-<code><span class="k">RUN</span> ct-ng build <span class="o">||</span> <span class="o">{</span> cat build.log <span class="o">&amp;&amp;</span> false<span class="p">;</span> <span class="o">}</span> <span class="o">&amp;&amp;</span> rm -rf .build</code>
-<code></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
-</div>
-
-<p>
-    The toolchain type is "Cross-Native", and is implemented as a special case
-    of the "Canadian Cross" toolchain.
-    It uses the cross-compilation toolchain that was built earlier.
-    More information can be found in the <a href="https://crosstool-ng.github.io/docs/toolchain-types/">Crosstool-NG
-        documentation</a>.
-</p>
-
-<h3><a name="customizing-the-toolchain" href="#customizing-the-toolchain">Customizing the toolchain</a></h3>
-
-<p>
-    You can customize all previously mentioned toolchains by running <code>ct-ng menuconfig</code> on the corresponding
-    configuration file.
-    The easiest way to do this is by running it inside of the <code>crosstool-ng-master</code> Docker container.
+    This step is optional. It can be useful to build it yourself if you
+    want the very latest version of crosstool-NG.
 </p>
 
 <pre class="console">
-<code>cd RPi-Cpp-Toolchain/</code>
-<code>./toolchain/docker/crosstool-ng-master/build.sh</code>
-<code>docker run -it --rm --volume "$PWD/toolchain/docker:/mnt" tttapa/crosstool-ng-master</code>
+<code>cd docker-crosstool-ng-multiarch</code>
+<code>docker build . -t ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</code>
 </pre>
-<pre class="console-docker">
-<code>cd /mnt/merged/cross-toolchain/</code>
-<code>cp aarch64-rpi3-linux-gnu.config .config  # Choose RPi model and architecture</code>
-<code>ct-ng menuconfig</code>
+
+<p>
+    If you skip this step, pull the image from <a
+        href="https://github.com/tttapa/docker-crosstool-ng-multiarch/pkgs/container/docker-crosstool-ng-multiarch">GitHub</a>:
+</p>
+<pre class="console">
+<code>docker pull ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</code>
+</pre>
+
+<h3><a name="upgrading-and-customizing-the-configurations" href="#upgrading-and-customizing-the-configurations">Upgrading and customizing the configurations</a></h3>
+
+<p>
+    Next, we'll use crosstool-NG to update the configuration files and
+    interactively customize the configuration. Here you can choose versions
+    of the compiler and other tools, Linux and libc versions, and so on.
+</p>
+<p>
+    First, start a shell in the crosstool-NG container you built or pulled in
+    the previous step. Mount the <code>docker-arm-cross-toolchain</code> folder
+    containing the config files, so you can access them inside of the container.
+</p>
+<pre class="console">
+<code>cd ../docker-arm-cross-toolchain</code>
+<code>docker run -it -v"$PWD:/mnt" ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</code>
 </pre>
 <p>
-    Now make your changes and save the result to <code>.config</code>.
+    Now copy the configuration you need to a file named <code>.config</code>,
+    update the configuration, make your changes, save the changes, and
+    then overwrite the previous configuration with the new one. Here I'll
+    use the <code>aarch64-rpi3-linux-gnu</code> configuration, but you should
+    use the correct one for your specific setup.
 </p>
 <pre class="console-docker">
 <code># Rename the old configuration</code>
-<code>mv aarch64-rpi3-linux-gnu.config aarch64-rpi3-linux-gnu.config.old</code>
-<code># Replace with new configuration</code>
-<code>mv .config aarch64-rpi3-linux-gnu.config</code>
+<code>cp /mnt/aarch64-rpi3-linux-gnu.config .config</code>
+<code># Upgrade the configuration</code>
+<code>ct-ng upgradeconfig</code>
+<code># Customize the configuration</code>
+<code>ct-ng menuconfig</code>
+<code># Overwrite the old configuration</code>
+<code>cp .config /mnt/aarch64-rpi3-linux-gnu.config</code>
 <code>exit</code>
 </pre>
 
+<h3><a name="building-the-toolchain" href="#building-the-toolchain">Building the toolchain</a></h3>
+
 <p>
-    Now you can build the toolchain again using the <code>./toolchain.sh</code> script, as explained
-    earlier:
+    Finally, build the toolchain with the new config.
+    Use the host triple that matches the configuration file name.
 </p>
 <pre class="console">
-<code>./toolchain/toolchain.sh &lt;board&gt; --build-toolchain --export-toolchain</code>
+<code>docker build . --build-arg=HOST_TRIPLE=aarch64-rpi3-linux-gnu -t ghcr.io/tttapa/docker-arm-cross-toolchain:aarch64-rpi3-linux-gnu</code>
 </pre>
+
+<h3><a name="packaging-and-extracting-the-toolchain" href="#packaging-and-extracting-the-toolchain">Packaging and extracting the toolchain</a></h3>
+
+<p>
+    Finally, create a tar archive of the toolchain, and copy it out of the Docker container so you can use it.
+</p>
+<pre class="console">
+<code>container=$(docker run -d ghcr.io/tttapa/docker-arm-cross-toolchain:aarch64-rpi3-linux-gnu bash -c "tar cJf x-tools.tar.bz2 x-tools")</code>
+<code>docker wait $container</code>
+<code>docker cp $container:/home/develop/x-tools.tar.bz2 x-tools-aarch64-rpi3-linux-gnu.tar.bz2</code>
+<code>docker rm $container</code>
+</pre>
+
+<h3><a name="installing-the-toolchain" href="#installing-the-toolchain">Installing the toolchain</a></h3>
+
+<p>
+    You can now simply extract the toolchain and install it somewhere on your system, e.g. in <code>~/opt</code>:
+</p>
+<pre class="console">
+<code>mkdir -p ~/opt</code>
+<code>tar xJf x-tools-aarch64-rpi3-linux-gnu.tar.bz2 -C ~/opt</code>
+</pre>
+<p>
+    For more details on how to select the correct one, and instructions for adding
+    it to your PATH, see <a
+        href="https://github.com/tttapa/docker-arm-cross-toolchain">tttapa/docker-arm-cross-toolchain</a>.
+</p>
 
 </div>
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="Installation.html" title="Installation and setup"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="C++ Development using Docker">Index</a></div><div class="nextpage"><a href="Dependencies.html" title="Cross-Compiling the Dependencies">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Sunday, 20 February 2022 17:14 UTC</footer>
+    <footer>Last edited: Saturday, 23 April 2022 17:47 UTC</footer>
 </body>
 
 </html>

@@ -55,8 +55,8 @@
             <li><span class="ftriangle"></span><a class="" href="Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
             <li><span class="ftriangle"></span><a class="" href="Dependencies.html">Cross-Compiling the Dependencies</a></li>
             <li><span class="ftriangle"></span><a class="" href="Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
-            <li><span class="ftriangle"></span><a class="" href="Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
             <li><span class="ftriangle"></span><a class="" href="Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="Debugging.html">Debugging</a></li>
             <li><span class="ftriangle"></span><a class="" href="Speedrun.html">Speedrun</a></li>
         </ul>
         </li>
@@ -227,14 +227,19 @@
     This is a guide on how to set up a C++ cross-compilation toolchain and development environment.
     It serves as the documentation for the <b><a
             href="https://github.com/tttapa/RPi-Cpp-Toolchain">RPi-Cpp-Toolchain</a></b> repository.
+    In this guide, we'll cross-compile all package such as Python, OpenCV and their dependencies from scratch.
 </p>
-<p style="border-left: 0.2em solid #ccc; padding: 0.3em 0.3em 0.4em 0.6em; background-color: #f8f8f8;">
+<p class="gray-block-quote">
     <b>Note:</b> building all dependencies from source might not be ideal for
     most use cases. It is often easier to use a sysroot specific to the
     operating system you plan to use on the Raspberry Pi (e.g. Raspberry Pi OS
     or Ubuntu) and use the system package manager (e.g. APT) to install the
     dependencies. This is explained on the
-    <a href="../C++-Development-RPiOS/">Ubuntu to Raspberry Pi OS Cross C++ Development</a> page.
+    <a href="../C++-Development-RPiOS/">Ubuntu to Raspberry Pi OS Cross C++ Development</a> page.<br>
+</p>
+<p class="gray-block-quote">
+    If you do want to build packages from source, <a href="https://www.yoctoproject.org/">Yocto</a>
+    and <a href="https://buildroot.org/">Buildroot</a> are good solutions as well.
 </p>
 
 <h3><a name="overview" href="#overview">Overview</a></h3>
@@ -243,7 +248,7 @@
     The first page guides you through the installation of the necessary tools and editors.
 </p>
 <p>
-    The second and third page explain how to build a cross-compilation toolchain using Crosstool-NG, and how to use it
+    The second and third page explain how to build a cross-compilation toolchain using crosstool-NG, and how to use it
     to compile the following libraries:
 <ul>
     <li><strong>Zlib</strong>: compression library (OpenSSL and Python dependency)</li>
@@ -260,7 +265,7 @@
     <li><strong>UUID</strong>: library for unique identifiers (Python dependency)</li>
     <li><strong>libX11</strong>: X11 protocol client library (Tk dependency)</li>
     <li><strong>Tcl/Tk</strong>: graphical user interface toolkit (Python/Tkinter dependency)</li>
-    <li><strong>Python 3.8.3</strong>: Python interpreter and libraries</li>
+    <li><strong>Python 3.10.4</strong>: Python interpreter and libraries</li>
     <li><strong>ZBar</strong>: Bar and QR code decoding library</li>
     <li><strong>Raspberry Pi Userland</strong>: VideoCore GPU drivers</li>
     <li><strong>VPX</strong>: VP8/VP9 codec SDK</li>
@@ -270,9 +275,9 @@
     <li><strong>OpenBLAS</strong>: linear algebra library (NumPy dependency)</li>
     <li><strong>NumPy</strong>: multi-dimensional array container for Python (OpenCV dependency)</li>
     <li><strong>SciPy</strong>: Python module for mathematics, science, and engineering</li>
-    <li><strong>OpenCV 4.3.0</strong>: computer vision library and Python module</li>
+    <li><strong>OpenCV</strong>: computer vision library and Python module</li>
     <li><strong>GDB Server</strong>: on-target remote debugger</li>
-    <li><strong>GCC 9.2.0</strong>: C, C++ and Fortran compilers</li>
+    <!-- <li><strong>GCC 11.2.0</strong>: C, C++ and Fortran compilers</li> -->
     <li><strong>GNU Make</strong>: build automation tool</li>
     <li><strong>Ninja</strong>: faster, more light-weight build tool</li>
     <li><strong>CMake</strong>: build system</li>
@@ -287,17 +292,14 @@
     Next, page four explains how to install these libraries to the Raspberry Pi.
 </p>
 <p>
-    The fifth helps you set up Visual Studio Code for cross-compilation and remote debugging.
-</p>
-<p>
-    The sixth page presents a small "hello world" example project in C++ that uses CMake and Google Test.
+    The fifth page presents a small “hello world” example project in C++ that uses CMake and Google Test.
 </p>
 <p>
     Finally, there's a page on remote on-target debugging using GDB and Visual Studio Code.
 </p>
 <p>
     If you're in a hurry, or if you are already quite familiar with Linux, compilers, etc. you can skip straight to the
-    "Speedrun" page, it contains all the commands you need to get the entire project running in just a couple of
+    “Speedrun” page, it contains all the commands you need to get the entire project running in just a couple of
     minutes.
 </p>
 
@@ -315,18 +317,18 @@
 </a><a href="Installing-Dependencies.html">
     <h2>Installing the dependencies on the Pi</h2>
     <p>Installing the cross-compiled libraries from the previous step on the Raspberry Pi.</p>
-</a><a href="Editor-Setup.html">
-    <h2>Setting up Visual Studio Code for C++ Development</h2>
-    <p>Installing and configuring the right extensions for easy C++ development in VSCode.</p>
 </a><a href="Cpp-Program.html">
     <h2>Cross-Compiling the C++ Example Project</h2>
     <p>Using the cross-compilation toolchain to build your own C++ project.</p>
+</a><a href="Debugging.html">
+    <h2>Debugging</h2>
+    <p>Remote on-target debugging using GDB and VSCode.</p>
 </a><a href="Speedrun.html">
     <h2>Speedrun</h2>
     <p>Installing, building and setting everything up as fast as possible, in just a few commands.</p>
 </a></div>
     </article>
-    <footer>Last edited: Sunday, 20 February 2022 17:21 UTC</footer>
+    <footer>Last edited: Sunday, 01 May 2022 00:43 UTC</footer>
 </body>
 
 </html>

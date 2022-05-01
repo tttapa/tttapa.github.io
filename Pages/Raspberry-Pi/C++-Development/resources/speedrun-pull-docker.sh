@@ -1,3 +1,3 @@
-./toolchain/toolchain.sh # List available board configurations
+./docker-arm-cross-build-scripts/build.sh # List available board configurations
 # Replace the board name with one of the options printed by the previous command
-./toolchain/toolchain.sh rpi3-aarch64 --pull --export
+./docker-arm-cross-build-scripts/build.sh rpi3-aarch64 --pull --export

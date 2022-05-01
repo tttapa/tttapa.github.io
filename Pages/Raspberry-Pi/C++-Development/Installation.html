@@ -53,8 +53,8 @@
             <li><span class="ftriangle"></span><a class="" href="Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
             <li><span class="ftriangle"></span><a class="" href="Dependencies.html">Cross-Compiling the Dependencies</a></li>
             <li><span class="ftriangle"></span><a class="" href="Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
-            <li><span class="ftriangle"></span><a class="" href="Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
             <li><span class="ftriangle"></span><a class="" href="Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="Debugging.html">Debugging</a></li>
             <li><span class="ftriangle"></span><a class="" href="Speedrun.html">Speedrun</a></li>
         </ul>
         </li>
@@ -255,21 +255,22 @@
 <h3><a name="operating-systems" href="#operating-systems">Operating Systems</a></h3>
 
 <p>
-    This guide is focussed on Linux as an operating system. While it should be possible to do most of it on Windows as
+    This guide is focussed on Linux as an operating system for building and deploying.
+    While it should be possible to do most of it on Windows as
     well, I wouldn't recommend it at all. Development tools are harder to install on Windows, and building the
     Docker containers will take much longer, especially if you don't have Windows Pro or Enterprise (Windows Home
     doesn't have Hyper-V and Containers support).<br>
     I've worked in a team where some developers preferred Windows, and I (eventually) got most of it to run correctly,
     but it wasn't worth it. Compiling large projects in a virtualized Docker container was many times slower than doing
     the same thing natively on Linux, the network configuration to connect to the Raspberry Pi directly was a pain,
-    on-target debugging was not supported, because the Windows tools don't support <code>gdb-server</code>, etc.<br>
+    on-target debugging was not directly supported, etc.<br>
     In the end, everyone moved to Linux, because it was so much faster and easier to use.<br>
     If you want to get serious about developing C/C++ software for the Raspberry Pi, installing Linux is definitely
     worth it.
 </p>
 <p>
-    I'll be using Ubuntu 19.10 throughout this guide, but pretty much everything applies to other Linux distributions as
-    well. The most significant difference will be the package manager used. On Ubuntu, I'll use APT and Snap, but most
+    I'll be using Ubuntu 22.04 throughout this guide, but pretty much everything applies to other Linux distributions as
+    well. The most significant difference will be the package manager used. On Ubuntu, I'll use APT, but most
     packages should be available in your distro's package manager as well.
 </p>
 
@@ -315,7 +316,8 @@
 <h4><a name="installation1" href="#installation1">Installation</a></h4>
 
 <p>
-    You need Docker to pull or build the toolchain. Docker Compose is optional.
+    You need Docker to build the libraries and toolchains. 
+    Docker Compose is optional.
     <!-- TODO: explain why you need Docker Compose -->
     <br> You can find detailed installation instructions here:
     <ul>
@@ -337,8 +339,8 @@
 <h4><a name="installation2" href="#installation2">Installation</a></h4>
 
 <p>
-    You can either download VSCode from <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>,
-    or if you're on Linux, you can install it as a <a href="https://snapcraft.io/code">Snap</a>:
+    You can download VSCode from <a href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>,
+    or if you're on Ubuntu, you can install it as a <a href="https://snapcraft.io/code">Snap</a>:
 </p>
 <pre class="console">
 <code>sudo snap install code --classic</code>
@@ -350,8 +352,6 @@
     The two most important extensions we'll use in this project, are the
     <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools">C/C++ extension</a> and the
     <a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode.cmake-tools">CMake Tools extension</a>.<br>
-    I'd also recommend installing <a href="https://marketplace.visualstudio.com/items?itemName=twxs.cmake">CMake
-        language support</a> for syntax highlighting and suggestions in CMake code.
     If you plan on editing the Dockerfiles to modify the toolchain or the libraries, you might find the
     <a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">Docker extension</a>
     useful as well.
@@ -367,7 +367,7 @@
     external libraries, and generates build files that are later used to compile the code.
 </p>
 <p>
-    You can download the latest version of CMake from the official <a href="https://cmake.org/">website</a>, or
+    You can download the latest version of CMake from <a href="https://cmake.org">https://cmake.org</a>, or
     you can install it using your package manager:
 </p>
 <pre class="console">
@@ -390,6 +390,11 @@
 <p>
     If you've installed CMake using the package manager, Make will probably already be installed.
 </p>
+<p>
+    You can also use <a href="https://ninja-build.org/">Ninja</a> instead of Make if you explicitly set the
+    generator when configuring the CMake projects.
+</p>
+<pre class="console"><code>sudo apt install ninja-build</code></pre>
 
 <h4><a name="gcc-optional" href="#gcc-optional">GCC (optional)</a></h4>
 
@@ -407,19 +412,28 @@
 </pre>
 <p>
     However, the default version is often out of date, especially on LTS releases of Ubuntu. Luckily, you
-    can easily install the latest version from the <code>ubuntu-toolchain-r/test</code> PPA:
+    can easily install the latest version from the <code>ubuntu-toolchain-r/test</code> PPA. For example:
 </p>
 <pre class="console">
 <code>sudo add-apt-repository ppa:ubuntu-toolchain-r/test</code>
-<code>sudo apt-get update</code>
-<code>sudo apt install gcc-9 g++-9</code>
+<code>sudo apt install gcc-11 g++-11</code>
+</pre>
+
+<p>
+    You can also install Clang, using their official PPAs: <a href="https://apt.llvm.org/">https://apt.llvm.org/</a>. 
+    For example, to install Clang 14:
+</p>
+<pre class="console">
+<code>source /etc/os-release</code>
+<code>sudo add-apt-repository "deb http://apt.llvm.org/${UBUNTU_CODENAME}/ llvm-toolchain-${UBUNTU_CODENAME}-14 main"</code>
+<code>sudo apt install clang-14</code>
 </pre>
 
 </div>
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="C++ Development using Docker">Index</a></div><div class="nextpage"><a href="Building-The-Toolchain.html" title="Building the Cross-Compilation Toolchain">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Thursday, 16 April 2020 09:31 UTC</footer>
+    <footer>Last edited: Sunday, 24 April 2022 12:57 UTC</footer>
 </body>
 
 </html>

@@ -53,8 +53,8 @@
             <li><span class="ftriangle"></span><a class="" href="Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
             <li><span class="ftriangle"></span><a class="" href="Dependencies.html">Cross-Compiling the Dependencies</a></li>
             <li><span class="ftriangle"></span><a class="" href="Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
-            <li><span class="ftriangle"></span><a class="" href="Editor-Setup.html">Setting up Visual Studio Code for C++ Development</a></li>
             <li><span class="ftriangle"></span><a class="" href="Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="Debugging.html">Debugging</a></li>
             <li><span class="ftriangle"></span><a class="openEntry " href="Speedrun.html">Speedrun</a></li>
         </ul>
         </li>
@@ -241,11 +241,6 @@
                 <li><a href="#installation-of-the-staging-area">Installation of the staging area</a></li>
               </ul>
             <li><a href="#try-out-the-c-example-project">Try out the C++ example project</a></li>
-              <ul>
-                <li><a href="#configure-and-build-the-example-project">Configure and build the example project</a></li>
-                <li><a href="#copy-the-tests-and-the-hello-world-program-to-the-pi">Copy the tests and the Hello World program to the Pi</a></li>
-                <li><a href="#run-the-tests-and-the-hello-world-program-on-the-pi">Run the tests and the Hello World program on the Pi</a></li>
-                </ul>
   </ul></div>
 
 
@@ -324,13 +319,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code>sudo apt install -y apt-transport-https ca-certificates curl software-properties-common</code>
 <code><span class="c1"># Add the Docker GPG key and PPA repository</span></code>
 <code>curl -fsSL https://download.docker.com/linux/ubuntu/gpg <span class="p">|</span> sudo apt-key add -</code>
-<code>sudo add-apt-repository <span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable&quot;</span></code>
-<code>sudo apt update</code>
+<code><span class="nb">source</span> /etc/os-release</code>
+<code>sudo add-apt-repository <span class="s2">&quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu </span><span class="si">${</span><span class="nv">UBUNTU_CODENAME</span><span class="si">}</span><span class="s2"> stable&quot;</span></code>
 <code><span class="c1"># Install Docker</span></code>
 <code>sudo apt install -y docker-ce</code>
 <code><span class="c1"># Add your user to the docker group so you can run Docker without sudo</span></code>
 <code>sudo usermod -aG docker <span class="si">${</span><span class="nv">USER</span><span class="si">}</span></code>
-<code><span class="c1"># Login again so group membership is up-to-date</span></code>
+<code><span class="c1"># Log in again so group membership is up-to-date</span></code>
 <code>su - <span class="si">${</span><span class="nv">USER</span><span class="si">}</span></code></pre></div>
 </div>
 <h4><a name="install-some-other-tools" href="#install-some-other-tools">Install some other tools</a></h4>
@@ -402,7 +397,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments20 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments20 pre.snippet20 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-tools.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments20"><pre class="lineNumbers snippet20"><code><span></span>sudo apt install -y --no-install-recommends cmake make git</code></pre></div>
+<div class="pygments20"><pre class="lineNumbers snippet20"><code><span></span>sudo apt install -y --no-install-recommends cmake make ninja-build git</code></pre></div>
 </div>
 <h4><a name="clone-the-rpi-cpp-toolchain-repository" href="#clone-the-rpi-cpp-toolchain-repository">Clone the RPi-Cpp-Toolchain repository</a></h4>
 <div class="codesnippet"><style>pre { line-height: 125%; }
@@ -547,9 +542,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments28 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments28 pre.snippet28 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-pull-docker.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments28"><pre class="lineNumbers snippet28"><code><span></span>./toolchain/toolchain.sh <span class="c1"># List available board configurations</span></code>
+<div class="pygments28"><pre class="lineNumbers snippet28"><code><span></span>./docker-arm-cross-build-scripts/build.sh <span class="c1"># List available board configurations</span></code>
 <code><span class="c1"># Replace the board name with one of the options printed by the previous command</span></code>
-<code>./toolchain/toolchain.sh rpi3-aarch64 --pull --export</code></pre></div>
+<code>./docker-arm-cross-build-scripts/build.sh rpi3-aarch64 --pull --export</code></pre></div>
 </div>
 
 <h3><a name="setup-of-the-necessary-software-on-the-raspberry-pi" href="#setup-of-the-necessary-software-on-the-raspberry-pi">Setup of the necessary software on the Raspberry Pi</a></h3>
@@ -565,8 +560,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <ol>
     <li>A working network connection to the same local network as your computer.</li>
     <li>The hostname and DNS or mDNS configured correctly so you can find the Pi on the network as
-        <code>rpi3.local</code>, even if its IP address changes.</li>
-    <li>An SSH configuration on your computer so you can SSH into the Pi using <code>ssh RPi3</code>.</li>
+        e.g. <code>rpi3.local</code>, even if its IP address changes.</li>
+    <li>An SSH configuration on your computer so you can SSH into the Pi using e.g. <code>ssh RPi3</code>.</li>
     <li>An SSH key from your computer installed in the <code>authorized_keys</code> of the Pi so you can SSH into it
         without having to enter your password each time.</li>
 </ol>
@@ -651,7 +646,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-install-staging.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
 <div class="pygments61"><pre class="lineNumbers snippet61"><code><span></span><span class="c1"># Copy the staging area archive to the Pi</span></code>
 <code><span class="c1"># This command may take a while, depending on the speed of your SD card</span></code>
-<code>scp ./toolchain/staging-aarch64-rpi3-linux-gnu.tar RPi3:/tmp</code>
+<code>scp ./docker-arm-cross-build-scripts/staging-aarch64-rpi3-linux-gnu.tar RPi3:/tmp</code>
 <code><span class="c1"># Install everything to the root of the filesystem</span></code>
 <code><span class="c1"># (will only install to /usr/local and /opt)</span></code>
 <code><span class="c1"># Enter the sudo password of the Pi if necessary</span></code>
@@ -735,245 +730,101 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments67 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments67 pre.snippet67 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-install-check.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments67"><pre class="lineNumbers snippet67"><code><span></span><span class="c1"># Check that Python 3.8 and OpenCV were installed correctly</span></code>
-<code>ssh -t RPi3 <span class="s2">&quot;python3.8 -c &#39;import cv2; print(cv2.__version__)&#39;&quot;</span></code></pre></div>
+<div class="pygments67"><pre class="lineNumbers snippet67"><code><span></span><span class="c1"># Check that Python 3.10 and OpenCV were installed correctly</span></code>
+<code>ssh RPi3 <span class="s2">&quot;python3.10 -c &#39;import cv2; print(cv2.__version__)&#39;&quot;</span></code></pre></div>
 </div>
 
 <h3><a name="try-out-the-c-example-project" href="#try-out-the-c-example-project">Try out the C++ example project</a></h3>
 
-<h4><a name="configure-and-build-the-example-project" href="#configure-and-build-the-example-project">Configure and build the example project</a></h4>
 <div class="codesnippet"><style>pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.pygments74 .hll { background-color: #ffffcc }
-.pygments74 { background: #ffffff; }
-.pygments74 .c { color: #008000 } /* Comment */
-.pygments74 .err { border: 1px solid #FF0000 } /* Error */
-.pygments74 .k { color: #0000ff } /* Keyword */
-.pygments74 .l { color: #0000FF } /* Literal */
-.pygments74 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments74 .cm { color: #008000 } /* Comment.Multiline */
-.pygments74 .cp { color: #af00db } /* Comment.Preproc */
-.pygments74 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments74 .c1 { color: #008000 } /* Comment.Single */
-.pygments74 .cs { color: #008000 } /* Comment.Special */
-.pygments74 .ge { font-style: italic } /* Generic.Emph */
-.pygments74 .gh { font-weight: bold } /* Generic.Heading */
-.pygments74 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments74 .gs { font-weight: bold } /* Generic.Strong */
-.pygments74 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments74 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments74 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments74 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments74 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments74 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments74 .kt { color: #2b91af } /* Keyword.Type */
-.pygments74 .ld { color: #0000FF } /* Literal.Date */
-.pygments74 .m { color: #0000FF } /* Literal.Number */
-.pygments74 .s { color: #a31515 } /* Literal.String */
-.pygments74 .na { color: #001080 } /* Name.Attribute */
-.pygments74 .nb { color: #795e26 } /* Name.Builtin */
-.pygments74 .nc { color: #2b91af } /* Name.Class */
-.pygments74 .no { color: #0000FF } /* Name.Constant */
-.pygments74 .nf { color: #795e26 } /* Name.Function */
-.pygments74 .nl { color: #AF00DB } /* Name.Label */
-.pygments74 .nn { color: #000000 } /* Name.Namespace */
-.pygments74 .nt { color: #800000 } /* Name.Tag */
-.pygments74 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments74 .ow { color: #0000ff } /* Operator.Word */
-.pygments74 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments74 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments74 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments74 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments74 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments74 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments74 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments74 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments74 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments74 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments74 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments74 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments74 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments74 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments74 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments74 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments74 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments74 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments74 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments74 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments74 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments74 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments74 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments74 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments74 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments74 pre.snippet74 { counter-reset: line 0; }</style>
+.pygments73 .hll { background-color: #ffffcc }
+.pygments73 { background: #ffffff; }
+.pygments73 .c { color: #008000 } /* Comment */
+.pygments73 .err { border: 1px solid #FF0000 } /* Error */
+.pygments73 .k { color: #0000ff } /* Keyword */
+.pygments73 .l { color: #0000FF } /* Literal */
+.pygments73 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments73 .cm { color: #008000 } /* Comment.Multiline */
+.pygments73 .cp { color: #af00db } /* Comment.Preproc */
+.pygments73 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments73 .c1 { color: #008000 } /* Comment.Single */
+.pygments73 .cs { color: #008000 } /* Comment.Special */
+.pygments73 .ge { font-style: italic } /* Generic.Emph */
+.pygments73 .gh { font-weight: bold } /* Generic.Heading */
+.pygments73 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments73 .gs { font-weight: bold } /* Generic.Strong */
+.pygments73 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments73 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments73 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments73 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments73 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments73 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments73 .kt { color: #2b91af } /* Keyword.Type */
+.pygments73 .ld { color: #0000FF } /* Literal.Date */
+.pygments73 .m { color: #0000FF } /* Literal.Number */
+.pygments73 .s { color: #a31515 } /* Literal.String */
+.pygments73 .na { color: #001080 } /* Name.Attribute */
+.pygments73 .nb { color: #795e26 } /* Name.Builtin */
+.pygments73 .nc { color: #2b91af } /* Name.Class */
+.pygments73 .no { color: #0000FF } /* Name.Constant */
+.pygments73 .nf { color: #795e26 } /* Name.Function */
+.pygments73 .nl { color: #AF00DB } /* Name.Label */
+.pygments73 .nn { color: #000000 } /* Name.Namespace */
+.pygments73 .nt { color: #800000 } /* Name.Tag */
+.pygments73 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments73 .ow { color: #0000ff } /* Operator.Word */
+.pygments73 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments73 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments73 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments73 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments73 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments73 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments73 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments73 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments73 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments73 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments73 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments73 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments73 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments73 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments73 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments73 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments73 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments73 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments73 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments73 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments73 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments73 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments73 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments73 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments73 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments73 pre.snippet73 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-cmake-build.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments74"><pre class="lineNumbers snippet74"><code><span></span><span class="nb">cd</span> build</code>
-<code>ls ../cmake  <span class="c1"># See what toolchain files are available</span></code>
-<code>             <span class="c1"># Use the one that matches your board</span></code>
-<code>cmake .. <span class="se">\</span></code>
-<code>    -DCMAKE_TOOLCHAIN_FILE<span class="o">=</span>../cmake/aarch64-rpi3-linux-gnu.cmake <span class="se">\</span></code>
+<div class="pygments73"><pre class="lineNumbers snippet73"><code><span></span><span class="c1"># See what toolchain files are available, use the one that matches your board.</span></code>
+<code>ls cmake</code>
+<code><span class="c1"># Configure the project using the correct toolchain.</span></code>
+<code>cmake -S. -Bbuild <span class="se">\</span></code>
+<code>    -DCMAKE_TOOLCHAIN_FILE<span class="o">=</span><span class="s2">&quot;cmake/aarch64-rpi3-linux-gnu.cmake&quot;</span> <span class="se">\</span></code>
 <code>    -DCMAKE_BUILD_TYPE<span class="o">=</span>Debug</code>
-<code>make -j<span class="k">$(</span>nproc<span class="k">)</span></code></pre></div>
-</div>
-<h4><a name="copy-the-tests-and-the-hello-world-program-to-the-pi" href="#copy-the-tests-and-the-hello-world-program-to-the-pi">Copy the tests and the Hello World program to the Pi</a></h4>
-<div class="codesnippet"><style>pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.pygments78 .hll { background-color: #ffffcc }
-.pygments78 { background: #ffffff; }
-.pygments78 .c { color: #008000 } /* Comment */
-.pygments78 .err { border: 1px solid #FF0000 } /* Error */
-.pygments78 .k { color: #0000ff } /* Keyword */
-.pygments78 .l { color: #0000FF } /* Literal */
-.pygments78 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments78 .cm { color: #008000 } /* Comment.Multiline */
-.pygments78 .cp { color: #af00db } /* Comment.Preproc */
-.pygments78 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments78 .c1 { color: #008000 } /* Comment.Single */
-.pygments78 .cs { color: #008000 } /* Comment.Special */
-.pygments78 .ge { font-style: italic } /* Generic.Emph */
-.pygments78 .gh { font-weight: bold } /* Generic.Heading */
-.pygments78 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments78 .gs { font-weight: bold } /* Generic.Strong */
-.pygments78 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments78 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments78 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments78 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments78 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments78 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments78 .kt { color: #2b91af } /* Keyword.Type */
-.pygments78 .ld { color: #0000FF } /* Literal.Date */
-.pygments78 .m { color: #0000FF } /* Literal.Number */
-.pygments78 .s { color: #a31515 } /* Literal.String */
-.pygments78 .na { color: #001080 } /* Name.Attribute */
-.pygments78 .nb { color: #795e26 } /* Name.Builtin */
-.pygments78 .nc { color: #2b91af } /* Name.Class */
-.pygments78 .no { color: #0000FF } /* Name.Constant */
-.pygments78 .nf { color: #795e26 } /* Name.Function */
-.pygments78 .nl { color: #AF00DB } /* Name.Label */
-.pygments78 .nn { color: #000000 } /* Name.Namespace */
-.pygments78 .nt { color: #800000 } /* Name.Tag */
-.pygments78 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments78 .ow { color: #0000ff } /* Operator.Word */
-.pygments78 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments78 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments78 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments78 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments78 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments78 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments78 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments78 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments78 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments78 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments78 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments78 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments78 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments78 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments78 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments78 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments78 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments78 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments78 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments78 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments78 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments78 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments78 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments78 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments78 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments78 pre.snippet78 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-copy-cpp-proj.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments78"><pre class="lineNumbers snippet78"><code><span></span><span class="c1"># Copy the cross-compiled binaries to the Pi</span></code>
-<code>scp ./bin/* RPi3:/tmp</code></pre></div>
-</div>
-<h4><a name="run-the-tests-and-the-hello-world-program-on-the-pi" href="#run-the-tests-and-the-hello-world-program-on-the-pi">Run the tests and the Hello World program on the Pi</a></h4>
-<div class="codesnippet"><style>pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.pygments82 .hll { background-color: #ffffcc }
-.pygments82 { background: #ffffff; }
-.pygments82 .c { color: #008000 } /* Comment */
-.pygments82 .err { border: 1px solid #FF0000 } /* Error */
-.pygments82 .k { color: #0000ff } /* Keyword */
-.pygments82 .l { color: #0000FF } /* Literal */
-.pygments82 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments82 .cm { color: #008000 } /* Comment.Multiline */
-.pygments82 .cp { color: #af00db } /* Comment.Preproc */
-.pygments82 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments82 .c1 { color: #008000 } /* Comment.Single */
-.pygments82 .cs { color: #008000 } /* Comment.Special */
-.pygments82 .ge { font-style: italic } /* Generic.Emph */
-.pygments82 .gh { font-weight: bold } /* Generic.Heading */
-.pygments82 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments82 .gs { font-weight: bold } /* Generic.Strong */
-.pygments82 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments82 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments82 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments82 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments82 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments82 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments82 .kt { color: #2b91af } /* Keyword.Type */
-.pygments82 .ld { color: #0000FF } /* Literal.Date */
-.pygments82 .m { color: #0000FF } /* Literal.Number */
-.pygments82 .s { color: #a31515 } /* Literal.String */
-.pygments82 .na { color: #001080 } /* Name.Attribute */
-.pygments82 .nb { color: #795e26 } /* Name.Builtin */
-.pygments82 .nc { color: #2b91af } /* Name.Class */
-.pygments82 .no { color: #0000FF } /* Name.Constant */
-.pygments82 .nf { color: #795e26 } /* Name.Function */
-.pygments82 .nl { color: #AF00DB } /* Name.Label */
-.pygments82 .nn { color: #000000 } /* Name.Namespace */
-.pygments82 .nt { color: #800000 } /* Name.Tag */
-.pygments82 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments82 .ow { color: #0000ff } /* Operator.Word */
-.pygments82 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments82 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments82 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments82 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments82 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments82 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments82 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments82 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments82 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments82 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments82 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments82 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments82 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments82 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments82 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments82 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments82 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments82 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments82 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments82 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments82 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments82 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments82 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments82 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments82 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments82 pre.snippet82 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-run.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments82"><pre class="lineNumbers snippet82"><code><span></span><span class="c1"># Run the tests</span></code>
-<code>ssh -t RPi3 <span class="s2">&quot;/tmp/greeter.test&quot;</span></code>
-<code></code>
-<code><span class="c1"># Run the Hello World program</span></code>
-<code>ssh -t RPi3 <span class="s2">&quot;/tmp/hello-world&quot;</span></code>
-<code></code>
-<code><span class="c1"># Alternatively, start an interactive SSH session, and run it on the Pi directly</span></code>
-<code>ssh RPi3</code></pre></div>
+<code><span class="c1"># Build the project.</span></code>
+<code>cmake --build build -j</code>
+<code><span class="c1"># Package the project.</span></code>
+<code><span class="nb">pushd</span> build<span class="p">;</span> cpack<span class="p">;</span> <span class="nb">popd</span></code>
+<code><span class="c1"># Copy the project to the Raspberry Pi.</span></code>
+<code>ssh RPi3 tar xz &lt; build/greeter-1.0.0-Linux-arm64.tar.gz</code>
+<code><span class="c1"># Run the hello world program on the Pi.</span></code>
+<code>ssh -t RPi3 greeter-1.0.0-Linux-arm64/bin/hello-world</code></pre></div>
 </div>
 
 </div>
         <hr id="end-of-article">
-        <div class="nextupprev"><div class="prevpage"><a href="Cpp-Program.html" title="Cross-Compiling the C++ Example Project"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="C++ Development using Docker">Index</a></div><div class="nextpage"></div></div>
+        <div class="nextupprev"><div class="prevpage"><a href="Debugging.html" title="Debugging"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="C++ Development using Docker">Index</a></div><div class="nextpage"></div></div>
     </article>
-    <footer>Last edited: Tuesday, 21 July 2020 21:58 UTC</footer>
+    <footer>Last edited: Sunday, 01 May 2022 01:44 UTC</footer>
 </body>
 
 </html>
