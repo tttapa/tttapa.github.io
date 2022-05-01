@@ -52,8 +52,8 @@
     </li>
     <li>
         Connect to the Raspberry Pi over SSH
-        <pre class="console"><code>ssh ubuntu@192.168.1.100</code>
-<code>ssh ubuntu@ubuntu # if you have a smart DNS server in your router</code></pre>
+        <pre class="console"><code>ssh -o IdentitiesOnly=yes ubuntu@192.168.1.100</code>
+<code>ssh -o IdentitiesOnly=yes ubuntu@ubuntu # if you have a smart DNS server in your router</code></pre>
         Replace the IP address with the one you found in the previous step. <br>
         You'll be prompted a password, the default one is <code>ubuntu</code>.
     </li>
@@ -91,7 +91,7 @@ EOF</code></pre>
     </li>
     <li>Add your public key to the Pi's <code>authorized_keys</code>, so you can connect to it without entering the
         password each time:
-        <pre class="console"><code>ssh-copy-id -i ~/.ssh/id_rsa.pub RPi3</code></pre>
+        <pre class="console"><code>ssh-copy-id -i ~/.ssh/id_rsa.pub -o IdentitiesOnly=yes RPi3</code></pre>
         If you don't have an SSH key pair yet, you can follow these instructions on how
         to create one:
         <a href="https://www.digitalocean.com/community/tutorial_collections/7">DigitalOcean - How to Set Up SSH
