@@ -233,7 +233,10 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno, refs):
     file = full_filepath(data['file'], filepath)
 
     # Get the GitHub/GitLab links for this file
-    git_service, git_link = get_git_remote_link(file, startline, endline)
+    if data.get('gitlink', True):
+        git_service, git_link = get_git_remote_link(file, startline, endline)
+    else:
+        git_service = git_link = None
 
     # Select the lines between startline and endline
     filecontents, ctrstart = clip_file_contents(file, startline, endline)
@@ -264,8 +267,9 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno, refs):
     htmlc = highlight(filecontents, lexer, formatter)
 
     # Set the right classes
+    clslinenos = "lineNumbers" if data.get('lineno', True) else "noLineNumbers"
     htmlc = htmlc.replace('<pre>',
-                          '<pre class="lineNumbers snippet{}">'.format(lineno))
+                          f'<pre class="{clslinenos} snippet{lineno}">')
     htmlc = htmlc.replace('\n</pre></div>', '</pre></div>')
 
     # Construct the final HTML code
