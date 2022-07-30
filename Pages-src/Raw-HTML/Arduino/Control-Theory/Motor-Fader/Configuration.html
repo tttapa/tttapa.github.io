@@ -1,0 +1,156 @@
+<!--
+@title: Configuration options and common use cases
+@sequence: 37
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: arduino,motorized fader,flying fader,pid,controller,midi,control surface
+@description: Settings to use for some common use cases, such as outputting MIDI
+              directly, tuning the controllers, changing the setpoint of the
+              controllers over I²C, etc.
+-->
+
+<html>
+
+<h2>Configuration options</h2>
+<p>
+    The code is very flexible and can be used in many different ways by changing
+    the configuration options in <code>main.cpp:Config</code>. The settings are
+    all compile-time constants, resulting in more efficient code and allowing
+    for useful error messages when some options conflict or are invalid.
+</p>
+@codesnippet{
+"file": "${HOME}/GitHub/Control-Surface-Motor-Fader/Motor-Controller/main.cpp",
+"startline": 90,
+"endline": 198
+}
+
+<h2>Use cases</h2>
+
+<h3>Control over I²C</h3>
+
+<p>
+    This is the default configuration that is enabled out of the box. It allows
+    another Arduino to read the position and the touch status of each fader, and
+    to update the setpoint of each controller. Communication happens over I²C,
+    and the message format is explained
+    <a href="Architecture.html#communication">here</a>.
+    You can have multiple motor drivers on the same bus by giving them different
+    addresses, using the <code>i2c_address</code> option.
+</p>
+<p>
+    The included example <a
+        href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/master/MIDI-Controller/MIDI-Controller.ino">MIDI-Controller.ino</a>
+    uses this mode, and it can be used as a reference implementation for sending
+    and receiving the right messages.
+</p>
+
+<h3>Control over Serial</h3>
+
+<p>
+    The <code>serial_control</code> option is also enabled by default. It allows
+    you to use the included <a
+        href="https://github.com/tttapa/Control-Surface-Motor-Fader/tree/master/Python/Tuning.py">Python/Tuning.py</a>
+    script to change the tuning of the controllers on the fly, and to log and
+    plot their behavior.
+</p>
+<p>
+    See <a href="PID-Tuning.html">PID Tuning</a> and
+    <a href="Architecture.html#communication">Architecture: Communication</a>
+    for more details.
+</p>
+
+<h3>Quick test to verify that everything is working</h3>
+
+<p>
+    Setting <code>test_reference = true</code> will result in the fader tracking
+    a test sequence, as shown in the
+    <a href="https://www.youtube.com/watch?v=j5vZXO6RVjA">demo video</a>.
+</p>
+<p>
+    If you also set <code>print_controller_signals = true</code>, you can open
+    the serial plotter (<kbd>Ctrl+Shift+L</kbd>) at the correct baud rate
+    (<code>serial_baud_rate = 1000000</code> by default), and view the
+    reference position, the actual fader position, and the control output, as 
+    shown in the figure below.
+</p>
+@image{
+"file": "images/serial-plotter.png"
+}
+<p>
+    The <code>controller_to_print</code> option specifies the (zero-based) index
+    of the fader to print/plot the data for.
+</p>
+
+<h3>Direct MIDI control</h3>
+
+<p>
+    Although the ATmega328P doesn't have native USB support, it does support
+    MIDI over Serial. After changing the <code>WITH_MIDI</code> macro to
+    <code>1</code> and setting <code>serial_control = false</code>, you can send
+    MIDI Pitch Bend messages to the serial port of the motor controller to 
+    change the setpoints of the controllers. Fader touch changes are reported 
+    back using MIDI Note On/Off messages, and while touched, the fader positions
+    are sent as MIDI Pitch Bend messages.
+</p>
+<p>
+    In this mode, you can use the included <a
+        href="https://github.com/tttapa/Control-Surface-Motor-Fader/tree/master/Python/SerialMIDI.py">Python/SerialMIDI.py</a>
+    script to test whether the MIDI communication works correctly. Instructions
+    are at the top of the script (in particular, make sure that the serial port
+    and baud rate are correct).
+</p>
+<p>
+    To use the motor controller directly with 5-pin MIDI or with custom USB MIDI
+    firmware, you have to select the correct MIDI baud rate: set
+    <code>midi_baud_rate = 31250</code>.
+</p>
+<p>
+    If you plan to use a software Serial-to-MIDI bridge, you'll have to select
+    an appropriate baud rate as well. For example, for Hairless MIDI, set
+    <code>midi_baud_rate = 115200</code>.
+</p>
+
+<h3>Debugging direct MIDI control</h3>
+
+<p>
+    The binary MIDI messages can be annoying to debug sometimes, so in addition
+    to the <code>WITH_MIDI = 1</code> option described in the previous section,
+    you can also set <code>MIDI_DEBUG</code> to <code>1</code> to make the motor
+    controller send the MIDI messages as readable text. If you open the serial
+    monitor at the correct baud rate (<code>serial_baud_rate</code>), you'll
+    see messages similar to the following when touching and moving the fader:
+</p>
+<pre class="code">Note On          Channel: 1	Data 1: 0x68	Data 2: 0x7f
+Pitch Bend       Channel: 1	Data 1: 0x30	Data 2: 0x00 (48)
+Pitch Bend       Channel: 1	Data 1: 0x40	Data 2: 0x00 (64)
+Pitch Bend       Channel: 1	Data 1: 0x50	Data 2: 0x00 (80)
+Pitch Bend       Channel: 1	Data 1: 0x60	Data 2: 0x00 (96)
+Note Off         Channel: 1	Data 1: 0x68	Data 2: 0x7f</pre>
+<p>
+    You can also change the setpoint of the faders from the serial monitor.
+    The format is <code>Ei ll hh</code> (hexadecimal), where <code>i</code>
+    is the zero-based index of the fader (0-3), <code>ll</code> are the seven
+    low bits of the 14-bit setpoint, and <code>hh</code> are the seven high bits
+    of the setpoint.<br>
+    For example, typing <code>E0 00 40</code> into the serial monitor and
+    pressing enter causes the first fader to move to the middle position. For
+    subsequent setpoint changes to the same fader, you don't have to repeat the
+    first byte (<code>Ei</code>), and the spaces between the bytes are optional.
+    For example, first sending <code>E00040</code> moves the first fader to the
+    middle position, and then sending <code>7F7F</code> moves the same fader to
+    the highest position.
+</p>
+
+<h3>Improved pin assignments for Arduino Nano</h3>
+
+<p>
+    The Arduino Nano has additional analog inputs A6 and A7. You can use these
+    instead of A2 and A3 to make room for two more digital inputs. To this end,
+    set <code>use_A6_A7 = true</code>. You can then use pin A2 for driving the
+    fourth fader by setting <code>fader_3_A2 = true</code>, thereby freeing up
+    pin D13 and the built-in LED. See also
+    <a href="Hardware.html#connections">Hardware: Connections</a>.
+</p>
+
+</html>
