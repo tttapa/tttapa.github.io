@@ -1,0 +1,227 @@
+<!--
+@title: Examples
+@sequence: 100
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: c++,atomics,memory order,order,sequential consistency,acquire,release
+@description: Examples using atomics.
+-->
+<html>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<style>
+    ol li,
+    ul li {
+        margin-bottom: 0.6em;
+    }
+</style>
+
+<!-- BEGIN -->
+
+<h2>Acquire-release</h2>
+
+@codesnippet{"file": "resources/acq-rel/preamble.cpp"}
+@codesnippet{"file": "resources/acq-rel/rel.cpp", "name": "Release"}
+@codesnippet{"file": "resources/acq-rel/acq.cpp", "name": "Acquire"}
+
+<div class="mermaid">
+flowchart TB
+    subgraph Release
+        rel_start(( ))
+        rel_start --> set_val["value = 42&emsp;➊"]
+        set_val -->|SEQ| val_rdy["value_ready.store(true, release)&emsp;➋"]
+        val_rdy --> rel_end_(( ))
+    end
+    subgraph Acquire
+        acq_start(( ))
+        acq_start --> if_val_rdy["if (value_ready.load(acquire)&emsp;➌"]
+        if_val_rdy -->|SEQ| read_val["assert(value == 42)&emsp;➍"]
+        read_val --> acq_end_(( ))
+    end
+    val_rdy -->|SYNC| if_val_rdy
+</div>
+<p>
+    If ➌ reads the value written by ➋, then the load-acquire ➌ synchronizes
+    with the store-release ➋ on the same atomic variable. Therefore, ➋ simply
+    happens before ➌. Combined with the fact that ➊ is sequenced before ➋ and
+    ➌ is sequenced before ➍, we conclude that ➊ strongly happens before ➍.
+</p>
+<p>
+    If ➌ does not read the value written by ➋, then there is no
+    synchronization, but this is not an issue because in that case, the branch
+    is not taken and ➍ is never executed.
+</p>
+
+<h2>Interrupt handle once</h2>
+
+@codesnippet{"file": "resources/interrupt-handle-once/preamble.cpp"}
+@codesnippet{"file": "resources/interrupt-handle-once/main.cpp", "name": "Main"}
+@codesnippet{"file": "resources/interrupt-handle-once/interrupt.cpp", "name": "Interrupt"}
+
+<div class="mermaid">
+flowchart TB
+    subgraph main
+        value_1["value = 1&emsp;➊"]
+        value_1 -->|SEQ| value_ptr_value["value_ptr.store(&amp;value, seq_cst)&emsp;➋"]
+        value_ptr_value -->|SEQ| handled_ld["handled.load(seq_cst)&emsp;➌"]
+        handled_ld -->|SEQ| value_ptr_xch["value_ptr.exchange(nullptr, relaxed)&emsp;➍"]
+        value_ptr_xch -->|SEQ| v_ld["*v&emsp;➎"]
+    end
+    subgraph interrupt
+        handled_sto["handled.store(true, seq_cst)&emsp;➏"]
+        handled_sto -->|SEQ| value_ptr_xch_int["value_ptr.exchange(nullptr, seq_cst)&emsp;➐"]
+        value_ptr_xch_int -->|SEQ| v_ld_int["*v&emsp;➑"]
+    end
+    value_ptr_value -->|SYNC| value_ptr_xch_int
+</div>
+
+<!-- <h3>Goals</h3>
+<ol>
+    <li>
+        ➊ happens before ➑:<br>
+        If ➑ is executed, it should read the value written by ➊.
+    </li>
+    <li>
+        If ➋ does not happen before ➐, then ➏ happens before ➌
+    </li>
+</ol>
+
+<ul>
+    <li>
+        the initialization of <code>handled</code> happens before ➌
+    </li>
+    <li>
+        the initialization of <code>handled</code> happens before ➏<br>
+        from write-write coherence, initialization precedes ➏ in the modification
+        order of <code>value_ptr</code>
+    </li>
+    <li>
+        ➋ synchronizes with ➐<br>
+        ➋ inter-thread happens before ➐<br>
+        ➋ happens before ➐<br>
+        from write-write coherence, ➋ precedes ➐ in the modification
+        order of <code>value_ptr</code>
+    </li>
+    <li>
+        Similarly to the acquire-release example,<br>
+        ➊ is sequenced before ➋, and ➋ synchronizes with ➐, and ➐ is sequenced before ➑<br>
+        ➊ is sequenced before ➋, and ➋ simply happens before ➐, and ➐ is sequenced before ➑<br>
+        ➊ strongly happens before ➑
+    </li>
+    <li>
+        ➋ is sequenced before ➌<br>
+        ➋ strongly happens before ➌<br>
+        ➋ precedes ➌ in the total order of sequentially consistent operations
+    </li>
+    <li>
+        ➏ is sequenced before ➐<br>
+        ➏ strongly happens before ➐<br>
+        ➏ precedes ➐ in the total order of sequentially consistent operations
+    </li>
+    <li>
+        ➋ is sequenced before ➍<br>
+        ➋ happens before ➍<br>
+        from write-write coherence, ➋ precedes ➍ in the modification
+        order of <code>value_ptr</code>
+    </li>
+    <li>
+        If ➌ reads the value written by ➏, then
+        <ul>
+            <li>
+                ➏ precedes ➌ in the modification order of
+                <code>handled</code><br>
+                ➌ does not happen before ➏<br>
+                ➏ is coherence-ordered before ➌<br>
+                The branch after ➌ is taken and ➍ is executed:<br>
+                From write-read coherence, ➍ gets its value from either ➋ or ➐,
+                because ➋ happens before ➍, and ➋ precedes ➐ in the
+                modification order of <code>value_ptr</code> (and there are no
+                other modifications of <code>value_ptr</code> after ➋)
+            </li>
+            <li>
+                If ➍ reads the value written by ➋, then
+                <ul>
+                    <li>
+                        <span style="color: red">➍ precedes ➐ in the
+                            modification order of <code>value_ptr</code></span>
+                    </li>
+                    <li>
+                        <span style="color: red">➐ reads
+                            <code>nullptr</code></span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                If ➐ reads the value written by ➋, then
+                <ul>
+                    <li>
+                        <span style="color: red">➐ precedes ➍ in the
+                            modification order of <code>value_ptr</code></span>
+                    </li>
+                    <li>
+                        <span style="color: red">➐ reads
+                            <code>nullptr</code></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        If ➌ does not read the value written by ➏, then
+        <ul>
+            <li>
+                If ➐ reads the value from ➋, then<br>
+                success
+            </li>
+            <li>
+                If ➐ does not read the value from ➋, then
+                <ul>
+                    <li>
+                        Given that ➋ happens before ➐, ➐ either takes its value
+                        from ➋ or from some side effect that follows ➋ in the
+                        modification order of <code>value_ptr</code>.<br>
+                        There is no other such side effect,
+                    </li>
+                </ul>
+            </li>
+            <li>
+                ➏ does not happen before ➌<br>
+                (By contradiction:
+                Assume that ➏ happens before ➌, then ➌ takes its value either
+                from ➏, or from a side effect that follows ➏ in the
+                modification order of <code>handled</code>. There is no such
+                side effect, and ➌ does not take its value from ➏, so the
+                assumption was false.)
+            </li>
+
+            <li style="color: red">
+                <br>
+                ➐ reads the value from ➋
+            </li>
+        </ul>
+        If ➌ reads the initial value of <code>handled</code>, then
+        <ul>
+            <li>
+
+            </li>
+        </ul>
+    </li>
+</ul> -->
+
+<!-- END -->
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#f4f4ff',
+            secondaryColor: '#f0f0f4',
+            tertiaryColor: '#F9FAFC',
+            fontFamily: 'monospace',
+        },
+    });
+</script>
+
+</html>

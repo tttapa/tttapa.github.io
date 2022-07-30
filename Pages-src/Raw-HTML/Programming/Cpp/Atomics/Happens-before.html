@@ -1,0 +1,561 @@
+<!--
+@title: Happens before
+@sequence: 10
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: c++,happens-before,sequenced-before,synchronizes-with
+@description: The C++ Standard's definitions of ordering relationships like
+              sequenced-before, synchronizes-with, happens-before, etc. with
+              diagrams to visualize all relationships.
+-->
+<html>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<h2>Definitions</h2>
+
+<p>
+    This section quotes some definitions from the standard, adding diagrams for easier interpretation.
+</p>
+
+<h3>Sequenced before</h3>
+
+<p>
+    Partial evaluation order within a single thread. This is not necessarily the
+    order observed by other threads.
+</p>
+<p>
+    Most important rule: <i>“Every value computation and side effect associated
+        with a full-expression is sequenced before every value computation and
+        side effect associated with the next full-expression to be evaluated.”</i>
+</p>
+<p>
+    <small>
+        <a href="https://en.cppreference.com/w/cpp/language/eval_order#Ordering">cppreference: Order of evaluation:
+            Ordering</a><br>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.80">C++ standard:
+            [intro.execution]</a>
+    </small>
+</p>
+
+<h3>Synchronizes with</h3>
+
+<p>
+    Certain library calls synchronize with other library calls performed by another thread. For example, an
+    atomic store-release synchronizes with a load-acquire that takes its value from the store.
+</p>
+
+<h3>Inter-thread happens before</h3>
+
+<p>
+    An evaluation <i>A</i> inter-thread happens before an evaluation <i>B</i> if
+</p>
+<ul>
+    <li><i>A</i> synchronizes with <i>B</i>, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A
+                end
+                subgraph T2
+                    B
+                end
+                A -->|SYNC| B
+        </div>
+    </li>
+    <li style="color: #aab"><i>A</i> is dependency-ordered before <i>B</i>, or</li>
+    <li>for some evaluation <i>X</i>
+        <ul>
+            <li><i>A</i> synchronizes with <i>X</i> and <i>X</i> is sequenced before <i>B</i>, or
+                <div class="mermaid">
+                    flowchart LR
+                        subgraph T1
+                            A
+                        end
+                        subgraph T2
+                            direction TB
+                            X -->|SEQ| B
+                        end
+                        A -->|SYNC| X
+                </div>
+            </li>
+            <li><i>A</i> is sequenced before <i>X</i> and <i>X</i> inter-thread happens before <i>B</i>, or
+                <div class="mermaid">
+                    flowchart LR
+                        subgraph T1
+                            direction TB
+                            A -->|SEQ| X
+                        end
+                        subgraph T2
+                            B
+                        end
+                        X -->|ITHB| B
+                </div>
+            </li>
+            <li><i>A</i> inter-thread happens before <i>X</i> and <i>X</i> inter-thread happens before <i>B</i>.
+                <div class="mermaid">
+                    flowchart LR
+                        subgraph T1
+                            A
+                        end
+                        subgraph T2
+                            X
+                        end
+                        subgraph T3
+                            B
+                        end
+                        A -->|ITHB| X
+                        X -->|ITHB| B
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>
+<p>
+    <small>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.82">C++ standard:
+            [intro.races]</a>
+    </small>
+</p>
+
+<h3>Happens before</h3>
+
+<p>
+    An evaluation <i>A</i> happens before an evaluation <i>B</i> (or, equivalently, <i>B</i> happens after <i>A</i>) if:
+</p>
+<ul>
+    <li><i>A</i> is sequenced before <i>B</i>, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    direction LR
+                    A -->|SEQ| B
+                end
+        </div>
+    </li>
+    <li><i>A</i> inter-thread happens before <i>B</i>.
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A
+                end
+                subgraph T2
+                    direction TB
+                    B
+                end
+                A -->|ITHB| B
+        </div>
+    </li>
+</ul>
+<p>
+    <small>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.82">C++ standard:
+            [intro.races]</a>
+    </small>
+</p>
+
+<h3>Simply happens before</h3>
+
+<p>
+    An evaluation <i>A</i> simply happens before an evaluation <i>B</i> if either
+</p>
+<ul>
+    <li><i>A</i> is sequenced before <i>B</i>, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    direction LR
+                    A -->|SEQ| B
+                end
+        </div>
+    </li>
+    <li><i>A</i> synchronizes with <i>B</i>, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A
+                end
+                subgraph T2
+                    direction TB
+                    B
+                end
+                A -->|SYNC| B
+        </div>
+    </li>
+    <li><i>A</i> simply happens before <i>X</i> and <i>X</i> simply happens before <i>B</i>.
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A
+                end
+                subgraph T2
+                    X
+                end
+                subgraph T3
+                    B
+                end
+                A -->|simpHB| X
+                X -->|simpHB| B
+        </div>
+    </li>
+</ul>
+<p>
+    In the absence of consume operations, the happens before and simply happens before relations are identical.
+</p>
+<p>
+    <small>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.82">C++ standard:
+            [intro.races]</a>
+    </small>
+</p>
+
+<h3>Strongly happens before</h3>
+
+<p>
+    An evaluation <i>A</i> strongly happens before an evaluation <i>D</i> if, either
+</p>
+<ul>
+    <li><i>A</i> is sequenced before <i>D</i>, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    direction LR
+                    A -->|SEQ| D
+                end
+        </div>
+    </li>
+    <li><i>A</i> synchronizes with <i>D</i>, and both <i>A</i> and <i>D</i> are sequentially consistent atomic
+        operations, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["seq_cst A"]
+                end
+                subgraph T2
+                    direction TB
+                    D["seq_cst D"]
+                end
+                A -->|SYNC| D
+        </div>
+    </li>
+    <li>there are evaluations <i>B</i> and <i>C</i> such that <i>A</i> is sequenced before <i>B</i>, <i>B</i> simply
+        happens before <i>C</i>, and <i>C</i> is sequenced before <i>D</i>, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A -->|SEQ| B
+                end
+                subgraph T2
+                    direction TB
+                    C -->|SEQ| D
+                end
+                B -->|simpHB| C
+        </div>
+    </li>
+    <li>there is an evaluation <i>B</i> such that <i>A</i> strongly happens before <i>B</i>, and <i>B</i> strongly
+        happens before <i>D</i>.
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A
+                end
+                subgraph T2
+                    direction TB
+                    B
+                end
+            subgraph T3
+                direction TB
+                D
+            end
+                A -->|SHB| B
+                B -->|SHB| D
+        </div>
+    </li>
+</ul>
+<p>
+    Informally, if <i>A</i> strongly happens before <i>B</i>, then <i>A</i> appears to be evaluated before <i>B</i> in
+    all contexts.
+    Strongly happens before excludes consume operations.
+</p>
+<p>
+    <small>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.82">C++ standard:
+            [intro.races]</a>
+    </small>
+</p>
+
+<h3>Modification order</h3>
+
+<p>
+    All modifications to a particular atomic object <i>M</i> occur in some particular total order,
+    called the modification order of <i>M</i>.
+</p>
+<p>
+    This order is usually guaranteed by the cache coherence of the hardware.<br>
+    Note that there is no total order of modifications of <i>distinct</i>
+    atomic objects.
+</p>
+<p>
+    The value of an atomic object <i>M</i>, as determined by evaluation B, shall be the value stored by some side
+    effect <i>A</i> that modifies <i>M</i>, where <i>B</i> does not happen before <i>A</i>.
+</p>
+<div class="mermaid">
+    flowchart RL
+        subgraph T1
+            direction LR
+            A["A(M)"]
+        end
+        subgraph T2
+            direction LR
+            B["B(M)"]
+        end
+        B --x|HB| A
+</div>
+
+<h4>Write-write coherence</h4>
+<p>
+    If an operation <i>A</i> that modifies an atomic object <i>M</i> happens before an operation <i>B</i> that modifies
+    <i>M</i>, then <i>A</i> shall be earlier than <i>B</i> in the modification order of <i>M</i>.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            direction LR
+            A["A(M)"]
+        end
+        subgraph T2
+            direction LR
+            B["B(M)"]
+        end
+        A -->|HB| B
+</div>
+
+<h4>Read-read coherence</h4>
+<p>
+    If a value computation <i>A</i> of an atomic object <i>M</i> happens before a value computation <i>B</i> of
+    <i>M</i>, and <i>A</i> takes its value from a side effect <i>X</i> on <i>M</i>,
+    then the value computed by <i>B</i> shall either be the value stored by <i>X</i> or
+    the value stored by a side effect <i>Y</i> on <i>M</i>, where <i>Y</i> follows <i>X</i> in the modification order of
+    <i>M</i>.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            direction LR
+            X["X(M)"]
+        end
+        subgraph T2
+            direction LR
+            A["A(M)"]
+        end
+        subgraph T3
+            direction LR
+            Y["Y(M)"]
+        end
+        subgraph T4
+            direction LR
+            B["B(M)"]
+        end
+        X --> A
+        A --->|HB| B
+        X --->|MOD| Y
+</div>
+
+<h4>Read-write coherence</h4>
+<p>
+    If a value computation A of an atomic object M happens before an operation B that modifies M, then A
+    shall take its value from a side effect X on M, where X precedes B in the modification order of M.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            direction LR
+            X["X(M)"]
+        end
+        subgraph T2
+            direction LR
+            A["A(M)"]
+        end
+        subgraph T3
+            direction LR
+            B["B(M)"]
+        end
+        X --->|MOD| B
+        A -->|HB| B
+</div>
+
+<h4>Write-read coherence</h4>
+<p>
+    If a side effect X on an atomic object M happens before a value computation B of M, then the evaluation B
+    shall take its value from X or from a side effect Y that follows X in the modification order of M.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            direction LR
+            X["X(M)"]
+        end
+        subgraph T2
+            direction LR
+            Y["Y(M)"]
+        end
+        subgraph T3
+            direction LR
+            B["B(M)"]
+        end
+        X -->|MOD| Y
+        X --->|HB| B
+</div>
+
+<p>
+    The four preceding coherence requirements effectively disallow compiler reordering of atomic operations
+    to a single object, even if both operations are relaxed loads. This effectively makes the cache coherence guarantee
+    provided by most hardware available to C++ atomic operations.
+</p>
+<p>
+    The value observed by a load of an atomic depends on the “happens before” relation, which depends on the
+    values observed by loads of atomics. The intended reading is that there must exist an association of atomic loads
+    with modifications they observe that, together with suitably chosen modification orders and the “happens before”
+    relation derived as described above, satisfy the resulting constraints as imposed here.
+</p>
+
+<p>
+    <small>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.82">C++ standard:
+            [intro.races]</a>
+    </small>
+</p>
+
+<h3>Release sequence</h3>
+
+<p>
+    A release sequence headed by a release operation A on an atomic object M is a maximal contiguous sub-
+    sequence of side effects in the modification order of M, where the first operation is A, and every subsequent
+    operation is an atomic read-modify-write operation.
+</p>
+<div class="mermaid">
+    flowchart LR
+        A["release A(M)"]
+        B["rmw B(M)"]
+        C["rmw C(M)"]
+        etc["rmw &hellip;"]
+        A -->|MOD| B
+        B -->|MOD| C
+        C -->|MOD| etc
+</div>
+
+<h3>Visible side effect</h3>
+
+<p>
+    A visible side effect <i>A</i> on a scalar object or bit-field <i>M</i> with respect to a value computation <i>B</i>
+    of <i>M</i> satisfies the conditions:
+</p>
+<ul>
+    <li>A happens before B and
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    direction LR
+                    A["A(M)"]
+                end
+                subgraph T2
+                    direction LR
+                    B["B(M)"]
+                end
+                A -->|HB| B
+        </div>
+    </li>
+    <li>there is no other side effect <i>X</i> to <i>M</i> such that <i>A</i> happens before <i>X</i> and <i>X</i>
+        happens before <i>B</i>.
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    direction LR
+                    A["A(M)"]
+                end
+                subgraph T2
+                    direction LR
+                    X["X(M)"]
+                end
+                subgraph T3
+                    direction LR
+                    B["B(M)"]
+                end
+                A -->|HB| B
+                A --x|HB| X
+                X --x|HB| B
+        </div>
+    </li>
+</ul>
+<p>
+    The value of a non-atomic scalar object or bit-field <i>M</i> , as determined by evaluation <i>B</i>,
+    shall be the value stored by the visible side effect <i>A</i>.
+</p>
+
+<h3>Potentially concurrent</h3>
+
+<p>
+    Two actions are potentially concurrent if
+</p>
+<ul>
+    <li>they are performed by different threads, or</li>
+    <li>they are unsequenced, at least one is performed by a signal handler, and they are not both performed by the same
+        signal handler invocation.</li>
+</ul>
+
+<h3>Data race</h3>
+
+<p>
+    The execution of a program contains a data race if it contains two potentially concurrent conflicting actions,
+    at least one of which is not atomic, and neither happens before the other, except for the special case for
+    signal handlers described below. Any such data race results in undefined behavior.
+</p>
+<p>
+    It can be shown that programs that correctly use mutexes and <code>memory_order::seq_cst</code> operations to
+    prevent all data races and use no other synchronization operations behave as if the operations executed by their
+    constituent threads were simply interleaved, with each value computation of an object being taken from the last side
+    effect on that object in that interleaving. This is normally referred to as “sequential consistency”. However, this
+    applies only to data-race-free programs, and data-race-free programs cannot observe most program transformations
+    that do not change single-threaded program semantics. In fact, most single-threaded program transformations continue
+    to be allowed, since any program that behaves differently as a result has undefined behavior.
+</p>
+<p>
+    Two accesses to the same object of type <code>volatile std::sig_atomic_t</code> do not result in a data race if
+    both occur in the same thread, even if one or more occurs in a signal handler. For each signal handler
+    invocation, evaluations performed by the thread invoking a signal handler can be divided into two groups A
+    and B, such that no evaluations in B happen before evaluations in A, and the evaluations of such <code>volatile
+        std::sig_atomic_t objects</code> take values as though all evaluations in A happened before the execution of
+    the signal handler and the execution of the signal handler happened before all evaluations in B.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            direction BT
+            A
+            B
+            B --x|HB| A
+        end
+        subgraph SIG
+            direction TB
+            S
+        end
+        A -->|HB| S
+        S -->|HB| B
+</div>
+
+<!-- END -->
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#f4f4ff',
+            secondaryColor: '#f0f0f4',
+            tertiaryColor: '#F9FAFC',
+            fontFamily: 'monospace',
+        },
+    });
+</script>
+
+</html>

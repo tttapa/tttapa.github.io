@@ -1,0 +1,354 @@
+<!--
+@title: Memory order
+@sequence: 20
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: c++,atomics,memory order,order,sequential consistency,acquire,release
+@description: Notes about C++ memory order for atomics.
+-->
+<html>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<h3>References</h3>
+
+<ul>
+    <li><a href="https://en.cppreference.com/w/cpp/language/memory_model">cppreference: Memory model</a></li>
+    <li><a href="https://en.cppreference.com/w/cpp/atomic/memory_order">cppreference: std::memory_order</a></li>
+    <li><a href="https://herbsutter.com/2013/02/11/atomic-weapons-the-c-memory-model-and-modern-hardware/">Herb Sutter:
+            atomic&lt;&gt; Weapons</a> (Channel 9 links are broken, but videos can still be found on YouTube)</li>
+    <li><a href="https://preshing.com/20120612/an-introduction-to-lock-free-programming/">Jeff Preshing: An Introduction
+            to Lock-Free Programming</a></li>
+    <li><a href="https://preshing.com/20120710/memory-barriers-are-like-source-control-operations/">Jeff Preshing:
+            Memory Barriers Are Like Source Control Operations</a></li>
+</ul>
+
+<h3>Load-acquire ▼</h3>
+<h3>Store-release ▲</h3>
+<h3>SC Load-acquire ▼</h3>
+<h3>SC Store-release ▲</h3>
+
+<h2>Memory orders for C++ atomics</h2>
+
+<p>
+    The C++ standard defines six constants to specify memory ordering:
+    The main two orderings are <code>memory_order_acquire</code> and
+    <code>memory_order_release</code>. The default ordering is
+    <code>memory_order_seq_cst</code>, which implies
+    <code>memory_order_acquire</code> for load operations and
+    <code>memory_order_release</code> for store operations, and additionally
+    creates a global, sequentially consistent order of operations on atomic
+    variables.
+    The combined <code>memory_order_acq_rel</code> ordering applies only to
+    read-modify-write operations, and implies
+    <code>memory_order_acquire</code> for the read and
+    <code>memory_order_release</code> for the write.
+    On some architectures, it can in theory be beneficial to use
+    <code>memory_order_consume</code>, which is a weaker version of
+    <code>memory_order_acquire</code>, but at the time of writing, no compiler
+    implements it and the specifics are <a
+        href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0735r1.html">still being discussed</a>,
+    so we won't cover it here.
+    Finally, <code>memory_order_relaxed</code> does not impose any ordering
+    constraints, so it won't be discussed in this section about memory order.
+</p>
+
+<h3><code>memory_order_acquire</code> ▼</h3>
+<p>
+    No reads or writes in the current thread can be reordered before this load.
+</p>
+<p>
+    Applies to load operations.
+</p>
+
+<h3><code>memory_order_release</code> ▲</h3>
+<p>
+    No reads or writes in the current thread can be reordered after this store.
+</p>
+<p>
+    Applies to store operations.
+</p>
+
+<h2>Acquire-release</h2>
+
+<p>
+    An atomic operation A that performs a release operation on an atomic object M synchronizes with an atomic
+    operation B that performs an acquire operation on M and takes its value from any side effect in the release
+    sequence headed by A.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["rel A(M)"]
+        end
+        subgraph T2
+            B["acq B(M)"]
+        end
+        A -->|VALUE| B
+</div>
+<p>
+    <small>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.1543">C++ standard:
+            [atomics.order]</a>
+    </small>
+</p>
+
+<h3>Fences</h3>
+
+<h4>Fence─fence</h4>
+<p>
+    A release fence A synchronizes with an acquire fence B if there exist atomic operations X and Y, both
+    operating on some atomic object M, such that A is sequenced before X, X modifies M, Y is sequenced
+    before B, and Y reads the value written by X or a value written by any side effect in the hypothetical release
+    sequence X would head if it were a release operation.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["rel fence A"]
+            A -->|SEQ| X["store X(M)"]
+        end
+        subgraph T2
+            Y["load Y(M)"]
+            Y -->|SEQ| B["acq fence B"]
+        end
+        X -->|VALUE| Y
+</div>
+
+<h4>Fence─atomic</h4>
+<p>
+    A release fence A synchronizes with an atomic operation B that performs an acquire operation on an atomic
+    object M if there exists an atomic operation X such that A is sequenced before X, X modifies M, and B
+    reads the value written by X or a value written by any side effect in the hypothetical release sequence X
+    would head if it were a release operation.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["rel fence A"]
+            A -->|SEQ| X["store X(M)"]
+        end
+        subgraph T2
+            B["acq B(M)"]
+        end
+        X -->|VALUE| B
+</div>
+
+<h4>Atomic─fence</h4>
+<p>
+    An atomic operation A that is a release operation on an atomic object M synchronizes with an acquire fence
+    B if there exists some atomic operation X on M such that X is sequenced before B and reads the value
+    written by A or a value written by any side effect in the release sequence headed by A.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["rel A(M)"]
+        end
+        subgraph T2
+            X["load Y(M)"]
+            X -->|SEQ| B["acq fence B"]
+        end
+        A -->|VALUE| X
+</div>
+
+<p>
+    <small>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.1569">C++ standard:
+            [atomics.fences]</a>
+    </small>
+</p>
+
+
+<h3>Coherence-ordered before</h3>
+
+<p>
+    An atomic operation A on some atomic object M is coherence-ordered before another atomic operation B on M if
+</p>
+<ul>
+    <li>A is a modification, and B reads the value stored by A, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["store A(M)"]
+                end
+                subgraph T2
+                    B["load B(M)"]
+                end
+                A -->|VALUE| B
+        </div>
+    </li>
+    <li>A precedes B in the modification order of M, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["A(M)"]
+                end
+                subgraph T2
+                    B["B(M)"]
+                end
+                A -->|MOD| B
+        </div>
+    </li>
+    <li>A and B are not the same atomic read-modify-write operation, and there exists an atomic modification X of M such
+        that A reads the value stored by X and X precedes B in the modification order of M, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    X["store X(M)"]
+                end
+                subgraph T2
+                    A["load A(M)"]
+                end
+                subgraph T3
+                    B["B(M)"]
+                end
+                X -->|VALUE| A
+                X --->|MOD| B
+        </div>
+    </li>
+    <li>there exists an atomic modification X of M such that A is coherence-ordered before X and X is coherence-ordered
+        before B.
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["A(M)"]
+                end
+                subgraph T2
+                    X["X(M)"]
+                end
+                subgraph T3
+                    B["B(M)"]
+                end
+                A -->|COB| X
+                X -->|COB| B
+        </div>
+    </li>
+</ul>
+
+<h3>Total order of sequentially consistent operations</h3>
+
+<p>
+    There is a single total order S on all <code>memory_order::seq_cst</code> operations, including fences, that
+    satisfies the following constraints.
+</p>
+<p>
+    First, if A and B are <code>memory_order::seq_cst</code> operations and A strongly happens before B, then A precedes
+    B in S.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["seq_cst A"]
+        end
+        subgraph T2
+            B["seq_cst B"]
+        end
+        A -->|SHB| B
+</div>
+<p>
+    Second, for every pair of atomic operations A and B on an object M, where A is coherence-ordered before B,
+    the following four conditions are required to be satisfied by S:
+</p>
+<ul>
+    <li>if A and B are both <code>memory_order::seq_cst</code> operations, then A precedes B in S; and
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["seq_cst A(M)"]
+                end
+                subgraph T2
+                    B["seq_cst B(M)"]
+                end
+                A -->|COB| B
+        </div>
+    </li>
+    <li>if A is a <code>memory_order::seq_cst</code> operation and B happens before a <code>memory_order::seq_cst</code>
+        fence Y, then A precedes Y in S; and
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["seq_cst A(M)"]
+                end
+                subgraph T2
+                    B["B(M)"]
+                    Y["seq_cst Y"]
+                end
+                A -->|COB| B
+                B -->|HB| Y
+        </div>
+    </li>
+    <li>if a <code>memory_order::seq_cst</code> fence X happens before A and B is a <code>memory_order::seq_cst</code>
+        operation, then X precedes B in S; and
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    X["seq_cst X"]
+                    A["A(M)"]
+                end
+                subgraph T2
+                    B["seq_cst B(M)"]
+                end
+                X -->|HB| A
+                A -->|COB| B
+        </div>
+    </li>
+    <li>if a <code>memory_order::seq_cst</code> fence X happens before A and B happens before a
+        <code>memory_order::seq_cst</code> fence Y, then X precedes Y in S.
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    X["seq_cst X"]
+                    A["A(M)"]
+                end
+                subgraph T2
+                    B["B(M)"]
+                    Y["seq_cst Y"]
+                end
+                X -->|HB| A
+                A -->|COB| B
+                B -->|HB| Y
+        </div>
+    </li>
+</ul>
+
+<p>
+    This definition ensures that S is consistent with the modification order of any atomic object M. It also
+    ensures that a <code>memory_order::seq_cst</code> load A of M gets its value either from the last modification of M
+    that precedes A in S or from some non-<code>memory_order::seq_cst</code> modification of M that does not happen
+    before any modification of M that precedes A in S.
+</p>
+<div class="mermaid">
+    flowchart LR
+        A["seq_cst load A(M)"]
+        X["seq_cst store X(M)"]
+        Y["store Y(M)"]
+        X -->|SC| A
+        Y --x|HB| X
+        Y -->|MOD| A
+        %% TODO: order is weird here
+</div>
+
+<p>
+    <code>memory_order::seq_cst</code> ensures sequential consistency only for a program that is free of data races and
+    uses exclusively <code>memory_order::seq_cst</code> atomic operations. Any use of weaker ordering will invalidate
+    this guarantee unless extreme care is used. In many cases, <code>memory_order::seq_cst</code> atomic operations are
+    reorderable with respect to other atomic operations performed by the same thread.
+</p>
+
+<!-- END -->
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#f4f4ff',
+            secondaryColor: '#f0f0f4',
+            tertiaryColor: '#F9FAFC',
+            fontFamily: 'monospace',
+        },
+    });
+</script>
+
+</html>
