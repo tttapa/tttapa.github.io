@@ -240,6 +240,8 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno, refs):
 
     # Select the lines between startline and endline
     filecontents, ctrstart = clip_file_contents(file, startline, endline)
+    if 'display_startline' in data:
+        ctrstart = int(data['display_startline']) - 1
 
     # Select the right lexer based on the filename and contents
     if 'lexer' in data:
