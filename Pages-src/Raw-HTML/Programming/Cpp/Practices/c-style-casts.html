@@ -1,0 +1,144 @@
+<!--
+@title: Don't use C-style casts
+@sequence: 100
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: c++,cpp,casting,cast,c-style cast,best practices,guideline
+@description:
+-->
+<html>
+
+<h2>What is a C-style cast?</h2>
+
+<p>
+    A <a href="https://en.cppreference.com/w/cpp/language/explicit_cast">C-style cast</a>
+    is an explicit type conversion of the form <code>(type)expression</code> or
+    <code>type(expression)</code>. For example:
+</p>
+@codesnippet{"file": "resources/c-style-cast-example.cpp"}
+
+<h2>Why are C-style casts an issue?</h2>
+
+<p>
+    C-style casts allow you to perform dangerous conversions, while suppressing
+    any warnings or errors from the compiler, and with complete disregard for
+    the C++ type system.<br>
+    Additionally, they do not clearly show the programmer's intent, and are
+    hard to search for in a code base.
+</p>
+<p>
+    Some concrete issues:
+</p>
+<ol>
+    <li>
+        They allow you to perform dubious casts between integers and pointers:
+        @codesnippet{"file": "resources/bad-casts-pointers.cpp"}
+    </li>
+    <li>
+        They allow you to cast away <code>const</code> and <code>volatile</code>
+        qualifiers:
+        @codesnippet{"file": "resources/bad-casts-cv.cpp"}
+    </li>
+    <li>
+        They allow you to cast between pointers to unrelated types:
+        @codesnippet{"file": "resources/bad-casts-unrelated-types.cpp"}
+    </li>
+</ol>
+<p>
+    All of these casts undermine the C++ type system and prevent the compiler
+    from catching common bugs.
+</p>
+
+<h2>What to use instead</h2>
+
+Consider one of  the following safer alternatives to C-style casts.
+
+<h3>No cast</h3>
+<p>
+    Sometimes you don't need an explicit cast.
+    Just let the type system do its thing.
+</p>
+<p>
+    In the case of literals, you can use a literal suffix to avoid a cast:
+</p>
+@codesnippet{"file": "resources/bad-cast-suffix.cpp"}
+
+<h3>Use braces</h3>
+<p>
+    When you do need an explicit cast to a specific type, for example to select
+    a specific function overload, use curly braces instead of using parentheses.
+    This creates a temporary of the given type. In cases where such a 
+    conversion is valid, the effect is the same as a C-style cast, but invalid
+    or narrowing type conversions are rightly rejected:
+</p>
+@codesnippet{"file": "resources/bad-casts-pointers-braces.cpp"}
+
+<pre class="code"><span style="color: #CC0000"><b>error: </b></span>invalid conversion from ‘<b>const char*</b>’ to ‘<b>int</b>’ [<span style="color: #CC0000"><b>-fpermissive</b></span>]
+    2 | int better          = int {<span style="color: #CC0000"><b>message</b></span>}; // compile-time error (as it should)
+      |                            <span style="color: #CC0000"><b>^~~~~~~</b></span>
+      |                            <span style="color: #CC0000"><b>|</b></span>
+      |                            <span style="color: #CC0000"><b>const char*</b></span></pre>
+<p>
+    Sensible conversions are allowed, for example, casting an integer to a wider
+    integer, or explicitly converting an integer to milliseconds:
+</p>
+@codesnippet{"file": "resources/bad-casts-pointers-braces-good.cpp"}
+
+<h3>Use named casts</h3>
+
+<p>
+    When you need to force a narrowing conversion, use
+    <a href="https://en.cppreference.com/w/cpp/language/static_cast"><code>static_cast&lt;type&gt;(expression)</code></a>.<br>
+    The advantage of <code>static_cast</code> is that it disallows many
+    questionable casts that would violate the rules of the type system, such
+    as casting away qualifiers or converting between unrelated types;
+</p>
+@codesnippet{"file": "resources/static_cast-const.cpp"}
+<pre class="code"><span style="color: #CC0000"><b>error: </b></span>invalid ‘<b>static_cast</b>’ from type ‘<b>const char*</b>’ to type ‘<b>char*</b>’
+    2 | char *little_better = <span style="color: #CC0000"><b>static_cast&lt;char *&gt;(message)</b></span>; // compile-time error (as it should)
+      |                       <span style="color: #CC0000"><b>^~~~~~~~~~~~~~~~~~~~~~~~~~~~</b></span></pre>
+@codesnippet{"file": "resources/static_cast.cpp", "startline": 4}
+<pre class="code"><span style="color: #CC0000"><b>error: </b></span>invalid ‘<b>static_cast</b>’ from type ‘<b>Pineapple*</b>’ to type ‘<b>Bulldozer*</b>’
+    5 | Bulldozer *b = <span style="color: #CC0000"><b>static_cast&lt;Bulldozer *&gt;(&amp;p)</b></span>; // compile-time error (as it should)
+      |                <span style="color: #CC0000"><b>^~~~~~~~~~~~~~~~~~~~~~~~~~~~</b></span></pre>
+
+<p>
+    For safely casting polymorphic types, e.g. converting a pointer-to-base to a 
+    pointer-to-derived in an inheritance hierarchy, use
+    <a href="https://en.cppreference.com/w/cpp/language/dynamic_cast"><code>dynamic_cast</code></a>.
+</p>
+<p>
+    If you <i>really</i> need a more powerful (read: dangerous) cast, you might
+    need a <a href="https://en.cppreference.com/w/cpp/language/reinterpret_cast"><code>reinterpret_cast</code></a>,
+    e.g. to convert between integers and pointers
+    or to convert pointers to objects to pointers to arrays of bytes.<br>
+    If you need to cast away <code>const</code> or <code>volatile</code> 
+    qualifiers, you can use <a href="https://en.cppreference.com/w/cpp/language/const_cast"><code>const_cast</code></a>.
+</p>
+<p>
+    Both <code>reinterpret_cast</code> and <code>const_cast</code> come with
+    huge caveats, making it very easy to shoot yourself in the foot and invoke
+    <a href="https://en.cppreference.com/w/cpp/language/ub">Undefined Behavior</a>.
+    They should generally only be used in low-level code or when dealing with
+    old C APIs, and demand good encapsulation and an even better justification.
+    Keep in mind that <code>reinterpret_cast</code> cannot be used
+    for type punning: Despite its name, you cannot use it to interpret a
+    variable of one type as a different type (except in some very limited cases,
+    see the cppreference link above for details).
+</p>
+
+<h2>C++ Core Guidelines</h2>
+
+<p>
+    If you're unconvinced by these arguments, you might want to have a look at
+    what the official C++ Core Guidelines have to say about casting:
+</p>
+<ul>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es48-avoid-casts">ES.48: Avoid casts</a></li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es49-if-you-must-use-a-cast-use-a-named-cast">ES.49: If you must use a cast, use a named cast</a> (as opposed to a C-style cast)</li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es50-dont-cast-away-const">ES.50: Don't cast away <code>const</code></a></li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es64-use-the-tenotation-for-construction">ES.64: Use the <code>T{e}</code> notation for construction</a></li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#prosafety-type-safety-profile">Pro.safety: Type-safety profile</a></li>
+</ul>
+</html>
