@@ -98,6 +98,7 @@
                 <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
             </ul>
             </li>
@@ -168,6 +169,11 @@
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/index.html">C++</a>
         <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../Programming/Cpp/Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
             <ul>
                 <li><span class="ftriangle"></span><a class="" href="../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
@@ -521,8 +527,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="pygments60"><pre class="lineNumbers snippet60"><code><span></span><span class="c"># Add a new library with the name &quot;greeter&quot; that is compiled from the source </span></code>
 <code><span class="c"># file &quot;src/greeter.cpp&quot;.</span></code>
 <code><span class="nb">add_library</span><span class="p">(</span><span class="s">greeter</span></code>
-<code>    <span class="s2">&quot;src/greeter.cpp&quot;</span></code>
-<code>    <span class="s2">&quot;include/greeter/greeter.hpp&quot;</span></code>
+<code><span class="w">    </span><span class="s2">&quot;src/greeter.cpp&quot;</span></code>
+<code><span class="w">    </span><span class="s2">&quot;include/greeter/greeter.hpp&quot;</span></code>
 <code><span class="p">)</span></code>
 <code></code>
 <code><span class="c"># The public header files for greeter can be found in the &quot;include&quot; folder, and </span></code>
@@ -538,18 +544,18 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="c"># well. They are private because they are only needed when building the library,</span></code>
 <code><span class="c"># not when using it from a different implementation file.</span></code>
 <code><span class="nb">target_include_directories</span><span class="p">(</span><span class="s">greeter</span></code>
-<code>    <span class="s">PUBLIC</span></code>
-<code>        <span class="o">$&lt;</span><span class="nv">INSTALL_INTERFACE:include</span><span class="o">&gt;</span></code>
-<code>        <span class="o">$&lt;</span><span class="nv">BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include</span><span class="o">&gt;</span></code>
-<code>    <span class="s">PRIVATE</span></code>
-<code>        <span class="o">$&lt;</span><span class="nv">BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src</span><span class="o">&gt;</span></code>
+<code><span class="w">    </span><span class="s">PUBLIC</span></code>
+<code><span class="w">        </span><span class="o">$&lt;</span><span class="nv">INSTALL_INTERFACE:include</span><span class="o">&gt;</span></code>
+<code><span class="w">        </span><span class="o">$&lt;</span><span class="nv">BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include</span><span class="o">&gt;</span></code>
+<code><span class="w">    </span><span class="s">PRIVATE</span></code>
+<code><span class="w">        </span><span class="o">$&lt;</span><span class="nv">BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src</span><span class="o">&gt;</span></code>
 <code><span class="p">)</span></code>
 <code><span class="c"># Enable C++17</span></code>
-<code><span class="nb">target_compile_features</span><span class="p">(</span><span class="s">greeter</span> <span class="s">PUBLIC</span> <span class="s">cxx_std_17</span><span class="p">)</span></code>
+<code><span class="nb">target_compile_features</span><span class="p">(</span><span class="s">greeter</span><span class="w"> </span><span class="s">PUBLIC</span><span class="w"> </span><span class="s">cxx_std_17</span><span class="p">)</span></code>
 <code></code>
 <code><span class="c"># Add an alias with the proper namespace to prevent collisions with other</span></code>
 <code><span class="c"># packages.</span></code>
-<code><span class="nb">add_library</span><span class="p">(</span><span class="s">greeter::greeter</span> <span class="s">ALIAS</span> <span class="s">greeter</span><span class="p">)</span></code>
+<code><span class="nb">add_library</span><span class="p">(</span><span class="s">greeter::greeter</span><span class="w"> </span><span class="s">ALIAS</span><span class="w"> </span><span class="s">greeter</span><span class="p">)</span></code>
 <code></code>
 <code><span class="c"># Include the rules for installing the library</span></code>
 <code><span class="nb">include</span><span class="p">(</span><span class="s">cmake/Install.cmake</span><span class="p">)</span></code>
@@ -723,28 +729,28 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments80 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments80 pre.snippet80 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/RPi-Cpp-Toolchain/blob/1909a6566b76618b7a4e08d535f861978ea4f09a/src/greeter/test/CMakeLists.txt" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments80"><pre class="lineNumbers snippet80"><code><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">GTest</span> <span class="s">MODULE</span> <span class="s">REQUIRED</span><span class="p">)</span></code>
+<div class="pygments80"><pre class="lineNumbers snippet80"><code><span></span><span class="nb">find_package</span><span class="p">(</span><span class="s">GTest</span><span class="w"> </span><span class="s">MODULE</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span></code>
 <code></code>
 <code><span class="c"># Add a new test executable with the name &quot;greeter.test&quot; that is compiled from </span></code>
 <code><span class="c"># the source file &quot;greeter.test.cpp&quot;.</span></code>
 <code><span class="nb">add_executable</span><span class="p">(</span><span class="s">greeter.test</span></code>
-<code>    <span class="s2">&quot;greeter.test.cpp&quot;</span></code>
+<code><span class="w">    </span><span class="s2">&quot;greeter.test.cpp&quot;</span></code>
 <code><span class="p">)</span></code>
 <code></code>
 <code><span class="c"># The test executable requires the &quot;greeter&quot; library (it&#39;s the library under</span></code>
 <code><span class="c"># test), as well as the Google Test main function to actually run all tests.</span></code>
 <code><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">greeter.test</span></code>
-<code>    <span class="s">PRIVATE</span></code>
-<code>        <span class="s">greeter</span></code>
-<code>        <span class="s">GTest::gtest_main</span></code>
+<code><span class="w">    </span><span class="s">PRIVATE</span></code>
+<code><span class="w">        </span><span class="s">greeter</span></code>
+<code><span class="w">        </span><span class="s">GTest::gtest_main</span></code>
 <code><span class="p">)</span></code>
 <code></code>
 <code><span class="c"># Only look for tests if we&#39;re not cross-compiling. When cross-compiling, it&#39;s</span></code>
 <code><span class="c"># not possible to run the test executable on the computer that&#39;s performing the</span></code>
 <code><span class="c"># build.</span></code>
-<code><span class="nb">if</span> <span class="p">(</span><span class="s">NOT</span> <span class="s">CMAKE_CROSSCOMPILING</span><span class="p">)</span></code>
-<code>    <span class="nb">include</span><span class="p">(</span><span class="s">GoogleTest</span><span class="p">)</span></code>
-<code>    <span class="nb">gtest_discover_tests</span><span class="p">(</span><span class="s">greeter.test</span><span class="p">)</span></code>
+<code><span class="nb">if</span> <span class="p">(</span><span class="s">NOT</span><span class="w"> </span><span class="s">CMAKE_CROSSCOMPILING</span><span class="p">)</span></code>
+<code><span class="w">    </span><span class="nb">include</span><span class="p">(</span><span class="s">GoogleTest</span><span class="p">)</span></code>
+<code><span class="w">    </span><span class="nb">gtest_discover_tests</span><span class="p">(</span><span class="s">greeter.test</span><span class="p">)</span></code>
 <code><span class="nb">endif</span><span class="p">()</span></code></pre></div>
 </div>
 
@@ -911,16 +917,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="pygments95"><pre class="lineNumbers snippet95"><code><span></span><span class="c"># Add a new executable with the name &quot;hello-world&quot; that is compiled from the</span></code>
 <code><span class="c"># source file &quot;hello-world.cpp&quot;.</span></code>
 <code><span class="nb">add_executable</span><span class="p">(</span><span class="s">hello-world</span></code>
-<code>    <span class="s2">&quot;hello-world.cpp&quot;</span></code>
+<code><span class="w">    </span><span class="s2">&quot;hello-world.cpp&quot;</span></code>
 <code><span class="p">)</span></code>
 <code></code>
 <code><span class="c"># The &quot;hello-world&quot; program requires the &quot;greeter&quot; library.</span></code>
 <code><span class="c"># The target_link_libraries command ensures that all compiler options such as</span></code>
 <code><span class="c"># include paths are set correctly, and that the executable is linked with the</span></code>
 <code><span class="c"># library as well.</span></code>
-<code><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">hello-world</span> </code>
-<code>    <span class="s">PRIVATE</span></code>
-<code>        <span class="s">greeter::greeter</span></code>
+<code><span class="nb">target_link_libraries</span><span class="p">(</span><span class="s">hello-world</span><span class="w"> </span></code>
+<code><span class="w">    </span><span class="s">PRIVATE</span></code>
+<code><span class="w">        </span><span class="s">greeter::greeter</span></code>
 <code><span class="p">)</span></code>
 <code></code>
 <code><span class="nb">include</span><span class="p">(</span><span class="s2">&quot;cmake/Install.cmake&quot;</span><span class="p">)</span></code></pre></div>

@@ -1,0 +1,1029 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="c++,cpp,casting,cast,c-style cast,best practices,guideline"/>
+    <meta name="description" content=""/>
+    <title>Don't use C-style casts</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Debugging.html">Debugging</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/index.html">Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../index.html">Programming</a>
+    <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../index.html">C++</a>
+        <ul>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="openEntry " href="c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="c-style-casts.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Don't use C-style casts</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+        <li><a href="#what-is-a-c-style-cast">What is a C-style cast?</a></li>
+        <li><a href="#why-are-c-style-casts-an-issue">Why are C-style casts an issue?</a></li>
+        <li><a href="#what-to-use-instead">What to use instead</a></li>
+          <ul>
+            <li><a href="#no-cast">No cast</a></li>
+            <li><a href="#use-braces">Use braces</a></li>
+            <li><a href="#use-named-casts">Use named casts</a></li>
+          </ul>
+        <li><a href="#c-core-guidelines">C++ Core Guidelines</a></li>
+  </ul></div>
+
+
+<h2><a name="what-is-a-c-style-cast" href="#what-is-a-c-style-cast">What is a C-style cast?</a></h2>
+
+<p>
+    A <a href="https://en.cppreference.com/w/cpp/language/explicit_cast">C-style cast</a>
+    is an explicit type conversion of the form <code>(type)expression</code> or
+    <code>type(expression)</code>. For example:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments19 .hll { background-color: #ffffcc }
+.pygments19 { background: #ffffff; }
+.pygments19 .c { color: #008000 } /* Comment */
+.pygments19 .err { border: 1px solid #FF0000 } /* Error */
+.pygments19 .k { color: #0000ff } /* Keyword */
+.pygments19 .l { color: #0000FF } /* Literal */
+.pygments19 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments19 .cm { color: #008000 } /* Comment.Multiline */
+.pygments19 .cp { color: #af00db } /* Comment.Preproc */
+.pygments19 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments19 .c1 { color: #008000 } /* Comment.Single */
+.pygments19 .cs { color: #008000 } /* Comment.Special */
+.pygments19 .ge { font-style: italic } /* Generic.Emph */
+.pygments19 .gh { font-weight: bold } /* Generic.Heading */
+.pygments19 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments19 .gs { font-weight: bold } /* Generic.Strong */
+.pygments19 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments19 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments19 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments19 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments19 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments19 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments19 .kt { color: #2b91af } /* Keyword.Type */
+.pygments19 .ld { color: #0000FF } /* Literal.Date */
+.pygments19 .m { color: #0000FF } /* Literal.Number */
+.pygments19 .s { color: #a31515 } /* Literal.String */
+.pygments19 .na { color: #001080 } /* Name.Attribute */
+.pygments19 .nb { color: #795e26 } /* Name.Builtin */
+.pygments19 .nc { color: #2b91af } /* Name.Class */
+.pygments19 .no { color: #0000FF } /* Name.Constant */
+.pygments19 .nf { color: #795e26 } /* Name.Function */
+.pygments19 .nl { color: #AF00DB } /* Name.Label */
+.pygments19 .nn { color: #000000 } /* Name.Namespace */
+.pygments19 .nt { color: #800000 } /* Name.Tag */
+.pygments19 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments19 .ow { color: #0000ff } /* Operator.Word */
+.pygments19 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments19 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments19 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments19 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments19 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments19 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments19 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments19 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments19 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments19 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments19 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments19 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments19 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments19 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments19 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments19 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments19 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments19 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments19 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments19 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments19 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments19 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments19 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments19 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments19 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments19 pre.snippet19 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/c-style-cast-example.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments19"><pre class="lineNumbers snippet19"><code><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="c1">// C-style cast</span></code>
+<code><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">char</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w">   </span><span class="c1">// functional cast, equivalent to C-style cast</span></code></pre></div>
+</div>
+
+<h2><a name="why-are-c-style-casts-an-issue" href="#why-are-c-style-casts-an-issue">Why are C-style casts an issue?</a></h2>
+
+<p>
+    C-style casts allow you to perform dangerous conversions, while suppressing
+    any warnings or errors from the compiler, and with complete disregard for
+    the C++ type system.<br>
+    Additionally, they do not clearly show the programmer's intent, and are
+    hard to search for in a code base.
+</p>
+<p>
+    Some concrete issues:
+</p>
+<ol>
+    <li>
+        They allow you to perform dubious casts between integers and pointers:
+        <div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments36 .hll { background-color: #ffffcc }
+.pygments36 { background: #ffffff; }
+.pygments36 .c { color: #008000 } /* Comment */
+.pygments36 .err { border: 1px solid #FF0000 } /* Error */
+.pygments36 .k { color: #0000ff } /* Keyword */
+.pygments36 .l { color: #0000FF } /* Literal */
+.pygments36 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments36 .cm { color: #008000 } /* Comment.Multiline */
+.pygments36 .cp { color: #af00db } /* Comment.Preproc */
+.pygments36 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments36 .c1 { color: #008000 } /* Comment.Single */
+.pygments36 .cs { color: #008000 } /* Comment.Special */
+.pygments36 .ge { font-style: italic } /* Generic.Emph */
+.pygments36 .gh { font-weight: bold } /* Generic.Heading */
+.pygments36 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments36 .gs { font-weight: bold } /* Generic.Strong */
+.pygments36 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments36 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments36 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments36 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments36 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments36 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments36 .kt { color: #2b91af } /* Keyword.Type */
+.pygments36 .ld { color: #0000FF } /* Literal.Date */
+.pygments36 .m { color: #0000FF } /* Literal.Number */
+.pygments36 .s { color: #a31515 } /* Literal.String */
+.pygments36 .na { color: #001080 } /* Name.Attribute */
+.pygments36 .nb { color: #795e26 } /* Name.Builtin */
+.pygments36 .nc { color: #2b91af } /* Name.Class */
+.pygments36 .no { color: #0000FF } /* Name.Constant */
+.pygments36 .nf { color: #795e26 } /* Name.Function */
+.pygments36 .nl { color: #AF00DB } /* Name.Label */
+.pygments36 .nn { color: #000000 } /* Name.Namespace */
+.pygments36 .nt { color: #800000 } /* Name.Tag */
+.pygments36 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments36 .ow { color: #0000ff } /* Operator.Word */
+.pygments36 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments36 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments36 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments36 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments36 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments36 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments36 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments36 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments36 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments36 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments36 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments36 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments36 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments36 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments36 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments36 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments36 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments36 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments36 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments36 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments36 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments36 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments36 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments36 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments36 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments36 pre.snippet36 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-pointers.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments36"><pre class="lineNumbers snippet36"><code><span></span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">very_bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="c1">// accidental int-to-pointer conversion</span></code>
+<code></code>
+<code><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">int</span><span class="w"> </span><span class="n">bad</span><span class="w">             </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">message</span><span class="p">;</span><span class="w"> </span><span class="c1">// accidental pointer-to-int conversion</span></code>
+<code><span class="kt">int</span><span class="w"> </span><span class="n">also_bad</span><span class="w">        </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="p">(</span><span class="n">message</span><span class="p">);</span><span class="w"> </span><span class="c1">// idem</span></code></pre></div>
+</div>
+    </li>
+    <li>
+        They allow you to cast away <code>const</code> and <code>volatile</code>
+        qualifiers:
+        <div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments41 .hll { background-color: #ffffcc }
+.pygments41 { background: #ffffff; }
+.pygments41 .c { color: #008000 } /* Comment */
+.pygments41 .err { border: 1px solid #FF0000 } /* Error */
+.pygments41 .k { color: #0000ff } /* Keyword */
+.pygments41 .l { color: #0000FF } /* Literal */
+.pygments41 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments41 .cm { color: #008000 } /* Comment.Multiline */
+.pygments41 .cp { color: #af00db } /* Comment.Preproc */
+.pygments41 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments41 .c1 { color: #008000 } /* Comment.Single */
+.pygments41 .cs { color: #008000 } /* Comment.Special */
+.pygments41 .ge { font-style: italic } /* Generic.Emph */
+.pygments41 .gh { font-weight: bold } /* Generic.Heading */
+.pygments41 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments41 .gs { font-weight: bold } /* Generic.Strong */
+.pygments41 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments41 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments41 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments41 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments41 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments41 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments41 .kt { color: #2b91af } /* Keyword.Type */
+.pygments41 .ld { color: #0000FF } /* Literal.Date */
+.pygments41 .m { color: #0000FF } /* Literal.Number */
+.pygments41 .s { color: #a31515 } /* Literal.String */
+.pygments41 .na { color: #001080 } /* Name.Attribute */
+.pygments41 .nb { color: #795e26 } /* Name.Builtin */
+.pygments41 .nc { color: #2b91af } /* Name.Class */
+.pygments41 .no { color: #0000FF } /* Name.Constant */
+.pygments41 .nf { color: #795e26 } /* Name.Function */
+.pygments41 .nl { color: #AF00DB } /* Name.Label */
+.pygments41 .nn { color: #000000 } /* Name.Namespace */
+.pygments41 .nt { color: #800000 } /* Name.Tag */
+.pygments41 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments41 .ow { color: #0000ff } /* Operator.Word */
+.pygments41 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments41 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments41 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments41 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments41 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments41 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments41 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments41 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments41 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments41 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments41 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments41 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments41 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments41 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments41 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments41 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments41 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments41 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments41 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments41 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments41 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments41 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments41 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments41 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments41 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments41 pre.snippet41 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-cv.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments41"><pre class="lineNumbers snippet41"><code><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">very_bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">message</span><span class="p">;</span><span class="w"> </span><span class="c1">// casts away const</span></code>
+<code></code>
+<code><span class="k">volatile</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span><span class="w"></span></code>
+<code><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">also_very_bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">buffer</span><span class="p">;</span><span class="w"> </span><span class="c1">// casts away volatile</span></code></pre></div>
+</div>
+    </li>
+    <li>
+        They allow you to cast between pointers to unrelated types:
+        <div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments45 .hll { background-color: #ffffcc }
+.pygments45 { background: #ffffff; }
+.pygments45 .c { color: #008000 } /* Comment */
+.pygments45 .err { border: 1px solid #FF0000 } /* Error */
+.pygments45 .k { color: #0000ff } /* Keyword */
+.pygments45 .l { color: #0000FF } /* Literal */
+.pygments45 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments45 .cm { color: #008000 } /* Comment.Multiline */
+.pygments45 .cp { color: #af00db } /* Comment.Preproc */
+.pygments45 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments45 .c1 { color: #008000 } /* Comment.Single */
+.pygments45 .cs { color: #008000 } /* Comment.Special */
+.pygments45 .ge { font-style: italic } /* Generic.Emph */
+.pygments45 .gh { font-weight: bold } /* Generic.Heading */
+.pygments45 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments45 .gs { font-weight: bold } /* Generic.Strong */
+.pygments45 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments45 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments45 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments45 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments45 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments45 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments45 .kt { color: #2b91af } /* Keyword.Type */
+.pygments45 .ld { color: #0000FF } /* Literal.Date */
+.pygments45 .m { color: #0000FF } /* Literal.Number */
+.pygments45 .s { color: #a31515 } /* Literal.String */
+.pygments45 .na { color: #001080 } /* Name.Attribute */
+.pygments45 .nb { color: #795e26 } /* Name.Builtin */
+.pygments45 .nc { color: #2b91af } /* Name.Class */
+.pygments45 .no { color: #0000FF } /* Name.Constant */
+.pygments45 .nf { color: #795e26 } /* Name.Function */
+.pygments45 .nl { color: #AF00DB } /* Name.Label */
+.pygments45 .nn { color: #000000 } /* Name.Namespace */
+.pygments45 .nt { color: #800000 } /* Name.Tag */
+.pygments45 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments45 .ow { color: #0000ff } /* Operator.Word */
+.pygments45 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments45 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments45 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments45 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments45 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments45 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments45 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments45 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments45 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments45 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments45 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments45 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments45 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments45 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments45 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments45 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments45 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments45 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments45 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments45 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments45 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments45 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments45 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments45 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments45 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments45 pre.snippet45 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-unrelated-types.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments45"><pre class="lineNumbers snippet45"><code><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Pineapple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span><span class="w"></span></code>
+<code><span class="k">class</span><span class="w"> </span><span class="nc">Bulldozer</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span><span class="w"></span></code>
+<code></code>
+<code><span class="n">Pineapple</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="n">Bulldozer</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">Bulldozer</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">p</span><span class="p">;</span><span class="w"> </span><span class="c1">// b points to a pineapple, not a bulldozer</span></code></pre></div>
+</div>
+    </li>
+</ol>
+<p>
+    All of these casts undermine the C++ type system and prevent the compiler
+    from catching common bugs.
+</p>
+
+<h2><a name="what-to-use-instead" href="#what-to-use-instead">What to use instead</a></h2>
+
+Consider one of  the following safer alternatives to C-style casts.
+
+<h3><a name="no-cast" href="#no-cast">No cast</a></h3>
+<p>
+    Sometimes you don't need an explicit cast.
+    Just let the type system do its thing.
+</p>
+<p>
+    In the case of literals, you can use a literal suffix to avoid a cast:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments65 .hll { background-color: #ffffcc }
+.pygments65 { background: #ffffff; }
+.pygments65 .c { color: #008000 } /* Comment */
+.pygments65 .err { border: 1px solid #FF0000 } /* Error */
+.pygments65 .k { color: #0000ff } /* Keyword */
+.pygments65 .l { color: #0000FF } /* Literal */
+.pygments65 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments65 .cm { color: #008000 } /* Comment.Multiline */
+.pygments65 .cp { color: #af00db } /* Comment.Preproc */
+.pygments65 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments65 .c1 { color: #008000 } /* Comment.Single */
+.pygments65 .cs { color: #008000 } /* Comment.Special */
+.pygments65 .ge { font-style: italic } /* Generic.Emph */
+.pygments65 .gh { font-weight: bold } /* Generic.Heading */
+.pygments65 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments65 .gs { font-weight: bold } /* Generic.Strong */
+.pygments65 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments65 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments65 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments65 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments65 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments65 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments65 .kt { color: #2b91af } /* Keyword.Type */
+.pygments65 .ld { color: #0000FF } /* Literal.Date */
+.pygments65 .m { color: #0000FF } /* Literal.Number */
+.pygments65 .s { color: #a31515 } /* Literal.String */
+.pygments65 .na { color: #001080 } /* Name.Attribute */
+.pygments65 .nb { color: #795e26 } /* Name.Builtin */
+.pygments65 .nc { color: #2b91af } /* Name.Class */
+.pygments65 .no { color: #0000FF } /* Name.Constant */
+.pygments65 .nf { color: #795e26 } /* Name.Function */
+.pygments65 .nl { color: #AF00DB } /* Name.Label */
+.pygments65 .nn { color: #000000 } /* Name.Namespace */
+.pygments65 .nt { color: #800000 } /* Name.Tag */
+.pygments65 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments65 .ow { color: #0000ff } /* Operator.Word */
+.pygments65 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments65 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments65 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments65 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments65 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments65 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments65 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments65 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments65 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments65 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments65 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments65 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments65 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments65 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments65 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments65 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments65 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments65 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments65 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments65 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments65 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments65 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments65 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments65 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments65 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments65 pre.snippet65 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-cast-suffix.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments65"><pre class="lineNumbers snippet65"><code><span></span><span class="kt">float</span><span class="w"> </span><span class="n">bad</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="mi">123</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">float</span><span class="w"> </span><span class="n">good</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">123.f</span><span class="p">;</span><span class="w"></span></code></pre></div>
+</div>
+
+<h3><a name="use-braces" href="#use-braces">Use braces</a></h3>
+<p>
+    When you do need an explicit cast to a specific type, for example to select
+    a specific function overload, use curly braces instead of using parentheses.
+    This creates a temporary of the given type. In cases where such a 
+    conversion is valid, the effect is the same as a C-style cast, but invalid
+    or narrowing type conversions are rightly rejected:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments75 .hll { background-color: #ffffcc }
+.pygments75 { background: #ffffff; }
+.pygments75 .c { color: #008000 } /* Comment */
+.pygments75 .err { border: 1px solid #FF0000 } /* Error */
+.pygments75 .k { color: #0000ff } /* Keyword */
+.pygments75 .l { color: #0000FF } /* Literal */
+.pygments75 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments75 .cm { color: #008000 } /* Comment.Multiline */
+.pygments75 .cp { color: #af00db } /* Comment.Preproc */
+.pygments75 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments75 .c1 { color: #008000 } /* Comment.Single */
+.pygments75 .cs { color: #008000 } /* Comment.Special */
+.pygments75 .ge { font-style: italic } /* Generic.Emph */
+.pygments75 .gh { font-weight: bold } /* Generic.Heading */
+.pygments75 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments75 .gs { font-weight: bold } /* Generic.Strong */
+.pygments75 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments75 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments75 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments75 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments75 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments75 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments75 .kt { color: #2b91af } /* Keyword.Type */
+.pygments75 .ld { color: #0000FF } /* Literal.Date */
+.pygments75 .m { color: #0000FF } /* Literal.Number */
+.pygments75 .s { color: #a31515 } /* Literal.String */
+.pygments75 .na { color: #001080 } /* Name.Attribute */
+.pygments75 .nb { color: #795e26 } /* Name.Builtin */
+.pygments75 .nc { color: #2b91af } /* Name.Class */
+.pygments75 .no { color: #0000FF } /* Name.Constant */
+.pygments75 .nf { color: #795e26 } /* Name.Function */
+.pygments75 .nl { color: #AF00DB } /* Name.Label */
+.pygments75 .nn { color: #000000 } /* Name.Namespace */
+.pygments75 .nt { color: #800000 } /* Name.Tag */
+.pygments75 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments75 .ow { color: #0000ff } /* Operator.Word */
+.pygments75 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments75 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments75 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments75 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments75 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments75 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments75 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments75 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments75 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments75 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments75 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments75 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments75 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments75 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments75 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments75 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments75 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments75 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments75 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments75 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments75 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments75 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments75 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments75 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments75 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments75 pre.snippet75 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-pointers-braces.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments75"><pre class="lineNumbers snippet75"><code><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">int</span><span class="w"> </span><span class="n">better</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="n">message</span><span class="p">};</span><span class="w"> </span><span class="c1">// compile-time error (as it should)</span></code></pre></div>
+</div>
+
+<pre class="code"><span style="color: #CC0000"><b>error: </b></span>invalid conversion from ‘<b>const char*</b>’ to ‘<b>int</b>’ [<span style="color: #CC0000"><b>-fpermissive</b></span>]
+    2 | int better          = int {<span style="color: #CC0000"><b>message</b></span>}; // compile-time error (as it should)
+      |                            <span style="color: #CC0000"><b>^~~~~~~</b></span>
+      |                            <span style="color: #CC0000"><b>|</b></span>
+      |                            <span style="color: #CC0000"><b>const char*</b></span></pre>
+<p>
+    Sensible conversions are allowed, for example, casting an integer to a wider
+    integer, or explicitly converting an integer to milliseconds:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments86 .hll { background-color: #ffffcc }
+.pygments86 { background: #ffffff; }
+.pygments86 .c { color: #008000 } /* Comment */
+.pygments86 .err { border: 1px solid #FF0000 } /* Error */
+.pygments86 .k { color: #0000ff } /* Keyword */
+.pygments86 .l { color: #0000FF } /* Literal */
+.pygments86 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments86 .cm { color: #008000 } /* Comment.Multiline */
+.pygments86 .cp { color: #af00db } /* Comment.Preproc */
+.pygments86 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments86 .c1 { color: #008000 } /* Comment.Single */
+.pygments86 .cs { color: #008000 } /* Comment.Special */
+.pygments86 .ge { font-style: italic } /* Generic.Emph */
+.pygments86 .gh { font-weight: bold } /* Generic.Heading */
+.pygments86 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments86 .gs { font-weight: bold } /* Generic.Strong */
+.pygments86 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments86 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments86 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments86 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments86 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments86 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments86 .kt { color: #2b91af } /* Keyword.Type */
+.pygments86 .ld { color: #0000FF } /* Literal.Date */
+.pygments86 .m { color: #0000FF } /* Literal.Number */
+.pygments86 .s { color: #a31515 } /* Literal.String */
+.pygments86 .na { color: #001080 } /* Name.Attribute */
+.pygments86 .nb { color: #795e26 } /* Name.Builtin */
+.pygments86 .nc { color: #2b91af } /* Name.Class */
+.pygments86 .no { color: #0000FF } /* Name.Constant */
+.pygments86 .nf { color: #795e26 } /* Name.Function */
+.pygments86 .nl { color: #AF00DB } /* Name.Label */
+.pygments86 .nn { color: #000000 } /* Name.Namespace */
+.pygments86 .nt { color: #800000 } /* Name.Tag */
+.pygments86 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments86 .ow { color: #0000ff } /* Operator.Word */
+.pygments86 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments86 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments86 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments86 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments86 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments86 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments86 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments86 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments86 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments86 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments86 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments86 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments86 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments86 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments86 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments86 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments86 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments86 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments86 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments86 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments86 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments86 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments86 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments86 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments86 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments86 pre.snippet86 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-pointers-braces-good.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments86"><pre class="lineNumbers snippet86"><code><span></span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="p">{</span><span class="mi">42</span><span class="p">};</span><span class="w"> </span><span class="c1">// okay</span></code>
+<code><span class="k">auto</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="w"> </span><span class="p">{</span><span class="n">i</span><span class="p">};</span><span class="w"> </span><span class="c1">// okay</span></code></pre></div>
+</div>
+
+<h3><a name="use-named-casts" href="#use-named-casts">Use named casts</a></h3>
+
+<p>
+    When you need to force a narrowing conversion, use
+    <a href="https://en.cppreference.com/w/cpp/language/static_cast"><code>static_cast&lt;type&gt;(expression)</code></a>.<br>
+    The advantage of <code>static_cast</code> is that it disallows many
+    questionable casts that would violate the rules of the type system, such
+    as casting away qualifiers or converting between unrelated types;
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments97 .hll { background-color: #ffffcc }
+.pygments97 { background: #ffffff; }
+.pygments97 .c { color: #008000 } /* Comment */
+.pygments97 .err { border: 1px solid #FF0000 } /* Error */
+.pygments97 .k { color: #0000ff } /* Keyword */
+.pygments97 .l { color: #0000FF } /* Literal */
+.pygments97 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments97 .cm { color: #008000 } /* Comment.Multiline */
+.pygments97 .cp { color: #af00db } /* Comment.Preproc */
+.pygments97 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments97 .c1 { color: #008000 } /* Comment.Single */
+.pygments97 .cs { color: #008000 } /* Comment.Special */
+.pygments97 .ge { font-style: italic } /* Generic.Emph */
+.pygments97 .gh { font-weight: bold } /* Generic.Heading */
+.pygments97 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments97 .gs { font-weight: bold } /* Generic.Strong */
+.pygments97 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments97 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments97 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments97 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments97 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments97 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments97 .kt { color: #2b91af } /* Keyword.Type */
+.pygments97 .ld { color: #0000FF } /* Literal.Date */
+.pygments97 .m { color: #0000FF } /* Literal.Number */
+.pygments97 .s { color: #a31515 } /* Literal.String */
+.pygments97 .na { color: #001080 } /* Name.Attribute */
+.pygments97 .nb { color: #795e26 } /* Name.Builtin */
+.pygments97 .nc { color: #2b91af } /* Name.Class */
+.pygments97 .no { color: #0000FF } /* Name.Constant */
+.pygments97 .nf { color: #795e26 } /* Name.Function */
+.pygments97 .nl { color: #AF00DB } /* Name.Label */
+.pygments97 .nn { color: #000000 } /* Name.Namespace */
+.pygments97 .nt { color: #800000 } /* Name.Tag */
+.pygments97 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments97 .ow { color: #0000ff } /* Operator.Word */
+.pygments97 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments97 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments97 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments97 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments97 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments97 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments97 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments97 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments97 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments97 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments97 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments97 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments97 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments97 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments97 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments97 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments97 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments97 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments97 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments97 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments97 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments97 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments97 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments97 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments97 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments97 pre.snippet97 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/static_cast-const.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments97"><pre class="lineNumbers snippet97"><code><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">little_better</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">(</span><span class="n">message</span><span class="p">);</span><span class="w"> </span><span class="c1">// compile-time error (as it should)</span></code></pre></div>
+</div>
+<pre class="code"><span style="color: #CC0000"><b>error: </b></span>invalid ‘<b>static_cast</b>’ from type ‘<b>const char*</b>’ to type ‘<b>char*</b>’
+    2 | char *little_better = <span style="color: #CC0000"><b>static_cast&lt;char *&gt;(message)</b></span>; // compile-time error (as it should)
+      |                       <span style="color: #CC0000"><b>^~~~~~~~~~~~~~~~~~~~~~~~~~~~</b></span></pre>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments101 .hll { background-color: #ffffcc }
+.pygments101 { background: #ffffff; }
+.pygments101 .c { color: #008000 } /* Comment */
+.pygments101 .err { border: 1px solid #FF0000 } /* Error */
+.pygments101 .k { color: #0000ff } /* Keyword */
+.pygments101 .l { color: #0000FF } /* Literal */
+.pygments101 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments101 .cm { color: #008000 } /* Comment.Multiline */
+.pygments101 .cp { color: #af00db } /* Comment.Preproc */
+.pygments101 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments101 .c1 { color: #008000 } /* Comment.Single */
+.pygments101 .cs { color: #008000 } /* Comment.Special */
+.pygments101 .ge { font-style: italic } /* Generic.Emph */
+.pygments101 .gh { font-weight: bold } /* Generic.Heading */
+.pygments101 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments101 .gs { font-weight: bold } /* Generic.Strong */
+.pygments101 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments101 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments101 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments101 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments101 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments101 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments101 .kt { color: #2b91af } /* Keyword.Type */
+.pygments101 .ld { color: #0000FF } /* Literal.Date */
+.pygments101 .m { color: #0000FF } /* Literal.Number */
+.pygments101 .s { color: #a31515 } /* Literal.String */
+.pygments101 .na { color: #001080 } /* Name.Attribute */
+.pygments101 .nb { color: #795e26 } /* Name.Builtin */
+.pygments101 .nc { color: #2b91af } /* Name.Class */
+.pygments101 .no { color: #0000FF } /* Name.Constant */
+.pygments101 .nf { color: #795e26 } /* Name.Function */
+.pygments101 .nl { color: #AF00DB } /* Name.Label */
+.pygments101 .nn { color: #000000 } /* Name.Namespace */
+.pygments101 .nt { color: #800000 } /* Name.Tag */
+.pygments101 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments101 .ow { color: #0000ff } /* Operator.Word */
+.pygments101 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments101 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments101 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments101 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments101 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments101 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments101 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments101 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments101 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments101 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments101 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments101 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments101 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments101 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments101 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments101 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments101 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments101 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments101 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments101 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments101 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments101 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments101 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments101 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments101 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments101 pre.snippet101 { counter-reset: line 3; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/static_cast.cpp#L4" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments101"><pre class="lineNumbers snippet101"><code><span></span><span class="n">Pineapple</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="n">Bulldozer</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Bulldozer</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="p">);</span><span class="w"> </span><span class="c1">// compile-time error (as it should)</span></code></pre></div>
+</div>
+<pre class="code"><span style="color: #CC0000"><b>error: </b></span>invalid ‘<b>static_cast</b>’ from type ‘<b>Pineapple*</b>’ to type ‘<b>Bulldozer*</b>’
+    5 | Bulldozer *b = <span style="color: #CC0000"><b>static_cast&lt;Bulldozer *&gt;(&amp;p)</b></span>; // compile-time error (as it should)
+      |                <span style="color: #CC0000"><b>^~~~~~~~~~~~~~~~~~~~~~~~~~~~</b></span></pre>
+
+<p>
+    For safely casting polymorphic types, e.g. converting a pointer-to-base to a 
+    pointer-to-derived in an inheritance hierarchy, use
+    <a href="https://en.cppreference.com/w/cpp/language/dynamic_cast"><code>dynamic_cast</code></a>.
+</p>
+<p>
+    If you <i>really</i> need a more powerful (read: dangerous) cast, you might
+    need a <a href="https://en.cppreference.com/w/cpp/language/reinterpret_cast"><code>reinterpret_cast</code></a>,
+    e.g. to convert between integers and pointers
+    or to convert pointers to objects to pointers to arrays of bytes.<br>
+    If you need to cast away <code>const</code> or <code>volatile</code> 
+    qualifiers, you can use <a href="https://en.cppreference.com/w/cpp/language/const_cast"><code>const_cast</code></a>.
+</p>
+<p>
+    Both <code>reinterpret_cast</code> and <code>const_cast</code> come with
+    huge caveats, making it very easy to shoot yourself in the foot and invoke
+    <a href="https://en.cppreference.com/w/cpp/language/ub">Undefined Behavior</a>.
+    They should generally only be used in low-level code or when dealing with
+    old C APIs, and demand good encapsulation and an even better justification.
+    Keep in mind that <code>reinterpret_cast</code> cannot be used
+    for type punning: Despite its name, you cannot use it to interpret a
+    variable of one type as a different type (except in some very limited cases,
+    see the cppreference link above for details).
+</p>
+
+<h2><a name="c-core-guidelines" href="#c-core-guidelines">C++ Core Guidelines</a></h2>
+
+<p>
+    If you're unconvinced by these arguments, you might want to have a look at
+    what the official C++ Core Guidelines have to say about casting:
+</p>
+<ul>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es48-avoid-casts">ES.48: Avoid casts</a></li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es49-if-you-must-use-a-cast-use-a-named-cast">ES.49: If you must use a cast, use a named cast</a> (as opposed to a C-style cast)</li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es50-dont-cast-away-const">ES.50: Don't cast away <code>const</code></a></li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es64-use-the-tenotation-for-construction">ES.64: Use the <code>T{e}</code> notation for construction</a></li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#prosafety-type-safety-profile">Pro.safety: Type-safety profile</a></li>
+</ul>
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="Best Practices">Index</a></div><div class="nextpage"></div></div>
+    </article>
+    <footer>Last edited: Saturday, 30 July 2022 23:22 UTC</footer>
+</body>
+
+</html>

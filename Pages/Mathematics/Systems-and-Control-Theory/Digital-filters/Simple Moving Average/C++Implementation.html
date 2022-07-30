@@ -1059,6 +1059,7 @@ mjx-c.mjx-c32::before {
                 <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
             </ul>
             </li>
@@ -1129,6 +1130,11 @@ mjx-c.mjx-c32::before {
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Programming/Cpp/index.html">C++</a>
         <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Programming/Cpp/Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Programming/Cpp/Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
             <ul>
                 <li><span class="ftriangle"></span><a class="" href="../../../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
@@ -1297,8 +1303,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/resources/SMA.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments56"><pre class="lineNumbers snippet56"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span></code>
 <code></code>
-<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">input_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint16_t</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">sum_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="w"></span></code>
-<code><span class="k">class</span> <span class="nc">SMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">input_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint16_t</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">sum_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">class</span><span class="w"> </span><span class="nc">SMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="n">input_t</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">input_t</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">        </span><span class="n">sum</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">previousInputs</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="w"></span></code>
@@ -1401,8 +1407,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments73 .il { color: #8A7B52 } /* Literal.Number.Integer.Long */
 .pygments73 pre.snippet73 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/resources/SMA-Arduino.ino" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments73"><pre class="lineNumbers snippet73"><code><span></span><span class="n">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">uint8_t</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="kr">class</span> <span class="nc">input_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">uint16_t</span><span class="p">,</span><span class="w"> </span><span class="kr">class</span> <span class="nc">sum_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">uint32_t</span><span class="o">&gt;</span><span class="w"></span></code>
-<code><span class="kr">class</span> <span class="nc">SMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<div class="pygments73"><pre class="lineNumbers snippet73"><code><span></span><span class="n">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">uint8_t</span><span class="w"> </span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="kr">class</span><span class="w"> </span><span class="nc">input_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">uint16_t</span><span class="p">,</span><span class="w"> </span><span class="kr">class</span><span class="w"> </span><span class="nc">sum_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">uint32_t</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="kr">class</span><span class="w"> </span><span class="nc">SMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">  </span><span class="kr">public</span><span class="o">:</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="n">input_t</span><span class="w"> </span><span class="kr">operator</span><span class="p">()(</span><span class="n">input_t</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">        </span><span class="n">sum</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="n">previousInputs</span><span class="p">[</span><span class="n">index</span><span class="p">];</span><span class="w"></span></code>

@@ -98,6 +98,7 @@
                 <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
             </ul>
             </li>
@@ -168,6 +169,11 @@
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/index.html">C++</a>
         <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../Programming/Cpp/Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
             <ul>
                 <li><span class="ftriangle"></span><a class="" href="../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
@@ -397,11 +403,11 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments98 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments98 pre.snippet98 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/docker-crosstool-ng-multiarch/blob/d12057eaead260a5ace1748cb3134e736d21d491/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments98"><pre class="lineNumbers snippet98"><code><span></span><span class="k">FROM</span> <span class="s">ubuntu:focal</span> <span class="k">as</span> <span class="s">ct-ng</span></code>
+<div class="pygments98"><pre class="lineNumbers snippet98"><code><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:focal</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">ct-ng</span></code>
 <code></code>
 <code><span class="c"># Install dependencies to build toolchain</span></code>
-<code><span class="k">ENV</span> <span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive</code>
-<code><span class="k">RUN</span> apt-get update <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code><span class="k">ENV</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive</code>
+<code><span class="k">RUN</span><span class="w"> </span>apt-get update <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    apt-get install -y gcc g++ gperf bison flex texinfo help2man make libncurses5-dev unzip <span class="se">\</span></code>
 <code>                       python3-dev autoconf automake libtool libtool-bin gawk wget rsync git <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    apt-get clean autoclean <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
@@ -409,33 +415,33 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code>    rm -rf /var/lib/apt/lists/*</code>
 <code></code>
 <code><span class="c"># Add a user called `develop` and add him to the sudo group</span></code>
-<code><span class="k">RUN</span> useradd -m develop <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code><span class="k">RUN</span><span class="w"> </span>useradd -m develop <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    <span class="nb">echo</span> <span class="s2">&quot;develop:develop&quot;</span> <span class="p">|</span> chpasswd <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    adduser develop sudo</code>
 <code></code>
-<code><span class="k">USER</span><span class="s"> develop</span></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
+<code><span class="k">USER</span><span class="w"> </span><span class="s">develop</span></code>
+<code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop</span></code>
 <code></code>
 <code><span class="c"># https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=280707&amp;p=1700861#p1700861</span></code>
-<code><span class="k">RUN</span> wget https://ftp.debian.org/debian/pool/main/b/binutils/binutils-source_2.31.1-16_all.deb <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code><span class="k">RUN</span><span class="w"> </span>wget https://ftp.debian.org/debian/pool/main/b/binutils/binutils-source_2.31.1-16_all.deb <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    mkdir binutils <span class="o">&amp;&amp;</span> <span class="nb">cd</span> binutils <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    ar x ../binutils-source_2.31.1-16_all.deb <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    tar xf data.tar.xz <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    cp usr/src/binutils/patches/129_multiarch_libpath.patch /home/develop</code>
 <code></code>
 <code><span class="c"># Download and install the latest version of crosstool-ng</span></code>
-<code><span class="k">RUN</span> git clone -b master --single-branch --depth <span class="m">1</span> <span class="se">\</span></code>
+<code><span class="k">RUN</span><span class="w"> </span>git clone -b master --single-branch --depth <span class="m">1</span> <span class="se">\</span></code>
 <code>        https://github.com/crosstool-ng/crosstool-ng.git</code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop/crosstool-ng</span></code>
-<code><span class="k">RUN</span> git show --summary <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop/crosstool-ng</span></code>
+<code><span class="k">RUN</span><span class="w"> </span>git show --summary <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    ./bootstrap <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    ../configure --prefix<span class="o">=</span>/home/develop/.local <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    make install <span class="o">&amp;&amp;</span>  <span class="se">\</span></code>
 <code>    <span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> rm -rf build</code>
-<code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span>/home/develop/.local/bin:<span class="nv">$PATH</span></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop </span></code></pre></div>
+<code><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/home/develop/.local/bin:<span class="nv">$PATH</span></code>
+<code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop </span></code></pre></div>
 </div>
 
 <p>
@@ -521,26 +527,26 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments117 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments117 pre.snippet117 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/docker-arm-cross-toolchain/blob/6d2216bfafab5410c02014aa5b14c064e9678ca6/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments117"><pre class="lineNumbers snippet117"><code><span></span><span class="k">FROM</span> <span class="s">ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</span></code>
+<div class="pygments117"><pre class="lineNumbers snippet117"><code><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</span></code>
 <code></code>
-<code><span class="k">ARG</span> HOST_TRIPLE</code>
+<code><span class="k">ARG</span><span class="w"> </span>HOST_TRIPLE</code>
 <code></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code>
-<code><span class="k">RUN</span> mkdir /home/develop/host-config <span class="o">&amp;&amp;</span> mkdir /home/develop/src</code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop/host-config</span></code>
-<code><span class="k">COPY</span> <span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.config .config</code>
-<code><span class="k">COPY</span> <span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.env .env</code>
-<code><span class="k">RUN</span> mkdir -p patches/binutils/2.31.1 <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
+<code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop</span></code>
+<code><span class="k">RUN</span><span class="w"> </span>mkdir /home/develop/host-config <span class="o">&amp;&amp;</span> mkdir /home/develop/src</code>
+<code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop/host-config</span></code>
+<code><span class="k">COPY</span><span class="w"> </span><span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.config .config</code>
+<code><span class="k">COPY</span><span class="w"> </span><span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.env .env</code>
+<code><span class="k">RUN</span><span class="w"> </span>mkdir -p patches/binutils/2.31.1 <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
 <code>    cp /home/develop/129_multiarch_libpath.patch patches/binutils/2.31.1</code>
-<code><span class="k">RUN</span> ls -lah</code>
+<code><span class="k">RUN</span><span class="w"> </span>ls -lah</code>
 <code></code>
 <code><span class="c"># https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=280707&amp;p=1700861#p1700861</span></code>
-<code><span class="k">RUN</span> . ./.env<span class="p">;</span> <span class="nb">export</span> <span class="nv">DEB_TARGET_MULTIARCH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_TRIPLE_LIB_DIR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="se">\</span></code>
+<code><span class="k">RUN</span><span class="w"> </span>. ./.env<span class="p">;</span> <span class="nb">export</span> <span class="nv">DEB_TARGET_MULTIARCH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_TRIPLE_LIB_DIR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="se">\</span></code>
 <code>    <span class="nv">V</span><span class="o">=</span><span class="m">1</span> ct-ng build <span class="o">||</span> <span class="o">{</span> cat build.log <span class="o">&amp;&amp;</span> false<span class="p">;</span> <span class="o">}</span> <span class="o">&amp;&amp;</span> rm -rf .build</code>
 <code></code>
-<code><span class="k">ENV</span> <span class="nv">TOOLCHAIN_PATH</span><span class="o">=</span>/home/develop/x-tools/<span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span></code>
-<code><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">TOOLCHAIN_PATH</span><span class="si">}</span>/bin:<span class="nv">$PATH</span></code>
-<code><span class="k">WORKDIR</span><span class="s"> /home/develop</span></code></pre></div>
+<code><span class="k">ENV</span><span class="w"> </span><span class="nv">TOOLCHAIN_PATH</span><span class="o">=</span>/home/develop/x-tools/<span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span></code>
+<code><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">TOOLCHAIN_PATH</span><span class="si">}</span>/bin:<span class="nv">$PATH</span></code>
+<code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop</span></code></pre></div>
 </div>
 
 <p>

@@ -1,0 +1,569 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="arduino,motorized fader,flying fader,pid,controller,midi,control surface"/>
+    <meta name="description" content="Settings to use for some common use cases, such as outputting MIDI directly, tuning the controllers, changing the setpoint of the controllers over I²C, etc."/>
+    <title>Configuration options and common use cases</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Debugging.html">Debugging</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../index.html">Control Theory</a>
+        <ul>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Architecture.html">Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry " href="Configuration.html">Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/index.html">Programming</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/Cpp/index.html">C++</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/Cpp/Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Programming/Cpp/Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Configuration.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Configuration options and common use cases</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+        <li><a href="#configuration-options">Configuration options</a></li>
+        <li><a href="#use-cases">Use cases</a></li>
+          <ul>
+            <li><a href="#control-over-i-c">Control over I²C</a></li>
+            <li><a href="#control-over-serial">Control over Serial</a></li>
+            <li><a href="#quick-test-to-verify-that-everything-is-working">Quick test to verify that everything is working</a></li>
+            <li><a href="#direct-midi-control">Direct MIDI control</a></li>
+            <li><a href="#debugging-direct-midi-control">Debugging direct MIDI control</a></li>
+            <li><a href="#improved-pin-assignments-for-arduino-nano">Improved pin assignments for Arduino Nano</a></li>
+            </ul>
+  </ul></div>
+
+
+<h2><a name="configuration-options" href="#configuration-options">Configuration options</a></h2>
+<p>
+    The code is very flexible and can be used in many different ways by changing
+    the configuration options in <code>main.cpp:Config</code>. The settings are
+    all compile-time constants, resulting in more efficient code and allowing
+    for useful error messages when some options conflict or are invalid.
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments22 .hll { background-color: #ffffcc }
+.pygments22 { background: #ffffff; }
+.pygments22 .c { color: #008000 } /* Comment */
+.pygments22 .err { border: 1px solid #FF0000 } /* Error */
+.pygments22 .k { color: #0000ff } /* Keyword */
+.pygments22 .l { color: #0000FF } /* Literal */
+.pygments22 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments22 .cm { color: #008000 } /* Comment.Multiline */
+.pygments22 .cp { color: #af00db } /* Comment.Preproc */
+.pygments22 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments22 .c1 { color: #008000 } /* Comment.Single */
+.pygments22 .cs { color: #008000 } /* Comment.Special */
+.pygments22 .ge { font-style: italic } /* Generic.Emph */
+.pygments22 .gh { font-weight: bold } /* Generic.Heading */
+.pygments22 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments22 .gs { font-weight: bold } /* Generic.Strong */
+.pygments22 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments22 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments22 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments22 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments22 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments22 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments22 .kt { color: #2b91af } /* Keyword.Type */
+.pygments22 .ld { color: #0000FF } /* Literal.Date */
+.pygments22 .m { color: #0000FF } /* Literal.Number */
+.pygments22 .s { color: #a31515 } /* Literal.String */
+.pygments22 .na { color: #001080 } /* Name.Attribute */
+.pygments22 .nb { color: #795e26 } /* Name.Builtin */
+.pygments22 .nc { color: #2b91af } /* Name.Class */
+.pygments22 .no { color: #0000FF } /* Name.Constant */
+.pygments22 .nf { color: #795e26 } /* Name.Function */
+.pygments22 .nl { color: #AF00DB } /* Name.Label */
+.pygments22 .nn { color: #000000 } /* Name.Namespace */
+.pygments22 .nt { color: #800000 } /* Name.Tag */
+.pygments22 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments22 .ow { color: #0000ff } /* Operator.Word */
+.pygments22 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments22 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments22 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments22 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments22 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments22 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments22 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments22 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments22 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments22 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments22 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments22 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments22 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments22 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments22 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments22 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments22 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments22 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments22 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments22 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments22 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments22 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments22 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments22 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments22 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments22 pre.snippet22 { counter-reset: line 89; }</style>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/5a91eac24c33224aa2761411591e44b880bfcf81/Motor-Controller/main.cpp#L90-L198" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments22"><pre class="lineNumbers snippet22"><code><span></span><span class="c1">// ----------------------------- Configuration ------------------------------ //</span></code>
+<code></code>
+<code><span class="c1">// Enable MIDI input/output.</span></code>
+<code><span class="cp">#define WITH_MIDI 0</span></code>
+<code><span class="c1">// Print to the Serial monitor instead of sending actual MIDI messages.</span></code>
+<code><span class="cp">#define MIDI_DEBUG 0</span></code>
+<code></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">Config</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Print the control loop and interrupt frequencies to Serial at startup:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">print_frequencies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Print the setpoint, actual position and control signal to Serial.</span></code>
+<code><span class="w">    </span><span class="c1">// Note that this slows down the control loop significantly, it probably</span></code>
+<code><span class="w">    </span><span class="c1">// won&#39;t work if you are using more than one fader without increasing</span></code>
+<code><span class="w">    </span><span class="c1">// `interrupt_divisor`:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">print_controller_signals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">controller_to_print</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Follow the test reference trajectory (true) or receive the target</span></code>
+<code><span class="w">    </span><span class="c1">// position over I²C or Serial (false):</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">test_reference</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Increase this divisor to slow down the test reference:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">test_reference_speed_div</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Allow control for tuning and starting experiments over Serial:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">serial_control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// I²C slave address (zero to disable I²C):</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">i2c_address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// The baud rate to use for the Serial interface (e.g. for MIDI_DEBUG,</span></code>
+<code><span class="w">    </span><span class="c1">// print_controller_signals, serial_control, etc.)</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">serial_baud_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1000000</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// The baud rate to use for MIDI over Serial.</span></code>
+<code><span class="w">    </span><span class="c1">// Use 31&#39;250 for MIDI over 5-pin DIN, HIDUINO/USBMidiKliK.</span></code>
+<code><span class="w">    </span><span class="c1">// Hairless MIDI uses 115&#39;200 by default.</span></code>
+<code><span class="w">    </span><span class="c1">// The included python/SerialMIDI.py script uses 1&#39;000&#39;000.</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">midi_baud_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">serial_baud_rate</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">// Number of faders, must be between 1 and 4:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">num_faders</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Actually drive the motors. If set to false, runs all code as normal, but</span></code>
+<code><span class="w">    </span><span class="c1">// doesn&#39;t turn on the motors.</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">enable_controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Use analog pins (A0, A1, A6, A7) instead of (A0, A1, A2, A3), useful for</span></code>
+<code><span class="w">    </span><span class="c1">// saving digital pins on an Arduino Nano:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">use_A6_A7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Use pin A2 instead of D13 as the motor driver pin for the fourth fader.</span></code>
+<code><span class="w">    </span><span class="c1">// Allows D13 to be used as overrun indicator, and avoids issues with the</span></code>
+<code><span class="w">    </span><span class="c1">// bootloader blinking the LED.</span></code>
+<code><span class="w">    </span><span class="c1">// Can only be used if `use_A6_A7` is set to true.</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">fader_3_A2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">// Capacitive touch sensing RC time threshold.</span></code>
+<code><span class="w">    </span><span class="c1">// Increase this time constant if the capacitive touch sense is too</span></code>
+<code><span class="w">    </span><span class="c1">// sensitive or decrease it if it&#39;s not sensitive enough:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">touch_rc_time_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">150e-6</span><span class="p">;</span><span class="w"> </span><span class="c1">// seconds</span></code>
+<code><span class="w">    </span><span class="c1">// Bit masks of the touch pins (must be on port B):</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">touch_masks</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB2</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                                              </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB4</span><span class="p">};</span><span class="w"></span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">// Use phase-correct PWM (true) or fast PWM (false), this determines the</span></code>
+<code><span class="w">    </span><span class="c1">// timer interrupt frequency, prefer phase-correct PWM with prescaler 1 on</span></code>
+<code><span class="w">    </span><span class="c1">// 16 MHz boards, and fast PWM with prescaler 1 on 8 MHz boards, both result</span></code>
+<code><span class="w">    </span><span class="c1">// in a PWM and interrupt frequency of 31.250 kHz</span></code>
+<code><span class="w">    </span><span class="c1">// (fast PWM is twice as fast):</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">phase_correct_pwm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// The fader position will be sampled once per `interrupt_divisor` timer</span></code>
+<code><span class="w">    </span><span class="c1">// interrupts, this determines the sampling frequency of the control loop.</span></code>
+<code><span class="w">    </span><span class="c1">// Some examples include 20 → 320 µs, 30 → 480 µs, 60 → 960 µs,</span></code>
+<code><span class="w">    </span><span class="c1">// 90 → 1,440 µs, 124 → 2,016 µs, 188 → 3,008 µs, 250 → 4,000 µs.</span></code>
+<code><span class="w">    </span><span class="c1">// 60 is the default, because it works with four faders. If you only use</span></code>
+<code><span class="w">    </span><span class="c1">// a single fader, you can go as low as 20 because you only need a quarter</span></code>
+<code><span class="w">    </span><span class="c1">// of the computations and ADC time:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">interrupt_divisor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">phase_correct_pwm</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// The prescaler for the timer, affects PWM and control loop frequencies:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="n">prescaler_fac</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// The prescaler for the ADC, affects speed of analog readings:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">adc_prescaler_fac</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">// Turn off the motor after this many seconds of inactivity:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">// EMA filter factor for fader position filters:</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">adc_ema_K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// SMA filter length for setpoint filters, improves tracking of ramps if the</span></code>
+<code><span class="w">    </span><span class="c1">// setpoint changes in steps (e.g. when the DAW only updates the reference</span></code>
+<code><span class="w">    </span><span class="c1">// every 20 ms). Powers of two are significantly faster (e.g. 32 works well):</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">setpoint_sma_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">// ------------------------ Computed Quantities ------------------------- //</span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">// Sampling time of control loop:</span></code>
+<code><span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">Ts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">prescaler_fac</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">interrupt_divisor</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">256</span><span class="w"> </span><span class="o">*</span><span class="w"></span></code>
+<code><span class="w">                                </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">phase_correct_pwm</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">F_CPU</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Frequency at which the interrupt fires:</span></code>
+<code><span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">interrupt_freq</span><span class="w"> </span><span class="o">=</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="mf">1.</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">F_CPU</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">prescaler_fac</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">256</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">phase_correct_pwm</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Clock speed of the ADC:</span></code>
+<code><span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">adc_clock_freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">F_CPU</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">adc_prescaler_fac</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Pulse pin D13 if the control loop took too long:</span></code>
+<code><span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">enable_overrun_indicator</span><span class="w"> </span><span class="o">=</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">num_faders</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">fader_3_A2</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">num_faders</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">num_faders</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                  </span><span class="s">&quot;At most four faders supported&quot;</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">use_A6_A7</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">fader_3_A2</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                  </span><span class="s">&quot;Cannot use A2 for motor driver &quot;</span><span class="w"></span></code>
+<code><span class="w">                  </span><span class="s">&quot;and analog input at the same time&quot;</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="o">!</span><span class="n">WITH_MIDI</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">serial_control</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                  </span><span class="s">&quot;Cannot use MIDI and Serial control at the same time&quot;</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="o">!</span><span class="n">WITH_MIDI</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">!</span><span class="n">print_controller_signals</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                  </span><span class="s">&quot;Cannot use MIDI while printing controller signals&quot;</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="p">};</span><span class="w"></span></code></pre></div>
+</div>
+
+<h2><a name="use-cases" href="#use-cases">Use cases</a></h2>
+
+<h3><a name="control-over-i-c" href="#control-over-i-c">Control over I²C</a></h3>
+
+<p>
+    This is the default configuration that is enabled out of the box. It allows
+    another Arduino to read the position and the touch status of each fader, and
+    to update the setpoint of each controller. Communication happens over I²C,
+    and the message format is explained
+    <a href="Architecture.html#communication">here</a>.
+    You can have multiple motor drivers on the same bus by giving them different
+    addresses, using the <code>i2c_address</code> option.
+</p>
+<p>
+    The included example <a
+        href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/master/MIDI-Controller/MIDI-Controller.ino">MIDI-Controller.ino</a>
+    uses this mode, and it can be used as a reference implementation for sending
+    and receiving the right messages.
+</p>
+
+<h3><a name="control-over-serial" href="#control-over-serial">Control over Serial</a></h3>
+
+<p>
+    The <code>serial_control</code> option is also enabled by default. It allows
+    you to use the included <a
+        href="https://github.com/tttapa/Control-Surface-Motor-Fader/tree/master/Python/Tuning.py">Python/Tuning.py</a>
+    script to change the tuning of the controllers on the fly, and to log and
+    plot their behavior.
+</p>
+<p>
+    See <a href="PID-Tuning.html">PID Tuning</a> and
+    <a href="Architecture.html#communication">Architecture: Communication</a>
+    for more details.
+</p>
+
+<h3><a name="quick-test-to-verify-that-everything-is-working" href="#quick-test-to-verify-that-everything-is-working">Quick test to verify that everything is working</a></h3>
+
+<p>
+    Setting <code>test_reference = true</code> will result in the fader tracking
+    a test sequence, as shown in the
+    <a href="https://www.youtube.com/watch?v=j5vZXO6RVjA">demo video</a>.
+</p>
+<p>
+    If you also set <code>print_controller_signals = true</code>, you can open
+    the serial plotter (<kbd>Ctrl+Shift+L</kbd>) at the correct baud rate
+    (<code>serial_baud_rate = 1000000</code> by default), and view the
+    reference position, the actual fader position, and the control output, as 
+    shown in the figure below.
+</p>
+<div class="img-wrapper"><a href="images/serial-plotter.png"><img src="images/serial-plotter.png" alt="images/serial-plotter.png"/></a></div>
+<p>
+    The <code>controller_to_print</code> option specifies the (zero-based) index
+    of the fader to print/plot the data for.
+</p>
+
+<h3><a name="direct-midi-control" href="#direct-midi-control">Direct MIDI control</a></h3>
+
+<p>
+    Although the ATmega328P doesn't have native USB support, it does support
+    MIDI over Serial. After changing the <code>WITH_MIDI</code> macro to
+    <code>1</code> and setting <code>serial_control = false</code>, you can send
+    MIDI Pitch Bend messages to the serial port of the motor controller to 
+    change the setpoints of the controllers. Fader touch changes are reported 
+    back using MIDI Note On/Off messages, and while touched, the fader positions
+    are sent as MIDI Pitch Bend messages.
+</p>
+<p>
+    In this mode, you can use the included <a
+        href="https://github.com/tttapa/Control-Surface-Motor-Fader/tree/master/Python/SerialMIDI.py">Python/SerialMIDI.py</a>
+    script to test whether the MIDI communication works correctly. Instructions
+    are at the top of the script (in particular, make sure that the serial port
+    and baud rate are correct).
+</p>
+<p>
+    To use the motor controller directly with 5-pin MIDI or with custom USB MIDI
+    firmware, you have to select the correct MIDI baud rate: set
+    <code>midi_baud_rate = 31250</code>.
+</p>
+<p>
+    If you plan to use a software Serial-to-MIDI bridge, you'll have to select
+    an appropriate baud rate as well. For example, for Hairless MIDI, set
+    <code>midi_baud_rate = 115200</code>.
+</p>
+
+<h3><a name="debugging-direct-midi-control" href="#debugging-direct-midi-control">Debugging direct MIDI control</a></h3>
+
+<p>
+    The binary MIDI messages can be annoying to debug sometimes, so in addition
+    to the <code>WITH_MIDI = 1</code> option described in the previous section,
+    you can also set <code>MIDI_DEBUG</code> to <code>1</code> to make the motor
+    controller send the MIDI messages as readable text. If you open the serial
+    monitor at the correct baud rate (<code>serial_baud_rate</code>), you'll
+    see messages similar to the following when touching and moving the fader:
+</p>
+<pre class="code">Note On          Channel: 1	Data 1: 0x68	Data 2: 0x7f
+Pitch Bend       Channel: 1	Data 1: 0x30	Data 2: 0x00 (48)
+Pitch Bend       Channel: 1	Data 1: 0x40	Data 2: 0x00 (64)
+Pitch Bend       Channel: 1	Data 1: 0x50	Data 2: 0x00 (80)
+Pitch Bend       Channel: 1	Data 1: 0x60	Data 2: 0x00 (96)
+Note Off         Channel: 1	Data 1: 0x68	Data 2: 0x7f</pre>
+<p>
+    You can also change the setpoint of the faders from the serial monitor.
+    The format is <code>Ei ll hh</code> (hexadecimal), where <code>i</code>
+    is the zero-based index of the fader (0-3), <code>ll</code> are the seven
+    low bits of the 14-bit setpoint, and <code>hh</code> are the seven high bits
+    of the setpoint.<br>
+    For example, typing <code>E0 00 40</code> into the serial monitor and
+    pressing enter causes the first fader to move to the middle position. For
+    subsequent setpoint changes to the same fader, you don't have to repeat the
+    first byte (<code>Ei</code>), and the spaces between the bytes are optional.
+    For example, first sending <code>E00040</code> moves the first fader to the
+    middle position, and then sending <code>7F7F</code> moves the same fader to
+    the highest position.
+</p>
+
+<h3><a name="improved-pin-assignments-for-arduino-nano" href="#improved-pin-assignments-for-arduino-nano">Improved pin assignments for Arduino Nano</a></h3>
+
+<p>
+    The Arduino Nano has additional analog inputs A6 and A7. You can use these
+    instead of A2 and A3 to make room for two more digital inputs. To this end,
+    set <code>use_A6_A7 = true</code>. You can then use pin A2 for driving the
+    fourth fader by setting <code>fader_3_A2 = true</code>, thereby freeing up
+    pin D13 and the built-in LED. See also
+    <a href="Hardware.html#connections">Hardware: Connections</a>.
+</p>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"><a href="Hardware.html" title="Hardware"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"><a href="ATmega328P-Code.html" title="ATmega328P Code">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+    </article>
+    <footer>Last edited: Saturday, 30 July 2022 22:25 UTC</footer>
+</body>
+
+</html>

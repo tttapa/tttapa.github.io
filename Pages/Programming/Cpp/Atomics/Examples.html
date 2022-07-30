@@ -1,0 +1,916 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="c++,atomics,memory order,order,sequential consistency,acquire,release"/>
+    <meta name="description" content="Examples using atomics."/>
+    <title>Examples</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Debugging.html">Debugging</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/index.html">Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../index.html">Programming</a>
+    <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../index.html">C++</a>
+        <ul>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="hiddenEntry " href="index.html">Atomics</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="Happens-before.html">Happens before</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Memory-order.html">Memory order</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry " href="Examples.html">Examples</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Examples.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Examples</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+        <li><a href="#acquire-release">Acquire-release</a></li>
+        <li><a href="#interrupt-handle-once">Interrupt handle once</a></li>
+          <ul>
+            <li><a href="#goals">Goals</a></li>
+            </ul>
+  </ul></div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<style>
+    ol li,
+    ul li {
+        margin-bottom: 0.6em;
+    }
+</style>
+
+<!-- BEGIN -->
+
+<h2><a name="acquire-release" href="#acquire-release">Acquire-release</a></h2>
+
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments24 .hll { background-color: #ffffcc }
+.pygments24 { background: #ffffff; }
+.pygments24 .c { color: #008000 } /* Comment */
+.pygments24 .err { border: 1px solid #FF0000 } /* Error */
+.pygments24 .k { color: #0000ff } /* Keyword */
+.pygments24 .l { color: #0000FF } /* Literal */
+.pygments24 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments24 .cm { color: #008000 } /* Comment.Multiline */
+.pygments24 .cp { color: #af00db } /* Comment.Preproc */
+.pygments24 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments24 .c1 { color: #008000 } /* Comment.Single */
+.pygments24 .cs { color: #008000 } /* Comment.Special */
+.pygments24 .ge { font-style: italic } /* Generic.Emph */
+.pygments24 .gh { font-weight: bold } /* Generic.Heading */
+.pygments24 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments24 .gs { font-weight: bold } /* Generic.Strong */
+.pygments24 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments24 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments24 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments24 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments24 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments24 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments24 .kt { color: #2b91af } /* Keyword.Type */
+.pygments24 .ld { color: #0000FF } /* Literal.Date */
+.pygments24 .m { color: #0000FF } /* Literal.Number */
+.pygments24 .s { color: #a31515 } /* Literal.String */
+.pygments24 .na { color: #001080 } /* Name.Attribute */
+.pygments24 .nb { color: #795e26 } /* Name.Builtin */
+.pygments24 .nc { color: #2b91af } /* Name.Class */
+.pygments24 .no { color: #0000FF } /* Name.Constant */
+.pygments24 .nf { color: #795e26 } /* Name.Function */
+.pygments24 .nl { color: #AF00DB } /* Name.Label */
+.pygments24 .nn { color: #000000 } /* Name.Namespace */
+.pygments24 .nt { color: #800000 } /* Name.Tag */
+.pygments24 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments24 .ow { color: #0000ff } /* Operator.Word */
+.pygments24 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments24 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments24 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments24 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments24 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments24 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments24 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments24 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments24 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments24 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments24 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments24 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments24 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments24 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments24 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments24 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments24 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments24 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments24 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments24 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments24 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments24 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments24 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments24 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments24 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments24 pre.snippet24 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/acq-rel/preamble.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments24"><pre class="lineNumbers snippet24"><code><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="n">std</span><span class="o">::</span><span class="kt">atomic_bool</span><span class="w"> </span><span class="n">value_ready</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span></code></pre></div>
+</div>
+<h4 class="snippet-name"><a name="release" href="#release">Release</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments25 .hll { background-color: #ffffcc }
+.pygments25 { background: #ffffff; }
+.pygments25 .c { color: #008000 } /* Comment */
+.pygments25 .err { border: 1px solid #FF0000 } /* Error */
+.pygments25 .k { color: #0000ff } /* Keyword */
+.pygments25 .l { color: #0000FF } /* Literal */
+.pygments25 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments25 .cm { color: #008000 } /* Comment.Multiline */
+.pygments25 .cp { color: #af00db } /* Comment.Preproc */
+.pygments25 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments25 .c1 { color: #008000 } /* Comment.Single */
+.pygments25 .cs { color: #008000 } /* Comment.Special */
+.pygments25 .ge { font-style: italic } /* Generic.Emph */
+.pygments25 .gh { font-weight: bold } /* Generic.Heading */
+.pygments25 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments25 .gs { font-weight: bold } /* Generic.Strong */
+.pygments25 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments25 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments25 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments25 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments25 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments25 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments25 .kt { color: #2b91af } /* Keyword.Type */
+.pygments25 .ld { color: #0000FF } /* Literal.Date */
+.pygments25 .m { color: #0000FF } /* Literal.Number */
+.pygments25 .s { color: #a31515 } /* Literal.String */
+.pygments25 .na { color: #001080 } /* Name.Attribute */
+.pygments25 .nb { color: #795e26 } /* Name.Builtin */
+.pygments25 .nc { color: #2b91af } /* Name.Class */
+.pygments25 .no { color: #0000FF } /* Name.Constant */
+.pygments25 .nf { color: #795e26 } /* Name.Function */
+.pygments25 .nl { color: #AF00DB } /* Name.Label */
+.pygments25 .nn { color: #000000 } /* Name.Namespace */
+.pygments25 .nt { color: #800000 } /* Name.Tag */
+.pygments25 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments25 .ow { color: #0000ff } /* Operator.Word */
+.pygments25 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments25 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments25 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments25 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments25 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments25 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments25 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments25 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments25 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments25 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments25 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments25 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments25 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments25 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments25 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments25 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments25 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments25 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments25 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments25 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments25 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments25 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments25 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments25 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments25 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments25 pre.snippet25 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/acq-rel/rel.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments25"><pre class="lineNumbers snippet25"><code><span></span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"> </span><span class="c1">//                                                            ➊    </span></code>
+<code><span class="n">value_ready</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_release</span><span class="p">);</span><span class="w"> </span><span class="c1">//                    ➋ ▲▲▲▲</span></code></pre></div>
+</div>
+<h4 class="snippet-name"><a name="acquire" href="#acquire">Acquire</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments26 .hll { background-color: #ffffcc }
+.pygments26 { background: #ffffff; }
+.pygments26 .c { color: #008000 } /* Comment */
+.pygments26 .err { border: 1px solid #FF0000 } /* Error */
+.pygments26 .k { color: #0000ff } /* Keyword */
+.pygments26 .l { color: #0000FF } /* Literal */
+.pygments26 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments26 .cm { color: #008000 } /* Comment.Multiline */
+.pygments26 .cp { color: #af00db } /* Comment.Preproc */
+.pygments26 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments26 .c1 { color: #008000 } /* Comment.Single */
+.pygments26 .cs { color: #008000 } /* Comment.Special */
+.pygments26 .ge { font-style: italic } /* Generic.Emph */
+.pygments26 .gh { font-weight: bold } /* Generic.Heading */
+.pygments26 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments26 .gs { font-weight: bold } /* Generic.Strong */
+.pygments26 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments26 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments26 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments26 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments26 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments26 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments26 .kt { color: #2b91af } /* Keyword.Type */
+.pygments26 .ld { color: #0000FF } /* Literal.Date */
+.pygments26 .m { color: #0000FF } /* Literal.Number */
+.pygments26 .s { color: #a31515 } /* Literal.String */
+.pygments26 .na { color: #001080 } /* Name.Attribute */
+.pygments26 .nb { color: #795e26 } /* Name.Builtin */
+.pygments26 .nc { color: #2b91af } /* Name.Class */
+.pygments26 .no { color: #0000FF } /* Name.Constant */
+.pygments26 .nf { color: #795e26 } /* Name.Function */
+.pygments26 .nl { color: #AF00DB } /* Name.Label */
+.pygments26 .nn { color: #000000 } /* Name.Namespace */
+.pygments26 .nt { color: #800000 } /* Name.Tag */
+.pygments26 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments26 .ow { color: #0000ff } /* Operator.Word */
+.pygments26 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments26 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments26 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments26 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments26 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments26 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments26 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments26 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments26 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments26 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments26 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments26 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments26 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments26 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments26 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments26 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments26 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments26 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments26 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments26 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments26 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments26 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments26 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments26 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments26 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments26 pre.snippet26 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/acq-rel/acq.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments26"><pre class="lineNumbers snippet26"><code><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value_ready</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_acquire</span><span class="p">))</span><span class="w"> </span><span class="c1">//                       ➌ ▼▼▼▼</span></code>
+<code><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span><span class="w"> </span><span class="c1">//                                               ➍</span></code></pre></div>
+</div>
+
+<div class="mermaid">
+flowchart TB
+    subgraph Release
+        rel_start(( ))
+        rel_start --> set_val["value = 42&emsp;➊"]
+        set_val -->|SEQ| val_rdy["value_ready.store(true, release)&emsp;➋"]
+        val_rdy --> rel_end_(( ))
+    end
+    subgraph Acquire
+        acq_start(( ))
+        acq_start --> if_val_rdy["if (value_ready.load(acquire)&emsp;➌"]
+        if_val_rdy -->|SEQ| read_val["assert(value == 42)&emsp;➍"]
+        read_val --> acq_end_(( ))
+    end
+    val_rdy -->|SYNC| if_val_rdy
+</div>
+<p>
+    If ➌ reads the value written by ➋, then the load-acquire ➌ synchronizes
+    with the store-release ➋ on the same atomic variable. Therefore, ➋ simply
+    happens before ➌. Combined with the fact that ➊ is sequenced before ➋ and
+    ➌ is sequenced before ➍, we conclude that ➊ strongly happens before ➍.
+</p>
+<p>
+    If ➌ does not read the value written by ➋, then there is no
+    synchronization, but this is not an issue because in that case, the branch
+    is not taken and ➍ is never executed.
+</p>
+
+<h2><a name="interrupt-handle-once" href="#interrupt-handle-once">Interrupt handle once</a></h2>
+
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments58 .hll { background-color: #ffffcc }
+.pygments58 { background: #ffffff; }
+.pygments58 .c { color: #008000 } /* Comment */
+.pygments58 .err { border: 1px solid #FF0000 } /* Error */
+.pygments58 .k { color: #0000ff } /* Keyword */
+.pygments58 .l { color: #0000FF } /* Literal */
+.pygments58 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments58 .cm { color: #008000 } /* Comment.Multiline */
+.pygments58 .cp { color: #af00db } /* Comment.Preproc */
+.pygments58 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments58 .c1 { color: #008000 } /* Comment.Single */
+.pygments58 .cs { color: #008000 } /* Comment.Special */
+.pygments58 .ge { font-style: italic } /* Generic.Emph */
+.pygments58 .gh { font-weight: bold } /* Generic.Heading */
+.pygments58 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments58 .gs { font-weight: bold } /* Generic.Strong */
+.pygments58 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments58 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments58 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments58 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments58 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments58 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments58 .kt { color: #2b91af } /* Keyword.Type */
+.pygments58 .ld { color: #0000FF } /* Literal.Date */
+.pygments58 .m { color: #0000FF } /* Literal.Number */
+.pygments58 .s { color: #a31515 } /* Literal.String */
+.pygments58 .na { color: #001080 } /* Name.Attribute */
+.pygments58 .nb { color: #795e26 } /* Name.Builtin */
+.pygments58 .nc { color: #2b91af } /* Name.Class */
+.pygments58 .no { color: #0000FF } /* Name.Constant */
+.pygments58 .nf { color: #795e26 } /* Name.Function */
+.pygments58 .nl { color: #AF00DB } /* Name.Label */
+.pygments58 .nn { color: #000000 } /* Name.Namespace */
+.pygments58 .nt { color: #800000 } /* Name.Tag */
+.pygments58 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments58 .ow { color: #0000ff } /* Operator.Word */
+.pygments58 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments58 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments58 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments58 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments58 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments58 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments58 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments58 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments58 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments58 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments58 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments58 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments58 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments58 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments58 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments58 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments58 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments58 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments58 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments58 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments58 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments58 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments58 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments58 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments58 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments58 pre.snippet58 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/interrupt-handle-once/preamble.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments58"><pre class="lineNumbers snippet58"><code><span></span><span class="n">std</span><span class="o">::</span><span class="kt">atomic_bool</span><span class="w"> </span><span class="n">handled</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span><span class="w"></span></code>
+<code><span class="kt">unsigned</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="n">std</span><span class="o">::</span><span class="n">atomic</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span><span class="w"></span></code>
+<code><span class="n">std</span><span class="o">::</span><span class="kt">atomic_uint</span><span class="w"> </span><span class="n">total</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span><span class="w"></span></code></pre></div>
+</div>
+<h4 class="snippet-name"><a name="main" href="#main">Main</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments59 .hll { background-color: #ffffcc }
+.pygments59 { background: #ffffff; }
+.pygments59 .c { color: #008000 } /* Comment */
+.pygments59 .err { border: 1px solid #FF0000 } /* Error */
+.pygments59 .k { color: #0000ff } /* Keyword */
+.pygments59 .l { color: #0000FF } /* Literal */
+.pygments59 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments59 .cm { color: #008000 } /* Comment.Multiline */
+.pygments59 .cp { color: #af00db } /* Comment.Preproc */
+.pygments59 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments59 .c1 { color: #008000 } /* Comment.Single */
+.pygments59 .cs { color: #008000 } /* Comment.Special */
+.pygments59 .ge { font-style: italic } /* Generic.Emph */
+.pygments59 .gh { font-weight: bold } /* Generic.Heading */
+.pygments59 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments59 .gs { font-weight: bold } /* Generic.Strong */
+.pygments59 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments59 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments59 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments59 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments59 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments59 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments59 .kt { color: #2b91af } /* Keyword.Type */
+.pygments59 .ld { color: #0000FF } /* Literal.Date */
+.pygments59 .m { color: #0000FF } /* Literal.Number */
+.pygments59 .s { color: #a31515 } /* Literal.String */
+.pygments59 .na { color: #001080 } /* Name.Attribute */
+.pygments59 .nb { color: #795e26 } /* Name.Builtin */
+.pygments59 .nc { color: #2b91af } /* Name.Class */
+.pygments59 .no { color: #0000FF } /* Name.Constant */
+.pygments59 .nf { color: #795e26 } /* Name.Function */
+.pygments59 .nl { color: #AF00DB } /* Name.Label */
+.pygments59 .nn { color: #000000 } /* Name.Namespace */
+.pygments59 .nt { color: #800000 } /* Name.Tag */
+.pygments59 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments59 .ow { color: #0000ff } /* Operator.Word */
+.pygments59 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments59 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments59 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments59 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments59 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments59 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments59 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments59 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments59 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments59 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments59 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments59 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments59 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments59 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments59 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments59 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments59 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments59 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments59 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments59 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments59 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments59 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments59 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments59 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments59 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments59 pre.snippet59 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/interrupt-handle-once/main.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments59"><pre class="lineNumbers snippet59"><code><span></span><span class="c1">// Store the value to be handled</span></code>
+<code><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">//                                                             ➊</span></code>
+<code><span class="n">value_ptr</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="o">&amp;</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span><span class="p">);</span><span class="w"> </span><span class="c1">//                    ➋ ▲▲▲▲</span></code>
+<code><span class="c1">// Check if the interrupt was handled before we ran</span></code>
+<code><span class="k">auto</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">handled</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span><span class="p">);</span><span class="w"> </span><span class="c1">//                      ➌ ▼▼▼▼</span></code>
+<code><span class="c1">// If the interrupt ran earlier, it might not have seen our value</span></code>
+<code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// See if our value is still there</span></code>
+<code><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">.</span><span class="n">exchange</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_relaxed</span><span class="p">);</span><span class="w"> </span><span class="c1">//   ➍</span></code>
+<code><span class="w">    </span><span class="c1">// And handle it ourselves</span></code>
+<code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">total</span><span class="p">.</span><span class="n">fetch_add</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_relaxed</span><span class="p">);</span><span class="w"> </span><span class="c1">//                ➎</span></code>
+<code><span class="p">}</span><span class="w"></span></code></pre></div>
+</div>
+<h4 class="snippet-name"><a name="interrupt" href="#interrupt">Interrupt</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments60 .hll { background-color: #ffffcc }
+.pygments60 { background: #ffffff; }
+.pygments60 .c { color: #008000 } /* Comment */
+.pygments60 .err { border: 1px solid #FF0000 } /* Error */
+.pygments60 .k { color: #0000ff } /* Keyword */
+.pygments60 .l { color: #0000FF } /* Literal */
+.pygments60 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments60 .cm { color: #008000 } /* Comment.Multiline */
+.pygments60 .cp { color: #af00db } /* Comment.Preproc */
+.pygments60 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments60 .c1 { color: #008000 } /* Comment.Single */
+.pygments60 .cs { color: #008000 } /* Comment.Special */
+.pygments60 .ge { font-style: italic } /* Generic.Emph */
+.pygments60 .gh { font-weight: bold } /* Generic.Heading */
+.pygments60 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments60 .gs { font-weight: bold } /* Generic.Strong */
+.pygments60 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments60 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments60 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments60 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments60 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments60 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments60 .kt { color: #2b91af } /* Keyword.Type */
+.pygments60 .ld { color: #0000FF } /* Literal.Date */
+.pygments60 .m { color: #0000FF } /* Literal.Number */
+.pygments60 .s { color: #a31515 } /* Literal.String */
+.pygments60 .na { color: #001080 } /* Name.Attribute */
+.pygments60 .nb { color: #795e26 } /* Name.Builtin */
+.pygments60 .nc { color: #2b91af } /* Name.Class */
+.pygments60 .no { color: #0000FF } /* Name.Constant */
+.pygments60 .nf { color: #795e26 } /* Name.Function */
+.pygments60 .nl { color: #AF00DB } /* Name.Label */
+.pygments60 .nn { color: #000000 } /* Name.Namespace */
+.pygments60 .nt { color: #800000 } /* Name.Tag */
+.pygments60 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments60 .ow { color: #0000ff } /* Operator.Word */
+.pygments60 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments60 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments60 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments60 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments60 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments60 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments60 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments60 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments60 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments60 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments60 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments60 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments60 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments60 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments60 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments60 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments60 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments60 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments60 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments60 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments60 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments60 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments60 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments60 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments60 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments60 pre.snippet60 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/interrupt-handle-once/interrupt.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments60"><pre class="lineNumbers snippet60"><code><span></span><span class="c1">// Notify the main thread that the interrupt ran</span></code>
+<code><span class="n">handled</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span><span class="p">);</span><span class="w"> </span><span class="c1">//                        ➏ ▲▲▲▲</span></code>
+<code><span class="c1">// Read the value from the main thread</span></code>
+<code><span class="k">auto</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">.</span><span class="n">exchange</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span><span class="p">);</span><span class="w"> </span><span class="c1">//       ➐ ▼▼▼▼</span></code>
+<code><span class="c1">// Handle it</span></code>
+<code><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">total</span><span class="p">.</span><span class="n">fetch_add</span><span class="p">(</span><span class="o">*</span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_relaxed</span><span class="p">);</span><span class="w"> </span><span class="c1">//                    ➑</span></code></pre></div>
+</div>
+
+<div class="mermaid">
+flowchart TB
+    subgraph main
+        value_1["value = 1&emsp;➊"]
+        value_1 -->|SEQ| value_ptr_value["value_ptr.store(&amp;value, seq_cst)&emsp;➋"]
+        value_ptr_value -->|SEQ| handled_ld["handled.load(seq_cst)&emsp;➌"]
+        handled_ld -->|SEQ| value_ptr_xch["value_ptr.exchange(nullptr, relaxed)&emsp;➍"]
+        value_ptr_xch -->|SEQ| v_ld["*v&emsp;➎"]
+    end
+    subgraph interrupt
+        handled_sto["handled.store(true, seq_cst)&emsp;➏"]
+        handled_sto -->|SEQ| value_ptr_xch_int["value_ptr.exchange(nullptr, seq_cst)&emsp;➐"]
+        value_ptr_xch_int -->|SEQ| v_ld_int["*v&emsp;➑"]
+    end
+    value_ptr_value -->|SYNC| value_ptr_xch_int
+</div>
+
+<!-- <h3><a name="goals" href="#goals">Goals</a></h3>
+<ol>
+    <li>
+        ➊ happens before ➑:<br>
+        If ➑ is executed, it should read the value written by ➊.
+    </li>
+    <li>
+        If ➋ does not happen before ➐, then ➏ happens before ➌
+    </li>
+</ol>
+
+<ul>
+    <li>
+        the initialization of <code>handled</code> happens before ➌
+    </li>
+    <li>
+        the initialization of <code>handled</code> happens before ➏<br>
+        from write-write coherence, initialization precedes ➏ in the modification
+        order of <code>value_ptr</code>
+    </li>
+    <li>
+        ➋ synchronizes with ➐<br>
+        ➋ inter-thread happens before ➐<br>
+        ➋ happens before ➐<br>
+        from write-write coherence, ➋ precedes ➐ in the modification
+        order of <code>value_ptr</code>
+    </li>
+    <li>
+        Similarly to the acquire-release example,<br>
+        ➊ is sequenced before ➋, and ➋ synchronizes with ➐, and ➐ is sequenced before ➑<br>
+        ➊ is sequenced before ➋, and ➋ simply happens before ➐, and ➐ is sequenced before ➑<br>
+        ➊ strongly happens before ➑
+    </li>
+    <li>
+        ➋ is sequenced before ➌<br>
+        ➋ strongly happens before ➌<br>
+        ➋ precedes ➌ in the total order of sequentially consistent operations
+    </li>
+    <li>
+        ➏ is sequenced before ➐<br>
+        ➏ strongly happens before ➐<br>
+        ➏ precedes ➐ in the total order of sequentially consistent operations
+    </li>
+    <li>
+        ➋ is sequenced before ➍<br>
+        ➋ happens before ➍<br>
+        from write-write coherence, ➋ precedes ➍ in the modification
+        order of <code>value_ptr</code>
+    </li>
+    <li>
+        If ➌ reads the value written by ➏, then
+        <ul>
+            <li>
+                ➏ precedes ➌ in the modification order of
+                <code>handled</code><br>
+                ➌ does not happen before ➏<br>
+                ➏ is coherence-ordered before ➌<br>
+                The branch after ➌ is taken and ➍ is executed:<br>
+                From write-read coherence, ➍ gets its value from either ➋ or ➐,
+                because ➋ happens before ➍, and ➋ precedes ➐ in the
+                modification order of <code>value_ptr</code> (and there are no
+                other modifications of <code>value_ptr</code> after ➋)
+            </li>
+            <li>
+                If ➍ reads the value written by ➋, then
+                <ul>
+                    <li>
+                        <span style="color: red">➍ precedes ➐ in the
+                            modification order of <code>value_ptr</code></span>
+                    </li>
+                    <li>
+                        <span style="color: red">➐ reads
+                            <code>nullptr</code></span>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                If ➐ reads the value written by ➋, then
+                <ul>
+                    <li>
+                        <span style="color: red">➐ precedes ➍ in the
+                            modification order of <code>value_ptr</code></span>
+                    </li>
+                    <li>
+                        <span style="color: red">➐ reads
+                            <code>nullptr</code></span>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>
+        If ➌ does not read the value written by ➏, then
+        <ul>
+            <li>
+                If ➐ reads the value from ➋, then<br>
+                success
+            </li>
+            <li>
+                If ➐ does not read the value from ➋, then
+                <ul>
+                    <li>
+                        Given that ➋ happens before ➐, ➐ either takes its value
+                        from ➋ or from some side effect that follows ➋ in the
+                        modification order of <code>value_ptr</code>.<br>
+                        There is no other such side effect,
+                    </li>
+                </ul>
+            </li>
+            <li>
+                ➏ does not happen before ➌<br>
+                (By contradiction:
+                Assume that ➏ happens before ➌, then ➌ takes its value either
+                from ➏, or from a side effect that follows ➏ in the
+                modification order of <code>handled</code>. There is no such
+                side effect, and ➌ does not take its value from ➏, so the
+                assumption was false.)
+            </li>
+
+            <li style="color: red">
+                <br>
+                ➐ reads the value from ➋
+            </li>
+        </ul>
+        If ➌ reads the initial value of <code>handled</code>, then
+        <ul>
+            <li>
+
+            </li>
+        </ul>
+    </li>
+</ul> -->
+
+<!-- END -->
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#f4f4ff',
+            secondaryColor: '#f0f0f4',
+            tertiaryColor: '#F9FAFC',
+            fontFamily: 'monospace',
+        },
+    });
+</script>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"><a href="Memory-order.html" title="Memory order"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Atomics">Index</a></div><div class="nextpage"></div></div>
+    </article>
+    <footer>Last edited: Saturday, 30 July 2022 22:49 UTC</footer>
+</body>
+
+</html>

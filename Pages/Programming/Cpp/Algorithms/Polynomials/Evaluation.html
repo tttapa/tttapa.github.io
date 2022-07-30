@@ -1,0 +1,587 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="evaluation,polynomial,monomial,chebyshev,clenshaw,horner"/>
+    <meta name="description" content="Evaluation of polynomials in monomial or Chebyshev basis."/>
+    <title>Evaluation</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Debugging.html">Debugging</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Theory/index.html">Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../index.html">Programming</a>
+    <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../index.html">C++</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../index.html">Algorithms</a>
+            <ul>
+                <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="hiddenEntry " href="index.html">Polynomials</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="openEntry " href="Evaluation.html">Evaluation</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="Interpolation.html">Interpolation</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Evaluation.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Evaluation</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+
+<h4 class="snippet-name"><a name="poly-hpp" href="#poly-hpp">poly.hpp</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments12 .hll { background-color: #ffffcc }
+.pygments12 { background: #ffffff; }
+.pygments12 .c { color: #008000 } /* Comment */
+.pygments12 .err { border: 1px solid #FF0000 } /* Error */
+.pygments12 .k { color: #0000ff } /* Keyword */
+.pygments12 .l { color: #0000FF } /* Literal */
+.pygments12 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments12 .cm { color: #008000 } /* Comment.Multiline */
+.pygments12 .cp { color: #af00db } /* Comment.Preproc */
+.pygments12 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments12 .c1 { color: #008000 } /* Comment.Single */
+.pygments12 .cs { color: #008000 } /* Comment.Special */
+.pygments12 .ge { font-style: italic } /* Generic.Emph */
+.pygments12 .gh { font-weight: bold } /* Generic.Heading */
+.pygments12 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments12 .gs { font-weight: bold } /* Generic.Strong */
+.pygments12 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments12 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments12 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments12 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments12 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments12 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments12 .kt { color: #2b91af } /* Keyword.Type */
+.pygments12 .ld { color: #0000FF } /* Literal.Date */
+.pygments12 .m { color: #0000FF } /* Literal.Number */
+.pygments12 .s { color: #a31515 } /* Literal.String */
+.pygments12 .na { color: #001080 } /* Name.Attribute */
+.pygments12 .nb { color: #795e26 } /* Name.Builtin */
+.pygments12 .nc { color: #2b91af } /* Name.Class */
+.pygments12 .no { color: #0000FF } /* Name.Constant */
+.pygments12 .nf { color: #795e26 } /* Name.Function */
+.pygments12 .nl { color: #AF00DB } /* Name.Label */
+.pygments12 .nn { color: #000000 } /* Name.Namespace */
+.pygments12 .nt { color: #800000 } /* Name.Tag */
+.pygments12 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments12 .ow { color: #0000ff } /* Operator.Word */
+.pygments12 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments12 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments12 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments12 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments12 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments12 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments12 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments12 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments12 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments12 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments12 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments12 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments12 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments12 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments12 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments12 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments12 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments12 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments12 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments12 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments12 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments12 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments12 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments12 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments12 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments12 pre.snippet12 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Algorithms/Polynomials/resources/include/poly.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments12"><pre class="lineNumbers snippet12"><code><span></span><span class="cp">#pragma once</span></code>
+<code></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="cp"></span></code>
+<code></code>
+<code><span class="k">namespace</span><span class="w"> </span><span class="nn">poly</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">using</span><span class="w"> </span><span class="n">coef_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorX</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="k">using</span><span class="w"> </span><span class="n">index_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Index</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">BasisTag</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">GenericPolynomial</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">GenericPolynomial</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">GenericPolynomial</span><span class="p">(</span><span class="n">coef_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coefficients</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">coefficients</span><span class="p">({</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)})</span><span class="w"> </span><span class="p">{}</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">explicit</span><span class="w"> </span><span class="n">GenericPolynomial</span><span class="p">(</span><span class="n">index_t</span><span class="w"> </span><span class="n">degree</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">coefficients</span><span class="w"> </span><span class="p">{</span><span class="n">coef_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">Zeros</span><span class="p">(</span><span class="n">degree</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)}</span><span class="w"> </span><span class="p">{}</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">explicit</span><span class="w"> </span><span class="n">GenericPolynomial</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coefficients</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">coefficients</span><span class="w"> </span><span class="p">{</span><span class="n">coefficients</span><span class="p">.</span><span class="n">size</span><span class="p">()}</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">begin</span><span class="p">(</span><span class="n">coefficients</span><span class="p">),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">coefficients</span><span class="p">),</span><span class="w"></span></code>
+<code><span class="w">                  </span><span class="n">std</span><span class="o">::</span><span class="n">begin</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">coefficients</span><span class="p">));</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="p">}</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">coef_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coefficients</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="p">};</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">MonomialBasis_t</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">MonomialBasis</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">ChebyshevBasis_t</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">ChebyshevBasis</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">using</span><span class="w"> </span><span class="n">Polynomial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenericPolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">MonomialBasis_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">using</span><span class="w"> </span><span class="n">ChebyshevPolynomial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenericPolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">ChebyshevBasis_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="p">}</span><span class="w"> </span><span class="c1">// namespace poly</span></code></pre></div>
+</div>
+<h4 class="snippet-name"><a name="poly-eval-hpp" href="#poly-eval-hpp">poly_eval.hpp</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments16 .hll { background-color: #ffffcc }
+.pygments16 { background: #ffffff; }
+.pygments16 .c { color: #008000 } /* Comment */
+.pygments16 .err { border: 1px solid #FF0000 } /* Error */
+.pygments16 .k { color: #0000ff } /* Keyword */
+.pygments16 .l { color: #0000FF } /* Literal */
+.pygments16 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments16 .cm { color: #008000 } /* Comment.Multiline */
+.pygments16 .cp { color: #af00db } /* Comment.Preproc */
+.pygments16 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments16 .c1 { color: #008000 } /* Comment.Single */
+.pygments16 .cs { color: #008000 } /* Comment.Special */
+.pygments16 .ge { font-style: italic } /* Generic.Emph */
+.pygments16 .gh { font-weight: bold } /* Generic.Heading */
+.pygments16 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments16 .gs { font-weight: bold } /* Generic.Strong */
+.pygments16 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments16 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments16 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments16 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments16 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments16 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments16 .kt { color: #2b91af } /* Keyword.Type */
+.pygments16 .ld { color: #0000FF } /* Literal.Date */
+.pygments16 .m { color: #0000FF } /* Literal.Number */
+.pygments16 .s { color: #a31515 } /* Literal.String */
+.pygments16 .na { color: #001080 } /* Name.Attribute */
+.pygments16 .nb { color: #795e26 } /* Name.Builtin */
+.pygments16 .nc { color: #2b91af } /* Name.Class */
+.pygments16 .no { color: #0000FF } /* Name.Constant */
+.pygments16 .nf { color: #795e26 } /* Name.Function */
+.pygments16 .nl { color: #AF00DB } /* Name.Label */
+.pygments16 .nn { color: #000000 } /* Name.Namespace */
+.pygments16 .nt { color: #800000 } /* Name.Tag */
+.pygments16 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments16 .ow { color: #0000ff } /* Operator.Word */
+.pygments16 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments16 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments16 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments16 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments16 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments16 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments16 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments16 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments16 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments16 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments16 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments16 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments16 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments16 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments16 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments16 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments16 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments16 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments16 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments16 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments16 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments16 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments16 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments16 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments16 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments16 pre.snippet16 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Algorithms/Polynomials/resources/include/poly_eval.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments16"><pre class="lineNumbers snippet16"><code><span></span><span class="cp">#pragma once</span></code>
+<code></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;poly.hpp&gt;</span><span class="cp"></span></code>
+<code></code>
+<code><span class="k">namespace</span><span class="w"> </span><span class="nn">poly</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">namespace</span><span class="w"> </span><span class="nn">detail</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code></code>
+<code><span class="c1">/// Tail-recursive implementation to allow C++11 constexpr.</span></code>
+<code><span class="c1">/// @param  x   Point to evaluate at</span></code>
+<code><span class="c1">/// @param  p   Polynomial coefficients</span></code>
+<code><span class="c1">/// @param  n   Index of current coefficient (number of remaining iterations)</span></code>
+<code><span class="c1">/// @param  b   Temporary value @f$ b_{n-1} = p_n + b_n x @f$</span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">P</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">horner_impl</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">index_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="c1">// base case</span></code>
+<code><span class="w">                  </span><span class="o">:</span><span class="w"> </span><span class="n">horner_impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="c1">/// Evaluate a polynomial using [Horner&#39;s method](https://en.wikipedia.org/wiki/Horner%27s_method).</span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">P</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">horner</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">P</span><span class="w"> </span><span class="o">&amp;</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">index_t</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">}</span><span class="w"> </span><span class="c1">// empty polynomial</span></code>
+<code><span class="w">         </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">  </span><span class="c1">// constant</span></code>
+<code><span class="w">                  </span><span class="o">:</span><span class="w"> </span><span class="n">horner_impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">horner</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">coef</span><span class="p">)[</span><span class="n">N</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">horner</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">N</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">horner</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">Polynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">poly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">horner</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">poly</span><span class="p">.</span><span class="n">coefficients</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">poly</span><span class="p">.</span><span class="n">coefficients</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="p">}</span><span class="w"> </span><span class="c1">// namespace detail</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">evaluate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">Polynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">poly</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">detail</span><span class="o">::</span><span class="n">horner</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">poly</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">namespace</span><span class="w"> </span><span class="nn">detail</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code></code>
+<code><span class="c1">/// Tail-recursive implementation to allow C++11 constexpr.</span></code>
+<code><span class="c1">/// @param  x   Point to evaluate at</span></code>
+<code><span class="c1">/// @param  c   Polynomial coefficients</span></code>
+<code><span class="c1">/// @param  n   Index of current coefficient (number of remaining iterations)</span></code>
+<code><span class="c1">/// @param  b1  Temporary value @f$ b^1_{n-1} = c_n + 2 b^1_n x - b^2_n @f$</span></code>
+<code><span class="c1">/// @param  b2  Temporary value @f$ b^2_{n-1} = b^1_n @f$</span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">clenshaw_cheb_impl</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">b1</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">b2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b2</span><span class="w"> </span><span class="c1">// base case</span></code>
+<code><span class="w">                  </span><span class="o">:</span><span class="w"> </span><span class="n">clenshaw_cheb_impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">b2</span><span class="p">,</span><span class="w"> </span><span class="n">b1</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="c1">/// Evaluate a Chebyshev polynomial using [Clenshaw&#39;s algorithm](https://en.wikipedia.org/wiki/Clenshaw_algorithm).</span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">clenshaw_cheb</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">C</span><span class="w"> </span><span class="o">&amp;</span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">index_t</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">}</span><span class="w">           </span><span class="c1">// empty polynomial</span></code>
+<code><span class="w">         </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w">            </span><span class="c1">// constant</span></code>
+<code><span class="w">         </span><span class="o">:</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="w"> </span><span class="c1">// linear</span></code>
+<code><span class="w">                  </span><span class="o">:</span><span class="w"> </span><span class="n">clenshaw_cheb_impl</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">],</span><span class="w"></span></code>
+<code><span class="w">                                       </span><span class="n">c</span><span class="p">[</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">]);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">N</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">clenshaw_cheb</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="p">(</span><span class="o">&amp;</span><span class="n">coef</span><span class="p">)[</span><span class="n">N</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">clenshaw_cheb</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">coef</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="n">N</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">clenshaw_cheb</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">ChebyshevPolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">poly</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">clenshaw_cheb</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">poly</span><span class="p">.</span><span class="n">coefficients</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">poly</span><span class="p">.</span><span class="n">coefficients</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="p">}</span><span class="w"> </span><span class="c1">// namespace detail</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">evaluate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">ChebyshevPolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">poly</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">detail</span><span class="o">::</span><span class="n">clenshaw_cheb</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">poly</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="p">}</span><span class="w"> </span><span class="c1">// namespace poly</span></code></pre></div>
+</div>
+<h4 class="snippet-name"><a name="poly-eval-cpp" href="#poly-eval-cpp">poly_eval.cpp</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments20 .hll { background-color: #ffffcc }
+.pygments20 { background: #ffffff; }
+.pygments20 .c { color: #008000 } /* Comment */
+.pygments20 .err { border: 1px solid #FF0000 } /* Error */
+.pygments20 .k { color: #0000ff } /* Keyword */
+.pygments20 .l { color: #0000FF } /* Literal */
+.pygments20 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments20 .cm { color: #008000 } /* Comment.Multiline */
+.pygments20 .cp { color: #af00db } /* Comment.Preproc */
+.pygments20 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments20 .c1 { color: #008000 } /* Comment.Single */
+.pygments20 .cs { color: #008000 } /* Comment.Special */
+.pygments20 .ge { font-style: italic } /* Generic.Emph */
+.pygments20 .gh { font-weight: bold } /* Generic.Heading */
+.pygments20 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments20 .gs { font-weight: bold } /* Generic.Strong */
+.pygments20 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments20 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments20 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments20 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments20 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments20 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments20 .kt { color: #2b91af } /* Keyword.Type */
+.pygments20 .ld { color: #0000FF } /* Literal.Date */
+.pygments20 .m { color: #0000FF } /* Literal.Number */
+.pygments20 .s { color: #a31515 } /* Literal.String */
+.pygments20 .na { color: #001080 } /* Name.Attribute */
+.pygments20 .nb { color: #795e26 } /* Name.Builtin */
+.pygments20 .nc { color: #2b91af } /* Name.Class */
+.pygments20 .no { color: #0000FF } /* Name.Constant */
+.pygments20 .nf { color: #795e26 } /* Name.Function */
+.pygments20 .nl { color: #AF00DB } /* Name.Label */
+.pygments20 .nn { color: #000000 } /* Name.Namespace */
+.pygments20 .nt { color: #800000 } /* Name.Tag */
+.pygments20 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments20 .ow { color: #0000ff } /* Operator.Word */
+.pygments20 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments20 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments20 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments20 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments20 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments20 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments20 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments20 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments20 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments20 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments20 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments20 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments20 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments20 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments20 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments20 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments20 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments20 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments20 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments20 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments20 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments20 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments20 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments20 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments20 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments20 pre.snippet20 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Algorithms/Polynomials/resources/src/poly_eval.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments20"><pre class="lineNumbers snippet20"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;poly_eval.hpp&gt;</span><span class="cp"></span></code>
+<code></code>
+<code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Create the polynomial p(x) = 1 - 2x + 3x² - 4x³ + 5x⁴</span></code>
+<code><span class="w">    </span><span class="n">poly</span><span class="o">::</span><span class="n">Polynomial</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Evaluate the polynomial at x = 3</span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">evaluate</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="mf">3.</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code></pre></div>
+</div>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="Polynomials">Index</a></div><div class="nextpage"><a href="Interpolation.html" title="Interpolation">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+    </article>
+    <footer>Last edited: Saturday, 30 July 2022 22:38 UTC</footer>
+</body>
+
+</html>

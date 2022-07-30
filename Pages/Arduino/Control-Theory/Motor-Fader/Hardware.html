@@ -488,6 +488,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
                 <li><span class="ftriangle"></span><a class="" href="PID-Tuning.html">PID Tuning</a></li>
                 <li><span class="ftriangle"></span><a class="" href="Architecture.html">Architecture and Design Decisions</a></li>
                 <li><span class="ftriangle"></span><a class="openEntry " href="Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Configuration.html">Configuration options and common use cases</a></li>
                 <li><span class="ftriangle"></span><a class="" href="ATmega328P-Code.html">ATmega328P Code</a></li>
             </ul>
             </li>
@@ -558,6 +559,11 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/Cpp/index.html">C++</a>
         <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/Cpp/Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Programming/Cpp/Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
             <ul>
                 <li><span class="ftriangle"></span><a class="" href="../../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
@@ -745,7 +751,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments70 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments70 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments70 pre.snippet70 { counter-reset: line 42; }</style>
-<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/47d8cb6cdc2978d500383387a72d646e62568a16/Motor-Controller/main.cpp#L43-L88" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/5a91eac24c33224aa2761411591e44b880bfcf81/Motor-Controller/main.cpp#L43-L88" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments70"><pre class="lineNumbers snippet70"><code><span></span><span class="c1">// -------------------------------- Hardware -------------------------------- //</span></code>
 <code></code>
 <code><span class="c1">// Fader 0:</span></code>
@@ -757,7 +763,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="c1">// Fader 1:</span></code>
 <code><span class="c1">//  - A1:  wiper of the potentiometer          (ADC1)</span></code>
 <code><span class="c1">//  - D9:  touch pin of the knob               (PB1)</span></code>
-<code><span class="c1">//  - D13: input 3A of L293D dual H-bridge 1   (PB5)</span></code>
+<code><span class="c1">//  - D7:  input 3A of L293D dual H-bridge 1   (PD7)</span></code>
 <code><span class="c1">//  - D11: input 4A of L293D dual H-bridge 1   (OC2A)</span></code>
 <code><span class="c1">//</span></code>
 <code><span class="c1">// Fader 2:</span></code>
@@ -769,7 +775,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="c1">// Fader 3:</span></code>
 <code><span class="c1">//  - A3:  wiper of the potentiometer          (ADC3)</span></code>
 <code><span class="c1">//  - D12: touch pin of the knob               (PB4)</span></code>
-<code><span class="c1">//  - D7:  input 3A of L293D dual H-bridge 2   (PD7)</span></code>
+<code><span class="c1">//  - D13: input 3A of L293D dual H-bridge 2   (PB5)</span></code>
 <code><span class="c1">//  - D6:  input 4A of L293D dual H-bridge 2   (OC0A)</span></code>
 <code><span class="c1">//</span></code>
 <code><span class="c1">// If fader 1 is unused:</span></code>
@@ -788,15 +794,15 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="c1">// On an Arduino Nano, you can set an option to use pins A6/A7 instead of A2/A3.</span></code>
 <code><span class="c1">// Note that D13 is often pulsed by the bootloader, which might cause the fader</span></code>
 <code><span class="c1">// to move when resetting the Arduino. You can either disable this behavior in</span></code>
-<code><span class="c1">// the bootloader, or use a different pin (e.g. A3 or A4 on an Arduino Nano).</span></code>
-<code><span class="c1">// The overrun indicator is only enabled if the number of faders is 1, because</span></code>
-<code><span class="c1">// it conflicts with the motor driver pin of Fader 1. You can choose a different</span></code>
-<code><span class="c1">// pin instead.</span></code></pre></div>
+<code><span class="c1">// the bootloader, or use a different pin (e.g. A2 or A3 on an Arduino Nano).</span></code>
+<code><span class="c1">// The overrun indicator is only enabled if the number of faders is less than 4,</span></code>
+<code><span class="c1">// because it conflicts with the motor driver pin of Fader 1. You can choose a</span></code>
+<code><span class="c1">// different pin instead.</span></code></pre></div>
 </div>
 
 </div>
         <hr id="end-of-article">
-        <div class="nextupprev"><div class="prevpage"><a href="Architecture.html" title="Architecture and Design Decisions"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"><a href="ATmega328P-Code.html" title="ATmega328P Code">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+        <div class="nextupprev"><div class="prevpage"><a href="Architecture.html" title="Architecture and Design Decisions"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"><a href="Configuration.html" title="Configuration options and common use cases">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
     <footer>Last edited: Monday, 19 July 2021 21:42 UTC</footer>
 </body>

@@ -532,6 +532,7 @@ mjx-c.mjx-c1D460.TEX-I::before {
                 <li><span class="ftriangle"></span><a class="" href="PID-Tuning.html">PID Tuning</a></li>
                 <li><span class="ftriangle"></span><a class="" href="Architecture.html">Architecture and Design Decisions</a></li>
                 <li><span class="ftriangle"></span><a class="" href="Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Configuration.html">Configuration options and common use cases</a></li>
                 <li><span class="ftriangle"></span><a class="" href="ATmega328P-Code.html">ATmega328P Code</a></li>
             </ul>
             </li>
@@ -602,6 +603,11 @@ mjx-c.mjx-c1D460.TEX-I::before {
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/Cpp/index.html">C++</a>
         <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/Cpp/Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Programming/Cpp/Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
             <ul>
                 <li><span class="ftriangle"></span><a class="" href="../../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
@@ -758,7 +764,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="pygments29"><pre class="lineNumbers snippet29"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span><span class="cp"></span></code>
 <code></code>
 <code><span class="c1">/// Very basic, mostly educational PID controller with derivative filter.</span></code>
-<code><span class="k">class</span> <span class="nc">PID</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="k">class</span><span class="w"> </span><span class="nc">PID</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="c1">/// @param  kp  Proportional gain   @f$ K_p @f$</span></code>
 <code><span class="w">    </span><span class="c1">/// @param  ki  Integral gain       @f$ K_i @f$</span></code>
@@ -888,7 +894,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Arduino/Control-Theory/Motor-Fader/resources/basic-pid-2.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments40"><pre class="lineNumbers snippet40"><code><span></span><span class="c1">/// Very basic, mostly educational PID controller with derivative filter, output</span></code>
 <code><span class="c1">/// clamping and integral anti-windup.</span></code>
-<code><span class="k">class</span> <span class="nc">PID</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="k">class</span><span class="w"> </span><span class="nc">PID</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="cm">/* ... */</span><span class="w"></span></code>
 <code></code>
@@ -1010,7 +1016,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/Controller.hpp#L38" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments55"><pre class="lineNumbers snippet55"><code><span></span><span class="c1">/// Standard PID (proportional, integral, derivative) controller. Derivative</span></code>
 <code><span class="c1">/// component is filtered using an exponential moving average filter.</span></code>
-<code><span class="k">class</span> <span class="nc">PID</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="k">class</span><span class="w"> </span><span class="nc">PID</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="n">PID</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="c1">/// @param  kp</span></code>
@@ -1063,7 +1069,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="w">        </span><span class="p">}</span><span class="w"></span></code>
 <code></code>
 <code><span class="w">        </span><span class="kt">bool</span><span class="w"> </span><span class="n">backward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span><span class="w"></span></code>
-<code><span class="w">        </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">calcIntegral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">backward</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="nl">newIntegral</span> <span class="p">:</span><span class="w"> </span><span class="n">integral</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="kt">int32_t</span><span class="w"> </span><span class="n">calcIntegral</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">backward</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">newIntegral</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">integral</span><span class="p">;</span><span class="w"></span></code>
 <code></code>
 <code><span class="w">        </span><span class="c1">// Standard PID rule</span></code>
 <code><span class="w">        </span><span class="kt">float</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kp</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ki_Ts</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">calcIntegral</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">kd_Ts</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">diff</span><span class="p">;</span><span class="w"></span></code>

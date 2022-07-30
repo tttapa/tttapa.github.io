@@ -1101,6 +1101,7 @@ mjx-c.mjx-c1D435.TEX-I::before {
                 <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
             </ul>
             </li>
@@ -1171,6 +1172,11 @@ mjx-c.mjx-c1D435.TEX-I::before {
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Programming/Cpp/index.html">C++</a>
         <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Programming/Cpp/Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Programming/Cpp/Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Programming/Cpp/Algorithms/index.html">Algorithms</a>
             <ul>
                 <li><span class="ftriangle"></span><a class="" href="../../../../Programming/Cpp/Algorithms/Max_n_elements.html">Maximum N elements</a></li>
@@ -1404,8 +1410,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="c1">/// The first Exponential Moving Average implementation for unsigned integers.</span></code>
 <code><span class="c1">///</span></code>
 <code><span class="c1">/// @note   An improved implementation is presented further down the page.</span></code>
-<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="k">class</span> <span class="nc">uint_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint16_t</span><span class="o">&gt;</span><span class="w"></span></code>
-<code><span class="k">class</span> <span class="nc">EMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">uint_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint16_t</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">class</span><span class="w"> </span><span class="nc">EMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="c1">/// Update the filter with the given input and return the filtered output.</span></code>
 <code><span class="w">    </span><span class="n">uint_t</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">uint_t</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
@@ -1534,19 +1540,19 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/resources/Rounding-Division.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments163"><pre class="lineNumbers snippet163"><code><span></span><span class="k">constexpr</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span></code>
 <code></code>
-<code><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">div_s1</span><span class="p">(</span><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">div_s1</span><span class="p">(</span><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">round</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">));</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">val</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span></code>
 <code><span class="w">        </span><span class="n">round</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">round</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">K</span><span class="p">;</span><span class="w"></span></code>
 <code><span class="p">}</span><span class="w"></span></code>
 <code></code>
-<code><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">div_s2</span><span class="p">(</span><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">div_s2</span><span class="p">(</span><span class="kt">signed</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">neg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">val</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">neg</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">K</span><span class="p">;</span><span class="w"></span></code>
 <code><span class="p">}</span><span class="w"></span></code>
 <code></code>
-<code><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">div_u</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">div_u</span><span class="p">(</span><span class="kt">unsigned</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">(</span><span class="n">val</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)))</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">K</span><span class="p">;</span><span class="w"></span></code>
 <code><span class="p">}</span><span class="w"></span></code></pre></div>
 </div>
@@ -1795,58 +1801,58 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments174 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments174 pre.snippet174 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/resources/Rounding-Division-AVR.S" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments174"><pre class="lineNumbers snippet174"><code><span></span><span class="nf">div_s1</span><span class="p">(</span><span class="no">int</span><span class="p">):</span></code>
-<code>        <span class="nf">sbrc</span> <span class="no">r25</span><span class="p">,</span><span class="mi">7</span>  <span class="c1"># Skip if Bit in Register is Cleared: val &gt;= 0</span></code>
-<code>        <span class="nf">rjmp</span> <span class="no">.L2</span></code>
-<code>                    <span class="c1"># val &gt;= 0</span></code>
-<code>        <span class="nf">adiw</span> <span class="no">r24</span><span class="p">,</span><span class="mi">4</span>  <span class="c1"># Add Immediate to Word: val + (1 &lt;&lt; (K - 1)) = val + 4</span></code>
-<code>        <span class="nf">asr</span> <span class="no">r25</span>     <span class="c1"># Arithmetic Shift Right: shift high byte (preserve sign)</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span>     <span class="c1"># Rotate Right through Carry: shift low byte</span></code>
-<code>        <span class="nf">asr</span> <span class="no">r25</span>     <span class="c1"># Two more times</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span></code>
-<code>        <span class="nf">asr</span> <span class="no">r25</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span></code>
-<code>        <span class="nf">ret</span></code>
-<code><span class="nl">.L2:</span>                </code>
-<code>                    <span class="c1"># val &lt; 0</span></code>
-<code>        <span class="nf">adiw</span> <span class="no">r24</span><span class="p">,</span><span class="mi">3</span>  <span class="c1"># Add Immediate to Word: val + (1 &lt;&lt; (K - 1)) - 1 = val + 3</span></code>
-<code>        <span class="nf">asr</span> <span class="no">r25</span>     <span class="c1"># Arithmetic Shift Right: shift high byte (preserve sign)</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span>     <span class="c1"># Rotate Right through Carry: shift low byte</span></code>
-<code>        <span class="nf">asr</span> <span class="no">r25</span>     <span class="c1"># Two more times</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span></code>
-<code>        <span class="nf">asr</span> <span class="no">r25</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span></code>
-<code>        <span class="nf">ret</span></code>
+<div class="pygments174"><pre class="lineNumbers snippet174"><code><span></span><span class="nf">div_s1</span><span class="p">(</span><span class="no">int</span><span class="p">):</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">sbrc</span><span class="w"> </span><span class="no">r25</span><span class="p">,</span><span class="mi">7</span><span class="w">  </span><span class="c1"># Skip if Bit in Register is Cleared: val &gt;= 0</span></code>
+<code><span class="w">        </span><span class="nf">rjmp</span><span class="w"> </span><span class="no">.L2</span><span class="w"></span></code>
+<code><span class="w">                    </span><span class="c1"># val &gt;= 0</span></code>
+<code><span class="w">        </span><span class="nf">adiw</span><span class="w"> </span><span class="no">r24</span><span class="p">,</span><span class="mi">4</span><span class="w">  </span><span class="c1"># Add Immediate to Word: val + (1 &lt;&lt; (K - 1)) = val + 4</span></code>
+<code><span class="w">        </span><span class="nf">asr</span><span class="w"> </span><span class="no">r25</span><span class="w">     </span><span class="c1"># Arithmetic Shift Right: shift high byte (preserve sign)</span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w">     </span><span class="c1"># Rotate Right through Carry: shift low byte</span></code>
+<code><span class="w">        </span><span class="nf">asr</span><span class="w"> </span><span class="no">r25</span><span class="w">     </span><span class="c1"># Two more times</span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">asr</span><span class="w"> </span><span class="no">r25</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">ret</span><span class="w"></span></code>
+<code><span class="nl">.L2:</span><span class="w">                </span></code>
+<code><span class="w">                    </span><span class="c1"># val &lt; 0</span></code>
+<code><span class="w">        </span><span class="nf">adiw</span><span class="w"> </span><span class="no">r24</span><span class="p">,</span><span class="mi">3</span><span class="w">  </span><span class="c1"># Add Immediate to Word: val + (1 &lt;&lt; (K - 1)) - 1 = val + 3</span></code>
+<code><span class="w">        </span><span class="nf">asr</span><span class="w"> </span><span class="no">r25</span><span class="w">     </span><span class="c1"># Arithmetic Shift Right: shift high byte (preserve sign)</span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w">     </span><span class="c1"># Rotate Right through Carry: shift low byte</span></code>
+<code><span class="w">        </span><span class="nf">asr</span><span class="w"> </span><span class="no">r25</span><span class="w">     </span><span class="c1"># Two more times</span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">asr</span><span class="w"> </span><span class="no">r25</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">ret</span><span class="w"></span></code>
 <code></code>
-<code><span class="nf">div_s2</span><span class="p">(</span><span class="no">int</span><span class="p">):</span></code>
-<code>        <span class="nf">movw</span> <span class="no">r18</span><span class="p">,</span><span class="no">r24</span></code>
-<code>        <span class="nf">subi</span> <span class="no">r18</span><span class="p">,-</span><span class="mi">4</span>   <span class="c1"># Subtract immediate: val + (1 &lt;&lt; (K - 1)) = val + 4</span></code>
-<code>        <span class="nf">sbci</span> <span class="no">r19</span><span class="p">,-</span><span class="mi">1</span>   <span class="c1"># Subtract Immediate with Carry: (low byte)</span></code>
-<code>        <span class="nf">mov</span> <span class="no">r24</span><span class="p">,</span><span class="no">r25</span></code>
-<code>        <span class="nf">rol</span> <span class="no">r24</span>       <span class="c1"># Rotate Left through Carry: C flag is now sign bit</span></code>
-<code>        <span class="nf">clr</span> <span class="no">r24</span>       <span class="c1"># Clear Register</span></code>
-<code>        <span class="nf">rol</span> <span class="no">r24</span>       <span class="c1"># Rotate Left through Carry: original sign bit is now lsb</span></code>
-<code>        <span class="nf">movw</span> <span class="no">r20</span><span class="p">,</span><span class="no">r18</span></code>
-<code>        <span class="nf">sub</span> <span class="no">r20</span><span class="p">,</span><span class="no">r24</span>   <span class="c1"># Subtract without Carry: val + 4 - neg</span></code>
-<code>        <span class="nf">sbc</span> <span class="no">r21</span><span class="p">,</span><span class="no">__zero_reg__</span>  <span class="c1"># Subtract with Carry: (low byte)</span></code>
-<code>        <span class="nf">movw</span> <span class="no">r24</span><span class="p">,</span><span class="no">r20</span></code>
-<code>        <span class="nf">asr</span> <span class="no">r25</span>       <span class="c1"># Arithmetic Shift Right: shift high byte (preserve sign)</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span>       <span class="c1"># Rotate Right through Carry: shift low byte</span></code>
-<code>        <span class="nf">asr</span> <span class="no">r25</span>       <span class="c1"># Two more times</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span></code>
-<code>        <span class="nf">asr</span> <span class="no">r25</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span></code>
-<code>        <span class="nf">ret</span></code>
+<code><span class="nf">div_s2</span><span class="p">(</span><span class="no">int</span><span class="p">):</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">movw</span><span class="w"> </span><span class="no">r18</span><span class="p">,</span><span class="no">r24</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">subi</span><span class="w"> </span><span class="no">r18</span><span class="p">,-</span><span class="mi">4</span><span class="w">   </span><span class="c1"># Subtract immediate: val + (1 &lt;&lt; (K - 1)) = val + 4</span></code>
+<code><span class="w">        </span><span class="nf">sbci</span><span class="w"> </span><span class="no">r19</span><span class="p">,-</span><span class="mi">1</span><span class="w">   </span><span class="c1"># Subtract Immediate with Carry: (low byte)</span></code>
+<code><span class="w">        </span><span class="nf">mov</span><span class="w"> </span><span class="no">r24</span><span class="p">,</span><span class="no">r25</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">rol</span><span class="w"> </span><span class="no">r24</span><span class="w">       </span><span class="c1"># Rotate Left through Carry: C flag is now sign bit</span></code>
+<code><span class="w">        </span><span class="nf">clr</span><span class="w"> </span><span class="no">r24</span><span class="w">       </span><span class="c1"># Clear Register</span></code>
+<code><span class="w">        </span><span class="nf">rol</span><span class="w"> </span><span class="no">r24</span><span class="w">       </span><span class="c1"># Rotate Left through Carry: original sign bit is now lsb</span></code>
+<code><span class="w">        </span><span class="nf">movw</span><span class="w"> </span><span class="no">r20</span><span class="p">,</span><span class="no">r18</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">sub</span><span class="w"> </span><span class="no">r20</span><span class="p">,</span><span class="no">r24</span><span class="w">   </span><span class="c1"># Subtract without Carry: val + 4 - neg</span></code>
+<code><span class="w">        </span><span class="nf">sbc</span><span class="w"> </span><span class="no">r21</span><span class="p">,</span><span class="no">__zero_reg__</span><span class="w">  </span><span class="c1"># Subtract with Carry: (low byte)</span></code>
+<code><span class="w">        </span><span class="nf">movw</span><span class="w"> </span><span class="no">r24</span><span class="p">,</span><span class="no">r20</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">asr</span><span class="w"> </span><span class="no">r25</span><span class="w">       </span><span class="c1"># Arithmetic Shift Right: shift high byte (preserve sign)</span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w">       </span><span class="c1"># Rotate Right through Carry: shift low byte</span></code>
+<code><span class="w">        </span><span class="nf">asr</span><span class="w"> </span><span class="no">r25</span><span class="w">       </span><span class="c1"># Two more times</span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">asr</span><span class="w"> </span><span class="no">r25</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">ret</span><span class="w"></span></code>
 <code></code>
-<code><span class="nf">div_u</span><span class="p">(</span><span class="no">unsigned</span> <span class="no">int</span><span class="p">):</span></code>
-<code>        <span class="nf">adiw</span> <span class="no">r24</span><span class="p">,</span><span class="mi">4</span>  <span class="c1"># Add Immediate to Word: val + (1 &lt;&lt; (K - 1)) = val + 4</span></code>
-<code>        <span class="nf">lsr</span> <span class="no">r25</span>     <span class="c1"># Logical Shift Right: shift high byte (no sign extension)</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span>     <span class="c1"># Rotate Right through Carry: shift low byte</span></code>
-<code>        <span class="nf">lsr</span> <span class="no">r25</span>     <span class="c1"># Two more times</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span></code>
-<code>        <span class="nf">lsr</span> <span class="no">r25</span></code>
-<code>        <span class="nf">ror</span> <span class="no">r24</span></code>
-<code>        <span class="nf">ret</span></code></pre></div>
+<code><span class="nf">div_u</span><span class="p">(</span><span class="no">unsigned</span><span class="w"> </span><span class="no">int</span><span class="p">):</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">adiw</span><span class="w"> </span><span class="no">r24</span><span class="p">,</span><span class="mi">4</span><span class="w">  </span><span class="c1"># Add Immediate to Word: val + (1 &lt;&lt; (K - 1)) = val + 4</span></code>
+<code><span class="w">        </span><span class="nf">lsr</span><span class="w"> </span><span class="no">r25</span><span class="w">     </span><span class="c1"># Logical Shift Right: shift high byte (no sign extension)</span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w">     </span><span class="c1"># Rotate Right through Carry: shift low byte</span></code>
+<code><span class="w">        </span><span class="nf">lsr</span><span class="w"> </span><span class="no">r25</span><span class="w">     </span><span class="c1"># Two more times</span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">lsr</span><span class="w"> </span><span class="no">r25</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">ror</span><span class="w"> </span><span class="no">r24</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nf">ret</span><span class="w"></span></code></pre></div>
 </div>
 <p>
     Keep in mind that an <code>int</code> on AVR is only 16 bits wide, whereas
@@ -2007,9 +2013,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="cm"> *    a sensible choice.</span></code>
 <code><span class="cm"> */</span><span class="w"></span></code>
 <code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"></span></code>
-<code><span class="w">          </span><span class="k">class</span> <span class="nc">input_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint_fast16_t</span><span class="p">,</span><span class="w"></span></code>
-<code><span class="w">          </span><span class="k">class</span> <span class="nc">state_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unsigned_t</span><span class="o">&lt;</span><span class="n">input_t</span><span class="o">&gt;&gt;</span><span class="w"></span></code>
-<code><span class="k">class</span> <span class="nc">EMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">          </span><span class="k">class</span><span class="w"> </span><span class="nc">input_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">uint_fast16_t</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">          </span><span class="k">class</span><span class="w"> </span><span class="nc">state_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_unsigned_t</span><span class="o">&lt;</span><span class="n">input_t</span><span class="o">&gt;&gt;</span><span class="w"></span></code>
+<code><span class="k">class</span><span class="w"> </span><span class="nc">EMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">  </span><span class="k">public</span><span class="o">:</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="c1">/// Constructor: initialize filter to zero or optional given value.</span></code>
 <code><span class="w">    </span><span class="n">EMA</span><span class="p">(</span><span class="n">input_t</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_t</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span><span class="w"></span></code>
@@ -2038,7 +2044,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code></code>
 <code><span class="w">    </span><span class="c1">/// Verify the input range to make sure it's compatible with the shift</span></code>
 <code><span class="w">    </span><span class="c1">/// factor and the width of the state type.</span></code>
-<code><span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">supports_range</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="n">min</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">      </span><span class="k">using</span><span class="w"> </span><span class="n">sstate_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">make_signed_t</span><span class="o">&lt;</span><span class="n">state_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span></code>
 <code><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">max</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"></span></code>
@@ -2208,8 +2214,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments242 .il { color: #8A7B52 } /* Literal.Number.Integer.Long */
 .pygments242 pre.snippet242 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/resources/EMA-Arduino.ino" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments242"><pre class="lineNumbers snippet242"><code><span></span><span class="n">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">uint8_t</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="kr">class</span> <span class="nc">uint_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">uint16_t</span><span class="o">&gt;</span><span class="w"></span></code>
-<code><span class="kr">class</span> <span class="nc">EMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<div class="pygments242"><pre class="lineNumbers snippet242"><code><span></span><span class="n">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">uint8_t</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="kr">class</span><span class="w"> </span><span class="nc">uint_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">uint16_t</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="kr">class</span><span class="w"> </span><span class="nc">EMA</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
 <code><span class="w">  </span><span class="kr">public</span><span class="o">:</span><span class="w"></span></code>
 <code><span class="w">    </span><span class="c1">/// Update the filter with the given input and return the filtered output.</span></code>
 <code><span class="w">    </span><span class="n">uint_t</span><span class="w"> </span><span class="kr">operator</span><span class="p">()(</span><span class="n">uint_t</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>

@@ -1,0 +1,619 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="c++,atomics,memory order,order,sequential consistency,acquire,release"/>
+    <meta name="description" content="Notes about C++ memory order for atomics."/>
+    <title>Memory order</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Debugging.html">Debugging</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/index.html">Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../index.html">Programming</a>
+    <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../index.html">C++</a>
+        <ul>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="hiddenEntry " href="index.html">Atomics</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="Happens-before.html">Happens before</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry " href="Memory-order.html">Memory order</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Examples.html">Examples</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Memory-order.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Memory order</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+          <ul>
+            <li><a href="#references">References</a></li>
+            <li><a href="#load-acquire">Load-acquire ▼</a></li>
+            <li><a href="#store-release">Store-release ▲</a></li>
+            <li><a href="#sc-load-acquire">SC Load-acquire ▼</a></li>
+            <li><a href="#sc-store-release">SC Store-release ▲</a></li>
+          </ul>
+        <li><a href="#memory-orders-for-c-atomics">Memory orders for C++ atomics</a></li>
+          <ul>
+            <li><a href="#memory-order-acquire"><code>memory_order_acquire</code> ▼</a></li>
+            <li><a href="#memory-order-release"><code>memory_order_release</code> ▲</a></li>
+          </ul>
+        <li><a href="#acquire-release">Acquire-release</a></li>
+          <ul>
+            <li><a href="#fences">Fences</a></li>
+              <ul>
+                <li><a href="#fence-fence">Fence─fence</a></li>
+                <li><a href="#fence-atomic">Fence─atomic</a></li>
+                <li><a href="#atomic-fence">Atomic─fence</a></li>
+              </ul>
+            <li><a href="#coherence-ordered-before">Coherence-ordered before</a></li>
+            <li><a href="#total-order-of-sequentially-consistent-operations">Total order of sequentially consistent operations</a></li>
+            </ul>
+  </ul></div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<h3><a name="references" href="#references">References</a></h3>
+
+<ul>
+    <li><a href="https://en.cppreference.com/w/cpp/language/memory_model">cppreference: Memory model</a></li>
+    <li><a href="https://en.cppreference.com/w/cpp/atomic/memory_order">cppreference: std::memory_order</a></li>
+    <li><a href="https://herbsutter.com/2013/02/11/atomic-weapons-the-c-memory-model-and-modern-hardware/">Herb Sutter:
+            atomic&lt;&gt; Weapons</a> (Channel 9 links are broken, but videos can still be found on YouTube)</li>
+    <li><a href="https://preshing.com/20120612/an-introduction-to-lock-free-programming/">Jeff Preshing: An Introduction
+            to Lock-Free Programming</a></li>
+    <li><a href="https://preshing.com/20120710/memory-barriers-are-like-source-control-operations/">Jeff Preshing:
+            Memory Barriers Are Like Source Control Operations</a></li>
+</ul>
+
+<h3><a name="load-acquire" href="#load-acquire">Load-acquire ▼</a></h3>
+<h3><a name="store-release" href="#store-release">Store-release ▲</a></h3>
+<h3><a name="sc-load-acquire" href="#sc-load-acquire">SC Load-acquire ▼</a></h3>
+<h3><a name="sc-store-release" href="#sc-store-release">SC Store-release ▲</a></h3>
+
+<h2><a name="memory-orders-for-c-atomics" href="#memory-orders-for-c-atomics">Memory orders for C++ atomics</a></h2>
+
+<p>
+    The C++ standard defines six constants to specify memory ordering:
+    The main two orderings are <code>memory_order_acquire</code> and
+    <code>memory_order_release</code>. The default ordering is
+    <code>memory_order_seq_cst</code>, which implies
+    <code>memory_order_acquire</code> for load operations and
+    <code>memory_order_release</code> for store operations, and additionally
+    creates a global, sequentially consistent order of operations on atomic
+    variables.
+    The combined <code>memory_order_acq_rel</code> ordering applies only to
+    read-modify-write operations, and implies
+    <code>memory_order_acquire</code> for the read and
+    <code>memory_order_release</code> for the write.
+    On some architectures, it can in theory be beneficial to use
+    <code>memory_order_consume</code>, which is a weaker version of
+    <code>memory_order_acquire</code>, but at the time of writing, no compiler
+    implements it and the specifics are <a
+        href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2019/p0735r1.html">still being discussed</a>,
+    so we won't cover it here.
+    Finally, <code>memory_order_relaxed</code> does not impose any ordering
+    constraints, so it won't be discussed in this section about memory order.
+</p>
+
+<h3><a name="memory-order-acquire" href="#memory-order-acquire"><code>memory_order_acquire</code> ▼</a></h3>
+<p>
+    No reads or writes in the current thread can be reordered before this load.
+</p>
+<p>
+    Applies to load operations.
+</p>
+
+<h3><a name="memory-order-release" href="#memory-order-release"><code>memory_order_release</code> ▲</a></h3>
+<p>
+    No reads or writes in the current thread can be reordered after this store.
+</p>
+<p>
+    Applies to store operations.
+</p>
+
+<h2><a name="acquire-release" href="#acquire-release">Acquire-release</a></h2>
+
+<p>
+    An atomic operation A that performs a release operation on an atomic object M synchronizes with an atomic
+    operation B that performs an acquire operation on M and takes its value from any side effect in the release
+    sequence headed by A.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["rel A(M)"]
+        end
+        subgraph T2
+            B["acq B(M)"]
+        end
+        A -->|VALUE| B
+</div>
+<p>
+    <small>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.1543">C++ standard:
+            [atomics.order]</a>
+    </small>
+</p>
+
+<h3><a name="fences" href="#fences">Fences</a></h3>
+
+<h4><a name="fence-fence" href="#fence-fence">Fence─fence</a></h4>
+<p>
+    A release fence A synchronizes with an acquire fence B if there exist atomic operations X and Y, both
+    operating on some atomic object M, such that A is sequenced before X, X modifies M, Y is sequenced
+    before B, and Y reads the value written by X or a value written by any side effect in the hypothetical release
+    sequence X would head if it were a release operation.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["rel fence A"]
+            A -->|SEQ| X["store X(M)"]
+        end
+        subgraph T2
+            Y["load Y(M)"]
+            Y -->|SEQ| B["acq fence B"]
+        end
+        X -->|VALUE| Y
+</div>
+
+<h4><a name="fence-atomic" href="#fence-atomic">Fence─atomic</a></h4>
+<p>
+    A release fence A synchronizes with an atomic operation B that performs an acquire operation on an atomic
+    object M if there exists an atomic operation X such that A is sequenced before X, X modifies M, and B
+    reads the value written by X or a value written by any side effect in the hypothetical release sequence X
+    would head if it were a release operation.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["rel fence A"]
+            A -->|SEQ| X["store X(M)"]
+        end
+        subgraph T2
+            B["acq B(M)"]
+        end
+        X -->|VALUE| B
+</div>
+
+<h4><a name="atomic-fence" href="#atomic-fence">Atomic─fence</a></h4>
+<p>
+    An atomic operation A that is a release operation on an atomic object M synchronizes with an acquire fence
+    B if there exists some atomic operation X on M such that X is sequenced before B and reads the value
+    written by A or a value written by any side effect in the release sequence headed by A.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["rel A(M)"]
+        end
+        subgraph T2
+            X["load Y(M)"]
+            X -->|SEQ| B["acq fence B"]
+        end
+        A -->|VALUE| X
+</div>
+
+<p>
+    <small>
+        <a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.1569">C++ standard:
+            [atomics.fences]</a>
+    </small>
+</p>
+
+
+<h3><a name="coherence-ordered-before" href="#coherence-ordered-before">Coherence-ordered before</a></h3>
+
+<p>
+    An atomic operation A on some atomic object M is coherence-ordered before another atomic operation B on M if
+</p>
+<ul>
+    <li>A is a modification, and B reads the value stored by A, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["store A(M)"]
+                end
+                subgraph T2
+                    B["load B(M)"]
+                end
+                A -->|VALUE| B
+        </div>
+    </li>
+    <li>A precedes B in the modification order of M, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["A(M)"]
+                end
+                subgraph T2
+                    B["B(M)"]
+                end
+                A -->|MOD| B
+        </div>
+    </li>
+    <li>A and B are not the same atomic read-modify-write operation, and there exists an atomic modification X of M such
+        that A reads the value stored by X and X precedes B in the modification order of M, or
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    X["store X(M)"]
+                end
+                subgraph T2
+                    A["load A(M)"]
+                end
+                subgraph T3
+                    B["B(M)"]
+                end
+                X -->|VALUE| A
+                X --->|MOD| B
+        </div>
+    </li>
+    <li>there exists an atomic modification X of M such that A is coherence-ordered before X and X is coherence-ordered
+        before B.
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["A(M)"]
+                end
+                subgraph T2
+                    X["X(M)"]
+                end
+                subgraph T3
+                    B["B(M)"]
+                end
+                A -->|COB| X
+                X -->|COB| B
+        </div>
+    </li>
+</ul>
+
+<h3><a name="total-order-of-sequentially-consistent-operations" href="#total-order-of-sequentially-consistent-operations">Total order of sequentially consistent operations</a></h3>
+
+<p>
+    There is a single total order S on all <code>memory_order::seq_cst</code> operations, including fences, that
+    satisfies the following constraints.
+</p>
+<p>
+    First, if A and B are <code>memory_order::seq_cst</code> operations and A strongly happens before B, then A precedes
+    B in S.
+</p>
+<div class="mermaid">
+    flowchart LR
+        subgraph T1
+            A["seq_cst A"]
+        end
+        subgraph T2
+            B["seq_cst B"]
+        end
+        A -->|SHB| B
+</div>
+<p>
+    Second, for every pair of atomic operations A and B on an object M, where A is coherence-ordered before B,
+    the following four conditions are required to be satisfied by S:
+</p>
+<ul>
+    <li>if A and B are both <code>memory_order::seq_cst</code> operations, then A precedes B in S; and
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["seq_cst A(M)"]
+                end
+                subgraph T2
+                    B["seq_cst B(M)"]
+                end
+                A -->|COB| B
+        </div>
+    </li>
+    <li>if A is a <code>memory_order::seq_cst</code> operation and B happens before a <code>memory_order::seq_cst</code>
+        fence Y, then A precedes Y in S; and
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    A["seq_cst A(M)"]
+                end
+                subgraph T2
+                    B["B(M)"]
+                    Y["seq_cst Y"]
+                end
+                A -->|COB| B
+                B -->|HB| Y
+        </div>
+    </li>
+    <li>if a <code>memory_order::seq_cst</code> fence X happens before A and B is a <code>memory_order::seq_cst</code>
+        operation, then X precedes B in S; and
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    X["seq_cst X"]
+                    A["A(M)"]
+                end
+                subgraph T2
+                    B["seq_cst B(M)"]
+                end
+                X -->|HB| A
+                A -->|COB| B
+        </div>
+    </li>
+    <li>if a <code>memory_order::seq_cst</code> fence X happens before A and B happens before a
+        <code>memory_order::seq_cst</code> fence Y, then X precedes Y in S.
+        <div class="mermaid">
+            flowchart LR
+                subgraph T1
+                    X["seq_cst X"]
+                    A["A(M)"]
+                end
+                subgraph T2
+                    B["B(M)"]
+                    Y["seq_cst Y"]
+                end
+                X -->|HB| A
+                A -->|COB| B
+                B -->|HB| Y
+        </div>
+    </li>
+</ul>
+
+<p>
+    This definition ensures that S is consistent with the modification order of any atomic object M. It also
+    ensures that a <code>memory_order::seq_cst</code> load A of M gets its value either from the last modification of M
+    that precedes A in S or from some non-<code>memory_order::seq_cst</code> modification of M that does not happen
+    before any modification of M that precedes A in S.
+</p>
+<div class="mermaid">
+    flowchart LR
+        A["seq_cst load A(M)"]
+        X["seq_cst store X(M)"]
+        Y["store Y(M)"]
+        X -->|SC| A
+        Y --x|HB| X
+        Y -->|MOD| A
+        %% TODO: order is weird here
+</div>
+
+<p>
+    <code>memory_order::seq_cst</code> ensures sequential consistency only for a program that is free of data races and
+    uses exclusively <code>memory_order::seq_cst</code> atomic operations. Any use of weaker ordering will invalidate
+    this guarantee unless extreme care is used. In many cases, <code>memory_order::seq_cst</code> atomic operations are
+    reorderable with respect to other atomic operations performed by the same thread.
+</p>
+
+<!-- END -->
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#f4f4ff',
+            secondaryColor: '#f0f0f4',
+            tertiaryColor: '#F9FAFC',
+            fontFamily: 'monospace',
+        },
+    });
+</script>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"><a href="Happens-before.html" title="Happens before"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Atomics">Index</a></div><div class="nextpage"><a href="Examples.html" title="Examples">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+    </article>
+    <footer>Last edited: Tuesday, 05 July 2022 21:16 UTC</footer>
+</body>
+
+</html>

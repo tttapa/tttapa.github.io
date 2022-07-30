@@ -1,0 +1,619 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="interpolation,polynomial,monomial,chebyshev,vandermonde"/>
+    <meta name="description" content="Interpolation of data using polynomials in monomial or Chebyshev basis."/>
+    <title>Interpolation</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Debugging.html">Debugging</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Theory/index.html">Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../index.html">Programming</a>
+    <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../index.html">C++</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../index.html">Algorithms</a>
+            <ul>
+                <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="hiddenEntry " href="index.html">Polynomials</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="Evaluation.html">Evaluation</a></li>
+                    <li><span class="ftriangle"></span><a class="openEntry " href="Interpolation.html">Interpolation</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="Interpolation.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Interpolation</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+
+<h4 class="snippet-name"><a name="poly-hpp" href="#poly-hpp">poly.hpp</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments13 .hll { background-color: #ffffcc }
+.pygments13 { background: #ffffff; }
+.pygments13 .c { color: #008000 } /* Comment */
+.pygments13 .err { border: 1px solid #FF0000 } /* Error */
+.pygments13 .k { color: #0000ff } /* Keyword */
+.pygments13 .l { color: #0000FF } /* Literal */
+.pygments13 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments13 .cm { color: #008000 } /* Comment.Multiline */
+.pygments13 .cp { color: #af00db } /* Comment.Preproc */
+.pygments13 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments13 .c1 { color: #008000 } /* Comment.Single */
+.pygments13 .cs { color: #008000 } /* Comment.Special */
+.pygments13 .ge { font-style: italic } /* Generic.Emph */
+.pygments13 .gh { font-weight: bold } /* Generic.Heading */
+.pygments13 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments13 .gs { font-weight: bold } /* Generic.Strong */
+.pygments13 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments13 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments13 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments13 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments13 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments13 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments13 .kt { color: #2b91af } /* Keyword.Type */
+.pygments13 .ld { color: #0000FF } /* Literal.Date */
+.pygments13 .m { color: #0000FF } /* Literal.Number */
+.pygments13 .s { color: #a31515 } /* Literal.String */
+.pygments13 .na { color: #001080 } /* Name.Attribute */
+.pygments13 .nb { color: #795e26 } /* Name.Builtin */
+.pygments13 .nc { color: #2b91af } /* Name.Class */
+.pygments13 .no { color: #0000FF } /* Name.Constant */
+.pygments13 .nf { color: #795e26 } /* Name.Function */
+.pygments13 .nl { color: #AF00DB } /* Name.Label */
+.pygments13 .nn { color: #000000 } /* Name.Namespace */
+.pygments13 .nt { color: #800000 } /* Name.Tag */
+.pygments13 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments13 .ow { color: #0000ff } /* Operator.Word */
+.pygments13 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments13 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments13 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments13 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments13 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments13 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments13 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments13 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments13 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments13 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments13 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments13 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments13 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments13 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments13 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments13 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments13 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments13 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments13 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments13 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments13 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments13 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments13 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments13 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments13 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments13 pre.snippet13 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Algorithms/Polynomials/resources/include/poly.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments13"><pre class="lineNumbers snippet13"><code><span></span><span class="cp">#pragma once</span></code>
+<code></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/Dense&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="cp"></span></code>
+<code></code>
+<code><span class="k">namespace</span><span class="w"> </span><span class="nn">poly</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">using</span><span class="w"> </span><span class="n">coef_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorX</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="k">using</span><span class="w"> </span><span class="n">index_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Index</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">BasisTag</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">GenericPolynomial</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">GenericPolynomial</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">GenericPolynomial</span><span class="p">(</span><span class="n">coef_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coefficients</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">coefficients</span><span class="p">({</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)})</span><span class="w"> </span><span class="p">{}</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">explicit</span><span class="w"> </span><span class="n">GenericPolynomial</span><span class="p">(</span><span class="n">index_t</span><span class="w"> </span><span class="n">degree</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">coefficients</span><span class="w"> </span><span class="p">{</span><span class="n">coef_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">Zeros</span><span class="p">(</span><span class="n">degree</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)}</span><span class="w"> </span><span class="p">{}</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">explicit</span><span class="w"> </span><span class="n">GenericPolynomial</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coefficients</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="o">:</span><span class="w"> </span><span class="n">coefficients</span><span class="w"> </span><span class="p">{</span><span class="n">coefficients</span><span class="p">.</span><span class="n">size</span><span class="p">()}</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">std</span><span class="o">::</span><span class="n">copy</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">begin</span><span class="p">(</span><span class="n">coefficients</span><span class="p">),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">end</span><span class="p">(</span><span class="n">coefficients</span><span class="p">),</span><span class="w"></span></code>
+<code><span class="w">                  </span><span class="n">std</span><span class="o">::</span><span class="n">begin</span><span class="p">(</span><span class="k">this</span><span class="o">-&gt;</span><span class="n">coefficients</span><span class="p">));</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="p">}</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">coef_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">coefficients</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="p">};</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">MonomialBasis_t</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">MonomialBasis</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">ChebyshevBasis_t</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"> </span><span class="kr">inline</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">ChebyshevBasis</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">using</span><span class="w"> </span><span class="n">Polynomial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenericPolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">MonomialBasis_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">using</span><span class="w"> </span><span class="n">ChebyshevPolynomial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GenericPolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">ChebyshevBasis_t</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="p">}</span><span class="w"> </span><span class="c1">// namespace poly</span></code></pre></div>
+</div>
+<h4 class="snippet-name"><a name="poly-interp-hpp" href="#poly-interp-hpp">poly_interp.hpp</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments17 .hll { background-color: #ffffcc }
+.pygments17 { background: #ffffff; }
+.pygments17 .c { color: #008000 } /* Comment */
+.pygments17 .err { border: 1px solid #FF0000 } /* Error */
+.pygments17 .k { color: #0000ff } /* Keyword */
+.pygments17 .l { color: #0000FF } /* Literal */
+.pygments17 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments17 .cm { color: #008000 } /* Comment.Multiline */
+.pygments17 .cp { color: #af00db } /* Comment.Preproc */
+.pygments17 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments17 .c1 { color: #008000 } /* Comment.Single */
+.pygments17 .cs { color: #008000 } /* Comment.Special */
+.pygments17 .ge { font-style: italic } /* Generic.Emph */
+.pygments17 .gh { font-weight: bold } /* Generic.Heading */
+.pygments17 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments17 .gs { font-weight: bold } /* Generic.Strong */
+.pygments17 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments17 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments17 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments17 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments17 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments17 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments17 .kt { color: #2b91af } /* Keyword.Type */
+.pygments17 .ld { color: #0000FF } /* Literal.Date */
+.pygments17 .m { color: #0000FF } /* Literal.Number */
+.pygments17 .s { color: #a31515 } /* Literal.String */
+.pygments17 .na { color: #001080 } /* Name.Attribute */
+.pygments17 .nb { color: #795e26 } /* Name.Builtin */
+.pygments17 .nc { color: #2b91af } /* Name.Class */
+.pygments17 .no { color: #0000FF } /* Name.Constant */
+.pygments17 .nf { color: #795e26 } /* Name.Function */
+.pygments17 .nl { color: #AF00DB } /* Name.Label */
+.pygments17 .nn { color: #000000 } /* Name.Namespace */
+.pygments17 .nt { color: #800000 } /* Name.Tag */
+.pygments17 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments17 .ow { color: #0000ff } /* Operator.Word */
+.pygments17 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments17 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments17 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments17 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments17 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments17 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments17 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments17 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments17 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments17 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments17 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments17 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments17 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments17 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments17 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments17 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments17 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments17 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments17 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments17 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments17 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments17 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments17 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments17 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments17 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments17 pre.snippet17 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Algorithms/Polynomials/resources/include/poly_interp.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments17"><pre class="lineNumbers snippet17"><code><span></span><span class="cp">#pragma once</span></code>
+<code></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Eigen/LU&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;poly.hpp&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span><span class="cp"></span></code>
+<code></code>
+<code><span class="k">namespace</span><span class="w"> </span><span class="nn">poly</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">using</span><span class="w"> </span><span class="n">vector_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorX</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">namespace</span><span class="w"> </span><span class="nn">detail</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">F</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="n">coef_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                      </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">F</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="n">vanderfun</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">());</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Construct Vandermonde matrix</span></code>
+<code><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">V</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vanderfun</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Scale the system</span></code>
+<code><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">scaling</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">colwise</span><span class="p">().</span><span class="n">norm</span><span class="p">().</span><span class="n">cwiseInverse</span><span class="p">();</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">V</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">scaling</span><span class="p">.</span><span class="n">asDiagonal</span><span class="p">();</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Solve the system</span></code>
+<code><span class="w">    </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">solution</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">fullPivLu</span><span class="p">().</span><span class="n">solve</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">solution</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">scaling</span><span class="p">.</span><span class="n">asDiagonal</span><span class="p">();</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">solution</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">auto</span><span class="w"> </span><span class="n">make_monomial_vandermonde_system</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                                      </span><span class="n">index_t</span><span class="w"> </span><span class="n">degree</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">degree</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">index_t</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="nf">V</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">degree</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">V</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">::</span><span class="n">Ones</span><span class="p">(</span><span class="n">N</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Index</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">degree</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">V</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">i</span><span class="p">).</span><span class="n">cwiseProduct</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">V</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="p">}</span><span class="w"> </span><span class="c1">// namespace detail</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="n">Polynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                          </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">MonomialBasis_t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">coef</span><span class="w"> </span><span class="o">=</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">detail</span><span class="o">::</span><span class="n">interpolate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">detail</span><span class="o">::</span><span class="n">make_monomial_vandermonde_system</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">coef</span><span class="p">)};</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">namespace</span><span class="w"> </span><span class="nn">detail</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="k">auto</span><span class="w"> </span><span class="n">make_chebyshev_vandermonde_system</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                                       </span><span class="n">index_t</span><span class="w"> </span><span class="n">degree</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">degree</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">index_t</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">();</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">Eigen</span><span class="o">::</span><span class="n">MatrixXd</span><span class="w"> </span><span class="nf">V</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="w"> </span><span class="n">degree</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">V</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="o">::</span><span class="n">Ones</span><span class="p">(</span><span class="n">N</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">degree</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">V</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Index</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">degree</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"></span></code>
+<code><span class="w">            </span><span class="n">V</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">).</span><span class="n">cwiseProduct</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">V</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="p">}</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">V</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="p">}</span><span class="w"> </span><span class="c1">// namespace detail</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="n">ChebyshevPolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                                   </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                                   </span><span class="n">ChebyshevBasis_t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">coef</span><span class="w"> </span><span class="o">=</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">detail</span><span class="o">::</span><span class="n">interpolate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">detail</span><span class="o">::</span><span class="n">make_chebyshev_vandermonde_system</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">coef</span><span class="p">)};</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Basis</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="n">GenericPolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">Basis</span><span class="o">&gt;</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                                        </span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">Basis</span><span class="w"> </span><span class="n">basis</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"></span></code>
+<code><span class="w">                       </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="n">basis</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Basis</span><span class="o">&gt;</span><span class="w"></span></code>
+<code><span class="n">GenericPolynomial</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">Basis</span><span class="o">&gt;</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">                                        </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">Basis</span><span class="w"> </span><span class="n">basis</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="w"></span></code>
+<code><span class="w">                           </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Map</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">())),</span><span class="w"></span></code>
+<code><span class="w">                       </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Ref</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="w"></span></code>
+<code><span class="w">                           </span><span class="n">Eigen</span><span class="o">::</span><span class="n">Map</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">vector_t</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">size</span><span class="p">())),</span><span class="w"></span></code>
+<code><span class="w">                       </span><span class="n">basis</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code>
+<code></code>
+<code><span class="p">}</span><span class="w"> </span><span class="c1">// namespace poly</span></code></pre></div>
+</div>
+<h4 class="snippet-name"><a name="poly-interp-cpp" href="#poly-interp-cpp">poly_interp.cpp</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments21 .hll { background-color: #ffffcc }
+.pygments21 { background: #ffffff; }
+.pygments21 .c { color: #008000 } /* Comment */
+.pygments21 .err { border: 1px solid #FF0000 } /* Error */
+.pygments21 .k { color: #0000ff } /* Keyword */
+.pygments21 .l { color: #0000FF } /* Literal */
+.pygments21 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments21 .cm { color: #008000 } /* Comment.Multiline */
+.pygments21 .cp { color: #af00db } /* Comment.Preproc */
+.pygments21 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments21 .c1 { color: #008000 } /* Comment.Single */
+.pygments21 .cs { color: #008000 } /* Comment.Special */
+.pygments21 .ge { font-style: italic } /* Generic.Emph */
+.pygments21 .gh { font-weight: bold } /* Generic.Heading */
+.pygments21 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments21 .gs { font-weight: bold } /* Generic.Strong */
+.pygments21 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments21 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments21 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments21 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments21 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments21 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments21 .kt { color: #2b91af } /* Keyword.Type */
+.pygments21 .ld { color: #0000FF } /* Literal.Date */
+.pygments21 .m { color: #0000FF } /* Literal.Number */
+.pygments21 .s { color: #a31515 } /* Literal.String */
+.pygments21 .na { color: #001080 } /* Name.Attribute */
+.pygments21 .nb { color: #795e26 } /* Name.Builtin */
+.pygments21 .nc { color: #2b91af } /* Name.Class */
+.pygments21 .no { color: #0000FF } /* Name.Constant */
+.pygments21 .nf { color: #795e26 } /* Name.Function */
+.pygments21 .nl { color: #AF00DB } /* Name.Label */
+.pygments21 .nn { color: #000000 } /* Name.Namespace */
+.pygments21 .nt { color: #800000 } /* Name.Tag */
+.pygments21 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments21 .ow { color: #0000ff } /* Operator.Word */
+.pygments21 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments21 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments21 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments21 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments21 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments21 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments21 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments21 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments21 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments21 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments21 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments21 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments21 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments21 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments21 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments21 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments21 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments21 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments21 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments21 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments21 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments21 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments21 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments21 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments21 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments21 pre.snippet21 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Algorithms/Polynomials/resources/src/poly_interp.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments21"><pre class="lineNumbers snippet21"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;poly_eval.hpp&gt;</span><span class="cp"></span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;poly_interp.hpp&gt;</span><span class="cp"></span></code>
+<code></code>
+<code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="p">.</span><span class="n">precision</span><span class="p">(</span><span class="mi">17</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Evaluate some points on this polynomial</span></code>
+<code><span class="w">    </span><span class="n">poly</span><span class="o">::</span><span class="n">Polynomial</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">p</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">-2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">-4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">};</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">poly</span><span class="o">::</span><span class="n">vector_t</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">poly</span><span class="o">::</span><span class="n">vector_t</span><span class="o">&lt;&gt;::</span><span class="n">LinSpaced</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">poly</span><span class="o">::</span><span class="n">vector_t</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">unaryExpr</span><span class="p">([</span><span class="n">p</span><span class="p">](</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">evaluate</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="p">});</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Interpolate the data</span></code>
+<code><span class="w">    </span><span class="n">poly</span><span class="o">::</span><span class="n">Polynomial</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">p_interp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">poly</span><span class="o">::</span><span class="n">MonomialBasis</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">p_interp</span><span class="p">.</span><span class="n">coefficients</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">// Now do the same with std::vectors</span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vx</span><span class="w"> </span><span class="p">{</span><span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="n">end</span><span class="p">()};</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">vy</span><span class="w"> </span><span class="p">{</span><span class="n">y</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">end</span><span class="p">()};</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">p_interp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">interpolate</span><span class="p">(</span><span class="n">vx</span><span class="p">,</span><span class="w"> </span><span class="n">vy</span><span class="p">,</span><span class="w"> </span><span class="n">poly</span><span class="o">::</span><span class="n">MonomialBasis</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">p_interp</span><span class="p">.</span><span class="n">coefficients</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">// Fit a Chebyshev polynomial through the same points</span></code>
+<code><span class="w">    </span><span class="n">poly</span><span class="o">::</span><span class="n">ChebyshevPolynomial</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">p_cheb</span><span class="w"> </span><span class="o">=</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">interpolate</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">poly</span><span class="o">::</span><span class="n">ChebyshevBasis</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">p_cheb</span><span class="p">.</span><span class="n">coefficients</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="c1">// Evaluate the polynomial again to verify</span></code>
+<code><span class="w">    </span><span class="n">poly</span><span class="o">::</span><span class="n">vector_t</span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">yc</span><span class="w"> </span><span class="o">=</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="n">x</span><span class="p">.</span><span class="n">unaryExpr</span><span class="p">([</span><span class="n">p_cheb</span><span class="p">](</span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">evaluate</span><span class="p">(</span><span class="n">p_cheb</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="p">});</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">y</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">yc</span><span class="p">.</span><span class="n">transpose</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"></span></code></pre></div>
+</div>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"><a href="Evaluation.html" title="Evaluation"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Polynomials">Index</a></div><div class="nextpage"></div></div>
+    </article>
+    <footer>Last edited: Saturday, 30 July 2022 22:44 UTC</footer>
+</body>
+
+</html>
