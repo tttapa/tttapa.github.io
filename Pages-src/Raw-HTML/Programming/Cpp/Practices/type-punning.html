@@ -1,0 +1,158 @@
+<!--
+@title: Don't use unions or pointer casts for type punning
+@sequence: 90
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: c++,cpp,casting,cast,punning,type punning,union,best practices,guideline,undefined behavior
+@description:
+-->
+<html>
+
+<h2>What is a type punning?</h2>
+
+<p>
+    According to <a href="">Wikipedia</a>, <i>“type punning is any programming
+        technique that subverts or circumvents the type system of a programming
+        language in order to achieve an effect that would be difficult or
+        impossible to achieve within the bounds of the formal language”</i>.<br>
+    A classical example is the
+    <a href="https://en.wikipedia.org/wiki/Fast_inverse_square_root">Quake III fast inverse square root function</a>,
+    where the bits of an IEEE 574 floating-point number are interpreted as a
+    32-bit integer:
+</p>
+@codesnippet{"file": "resources/type-punning-example-finvsqrt.cpp"}
+<p>
+    Other uses include serialization and deserialization, where floating-point
+    numbers or other types are converted to and from arrays of bytes to be
+    transmitted over a network or stored to a file.
+</p>
+<p>
+    In the previous example, an invalid <a href="c-style-casts.html">C-style pointer cast</a>
+    was used to carry out the type punning. Another commonly used
+    but equally incorrect method makes use of (or abuses) a union:
+</p>
+@codesnippet{"file": "resources/type-punning-example-union.cpp"}
+
+<h2>Why can't I use a union for type punning?</h2>
+
+<p>
+    You cannot use a union for type punning because you are not allowed to
+    first write to one member of the union, and then read from a different one.
+    <sup><a href="https://en.cppreference.com/w/cpp/language/union#Explanation">[cppreference:union]</a></sup>
+</p>
+<p>
+    Specifically, in the second example above, writing to <code>u.f</code> makes it the
+    active member, starting its lifetime.
+    <sup><a
+            href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.285">[class.union.general]</a></sup>
+    At most one member can be active at any given time.<br>
+    Reading from the inactive member <code>u.bytes</code> is
+    then not allowed, because its lifetime never began, and reading an object
+    before the beginning of its lifetime invokes <a href="https://en.cppreference.com/w/cpp/language/ub">Undefined
+        Behavior</a>.
+    <sup><a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.62">[basic.life]</a></sup>
+</p>
+<p>
+    <small>Note: In C, the situation is different, C99 and later standards explicitly allow type punning using unions.
+        <sup><a href="https://open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf#page=101">[C11: footnote
+                95]</a></sup></small>
+</p>
+
+<h2>Why can't I use a pointer or reference cast for type punning?</h2>
+
+<p>
+    The C-style casts in the first example are equivalent to <code>reinterpret_cast</code> expressions.
+    The rules for such casts are quite complicated, see e.g. <a
+        href="https://en.cppreference.com/w/cpp/language/reinterpret_cast">cppreference: reinterpret_cast</a>.
+    The casts required for type punning fall under items 5 and 6 on that web page, and these casts are only
+    allowed when the type aliasing rules (sometimes called the <i>strict aliasing rule</i>) are satisfied.
+    However, the whole point of type punning is that these type aliasing rules are not fulfilled.<br>
+    In the first example,
+    <code>float</code> and <code>long</code> are not <a
+        href="https://en.cppreference.com/w/cpp/language/reinterpret_cast#Type_aliasing"><i>similar</i> types</a>
+    <sup><a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.97">[conv.qual]</a></sup>,
+    so the aliasing rule is violated, and dereferencing the pointer resulting from the cast invokes
+    <a href="https://en.cppreference.com/w/cpp/language/ub">Undefined Behavior</a>.
+</p>
+<p>
+    One important exception to the strict aliasing rule are the character types
+    <code>(unsigned) char</code> and <code>std::byte</code>: you can
+    inspect the object representation of any object as an array of bytes through
+    pointers to these character types.
+</p>
+
+<h2>What to use instead</h2>
+
+<h3><code>std::bit_cast</code></h3>
+
+<p>
+    From C++20 onwards, you can use the <code>std::bit_cast</code> function from
+    the <code>&lt;bit&gt;</code> header. <sup><a
+            href="https://en.cppreference.com/w/cpp/numeric/bit_cast">[cppreference:bit_cast]</a></sup>
+    It performs the type punning in a safe way, additionally checking that both
+    types have the same size, and that they are <a
+        href="https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable"><i>TriviallyCopyable</i></a>.
+</p>
+<p>
+    The fast inverse square root example can be fixed as follows:
+</p>
+@codesnippet{"file": "resources/type-punning-example-finvsqrt-fixed.cpp"}
+
+<h3><code>std::memcpy</code></h3>
+
+<p>
+    Before C++20, the only valid way to perform type punning was to use the
+    <code>memcpy</code> function, copying the object representation from an
+    object of one type to another object of a different type.
+</p>
+<p>
+    It should be noted that this does not mean that an actual call to the C
+    library function <code>memcpy</code> will be emitted. Compiler developers
+    are aware of this use of <code>memcpy</code>, and completely optimize it out
+    for type punning use cases, even with optimizations disabled
+    (<code>-O0</code>).
+</p>
+<p>
+    Another valid version of the inverse square root code could be:
+</p>
+@codesnippet{"file": "resources/type-punning-example-finvsqrt-fixed-memcpy.cpp"}
+<p>
+    The <code>memcpy</code> function can also be used to fix the second example
+    of converting a float to the bytes it consists of:
+</p>
+@codesnippet{"file": "resources/type-punning-example-union-fixed-memcpy.cpp"}
+
+<h3>Cast to a character array</h3>
+
+<p>
+    In many cases related to serialization, using <code>memcpy</code> or
+    <code>bit_cast</code> is unnecessary, thanks to the exception to the 
+    type aliasing rules for character types.
+</p>
+<p>
+    For example, to write the bytes representing a <code>float</code> to a file,
+    one could use a cast to a pointer to a character type:
+</p>
+@codesnippet{"file": "resources/type-punning-example-union-fixed.cpp"}
+<p>
+    Keep in mind though that this is an exception to the rule. It would not be
+    valid to do the same in reverse, for example:
+</p>
+@codesnippet{"file": "resources/type-punning-example-union-fixed-bad.cpp"}
+
+<h2>C++ Core Guidelines</h2>
+
+<p>
+    If you're unconvinced by what was presented on this page, you might want to
+    have a look at what the official C++ Core Guidelines have to say about type
+    punning:
+</p>
+<ul>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es48-avoid-casts">ES.48: Avoid casts</a>
+    </li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c183-dont-use-a-union-for-type-punning">C.183:
+            Don’t use a <code>union</code> for type punning</a></li>
+</ul>
+
+</html>
