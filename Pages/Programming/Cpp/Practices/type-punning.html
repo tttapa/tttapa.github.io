@@ -1,0 +1,907 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="author" content="Pieter P"/>
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="theme-color" content="#ccc"/>
+    <meta name="keywords" content="c++,cpp,casting,cast,punning,type punning,union,best practices,guideline,undefined behavior"/>
+    <meta name="description" content=""/>
+    <title>Don't use unions or pointer casts for type punning</title>
+</head>
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Debugging.html">Debugging</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/index.html">Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Controllers.html">PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Cpp-Implementation.html">C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../index.html">Programming</a>
+    <ul>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../index.html">C++</a>
+        <ul>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="openEntry " href="type-punning.html">Don't use unions or pointer casts for type punning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="type-punning.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article>
+        <h1 class="title">Don't use unions or pointer casts for type punning</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+        <li><a href="#what-is-a-type-punning">What is a type punning?</a></li>
+        <li><a href="#why-can-t-i-use-a-union-for-type-punning">Why can't I use a union for type punning?</a></li>
+        <li><a href="#why-can-t-i-use-a-pointer-or-reference-cast-for-type-punning">Why can't I use a pointer or reference cast for type punning?</a></li>
+        <li><a href="#what-to-use-instead">What to use instead</a></li>
+          <ul>
+            <li><a href="#std-bit-cast"><code>std::bit_cast</code></a></li>
+            <li><a href="#std-memcpy"><code>std::memcpy</code></a></li>
+            <li><a href="#cast-to-a-character-array">Cast to a character array</a></li>
+          </ul>
+        <li><a href="#c-core-guidelines">C++ Core Guidelines</a></li>
+  </ul></div>
+
+
+<h2><a name="what-is-a-type-punning" href="#what-is-a-type-punning">What is a type punning?</a></h2>
+
+<p>
+    According to <a href="">Wikipedia</a>, <i>“type punning is any programming
+        technique that subverts or circumvents the type system of a programming
+        language in order to achieve an effect that would be difficult or
+        impossible to achieve within the bounds of the formal language”</i>.<br>
+    A classical example is the
+    <a href="https://en.wikipedia.org/wiki/Fast_inverse_square_root">Quake III fast inverse square root function</a>,
+    where the bits of an IEEE 574 floating-point number are interpreted as a
+    32-bit integer:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments24 .hll { background-color: #ffffcc }
+.pygments24 { background: #ffffff; }
+.pygments24 .c { color: #008000 } /* Comment */
+.pygments24 .err { border: 1px solid #FF0000 } /* Error */
+.pygments24 .k { color: #0000ff } /* Keyword */
+.pygments24 .l { color: #0000FF } /* Literal */
+.pygments24 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments24 .cm { color: #008000 } /* Comment.Multiline */
+.pygments24 .cp { color: #af00db } /* Comment.Preproc */
+.pygments24 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments24 .c1 { color: #008000 } /* Comment.Single */
+.pygments24 .cs { color: #008000 } /* Comment.Special */
+.pygments24 .ge { font-style: italic } /* Generic.Emph */
+.pygments24 .gh { font-weight: bold } /* Generic.Heading */
+.pygments24 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments24 .gs { font-weight: bold } /* Generic.Strong */
+.pygments24 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments24 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments24 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments24 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments24 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments24 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments24 .kt { color: #2b91af } /* Keyword.Type */
+.pygments24 .ld { color: #0000FF } /* Literal.Date */
+.pygments24 .m { color: #0000FF } /* Literal.Number */
+.pygments24 .s { color: #a31515 } /* Literal.String */
+.pygments24 .na { color: #001080 } /* Name.Attribute */
+.pygments24 .nb { color: #795e26 } /* Name.Builtin */
+.pygments24 .nc { color: #2b91af } /* Name.Class */
+.pygments24 .no { color: #0000FF } /* Name.Constant */
+.pygments24 .nf { color: #795e26 } /* Name.Function */
+.pygments24 .nl { color: #AF00DB } /* Name.Label */
+.pygments24 .nn { color: #000000 } /* Name.Namespace */
+.pygments24 .nt { color: #800000 } /* Name.Tag */
+.pygments24 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments24 .ow { color: #0000ff } /* Operator.Word */
+.pygments24 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments24 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments24 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments24 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments24 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments24 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments24 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments24 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments24 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments24 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments24 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments24 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments24 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments24 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments24 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments24 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments24 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments24 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments24 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments24 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments24 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments24 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments24 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments24 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments24 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments24 pre.snippet24 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-finvsqrt.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments24"><pre class="lineNumbers snippet24"><code><span></span><span class="kt">float</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">long</span><span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">long</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">y</span><span class="p">;</span><span class="w">                 </span><span class="c1">// evil floating point bit level hacking</span></code>
+<code><span class="n">i</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mh">0x5f3759df</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">        </span><span class="c1">// what the fuck? </span></code>
+<code><span class="n">y</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="p">(</span><span class="kt">float</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="n">i</span><span class="p">;</span><span class="w"></span></code></pre></div>
+</div>
+<p>
+    Other uses include serialization and deserialization, where floating-point
+    numbers or other types are converted to and from arrays of bytes to be
+    transmitted over a network or stored to a file.
+</p>
+<p>
+    In the previous example, an invalid <a href="c-style-casts.html">C-style pointer cast</a>
+    was used to carry out the type punning. Another commonly used
+    but equally incorrect method makes use of (or abuses) a union:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments35 .hll { background-color: #ffffcc }
+.pygments35 { background: #ffffff; }
+.pygments35 .c { color: #008000 } /* Comment */
+.pygments35 .err { border: 1px solid #FF0000 } /* Error */
+.pygments35 .k { color: #0000ff } /* Keyword */
+.pygments35 .l { color: #0000FF } /* Literal */
+.pygments35 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments35 .cm { color: #008000 } /* Comment.Multiline */
+.pygments35 .cp { color: #af00db } /* Comment.Preproc */
+.pygments35 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments35 .c1 { color: #008000 } /* Comment.Single */
+.pygments35 .cs { color: #008000 } /* Comment.Special */
+.pygments35 .ge { font-style: italic } /* Generic.Emph */
+.pygments35 .gh { font-weight: bold } /* Generic.Heading */
+.pygments35 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments35 .gs { font-weight: bold } /* Generic.Strong */
+.pygments35 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments35 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments35 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments35 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments35 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments35 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments35 .kt { color: #2b91af } /* Keyword.Type */
+.pygments35 .ld { color: #0000FF } /* Literal.Date */
+.pygments35 .m { color: #0000FF } /* Literal.Number */
+.pygments35 .s { color: #a31515 } /* Literal.String */
+.pygments35 .na { color: #001080 } /* Name.Attribute */
+.pygments35 .nb { color: #795e26 } /* Name.Builtin */
+.pygments35 .nc { color: #2b91af } /* Name.Class */
+.pygments35 .no { color: #0000FF } /* Name.Constant */
+.pygments35 .nf { color: #795e26 } /* Name.Function */
+.pygments35 .nl { color: #AF00DB } /* Name.Label */
+.pygments35 .nn { color: #000000 } /* Name.Namespace */
+.pygments35 .nt { color: #800000 } /* Name.Tag */
+.pygments35 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments35 .ow { color: #0000ff } /* Operator.Word */
+.pygments35 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments35 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments35 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments35 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments35 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments35 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments35 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments35 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments35 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments35 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments35 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments35 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments35 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments35 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments35 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments35 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments35 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments35 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments35 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments35 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments35 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments35 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments35 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments35 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments35 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments35 pre.snippet35 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-union.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments35"><pre class="lineNumbers snippet35"><code><span></span><span class="k">union</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">byte</span><span class="w"> </span><span class="n">bytes</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">)];</span><span class="w"></span></code>
+<code><span class="p">}</span><span class="w"> </span><span class="n">u</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="n">u</span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.34f</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="n">write_to_file</span><span class="p">(</span><span class="n">u</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">u</span><span class="p">.</span><span class="n">bytes</span><span class="p">));</span><span class="w"> </span><span class="c1">// Error: Undefined Behavior</span></code></pre></div>
+</div>
+
+<h2><a name="why-can-t-i-use-a-union-for-type-punning" href="#why-can-t-i-use-a-union-for-type-punning">Why can't I use a union for type punning?</a></h2>
+
+<p>
+    You cannot use a union for type punning because you are not allowed to
+    first write to one member of the union, and then read from a different one.
+    <sup><a href="https://en.cppreference.com/w/cpp/language/union#Explanation">[cppreference:union]</a></sup>
+</p>
+<p>
+    Specifically, in the second example above, writing to <code>u.f</code> makes it the
+    active member, starting its lifetime.
+    <sup><a
+            href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.285">[class.union.general]</a></sup>
+    At most one member can be active at any given time.<br>
+    Reading from the inactive member <code>u.bytes</code> is
+    then not allowed, because its lifetime never began, and reading an object
+    before the beginning of its lifetime invokes <a href="https://en.cppreference.com/w/cpp/language/ub">Undefined
+        Behavior</a>.
+    <sup><a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.62">[basic.life]</a></sup>
+</p>
+<p>
+    <small>Note: In C, the situation is different, C99 and later standards explicitly allow type punning using unions.
+        <sup><a href="https://open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf#page=101">[C11: footnote
+                95]</a></sup></small>
+</p>
+
+<h2><a name="why-can-t-i-use-a-pointer-or-reference-cast-for-type-punning" href="#why-can-t-i-use-a-pointer-or-reference-cast-for-type-punning">Why can't I use a pointer or reference cast for type punning?</a></h2>
+
+<p>
+    The C-style casts in the first example are equivalent to <code>reinterpret_cast</code> expressions.
+    The rules for such casts are quite complicated, see e.g. <a
+        href="https://en.cppreference.com/w/cpp/language/reinterpret_cast">cppreference: reinterpret_cast</a>.
+    The casts required for type punning fall under items 5 and 6 on that web page, and these casts are only
+    allowed when the type aliasing rules (sometimes called the <i>strict aliasing rule</i>) are satisfied.
+    However, the whole point of type punning is that these type aliasing rules are not fulfilled.<br>
+    In the first example,
+    <code>float</code> and <code>long</code> are not <a
+        href="https://en.cppreference.com/w/cpp/language/reinterpret_cast#Type_aliasing"><i>similar</i> types</a>
+    <sup><a href="https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/n4868.pdf#page.97">[conv.qual]</a></sup>,
+    so the aliasing rule is violated, and dereferencing the pointer resulting from the cast invokes
+    <a href="https://en.cppreference.com/w/cpp/language/ub">Undefined Behavior</a>.
+</p>
+<p>
+    One important exception to the strict aliasing rule are the character types
+    <code>(unsigned) char</code> and <code>std::byte</code>: you can
+    inspect the object representation of any object as an array of bytes through
+    pointers to these character types.
+</p>
+
+<h2><a name="what-to-use-instead" href="#what-to-use-instead">What to use instead</a></h2>
+
+<h3><a name="std-bit-cast" href="#std-bit-cast"><code>std::bit_cast</code></a></h3>
+
+<p>
+    From C++20 onwards, you can use the <code>std::bit_cast</code> function from
+    the <code>&lt;bit&gt;</code> header. <sup><a
+            href="https://en.cppreference.com/w/cpp/numeric/bit_cast">[cppreference:bit_cast]</a></sup>
+    It performs the type punning in a safe way, additionally checking that both
+    types have the same size, and that they are <a
+        href="https://en.cppreference.com/w/cpp/named_req/TriviallyCopyable"><i>TriviallyCopyable</i></a>.
+</p>
+<p>
+    The fast inverse square root example can be fixed as follows:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments100 .hll { background-color: #ffffcc }
+.pygments100 { background: #ffffff; }
+.pygments100 .c { color: #008000 } /* Comment */
+.pygments100 .err { border: 1px solid #FF0000 } /* Error */
+.pygments100 .k { color: #0000ff } /* Keyword */
+.pygments100 .l { color: #0000FF } /* Literal */
+.pygments100 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments100 .cm { color: #008000 } /* Comment.Multiline */
+.pygments100 .cp { color: #af00db } /* Comment.Preproc */
+.pygments100 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments100 .c1 { color: #008000 } /* Comment.Single */
+.pygments100 .cs { color: #008000 } /* Comment.Special */
+.pygments100 .ge { font-style: italic } /* Generic.Emph */
+.pygments100 .gh { font-weight: bold } /* Generic.Heading */
+.pygments100 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments100 .gs { font-weight: bold } /* Generic.Strong */
+.pygments100 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments100 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments100 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments100 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments100 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments100 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments100 .kt { color: #2b91af } /* Keyword.Type */
+.pygments100 .ld { color: #0000FF } /* Literal.Date */
+.pygments100 .m { color: #0000FF } /* Literal.Number */
+.pygments100 .s { color: #a31515 } /* Literal.String */
+.pygments100 .na { color: #001080 } /* Name.Attribute */
+.pygments100 .nb { color: #795e26 } /* Name.Builtin */
+.pygments100 .nc { color: #2b91af } /* Name.Class */
+.pygments100 .no { color: #0000FF } /* Name.Constant */
+.pygments100 .nf { color: #795e26 } /* Name.Function */
+.pygments100 .nl { color: #AF00DB } /* Name.Label */
+.pygments100 .nn { color: #000000 } /* Name.Namespace */
+.pygments100 .nt { color: #800000 } /* Name.Tag */
+.pygments100 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments100 .ow { color: #0000ff } /* Operator.Word */
+.pygments100 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments100 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments100 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments100 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments100 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments100 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments100 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments100 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments100 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments100 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments100 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments100 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments100 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments100 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments100 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments100 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments100 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments100 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments100 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments100 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments100 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments100 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments100 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments100 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments100 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments100 pre.snippet100 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-finvsqrt-fixed.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments100"><pre class="lineNumbers snippet100"><code><span></span><span class="kt">float</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="k">auto</span><span class="w">  </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">bit_cast</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">y</span><span class="p">);</span><span class="w">   </span><span class="c1">// evil floating point bit level hacking</span></code>
+<code><span class="n">i</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="mh">0x5f3759df</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">        </span><span class="c1">// what the fuck? </span></code>
+<code><span class="n">y</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">bit_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"></span></code></pre></div>
+</div>
+
+<h3><a name="std-memcpy" href="#std-memcpy"><code>std::memcpy</code></a></h3>
+
+<p>
+    Before C++20, the only valid way to perform type punning was to use the
+    <code>memcpy</code> function, copying the object representation from an
+    object of one type to another object of a different type.
+</p>
+<p>
+    It should be noted that this does not mean that an actual call to the C
+    library function <code>memcpy</code> will be emitted. Compiler developers
+    are aware of this use of <code>memcpy</code>, and completely optimize it out
+    for type punning use cases, even with optimizations disabled
+    (<code>-O0</code>).
+</p>
+<p>
+    Another valid version of the inverse square root code could be:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments119 .hll { background-color: #ffffcc }
+.pygments119 { background: #ffffff; }
+.pygments119 .c { color: #008000 } /* Comment */
+.pygments119 .err { border: 1px solid #FF0000 } /* Error */
+.pygments119 .k { color: #0000ff } /* Keyword */
+.pygments119 .l { color: #0000FF } /* Literal */
+.pygments119 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments119 .cm { color: #008000 } /* Comment.Multiline */
+.pygments119 .cp { color: #af00db } /* Comment.Preproc */
+.pygments119 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments119 .c1 { color: #008000 } /* Comment.Single */
+.pygments119 .cs { color: #008000 } /* Comment.Special */
+.pygments119 .ge { font-style: italic } /* Generic.Emph */
+.pygments119 .gh { font-weight: bold } /* Generic.Heading */
+.pygments119 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments119 .gs { font-weight: bold } /* Generic.Strong */
+.pygments119 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments119 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments119 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments119 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments119 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments119 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments119 .kt { color: #2b91af } /* Keyword.Type */
+.pygments119 .ld { color: #0000FF } /* Literal.Date */
+.pygments119 .m { color: #0000FF } /* Literal.Number */
+.pygments119 .s { color: #a31515 } /* Literal.String */
+.pygments119 .na { color: #001080 } /* Name.Attribute */
+.pygments119 .nb { color: #795e26 } /* Name.Builtin */
+.pygments119 .nc { color: #2b91af } /* Name.Class */
+.pygments119 .no { color: #0000FF } /* Name.Constant */
+.pygments119 .nf { color: #795e26 } /* Name.Function */
+.pygments119 .nl { color: #AF00DB } /* Name.Label */
+.pygments119 .nn { color: #000000 } /* Name.Namespace */
+.pygments119 .nt { color: #800000 } /* Name.Tag */
+.pygments119 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments119 .ow { color: #0000ff } /* Operator.Word */
+.pygments119 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments119 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments119 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments119 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments119 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments119 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments119 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments119 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments119 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments119 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments119 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments119 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments119 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments119 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments119 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments119 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments119 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments119 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments119 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments119 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments119 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments119 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments119 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments119 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments119 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments119 pre.snippet119 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-finvsqrt-fixed-memcpy.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments119"><pre class="lineNumbers snippet119"><code><span></span><span class="kt">float</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">number</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">uint32_t</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="k">static_assert</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="w"> </span><span class="s">&quot;error: different sizes&quot;</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="n">std</span><span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">i</span><span class="p">));</span><span class="w">         </span><span class="c1">// evil floating point bit level hacking</span></code>
+<code><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x5f3759df</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w">              </span><span class="c1">// what the fuck? </span></code>
+<code><span class="n">std</span><span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="o">&amp;</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">y</span><span class="p">));</span><span class="w"></span></code></pre></div>
+</div>
+<p>
+    The <code>memcpy</code> function can also be used to fix the second example
+    of converting a float to the bytes it consists of:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments124 .hll { background-color: #ffffcc }
+.pygments124 { background: #ffffff; }
+.pygments124 .c { color: #008000 } /* Comment */
+.pygments124 .err { border: 1px solid #FF0000 } /* Error */
+.pygments124 .k { color: #0000ff } /* Keyword */
+.pygments124 .l { color: #0000FF } /* Literal */
+.pygments124 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments124 .cm { color: #008000 } /* Comment.Multiline */
+.pygments124 .cp { color: #af00db } /* Comment.Preproc */
+.pygments124 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments124 .c1 { color: #008000 } /* Comment.Single */
+.pygments124 .cs { color: #008000 } /* Comment.Special */
+.pygments124 .ge { font-style: italic } /* Generic.Emph */
+.pygments124 .gh { font-weight: bold } /* Generic.Heading */
+.pygments124 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments124 .gs { font-weight: bold } /* Generic.Strong */
+.pygments124 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments124 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments124 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments124 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments124 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments124 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments124 .kt { color: #2b91af } /* Keyword.Type */
+.pygments124 .ld { color: #0000FF } /* Literal.Date */
+.pygments124 .m { color: #0000FF } /* Literal.Number */
+.pygments124 .s { color: #a31515 } /* Literal.String */
+.pygments124 .na { color: #001080 } /* Name.Attribute */
+.pygments124 .nb { color: #795e26 } /* Name.Builtin */
+.pygments124 .nc { color: #2b91af } /* Name.Class */
+.pygments124 .no { color: #0000FF } /* Name.Constant */
+.pygments124 .nf { color: #795e26 } /* Name.Function */
+.pygments124 .nl { color: #AF00DB } /* Name.Label */
+.pygments124 .nn { color: #000000 } /* Name.Namespace */
+.pygments124 .nt { color: #800000 } /* Name.Tag */
+.pygments124 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments124 .ow { color: #0000ff } /* Operator.Word */
+.pygments124 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments124 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments124 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments124 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments124 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments124 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments124 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments124 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments124 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments124 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments124 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments124 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments124 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments124 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments124 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments124 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments124 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments124 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments124 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments124 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments124 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments124 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments124 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments124 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments124 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments124 pre.snippet124 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-union-fixed-memcpy.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments124"><pre class="lineNumbers snippet124"><code><span></span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.34f</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">)];</span><span class="w"></span></code>
+<code><span class="n">std</span><span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">));</span><span class="w"></span></code></pre></div>
+</div>
+
+<h3><a name="cast-to-a-character-array" href="#cast-to-a-character-array">Cast to a character array</a></h3>
+
+<p>
+    In many cases related to serialization, using <code>memcpy</code> or
+    <code>bit_cast</code> is unnecessary, thanks to the exception to the 
+    type aliasing rules for character types.
+</p>
+<p>
+    For example, to write the bytes representing a <code>float</code> to a file,
+    one could use a cast to a pointer to a character type:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments137 .hll { background-color: #ffffcc }
+.pygments137 { background: #ffffff; }
+.pygments137 .c { color: #008000 } /* Comment */
+.pygments137 .err { border: 1px solid #FF0000 } /* Error */
+.pygments137 .k { color: #0000ff } /* Keyword */
+.pygments137 .l { color: #0000FF } /* Literal */
+.pygments137 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments137 .cm { color: #008000 } /* Comment.Multiline */
+.pygments137 .cp { color: #af00db } /* Comment.Preproc */
+.pygments137 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments137 .c1 { color: #008000 } /* Comment.Single */
+.pygments137 .cs { color: #008000 } /* Comment.Special */
+.pygments137 .ge { font-style: italic } /* Generic.Emph */
+.pygments137 .gh { font-weight: bold } /* Generic.Heading */
+.pygments137 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments137 .gs { font-weight: bold } /* Generic.Strong */
+.pygments137 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments137 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments137 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments137 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments137 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments137 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments137 .kt { color: #2b91af } /* Keyword.Type */
+.pygments137 .ld { color: #0000FF } /* Literal.Date */
+.pygments137 .m { color: #0000FF } /* Literal.Number */
+.pygments137 .s { color: #a31515 } /* Literal.String */
+.pygments137 .na { color: #001080 } /* Name.Attribute */
+.pygments137 .nb { color: #795e26 } /* Name.Builtin */
+.pygments137 .nc { color: #2b91af } /* Name.Class */
+.pygments137 .no { color: #0000FF } /* Name.Constant */
+.pygments137 .nf { color: #795e26 } /* Name.Function */
+.pygments137 .nl { color: #AF00DB } /* Name.Label */
+.pygments137 .nn { color: #000000 } /* Name.Namespace */
+.pygments137 .nt { color: #800000 } /* Name.Tag */
+.pygments137 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments137 .ow { color: #0000ff } /* Operator.Word */
+.pygments137 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments137 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments137 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments137 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments137 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments137 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments137 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments137 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments137 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments137 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments137 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments137 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments137 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments137 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments137 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments137 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments137 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments137 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments137 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments137 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments137 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments137 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments137 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments137 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments137 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments137 pre.snippet137 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-union-fixed.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments137"><pre class="lineNumbers snippet137"><code><span></span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.34f</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="n">write_to_file</span><span class="p">(</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">byte</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">));</span><span class="w"> </span><span class="c1">// Ok</span></code></pre></div>
+</div>
+<p>
+    Keep in mind though that this is an exception to the rule. It would not be
+    valid to do the same in reverse, for example:
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments142 .hll { background-color: #ffffcc }
+.pygments142 { background: #ffffff; }
+.pygments142 .c { color: #008000 } /* Comment */
+.pygments142 .err { border: 1px solid #FF0000 } /* Error */
+.pygments142 .k { color: #0000ff } /* Keyword */
+.pygments142 .l { color: #0000FF } /* Literal */
+.pygments142 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments142 .cm { color: #008000 } /* Comment.Multiline */
+.pygments142 .cp { color: #af00db } /* Comment.Preproc */
+.pygments142 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments142 .c1 { color: #008000 } /* Comment.Single */
+.pygments142 .cs { color: #008000 } /* Comment.Special */
+.pygments142 .ge { font-style: italic } /* Generic.Emph */
+.pygments142 .gh { font-weight: bold } /* Generic.Heading */
+.pygments142 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments142 .gs { font-weight: bold } /* Generic.Strong */
+.pygments142 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments142 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments142 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments142 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments142 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments142 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments142 .kt { color: #2b91af } /* Keyword.Type */
+.pygments142 .ld { color: #0000FF } /* Literal.Date */
+.pygments142 .m { color: #0000FF } /* Literal.Number */
+.pygments142 .s { color: #a31515 } /* Literal.String */
+.pygments142 .na { color: #001080 } /* Name.Attribute */
+.pygments142 .nb { color: #795e26 } /* Name.Builtin */
+.pygments142 .nc { color: #2b91af } /* Name.Class */
+.pygments142 .no { color: #0000FF } /* Name.Constant */
+.pygments142 .nf { color: #795e26 } /* Name.Function */
+.pygments142 .nl { color: #AF00DB } /* Name.Label */
+.pygments142 .nn { color: #000000 } /* Name.Namespace */
+.pygments142 .nt { color: #800000 } /* Name.Tag */
+.pygments142 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments142 .ow { color: #0000ff } /* Operator.Word */
+.pygments142 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments142 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments142 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments142 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments142 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments142 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments142 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments142 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments142 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments142 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments142 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments142 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments142 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments142 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments142 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments142 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments142 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments142 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments142 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments142 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments142 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments142 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments142 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments142 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments142 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments142 pre.snippet142 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-union-fixed-bad.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments142"><pre class="lineNumbers snippet142"><code><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="mh">0xA4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x70</span><span class="p">,</span><span class="w"> </span><span class="mh">0x45</span><span class="p">,</span><span class="w"> </span><span class="mh">0x41</span><span class="p">};</span><span class="w"></span></code>
+<code><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"> </span><span class="c1">// Error: Undefined Behavior</span></code></pre></div>
+</div>
+
+<h2><a name="c-core-guidelines" href="#c-core-guidelines">C++ Core Guidelines</a></h2>
+
+<p>
+    If you're unconvinced by what was presented on this page, you might want to
+    have a look at what the official C++ Core Guidelines have to say about type
+    punning:
+</p>
+<ul>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#es48-avoid-casts">ES.48: Avoid casts</a>
+    </li>
+    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines#c183-dont-use-a-union-for-type-punning">C.183:
+            Don’t use a <code>union</code> for type punning</a></li>
+</ul>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="Best Practices">Index</a></div><div class="nextpage"><a href="c-style-casts.html" title="Don't use C-style casts">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+    </article>
+    <footer>Last edited: Sunday, 31 July 2022 01:35 UTC</footer>
+</body>
+
+</html>
