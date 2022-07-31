@@ -567,8 +567,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     It should be noted that this does not mean that an actual call to the C
     library function <code>memcpy</code> will be emitted. Compiler developers
     are aware of this use of <code>memcpy</code>, and completely optimize it out
-    for type punning use cases, even with optimizations disabled
-    (<code>-O0</code>).
+    for type punning use cases, you won't see a call to <code>memcpy</code> even
+    with optimizations disabled (<code>-O0</code>).
 </p>
 <p>
     Another valid version of the inverse square root code could be:
@@ -722,7 +722,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-union-fixed-memcpy.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
 <div class="pygments124"><pre class="lineNumbers snippet124"><code><span></span><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">12.34f</span><span class="p">;</span><span class="w"></span></code>
 <code><span class="kt">uint8_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">[</span><span class="k">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">)];</span><span class="w"></span></code>
-<code><span class="n">std</span><span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">));</span><span class="w"></span></code></pre></div>
+<code><span class="n">std</span><span class="o">::</span><span class="n">memcpy</span><span class="p">(</span><span class="n">bytes</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">x</span><span class="p">));</span><span class="w"></span></code></pre></div>
 </div>
 
 <h3><a name="cast-to-a-character-array" href="#cast-to-a-character-array">Cast to a character array</a></h3>
@@ -901,7 +901,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="Best Practices">Index</a></div><div class="nextpage"><a href="c-style-casts.html" title="Don't use C-style casts">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Sunday, 31 July 2022 11:22 UTC</footer>
+    <footer>Last edited: Sunday, 31 July 2022 11:34 UTC</footer>
 </body>
 
 </html>
