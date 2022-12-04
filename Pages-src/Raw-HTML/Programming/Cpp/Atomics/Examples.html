@@ -39,7 +39,7 @@ flowchart TB
         if_val_rdy -->|SEQ| read_val["assert(value == 42)&emsp;➍"]
         read_val --> acq_end_(( ))
     end
-    val_rdy -->|SYNC| if_val_rdy
+    val_rdy -.->|SYNC| if_val_rdy
 </div>
 <p>
     If ➌ reads the value written by ➋, then the load-acquire ➌ synchronizes
@@ -73,7 +73,7 @@ flowchart TB
         handled_sto -->|SEQ| value_ptr_xch_int["value_ptr.exchange(nullptr, seq_cst)&emsp;➐"]
         value_ptr_xch_int -->|SEQ| v_ld_int["*v&emsp;➑"]
     end
-    value_ptr_value -->|SYNC| value_ptr_xch_int
+    value_ptr_value -.->|SYNC| value_ptr_xch_int
 </div>
 
 <!-- <h3>Goals</h3>
