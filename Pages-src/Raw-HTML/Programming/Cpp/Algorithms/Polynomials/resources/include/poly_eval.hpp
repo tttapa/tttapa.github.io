@@ -1,6 +1,7 @@
 #pragma once
 
 #include <poly.hpp>
+#include <vector>
 
 namespace poly {
 
@@ -81,6 +82,44 @@ constexpr T clenshaw_cheb(T x, const ChebyshevPolynomial<T> &poly) {
 template <class T>
 constexpr T evaluate(const ChebyshevPolynomial<T> &poly, T x) {
     return detail::clenshaw_cheb(x, poly);
+}
+
+template <class T, class Basis>
+constexpr void evaluate(const GenericPolynomial<T, Basis> &poly,
+                        vector_ref_t<T> x, vector_mut_ref_t<T> y) {
+    y = x.unaryExpr([&](double x) { return evaluate(poly, x); });
+}
+
+template <class T, class Basis>
+constexpr vector_t<T> evaluate(const GenericPolynomial<T, Basis> &poly,
+                               vector_ref_t<T> x) {
+    return x.unaryExpr([&](double x) { return evaluate(poly, x); });
+}
+
+template <class T, class Basis>
+constexpr void evaluate(const GenericPolynomial<T, Basis> &poly,
+                        const vector_t<T> &x, vector_t<T> &y) {
+    evaluate(poly, vector_ref_t<T> {x}, vector_mut_ref_t<T> {y});
+}
+
+template <class T, class Basis>
+constexpr vector_t<T> evaluate(const GenericPolynomial<T, Basis> &poly,
+                               const vector_t<T> &x) {
+    return evaluate(poly, vector_ref_t<T> {x});
+}
+
+template <class T, class Basis>
+constexpr void evaluate(const GenericPolynomial<T, Basis> &poly,
+                        const std::vector<T> &x, std::vector<T> &y) {
+    evaluate(poly, detail::vector_map_ref(x), detail::vector_map_ref(y));
+}
+
+template <class T, class Basis>
+constexpr std::vector<T> evaluate(const GenericPolynomial<T, Basis> &poly,
+                                  const std::vector<T> &x) {
+    std::vector<T> y(x.size());
+    evaluate(poly, x, y);
+    return y;
 }
 
 } // namespace poly
