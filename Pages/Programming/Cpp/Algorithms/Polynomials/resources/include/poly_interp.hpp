@@ -6,14 +6,10 @@
 
 namespace poly {
 
-template <class T = double>
-using vector_t = Eigen::VectorX<T>;
-
 namespace detail {
 
 template <class T, class F>
-coef_t<T> interpolate(Eigen::Ref<const vector_t<T>> x,
-                      Eigen::Ref<const vector_t<T>> y, F &&vanderfun) {
+coef_t<T> interpolate(vector_ref_t<T> x, vector_ref_t<T> y, F &&vanderfun) {
     assert(x.size() == y.size());
     assert(x.size() > 0);
     // Construct Vandermonde matrix
@@ -28,8 +24,7 @@ coef_t<T> interpolate(Eigen::Ref<const vector_t<T>> x,
 }
 
 template <class T>
-auto make_monomial_vandermonde_system(Eigen::Ref<const vector_t<T>> x,
-                                      index_t degree) {
+auto make_monomial_vandermonde_system(vector_ref_t<T> x, index_t degree) {
     assert(degree >= 0);
     const index_t N = x.size();
     Eigen::MatrixXd V(N, degree + 1);
@@ -42,18 +37,17 @@ auto make_monomial_vandermonde_system(Eigen::Ref<const vector_t<T>> x,
 } // namespace detail
 
 template <class T>
-Polynomial<T> interpolate(Eigen::Ref<const vector_t<T>> x,
-                          Eigen::Ref<const vector_t<T>> y, MonomialBasis_t) {
-    auto coef =
-        detail::interpolate(x, y, detail::make_monomial_vandermonde_system<T>);
+Polynomial<T> interpolate(vector_ref_t<T> x, vector_ref_t<T> y,
+                          MonomialBasis_t) {
+    auto *vanderfun = detail::make_monomial_vandermonde_system<T>;
+    auto coef = detail::interpolate(x, y, vanderfun);
     return {std::move(coef)};
 }
 
 namespace detail {
 
 template <class T>
-auto make_chebyshev_vandermonde_system(Eigen::Ref<const vector_t<T>> x,
-                                       index_t degree) {
+auto make_chebyshev_vandermonde_system(vector_ref_t<T> x, index_t degree) {
     assert(degree >= 0);
     const index_t N = x.size();
     Eigen::MatrixXd V(N, degree + 1);
@@ -69,28 +63,23 @@ auto make_chebyshev_vandermonde_system(Eigen::Ref<const vector_t<T>> x,
 } // namespace detail
 
 template <class T>
-ChebyshevPolynomial<T> interpolate(Eigen::Ref<const vector_t<T>> x,
-                                   Eigen::Ref<const vector_t<T>> y,
+ChebyshevPolynomial<T> interpolate(vector_ref_t<T> x, vector_ref_t<T> y,
                                    ChebyshevBasis_t) {
-    auto coef =
-        detail::interpolate(x, y, detail::make_chebyshev_vandermonde_system<T>);
+    auto *vanderfun = detail::make_chebyshev_vandermonde_system<T>;
+    auto coef = detail::interpolate(x, y, vanderfun);
     return {std::move(coef)};
 }
 
 template <class T, class Basis>
 GenericPolynomial<T, Basis> interpolate(const vector_t<T> &x,
                                         const vector_t<T> &y, Basis basis) {
-    return interpolate(Eigen::Ref<const vector_t<T>>(x),
-                       Eigen::Ref<const vector_t<T>>(y), basis);
+    return interpolate(vector_ref_t<T> {x}, vector_ref_t<T> {y}, basis);
 }
 
 template <class T, class Basis>
 GenericPolynomial<T, Basis> interpolate(const std::vector<T> &x,
                                         const std::vector<T> &y, Basis basis) {
-    return interpolate(Eigen::Ref<const vector_t<T>>(
-                           Eigen::Map<const vector_t<T>>(x.data(), x.size())),
-                       Eigen::Ref<const vector_t<T>>(
-                           Eigen::Map<const vector_t<T>>(y.data(), y.size())),
+    return interpolate(detail::vector_map_ref(x), detail::vector_map_ref(y),
                        basis);
 }
 

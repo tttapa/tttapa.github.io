@@ -492,7 +492,7 @@ flowchart TB
         if_val_rdy -->|SEQ| read_val["assert(value == 42)&emsp;➍"]
         read_val --> acq_end_(( ))
     end
-    val_rdy -->|SYNC| if_val_rdy
+    val_rdy -.->|SYNC| if_val_rdy
 </div>
 <p>
     If ➌ reads the value written by ➋, then the load-acquire ➌ synchronizes
@@ -756,7 +756,7 @@ flowchart TB
         handled_sto -->|SEQ| value_ptr_xch_int["value_ptr.exchange(nullptr, seq_cst)&emsp;➐"]
         value_ptr_xch_int -->|SEQ| v_ld_int["*v&emsp;➑"]
     end
-    value_ptr_value -->|SYNC| value_ptr_xch_int
+    value_ptr_value -.->|SYNC| value_ptr_xch_int
 </div>
 
 <!-- <h3><a name="goals" href="#goals">Goals</a></h3>
@@ -911,7 +911,7 @@ flowchart TB
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="Memory-order.html" title="Memory order"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Atomics">Index</a></div><div class="nextpage"></div></div>
     </article>
-    <footer>Last edited: Saturday, 30 July 2022 22:49 UTC</footer>
+    <footer>Last edited: Saturday, 20 August 2022 13:30 UTC</footer>
 </body>
 
 </html>

@@ -552,26 +552,37 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments180 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments180 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments180 pre.snippet180 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/RPi-Cross-Cpp-Development/blob/b0622bb6e1396733f81a1286338436b4ef6dbfd3/cmake/armv6-rpi-linux-gnueabihf.cmake" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
-<div class="pygments180"><pre class="lineNumbers snippet180"><code><span></span><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_SYSTEM_NAME</span><span class="w"> </span><span class="s">Linux</span><span class="p">)</span></code>
+<a href="https://github.com/tttapa/RPi-Cross-Cpp-Development/blob/711cf41f0c1343a382e731fda6e8aa527bea7ad1/cmake/armv6-rpi-linux-gnueabihf.cmake" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<div class="pygments180"><pre class="lineNumbers snippet180"><code><span></span><span class="c"># https://cmake.org/cmake/help/book/mastering-cmake/chapter/Cross%20Compiling%20With%20CMake.html</span></code>
+<code></code>
+<code><span class="c"># Cross-compilation system information</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_SYSTEM_NAME</span><span class="w"> </span><span class="s">Linux</span><span class="p">)</span></code>
 <code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_SYSTEM_PROCESSOR</span><span class="w"> </span><span class="s">arm</span><span class="p">)</span></code>
 <code></code>
-<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_SYSROOT</span><span class="w"> </span><span class="s">/var/lib/schroot/chroots/rpizero-buster-armhf</span><span class="p">)</span></code>
-<code><span class="nb">SET</span><span class="p">(</span><span class="s">CMAKE_FIND_ROOT_PATH</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_SYSROOT</span><span class="o">}</span><span class="p">)</span></code>
+<code><span class="c"># The sysroot contains all the libraries we might need to link against and </span></code>
+<code><span class="c"># possibly headers we need for compilation</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_SYSROOT</span><span class="w"> </span><span class="s">/var/lib/schroot/chroots/schroot-name-armhf</span><span class="p">)</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_FIND_ROOT_PATH</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_SYSROOT</span><span class="o">}</span><span class="p">)</span></code>
 <code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_LIBRARY_ARCHITECTURE</span><span class="w"> </span><span class="s">arm-linux-gnueabihf</span><span class="p">)</span></code>
 <code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_STAGING_PREFIX</span><span class="w"> </span><span class="o">$ENV{</span><span class="nv">HOME</span><span class="o">}</span><span class="s">/RPi-dev/staging-armv6-rpi</span><span class="p">)</span></code>
 <code></code>
-<code><span class="nb">set</span><span class="p">(</span><span class="s">cross</span><span class="w"> </span><span class="s2">&quot;armv6-rpi-linux-gnueabihf&quot;</span><span class="p">)</span></code>
-<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_C_COMPILER</span><span class="w"> </span><span class="o">${</span><span class="nv">cross</span><span class="o">}</span><span class="s">-gcc</span><span class="p">)</span></code>
-<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_COMPILER</span><span class="w"> </span><span class="o">${</span><span class="nv">cross</span><span class="o">}</span><span class="s">-g++</span><span class="p">)</span></code>
-<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_Fortran_COMPILER</span><span class="w"> </span><span class="o">${</span><span class="nv">cross</span><span class="o">}</span><span class="s">-gfortran</span><span class="p">)</span></code>
+<code><span class="c"># Set the compilers for C, C++ and Fortran</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">RPI_GCC_TRIPLE</span><span class="w"> </span><span class="s2">&quot;armv6-rpi-linux-gnueabihf&quot;</span><span class="p">)</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_C_COMPILER</span><span class="w"> </span><span class="o">${</span><span class="nv">RPI_GCC_TRIPLE</span><span class="o">}</span><span class="s">-gcc</span><span class="w"> </span><span class="s">CACHE</span><span class="w"> </span><span class="s">FILEPATH</span><span class="w"> </span><span class="s2">&quot;C compiler&quot;</span><span class="p">)</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_COMPILER</span><span class="w"> </span><span class="o">${</span><span class="nv">RPI_GCC_TRIPLE</span><span class="o">}</span><span class="s">-g++</span><span class="w"> </span><span class="s">CACHE</span><span class="w"> </span><span class="s">FILEPATH</span><span class="w"> </span><span class="s2">&quot;C++ compiler&quot;</span><span class="p">)</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_Fortran_COMPILER</span><span class="w"> </span><span class="o">${</span><span class="nv">RPI_GCC_TRIPLE</span><span class="o">}</span><span class="s">-gfortran</span><span class="w"> </span><span class="s">CACHE</span><span class="w"> </span><span class="s">FILEPATH</span><span class="w"> </span><span class="s2">&quot;Fortran compiler&quot;</span><span class="p">)</span></code>
 <code></code>
+<code><span class="c"># Set the architecture-specific compiler flags</span></code>
 <code><span class="nb">set</span><span class="p">(</span><span class="s">ARCH_FLAGS</span><span class="w"> </span><span class="s2">&quot;-mcpu=arm1176jzf-s&quot;</span><span class="p">)</span></code>
-<code><span class="nb">SET</span><span class="p">(</span><span class="s">CMAKE_C_FLAGS</span><span class="w"> </span><span class="s2">&quot;${CMAKE_C_FLAGS} ${ARCH_FLAGS}&quot;</span><span class="p">)</span></code>
-<code><span class="nb">SET</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS</span><span class="w"> </span><span class="s2">&quot;${CMAKE_CXX_FLAGS} ${ARCH_FLAGS}&quot;</span><span class="p">)</span></code>
-<code><span class="nb">SET</span><span class="p">(</span><span class="s">CMAKE_Fortran_FLAGS</span><span class="w"> </span><span class="s2">&quot;${CMAKE_Fortran_FLAGS} ${ARCH_FLAGS}&quot;</span><span class="p">)</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_C_FLAGS_INIT</span><span class="w"> </span><span class="o">${</span><span class="nv">ARCH_FLAGS</span><span class="o">}</span><span class="p">)</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_CXX_FLAGS_INIT</span><span class="w"> </span><span class="o">${</span><span class="nv">ARCH_FLAGS</span><span class="o">}</span><span class="p">)</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_Fortran_FLAGS_INIT</span><span class="w"> </span><span class="o">${</span><span class="nv">ARCH_FLAGS</span><span class="o">}</span><span class="p">)</span></code>
 <code></code>
+<code><span class="c"># Don&#39;t look for programs in the sysroot (these are ARM programs, they won&#39;t run</span></code>
+<code><span class="c"># on the build machine)</span></code>
 <code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_FIND_ROOT_PATH_MODE_PROGRAM</span><span class="w"> </span><span class="s">NEVER</span><span class="p">)</span></code>
+<code><span class="c"># Only look for libraries, headers and packages in the sysroot, don&#39;t look on </span></code>
+<code><span class="c"># the build machine</span></code>
 <code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_FIND_ROOT_PATH_MODE_LIBRARY</span><span class="w"> </span><span class="s">ONLY</span><span class="p">)</span></code>
 <code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_FIND_ROOT_PATH_MODE_INCLUDE</span><span class="w"> </span><span class="s">ONLY</span><span class="p">)</span></code>
 <code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_FIND_ROOT_PATH_MODE_PACKAGE</span><span class="w"> </span><span class="s">ONLY</span><span class="p">)</span></code>
@@ -675,16 +686,20 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments213 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments213 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments213 pre.snippet213 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/RPi-Cross-Cpp-Development/blob/c30bbbfbbd4841406a6b87884ddc389ebb94759e/.vscode/cmake-kits.json" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<a href="https://github.com/tttapa/RPi-Cross-Cpp-Development/blob/711cf41f0c1343a382e731fda6e8aa527bea7ad1/.vscode/cmake-kits.json" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
 <div class="pygments213"><pre class="lineNumbers snippet213"><code><span></span><span class="p">[</span><span class="w"></span></code>
-<code><span class="p">{</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Raspberry Pi 3 (aarch64)&quot;</span><span class="p">,</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="nt">&quot;toolchainFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/cmake/aarch64-rpi3-linux-gnu.cmake&quot;</span><span class="w"></span></code>
-<code><span class="p">},</span><span class="w"></span></code>
-<code><span class="p">{</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Raspberry Pi (armv6)&quot;</span><span class="p">,</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="nt">&quot;toolchainFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/cmake/armv6-rpi-linux-gnueabihf.cmake&quot;</span><span class="w"></span></code>
-<code><span class="p">}</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Raspberry Pi 3 (aarch64)&quot;</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nt">&quot;toolchainFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/cmake/aarch64-rpi3-linux-gnu.cmake&quot;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="p">},</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Raspberry Pi 3 Clang (aarch64)&quot;</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nt">&quot;toolchainFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/cmake/aarch64-rpi3-linux-gnu-clang.cmake&quot;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="p">},</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Raspberry Pi (armv6)&quot;</span><span class="p">,</span><span class="w"></span></code>
+<code><span class="w">        </span><span class="nt">&quot;toolchainFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/cmake/armv6-rpi-linux-gnueabihf.cmake&quot;</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="p">}</span><span class="w"></span></code>
 <code><span class="p">]</span><span class="w"></span></code></pre></div>
 </div>
 <p>

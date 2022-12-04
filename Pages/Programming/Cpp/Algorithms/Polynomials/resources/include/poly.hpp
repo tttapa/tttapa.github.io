@@ -3,11 +3,18 @@
 #include <Eigen/Dense>
 #include <algorithm>
 #include <utility>
+#include <vector>
 
 namespace poly {
 
 template <class T = double>
-using coef_t = Eigen::VectorX<T>;
+using vector_t = Eigen::VectorX<T>;
+template <class T = double>
+using vector_ref_t = Eigen::Ref<const vector_t<T>>;
+template <class T = double>
+using vector_mut_ref_t = Eigen::Ref<vector_t<T>>;
+template <class T = double>
+using coef_t = vector_t<T>;
 using index_t = Eigen::Index;
 
 template <class T, class BasisTag>
@@ -34,5 +41,19 @@ template <class T = double>
 using Polynomial = GenericPolynomial<T, MonomialBasis_t>;
 template <class T = double>
 using ChebyshevPolynomial = GenericPolynomial<T, ChebyshevBasis_t>;
+
+namespace detail {
+template <class Container>
+vector_ref_t<typename Container::value_type>
+vector_map_ref(const Container &x) {
+    return Eigen::Map<const vector_t<typename Container::value_type>>(x.data(),
+                                                                      x.size());
+}
+template <class Container>
+vector_mut_ref_t<typename Container::value_type> vector_map_ref(Container &x) {
+    return Eigen::Map<vector_t<typename Container::value_type>>(x.data(),
+                                                                x.size());
+}
+} // namespace detail
 
 } // namespace poly
