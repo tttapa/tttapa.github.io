@@ -169,6 +169,10 @@
     </li>
     <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/index.html">Programming</a>
     <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Snippets/index.html">Snippets</a>
+        <ul>
+        </ul>
+        </li>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/index.html">C++</a>
         <ul>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/Practices/index.html">Best Practices</a>
@@ -311,46 +315,46 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments25 pre.snippet25 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development-Ubuntu/resources/speedrun.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
 <div class="pygments25"><pre class="lineNumbers snippet25"><code><span></span><span class="c1"># Install the necessary tools:</span></code>
-<code>sudo apt install ubuntu-dev-tools</code>
+<code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ubuntu-dev-tools</code>
 <code><span class="c1"># Then create a schroot environment for the arm64 environment, using Ubuntu </span></code>
 <code><span class="c1"># Impish (remember the name you used, you&#39;ll need it later):</span></code>
-<code>mk-sbuild --arch<span class="o">=</span>arm64 --skip-proposed --skip-updates --skip-security --name<span class="o">=</span>rpi3-impish impish</code>
+<code>mk-sbuild<span class="w"> </span>--arch<span class="o">=</span>arm64<span class="w"> </span>--skip-proposed<span class="w"> </span>--skip-updates<span class="w"> </span>--skip-security<span class="w"> </span>--name<span class="o">=</span>rpi3-impish<span class="w"> </span>impish</code>
 <code><span class="c1"># If this is the first time you run mk-sbuild, you&#39;ll have to follow some </span></code>
 <code><span class="c1"># instructions. Since we won&#39;t be publishing any software, you can simply accept</span></code>
 <code><span class="c1"># the default configuration. Afterwards, reboot or log out and back in again, as </span></code>
 <code><span class="c1"># instructed. Alternatively, use </span></code>
-<code>su - <span class="nv">$USER</span> <span class="c1"># to flush group membership.</span></code>
+<code>su<span class="w"> </span>-<span class="w"> </span><span class="nv">$USER</span><span class="w"> </span><span class="c1"># to flush group membership.</span></code>
 <code><span class="c1"># Then run the command again, this time it will actually create the schroot:</span></code>
-<code>mk-sbuild --arch<span class="o">=</span>arm64 --skip-proposed --skip-updates --skip-security --name<span class="o">=</span>rpi3-impish impish</code>
+<code>mk-sbuild<span class="w"> </span>--arch<span class="o">=</span>arm64<span class="w"> </span>--skip-proposed<span class="w"> </span>--skip-updates<span class="w"> </span>--skip-security<span class="w"> </span>--name<span class="o">=</span>rpi3-impish<span class="w"> </span>impish</code>
 <code><span class="c1"># Install some dependencies in the schroot. Use the sbuild-apt wrapper around </span></code>
 <code><span class="c1"># the apt-get tool, and give it the name of the schroot you created earlier,</span></code>
 <code><span class="c1"># with the architecture as suffix:</span></code>
-<code>sudo sbuild-apt rpi3-impish-arm64 apt-get install libboost-all-dev</code>
+<code>sudo<span class="w"> </span>sbuild-apt<span class="w"> </span>rpi3-impish-arm64<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>libboost-all-dev</code>
 <code><span class="c1"># Download and extract the cross-compilation toolchain:</span></code>
-<code>wget -qO- https://github.com/tttapa/docker-arm-cross-toolchain/releases/latest/download/x-tools-aarch64-rpi3-linux-gnu.tar.bz2 <span class="p">|</span> tar xJ -C ~/opt</code>
+<code>wget<span class="w"> </span>-qO-<span class="w"> </span>https://github.com/tttapa/docker-arm-cross-toolchain/releases/latest/download/x-tools-aarch64-rpi3-linux-gnu.tar.bz2<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>xJ<span class="w"> </span>-C<span class="w"> </span>~/opt</code>
 <code><span class="c1"># Add the toolchain to your path:</span></code>
-<code><span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/opt/x-tools/aarch64-rpi3-linux-gnu/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span></code>
+<code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/opt/x-tools/aarch64-rpi3-linux-gnu/bin:</span><span class="nv">$PATH</span><span class="s2">&quot;</span></code>
 <code><span class="c1"># Download the repository with the example CMake C++ project:</span></code>
-<code>git clone https://github.com/tttapa/RPi-Cross-Cpp-Development.git</code>
+<code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/tttapa/RPi-Cross-Cpp-Development.git</code>
 <code><span class="c1"># Enter it:</span></code>
-<code><span class="nb">cd</span> RPi-Cross-Cpp-Development</code>
+<code><span class="nb">cd</span><span class="w"> </span>RPi-Cross-Cpp-Development</code>
 <code><span class="c1"># Replace the schroot name in the toolchain file by the name used earlier:</span></code>
-<code>sed -i <span class="s1">&#39;s/schroot-name-arm64/rpi3-impish-arm64/&#39;</span> cmake/aarch64-rpi3-linux-gnu.cmake</code>
+<code>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;s/schroot-name-arm64/rpi3-impish-arm64/&#39;</span><span class="w"> </span>cmake/aarch64-rpi3-linux-gnu.cmake</code>
 <code><span class="c1"># Configure the project for cross-compilation:</span></code>
-<code>cmake -S. -Bbuild -DCMAKE_TOOLCHAIN_FILE<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/cmake/aarch64-rpi3-linux-gnu.cmake&quot;</span></code>
+<code>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild<span class="w"> </span>-DCMAKE_TOOLCHAIN_FILE<span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">/cmake/aarch64-rpi3-linux-gnu.cmake&quot;</span></code>
 <code><span class="c1"># Build the project:</span></code>
-<code>cmake --build build -j</code>
+<code>cmake<span class="w"> </span>--build<span class="w"> </span>build<span class="w"> </span>-j</code>
 <code><span class="c1"># Install the project into the staging area:</span></code>
-<code>cmake --install build</code>
+<code>cmake<span class="w"> </span>--install<span class="w"> </span>build</code>
 <code><span class="c1"># Install the dependencies on the Raspberry Pi:</span></code>
-<code>ssh RPi3 sudo apt-get install -y libboost-program-options1.74.0</code>
+<code>ssh<span class="w"> </span>RPi3<span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libboost-program-options1.74.0</code>
 <code><span class="c1"># Copy the “Hello World” example program to the Raspberry Pi:</span></code>
-<code>ssh RPi3 mkdir -p <span class="s1">&#39;~/.local/bin&#39;</span></code>
-<code>scp ~/RPi-dev/staging-aarch64-rpi3/bin/hello RPi3:~/.local/bin</code>
+<code>ssh<span class="w"> </span>RPi3<span class="w"> </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s1">&#39;~/.local/bin&#39;</span></code>
+<code>scp<span class="w"> </span>~/RPi-dev/staging-aarch64-rpi3/bin/hello<span class="w"> </span>RPi3:~/.local/bin</code>
 <code><span class="c1"># Run the example program:</span></code>
-<code>ssh RPi3 bash --login -c hello</code>
+<code>ssh<span class="w"> </span>RPi3<span class="w"> </span>bash<span class="w"> </span>--login<span class="w"> </span>-c<span class="w"> </span>hello</code>
 <code><span class="c1"># Or simply log in using</span></code>
-<code>ssh RPi3</code>
+<code>ssh<span class="w"> </span>RPi3</code>
 <code><span class="c1"># and then run the program there:</span></code>
 <code>hello</code></pre></div>
 </div>
@@ -423,17 +427,17 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments26 pre.snippet26 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development-Ubuntu/resources/debug.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
 <div class="pygments26"><pre class="lineNumbers snippet26"><code><span></span><span class="c1"># Copy the toolchain&#39;s gdbserver to the Pi:</span></code>
-<code>scp ~/opt/x-tools/aarch64-rpi3-linux-gnu/aarch64-rpi3-linux-gnu/debug-root/usr/bin/gdbserver RPi3:~</code>
+<code>scp<span class="w"> </span>~/opt/x-tools/aarch64-rpi3-linux-gnu/aarch64-rpi3-linux-gnu/debug-root/usr/bin/gdbserver<span class="w"> </span>RPi3:~</code>
 <code><span class="c1"># Install it:</span></code>
-<code>ssh RPi3 sudo mv gdbserver /usr/local/bin</code>
+<code>ssh<span class="w"> </span>RPi3<span class="w"> </span>sudo<span class="w"> </span>mv<span class="w"> </span>gdbserver<span class="w"> </span>/usr/local/bin</code>
 <code><span class="c1"># Test it:</span></code>
-<code>ssh RPi3 gdbserver --version</code>
+<code>ssh<span class="w"> </span>RPi3<span class="w"> </span>gdbserver<span class="w"> </span>--version</code>
 <code><span class="c1"># Start GDB with the hello program on your computer:</span></code>
-<code>aarch64-rpi3-linux-gnu-gdb ~/RPi-dev/staging-aarch64-rpi3/bin/hello</code>
+<code>aarch64-rpi3-linux-gnu-gdb<span class="w"> </span>~/RPi-dev/staging-aarch64-rpi3/bin/hello</code>
 <code><span class="c1"># Inside of GDB, set the sysroot:</span></code>
-<code><span class="nb">set</span> sysroot /var/lib/schroot/chroots/rpi3-impish-arm64</code>
+<code><span class="nb">set</span><span class="w"> </span>sysroot<span class="w"> </span>/var/lib/schroot/chroots/rpi3-impish-arm64</code>
 <code><span class="c1"># Select and start the target:</span></code>
-<code>target remote <span class="p">|</span> ssh RPi3 gdbserver - <span class="s1">&#39;~/.local/bin/hello&#39;</span> --name Pieter</code>
+<code>target<span class="w"> </span>remote<span class="w"> </span><span class="p">|</span><span class="w"> </span>ssh<span class="w"> </span>RPi3<span class="w"> </span>gdbserver<span class="w"> </span>-<span class="w"> </span><span class="s1">&#39;~/.local/bin/hello&#39;</span><span class="w"> </span>--name<span class="w"> </span>Pieter</code>
 <code><span class="c1"># Run program:</span></code>
 <code><span class="k">continue</span></code>
 <code><span class="c1"># Exit GDB:</span></code>

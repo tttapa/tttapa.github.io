@@ -830,6 +830,10 @@ mjx-c.mjx-c3E::before {
     </li>
     <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/index.html">Programming</a>
     <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Snippets/index.html">Snippets</a>
+        <ul>
+        </ul>
+        </li>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/index.html">C++</a>
         <ul>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/Practices/index.html">Best Practices</a>
@@ -1006,13 +1010,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments27 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments27 pre.snippet27 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_unsigned.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments27"><pre class="lineNumbers snippet27"><code><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">div_by_16_a</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span><span class="w"></span></code>
-<code><span class="p">}</span><span class="w"></span></code>
+<div class="pygments27"><pre class="lineNumbers snippet27"><code><span></span><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">div_by_16_a</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span></code>
+<code><span class="p">}</span></code>
 <code></code>
-<code><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">div_by_16_b</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="kt">uint16_t</span><span class="w"> </span><span class="nf">div_by_16_b</span><span class="p">(</span><span class="kt">uint16_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="c1">// 16 = 2⁴</span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="p">}</span></code></pre></div>
 </div>
 
 <p>
@@ -1091,15 +1095,15 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments39 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments39 pre.snippet39 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_unsigned_vector.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments39"><pre class="lineNumbers snippet39"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;arm_neon.h&gt;</span><span class="cp"></span></code>
+<div class="pygments39"><pre class="lineNumbers snippet39"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;arm_neon.h&gt;</span></code>
 <code></code>
-<code><span class="n">uint16x4_t</span><span class="w"> </span><span class="nf">div_by_16</span><span class="p">(</span><span class="n">uint16x4_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="n">uint16x4_t</span><span class="w"> </span><span class="nf">div_by_16</span><span class="p">(</span><span class="n">uint16x4_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshr_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// 16 = 2⁴</span></code>
-<code><span class="p">}</span><span class="w"></span></code>
+<code><span class="p">}</span></code>
 <code></code>
-<code><span class="n">uint16x8_t</span><span class="w"> </span><span class="nf">div_by_16</span><span class="p">(</span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="n">uint16x8_t</span><span class="w"> </span><span class="nf">div_by_16</span><span class="p">(</span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshrq_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// 16 = 2⁴</span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="p">}</span></code></pre></div>
 </div>
 <p>
     The name is derived from <u>v</u>ector <u>sh</u>ift <u>r</u>ight, <code>n</code> indicates a fixed number of bits is
@@ -1182,9 +1186,9 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments55 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments55 pre.snippet55 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_unsigned_vector_round.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments55"><pre class="lineNumbers snippet55"><code><span></span><span class="n">uint16x8_t</span><span class="w"> </span><span class="nf">div_by_16_round</span><span class="p">(</span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<div class="pygments55"><pre class="lineNumbers snippet55"><code><span></span><span class="n">uint16x8_t</span><span class="w"> </span><span class="nf">div_by_16_round</span><span class="p">(</span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vrshrq_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// 16 = 2⁴</span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="p">}</span></code></pre></div>
 </div>
 
 <h3><a name="signed-integers" href="#signed-integers">Signed integers</a></h3>
@@ -1268,15 +1272,15 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments72 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments72 pre.snippet72 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_signed.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments72"><pre class="lineNumbers snippet72"><code><span></span><span class="kt">int16_t</span><span class="w"> </span><span class="nf">div_by_16_a</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span><span class="w"></span></code>
-<code><span class="p">}</span><span class="w"></span></code>
+<div class="pygments72"><pre class="lineNumbers snippet72"><code><span></span><span class="kt">int16_t</span><span class="w"> </span><span class="nf">div_by_16_a</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">16</span><span class="p">;</span></code>
+<code><span class="p">}</span></code>
 <code></code>
-<code><span class="kt">int16_t</span><span class="w"> </span><span class="nf">div_by_16_b</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"></span></code>
-<code><span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span></code>
+<code><span class="kt">int16_t</span><span class="w"> </span><span class="nf">div_by_16_b</span><span class="p">(</span><span class="kt">int16_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="n">x</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">16</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"> </span><span class="c1">// 16 = 2⁴</span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="p">}</span></code></pre></div>
 </div>
 
 <p>
@@ -1353,13 +1357,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments82 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments82 pre.snippet82 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_signed_vector.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments82"><pre class="lineNumbers snippet82"><code><span></span><span class="n">int16x8_t</span><span class="w"> </span><span class="nf">div_by_16</span><span class="p">(</span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<div class="pygments82"><pre class="lineNumbers snippet82"><code><span></span><span class="n">int16x8_t</span><span class="w"> </span><span class="nf">div_by_16</span><span class="p">(</span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">negative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vcltzq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// compare less than zero</span></code>
-<code><span class="w">    </span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vdupq_n_s16</span><span class="p">(</span><span class="mi">16</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vdupq_n_s16</span><span class="p">(</span><span class="mi">16</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span></code>
 <code><span class="w">    </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vandq_s16</span><span class="p">(</span><span class="n">negative</span><span class="p">,</span><span class="w"> </span><span class="n">correction</span><span class="p">);</span><span class="w"> </span><span class="c1">// only add correction if &lt; 0</span></code>
-<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vaddq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">correction</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vaddq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">correction</span><span class="p">);</span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshrq_n_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// 16 = 2⁴</span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="p">}</span></code></pre></div>
 </div>
 <p>
     In this snippet, <code>vdupq_n_s16</code> is used to duplicate a single value across all lanes of a vector register.
@@ -1447,12 +1451,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="cp">        a_;                                                                    \</span></code>
 <code><span class="cp">    })</span></code>
 <code></code>
-<code><span class="n">int16x8_t</span><span class="w"> </span><span class="nf">div_by_16</span><span class="p">(</span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="n">int16x8_t</span><span class="w"> </span><span class="nf">div_by_16</span><span class="p">(</span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">negative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vcltzq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// compare less than zero</span></code>
-<code><span class="w">    </span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vandq_n_u16</span><span class="p">(</span><span class="n">negative</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vsubq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vreinterpretq_s16_u16</span><span class="p">(</span><span class="n">correction</span><span class="p">));</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vandq_n_u16</span><span class="p">(</span><span class="n">negative</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">16</span><span class="p">);</span></code>
+<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vsubq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vreinterpretq_s16_u16</span><span class="p">(</span><span class="n">correction</span><span class="p">));</span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshrq_n_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w"> </span><span class="c1">// 16 = 2⁴</span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="p">}</span></code></pre></div>
 </div>
 <p>
     There is no actual AND instruction, the BIC (bit clear) instruction is used instead. There's no intrinsic for it, so
@@ -1544,12 +1548,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="cp">        a_;                                                                    \</span></code>
 <code><span class="cp">    })</span></code>
 <code></code>
-<code><span class="n">int16x8_t</span><span class="w"> </span><span class="nf">div_by_512</span><span class="p">(</span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<code><span class="n">int16x8_t</span><span class="w"> </span><span class="nf">div_by_512</span><span class="p">(</span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">negative</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vcltzq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// compare less than zero</span></code>
-<code><span class="w">    </span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vandq_n_high_u16</span><span class="p">(</span><span class="n">negative</span><span class="p">,</span><span class="w"> </span><span class="mi">512</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vaddq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vreinterpretq_s16_u16</span><span class="p">(</span><span class="n">correction</span><span class="p">));</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">correction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vandq_n_high_u16</span><span class="p">(</span><span class="n">negative</span><span class="p">,</span><span class="w"> </span><span class="mi">512</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span></code>
+<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vaddq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vreinterpretq_s16_u16</span><span class="p">(</span><span class="n">correction</span><span class="p">));</span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshrq_n_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span><span class="w"> </span><span class="c1">// 512 = 2⁹</span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="p">}</span></code></pre></div>
 </div>
 
 <h4><a name="rounding1" href="#rounding1">Rounding</a></h4>
@@ -1626,11 +1630,11 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments122 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments122 pre.snippet122 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_16_signed_vector_round.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments122"><pre class="lineNumbers snippet122"><code><span></span><span class="n">int16x8_t</span><span class="w"> </span><span class="nf">div_by_16_round</span><span class="p">(</span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<div class="pygments122"><pre class="lineNumbers snippet122"><code><span></span><span class="n">int16x8_t</span><span class="w"> </span><span class="nf">div_by_16_round</span><span class="p">(</span><span class="n">int16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">sign</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vshrq_n_u16</span><span class="p">(</span><span class="n">vreinterpretq_u16_s16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="mi">15</span><span class="p">);</span><span class="w"> </span><span class="c1">// sign bit</span></code>
 <code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vqsubq_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vreinterpretq_s16_u16</span><span class="p">(</span><span class="n">sign</span><span class="p">));</span><span class="w"> </span><span class="c1">// subtract 1 if &lt; 0</span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vrshrq_n_s16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span><span class="w">                      </span><span class="c1">// 16 = 2⁴</span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="p">}</span></code></pre></div>
 </div>
 <p>
     Subtracting one from a negative number has an annoying edge case: if the dividend is <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c36"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c35"></mjx-c><mjx-c class="mjx-c33"></mjx-c><mjx-c class="mjx-c36"></mjx-c></mjx-mn><mjx-mo class="mjx-n"><mjx-c class="mjx-c2C"></mjx-c></mjx-mo></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo>−</mo><mn>65536</mn><mo>,</mo></math></mjx-assistive-mml></mjx-container> subtracting one
@@ -1728,7 +1732,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_256_vector_narrow.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
 <div class="pygments151"><pre class="lineNumbers snippet151"><code><span></span><span class="n">uint8x8_t</span><span class="w"> </span><span class="nf">div_by_256</span><span class="p">(</span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span></code>
 <code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshrn_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span><span class="w"> </span><span class="c1">// 256 = 2⁸</span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="p">}</span></code></pre></div>
 </div>
 <p>
     Narrowing intrinsics have an <code>n</code> suffix. You can also realize a rounding division by using
@@ -1828,16 +1832,16 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments184 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments184 pre.snippet184 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_255_vector.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments184"><pre class="lineNumbers snippet184"><code><span></span><span class="n">uint8x8_t</span><span class="w"> </span><span class="nf">div_by_255</span><span class="p">(</span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<div class="pygments184"><pre class="lineNumbers snippet184"><code><span></span><span class="n">uint8x8_t</span><span class="w"> </span><span class="nf">div_by_255</span><span class="p">(</span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="c1">// Multiply by 0x8081 as 32-bit integers (high and low elements separately)</span></code>
 <code><span class="w">    </span><span class="c1">// 0x800000/0x8081 ≃ 255</span></code>
-<code><span class="w">    </span><span class="n">uint32x4_t</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmull_high_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8081</span><span class="p">);</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="n">uint32x4_t</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmull_n_u16</span><span class="p">(</span><span class="n">vget_low_u16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="mh">0x8081</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">uint32x4_t</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmull_high_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8081</span><span class="p">);</span></code>
+<code><span class="w">    </span><span class="n">uint32x4_t</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmull_n_u16</span><span class="p">(</span><span class="n">vget_low_u16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="mh">0x8081</span><span class="p">);</span></code>
 <code><span class="w">    </span><span class="c1">// Extract the 16 high bits of all 32-bit products (division by 0x10000)</span></code>
-<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vuzp2q_u16</span><span class="p">(</span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="w"> </span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">h</span><span class="p">));</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vuzp2q_u16</span><span class="p">(</span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="w"> </span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">h</span><span class="p">));</span></code>
 <code><span class="w">    </span><span class="c1">// Divide by 0x80 and narrow from 16 bits to 8 bits</span></code>
-<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshrn_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span><span class="w"></span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshrn_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span></code>
+<code><span class="p">}</span></code></pre></div>
 </div>
 <p>
     The effect of the <code>uzp2</code> instruction is visualized in the following diagram. Each cell is a 16-bit
@@ -2017,17 +2021,17 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments297 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments297 pre.snippet297 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/NEON/resources/div_by_255_vector_round.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments297"><pre class="lineNumbers snippet297"><code><span></span><span class="n">uint8x8_t</span><span class="w"> </span><span class="nf">div_by_255_round</span><span class="p">(</span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"></span></code>
+<div class="pygments297"><pre class="lineNumbers snippet297"><code><span></span><span class="n">uint8x8_t</span><span class="w"> </span><span class="nf">div_by_255_round</span><span class="p">(</span><span class="n">uint16x8_t</span><span class="w"> </span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="c1">// Add the rounding constant</span></code>
-<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vaddq_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vdupq_n_u16</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">7</span><span class="p">));</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vaddq_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">vdupq_n_u16</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">7</span><span class="p">));</span></code>
 <code><span class="w">    </span><span class="c1">// Multiply by 0x8080 as 32-bit integers (high and low elements separately)</span></code>
-<code><span class="w">    </span><span class="n">uint32x4_t</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmull_high_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8080</span><span class="p">);</span><span class="w"></span></code>
-<code><span class="w">    </span><span class="n">uint32x4_t</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmull_n_u16</span><span class="p">(</span><span class="n">vget_low_u16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="mh">0x8080</span><span class="p">);</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">uint32x4_t</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmull_high_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mh">0x8080</span><span class="p">);</span></code>
+<code><span class="w">    </span><span class="n">uint32x4_t</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vmull_n_u16</span><span class="p">(</span><span class="n">vget_low_u16</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="w"> </span><span class="mh">0x8080</span><span class="p">);</span></code>
 <code><span class="w">    </span><span class="c1">// Extract the 16 high bits of all 32-bit products (division by 0x10000)</span></code>
-<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vuzp2q_u16</span><span class="p">(</span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="w"> </span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">h</span><span class="p">));</span><span class="w"></span></code>
+<code><span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">vuzp2q_u16</span><span class="p">(</span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">l</span><span class="p">),</span><span class="w"> </span><span class="n">vreinterpretq_u16_u32</span><span class="p">(</span><span class="n">h</span><span class="p">));</span></code>
 <code><span class="w">    </span><span class="c1">// Divide by 0x80 and narrow from 16 bits to 8 bits</span></code>
-<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshrn_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span><span class="w"></span></code>
-<code><span class="p">}</span><span class="w"></span></code></pre></div>
+<code><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">vshrn_n_u16</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">);</span></code>
+<code><span class="p">}</span></code></pre></div>
 </div>
 <p>
     The result of this function is correct as long as the addition of the rounding constant doesn't cause overflow. This

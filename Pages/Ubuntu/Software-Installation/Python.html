@@ -167,6 +167,10 @@
     </li>
     <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/index.html">Programming</a>
     <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Snippets/index.html">Snippets</a>
+        <ul>
+        </ul>
+        </li>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/index.html">C++</a>
         <ul>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/Practices/index.html">Best Practices</a>
@@ -430,38 +434,38 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="nv">prefix</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local"</span></code>
 <code></code>
 <code><span class="c1"># Install dependencies and build tools</span></code>
-<code>sudo apt-get update</code>
-<code>sudo apt-get install -y <span class="se">\</span></code>
-<code>    zlib1g-dev libbz2-dev libssl-dev uuid-dev libffi-dev libreadline-dev <span class="se">\</span></code>
-<code>    libsqlite3-dev tk-dev libbz2-dev libncurses5-dev libreadline6-dev <span class="se">\</span></code>
-<code>    libgdbm-dev liblzma-dev <span class="se">\</span></code>
-<code>    gcc g++ make wget</code>
+<code>sudo<span class="w"> </span>apt-get<span class="w"> </span>update</code>
+<code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>zlib1g-dev<span class="w"> </span>libbz2-dev<span class="w"> </span>libssl-dev<span class="w"> </span>uuid-dev<span class="w"> </span>libffi-dev<span class="w"> </span>libreadline-dev<span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>libsqlite3-dev<span class="w"> </span>tk-dev<span class="w"> </span>libbz2-dev<span class="w"> </span>libncurses5-dev<span class="w"> </span>libreadline6-dev<span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>libgdbm-dev<span class="w"> </span>liblzma-dev<span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>gcc<span class="w"> </span>g++<span class="w"> </span>make<span class="w"> </span>wget</code>
 <code></code>
 <code><span class="c1"># For Ubuntu 18.04 and later, another dependency is required for GNU dbm</span></code>
-<code><span class="nb">source</span> /etc/os-release</code>
-<code><span class="k">if</span> <span class="o">((</span> <span class="k">$(</span><span class="nb">echo</span> <span class="s2">"</span><span class="nv">$VERSION_ID</span><span class="s2"> &gt;= 18.04"</span> <span class="p">|</span> bc -l<span class="k">)</span> <span class="o">))</span><span class="p">;</span></code>
+<code><span class="nb">source</span><span class="w"> </span>/etc/os-release</code>
+<code><span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$VERSION_ID</span><span class="s2"> &gt;= 18.04"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span><span class="o">))</span><span class="p">;</span></code>
 <code><span class="k">then</span></code>
-<code>    sudo apt-get install libgdbm-compat-dev</code>
+<code><span class="w">    </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>libgdbm-compat-dev</code>
 <code><span class="k">fi</span></code>
 <code></code>
 <code><span class="c1"># Download and extract the Python source code</span></code>
-<code>mkdir -p <span class="s2">"</span><span class="nv">$builddir</span><span class="s2">"</span></code>
-<code><span class="nb">cd</span> <span class="nv">$builddir</span></code>
-<code><span class="k">if</span> <span class="o">[</span> ! -d <span class="s2">"</span><span class="nv">$python</span><span class="s2">"</span> <span class="o">]</span></code>
+<code>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="nv">$builddir</span><span class="s2">"</span></code>
+<code><span class="nb">cd</span><span class="w"> </span><span class="nv">$builddir</span></code>
+<code><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>!<span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$python</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span></code>
 <code><span class="k">then</span></code>
-<code>    wget <span class="s2">"https://www.python.org/ftp/python/</span><span class="nv">$version</span><span class="s2">/</span><span class="nv">$python</span><span class="s2">.tgz"</span></code>
-<code>    tar xf <span class="nv">$python</span>.tgz</code>
+<code><span class="w">    </span>wget<span class="w"> </span><span class="s2">"https://www.python.org/ftp/python/</span><span class="nv">$version</span><span class="s2">/</span><span class="nv">$python</span><span class="s2">.tgz"</span></code>
+<code><span class="w">    </span>tar<span class="w"> </span>xf<span class="w"> </span><span class="nv">$python</span>.tgz</code>
 <code><span class="k">fi</span></code>
 <code></code>
-<code><span class="nb">cd</span> <span class="s2">"</span><span class="nv">$python</span><span class="s2">"</span></code>
-<code>./configure --prefix<span class="o">=</span><span class="s2">"</span><span class="nv">$prefix</span><span class="s2">"</span> <span class="se">\</span></code>
-<code>    --enable-ipv6 <span class="se">\</span></code>
-<code>    --enable-shared <span class="se">\</span></code>
-<code>    --with-lto --enable-optimizations <span class="se">\</span></code>
-<code>    <span class="s1">'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</span></code>
+<code><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$python</span><span class="s2">"</span></code>
+<code>./configure<span class="w"> </span>--prefix<span class="o">=</span><span class="s2">"</span><span class="nv">$prefix</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>--enable-ipv6<span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>--enable-shared<span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>--with-lto<span class="w"> </span>--enable-optimizations<span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span><span class="s1">'LDFLAGS=-Wl,-rpath,\$$ORIGIN/../lib'</span></code>
 <code></code>
-<code>make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span></code>
-<code>make altinstall</code></pre></div>
+<code>make<span class="w"> </span>-j<span class="k">$(($(</span>nproc<span class="k">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="k">))</span></code>
+<code>make<span class="w"> </span>altinstall</code></pre></div>
 </div>
 
 <p>

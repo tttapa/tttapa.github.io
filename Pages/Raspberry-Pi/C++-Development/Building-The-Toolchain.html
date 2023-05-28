@@ -167,6 +167,10 @@
     </li>
     <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/index.html">Programming</a>
     <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Snippets/index.html">Snippets</a>
+        <ul>
+        </ul>
+        </li>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/index.html">C++</a>
         <ul>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Programming/Cpp/Practices/index.html">Best Practices</a>
@@ -403,64 +407,60 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments98 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments98 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments98 pre.snippet98 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/docker-crosstool-ng-multiarch/blob/54d05e2d6d7999142e5c0007c995221ab74877d6/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<a href="https://github.com/tttapa/docker-crosstool-ng-multiarch/blob/4d2047ab2683433922b6ef081e39f75491f4241f/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
 <div class="pygments98"><pre class="lineNumbers snippet98"><code><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ubuntu:bionic</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="s">ct-ng</span></code>
 <code></code>
 <code><span class="c"># Install dependencies to build toolchain</span></code>
-<code><span class="k">RUN</span><span class="w"> </span><span class="nb">export</span> <span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    apt-get update <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    apt-get install -y --no-install-recommends<span class="se">\</span></code>
-<code>        gcc g++ gperf bison flex texinfo help2man make libncurses5-dev <span class="se">\</span></code>
-<code>        python3-dev libtool automake libtool-bin gawk wget rsync git patch <span class="se">\</span></code>
-<code>        unzip xz-utils bzip2 ca-certificates <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    apt-get clean autoclean <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    apt-get autoremove -y <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    rm -rf /var/lib/apt/lists/*</code>
+<code><span class="k">RUN</span><span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">DEBIAN_FRONTEND</span><span class="o">=</span>noninteractive<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="se">\</span></code>
+<code><span class="w">        </span>gcc<span class="w"> </span>g++<span class="w"> </span>gperf<span class="w"> </span>bison<span class="w"> </span>flex<span class="w"> </span>texinfo<span class="w"> </span>help2man<span class="w"> </span>make<span class="w"> </span>libncurses5-dev<span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">        </span>python3-dev<span class="w"> </span>libtool<span class="w"> </span>automake<span class="w"> </span>libtool-bin<span class="w"> </span>gawk<span class="w"> </span>wget<span class="w"> </span>rsync<span class="w"> </span>git<span class="w"> </span>patch<span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">        </span>unzip<span class="w"> </span>xz-utils<span class="w"> </span>bzip2<span class="w"> </span>ca-certificates<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>apt-get<span class="w"> </span>clean<span class="w"> </span>autoclean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>apt-get<span class="w"> </span>autoremove<span class="w"> </span>-y<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*</code>
 <code></code>
 <code><span class="c"># Add a user called `develop` and add him to the sudo group</span></code>
-<code><span class="k">RUN</span><span class="w"> </span>useradd -m develop <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    <span class="nb">echo</span> <span class="s2">&quot;develop:develop&quot;</span> <span class="p">|</span> chpasswd <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    adduser develop sudo</code>
+<code><span class="k">RUN</span><span class="w"> </span>useradd<span class="w"> </span>-m<span class="w"> </span>develop<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;develop:develop&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>chpasswd<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>adduser<span class="w"> </span>develop<span class="w"> </span>sudo</code>
 <code></code>
 <code><span class="k">USER</span><span class="w"> </span><span class="s">develop</span></code>
 <code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop</span></code>
 <code></code>
 <code><span class="c"># Install autoconf</span></code>
-<code><span class="k">RUN</span><span class="w"> </span>wget https://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.gz -O- <span class="p">|</span> tar xz <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    <span class="nb">cd</span> autoconf-2.71 <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    ./configure --prefix<span class="o">=</span>/home/develop/.local <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    make -j<span class="k">$(</span>nproc<span class="k">)</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    make install <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    <span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    rm -rf autoconf-2.71</code>
+<code><span class="k">RUN</span><span class="w"> </span>wget<span class="w"> </span>https://ftp.gnu.org/gnu/autoconf/autoconf-2.71.tar.gz<span class="w"> </span>-O-<span class="w"> </span><span class="p">|</span><span class="w"> </span>tar<span class="w"> </span>xz<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span><span class="nb">cd</span><span class="w"> </span>autoconf-2.71<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>./configure<span class="w"> </span>--prefix<span class="o">=</span>/home/develop/.local<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span><span class="nb">cd</span><span class="w"> </span>..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>autoconf-2.71</code>
 <code><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/home/develop/.local/bin:<span class="nv">$PATH</span></code>
 <code></code>
 <code><span class="c"># Download and install the latest version of crosstool-ng</span></code>
-<code><span class="k">RUN</span><span class="w"> </span>git clone -b master --single-branch --depth <span class="m">1</span> <span class="se">\</span></code>
-<code>        https://github.com/crosstool-ng/crosstool-ng.git</code>
+<code><span class="k">RUN</span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>updates<span class="w"> </span>--single-branch<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">        </span>https://github.com/cpackham/crosstool-ng.git</code>
 <code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop/crosstool-ng</span></code>
-<code><span class="k">RUN</span><span class="w"> </span>git show --summary <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    ./bootstrap <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    mkdir build <span class="o">&amp;&amp;</span> <span class="nb">cd</span> build <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    ../configure --prefix<span class="o">=</span>/home/develop/.local <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    make -j<span class="k">$(($(</span>nproc<span class="k">)</span> <span class="o">*</span> <span class="m">2</span><span class="k">))</span> <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    make install <span class="o">&amp;&amp;</span>  <span class="se">\</span></code>
-<code>    <span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> rm -rf build</code>
+<code><span class="k">RUN</span><span class="w"> </span>git<span class="w"> </span>show<span class="w"> </span>--summary<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>./bootstrap<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>../configure<span class="w"> </span>--prefix<span class="o">=</span>/home/develop/.local<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>make<span class="w"> </span>-j<span class="k">$(($(</span>nproc<span class="k">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">2</span><span class="k">))</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">  </span><span class="se">\</span></code>
+<code><span class="w">    </span><span class="nb">cd</span><span class="w"> </span>..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>build</code>
 <code></code>
 <code><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/home/develop/.local/bin:<span class="nv">$PATH</span></code>
 <code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop </span></code>
 <code></code>
 <code><span class="c"># Patches</span></code>
 <code><span class="c"># https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=280707&amp;p=1700861#p1700861</span></code>
-<code><span class="k">RUN</span><span class="w"> </span>mkdir binutils <span class="o">&amp;&amp;</span> <span class="nb">cd</span> binutils <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    wget https://ftp.debian.org/debian/pool/main/b/binutils/binutils-source_2.39-8_all.deb <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    ar x binutils-source_2.39-8_all.deb <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    tar xf data.tar.xz <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    mkdir -p ../patches/binutils/2.39 <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    cp usr/src/binutils/patches/129_multiarch_libpath.patch <span class="se">\</span></code>
-<code>        ../patches/binutils/2.39 <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    <span class="nb">cd</span> .. <span class="o">&amp;&amp;</span> <span class="se">\</span></code>
-<code>    rm -rf binutils</code></pre></div>
+<code><span class="k">RUN</span><span class="w"> </span>wget<span class="w"> </span>https://ftp.debian.org/debian/pool/main/b/binutils/binutils_2.40-2.debian.tar.xz<span class="w"> </span>-O-<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>tar<span class="w"> </span>xJ<span class="w"> </span>debian/patches/129_multiarch_libpath.patch<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>mkdir<span class="w"> </span>-p<span class="w"> </span>patches/binutils/2.40<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>mv<span class="w"> </span>debian/patches/129_multiarch_libpath.patch<span class="w"> </span>patches/binutils/2.40<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span>rm<span class="w"> </span>-rf<span class="w"> </span>debian</code></pre></div>
 </div>
 
 <p>
@@ -545,21 +545,26 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments117 .vm { color: #0F1E87 } /* Name.Variable.Magic */
 .pygments117 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments117 pre.snippet117 { counter-reset: line 0; }</style>
-<a href="https://github.com/tttapa/docker-arm-cross-toolchain/blob/53524b2e2f7d1d5d3756d1b8bd18dcdd4d6b5f61/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
+<a href="https://github.com/tttapa/docker-arm-cross-toolchain/blob/d1cab261c3a58b315026b3b96a088654bee01617/Dockerfile" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"/></a>
 <div class="pygments117"><pre class="lineNumbers snippet117"><code><span></span><span class="k">FROM</span><span class="w"> </span><span class="s">ghcr.io/tttapa/docker-crosstool-ng-multiarch:master</span></code>
 <code></code>
 <code><span class="k">ARG</span><span class="w"> </span>HOST_TRIPLE</code>
 <code></code>
 <code><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/home/develop</span></code>
-<code><span class="k">RUN</span><span class="w"> </span>mkdir /home/develop/src</code>
-<code><span class="k">COPY</span><span class="w"> </span><span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.defconfig defconfig</code>
-<code><span class="k">COPY</span><span class="w"> </span><span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.env .env</code>
-<code><span class="k">RUN</span><span class="w"> </span>ls -lah</code>
+<code><span class="k">RUN</span><span class="w"> </span>mkdir<span class="w"> </span>/home/develop/src</code>
+<code><span class="k">COPY</span><span class="w"> </span><span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.defconfig<span class="w"> </span>defconfig</code>
+<code><span class="k">COPY</span><span class="w"> </span><span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>.env<span class="w"> </span>.env</code>
+<code><span class="k">RUN</span><span class="w"> </span>ls<span class="w"> </span>-lah</code>
 <code></code>
-<code><span class="k">RUN</span><span class="w"> </span>ct-ng defconfig</code>
+<code><span class="k">RUN</span><span class="w"> </span>ct-ng<span class="w"> </span>defconfig</code>
 <code><span class="c"># https://www.raspberrypi.org/forums/viewtopic.php?f=91&amp;t=280707&amp;p=1700861#p1700861</span></code>
-<code><span class="k">RUN</span><span class="w"> </span>. ./.env<span class="p">;</span> <span class="nb">export</span> <span class="nv">DEB_TARGET_MULTIARCH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_TRIPLE_LIB_DIR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span> <span class="se">\</span></code>
-<code>    <span class="nv">V</span><span class="o">=</span><span class="m">1</span> ct-ng build <span class="o">||</span> <span class="o">{</span> cat build.log <span class="o">&amp;&amp;</span> false<span class="p">;</span> <span class="o">}</span> <span class="o">&amp;&amp;</span> rm -rf .build</code>
+<code><span class="k">RUN</span><span class="w"> </span>.<span class="w"> </span>./.env<span class="p">;</span><span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">DEB_TARGET_MULTIARCH</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HOST_TRIPLE_LIB_DIR</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span></code>
+<code><span class="w">    </span><span class="nv">V</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>ct-ng<span class="w"> </span>build<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span>cat<span class="w"> </span>build.log<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>false<span class="p">;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>.build</code>
+<code></code>
+<code><span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>+w<span class="w"> </span>/home/develop/x-tools/<span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span></code>
+<code><span class="k">COPY</span><span class="w"> </span>cmake/Common.toolchain.cmake<span class="w"> </span>/home/develop/x-tools/<span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>/</code>
+<code><span class="k">COPY</span><span class="w"> </span>cmake/<span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>/*<span class="w"> </span>/home/develop/x-tools/<span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span>/</code>
+<code><span class="k">RUN</span><span class="w"> </span>chmod<span class="w"> </span>-w<span class="w"> </span>/home/develop/x-tools/<span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span></code>
 <code></code>
 <code><span class="k">ENV</span><span class="w"> </span><span class="nv">TOOLCHAIN_PATH</span><span class="o">=</span>/home/develop/x-tools/<span class="si">${</span><span class="nv">HOST_TRIPLE</span><span class="si">}</span></code>
 <code><span class="k">ENV</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="si">${</span><span class="nv">TOOLCHAIN_PATH</span><span class="si">}</span>/bin:<span class="nv">$PATH</span></code>
