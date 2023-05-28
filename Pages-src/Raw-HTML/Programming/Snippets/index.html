@@ -1,0 +1,63 @@
+<!--
+@title: Snippets
+@sequence: 0
+@author: Pieter P
+@tableofcontents: false
+@shownextupprevpage: false
+@keywords:
+@description:
+-->
+<html>
+
+<h3>CMake</h3>
+
+@codesnippet{
+"file": "resources/timing.cmake",
+"name": "Compilation timing"
+}
+
+@codesnippet{
+"file": "resources/strip-debug.cmake",
+"name": "Stripping debug information"
+}
+
+@codesnippet{
+"file": "resources/visibility.cmake",
+"name": "Hiding symbols with default visibility in shared library"
+}
+<p>
+    The target properties ensure that the source files comprising the given target
+    are compiled with the visibility set to hidden, which means that unless a symbol
+    is explicitly marked “export”, it won't be exported in the shared library.
+</p>
+<p>
+    The linker option ensures that symbols with default visibility in any static
+    libraries the target depends on are not exported in the shared library either.
+    <br>
+    From <code>man ld(1)</code>:
+</p>
+<pre class="code"><code>--exclude-libs lib,lib,...
+    Specifies a list of archive libraries from which symbols should not
+    be automatically exported.  The library names may be delimited by
+    commas or colons.  Specifying "--exclude-libs ALL" excludes symbols
+    in all archive libraries from automatic export.</code></pre>
+<p>
+    For explicitly exporting symbols that are part of the public API, see
+    <a href="https://cmake.org/cmake/help/latest/module/GenerateExportHeader.html">GenerateExportHeader</a>.
+</p>
+
+<h3>Linux compilation and development</h3>
+
+@codesnippet{
+"file": "resources/symbols.sh",
+"name": "Inspecting binaries"
+}
+
+<h3>C++</h3>
+
+@codesnippet{
+"file": "resources/reverse-list.cpp",
+"name": "Reversing a linked list"
+}
+
+</html>
