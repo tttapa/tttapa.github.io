@@ -160,8 +160,7 @@ class PagesParser {
         cout << c << endl;
         if (system(c.c_str()) != 0)
             throw std::runtime_error("Command '" + c + "' failed.");
-
-        c = "{ google-chrome --headless --disable-gpu "
+        c = "{ chromium --headless --disable-gpu "
             "--run-all-compositor-stages-before-draw --remote-debugging-port=" +
             std::to_string(dev_port) + " 2>&1; } &";
         cout << c << endl;
