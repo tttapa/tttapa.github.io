@@ -210,7 +210,7 @@ def clip_file_contents(file, startline, endline):
     nonemptylineencountered = False
     filecontents = ""
 
-    with open(file) as f:
+    with open(file, 'r', encoding="utf-8") as f:
         for i, line in enumerate(f):
             if i >= (startline - 1):
                 filecontents += line
@@ -399,7 +399,8 @@ def handleLaTeX(data: dict, html, filepath, lineno, refs):
         fullmakefile = join(fullfiledir, 'Makefile')
         if not path.exists(makefile):
             makefilecontents = latexmakefiletemplate.format(name=name)
-            with open(fullmakefile, 'w') as f: f.write(makefilecontents)
+            with open(fullmakefile, 'w', encoding="utf-8") as f:
+                f.write(makefilecontents)
     data.setdefault('source', file)
     data['file'] = join(filedir, name + '.pdf')
     data.setdefault('display-file', join(filedir, name + '.svg'))
@@ -409,7 +410,7 @@ def handleInclude(data: dict, html, filepath, lineno, refs):
     file = data['file']
     fullfile = checkPath(filepath, file, "Included file")
     makedeps = handleMake(data, html, filepath, lineno, refs)
-    with open(fullfile, 'r') as f:
+    with open(fullfile, 'r', encoding="utf-8") as f:
         contents = f.read()
     return contents, makedeps + [fullfile]
 
@@ -493,7 +494,7 @@ def replaceTags(html, filepath, lineno, outpath, metadata):
                 raise e
     if deps:
         depfname = path.splitext(outpath)[0] + '.dep'
-        with open(depfname, 'w') as f:
+        with open(depfname, 'w', encoding="utf-8") as f:
             f.write('\n'.join(sorted(deps)))
     return html
 
