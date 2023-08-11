@@ -140,6 +140,7 @@ img.gitlab-mark:hover {
 
 figure.img-wrapper {
     position: relative;
+    margin: 0;
     padding-bottom: 0.1em;
 }
 figure.img-wrapper > a:hover {
@@ -890,3 +891,88 @@ mjx-container[jax="SVG"] > svg a {
         page-break-after: always;
     }
 }
+
+/* Circled numbers for lists */
+
+@counter-style circled-alpha {
+    system: fixed;
+    symbols: Ⓐ Ⓑ Ⓒ Ⓓ Ⓔ Ⓕ Ⓖ Ⓗ Ⓘ Ⓙ Ⓚ Ⓛ Ⓜ Ⓝ Ⓞ Ⓟ Ⓠ Ⓡ Ⓢ Ⓣ Ⓤ Ⓥ Ⓦ Ⓧ Ⓨ Ⓩ;
+    suffix: "  ";
+}
+@counter-style circled-num {
+    system: fixed;
+    symbols: ➀ ➁ ➂ ➃ ➄ ➅ ➆ ➇ ➈ ➉;
+    suffix: "  ";
+}
+
+ol.circled {
+    list-style: circled-num;
+    position: relative;
+}
+
+ol.circled>li {
+    margin-bottom: 0.3em;
+}
+
+/* ol.circled>li::before {
+    display: block;
+    content: counter(list-item);
+    height: 1.1em;
+    width: 1.1em;
+    border-radius: 50%;
+    text-align: center;
+    border: 1px solid black;
+    font-family: monospace;
+    position: absolute;
+    left: 16px;
+    margin-top: 0.2ex;
+} */
+
+/* Book style */
+
+article.book-section div.main-content>h2 {
+    counter-reset: book-section3;
+}
+
+article.book-section div.main-content>h2::before {
+    content: counter(book-chapter) "." counter(book-section) "." counter(book-section2) ". ";
+    counter-increment: book-section2;
+}
+
+article.book-section div.main-content>h3 {
+    counter-reset: book-section4;
+}
+
+/* article.book-section div.main-content>h3::before {
+    content: counter(book-chapter) "." counter(book-section) "." counter(book-section2) "." counter(book-section3) ". ";
+    counter-increment: book-section3;
+} */
+
+/* article.book-section div.main-content>h4::before {
+    content: counter(book-chapter) "." counter(book-section) "." counter(book-section2) "." counter(book-section3) "." counter(book-section4) ". ";
+    counter-increment: book-section4;
+} */
+
+
+article.book-chapter div.main-content>h2 {
+    counter-reset: book-section3;
+}
+
+article.book-chapter div.main-content>h2::before {
+    content: counter(book-chapter) "." counter(book-section2) ". ";
+    counter-increment: book-section2;
+}
+
+article.book-chapter div.main-content>h3 {
+    counter-reset: book-section4;
+}
+
+article.book-chapter div.main-content>h3::before {
+    content: counter(book-chapter) "." counter(book-section2) "." counter(book-section3) ". ";
+    counter-increment: book-section3;
+}
+
+/* article.book-chapter div.main-content>h4::before {
+    content: counter(book-chapter) "." counter(book-section2) "." counter(book-section3) "." counter(book-section4) ". ";
+    counter-increment: book-section4;
+} */

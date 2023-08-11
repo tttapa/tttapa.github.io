@@ -15,6 +15,7 @@
 #include <regex>
 #include <span>
 #include <sstream>
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -59,8 +60,17 @@ class PagesParser {
         file_time_t depmodified;
         path abs_source_path;
         path rel_path;
+        std::optional<int> sectionNumber = std::nullopt;
         const Page *previous = nullptr, *next = nullptr;
         const Page *parent = nullptr;
+
+        std::optional<int> getStartSectionNumber() const {
+            if (auto it = metadata.find("section-number");
+                it != metadata.end()) {
+                return std::stoi(it->second);
+            }
+            return {};
+        }
 
         int getSequenceNumber() const {
             if (auto seq_str_it = metadata.find("sequence");
@@ -88,6 +98,21 @@ class PagesParser {
             }
         }
 
+        string getFullTitle() const {
+            if (auto pfx = getSectionNumbers(); !pfx.empty())
+                return pfx + ' ' + getTitle();
+            return getTitle();
+        }
+
+        string getSectionNumbers() const {
+            if (!sectionNumber)
+                return "";
+            auto thisSectionNumber = std::to_string(*sectionNumber) + '.';
+            if (!parent)
+                return thisSectionNumber;
+            return parent->getSectionNumbers() + thisSectionNumber;
+        }
+
         string getDescription() const {
             if (auto descr_it = metadata.find("description");
                 descr_it != metadata.end()) {
@@ -95,6 +120,43 @@ class PagesParser {
             } else {
                 Red(cerr) << "Warning: no valid description for "
                           << abs_source_path << endl;
+                return "";
+            }
+        }
+
+        string getArticleClass() const {
+            if (auto class_it = metadata.find("article-class");
+                class_it != metadata.end()) {
+                auto cls = class_it->second;
+                auto attrs = " class=\"" + cls + "\"";
+                if (cls == "book-chapter") {
+                    if (!sectionNumber)
+                        throw std::runtime_error(
+                            "Missing section number for book-chapter. Add "
+                            "@section-number: 1 to index.html metadata");
+                    attrs += " style=\"counter-reset: book-chapter " +
+                             std::to_string(*sectionNumber) +
+                             " book-section2 0 book-section3 0;\"";
+                } else if (cls == "book-section") {
+                    if (!parent)
+                        throw std::runtime_error(
+                            "Missing parent for book-section");
+                    if (!sectionNumber)
+                        throw std::runtime_error(
+                            "Missing section number for book-section. Add "
+                            "@section-number: 1 to index.html metadata");
+                    if (!parent->sectionNumber)
+                        throw std::runtime_error(
+                            "Missing section number for parent of "
+                            "book-section. Add "
+                            "@section-number: 1 to parent index.html metadata");
+                    attrs += " style=\"counter-reset: book-chapter " +
+                             std::to_string(*parent->sectionNumber) +
+                             " book-section " + std::to_string(*sectionNumber) +
+                             " book-section2 0 book-section3 0;\"";
+                }
+                return attrs;
+            } else {
                 return "";
             }
         }
@@ -280,7 +342,8 @@ class PagesParser {
         string out = pageTemplate;
         replace(out, ":mathjax:",
                 mathjax ? "<!-- No MathJax -->" : mathjax_template);
-        replace(out, ":title:", page.getTitle());
+        auto title = page.getFullTitle();
+        replace(out, ":title:", title);
         replace(out, ":nav:", generateNavigation(page));
         replace(out, ":filenamepdf:", page.rel_path.stem().string() + ".pdf");
         string html = page.html;
@@ -293,9 +356,9 @@ class PagesParser {
         replace(out, ":nextupprev:",
                 showNextUpPrev ? generateNextUpPrevNav(page) : "");
         replace(out, ":mdate:", formatFileTime(page.modified));
+        replace(out, ":article-class:", page.getArticleClass());
         for (const auto &[key, value] : page.metadata)
-            while (replace(out, ":" + key + ":", value))
-                ;
+            replace(out, ":" + key + ":", value);
         return out;
     }
 
@@ -447,7 +510,7 @@ class PagesParser {
             result += "\" href=\"";
             result += fs::relative(entry.rel_path, page.rel_path.parent_path());
             result += "\">";
-            result += entry.getTitle();
+            result += entry.getFullTitle();
             result += "</a>\n";
             result += generateNavigation(page, entry, level + 1);
             result += indentation_li;
@@ -469,7 +532,7 @@ class PagesParser {
             result += "\" href=\"";
             result += fs::relative(entry.rel_path, page.rel_path.parent_path());
             result += "\">";
-            result += entry.getTitle();
+            result += entry.getFullTitle();
             result += "</a></li>\n";
         };
         auto visitor = overloaded{gen_subdir, gen_page};
@@ -488,7 +551,7 @@ class PagesParser {
             res += R"(<a href=")";
             res += fs::relative(page.previous->rel_path, base_path);
             res += R"(" title=")";
-            res += page.previous->getTitle();
+            res += page.previous->getFullTitle();
             res += R"("><i class="material-icons")"
                    R"( style="vertical-align: middle; text-decoration: none">)"
                    R"(chevron_left </i>Previous )";
@@ -504,7 +567,7 @@ class PagesParser {
             else
                 res += "index.html";
             res += R"(" title=")";
-            res += page.parent ? page.parent->getTitle() : "Up";
+            res += page.parent ? page.parent->getFullTitle() : "Up";
             res += page.is_folder ? R"(">Up</a>)" : R"(">Index</a>)";
         }
         res += R"(</div>)";
@@ -513,7 +576,7 @@ class PagesParser {
             res += R"(<a href=")";
             res += fs::relative(page.next->rel_path, base_path);
             res += R"(" title=")";
-            res += page.next->getTitle();
+            res += page.next->getFullTitle();
             res += R"(">Next )";
             res += page.next->is_folder ? "Chapter" : "Page";
             res += R"(<i class="material-icons")"
@@ -527,7 +590,7 @@ class PagesParser {
     string generateIndexItem(const Page &page, const path &root) {
         string item = page.is_folder ? index_item_folder_template //
                                      : index_item_template;
-        replace(item, ":title:", page.getTitle());
+        replace(item, ":title:", page.getFullTitle());
         replace(item, ":link:", fs::relative(page.rel_path, root));
         replace(item, ":description:", page.getDescription());
         return item;
@@ -592,11 +655,14 @@ class PagesParser {
     }
 
     static bool replace(string &str, const string &from, const string &to) {
-        if (size_t start = str.find(from); start != string::npos) {
+        bool ret = false;
+        size_t start = str.find(from);
+        while (start != string::npos) {
+            ret = true;
             str.replace(start, from.length(), to);
-            return true;
+            start = str.find(from, start + from.length());
         }
-        return false;
+        return ret;
     }
 
     static string formatFileTime(file_time_t ft) {
@@ -802,10 +868,7 @@ class PagesParser {
             create_index_file(directory, result);
 
         auto get_addr = [](PageOrDir &p) {
-            auto visitor = overloaded{
-                [](PageDirectory &dir) -> Page * { return &dir; },
-                [](Page &page) -> Page * { return &page; },
-            };
+            auto visitor = [](auto &p) -> Page * { return &p; };
             return std::visit(visitor, p);
         };
         auto set_next = [](PageOrDir &p, Page *next) {
@@ -818,6 +881,10 @@ class PagesParser {
         };
         auto set_parent = [](PageOrDir &p, Page *parent) {
             auto visitor = [&](auto &p) { p.parent = parent; };
+            return std::visit(visitor, p);
+        };
+        auto set_section = [](PageOrDir &p, int s) {
+            auto visitor = [s](auto &p) { return p.sectionNumber = s; };
             return std::visit(visitor, p);
         };
 
@@ -844,6 +911,12 @@ class PagesParser {
                 [](Page &) {},
             };
             std::visit(visitor, *dir);
+        }
+        // Add the section numbers
+        if (auto secStart = result.getStartSectionNumber()) {
+            int counter = *secStart;
+            for (auto &entry : result.pages_and_subdirs)
+                set_section(*entry, counter++);
         }
     }
 #pragma endregion
