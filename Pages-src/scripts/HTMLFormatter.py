@@ -281,11 +281,11 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno, refs):
     datastr += '<div class="codesnippet"><style>' + css + '</style>\n'
     if git_link is not None and git_service == 'github':
         datastr += '<a href="' + git_link + '" title="Open on GitHub">'
-        datastr += '<img class="github-mark" src="/Images/GitHub-Mark.svg"/>'
+        datastr += '<img class="github-mark" src="/Images/GitHub-Mark.svg">'
         datastr += '</a>\n'
     if git_link is not None and git_service == 'gitlab':
         datastr += '<a href="' + git_link + '" title="Open on GitLab">'
-        datastr += '<img class="gitlab-mark" src="/Images/GitLab-Mark.svg"/>'
+        datastr += '<img class="gitlab-mark" src="/Images/GitLab-Mark.svg">'
         datastr += '</a>\n'
     datastr += htmlc + '</div>'
     return datastr, makedeps + [file]
@@ -336,13 +336,23 @@ def formatImage(data, html, filepath, lineno, refs: dict):
         else:
             data['caption'] = f'Figure {count}'
 
-    htmlstr = f'<div class="img-wrapper"><a href="{file}"'
-    htmlstr = handle_attr('a-attr', htmlstr)
+    htmlstr = '<figure class="img-wrapper"'
+    htmlstr = handle_attr('figure-attr', htmlstr)
     if anchor is not None:
         htmlstr += f' id="{anchor}"'
-    htmlstr += f'><img src="{dispfile}" alt="{alt}"'
-    htmlstr = handle_attr('img-attr', htmlstr)
-    htmlstr += '/></a>'
+    htmlstr += '>'
+    
+    if fulldispfile.endswith('.mmd'):
+        htmlstr += '\n<div class="mermaid">\n'
+        with open(fulldispfile, 'r', encoding="utf-8") as f:
+            htmlstr += f.read()
+        htmlstr += '\n</div>\n'
+    else:
+        htmlstr += f'<a href="{file}"'
+        htmlstr = handle_attr('a-attr', htmlstr)
+        htmlstr += f'><img src="{dispfile}" alt="{alt}"'
+        htmlstr = handle_attr('img-attr', htmlstr)
+        htmlstr += '></a>'
 
     src = data.get('source')
     if src:
@@ -354,14 +364,13 @@ def formatImage(data, html, filepath, lineno, refs: dict):
         htmlstr += '<small class="image-code-link">'
         htmlstr += f'<a href="{src}">Image source code</a></small>'
 
-    
     cap = data.get('caption')
     if cap:
         htmlstr += f'<figcaption'
         htmlstr = handle_attr('figcaption-attr', htmlstr)
         htmlstr += f'>{cap}</figcaption>'
 
-    htmlstr += '</div>'
+    htmlstr += '</figure>'
 
     return htmlstr, makedeps + [fullfile, fulldispfile]
 
