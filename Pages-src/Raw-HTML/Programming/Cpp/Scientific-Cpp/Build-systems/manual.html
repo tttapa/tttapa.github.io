@@ -8,6 +8,7 @@
 @description: Manually invoking the compiler to gain an understanding and
               appreciation of the specific tasks a build system performs for
               you.
+@article-class: book-section
 -->
 
 <html>
@@ -59,33 +60,14 @@
     div.twocolumns>div {
         flex: 1 1 40%;
     }
-
-    ol.circled {
-        list-style: none;
-        position: relative;
-    }
-
-    ol.circled>li {
-        margin-bottom: 0.3em;
-    }
-
-    ol.circled>li::before {
-        display: block;
-        content: counter(list-item);
-        height: 1.1em;
-        width: 1.1em;
-        /* line-height: 1.1em; */
-        border-radius: 50%;
-        text-align: center;
-        border: 1px solid black;
-        font-family: monospace;
-        position: absolute;
-        left: 16px;
-        margin-top: 0.2ex;
-    }
 </style>
 
 <h3>Source code</h3>
+
+<p>
+    The source code listed below is not too important in and of itself, what
+    matters are the dependencies between the different source files.
+</p>
 
 <div class="twocolumns">
     <div>
@@ -111,10 +93,10 @@
 <h3>The compilation process</h3>
 
 <p>
-    To build and run the main program, we need the following steps:
+    To build the main executable, we need the following steps:
 </p>
 <ol class="circled">
-    <li>Preprocess and compile the implementation files into object files.</li>
+    <li>Preprocess and compile all implementation files into object files.</li>
     <li>Link all object files and external libraries into an executable.</li>
 </ol>
 <p>
@@ -134,9 +116,9 @@
         <u><b>i</b></u>nclude path using the <code>-I</code> flag. Similarly, the
         preprocessing of <code>b.cpp</code> requires both <code>liba</code> and
         <code>libb</code> to be added to the search path, and <code>main.cpp</code>
-        only needs <code>libb</code>.
+        needs <code>libb</code>.
         We assume that the <code>{fmt}</code> library is installed in
-        <code>/usr/include</code> or some other location that is already in GCC's
+        <code>/usr/include</code> or some other location that is already in GCC’s
         default search path. If this were not the case, we would add another
         <code>-I</code> or <code>-isystem</code> flag to inform the preprocessor of
         its location.
@@ -145,7 +127,7 @@
         The invocation of GCC without the <code>-c</code> option links the three
         object files together into an executable. Since <code>a.cpp</code> makes
         use of the <code>{fmt}</code> library, we need to <u><b>l</b></u>ink to this
-        library as well, using the <code>-l</code> flag. Here we assume again that
+        library as well, using the <code>-l</code> flag. Here we again assume that
         the <code>libfmt.so</code> library is in a standard location, otherwise we
         would need to use the <code>-L</code> flag to add its location to the
         <u><b>l</b></u>ibrary search path.
@@ -163,13 +145,15 @@
 <h2>Limitations of manual compilation</h2>
 
 <p>
-    Manually invoking the compiler like this has some serious downsides and
-    challenges, including:
+    Manually invoking the compiler like this (with or without a shell script)
+    has some serious downsides and challenges, including:
 </p>
 <ol>
-    <li><b>Repetitiveness</b>: Building a C++ project involves many similar
-        calls to the compiler. Although this can be somewhat reduced using wildcards or Bash scripting, we need a more
-        structural solution.</li>
+    <li><b>Repetitiveness and boilerplate</b>: Building a C++ project involves many similar
+        calls to the compiler. Although the number of commands to write can be somewhat reduced using wildcards or Bash
+        scripting, we need a more structural solution that is easy to maintain when files are added or when the
+        layout of the project changes.
+    </li>
     <li><b>Propagation of compiler flags</b>: Some compiler options (such as preprocessor macros, C++ standard versions
         and include paths) need to be propagated from a library to its dependents. For example, library B uses library
         A, so the location of <code>a.hpp</code> needs to be added to the search paths when compiling
@@ -178,33 +162,49 @@
     <li><b>Propagation of linker flags</b>: Even though
         <code>main.cpp</code> has no knowledge of the implementation of libraries A and B, it still needs to link to its
         direct dependency <code>b.o</code> and the transitive dependencies <code>a.o</code> and <code>libfmt.so</code>.
-        The transitive dependencies can become quite unwieldy, and all need to come together for the final linking step.
+        The tree of transitive dependencies can become quite unwieldy, and they all need to come together for the final
+        linking step.
     </li>
-    <li><b>Incremental compilation</b>: The complete compilation of larger projects often takes several minutes. During
-        development, we therefore only want to recompile the files that actually changed. Since the contents of header
-        files are actually pasted into the source files that include them before compilation (using simple text
-        substitution of the <code>#include</code> directive), a change in a header file can cascade and require many
-        source files to be recompiled. For example, if <code>b.hpp</code> is modified, both <code>b.cpp</code> and
-        <code>main.cpp</code> have to be recompiled (this can be seen from @ref{"ref": "graph-compile-project"}). For
-        larger projects, the <i>included-by</i> graph can grow very complex, as demonstrated by @ref{"ref":
-        "alpaqa-dep"} and determining these dependencies manually is not an option.
+    <li><b>Incremental compilation</b>: Compiling a larger project in its entirety can often take several minutes.
+        During development, this can become a serious impediment. We therefore only want to recompile the files that
+        actually changed. Since the preprocessor pastes the contents of header files into the source files that include
+        them (using simple text substitution of the <code>#include</code> directive), a change in a header file
+        can cascade and require many source files to be recompiled. For example, if <code>b.hpp</code> is modified, both
+        <code>b.cpp</code> and <code>main.cpp</code> have to be recompiled. For larger projects, the <i>included-by</i>
+        graph can grow very complex, as demonstrated by @ref{"ref": "alpaqa-dep"}, and determining these dependencies
+        manually is not an option.
     </li>
     <li><b>Portability</b>: The commands above only work for GCC. Users of your project might want to compile it using
         Visual Studio on Windows, or Xcode on macOS, or perhaps even cross-compile it for an embedded system. This would
         require maintaining multiple scripts or build descriptions, with the risk of them getting out of sync.</li>
-    <li><b>Implicit assumptions about dependencies</b>: In the example above, we assumed that the <code>{fmt}</code> was
-        installed system-wide, with the necessary files in GCC’s default search paths. However, this is not always
-        possible, a user may have dependencies installed in their home folder, in a virtual environment, in a
+    <li><b>Lack of integration with IDEs and other tools</b>: IDEs like Visual Studio, VS Code, CLion, Xcode, as well
+        as language servers like clangd, or other tools such clang-tidy and Cppcheck won’t be able to easily interact
+        with your project if it is described using custom commands or shell scripts.</li>
+    <li><b>Implicit assumptions about dependencies</b>: In the example above, we assumed that the <code>{fmt}</code>
+        library was installed system-wide, with the necessary files in GCC’s default search paths. However, this is not
+        always possible, a user may have dependencies installed in their home folder, in a virtual environment, in a
         subdirectory of the project folder, or somewhere else entirely. Our build script should not make any assumptions
         or hard-code any paths. We need a standardized way to locate third-party libraries and other dependencies that
         works across systems.</li>
+    <li><b>Ease of use</b>: By using a custom script or commands to build your project, you make it harder
+        for users to get started with your software (especially when things don’t work as expected), and it also
+        increases the friction for potential contributors that want to help improve your software or build system.
+        There is great value in making the installation of your software as easy as
+        <code>cmake -Bbuild -S. && cmake --build build -j && cmake --install build</code>, which is the standard
+        procedure for a majority of (newer) C and C++ projects.
+    </li>
 </ol>
 
 @image{ "file": "images/alpaqa-dep-type-erased-problem.hpp.svg",
 "img-attr": {"style": "width: 200%; max-width: 200%"},
 "figure-attr": {"style": "max-width: 100%; overflow-x: scroll;"},
 "label": "alpaqa-dep",
-"caption": "The <i>included-by</i> graph of a single header file in a real-world C++ project." }
+"caption": "The <i>“included-by”</i> graph of a single header file in a real-world C++ project." }
+
+<p>
+    In the next chapter, we’ll look at build systems and build system generators that provide solutions to the
+    issues listed above.
+</p>
 
 <!-- END -->
 
