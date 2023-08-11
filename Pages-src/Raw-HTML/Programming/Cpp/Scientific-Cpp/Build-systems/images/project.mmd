@@ -1,0 +1,38 @@
+flowchart LR
+    subgraph Headers
+        Ah["<span style="font-family: monospace;">liba/a.hpp</span>"]
+        Bh["<span style="font-family: monospace;">libb/b.hpp</span>"]
+    end
+    subgraph External headers
+        Fh["<span style="font-family: monospace;">fmt/core.h</span>"]
+    end
+    subgraph Implementation
+        A["<span style="font-family: monospace;">liba/a.cpp</span>"]
+        B["<span style="font-family: monospace;">libb/b.cpp</span>"]
+        M["<span style="font-family: monospace;">main.cpp&nbsp;&nbsp;</span>"]
+    end
+    subgraph Objects
+        Ao["<span style="font-family: monospace;">build/a.o&nbsp;&nbsp;&nbsp;</span>"]
+        Bo["<span style="font-family: monospace;">build/b.o&nbsp;&nbsp;&nbsp;</span>"]
+        Mo["<span style="font-family: monospace;">build/main.o</span>"]
+    end
+    subgraph External libraries
+        F["<span style="font-family: monospace;">libfmt.so</span>"]
+    end
+    subgraph Binaries
+        Mexe("<span style="font-family: monospace;">build/main</span>")
+    end
+    Fh -->|included by| A
+    Ah -->|included by| A
+    Ah -->|included by| B
+    Bh -->|included by| B
+    Bh -->|included by| M
+
+    A -->|compiled to| Ao
+    B -->|compiled to| Bo
+    M -->|compiled to| Mo
+
+    F -->|linked into| Mexe
+    Ao -->|linked into| Mexe
+    Bo -->|linked into| Mexe
+    Mo -->|linked into| Mexe
