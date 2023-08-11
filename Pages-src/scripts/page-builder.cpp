@@ -13,6 +13,7 @@
 #include <memory>
 #include <optional>
 #include <regex>
+#include <span>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -41,6 +42,11 @@ using std::filesystem::path;
 
 using string_map = std::map<string, string>;
 using file_time_t = std::filesystem::file_time_type;
+
+template <class... Ts>
+struct overloaded : Ts... {
+    using Ts::operator()...;
+};
 
 class PagesParser {
   public:
@@ -95,8 +101,8 @@ class PagesParser {
     };
 
     struct PageDirectory : public Page {
-        vector<Page> pages;
-        vector<PageDirectory> subdirectories;
+        vector<std::unique_ptr<std::variant<Page, PageDirectory>>>
+            pages_and_subdirs;
         vector<path> resources;
         PageDirectory() { is_folder = true; }
     };
@@ -114,7 +120,7 @@ class PagesParser {
 
     void load() {
         init();
-        root = load_page_directory(source_dir);
+        load_page_directory(source_dir, root);
     }
 
     Task task;
@@ -299,12 +305,13 @@ class PagesParser {
             fs::create_directories(output_dir / dir.rel_path.parent_path());
             // Export the index page of the current directory
             exportPage(dir);
-            // Export all subdirectories
-            for (auto &subdir : dir.subdirectories)
-                exportDirectory(subdir);
             // Export all other pages in this directory
-            for (auto &page : dir.pages)
-                exportPage(page);
+            auto visitor = overloaded{
+                [this](const PageDirectory &dir) { exportDirectory(dir); },
+                [this](const Page &page) { exportPage(page); },
+            };
+            for (auto &page_or_subdir : dir.pages_and_subdirs)
+                std::visit(visitor, *page_or_subdir);
             // Copy all resource folders
             for (auto &dir : dir.resources)
                 fs::copy(source_dir / dir, output_dir / dir,
@@ -351,12 +358,13 @@ class PagesParser {
     void exportPDFDirectory(const PageDirectory &dir) {
         // Export the index page of the current directory
         exportPDFPage(dir);
-        // Export all subdirectories
-        for (auto &subdir : dir.subdirectories)
-            exportPDFDirectory(subdir);
-        // Export all other pages in this directory
-        for (auto &page : dir.pages)
-            exportPDFPage(page);
+        // Export all other pages in this directory and subdirectories
+        auto visitor = overloaded{
+            [this](const PageDirectory &dir) { exportPDFDirectory(dir); },
+            [this](const Page &page) { exportPDFPage(page); },
+        };
+        for (auto &page_or_subdir : dir.pages_and_subdirs)
+            std::visit(visitor, *page_or_subdir);
     }
 
     static bool isTruthyString(string str) {
@@ -414,14 +422,14 @@ class PagesParser {
 
         string result = indentation_ul;
         result += "<ul>\n";
-        for (const auto &entry : root.subdirectories) {
+        auto gen_subdir = [&](const PageDirectory &entry) {
             bool open_entry = page.rel_path == entry.rel_path;
             string rel =
                 fs::relative(page.rel_path, entry.rel_path.parent_path());
             bool expanded = rel.substr(0, 2) != "..";
             bool hidden = !isDirectoryToList(entry);
             if (hidden && !(open_entry || expanded))
-                continue;
+                return;
             result += indentation_li;
             result += "<li";
             if (expanded)
@@ -444,13 +452,13 @@ class PagesParser {
             result += generateNavigation(page, entry, level + 1);
             result += indentation_li;
             result += "</li>\n";
-        }
-        for (const auto &entry : root.pages) {
+        };
+        auto gen_page = [&](const Page &entry) {
             string rel = fs::relative(page.rel_path, entry.rel_path);
             bool open_entry = rel == ".";
             bool hidden = !isPageToList(entry);
             if (hidden && !open_entry)
-                continue;
+                return;
             result += indentation_li;
             result += "<li><span class=\"ftriangle\"></span>";
             result += "<a class=\"";
@@ -463,7 +471,10 @@ class PagesParser {
             result += "\">";
             result += entry.getTitle();
             result += "</a></li>\n";
-        }
+        };
+        auto visitor = overloaded{gen_subdir, gen_page};
+        for (const auto &entry : root.pages_and_subdirs)
+            std::visit(visitor, *entry);
         result += indentation_ul;
         result += "</ul>\n";
         return result;
@@ -472,33 +483,40 @@ class PagesParser {
     string generateNextUpPrevNav(const Page &page) {
         string res = "";
         res += R"(<div class="prevpage">)";
+        const auto &base_path = page.rel_path.parent_path();
         if (page.previous) {
             res += R"(<a href=")";
-            res += page.previous->rel_path.filename();
+            res += fs::relative(page.previous->rel_path, base_path);
             res += R"(" title=")";
             res += page.previous->getTitle();
             res += R"("><i class="material-icons")"
                    R"( style="vertical-align: middle; text-decoration: none">)"
-                   R"(chevron_left </i>Previous Page</a>)";
+                   R"(chevron_left </i>Previous )";
+            res += page.previous->is_folder ? "Chapter" : "Page";
+            res += R"(</a>)";
         }
         res += R"(</div>)";
         res += R"(<div class="uppage">)";
         if (true) {
             res += R"(<a href=")";
-            res += "index.html";
+            if (page.parent)
+                res += fs::relative(page.parent->rel_path, base_path);
+            else
+                res += "index.html";
             res += R"(" title=")";
             res += page.parent ? page.parent->getTitle() : "Up";
-            res += R"(">Index</a>)";
+            res += page.is_folder ? R"(">Up</a>)" : R"(">Index</a>)";
         }
         res += R"(</div>)";
         res += R"(<div class="nextpage">)";
         if (page.next) {
             res += R"(<a href=")";
-            res += page.next->rel_path.filename();
+            res += fs::relative(page.next->rel_path, base_path);
             res += R"(" title=")";
             res += page.next->getTitle();
-            res += R"(">Next Page)"
-                   R"(<i class="material-icons")"
+            res += R"(">Next )";
+            res += page.next->is_folder ? "Chapter" : "Page";
+            res += R"(<i class="material-icons")"
                    R"( style="vertical-align: middle; text-decoration: none">)"
                    R"( chevron_right</i></a>)";
         }
@@ -517,16 +535,19 @@ class PagesParser {
 
     string generateIndex(const PageDirectory &dir) {
         string result;
-        for (const auto &entry : dir.subdirectories) {
+        auto gen_subdir = [&](const PageDirectory &entry) {
             if (!isDirectoryToList(entry))
-                continue;
+                return;
             result += generateIndexItem(entry, dir.rel_path.parent_path());
-        }
-        for (const auto &entry : dir.pages) {
+        };
+        auto gen_page = [&](const Page &entry) {
             if (!isPageToList(entry))
-                continue;
+                return;
             result += generateIndexItem(entry, dir.rel_path.parent_path());
-        }
+        };
+        auto visitor = overloaded{gen_subdir, gen_page};
+        for (const auto &entry : dir.pages_and_subdirs)
+            std::visit(visitor, *entry);
         return result;
     }
 
@@ -703,15 +724,21 @@ class PagesParser {
                entry.path().filename() == "resources";
     }
 
-    template <class Page>
-    static void sort_pages(vector<Page> &pages) {
-        auto order = [](const Page &lhs, const Page &rhs) {
-            int lhs_seq = lhs.getSequenceNumber(),
-                rhs_seq = rhs.getSequenceNumber();
-            if (lhs_seq != rhs_seq)
-                return lhs_seq < rhs_seq;
-            else
+    using PageOrDir = std::variant<Page, PageDirectory>;
+
+    static void sort_pages(std::span<std::unique_ptr<PageOrDir>> pages) {
+        auto order = [](const std::unique_ptr<PageOrDir> &lhs,
+                        const std::unique_ptr<PageOrDir> &rhs) {
+            auto visitor = [](const auto &lhs, const auto &rhs) {
+                int lhs_seq = lhs.getSequenceNumber(),
+                    rhs_seq = rhs.getSequenceNumber();
+                if (lhs_seq != rhs_seq)
+                    return lhs_seq < rhs_seq;
+                if (lhs.is_folder && !rhs.is_folder)
+                    return true;
                 return lhs.getTitle() < rhs.getTitle();
+            };
+            return std::visit(visitor, *lhs, *rhs);
         };
         std::sort(pages.begin(), pages.end(), order);
     }
@@ -748,43 +775,76 @@ class PagesParser {
         load_page_file(fs::directory_entry(index), result);
     }
 
-    PageDirectory load_page_directory(const path &directory) {
-        PageDirectory result;
+    void load_page_directory(const path &directory, PageDirectory &result) {
         bool hasIndex = false;
         for (const auto &entry : fs::directory_iterator(directory)) {
             if (entry.is_directory()) {
                 if (is_resource_folder(entry)) {
                     result.resources.push_back(fs::relative(entry, source_dir));
                 } else {
-                    result.subdirectories.push_back(load_page_directory(entry));
+                    auto &dir = result.pages_and_subdirs.emplace_back(
+                        std::make_unique<PageOrDir>(
+                            std::in_place_type<PageDirectory>));
+                    load_page_directory(entry, std::get<PageDirectory>(*dir));
                 }
             } else if (entry.is_regular_file()) {
                 if (entry.path().filename() == "index.html") {
                     load_page_file(entry, result);
                     hasIndex = true;
                 } else {
-                    result.pages.push_back(load_page_file(entry));
+                    result.pages_and_subdirs.emplace_back(
+                        std::make_unique<PageOrDir>(load_page_file(entry)));
                 }
             }
         }
-        sort_pages(result.pages);
-        sort_pages(result.subdirectories);
+        sort_pages(result.pages_and_subdirs);
         if (!hasIndex)
             create_index_file(directory, result);
+
+        auto get_addr = [](PageOrDir &p) {
+            auto visitor = overloaded{
+                [](PageDirectory &dir) -> Page * { return &dir; },
+                [](Page &page) -> Page * { return &page; },
+            };
+            return std::visit(visitor, p);
+        };
+        auto set_next = [](PageOrDir &p, Page *next) {
+            auto visitor = [&](auto &p) { p.next = next; };
+            return std::visit(visitor, p);
+        };
+        auto set_prev = [](PageOrDir &p, Page *previous) {
+            auto visitor = [&](auto &p) { p.previous = previous; };
+            return std::visit(visitor, p);
+        };
+        auto set_parent = [](PageOrDir &p, Page *parent) {
+            auto visitor = [&](auto &p) { p.parent = parent; };
+            return std::visit(visitor, p);
+        };
+
         // Add the "next" and "previous" pointers to all pages in this directory
-        if (result.pages.size() > 1) {
-            result.pages[0].next = &result.pages[1];
-            for (size_t i = 1; i < result.pages.size() - 1; ++i) {
-                result.pages[i].next = &result.pages[i + 1];
-                result.pages[i].previous = &result.pages[i - 1];
+        if (result.pages_and_subdirs.size() > 1) {
+            set_next(*result.pages_and_subdirs[0],
+                     get_addr(*result.pages_and_subdirs[1]));
+            for (size_t i = 1; i < result.pages_and_subdirs.size() - 1; ++i) {
+                set_next(*result.pages_and_subdirs[i],
+                         get_addr(*result.pages_and_subdirs[i + 1]));
+                set_prev(*result.pages_and_subdirs[i],
+                         get_addr(*result.pages_and_subdirs[i - 1]));
             }
-            result.pages.end()[-1].previous = &result.pages.end()[-2];
+            set_prev(*result.pages_and_subdirs.end()[-1],
+                     get_addr(*result.pages_and_subdirs.end()[-2]));
         }
-        // Add the "up" pointer to the pages in the subdirectoriesfor (Page &page : result.subdirectories.back().pages)
-        for (auto &subdir : result.subdirectories)
-            for (Page &page : subdir.pages)
-                page.parent = &subdir;
-        return result;
+        // Add the "up" pointer to the pages in the subdirectoriesfor
+        for (auto &dir : result.pages_and_subdirs) {
+            overloaded visitor{
+                [&set_parent](PageDirectory &dir) {
+                    for (auto &page : dir.pages_and_subdirs)
+                        set_parent(*page, &dir);
+                },
+                [](Page &) {},
+            };
+            std::visit(visitor, *dir);
+        }
     }
 #pragma endregion
 
