@@ -21,14 +21,14 @@
 <pre class="console"><code>python3 -m pip install numpy matplotlib pyserial</code></pre>
 
 <p>
-    After installing the dependencies, verifying the port name, and specifying 
+    After installing the dependencies, verifying the port name, and specifying
     the desired tunings in the <code>tunings</code> list, run the script using:
 </p>
 
 <pre class="console"><code>python3 Python/Tuning.py</code></pre>
 
 <p>
-    The script will then connect to the Arduino and perform an experiment with 
+    The script will then connect to the Arduino and perform an experiment with
     each of the tunings specified in the list. The results of these experiments
     are stored in a file, and then plotted in a graph as shown below.
 </p>
@@ -59,14 +59,16 @@
     The figure above shows the results of four experiments with different values for the
     proportional gain \(K_p\). <br>
     The <span style="color: #1F77B4;">blue</span> line is the reference or target position,
-    the <span style="color: #FF7F0E;">orange</span> line is the actual position of the fader, 
+    the <span style="color: #FF7F0E;">orange</span> line is the actual position of the fader,
     and the <span style="color: #2CA02C">green</span> line is the control signal sent to the motor.
 </p>
 <p>
     We can make two main observations based on these experiments:
 <ol>
     <li>If the proportional gain is too low ─ as is the case in the top graph ─
-        the controller results in very poor tracking and in a large steady-state error.</li>
+        the controller results in very poor tracking and in a large steady-state error.
+        Even though the steady-state control signal is nonzero, it is not large enough to
+        overcome the static friction of the fader.</li>
     <li>If the proportional gain is too high ─ such as in the bottom two figures ─
         the tracking and steady-state errors are smaller, but the system overshoots the
         setpoint significantly, with ringing after steep transients, and oscillations
@@ -103,7 +105,7 @@
     while following the ramp. This is addressed by the integral component: if
     the actual position is consistently below the target position, the integral
     will sum up those positive errors over time, which increases the control
-    signal and reducing the tracking and steady-state errors.
+    signal and reduces the tracking and steady-state errors.
 </p>
 @image{
 "file": "images/Ki.svg"

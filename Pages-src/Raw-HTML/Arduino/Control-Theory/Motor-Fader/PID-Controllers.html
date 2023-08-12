@@ -13,18 +13,28 @@
     $$ \require{physics} $$
 </div>
 
+<p>
+    This first chapter gives a brief recap of PID control theory. It describes the controller architecture and derives
+    the formulas that will be implemented in C++ in the next chapter.
+</p>
+<p>
+    Prerequisites: basic control theory, Laplace and Z-transforms.
+</p>
+
 <h2>Continuous-time</h2>
 
-In this first section, we'll assume that all signals are functions of a continuous time variable \(t\). 
-Later, we'll discretize the continuous-time controllers into a discrete-time approximation that
-can easily be manipulated by computers and microcontrollers.
+<p>
+    In this first section, we'll assume that all signals are functions of a continuous time variable \(t\).
+    Later, we'll discretize the continuous-time controllers into a discrete-time approximation that
+    can easily be manipulated by computers and microcontrollers.
+</p>
 
 <h3>Closed-loop controllers</h3>
 <p>
-    @ref{"ref": "fig:closed-loop"} shows the block diagram of a general closed-loop or feedback control system. 
-    The output of the system \(y(t)\) is subtracted from the reference \(r(t)\), and this error \(e(t)\)
-    is fed to the <i>controller</i>, which produces the control signal \(u(t)\) that is sent to the <i>plant</i>
-    (the system being controlled) in an attempt to drive the error to zero.
+    @ref{"ref": "fig:closed-loop"} shows the block diagram of a general closed-loop or feedback control system.
+    The output \(y(t)\) of the <i>plant</i> (the system being controlled) is subtracted from the reference \(r(t)\),
+    and this error \(e(t)\) is fed to the <i>controller</i>, which produces the control signal \(u(t)\) that is sent to
+    the input of the plant, in an attempt to drive the error to zero.
 </p>
 @latex{
 "file": "images/tex/closed-loop/closed-loop.tex",
@@ -34,15 +44,15 @@ can easily be manipulated by computers and microcontrollers.
 <h3>The PID controller</h3>
 <p>
     In a PID controller, the control signal is calculated as the sum of three components: a proportional component,
-    an integral component, and a derivative component. The proportional component simply multiplies the error 
+    an integral component, and a derivative component. The proportional component simply multiplies the error
     by a constant \(K_p\),
-    the integral component multiplies the time integral of the error by a constant \(K_i\), and the 
-    derivative component multiplies the time derivative of the error by a constant \(K_d\). 
+    the integral component multiplies the time integral of the error by a constant \(K_i\), and the
+    derivative component multiplies the time derivative of the error by a constant \(K_d\).
     Mathematically, the control law is given by
     $$
     u(t) = K_p\, e(t) + K_i \int_0^t e(\tau) \dd\tau + K_d\, \frac{\dd}{\dd t} e(t).
     $$
-    The constants \(K_p\), \(K_i\) and \(K_d\) are referred to as the proportional gain, 
+    The constants \(K_p\), \(K_i\) and \(K_d\) are referred to as the proportional gain,
     the integral gain, and
     the derivative gain respectively. <br>
     The block diagram of this type of controller is shown in @ref{"ref": "fig:pid"}.
@@ -54,8 +64,8 @@ can easily be manipulated by computers and microcontrollers.
 }
 <p>
     You can find intuitive explanations of the purpose of each of the three components
-    all over the internet, but in short: the proportional component makes the controller act 
-    on the instantaneous error, the integral component accumulates past errors in order to 
+    all over the internet, but in short: the proportional component makes the controller act
+    on the instantaneous error, the integral component accumulates past errors in order to
     minimize the steady-state and tracking error, and the derivative component penalizes the
     velocity at which the output changes, which can help to reduce overshoot.
 </p>
@@ -78,7 +88,8 @@ can easily be manipulated by computers and microcontrollers.
     $$
     U(s) = \left( K_p + K_i\,\frac{1}{s} + K_d\,s \right) E(s),
     $$
-    where \(U(s)\) and \(E(s)\) are the <a href="https://en.wikipedia.org/wiki/Laplace_transform">Laplace transforms</a> of
+    where \(U(s)\) and \(E(s)\) are the <a href="https://en.wikipedia.org/wiki/Laplace_transform">Laplace transforms</a>
+    of
     the respective time-domain signals \(u(t)\) and \(e(t)\).
     This formulation is represented by @ref{"ref": "fig:pid-laplace"}.
 </p>
@@ -89,7 +100,7 @@ can easily be manipulated by computers and microcontrollers.
 }
 <h3>Derivative filtering</h3>
 <p>
-    The derivative of the error can be rather noisy, so practical PID controllers 
+    The derivative of the error can be rather noisy, so practical PID controllers
     often include a low-pass filter. Let \(e_f(t)\) be the low-pass filtered error,
     then the control law can be modified into
     $$
@@ -100,7 +111,7 @@ can easily be manipulated by computers and microcontrollers.
     U(s) = \left( K_p + K_i\,\frac{1}{s} + K_d\,sH(s) \right) E(s).
     $$
     Here, \(H(s)\) is the transfer function of the low-pass filter for the
-    derivative component. 
+    derivative component.
 </p>
 <p>
     For the sake of simplicity, we'll use a single-pole low-pass filter to
@@ -334,17 +345,17 @@ or recurrence relation.
 
 <h2>Derivative on measurement</h2>
 <p>
-    One disadvantage of the PID topology discussed above is that the derivative 
+    One disadvantage of the PID topology discussed above is that the derivative
     component will become very large if the reference \(r(t)\) suddenly changes.
     This effect is known as “derivative kick”. <br>
     The solution is really simple: instead of the derivative of the error,
-    the derivative of the measurement is used. The former is known as 
-    “derivative on error”, the latter as “derivative on measurement”. 
-    Both topologies are equivalent if the reference is constant, because 
+    the derivative of the measurement is used. The former is known as
+    “derivative on error”, the latter as “derivative on measurement”.
+    Both topologies are equivalent if the reference is constant, because
     if \(\dv{t} r(t) = 0\), then \(\dv{t} e(t) = -\dv{t} y(t)\).
 </p>
 <p>
-    @ref{"ref": "fig:pid-DonM"} shows a block diagram of this new derivative on 
+    @ref{"ref": "fig:pid-DonM"} shows a block diagram of this new derivative on
     measurement topology, including the low-pass filter on the derivative.
 </p>
 @latex{
@@ -352,4 +363,5 @@ or recurrence relation.
 "caption": "Block diagram of a PID controller with “derivative on measurement”",
 "label": "fig:pid-DonM"
 }
+
 </html>
