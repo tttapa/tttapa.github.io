@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#ccc">
     <meta name="keywords" content="arduino,motorized fader,flying fader,pid,controller,midi,control surface">
     <meta name="description" content="Overview of how the code is structured.">
-    <title>Architecture and Design Decisions</title>
+    <title>4. Architecture and Design Decisions</title>
 <style id="MJX-CHTML-styles">
 mjx-container[jax="CHTML"] {
   line-height: 0;
@@ -671,6 +671,7 @@ mjx-c.mjx-c46::before {
   content: "F";
 }
 </style></head>
+
 <body>
     <nav>
         <div>
@@ -750,13 +751,13 @@ mjx-c.mjx-c46::before {
         <ul>
             <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="index.html">Motorized Faders</a>
             <ul>
-                <li><span class="ftriangle"></span><a class="" href="PID-Controllers.html">PID Controllers</a></li>
-                <li><span class="ftriangle"></span><a class="" href="PID-Cpp-Implementation.html">C++ Implementation</a></li>
-                <li><span class="ftriangle"></span><a class="" href="PID-Tuning.html">PID Tuning</a></li>
-                <li><span class="ftriangle"></span><a class="openEntry " href="Architecture.html">Architecture and Design Decisions</a></li>
-                <li><span class="ftriangle"></span><a class="" href="Hardware.html">Hardware</a></li>
-                <li><span class="ftriangle"></span><a class="" href="Configuration.html">Configuration options and common use cases</a></li>
-                <li><span class="ftriangle"></span><a class="" href="ATmega328P-Code.html">ATmega328P Code</a></li>
+                <li><span class="ftriangle"></span><a class="" href="PID-Controllers.html">1. PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="PID-Cpp-Implementation.html">2. C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="PID-Tuning.html">3. PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry " href="Architecture.html">4. Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Hardware.html">5. Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Configuration.html">6. Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="ATmega328P-Code.html">7. ATmega328P Code</a></li>
             </ul>
             </li>
         </ul>
@@ -849,13 +850,13 @@ mjx-c.mjx-c46::before {
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
         <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
             <ul>
                 <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
             </ul>
             </li>
-            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
             <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
             <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
             <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
@@ -885,7 +886,7 @@ mjx-c.mjx-c46::before {
         </div>
     </nav>
     <article>
-        <h1 class="title">Architecture and Design Decisions</h1>
+        <h1 class="title">4. Architecture and Design Decisions</h1>
         <i class="author">Pieter P</i>
         <div class="main-content">
 <div class="toc" id="toc">
@@ -1125,7 +1126,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     released and the knob being touched. The threshold time and the threshold
     voltage of <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-msup space="3"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D452 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mo class="mjx-n"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mn class="mjx-n"><mjx-c class="mjx-c31"></mjx-c></mjx-mn></mjx-TeXAtom></mjx-script></mjx-msup><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mstyle><mjx-mspace style="width: 0.167em"></mjx-mspace></mjx-mstyle><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D449 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.186em"><mjx-TeXAtom size="s" texclass="ORD"><mjx-mi class="mjx-n"><mjx-c class="mjx-c63"></mjx-c><mjx-c class="mjx-c63"></mjx-c></mjx-mi></mjx-TeXAtom></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow data-mjx-texclass="ORD"><mo>−</mo><mn>1</mn></mrow></msup><mo stretchy="false">)</mo><mstyle scriptlevel="0"><mspace width="0.167em"></mspace></mstyle><msub><mi>V</mi><mrow data-mjx-texclass="ORD"><mi data-mjx-auto-op="false">cc</mi></mrow></msub></math></mjx-assistive-mml></mjx-container> are shown as well.
 </p>
-<div class="img-wrapper"><a href="images/touch-sense/rc.svg"><img src="images/touch-sense/rc.svg" alt="images/touch-sense/rc.svg"></a><small class="image-code-link"><a href="images/touch-sense/rc.py">Image source code</a></small></div>
+<figure class="img-wrapper"><a href="images/touch-sense/rc.svg"><img src="images/touch-sense/rc.svg" alt="images/touch-sense/rc.svg"></a><small class="image-code-link"><a href="images/touch-sense/rc.py">Image source code</a></small></figure>
 <p>
     To determine whether the knob is being touched, we can just look at the
     state of the pin after the threshold time: if it's high, the RC-time is less
@@ -1369,7 +1370,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments236 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments236 pre.snippet236 { counter-reset: line 506; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/64c44cb375bb32e50321b928b43bc743da745a99/Motor-Controller/main.cpp#L507-L519" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments236"><pre class="lineNumbers snippet236"><code><span></span><span class="c1">// Commands:</span></code>
+<div class="pygments236"><pre class="lineNumbers snippet236"><code><span></span><span class="c1">// Message format: &lt;command&gt; &lt;fader&gt; &lt;value&gt;</span></code>
+<code><span class="c1">// Commands:</span></code>
 <code><span class="c1">//   - p: proportional gain Kp</span></code>
 <code><span class="c1">//   - i: integral gain Ki</span></code>
 <code><span class="c1">//   - d: derivative gain Kd</span></code>
@@ -1390,7 +1392,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 </div>
         <hr id="end-of-article">
-        <div class="nextupprev"><div class="prevpage"><a href="PID-Tuning.html" title="PID Tuning"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"><a href="Hardware.html" title="Hardware">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+        <div class="nextupprev"><div class="prevpage"><a href="PID-Tuning.html" title="3. PID Tuning"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"><a href="Hardware.html" title="5. Hardware">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
     <footer>Last edited: Saturday, 30 July 2022 22:08 UTC</footer>
 </body>

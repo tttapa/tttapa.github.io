@@ -1,0 +1,962 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+    <meta name="theme-color" content="#ccc">
+    <meta name="keywords" content="">
+    <meta name="description" content="Manually invoking the compiler to gain an understanding and appreciation of the specific tasks a build system performs for you.">
+    <title>2.1. Manual compilation</title>
+</head>
+
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-RPiOS/Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Debugging.html">Debugging</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Theory/index.html">Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Controllers.html">1. PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Cpp-Implementation.html">2. C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">3. PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">4. Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">5. Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">6. Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">7. ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../index.html">Programming</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Snippets/index.html">Snippets</a>
+        <ul>
+        </ul>
+        </li>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../index.html">C++</a>
+        <ul>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="hiddenEntry " href="../index.html">Scientific C++</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Introduction/index.html">1. Introduction</a>
+                <ul>
+                </ul>
+                </li>
+                <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="index.html">2. Compilation and build systems</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="openEntry " href="manual.html">2.1. Manual compilation</a></li>
+                </ul>
+                </li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../Practices/type-punning.html">Don't use unions or pointer casts for type punning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="manual.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article  class="book-section" style="counter-reset: book-chapter 2 book-section 1 book-section2 0 book-section3 0;">
+        <h1 class="title">2.1. Manual compilation</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc" id="toc">
+  <script>
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+        <li><a href="#example-project">Example project</a></li>
+          <ul>
+            <li><a href="#source-code">Source code</a></li>
+            <li><a href="#the-compilation-process">The compilation process</a></li>
+          </ul>
+        <li><a href="#limitations-of-manual-compilation">Limitations of manual compilation</a></li>
+  </ul></div>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+
+<p>
+    In this section, we'll manually invoke the compiler to build a very simple
+    “Hello, World”-style program that consists of multiple source files.
+    The goal is to illustrate how building software works under the hood, and
+    motivate the use of a build system or build system generator to automate
+    this tedious task.
+</p>
+
+<h2><a name="example-project" href="#example-project">Example project</a></h2>
+
+<p>
+    Consider a small project that consists of two libraries and a main program.
+</p>
+<ul>
+    <li>The first library (A) defines the <code>say_hello()</code> function. It
+        uses the <a href="https://github.com/fmtlib/fmt"><code>{fmt}</code></a>
+        library to print a greeting to the console.</li>
+    <li>The second library (B) uses the <code>say_hello()</code> function from
+        library A to implement the <code>greet_many()</code> function that
+        greets multiple people.</li>
+    <li>Finally, the main program creates an array with names of people to greet,
+        and calls library B’s <code>greet_many()</code> function.</li>
+</ul>
+
+<p>
+    The project layout could look something like this:
+</p>
+
+<pre class="code"><code>├── liba</code>
+<code>│   ├── a.cpp</code>
+<code>│   └── a.hpp</code>
+<code>├── libb</code>
+<code>│   ├── b.cpp</code>
+<code>│   └── b.hpp</code>
+<code>└── main.cpp</code></pre>
+
+<style>
+    div.twocolumns {
+        display: flex;
+        column-gap: 1.6em;
+        flex-wrap: wrap;
+    }
+
+    div.twocolumns>div {
+        flex: 1 1 40%;
+    }
+</style>
+
+<h3><a name="source-code" href="#source-code">Source code</a></h3>
+
+<p>
+    The source code listed below is not too important in and of itself, what
+    matters are the dependencies between the different source files.
+</p>
+
+<div class="twocolumns">
+    <div>
+        <h4 class="snippet-name"><a name="header-a-liba-a-hpp" href="#header-a-liba-a-hpp">Header A (liba/a.hpp)</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments74 .hll { background-color: #ffffcc }
+.pygments74 { background: #ffffff; }
+.pygments74 .c { color: #008000 } /* Comment */
+.pygments74 .err { border: 1px solid #FF0000 } /* Error */
+.pygments74 .k { color: #0000ff } /* Keyword */
+.pygments74 .l { color: #0000FF } /* Literal */
+.pygments74 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments74 .cm { color: #008000 } /* Comment.Multiline */
+.pygments74 .cp { color: #af00db } /* Comment.Preproc */
+.pygments74 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments74 .c1 { color: #008000 } /* Comment.Single */
+.pygments74 .cs { color: #008000 } /* Comment.Special */
+.pygments74 .ge { font-style: italic } /* Generic.Emph */
+.pygments74 .gh { font-weight: bold } /* Generic.Heading */
+.pygments74 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments74 .gs { font-weight: bold } /* Generic.Strong */
+.pygments74 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments74 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments74 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments74 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments74 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments74 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments74 .kt { color: #2b91af } /* Keyword.Type */
+.pygments74 .ld { color: #0000FF } /* Literal.Date */
+.pygments74 .m { color: #0000FF } /* Literal.Number */
+.pygments74 .s { color: #a31515 } /* Literal.String */
+.pygments74 .na { color: #001080 } /* Name.Attribute */
+.pygments74 .nb { color: #795e26 } /* Name.Builtin */
+.pygments74 .nc { color: #2b91af } /* Name.Class */
+.pygments74 .no { color: #0000FF } /* Name.Constant */
+.pygments74 .nf { color: #795e26 } /* Name.Function */
+.pygments74 .nl { color: #AF00DB } /* Name.Label */
+.pygments74 .nn { color: #000000 } /* Name.Namespace */
+.pygments74 .nt { color: #800000 } /* Name.Tag */
+.pygments74 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments74 .ow { color: #0000ff } /* Operator.Word */
+.pygments74 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments74 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments74 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments74 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments74 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments74 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments74 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments74 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments74 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments74 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments74 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments74 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments74 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments74 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments74 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments74 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments74 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments74 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments74 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments74 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments74 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments74 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments74 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments74 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments74 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments74 pre.snippet74 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Scientific-Cpp/Build-systems/resources/liba/a.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments74"><pre class="lineNumbers snippet74"><code><span></span><span class="cp">#pragma once</span></code>
+<code></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span></code>
+<code></code>
+<code><span class="c1">/// Print a greeting message.</span></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="nf">say_hello</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">);</span></code></pre></div>
+</div>
+    </div>
+    <div>
+        <h4 class="snippet-name"><a name="implementation-a-liba-a-cpp" href="#implementation-a-liba-a-cpp">Implementation A (liba/a.cpp)</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments78 .hll { background-color: #ffffcc }
+.pygments78 { background: #ffffff; }
+.pygments78 .c { color: #008000 } /* Comment */
+.pygments78 .err { border: 1px solid #FF0000 } /* Error */
+.pygments78 .k { color: #0000ff } /* Keyword */
+.pygments78 .l { color: #0000FF } /* Literal */
+.pygments78 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments78 .cm { color: #008000 } /* Comment.Multiline */
+.pygments78 .cp { color: #af00db } /* Comment.Preproc */
+.pygments78 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments78 .c1 { color: #008000 } /* Comment.Single */
+.pygments78 .cs { color: #008000 } /* Comment.Special */
+.pygments78 .ge { font-style: italic } /* Generic.Emph */
+.pygments78 .gh { font-weight: bold } /* Generic.Heading */
+.pygments78 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments78 .gs { font-weight: bold } /* Generic.Strong */
+.pygments78 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments78 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments78 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments78 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments78 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments78 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments78 .kt { color: #2b91af } /* Keyword.Type */
+.pygments78 .ld { color: #0000FF } /* Literal.Date */
+.pygments78 .m { color: #0000FF } /* Literal.Number */
+.pygments78 .s { color: #a31515 } /* Literal.String */
+.pygments78 .na { color: #001080 } /* Name.Attribute */
+.pygments78 .nb { color: #795e26 } /* Name.Builtin */
+.pygments78 .nc { color: #2b91af } /* Name.Class */
+.pygments78 .no { color: #0000FF } /* Name.Constant */
+.pygments78 .nf { color: #795e26 } /* Name.Function */
+.pygments78 .nl { color: #AF00DB } /* Name.Label */
+.pygments78 .nn { color: #000000 } /* Name.Namespace */
+.pygments78 .nt { color: #800000 } /* Name.Tag */
+.pygments78 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments78 .ow { color: #0000ff } /* Operator.Word */
+.pygments78 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments78 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments78 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments78 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments78 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments78 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments78 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments78 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments78 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments78 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments78 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments78 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments78 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments78 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments78 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments78 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments78 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments78 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments78 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments78 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments78 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments78 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments78 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments78 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments78 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments78 pre.snippet78 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Scientific-Cpp/Build-systems/resources/liba/a.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments78"><pre class="lineNumbers snippet78"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;fmt/core.h&gt;</span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;a.hpp&gt;</span></code>
+<code></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="nf">say_hello</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="n">fmt</span><span class="o">::</span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Hello, {}!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">);</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+    </div>
+    <div><h4 class="snippet-name"><a name="header-b-libb-b-hpp" href="#header-b-libb-b-hpp">Header B (libb/b.hpp)</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments81 .hll { background-color: #ffffcc }
+.pygments81 { background: #ffffff; }
+.pygments81 .c { color: #008000 } /* Comment */
+.pygments81 .err { border: 1px solid #FF0000 } /* Error */
+.pygments81 .k { color: #0000ff } /* Keyword */
+.pygments81 .l { color: #0000FF } /* Literal */
+.pygments81 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments81 .cm { color: #008000 } /* Comment.Multiline */
+.pygments81 .cp { color: #af00db } /* Comment.Preproc */
+.pygments81 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments81 .c1 { color: #008000 } /* Comment.Single */
+.pygments81 .cs { color: #008000 } /* Comment.Special */
+.pygments81 .ge { font-style: italic } /* Generic.Emph */
+.pygments81 .gh { font-weight: bold } /* Generic.Heading */
+.pygments81 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments81 .gs { font-weight: bold } /* Generic.Strong */
+.pygments81 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments81 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments81 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments81 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments81 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments81 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments81 .kt { color: #2b91af } /* Keyword.Type */
+.pygments81 .ld { color: #0000FF } /* Literal.Date */
+.pygments81 .m { color: #0000FF } /* Literal.Number */
+.pygments81 .s { color: #a31515 } /* Literal.String */
+.pygments81 .na { color: #001080 } /* Name.Attribute */
+.pygments81 .nb { color: #795e26 } /* Name.Builtin */
+.pygments81 .nc { color: #2b91af } /* Name.Class */
+.pygments81 .no { color: #0000FF } /* Name.Constant */
+.pygments81 .nf { color: #795e26 } /* Name.Function */
+.pygments81 .nl { color: #AF00DB } /* Name.Label */
+.pygments81 .nn { color: #000000 } /* Name.Namespace */
+.pygments81 .nt { color: #800000 } /* Name.Tag */
+.pygments81 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments81 .ow { color: #0000ff } /* Operator.Word */
+.pygments81 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments81 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments81 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments81 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments81 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments81 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments81 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments81 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments81 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments81 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments81 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments81 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments81 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments81 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments81 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments81 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments81 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments81 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments81 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments81 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments81 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments81 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments81 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments81 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments81 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments81 pre.snippet81 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Scientific-Cpp/Build-systems/resources/libb/b.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments81"><pre class="lineNumbers snippet81"><code><span></span><span class="cp">#pragma once</span></code>
+<code></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;span&gt;</span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string_view&gt;</span></code>
+<code></code>
+<code><span class="c1">/// Print a greeting for each of the names in the array.</span></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="nf">greet_many</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">span</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="p">);</span></code></pre></div>
+</div>
+    </div>
+    <div><h4 class="snippet-name"><a name="implementation-b-libb-b-cpp" href="#implementation-b-libb-b-cpp">Implementation B (libb/b.cpp)</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments84 .hll { background-color: #ffffcc }
+.pygments84 { background: #ffffff; }
+.pygments84 .c { color: #008000 } /* Comment */
+.pygments84 .err { border: 1px solid #FF0000 } /* Error */
+.pygments84 .k { color: #0000ff } /* Keyword */
+.pygments84 .l { color: #0000FF } /* Literal */
+.pygments84 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments84 .cm { color: #008000 } /* Comment.Multiline */
+.pygments84 .cp { color: #af00db } /* Comment.Preproc */
+.pygments84 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments84 .c1 { color: #008000 } /* Comment.Single */
+.pygments84 .cs { color: #008000 } /* Comment.Special */
+.pygments84 .ge { font-style: italic } /* Generic.Emph */
+.pygments84 .gh { font-weight: bold } /* Generic.Heading */
+.pygments84 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments84 .gs { font-weight: bold } /* Generic.Strong */
+.pygments84 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments84 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments84 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments84 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments84 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments84 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments84 .kt { color: #2b91af } /* Keyword.Type */
+.pygments84 .ld { color: #0000FF } /* Literal.Date */
+.pygments84 .m { color: #0000FF } /* Literal.Number */
+.pygments84 .s { color: #a31515 } /* Literal.String */
+.pygments84 .na { color: #001080 } /* Name.Attribute */
+.pygments84 .nb { color: #795e26 } /* Name.Builtin */
+.pygments84 .nc { color: #2b91af } /* Name.Class */
+.pygments84 .no { color: #0000FF } /* Name.Constant */
+.pygments84 .nf { color: #795e26 } /* Name.Function */
+.pygments84 .nl { color: #AF00DB } /* Name.Label */
+.pygments84 .nn { color: #000000 } /* Name.Namespace */
+.pygments84 .nt { color: #800000 } /* Name.Tag */
+.pygments84 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments84 .ow { color: #0000ff } /* Operator.Word */
+.pygments84 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments84 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments84 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments84 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments84 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments84 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments84 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments84 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments84 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments84 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments84 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments84 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments84 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments84 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments84 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments84 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments84 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments84 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments84 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments84 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments84 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments84 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments84 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments84 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments84 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments84 pre.snippet84 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Scientific-Cpp/Build-systems/resources/libb/b.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments84"><pre class="lineNumbers snippet84"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;a.hpp&gt;</span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;b.hpp&gt;</span></code>
+<code></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="nf">greet_many</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">span</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">names</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="n">say_hello</span><span class="p">(</span><span class="n">name</span><span class="p">);</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+    </div>
+    <div><h4 class="snippet-name"><a name="main-program-main-cpp" href="#main-program-main-cpp">Main program (main.cpp)</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments87 .hll { background-color: #ffffcc }
+.pygments87 { background: #ffffff; }
+.pygments87 .c { color: #008000 } /* Comment */
+.pygments87 .err { border: 1px solid #FF0000 } /* Error */
+.pygments87 .k { color: #0000ff } /* Keyword */
+.pygments87 .l { color: #0000FF } /* Literal */
+.pygments87 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments87 .cm { color: #008000 } /* Comment.Multiline */
+.pygments87 .cp { color: #af00db } /* Comment.Preproc */
+.pygments87 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments87 .c1 { color: #008000 } /* Comment.Single */
+.pygments87 .cs { color: #008000 } /* Comment.Special */
+.pygments87 .ge { font-style: italic } /* Generic.Emph */
+.pygments87 .gh { font-weight: bold } /* Generic.Heading */
+.pygments87 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments87 .gs { font-weight: bold } /* Generic.Strong */
+.pygments87 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments87 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments87 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments87 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments87 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments87 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments87 .kt { color: #2b91af } /* Keyword.Type */
+.pygments87 .ld { color: #0000FF } /* Literal.Date */
+.pygments87 .m { color: #0000FF } /* Literal.Number */
+.pygments87 .s { color: #a31515 } /* Literal.String */
+.pygments87 .na { color: #001080 } /* Name.Attribute */
+.pygments87 .nb { color: #795e26 } /* Name.Builtin */
+.pygments87 .nc { color: #2b91af } /* Name.Class */
+.pygments87 .no { color: #0000FF } /* Name.Constant */
+.pygments87 .nf { color: #795e26 } /* Name.Function */
+.pygments87 .nl { color: #AF00DB } /* Name.Label */
+.pygments87 .nn { color: #000000 } /* Name.Namespace */
+.pygments87 .nt { color: #800000 } /* Name.Tag */
+.pygments87 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments87 .ow { color: #0000ff } /* Operator.Word */
+.pygments87 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments87 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments87 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments87 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments87 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments87 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments87 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments87 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments87 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments87 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments87 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments87 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments87 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments87 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments87 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments87 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments87 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments87 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments87 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments87 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments87 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments87 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments87 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments87 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments87 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments87 pre.snippet87 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Scientific-Cpp/Build-systems/resources/main.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments87"><pre class="lineNumbers snippet87"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;b.hpp&gt;</span></code>
+<code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;vector&gt;</span></code>
+<code></code>
+<code><span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="w"> </span><span class="n">people</span><span class="p">{</span><span class="s">&quot;John&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Paul&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;George&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Ringo&quot;</span><span class="p">};</span></code>
+<code><span class="w">    </span><span class="n">greet_many</span><span class="p">(</span><span class="n">people</span><span class="p">);</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+    </div>
+</div>
+
+
+<h3><a name="the-compilation-process" href="#the-compilation-process">The compilation process</a></h3>
+
+<p>
+    To build the main executable, we need the following steps:
+</p>
+<ol class="circled">
+    <li>Preprocess and compile all implementation files into object files.</li>
+    <li>Link all object files and external libraries into an executable.</li>
+</ol>
+<p>
+    Using GCC, this can be done as follows:
+</p>
+
+<h4 class="snippet-name"><a name="build-commands" href="#build-commands">Build commands</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments106 .hll { background-color: #ffffcc }
+.pygments106 { background: #ffffff; }
+.pygments106 .c { color: #008000 } /* Comment */
+.pygments106 .err { border: 1px solid #FF0000 } /* Error */
+.pygments106 .k { color: #0000ff } /* Keyword */
+.pygments106 .l { color: #0000FF } /* Literal */
+.pygments106 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments106 .cm { color: #008000 } /* Comment.Multiline */
+.pygments106 .cp { color: #af00db } /* Comment.Preproc */
+.pygments106 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments106 .c1 { color: #008000 } /* Comment.Single */
+.pygments106 .cs { color: #008000 } /* Comment.Special */
+.pygments106 .ge { font-style: italic } /* Generic.Emph */
+.pygments106 .gh { font-weight: bold } /* Generic.Heading */
+.pygments106 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments106 .gs { font-weight: bold } /* Generic.Strong */
+.pygments106 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments106 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments106 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments106 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments106 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments106 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments106 .kt { color: #2b91af } /* Keyword.Type */
+.pygments106 .ld { color: #0000FF } /* Literal.Date */
+.pygments106 .m { color: #0000FF } /* Literal.Number */
+.pygments106 .s { color: #a31515 } /* Literal.String */
+.pygments106 .na { color: #001080 } /* Name.Attribute */
+.pygments106 .nb { color: #795e26 } /* Name.Builtin */
+.pygments106 .nc { color: #2b91af } /* Name.Class */
+.pygments106 .no { color: #0000FF } /* Name.Constant */
+.pygments106 .nf { color: #795e26 } /* Name.Function */
+.pygments106 .nl { color: #AF00DB } /* Name.Label */
+.pygments106 .nn { color: #000000 } /* Name.Namespace */
+.pygments106 .nt { color: #800000 } /* Name.Tag */
+.pygments106 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments106 .ow { color: #0000ff } /* Operator.Word */
+.pygments106 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments106 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments106 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments106 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments106 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments106 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments106 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments106 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments106 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments106 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments106 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments106 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments106 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments106 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments106 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments106 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments106 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments106 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments106 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments106 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments106 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments106 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments106 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments106 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments106 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments106 pre.snippet106 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Scientific-Cpp/Build-systems/resources/build.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments106"><pre class="lineNumbers snippet106"><code><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>build</code>
+<code>g++<span class="w"> </span>-std<span class="o">=</span>c++20<span class="w"> </span>-c<span class="w"> </span>liba/a.cpp<span class="w"> </span>-I<span class="w"> </span>liba<span class="w"> </span>-o<span class="w"> </span>build/a.o<span class="w">            </span><span class="c1"># ╮</span></code>
+<code>g++<span class="w"> </span>-std<span class="o">=</span>c++20<span class="w"> </span>-c<span class="w"> </span>libb/b.cpp<span class="w"> </span>-I<span class="w"> </span>liba<span class="w"> </span>-I<span class="w"> </span>libb<span class="w"> </span>-o<span class="w"> </span>build/b.o<span class="w">    </span><span class="c1"># ├ ➊</span></code>
+<code>g++<span class="w"> </span>-std<span class="o">=</span>c++20<span class="w"> </span>-c<span class="w"> </span>main.cpp<span class="w"> </span>-I<span class="w"> </span>libb<span class="w"> </span>-o<span class="w"> </span>build/main.o<span class="w">           </span><span class="c1"># ╯</span></code>
+<code>g++<span class="w"> </span>build/<span class="o">{</span>a,b,main<span class="o">}</span>.o<span class="w"> </span>-lfmt<span class="w"> </span>-o<span class="w"> </span>build/main<span class="w">                   </span><span class="c1"># ─ ➋</span></code>
+<code>./build/main</code></pre></div>
+</div>
+
+<ol class="circled">
+    <li>
+        The <code>-c</code> option causes GCC to preprocess and <u><b>c</b></u>ompile the
+        given file, writing the resulting object file to the <u><b>o</b></u>utput file
+        specified using the <code>-o</code> flag.
+        When preprocessing <code>a.cpp</code>, GCC needs to locate the header file
+        <code>a.hpp</code>, so the directory containing this file is added to the
+        <u><b>i</b></u>nclude path using the <code>-I</code> flag. Similarly, the
+        preprocessing of <code>b.cpp</code> requires both <code>liba</code> and
+        <code>libb</code> to be added to the search path, and <code>main.cpp</code>
+        needs <code>libb</code>.
+        We assume that the <code>{fmt}</code> library is installed in
+        <code>/usr/include</code> or some other location that is already in GCC’s
+        default search path. If this were not the case, we would add another
+        <code>-I</code> or <code>-isystem</code> flag to inform the preprocessor of
+        its location.
+    </li>
+    <li>
+        The invocation of GCC without the <code>-c</code> option links the three
+        object files together into an executable. Since <code>a.cpp</code> makes
+        use of the <code>{fmt}</code> library, we need to <u><b>l</b></u>ink to this
+        library as well, using the <code>-l</code> flag. Here we again assume that
+        the <code>libfmt.so</code> library is in a standard location, otherwise we
+        would need to use the <code>-L</code> flag to add its location to the
+        <u><b>l</b></u>ibrary search path.
+    </li>
+</ol>
+<p>
+    The dependencies between the different files involved in the build process
+    are visualized in <a class="pages-xref" href="#fig-1">Figure&nbsp;1</a>.
+</p>
+
+<figure class="img-wrapper" id="fig-1">
+<div class="mermaid">
+flowchart LR
+    subgraph Headers
+        Ah["<span style="font-family: monospace;">liba/a.hpp</span>"]
+        Bh["<span style="font-family: monospace;">libb/b.hpp</span>"]
+    end
+    subgraph External headers
+        Fh["<span style="font-family: monospace;">fmt/core.h</span>"]
+    end
+    subgraph Implementation
+        A["<span style="font-family: monospace;">liba/a.cpp</span>"]
+        B["<span style="font-family: monospace;">libb/b.cpp</span>"]
+        M["<span style="font-family: monospace;">main.cpp&nbsp;&nbsp;</span>"]
+    end
+    subgraph Objects
+        Ao["<span style="font-family: monospace;">build/a.o&nbsp;&nbsp;&nbsp;</span>"]
+        Bo["<span style="font-family: monospace;">build/b.o&nbsp;&nbsp;&nbsp;</span>"]
+        Mo["<span style="font-family: monospace;">build/main.o</span>"]
+    end
+    subgraph External libraries
+        F["<span style="font-family: monospace;">libfmt.so</span>"]
+    end
+    subgraph Binaries
+        Mexe("<span style="font-family: monospace;">build/main</span>")
+    end
+    Fh -->|included by| A
+    Ah -->|included by| A
+    Ah -->|included by| B
+    Bh -->|included by| B
+    Bh -->|included by| M
+
+    A -->|compiled to| Ao
+    B -->|compiled to| Bo
+    M -->|compiled to| Mo
+
+    F -->|linked into| Mexe
+    Ao -->|linked into| Mexe
+    Bo -->|linked into| Mexe
+    Mo -->|linked into| Mexe
+</div>
+<figcaption>Figure 1: Dependencies between files used during the build process.</figcaption></figure>
+
+<h2><a name="limitations-of-manual-compilation" href="#limitations-of-manual-compilation">Limitations of manual compilation</a></h2>
+
+<p>
+    Manually invoking the compiler like this (with or without a shell script)
+    has some serious downsides and challenges, including:
+</p>
+<ol>
+    <li><b>Repetitiveness and boilerplate</b>: Building a C++ project involves many similar
+        calls to the compiler. Although the number of commands to write can be somewhat reduced using wildcards or Bash
+        scripting, we need a more structural solution that is easy to maintain when files are added or when the
+        layout of the project changes.
+    </li>
+    <li><b>Propagation of compiler flags</b>: Some compiler options (such as preprocessor macros, C++ standard versions
+        and include paths) need to be propagated from a library to its dependents. For example, library B uses library
+        A, so the location of <code>a.hpp</code> needs to be added to the search paths when compiling
+        <code>b.cpp</code>.
+    </li>
+    <li><b>Propagation of linker flags</b>: Even though
+        <code>main.cpp</code> has no knowledge of the implementation of libraries A and B, it still needs to link to its
+        direct dependency <code>b.o</code> and the transitive dependencies <code>a.o</code> and <code>libfmt.so</code>.
+        The tree of transitive dependencies can become quite unwieldy, and they all need to come together for the final
+        linking step.
+    </li>
+    <li><b>Incremental compilation</b>: Compiling a larger project in its entirety can often take several minutes.
+        During development, this can become a serious impediment. We therefore only want to recompile the files that
+        actually changed. Since the preprocessor pastes the contents of header files into the source files that include
+        them (using simple text substitution of the <code>#include</code> directive), a change in a header file
+        can cascade and require many source files to be recompiled. For example, if <code>b.hpp</code> is modified, both
+        <code>b.cpp</code> and <code>main.cpp</code> have to be recompiled. For larger projects, the <i>included-by</i>
+        graph can grow very complex, as demonstrated by <a class="pages-xref" href="#fig-2">Figure&nbsp;2</a>, and determining these dependencies
+        manually is not an option.
+    </li>
+    <li><b>Portability</b>: The commands above only work for GCC. Users of your project might want to compile it using
+        Visual Studio on Windows, or Xcode on macOS, or perhaps even cross-compile it for an embedded system. This would
+        require maintaining multiple scripts or build descriptions, with the risk of them getting out of sync.</li>
+    <li><b>Lack of integration with IDEs and other tools</b>: IDEs like Visual Studio, VS Code, CLion, Xcode, as well
+        as language servers like clangd, or other tools such clang-tidy and Cppcheck won’t be able to easily interact
+        with your project if it is described using custom commands or shell scripts.</li>
+    <li><b>Implicit assumptions about dependencies</b>: In the example above, we assumed that the <code>{fmt}</code>
+        library was installed system-wide, with the necessary files in GCC’s default search paths. However, this is not
+        always possible, a user may have dependencies installed in their home folder, in a virtual environment, in a
+        subdirectory of the project folder, or somewhere else entirely. Our build script should not make any assumptions
+        or hard-code any paths. We need a standardized way to locate third-party libraries and other dependencies that
+        works across systems.</li>
+    <li><b>Ease of use</b>: By using a custom script or commands to build your project, you make it harder
+        for users to get started with your software (especially when things don’t work as expected), and it also
+        increases the friction for potential contributors that want to help improve your software or build system.
+        There is great value in making the installation of your software as easy as
+        <code>cmake -Bbuild -S. && cmake --build build -j && cmake --install build</code>, which is the standard
+        procedure for a majority of (newer) C and C++ projects.
+    </li>
+</ol>
+
+<figure class="img-wrapper" style="max-width: 100%; overflow-x: scroll;" id="fig-2"><a href="images/alpaqa-dep-type-erased-problem.hpp.svg"><img src="images/alpaqa-dep-type-erased-problem.hpp.svg" alt="The <i>“included-by”</i> graph of a single header file in a real-world C++ project." style="width: 200%; max-width: 200%"></a><figcaption>Figure 2: The <i>“included-by”</i> graph of a single header file in a real-world C++ project.</figcaption></figure>
+
+<p>
+    In the next chapter, we’ll look at build systems and build system generators that provide solutions to the
+    issues listed above.
+</p>
+
+<!-- END -->
+
+<script>
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#f4f4ff',
+            secondaryColor: '#f0f0f4',
+            tertiaryColor: '#FFFCED',
+            // fontFamily: 'monospace',
+        },
+    });
+</script>
+
+</div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="2. Compilation and build systems">Index</a></div><div class="nextpage"></div></div>
+    </article>
+    <footer>Last edited: Friday, 11 August 2023 22:54 UTC</footer>
+</body>
+
+</html>

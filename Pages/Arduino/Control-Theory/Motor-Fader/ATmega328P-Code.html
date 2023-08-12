@@ -12,7 +12,7 @@
     <meta name="theme-color" content="#ccc">
     <meta name="keywords" content="arduino,motorized fader,flying fader,pid,controller,midi,control surface">
     <meta name="description" content="Complete C++ implementation for driving up to four motorized faders on an ATmega328P microcontroller, with all kinds of extra features such as capacitive touch sensing for the fader knobs, tuning over the serial port, setpoint changes over I²C, and so on.">
-    <title>ATmega328P Code</title>
+    <title>7. ATmega328P Code</title>
 <style id="MJX-CHTML-styles">
 mjx-container[jax="CHTML"] {
   line-height: 0;
@@ -404,6 +404,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
   src: url("https://cdn.jsdelivr.net/npm/mathjax@3/es5/output/chtml/fonts/woff-v2/MathJax_Vector-Bold.woff") format("woff");
 }
 </style></head>
+
 <body>
     <nav>
         <div>
@@ -483,13 +484,13 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
         <ul>
             <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="index.html">Motorized Faders</a>
             <ul>
-                <li><span class="ftriangle"></span><a class="" href="PID-Controllers.html">PID Controllers</a></li>
-                <li><span class="ftriangle"></span><a class="" href="PID-Cpp-Implementation.html">C++ Implementation</a></li>
-                <li><span class="ftriangle"></span><a class="" href="PID-Tuning.html">PID Tuning</a></li>
-                <li><span class="ftriangle"></span><a class="" href="Architecture.html">Architecture and Design Decisions</a></li>
-                <li><span class="ftriangle"></span><a class="" href="Hardware.html">Hardware</a></li>
-                <li><span class="ftriangle"></span><a class="" href="Configuration.html">Configuration options and common use cases</a></li>
-                <li><span class="ftriangle"></span><a class="openEntry " href="ATmega328P-Code.html">ATmega328P Code</a></li>
+                <li><span class="ftriangle"></span><a class="" href="PID-Controllers.html">1. PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="PID-Cpp-Implementation.html">2. C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="PID-Tuning.html">3. PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Architecture.html">4. Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Hardware.html">5. Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="Configuration.html">6. Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="openEntry " href="ATmega328P-Code.html">7. ATmega328P Code</a></li>
             </ul>
             </li>
         </ul>
@@ -582,13 +583,13 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
     <ul>
         <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
         <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
             <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
             <ul>
                 <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
                 <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
             </ul>
             </li>
-            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
             <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
             <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
             <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
@@ -618,7 +619,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
         </div>
     </nav>
     <article>
-        <h1 class="title">ATmega328P Code</h1>
+        <h1 class="title">7. ATmega328P Code</h1>
         <i class="author">Pieter P</i>
         <div class="main-content">
 
@@ -837,7 +838,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="w">    </span><span class="c1">// sensitive or decrease it if it's not sensitive enough:</span></code>
 <code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">touch_rc_time_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">150e-6</span><span class="p">;</span><span class="w"> </span><span class="c1">// seconds</span></code>
 <code><span class="w">    </span><span class="c1">// Bit masks of the touch pins (must be on port B):</span></code>
-<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">touch_masks</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">touch_masks</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB2</span><span class="p">,</span></code>
+<code><span class="w">                                              </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB4</span><span class="p">};</span></code>
 <code></code>
 <code><span class="w">    </span><span class="c1">// Use phase-correct PWM (true) or fast PWM (false), this determines the</span></code>
 <code><span class="w">    </span><span class="c1">// timer interrupt frequency, prefer phase-correct PWM with prescaler 1 on</span></code>
@@ -3024,7 +3026,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 </div>
         <hr id="end-of-article">
-        <div class="nextupprev"><div class="prevpage"><a href="Configuration.html" title="Configuration options and common use cases"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"></div></div>
+        <div class="nextupprev"><div class="prevpage"><a href="Configuration.html" title="6. Configuration options and common use cases"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"></div></div>
     </article>
     <footer>Last edited: Monday, 19 July 2021 20:40 UTC</footer>
 </body>
