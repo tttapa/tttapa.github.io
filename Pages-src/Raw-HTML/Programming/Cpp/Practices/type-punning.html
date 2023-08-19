@@ -140,6 +140,26 @@
     valid to do the same in reverse, for example:
 </p>
 @codesnippet{"file": "resources/type-punning-example-union-fixed-bad.cpp"}
+<p>
+    You cannot access the memory occupied by the <code>bytes</code> variable
+    through a pointer to <code>float</code>, because there is no value of type
+    <code>float</code> at that address that is within its lifetime.
+</p>
+
+<h3>Explicitly starting lifetimes</h3>
+
+<p>
+    In the previous example of interpreting an array of bytes as a <code>float</code>,
+    the main problem was that no value of type <code>float</code> was within its
+    lifetime at that address.
+    In C++23, you can explicitly start the lifetime of objects of
+    implicit-lifetime type <sup><a href="https://en.cppreference.com/w/cpp/named_req/ImplicitLifetimeType">[cppreference:ImplicitLifetimeType]</a></sup>
+    using the <a href="https://en.cppreference.com/w/cpp/memory/start_lifetime_as"><code>std::start_lifetime_as</code></a>
+    function. This is especially useful for deserialization, where you may want
+    to reinterpret an array of bytes that you read from a file or from a socket
+    as a struct with a known layout.
+</p>
+@codesnippet{"file": "resources/type-punning-example-union-fixed-start-lifetime.cpp"}
 
 <h2>C++ Core Guidelines</h2>
 
