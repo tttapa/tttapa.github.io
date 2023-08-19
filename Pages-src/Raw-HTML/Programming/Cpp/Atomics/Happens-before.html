@@ -327,7 +327,7 @@
             direction LR
             B["B(M)"]
         end
-        A -->|HB| B
+        A -->|HB<br>MOD| B
 </div>
 
 <h4>Read-read coherence</h4>
@@ -356,9 +356,11 @@
             direction LR
             B["B(M)"]
         end
-        X --> A
+        X -->|value| A
         A --->|HB| B
         X --->|MOD| Y
+        %% X -.->|value| B
+        %% Y -.->|value| B
 </div>
 
 <h4>Read-write coherence</h4>
@@ -382,6 +384,7 @@
         end
         X --->|MOD| B
         A -->|HB| B
+        %% X -.->|value| A
 </div>
 
 <h4>Write-read coherence</h4>
@@ -528,19 +531,17 @@
     the signal handler and the execution of the signal handler happened before all evaluations in B.
 </p>
 <div class="mermaid">
-    flowchart LR
+    flowchart 
+        subgraph SIG
+            S
+        end
         subgraph T1
-            direction BT
             A
             B
-            B --x|HB| A
-        end
-        subgraph SIG
-            direction TB
-            S
         end
         A -->|HB| S
         S -->|HB| B
+        B --x|HB| A
 </div>
 
 <!-- END -->
