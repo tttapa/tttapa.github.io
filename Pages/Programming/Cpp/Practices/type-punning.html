@@ -248,6 +248,7 @@
             <li><a href="#std-bit-cast"><code>std::bit_cast</code></a></li>
             <li><a href="#std-memcpy"><code>std::memcpy</code></a></li>
             <li><a href="#cast-to-a-character-array">Cast to a character array</a></li>
+            <li><a href="#explicitly-starting-lifetimes">Explicitly starting lifetimes</a></li>
           </ul>
         <li><a href="#c-core-guidelines">C++ Core Guidelines</a></li>
   </ul></div>
@@ -887,6 +888,96 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <div class="pygments142"><pre class="lineNumbers snippet142"><code><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="mh">0xA4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x70</span><span class="p">,</span><span class="w"> </span><span class="mh">0x45</span><span class="p">,</span><span class="w"> </span><span class="mh">0x41</span><span class="p">};</span></code>
 <code><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="kt">float</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"> </span><span class="c1">// Error: Undefined Behavior</span></code></pre></div>
 </div>
+<p>
+    You cannot access the memory occupied by the <code>bytes</code> variable
+    through a pointer to <code>float</code>, because there is no value of type
+    <code>float</code> at that address that is within its lifetime.
+</p>
+
+<h3><a name="explicitly-starting-lifetimes" href="#explicitly-starting-lifetimes">Explicitly starting lifetimes</a></h3>
+
+<p>
+    In the previous example of interpreting an array of bytes as a <code>float</code>,
+    the main problem was that no value of type <code>float</code> was within its
+    lifetime at that address.
+    In C++23, you can explicitly start the lifetime of objects of
+    implicit-lifetime type <sup><a href="https://en.cppreference.com/w/cpp/named_req/ImplicitLifetimeType">[cppreference:ImplicitLifetimeType]</a></sup>
+    using the <a href="https://en.cppreference.com/w/cpp/memory/start_lifetime_as"><code>std::start_lifetime_as</code></a>
+    function. This is especially useful for deserialization, where you may want
+    to reinterpret an array of bytes that you read from a file or from a socket
+    as a struct with a known layout.
+</p>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments162 .hll { background-color: #ffffcc }
+.pygments162 { background: #ffffff; }
+.pygments162 .c { color: #008000 } /* Comment */
+.pygments162 .err { border: 1px solid #FF0000 } /* Error */
+.pygments162 .k { color: #0000ff } /* Keyword */
+.pygments162 .l { color: #0000FF } /* Literal */
+.pygments162 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments162 .cm { color: #008000 } /* Comment.Multiline */
+.pygments162 .cp { color: #af00db } /* Comment.Preproc */
+.pygments162 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments162 .c1 { color: #008000 } /* Comment.Single */
+.pygments162 .cs { color: #008000 } /* Comment.Special */
+.pygments162 .ge { font-style: italic } /* Generic.Emph */
+.pygments162 .gh { font-weight: bold } /* Generic.Heading */
+.pygments162 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments162 .gs { font-weight: bold } /* Generic.Strong */
+.pygments162 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments162 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments162 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments162 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments162 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments162 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments162 .kt { color: #2b91af } /* Keyword.Type */
+.pygments162 .ld { color: #0000FF } /* Literal.Date */
+.pygments162 .m { color: #0000FF } /* Literal.Number */
+.pygments162 .s { color: #a31515 } /* Literal.String */
+.pygments162 .na { color: #001080 } /* Name.Attribute */
+.pygments162 .nb { color: #795e26 } /* Name.Builtin */
+.pygments162 .nc { color: #2b91af } /* Name.Class */
+.pygments162 .no { color: #0000FF } /* Name.Constant */
+.pygments162 .nf { color: #795e26 } /* Name.Function */
+.pygments162 .nl { color: #AF00DB } /* Name.Label */
+.pygments162 .nn { color: #000000 } /* Name.Namespace */
+.pygments162 .nt { color: #800000 } /* Name.Tag */
+.pygments162 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments162 .ow { color: #0000ff } /* Operator.Word */
+.pygments162 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments162 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments162 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments162 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments162 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments162 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments162 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments162 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments162 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments162 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments162 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments162 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments162 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments162 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments162 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments162 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments162 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments162 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments162 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments162 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments162 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments162 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments162 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments162 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments162 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments162 pre.snippet162 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-union-fixed-start-lifetime.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments162"><pre class="lineNumbers snippet162"><code><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="mh">0xA4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x70</span><span class="p">,</span><span class="w"> </span><span class="mh">0x45</span><span class="p">,</span><span class="w"> </span><span class="mh">0x41</span><span class="p">};</span></code>
+<code><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">start_lifetime_as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"> </span><span class="c1">// Ok</span></code></pre></div>
+</div>
 
 <h2><a name="c-core-guidelines" href="#c-core-guidelines">C++ Core Guidelines</a></h2>
 
@@ -906,7 +997,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="Best Practices">Index</a></div><div class="nextpage"><a href="c-style-casts.html" title="Don't use C-style casts">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Sunday, 31 July 2022 12:08 UTC</footer>
+    <footer>Last edited: Saturday, 19 August 2023 11:18 UTC</footer>
 </body>
 
 </html>
