@@ -975,9 +975,13 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments162 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments162 pre.snippet162 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/type-punning-example-union-fixed-start-lifetime.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments162"><pre class="lineNumbers snippet162"><code><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="mh">0xA4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x70</span><span class="p">,</span><span class="w"> </span><span class="mh">0x45</span><span class="p">,</span><span class="w"> </span><span class="mh">0x41</span><span class="p">};</span></code>
+<div class="pygments162"><pre class="lineNumbers snippet162"><code><span></span><span class="k">alignas</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">bytes</span><span class="p">[]</span><span class="w"> </span><span class="p">{</span><span class="mh">0xA4</span><span class="p">,</span><span class="w"> </span><span class="mh">0x70</span><span class="p">,</span><span class="w"> </span><span class="mh">0x45</span><span class="p">,</span><span class="w"> </span><span class="mh">0x41</span><span class="p">};</span></code>
 <code><span class="kt">float</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">std</span><span class="o">::</span><span class="n">start_lifetime_as</span><span class="o">&lt;</span><span class="kt">float</span><span class="o">&gt;</span><span class="p">(</span><span class="n">bytes</span><span class="p">);</span><span class="w"> </span><span class="c1">// Ok</span></code></pre></div>
 </div>
+<p>
+    Note that the alignment of the buffer has to be correct, otherwise, the
+    behavior is undefined.
+</p>
 
 <h2><a name="c-core-guidelines" href="#c-core-guidelines">C++ Core Guidelines</a></h2>
 
@@ -997,7 +1001,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="Best Practices">Index</a></div><div class="nextpage"><a href="c-style-casts.html" title="Don't use C-style casts">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Saturday, 19 August 2023 11:18 UTC</footer>
+    <footer>Last edited: Saturday, 19 August 2023 16:40 UTC</footer>
 </body>
 
 </html>
