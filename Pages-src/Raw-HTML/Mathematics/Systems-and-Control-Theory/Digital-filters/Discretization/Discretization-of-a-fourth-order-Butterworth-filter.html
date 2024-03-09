@@ -59,7 +59,7 @@ If we don't the cut-off frequency will shift to an incorrect frequency when we d
 <p>
     Now that we know the pre-warped analog cut-off frequency, we can start designing the analog filter.<br>
     We'll use the formula for the Butterworth low-pass filter derived in the page on Butterworth Filters:
-    $$ \begin{equation} H_4(s') = \frac{1}{B_4(s')} \quad\quad \mathrm{where} \;s' \triangleq \frac{s}{\omega_{c,a}} \end{equation} \label{H} $$
+    $$ \begin{equation} H_4(s') = \frac{1}{B_4(s')} \quad\quad \mathrm{where} \;s' \triangleq \frac{s}{\omega_{c,a}} \label{H} \end{equation} $$
 
     $$ B_4(s') = \left(s'^2 - 2\cos\left(2\pi\frac{4+1}{4\cdot4}\right) s' + 1\right)
                  \left(s'^2 - 2\cos\left(2\pi\frac{2+4+1}{4\cdot4}\right) s' + 1\right) $$
@@ -78,7 +78,7 @@ If we don't the cut-off frequency will shift to an incorrect frequency when we d
     $$ \begin{equation} \begin{split} 
     B_4(s') &= \left(s'^2 + \alpha s' + 1\right)\left(s'^2 + \beta s' + 1\right) \\ 
             &= s'^4 + s'^3(\alpha+\beta) + s'^2(\alpha\beta+2) + s'(\alpha+\beta) + 1
-    \end{split} \end{equation} \label{B} $$
+    \end{split} \label{B} \end{equation} $$
 </p>
 
 <h3>Discretizing the Analog Filter</h3>
@@ -88,10 +88,10 @@ If we don't the cut-off frequency will shift to an incorrect frequency when we d
     Therefore:
     $$ s' = \frac{2 f_s}{\omega_{a,c}}\frac{z-1}{z+1} $$
     Again, we'll introduce a constant to simplify the expression:
-    $$ \begin{equation} \begin{split}
+    $$ \begin{equation}\label{gamma} \begin{split}
     \gamma &\triangleq \frac{2 f_s}{\omega_{a,c}} = \frac{2f_s}{2f_s\tan\left(\frac{\omega_{c,d}}{2}\right)} = \cot\left(\pi\frac{f_c}{f_s}\right) \\
-    &= \cot\left(\frac\pi8\right) = 1 + \sqrt2 \end{split} \end{equation} \label{gamma} $$
-    $$ \begin{equation} s' = \gamma \frac{z-1}{z+1} \end{equation} \label{s_prime_z} $$
+    &= \cot\left(\frac\pi8\right) = 1 + \sqrt2 \end{split} \end{equation} $$
+    $$ \begin{equation} s' = \gamma \frac{z-1}{z+1} \label{s_prime_z} \end{equation} $$
 
     What follows is just rearranging the expression of \(B_4(s')\) from Equation \(\ref{B}\), using the substitution of Equation \(\ref{s_prime_z}\).<br>
     Finally, we end up with an expression for the transfer function, using Equation \(\ref{H}\), and we can determine the coefficients using the constants 
