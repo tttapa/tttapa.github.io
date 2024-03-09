@@ -89,14 +89,93 @@
     </div>
 </div>
 
-
-<h3>The compilation process</h3>
+<h2>Header files and implementation files</h2>
 
 <p>
-    To build the main executable, we need the following steps:
+    Most C++ source files fall into one of two categories: header files and implementation files.
+    Implementation files (usually with extension <code>.cpp</code>, <code>.cc</code> or <code>.cxx</code>) are files
+    that contain function or variable definitions, and are compiled into executable code.
+    Header files (usually with extension <code>.hpp</code>, <code>.h</code> or <code>.hxx</code>) contain declarations,
+    function prototypes and class definitions. They are not compiled in isolation, but are intended to be included in
+    implementation files or in other header files.<br>
+    Broadly speaking, the API of a library (i.e. the declarations that are needed to <i>use</i> the library) is
+    declared in header files.
+    The actual executable code (i.e. the definitions of the functions provided by the library)
+    exists across multiple implementation files.
+</p>
+
+<h2>The compilation process</h2>
+
+<p>
+    The compiler performs different intermediate steps as part of the build
+    process:
+</p>
+<ol>
+    <li><b>Pre-processing</b>:
+        including header files by expanding <code>#include</code> directives, performing macro substitution, handling
+        <code>#if</code> directives, etc.
+    </li>
+    <li><b>Compilation</b>:
+        parsing and interpreting the pre-processed source code, and composing the corresponding intermediate
+        representation. Along the way, syntactical and semantic errors are reported.</li>
+    <li><b>Optimization</b>:
+        iteratively rewriting the intermediate representation to improve performance and/or memory usage, without
+        changing the observable behavior of the code.</li>
+    <li><b>Code generation and assembly</b>:
+        converting the intermediate representation into executable machine code. </li>
+    <li><b>Linking</b>:
+        combining the machine code for different files and libraries into a single binary.</li>
+</ol>
+
+<h3>Pre-processing</h3>
+
+<p>
+    The pre-processor's duty is to handle all pre-processor directives, like <code>#include</code>,
+    <code>#if/#elif/#else/#endif</code>, <code>#define</code>, and it performs simple text-based macro expansion. It
+    also strips the comments from the source code.
+</p>
+<p>
+    It is important to note that the preprocessor actually pastes the contents of header files into the source files
+    that include them. This is done using relatively simple text substitution of the <code>#include</code> directive,
+    with some bookkeeping to be able to recover the original file names and line numbers. An example of a pre-processed
+    version of the file <code>b.cpp</code> from above is listed below. This is the kind of code that is actually handed
+    to the compiler.
+</p>
+
+@codesnippet{ "file": "resources/libb/b.i",
+"name": "Pre-processed source code of implementation B (libb/b.i)" }
+
+<p>
+    The directives starting with a <code>#</code> refer back to the original location of the source code.
+    You can see how the headers <code>a.hpp</code> and <code>b.hpp</code> have been inlined and combined with the other
+    contents of <code>b.cpp</code>. This inlining is done recursively: all <code>#include</code> directives are
+    expanded, including standard library headers (which have been omitted for clarity). The preprocessor also removes
+    all comments from the code, the comments in the snippet above were added manually to point out the different parts.
+</p>
+
+<h3>Compilation, optimization and code generation</h3>
+
+<p>
+    Modern compilers are among the most sophisticated pieces of software out there, and a detailed description falls
+    beyond the scope of this document.
+    <span style="color: red">TODO: add references</span>
+</p>
+
+<h3>Linking</h3>
+
+<p>
+    <span style="color: red">TODO: explain object files</span>
+</p>
+
+<h2>Building the example project</h2>
+
+<p>
+    To build the main executable for the example project above, some of the steps are combined, and the two main steps
+    in the build process are:
 </p>
 <ol class="circled">
-    <li>Preprocess and compile all implementation files into object files.</li>
+    <li>Pre-process and compile all implementation files into object files (covers pre-processing, compiling,
+        optimizing, assembling).</li>
     <li>Link all object files and external libraries into an executable.</li>
 </ol>
 <p>
