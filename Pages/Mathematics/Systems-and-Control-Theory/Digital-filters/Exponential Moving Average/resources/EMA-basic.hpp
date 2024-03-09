@@ -19,9 +19,10 @@ class EMA {
     static_assert(std::is_unsigned<uint_t>::value,
                   "The `uint_t` type should be an unsigned integer, "
                   "otherwise, the division using bit shifts is invalid.");
+    static_assert(K > 0, "K should be greater than zero");
 
     /// Fixed point representation of one half, used for rounding.
-    constexpr static uint_t half = 1 << (K - 1);
+    constexpr static uint_t half = uint_t{1} << (K - 1);
 
   private:
     uint_t state = 0;

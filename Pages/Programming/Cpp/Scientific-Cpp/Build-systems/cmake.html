@@ -4,23 +4,23 @@
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- No MathJax -->
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
     <meta name="theme-color" content="#ccc">
     <meta name="keywords" content="">
-    <meta name="description" content="Introduction, goals and non-goals, related resources.">
-    <title>1. Introduction</title>
+    <meta name="description" content="Using CMake to configure and automate the build process of the simple C++ project from the previous section.">
+    <title>2.2. CMake</title>
 </head>
 
 <body>
     <nav>
         <div>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
-                <path d="M0 0h48v48h-48z" fill="none" />
-                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z" />
+                <path d="M0 0h48v48h-48z" fill="none"/>
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z"/>
             </svg>
             <h2><a href="/Pages">Pages</a></h2>
 <ul>
@@ -176,14 +176,14 @@
         <ul>
             <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="hiddenEntry " href="../index.html">Scientific C++</a>
             <ul>
-                <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry " href="index.html">1. Introduction</a>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Introduction/index.html">1. Introduction</a>
                 <ul>
                 </ul>
                 </li>
-                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Build-systems/index.html">2. Compilation and build systems</a>
+                <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="index.html">2. Compilation and build systems</a>
                 <ul>
-                    <li><span class="ftriangle"></span><a class="" href="../Build-systems/manual.html">2.1. Manual compilation</a></li>
-                    <li><span class="ftriangle"></span><a class="" href="../Build-systems/cmake.html">2.2. CMake</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="manual.html">2.1. Manual compilation</a></li>
+                    <li><span class="ftriangle"></span><a class="openEntry " href="cmake.html">2.2. CMake</a></li>
                 </ul>
                 </li>
                 <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Pitfalls/index.html">3. Pitfalls</a>
@@ -240,7 +240,7 @@
                 <a href="/" title="Home">home</a>
             </i>
             <i class="material-icons">
-                <a href="index.pdf" title="Download as PDF">get_app</a>
+                <a href="cmake.pdf" title="Download as PDF">get_app</a>
             </i>
             <!-- <i class="material-icons">
                 <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
@@ -250,54 +250,19 @@
             </i>
         </div>
     </nav>
-    <article  class="book-chapter" style="counter-reset: book-chapter 1 book-section2 0 book-section3 0;">
-        <h1 class="indexTitle">1. Introduction</h1>
+    <article  class="book-section" style="counter-reset: book-chapter 2 book-section 2 book-section2 0 book-section3 0;">
+        <h1 class="title">2.2. CMake</h1>
         <i class="author">Pieter P</i>
         <div class="main-content">
-<div class="toc" id="toc">
-  <script>
-  function updateTocSize() {
-    let toc = document.getElementById("toc");
-    toc.style.maxHeight = toc.scrollHeight + 'px';
-  }
-  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
-  <ul>
-        <li><a href="#goals-and-non-goals">Goals and non-goals</a></li>
-        <li><a href="#related-resources">Related resources</a></li>
-  </ul></div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
 
 
-<h2><a name="goals-and-non-goals" href="#goals-and-non-goals">Goals and non-goals</a></h2>
-
-<p>
-    The goal of this guide is to get to an ergonomic workflow for developing
-    scientific software using C++. It is not designed to be a tutorial of the
-    C++ language itself, but an overview of useful tools (package managers,
-    build systems, linters, static analysis, run-time sanitizers, debuggers,
-    testing frameworks), recommendations on how to structure a (scientific) C++
-    project, guidelines for interoperability with other popular languages, and
-    so on.
-</p>
-
-<h2><a name="related-resources" href="#related-resources">Related resources</a></h2>
-
-<ul>
-    <li><a href="https://en.cppreference.com">cppreference</a>: the recommended language and standard library
-        reference</li>
-    <li><a href="https://www.learncpp.com">learncpp.com</a>: a solid, up-to-date tutorial for the C++ language
-        itself</li>
-    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines">C++ Core Guidelines</a>: an extensive set
-        of guidelines for using C++ well</li>
-    <li><a href="https://open-std.org/jtc1/sc22/wg21/docs/papers/2023/n4950.pdf">C++ 23 Standard (draft)</a>: draft of
-        the official C++ standard, as a big PDF</li>
-</ul>
 
 </div>
-        <hr>
-        <div class="indexContainer"></div>
-        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="../index.html" title="Scientific C++">Up</a></div><div class="nextpage"><a href="../Build-systems/index.html" title="2. Compilation and build systems">Next Chapter<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+        <hr id="end-of-article">
+        <div class="nextupprev"><div class="prevpage"><a href="manual.html" title="2.1. Manual compilation"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="2. Compilation and build systems">Index</a></div><div class="nextpage"></div></div>
     </article>
-    <footer>Last edited: Saturday, 12 August 2023 00:25 UTC</footer>
+    <footer>Last edited: Wednesday, 01 November 2023 23:21 UTC</footer>
 </body>
 
 </html>

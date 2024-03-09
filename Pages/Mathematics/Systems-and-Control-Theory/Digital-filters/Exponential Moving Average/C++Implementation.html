@@ -1430,9 +1430,10 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_unsigned</span><span class="o">&lt;</span><span class="n">uint_t</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">,</span></code>
 <code><span class="w">                  </span><span class="s">"The `uint_t` type should be an unsigned integer, "</span></code>
 <code><span class="w">                  </span><span class="s">"otherwise, the division using bit shifts is invalid."</span><span class="p">);</span></code>
+<code><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">"K should be greater than zero"</span><span class="p">);</span></code>
 <code></code>
 <code><span class="w">    </span><span class="c1">/// Fixed point representation of one half, used for rounding.</span></code>
-<code><span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">uint_t</span><span class="w"> </span><span class="n">half</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span></code>
+<code><span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">uint_t</span><span class="w"> </span><span class="n">half</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uint_t</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span></code>
 <code></code>
 <code><span class="w">  </span><span class="k">private</span><span class="o">:</span></code>
 <code><span class="w">    </span><span class="n">uint_t</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></code>
@@ -2024,23 +2025,28 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="k">class</span><span class="w"> </span><span class="nc">EMA</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">  </span><span class="k">public</span><span class="o">:</span></code>
 <code><span class="w">    </span><span class="c1">/// Constructor: initialize filter to zero or optional given value.</span></code>
-<code><span class="w">    </span><span class="n">EMA</span><span class="p">(</span><span class="n">input_t</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_t</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span></code>
-<code><span class="w">      </span><span class="o">:</span><span class="w"> </span><span class="n">state</span><span class="p">(</span><span class="n">zero</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">state_t</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">initial</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span></code>
+<code><span class="w">    </span><span class="n">EMA</span><span class="p">(</span><span class="n">input_t</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input_t</span><span class="p">{</span><span class="mi">0</span><span class="p">})</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">reset</span><span class="p">(</span><span class="n">initial</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code></code>
+<code><span class="w">    </span><span class="c1">/// Reset the filter state so it outputs the given value.</span></code>
+<code><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">reset</span><span class="p">(</span><span class="n">input_t</span><span class="w"> </span><span class="n">initial</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">        </span><span class="n">state_t</span><span class="w"> </span><span class="n">initial_s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">state_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">initial</span><span class="p">);</span></code>
+<code><span class="w">        </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zero</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="n">initial_s</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">K</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">initial_s</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="p">}</span></code>
 <code></code>
 <code><span class="w">    </span><span class="c1">/// Update the filter with the given input and return the filtered output.</span></code>
 <code><span class="w">    </span><span class="n">input_t</span><span class="w"> </span><span class="k">operator</span><span class="p">()(</span><span class="n">input_t</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span></code>
-<code><span class="w">      </span><span class="n">state</span><span class="w">         </span><span class="o">+=</span><span class="w"> </span><span class="n">state_t</span><span class="p">(</span><span class="n">input</span><span class="p">);</span></code>
+<code><span class="w">      </span><span class="n">state</span><span class="w">         </span><span class="o">+=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">state_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">input</span><span class="p">);</span></code>
 <code><span class="w">      </span><span class="n">state_t</span><span class="w"> </span><span class="n">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">state</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">half</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">K</span><span class="p">;</span></code>
 <code><span class="w">      </span><span class="n">output</span><span class="w">        </span><span class="o">-=</span><span class="w"> </span><span class="n">zero</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">K</span><span class="p">;</span></code>
 <code><span class="w">      </span><span class="n">state</span><span class="w">         </span><span class="o">-=</span><span class="w"> </span><span class="n">output</span><span class="p">;</span></code>
-<code><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">input_t</span><span class="p">(</span><span class="n">output</span><span class="p">);</span></code>
+<code><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">input_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">output</span><span class="p">);</span></code>
 <code><span class="w">    </span><span class="p">}</span></code>
 <code></code>
 <code><span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="n">state_t</span><span class="w"> </span></code>
 <code><span class="w">      </span><span class="n">max_state</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">state_t</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">(),</span></code>
 <code><span class="w">      </span><span class="n">half_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">max_state</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span></code>
-<code><span class="w">      </span><span class="n">zero</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_unsigned</span><span class="o">&lt;</span><span class="n">input_t</span><span class="o">&gt;::</span><span class="n">value</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">state_t</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">half_state</span><span class="p">,</span></code>
-<code><span class="w">      </span><span class="n">half</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">state_t</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">state_t</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span></code>
+<code><span class="w">      </span><span class="n">zero</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">is_unsigned</span><span class="o">&lt;</span><span class="n">input_t</span><span class="o">&gt;::</span><span class="n">value</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">state_t</span><span class="p">{</span><span class="mi">0</span><span class="p">}</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">half_state</span><span class="p">,</span></code>
+<code><span class="w">      </span><span class="n">half</span><span class="w">       </span><span class="o">=</span><span class="w"> </span><span class="n">K</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="n">state_t</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">state_t</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span></code>
 <code><span class="w">  </span></code>
 <code><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_unsigned</span><span class="o">&lt;</span><span class="n">state_t</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">,</span><span class="w"> </span></code>
 <code><span class="w">                  </span><span class="s">"state type should be unsigned"</span><span class="p">);</span></code>
@@ -2058,8 +2064,8 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="w">             </span><span class="n">max</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="n">input_t</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span></code>
 <code><span class="w">             </span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">is_unsigned</span><span class="o">&lt;</span><span class="n">input_t</span><span class="o">&gt;::</span><span class="n">value</span></code>
 <code><span class="w">               </span><span class="o">?</span><span class="w"> </span><span class="n">state_t</span><span class="p">(</span><span class="n">max</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="p">(</span><span class="n">max_state</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">K</span><span class="p">)</span></code>
-<code><span class="w">               </span><span class="o">:</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="o">-</span><span class="n">sstate_t</span><span class="p">(</span><span class="n">max_state</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">  </span></code>
-<code><span class="w">                 </span><span class="n">max</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">sstate_t</span><span class="p">(</span><span class="n">max_state</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)));</span></code>
+<code><span class="w">               </span><span class="o">:</span><span class="w"> </span><span class="n">min</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="o">-</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">sstate_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">max_state</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">  </span></code>
+<code><span class="w">                 </span><span class="n">max</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">sstate_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">max_state</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)));</span></code>
 <code><span class="w">    </span><span class="p">}</span></code>
 <code></code>
 <code><span class="w">  </span><span class="k">private</span><span class="o">:</span></code>
@@ -2152,75 +2158,79 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 
 <h3><a name="arduino-example" href="#arduino-example">Arduino Example</a></h3>
 
+On most modern Arduinos, the code above should work fine. If you want to use an
+older 8-bit AVR-based Arduino, you'll find that the necessary standard library
+headers are missing. In that case, you could use the stripped-down version below:
+
 <div class="codesnippet"><style>pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.pygments242 .hll { background-color: #ffffcc }
-.pygments242 { background: #ffffff; }
-.pygments242 .c { color: #95a5a6 } /* Comment */
-.pygments242 .err { color: #a61717 } /* Error */
-.pygments242 .k { color: #728E00 } /* Keyword */
-.pygments242 .n { color: #434f54 } /* Name */
-.pygments242 .o { color: #728E00 } /* Operator */
-.pygments242 .ch { color: #95a5a6 } /* Comment.Hashbang */
-.pygments242 .cm { color: #95a5a6 } /* Comment.Multiline */
-.pygments242 .cp { color: #728E00 } /* Comment.Preproc */
-.pygments242 .cpf { color: #95a5a6 } /* Comment.PreprocFile */
-.pygments242 .c1 { color: #95a5a6 } /* Comment.Single */
-.pygments242 .cs { color: #95a5a6 } /* Comment.Special */
-.pygments242 .kc { color: #00979D } /* Keyword.Constant */
-.pygments242 .kd { color: #728E00 } /* Keyword.Declaration */
-.pygments242 .kn { color: #728E00 } /* Keyword.Namespace */
-.pygments242 .kp { color: #00979D } /* Keyword.Pseudo */
-.pygments242 .kr { color: #00979D } /* Keyword.Reserved */
-.pygments242 .kt { color: #00979D } /* Keyword.Type */
-.pygments242 .m { color: #8A7B52 } /* Literal.Number */
-.pygments242 .s { color: #7F8C8D } /* Literal.String */
-.pygments242 .na { color: #434f54 } /* Name.Attribute */
-.pygments242 .nb { color: #728E00 } /* Name.Builtin */
-.pygments242 .nc { color: #434f54 } /* Name.Class */
-.pygments242 .no { color: #434f54 } /* Name.Constant */
-.pygments242 .nd { color: #434f54 } /* Name.Decorator */
-.pygments242 .ni { color: #434f54 } /* Name.Entity */
-.pygments242 .ne { color: #434f54 } /* Name.Exception */
-.pygments242 .nf { color: #D35400 } /* Name.Function */
-.pygments242 .nl { color: #434f54 } /* Name.Label */
-.pygments242 .nn { color: #434f54 } /* Name.Namespace */
-.pygments242 .nx { color: #728E00 } /* Name.Other */
-.pygments242 .py { color: #434f54 } /* Name.Property */
-.pygments242 .nt { color: #434f54 } /* Name.Tag */
-.pygments242 .nv { color: #434f54 } /* Name.Variable */
-.pygments242 .ow { color: #728E00 } /* Operator.Word */
-.pygments242 .mb { color: #8A7B52 } /* Literal.Number.Bin */
-.pygments242 .mf { color: #8A7B52 } /* Literal.Number.Float */
-.pygments242 .mh { color: #8A7B52 } /* Literal.Number.Hex */
-.pygments242 .mi { color: #8A7B52 } /* Literal.Number.Integer */
-.pygments242 .mo { color: #8A7B52 } /* Literal.Number.Oct */
-.pygments242 .sa { color: #7F8C8D } /* Literal.String.Affix */
-.pygments242 .sb { color: #7F8C8D } /* Literal.String.Backtick */
-.pygments242 .sc { color: #7F8C8D } /* Literal.String.Char */
-.pygments242 .dl { color: #7F8C8D } /* Literal.String.Delimiter */
-.pygments242 .sd { color: #7F8C8D } /* Literal.String.Doc */
-.pygments242 .s2 { color: #7F8C8D } /* Literal.String.Double */
-.pygments242 .se { color: #7F8C8D } /* Literal.String.Escape */
-.pygments242 .sh { color: #7F8C8D } /* Literal.String.Heredoc */
-.pygments242 .si { color: #7F8C8D } /* Literal.String.Interpol */
-.pygments242 .sx { color: #7F8C8D } /* Literal.String.Other */
-.pygments242 .sr { color: #7F8C8D } /* Literal.String.Regex */
-.pygments242 .s1 { color: #7F8C8D } /* Literal.String.Single */
-.pygments242 .ss { color: #7F8C8D } /* Literal.String.Symbol */
-.pygments242 .bp { color: #728E00 } /* Name.Builtin.Pseudo */
-.pygments242 .fm { color: #D35400 } /* Name.Function.Magic */
-.pygments242 .vc { color: #434f54 } /* Name.Variable.Class */
-.pygments242 .vg { color: #434f54 } /* Name.Variable.Global */
-.pygments242 .vi { color: #434f54 } /* Name.Variable.Instance */
-.pygments242 .vm { color: #434f54 } /* Name.Variable.Magic */
-.pygments242 .il { color: #8A7B52 } /* Literal.Number.Integer.Long */
-.pygments242 pre.snippet242 { counter-reset: line 0; }</style>
+.pygments246 .hll { background-color: #ffffcc }
+.pygments246 { background: #ffffff; }
+.pygments246 .c { color: #95a5a6 } /* Comment */
+.pygments246 .err { color: #a61717 } /* Error */
+.pygments246 .k { color: #728E00 } /* Keyword */
+.pygments246 .n { color: #434f54 } /* Name */
+.pygments246 .o { color: #728E00 } /* Operator */
+.pygments246 .ch { color: #95a5a6 } /* Comment.Hashbang */
+.pygments246 .cm { color: #95a5a6 } /* Comment.Multiline */
+.pygments246 .cp { color: #728E00 } /* Comment.Preproc */
+.pygments246 .cpf { color: #95a5a6 } /* Comment.PreprocFile */
+.pygments246 .c1 { color: #95a5a6 } /* Comment.Single */
+.pygments246 .cs { color: #95a5a6 } /* Comment.Special */
+.pygments246 .kc { color: #00979D } /* Keyword.Constant */
+.pygments246 .kd { color: #728E00 } /* Keyword.Declaration */
+.pygments246 .kn { color: #728E00 } /* Keyword.Namespace */
+.pygments246 .kp { color: #00979D } /* Keyword.Pseudo */
+.pygments246 .kr { color: #00979D } /* Keyword.Reserved */
+.pygments246 .kt { color: #00979D } /* Keyword.Type */
+.pygments246 .m { color: #8A7B52 } /* Literal.Number */
+.pygments246 .s { color: #7F8C8D } /* Literal.String */
+.pygments246 .na { color: #434f54 } /* Name.Attribute */
+.pygments246 .nb { color: #728E00 } /* Name.Builtin */
+.pygments246 .nc { color: #434f54 } /* Name.Class */
+.pygments246 .no { color: #434f54 } /* Name.Constant */
+.pygments246 .nd { color: #434f54 } /* Name.Decorator */
+.pygments246 .ni { color: #434f54 } /* Name.Entity */
+.pygments246 .ne { color: #434f54 } /* Name.Exception */
+.pygments246 .nf { color: #D35400 } /* Name.Function */
+.pygments246 .nl { color: #434f54 } /* Name.Label */
+.pygments246 .nn { color: #434f54 } /* Name.Namespace */
+.pygments246 .nx { color: #728E00 } /* Name.Other */
+.pygments246 .py { color: #434f54 } /* Name.Property */
+.pygments246 .nt { color: #434f54 } /* Name.Tag */
+.pygments246 .nv { color: #434f54 } /* Name.Variable */
+.pygments246 .ow { color: #728E00 } /* Operator.Word */
+.pygments246 .mb { color: #8A7B52 } /* Literal.Number.Bin */
+.pygments246 .mf { color: #8A7B52 } /* Literal.Number.Float */
+.pygments246 .mh { color: #8A7B52 } /* Literal.Number.Hex */
+.pygments246 .mi { color: #8A7B52 } /* Literal.Number.Integer */
+.pygments246 .mo { color: #8A7B52 } /* Literal.Number.Oct */
+.pygments246 .sa { color: #7F8C8D } /* Literal.String.Affix */
+.pygments246 .sb { color: #7F8C8D } /* Literal.String.Backtick */
+.pygments246 .sc { color: #7F8C8D } /* Literal.String.Char */
+.pygments246 .dl { color: #7F8C8D } /* Literal.String.Delimiter */
+.pygments246 .sd { color: #7F8C8D } /* Literal.String.Doc */
+.pygments246 .s2 { color: #7F8C8D } /* Literal.String.Double */
+.pygments246 .se { color: #7F8C8D } /* Literal.String.Escape */
+.pygments246 .sh { color: #7F8C8D } /* Literal.String.Heredoc */
+.pygments246 .si { color: #7F8C8D } /* Literal.String.Interpol */
+.pygments246 .sx { color: #7F8C8D } /* Literal.String.Other */
+.pygments246 .sr { color: #7F8C8D } /* Literal.String.Regex */
+.pygments246 .s1 { color: #7F8C8D } /* Literal.String.Single */
+.pygments246 .ss { color: #7F8C8D } /* Literal.String.Symbol */
+.pygments246 .bp { color: #728E00 } /* Name.Builtin.Pseudo */
+.pygments246 .fm { color: #D35400 } /* Name.Function.Magic */
+.pygments246 .vc { color: #434f54 } /* Name.Variable.Class */
+.pygments246 .vg { color: #434f54 } /* Name.Variable.Global */
+.pygments246 .vi { color: #434f54 } /* Name.Variable.Instance */
+.pygments246 .vm { color: #434f54 } /* Name.Variable.Magic */
+.pygments246 .il { color: #8A7B52 } /* Literal.Number.Integer.Long */
+.pygments246 pre.snippet246 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/resources/EMA-Arduino.ino" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments242"><pre class="lineNumbers snippet242"><code><span></span><span class="n">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">uint8_t</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="kr">class</span><span class="w"> </span><span class="nc">uint_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">uint16_t</span><span class="o">&gt;</span></code>
+<div class="pygments246"><pre class="lineNumbers snippet246"><code><span></span><span class="n">template</span><span class="w"> </span><span class="o">&lt;</span><span class="kr">uint8_t</span><span class="w"> </span><span class="n">K</span><span class="p">,</span><span class="w"> </span><span class="kr">class</span><span class="w"> </span><span class="nc">uint_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kr">uint16_t</span><span class="o">&gt;</span></code>
 <code><span class="kr">class</span><span class="w"> </span><span class="nc">EMA</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">  </span><span class="kr">public</span><span class="o">:</span></code>
 <code><span class="w">    </span><span class="c1">/// Update the filter with the given input and return the filtered output.</span></code>
@@ -2237,7 +2247,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="w">        </span><span class="s">"the division using bit shifts is invalid."</span><span class="p">);</span></code>
 <code></code>
 <code><span class="w">    </span><span class="c1">/// Fixed point representation of one half, used for rounding.</span></code>
-<code><span class="w">    </span><span class="n">constexpr</span><span class="w"> </span><span class="kr">static</span><span class="w"> </span><span class="n">uint_t</span><span class="w"> </span><span class="n">half</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span></code>
+<code><span class="w">    </span><span class="n">constexpr</span><span class="w"> </span><span class="kr">static</span><span class="w"> </span><span class="n">uint_t</span><span class="w"> </span><span class="n">half</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">uint_t</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span></code>
 <code></code>
 <code><span class="w">  </span><span class="kr">private</span><span class="o">:</span></code>
 <code><span class="w">    </span><span class="n">uint_t</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></code>
@@ -2277,7 +2287,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="Filtering-in-MATLAB.html" title="Filtering in MATLAB"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Exponential Moving Average">Index</a></div><div class="nextpage"></div></div>
     </article>
-    <footer>Last edited: Thursday, 23 July 2020 13:54 UTC</footer>
+    <footer>Last edited: Saturday, 09 March 2024 13:40 UTC</footer>
 </body>
 
 </html>

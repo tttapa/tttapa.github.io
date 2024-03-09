@@ -183,6 +183,15 @@
                 <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="index.html">2. Compilation and build systems</a>
                 <ul>
                     <li><span class="ftriangle"></span><a class="openEntry " href="manual.html">2.1. Manual compilation</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="cmake.html">2.2. CMake</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Pitfalls/index.html">3. Pitfalls</a>
+                <ul>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Shared-libraries/index.html">4. Shared libraries</a>
+                <ul>
                 </ul>
                 </li>
             </ul>
@@ -256,8 +265,15 @@
         <li><a href="#example-project">Example project</a></li>
           <ul>
             <li><a href="#source-code">Source code</a></li>
-            <li><a href="#the-compilation-process">The compilation process</a></li>
           </ul>
+        <li><a href="#header-files-and-implementation-files">Header files and implementation files</a></li>
+        <li><a href="#the-compilation-process">The compilation process</a></li>
+          <ul>
+            <li><a href="#pre-processing">Pre-processing</a></li>
+            <li><a href="#compilation-optimization-and-code-generation">Compilation, optimization and code generation</a></li>
+            <li><a href="#linking">Linking</a></li>
+          </ul>
+        <li><a href="#building-the-example-project">Building the example project</a></li>
         <li><a href="#limitations-of-manual-compilation">Limitations of manual compilation</a></li>
   </ul></div>
 
@@ -711,14 +727,185 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     </div>
 </div>
 
-
-<h3><a name="the-compilation-process" href="#the-compilation-process">The compilation process</a></h3>
+<h2><a name="header-files-and-implementation-files" href="#header-files-and-implementation-files">Header files and implementation files</a></h2>
 
 <p>
-    To build the main executable, we need the following steps:
+    Most C++ source files fall into one of two categories: header files and implementation files.
+    Implementation files (usually with extension <code>.cpp</code>, <code>.cc</code> or <code>.cxx</code>) are files
+    that contain function or variable definitions, and are compiled into executable code.
+    Header files (usually with extension <code>.hpp</code>, <code>.h</code> or <code>.hxx</code>) contain declarations,
+    function prototypes and class definitions. They are not compiled in isolation, but are intended to be included in
+    implementation files or in other header files.<br>
+    Broadly speaking, the API of a library (i.e. the declarations that are needed to <i>use</i> the library) is
+    declared in header files.
+    The actual executable code (i.e. the definitions of the functions provided by the library)
+    exists across multiple implementation files.
+</p>
+
+<h2><a name="the-compilation-process" href="#the-compilation-process">The compilation process</a></h2>
+
+<p>
+    The compiler performs different intermediate steps as part of the build
+    process:
+</p>
+<ol>
+    <li><b>Pre-processing</b>:
+        including header files by expanding <code>#include</code> directives, performing macro substitution, handling
+        <code>#if</code> directives, etc.
+    </li>
+    <li><b>Compilation</b>:
+        parsing and interpreting the pre-processed source code, and composing the corresponding intermediate
+        representation. Along the way, syntactical and semantic errors are reported.</li>
+    <li><b>Optimization</b>:
+        iteratively rewriting the intermediate representation to improve performance and/or memory usage, without
+        changing the observable behavior of the code.</li>
+    <li><b>Code generation and assembly</b>:
+        converting the intermediate representation into executable machine code. </li>
+    <li><b>Linking</b>:
+        combining the machine code for different files and libraries into a single binary.</li>
+</ol>
+
+<h3><a name="pre-processing" href="#pre-processing">Pre-processing</a></h3>
+
+<p>
+    The pre-processor's duty is to handle all pre-processor directives, like <code>#include</code>,
+    <code>#if/#elif/#else/#endif</code>, <code>#define</code>, and it performs simple text-based macro expansion. It
+    also strips the comments from the source code.
+</p>
+<p>
+    It is important to note that the preprocessor actually pastes the contents of header files into the source files
+    that include them. This is done using relatively simple text substitution of the <code>#include</code> directive,
+    with some bookkeeping to be able to recover the original file names and line numbers. An example of a pre-processed
+    version of the file <code>b.cpp</code> from above is listed below. This is the kind of code that is actually handed
+    to the compiler.
+</p>
+
+<h4 class="snippet-name"><a name="pre-processed-source-code-of-implementation-b-libb-b-i" href="#pre-processed-source-code-of-implementation-b-libb-b-i">Pre-processed source code of implementation B (libb/b.i)</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments145 .hll { background-color: #ffffcc }
+.pygments145 { background: #ffffff; }
+.pygments145 .c { color: #008000 } /* Comment */
+.pygments145 .err { border: 1px solid #FF0000 } /* Error */
+.pygments145 .k { color: #0000ff } /* Keyword */
+.pygments145 .l { color: #0000FF } /* Literal */
+.pygments145 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments145 .cm { color: #008000 } /* Comment.Multiline */
+.pygments145 .cp { color: #af00db } /* Comment.Preproc */
+.pygments145 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments145 .c1 { color: #008000 } /* Comment.Single */
+.pygments145 .cs { color: #008000 } /* Comment.Special */
+.pygments145 .ge { font-style: italic } /* Generic.Emph */
+.pygments145 .gh { font-weight: bold } /* Generic.Heading */
+.pygments145 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments145 .gs { font-weight: bold } /* Generic.Strong */
+.pygments145 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments145 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments145 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments145 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments145 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments145 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments145 .kt { color: #2b91af } /* Keyword.Type */
+.pygments145 .ld { color: #0000FF } /* Literal.Date */
+.pygments145 .m { color: #0000FF } /* Literal.Number */
+.pygments145 .s { color: #a31515 } /* Literal.String */
+.pygments145 .na { color: #001080 } /* Name.Attribute */
+.pygments145 .nb { color: #795e26 } /* Name.Builtin */
+.pygments145 .nc { color: #2b91af } /* Name.Class */
+.pygments145 .no { color: #0000FF } /* Name.Constant */
+.pygments145 .nf { color: #795e26 } /* Name.Function */
+.pygments145 .nl { color: #AF00DB } /* Name.Label */
+.pygments145 .nn { color: #000000 } /* Name.Namespace */
+.pygments145 .nt { color: #800000 } /* Name.Tag */
+.pygments145 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments145 .ow { color: #0000ff } /* Operator.Word */
+.pygments145 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments145 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments145 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments145 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments145 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments145 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments145 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments145 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments145 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments145 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments145 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments145 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments145 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments145 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments145 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments145 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments145 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments145 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments145 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments145 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments145 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments145 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments145 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments145 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments145 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments145 pre.snippet145 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Scientific-Cpp/Build-systems/resources/libb/b.i" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments145"><pre class="lineNumbers snippet145"><code><span></span><span class="cp"># 1 &quot;libb/b.cpp&quot;</span></code>
+<code><span class="cp"># 1 &quot;liba/a.hpp&quot; 1</span></code>
+<code></code>
+<code><span class="cp"># 1 &quot;/usr/include/c++/11/string_view&quot; 1 3</span></code>
+<code><span class="cm">/* Thousands of lines of standard library code omitted */</span></code>
+<code><span class="cp"># 4 &quot;liba/a.hpp&quot; 2</span></code>
+<code><span class="w">                                                                  </span><span class="c1">// All comments were removed by the preprocessor</span></code>
+<code><span class="cp"># 6 &quot;liba/a.hpp&quot;</span></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="nf">say_hello</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="w"> </span><span class="n">name</span><span class="p">);</span><span class="w">                            </span><span class="c1">// This is line 6 of a.hpp</span></code>
+<code><span class="cp"># 2 &quot;libb/b.cpp&quot; 2</span></code>
+<code><span class="cp"># 1 &quot;libb/b.hpp&quot; 1</span></code>
+<code></code>
+<code><span class="cp"># 1 &quot;/usr/include/c++/11/span&quot; 1 3</span></code>
+<code><span class="cm">/* More standard library code omitted */</span></code>
+<code><span class="cp"># 4 &quot;libb/b.hpp&quot; 2</span></code>
+<code></code>
+<code><span class="cp"># 7 &quot;libb/b.hpp&quot;</span></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="nf">greet_many</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">span</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="p">);</span><span class="w">         </span><span class="c1">// This is line 7 of b.hpp</span></code>
+<code><span class="cp"># 3 &quot;libb/b.cpp&quot; 2</span></code>
+<code></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="nf">greet_many</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">span</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">string_view</span><span class="o">&gt;</span><span class="w"> </span><span class="n">names</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">        </span><span class="c1">// This is line 4 of b.cpp</span></code>
+<code><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="k">auto</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">names</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="n">say_hello</span><span class="p">(</span><span class="n">name</span><span class="p">);</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+
+<p>
+    The directives starting with a <code>#</code> refer back to the original location of the source code.
+    You can see how the headers <code>a.hpp</code> and <code>b.hpp</code> have been inlined and combined with the other
+    contents of <code>b.cpp</code>. This inlining is done recursively: all <code>#include</code> directives are
+    expanded, including standard library headers (which have been omitted for clarity). The preprocessor also removes
+    all comments from the code, the comments in the snippet above were added manually to point out the different parts.
+</p>
+
+<h3><a name="compilation-optimization-and-code-generation" href="#compilation-optimization-and-code-generation">Compilation, optimization and code generation</a></h3>
+
+<p>
+    Modern compilers are among the most sophisticated pieces of software out there, and a detailed description falls
+    beyond the scope of this document.
+    <span style="color: red">TODO: add references</span>
+</p>
+
+<h3><a name="linking" href="#linking">Linking</a></h3>
+
+<p>
+    <span style="color: red">TODO: explain object files</span>
+</p>
+
+<h2><a name="building-the-example-project" href="#building-the-example-project">Building the example project</a></h2>
+
+<p>
+    To build the main executable for the example project above, some of the steps are combined, and the two main steps
+    in the build process are:
 </p>
 <ol class="circled">
-    <li>Preprocess and compile all implementation files into object files.</li>
+    <li>Pre-process and compile all implementation files into object files (covers pre-processing, compiling,
+        optimizing, assembling).</li>
     <li>Link all object files and external libraries into an executable.</li>
 </ol>
 <p>
@@ -731,70 +918,70 @@ td.linenos .normal { color: inherit; background-color: transparent; padding-left
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.pygments106 .hll { background-color: #ffffcc }
-.pygments106 { background: #ffffff; }
-.pygments106 .c { color: #008000 } /* Comment */
-.pygments106 .err { border: 1px solid #FF0000 } /* Error */
-.pygments106 .k { color: #0000ff } /* Keyword */
-.pygments106 .l { color: #0000FF } /* Literal */
-.pygments106 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments106 .cm { color: #008000 } /* Comment.Multiline */
-.pygments106 .cp { color: #af00db } /* Comment.Preproc */
-.pygments106 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments106 .c1 { color: #008000 } /* Comment.Single */
-.pygments106 .cs { color: #008000 } /* Comment.Special */
-.pygments106 .ge { font-style: italic } /* Generic.Emph */
-.pygments106 .gh { font-weight: bold } /* Generic.Heading */
-.pygments106 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments106 .gs { font-weight: bold } /* Generic.Strong */
-.pygments106 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments106 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments106 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments106 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments106 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments106 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments106 .kt { color: #2b91af } /* Keyword.Type */
-.pygments106 .ld { color: #0000FF } /* Literal.Date */
-.pygments106 .m { color: #0000FF } /* Literal.Number */
-.pygments106 .s { color: #a31515 } /* Literal.String */
-.pygments106 .na { color: #001080 } /* Name.Attribute */
-.pygments106 .nb { color: #795e26 } /* Name.Builtin */
-.pygments106 .nc { color: #2b91af } /* Name.Class */
-.pygments106 .no { color: #0000FF } /* Name.Constant */
-.pygments106 .nf { color: #795e26 } /* Name.Function */
-.pygments106 .nl { color: #AF00DB } /* Name.Label */
-.pygments106 .nn { color: #000000 } /* Name.Namespace */
-.pygments106 .nt { color: #800000 } /* Name.Tag */
-.pygments106 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments106 .ow { color: #0000ff } /* Operator.Word */
-.pygments106 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments106 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments106 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments106 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments106 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments106 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments106 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments106 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments106 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments106 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments106 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments106 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments106 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments106 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments106 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments106 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments106 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments106 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments106 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments106 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments106 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments106 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments106 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments106 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments106 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments106 pre.snippet106 { counter-reset: line 0; }</style>
+.pygments185 .hll { background-color: #ffffcc }
+.pygments185 { background: #ffffff; }
+.pygments185 .c { color: #008000 } /* Comment */
+.pygments185 .err { border: 1px solid #FF0000 } /* Error */
+.pygments185 .k { color: #0000ff } /* Keyword */
+.pygments185 .l { color: #0000FF } /* Literal */
+.pygments185 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments185 .cm { color: #008000 } /* Comment.Multiline */
+.pygments185 .cp { color: #af00db } /* Comment.Preproc */
+.pygments185 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments185 .c1 { color: #008000 } /* Comment.Single */
+.pygments185 .cs { color: #008000 } /* Comment.Special */
+.pygments185 .ge { font-style: italic } /* Generic.Emph */
+.pygments185 .gh { font-weight: bold } /* Generic.Heading */
+.pygments185 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments185 .gs { font-weight: bold } /* Generic.Strong */
+.pygments185 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments185 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments185 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments185 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments185 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments185 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments185 .kt { color: #2b91af } /* Keyword.Type */
+.pygments185 .ld { color: #0000FF } /* Literal.Date */
+.pygments185 .m { color: #0000FF } /* Literal.Number */
+.pygments185 .s { color: #a31515 } /* Literal.String */
+.pygments185 .na { color: #001080 } /* Name.Attribute */
+.pygments185 .nb { color: #795e26 } /* Name.Builtin */
+.pygments185 .nc { color: #2b91af } /* Name.Class */
+.pygments185 .no { color: #0000FF } /* Name.Constant */
+.pygments185 .nf { color: #795e26 } /* Name.Function */
+.pygments185 .nl { color: #AF00DB } /* Name.Label */
+.pygments185 .nn { color: #000000 } /* Name.Namespace */
+.pygments185 .nt { color: #800000 } /* Name.Tag */
+.pygments185 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments185 .ow { color: #0000ff } /* Operator.Word */
+.pygments185 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments185 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments185 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments185 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments185 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments185 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments185 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments185 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments185 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments185 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments185 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments185 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments185 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments185 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments185 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments185 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments185 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments185 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments185 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments185 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments185 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments185 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments185 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments185 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments185 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments185 pre.snippet185 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Scientific-Cpp/Build-systems/resources/build.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments106"><pre class="lineNumbers snippet106"><code><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>build</code>
+<div class="pygments185"><pre class="lineNumbers snippet185"><code><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>build</code>
 <code>g++<span class="w"> </span>-std<span class="o">=</span>c++20<span class="w"> </span>-c<span class="w"> </span>liba/a.cpp<span class="w"> </span>-I<span class="w"> </span>liba<span class="w"> </span>-o<span class="w"> </span>build/a.o<span class="w">            </span><span class="c1"># ╮</span></code>
 <code>g++<span class="w"> </span>-std<span class="o">=</span>c++20<span class="w"> </span>-c<span class="w"> </span>libb/b.cpp<span class="w"> </span>-I<span class="w"> </span>liba<span class="w"> </span>-I<span class="w"> </span>libb<span class="w"> </span>-o<span class="w"> </span>build/b.o<span class="w">    </span><span class="c1"># ├ ➊</span></code>
 <code>g++<span class="w"> </span>-std<span class="o">=</span>c++20<span class="w"> </span>-c<span class="w"> </span>main.cpp<span class="w"> </span>-I<span class="w"> </span>libb<span class="w"> </span>-o<span class="w"> </span>build/main.o<span class="w">           </span><span class="c1"># ╯</span></code>
@@ -954,9 +1141,9 @@ flowchart LR
 
 </div>
         <hr id="end-of-article">
-        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="2. Compilation and build systems">Index</a></div><div class="nextpage"></div></div>
+        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="index.html" title="2. Compilation and build systems">Index</a></div><div class="nextpage"><a href="cmake.html" title="2.2. CMake">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Saturday, 12 August 2023 00:25 UTC</footer>
+    <footer>Last edited: Friday, 03 November 2023 12:51 UTC</footer>
 </body>
 
 </html>

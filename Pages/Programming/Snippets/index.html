@@ -586,7 +586,155 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="c1"># List of symbols in shared library (1)</span></code>
 <code>nm<span class="w"> </span>-CD<span class="w"> </span>--defined-only<span class="w"> </span>--size-sort<span class="w"> </span>libfile.so</code>
 <code><span class="c1"># List of symbols in shared library (2)</span></code>
-<code>readelf<span class="w"> </span>--wide<span class="w"> </span>--symbols<span class="w"> </span>--demangle<span class="w"> </span>libfile.so</code></pre></div>
+<code>readelf<span class="w"> </span>--wide<span class="w"> </span>--symbols<span class="w"> </span>--demangle<span class="w"> </span>libfile.so</code>
+<code><span class="c1"># Filter symbols and prevent line wrapping</span></code>
+<code>readelf<span class="w"> </span>--wide<span class="w"> </span>--symbols<span class="w"> </span>--demangle<span class="w"> </span>libfile.so<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>name<span class="w"> </span><span class="p">|</span><span class="w"> </span>bat<span class="w"> </span>--wrap<span class="o">=</span>never</code></pre></div>
+</div>
+
+<h4 class="snippet-name"><a name="checking-a-debug-link" href="#checking-a-debug-link">Checking a debug link</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments56 .hll { background-color: #ffffcc }
+.pygments56 { background: #ffffff; }
+.pygments56 .c { color: #008000 } /* Comment */
+.pygments56 .err { border: 1px solid #FF0000 } /* Error */
+.pygments56 .k { color: #0000ff } /* Keyword */
+.pygments56 .l { color: #0000FF } /* Literal */
+.pygments56 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments56 .cm { color: #008000 } /* Comment.Multiline */
+.pygments56 .cp { color: #af00db } /* Comment.Preproc */
+.pygments56 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments56 .c1 { color: #008000 } /* Comment.Single */
+.pygments56 .cs { color: #008000 } /* Comment.Special */
+.pygments56 .ge { font-style: italic } /* Generic.Emph */
+.pygments56 .gh { font-weight: bold } /* Generic.Heading */
+.pygments56 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments56 .gs { font-weight: bold } /* Generic.Strong */
+.pygments56 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments56 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments56 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments56 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments56 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments56 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments56 .kt { color: #2b91af } /* Keyword.Type */
+.pygments56 .ld { color: #0000FF } /* Literal.Date */
+.pygments56 .m { color: #0000FF } /* Literal.Number */
+.pygments56 .s { color: #a31515 } /* Literal.String */
+.pygments56 .na { color: #001080 } /* Name.Attribute */
+.pygments56 .nb { color: #795e26 } /* Name.Builtin */
+.pygments56 .nc { color: #2b91af } /* Name.Class */
+.pygments56 .no { color: #0000FF } /* Name.Constant */
+.pygments56 .nf { color: #795e26 } /* Name.Function */
+.pygments56 .nl { color: #AF00DB } /* Name.Label */
+.pygments56 .nn { color: #000000 } /* Name.Namespace */
+.pygments56 .nt { color: #800000 } /* Name.Tag */
+.pygments56 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments56 .ow { color: #0000ff } /* Operator.Word */
+.pygments56 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments56 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments56 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments56 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments56 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments56 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments56 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments56 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments56 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments56 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments56 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments56 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments56 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments56 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments56 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments56 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments56 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments56 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments56 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments56 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments56 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments56 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments56 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments56 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments56 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments56 pre.snippet56 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/objcopy-debug-link.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments56"><pre class="lineNumbers snippet56"><code><span></span><span class="c1"># Dependencies and dynamic section of a shared library</span></code>
+<code>objcopy<span class="w"> </span>-O<span class="w"> </span>binary<span class="w"> </span>--dump-section<span class="w"> </span>.gnu_debuglink<span class="o">=</span>&gt;<span class="o">(</span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="w"> </span>-<span class="o">)</span><span class="w"> </span>libfile.so</code></pre></div>
+</div>
+
+<h4 class="snippet-name"><a name="check-the-glibc-version-requirements-of-an-elf-file" href="#check-the-glibc-version-requirements-of-an-elf-file">Check the GLIBC version requirements of an ELF file</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments61 .hll { background-color: #ffffcc }
+.pygments61 { background: #ffffff; }
+.pygments61 .c { color: #008000 } /* Comment */
+.pygments61 .err { border: 1px solid #FF0000 } /* Error */
+.pygments61 .k { color: #0000ff } /* Keyword */
+.pygments61 .l { color: #0000FF } /* Literal */
+.pygments61 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments61 .cm { color: #008000 } /* Comment.Multiline */
+.pygments61 .cp { color: #af00db } /* Comment.Preproc */
+.pygments61 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments61 .c1 { color: #008000 } /* Comment.Single */
+.pygments61 .cs { color: #008000 } /* Comment.Special */
+.pygments61 .ge { font-style: italic } /* Generic.Emph */
+.pygments61 .gh { font-weight: bold } /* Generic.Heading */
+.pygments61 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments61 .gs { font-weight: bold } /* Generic.Strong */
+.pygments61 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments61 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments61 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments61 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments61 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments61 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments61 .kt { color: #2b91af } /* Keyword.Type */
+.pygments61 .ld { color: #0000FF } /* Literal.Date */
+.pygments61 .m { color: #0000FF } /* Literal.Number */
+.pygments61 .s { color: #a31515 } /* Literal.String */
+.pygments61 .na { color: #001080 } /* Name.Attribute */
+.pygments61 .nb { color: #795e26 } /* Name.Builtin */
+.pygments61 .nc { color: #2b91af } /* Name.Class */
+.pygments61 .no { color: #0000FF } /* Name.Constant */
+.pygments61 .nf { color: #795e26 } /* Name.Function */
+.pygments61 .nl { color: #AF00DB } /* Name.Label */
+.pygments61 .nn { color: #000000 } /* Name.Namespace */
+.pygments61 .nt { color: #800000 } /* Name.Tag */
+.pygments61 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments61 .ow { color: #0000ff } /* Operator.Word */
+.pygments61 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments61 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments61 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments61 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments61 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments61 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments61 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments61 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments61 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments61 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments61 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments61 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments61 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments61 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments61 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments61 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments61 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments61 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments61 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments61 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments61 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments61 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments61 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments61 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments61 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments61 pre.snippet61 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/objdump-glibc-version.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments61"><pre class="lineNumbers snippet61"><code><span></span><span class="c1"># Print private headers containing version references</span></code>
+<code>objdump<span class="w"> </span>-p<span class="w"> </span>libfile.so</code></pre></div>
 </div>
 
 <h3><a name="c" href="#c">C++</a></h3>
@@ -597,70 +745,70 @@ td.linenos .normal { color: inherit; background-color: transparent; padding-left
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.pygments58 .hll { background-color: #ffffcc }
-.pygments58 { background: #ffffff; }
-.pygments58 .c { color: #008000 } /* Comment */
-.pygments58 .err { border: 1px solid #FF0000 } /* Error */
-.pygments58 .k { color: #0000ff } /* Keyword */
-.pygments58 .l { color: #0000FF } /* Literal */
-.pygments58 .ch { color: #008000 } /* Comment.Hashbang */
-.pygments58 .cm { color: #008000 } /* Comment.Multiline */
-.pygments58 .cp { color: #af00db } /* Comment.Preproc */
-.pygments58 .cpf { color: #a31515 } /* Comment.PreprocFile */
-.pygments58 .c1 { color: #008000 } /* Comment.Single */
-.pygments58 .cs { color: #008000 } /* Comment.Special */
-.pygments58 .ge { font-style: italic } /* Generic.Emph */
-.pygments58 .gh { font-weight: bold } /* Generic.Heading */
-.pygments58 .gp { font-weight: bold } /* Generic.Prompt */
-.pygments58 .gs { font-weight: bold } /* Generic.Strong */
-.pygments58 .gu { font-weight: bold } /* Generic.Subheading */
-.pygments58 .kc { color: #4e8ae9 } /* Keyword.Constant */
-.pygments58 .kd { color: #0000ff } /* Keyword.Declaration */
-.pygments58 .kn { color: #af00db } /* Keyword.Namespace */
-.pygments58 .kp { color: #0000ff } /* Keyword.Pseudo */
-.pygments58 .kr { color: #0000ff } /* Keyword.Reserved */
-.pygments58 .kt { color: #2b91af } /* Keyword.Type */
-.pygments58 .ld { color: #0000FF } /* Literal.Date */
-.pygments58 .m { color: #0000FF } /* Literal.Number */
-.pygments58 .s { color: #a31515 } /* Literal.String */
-.pygments58 .na { color: #001080 } /* Name.Attribute */
-.pygments58 .nb { color: #795e26 } /* Name.Builtin */
-.pygments58 .nc { color: #2b91af } /* Name.Class */
-.pygments58 .no { color: #0000FF } /* Name.Constant */
-.pygments58 .nf { color: #795e26 } /* Name.Function */
-.pygments58 .nl { color: #AF00DB } /* Name.Label */
-.pygments58 .nn { color: #000000 } /* Name.Namespace */
-.pygments58 .nt { color: #800000 } /* Name.Tag */
-.pygments58 .nv { color: #0F1E87 } /* Name.Variable */
-.pygments58 .ow { color: #0000ff } /* Operator.Word */
-.pygments58 .mb { color: #09885a } /* Literal.Number.Bin */
-.pygments58 .mf { color: #09885a } /* Literal.Number.Float */
-.pygments58 .mh { color: #09885a } /* Literal.Number.Hex */
-.pygments58 .mi { color: #09885a } /* Literal.Number.Integer */
-.pygments58 .mo { color: #09885a } /* Literal.Number.Oct */
-.pygments58 .sa { color: #a31515 } /* Literal.String.Affix */
-.pygments58 .sb { color: #a31515 } /* Literal.String.Backtick */
-.pygments58 .sc { color: #a31515 } /* Literal.String.Char */
-.pygments58 .dl { color: #a31515 } /* Literal.String.Delimiter */
-.pygments58 .sd { color: #a31515 } /* Literal.String.Doc */
-.pygments58 .s2 { color: #a31515 } /* Literal.String.Double */
-.pygments58 .se { color: #a31515 } /* Literal.String.Escape */
-.pygments58 .sh { color: #a31515 } /* Literal.String.Heredoc */
-.pygments58 .si { color: #a31515 } /* Literal.String.Interpol */
-.pygments58 .sx { color: #a31515 } /* Literal.String.Other */
-.pygments58 .sr { color: #a31515 } /* Literal.String.Regex */
-.pygments58 .s1 { color: #a31515 } /* Literal.String.Single */
-.pygments58 .ss { color: #a31515 } /* Literal.String.Symbol */
-.pygments58 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
-.pygments58 .fm { color: #795e26 } /* Name.Function.Magic */
-.pygments58 .vc { color: #0F1E87 } /* Name.Variable.Class */
-.pygments58 .vg { color: #0F1E87 } /* Name.Variable.Global */
-.pygments58 .vi { color: #0F1E87 } /* Name.Variable.Instance */
-.pygments58 .vm { color: #0F1E87 } /* Name.Variable.Magic */
-.pygments58 .il { color: #09885a } /* Literal.Number.Integer.Long */
-.pygments58 pre.snippet58 { counter-reset: line 0; }</style>
+.pygments68 .hll { background-color: #ffffcc }
+.pygments68 { background: #ffffff; }
+.pygments68 .c { color: #008000 } /* Comment */
+.pygments68 .err { border: 1px solid #FF0000 } /* Error */
+.pygments68 .k { color: #0000ff } /* Keyword */
+.pygments68 .l { color: #0000FF } /* Literal */
+.pygments68 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments68 .cm { color: #008000 } /* Comment.Multiline */
+.pygments68 .cp { color: #af00db } /* Comment.Preproc */
+.pygments68 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments68 .c1 { color: #008000 } /* Comment.Single */
+.pygments68 .cs { color: #008000 } /* Comment.Special */
+.pygments68 .ge { font-style: italic } /* Generic.Emph */
+.pygments68 .gh { font-weight: bold } /* Generic.Heading */
+.pygments68 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments68 .gs { font-weight: bold } /* Generic.Strong */
+.pygments68 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments68 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments68 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments68 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments68 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments68 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments68 .kt { color: #2b91af } /* Keyword.Type */
+.pygments68 .ld { color: #0000FF } /* Literal.Date */
+.pygments68 .m { color: #0000FF } /* Literal.Number */
+.pygments68 .s { color: #a31515 } /* Literal.String */
+.pygments68 .na { color: #001080 } /* Name.Attribute */
+.pygments68 .nb { color: #795e26 } /* Name.Builtin */
+.pygments68 .nc { color: #2b91af } /* Name.Class */
+.pygments68 .no { color: #0000FF } /* Name.Constant */
+.pygments68 .nf { color: #795e26 } /* Name.Function */
+.pygments68 .nl { color: #AF00DB } /* Name.Label */
+.pygments68 .nn { color: #000000 } /* Name.Namespace */
+.pygments68 .nt { color: #800000 } /* Name.Tag */
+.pygments68 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments68 .ow { color: #0000ff } /* Operator.Word */
+.pygments68 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments68 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments68 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments68 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments68 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments68 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments68 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments68 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments68 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments68 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments68 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments68 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments68 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments68 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments68 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments68 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments68 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments68 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments68 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments68 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments68 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments68 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments68 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments68 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments68 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments68 pre.snippet68 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/reverse-list.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments58"><pre class="lineNumbers snippet58"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="c1"> // std::exchange</span></code>
+<div class="pygments68"><pre class="lineNumbers snippet68"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="c1"> // std::exchange</span></code>
 <code></code>
 <code><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span></code>
@@ -674,12 +822,98 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="p">}</span></code></pre></div>
 </div>
 
+<h3><a name="bluez" href="#bluez">BlueZ</a></h3>
+
+<h4 class="snippet-name"><a name="send-and-receive-midi-over-ble" href="#send-and-receive-midi-over-ble">Send and receive MIDI over BLE</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments75 .hll { background-color: #ffffcc }
+.pygments75 { background: #ffffff; }
+.pygments75 .c { color: #008000 } /* Comment */
+.pygments75 .err { border: 1px solid #FF0000 } /* Error */
+.pygments75 .k { color: #0000ff } /* Keyword */
+.pygments75 .l { color: #0000FF } /* Literal */
+.pygments75 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments75 .cm { color: #008000 } /* Comment.Multiline */
+.pygments75 .cp { color: #af00db } /* Comment.Preproc */
+.pygments75 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments75 .c1 { color: #008000 } /* Comment.Single */
+.pygments75 .cs { color: #008000 } /* Comment.Special */
+.pygments75 .ge { font-style: italic } /* Generic.Emph */
+.pygments75 .gh { font-weight: bold } /* Generic.Heading */
+.pygments75 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments75 .gs { font-weight: bold } /* Generic.Strong */
+.pygments75 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments75 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments75 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments75 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments75 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments75 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments75 .kt { color: #2b91af } /* Keyword.Type */
+.pygments75 .ld { color: #0000FF } /* Literal.Date */
+.pygments75 .m { color: #0000FF } /* Literal.Number */
+.pygments75 .s { color: #a31515 } /* Literal.String */
+.pygments75 .na { color: #001080 } /* Name.Attribute */
+.pygments75 .nb { color: #795e26 } /* Name.Builtin */
+.pygments75 .nc { color: #2b91af } /* Name.Class */
+.pygments75 .no { color: #0000FF } /* Name.Constant */
+.pygments75 .nf { color: #795e26 } /* Name.Function */
+.pygments75 .nl { color: #AF00DB } /* Name.Label */
+.pygments75 .nn { color: #000000 } /* Name.Namespace */
+.pygments75 .nt { color: #800000 } /* Name.Tag */
+.pygments75 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments75 .ow { color: #0000ff } /* Operator.Word */
+.pygments75 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments75 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments75 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments75 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments75 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments75 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments75 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments75 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments75 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments75 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments75 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments75 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments75 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments75 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments75 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments75 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments75 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments75 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments75 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments75 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments75 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments75 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments75 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments75 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments75 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments75 pre.snippet75 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/bluetoothctl-midi.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+<div class="pygments75"><pre class="lineNumbers snippet75"><code><span></span>bluetoothctl</code>
+<code>scan<span class="w"> </span>le</code>
+<code>scan<span class="w"> </span>off</code>
+<code>pair<span class="w"> </span>F4:12:FA:E3:47:51</code>
+<code>connect<span class="w"> </span>F4:12:FA:E3:47:51</code>
+<code>menu<span class="w"> </span>gatt</code>
+<code>list-attributes</code>
+<code><span class="k">select</span>-attribute<span class="w"> </span>/org/bluez/hci0/dev_F4_12_FA_E3_47_51/service000a/char000b</code>
+<code>notify<span class="w"> </span>on</code>
+<code><span class="nb">read</span></code>
+<code>write<span class="w"> </span><span class="s2">&quot;0x80 0x80 0x90 0x12 0x13&quot;</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="nb">command</span></code>
+<code>back</code>
+<code>disconnect</code></pre></div>
+</div>
+
 </div>
         <hr>
         <div class="indexContainer"></div>
         <div class="nextupprev"></div>
     </article>
-    <footer>Last edited: Wednesday, 03 May 2023 10:01 UTC</footer>
+    <footer>Last edited: Saturday, 20 January 2024 01:49 UTC</footer>
 </body>
 
 </html>

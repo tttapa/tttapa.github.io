@@ -11,8 +11,8 @@
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
     <meta name="theme-color" content="#ccc">
     <meta name="keywords" content="">
-    <meta name="description" content="Introduction, goals and non-goals, related resources.">
-    <title>1. Introduction</title>
+    <meta name="description" content="">
+    <title>4. Shared libraries</title>
 </head>
 
 <body>
@@ -176,7 +176,7 @@
         <ul>
             <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="hiddenEntry " href="../index.html">Scientific C++</a>
             <ul>
-                <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry " href="index.html">1. Introduction</a>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Introduction/index.html">1. Introduction</a>
                 <ul>
                 </ul>
                 </li>
@@ -190,7 +190,7 @@
                 <ul>
                 </ul>
                 </li>
-                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Shared-libraries/index.html">4. Shared libraries</a>
+                <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry " href="index.html">4. Shared libraries</a>
                 <ul>
                 </ul>
                 </li>
@@ -250,54 +250,39 @@
             </i>
         </div>
     </nav>
-    <article  class="book-chapter" style="counter-reset: book-chapter 1 book-section2 0 book-section3 0;">
-        <h1 class="indexTitle">1. Introduction</h1>
+    <article >
+        <h1 class="indexTitle">4. Shared libraries</h1>
         <i class="author">Pieter P</i>
         <div class="main-content">
-<div class="toc" id="toc">
-  <script>
-  function updateTocSize() {
-    let toc = document.getElementById("toc");
-    toc.style.maxHeight = toc.scrollHeight + 'px';
-  }
-  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
-  <ul>
-        <li><a href="#goals-and-non-goals">Goals and non-goals</a></li>
-        <li><a href="#related-resources">Related resources</a></li>
-  </ul></div>
-
-
-<h2><a name="goals-and-non-goals" href="#goals-and-non-goals">Goals and non-goals</a></h2>
 
 <p>
-    The goal of this guide is to get to an ergonomic workflow for developing
-    scientific software using C++. It is not designed to be a tutorial of the
-    C++ language itself, but an overview of useful tools (package managers,
-    build systems, linters, static analysis, run-time sanitizers, debuggers,
-    testing frameworks), recommendations on how to structure a (scientific) C++
-    project, guidelines for interoperability with other popular languages, and
-    so on.
+    Shared libraries have two interesting properties: their code can be shared
+    between different processes, and they can be loaded dynamically at run time.
+    It is especially the latter feature that makes them useful: this allows you
+    to load plugins or optional parts of your software while the program is
+    already running.
 </p>
-
-<h2><a name="related-resources" href="#related-resources">Related resources</a></h2>
-
-<ul>
-    <li><a href="https://en.cppreference.com">cppreference</a>: the recommended language and standard library
-        reference</li>
-    <li><a href="https://www.learncpp.com">learncpp.com</a>: a solid, up-to-date tutorial for the C++ language
-        itself</li>
-    <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines">C++ Core Guidelines</a>: an extensive set
-        of guidelines for using C++ well</li>
-    <li><a href="https://open-std.org/jtc1/sc22/wg21/docs/papers/2023/n4950.pdf">C++ 23 Standard (draft)</a>: draft of
-        the official C++ standard, as a big PDF</li>
-</ul>
+<p>
+    Shared libraries are the mechanism used by the Python interpreter to load
+    and import extension modules.
+    For example, when you type <code>import numpy</code> in Python, this
+    will load a shared library <code>numpy/core/_multiarray_umath.so</code> with
+    optimized C implementations of many NumPy functions.
+</p>
+<p>
+    Another scientific library that is often linked as a shared library is the
+    BLAS linear algebra library. When a program links to BLAS as a shared
+    library, users can decide which implementation of the BLAS library they want
+    to use. For example, they might want to use an implementation by Intel that
+    is optimized for their specific system.
+</p>
 
 </div>
         <hr>
         <div class="indexContainer"></div>
-        <div class="nextupprev"><div class="prevpage"></div><div class="uppage"><a href="../index.html" title="Scientific C++">Up</a></div><div class="nextpage"><a href="../Build-systems/index.html" title="2. Compilation and build systems">Next Chapter<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+        <div class="nextupprev"><div class="prevpage"><a href="../Pitfalls/index.html" title="3. Pitfalls"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Chapter</a></div><div class="uppage"><a href="../index.html" title="Scientific C++">Up</a></div><div class="nextpage"></div></div>
     </article>
-    <footer>Last edited: Saturday, 12 August 2023 00:25 UTC</footer>
+    <footer>Last edited: Friday, 03 November 2023 13:08 UTC</footer>
 </body>
 
 </html>
