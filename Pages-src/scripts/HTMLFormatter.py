@@ -287,6 +287,12 @@ def formatPygmentsCodeSnippet(data: dict, html, filepath, lineno, refs):
         datastr += '<a href="' + git_link + '" title="Open on GitLab">'
         datastr += '<img class="gitlab-mark" src="/Images/GitLab-Mark.svg">'
         datastr += '</a>\n'
+    datastr += """
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    """
     datastr += htmlc + '</div>'
     return datastr, makedeps + [file]
 

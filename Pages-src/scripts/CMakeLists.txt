@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.23)
 
 project(Pages CXX)
 
@@ -45,6 +45,8 @@ endif()
 # EXECUTABLE
 # ------------------------------------------------------------------------------
 
+set(Python_FIND_VIRTUALENV FIRST)
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 find_program(pybind11_config pybind11-config)
 if (pybind11_config)
     execute_process(COMMAND ${pybind11_config} --cmakedir

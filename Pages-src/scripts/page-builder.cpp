@@ -935,10 +935,10 @@ class PagesParser {
     string index_item_folder_template;
 };
 
-path source_dir = "/home/pieter/GitHub/tttapa.github.io/Pages-src/Raw-HTML";
+path source_dir = "/home/pieter/GitHub-archive/tttapa.github.io/Pages-src/Raw-HTML";
 // path output_dir   = "/tmp";
-path output_dir = "/home/pieter/GitHub/tttapa.github.io/Pages";
-path template_dir = "/home/pieter/GitHub/tttapa.github.io/Pages-src/templates";
+path output_dir = "/home/pieter/GitHub-archive/tttapa.github.io/Pages";
+path template_dir = "/home/pieter/GitHub-archive/tttapa.github.io/Pages-src/templates";
 
 int main(int argc, const char *argv[]) {
     PagesParser p = {source_dir, output_dir, template_dir};
