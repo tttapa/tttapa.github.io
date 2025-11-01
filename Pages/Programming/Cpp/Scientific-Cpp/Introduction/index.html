@@ -13,6 +13,19 @@
     <meta name="keywords" content="">
     <meta name="description" content="Introduction, goals and non-goals, related resources.">
     <title>1. Introduction</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>

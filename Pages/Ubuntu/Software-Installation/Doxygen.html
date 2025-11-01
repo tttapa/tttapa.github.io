@@ -13,6 +13,19 @@
     <meta name="keywords" content="Doxygen,Build,Source,Compile,Ubuntu,Linux,Installation,Documentation">
     <meta name="description" content="Instructions for building Doxygen.">
     <title>Doxygen</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -306,7 +319,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments13 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments13 pre.snippet13 { counter-reset: line 4; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Ubuntu/Software-Installation/resources/doxygen.sh#L5" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments13"><pre class="lineNumbers snippet13"><code><span></span><span class="nb">cd</span><span class="w"> </span>/tmp</code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments13"><pre class="lineNumbers snippet13"><code><span></span><span class="nb">cd</span><span class="w"> </span>/tmp</code>
 <code>git<span class="w"> </span>clone<span class="w"> </span>--branch<span class="w"> </span>Release_1_8_18<span class="w"> </span>--depth<span class="w"> </span><span class="m">1</span><span class="w"> </span>https://github.com/doxygen/doxygen.git</code>
 <code>mkdir<span class="w"> </span>doxygen/build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>doxygen/build</code>
 <code>cmake<span class="w"> </span>-G<span class="w"> </span><span class="s2">&quot;Unix Makefiles&quot;</span><span class="w"> </span>-DCMAKE_INSTALL_PREFIX<span class="o">=</span><span class="nv">$HOME</span>/.local<span class="w"> </span>..</code>

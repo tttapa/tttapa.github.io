@@ -13,6 +13,19 @@
     <meta name="keywords" content="cross-compile,raspberry,raspberry pi,installation,raspbian, raspberry pi os">
     <meta name="description" content="Cross-compiling a C++ project using CMake and with a dependency on the Boost libraries, as an example of how to build any C++ project with nontrivial dependencies.">
     <title>Building the C++ example project</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -471,7 +484,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments170 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments170 pre.snippet170 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/RPi-Cross-Cpp-Development/blob/805b5f7d36b6b281d658adaf0cdf1177793c3c98/CMakeLists.txt" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments170"><pre class="lineNumbers snippet170"><code><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments170"><pre class="lineNumbers snippet170"><code><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span></code>
 <code><span class="nb">project</span><span class="p">(</span><span class="s">hello</span><span class="w"> </span><span class="s">VERSION</span><span class="w"> </span><span class="s">0.1.0</span><span class="w"> </span><span class="s">LANGUAGES</span><span class="w"> </span><span class="s">C</span><span class="w"> </span><span class="s">CXX</span><span class="w"> </span><span class="s">Fortran</span><span class="p">)</span></code>
 <code></code>
 <code><span class="nb">find_package</span><span class="p">(</span><span class="s">Boost</span><span class="w"> </span><span class="s">REQUIRED</span><span class="w"> </span><span class="s">COMPONENTS</span><span class="w"> </span><span class="s">program_options</span><span class="p">)</span></code>
@@ -558,7 +576,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments180 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments180 pre.snippet180 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/RPi-Cross-Cpp-Development/blob/711cf41f0c1343a382e731fda6e8aa527bea7ad1/cmake/armv6-rpi-linux-gnueabihf.cmake" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments180"><pre class="lineNumbers snippet180"><code><span></span><span class="c"># https://cmake.org/cmake/help/book/mastering-cmake/chapter/Cross%20Compiling%20With%20CMake.html</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments180"><pre class="lineNumbers snippet180"><code><span></span><span class="c"># https://cmake.org/cmake/help/book/mastering-cmake/chapter/Cross%20Compiling%20With%20CMake.html</span></code>
 <code></code>
 <code><span class="c"># Cross-compilation system information</span></code>
 <code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_SYSTEM_NAME</span><span class="w"> </span><span class="s">Linux</span><span class="p">)</span></code>
@@ -692,7 +715,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments213 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments213 pre.snippet213 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/RPi-Cross-Cpp-Development/blob/711cf41f0c1343a382e731fda6e8aa527bea7ad1/.vscode/cmake-kits.json" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments213"><pre class="lineNumbers snippet213"><code><span></span><span class="p">[</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments213"><pre class="lineNumbers snippet213"><code><span></span><span class="p">[</span></code>
 <code><span class="w">    </span><span class="p">{</span></code>
 <code><span class="w">        </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Raspberry Pi 3 (aarch64)&quot;</span><span class="p">,</span></code>
 <code><span class="w">        </span><span class="nt">&quot;toolchainFile&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;${workspaceFolder}/cmake/aarch64-rpi3-linux-gnu.cmake&quot;</span></code>
@@ -810,7 +838,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="Development-setup.html" title="Development setup"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Ubuntu to Raspberry Pi OS Cross C++ Development">Index</a></div><div class="nextpage"><a href="Debugging.html" title="Remote debugging">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Saturday, 05 February 2022 16:20 UTC</footer>
+    <footer>Last edited: Saturday, 01 February 2025 22:46 UTC</footer>
 </body>
 
 </html>

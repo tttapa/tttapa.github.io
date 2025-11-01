@@ -13,6 +13,19 @@
     <meta name="keywords" content="BlueZ,BlueZ 5.50,Bluetooth,Ubuntu,Linux,Installation,MIDI,ALSA">
     <meta name="description" content="Installation instructions for BlueZ 5.50, the official Linux Bluetooth protocol stack, on Ubuntu. It's useful if you want support for MIDI over BLE.">
     <title>BlueZ with MIDI over BLE Support</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -355,7 +368,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments64 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments64 pre.snippet64 { counter-reset: line 4; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Ubuntu/Software-Installation/resources/bluez.sh#L5" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments64"><pre class="lineNumbers snippet64"><code><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments64"><pre class="lineNumbers snippet64"><code><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span></code>
 <code><span class="w">    </span>libudev-dev<span class="w"> </span>libical-dev<span class="w"> </span>libreadline-dev<span class="w"> </span>libdbus-1-dev<span class="w"> </span>libasound2-dev<span class="w"> </span><span class="se">\</span></code>
 <code><span class="w">    </span>build-essential</code>
 <code></code>

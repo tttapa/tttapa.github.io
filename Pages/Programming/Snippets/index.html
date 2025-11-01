@@ -13,6 +13,19 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <title>Snippets</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -304,7 +317,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments14 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments14 pre.snippet14 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/timing.cmake" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments14"><pre class="lineNumbers snippet14"><code><span></span><span class="nb">set_property</span><span class="p">(</span><span class="s">GLOBAL</span><span class="w"> </span><span class="s">PROPERTY</span><span class="w"> </span><span class="s">RULE_LAUNCH_COMPILE</span><span class="w"> </span><span class="s2">&quot;${CMAKE_COMMAND} -E time&quot;</span><span class="p">)</span></code></pre></div>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments14"><pre class="lineNumbers snippet14"><code><span></span><span class="nb">set_property</span><span class="p">(</span><span class="s">GLOBAL</span><span class="w"> </span><span class="s">PROPERTY</span><span class="w"> </span><span class="s">RULE_LAUNCH_COMPILE</span><span class="w"> </span><span class="s2">&quot;${CMAKE_COMMAND} -E time&quot;</span><span class="p">)</span></code></pre></div>
 </div>
 
 <h4 class="snippet-name"><a name="stripping-debug-information" href="#stripping-debug-information">Stripping debug information</a></h4>
@@ -376,7 +394,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments19 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments19 pre.snippet19 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/strip-debug.cmake" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments19"><pre class="lineNumbers snippet19"><code><span></span><span class="c"># Strip and install debug information</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments19"><pre class="lineNumbers snippet19"><code><span></span><span class="c"># Strip and install debug information</span></code>
 <code><span class="nb">function</span><span class="p">(</span><span class="s">myproject_install_debug_syms</span><span class="w"> </span><span class="s">target</span><span class="w"> </span><span class="s">component</span><span class="w"> </span><span class="s">dest_lib</span><span class="w"> </span><span class="s">dest_bin</span><span class="p">)</span></code>
 <code><span class="w">    </span><span class="nb">if</span><span class="w"> </span><span class="p">(</span><span class="s">MSVC</span><span class="p">)</span></code>
 <code><span class="w">        </span><span class="nb">install</span><span class="p">(</span><span class="s">FILES</span><span class="w"> </span><span class="s2">&quot;$&lt;TARGET_PDB_FILE:${target}&gt;&quot;</span></code>
@@ -481,7 +504,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments24 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments24 pre.snippet24 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/visibility.cmake" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments24"><pre class="lineNumbers snippet24"><code><span></span><span class="nb">function</span><span class="p">(</span><span class="s">configure_visibility</span><span class="w"> </span><span class="s">target</span><span class="p">)</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments24"><pre class="lineNumbers snippet24"><code><span></span><span class="nb">function</span><span class="p">(</span><span class="s">configure_visibility</span><span class="w"> </span><span class="s">target</span><span class="p">)</span></code>
 <code><span class="w">    </span><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">target</span><span class="o">}</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">CXX_VISIBILITY_PRESET</span><span class="w"> </span><span class="s2">&quot;hidden&quot;</span></code>
 <code><span class="w">                                               </span><span class="s">VISIBILITY_INLINES_HIDDEN</span><span class="w"> </span><span class="s">true</span><span class="p">)</span></code>
 <code><span class="w">    </span><span class="nb">if</span><span class="w"> </span><span class="p">(</span><span class="s">CMAKE_SYSTEM_NAME</span><span class="w"> </span><span class="s">MATCHES</span><span class="w"> </span><span class="s2">&quot;Linux&quot;</span><span class="p">)</span></code>
@@ -581,7 +609,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments51 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments51 pre.snippet51 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/symbols.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments51"><pre class="lineNumbers snippet51"><code><span></span><span class="c1"># Dependencies and dynamic section of a shared library</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments51"><pre class="lineNumbers snippet51"><code><span></span><span class="c1"># Dependencies and dynamic section of a shared library</span></code>
 <code>readelf<span class="w"> </span>-d<span class="w"> </span>libfile.so</code>
 <code><span class="c1"># List of symbols in shared library (1)</span></code>
 <code>nm<span class="w"> </span>-CD<span class="w"> </span>--defined-only<span class="w"> </span>--size-sort<span class="w"> </span>libfile.so</code>
@@ -660,7 +693,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments56 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments56 pre.snippet56 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/objcopy-debug-link.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments56"><pre class="lineNumbers snippet56"><code><span></span><span class="c1"># Dependencies and dynamic section of a shared library</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments56"><pre class="lineNumbers snippet56"><code><span></span><span class="c1"># Dependencies and dynamic section of a shared library</span></code>
 <code>objcopy<span class="w"> </span>-O<span class="w"> </span>binary<span class="w"> </span>--dump-section<span class="w"> </span>.gnu_debuglink<span class="o">=</span>&gt;<span class="o">(</span>cut<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>-f<span class="w"> </span><span class="m">1</span><span class="w"> </span>-<span class="o">)</span><span class="w"> </span>libfile.so</code></pre></div>
 </div>
 
@@ -733,7 +771,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments61 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments61 pre.snippet61 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/objdump-glibc-version.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments61"><pre class="lineNumbers snippet61"><code><span></span><span class="c1"># Print private headers containing version references</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments61"><pre class="lineNumbers snippet61"><code><span></span><span class="c1"># Print private headers containing version references</span></code>
 <code>objdump<span class="w"> </span>-p<span class="w"> </span>libfile.so</code></pre></div>
 </div>
 
@@ -808,7 +851,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments68 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments68 pre.snippet68 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/reverse-list.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments68"><pre class="lineNumbers snippet68"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="c1"> // std::exchange</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments68"><pre class="lineNumbers snippet68"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;utility&gt;</span><span class="c1"> // std::exchange</span></code>
 <code></code>
 <code><span class="k">struct</span><span class="w"> </span><span class="nc">Node</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">    </span><span class="n">Node</span><span class="w"> </span><span class="o">*</span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">nullptr</span><span class="p">;</span></code>
@@ -893,7 +941,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments75 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments75 pre.snippet75 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/bluetoothctl-midi.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments75"><pre class="lineNumbers snippet75"><code><span></span>bluetoothctl</code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments75"><pre class="lineNumbers snippet75"><code><span></span>bluetoothctl</code>
 <code>scan<span class="w"> </span>le</code>
 <code>scan<span class="w"> </span>off</code>
 <code>pair<span class="w"> </span>F4:12:FA:E3:47:51</code>
@@ -908,12 +961,258 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code>disconnect</code></pre></div>
 </div>
 
+<h3><a name="python" href="#python">Python</a></h3>
+
+<h4 class="snippet-name"><a name="plot-a-dense-matrix-using-matplotlib" href="#plot-a-dense-matrix-using-matplotlib">Plot a dense matrix using matplotlib</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments82 .hll { background-color: #ffffcc }
+.pygments82 { background: #ffffff; }
+.pygments82 .c { color: #008000 } /* Comment */
+.pygments82 .err { border: 1px solid #FF0000 } /* Error */
+.pygments82 .k { color: #0000ff } /* Keyword */
+.pygments82 .l { color: #0000FF } /* Literal */
+.pygments82 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments82 .cm { color: #008000 } /* Comment.Multiline */
+.pygments82 .cp { color: #af00db } /* Comment.Preproc */
+.pygments82 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments82 .c1 { color: #008000 } /* Comment.Single */
+.pygments82 .cs { color: #008000 } /* Comment.Special */
+.pygments82 .ge { font-style: italic } /* Generic.Emph */
+.pygments82 .gh { font-weight: bold } /* Generic.Heading */
+.pygments82 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments82 .gs { font-weight: bold } /* Generic.Strong */
+.pygments82 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments82 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments82 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments82 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments82 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments82 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments82 .kt { color: #2b91af } /* Keyword.Type */
+.pygments82 .ld { color: #0000FF } /* Literal.Date */
+.pygments82 .m { color: #0000FF } /* Literal.Number */
+.pygments82 .s { color: #a31515 } /* Literal.String */
+.pygments82 .na { color: #001080 } /* Name.Attribute */
+.pygments82 .nb { color: #795e26 } /* Name.Builtin */
+.pygments82 .nc { color: #2b91af } /* Name.Class */
+.pygments82 .no { color: #0000FF } /* Name.Constant */
+.pygments82 .nf { color: #795e26 } /* Name.Function */
+.pygments82 .nl { color: #AF00DB } /* Name.Label */
+.pygments82 .nn { color: #000000 } /* Name.Namespace */
+.pygments82 .nt { color: #800000 } /* Name.Tag */
+.pygments82 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments82 .ow { color: #0000ff } /* Operator.Word */
+.pygments82 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments82 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments82 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments82 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments82 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments82 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments82 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments82 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments82 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments82 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments82 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments82 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments82 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments82 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments82 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments82 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments82 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments82 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments82 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments82 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments82 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments82 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments82 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments82 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments82 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments82 pre.snippet82 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/plot-dense-matrix.py" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments82"><pre class="lineNumbers snippet82"><code><span></span><span class="sd">&quot;&quot;&quot;Plot a dense matrix using matplotlib, with special colors for zeros and</span></code>
+<code><span class="sd">inf/nan. Useful for visualizing differences between matrices with possibly</span></code>
+<code><span class="sd">missing values.w&quot;&quot;&quot;</span></code>
+<code></code>
+<code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span></code>
+<code><span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">mcolors</span></code>
+<code></code>
+<code></code>
+<code><span class="k">def</span> <span class="nf">imshow_matrix</span><span class="p">(</span></code>
+<code>    <span class="n">data</span><span class="p">,</span></code>
+<code>    <span class="n">cmap</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">Colormap</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></code>
+<code>    <span class="o">*</span><span class="p">,</span></code>
+<code>    <span class="n">inf_color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span></code>
+<code>    <span class="n">zero_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span></code>
+<code><span class="p">):</span></code>
+<code><span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepare data, colormap and normalization for imshow of a dense matrix.</span></code>
+<code><span class="sd">    Zeros are shown as white, inf/nan as red (customizable).&quot;&quot;&quot;</span></code>
+<code>    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
+<code>    <span class="n">min_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)])</span></code>
+<code>    <span class="n">max_val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">data</span><span class="p">)])</span></code>
+<code>    <span class="n">data</span><span class="p">[</span><span class="n">data</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.99</span> <span class="o">*</span> <span class="n">min_val</span></code>
+<code>    <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></code>
+<code>    <span class="n">cmap</span><span class="o">.</span><span class="n">set_bad</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">inf_color</span><span class="p">)</span>  <span class="c1"># inf/nan values</span></code>
+<code>    <span class="n">cmap</span><span class="o">.</span><span class="n">set_under</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">zero_color</span><span class="p">)</span>  <span class="c1"># zero values</span></code>
+<code>    <span class="n">norm</span> <span class="o">=</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="n">min_val</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">max_val</span><span class="p">)</span></code>
+<code>    <span class="k">return</span> <span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">norm</span></code>
+<code></code>
+<code></code>
+<code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span></code>
+<code></code>
+<code><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span> <span class="mi">96</span><span class="p">))</span></code>
+<code><span class="n">msk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.5</span></code>
+<code><span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span></code>
+<code><span class="n">A</span><span class="p">[</span><span class="n">msk</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span></code>
+<code><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="o">*</span><span class="n">imshow_matrix</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">))</span></code>
+<code><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span></code>
+<code><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></div>
+</div>
+
+<h4 class="snippet-name"><a name="plot-a-sparse-matrix-using-matplotlib" href="#plot-a-sparse-matrix-using-matplotlib">Plot a sparse matrix using matplotlib</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments87 .hll { background-color: #ffffcc }
+.pygments87 { background: #ffffff; }
+.pygments87 .c { color: #008000 } /* Comment */
+.pygments87 .err { border: 1px solid #FF0000 } /* Error */
+.pygments87 .k { color: #0000ff } /* Keyword */
+.pygments87 .l { color: #0000FF } /* Literal */
+.pygments87 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments87 .cm { color: #008000 } /* Comment.Multiline */
+.pygments87 .cp { color: #af00db } /* Comment.Preproc */
+.pygments87 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments87 .c1 { color: #008000 } /* Comment.Single */
+.pygments87 .cs { color: #008000 } /* Comment.Special */
+.pygments87 .ge { font-style: italic } /* Generic.Emph */
+.pygments87 .gh { font-weight: bold } /* Generic.Heading */
+.pygments87 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments87 .gs { font-weight: bold } /* Generic.Strong */
+.pygments87 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments87 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments87 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments87 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments87 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments87 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments87 .kt { color: #2b91af } /* Keyword.Type */
+.pygments87 .ld { color: #0000FF } /* Literal.Date */
+.pygments87 .m { color: #0000FF } /* Literal.Number */
+.pygments87 .s { color: #a31515 } /* Literal.String */
+.pygments87 .na { color: #001080 } /* Name.Attribute */
+.pygments87 .nb { color: #795e26 } /* Name.Builtin */
+.pygments87 .nc { color: #2b91af } /* Name.Class */
+.pygments87 .no { color: #0000FF } /* Name.Constant */
+.pygments87 .nf { color: #795e26 } /* Name.Function */
+.pygments87 .nl { color: #AF00DB } /* Name.Label */
+.pygments87 .nn { color: #000000 } /* Name.Namespace */
+.pygments87 .nt { color: #800000 } /* Name.Tag */
+.pygments87 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments87 .ow { color: #0000ff } /* Operator.Word */
+.pygments87 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments87 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments87 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments87 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments87 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments87 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments87 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments87 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments87 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments87 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments87 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments87 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments87 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments87 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments87 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments87 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments87 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments87 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments87 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments87 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments87 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments87 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments87 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments87 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments87 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments87 pre.snippet87 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Snippets/resources/plot-sparse-matrix.py" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments87"><pre class="lineNumbers snippet87"><code><span></span><span class="sd">&quot;&quot;&quot;Plot a sparse matrix using matplotlib, with special colors for structural</span></code>
+<code><span class="sd">zeros, numerical zeros, and inf/nan. Useful for visualizing differences between</span></code>
+<code><span class="sd">sparse matrices with possibly missing values.&quot;&quot;&quot;</span></code>
+<code></code>
+<code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span></code>
+<code><span class="kn">import</span> <span class="nn">scipy.sparse</span> <span class="k">as</span> <span class="nn">spa</span></code>
+<code><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span></code>
+<code><span class="kn">import</span> <span class="nn">matplotlib.colors</span> <span class="k">as</span> <span class="nn">mcolors</span></code>
+<code></code>
+<code></code>
+<code><span class="k">def</span> <span class="nf">nonzero_indices</span><span class="p">(</span><span class="n">matrix</span><span class="p">:</span> <span class="n">spa</span><span class="o">.</span><span class="n">csc_array</span><span class="p">):</span></code>
+<code><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the indices of the structural nonzeros in the given sparse matrix&quot;&quot;&quot;</span></code>
+<code>    <span class="n">minor</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">indices</span></code>
+<code>    <span class="n">indptr</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">indptr</span></code>
+<code>    <span class="n">major</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">indptr</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">minor</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">indptr</span><span class="p">))</span></code>
+<code>    <span class="k">return</span> <span class="n">minor</span><span class="p">,</span> <span class="n">major</span></code>
+<code></code>
+<code></code>
+<code><span class="k">def</span> <span class="nf">plot_sparse_matrix</span><span class="p">(</span></code>
+<code>    <span class="n">matrix</span><span class="p">:</span> <span class="n">spa</span><span class="o">.</span><span class="n">csc_array</span><span class="p">,</span></code>
+<code>    <span class="n">cmap</span><span class="p">:</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">Colormap</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span></code>
+<code>    <span class="o">*</span><span class="p">,</span></code>
+<code>    <span class="n">inf_color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span></code>
+<code>    <span class="n">struc_zero_color</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">,</span></code>
+<code>    <span class="n">num_zero_color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span></code>
+<code><span class="p">):</span></code>
+<code><span class="w">    </span><span class="sd">&quot;&quot;&quot;Prepare data, colormap and normalization for imshow of a sparse matrix.</span></code>
+<code><span class="sd">    Structural zeros are shown as gray, numerical zeros as white, inf/nan as</span></code>
+<code><span class="sd">    red (customizable).&quot;&quot;&quot;</span></code>
+<code>    <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">matrix</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span></code>
+<code>    <span class="n">fin_nonzero</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_and</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">data</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span></code>
+<code>    <span class="n">finite_data</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">fin_nonzero</span><span class="p">])</span></code>
+<code>    <span class="n">minval</span><span class="p">,</span> <span class="n">maxval</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">finite_data</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mf">1.0</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">finite_data</span><span class="p">,</span> <span class="n">initial</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span></code>
+<code>    <span class="n">margin</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">maxval</span> <span class="o">/</span> <span class="n">minval</span><span class="p">)</span></code>
+<code>    <span class="n">under</span><span class="p">,</span> <span class="n">over</span> <span class="o">=</span> <span class="n">minval</span> <span class="o">/</span> <span class="n">margin</span><span class="p">,</span> <span class="n">maxval</span> <span class="o">*</span> <span class="n">margin</span></code>
+<code>    <span class="k">assert</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span></code>
+<code>    <span class="n">dense_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">under</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s2">&quot;F&quot;</span><span class="p">)</span></code>
+<code>    <span class="n">rows</span><span class="p">,</span> <span class="n">cols</span> <span class="o">=</span> <span class="n">nonzero_indices</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span></code>
+<code>    <span class="n">data</span><span class="p">[</span><span class="n">data</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">over</span></code>
+<code>    <span class="n">dense_matrix</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="s2">&quot;K&quot;</span><span class="p">)[</span><span class="n">rows</span> <span class="o">+</span> <span class="n">cols</span> <span class="o">*</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">data</span></code>
+<code>    <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">get_cmap</span><span class="p">(</span><span class="n">cmap</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span></code>
+<code>    <span class="n">cmap</span><span class="o">.</span><span class="n">set_extremes</span><span class="p">(</span><span class="n">under</span><span class="o">=</span><span class="n">struc_zero_color</span><span class="p">,</span> <span class="n">over</span><span class="o">=</span><span class="n">num_zero_color</span><span class="p">,</span> <span class="n">bad</span><span class="o">=</span><span class="n">inf_color</span><span class="p">)</span></code>
+<code>    <span class="n">norm</span> <span class="o">=</span> <span class="n">mcolors</span><span class="o">.</span><span class="n">LogNorm</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">minval</span><span class="p">),</span> <span class="n">vmax</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">maxval</span><span class="p">))</span></code>
+<code>    <span class="k">return</span> <span class="n">dense_matrix</span><span class="p">,</span> <span class="n">cmap</span><span class="p">,</span> <span class="n">norm</span></code>
+<code></code>
+<code></code>
+<code><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">standard_normal</span><span class="p">((</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span></code>
+<code><span class="n">np</span><span class="o">.</span><span class="n">fill_diagonal</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span></code>
+<code><span class="n">sparse_A</span> <span class="o">=</span> <span class="n">spa</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;csc&quot;</span><span class="p">)</span></code>
+<code><span class="n">msk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sparse_A</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.7</span></code>
+<code><span class="n">sparse_A</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">msk</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Introduce some numerical zeros</span></code>
+<code><span class="c1"># Note: many scipy operations implicitly drop numerical zeros</span></code>
+<code><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="o">*</span><span class="n">plot_sparse_matrix</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">sparse_A</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">))</span></code>
+<code><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span></code>
+<code><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></code></pre></div>
+</div>
+
 </div>
         <hr>
         <div class="indexContainer"></div>
         <div class="nextupprev"></div>
     </article>
-    <footer>Last edited: Saturday, 20 January 2024 01:49 UTC</footer>
+    <footer>Last edited: Saturday, 01 November 2025 09:19 UTC</footer>
 </body>
 
 </html>

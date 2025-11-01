@@ -13,6 +13,19 @@
     <meta name="keywords" content="arduino,motorized fader,flying fader,pid,controller,midi,control surface">
     <meta name="description" content="PID controller implementation in C++.">
     <title>2. C++ Implementation</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 <style id="MJX-CHTML-styles">
 mjx-container[jax="CHTML"] {
   line-height: 0;
@@ -172,6 +185,7 @@ mjx-math {
   font-size: 100%;
   font-size-adjust: none;
   letter-spacing: normal;
+  border-collapse: collapse;
   word-wrap: normal;
   word-spacing: normal;
   white-space: nowrap;
@@ -683,7 +697,7 @@ mjx-c.mjx-c1D460.TEX-I::before {
 
 
 <div style="display: none;">
-    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" display="true"><mjx-math display="true" style="margin-left: 0; margin-right: 0" class=" MJX-TEX" aria-hidden="true"></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"></math></mjx-assistive-mml></mjx-container>
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative;" display="true"><mjx-math display="true" style="margin-left: 0; margin-right: 0;" class=" MJX-TEX" aria-hidden="true"></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"></math></mjx-assistive-mml></mjx-container>
 </div>
 
 <p>
@@ -767,7 +781,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments29 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments29 pre.snippet29 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Arduino/Control-Theory/Motor-Fader/resources/basic-pid.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments29"><pre class="lineNumbers snippet29"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments29"><pre class="lineNumbers snippet29"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cmath&gt;</span></code>
 <code></code>
 <code><span class="c1">/// Very basic, mostly educational PID controller with derivative filter.</span></code>
 <code><span class="k">class</span><span class="w"> </span><span class="nc">PID</span><span class="w"> </span><span class="p">{</span></code>
@@ -898,7 +917,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments40 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments40 pre.snippet40 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Arduino/Control-Theory/Motor-Fader/resources/basic-pid-2.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments40"><pre class="lineNumbers snippet40"><code><span></span><span class="c1">/// Very basic, mostly educational PID controller with derivative filter, output</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments40"><pre class="lineNumbers snippet40"><code><span></span><span class="c1">/// Very basic, mostly educational PID controller with derivative filter, output</span></code>
 <code><span class="c1">/// clamping and integral anti-windup.</span></code>
 <code><span class="k">class</span><span class="w"> </span><span class="nc">PID</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">  </span><span class="k">public</span><span class="o">:</span></code>
@@ -948,7 +972,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
     a few changes to the algorithm introduced above:
     <ul>
         <li>We use integer types for the input, setpoint, error and integral.</li>
-        <li>For efficiency, the constants <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.04em"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>K</mi><mi>i</mi></msub></math></mjx-assistive-mml></mjx-container> and <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.04em"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D451 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>K</mi><mi>d</mi></msub></math></mjx-assistive-mml></mjx-container> are premultiplied/divided by the factor <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D460 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>T</mi><mi>s</mi></msub></math></mjx-assistive-mml></mjx-container>.</li>
+        <li>For efficiency, the constants <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative;"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.04em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D456 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>K</mi><mi>i</mi></msub></math></mjx-assistive-mml></mjx-container> and <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative;"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D43E TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.04em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D451 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>K</mi><mi>d</mi></msub></math></mjx-assistive-mml></mjx-container> are premultiplied/divided by the factor <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative;"><mjx-math class=" MJX-TEX" aria-hidden="true"><mjx-msub><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D447 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: -0.15em; margin-left: -0.12em;"><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D460 TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msub></mjx-math><mjx-assistive-mml unselectable="on" display="inline"><math xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi>T</mi><mi>s</mi></msub></math></mjx-assistive-mml></mjx-container>.</li>
         <li>The output is turned off completely after a given number of cycles of inactivity (no setpoint changes or human interaction), if the error is small enough.</li>
     </ul>
 </p>
@@ -1020,7 +1044,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments55 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments55 pre.snippet55 { counter-reset: line 37; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/7fda1169f57cdb3e7887d1cc1c9ae9a797ea0afa/Motor-Controller/Controller.hpp#L38" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments55"><pre class="lineNumbers snippet55"><code><span></span><span class="c1">/// Standard PID (proportional, integral, derivative) controller. Derivative</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments55"><pre class="lineNumbers snippet55"><code><span></span><span class="c1">/// Standard PID (proportional, integral, derivative) controller. Derivative</span></code>
 <code><span class="c1">/// component is filtered using an exponential moving average filter.</span></code>
 <code><span class="k">class</span><span class="w"> </span><span class="nc">PID</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="w">  </span><span class="k">public</span><span class="o">:</span></code>
@@ -1154,7 +1183,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="PID-Controllers.html" title="1. PID Controllers"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"><a href="PID-Tuning.html" title="3. PID Tuning">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Friday, 16 July 2021 16:55 UTC</footer>
+    <footer>Last edited: Saturday, 01 February 2025 22:43 UTC</footer>
 </body>
 
 </html>

@@ -13,6 +13,19 @@
     <meta name="keywords" content="c++,cpp,casting,cast,c-style cast,best practices,guideline">
     <meta name="description" content="">
     <title>Don't use C-style casts</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -327,7 +340,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments19 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments19 pre.snippet19 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/c-style-cast-example.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments19"><pre class="lineNumbers snippet19"><code><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments19"><pre class="lineNumbers snippet19"><code><span></span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span></code>
 <code><span class="kt">float</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="c1">// C-style cast</span></code>
 <code><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">char</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w">   </span><span class="c1">// functional cast, equivalent to C-style cast</span></code></pre></div>
 </div>
@@ -415,7 +433,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments36 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments36 pre.snippet36 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-pointers.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments36"><pre class="lineNumbers snippet36"><code><span></span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments36"><pre class="lineNumbers snippet36"><code><span></span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span></code>
 <code><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="n">very_bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="c1">// accidental int-to-pointer conversion</span></code>
 <code></code>
 <code><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span></code>
@@ -494,7 +517,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments41 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments41 pre.snippet41 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-cv.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments41"><pre class="lineNumbers snippet41"><code><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments41"><pre class="lineNumbers snippet41"><code><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span></code>
 <code><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">very_bad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">message</span><span class="p">;</span><span class="w"> </span><span class="c1">// casts away const</span></code>
 <code></code>
 <code><span class="k">volatile</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">buffer</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span></code>
@@ -571,7 +599,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments45 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments45 pre.snippet45 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-unrelated-types.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments45"><pre class="lineNumbers snippet45"><code><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Pineapple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments45"><pre class="lineNumbers snippet45"><code><span></span><span class="k">struct</span><span class="w"> </span><span class="nc">Pineapple</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span></code>
 <code><span class="k">class</span><span class="w"> </span><span class="nc">Bulldozer</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="cm">/* ... */</span><span class="w"> </span><span class="p">};</span></code>
 <code></code>
 <code><span class="n">Pineapple</span><span class="w"> </span><span class="n">p</span><span class="p">;</span></code>
@@ -664,7 +697,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments65 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments65 pre.snippet65 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-cast-suffix.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments65"><pre class="lineNumbers snippet65"><code><span></span><span class="kt">float</span><span class="w"> </span><span class="n">bad</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="mi">123</span><span class="p">;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments65"><pre class="lineNumbers snippet65"><code><span></span><span class="kt">float</span><span class="w"> </span><span class="n">bad</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="mi">123</span><span class="p">;</span></code>
 <code><span class="kt">float</span><span class="w"> </span><span class="n">good</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">123.f</span><span class="p">;</span></code></pre></div>
 </div>
 
@@ -744,7 +782,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments75 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments75 pre.snippet75 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-pointers-braces.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments75"><pre class="lineNumbers snippet75"><code><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments75"><pre class="lineNumbers snippet75"><code><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span></code>
 <code><span class="kt">int</span><span class="w"> </span><span class="n">better</span><span class="w">          </span><span class="o">=</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span><span class="n">message</span><span class="p">};</span><span class="w"> </span><span class="c1">// compile-time error (as it should)</span></code></pre></div>
 </div>
 
@@ -825,7 +868,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments86 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments86 pre.snippet86 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/bad-casts-pointers-braces-good.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments86"><pre class="lineNumbers snippet86"><code><span></span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="p">{</span><span class="mi">42</span><span class="p">};</span><span class="w"> </span><span class="c1">// okay</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments86"><pre class="lineNumbers snippet86"><code><span></span><span class="k">auto</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="p">{</span><span class="mi">42</span><span class="p">};</span><span class="w"> </span><span class="c1">// okay</span></code>
 <code><span class="k">auto</span><span class="w"> </span><span class="n">ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">milliseconds</span><span class="w"> </span><span class="p">{</span><span class="n">i</span><span class="p">};</span><span class="w"> </span><span class="c1">// okay</span></code></pre></div>
 </div>
 
@@ -906,7 +954,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments97 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments97 pre.snippet97 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/static_cast-const.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments97"><pre class="lineNumbers snippet97"><code><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments97"><pre class="lineNumbers snippet97"><code><span></span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;12345&quot;</span><span class="p">;</span></code>
 <code><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">little_better</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">char</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">(</span><span class="n">message</span><span class="p">);</span><span class="w"> </span><span class="c1">// compile-time error (as it should)</span></code></pre></div>
 </div>
 <pre class="code"><span style="color: #CC0000"><b>error: </b></span>invalid ‘<b>static_cast</b>’ from type ‘<b>const char*</b>’ to type ‘<b>char*</b>’
@@ -980,7 +1033,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments101 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments101 pre.snippet101 { counter-reset: line 3; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Practices/resources/static_cast.cpp#L4" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments101"><pre class="lineNumbers snippet101"><code><span></span><span class="n">Pineapple</span><span class="w"> </span><span class="n">p</span><span class="p">;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments101"><pre class="lineNumbers snippet101"><code><span></span><span class="n">Pineapple</span><span class="w"> </span><span class="n">p</span><span class="p">;</span></code>
 <code><span class="n">Bulldozer</span><span class="w"> </span><span class="o">*</span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">Bulldozer</span><span class="w"> </span><span class="o">*&gt;</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="p">);</span><span class="w"> </span><span class="c1">// compile-time error (as it should)</span></code></pre></div>
 </div>
 <pre class="code"><span style="color: #CC0000"><b>error: </b></span>invalid ‘<b>static_cast</b>’ from type ‘<b>Pineapple*</b>’ to type ‘<b>Bulldozer*</b>’

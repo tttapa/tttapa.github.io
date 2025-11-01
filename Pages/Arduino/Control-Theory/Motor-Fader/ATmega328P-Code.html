@@ -13,6 +13,19 @@
     <meta name="keywords" content="arduino,motorized fader,flying fader,pid,controller,midi,control surface">
     <meta name="description" content="Complete C++ implementation for driving up to four motorized faders on an ATmega328P microcontroller, with all kinds of extra features such as capacitive touch sensing for the fader knobs, tuning over the serial port, setpoint changes over I²C, and so on.">
     <title>7. ATmega328P Code</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 <style id="MJX-CHTML-styles">
 mjx-container[jax="CHTML"] {
   line-height: 0;
@@ -172,6 +185,7 @@ mjx-math {
   font-size: 100%;
   font-size-adjust: none;
   letter-spacing: normal;
+  border-collapse: collapse;
   word-wrap: normal;
   word-spacing: normal;
   white-space: nowrap;
@@ -624,7 +638,7 @@ mjx-stretchy-v mjx-c, mjx-stretchy-h mjx-c {
         <div class="main-content">
 
 <div style="display: none;">
-    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative" display="true"><mjx-math display="true" style="margin-left: 0; margin-right: 0" class=" MJX-TEX" aria-hidden="true"></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"></math></mjx-assistive-mml></mjx-container>
+    <mjx-container class="MathJax" jax="CHTML" style="font-size: 113.1%; position: relative;" display="true"><mjx-math display="true" style="margin-left: 0; margin-right: 0;" class=" MJX-TEX" aria-hidden="true"></mjx-math><mjx-assistive-mml unselectable="on" display="block"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"></math></mjx-assistive-mml></mjx-container>
 </div>
 
 <h4 class="snippet-name"><a name="main-cpp" href="#main-cpp">main.cpp</a></h4>
@@ -696,7 +710,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments19 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments19 pre.snippet19 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/81fd2fce566cbec6239e109186e5c1ce0812e71d/Motor-Controller/main.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments19"><pre class="lineNumbers snippet19"><code><span></span><span class="c1">// Configuration and initialization of the analog-to-digital converter:</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments19"><pre class="lineNumbers snippet19"><code><span></span><span class="c1">// Configuration and initialization of the analog-to-digital converter:</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">"ADC.hpp"</span></code>
 <code><span class="c1">// Capacitive touch sensing:</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">"Touch.hpp"</span></code>
@@ -788,7 +807,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="c1">// ----------------------------- Configuration ------------------------------ //</span></code>
 <code></code>
 <code><span class="c1">// Enable MIDI input/output.</span></code>
-<code><span class="cp">#define WITH_MIDI 1</span></code>
+<code><span class="cp">#define WITH_MIDI 0</span></code>
 <code><span class="c1">// Print to the Serial monitor instead of sending actual MIDI messages.</span></code>
 <code><span class="cp">#define MIDI_DEBUG 0</span></code>
 <code></code>
@@ -807,7 +826,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="w">    </span><span class="c1">// Increase this divisor to slow down the test reference:</span></code>
 <code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">test_reference_speed_div</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span></code>
 <code><span class="w">    </span><span class="c1">// Allow control for tuning and starting experiments over Serial:</span></code>
-<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">serial_control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">serial_control</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></code>
 <code><span class="w">    </span><span class="c1">// I²C slave address (zero to disable I²C):</span></code>
 <code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">i2c_address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span></code>
 <code><span class="w">    </span><span class="c1">// The baud rate to use for the Serial interface (e.g. for MIDI_DEBUG,</span></code>
@@ -826,21 +845,21 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 <code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">enable_controller</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></code>
 <code><span class="w">    </span><span class="c1">// Use analog pins (A0, A1, A6, A7) instead of (A0, A1, A2, A3), useful for</span></code>
 <code><span class="w">    </span><span class="c1">// saving digital pins on an Arduino Nano:</span></code>
-<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">use_A6_A7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">use_A6_A7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span></code>
 <code><span class="w">    </span><span class="c1">// Use pin A2 instead of D13 as the motor driver pin for the fourth fader.</span></code>
 <code><span class="w">    </span><span class="c1">// Allows D13 to be used as overrun indicator, and avoids issues with the</span></code>
 <code><span class="w">    </span><span class="c1">// bootloader blinking the LED.</span></code>
 <code><span class="w">    </span><span class="c1">// Can only be used if `use_A6_A7` is set to true.</span></code>
-<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">fader_3_A2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">fader_3_A2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span></code>
 <code><span class="w">    </span><span class="c1">// Change the setpoint to the current position when touching the knob.</span></code>
 <code><span class="w">    </span><span class="c1">// Useful if your DAW does not send any feedback when manually moving the</span></code>
 <code><span class="w">    </span><span class="c1">// fader.</span></code>
-<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">touch_to_current_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">touch_to_current_position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span></code>
 <code></code>
 <code><span class="w">    </span><span class="c1">// Capacitive touch sensing RC time threshold.</span></code>
 <code><span class="w">    </span><span class="c1">// Increase this time constant if the capacitive touch sense is too</span></code>
 <code><span class="w">    </span><span class="c1">// sensitive or decrease it if it's not sensitive enough:</span></code>
-<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">touch_rc_time_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">100e-6</span><span class="p">;</span><span class="w"> </span><span class="c1">// seconds</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">touch_rc_time_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">150e-6</span><span class="p">;</span><span class="w"> </span><span class="c1">// seconds</span></code>
 <code><span class="w">    </span><span class="c1">// Bit masks of the touch pins (must be on port B):</span></code>
 <code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">touch_masks</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB2</span><span class="p">,</span></code>
 <code><span class="w">                                              </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">PB4</span><span class="p">};</span></code>
@@ -1338,7 +1357,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments23 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments23 pre.snippet23 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/fe8a54f912ea0bac2d75647e6f40e23807e00823/Motor-Controller/ADC.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments23"><pre class="lineNumbers snippet23"><code><span></span><span class="cp">#pragma once</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments23"><pre class="lineNumbers snippet23"><code><span></span><span class="cp">#pragma once</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">"Registers.hpp"</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;avr/interrupt.h&gt;</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;util/atomic.h&gt;</span></code>
@@ -1597,7 +1621,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments27 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments27 pre.snippet27 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/7bcd5aa40a7bd5168f2578ef686e819d299d203b/Motor-Controller/Touch.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments27"><pre class="lineNumbers snippet27"><code><span></span><span class="cp">#pragma once</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments27"><pre class="lineNumbers snippet27"><code><span></span><span class="cp">#pragma once</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;avr/interrupt.h&gt;</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;avr/io.h&gt;</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;util/atomic.h&gt;</span></code>
@@ -1770,7 +1799,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments31 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments31 pre.snippet31 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/7fda1169f57cdb3e7887d1cc1c9ae9a797ea0afa/Motor-Controller/Controller.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments31"><pre class="lineNumbers snippet31"><code><span></span><span class="cp">#pragma once</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments31"><pre class="lineNumbers snippet31"><code><span></span><span class="cp">#pragma once</span></code>
 <code></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stddef.h&gt;</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span></code>
@@ -2005,7 +2039,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments35 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments35 pre.snippet35 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/5a91eac24c33224aa2761411591e44b880bfcf81/Motor-Controller/Motor.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments35"><pre class="lineNumbers snippet35"><code><span></span><span class="cp">#pragma once</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments35"><pre class="lineNumbers snippet35"><code><span></span><span class="cp">#pragma once</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">"Registers.hpp"</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;avr/interrupt.h&gt;</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;util/atomic.h&gt;</span></code>
@@ -2245,7 +2284,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments39 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments39 pre.snippet39 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/Reference.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments39"><pre class="lineNumbers snippet39"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;avr/pgmspace.h&gt;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments39"><pre class="lineNumbers snippet39"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;avr/pgmspace.h&gt;</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stddef.h&gt;</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdint.h&gt;</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;util/atomic.h&gt;</span></code>
@@ -2505,7 +2549,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments43 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments43 pre.snippet43 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/Registers.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments43"><pre class="lineNumbers snippet43"><code><span></span><span class="cp">#pragma once</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments43"><pre class="lineNumbers snippet43"><code><span></span><span class="cp">#pragma once</span></code>
 <code></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;avr/io.h&gt;</span></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;avr/sfr_defs.h&gt;</span></code>
@@ -2752,7 +2801,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments47 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments47 pre.snippet47 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/SerialSLIP.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments47"><pre class="lineNumbers snippet47"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments47"><pre class="lineNumbers snippet47"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino.h&gt;</span></code>
 <code></code>
 <code><span class="k">namespace</span><span class="w"> </span><span class="nn">SLIP_Constants</span><span class="w"> </span><span class="p">{</span></code>
 <code><span class="k">const</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">END</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mo">0300</span><span class="p">;</span></code>
@@ -2967,7 +3021,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments51 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments51 pre.snippet51 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/Control-Surface-Motor-Fader/blob/661955c845f21c097258cf0082112123454a6b01/Motor-Controller/SMA.hpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments51"><pre class="lineNumbers snippet51"><code><span></span><span class="cp">#pragma once</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments51"><pre class="lineNumbers snippet51"><code><span></span><span class="cp">#pragma once</span></code>
 <code></code>
 <code><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;Arduino_Helpers.h&gt;</span></code>
 <code></code>
@@ -3036,7 +3095,7 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="Configuration.html" title="6. Configuration options and common use cases"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Motorized Faders">Index</a></div><div class="nextpage"></div></div>
     </article>
-    <footer>Last edited: Monday, 19 July 2021 20:40 UTC</footer>
+    <footer>Last edited: Saturday, 01 February 2025 22:43 UTC</footer>
 </body>
 
 </html>

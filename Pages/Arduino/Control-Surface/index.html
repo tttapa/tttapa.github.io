@@ -13,6 +13,19 @@
     <meta name="keywords" content="Control Surface,MIDI,Arduino">
     <meta name="description" content="The Control Surface library enables you to build amazing MIDI controllers using Arduino-compatible boards.">
     <title>Control Surface</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>

@@ -13,6 +13,19 @@
     <meta name="keywords" content="arduino,motorized fader,flying fader,pid,midi,control surface">
     <meta name="description" content="MIDI control surface with motorized faders.">
     <title>Motorized Faders</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>

@@ -13,6 +13,19 @@
     <meta name="keywords" content="c++,atomics,memory order,order,sequential consistency,acquire,release">
     <meta name="description" content="Examples using atomics.">
     <title>Examples</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -335,7 +348,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments24 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments24 pre.snippet24 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/acq-rel/preamble.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments24"><pre class="lineNumbers snippet24"><code><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments24"><pre class="lineNumbers snippet24"><code><span></span><span class="kt">unsigned</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></code>
 <code><span class="n">std</span><span class="o">::</span><span class="kt">atomic_bool</span><span class="w"> </span><span class="n">value_ready</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span></code></pre></div>
 </div>
 <h4 class="snippet-name"><a name="release" href="#release">Release</a></h4>
@@ -407,7 +425,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments25 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments25 pre.snippet25 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/acq-rel/rel.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments25"><pre class="lineNumbers snippet25"><code><span></span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"> </span><span class="c1">//                                                            ➊    </span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments25"><pre class="lineNumbers snippet25"><code><span></span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span><span class="w"> </span><span class="c1">//                                                            ➊    </span></code>
 <code><span class="n">value_ready</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_release</span><span class="p">);</span><span class="w"> </span><span class="c1">//                    ➋ ▲▲▲▲</span></code></pre></div>
 </div>
 <h4 class="snippet-name"><a name="acquire" href="#acquire">Acquire</a></h4>
@@ -479,7 +502,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments26 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments26 pre.snippet26 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/acq-rel/acq.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments26"><pre class="lineNumbers snippet26"><code><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value_ready</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_acquire</span><span class="p">))</span><span class="w"> </span><span class="c1">//                       ➌ ▼▼▼▼</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments26"><pre class="lineNumbers snippet26"><code><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">value_ready</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_acquire</span><span class="p">))</span><span class="w"> </span><span class="c1">//                       ➌ ▼▼▼▼</span></code>
 <code><span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span><span class="w"> </span><span class="c1">//                                               ➍</span></code></pre></div>
 </div>
 
@@ -581,7 +609,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments58 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments58 pre.snippet58 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/interrupt-handle-once/preamble.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments58"><pre class="lineNumbers snippet58"><code><span></span><span class="n">std</span><span class="o">::</span><span class="kt">atomic_bool</span><span class="w"> </span><span class="n">handled</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments58"><pre class="lineNumbers snippet58"><code><span></span><span class="n">std</span><span class="o">::</span><span class="kt">atomic_bool</span><span class="w"> </span><span class="n">handled</span><span class="p">{</span><span class="nb">false</span><span class="p">};</span></code>
 <code><span class="kt">unsigned</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span></code>
 <code><span class="n">std</span><span class="o">::</span><span class="n">atomic</span><span class="o">&lt;</span><span class="k">const</span><span class="w"> </span><span class="kt">unsigned</span><span class="w"> </span><span class="o">*&gt;</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">{</span><span class="k">nullptr</span><span class="p">};</span></code>
 <code><span class="n">std</span><span class="o">::</span><span class="kt">atomic_uint</span><span class="w"> </span><span class="n">total</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span></code></pre></div>
@@ -655,7 +688,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments59 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments59 pre.snippet59 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/interrupt-handle-once/main.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments59"><pre class="lineNumbers snippet59"><code><span></span><span class="c1">// Store the value to be handled</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments59"><pre class="lineNumbers snippet59"><code><span></span><span class="c1">// Store the value to be handled</span></code>
 <code><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="c1">//                                                             ➊</span></code>
 <code><span class="n">value_ptr</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="o">&amp;</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span><span class="p">);</span><span class="w"> </span><span class="c1">//                    ➋ ▲▲▲▲</span></code>
 <code><span class="c1">// Check if the interrupt was handled before we ran</span></code>
@@ -738,7 +776,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments60 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments60 pre.snippet60 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Atomics/resources/interrupt-handle-once/interrupt.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments60"><pre class="lineNumbers snippet60"><code><span></span><span class="c1">// Notify the main thread that the interrupt ran</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments60"><pre class="lineNumbers snippet60"><code><span></span><span class="c1">// Notify the main thread that the interrupt ran</span></code>
 <code><span class="n">handled</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span><span class="p">);</span><span class="w"> </span><span class="c1">//                        ➏ ▲▲▲▲</span></code>
 <code><span class="c1">// Read the value from the main thread</span></code>
 <code><span class="k">auto</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">value_ptr</span><span class="p">.</span><span class="n">exchange</span><span class="p">(</span><span class="k">nullptr</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">memory_order_seq_cst</span><span class="p">);</span><span class="w"> </span><span class="c1">//       ➐ ▼▼▼▼</span></code>

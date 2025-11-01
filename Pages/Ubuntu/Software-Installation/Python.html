@@ -13,6 +13,19 @@
     <meta name="keywords" content="Python,Python3,build,source,Ubuntu,Installation">
     <meta name="description" content="Build instructions for Python 3 on Ubuntu.">
     <title>Python</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -429,7 +442,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments138 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments138 pre.snippet138 { counter-reset: line 6; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Ubuntu/Software-Installation/resources/python.sh#L7" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments138"><pre class="lineNumbers snippet138"><code><span></span><span class="nv">version</span><span class="o">=</span><span class="s2">"3.8.2"</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments138"><pre class="lineNumbers snippet138"><code><span></span><span class="nv">version</span><span class="o">=</span><span class="s2">"3.8.2"</span></code>
 <code><span class="nv">builddir</span><span class="o">=</span><span class="s2">"/tmp"</span></code>
 <code><span class="nv">python</span><span class="o">=</span><span class="s2">"Python-</span><span class="nv">$version</span><span class="s2">"</span></code>
 <code><span class="nv">prefix</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.local"</span></code>

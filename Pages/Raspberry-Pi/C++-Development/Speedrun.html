@@ -13,6 +13,19 @@
     <meta name="keywords" content="">
     <meta name="description" content="Installing, building and setting everything up as fast as possible, in just a few commands.">
     <title>Speedrun</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
 </head>
 
 <body>
@@ -327,7 +340,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments16 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments16 pre.snippet16 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-docker.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments16"><pre class="lineNumbers snippet16"><code><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update</code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments16"><pre class="lineNumbers snippet16"><code><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update</code>
 <code>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>apt-transport-https<span class="w"> </span>ca-certificates<span class="w"> </span>curl<span class="w"> </span>software-properties-common</code>
 <code><span class="c1"># Add the Docker GPG key and PPA repository</span></code>
 <code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://download.docker.com/linux/ubuntu/gpg<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>apt-key<span class="w"> </span>add<span class="w"> </span>-</code>
@@ -409,7 +427,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments20 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments20 pre.snippet20 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-tools.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments20"><pre class="lineNumbers snippet20"><code><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span>ninja-build<span class="w"> </span>git</code></pre></div>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments20"><pre class="lineNumbers snippet20"><code><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--no-install-recommends<span class="w"> </span>cmake<span class="w"> </span>make<span class="w"> </span>ninja-build<span class="w"> </span>git</code></pre></div>
 </div>
 <h4><a name="clone-the-rpi-cpp-toolchain-repository" href="#clone-the-rpi-cpp-toolchain-repository">Clone the RPi-Cpp-Toolchain repository</a></h4>
 <div class="codesnippet"><style>pre { line-height: 125%; }
@@ -480,7 +503,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments24 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments24 pre.snippet24 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-clone.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments24"><pre class="lineNumbers snippet24"><code><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/GitHub</code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments24"><pre class="lineNumbers snippet24"><code><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/GitHub</code>
 <code><span class="nb">cd</span><span class="w"> </span>~/GitHub</code>
 <code>git<span class="w"> </span>clone<span class="w"> </span>--recursive<span class="w"> </span>https://github.com/tttapa/RPi-Cpp-Toolchain.git</code>
 <code><span class="nb">cd</span><span class="w"> </span>RPi-Cpp-Toolchain</code></pre></div>
@@ -554,7 +582,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments28 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments28 pre.snippet28 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-pull-docker.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments28"><pre class="lineNumbers snippet28"><code><span></span>./docker-arm-cross-build-scripts/build.sh<span class="w"> </span><span class="c1"># List available board configurations</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments28"><pre class="lineNumbers snippet28"><code><span></span>./docker-arm-cross-build-scripts/build.sh<span class="w"> </span><span class="c1"># List available board configurations</span></code>
 <code><span class="c1"># Replace the board name with one of the options printed by the previous command</span></code>
 <code>./docker-arm-cross-build-scripts/build.sh<span class="w"> </span>rpi3-aarch64<span class="w"> </span>--pull<span class="w"> </span>--export</code></pre></div>
 </div>
@@ -656,7 +689,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments61 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments61 pre.snippet61 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-install-staging.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments61"><pre class="lineNumbers snippet61"><code><span></span><span class="c1"># Copy the staging area archive to the Pi</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments61"><pre class="lineNumbers snippet61"><code><span></span><span class="c1"># Copy the staging area archive to the Pi</span></code>
 <code><span class="c1"># This command may take a while, depending on the speed of your SD card</span></code>
 <code>scp<span class="w"> </span>./docker-arm-cross-build-scripts/staging-aarch64-rpi3-linux-gnu.tar<span class="w"> </span>RPi3:/tmp</code>
 <code><span class="c1"># Install everything to the root of the filesystem</span></code>
@@ -742,7 +780,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments67 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments67 pre.snippet67 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-install-check.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments67"><pre class="lineNumbers snippet67"><code><span></span><span class="c1"># Check that Python 3.10 and OpenCV were installed correctly</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments67"><pre class="lineNumbers snippet67"><code><span></span><span class="c1"># Check that Python 3.10 and OpenCV were installed correctly</span></code>
 <code>ssh<span class="w"> </span>RPi3<span class="w"> </span><span class="s2">&quot;python3.10 -c &#39;import cv2; print(cv2.__version__)&#39;&quot;</span></code></pre></div>
 </div>
 
@@ -816,7 +859,12 @@ span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 
 .pygments73 .il { color: #09885a } /* Literal.Number.Integer.Long */
 .pygments73 pre.snippet73 { counter-reset: line 0; }</style>
 <a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Raspberry-Pi/C++-Development/resources/speedrun-cmake-build.sh" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
-<div class="pygments73"><pre class="lineNumbers snippet73"><code><span></span><span class="c1"># See what toolchain files are available, use the one that matches your board.</span></code>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments73"><pre class="lineNumbers snippet73"><code><span></span><span class="c1"># See what toolchain files are available, use the one that matches your board.</span></code>
 <code>ls<span class="w"> </span>cmake</code>
 <code><span class="c1"># Configure the project using the correct toolchain.</span></code>
 <code>cmake<span class="w"> </span>-S.<span class="w"> </span>-Bbuild<span class="w"> </span><span class="se">\</span></code>
