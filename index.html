@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=IBM+Plex+Serif:ital,wght@0,300;0,500;1,300;1,500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="theme-color" content="#ccc">
@@ -17,16 +18,56 @@
 </head>
 
 <body>
-    <article>
-        <h1 style="font-size:40px;margin-bottom:0;">Pieter's Pages<br></h1>
-        <!-- <i style="font-size:0.9em;color:#888;margin-bottom:2em;display:block">Pieter P,&emsp;09-03-2017</i> -->
+    <style>
+        p {
+            font-family: 'IBM Plex Serif', 'Times New Roman', Times, serif;
+            font-weight: 300;
+        }
+    </style>
+    <article >
+        <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 1em 2em; margin-top: 26pt;">
+            <h1 style="font-size:40px; margin: 0; flex: 0 1 auto;">Pieter's Pages</h1>
+
+            <div style="padding: 0; margin: 0; color: #111; font-family: 'Courier New', Courier, monospace; font-size: 0.9em; flex: 1 1 auto; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.5em 2em;">
+                <a style="text-decoration: none; white-space: nowrap;" href="https://github.com/tttapa"><img style="display: inline; opacity: 0.53; vertical-align: middle; margin: 0; padding-bottom: 0.25em;" src="/Images/GitHub-Mark.svg">&nbsp;GitHub</a>
+                <a style="text-decoration: none; white-space: nowrap;" href="https://scholar.google.com/citations?user=ajd0OrQAAAAJ"><i class="material-icons" style="font-size: 1.2em; vertical-align:middle; color:#888; padding-bottom: 0.25em">school</i>&nbsp;Google Scholar</a>
+                <a style="text-decoration: none; white-space: nowrap;" href="https://pypi.org/user/pieterp"><img style="display: inline; height: 1.2em; opacity: 0.53; vertical-align: middle; margin: 0; padding-bottom: 0.1em;" src="/Images/python-bw.svg">&nbsp;PyPI</a>
+            </div>
+        </div>
+
+        <div style="margin-top: 1em;">
+            <div class="toc expanded" id="toc" style="max-height: none;">
+                <script>
+                    let toc = document.getElementById("toc");
+                    toc.classList.remove("expanded");
+                    toc.style.maxHeight = '1.6em';
+                    function updateTocSize() {
+                        let toc = document.getElementById("toc");
+                        toc.style.maxHeight = toc.scrollHeight + 'px';
+                    }
+                </script>
+                <h4 class="toc"
+                    onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">
+                    Table of Contents <i class="material-icons">list</i></h4>
+                <ul>
+                    <li><a href="#pages">Pages</a></li>
+                    <li><a href="#software">Scientific software</a></li>
+                    <li><a href="#publications">Scientific Publications</a></li>
+                    <li><a href="#presentations">Presentations</a></li>
+                    <li><a href="#development">Development</a></li>
+                    <li><a href="#raspberry-pi">Raspberry Pi</a></li>
+                    <li><a href="#arduino">Arduino</a></li>
+                    <li><a href="#tools">Tools</a></li>
+                </ul>
+            </div>
+        </div>
 
         <p>
-            Welcome! This is where I keep some notes on topics I'm interested in, as well as links to the GitHub
+            Welcome! This website is where I keep some notes on topics I'm interested in, as well as links to the research papers and GitHub
             repositories for projects I'm working on.
         </p>
 
-        <h2 style="border-bottom: #888 1px solid">Pages</h2>
+        <h2 style="border-bottom: #888 1px solid" id="pages">Pages</h2>
 
         <!-- <a href="/Pages"> -->
         <p>
@@ -39,7 +80,7 @@
             <a style="margin-left: 1.5em;" href="/Pages">Go to Pages</a>
         </p>
 
-        <h2 style="border-bottom: #888 1px solid">Scientific software</h2>
+        <h2 style="border-bottom: #888 1px solid" id="software">Scientific software</h2>
         <div class="indexContainer">
 
             <a href="https://github.com/kul-optec/alpaqa" style="position: relative; clear: right;">
@@ -130,8 +171,18 @@
 
         </div>
 
-        <h2 style="border-bottom: #888 1px solid">Scientific Publications</h2>
+        <h2 style="border-bottom: #888 1px solid" id="publications">Scientific Publications</h2>
         <div class="indexContainer">
+
+            <div>
+                <h3>C<span style="font-variant: small-caps;">yqlone</span>: A Parallel, High-Performance Linear Solver for Optimal Control </h3>
+                <p>
+                    <em>Pieter Pas, Panagiotis Patrinos</em><br>
+                    Preprint, 2025
+                </p><p style="padding-top: 0.3em;">
+                    <a href="https://arxiv.org/abs/2512.09058">arXiv</a>
+                </p>
+            </div>
 
             <div>
                 <h3>Blocked Cholesky factorization updates of the Riccati recursion using hyperbolic Householder transformations</h3>
@@ -154,7 +205,7 @@
             </div>
 
             <div>
-                <h3>P<small>ANTR</small>: A proximal algorithm with trust-region updates for nonconvex constrained optimization</h3>
+                <h3>P<span style="font-variant: small-caps;">antr</span>: A proximal algorithm with trust-region updates for nonconvex constrained optimization</h3>
                 <p>
                     <em>Alexander Bodard, Pieter Pas, Panagiotis Patrinos</em><br>
                     IEEE Control Systems Letters, 2023
@@ -174,7 +225,7 @@
             </div>
 
             <div>
-                <h3>A<small>LPAQA</small>: A matrix-free solver for nonlinear MPC and large-scale nonconvex optimization</h3>
+                <h3>A<span style="font-variant: small-caps;">lpaqa</span>: A matrix-free solver for nonlinear MPC and large-scale nonconvex optimization</h3>
                 <p>
                     <em>Pieter Pas, Mathijs Schuurmans, Panagiotis Patrinos</em><br>
                     20<sup>th</sup> European Control Conference (ECC22), 2022
@@ -185,8 +236,16 @@
 
         </div>
 
-        <h2 style="border-bottom: #888 1px solid">Presentations</h2>
+        <h2 style="border-bottom: #888 1px solid" id="presentations">Presentations</h2>
         <div class="indexContainer">
+
+            <a href="https://github.com/tttapa/RSE2025-Python-Packaging/">
+                <h3>Publishing portable Python bindings for C, C++ and Fortran codes</h3>
+                <p>
+                    Slides for my presentation about Python bindings and packaging at RSE 2025
+                    (KU Leuven Research Software Engineering Day).
+                </p>
+            </a>
 
             <a href="https://github.com/tttapa/Mastering-Cpp-Scientific-Computing/">
                 <h3>Mastering C++ for scientific computing: tools, tips, and tricks</h3>
@@ -197,7 +256,7 @@
 
         </div>
 
-        <h2 style="border-bottom: #888 1px solid">Development</h2>
+        <h2 style="border-bottom: #888 1px solid" id="development">Development</h2>
         <div class="indexContainer">
 
             <a href="https://github.com/tttapa/toolchains">
@@ -225,7 +284,7 @@
 
         </div>
 
-        <h2 style="border-bottom: #888 1px solid">Raspberry Pi</h2>
+        <h2 style="border-bottom: #888 1px solid" id="raspberry-pi">Raspberry Pi</h2>
         <div class="indexContainer">
 
             <a href="https://github.com/tttapa/docker-arm-cross-toolchain">
@@ -268,7 +327,7 @@
 
         </div>
 
-        <h2 style="border-bottom: #888 1px solid">Arduino</h2>
+        <h2 style="border-bottom: #888 1px solid" id="arduino">Arduino</h2>
         <div class="indexContainer">
 
             <a href="https://github.com/tttapa/Control-Surface">
@@ -322,7 +381,7 @@
 
         </div>
 
-        <h2 style="border-bottom: #888 1px solid">Tools</h2>
+        <h2 style="border-bottom: #888 1px solid" id="tools">Tools</h2>
 
         <div class="indexContainer">
 
