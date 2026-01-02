@@ -13,7 +13,6 @@
     We can use MATLAB to visualize the effects of the filter. The scripts used
     can be found at the bottom of the page.
 </p>
-<p>
 First, we generate a test signal that consists of two sine waves.
 <img src="images/original-sine-waves.svg" style="width: 90%"/>
 Then we apply the filter to it and plot the result. You can clearly see how the 
@@ -36,23 +35,34 @@ You can hear the difference for yourself:
 </audio>
 <button onclick="document.getElementById('filtered_wav').currentTime = 0;document.getElementById('filtered_wav').play();document.getElementById('original_wav').pause()">Filtered</button>
 </div>
-</p>
 
 <h3>Audio</h3>
 
-<p>
-    It can be used on music as well:
+It can be used on music as well. Try it out using the buttons below (you can switch between the original and filtered audio while the music is playing).
+<script>
+function switchAudio(playId, pauseId) {
+    var play = document.getElementById(playId);
+    var pause = document.getElementById(pauseId);
+    pause.pause();
+    if (pause.ended) {
+        play.currentTime = 0;
+        pause.currentTime = 0;
+    } else {
+        play.currentTime = pause.currentTime;
+    }
+    play.play();
+}
+</script>
 <div>
 <audio id="telegraph_road_original_wav">
     <source src="images/telegraph_road_original.mp3" type="audio/mpeg"/>
 </audio>
-<button onmousedown="document.getElementById('telegraph_road_filtered_wav').pause();document.getElementById('telegraph_road_original_wav').currentTime = document.getElementById('telegraph_road_filtered_wav').currentTime;document.getElementById('telegraph_road_original_wav').play()">Original</button>
+<button onmousedown="switchAudio('telegraph_road_original_wav','telegraph_road_filtered_wav')">Original</button>
 <audio id="telegraph_road_filtered_wav">
     <source src="images/telegraph_road_filtered.mp3" type="audio/mpeg"/>
 </audio>
-<button onmousedown="document.getElementById('telegraph_road_original_wav').pause();document.getElementById('telegraph_road_filtered_wav').currentTime = document.getElementById('telegraph_road_original_wav').currentTime;document.getElementById('telegraph_road_filtered_wav').play()">Filtered</button>
+<button onmousedown="switchAudio('telegraph_road_filtered_wav','telegraph_road_original_wav')">Filtered</button>
 </div>
-</p>
 
 <h3>Code</h3>
 
