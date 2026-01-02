@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="author" content="Pieter P">
     <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,600;1,300;1,600&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- No MathJax -->
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
@@ -245,8 +246,10 @@
         <h1 class="title">Filtering in MATLAB</h1>
         <i class="author">Pieter P</i>
         <div class="main-content">
-<div class="toc" id="toc">
+<div class="toc expanded" id="toc" style="max-height: none;">
   <script>
+  toc.classList.remove("expanded");
+  toc.style.maxHeight = '1.6em';
   function updateTocSize() {
     let toc = document.getElementById("toc");
     toc.style.maxHeight = toc.scrollHeight + 'px';
@@ -266,7 +269,6 @@
     We can use MATLAB to visualize the effects of the filter. The scripts used
     can be found at the bottom of the page.
 </p>
-<p>
 First, we generate a test signal that consists of two sine waves.
 <img src="images/original-sine-waves.svg" style="width: 90%"/>
 Then we apply the filter to it and plot the result. You can clearly see how the 
@@ -289,23 +291,34 @@ You can hear the difference for yourself:
 </audio>
 <button onclick="document.getElementById('filtered_wav').currentTime = 0;document.getElementById('filtered_wav').play();document.getElementById('original_wav').pause()">Filtered</button>
 </div>
-</p>
 
 <h3><a name="audio" href="#audio">Audio</a></h3>
 
-<p>
-    It can be used on music as well:
+It can be used on music as well. Try it out using the buttons below (you can switch between the original and filtered audio while the music is playing).
+<script>
+function switchAudio(playId, pauseId) {
+    var play = document.getElementById(playId);
+    var pause = document.getElementById(pauseId);
+    pause.pause();
+    if (pause.ended) {
+        play.currentTime = 0;
+        pause.currentTime = 0;
+    } else {
+        play.currentTime = pause.currentTime;
+    }
+    play.play();
+}
+</script>
 <div>
 <audio id="telegraph_road_original_wav">
     <source src="images/telegraph_road_original.mp3" type="audio/mpeg"/>
 </audio>
-<button onmousedown="document.getElementById('telegraph_road_filtered_wav').pause();document.getElementById('telegraph_road_original_wav').currentTime = document.getElementById('telegraph_road_filtered_wav').currentTime;document.getElementById('telegraph_road_original_wav').play()">Original</button>
+<button onmousedown="switchAudio('telegraph_road_original_wav','telegraph_road_filtered_wav')">Original</button>
 <audio id="telegraph_road_filtered_wav">
     <source src="images/telegraph_road_filtered.mp3" type="audio/mpeg"/>
 </audio>
-<button onmousedown="document.getElementById('telegraph_road_original_wav').pause();document.getElementById('telegraph_road_filtered_wav').currentTime = document.getElementById('telegraph_road_original_wav').currentTime;document.getElementById('telegraph_road_filtered_wav').play()">Filtered</button>
+<button onmousedown="switchAudio('telegraph_road_filtered_wav','telegraph_road_original_wav')">Filtered</button>
 </div>
-</p>
 
 <h3><a name="code" href="#code">Code</a></h3>
 
@@ -418,7 +431,7 @@ You can hear the difference for yourself:
         <hr id="end-of-article">
         <div class="nextupprev"><div class="prevpage"><a href="Exponential-Moving-Average.html" title="Exponential Moving Average"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Page</a></div><div class="uppage"><a href="index.html" title="Exponential Moving Average">Index</a></div><div class="nextpage"><a href="C++Implementation.html" title="C++ Implementation">Next Page<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
     </article>
-    <footer>Last edited: Thursday, 23 July 2020 13:49 UTC</footer>
+    <footer>Last edited: Friday, 02 January 2026 23:05 UTC</footer>
 </body>
 
 </html>
