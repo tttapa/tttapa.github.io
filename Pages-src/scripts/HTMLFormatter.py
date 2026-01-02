@@ -69,8 +69,10 @@ def addAnchors(html: str, metadata: dict) -> str:
         raise Exception("String should have truth value (e.g. "
                         "\"true\" or \"false\"), got \"" +
                         toc + "\" instead.")
-    toc = '\n<div class="toc" id="toc">\n'
+    toc = '\n<div class="toc expanded" id="toc" style="max-height: none;">\n'
     toc += '  <script>\n'
+    toc += '  toc.classList.remove("expanded");\n'
+    toc += "  toc.style.maxHeight = '1.6em';\n"
     toc += '  function updateTocSize() {\n'
     toc += '    let toc = document.getElementById("toc");\n'
     toc += "    toc.style.maxHeight = toc.scrollHeight + 'px';\n"
