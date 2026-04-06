@@ -1,0 +1,3725 @@
+{
+  "symbols": [
+    {
+      "key": "func()",
+      "description": "Normal function",
+      "definition": "void func() { \u2026 }"
+    },
+    {
+      "key": "inline_func()",
+      "description": "Inline function",
+      "definition": "inline void func() { \u2026 }"
+    },
+    {
+      "key": "static_func()",
+      "description": "Static function",
+      "definition": "static void func() { \u2026 }"
+    },
+    {
+      "key": "(anonymous namespace)::anonymous_func()",
+      "description": "Anonymous namespace function",
+      "definition": "namespace {\nvoid func() { \u2026 }\n}"
+    },
+    {
+      "key": "default_func()",
+      "description": "Explicit default visibility",
+      "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }"
+    },
+    {
+      "key": "protected_func()",
+      "description": "Explicit protected visibility",
+      "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }"
+    },
+    {
+      "key": "hidden_func()",
+      "description": "Explicit hidden visibility",
+      "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }"
+    },
+    {
+      "key": "void template_func<int>()",
+      "description": "Function template",
+      "definition": "template <class T>\nvoid template_func() { \u2026 }"
+    },
+    {
+      "key": "void inline_template_func<int>()",
+      "description": "Inline function template",
+      "definition": "template <class T>\ninline void inline_template_func() { \u2026 }"
+    },
+    {
+      "key": "Class<NoInst>::func()",
+      "description": "Member function of class template without attribute, implicitly instantiated",
+      "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();"
+    },
+    {
+      "key": "Class<NoInst>::out_of_line_func()",
+      "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+      "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();"
+    },
+    {
+      "key": "Class<InstDefault>::func()",
+      "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+      "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();"
+    },
+    {
+      "key": "Class<InstDefault>::out_of_line_func()",
+      "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+      "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();"
+    },
+    {
+      "key": "DefaultClass<NoInst>::func()",
+      "description": "Member function of class template with default visibility, implicitly instantiated",
+      "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();"
+    },
+    {
+      "key": "DefaultClass<NoInst>::out_of_line_func()",
+      "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+      "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();"
+    },
+    {
+      "key": "DefaultClass<Inst>::func()",
+      "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+      "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();"
+    },
+    {
+      "key": "DefaultClass<Inst>::out_of_line_func()",
+      "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+      "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();"
+    },
+    {
+      "key": "DefaultClass<InstProtected>::func()",
+      "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+      "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();"
+    },
+    {
+      "key": "DefaultClass<InstProtected>::out_of_line_func()",
+      "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+      "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();"
+    }
+  ],
+  "targets": {
+    "executable": {
+      "default": {
+        "hidden": {
+          "title": "default-inl-hidden-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "default-inl-hidden-exe",
+          "inlines_hidden": true,
+          "compile": "g++ -fvisibility-inlines-hidden",
+          "link": "g++",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            }
+          ]
+        },
+        "default": {
+          "title": "default-inl-default-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "default-inl-default-exe",
+          "inlines_hidden": false,
+          "compile": "g++",
+          "link": "g++",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            }
+          ]
+        }
+      },
+      "hidden": {
+        "hidden": {
+          "title": "hidden-inl-hidden-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "hidden-inl-hidden-exe",
+          "inlines_hidden": true,
+          "compile": "g++ -fvisibility=hidden -fvisibility-inlines-hidden",
+          "link": "g++",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            }
+          ]
+        },
+        "default": {
+          "title": "hidden-inl-default-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "hidden-inl-default-exe",
+          "inlines_hidden": false,
+          "compile": "g++ -fvisibility=hidden",
+          "link": "g++",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            }
+          ]
+        }
+      },
+      "protected": {
+        "hidden": {
+          "title": "protected-inl-hidden-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "protected-inl-hidden-exe",
+          "inlines_hidden": true,
+          "compile": "g++ -fvisibility=protected -fvisibility-inlines-hidden",
+          "link": "g++",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            }
+          ]
+        },
+        "default": {
+          "title": "protected-inl-default-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "protected-inl-default-exe",
+          "inlines_hidden": false,
+          "compile": "g++ -fvisibility=protected",
+          "link": "g++",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            }
+          ]
+        }
+      }
+    },
+    "shared": {
+      "default": {
+        "hidden": {
+          "title": "libdefault-inl-hidden-shared.so",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "libdefault-inl-hidden-shared.so",
+          "inlines_hidden": true,
+          "compile": "g++ -fPIC -fvisibility-inlines-hidden",
+          "link": "g++ -fPIC -shared",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        },
+        "default": {
+          "title": "libdefault-inl-default-shared.so",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "libdefault-inl-default-shared.so",
+          "inlines_hidden": false,
+          "compile": "g++ -fPIC",
+          "link": "g++ -fPIC -shared",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        }
+      },
+      "hidden": {
+        "hidden": {
+          "title": "libhidden-inl-hidden-shared.so",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "libhidden-inl-hidden-shared.so",
+          "inlines_hidden": true,
+          "compile": "g++ -fPIC -fvisibility=hidden -fvisibility-inlines-hidden",
+          "link": "g++ -fPIC -shared",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        },
+        "default": {
+          "title": "libhidden-inl-default-shared.so",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "libhidden-inl-default-shared.so",
+          "inlines_hidden": false,
+          "compile": "g++ -fPIC -fvisibility=hidden",
+          "link": "g++ -fPIC -shared",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        }
+      },
+      "protected": {
+        "hidden": {
+          "title": "libprotected-inl-hidden-shared.so",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "libprotected-inl-hidden-shared.so",
+          "inlines_hidden": true,
+          "compile": "g++ -fPIC -fvisibility=protected -fvisibility-inlines-hidden",
+          "link": "g++ -fPIC -shared",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        },
+        "default": {
+          "title": "libprotected-inl-default-shared.so",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "libprotected-inl-default-shared.so",
+          "inlines_hidden": false,
+          "compile": "g++ -fPIC -fvisibility=protected",
+          "link": "g++ -fPIC -shared",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        }
+      }
+    },
+    "exports": {
+      "default": {
+        "hidden": {
+          "title": "default-inl-hidden-export-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "default-inl-hidden-export-exe",
+          "inlines_hidden": true,
+          "compile": "g++ -fvisibility-inlines-hidden",
+          "link": "g++ -Wl,--export-dynamic -rdynamic",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        },
+        "default": {
+          "title": "default-inl-default-export-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "default-inl-default-export-exe",
+          "inlines_hidden": false,
+          "compile": "g++",
+          "link": "g++ -Wl,--export-dynamic -rdynamic",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        }
+      },
+      "hidden": {
+        "hidden": {
+          "title": "hidden-inl-hidden-export-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "hidden-inl-hidden-export-exe",
+          "inlines_hidden": true,
+          "compile": "g++ -fvisibility=hidden -fvisibility-inlines-hidden",
+          "link": "g++ -Wl,--export-dynamic -rdynamic",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        },
+        "default": {
+          "title": "hidden-inl-default-export-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "hidden-inl-default-export-exe",
+          "inlines_hidden": false,
+          "compile": "g++ -fvisibility=hidden",
+          "link": "g++ -Wl,--export-dynamic -rdynamic",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        }
+      },
+      "protected": {
+        "hidden": {
+          "title": "protected-inl-hidden-export-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "protected-inl-hidden-export-exe",
+          "inlines_hidden": true,
+          "compile": "g++ -fvisibility=protected -fvisibility-inlines-hidden",
+          "link": "g++ -Wl,--export-dynamic -rdynamic",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        },
+        "default": {
+          "title": "protected-inl-default-export-exe",
+          "object_file_name": "main.cpp.o",
+          "binary_name": "protected-inl-default-export-exe",
+          "inlines_hidden": false,
+          "compile": "g++ -fvisibility=protected",
+          "link": "g++ -Wl,--export-dynamic -rdynamic",
+          "rows": [
+            {
+              "key": "func()",
+              "description": "Normal function",
+              "definition": "void func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "inline_func()",
+              "description": "Inline function",
+              "definition": "inline void func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "static_func()",
+              "description": "Static function",
+              "definition": "static void func() { \u2026 }",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "(anonymous namespace)::anonymous_func()",
+              "description": "Anonymous namespace function",
+              "definition": "namespace {\nvoid func() { \u2026 }\n}",
+              "object_bind": "LOCAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "default_func()",
+              "description": "Explicit default visibility",
+              "definition": "void [[gnu::visibility(\"default\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "DEFAULT",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "protected_func()",
+              "description": "Explicit protected visibility",
+              "definition": "void [[gnu::visibility(\"protected\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "PROTECTED",
+              "binary_bind": "GLOBAL",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "hidden_func()",
+              "description": "Explicit hidden visibility",
+              "definition": "void [[gnu::visibility(\"hidden\")]] func() { \u2026 }",
+              "object_bind": "GLOBAL",
+              "object_vis": "HIDDEN",
+              "binary_bind": "LOCAL",
+              "binary_vis": "DEFAULT",
+              "dynsym": false
+            },
+            {
+              "key": "void template_func<int>()",
+              "description": "Function template",
+              "definition": "template <class T>\nvoid template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "void inline_template_func<int>()",
+              "description": "Inline function template",
+              "definition": "template <class T>\ninline void inline_template_func() { \u2026 }",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "Class<NoInst>::func()",
+              "description": "Member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "Class<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, implicitly instantiated",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::func()",
+              "description": "Member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void func() { \u2026 }\n};\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "Class<InstDefault>::out_of_line_func()",
+              "description": "Out-of-line member function of class template without attribute, explicitly instantiated with default visibility",
+              "definition": "template <class T>\nstruct Class {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid Class<T>::out_of_line_func() { \u2026 }\n\nstruct InstDefault;\ntemplate struct [[gnu::visibility(\"default\")]]\n    Class<InstDefault>;\n\nClass<InstDefault> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::func()",
+              "description": "Member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nDefaultClass<int> obj;  // implicitly instantiated\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<NoInst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, implicitly instantiated",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nDefaultClass<int> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<Inst>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated without attribute",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct Inst;\ntemplate struct DefaultClass<Inst>;\n\nDefaultClass<Inst> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "PROTECTED",
+              "binary_bind": "WEAK",
+              "binary_vis": "PROTECTED",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::func()",
+              "description": "Member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void func() { \u2026 }\n};\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\"))]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            },
+            {
+              "key": "DefaultClass<InstProtected>::out_of_line_func()",
+              "description": "Out-of-line member function of class template with default visibility, explicitly instantiated with protected visibility",
+              "definition": "template <class T>\nstruct [[gnu::visibility(\"default\")]] DefaultClass {\n    void out_of_line_func();\n};\n\ntemplate <class T>\nvoid DefaultClass<T>::out_of_line_func() { \u2026 }\n\nstruct InstProtected;\ntemplate struct [[gnu::visibility(\"protected\")]]\n    DefaultClass<InstProtected>;\n\nDefaultClass<InstProtected> obj;\nobj.out_of_line_func();",
+              "object_bind": "WEAK",
+              "object_vis": "DEFAULT",
+              "binary_bind": "WEAK",
+              "binary_vis": "DEFAULT",
+              "dynsym": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

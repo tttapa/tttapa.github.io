@@ -1,0 +1,331 @@
+<!--
+@title: Visibility
+@sequence: 900
+@author: Pieter P
+@tableofcontents: true
+@shownextupprevpage: true
+@keywords: visibility, elf, fvisibility, symbol visibility, c, c++, gcc, linux, linking, shared library, export
+@description:
+-->
+<html>
+
+<style>
+    td.bind-global {
+        color: maroon;
+    }
+
+    td.bind-local {
+        color: forestgreen;
+    }
+
+    td.bind-weak {
+        color: navy;
+    }
+
+    td.vis-default {
+        color: crimson;
+    }
+
+    td.vis-protected {
+        color: darkorange;
+    }
+
+    td.vis-hidden {
+        color: blueviolet;
+    }
+
+    td.dynsym-yes {
+        color: black;
+    }
+
+    td.dynsym-no {
+        color: lightgray;
+    }
+
+    td.definition code {
+        display: block;
+        white-space: pre;
+        font-size: 0.85em;
+    }
+
+    td.changed {
+        animation: cell-flash 4s ease-out;
+    }
+
+    article table {
+        margin: 0.5em 0;
+    }
+
+    td, th {
+        padding: 0.4em;
+    }
+
+    @keyframes cell-flash {
+        0% {
+            background-color: rgba(255, 215, 0, 0.45);
+        }
+
+        100% {
+            background-color: transparent;
+        }
+    }
+</style>
+
+<body>
+    <p>
+        ELF symbol visibility and binding can be complex, especially when considering the interaction of
+        different visibility attributes, compiler options, and link types.
+        This page provides an interactive summary of how these factors affect the binding and visibility
+        of various types of symbols in C++, both in the object files and in the final linked binary.
+        Generated using GCC 11.4.0 on Linux x86-64.
+    </p>
+
+    <h2>ELF symbol binding and visibility summary</h2>
+    <p>
+        Choose a link type, <code>-fvisibility</code> setting, and <code>-fvisibility-inlines-hidden</code>
+        option to generate the table below. The rows summarize binding and visibility for each function
+        type in the object file, the final target symbol table
+        (<code>.symtab</code>), and whether the symbol appears in
+        <code>.dynsym</code>. The meaning of the different fields can be found
+        in the ELF specification in the references <a href="#external-references">below</a>.
+    </p>
+
+    <section class="controls">
+        <fieldset>
+            <legend>Link type</legend>
+            <label><input type="radio" name="link-type" value="shared" checked> Shared library</label>
+            <label><input type="radio" name="link-type" value="executable"> Executable</label>
+            <label><input type="radio" name="link-type" value="exports"> Executable with exports</label>
+        </fieldset>
+
+        <fieldset>
+            <legend><code>-fvisibility</code></legend>
+            <label><input type="radio" name="visibility" value="default"> Default</label>
+            <label><input type="radio" name="visibility" value="protected"> Protected</label>
+            <label><input type="radio" name="visibility" value="hidden" checked> Hidden</label>
+        </fieldset>
+
+        <fieldset>
+            <legend><code>-fvisibility-inlines-hidden</code></legend>
+            <label><input type="radio" name="inlines-hidden" value="default"> Off (default)</label>
+            <label><input type="radio" name="inlines-hidden" value="hidden" checked> On (hidden)</label>
+        </fieldset>
+    </section>
+
+    <hr>
+
+    Compile: <code id="compile-command">g++</code><br>
+    Link: <code id="link-command">g++</code>
+
+    <table id="symbol-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Definition</th>
+                <th>Object Binding</th>
+                <th>Object Visibility</th>
+                <th>Binary Binding</th>
+                <th>Binary Visibility</th>
+                <th>.dynsym</th>
+            </tr>
+        </thead>
+        <tbody id="symbol-table-body"></tbody>
+    </table>
+
+    <h3>Caveats</h3>
+    <ul>
+        <li>
+            The visibility attribute of an explicit instantiation of a class
+            template does not override the visibility of the class definition.
+            No warning is emitted by GCC; the attribute is simply ignored.
+            However, if the class template definition is marked with default visibility,
+            but the explicit instantiation does not specify a visibility,
+            the visibility of the explicit instantiation is determined by the
+            <code>-fvisibility</code> option. <br>
+            Contrary to the implicit instatiation case,
+            such an explicit instantiation without a visibility attribute
+            does preserve default visibility if <code>-fvisibility=default</code>
+            and <code>-fvisibility-inlines-hidden</code> are enabled.
+        </li>
+        <li>
+            If an <code>extern template</code> declaration for an explicit class template
+            instantiation exists, the visibility of the <code>extern template</code>
+            declaration is used, even if the explicit instantiation does not
+            specify a visibility. GCC warns if the visibility of the
+            <code>extern template</code> declaration does not match the
+            visibility of the explicit instantiation
+            (<code>warning: type attributes ignored after type is already defined [-Wattributes]</code>).
+        </li>
+        <li>
+            In the case of an implicit instantiation,
+            the <code>-fvisibility=hidden</code> and
+            <code>-fvisibility-inlines-hidden</code> options hide
+            member functions of class templates, even if the class
+            template itself is marked with default visibility.
+            The <code>-fvisibility-inlines-hidden</code> option
+            only hides inline member functions of class templates,
+            without affecting member functions with out-of-line definitions. <br>
+            To force visibility of all member functions, the class template must
+            be explicitly instantiated with default visibility. This should be
+            done before any implicit instantiations occur, which typically means
+            it must be done in the header file, using an <code>extern template</code>.
+        </li>
+        <li>
+            Even though function templates and inline function templates both
+            emit weak symbols (similar to ordinary inline functions),
+            the visibility of the emitted symbols is different when
+            <code>-fvisibility-inlines-hidden</code> is enabled.
+        </li>
+    </ul>
+
+    <h3>Methodology</h3>
+
+    <p>
+        Test program built with a matrix of different visibility
+        settings and link types, then parsing the output of
+        <code>readelf</code> to generate the table.
+    </p>
+
+    <details>
+        <summary>Test program source code ...</summary>
+
+        @codesnippet{
+        "name": "main.cpp",
+        "file": "resources/main.cpp"
+        }
+        @codesnippet{
+        "name": "CMakeLists.txt",
+        "file": "resources/CMakeLists.txt"
+        }
+
+    </details>
+
+    <h2>External references</h2>
+    <ul>
+        <li><a href="https://gcc.gnu.org/wiki/Visibility">GCC Visibility Wiki</a></li>
+        <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fvisibility">GCC -fvisibility
+                Option</a></li>
+        <li><a
+                href="https://gcc.gnu.org/onlinedocs/gcc/C_002b_002b-Dialect-Options.html#index-fvisibility-inlines-hidden">GCC
+                -fvisibility-inlines-hidden Option</a></li>
+        <li><a href="https://refspecs.linuxfoundation.org/elf/gabi4+/ch4.symtab.html">Linux Foundation ELF
+                Specification</a></li>
+    </ul>
+
+    <script>
+        const DATA_URL = 'resources/readelf.json';
+        let visibilityData = null;
+
+        function valueClass(prefix, value) {
+            if (!value) {
+                return '';
+            }
+            return `${prefix}-${value.toLowerCase()}`;
+        }
+
+        function currentSelection(name) {
+            return document.querySelector(`input[name="${name}"]:checked`).value;
+        }
+
+        function selectedTarget() {
+            if (!visibilityData) {
+                return null;
+            }
+
+            const linkType = currentSelection('link-type');
+            const visibility = currentSelection('visibility');
+            const inlinesHidden = currentSelection('inlines-hidden');
+            const targetsByType = visibilityData.targets?.[linkType];
+            if (!targetsByType) {
+                return null;
+            }
+            return targetsByType[visibility]?.[inlinesHidden] ?? null;
+        }
+
+        function escapeHtml(text) {
+            return String(text)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        function renderTable(previousState) {
+            const target = selectedTarget();
+            const tbody = document.getElementById('symbol-table-body');
+            const compileNode = document.getElementById('compile-command');
+            const linkNode = document.getElementById('link-command');
+
+            if (!target) {
+                compileNode.textContent = 'N/A';
+                linkNode.textContent = 'N/A';
+                tbody.innerHTML = '<tr><td colspan="7">No data for this selection</td></tr>';
+                return { rows: [] };
+            }
+
+            compileNode.textContent = target.compile;
+            linkNode.textContent = target.link;
+
+            tbody.innerHTML = target.rows.map((row, index) => {
+                const previousRow = previousState?.rows[index];
+                const changed = (field) => previousRow && previousRow[field] !== row[field] ? ' changed' : '';
+                const objectBindClass = valueClass('bind', row.object_bind);
+                const objectVisClass = valueClass('vis', row.object_vis);
+                const binaryBindClass = valueClass('bind', row.binary_bind);
+                const binaryVisClass = valueClass('vis', row.binary_vis);
+                const dynsymClass = row.dynsym ? 'dynsym-yes' : 'dynsym-no';
+                return `
+            <tr>
+                <td>${escapeHtml(row.description)}</td>
+                <td class="definition"><code>${escapeHtml(row.definition)}</code></td>
+                <td class="${objectBindClass}${changed('object_bind')}">${escapeHtml(row.object_bind ?? '-').toLowerCase()}</td>
+                <td class="${objectVisClass}${changed('object_vis')}">${escapeHtml(row.object_vis ?? '-').toLowerCase()}</td>
+                <td class="${binaryBindClass}${changed('binary_bind')}">${escapeHtml(row.binary_bind ?? '-').toLowerCase()}</td>
+                <td class="${binaryVisClass}${changed('binary_vis')}">${escapeHtml(row.binary_vis ?? '-').toLowerCase()}</td>
+                <td class="${dynsymClass}${changed('dynsym')}">${row.dynsym ? 'yes' : 'no'}</td>
+            </tr>
+        `;
+            }).join('');
+
+            const changedCells = tbody.querySelectorAll('.changed');
+            changedCells.forEach((cell) => {
+                window.setTimeout(() => cell.classList.remove('changed'), 4000);
+            });
+
+            return { rows: target.rows };
+        }
+
+        let lastState = null;
+
+        function refreshTable() {
+            lastState = renderTable(lastState);
+        }
+
+        document.querySelectorAll('input[name="link-type"], input[name="visibility"], input[name="inlines-hidden"]').forEach((input) => {
+            input.addEventListener('change', refreshTable);
+        });
+
+        async function init() {
+            try {
+                const response = await fetch(DATA_URL, { cache: 'no-cache' });
+                if (!response.ok) {
+                    throw new Error(`Could not load ${DATA_URL}`);
+                }
+                visibilityData = await response.json();
+                refreshTable();
+            } catch (error) {
+                document.getElementById('compile-command').textContent = 'N/A';
+                document.getElementById('link-command').textContent = 'N/A';
+                document.getElementById('symbol-table-body').innerHTML =
+                    '<tr><td colspan="7">Failed to load resources/readelf.json</td></tr>';
+                console.error(error);
+            }
+        }
+
+        init();
+    </script>
+
+</body>
+
+</html>
