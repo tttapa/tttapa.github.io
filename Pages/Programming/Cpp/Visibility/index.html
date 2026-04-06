@@ -1,0 +1,881 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Pieter P">
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,300;0,600;1,300;1,600&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- No MathJax -->
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'>
+    <meta name="theme-color" content="#ccc">
+    <meta name="keywords" content="visibility, elf, fvisibility, symbol visibility, c, c++, gcc, linux, linking, shared library, export">
+    <meta name="description" content="">
+    <title>Visibility</title>
+    <script>
+        function copyTextBelow(button) {
+            const txt = button.nextElementSibling.innerText;
+            navigator.clipboard.writeText(txt).then(() => {
+                button.classList.add("copied");
+                setTimeout(() => {
+                    button.classList.remove("copied");
+                }, 2000);
+            }).catch(err => {
+                console.error("Error copying text: ", err);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <nav>
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" style="position:absolute;top:4px;right: 4px;">
+                <path d="M0 0h48v48h-48z" fill="none" />
+                <path d="M6 36h36v-4h-36v4zm0-10h36v-4h-36v4zm0-14v4h36v-4h-36z" />
+            </svg>
+            <h2><a href="/Pages">Pages</a></h2>
+<ul>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/index.html">Raspberry Pi</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/index.html">Installation and Setup</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/Setting-up-Ubuntu.html">Installing and Setting up Ubuntu</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/Installation+Setup/WiFi-Setup.html">Setting up the WiFi Connection</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/Python-Development/index.html">Python Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/index.html">Ubuntu to Raspberry Pi OS Cross C++ Development</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Installation.html">Installation and Setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Development-setup.html">Development setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Building-example-project.html">Building the C++ example project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development-RPiOS/Debugging.html">Remote debugging</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development-Ubuntu/index.html">Ubuntu to Ubuntu Cross C++ Development</a>
+        <ul>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/C++-Development/index.html">C++ Development using Docker</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installation.html">Installation and setup</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Building-The-Toolchain.html">Building the Cross-Compilation Toolchain</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Dependencies.html">Cross-Compiling the Dependencies</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Installing-Dependencies.html">Installing the dependencies on the Pi</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Cpp-Program.html">Cross-Compiling the C++ Example Project</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Debugging.html">Debugging</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/C++-Development/Speedrun.html">Speedrun</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Raspberry-Pi/NEON/index.html">NEON</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Raspberry-Pi/NEON/Division.html">Division</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/index.html">Arduino</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/index.html">Audio and Signal Processing</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/index.html">VU Meters</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Model.html">Model of a moving-coil galvanometer</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Audio-and-Signal-Processing/VU-Meters/Damped-Harmonic-Oscillator.html">The Damped Harmonic Oscillator</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/index.html">Control Surface</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Surface/Developers/index.html">Developers</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Installation.html">Installation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Style.html">Style</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Tests.html">Tests</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Surface/Developers/Generating-Documentation.html">Generating Documentation</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/index.html">Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/index.html">Motorized Faders</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Controllers.html">1. PID Controllers</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Cpp-Implementation.html">2. C++ Implementation</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/PID-Tuning.html">3. PID Tuning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Architecture.html">4. Architecture and Design Decisions</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Hardware.html">5. Hardware</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/Configuration.html">6. Configuration options and common use cases</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Control-Theory/Motor-Fader/ATmega328P-Code.html">7. ATmega328P Code</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/Bootloaders/index.html">Bootloaders</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Arduino/Bootloaders/ATmega328P-custom-frequency.html">Compiling Optiboot - ATmega328P at custom frequency</a></li>
+        </ul>
+        </li>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/index.html">ESP8266</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Arduino/ESP8266/Flashing/index.html">Flashing</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Arduino/ESP8266/Flashing/Flashing-With-an-Arduino.html">Flashing the ESP8266 with an Arduino UNO</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/index.html">Mathematics &amp; Engineering</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/index.html">Systems and Control Theory</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/index.html">Analog Filters &amp; Systems</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Analog-Filters/Butterworth-Filters.html">Butterworth Filters</a></li>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/index.html">Digital Filters &amp; Systems</a>
+            <ul>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/index.html">DTLTI Systems, Transfer Functions, and the Z-transform</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/DTLTI-Systems.html">DTLTI Systems</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Impulse-and-Step-Response.html">Impulse and Step Response</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/Convolutions.html">Convolutions</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/DTLTI-Systems,-Transfer-Functions,-and-the-Z-transform/The-Z-transform.html">The Z-transform</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/index.html">Exponential Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Exponential-Moving-Average.html">Exponential Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/Filtering-in-MATLAB.html">Filtering in MATLAB</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Exponential Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/index.html">Simple Moving Average</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/Simple-Moving-Average.html">Simple Moving Average</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Simple Moving Average/C++Implementation.html">C++ Implementation</a></li>
+                </ul>
+                </li>
+                <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/index.html">Discretization</a>
+                <ul>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Bilinear-transform.html">Bilinear Transform</a></li>
+                    <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/Discretization/Discretization-of-a-fourth-order-Butterworth-filter.html">Discretization of a Fourth-Order Butterworth Filter</a></li>
+                </ul>
+                </li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Mathematics/Systems-and-Control-Theory/Digital-filters/FIR-Notch.html">Simple Finite Impulse Response Notch Filter</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../index.html">Programming</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../Snippets/index.html">Snippets</a>
+        <ul>
+        </ul>
+        </li>
+        <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../index.html">C++</a>
+        <ul>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Practices/index.html">Best Practices</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../Practices/type-punning.html">Don't use unions or pointer casts for type punning</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../Practices/c-style-casts.html">Don't use C-style casts</a></li>
+            </ul>
+            </li>
+            <li class="expanded"><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="openEntry " href="index.html">Visibility</a>
+            <ul>
+            </ul>
+            </li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../Algorithms/index.html">Algorithms</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../Algorithms/Max_n_elements.html">Maximum N elements</a></li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+    <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/index.html">Ubuntu</a>
+    <ul>
+        <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/index.html">Software Installation</a>
+        <ul>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Installing-Locally.html">Installing Locally</a></li>
+            <li><span class="dtriangle" onclick="this.parentElement.classList.toggle('expanded');"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/index.html">Arduino</a>
+            <ul>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Arduino-IDE.html">Arduino IDE</a></li>
+                <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Arduino/Hairless-MIDI.html">The Hairless MIDI to Serial Bridge</a></li>
+            </ul>
+            </li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/BlueZ.html">BlueZ with MIDI over BLE Support</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Doxygen.html">Doxygen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eclipse.html">Eclipse</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Eigen3.html">Eigen</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/GoogleTest.html">GoogleTest</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Java.html">Java</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/Python.html">Python</a></li>
+            <li><span class="ftriangle"></span><a class="" href="../../../Ubuntu/Software-Installation/VirtualBox.html">VirtualBox</a></li>
+        </ul>
+        </li>
+    </ul>
+    </li>
+</ul>
+
+            <i class="material-icons">
+                <a href="/" title="Home">home</a>
+            </i>
+            <i class="material-icons">
+                <a href="index.pdf" title="Download as PDF">get_app</a>
+            </i>
+            <!-- <i class="material-icons">
+                <a href="javascript:window.print()" title="Print this article" onclick="window.print(); return false;">print</a>
+            </i> -->
+            <i class="material-icons">
+                <a href="https://github.com/tttapa/tttapa.github.io/issues/new" target="_blank" title="Comment or open an issue">feedback</a>
+            </i>
+        </div>
+    </nav>
+    <article >
+        <h1 class="indexTitle">Visibility</h1>
+        <i class="author">Pieter P</i>
+        <div class="main-content">
+<div class="toc expanded" id="toc" style="max-height: none;">
+  <script>
+  toc.classList.remove("expanded");
+  toc.style.maxHeight = '1.6em';
+  function updateTocSize() {
+    let toc = document.getElementById("toc");
+    toc.style.maxHeight = toc.scrollHeight + 'px';
+  }
+  </script>  <h4 class="toc" onclick="if (this.parentElement.classList.toggle('expanded')) {updateTocSize();window.addEventListener('resize', updateTocSize);} else {this.parentElement.style = undefined;window.removeEventListener('resize', updateTocSize);}">Table of Contents <i class="material-icons">list</i></h4>
+  <ul>
+        <li><a href="#elf-symbol-binding-and-visibility-summary">ELF symbol binding and visibility summary</a></li>
+          <ul>
+            <li><a href="#caveats">Caveats</a></li>
+            <li><a href="#methodology">Methodology</a></li>
+          </ul>
+        <li><a href="#external-references">External references</a></li>
+  </ul></div>
+
+
+<style>
+    td.bind-global {
+        color: maroon;
+    }
+
+    td.bind-local {
+        color: forestgreen;
+    }
+
+    td.bind-weak {
+        color: navy;
+    }
+
+    td.vis-default {
+        color: crimson;
+    }
+
+    td.vis-protected {
+        color: darkorange;
+    }
+
+    td.vis-hidden {
+        color: blueviolet;
+    }
+
+    td.dynsym-yes {
+        color: black;
+    }
+
+    td.dynsym-no {
+        color: lightgray;
+    }
+
+    td.definition code {
+        display: block;
+        white-space: pre;
+        font-size: 0.85em;
+    }
+
+    td.changed {
+        animation: cell-flash 4s ease-out;
+    }
+
+    article table {
+        margin: 0.5em 0;
+    }
+
+    td, th {
+        padding: 0.4em;
+    }
+
+    @keyframes cell-flash {
+        0% {
+            background-color: rgba(255, 215, 0, 0.45);
+        }
+
+        100% {
+            background-color: transparent;
+        }
+    }
+</style>
+
+<body>
+    <p>
+        ELF symbol visibility and binding can be complex, especially when considering the interaction of
+        different visibility attributes, compiler options, and link types.
+        This page provides an interactive summary of how these factors affect the binding and visibility
+        of various types of symbols in C++, both in the object files and in the final linked binary.
+        Generated using GCC 11.4.0 on Linux x86-64.
+    </p>
+
+    <h2><a name="elf-symbol-binding-and-visibility-summary" href="#elf-symbol-binding-and-visibility-summary">ELF symbol binding and visibility summary</a></h2>
+    <p>
+        Choose a link type, <code>-fvisibility</code> setting, and <code>-fvisibility-inlines-hidden</code>
+        option to generate the table below. The rows summarize binding and visibility for each function
+        type in the object file, the final target symbol table
+        (<code>.symtab</code>), and whether the symbol appears in
+        <code>.dynsym</code>. The meaning of the different fields can be found
+        in the ELF specification in the references <a href="#external-references">below</a>.
+    </p>
+
+    <section class="controls">
+        <fieldset>
+            <legend>Link type</legend>
+            <label><input type="radio" name="link-type" value="shared" checked> Shared library</label>
+            <label><input type="radio" name="link-type" value="executable"> Executable</label>
+            <label><input type="radio" name="link-type" value="exports"> Executable with exports</label>
+        </fieldset>
+
+        <fieldset>
+            <legend><code>-fvisibility</code></legend>
+            <label><input type="radio" name="visibility" value="default"> Default</label>
+            <label><input type="radio" name="visibility" value="protected"> Protected</label>
+            <label><input type="radio" name="visibility" value="hidden" checked> Hidden</label>
+        </fieldset>
+
+        <fieldset>
+            <legend><code>-fvisibility-inlines-hidden</code></legend>
+            <label><input type="radio" name="inlines-hidden" value="default"> Off (default)</label>
+            <label><input type="radio" name="inlines-hidden" value="hidden" checked> On (hidden)</label>
+        </fieldset>
+    </section>
+
+    <hr>
+
+    Compile: <code id="compile-command">g++</code><br>
+    Link: <code id="link-command">g++</code>
+
+    <table id="symbol-table">
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Definition</th>
+                <th>Object Binding</th>
+                <th>Object Visibility</th>
+                <th>Binary Binding</th>
+                <th>Binary Visibility</th>
+                <th>.dynsym</th>
+            </tr>
+        </thead>
+        <tbody id="symbol-table-body"></tbody>
+    </table>
+
+    <h3><a name="caveats" href="#caveats">Caveats</a></h3>
+    <ul>
+        <li>
+            The visibility attribute of an explicit instantiation of a class
+            template does not override the visibility of the class definition.
+            No warning is emitted by GCC; the attribute is simply ignored.
+            However, if the class template definition is marked with default visibility,
+            but the explicit instantiation does not specify a visibility,
+            the visibility of the explicit instantiation is determined by the
+            <code>-fvisibility</code> option. <br>
+            Contrary to the implicit instatiation case,
+            such an explicit instantiation without a visibility attribute
+            does preserve default visibility if <code>-fvisibility=default</code>
+            and <code>-fvisibility-inlines-hidden</code> are enabled.
+        </li>
+        <li>
+            If an <code>extern template</code> declaration for an explicit class template
+            instantiation exists, the visibility of the <code>extern template</code>
+            declaration is used, even if the explicit instantiation does not
+            specify a visibility. GCC warns if the visibility of the
+            <code>extern template</code> declaration does not match the
+            visibility of the explicit instantiation
+            (<code>warning: type attributes ignored after type is already defined [-Wattributes]</code>).
+        </li>
+        <li>
+            In the case of an implicit instantiation,
+            the <code>-fvisibility=hidden</code> and
+            <code>-fvisibility-inlines-hidden</code> options hide
+            member functions of class templates, even if the class
+            template itself is marked with default visibility.
+            The <code>-fvisibility-inlines-hidden</code> option
+            only hides inline member functions of class templates,
+            without affecting member functions with out-of-line definitions. <br>
+            To force visibility of all member functions, the class template must
+            be explicitly instantiated with default visibility. This should be
+            done before any implicit instantiations occur, which typically means
+            it must be done in the header file, using an <code>extern template</code>.
+        </li>
+        <li>
+            Even though function templates and inline function templates both
+            emit weak symbols (similar to ordinary inline functions),
+            the visibility of the emitted symbols is different when
+            <code>-fvisibility-inlines-hidden</code> is enabled.
+        </li>
+    </ul>
+
+    <h3><a name="methodology" href="#methodology">Methodology</a></h3>
+
+    <p>
+        Test program built with a matrix of different visibility
+        settings and link types, then parsing the output of
+        <code>readelf</code> to generate the table.
+    </p>
+
+    <details>
+        <summary>Test program source code ...</summary>
+
+        <h4 class="snippet-name"><a name="main-cpp" href="#main-cpp">main.cpp</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments192 .hll { background-color: #ffffcc }
+.pygments192 { background: #ffffff; }
+.pygments192 .c { color: #008000 } /* Comment */
+.pygments192 .err { border: 1px solid #FF0000 } /* Error */
+.pygments192 .k { color: #0000ff } /* Keyword */
+.pygments192 .l { color: #0000FF } /* Literal */
+.pygments192 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments192 .cm { color: #008000 } /* Comment.Multiline */
+.pygments192 .cp { color: #af00db } /* Comment.Preproc */
+.pygments192 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments192 .c1 { color: #008000 } /* Comment.Single */
+.pygments192 .cs { color: #008000 } /* Comment.Special */
+.pygments192 .ge { font-style: italic } /* Generic.Emph */
+.pygments192 .gh { font-weight: bold } /* Generic.Heading */
+.pygments192 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments192 .gs { font-weight: bold } /* Generic.Strong */
+.pygments192 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments192 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments192 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments192 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments192 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments192 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments192 .kt { color: #2b91af } /* Keyword.Type */
+.pygments192 .ld { color: #0000FF } /* Literal.Date */
+.pygments192 .m { color: #0000FF } /* Literal.Number */
+.pygments192 .s { color: #a31515 } /* Literal.String */
+.pygments192 .na { color: #001080 } /* Name.Attribute */
+.pygments192 .nb { color: #795e26 } /* Name.Builtin */
+.pygments192 .nc { color: #2b91af } /* Name.Class */
+.pygments192 .no { color: #0000FF } /* Name.Constant */
+.pygments192 .nf { color: #795e26 } /* Name.Function */
+.pygments192 .nl { color: #AF00DB } /* Name.Label */
+.pygments192 .nn { color: #000000 } /* Name.Namespace */
+.pygments192 .nt { color: #800000 } /* Name.Tag */
+.pygments192 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments192 .ow { color: #0000ff } /* Operator.Word */
+.pygments192 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments192 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments192 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments192 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments192 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments192 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments192 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments192 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments192 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments192 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments192 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments192 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments192 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments192 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments192 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments192 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments192 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments192 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments192 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments192 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments192 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments192 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments192 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments192 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments192 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments192 pre.snippet192 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Visibility/resources/main.cpp" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments192"><pre class="lineNumbers snippet192"><code><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;cstdio&gt;</span></code>
+<code></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="nf">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;func&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code></code>
+<code><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">static_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;static_func&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code></code>
+<code><span class="k">namespace</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="nf">anonymous_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;anonymous_func&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code><span class="p">}</span><span class="w"> </span><span class="c1">// namespace</span></code>
+<code></code>
+<code><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">inline_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;inline_func&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="n">template_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;template_func&lt;...&gt;&quot;</span><span class="p">);</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span></code>
+<code><span class="kr">inline</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">inline_template_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;inline_template_func&lt;...&gt;&quot;</span><span class="p">);</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">Class</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;Class&lt;...&gt;::func&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">static_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;Class&lt;...&gt;::static_func&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">out_of_line_func</span><span class="p">();</span></code>
+<code><span class="p">};</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">out_of_line_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;Class&lt;...&gt;::out_of_line_func&quot;</span><span class="p">);</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">NoInst</span><span class="p">;</span></code>
+<code></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">InstDefault</span><span class="p">;</span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">[[</span><span class="n">gnu</span><span class="o">::</span><span class="n">visibility</span><span class="p">(</span><span class="s">&quot;default&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="n">Class</span><span class="o">&lt;</span><span class="n">InstDefault</span><span class="o">&gt;</span><span class="p">;</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="p">[[</span><span class="n">gnu</span><span class="o">::</span><span class="n">visibility</span><span class="p">(</span><span class="s">&quot;default&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="n">DefaultClass</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;Class&lt;...&gt;::func&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code><span class="w">    </span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">static_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;Class&lt;...&gt;::static_func&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">out_of_line_func</span><span class="p">();</span></code>
+<code><span class="p">};</span></code>
+<code></code>
+<code><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span></code>
+<code><span class="kt">void</span><span class="w"> </span><span class="n">DefaultClass</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">out_of_line_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;Class&lt;...&gt;::out_of_line_func&quot;</span><span class="p">);</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">Inst</span><span class="p">;</span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">DefaultClass</span><span class="o">&lt;</span><span class="n">Inst</span><span class="o">&gt;</span><span class="p">;</span></code>
+<code></code>
+<code><span class="k">struct</span><span class="w"> </span><span class="nc">InstProtected</span><span class="p">;</span></code>
+<code><span class="k">template</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="p">[[</span><span class="n">gnu</span><span class="o">::</span><span class="n">visibility</span><span class="p">(</span><span class="s">&quot;protected&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="n">DefaultClass</span><span class="o">&lt;</span><span class="n">InstProtected</span><span class="o">&gt;</span><span class="p">;</span></code>
+<code></code>
+<code><span class="p">[[</span><span class="n">gnu</span><span class="o">::</span><span class="n">visibility</span><span class="p">(</span><span class="s">&quot;default&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">default_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;default_func&quot;</span><span class="p">);</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="p">[[</span><span class="n">gnu</span><span class="o">::</span><span class="n">visibility</span><span class="p">(</span><span class="s">&quot;protected&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">protected_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;protected_func&quot;</span><span class="p">);</span></code>
+<code><span class="p">}</span></code>
+<code></code>
+<code><span class="p">[[</span><span class="n">gnu</span><span class="o">::</span><span class="n">visibility</span><span class="p">(</span><span class="s">&quot;hidden&quot;</span><span class="p">)]]</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">hidden_func</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">puts</span><span class="p">(</span><span class="s">&quot;hidden_func&quot;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span></code>
+<code></code>
+<code><span class="kt">int</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span></code>
+<code><span class="w">    </span><span class="n">func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">static_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">anonymous_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">inline_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">template_func</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">inline_template_func</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">Class</span><span class="o">&lt;</span><span class="n">NoInst</span><span class="o">&gt;</span><span class="w"> </span><span class="n">obj</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="n">obj</span><span class="p">.</span><span class="n">func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">obj</span><span class="p">.</span><span class="n">static_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">obj</span><span class="p">.</span><span class="n">out_of_line_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">Class</span><span class="o">&lt;</span><span class="n">InstDefault</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inst_default_obj</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="n">inst_default_obj</span><span class="p">.</span><span class="n">func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">inst_default_obj</span><span class="p">.</span><span class="n">static_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">inst_default_obj</span><span class="p">.</span><span class="n">out_of_line_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">DefaultClass</span><span class="o">&lt;</span><span class="n">NoInst</span><span class="o">&gt;</span><span class="w"> </span><span class="n">default_obj</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="n">default_obj</span><span class="p">.</span><span class="n">func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">default_obj</span><span class="p">.</span><span class="n">static_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">default_obj</span><span class="p">.</span><span class="n">out_of_line_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">DefaultClass</span><span class="o">&lt;</span><span class="n">Inst</span><span class="o">&gt;</span><span class="w"> </span><span class="n">default_inst_obj</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="n">default_inst_obj</span><span class="p">.</span><span class="n">func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">default_inst_obj</span><span class="p">.</span><span class="n">static_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">default_inst_obj</span><span class="p">.</span><span class="n">out_of_line_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">DefaultClass</span><span class="o">&lt;</span><span class="n">InstProtected</span><span class="o">&gt;</span><span class="w"> </span><span class="n">default_inst_protected_obj</span><span class="p">;</span></code>
+<code><span class="w">    </span><span class="n">default_inst_protected_obj</span><span class="p">.</span><span class="n">func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">default_inst_protected_obj</span><span class="p">.</span><span class="n">static_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">default_inst_protected_obj</span><span class="p">.</span><span class="n">out_of_line_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">default_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">protected_func</span><span class="p">();</span></code>
+<code><span class="w">    </span><span class="n">hidden_func</span><span class="p">();</span></code>
+<code><span class="p">}</span></code></pre></div>
+</div>
+        <h4 class="snippet-name"><a name="cmakelists-txt" href="#cmakelists-txt">CMakeLists.txt</a></h4>
+<div class="codesnippet"><style>pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.pygments196 .hll { background-color: #ffffcc }
+.pygments196 { background: #ffffff; }
+.pygments196 .c { color: #008000 } /* Comment */
+.pygments196 .err { border: 1px solid #FF0000 } /* Error */
+.pygments196 .k { color: #0000ff } /* Keyword */
+.pygments196 .l { color: #0000FF } /* Literal */
+.pygments196 .ch { color: #008000 } /* Comment.Hashbang */
+.pygments196 .cm { color: #008000 } /* Comment.Multiline */
+.pygments196 .cp { color: #af00db } /* Comment.Preproc */
+.pygments196 .cpf { color: #a31515 } /* Comment.PreprocFile */
+.pygments196 .c1 { color: #008000 } /* Comment.Single */
+.pygments196 .cs { color: #008000 } /* Comment.Special */
+.pygments196 .ge { font-style: italic } /* Generic.Emph */
+.pygments196 .gh { font-weight: bold } /* Generic.Heading */
+.pygments196 .gp { font-weight: bold } /* Generic.Prompt */
+.pygments196 .gs { font-weight: bold } /* Generic.Strong */
+.pygments196 .gu { font-weight: bold } /* Generic.Subheading */
+.pygments196 .kc { color: #4e8ae9 } /* Keyword.Constant */
+.pygments196 .kd { color: #0000ff } /* Keyword.Declaration */
+.pygments196 .kn { color: #af00db } /* Keyword.Namespace */
+.pygments196 .kp { color: #0000ff } /* Keyword.Pseudo */
+.pygments196 .kr { color: #0000ff } /* Keyword.Reserved */
+.pygments196 .kt { color: #2b91af } /* Keyword.Type */
+.pygments196 .ld { color: #0000FF } /* Literal.Date */
+.pygments196 .m { color: #0000FF } /* Literal.Number */
+.pygments196 .s { color: #a31515 } /* Literal.String */
+.pygments196 .na { color: #001080 } /* Name.Attribute */
+.pygments196 .nb { color: #795e26 } /* Name.Builtin */
+.pygments196 .nc { color: #2b91af } /* Name.Class */
+.pygments196 .no { color: #0000FF } /* Name.Constant */
+.pygments196 .nf { color: #795e26 } /* Name.Function */
+.pygments196 .nl { color: #AF00DB } /* Name.Label */
+.pygments196 .nn { color: #000000 } /* Name.Namespace */
+.pygments196 .nt { color: #800000 } /* Name.Tag */
+.pygments196 .nv { color: #0F1E87 } /* Name.Variable */
+.pygments196 .ow { color: #0000ff } /* Operator.Word */
+.pygments196 .mb { color: #09885a } /* Literal.Number.Bin */
+.pygments196 .mf { color: #09885a } /* Literal.Number.Float */
+.pygments196 .mh { color: #09885a } /* Literal.Number.Hex */
+.pygments196 .mi { color: #09885a } /* Literal.Number.Integer */
+.pygments196 .mo { color: #09885a } /* Literal.Number.Oct */
+.pygments196 .sa { color: #a31515 } /* Literal.String.Affix */
+.pygments196 .sb { color: #a31515 } /* Literal.String.Backtick */
+.pygments196 .sc { color: #a31515 } /* Literal.String.Char */
+.pygments196 .dl { color: #a31515 } /* Literal.String.Delimiter */
+.pygments196 .sd { color: #a31515 } /* Literal.String.Doc */
+.pygments196 .s2 { color: #a31515 } /* Literal.String.Double */
+.pygments196 .se { color: #a31515 } /* Literal.String.Escape */
+.pygments196 .sh { color: #a31515 } /* Literal.String.Heredoc */
+.pygments196 .si { color: #a31515 } /* Literal.String.Interpol */
+.pygments196 .sx { color: #a31515 } /* Literal.String.Other */
+.pygments196 .sr { color: #a31515 } /* Literal.String.Regex */
+.pygments196 .s1 { color: #a31515 } /* Literal.String.Single */
+.pygments196 .ss { color: #a31515 } /* Literal.String.Symbol */
+.pygments196 .bp { color: #795e26 } /* Name.Builtin.Pseudo */
+.pygments196 .fm { color: #795e26 } /* Name.Function.Magic */
+.pygments196 .vc { color: #0F1E87 } /* Name.Variable.Class */
+.pygments196 .vg { color: #0F1E87 } /* Name.Variable.Global */
+.pygments196 .vi { color: #0F1E87 } /* Name.Variable.Instance */
+.pygments196 .vm { color: #0F1E87 } /* Name.Variable.Magic */
+.pygments196 .il { color: #09885a } /* Literal.Number.Integer.Long */
+.pygments196 pre.snippet196 { counter-reset: line 0; }</style>
+<a href="https://github.com/tttapa/tttapa.github.io/blob/master/Pages-src/Raw-HTML/Programming/Cpp/Visibility/resources/CMakeLists.txt" title="Open on GitHub"><img class="github-mark" src="/Images/GitHub-Mark.svg"></a>
+
+    <div class="copy-button" onclick="copyTextBelow(this)" title="Copy to clipboard">
+        <span class="material-icons copy-icon clipboard">content_copy</span>
+        <span class="material-icons copy-icon checkmark">check</span>
+    </div>
+    <div class="pygments196"><pre class="lineNumbers snippet196"><code><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.24</span><span class="p">)</span></code>
+<code><span class="nb">project</span><span class="p">(</span><span class="s">Visibility</span><span class="p">)</span></code>
+<code><span class="nb">set</span><span class="p">(</span><span class="s">CMAKE_VERBOSE_MAKEFILE</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span></code>
+<code><span class="nb">add_compile_options</span><span class="p">(</span><span class="s">-Wall</span><span class="w"> </span><span class="s">-Wextra</span><span class="p">)</span></code>
+<code></code>
+<code><span class="nb">function</span><span class="p">(</span><span class="s">visibility_print_symbols</span><span class="w"> </span><span class="s">tgt</span><span class="p">)</span></code>
+<code><span class="w">    </span><span class="nb">string</span><span class="p">(</span><span class="s">JOIN</span><span class="w"> </span><span class="s2">&quot;|&quot;</span><span class="w"> </span><span class="s">regex</span><span class="w"> </span><span class="o">${</span><span class="nv">ARGN</span><span class="o">}</span><span class="w"> </span><span class="s2">&quot;Symbol table&quot;</span><span class="w"> </span><span class="s2">&quot;Bind&quot;</span><span class="w"> </span><span class="s2">&quot;Vis&quot;</span><span class="p">)</span></code>
+<code><span class="w">    </span><span class="nb">add_custom_command</span><span class="p">(</span><span class="s">TARGET</span><span class="w"> </span><span class="o">${</span><span class="nv">tgt</span><span class="o">}</span><span class="w"> </span><span class="s">POST_BUILD</span><span class="w"> </span><span class="s">VERBATIM</span></code>
+<code><span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_COMMAND</span><span class="o">}</span><span class="w"> </span><span class="s">-E</span><span class="w"> </span><span class="s">echo</span></code>
+<code><span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_COMMAND</span><span class="o">}</span><span class="w"> </span><span class="s">-E</span><span class="w"> </span><span class="s">echo</span><span class="w"> </span><span class="s2">&quot;Object file symbols ($&lt;PATH:GET_FILENAME,$&lt;TARGET_OBJECTS:${tgt}&gt;&gt;):&quot;</span></code>
+<code><span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_READELF</span><span class="o">}</span><span class="w"> </span><span class="s">-WCs</span><span class="w"> </span><span class="s2">&quot;$&lt;TARGET_OBJECTS:${tgt}&gt;&quot;</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">grep</span><span class="w"> </span><span class="s">-E</span><span class="w"> </span><span class="s2">&quot;${regex}&quot;</span></code>
+<code><span class="w">        </span><span class="s">USES_TERMINAL</span><span class="p">)</span></code>
+<code><span class="w">    </span><span class="nb">add_custom_command</span><span class="p">(</span><span class="s">TARGET</span><span class="w"> </span><span class="o">${</span><span class="nv">tgt</span><span class="o">}</span><span class="w"> </span><span class="s">POST_BUILD</span><span class="w"> </span><span class="s">VERBATIM</span></code>
+<code><span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_COMMAND</span><span class="o">}</span><span class="w"> </span><span class="s">-E</span><span class="w"> </span><span class="s">echo</span></code>
+<code><span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_COMMAND</span><span class="o">}</span><span class="w"> </span><span class="s">-E</span><span class="w"> </span><span class="s">echo</span><span class="w"> </span><span class="s2">&quot;Executable file symbols ($&lt;PATH:GET_FILENAME,$&lt;TARGET_FILE:${tgt}&gt;&gt;):&quot;</span></code>
+<code><span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="o">${</span><span class="nv">CMAKE_READELF</span><span class="o">}</span><span class="w"> </span><span class="s">-WCs</span><span class="w"> </span><span class="s2">&quot;$&lt;TARGET_FILE:${tgt}&gt;&quot;</span><span class="w"> </span><span class="s">|</span><span class="w"> </span><span class="s">grep</span><span class="w"> </span><span class="s">-E</span><span class="w"> </span><span class="s2">&quot;${regex}&quot;</span></code>
+<code><span class="w">        </span><span class="s">USES_TERMINAL</span><span class="p">)</span></code>
+<code><span class="nb">endfunction</span><span class="p">()</span></code>
+<code></code>
+<code><span class="nb">foreach</span><span class="p">(</span><span class="s">vis</span><span class="w"> </span><span class="s">default</span><span class="w"> </span><span class="s">hidden</span><span class="w"> </span><span class="s">protected</span><span class="p">)</span></code>
+<code><span class="w">    </span><span class="nb">foreach</span><span class="p">(</span><span class="s">vis-inl</span><span class="w"> </span><span class="s">inl-hidden</span><span class="w"> </span><span class="s">inl-default</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">set</span><span class="p">(</span><span class="s">vis-inl-value</span><span class="w"> </span><span class="s2">&quot;Off&quot;</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">if</span><span class="w"> </span><span class="p">(</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="w"> </span><span class="s">STREQUAL</span><span class="w"> </span><span class="s2">&quot;inl-hidden&quot;</span><span class="p">)</span></code>
+<code><span class="w">            </span><span class="nb">set</span><span class="p">(</span><span class="s">vis-inl-value</span><span class="w"> </span><span class="s2">&quot;On&quot;</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">endif</span><span class="p">()</span></code>
+<code><span class="w">        </span><span class="nb">add_executable</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-exe</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-exe</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">CXX_VISIBILITY_PRESET</span><span class="w"> </span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-exe</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">VISIBILITY_INLINES_HIDDEN</span><span class="w"> </span><span class="o">${</span><span class="nv">vis-inl-value</span><span class="o">}</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">visibility_print_symbols</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-exe</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">)</span></code>
+<code></code>
+<code><span class="w">        </span><span class="nb">add_executable</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-export-exe</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-export-exe</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">CXX_VISIBILITY_PRESET</span><span class="w"> </span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-export-exe</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">VISIBILITY_INLINES_HIDDEN</span><span class="w"> </span><span class="o">${</span><span class="nv">vis-inl-value</span><span class="o">}</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-export-exe</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">ENABLE_EXPORTS</span><span class="w"> </span><span class="s">ON</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">visibility_print_symbols</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-export-exe</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">)</span></code>
+<code></code>
+<code><span class="w">        </span><span class="nb">add_library</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-shared</span><span class="w"> </span><span class="s">SHARED</span><span class="w"> </span><span class="s">main.cpp</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-shared</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">CXX_VISIBILITY_PRESET</span><span class="w"> </span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">set_target_properties</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-shared</span><span class="w"> </span><span class="s">PROPERTIES</span><span class="w"> </span><span class="s">VISIBILITY_INLINES_HIDDEN</span><span class="w"> </span><span class="o">${</span><span class="nv">vis-inl-value</span><span class="o">}</span><span class="p">)</span></code>
+<code><span class="w">        </span><span class="nb">visibility_print_symbols</span><span class="p">(</span><span class="o">${</span><span class="nv">vis</span><span class="o">}</span><span class="s">-</span><span class="o">${</span><span class="nv">vis-inl</span><span class="o">}</span><span class="s">-shared</span><span class="w"> </span><span class="s2">&quot;func&quot;</span><span class="p">)</span></code>
+<code><span class="w">    </span><span class="nb">endforeach</span><span class="p">()</span></code>
+<code><span class="nb">endforeach</span><span class="p">()</span></code></pre></div>
+</div>
+
+    </details>
+
+    <h2><a name="external-references" href="#external-references">External references</a></h2>
+    <ul>
+        <li><a href="https://gcc.gnu.org/wiki/Visibility">GCC Visibility Wiki</a></li>
+        <li><a href="https://gcc.gnu.org/onlinedocs/gcc/Code-Gen-Options.html#index-fvisibility">GCC -fvisibility
+                Option</a></li>
+        <li><a
+                href="https://gcc.gnu.org/onlinedocs/gcc/C_002b_002b-Dialect-Options.html#index-fvisibility-inlines-hidden">GCC
+                -fvisibility-inlines-hidden Option</a></li>
+        <li><a href="https://refspecs.linuxfoundation.org/elf/gabi4+/ch4.symtab.html">Linux Foundation ELF
+                Specification</a></li>
+    </ul>
+
+    <script>
+        const DATA_URL = 'resources/readelf.json';
+        let visibilityData = null;
+
+        function valueClass(prefix, value) {
+            if (!value) {
+                return '';
+            }
+            return `${prefix}-${value.toLowerCase()}`;
+        }
+
+        function currentSelection(name) {
+            return document.querySelector(`input[name="${name}"]:checked`).value;
+        }
+
+        function selectedTarget() {
+            if (!visibilityData) {
+                return null;
+            }
+
+            const linkType = currentSelection('link-type');
+            const visibility = currentSelection('visibility');
+            const inlinesHidden = currentSelection('inlines-hidden');
+            const targetsByType = visibilityData.targets?.[linkType];
+            if (!targetsByType) {
+                return null;
+            }
+            return targetsByType[visibility]?.[inlinesHidden] ?? null;
+        }
+
+        function escapeHtml(text) {
+            return String(text)
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;')
+                .replaceAll('"', '&quot;')
+                .replaceAll("'", '&#039;');
+        }
+
+        function renderTable(previousState) {
+            const target = selectedTarget();
+            const tbody = document.getElementById('symbol-table-body');
+            const compileNode = document.getElementById('compile-command');
+            const linkNode = document.getElementById('link-command');
+
+            if (!target) {
+                compileNode.textContent = 'N/A';
+                linkNode.textContent = 'N/A';
+                tbody.innerHTML = '<tr><td colspan="7">No data for this selection</td></tr>';
+                return { rows: [] };
+            }
+
+            compileNode.textContent = target.compile;
+            linkNode.textContent = target.link;
+
+            tbody.innerHTML = target.rows.map((row, index) => {
+                const previousRow = previousState?.rows[index];
+                const changed = (field) => previousRow && previousRow[field] !== row[field] ? ' changed' : '';
+                const objectBindClass = valueClass('bind', row.object_bind);
+                const objectVisClass = valueClass('vis', row.object_vis);
+                const binaryBindClass = valueClass('bind', row.binary_bind);
+                const binaryVisClass = valueClass('vis', row.binary_vis);
+                const dynsymClass = row.dynsym ? 'dynsym-yes' : 'dynsym-no';
+                return `
+            <tr>
+                <td>${escapeHtml(row.description)}</td>
+                <td class="definition"><code>${escapeHtml(row.definition)}</code></td>
+                <td class="${objectBindClass}${changed('object_bind')}">${escapeHtml(row.object_bind ?? '-').toLowerCase()}</td>
+                <td class="${objectVisClass}${changed('object_vis')}">${escapeHtml(row.object_vis ?? '-').toLowerCase()}</td>
+                <td class="${binaryBindClass}${changed('binary_bind')}">${escapeHtml(row.binary_bind ?? '-').toLowerCase()}</td>
+                <td class="${binaryVisClass}${changed('binary_vis')}">${escapeHtml(row.binary_vis ?? '-').toLowerCase()}</td>
+                <td class="${dynsymClass}${changed('dynsym')}">${row.dynsym ? 'yes' : 'no'}</td>
+            </tr>
+        `;
+            }).join('');
+
+            const changedCells = tbody.querySelectorAll('.changed');
+            changedCells.forEach((cell) => {
+                window.setTimeout(() => cell.classList.remove('changed'), 4000);
+            });
+
+            return { rows: target.rows };
+        }
+
+        let lastState = null;
+
+        function refreshTable() {
+            lastState = renderTable(lastState);
+        }
+
+        document.querySelectorAll('input[name="link-type"], input[name="visibility"], input[name="inlines-hidden"]').forEach((input) => {
+            input.addEventListener('change', refreshTable);
+        });
+
+        async function init() {
+            try {
+                const response = await fetch(DATA_URL, { cache: 'no-cache' });
+                if (!response.ok) {
+                    throw new Error(`Could not load ${DATA_URL}`);
+                }
+                visibilityData = await response.json();
+                refreshTable();
+            } catch (error) {
+                document.getElementById('compile-command').textContent = 'N/A';
+                document.getElementById('link-command').textContent = 'N/A';
+                document.getElementById('symbol-table-body').innerHTML =
+                    '<tr><td colspan="7">Failed to load resources/readelf.json</td></tr>';
+                console.error(error);
+            }
+        }
+
+        init();
+    </script>
+
+</body>
+
+</div>
+        <hr>
+        <div class="indexContainer"></div>
+        <div class="nextupprev"><div class="prevpage"><a href="../Practices/index.html" title="Best Practices"><i class="material-icons" style="vertical-align: middle; text-decoration: none">chevron_left </i>Previous Chapter</a></div><div class="uppage"><a href="../index.html" title="C++">Up</a></div><div class="nextpage"><a href="../Algorithms/index.html" title="Algorithms">Next Chapter<i class="material-icons" style="vertical-align: middle; text-decoration: none"> chevron_right</i></a></div></div>
+    </article>
+    <footer>Last edited: Monday, 06 April 2026 11:33 UTC</footer>
+</body>
+
+</html>
